@@ -1,0 +1,76 @@
+<h1>如何在 Klaviyo 中设置短信</h1>
+
+<p>只有所有者、管理员和经理才能设置 SMS。了解如何在 Klaviyo 中启用短信。如果您已在 Klaviyo 帐户中设置了电子邮件，则适用这些步骤。如果您正在执行电子邮件和短信的设置向导，步骤可能会有所不同。您必须先打开短信并拥有发送号码，然后才能执行以下任何操作：</p>
+<ul>
+<li>导入或收集短信订阅者</li>
+<li>发送短信或彩信</li>
+</ul>
+<p>请注意，[并非所有行业都有资格使用短信](https://help.klaviyo.com/hc/en-us/articles/4401822831771)。 ## 开始之前</p>
+<h3>数字类型</h3>
+<p>根据您要发送至的国家/地区，您可能可以使用一种或多种不同类型的发送号码。 |  |  |  |  |  |  |</p>
+<p>| --- | --- | --- | --- | --- | --- |</p>
+<p>| <strong><em>*国家</strong><strong> | </strong><strong>\</em>免费电话号码</strong><strong> | </strong><strong>\<em>品牌SID</strong><strong> | </strong><strong>长代码</strong><strong> | </strong><strong>短代码</strong><strong> | </strong><strong>短代码（虚荣）</strong></em>* |</p>
+<p>| <strong><em>*AT</strong></em>* | ✖ | ✔ | ✔ | ✖ | ✖ |</p>
+<p>| <strong><em>*澳大利亚</strong></em>* | ✖ | ✔ | ✔ | ✖ | ✖ |</p>
+<p>| <strong><em>*是</strong></em>* | ✖ | ✖ | ✔ | ✖ | ✖ |</p>
+<p>| <strong><em>*CA</strong></em>* | ✔ | ✖ | ✖ | ✖ | ✔ |</p>
+<p>| <strong><em>*CH</strong></em>* | ✖ | ✔ | ✔ | ✖ | ✖ |</p>
+<p>| <strong><em>*德</strong></em>* | ✖ | ✔ | ✔ | ✖ | ✖ |</p>
+<p>| <strong><em>*DK</strong></em>* | ✖ | ✔ | ✔ | ✖ | ✖ |</p>
+<p>| <strong><em>*ES</strong></em>* | ✖ | ✔ | ✔ | ✖ | ✖ |</p>
+<p>| <strong><em>*FI</strong></em>* | ✖ | ✔ | ✔ | ✖ | ✖ |</p>
+<p>| <strong><em>*法国</strong></em>* | ✖ | ✔ | ✖ | ✖ | ✖ |</p>
+<p>| <strong><em>*胡</strong></em>* | ✖ | ✖ | ✔ | ✖ | ✖ |</p>
+<p>| <strong><em>*IE</strong></em>* | ✖ | ✔ | ✔ | ✖ | ✖ |</p>
+<p>| <strong><em>*IT</strong></em>* | ✖ | ✔ | ✔ | ✖ | ✖ |</p>
+<p>| <strong><em>*卢</strong></em>* | ✖ | ✔ | ✖ | ✖ | ✖ |</p>
+<p>| <strong><em>*荷兰</strong></em>* | ✖ | ✔ | ✔ | ✖ | ✖ |</p>
+<p>| <strong><em>*不</strong></em>* | ✖ | ✔ | ✔ | ✖ | ✖ |</p>
+<p>| <strong><em>*新西兰</strong></em>* | ✖ | ✖ | ✖ | ✖ | ✔ |</p>
+<p>| <strong><em>*PL</strong></em>* | ✖ | ✔ | ✔ | ✖ | ✖ |</p>
+<p>| <strong><em>*PT</strong></em>* | ✖ | ✔ | ✔ | ✖ | ✖ |</p>
+<p>| <strong><em>*SE</strong></em>* | ✖ | ✔ | ✔ | ✖ | ✖ |</p>
+<p>| <strong><em>*英国</strong></em>* | ✖ | ✔ | ✔ | ✖ | ✔ |</p>
+<p>| <strong><em>*美国</strong></em>* | ✔ | ✖ | ✖ | ✔ | ✔ |</p>
+<p>星号 (\*) 表示该数字类型：</p>
+<ul>
+<li>是 Klaviyo 中的默认发送号码，所有帐户均可免费使用。 - 对于所有可用的国家/地区使用相同的号码。 - 例如，同一品牌的发件人 ID 收集同意并向英国、德国、澳大利亚等地发送短信。非默认发送号码（即长代码和短代码）需要付费套餐。这也适用于比利时和匈牙利，长代码是唯一的发送号码。 ****默认发送号码****</li>
+</ul>
+<p>通过品牌发件人 ID 和免费电话号码，可以使用同一个号码来收集同意并将其发送到多个国家/地区。它们会自动执行此操作，因此，如果您不想收集同意或发送到特定国家/地区，请按国家/地区定位您的表单，创建基于位置的细分，然后拆分您的流程。如果您想知道在哪里使用短信积分，按国家/地区区分也很关键。由于积分因国家/地区而异，因此基于位置的定位可帮助您跟踪您的花费、参与人数以及每条消息的投资回报率。这样，您就会知道向何处以及向谁发送 SMS 消息。下表列出了这些号码将发送到的所有国家/地区。 |  |  |</p>
+<p>| --- | --- |</p>
+<p>| <strong><em>*品牌发件人 ID</strong><strong> | </strong><strong>免费电话</strong></em>* |</p>
+<p>|澳大利亚 |美国 |</p>
+<p>|奥地利 |加拿大 |</p>
+<p>|丹麦 |  |</p>
+<p>|芬兰 |  |</p>
+<p>|法国 |  |</p>
+<p>|德国 |  |</p>
+<p>|爱尔兰 |  |</p>
+<p>|意大利 |  |</p>
+<p>|卢森堡 |  |</p>
+<p>|荷兰 |  |</p>
+<p>|挪威 |  |</p>
+<p>|波兰 |  |</p>
+<p>|葡萄牙 |  |</p>
+<p>|西班牙 |  |</p>
+<p>|瑞典 |  |</p>
+<p>|瑞士 |  |</p>
+<p>|英国 |  |</p>
+<p>Klaviyo 将为您提供免费电话号码和品牌发件人 ID；您只需完成短信向导即可获取这些号码。如果您想使用其他号码，请先完成此设置过程，以便您可以开始收集同意，然后请求其他号码。 ## 开启短信功能</p>
+<p>如果您在 Klaviyo 设置向导期间没有设置 SMS，则可以在 SMS 设置页面中将其打开。 ![](https://fast.wistia.com/embed/medias/dx8q97zx8c/swatch)</p>
+<p>1. 单击左下角您的帐户名称。 2. 导航至<strong><em>*设置 > 短信</strong><strong>。 3. 单击</strong><strong>免费设置短信</strong><strong>。如果您没有看到此按钮，请单击</strong><strong>添加国家/地区</strong></em>*并选择您要开始发送的国家/地区。 4. 在弹出的模式中，选择您要使用短信的国家/地区（选中所有适用的选项）。 ![步骤选择要发送短信的国家/地区](https://klaviyo.zendesk.com/hc/article_attachments/28722596951835)</p>
+<p>5. 单击<strong><em>*下一步</strong></em>*</p>
+<p>6. 填写您的公司信息。 ![](https://klaviyo.zendesk.com/hc/article_attachments/47593800502811)</p>
+<p>7. 检查或选择您的发送号码。 有关数字的完整比较，请参阅我们关于[短信发送号码]的文章(https://klaviyo.zendesk.com/hc/en-us/articles/6637671573403)，但主要亮点包括：</p>
+<ul>
+<li>有时，同一个发送号码会用于多个国家/地区，除非您有其他号码优先。 - 美国和加拿大使用相同的免费电话号码，除非您有一个或两个国家/地区的短代码。 - 相同品牌的发件人 ID 适用于每个可用的国家/地区，除非您在特定国家/地区拥有长代码或短代码。 - 短代码和长代码始终与特定国家/地区相关。 - 某些国家/地区仅提供 1 种发送号码：</li>
+<li>对于比利时，唯一的选择是请求长代码。 - 对于新西兰：唯一的选择是申请短代码。！[在 Klaviyo 中创建品牌发件人 ID 的模式](https://klaviyo.zendesk.com/hc/article_attachments/28722558533659)</li>
+</ul>
+<p>8. 单击<strong><em>*下一步</strong></em>*。 9. 某些国家/地区要求发送号码必须经过验证或注册才能使用。这包括：</p>
+<ul>
+<li>所有[短代码](https://help.klaviyo.com/hc/en-us/articles/26886941270171)（无论哪个国家/地区）。 - 美国或加拿大的[免费电话号码](https://help.klaviyo.com/hc/en-us/articles/4415873897499)。 - 请注意，无需执行任何操作即可开始免费电话号码的验证过程。 - 澳大利亚和爱尔兰的[品牌发件人 ID](https://help.klaviyo.com/hc/en-us/articles/14953787622427)。 - 请注意，爱尔兰要求您通过其国家注册机构 [ComReg](https://senderid.comreg.ie/) 进行注册。 - 澳大利亚、比利时和爱尔兰的[长代码](https://help.klaviyo.com/hc/en-us/articles/26705180655003)。 10. 选择以下后续步骤之一：</li>
+</ul>
+<ul>
+<li>创建注册表单（最适合短信新手）。 - 上传以前的短信订阅者列表（最适合那些从其他短信提供商切换的订阅者）。请注意，如果您已经在 Klaviyo 中使用 UTM 跟踪，我们还建议导航至****设置 > 其他 > UTM 跟踪****，并将 UTM 介质调整为 **消息类型。** 否则，可能无法正确跟踪 SMS 消息。 ## 结果</li>
+</ul>
+<p>您现在可以开始收集短信订阅者并向他们发送短信。不过，在此之前，请先在学院学习[短信合规性最佳实践](https://academy.klaviyo.com/en-us/courses/best-practices-for-sms-compliance/2011622)。</p>
