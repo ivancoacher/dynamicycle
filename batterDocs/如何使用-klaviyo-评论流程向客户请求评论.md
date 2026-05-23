@@ -1,0 +1,35 @@
+<h1>如何使用 Klaviyo 评论流程向客户请求评论</h1>
+
+<h2>你将会学到</h2>
+<p>了解如何在 Klaviyo 中配置关键流程以开始获取客户评论。如果您使用 Klaviyo Reviews 以外的其他评论平台，请了解如何[使用 Klaviyo 流程请求评论](https://help.klaviyo.com/hc/en-us/articles/115002779391#01H46MRZ7GEJV79PZ506FSSS3A)。 ## 关键评论流程</p>
+<p>有 2 个关键审核流程：</p>
+<ul>
+<li>****审查请求流程****</li>
+</ul>
+<p>请最近的购买者评论他们订单中的产品。考虑提供激励措施（例如 15% 折扣、下一个订单免费送货、额外忠诚度积分），这可能会增加转化率。此流程由 <strong>准备审核</strong> 事件触发。 - <strong><em>*审查后续流程</strong></em>*</p>
+<p>如果您提供奖励（推荐）以换取客户评论，请在提交评论后提供该奖励。此流程由 <strong>审核已提交</strong> 事件触发。 ### 关于<strong>准备审查</strong>活动</p>
+<p>当项目已交付或履行并满足您设置的用于指示项目已准备好接受审核的条件时，将跟踪此指标。了解如何[自定义](https://klaviyo.zendesk.com/hc/en-us/articles/16682549669403) [<strong>准备审核</strong>](https://klaviyo.zendesk.com/hc/en-us/articles/16682549669403) [度量](https://klaviyo.zendesk.com/hc/en-us/articles/16682549669403)。 <strong>准备审核</strong> 事件仅在您开始使用 Klaviyo Reviews 后下的订单才会触发。了解如何[填充](https://klaviyo.zendesk.com/hc/en-us/articles/25930166202651) [<strong>准备审核</strong>](https://klaviyo.zendesk.com/hc/en-us/articles/25930166202651) [过去的指标订单](https://klaviyo.zendesk.com/hc/en-us/articles/25930166202651)。 ## 创建审核请求流程</p>
+<p>1. 在 Klaviyo 中，导航至<strong><em>*Flows</strong><strong> 选项卡。 2. 单击</strong><strong>创建流程</strong><strong>。 3. 搜索“审核请求”，然后选择一张</strong><strong>审核请求：Klaviyo 评论</strong></em>* 卡。 ![](https://klaviyo.zendesk.com/hc/article_attachments/28723523744027)</p>
+<p>4. 单击<strong><em>*使用模板</strong><strong>。 5. 根据您的喜好调整流消息。 6. 单击右上角的</strong><strong>查看并打开</strong><strong>。 7. 从下拉列表中选择</strong><strong>实时</strong><strong>。 8. 单击</strong><strong>保存</strong><strong>。完成这些步骤后，当您的客户[有资格提交评论](https://help.klaviyo.com/hc/en-us/articles/16682549669403)时，您的评论请求流程将开始发送给他们。当有人通过单击此流程消息中的链接提交评论时，他们将在您的网站上显示</strong>已验证的买家</em>*徽章。 ![经过验证的买家徽章](https://klaviyo.zendesk.com/hc/article_attachments/28723545679387)</p>
+<p>如果您在发送审核请求后删除产品，则单击电子邮件 CTA 的收件人将看到一条消息，指示该产品已被删除。他们将无法对已删除的产品提交评论。 ### 调整审核请求按钮</p>
+<p>如果您想替换审核请求电子邮件中的默认星标，只需在流程电子邮件中添加一个按钮，并在 <strong>URL</strong> 字段中添加动态审核请求链接标签：{{ event.review\_link }}</p>
+<h2>创建审核后续流程</h2>
+<p>如果您提供奖励以换取评论，则无论他们评论的内容如何，您都必须坚持到底并向他们发送奖励。即使您不提供奖励，也可以考虑感谢审阅者的反馈，并在他们有负面体验时提供支持。 1. 在 Klaviyo 中，导航至<strong><em>*Flows</strong><strong> 选项卡。 2. 单击</strong><strong>创建流程</strong><strong>。 3. 搜索“审查后续行动”，然后选择</strong><strong>审查后续行动：Klaviyo 评论</strong></em>* 卡。 ![Klaviyo评论流程卡](https://klaviyo.zendesk.com/hc/article_attachments/28723545674779)</p>
+<p>4. 单击<strong><em>*创建流</strong><strong>。 5. 编辑流程消息以反映您的品牌和您想要提供的奖励。 6. 流程完成后，单击</strong><strong>更新操作状态</strong></em>*并设置流程。 ### 添加优惠券代码（可选）</p>
+<p>如果您想在评论后续流程中包含奖励，请使用 Klaviyo 中内置的个人优惠券代码。 1. 创建动态优惠券代码。 1. 了解如何[为 Shopify 创建独特的优惠券](https://help.klaviyo.com/hc/en-us/articles/115006155388)。 2. 了解如何[为 WooCommerce 创建独特的优惠券](https://help.klaviyo.com/hc/en-us/articles/22168739689627)。 2. 导航回包含您的审核后续流程的选项卡。 3. 添加优惠券代码标签“{% coupon_code 'NAME_OF_YOUR_COUPON' %}”以及您的优惠券名称。 ## 评审提交表</p>
+<p>当您的客户点击审核请求流程中的 CTA 时，他们首先会看到一个用于选择星级的选项。选择星级后，他们将看到包含以下字段的表格：</p>
+<ul>
+<li>电子邮件地址</li>
+<li>审阅文本</li>
+<li>上传照片（支持PNG和JPG格式）</li>
+<li>上传视频（支持MP4和MOV格式）</li>
+<li>[自定义问题](https://help.klaviyo.com/hc/en-us/articles/16319181846171)，如果已配置</li>
+</ul>
+<p>提交评论后，他们将看到一个确认页面，其中包含用于编辑评论的链接。如果他们订购了超过 1 件产品，他们将看到查看订单中最多 3 件附加产品的选项。根据您的[优先级设置](https://help.klaviyo.com/hc/en-us/articles/16681935355163) 选择和订购产品。审阅者在提交审阅后最多 30 天内可以返回原始审阅请求链接进行编辑。 ![](https://fast.wistia.com/embed/medias/3o55h7i4wu/swatch)</p>
+<h2>手动请求评论</h2>
+<p>您可以使用手动审核请求链接直接向客户请求审核。这些链接特定于所选产品。您可以在活动中向该产品的过去购买者、客户服务对话或与特定产品的过去购买者联系的任何其他地方使用手动生成的评论链接。 1. 在 Klaviyo 中选择<strong><em>*评论</strong><strong>选项卡。 2. 单击</strong><strong>产品</strong></em>*选项卡。 ![评论产品选项卡](https://klaviyo.zendesk.com/hc/article_attachments/28723523738523)</p>
+<p>3. 单击您想要请求评论的产品右侧的三点菜单。 4. 单击<strong><em>*复制手动审核链接</strong></em>*。 ![复制链接到手动审核按钮](https://klaviyo.zendesk.com/hc/article_attachments/30500966980123)</p>
+<p>5. 直接与客户共享此链接（例如，通过向他们发送电子邮件）。如果您以任何方式激励评论者（例如，用免费产品换取评论、提供折扣代码等），请选择<strong><em>*复制激励链接进行评论</strong><strong>。通过此链接提交的评论将在您的评论小部件中标记为</strong>激励</em>*。 ## 获取有关新评论的通知</p>
+<p>每当有人评论您的一款产品时，设置电子邮件通知。启用新的评论通知意味着每当有人提出问题时您也会收到通知。不可能专门订阅新的评论通知。 1. 导航至 Klaviyo 中的<strong><em>*评论</strong><strong>选项卡。 2. 单击</strong><strong>评论设置</strong><strong>。 3. 选择</strong><strong>发布规则和通知</strong><strong>。 4. 在</strong>通知<strong>下，选中</strong>待处理活动（评论和问答）</em>*旁边的框。 5. 选择频率（立即、每天或每周）和交付时间。 ![评论通知设置](https://klaviyo.zendesk.com/hc/article_attachments/28723545682459)</p>
+<p>6. 从帐户用户列表中选择一个或多个通知收件人</p>
+<p>当有人提交评论或产品问题时，系统会向他们发送通知。通知只能发送给帐户用户。如果您想向下拉菜单中没有看到的人发送通知，请[邀请他们加入您的 Klaviyo 帐户](https://help.klaviyo.com/hc/en-us/articles/360053547071)。 7. 或者，选中<strong>每周统计摘要</strong>旁边的框，获取有关产品评论的每周报告。这可以发送给与被选择用于审阅通知的用户不同的用户（或多个用户）。 8. 单击<strong><em>*保存更改</strong></em>*。收到评论后，您可以选择为每条评论[添加公开回复](https://help.klaviyo.com/hc/en-us/articles/20817781267739)（例如，感谢评论者的反馈或对令人沮丧的体验表示歉意）。</p>
