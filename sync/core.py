@@ -13,7 +13,8 @@ from dotenv import load_dotenv
 from markdownify import MarkdownConverter
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
-KLAVIYO_DIR = PROJECT_ROOT / "klaviyo"
+KLAVIYO_EN_DIR = PROJECT_ROOT / "klaviyo-en"
+KLAVIYO_CN_DIR = PROJECT_ROOT / "klaviyo-cn"
 BATTERDOCS_DIR = PROJECT_ROOT / "batterDocs"
 ENV_FILE = PROJECT_ROOT / ".env"
 
@@ -26,26 +27,16 @@ WP_API_BASE = os.getenv("WP_API_BASE", "/wp-json/wp/v2")
 
 ZENDESK_API = "https://help.klaviyo.com/api/v2/help_center/en-us"
 
-# batterDocs category slug -> WP term ID
-WP_CATEGORY_IDS = {
-    "account-billing": 775425969,
-    "advanced-kdp-marketing-analytics": 775425957,
-    "analytics-audience": 775425956,
-    "campaigns": 775425959,
-    "content": 775425958,
-    "conversations": 775425960,
-    "customer-agent": 775425976,
-    "customer-hub": 775425961,
-    "dc-resources": 775425962,
-    "deliverability-compliance": 775425963,
-    "faq": 775425978,
-    "flows": 775425971,
-    "helpdesk": 775425977,
-    "integrations": 775425972,
-    "reviews": 775425973,
-    "sign-up-forms": 775425974,
-    "sms-whatsapp": 775425975,
-}
+WP_PARENT_CAT = 775425988  # "Kalaviyo 官方文档"
+
+# Klaviyo slug -> WP sub-category ID (under 775425988)
+# Loaded dynamically from .category_map.json
+CATEGORY_MAP_FILE = KLAVIYO_EN_DIR / ".category_map.json"
+
+def load_category_map():
+    if CATEGORY_MAP_FILE.exists():
+        return json.loads(CATEGORY_MAP_FILE.read_text("utf-8"))
+    return {}
 
 # Klaviyo category ID -> batterDocs slug
 KLAVIYO_CATEGORY_MAP = {
@@ -162,10 +153,11 @@ class WordPressClient:
         return with_retry(_do, description="GET categories")
 
     def create_doc(self, title, content, category_slug, status="publish"):
-        cat_id = WP_CATEGORY_IDS.get(category_slug)
+        cat_map = load_category_map()
+        cat_id = cat_map.get(category_slug)
         if not cat_id:
             print(f"  WARN: unknown category '{category_slug}'")
-            cat_id = 775425978  # fallback to FAQ
+            return None
 
         def _do():
             resp = requests.post(
