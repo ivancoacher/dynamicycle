@@ -5,7 +5,13 @@
 .betterdocs-docs-sidebar,
 .betterdocs-single-layout-2 .betterdocs-sidebar,
 .betterdocs-single-layout-3 .betterdocs-sidebar,
-.betterdocs-single-wraper .betterdocs-sidebar {
+.betterdocs-single-wraper .betterdocs-sidebar,
+.betterdocs-toc,
+.betterdocs-table-of-contents,
+.betterdocs-toc-wrapper,
+.betterdocs-toc-container,
+.betterdocs-content-area > .betterdocs-toc,
+.betterdocs-doc-content > .betterdocs-toc {
   display: none !important;
 }
 .betterdocs-content-area,
