@@ -1,0 +1,50 @@
+<h1>了解 Klaviyo 中的身份解析</h1>
+
+<h2>你将会学到</h2>
+<p>了解 Klaviyo 中的身份解析，它将跨多个渠道的客户交互整合到单个记录下。由于 Klaviyo 是一种全渠道营销工具，支持电子邮件、短信和移动推送通知，因此您的客户可以通过其中一个或所有这些渠道与您互动。为了确保您的客户档案与所有这些渠道的活动保持同步，Klaviyo 会根据您帐户中的现有数据自动解析共享公共标识符的不同档案的身份。 ## 什么是身份解析？身份解析是指维护统一客户记录的过程，无论不同接触点或设备上使用的各种标识符（例如电子邮件、电话号码等）如何。这将为每个人提供一个单一、全面的档案，无论他们通过何种渠道进行互动。身份解析通常用作通用术语，包含 2 个关键数据跟踪和统一过程：</p>
+<ul>
+<li>****识别客户****</li>
+</ul>
+<p>根据某人提供的身份或其他数字信号识别某人是谁。 - <strong><em>*将配置文件解析为单一身份</strong></em>*</p>
+<p>将行为整合到身份并消除重复记录，以创建统一的客户视图。一个常见的例子是，在您的 Klaviyo 帐户中拥有电子邮件配置文件的客户后来通过与其电子邮件无关的方法订阅短信，例如[关键字选择加入](https://help.klaviyo.com/hc/en-us/articles/360050384091)。此客户操作会生成一个用于接收 SMS 消息的单独配置文件。但是，如果该客户随后采取行动（例如进行购买）并提交电话和电子邮件； Klaviyo 将识别出电话和电子邮件属于同一客户，并且他们的个人资料将被合并。 ## 识别客户</p>
+<p>Klaviyo 会通过几种不同的方法自动进行 cookie 并捕获客户的身份。 ### 现场 JavaScript 跟踪</p>
+<p>Klaviyo 的[现场跟踪](https://help.klaviyo.com/hc/en-us/articles/115005076767) 负责跟踪整个网站上已识别浏览器的<strong>网站活动</strong>和<strong>查看</strong>产品事件。 ### 通过 Shopify Server Pixel 进行额外的 Shopify 跟踪</p>
+<p>对于 Shopify 用户，您还可以通过 [Shopify Pixel](https://help.klaviyo.com/hc/en-us/articles/4425956184731) 轻松启用新的跟踪事件，例如<strong>添加到购物车</strong>、<strong>查看的页面</strong>、<strong>查看的收藏夹</strong>和<strong>提交的搜索</strong>。这些事件在服务器端同步，通过 Klaviyo 中的更多事件同步和流触发提供更完整的配置文件。 ### 表格</p>
+<p><a href="https://help.klaviyo.com/hc/en-us/articles/360026474752">注册表单</a></p>
+<p>与其他数据平台不同，Klaviyo 负责发送消息。当收件人单击您发送的电子邮件中的链接时，系统会自动识别他们的浏览器，以便您可以查看他们在您网站上的位置，并跟踪后续的其他现场操作。 ### 结帐识别</p>
+<p>当访问者在您的网站上进行结帐时，Klaviyo 会自动识别他们并收集结帐事件。此功能可能因不同的集成而异。 ## 将配置文件解析为单一身份</p>
+<p>Klaviyo 通过两种主要方法解析客户身份。 ### 匿名访客活动回填</p>
+<p>通过 Klaviyo 的匿名访客活动回填，您可以在识别之前捕获购物者的现场活动。一旦将来识别出该访客，您就可以访问他们的历史现场活动。这使您可以更全面地了解客户的旅程，并利用历史数据丰富客户档案。详细了解 Klaviyo 的[匿名访客活动回填](https://help.klaviyo.com/hc/en-us/articles/17928628922395)。要收集匿名访客活动，您必须在商店中安装 Klaviyo.js（对于大多数集成来说这是自动安装的）。 Klaviyo.js 允许您发布 Klaviyo 注册表单并跟踪购物者在您的网站上的活动。 在您的网站上成功安装 Klaviyo.js 后，您可以在帐户设置中启用匿名访客活动回填。要启用匿名访客活动回填：</p>
+<p>1. 在左下角选择您的帐户名。 2. 选择<strong><em>*设置</strong><strong>。 3. 转到 </strong><strong>数据</strong><strong>。 4. 选中</strong>启用匿名访客跟踪</em>*框。 ![数据选项卡，显示匿名访客跟踪选项](https://klaviyo.zendesk.com/hc/article_attachments/34262891532059)</p>
+<p>5. 单击 <strong><em>*更新</strong></em>*。 ### 确定性配置文件合并</p>
+<p>确定性配置文件合并是指当发生将电子邮件地址、电话号码或设备 ID (iOS) 链接在一起的操作时，主动检查会合并两个单独的配置文件。这包括跨多个设备合并数据，并允许您有效管理全渠道客户数据。 ## 身份解析在 Klaviyo 中的工作原理</p>
+<p>当客户通过不同渠道与您的品牌互动时，Klaviyo 会检查是否有机会将这些互动合并到单一客户资料中。这是基于一个称为“标识符优先级”的过程，其中 Klaviyo 使用现有数据来确定这些全渠道互动是否可以整合到一个更强大的标识符下。 Klaviyo 将这些标识符排序为：</p>
+<p>1.<strong><em>*个人资料ID</strong></em>*</p>
+<p>Klaviyo 分配给每个配置文件的主要标识符。 2.<strong><em>*外部ID</strong></em>*</p>
+<p>可用作个人资料上的主要标识符的外部 ID，通常代替电子邮件地址。外部 ID 通过某些集成（例如 Bigcommerce）或通过 [Klaviyo 的 API]（https://developers.klaviyo.com/en/docs/update_profile_properties_via_api）设置</p>
+<p>3.<strong><em>*电子邮件</strong></em>*</p>
+<p>与个人资料关联的电子邮件地址。 4.<strong><em>*电话号码</strong></em>*</p>
+<p>与个人资料关联的电话号码。 5.<strong><em>*匿名移动应用程序ID</strong></em>*</p>
+<p>对于移动应用程序配置文件，如果 Klaviyo 无法将用户与电子邮件地址关联，则匿名移动应用程序 ID 将代表 iOS 或 Android 访客配置文件。 Klaviyo 的现场跟踪目前仅支持电子邮件和电话号码。当 Klaviyo 创建匿名移动应用 ID 时，会考虑以下所有 ID 类型：</p>
+<ul>
+<li>iOS 上的 IDFA 或推送令牌。 - Android 上的 Google 广告 ID (GAID)、Firebase ID (FID) 或设备 ID。对于每个较低级别的标识符，Klaviyo 会检查仅由该标识符识别的帐户中是否存在配置文件。如果找到这样的配置文件，并且可以根据它们链接在一起的实例将其与更高级别的标识符相关联，则 Klaviyo 将尝试合并到更高级别的标识符下。为了说明这一点，下面是一个示例，其中 Klaviyo 使用以下标识符集解析客户的身份：</li>
+</ul>
+<p>|  |  |</p>
+<p>| --- | --- |</p>
+<p>| <strong><em>*标识符类型</strong><strong> | </strong><strong>价值</strong></em>* |</p>
+<p>|电子邮件 |示例@klaviyo.com |</p>
+<p>|电话号码 | 123-456-7890 |</p>
+<p>|匿名移动应用程序 ID | iOS：000000-0000-0000-000000 |</p>
+<p>一旦 Klaviyo 看到所有 3 个标识符在一起，这表明它们都属于同一客户，它将检查是否存在仅通过电话号码识别的个人资料或仅通过匿名移动应用 ID 识别的个人资料。如果找到其中任何一个，它们将被合并到具有更高级别标识符（在本例中为电子邮件）的配置文件中。 ## 触发配置文件合并的数据</p>
+<p>为了让 Klaviyo 识别多个配置文件属于同一客户，与每个配置文件关联的标识符需要一起识别。通常，此信息以事件的形式出现，其中事件数据包括多个标识符，例如电子邮件和电话号码。 Klaviyo 还根据客户自行提交的数据合并个人资料（例如，通过包含电话和电子邮件字段的表单）。 Klaviyo 还根据通过网络跟踪提交的信息合并配置文件，该信息使用 [cookies](https://help.klaviyo.com/hc/en-us/articles/360034666712) 将活动与电子邮件配置文件关联起来。例如，如果电子邮件配置文件提交了仅包含电话的表单且其中包含 cookie，那么他们提交的电话号码将被附加到其预先存在的配置文件中。与点击文本或关键字相关的操作通常不会导致基于 cookie 跟踪的合并。这是因为 Cookie 踪迹在应用程序之间丢失（例如，从 Web 到 SMS），并且我们无法确定这 2 个操作是由同一个人执行的。 ## 查找个人资料 ID</p>
+<p>每个个人资料都有一个唯一的 ID，您可以通过导航到个人资料并查看 URL 来找到该 ID。 查找 26 个字符的 ID，如下图所示。 ![个人资料 URL 中的 24 个字符的个人资料 ID](https://klaviyo.zendesk.com/hc/article_attachments/34262891536667)</p>
+<p>如果您在 Klaviyo 变更之前获取了您帐户中的一些较旧的个人资料，则它们可能具有六个字符的 ID。该 ID 仍然正确并且对于他们的个人资料而言是唯一的。 ![配置文件 URL 中的 6 个字符配置文件 ID](https://klaviyo.zendesk.com/hc/article_attachments/28705664932507)</p>
+<p>要动态调用此 ID，您可以使用 {{ person.KlaviyoID }}。 ## 手动合并配置文件</p>
+<p>如果您知道一对配置文件属于一个客户，则可以手动合并这两个配置文件。合并一对个人资料将仅生成联系人的一个个人资料和一个电子邮件地址。将保留最近更新的个人资料的客户 ID。请注意，合并配置文件无法反转。要手动合并配置文件：</p>
+<p>1. 导航到要删除的源配置文件。 2. 打开<strong><em>*配置文件操作</strong><strong>下拉列表。 3. 单击</strong><strong>合并配置文件</strong></em>*。 ![](https://klaviyo.zendesk.com/hc/article_attachments/34262891541403)</p>
+<p>4. 在出现的弹出窗口中，搜索目标配置文件（您要合并到或保留的配置文件）。 5. 从搜索结果中选择一个配置文件。 - 如果您没有看到想要合并的目标配置文件，请确保您的搜索中没有拼写错误。然后点击<strong><em>*Return</strong><strong>或</strong><strong>Enter</strong></em>*按钮再次搜索。有关更多信息，请参阅我们的指南[如何删除、合并和导出配置文件](https://help.klaviyo.com/hc/en-us/articles/115005073847)。 ## 其他资源</p>
+<ul>
+<li>[了解 Klaviyo 中的配置文件](https://help.klaviyo.com/hc/en-us/articles/115005247088)</li>
+<li>[了解短信配置文件何时合并](https://help.klaviyo.com/hc/en-us/articles/360035588012)</li>
+<li>[了解 Klaviyo 中的 cookies](https://help.klaviyo.com/hc/en-us/articles/360034666712)</li>
+</ul>
