@@ -1,0 +1,44 @@
+---
+id: 27497646637979
+title: "How to configure custom reports to track bot clicks"
+source_url: "https://klaviyo.zendesk.com/hc/en-us/articles/27497646637979-How-to-configure-custom-reports-to-track-bot-clicks"
+section: "Custom reports best practices"
+category: "Analytics"
+category_slug: "analytics-audience"
+klaviyo_updated: "2026-04-21T13:54:37Z"
+language: en
+---
+
+Learn how to track and analyze bot clicks or non-human clicks into your emails via Klaviyo custom reports.
+
+Bot clicks may be performed by inbox providers, mobile carriers, or third-party security software to ensure emails do not contain malicious phishing links. However, since these clicks do not occur by a person, they may give false engagement data and skew your marketing strategies. By filtering on bot clicks in custom reports, you can see the total impact of these machine-driven clicks.
+
+## Configure your custom report
+
+In order to detect bot clicks, you will need to add a filter to your Single Metric report. Note that Campaign and Flow Performance reports do not require the bot clicks filter if you have the [bot clicks feature enabled](https://help.klaviyo.com/hc/en-us/articles/360004059711#h_01HFEZWHWN7AVGXQB8TGQT6BXG).
+
+1. Navigate to ****Analytics > Custom Reports****.
+2. You have the option to either choose a pre-built report or create your own report from scratch. With either option, you can add the bot clicks filter.
+
+![](https://lh7-us.googleusercontent.com/docsz/AD_4nXcJZ0Mk5Qxjd9d2Ik45N9XcwI6jHjYTRs-M65azmC4LvgV7tEzoqmRBfjrgjbVNij8nkmr-i9GZ5yam7yZVxUdDL0RkKsUkwgRj53gudaIp4dCcZWpIPwKP8bf30IzOUaLqJgBU-h0gPp4mVtYU0m8fU9Fc?key=sWkzoQI0j7RpCWbUKBpTgQ)
+
+### Single metric reports
+
+1. From inside an existing report or a new **Single Metric** report, click on the ****Group**** or ****Filter**** field to expose the dropdown. Note that the **Bot Click** property is only available on click metrics.
+   ![](https://lh7-us.googleusercontent.com/docsz/AD_4nXdn9HEVMkyl9ZRkSREOusqONHJEuS5TI_hv8Xeo7EzcE0LmeTDV17wZ-c8OzC1ctDY8YVOGwXBjH8rs-53-D8BAoKkVIz0R3WfkvrDJswILR-tgfHU6F1NrWzR6diZZpzwuBXnpH4k8qCmZj4CudR3kRa8v?key=sWkzoQI0j7RpCWbUKBpTgQ)
+2. Search or find the property for bot clicks from the dropdown and select it.
+3. Optional: If you chose the **+ Add Filter** option make sure that **Bot Click equals** **True**, **False**, or both.
+   ![](https://lh7-us.googleusercontent.com/docsz/AD_4nXcjAarE5LZKcSEVfCYxRW-B5Et0KITLYL-vy7mOjHmawcrG0XE1pJvG0kYEkSqCCYALSxWY9hfZZIQnry7-gz0HC_l92BvncXEZJsO_v7rLR10HF3_6ztwVbgIXiaNUVvyjSxkbBlsHDQIObW2hKM6odF8?key=sWkzoQI0j7RpCWbUKBpTgQ)
+4. If you have no more changes to make to your report, click ****Save & Run Report****.
+
+## Reviewing and exporting your data
+
+Once you have added your bot click filter, you can either preview, schedule, or export your raw data. If you choose to [schedule your report](https://help.klaviyo.com/hc/en-us/articles/4407838420123) for later review or export it as a CSV, your CSV file will contain new columns for the attributed bot clicks.
+
+In the Single Metric Report, you will see a column labeled “Bot click" in your data export. If Bot click is "True," it means the message was a machine-driven click.
+
+## Additional resources
+
+[How to build and use custom reports in Klaviyo](https://help.klaviyo.com/hc/en-us/articles/360047725651)
+[How to configure custom reports to track Apple Mail Privacy Protection (MPP) opens](https://help.klaviyo.com/hc/en-us/articles/4416803987739)
+[Understanding the default account, email, and list settings](https://help.klaviyo.com/hc/en-us/articles/360004059711)

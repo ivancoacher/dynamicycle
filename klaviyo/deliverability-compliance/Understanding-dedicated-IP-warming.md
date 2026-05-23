@@ -1,0 +1,50 @@
+---
+id: 7521152741403
+title: "Understanding dedicated IP warming"
+source_url: "https://klaviyo.zendesk.com/hc/en-us/articles/7521152741403-Understanding-dedicated-IP-warming"
+section: "Warm and ramp your domain"
+category: "Deliverability & compliance"
+category_slug: "deliverability-compliance"
+klaviyo_updated: "2026-04-21T13:55:05Z"
+language: en
+---
+
+## You will learn
+
+Learn more about the process for warming and setting up dedicated IP addresses. Dedicated IP addresses (not to be confused with [dedicated sending domains](https://help.klaviyo.com/hc/en-us/articles/7674941873947)) are used by Klaviyo managed accounts that meet certain sending criteria on Klaviyo. The main benefit of using a dedicated IP address is that the reputation of the IP address can only be influenced by the single account that is using it. [Learn more about the benefits and drawbacks of using a dedicated IP](https://help.klaviyo.com/hc/en-us/articles/7675517826587).
+
+To learn if you qualify for a dedicated IP and more details about the warming process, please reach out to your Customer Success Manager for more information. And for more information on plans and success support, read more about [how our free and paid plans differ](https://help.klaviyo.com/hc/en-us/articles/360050759151-How-Free-and-Paid-Plans-Differ#talk-with-customer-success-managers-and-onboarding-specialists4).
+
+## What makes dedicated IP warming different
+
+Setting up a new dedicated IP is an entirely different process than ramping a shared IP, as dedicated IP’s need to be fully warmed while shared IP’s are more focused on ramping your send volume. [Learn more about differences between ramping and warming](https://help.klaviyo.com/hc/en-us/articles/7520811253275).
+
+Before starting any of the processes below, it’s important that you reach out to your Customer Success Manager for more information on dedicated IPs and if you qualify for one.
+
+Both existing and new customers wanting to get started with a new dedicated IP will first need to:
+
+- Suspend any third-party affiliate marketing being done elsewhere.
+- Update, refresh, or pause any poor performing email templates.
+- Clean your lists to remove unengaged profiles and invalid email addresses. Learn more in our [guide to list cleaning](https://help.klaviyo.com/hc/en-us/articles/115005078347).
+
+## Warming plan
+
+Then, you will need to focus efforts on sending campaigns first (i.e., not flows) over the first 30 days of your warming period. Your sending plan will depend on if you are an existing or new Klaviyo customer, how often you send, and your audience engagement. It’s important to focus on campaigns instead of flows as you have more control over opt-in consent; whereas, some flows, like abandoned cart or browse abandonment, rarely contain this. You must also avoid risk of any list-bombing tactics, as this is commonly performed by malicious actors and will hurt your sender reputation.
+
+Note it’s imperative that you work with your Customer Success Manager and success team for tailored assistance throughout this dedicated IP warming process. Your success team will help you create a plan specific to your needs. Failure to work closely with your team may result in IP reputation issues, and Klaviyo do not allow for customers to switch dedicated IPs due to reputation issues.
+
+## Monitoring success
+
+After setting up and following your sending plan, it is important to focus on clicks as your primary engagement events. Since the release of ios15 and MPP, [opens could be skewed by machine-driven](https://help.klaviyo.com/hc/en-us/articles/4416803987739) opens. During this time, focus on sending consistency, instead of volume. Klaviyo’s back-end has an automated warming process when a dedicated IP is assigned to a customer that appropriately distributes volume.
+
+## Automated IP warming
+
+When beginning to send emails on a new IP address, emails must be sent gradually to avoid being blocked by inbox providers that have not previously seen activity from that IP. This precaution is necessary because spammers often send large volumes of emails from newly activated or long-dormant IPs. To prevent triggering suspicion, Klaviyo initially sends a small portion of emails through the dedicated IP while routing the rest through shared IPs. Over time, the proportion of emails sent via the dedicated IP increases progressively.
+
+The IP warming process automatically completes once 100% of the expected email volume is sent through the dedicated IP. This process typically takes 3-4 weeks, though the exact timeline may vary based on the sending volume and patterns.
+
+There are few key aspects to note about dedicated IP warming:
+
+- The duration of the warming period depends on sending volume but typically lasts about 30-40 days.
+- Sending volume on the dedicated IP(s) during warming increases on a non-linear curve, with most of the sending volume increase occurring towards the end of warming.
+- The segmentation recommendations provided by our customer support team during warming are to create a strong sending reputation for the new IPs, and are not concerned with the total volume.
