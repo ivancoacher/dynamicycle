@@ -69,6 +69,26 @@
   font-size: 16px;
   line-height: 1.75;
 }
+.dc-learn-list {
+  margin: 18px 0 0 22px;
+  padding: 0;
+}
+.dc-learn-list li {
+  margin: 0 0 18px;
+  padding-left: 2px;
+}
+.dc-learn-list strong {
+  display: block;
+  color: #111827;
+  font-size: 16px;
+  line-height: 1.45;
+  margin-bottom: 3px;
+}
+.dc-learn-list span {
+  display: block;
+  color: #1f2937;
+  line-height: 1.7;
+}
 .dc-resource-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -131,26 +151,25 @@
 
 <section id="what-you-will-learn" style="margin-bottom: 32px;">
   <h2 style="font-size: 24px; line-height: 1.35; margin: 0 0 14px; color: #111827;">你将会学到</h2>
-  <p style="margin: 0 0 18px;">了解在查看 Campaign 结果时，<strong>独立打开/点击</strong>与<strong>总打开/点击</strong>之间的区别。简单来说，独立数据回答“有多少人参与”，总数回答“发生了多少次互动”。</p>
-
-  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 14px; margin: 22px 0 8px;">
-    <div style="border: 1px solid #e5e7eb; border-radius: 10px; padding: 16px 18px; background: #ffffff;">
-      <h3 style="font-size: 16px; margin: 0 0 8px; color: #111827;">独立打开次数</h3>
-      <p style="margin: 0; color: #4b5563;">打开邮件的唯一收件人数。同一位收件人打开 2 次，仍计为 1 次独立打开。</p>
-    </div>
-    <div style="border: 1px solid #e5e7eb; border-radius: 10px; padding: 16px 18px; background: #ffffff;">
-      <h3 style="font-size: 16px; margin: 0 0 8px; color: #111827;">独立点击次数</h3>
-      <p style="margin: 0; color: #4b5563;">点击邮件的唯一收件人数。同一位收件人点击 2 次，仍计为 1 次独立点击。</p>
-    </div>
-    <div style="border: 1px solid #e5e7eb; border-radius: 10px; padding: 16px 18px; background: #ffffff;">
-      <h3 style="font-size: 16px; margin: 0 0 8px; color: #111827;">总打开次数*</h3>
-      <p style="margin: 0; color: #4b5563;">邮件被打开的总次数。同一位收件人打开 2 次，会计为 2 次总打开。</p>
-    </div>
-    <div style="border: 1px solid #e5e7eb; border-radius: 10px; padding: 16px 18px; background: #ffffff;">
-      <h3 style="font-size: 16px; margin: 0 0 8px; color: #111827;">总点击次数*</h3>
-      <p style="margin: 0; color: #4b5563;">邮件被点击的总次数。同一位收件人点击 2 次，会计为 2 次总点击。</p>
-    </div>
-  </div>
+  <p style="margin: 0 0 12px;">了解在查看 Campaign 结果时，独立打开/点击与总打开/点击之间的区别。简单来说：</p>
+  <ul class="dc-learn-list">
+    <li>
+      <strong>独立打开次数</strong>
+      <span>打开邮件的唯一收件人数。换句话说，如果一位收件人打开你的邮件两次，则计为一次独立打开。</span>
+    </li>
+    <li>
+      <strong>独立点击次数</strong>
+      <span>点击邮件的唯一收件人数。换句话说，如果一位收件人点击你的邮件两次，则计为一次独立点击。</span>
+    </li>
+    <li>
+      <strong>总打开次数*</strong>
+      <span>邮件被打开的总次数。换句话说，如果一位收件人打开你的邮件两次，则计为两次总打开。</span>
+    </li>
+    <li>
+      <strong>总点击次数*</strong>
+      <span>邮件被点击的总次数。换句话说，如果一位收件人点击你的邮件两次，则计为两次总点击。</span>
+    </li>
+  </ul>
 </section>
 
 <aside style="border-left: 4px solid #334155; background: #f8fafc; border-radius: 8px; padding: 16px 18px; margin: 0 0 34px;">
