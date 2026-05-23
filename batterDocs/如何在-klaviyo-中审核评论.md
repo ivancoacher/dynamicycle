@@ -1,0 +1,32 @@
+<h1>如何在 Klaviyo 中审核评论</h1>
+
+<h2>你将会学到</h2>
+<p>了解如何在 Klaviyo 中审核产品和商店评论。通过审核，您可以发布所有有效的评论，同时拒绝不适当或不相关的评论（例如，带有攻击性内容的评论）。 ## 开始之前</p>
+<p>客户评论，包括其收集和管理，受到各个监管机构的监管。 [了解推荐的最佳实践](https://help.klaviyo.com/hc/en-us/articles/16685026123035)，以在整个审核计划中实现透明度、公平性和合规性。 ## 设置自动批准设置</p>
+<p>1. 在 Klaviyo 中选择<strong><em>*评论</strong><strong>选项卡。 2. 单击</strong><strong>评论设置</strong><strong>。 3. 选择</strong><strong>发布规则和通知</strong></em>*。 ![发布规则和通知设置](https://klaviyo.zendesk.com/hc/article_attachments/28720761655963)</p>
+<p>4. 选择您的自动批准设置：</p>
+<p>1.是否自动审核评论。 2. 自动批准哪些星级（例如，批准所有 4 星和 5 星评论，但需要对所有其他评论进行手动审核）。 3. 使用媒体（即图像）或脏话进行评论是否需要手动批准。 4. 是否应将包含某些关键字（例如“.com”等顶级域名）的评论标记为手动批准，以捕获潜在的垃圾邮件或链接。 5. 单击<strong><em>*保存更改</strong></em>*。 ![](https://klaviyo.zendesk.com/hc/article_attachments/36274349748123)</p>
+<h2>中等评论</h2>
+<p>1. 在 Klaviyo 中选择<strong><em>*评论</strong><strong>选项卡。 2. 单击</strong><strong>所有评论</strong><strong>。在这里，您将看到所有评论的列表。 3. 选择</strong><strong>待处理</strong><strong> 仅查看需要审核的评论。您还可以按时间段、评级、回复（即</strong>包括回复<strong>或</strong>无回复</em>*）以及评论是否经过验证来过滤评论。 ![待审核](https://klaviyo.zendesk.com/hc/article_attachments/28720761662619)</p>
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28720773413659" alt="评论审核附加过滤器" />
+<p>4. 对于每个待审核，您有 2 个选项：</p>
+<p>1. 点击<strong><em>*发布</strong></em>*公开发布评论，或者</p>
+<p>2. 打开<strong><em>*拒绝</strong><strong>菜单并选择拒绝原因。拒绝评论时请谨慎行事。出于合规性目的，强烈建议您发布所有评论，除​​非它们符合以下条件之一：</strong>亵渎/不当<strong>、</strong>包含私人信息<strong>、</strong>与产品或服务无关<strong>、</strong>虚假或误导性<strong>或</strong>虚假<strong>。如果原因不属于上述选项之一，您也可以选择</strong>其他<strong>。当拒绝没有文本的审核时，您必须在开放文本字段中提供原因。请参阅我们的[收集评论的最佳实践](https://help.klaviyo.com/hc/en-us/articles/16685026123035)指南，了解有关何时可以拒绝评论的更多详细信息。 5. 对所有待审核重复此过程。定期审查并发布或拒绝任何处于 </strong>待处理<strong> 状态的内容（例如每周一次）。如果评审被拒绝，评审作者不会收到通知。如果打开自动发布，任何处于 </strong>待处理<strong> 状态的经过验证的评论都会在 14 天后自动发布，以确保准确性和透明度。了解[审查法规和最佳实践](https://help.klaviyo.com/hc/en-us/articles/16685026123035)。如果您有大量待审评论并希望一次全部发布，您可以从“</strong><strong>概述</strong></em>*”选项卡执行此操作。要立即发布所有待审评论：</p>
+<p>6. 导航至 Klaviyo 中的 <strong><em>*Reviews</strong><strong>。 7. 在</strong>概述<strong>选项卡中，滚动到</strong>待处理活动<strong>卡。 8. 打开附加选项（3 个点）菜单。 9. 选择</strong><strong>发布所有待审评论</strong></em>*。 ![发布所有待审评论的选项](https://klaviyo.zendesk.com/hc/article_attachments/29565044594203)</p>
+<p>10. 在出现的模式中，确认您已准备好发布所有待审核的评论。 ### 无文字的审核和评论</p>
+<p>许多国家/地区都有[管理审核审核的法规](https://help.klaviyo.com/hc/en-us/articles/16685026123035)，通常要求品牌：</p>
+<ul>
+<li>发布所有合法评论。 - 仅当评论符合一组特定标准时才拒绝评论，例如：</li>
+<li>含有攻击性语言</li>
+<li>包括私人信息</li>
+</ul>
+<p>拒绝评论时要小心，尤其是那些没有文本的评论，以确保遵守这些规定。如果没有文字的评论不符合您的自动批准设置，它将被标记为 <strong>待处理</strong> 14 天，或者直到您发布为止。 如果您能够在此期间解决客户的投诉（例如，通过[客户服务流程](https://help.klaviyo.com/hc/en-us/articles/16680027976731)）并且客户更新了评论，则只会发布更新后的评论。 ### 适度的图像</p>
+<p>当使用图像审核评论时，您有以下选项：</p>
+<ul>
+<li>****旋转****</li>
+</ul>
+<p>如果图像以错误的方向上传，请旋转它，以便它在评论小部件中正确显示。 - <strong><em>*隐藏</strong></em>*</p>
+<p>如果图像不合适或包含敏感信息，请将其隐藏，以便评论小部件中仅显示评论文本。要审核评论的图像：</p>
+<p>1. 导航至<strong><em>*评论 > 所有评论</strong><strong>。 2. 在过滤器侧栏中，选择 </strong><strong>照片</strong></em>* 以过滤包含图像的评论。 ![](https://klaviyo.zendesk.com/hc/article_attachments/39490614495899)</p>
+<p>3. 单击您要调整的图像。 ![](https://klaviyo.zendesk.com/hc/article_attachments/39490614499355)</p>
+<p>4. 在出现的模式中，选择<strong><em>*隐藏</strong><strong>以隐藏评论公开出现的任何位置的图像，或选择</strong><strong>旋转</strong></em>*以逆时针旋转图像。 ![](https://klaviyo.zendesk.com/hc/article_attachments/39490608143259)</p>
