@@ -11,7 +11,9 @@
 .betterdocs-toc-wrapper,
 .betterdocs-toc-container,
 .betterdocs-content-area > .betterdocs-toc,
-.betterdocs-doc-content > .betterdocs-toc {
+.betterdocs-doc-content > .betterdocs-toc,
+.betterdocs-article-reactions,
+.betterdocs-social-share {
   display: none !important;
 }
 .betterdocs-content-area,
