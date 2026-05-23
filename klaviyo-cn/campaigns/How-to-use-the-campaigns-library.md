@@ -1,0 +1,55 @@
+---
+id: "30892315134747"
+title: "如何使用营销活动库"
+source_url: "https://klaviyo.zendesk.com/hc/en-us/articles/30892315134747-How-to-use-the-campaigns-library"
+section: "Getting started with campaigns"
+category: "Campaigns"
+category_slug: "campaigns"
+klaviyo_updated: "2026-05-11T12:54:35Z"
+language: "zh"
+---
+## 你将会学到
+
+了解如何使用营销活动库创建营销活动，该库将设置一部分个人资料作为您的受众，并根据您的营销目标设置消息内容。该库可用于电子邮件和短信活动。
+
+活动目标包括：
+
+- 推广产品
+- 发起销售
+- 吸引您的订阅者
+- 分享独家优惠
+- 分享业务更新
+
+使用库中的模板可以更轻松、更快速地为订阅者创建营销活动。这是选择受众和消息内容的一个很好的起点，您可以为您的品牌进一步定制这些受众和消息内容。
+
+## 开始之前
+
+如果您还没有了解创建营销活动的基础知识：
+
+- [如何创建和发送电子邮件营销活动](https://help.klaviyo.com/hc/en-us/articles/115005054847)
+- [如何创建和发送短信活动](https://help.klaviyo.com/hc/en-us/articles/360040039971)
+
+## 探索活动库
+
+要探索活动库：
+
+1. 单击 Klaviyo 中的****营销活动****选项卡。
+2. 在顶部，单击****库****。
+   ![](https://klaviyo.zendesk.com/hc/article_attachments/32781078342939)
+3. 使用 ****Channel**** 下拉列表在电子邮件和短信活动之间进行过滤。
+   ![](https://klaviyo.zendesk.com/hc/article_attachments/32757153452059)
+4. 使用搜索栏查找特定类型的营销活动，或单击****营销活动目标**** 根据目标进行过滤。
+
+   ![](https://klaviyo.zendesk.com/hc/article_attachments/30892315131035)
+
+   活动模板将根据您帐户中的指标数据显示。例如，仅当您的帐户中有订单数据时，才会显示与 **已下订单** 事件相关的模板。
+5. 找到您喜欢的营销活动模板后，单击它以查看详细信息。
+
+   左侧是活动和相关标签的描述。 **受众**下是营销活动将发送到的细分的定义。
+
+   ![](https://klaviyo.zendesk.com/hc/article_attachments/30892315132571)
+
+   营销活动库创建的细分将保留在您的帐户中，以便在未来的营销活动中使用。如果您从库中创建的营销活动使用与之前创建的营销活动相同的细分定义，则它将重用现有细分，而不是创建新细分。
+
+   右侧是受众规模的估计以及活动中使用的电子邮件内容的预览。
+6. 单击右上角的****创建和自定义****，继续执行营销活动设置向导。

@@ -1,0 +1,53 @@
+---
+id: "360054242492"
+title: "如何建立生日流程"
+source_url: "https://klaviyo.zendesk.com/hc/en-us/articles/360054242492-How-to-build-a-birthday-flow"
+section: "Lifecycle flows"
+category: "Flows"
+category_slug: "flows"
+klaviyo_updated: "2026-04-21T13:54:51Z"
+language: "zh"
+---
+## 你将会学到
+
+了解如何创建在客户生日时发送消息的流程，以表明您对客户的关心程度。毕竟，谁不喜欢被人祝生日快乐呢？生日流程可以通过多种不同的方式制作：
+
+- 仅包含 1 条消息
+- 包括许多分割以增强个性化
+- 既是半生日又是生日流程
+
+在本文中，您将学习如何创建生日流程并查看该流程的示例。 ![](https://fast.wistia.com/embed/medias/hoxiwgq9n4/swatch)
+
+## 开始之前
+
+在使用生日流程之前，您必须收集生日作为客户个人资料上的个人资料属性。有几种方法可以做到这一点。 - 在[注册表单](https://klaviyo.zendesk.com/hc/en-us/articles/360026474752)中添加日期字段，供订阅者填写生日。 - 使用 [CSV 文件](https://klaviyo.zendesk.com/hc/en-us/articles/1260806293150) 手动导入生日。 - 如果生日作为电子商务平台中的属性存在，电子商务集成会将生日作为配置文件属性导入。 ## 创建生日流程
+
+1. 在****Flows**** 选项卡中，创建一个[日期属性触发的流](https://help.klaviyo.com/hc/en-us/articles/360002732652)。 ![在流触发器列表中，可以在底部找到日期属性选项](https://klaviyo.zendesk.com/hc/article_attachments/28720670182171)
+2. 在下拉列表中，选择用于收集订阅者生日的属性。您至少需要 1 个配置文件才能拥有此属性，才能使其显示在下拉列表中。如果您没有看到任何列出的内容，请检查个人资料的生日是否采用[接受的日期格式](https://help.klaviyo.com/hc/en-us/articles/115005253428)之一。 ![在“触发器设置”菜单中，您可以从下拉列表中选择日期属性，例如生日属性（如果您的帐户中存在）](https://klaviyo.zendesk.com/hc/article_attachments/28720670191387)
+3. 选择您想要开始流程的时间：该人的生日当天或之前。 4. 然后，选择目标日期延迟的时间。对于生日流程，我们建议将其设置为当天早些时候并使用**收件人的本地时区**。在这里，我们将延迟设置为上午 9 点。对于您希望流程重复的频率，请选择****每年****。 ![每年选项应从“何时应重复此流程”部分中选择](https://klaviyo.zendesk.com/hc/article_attachments/28720670196123)
+5. 配置触发器设置后，单击****保存****。 6. 如果您选择流程在该日期之前开始，则会出现目标日期延迟。该点代表某人的生日，您可以在该点之前或之后添加操作。 ![在流程编辑器中，触发器将显示其配置](https://klaviyo.zendesk.com/hc/article_attachments/28720658443163)
+7. 接下来，开始添加消息。确保在个人资料的实际生日上添加一条消息。下面是一个单消息示例。 ![可以在流程触发后立即添加消息，例如“生日快乐”消息](https://klaviyo.zendesk.com/hc/article_attachments/28720670198555)
+
+## 生日流程示例
+
+### 在生日前不久开始
+
+当您提供面对面的优惠或折扣时，将流程设置为在生日之前开始非常有用，因为这让他们有时间计划何时想要使用它。然后，您可以在当天跟进，祝他们生日快乐，并提醒他们您的优惠。在以下示例中，流电子邮件是在收件人生日前一周发送的。在他们的实际生日那天，他们将收到一条短信或 WhatsApp 消息（如果他们选择了其中一个渠道）或一封电子邮件。 ![](https://klaviyo.zendesk.com/hc/article_attachments/34362688300187)
+
+### 发送半生日消息
+
+许多人期望在生日当天或前后收到商家的生日祝福，但半生日就不一样了。祝您的订阅者半生日快乐是一个很好的姿态，也是提醒他们您的品牌的一种方式。使用与上面相同的设置，您还可以发送半生日消息。将流程设置为在某人生日前 6 个月开始，然后添加您的电子邮件、短信或 WhatsApp 消息。 ![您可以将触发器设置为在某人生日前 6 个月开始并发送“1/2 生日快乐”消息](https://klaviyo.zendesk.com/hc/article_attachments/28720670202523)
+
+[RAREFORM](https://www.rareform.com/) 在他们的半生日流程中使用了类似的概念。他们的流程仅包含 1 条消息，如下所示，其中包含一条轻松的消息和为收件人提供的折扣。 ![来自 RAREFORM 的半岁生日留言示例](https://klaviyo.zendesk.com/hc/article_attachments/28720670177051)
+
+## 个性化您的生日流程
+
+随着您的成长并获得有关订阅者的更多信息，请考虑在您的生日和半生日流程中添加更多个性化内容。例如，您可以使用基于配置文件属性的条件分割来显示您知道他们喜欢的产品/样式。 ![使用配置文件属性根据客户偏好进行有条件分割的生日流程示例](https://klaviyo.zendesk.com/hc/article_attachments/28720670207259)
+
+## 其他资源
+
+请参阅[Klaviyo 接受的日期和时间戳格式](https://help.klaviyo.com/hc/en-us/articles/115005253428)。阅读有关日期属性触发流的更多信息：
+
+- [如何创建日期属性触发的流程](https://help.klaviyo.com/hc/en-us/articles/360002732652)
+- [了解基于日期的流程如何安排收件人](https://help.klaviyo.com/hc/en-us/articles/360054240252)
+- [了解日期财产流中的时间延迟](https://help.klaviyo.com/hc/en-us/articles/360054705431)

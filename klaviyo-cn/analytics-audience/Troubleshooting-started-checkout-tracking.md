@@ -1,0 +1,79 @@
+---
+id: "6998274713371"
+title: "疑难解答开始结帐跟踪"
+source_url: "https://klaviyo.zendesk.com/hc/en-us/articles/6998274713371-Troubleshooting-started-checkout-tracking"
+section: "Metrics troubleshooting"
+category: "Analytics"
+category_slug: "analytics-audience"
+klaviyo_updated: "2026-04-21T13:55:04Z"
+language: "zh"
+---
+## 开始之前
+
+**开始结账** 跟踪包含在许多电子商务集成中，不需要任何额外的设置。在查阅本指南之前，请确保您已正确设置、配置并启用电子商务集成。了解不同集成的 **Started Checkout** 事件如何触发非常重要。请参阅下面的列表，快速了解每个电子商务集成如何触发事件。您可以单击每个集成的名称以了解更多信息。 - 客户登录其帐户，将商品添加到购物车，然后查看结账页面
+- 未登录的客户将商品添加到购物车、查看结帐页面并输入帐单电子邮件地址
+
+- [Shopify](https://help.klaviyo.com/hc/en-us/articles/115005080447)
+  称为 **结帐开始**，并在客户填写结帐页面上的电子邮件地址字段后进行跟踪。这适用于一页结帐和多页结帐。 - [BigCommerce](https://help.klaviyo.com/hc/en-us/articles/115005082587)
+  跟踪客户何时在 BigCommerce 结帐流程的第一页上输入联系信息和送货信息并单击“继续”
+- [Magento 1](https://help.klaviyo.com/hc/en-us/articles/115005254528)
+  称为 **结帐开始**，并跟踪客户何时在 Magento 结帐流程的第一页上输入联系信息和送货信息并单击“继续”
+- [Magento 2](https://help.klaviyo.com/hc/en-us/articles/115003458852)
+  此事件仅跟踪客户是否在 Magento 2 定期同步发生时（每 30 分钟发生一次）未继续下订单。例如，如果客户在上次定期同步后立即开始结账，但未在 30 分钟内完成结账，则 **Started Checkout** 事件将发送到 Klaviyo。如果他们在这 30 分钟内继续下订单，则不会记录 **开始结账** 事件，而是跟踪 **已下订单** 事件。此事件跟踪何时发生以下其中一种情况：
+  - 客户登录其帐户，将商品添加到购物车，然后查看结账页面
+  - 未登录的客户将商品添加到购物车、查看结帐页面并输入帐单电子邮件地址
+  - 客户登录他们的帐户，将商品添加到购物车，然后导航到结账页面
+  - 无需登录或使用访客结账，客户即可将商品添加到购物车、导航到结账页面并输入电子邮件地址
+- [WooCommerce](https://help.klaviyo.com/hc/en-us/articles/360030732832)
+  当以下情况之一发生时进行跟踪：
+- [PrestaShop](https://help.klaviyo.com/hc/en-us/articles/360055123191)
+  当以下情况之一发生时进行跟踪：
+- [Shift4Shop](https://help.klaviyo.com/hc/en-us/articles/115005083107)
+  跟踪客户何时在 Shift4Shop 结帐流程的第一页上输入联系信息和送货信息并单击“继续”
+
+如果您使用的电子商务平台没有预构建的 Klaviyo 集成或自定义平台，请在我们的开发者网站上了解[如何启用“开始结帐”跟踪](https://developers.klaviyo.com/en/docs/guide-to-integrating-a-platform-without-a-pre-built-klaviyo-integration#started-checkout)。 ## 测试开始结帐事件
+
+**开始结账** 事件通常用于设置废弃的购物车流程。如果您最近设置了帐户并尝试从 Klaviyo 的流程库创建废弃的购物车流程，您可能会遇到以下警告消息：
+
+“我们最近没有收到任何**开始结帐**事件。如果您认为可能存在问题，请联系我们的成功团队寻求帮助。”
+
+这并不一定意味着您的帐户或集成存在问题，但可能意味着尚未触发 **开始结帐** 事件。如果您的网站是新的，则很可能是这种情况。您可以按照以下步骤触发事件以使此警告消失。要测试您的 **Started Checkout** 跟踪设置是否正确，请按照以下步骤操作：
+
+1. 导航到您的网站。 2. 导航至您网站上有库存产品的产品页面。 3. 点击页面上的“添加到购物车”按钮。 4. 继续结账购物车中的商品。 5. 在结帐首页，填写所有必需的联系信息，然后单击****继续****以进入结帐流程的下一步。 6. 在 Klaviyo 中搜索您在结帐时使用的电子邮件地址
+   ![搜索栏位于 Klaviyo 的右上角，您可以通过电子邮件地址搜索个人资料。](https://klaviyo.zendesk.com/hc/article_attachments/28716066498843)
+
+   您应该看到已为您创建了 Klaviyo 个人资料（如果尚不存在），并且已在您的活动源上跟踪 **开始结帐** 事件。由于某些电子商务平台的限制，并非所有电子商务集成都会实时同步数据。对于某些集成，您可能需要等待 30 分钟到一个小时才能跟踪事件。请参阅我们关于[集成同步的频率](https://help.klaviyo.com/hc/en-us/articles/115005253208) 的文章以了解更多信息。要查看随时间变化的所有 **已开始结帐** 指标的摘要：
+7. 导航至您帐户的[分析选项卡](https://www.klaviyo.com/analytics/)。 8. 单击进入 ****Metrics.****
+9. 按 **Started Checkout**（或 Shopify 和 Magento 1 的 **Checkout Started**）进行筛选，以查看活动源、活动地图、图表、最佳人员和同期群报告中的跟踪数据。 ![“指标”页面顶部有一个搜索栏，您可以在其中按名称搜索不同的指标。](https://klaviyo.zendesk.com/hc/article_attachments/28716056049691)
+
+查看下面的故障排除方案并进行更改后，您应该再次测试跟踪以确保其正常工作。 ## 故障排除场景
+
+查看以下问题以诊断 **Started Checkout** 问题的原因。请注意，某些步骤是通用的，其他步骤取决于您使用的电子商务平台。 ****您在跟踪其他指标时是否也遇到问题？****
+
+如果您在跟踪其他指标以及**开始结帐**时遇到问题，则您的集成设置可能存在问题。请按照以下步骤查看您的集成设置是否正确：
+
+1. 如果按键两侧看起来匹配，请检查按键前后是否有空格。删除所有前导或尾随空格，因为它们可能会导致错误。 1. 导航至您帐户的集成页面。 2. 在 **启用的集成** 选项卡中，确保您的电子商务集成位于列表中。否则，请按照本文[开始之前部分](#h_01G6W4E472QT850B5ZPSEKFEX5)中链接的相关设置指南，确保您已正确遵循设置和配置电子商务集成的所有步骤。 3. 如果您的电子商务集成已启用，请单击****查看设置****以检查与集成相关的错误消息以及所有必填字段是否已填写。 ![集成设置链接位于“启用的集成”选项卡中每个集成的右侧。](https://klaviyo.zendesk.com/hc/article_attachments/28716066504091)
+4. 如果您的集成需要使用公共 API 密钥、私有 API 密钥、消费者密钥和/或消费者秘密，请确保 Klaviyo 中的信息与您的电子商务平台中的信息匹配。 5. 如果您在集成时仍然遇到问题，请[联系 Klaviyo 支持](https://help.klaviyo.com/hc/en-us/articles/115001002272-How-to-Contact-Support) 以进行进一步的故障排除。 ****您最近更换过电子商务平台吗？****
+
+迁移电子商务平台时，请确保将用于流程和分析的指标切换为新电子商务平台的指标。例如，如果您要从 BigCommerce 切换到 Shopify，您帐户的分析和流程可能仍会设置为使用 BigCommerce 的 **开始结帐** 指标，而不是 Shopify 的 **开始结帐** 指标。 请参阅以下指南以获得进一步帮助：
+
+- [切换电商平台后如何更新Klaviyo](https://help.klaviyo.com/hc/en-us/articles/360003124151-Updating-Klaviyo-After-Switching-Ecommerce-Platforms)
+- [如何更改流量和营销活动报告的转化指标](https://help.klaviyo.com/hc/en-us/articles/115005199947-How-to-Change-the-Conversion-Metric-for-Flow-and-Campaign-Reports)
+- [如何更改流程触发器](https://help.klaviyo.com/hc/en-us/articles/115002775052-How-to-change-a-flow-trigger)
+
+****您的结帐页面是否使用第三方服务？****
+
+如果您使用第三方应用程序或扩展程序来处理结帐流程，这可能会阻止您的电子商务平台正确触发结帐事件，进而阻止 Klaviyo 跟踪 **开始结帐** 事件。为了对此进行测试，请尝试禁用负责管理结帐流程的应用程序或扩展程序，并查看是否能够使用本指南的[测试开始结帐事件部分](#h_01G6W4EPHW2E7Y4E662V5YE8SP)中提供的步骤触发 **开始结帐** 事件。 ****对于 Wix 用户：您的商店使用单页面进行结账吗？****
+
+为了让 Klaviyo 跟踪 Wix 上的 **开始结帐** 事件，运输和账单信息必须位于不同的页面上。如果您有单页面结账流程，建议您调整所有设置、主题或扩展程序，以确保您的结账流程要求客户在多个页面上输入信息。 ****对于 WooCommerce 和 Magento 用户：您是否使用最新版本的集成插件？****
+
+如果您使用的是 WooCommerce 或 Magento，**开始结账** 跟踪问题可能与您平台的 Klaviyo 插件的其他问题有关。检查您是否正在使用最新版本的插件进行集成。如果需要，请更新到 WooCommerce 或 Magento 中的最新版本，或者您可以从相关平台的列表中下载最新版本。 - [安装向导安装](https://marketplace.magento.com/klaviyo-magento2-extension.html)
+- [Composer 安装](https://packagist.org/packages/klaviyo/magento2-extension)
+
+- [Klaviyo WordPress (WooCommerce) 插件](https://wordpress.org/plugins/klaviyo/)
+- [Klaviyo Magento 1 扩展](https://www.klaviyo.com/media/downloads/MagentoKlaviyo-Latest.tgz)
+- Klaviyo Magento 2 扩展
+
+## 联系 Klaviyo 支持
+
+如果您在查阅此列表并测试跟踪后仍然遇到问题，请通过我们的[社区](https://community.klaviyo.com/got-a-question-1)或我们的[支持团队](https://help.klaviyo.com/hc/en-us/articles/115001002272-How-to-Contact-Support)联系。

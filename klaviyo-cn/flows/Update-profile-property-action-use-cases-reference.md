@@ -1,0 +1,55 @@
+---
+id: "360050420371"
+title: "更新配置文件属性操作用例参考"
+source_url: "https://klaviyo.zendesk.com/hc/en-us/articles/360050420371-Update-profile-property-action-use-cases-reference"
+section: "Add steps or actions to flows"
+category: "Flows"
+category_slug: "flows"
+klaviyo_updated: "2026-04-21T13:54:50Z"
+language: "zh"
+---
+## 你将会学到
+
+了解如何在收件人进入流程的某个阶段时使用更新配置文件属性操作来标记收件人。您还可以使用此操作编辑配置文件属性或将其删除。本文通过示例介绍如何使用更新配置文件属性操作。
+
+## 收集感兴趣的类别
+
+人们在电子邮件中点击的链接可以表明特定兴趣和一般兴趣。在整个流程中，您可能会展示不同类别的产品。在系列结束时，您可以根据某人单击的类别或集合创建拆分。使用更新配置文件属性操作，创建属性并轻松捕获此参与度。
+
+需要考虑的一个例子是有人点击“新到货”。这是一个很好的指标，表明此人对最新趋势或新产品感兴趣。推出新产品时，向您认识的通常与新产品互动的人发送特定的营销活动，主题行应符合该主题。
+
+要了解如何设置这些链接，请访问我们的指南[当有人单击链接时更新个人资料属性](https://help.klaviyo.com/hc/en-us/articles/115005255248#adding-buttons-or-links-that-update-profile-properties1)。
+
+## 用重要日期标记个人资料
+
+使用此功能的另一个好方法是利用内置方法将属性设置或更新为当前日期。如果您有针对新客户的[感谢系列](https://help.klaviyo.com/hc/en-us/articles/360028872611)，请添加更新配置文件属性操作作为第一步，以使用首次购买日期标记每个配置文件。
+
+![更新配置文件属性操作集以创建“首次购买日期”属性。
+](https://klaviyo.zendesk.com/hc/article_attachments/28723543919771)
+
+存储某些日期可以方便地进行进一步分析以及触发[基于日期的自动化](https://help.klaviyo.com/hc/en-us/articles/360002732652)。
+
+此外，您可以标记某人订阅电子邮件或短信的日期。这些数据点有助于衡量列表随时间的增长。
+
+![更新配置文件属性操作集以创建 SMS 订阅日期属性
+](https://klaviyo.zendesk.com/hc/article_attachments/28723521995163)
+
+## 当他们完成欢迎系列时标记个人资料
+
+您可能不希望订阅者在看完整个[欢迎系列](https://help.klaviyo.com/hc/en-us/articles/115002775172)之前开始接收常规新闻通讯内容。
+
+在欢迎系列流程的末尾，添加值为“true”的完整欢迎流程属性。然后，您可以对主要订阅者列表进行细分，以仅包含此属性设置为 true 的订阅者列表。
+
+## 将性别添加到他们的个人资料中
+
+在许多行业（包括服装、配饰和护发），了解某人的性别可以帮助您传递更有针对性的信息。使用更新个人资料属性操作，您可以在某人购买或查看特定系列时将其性别添加到个人资料中。
+
+![具有多个触发器拆分的流程示例，用于检查订单集合的性别。](https://klaviyo.zendesk.com/hc/article_attachments/28723543923739)
+
+添加此配置文件属性后，您可以使用它来创建基于性别的细分。然后，通过有针对性的活动向各个细分群体发送与其性别相关的信息，或使用不同的注册表单来针对他们。
+
+## 其他资源
+
+- [如何向流程添加更新配置文件属性操作](https://help.klaviyo.com/hc/en-us/articles/360001768432)
+- [电子邮件个性化课程](https://academy.klaviyo.com/guide-to-email-personalization)
+- [如何使用链接收集有关收件人的信息](https://klaviyo.zendesk.com/hc/en-us/articles/115005255248)

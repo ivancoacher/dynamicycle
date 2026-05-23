@@ -1,0 +1,79 @@
+---
+id: "360054551492"
+title: "PrestaShop 入门"
+source_url: "https://klaviyo.zendesk.com/hc/en-us/articles/360054551492-Getting-started-with-PrestaShop"
+section: "PrestaShop"
+category: "Integrations"
+category_slug: "integrations"
+klaviyo_updated: "2026-05-15T08:50:33Z"
+language: "zh"
+---
+## 你将会学到
+
+了解如何将您的 PrestaShop 商店与 Klaviyo 集成。 Klaviyo 是 PrestaShop 的首选营销自动化合作伙伴。此过程涉及 2 个步骤：在 PrestaShop 中安装免费模块（**PrestaShop Automation with Klaviyo**）并启用 Klaviyo 中的集成。本文还提供了有关监控数据同步、设置事务电子邮件和更新模块的信息，以便您可以与 Klaviyo 一起成长。 ## 开始之前
+
+为了使用 Klaviyo 模块，您需要使用以下 PrestaShop 版本之一：
+
+- PrestaShop 1.7.0 至 9.1.x（并使用 PHP 7.1 或更高版本）
+  - 请注意，如果您想使用我们的结账时短信同意收集功能，您需要使用 PrestaShop 1.7.6 或更高版本。如果您使用的是 1.7.0 之前的 PrestaShop 版本，并且想要升级以便使用 Klaviyo 模块，请查看 PrestaShop 的[商店升级指南](https://devdocs.prestashop.com/1.7/basics/keeping-up-to-date/upgrade/)
+
+    集成前请检查以下信息：
+- 如果您使用的是 PrestaShop 版本，则预装了 [PrestaShop Automation with Klaviyo](https://addons.prestashop.com/en/promotions-marketing/91359-prestashop-automation-with-klaviyo.html) 模块。如果您使用的是其他版本的 PrestaShop，则需要安装它（下一节将详细介绍）。 - **PrestaShop Automation with Klaviyo** 旨在与 PrestaShop [后台功能](https://docs.prestashop-project.org/1.7-documentation/user-guide/connecting-back-office) 集成，如 PrestaShop 帐户。安装 **PrestaShop Automation** 时，系统会提示您在后台安装 PrestaShop Account、PrestaShop EventBus 和 PrestaShop Marketplace 模块，以便使用 Klaviyo 模块。 - 不想与开源 PrestaShop 商店的后台功能集成？您可以改用我们的 [Klaviyo by PrestaShop Partners](https://addons.prestashop.com/en/newsletter-sms/49837-klaviyo.html) 模块，该模块包含与 **PrestaShop Automation with Klaviyo** 相同的功能集，并且不需要 PS\_MBO。 - 强烈建议将 Klaviyo IP 添加到防火墙提供商的允许列表中，以最大程度地减少身份验证和配置问题。更多详情请查看【如何将Klaviyo集成流量IP地址列入白名单】(https://help.klaviyo.com/hc/en-us/articles/19143781289115)。想要更新您当前的 Klaviyo 模块？请参阅[本文结尾](https://help.klaviyo.com/hc/en-us/articles/360054551492#h_01HD6YRW7VWJQKBXTN7TGA7N88)了解更多信息。 ## 操作方法视频
+
+![](https://fast.wistia.com/embed/medias/bywqzlujfa/swatch)
+
+## 在 PrestaShop 中安装模块
+
+1. 如果您使用 PrestaShop 版本，则预先安装了 **PrestaShop Automation with Klaviyo** 模块。你应该：
+   1. 登录您的 PrestaShop 商店。 2. 在左侧菜单的****配置****下，选择****Klaviyo****。 3. 跳到本文的[下一节](https://help.klaviyo.com/hc/en-us/articles/360054551492#h_01HD6YRW7VPWVC4900MNN5F0K8)配置模块。 2. 如果您不使用 PrestaShop 版本，请前往 PrestaShop 市场上的 [PrestaShop Automation with Klaviyo module page](https://addons.prestashop.com/en/newsletter-sms/91359-prestashop-automation-with-klaviyo.html)，然后继续下一步。 ![](https://klaviyo.zendesk.com/hc/article_attachments/28715970454683)
+3. 在模块页面，点击****下载****。如有必要，请验证您的详细信息，然后选择您正在使用的 PrestaShop 版本并下载 zip 文件。您不需要解压 zip 文件。 ![](https://klaviyo.zendesk.com/hc/article_attachments/28715963851931)
+4. 登录您的 PrestaShop 商店并导航至****模块 > 模块管理器****。单击****上传模块****，然后将 zip 文件拖放到模块管理器中。 ![](https://klaviyo.zendesk.com/hc/article_attachments/35197766381595)
+5. 完成后模块将显示安装成功的消息。接下来，单击****配置****并继续下一部分。 ## 在 PrestaShop 中配置模块
+
+1. 您需要检索您的 Klaviyo 公共 API 密钥（也称为您的站点 ID），并生成用于 PrestaShop 的 Klaviyo 私有 API 密钥。 - 登录 Klaviyo，然后单击左下角的组织名称。 - 选择****设置 > API 密钥****。 - 从页面复制您的公共 API 密钥并将其粘贴到 PrestaShop 中的相应设置中。 - 返回 Klaviyo，单击****创建私有 API 密钥****，为其命名，选择****完全访问密钥****，然后单击****创建****。 - 安全地复制您新创建的私有 API 密钥并将其粘贴到 PrestaShop 中的相应设置中。 2. 如果您希望交易订单事件实时同步，请打开****发送实时订单事件至Klaviyo****。这些事件可用于发送事务性消息，并将显示为标记为事务性的第二组事件（例如，您将在 Klaviyo 中看到一个标记为 **已下订单交易** 的指标，该指标将实时同步，此外还有一个标记为 **已下订单** 的指标，该指标每 30 分钟同步一次）。 ![](https://klaviyo.zendesk.com/hc/article_attachments/28715963854107)
+3. 如果您愿意，请打开****关闭 PrestaShop 生成的交易订单电子邮件****。我们建议您禁用此设置，直到您准备好在 Klaviyo 中发送事务电子邮件为止。您可以随时返回此页面并打开设置以禁用 PrestaShop 发送。请注意，切换此设置会阻止与**已下订单**、**已履行订单**、**已取消订单**和**退款订单**相关的交易电子邮件以及付款提醒电子邮件。 4. 如果您希望同步结帐时或通过注册表单收集的电子邮件订阅者，请启用 **将 PrestaShop 电子邮件订阅者同步到 Klaviyo**。 5. 如果您希望用户在结账时选择加入短信营销，请启用 **将 PrestaShop 短信订阅者同步到 Klaviyo**。 6.![](https://klaviyo.zendesk.com/hc/article_attachments/28715963860379)
+
+   您必须[在 Klaviyo 中设置 SMS](https://help.klaviyo.com/hc/en-us/articles/4404274419355)，然后才能同步 SMS 订阅者。 7. 单击****保存****继续。 8. 如果您打开电子邮件订阅者同步设置，系统将提示您从 Klaviyo 帐户中选择要添加电子邮件订阅者的列表。所有新订阅者都将添加到您选择的列表中。我们建议使用 **电子邮件列表。**
+   ![](https://klaviyo.zendesk.com/hc/article_attachments/28715970464923)
+9. 如果您想使用 [PrestaShop Newsletter Subscription module](https://addons.prestashop.com/en/newsletter-sms/22318-newsletter-subscription.html#overview) 将个人资料订阅到 Klaviyo 列表，请确保您已启用该模块，并且该模块使用 2.6.0 或更高版本。 10. 如果您打开短信订阅者同步设置：
+    1. 系统将提示您从 Klaviyo 帐户中选择要添加短信订阅者的列表。所有新订阅者都将添加到您选择的列表中。我们建议对电子邮件和短信订阅者使用单独的列表。 2. 选择**客户何时订阅**？这可以是在他们开始结账或下订单之后
+    3. 为您的营销复选框添加同意标签；使用清晰的标签告知用户他们选择的内容（例如“订阅短信营销”）。 4. 添加同意[披露文本](https://help.klaviyo.com/hc/en-us/articles/4412878737051)。您必须包含合规性披露语言。确保将短信营销计划的条款包含在您的服务条款和隐私政策中。请注意，您必须在披露框中使用 HTML。披露语言示例：
+       **选中此框并在上面输入您的电话号码，即表示您同意通过所提供的号码接收来自[公司名称]的营销短信（例如促销、购物车提醒）。可能需要支付消息和数据费。消息频率各不相同。您可以随时回复“停止”或单击取消订阅链接（如果有）来取消订阅。 <a href="link">隐私政策</a>和<a href="link">条款</a>。**
+    5. 您可以使用显示框右侧的语言切换按钮，为商店显示的每种语言添加特定于语言的显示文本。![](https://klaviyo.zendesk.com/hc/article_attachments/28715963865755)
+11. 单击****保存****继续。 12. 接下来，通过接受默认值或选择不同的值来完成订单状态映射表单。订单状态对应于 Klaviyo 中记录的订单事件。您可以为每个订单事件选择多个值。使用 Cmd 或 Ctrl+单击可选择多个。多个订单事件中不能选择相同的值。选择重复值将导致错误消息并且无法保存。 事务性和非事务性事件都将遵循您选择的顺序映射。 13. 完成订单状态配置后，单击****保存****。 14. 您将看到**优惠券**部分，您可以在其中生成优惠券。在 **购物车规则限制** 字段中，选择 **每个前缀一个购物车规则** 或 **每个订单一个购物车规则** 以限制客户使用优惠券的方式。默认情况下，此设置为 **每个前缀一个购物车规则，** 防止客户在结帐时添加多个具有相同前缀的代码。 ![Klaviyo 模块设置中的购物车规则限制字段](https://klaviyo.zendesk.com/hc/article_attachments/28715970473371)
+15. 如果您还希望使用**生成数量**字段生成优惠券代码，您可以稍后返回此页面。阅读[如何为 PrestaShop 创建静态优惠券](https://help.klaviyo.com/hc/en-us/articles/19655157461403) 了解更多信息。 16. 在 **回到库存** 下，您将看到 **电子邮件通知** 开关，该开关允许在 Klaviyo 中发送回到库存电子邮件。为了启用此切换，您需要在 PrestaShop 中安装邮件警报模块并打开产品可用性：
+    1. 在新选项卡中，导航至 PrestaShop 管理员中的****模块 > 模块管理器****。 2. 搜索**邮件警报**。 3. 找到该模块并单击****安装****。 ![](https://klaviyo.zendesk.com/hc/article_attachments/33130255350043)
+    4. 模块安装后，单击****配置****。 ![](https://klaviyo.zendesk.com/hc/article_attachments/33130255356315)
+    5. 确保****产品可用性****已打开。 ![](https://klaviyo.zendesk.com/hc/article_attachments/33130255362715)
+    6. 单击****保存****。 17. 启用 **电子邮件通知** 开关以启用 Klaviyo 中的库存电子邮件发送功能。请注意，启用该开关也会关闭从 PrestaShop 发送的库存电子邮件。您仍然需要在 Klaviyo 中设置[退回库存流程](https://help.klaviyo.com/hc/en-us/articles/33059375555099#h_01JJ80E2W0K4N9THD0RPEBVJ3Y)才能开始发送。 ![](https://klaviyo.zendesk.com/hc/article_attachments/33130201022107)
+18. 接下来，在左侧导航的****配置****部分中选择****高级参数****。选择****Web 服务****。复制为您生成的 Klaviyo Web 服务密钥，然后继续下一部分。 - 下一步在 Klaviyo 中启用集成时将使用此密钥。我们建议通过选择 Klaviyo Web 服务密钥旁边的铅笔图标来验证 Web 服务密钥是否具有正确的 Klaviyo 权限。向下滚动所有权限列表并找到 Klaviyo。确保选中所有权限复选框。选择****保存****以应用任何更改。 ## 在 Klaviyo 中启用集成
+
+1. 接下来，在您的 Klaviyo 帐户中启用 PrestaShop 集成。在 Klaviyo 中，从左侧导航中选择****集成****。 2. 单击****探索应用程序****，搜索**PrestaShop**，然后选择卡。然后，单击****安装****。 3. 在下一页上，单击****连接到 PrestaShop****。 ![](https://klaviyo.zendesk.com/hc/article_attachments/35197766384411)
+4. 在下一页的****商店 URL**** 字段中输入您的 PrestaShop 商店 URL。您可以在 PrestaShop 帐户中的****商店参数 > 流量和 SEO > 商店 URL**** 下找到您的商店 URL。您还可以单击****查看我的商店****，从帐户内的任何页面快速导航到您的 PrestaShop 网站，以检索商店的 URL。 ![Klaviyo 中 PrestaShop 的连接详细信息，包括商店 URL 和 Web 服务密钥](https://klaviyo.zendesk.com/hc/article_attachments/28715963832347)
+5. 将从 PrestaShop 复制的 Web 服务密钥粘贴到 ****Webservice key**** 字段中。 6. 如果您想将商店使用的所有货币转换为 Klaviyo 中的单一货币，请选中****将所有货币转换为一种标准货币****，然后从下拉列表中选择全球货币代码。 - 这不会改变您的 Klaviyo 帐户的货币。要更改您在帐户范围内使用的货币，请参阅我们的指南[更改您帐户的货币](https://help.klaviyo.com/hc/en-us/articles/115005061007-Change-the-Currency-for-Your-Account)。 7. 选择****检索商店列表****，获取可用 PrestaShop 商店的列表。然后，检查您想要整合的商店。您必须至少选择 1 家商店才能继续。 8. 如果您想将目录变体（也称为组合）从 PrestaShop 同步到 Klaviyo，请选中 **同步变体**。我们建议同步变体以支持补货、低库存和降价流程。 ![](https://klaviyo.zendesk.com/hc/article_attachments/33082359779355)
+9. 如果您选择**同步变体**，则默认情况下会选中**同步库存**。此设置将定期同步每个变体的库存量，以确保补货、低库存和降价流程正常运行。如果您选中**同步变体**但取消选中**同步库存**，您将无法使用这些流程。但是，您将可以访问用于电子邮件消息传递的变体级别数据。 10. 完成后，选择****完成设置****。 11. 您将看到一条成功消息，表明您的帐户已连接。 ![您的 PrestaShop 帐户现已连接到 Klaviyo 成功消息](https://klaviyo.zendesk.com/hc/article_attachments/28715963840795)
+
+## Klaviyo 中的 PrestaShop 数据
+
+3 种类型的事件从 PrestaShop 同步到 Klaviyo：
+
+- 订单事件每 30 分钟同步一次（例如，**下订单**）。 - 交易订单事件实时同步，如果您选择启用它们（例如，**下订单交易**）。 - Klaviyo 现场活动（例如，**现场活动**、**查看产品**和 **添加到购物车**）。此外，客户信息会从 PrestaShop 同步到 Klaviyo 配置文件，包括电子邮件地址、电话号码、电子邮件同意书和短信同意书（如果适用）。您可以通过导航到****分析 > 指标****来查看 Klaviyo 中的所有这些事件。按 **PrestaShop** 过滤以查看订单和交易订单事件（它们将具有 PrestaShop 图标）或按 **API** 过滤以查看 Klaviyo 现场事件（它们将具有齿轮图标）。有关从 PrestaShop 同步的指标的完整列表，请查看我们的 [PrestaShop 数据参考](https://help.klaviyo.com/hc/en-us/articles/360055123191)。当您首次与 PrestaShop 集成时，Klaviyo 将同步您过去 90 天的数据，以便您可以立即开始与最近的客户互动。同步您最近 90 天的数据后，Klaviyo 将开始您完整的历史数据同步。根据您商店的订单、客户和产品数量，同步所有数据可能需要几分钟到几天的时间。我们建议您在进行历史同步时至少分配 1024 mb 的 PHP 内存。这使得同步能够及时完成。如果需要，可以在历史同步完成后减少初始内存需求。同步完成后，集成选项卡中的 PrestaShop 集成将标记为完成。要验证 PrestaShop 中的所有数据是否已成功同步，您可以交叉检查几天或一周的订单总数。在开始验证之前，请确保您帐户的时区与 PrestaShop 中的设置匹配。要检查或更新您帐户的时区：
+
+1. 单击左下角的组织名称。 2. 选择****设置****。 3. 选择****组织****选项卡。 ## 发送交易电子邮件
+
+想要使用从 PrestaShop 同步的实时订单数据发送交易电子邮件？为此，您需要在 Klaviyo 中从头开始创建流程。请阅读[如何使用流程发送事务性电子邮件](https://help.klaviyo.com/hc/en-us/articles/360003165732)，了解事务性电子邮件在 Klaviyo 中的工作原理。您需要设置这些流程，然后联系 Klaviyo 的支持团队以获得批准。一旦获得批准，您可以在 PrestaShop 中关闭交易电子邮件发送，并在 Klaviyo 中实时设置交易流程。 ## 重新同步您的目录
+
+如果您想随时重新同步 PrestaShop 目录数据，您可以在集成的 **数据** 选项卡中执行此操作：
+
+1. 在 Klaviyo 中，从左侧导航中选择****集成****。 2. 从列表中选择****PrestaShop****。 3. 单击****数据****选项卡。 4. 在标记为 **同步目录数据** 的部分中，单击 ****重新同步。**** 您的目录将开始重新同步。 ![](https://klaviyo.zendesk.com/hc/article_attachments/33082365067547)
+
+## 更新你的模块
+
+您使用的 PrestaShop 模块版本是否低于 1.4.1？我们建议立即升级到 1.4.1 或更高版本。该模块的旧版本使用 Klaviyo 的 v1 和 v2 API，这些 API 已停用并且不再按预期运行。 此外，升级到版本 1.4.1 或更高版本将使您能够利用首次在 1.3.0 上发布的这些功能：
+
+1. 轻松显示电子邮件中宣传的产品的真实价格和含增值税 (VAT)。请注意，从 1.2.10 以下版本升级到 1.2.10 或更高版本可能会因此更改而导致电子邮件模板不准确； [阅读我们的文章](https://help.klaviyo.com/hc/en-us/articles/14477037350299) 以了解该怎么做。 2. 通过实时事件同步向您的客户发送交易电子邮件。 3.快速生成批量优惠券并将其导入Klaviyo。要将模块更新到最新版本：
+4. 登录您的 PrestaShop 管理员。 5. 导航至****模块 > 模块管理器****。 6. 滚动找到 Klaviyo 模块并选择****升级****。 ![](https://klaviyo.zendesk.com/hc/article_attachments/28715963843099)
+
+如果您要从低于 1.3.0 的版本升级：请务必注意，完成升级后，升级前发送的废弃购物车电子邮件中使用的购物车重建链接将不再有效。但是，升级后发送的所有废弃购物车电子邮件都将正常运行。要了解每个版本中所做的更改，请前往插件市场上的 [Klaviyo 模块](https://addons.prestashop.com/en/newsletter-sms/49837-klaviyo.html)，向下滚动到 **新增功能**，然后单击 ****显示更改日志历史记录****。 ## 结果
+
+现在，您已将 PrestaShop 与 Klaviyo 集成，并且可以开始使用 Klaviyo 来满足您自己的营销需求。

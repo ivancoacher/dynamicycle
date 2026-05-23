@@ -1,0 +1,64 @@
+---
+id: "360051612551"
+title: "了解库存流量回流如何运作"
+source_url: "https://klaviyo.zendesk.com/hc/en-us/articles/360051612551-Understanding-how-back-in-stock-flows-work"
+section: "Back in stock flows"
+category: "Flows"
+category_slug: "flows"
+klaviyo_updated: "2026-04-21T13:54:51Z"
+language: "zh"
+---
+## 你将会学到
+
+了解库存流的工作原理、联系人如何在其中移动以及它们与大多数其他指标触发流有何不同。例如，他们有库存延迟组件，这是此类流程所独有的。
+
+使用以下方式支持 Klaviyo 恢复库存：
+
+- [Shopify](https://help.klaviyo.com/hc/en-us/articles/38767539287323)
+- [BigCommerce](https://help.klaviyo.com/hc/en-us/articles/38767539287323)
+- [Magento 2](https://developers.klaviyo.com/en/docs/how_to_set_up_custom_back_in_stock)
+- [PrestaShop](https://help.klaviyo.com/hc/en-us/articles/33059375555099)
+- [SFCC](https://help.klaviyo.com/hc/en-us/articles/22495505773083)
+- [商店软件](https://help.klaviyo.com/hc/en-us/articles/13325405718939)
+- [自定义目录源](https://developers.klaviyo.com/en/docs/how_to_enable_back_in_stock_for_custom_catalog_feeds)
+- [API](https://developers.klaviyo.com/en/docs/how_to_set_up_custom_back_in_stock)
+
+如果您尚未在 Klaviyo 帐户或商店中设置库存返还，请了解[如何建立库存返还流程。](https://klaviyo.zendesk.com/hc/en-us/articles/115003872251)
+
+## 触发流程
+
+当客户在您的网站上订阅缺货产品时，您会在他们的个人资料中看到跟踪的事件：**订阅了库存补货。**订阅了库存补货提醒的客户将自动进入由该**订阅了库存补货**事件触发的流程。
+
+## 回到库存延迟组件
+
+触发流程后，您将看到该联系人已添加到库存延迟组件后面的****等待****收件人列表中。
+
+要了解谁在这一步等待，请点击详细信息侧边栏的 **性能** 部分中的 **查看详细信息**** 以了解此延迟。
+
+![](https://klaviyo.zendesk.com/hc/article_attachments/47037001826971)
+
+## 发送给库存订阅者
+
+当产品重新有货时，您会看到等待该商品的人进入“**移至下一步**”类别。根据您的库存设置，部分或全部联系人将收到一条消息，提醒他们该商品有货。
+
+您的流程的消息状态必须设置为 **实时** 或 **手动**，以便将订阅者添加到库存延迟延迟的等待列表中。如果延迟后的消息设置为**草稿**，则不会将任何人放入等待列表中。
+
+要查看有关库存提醒电子邮件或短信的收件人活动，请单击消息本身。在侧边栏的 **性能** 部分中，您将看到过去 30 天内的活动摘要。单击****查看详细信息****以探索较长或自定义时间范围内的活动。
+
+请注意，在发送第二条消息之前无法检查该商品是否仍有库存。发送初始消息后，Klaviyo 无法检查该商品的库存以查看该商品是否再次缺货。
+
+## 添加过去的配置文件以返回库存流
+
+将过去的个人资料添加到库存流中通常不会带来新的人员。补货流由**订阅补货**指标触发，并且[指标触发的流根据时间延迟添加过去的配置文件](https://help.klaviyo.com/hc/en-us/articles/115002779231#metric-triggered-flows2)。由于返回库存流量最好没有时间延迟（并且**返回库存**延迟功能不同），因此添加过去的配置文件不会产生任何效果。如果您希望联系库存报告中的人员，我们建议您发送营销活动。
+
+也就是说，如果您的库存流确实包含时间延迟，则添加过去的配置文件的工作方式与其他指标触发的流添加过去的配置文件的方式类似。唯一的区别是，对于库存恢复流，一旦产品恢复库存，等待队列中的人员就会收到通知。
+
+## 其他资源
+
+了解有关库存回流的更多信息：
+
+- [如何创建库存流](https://help.klaviyo.com/hc/en-us/articles/115003872251)
+- [如何配置库存邮件](https://help.klaviyo.com/hc/en-us/articles/360051612751)
+- [如何将短信添加到库存流](https://help.klaviyo.com/hc/en-us/articles/7954040204827)
+
+了解[联系人如何在流程中移动](https://help.klaviyo.com/hc/en-us/articles/360017706091)
