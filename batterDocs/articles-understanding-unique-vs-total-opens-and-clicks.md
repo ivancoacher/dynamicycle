@@ -69,6 +69,38 @@
   font-size: 16px;
   line-height: 1.75;
 }
+.dc-resource-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 14px;
+  margin-top: 14px;
+}
+.dc-resource-card {
+  display: block;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  padding: 16px 18px;
+  background: #ffffff;
+  color: #1f2937;
+  text-decoration: none;
+}
+.dc-resource-card strong {
+  display: block;
+  color: #111827;
+  font-size: 16px;
+  line-height: 1.45;
+  margin-bottom: 8px;
+}
+.dc-resource-card span {
+  display: block;
+  color: #4b5563;
+  font-size: 15px;
+  line-height: 1.65;
+}
+.dc-resource-card:hover {
+  border-color: #94a3b8;
+  box-shadow: 0 8px 22px rgba(15, 23, 42, 0.08);
+}
 @media (max-width: 900px) {
   .dc-article-shell {
     display: block;
@@ -138,7 +170,7 @@
   <p style="margin: 0 0 18px;"><strong>Engagement over time</strong> 模块中的核心打开和点击数据代表独立打开与独立点击；这些数字会与 <strong>Campaigns</strong> 标签首页中看到的数字一致。</p>
 
   <figure style="margin: 22px 0 18px; border: 1px solid #e5e7eb; border-radius: 12px; overflow: hidden; background: #ffffff;">
-    <img src="https://klaviyo.zendesk.com/hc/article_attachments/28720892141723" alt="Klaviyo 中随时间变化的参与度图表，展示 Campaign 打开和点击表现" style="display: block; width: 100%; height: auto; margin: 0;">
+    <img src="https://cdn.sanity.io/images/6ct6b26e/help-center-prod/1ca037740739012ea8cb45d4066d82e68b568a7b-1600x752.jpg?w=687" alt="Klaviyo 中随时间变化的参与度图表，展示 Campaign 打开和点击表现" style="display: block; width: 100%; height: auto; margin: 0;">
     <figcaption style="font-size: 14px; color: #6b7280; padding: 12px 16px; border-top: 1px solid #e5e7eb; background: #f9fafb;">Engagement over time 模块用于查看 Campaign 的独立打开和独立点击趋势。</figcaption>
   </figure>
 
@@ -154,10 +186,16 @@
 
 <section id="additional-resources" style="border-top: 1px solid #e5e7eb; padding-top: 22px; margin-top: 34px;">
   <h2 style="font-size: 22px; line-height: 1.35; margin: 0 0 14px; color: #111827;">其他资源</h2>
-  <ul style="margin: 0; padding-left: 22px;">
-    <li style="margin-bottom: 8px;">了解更多打开和点击相关内容：<a href="https://help.klaviyo.com/hc/en-us/articles/115000201131" style="color: #111827; text-decoration: underline; text-underline-offset: 3px;">如何监控电子邮件送达表现</a></li>
-    <li style="margin-bottom: 0;">了解如何分析 Campaign：<a href="https://help.klaviyo.com/hc/en-us/articles/115005258568" style="color: #111827; text-decoration: underline; text-underline-offset: 3px;">了解可用的 Campaign 分析</a></li>
-  </ul>
+  <div class="dc-resource-grid">
+    <a class="dc-resource-card" href="https://help.klaviyo.com/hc/en-us/articles/115000201131">
+      <strong>电子邮件送达率监控和绩效指标入门</strong>
+      <span>了解不同行业中较好的电子邮件送达指标，以及可以用来改善邮件表现的策略。</span>
+    </a>
+    <a class="dc-resource-card" href="https://help.klaviyo.com/hc/en-us/articles/115005258568">
+      <strong>了解可用的 Campaign 分析</strong>
+      <span>学习如何使用 Klaviyo 的 Campaign 报告，查看打开、点击之后的网站行为、结账开始和收入表现。</span>
+    </a>
+  </div>
 </section>
 
 <!-- klaviyo_id: 115005085427 -->
