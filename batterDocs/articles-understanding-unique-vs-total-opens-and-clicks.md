@@ -89,37 +89,23 @@
   color: #1f2937;
   line-height: 1.7;
 }
-.dc-resource-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 14px;
-  margin-top: 14px;
+.dc-resource-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
-.dc-resource-card {
-  display: block;
-  border: 1px solid #e5e7eb;
-  border-radius: 10px;
-  padding: 16px 18px;
-  background: #ffffff;
-  color: #1f2937;
-  text-decoration: none;
+.dc-resource-list li {
+  margin: 0 0 16px;
 }
-.dc-resource-card strong {
-  display: block;
+.dc-resource-list a {
   color: #111827;
-  font-size: 16px;
-  line-height: 1.45;
-  margin-bottom: 8px;
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }
-.dc-resource-card span {
-  display: block;
-  color: #4b5563;
-  font-size: 15px;
-  line-height: 1.65;
-}
-.dc-resource-card:hover {
-  border-color: #94a3b8;
-  box-shadow: 0 8px 22px rgba(15, 23, 42, 0.08);
+.dc-resource-list p {
+  margin: 4px 0 0;
+  color: #1f2937;
+  line-height: 1.7;
 }
 @media (max-width: 900px) {
   .dc-article-shell {
@@ -205,16 +191,16 @@
 
 <section id="additional-resources" style="border-top: 1px solid #e5e7eb; padding-top: 22px; margin-top: 34px;">
   <h2 style="font-size: 22px; line-height: 1.35; margin: 0 0 14px; color: #111827;">其他资源</h2>
-  <div class="dc-resource-grid">
-    <a class="dc-resource-card" href="https://help.klaviyo.com/hc/en-us/articles/115000201131">
-      <strong>电子邮件送达率监控和绩效指标入门</strong>
-      <span>了解不同行业中较好的电子邮件送达指标，以及可以用来改善邮件表现的策略。</span>
-    </a>
-    <a class="dc-resource-card" href="https://help.klaviyo.com/hc/en-us/articles/115005258568">
-      <strong>了解可用的 Campaign 分析</strong>
-      <span>学习如何使用 Klaviyo 的 Campaign 报告，查看打开、点击之后的网站行为、结账开始和收入表现。</span>
-    </a>
-  </div>
+  <ul class="dc-resource-list">
+    <li>
+      <a href="https://help.klaviyo.com/hc/en-us/articles/115000201131">电子邮件送达率监控和绩效指标入门</a>
+      <p>了解不同行业中较好的电子邮件送达指标，以及可以用来改善邮件表现的策略。在本指南中，你可以了解按垂直行业或业务类型应该争取达到的电子邮件 Campaign 和 Flow 消息打开率、点击率，并学习如何缓解潜在的送达问题以及持续监控这些指标。</p>
+    </li>
+    <li>
+      <a href="https://help.klaviyo.com/hc/en-us/articles/115005258568">了解可用的 Campaign 分析</a>
+      <p>学习如何使用 Klaviyo 的 Campaign 报告，了解消息表现以及用户打开或点击之后发生了什么。你可以通过 Campaign 分析进一步查看网站行为、结账开始和直接归因于每条消息的收入。</p>
+    </li>
+  </ul>
 </section>
 
 <!-- klaviyo_id: 115005085427 -->
