@@ -1,0 +1,43 @@
+<h1>通过 Klaviyo 了解税务</h1>
+
+<h2>你将会学到</h2>
+<p>了解 Klaviyo 中的税费，包括销售税、增值税和商品及服务税，包括其计算方式以及如何查看。 ## Klaviyo 如何计算税金</p>
+<p>销售税、增值税和商品及服务税税率根据您的企业经营地点（即州、地区或国家）、您开展的业务类型（例如经销商）以及您的企业类型而有所不同（因为某些非营利组织或政府机构可能被排除在美国的销售税要求之外）。 Klaviyo 根据管辖您的帐单地址所列地址的州、地方和国家/地区法律向您征税。如何查找您的帐单地址：</p>
+<p>1. 单击左下角您的组织名称。 2. 点击 <strong><em>*账单</strong><strong>。 3. 选择</strong><strong>首选项</strong></em>*。 ![Billing_preferences.png](https://klaviyo.zendesk.com/hc/article_attachments/28720847420955)</p>
+<h2>如何查看销售税、增值税或商品及服务税</h2>
+<p>您可以查看税费：</p>
+<ul>
+<li>在您的发票上</li>
+<li>当你改变计划时</li>
+</ul>
+<h3>查看发票上的税费</h3>
+<p>您可以查看当前或过去发票上的税款。要查找您过去的发票：</p>
+<p>1. 导航至<strong><em>*账单</strong><strong>。 2. 点击 </strong><strong>付款历史记录</strong></em>*。在发票上，Klaviyo 包括计算税费的行项目，以反映支付的总金额。您还将收到一封电子邮件，其中包含收费总额和发票链接。您可以通过以下方式查看发票上的税费：</p>
+<ul>
+<li>单击发票链接，其中包括成本明细以及销售税、增值税或商品及服务税（取决于您的帐单地址）</li>
+<li>下载 PDF 格式的发票，其中包括：</li>
+<li>您组织的帐单地址</li>
+<li>税项（例如，收取的百分比和总金额）</li>
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28720892545819" alt="发票示例" />
+<li>下载 PDF 格式的收据，其中包括：</li>
+<li>发票中的所有项目</li>
+<li>收据号码</li>
+<li>付款方式</li>
+</ul>
+<h3>更改计划时查看税费</h3>
+<p>如果您决定改变计划：</p>
+<p>1. 导航至<strong><em>*账单</strong><strong>。 2. 单击</strong><strong>创建您的计划</strong></em>*。 3. 查看计划页面。注意：如免责声明所述，税费不包含在计划中的每月价格中。 ![在 Klaviyo 中选择新计划的页面](https://klaviyo.zendesk.com/hc/article_attachments/28720847413787)</p>
+<p>4. 单击<strong><em>*选择计划</strong></em>*。 5. 查看结账页面，您可以在其中查看您选择的计划所适用的税费。 ![更改套餐时的结帐页面，显示销售税](https://klaviyo.zendesk.com/hc/article_attachments/28720892551195)</p>
+<p>6. 点击<strong><em>*确认并付款</strong><strong>完成套餐更改。 </strong><strong>如果我的帐单地址与我的税务申报地址不符怎么办？</strong></em>*</p>
+<p>在结帐页面上，默认情况下会选中 <strong>使用我组织的主要地址作为我的帐单地址</strong> 复选框。如果您组织的税务申报与为您的组织提供的地址不匹配，您可以取消选中 <strong>使用我组织的主要地址作为我的帐单地址</strong> 复选框并输入其他地址。否则，默认位置将提取估计税率和添加到您的总成本中的金额。 <strong><em>*为什么预估税率有一个问号？</strong></em>*</p>
+<p>问号表示 Klaviyo 无法确定估计税率。例如，如果您不在应税地点，则可能会发生这种情况。如果您的估计税率不可用，请将鼠标悬停在<strong>不可用</strong>旁边的问号上以查看原因。 ## 请求免税：仅限美国</p>
+<p>一些非营利组织、宗教机构、教育组织、研究机构等被视为免税。如果您认为您的组织应该免税，您可以按照[提交免税申请的说明](https://klaviyo.zendesk.com/hc/en-us/articles/360037472871)。您需要提供相关文件和证明才能获得免税批准。该文档会根据您所在的州而有所不同，因此在提交之前参考州法律非常重要。 ## 澳大利亚的商品及服务税</p>
+<p>Klaviyo 将从 2024 年 5 月 27 日起开始收取 10% 的 GST。如果您需要注册 GST，请在您的 Klaviyo 账户上提供您的澳大利亚商业号码 (ABN)。如果适用，请参阅我们的指南[如何添加您的 ABN](https://help.klaviyo.com/hc/en-us/articles/360056549931)。 作为在澳大利亚注册 GST 的企业，GST 金额将作为无需支付给 Klaviyo 的免税金额显示在您的 Klaviyo 发票上，因为您有责任向澳大利亚税务局支付这笔金额（也称为反向费用）。如果您不是 GST 注册企业，您的 Klaviyo 发票将包含自该日期起的额外 GST 金额。如果您不希望因此次更改而继续使用 Klaviyo，您可以了解[如何取消您的帐户](https://help.klaviyo.com/hc/en-us/articles/1260805595309)。 ## 加拿大的 GST 和 HST</p>
+<p>Klaviyo 将从 2024 年 6 月 20 日起开始在加拿大征收 GST 和 HST。如果您需要注册 GST 或 HST，请在“账单首选项”页面的 Klaviyo 帐户中使用税收类型“加拿大 GST/HST”提供您的加拿大税务局 (CRA) 计划帐号（即“123456789RT0001”）。如果适用，请参阅我们的[如何添加税号指南](https://help.klaviyo.com/hc/en-us/articles/360056549931)。作为在加拿大注册 GST 或 HST 的企业，GST 或 HST 金额将作为无需支付给 Klaviyo 的免税金额显示在您的发票上，因为您有责任向加拿大税务局支付这笔金额（也称为反向费用）。如果您不是 GST 或 HST 注册企业，则自该日期起，您的 Klaviyo 发票将包含 GST 或 HST 金额作为附加行项目。如果您不希望因此次更改而继续使用 Klaviyo，您可以了解[如何取消您的帐户](https://help.klaviyo.com/hc/en-us/articles/1260805595309)。 ## 欧盟增值税</p>
+<p>Klaviyo 将于 2024 年 7 月 1 日开始在欧盟征收增值税。如果您需要注册增值税，请在您的 Klaviyo 账户中提供您的欧洲增值税号。如果适用，请参阅我们的[如何添加欧洲增值税号指南](https://help.klaviyo.com/hc/en-us/articles/360056549931)。作为增值税注册企业，增值税金额将作为无需支付给 Klaviyo 的免税金额显示在您的 Klaviyo 发票上，因为您有责任向相关税务机关支付这笔金额（也称为反向费用）。如果您不是增值税注册企业，您的 Klaviyo 发票将包含自该日期起的额外增值税金额。如果您还有任何其他问题，请通过支持联系我们或联系您的专用 Klaviyo 联系人。 ## 英国的增值税</p>
+<p>Klaviyo 将于 2024 年 10 月 1 日开始在英国收取增值税。如果您需要注册增值税，请在您的 Klaviyo 账户中提供您的欧洲增值税号。如果适用，请参阅我们的[如何添加英国增值税号指南](https://help.klaviyo.com/hc/en-us/articles/360056549931)。作为增值税注册企业，增值税金额将作为无需支付给 Klaviyo 的免税金额显示在您的 Klaviyo 发票上，因为您有责任向 HMRC 支付这笔金额（也称为反向费用）。如果您不是增值税注册企业，您的 Klaviyo 发票将包含自该日期起的额外增值税金额。如果您还有任何其他问题，请通过支持联系我们或联系您的专用 Klaviyo 联系人。 ## 其他资源</p>
+<ul>
+<li>[如何在 Klaviyo 中查找并更新您的税号](https://help.klaviyo.com/hc/en-us/articles/360056549931)</li>
+<li>[更新您的信用卡信息](https://klaviyo.zendesk.com/hc/en-us/articles/115005232048)</li>
+<li>[了解 Klaviyo 计费的工作原理](https://klaviyo.zendesk.com/hc/en-us/articles/115000976672)</li>
+</ul>
