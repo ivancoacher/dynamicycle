@@ -13,7 +13,11 @@
 .betterdocs-content-area > .betterdocs-toc,
 .betterdocs-doc-content > .betterdocs-toc,
 .betterdocs-article-reactions,
-.betterdocs-social-share {
+.betterdocs-social-share,
+.wp-block-column:has(.betterdocs-article-reactions),
+.wp-block-column:has(.betterdocs-social-share),
+.wp-block-columns:has(.betterdocs-article-reactions),
+.wp-block-columns:has(.betterdocs-social-share) {
   display: none !important;
 }
 .betterdocs-content-area,
