@@ -1,0 +1,50 @@
+<h1>如何使用 Klaviyo 的 cookie 配置 OneTrust</h1>
+
+<h2>你会学到的</h2>
+<p>了解如何配置 OneTrust cookie 管理工具（包括其 Auto-BlockingTM 功能和 Cookie Pro 产品）以与 Klaviyo 的跟踪和现场功能配合使用。 Klaviyo.js 是 Klaviyo 的 JavaScript 代码段，可启用网站上的活动跟踪和注册表单。您可以选择通过电子商务集成或将代码粘贴到网站主题中来启用此跟踪。通常，当启用 Klaviyo 的 JavaScript 时，\_\_kla\_id cookie 可以跟踪和识别网站访问者。当未被阻止时，此 cookie 会暂时保存个人身份信息，一旦识别出访问者（例如，单击通过 Klaviyo 发送的电子邮件中的链接），此 cookie 信息就会传递给 Klaviyo。但是，OneTrust 需要额外的设置步骤来确保捕获此信息，然后将其合规地发送到 Klaviyo。在本文中，我们将逐步完成确保 OneTrust 正确捕获访客信息并将其发送到 Klaviyo 的步骤。请注意，您需要按照下面列出的顺序完成本指南中的所有 cookie 设置步骤。 ## 先决条件</p>
+<p>我们建议访问我们的 [Klaviyo 网络跟踪指南](https://help.klaviyo.com/hc/en-us/articles/115005076767)，了解有关我们的 cookie 如何以不同方式捕获已知访客信息的更多信息。此外，您必须直接通过[电子商务集成](https://help.klaviyo.com/hc/en-us/categories/115000032731-Ecommerce-Integrations)启用Klaviyo.js，或者[手动](https://developers.klaviyo.com/en/docs/guide-to-integrating-a-platform-without-a-pre-built-klaviyo-integration#javascript-track-api-for-on-site-metrics)。 ## 配置 Klaviyo 和 OneTrust 的工具</p>
+<p>OneTrust 的工具将自动阻止 cookie，除非访问者已通过 OneTrust 明确同意。这些工具可以阻止 cookie，但也会导致 Klaviyo 表单完全停止工作，甚至是不需要跟踪的表单。为了遵守此合规协议并允许某些表单发挥作用，Klaviyo 需要配置 OneTrust，以便在未经同意的情况下不跟踪事件。 Klaviyo 的跟踪包括：</p>
+<ul>
+<li>如果访问者在网站上处于活动状态，则网站引荐来源网址</li>
+<li>如果访客查看产品或将产品添加到购物车（如果您已单独启用此功能）</li>
+</ul>
+<p>为了使基于同意的跟踪在 OneTrust 和 Klaviyo 之间兼容，以及一些注册表单功能继续工作，您需要在 OneTrust 的 CookiePro 工具中执行以下步骤。 ## 将您的网站添加到 CookiePro</p>
+<p>如果您还没有这样做，您需要将您的网站添加到您的 CookiePro 帐户。 1. 登录您的 [CookiePro 帐户](http://app.cookiepro.com/)，然后单击“我的应用程序”下的 <strong><em>*Cookie 合规性</strong></em>* 部分。 ![突出显示 Cookie 合规性部分的 CookiePro 仪表板视图](https://klaviyo.zendesk.com/hc/article_attachments/28717390181531)</p>
+<p>2. 单击右上角的<strong><em>*添加网站</strong></em>*。 ![CookiePro 仪表板页面右上角的“添加网站”按钮](https://klaviyo.zendesk.com/hc/article_attachments/28717390183579)</p>
+<p>3. 从这里，您将看到用于设置和添加网站和扫描详细信息的部分。在前两个字段中填写您的网站 URL 和组织名称。 ![扫描网站模式，其中包含填写网站 URL 和组织信息的字段](https://klaviyo.zendesk.com/hc/article_attachments/28717383884059)</p>
+<p>请注意，如果您已经有一个与您的 CookiePro 帐户关联的组织，它将作为一个选项显示在下拉列表中。 4. 在<strong><em>*高级选项</strong><strong>部分下，您可以选择调整或添加扫描设置。 5. 您可以通过更改 </strong>限制扫描</em>* 字段中的数字来调整 CookiePro 将扫描的网站页面数量。默认情况下，CookiePro 将建议扫描前 1,000 页。 ![在扫描设置页面内，可以在字段中输入扫描页码并打开选项](https://klaviyo.zendesk.com/hc/article_attachments/28717390188315)</p>
+<p>6. 您还可以将 CookiePro 扫描限制在您网站的某一区域。为此，请打开网站内<strong>限制到此路径</strong><strong>旁边的选项。</strong> 确保您上面的网站 URL 反映了此 URL 路径（例如，retail.com/signups）。 ![在“扫描设置”页面内，切换选项仅扫描网站某一区域内的页面](https://klaviyo.zendesk.com/hc/article_attachments/28717383946907)</p>
+<p>7. 最后，如果您希望 CookiePro 扫描某些页面或页面类型，您可以在接下来的几个字段中添加它们。将用逗号分隔的页面 ID 添加到 <strong>使用查询</strong><strong>参数扫描页面</strong> 字段，以按 ID 号扫描页面。您还可以通过在 <strong>要扫描的目标页面</strong> 字段中添加这些 URL 来按 URL 扫描页面。如果您有较长的 URL 或站点地图列表，您可以将其复制并粘贴到 <strong>站点地图 URL</strong> 字段中。这些 URL 将在扫描队列中首先被扫描。 ![在“扫描设置”页面中，用于在要扫描的网站的某些页面或区域上添加附加信息的字段](https://klaviyo.zendesk.com/hc/article_attachments/28717383893403)</p>
+<p>8. 完成所有设置后，单击右下角的<strong><em>*扫描和配置</strong></em>*。 ## 配置静态跟踪 Cookie</p>
+<p>在下面的部分中，我们将逐步设置您的静态跟踪 cookie，以确保您能够收集第三方 cookie 并将其传递给 Klaviyo。 1. 添加您的网站后，导航至左侧导航栏中的 <strong><em>*Cookiepedia</strong><strong> > </strong><strong>分类</strong><strong>。 2. 通过在上面的字段中搜索或滚动下面的列表来查找 Klaviyo 静态跟踪 \_\_kla\_id cookie。它应该是标记为“持久”的选项，主机名为 </strong>static-tracking.klaviyo.com<strong>。 3. 单击</strong><strong>\_\_kla\_id</strong></em>* cookie 选项。 ![在“分类”页面内，列表中 __kla_id cookie 的突出显示视图](https://klaviyo.zendesk.com/hc/article_attachments/28717390192411)</p>
+<p>4. 进入 <strong>Cookie 详细信息</strong> 页面后，导航至 <strong>分类</strong><strong> 选项卡。 5. 如果您尚未使用 Klaviyo 和 OneTrust 运行扫描，请确保从 </strong>选择类别<strong> 下拉列表中选择 </strong>定位 Cookie<strong><em>*。确保 </strong>第三方 Cookie<strong> 已填充在 </strong>选择一方</em>* 下拉列表中。 ![在“分类”选项卡上，显示用于选择 Cookie 类别和 Cookie 方的下拉菜单的模式](https://klaviyo.zendesk.com/hc/article_attachments/28717390194715)</p>
+<p>6. 完成这些更新后，单击右下角的<strong><em>*保存</strong><strong>。 7. 在同一区域中，导航至</strong><strong>Source</strong></em>* 选项卡。您应该会看到您的网站 URL 出现在列表中，如下例所示。 ![在“来源”页面内，显示网站 URL 的视图](https://klaviyo.zendesk.com/hc/article_attachments/28717383898267)</p>
+<p>8. 单击您的<strong><em>*网站 URL</strong></em>*。 9. 将出现一个带有新 URL 的下拉菜单；单击右侧的铅笔图标。 ![网站 URL 右侧铅笔编辑图标的突出显示视图](https://klaviyo.zendesk.com/hc/article_attachments/28717383900315)</p>
+<p>10. 在模式中，删除当前 URL 并将其替换为：<strong>https://static-tracking.klaviyo.com</strong>。 11. 更新 URL 后，单击<strong><em>*确认</strong></em>*。 ![资源 URL 的模式视图，右下角带有确认按钮](https://klaviyo.zendesk.com/hc/article_attachments/28717383943067)</p>
+<p>12. 要确认 Klaviyo cookie 已更新，请导航至左侧导航栏中的<strong><em>*Cookpedia</strong><strong></em></strong><em>> 分类</em><em>*</em>。 1</p>
+<p>3. 单击 <strong><em>*Cookies</strong><strong> 选项卡。 14. 从这里开始，您的 \_\_kla\_id cookie 应在 </strong>Domain Category Overrides<strong> 和 </strong>Domains</em>* 列下显示“1”。 ![在确认屏幕上，列表视图显示您的 __kla_id cookie，其中包含域类别覆盖和域作为数字](https://klaviyo.zendesk.com/hc/article_attachments/28717390203035)</p>
+<h2>配置 Static.Klaviyo Cookie</h2>
+<p>在下面的部分中，我们将逐步设置您的 static.Klaviyo cookie，以确保您能够收集第三方 cookie 并将其传递给 Klaviyo。 1. 在左侧导航栏中导航至 <strong><em>*Cookiepedia > 分类</strong><strong>。 2. 通过在上面的字段中搜索或滚动下面的列表来查找 static.Klaviyo \_\_kla\_id cookie。它应该是标记为“持久”的选项，主机名为 </strong>static.klaviyo.com<strong>。 3. 单击</strong><strong>\_\_kla\_id</strong></em>* cookie 选项。 ![在“分类”页面上，__kla_id cookie 选项在列表视图中突出显示](https://klaviyo.zendesk.com/hc/article_attachments/28717383910299)</p>
+<p>4. 进入 <strong>Cookie 详细信息</strong> 页面后，导航至 <strong>分类</strong><strong> 选项卡。 5. 从 </strong>选择类别<strong> 下拉列表中选择 </strong>定位 Cookie<strong><em>*。确保 </strong>第三方 Cookie<strong> 已填充在 </strong>选择一方</em>* 下拉列表中。 ![在“分类”选项卡上，显示用于选择 Cookie 类别和 Cookie 方的下拉菜单的模式](https://klaviyo.zendesk.com/hc/article_attachments/28717390194715)</p>
+<p>6. 完成这些更新后，单击右下角的<strong><em>*保存</strong><strong>。 7. 在同一区域中，导航至</strong><strong>Source</strong></em>* 选项卡。您应该会看到您的网站 URL 显示在下面的列表中。 ![您网站 URL 的模式视图](https://klaviyo.zendesk.com/hc/article_attachments/28717383898267)</p>
+<p>8. 单击您的<strong><em>*网站 URL</strong></em>*。 9. 将出现一个带有新 URL 的下拉菜单；单击出现在右侧的铅笔图标。 ![网站 URL 右侧铅笔编辑图标的突出显示视图](https://klaviyo.zendesk.com/hc/article_attachments/28717383900315)</p>
+<p>10. 在模式中删除当前 URL 并替换为：<strong>https://static-tracking.klaviyo.com</strong>[.](https://static-tracking.klaviyo.com.)</p>
+<p>11. 更新 URL 后，单击<strong><em>*确认</strong></em>*。 ![右下角带有确认按钮的网站 URL 模式](https://klaviyo.zendesk.com/hc/article_attachments/28717383943067)</p>
+<p>12. 要确认 Klaviyo cookie 已更新，请导航至左侧导航栏中的 <strong><em>*Cookiepedia > 分类</strong><strong>。 13. 从这里开始，您的 \_\_kla\_id cookie 应在 </strong>Domain Category Overrides<strong> 和 </strong>Domains</em>* 列下显示“1”。 ![在确认屏幕上，列表视图显示您的 __kla_id cookie，其中包含域类别覆盖和域作为数字](https://klaviyo.zendesk.com/hc/article_attachments/28717390203035)</p>
+<h2>配置您网站的第一方 Cookie</h2>
+<p>在下面的部分中，我们将介绍如何直接设置您的网站或第一方 cookie 以捕获电子商务网站上的事件。 1. 在左侧导航栏中导航至 <strong><em>*Cookiepedia > 分类</strong><strong>。 2. 通过在上面的字段中搜索或滚动下面的列表来查找您网站特定的 \_\_kla\_id cookie。它应该是标记为“持久”的选项，并以您的网站 URL 作为主机名。 3. 单击</strong><strong>\_\_kla\_id</strong></em>* cookie 选项。 ![在分类页面上，您的 __kla_id cookie 在列表视图中突出显示](https://klaviyo.zendesk.com/hc/article_attachments/28717383916315)</p>
+<p>4. 进入 <strong>Cookie 详细信息</strong> 页面后，导航至 <strong>分类</strong><strong> 选项卡。 5. 从 </strong>选择类别<strong> 下拉列表中选择 </strong>定位 Cookie<strong><em>*。确保</strong>第一方 Cookie<strong> 已填充在 </strong>选择一方</em>* 下拉列表中。 ![在“分类”选项卡上，显示用于选择 Cookie 类别和 Cookie 方的下拉菜单的模式](https://klaviyo.zendesk.com/hc/article_attachments/28717390209819)</p>
+<p>6. 完成这些更新后，单击右下角的<strong><em>*保存</strong><strong>。 7. 在同一区域中，导航至</strong><strong>Source</strong></em>* 选项卡。您应该会看到您的网站 URL 显示在下面的列表中。 ![您网站 URL 的模式视图](https://klaviyo.zendesk.com/hc/article_attachments/28717383898267)</p>
+<p>8. 单击您的<strong><em>*网站 URL</strong></em>*。 9. 将出现一个带有新 URL 的下拉菜单；单击出现在右侧的铅笔图标。 ![网站 URL 右侧铅笔编辑图标的突出显示视图](https://klaviyo.zendesk.com/hc/article_attachments/28717383900315)</p>
+<p>10. 在模式中删除当前 URL 并替换为：<strong>https://static-tracking.klaviyo.com</strong>。 11. 更新 URL 后，单击<strong><em>*确认</strong></em>*。 ![显示您网站 URL 的模式，右下角带有确认按钮](https://klaviyo.zendesk.com/hc/article_attachments/28717383943067)</p>
+<h2>预览更新的 Cookie</h2>
+<p>1. 导航至左侧导航栏中的<strong><em>*脚本</strong><strong>。 2. 在“脚本”页面上，单击下面显示的</strong><strong>网站 URL</strong></em>*。 ![在脚本页面上，您的网站 URL 将出现在下面的列表中以供单击](https://klaviyo.zendesk.com/hc/article_attachments/28717383922971)</p>
+<p>3. 然后，单击右上角的<strong><em>*发布作品</strong></em>*。 ![单击脚本页面右上角的“发布作品”按钮的视图](https://klaviyo.zendesk.com/hc/article_attachments/28717383924507)</p>
+<p>4. 在出现的右侧边栏中，单击<strong><em>*确认</strong><strong>。 5. 进入 </strong>Review<strong> 选项卡后，向下滚动并单击 </strong><strong>Continue</strong><strong>。 6. 最后，在</strong>确认<strong></em><em>并发布</strong>选项卡上，单击<strong></em><em>发布测试和预览</strong></em>*。您的预览可能需要几秒钟的时间来加载，但一旦准备好，您将看到下面出现一个绿色的勾号。 ![](https://fast.wistia.com/embed/medias/2b9o3tsibi/swatch)</p>
+<p>7. 出现此成功消息后，单击下面的<strong><em>*确认</strong></em>*。 ## 发布您更新的 Cookie</p>
+<p>在发布 Cookie 之前，请务必注意，生产脚本最多可能需要四个小时才能在您的网站上生效。按照以下说明操作后，请等待四个小时才能看到这些更新。 1. 导航至左侧导航栏中的<strong><em>*网站</strong><strong>。 2. 在 </strong>网站<strong> 页面上，从下面的列表中单击您的</strong><strong>网站 URL</strong></em>*。 ![在网站页面上，您的网站网址将出现在下面的列表中以供单击](https://klaviyo.zendesk.com/hc/article_attachments/28717390222491)</p>
+<p>3. 在此处，单击右上角的<strong><em>*发布</strong><strong>。 4. 将出现一个侧边栏模式，确认您要发布的版本。点击右下角</strong><strong>确认</strong></em>*。 ![右侧边栏中将出现一个模式，用于发布您的网站 cookie，并在右下角带有确认按钮](https://klaviyo.zendesk.com/hc/article_attachments/28717390226715)</p>
+<p>5. 在同一模式中，您将进入 <strong>审阅和发布</strong> 屏幕。单击<strong><em>*启用自动阻止 Cookie</strong></em>* 上的切换按钮。您可以在[指南](https://community.cookiepro.com/s/article/UUID-5b03e81d-8b3b-5da8-eed5-b3b015730f3c?language=en_US)中阅读有关 CookiePro 自动阻止功能的更多信息。 ![在审阅和发布屏幕上，突出显示的区域可打开自动阻止 Cookie](https://klaviyo.zendesk.com/hc/article_attachments/28717383934235)</p>
+<p>6、点击右下角<strong><em>*发布</strong><strong>。 7. 将出现一个弹出窗口，其中包含您的制作脚本。单击</strong><strong>复制脚本</strong></em>*。 ![显示要复制并粘贴到网站的生产脚本的弹出窗口](https://klaviyo.zendesk.com/hc/article_attachments/28717390232603)</p>
+<p>8. 将这些脚本放入您的电子商务网站的 html 中。在 CookiePro 的分步 [指南](https://community.cookiepro.com/s/article/UUID-7478d3b4-18eb-3ac0-a6fd-fb7ebff9f8dc?language=en_US) 中了解有关将这些脚本放入电子商务网站的更多信息。 ## 结果</p>
+<p>您已成功设置 OneTrust cookie 跟踪软件，以确保捕获您的访客信息，然后将其合规地发送至 Klaviyo。</p>
