@@ -1,0 +1,1072 @@
+{
+  "captured_at": "2026-05-23T16:16:58Z",
+  "article": {
+    "id": 115005080447,
+    "url": "https://klaviyo.zendesk.com/api/v2/help_center/en-us/articles/115005080447.json",
+    "html_url": "https://klaviyo.zendesk.com/hc/en-us/articles/115005080447-Shopify-data-reference",
+    "author_id": 20345311467,
+    "comments_disabled": true,
+    "draft": false,
+    "promoted": false,
+    "position": 1,
+    "vote_sum": 154,
+    "vote_count": 496,
+    "section_id": 49375363814555,
+    "created_at": "2017-03-30T18:03:37Z",
+    "updated_at": "2026-04-21T13:54:19Z",
+    "name": "Shopify data reference",
+    "title": "Shopify data reference",
+    "source_locale": "en-us",
+    "locale": "en-us",
+    "outdated": false,
+    "outdated_locales": [],
+    "edited_at": "2026-04-17T00:55:46Z",
+    "user_segment_id": null,
+    "permission_group_id": 146372,
+    "content_tag_ids": [],
+    "label_names": [],
+    "body": "<h2 id=\"01H8CEA9BVHGJAQYPMY8HAB44V\">You will learn</h2>\n<p>Learn what data syncs from Shopify to Klaviyo and where to view it. This includes both order data (such as <em>Placed Order</em>, <em>Ordered Product</em>, etc.), delivery data, onsite tracking data, and customer data. If you have not already, read our guide on <a href=\"https://help.klaviyo.com/hc/en-us/articles/115005080407-How-to-Integrate-with-Shopify\">getting started with Shopify</a> for step-by-step instructions on integrating, before continuing with this article.</p>\n<h2 id=\"h_01HSKSF3JC583G0ZW3MB2143P6\">About the initial data sync</h2>\n<p>When you first integrate with Shopify, Klaviyo will sync the last 90 days of your Shopify data so you can start engaging your most recent customers. After the sync of the last 90 days of data, Klaviyo will begin your complete historical data sync. Depending on how many orders, customers, and products your store has, it can take anywhere from a few minutes to several days to sync all of your data, and a green progress bar will show the progress of your sync.</p>\n<p>Once this historical sync is complete, new data will sync to Klaviyo in real time.</p>\n<h2 id=\"01H8CEA9BVQ8VE41XN5M69SN08\">How to view your data</h2>\n<p>Click the <strong>Analytics</strong> dropdown in the left-hand navigation sidebar and select <strong>Metrics</strong>. Here, you can view all of the metrics in your account. The metrics with a Shopify icon represent all of the metrics synced from your Shopify integration. You can filter this view to see only Shopify metrics by using the filter selector in the upper right-hand corner. The metrics synced from Shopify are:</p>\n<ul>\n<li>Checkout Started</li>\n<li>Placed Order</li>\n<li>Ordered Product</li>\n<li>Fulfilled Order</li>\n<li>Fulfilled Partial Order</li>\n<li>Cancelled Order</li>\n<li>Refunded Order</li>\n<li>Confirmed Shipment</li>\n<li>Delivered Shipment</li>\n<li>Marked Out for Delivery</li>\n<li>Active on Site</li>\n<li>Viewed Product</li>\n<li>Viewed Collection</li>\n<li>Submitted Search</li>\n<li>Added to Cart</li>\n</ul>\n<p>All of the events above are branded with the Shopify icon when they sync to Klaviyo, with the exception of <em>Active on Site</em> and <em>Viewed Product</em>, which have a gear icon. These events are tracked by Klaviyo via an installed snippet, while Shopify-branded events are natively tracked by Shopify. </p>\n<div class=\"bs-callout bs-callout-default\">\n<p><em>Confirmed Shipment</em>, <em>Delivered Shipment</em>, and <em>Confirmed Out for Delivery</em> events will only sync to Klaviyo if they are available in Shopify. Please note that Shopify only provides these notifications for <a href=\"https://help.shopify.com/en/manual/shipping/understanding-shipping/shipping-carriers\">certain shipping carriers</a>.</p>\n</div>\n<h2 id=\"01H8CEA9BV1F40P6KMS72KWP2K\">Checkout Started</h2>\n<div class=\"bs-callout bs-callout-default\">\n<p>Klaviyo's Shopify integration is fully compatible with Shopify One-page Checkout. Whether you're using one-page checkout or multi-page checkout, the <em>Checkout Started</em> event is triggered after the customer fills out their email. If you've customized your checkout, customers may still need to progress to the next step in the checkout process for the <em>Checkout Started</em> event to be triggered. Additional customer information will be updated in Klaviyo once the customer is created in Shopify.</p>\n</div>\n<p>The event that Klaviyo tracks includes all of the product information about the items in someone's cart including product names, images, and variant information so you can use this information in your abandoned cart emails.</p>\n<p>This event syncs with a checkout URL property, which links back to each customer’s unique cart. If someone opens an abandoned cart email from a new device, this link will rebuild the person's cart when clicked through. You can filter and target <em>Checkout Started</em> events based on the following criteria:</p>\n<ul>\n<li>\n<strong>$value</strong><br>\nThe total value of the cart at time of started checkout. This may include any line prices, taxes, shipping costs, tips, and discounts.</li>\n<li>\n<strong>Items</strong><br>\nThe names of the products in someone's order, e.g., <em>t-shirt </em>or <em>pants</em>.</li>\n<li>\n<strong>Collections</strong><br>\nThe complete set of the collections of the products in someone's order, e.g., <em>t-shirts, men's, pants</em> and<em> sale</em>.</li>\n<li>\n<strong>Item Count</strong><br>\nThe count of line items in the order, e.g., <em>2. </em>Note that this does not account for the quantity of items. Additionally, it is possible to add the same item to a cart multiple times and have it counted as multiple line items in Shopify; Klaviyo does not check for uniqueness or merge these for Item Count.</li>\n<li>\n<strong>Discount Codes</strong><br>\nAny discount or coupon codes someone used towards the order, e.g., <em>SPRING2015</em>.</li>\n<li>\n<strong>Total Discounts</strong><br>\nThe total amount of any coupons or discounts if someone used  code, e.g., <em>10.00</em>.</li>\n<li>\n<strong>Customer Locale</strong><br>\nThe customer’s locale when placing the order, e.g., <em>en-US</em>.</li>\n<li>\n<strong>$extra</strong><br>\nAdditional data including localized product information.</li>\n</ul>\n<p>If there is billing address information available, we will also capture all relevant address details. If there is a referring site captured by Shopify, we will sync this as well.</p>\n<h3 id=\"01H8CEA9BVDS1KHEF42SK89ZVB\">Checkout Started vs Abandoned Checkout</h3>\n<p>Shopify's<em>Abandoned Checkout</em>metric is different from its <em>Checkout Started</em>metric. Klaviyo's Abandoned Cart flow is triggered by the<em>Checkout Started</em>metric, while Shopify's Abandoned Cart flow is triggered by the<em>Abandoned Cart</em>metric.</p>\n<h3 id=\"01H8CEA9BVHKY18N9J9HGF6WAD\">Do I need to disable the Abandoned Checkout notification in Shopify or will Klaviyo do this automatically? </h3>\n<p>You will need to do this manually. To turn off Shopify’s Abandoned Cart Recovery head over to <strong>Settings &gt; Checkout</strong> and then scroll down until you see <strong>Abandoned checkouts</strong>, under the <em>Email Marketing</em> section. You will need to uncheck the box that says \"Automatically send abandoned checkout emails.\" </p>\n<h2 id=\"01H8CEA9BVT4JA6QMF3Q3SDH40\">Placed Order</h2>\n<p>This event is tracked when a customer completes the checkout process and creates an order in your Shopify store. The event Klaviyo tracks includes all of the product information about the items someone purchased including product names, images and variant information so you can use that information in purchase follow up emails. You can filter and target <em>Placed Order</em> events based on the following criteria:</p>\n<ul>\n<li>\n<strong>$value</strong><br>\nThe total value of the placed order, inclusive of shipping and any applied discounts.</li>\n<li>\n<strong>Items</strong><br>\nThe names of the products in someone's order, e.g., <em>t-shirt </em>or <em>pants</em>.</li>\n<li>\n<strong>Collections</strong><br>\nThe complete set of the collections of the products in someone's order, e.g., <em>t-shirts, mens, pants,</em> and<em> sale.</em>\n</li>\n<li>\n<strong>Item Count</strong><br>\nThe count of line items in the order, e.g., <em>2. </em>Note that this does not account for the quantity of items. Additionally, it is possible to add the same item to a cart multiple times and have it counted as multiple line items in Shopify; Klaviyo does not check for uniqueness or merge these for Item Count.</li>\n<li>\n<strong>Discount Codes</strong><br>\nAny discount or coupon codes someone used towards the order, e.g., <em>SPRING2015; </em>while this isn't synced as a specific metric, there will be a <em>Discount Codes</em> property for each order that will allow you to see who purchased using particular codes.</li>\n<li>\n<strong>Total Discounts</strong><br>\nThe total amount of any coupons or discounts if someone used a code, e.g., <em>10.00.</em>\n</li>\n<li>\n<strong>Customer Locale</strong><br>\nThe customer’s locale when placing the order, e.g., <em>en-US</em>.</li>\n<li>\n<strong>$extra</strong><br>\nAdditional data including localized product information.</li>\n<li>\n<strong>Source Name</strong><br>\nPOS, Mobile etc.</li>\n<li>\n<strong>OptedInToSmsOrderUpdates</strong><br>\nThis value (True or False) indicates that the shopper has provided their phone number with their shipping information during checkout.</li>\n</ul>\n<h3 id=\"h_01J56FFKH586BTR7T105CNB0R9\">Triggering off of Placed Order events</h3>\n<p><em>Placed Order</em> and <em>Ordered Product</em> events are synced to Klaviyo seconds apart. For this reason, it is important to be consistent with the metric you use to trigger and filter your flows and segments. For example, if your flow is triggered by the <em>Placed Order</em> event and you add a filter to exclude anyone who <em>Ordered Product</em> since starting the flow, all recipients will be skipped because the two events are separate, but sync seconds apart. As a best practice, use the <em>Placed Order</em> event to trigger and filter flows and segments.</p>\n<h2 id=\"h_01JADBRNBQ8JYRZ8GGY30EZ05K\">Ordered Product</h2>\n<p>This event is also tracked when a customer places an order, but a separate event is tracked for each item someone purchases. For example, if someone buys a t-shirt and a pair of pants, one <em>Placed Order</em> event will be tracked along with two <em>Ordered Product</em> events; one <em>Placed Order</em> event for the purchase as a whole, and then one <em>Ordered Product</em> event for the t-shirt and one <em>Ordered Product</em> event for the pants.</p>\n<p>The events Klaviyo tracks includes detailed information about each product someone purchases. This is useful when creating behavioral segments based on product variant options and other detailed information that's not available in the <em>Placed Order</em> event. You can filter and target <em>Ordered Product</em> events based on the following criteria:</p>\n<ul>\n<li>\n<strong>$value</strong><br>\nThe total value of the item purchased; no shipping costs or discounts included.</li>\n<li>\n<strong>Name</strong><br>\nThe name or title of the ordered product in Shopify, e.g., <em>t-shirt</em>.</li>\n<li>\n<strong>Variant Name</strong><br>\nThe name or title of the product variant in Shopify, e.g., <em>red, size medium t-shirt</em>.</li>\n<li>\n<strong>SKU</strong><br>\nThe SKU of the product variant, e.g., <em>REDMEDIUMTSHIRT</em>.</li>\n<li>\n<strong>ProductID</strong><br>\nThe ID associated with the product in your store.</li>\n<li>\n<strong>Quantity</strong><br>\nThe quantity will always be 1, since we track an <em>Ordered Product</em> event for each individual item in the order, including multiples of the same item.</li>\n<li>\n<strong>Collections</strong><br>\nThe complete set of collections or categories applied to the product, e.g., <em>t-shirts, men's</em> and<em> sale</em>.</li>\n<li>\n<strong>Tags</strong><br>\nAny tags applied to the product in your store.</li>\n<li>\n<strong>Variant Option: &lt;OptionName&gt;</strong><br>\nThe name and value of any variant options for the variant ordered, e.g., <em>Variant Option: Size </em>would be <em>Medium</em> and <em>Variant Option: Color </em>would be<em> Red</em>.</li>\n<li>\n<strong>Attribute: &lt;AttributeName&gt;</strong><br>\nThe name and value of any product attributes for the product ordered, e.g., <em>Attribute: Season</em> would be <em>Spring</em>.</li>\n<li>\n<strong>Variant ID: &lt;Variant ID&gt;</strong><br>\nThe ID associated with the product variant on your store. </li>\n<li>\n<strong>Customer Locale</strong><br>\nThe customer’s locale when placing the order, e.g., <em>en-US</em>.</li>\n<li>\n<strong>$extra</strong><br>\nAdditional data including localized product information.</li>\n</ul>\n<h2 id=\"01H8CEA9BVAVP3S5XW6HQ6JQ3F\">Fulfilled Order</h2>\n<p>This event is tracked when an order is marked as \"fulfilled\" in your Shopify store. Klaviyo will track a <em>Fulfilled Order</em> event specifically when we sync an order with a <code>Fulfillment Status</code> of \"fulfilled.\"</p>\n<p>The event Klaviyo tracks includes all product information regarding the items someone purchased including product names and images so you can use that information in purchase follow up emails. You can filter and target <em>Fulfilled Order</em> events based on the following criteria:</p>\n<ul>\n<li>\n<strong>$value</strong><br>\nThe total value of the fulfilled order.</li>\n<li>\n<strong>Items</strong><br>\nThe names of the products in someone's order, e.g., <em>t-shirt </em>or <em>pants</em>.</li>\n<li>\n<strong>Collections</strong><br>\nThe complete set of the collections of the products in someone's order, e.g., <em>t-shirts, men's, pants,</em> and<em> sale</em>.</li>\n<li>\n<strong>Item Count</strong><br>\nThe count of line items in the order, e.g., <em>2. </em>Note that this does not account for the quantity of items. Additionally, it is possible to add the same item to a cart multiple times and have it counted as multiple line items in Shopify; Klaviyo does not check for uniqueness or merge these for Item Count.</li>\n<li>\n<strong>Discount Codes</strong><br>\nAny discount or coupon codes someone used towards the order, e.g., <em>SPRING2015</em>.</li>\n<li>\n<strong>Total Discounts</strong><br>\nThe total amount of any coupons or discounts if someone used a code, e.g., <em>10.00</em>.</li>\n<li>\n<strong>Customer Locale</strong><br>\nThe customer’s locale when placing the order, e.g., <em>en-US</em>.</li>\n<li>\n<strong>$extra</strong><br>\nAdditional data including localized product information.</li>\n<li>\n<strong>OptedInToSmsOrderUpdates</strong><br>\nThis value (True or False) indicates that the shopper has provided their phone number with their shipping information during checkout.</li>\n</ul>\n<h2 id=\"01H8CEA9BVFVYZB7Z01W6WJRM0\">Fulfilled Partial Order</h2>\n<p>This event is tracked when an order that has been placed is partially fulfilled. For example, if you opt to ship order items in multiple shipments and want to send transactional emails for each stage in the fulfillment of an order, <em>Fulfilled Partial Order</em> events can be leveraged such that customers are notified when their items will be delivered. View our guide for more information on <a href=\"https://help.klaviyo.com/hc/en-us/articles/4401771131419\">setting up flows based on </a><a href=\"https://help.klaviyo.com/hc/en-us/articles/4401771131419\"><em>Fulfilled Partial Order</em></a><a href=\"https://help.klaviyo.com/hc/en-us/articles/4401771131419\"> events</a>.</p>\n<h2 id=\"01H8CEA9BVKNRRX1JQ0PCYE4ZE\">Cancelled Order</h2>\n<p>This event is tracked when a customer creates an order in your Shopify store but then cancels the order before fulfillment. The event Klaviyo tracks includes all of the product information about the items someone purchased including product names and images. You can filter and target <em>Cancelled Order</em> events based on the following criteria:</p>\n<ul>\n<li>\n<strong>$value</strong><br>\nThe total value of the canceled order.</li>\n<li>\n<strong>Items</strong><br>\nThe names of the products in someone's order, e.g., <em>t-shirt </em>or <em>pants</em>.</li>\n<li>\n<strong>Collections</strong><br>\nThe complete set of the collections of the products in someone's order, e.g., <em>t-shirts, men's, pants</em> and<em> sale</em>.</li>\n<li>\n<strong>Item Count</strong><br>\nThe count of line items in the order, e.g., <em>2. </em>Note that this does not account for the quantity of items. Additionally, it is possible to add the same item to a cart multiple times and have it counted as multiple line items in Shopify; Klaviyo does not check for uniqueness or merge these for Item Count.</li>\n<li>\n<strong>Discount Codes</strong><br>\nAny discount or coupon codes someone used towards the order, e.g., <em>SPRING2015</em>.</li>\n<li>\n<strong>Total Discounts</strong><br>\nThe total amount of any coupons or discounts if someone used a code, e.g., <em>10.00</em>.</li>\n<li>\n<strong>Customer Locale</strong><br>\nThe customer’s locale when placing the order, e.g., <em>en-US</em>.</li>\n<li>\n<strong>$extra</strong><br>\nAdditional data including localized product information.</li>\n<li>\n<strong>OptedInToSmsOrderUpdates</strong><br>\nThis value (True or False) indicates that the shopper has provided their phone number with their shipping information during checkout.</li>\n</ul>\n<h2 id=\"01H8CEA9BV5EHENFETE0JB8YW0\">Refunded Order</h2>\n<p>This event is tracked when a customer completes the checkout process in your Shopify store and a payment is made, but the customer requests the payment to be returned. Klaviyo only receives events from fully refunded orders (not partially refunded orders). The event Klaviyo tracks includes all of the product information about the items someone purchased including product names, images, and variant information. You can filter and target <em>Refunded Order</em> events based on the following criteria:</p>\n<ul>\n<li>\n<strong>$value</strong><br>\nThe total value of the refunded order.</li>\n<li>\n<strong>Items</strong><br>\nThe names of the products in someone's order, e.g., <em>t-shirt </em>or <em>pants</em>.</li>\n<li>\n<strong>Collections</strong><br>\nThe complete set of the collections of the products in someone's order, e.g., <em>t-shirts, men's, pants</em> and<em> sale</em>.</li>\n<li>\n<strong>Item Count</strong><br>\nThe count of line items in the order, e.g., <em>2. </em>Note that this does not account for the quantity of items. Additionally, it is possible to add the same item to a cart multiple times and have it counted as multiple line items in Shopify; Klaviyo does not check for uniqueness or merge these for Item Count.</li>\n<li>\n<strong>Discount Codes</strong><br>\nAny discount or coupon codes someone used towards the order, e.g., <em>SPRING2015</em>.</li>\n<li>\n<strong>Total Discounts</strong><br>\nThe total amount of any coupons or discounts if someone used a code, e.g., <em>10.00</em>.</li>\n<li>\n<strong>Customer Locale</strong><br>\nThe customer’s locale when placing the order, e.g., <em>en-US</em>.</li>\n<li>\n<strong>$extra</strong><br>\nAdditional data including localized product information.</li>\n<li>\n<strong>OptedInToSmsOrderUpdates</strong><br>\nThis value (True or False) indicates that the shopper has provided their phone number with their shipping information during checkout.</li>\n</ul>\n<h2 id=\"01H8CEA9BV9N92HJCXSH2K84DN\">Confirmed Shipment</h2>\n<p>This event is tracked when the carrier is made aware of the shipment but hasn't received it yet. You can filter and target <em>Confirmed Shipment </em>events based on the following criteria:</p>\n<ul>\n<li>\n<strong>$value</strong><br>\nThe sum of product prices, including discounts, for item(s) in the shipment.</li>\n<li>\n<strong>Collections</strong><br>\nThe product collections for product(s) in the shipment.</li>\n<li>\n<strong>Customer Locale</strong><br>\nThe customer’s locale when placing the order, e.g., <em>en-US</em>.</li>\n<li>\n<strong>Estimated Delivery</strong><br>\nThe estimated delivery date for the shipment.</li>\n<li>\n<strong>Fulfillment Service</strong><br>\nThe fulfillment service associated with the shipment, e.g., <em>manual</em>.</li>\n<li>\n<strong>Items</strong><br>\nAn array of the product(s) in the shipment.</li>\n<li>\n<strong>Item Count</strong><br>\nThe total number of items in the shipment.</li>\n<li>\n<strong>Shipment Status</strong><br>\nThe status of the shipment, e.g., <em>confirmed</em>.</li>\n<li>\n<strong>Source Name</strong><br>\nThe source of the order, e.g., <em>web</em>.</li>\n<li>\n<strong>Tracking Company </strong><br>\nThe name of the tracking company.</li>\n<li>\n<strong>Tracking Numbers</strong><br>\nThe tracking number(s) of the shipment.</li>\n<li>\n<strong>OptedInToSmsOrderUpdates</strong><br>\nThis value (True or False) indicates that the shopper has provided their phone number with their shipping information during checkout.</li>\n</ul>\n<h2 id=\"01H8CEA9BWCYQH0NXXGTCW2MFX\">Delivered Shipment</h2>\n<p>This event is tracked when a fulfillment’s shipping status is marked as <em>delivered </em>on your Shopify store. You can filter and target <em>Delivered Shipment </em>events based on the following criteria:</p>\n<ul>\n<li>\n<strong>$value</strong><br>\nThe sum of product prices, including discounts, for item(s) in the shipment.</li>\n<li>\n<strong>Collections</strong><br>\nThe product collections for product(s) in the shipment.</li>\n<li>\n<strong>Customer Locale</strong><br>\nThe customer’s locale when placing the order, e.g., <em>en-US</em>.</li>\n<li>\n<strong>Delivery Hours</strong><br>\nThe number of hours the shipment took to be delivered after it was created.</li>\n<li>\n<strong>Estimated Delivery</strong><br>\nThe estimated delivery date for the shipment.</li>\n<li>\n<strong>Fulfillment Service</strong><br>\nThe fulfillment service associated with the shipment, e.g., <em>manual</em>.</li>\n<li>\n<strong>Items</strong><br>\nAn array of the product(s) in the shipment.</li>\n<li>\n<strong>Item Count</strong><br>\nThe total number of items in the shipment.</li>\n<li>\n<strong>Transit Hours</strong><br>\nThe number of hours the shipment has been in transit.</li>\n<li>\n<strong>Shipment Status</strong><br>\nThe status of the shipment, which is <em>delivered</em>.</li>\n<li>\n<strong>Source Name</strong><br>\nThe source of the order, e.g., <em>web</em>.</li>\n<li>\n<strong>Tracking Company </strong><br>\nThe name of the tracking company.</li>\n<li>\n<strong>Tracking Numbers</strong><br>\nThe tracking number(s) of the shipment.</li>\n<li>\n<strong>OptedInToSmsOrderUpdates</strong><br>\nThis value (True or False) indicates that the shopper has provided their phone number with their shipping information during checkout.</li>\n</ul>\n<h2 id=\"01H8CEA9BW40BDG52YW0HHSA0V\">Marked Out for Delivery</h2>\n<p>This event is tracked when a fulfillment’s shipping status is marked as <em>out_for_delivery </em>on your Shopify store. You can filter and target <em>Marked Out for Delivery </em>events based on the following criteria:</p>\n<ul>\n<li>\n<strong>$value</strong><br>\nThe sum of product prices, including discounts, for item(s) in the shipment.</li>\n<li>\n<strong>Collections</strong><br>\nThe product collections for product(s) in the shipment.</li>\n<li>\n<strong>Customer Locale</strong><br>\nThe customer’s locale when placing the order, e.g., <em>en-US</em>.</li>\n<li>\n<strong>Estimated Delivery</strong><br>\nThe estimated delivery date for the shipment.</li>\n<li>\n<strong>Fulfillment Service</strong><br>\nThe fulfillment service associated with the shipment, e.g., <em>manual</em>.</li>\n<li>\n<strong>Items</strong><br>\nAn array of the product(s) in the shipment.</li>\n<li>\n<strong>Item Count</strong><br>\nThe total number of items in the shipment.</li>\n<li>\n<strong>Transit Hours</strong><br>\nThe number of hours the shipment has been in transit.</li>\n<li>\n<strong>Shipment Status</strong><br>\nThe status of the shipment, which is <em>out_for_delivery</em>.</li>\n<li>\n<strong>Source Name</strong><br>\nThe source of the order, e.g., <em>web</em>.</li>\n<li>\n<strong>Tracking Company </strong><br>\nThe name of the tracking company.</li>\n<li>\n<strong>Tracking Numbers</strong><br>\nThe tracking number(s) of the shipment.</li>\n<li>\n<strong>OptedInToSmsOrderUpdates</strong><br>\nThis value (True or False) indicates that the shopper has provided their phone number with their shipping information during checkout.</li>\n</ul>\n<h2 id=\"h_01J6F8BS3BAQWSHXG199774JR0\">Active on Site</h2>\n<p>This event tracks when an identified user is active on your site. The top-level properties are:</p>\n<ul>\n<li>\n<strong>Browser</strong><br>\nUser agent for the originating browser (e.g., “Chrome”).</li>\n<li>\n<strong>Os</strong><br>\nUser agent for the originating operating system (e.g., “Mac”).</li>\n<li>\n<strong>Page </strong><br>\nThe URL of the visited page.</li>\n<li>\n<strong>utm_medium</strong><br>\nThe marketing channel the user comes from to the website.</li>\n<li>\n<strong>utm_source</strong><br>\nThe source of traffic to the website.</li>\n<li>\n<strong>utm_campaign</strong><br>\nThe name of the marketing campaign associated with the traffic.</li>\n<li>\n<strong>utm_id</strong><br>\nThe unique identifier for the marketing campaign associated with the traffic.</li>\n<li>\n<strong>utm_term</strong><br>\nThis is an optional UTM parameter that marketers can set to track paid search terms.</li>\n<li>\n<strong>Fragments</strong><br>\nAny other items in the URL, like an anchor tag that indicates where the user would have landed on the page. If there are no fragments on the URL, no values are set. </li>\n<li>\n<strong>Identity_source</strong><br>\nThe event that triggered Klaviyo to receive the on-site event. </li>\n<li>\n<strong>Parameters</strong><br>\nEach of the first 10 parameters present in the URL as their own piece of event data, except for <em>_kx</em> and UTMs. If there are no parameters on the URL, no values are set. Parameters beyond the first 10 are not captured. </li>\n<li>\n<strong>First_page_path</strong><br>\nThe path of the first page a customer lands on. If there is no path on the first page view, no value is set.</li>\n<li>\n<strong>Kx_present</strong><br>\nIf _kx is present on the URL, <em>true</em> is returned for the dimension. If not, <em>false</em> is returned. This highlights whether or not the session could be associated with a click on a link in a Klaviyo message.</li>\n</ul>\n<div class=\"bs-callout bs-callout-default\">\n<p>For each of the <a href=\"https://help.klaviyo.com/hc/en-us/articles/115005247808\">UTM parameters</a>, Klaviyo will return the first value in the URL’s query parameters. If the UTM parameter is not present on a URL, then no values are provided in the event.</p>\n</div>\n<h2 id=\"h_01J6F8CB8ERSJFDA87R4BNZSSK\">Viewed Product</h2>\n<p>This event tracks when an identified user views a product on your site. The top-level properties are:</p>\n<ul>\n<li>\n<strong>URL</strong><br>\nURL of the product.</li>\n<li>\n<strong>Activity ID</strong><br>\nActivity ID for the event.</li>\n<li>\n<strong>Product </strong><br>\nName of the product.</li>\n<li>\n<strong>ProductID</strong><br>\nID of the product.</li>\n<li>\n<strong>ImageURL</strong><br>\nURL for the product image.</li>\n<li>\n<strong>Brand</strong><br>\nProduct’s vendor name.</li>\n<li>\n<strong>Categories</strong><br>\nThe categories that the product belongs to.</li>\n<li>\n<strong>Price</strong><br>\nProduct variant’s price.</li>\n<li>\n<strong>CompareAtPrice</strong><br>\nPrice before discounts.</li>\n</ul>\n<h2 id=\"h_01J6F8CQA7NGJTR97G3C62M4SJ\">Viewed Collection</h2>\n<p>This event tracks when an identified user views a collection your site. The top-level properties are:</p>\n<ul>\n<li>\n<strong>URL</strong><br>\nCollection URL.</li>\n<li>\n<strong>Activity ID</strong><br>\nActivity ID for the event.</li>\n<li>\n<strong>CollectionName</strong><br>\nName of the collection.</li>\n<li>\n<strong>CollectionID</strong><br>\nID for the collection.</li>\n<li>\n<strong>_ip_country_code</strong><br>\nISO 3166-1 alpha-2 (two-letter) country code (e.g., “US”).</li>\n<li>\n<strong>_ip_region_code</strong><br>\nISO 3166-2 region code (e.g. province, state such as “MA”).</li>\n</ul>\n<h2 id=\"h_01J6F8F7BVY6YKBQ9J6CP5CP2K\">Submitted Search</h2>\n<p>This event tracks when an identified user submits a search on your site. The top-level properties are:</p>\n<ul>\n<li>\n<strong>URL</strong><br>\nURL for the search query.</li>\n<li>\n<strong>Activity ID</strong><br>\nActivity ID for the event.</li>\n<li>\n<strong>SearchQuery</strong><br>\nContents of search query (e.g., “Mens Large Tshirts”).</li>\n<li>\n<strong>SearchQueryParts</strong><br>\nList including contents of search query (e.g., \"Mens \\\"Large\\\" Tshirts”).</li>\n<li>\n<strong>_ip_country_code</strong><br>\nISO 3166-1 alpha-2 (two-letter) country code (e.g., “US”).</li>\n<li>\n<strong>_ip_region_code</strong><br>\nISO 3166-2 region code (e.g. province, state such as “MA”).</li>\n</ul>\n<h2 id=\"h_01J6F8FWMEH250MPETV9FSDWF3\">Added to Cart</h2>\n<p>This event tracks when an identified user adds an item to their cart. This event tracks 1 product at a time within its top-level properties. The top-level properties are:</p>\n<ul>\n<li>\n<strong>URL</strong><br>\nURL of the item added to the Cart.</li>\n<li>\n<strong>Browser</strong><br>\nUser agent for originating browser (e.g., “Chrome”).</li>\n<li>\n<strong>OS </strong><br>\nUser agent for the originating operating system (e.g., “Mac”).</li>\n<li>\n<strong>$value</strong><br>\nTotal value of product variant added to the cart.</li>\n<li>\n<strong>Product Name</strong><br>\nName of the product.</li>\n<li>\n<strong>ProductID</strong><br>\nID of the product.</li>\n<li>\n<strong>VariantID</strong><br>\nID for the product variant.</li>\n<li>\n<strong>Variant Name</strong><br>\nName of the product variant.</li>\n<li>\n<strong>Categories</strong><br>\nCategories applied to the product.</li>\n<li>\n<strong>ImageURL</strong><br>\nURL for the product image, or the product variant image if available.</li>\n<li>\n<strong>Brand</strong><br>\nProduct’s vendor name.</li>\n<li>\n<strong>Price</strong><br>\nProduct variant’s price.</li>\n<li>\n<strong>CompareAtPrice</strong><br>\nPrice before discounts.</li>\n<li>\n<strong>$currency</strong><br>\nCurrency code for the price.</li>\n<li>\n<strong>Product Type</strong><br>\nProduct type specified by the merchant.</li>\n<li>\n<strong>Variant SKU</strong><br>\nSKU associated with the variant.</li>\n<li>\n<strong>Quantity</strong><br>\nQuantity for the product.</li>\n<li>\n<strong>_ip_country_code</strong><br>\nISO 3166-1 alpha-2 (two-letter) country code (e.g., “US”).</li>\n<li>\n<strong>_ip_region_code</strong><br>\nISO 3166-2 region code (e.g. province, state such as “MA”).</li>\n</ul>\n<h2 id=\"section2\">Synced customer data</h2>\n<p>In addition to the metrics Klaviyo syncs from Shopify, Klaviyo will also create a unique profile for every customer that we sync. When we sync contact information, there are also certain custom properties that may get added to each Klaviyo profile. You can use these properties in segments and in flows. Here are the properties that are automatically synced from Shopify:</p>\n<ul>\n<li>\n<strong>Email, First and Last Name, City, State/Region, Zip Code, Country, Phone Number</strong><br>\nThese built-in Klaviyo fields are automatically populated with all available data from Shopify.</li>\n<li>\n<strong>Locale information</strong><br>\nThe <em>Locale</em> property includes the profile’s locale synced from Shopify (e.g., “en-US”). The <em>Locale: Language</em> and <em>Locale: Country</em> properties are derived from <em>Locale</em> and contain the language and country information, respectively.</li>\n<li>\n<strong>Marketing consent</strong><br>\nWhether or not a customer has opted-in to receive email and/or SMS marketing.</li>\n<li>\n<strong>Shopify Tags</strong><br>\nAny custom tags assigned to that customer in Shopify, e.g., <em>Wholesale</em> or <em>VIP</em>.</li>\n</ul>\n<p>Please note that profiles deleted in Shopify are not correspondingly deleted in Klaviyo.</p>\n<h2 id=\"section3\">Frequency of the Shopify sync</h2>\n<p>Metrics and profile properties from Shopify are synced in real-time. You should see event data appear in your Klaviyo account within a few seconds of when the event is tracked in your Shopify store.</p>\n<p>Because we sync all metrics in real-time, any tags - such as Order Tags - that might be added to an order after it is processed will not sync into Klaviyo. Klaviyo does not re-sync metrics after the initial event takes place, so no tags or adjustments made to an order after-the-fact will be updated in Klaviyo.</p>\n<h2 id=\"h_01J56FHFAQK6CQW4JN6F7MNX0S\">How we calculate revenue</h2>\n<p><em>Revenue</em>, or <em>Placed Order value</em>, is calculated as follows: (sub-total + shipping) - any discounts.</p>\n<p>You may see that the <em>Revenue</em> value on your Klaviyo dashboard does not always match up with the revenue value you see in Shopify; this is because Shopify subtracts canceled and refunded orders from their revenue calculation, while Klaviyo does not.</p>\n<p>Note that if you're looking to create a condition (like in a segment or flow) based on revenue for a customer over a certain period, you should use the <em>Revenue</em> metric and not the <em>Placed Order</em> metric. <br>\n</p>\n<p><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28704476411675\" alt=\"Segment definition in Klaviyo for what someone has done (or not done) has revenue is greater than 50 over all time\" width=\"629\" height=\"160\"></p>\n<h2 id=\"h_01JEEXDZ0SS0Z21J2A192AQ0N7\">Segmenting based on value</h2>\n<p>If you want to segment customers based on the value of products they've ordered, checkouts they've started, etc., there's a specific way to do this in Klaviyo. In our segment builder, select <em>What someone has done (or not done) &gt; Person has &gt; [Event] Value</em>, then set your desired value and conditions. In the example below, we use <em>Ordered Product Value</em>.</p>\n<p><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/31625849320219\" alt=\"\"></p>\n<p>Note that you should not use the $value event property to segment customers in this way. </p>",
+    "user_segment_ids": []
+  },
+  "normalized": {
+    "id": "115005080447",
+    "title": "Shopify data reference",
+    "source_url": "https://help.klaviyo.com/hc/en-us/articles/115005080447-Shopify-data-reference",
+    "section_id": 49375363814555,
+    "section": "Getting started with Shopify",
+    "category_id": 115000032731,
+    "category": "Integrations",
+    "category_slug": "integrations",
+    "klaviyo_updated": "2026-04-21T13:54:19Z",
+    "created_at": "2017-03-30T18:03:37Z",
+    "draft": false,
+    "promoted": false,
+    "position": 1,
+    "label_names": []
+  },
+  "files": {
+    "body_html": "_source/articles/115005080447.body.html",
+    "rendered_html": "_source/rendered/115005080447.html"
+  },
+  "assets": {
+    "api_body": {
+      "images": [
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28704476411675",
+          "alt": "Segment definition in Klaviyo for what someone has done (or not done) has revenue is greater than 50 over all time",
+          "width": "629",
+          "height": "160"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/31625849320219",
+          "alt": "",
+          "width": "",
+          "height": ""
+        }
+      ],
+      "links": [
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005080407-How-to-Integrate-with-Shopify",
+          "text": "getting started with Shopify"
+        },
+        {
+          "href": "https://help.shopify.com/en/manual/shipping/understanding-shipping/shipping-carriers",
+          "text": "certain shipping carriers"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4401771131419",
+          "text": "setting up flows based on"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4401771131419",
+          "text": "Fulfilled Partial Order"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4401771131419",
+          "text": "events"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005247808",
+          "text": "UTM parameters"
+        }
+      ],
+      "headings": [
+        {
+          "level": 2,
+          "id": "01H8CEA9BVHGJAQYPMY8HAB44V",
+          "text": "You will learn"
+        },
+        {
+          "level": 2,
+          "id": "h_01HSKSF3JC583G0ZW3MB2143P6",
+          "text": "About the initial data sync"
+        },
+        {
+          "level": 2,
+          "id": "01H8CEA9BVQ8VE41XN5M69SN08",
+          "text": "How to view your data"
+        },
+        {
+          "level": 2,
+          "id": "01H8CEA9BV1F40P6KMS72KWP2K",
+          "text": "Checkout Started"
+        },
+        {
+          "level": 3,
+          "id": "01H8CEA9BVDS1KHEF42SK89ZVB",
+          "text": "Checkout Started vs Abandoned Checkout"
+        },
+        {
+          "level": 3,
+          "id": "01H8CEA9BVHKY18N9J9HGF6WAD",
+          "text": "Do I need to disable the Abandoned Checkout notification in Shopify or will Klaviyo do this automatically?"
+        },
+        {
+          "level": 2,
+          "id": "01H8CEA9BVT4JA6QMF3Q3SDH40",
+          "text": "Placed Order"
+        },
+        {
+          "level": 3,
+          "id": "h_01J56FFKH586BTR7T105CNB0R9",
+          "text": "Triggering off of Placed Order events"
+        },
+        {
+          "level": 2,
+          "id": "h_01JADBRNBQ8JYRZ8GGY30EZ05K",
+          "text": "Ordered Product"
+        },
+        {
+          "level": 2,
+          "id": "01H8CEA9BVAVP3S5XW6HQ6JQ3F",
+          "text": "Fulfilled Order"
+        },
+        {
+          "level": 2,
+          "id": "01H8CEA9BVFVYZB7Z01W6WJRM0",
+          "text": "Fulfilled Partial Order"
+        },
+        {
+          "level": 2,
+          "id": "01H8CEA9BVKNRRX1JQ0PCYE4ZE",
+          "text": "Cancelled Order"
+        },
+        {
+          "level": 2,
+          "id": "01H8CEA9BV5EHENFETE0JB8YW0",
+          "text": "Refunded Order"
+        },
+        {
+          "level": 2,
+          "id": "01H8CEA9BV9N92HJCXSH2K84DN",
+          "text": "Confirmed Shipment"
+        },
+        {
+          "level": 2,
+          "id": "01H8CEA9BWCYQH0NXXGTCW2MFX",
+          "text": "Delivered Shipment"
+        },
+        {
+          "level": 2,
+          "id": "01H8CEA9BW40BDG52YW0HHSA0V",
+          "text": "Marked Out for Delivery"
+        },
+        {
+          "level": 2,
+          "id": "h_01J6F8BS3BAQWSHXG199774JR0",
+          "text": "Active on Site"
+        },
+        {
+          "level": 2,
+          "id": "h_01J6F8CB8ERSJFDA87R4BNZSSK",
+          "text": "Viewed Product"
+        },
+        {
+          "level": 2,
+          "id": "h_01J6F8CQA7NGJTR97G3C62M4SJ",
+          "text": "Viewed Collection"
+        },
+        {
+          "level": 2,
+          "id": "h_01J6F8F7BVY6YKBQ9J6CP5CP2K",
+          "text": "Submitted Search"
+        },
+        {
+          "level": 2,
+          "id": "h_01J6F8FWMEH250MPETV9FSDWF3",
+          "text": "Added to Cart"
+        },
+        {
+          "level": 2,
+          "id": "section2",
+          "text": "Synced customer data"
+        },
+        {
+          "level": 2,
+          "id": "section3",
+          "text": "Frequency of the Shopify sync"
+        },
+        {
+          "level": 2,
+          "id": "h_01J56FHFAQK6CQW4JN6F7MNX0S",
+          "text": "How we calculate revenue"
+        },
+        {
+          "level": 2,
+          "id": "h_01JEEXDZ0SS0Z21J2A192AQ0N7",
+          "text": "Segmenting based on value"
+        }
+      ]
+    },
+    "rendered_page": {
+      "images": [
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/7ff492c2b417b7ecfe572f839a8a81398693c1f7-1920x1080.webp",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/941fbb33385f7eb1d5b15d4e1353a464cbf38f2b-1428x364.jpg?w=629",
+          "alt": "Segment definition in Klaviyo for what someone has done (or not done) has revenue is greater than 50 over all time",
+          "width": "629",
+          "height": "160"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/ba05b2752e281f5ba50674974b97345c7ce6c441-1516x384.png",
+          "alt": "",
+          "width": "",
+          "height": ""
+        }
+      ],
+      "links": [
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005080447-Shopify-data-reference#site-content",
+          "text": "Skip to main content"
+        },
+        {
+          "href": "https://www.klaviyo.com",
+          "text": "Home"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center"
+        },
+        {
+          "href": "https://www.klaviyo.com/enterprise",
+          "text": "Enterprise"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Partners"
+        },
+        {
+          "href": "https://www.klaviyo.com/careers",
+          "text": "Careers"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": "Log in"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": ""
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center Find step-by-step instructions and troubleshooting solutions in our knowledge base."
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000032731",
+          "text": "Integrations"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000312411",
+          "text": "Flows"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867867",
+          "text": "Audience"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867667",
+          "text": "Campaigns"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/360000190711",
+          "text": "Sign-up forms"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000873988",
+          "text": "Deliverability & compliance"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/29173800271259",
+          "text": "SMS"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/16638219724187",
+          "text": "Reviews"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/18073014919195",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/34141283979931",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/37659126754075",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/33948021740315",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/39746685522331",
+          "text": "WhatsApp"
+        },
+        {
+          "href": "https://academy.klaviyo.com",
+          "text": "Klaviyo Academy Expert training and education to help you succeed with Klaviyo, and beyond."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Quick+guide&resource=academy_courses",
+          "text": "Quick guides Learn marketing strategies and concepts in 15 minutes or less."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Course&resource=academy_courses",
+          "text": "Courses Master key marketing topics through structured lessons and exams."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/best-practices",
+          "text": "Best practices Discover top product and marketing strategies for your business."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/learning-paths",
+          "text": "Learning paths Complete curated learning journeys tailored to your marketing goals."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses",
+          "text": "Explore all resources"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Live+training&resource=academy_courses",
+          "text": "Live trainings Build confidence through hands-on interactive workshops and thought-provoking strategy sessions."
+        },
+        {
+          "href": "https://www.bigmarker.com/klaviyo-customer-education/Office-hours-Getting-started-with-Klaviyo",
+          "text": "Live office hours Join a strategic discussion where you can ask questions and get answers in real-time."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/private-live-training",
+          "text": "1:1 Live training Book a private training session with an expert to jumpstart your platform knowledge and confidence."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/credentials",
+          "text": "Klaviyo credentials Dig deeper into select topics and showcase your expertise with a final exam to earn a certificate and digital badge."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/certificates/klaviyo-practitioner-certificate",
+          "text": "Klaviyo practitioner certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/deliverability-certificate",
+          "text": "Deliverability certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/developer-certificate",
+          "text": "Klaviyo developer certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses&select=Certificate",
+          "text": "See all certificates"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Klaviyo Community Join our thriving community network to connect with brands like yours—online and in person."
+        },
+        {
+          "href": "https://community.klaviyo.com/topic/new",
+          "text": "Ask a question Post a question and get thoughtful answers from Klaviyo powerusers."
+        },
+        {
+          "href": "https://community.klaviyo.com/p/roadmap",
+          "text": "Product roadmap"
+        },
+        {
+          "href": "https://community.klaviyo.com/search/activity/recent",
+          "text": "Recent threads"
+        },
+        {
+          "href": "https://community.klaviyo.com/p/champions",
+          "text": "Meet the Champions"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups",
+          "text": "Browse all groups Your people are waiting. New ideas and connections are a click away."
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/developer-group-64",
+          "text": "Developer group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/entrepreneur-user-group-118",
+          "text": "Entrepreneur group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/woo-user-group-87",
+          "text": "WooCommerce group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/new-york-meetup-chapter-82",
+          "text": "New York City"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/los-angeles-meetup-chapter-83",
+          "text": "Los Angeles"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/austin-meetup-chapter-85",
+          "text": "Austin"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/san-diego-meetup-chapter-86",
+          "text": "San Diego"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/amsterdam-meetup-chapter-84",
+          "text": "Amsterdam"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Klaviyo Developers Access API documentation and developer guides to help you build with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/get_started",
+          "text": "Get started Access key resources and a step-by-step checklist for how to start developing with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/build_your_integration",
+          "text": "Grow your app's reach Learn how to join our ecosystem and get your app listed on our marketplace."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/developer-tools",
+          "text": "Developer tools Generate sample data, monitor your API usage, and access our Postman collections."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/reference/api_overview",
+          "text": "API reference Browse our full catalog of API docs."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/changelog_",
+          "text": "Changelog"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/api_versioning_and_deprecation_policy",
+          "text": "Versioning & deprecation policy"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/rate_limits_and_error_handling",
+          "text": "Rate limits & error handling"
+        },
+        {
+          "href": "https://youtube.com/playlist?list=PLHkNfHgtxcUanrkMnKPdkRzuWU7MGv_xM&si=pkG-KH7IT_TUHOGC",
+          "text": "API tutorials on YouTube Subscribe to our Klaviyo API Tutorials playlist for easy access to step-by-step developer walkthroughs."
+        },
+        {
+          "href": "https://www.klaviyo.com/contact-us",
+          "text": "Contact us"
+        },
+        {
+          "href": "https://www.klaviyo.com/sign-up",
+          "text": "Sign up"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": "Search"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005080447",
+          "text": "United States - EN"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/de-de/articles/115005080447",
+          "text": "Deutschland - DE"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-es/articles/115005080447",
+          "text": "España - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-mx/articles/115005080447",
+          "text": "México - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/fr-fr/articles/115005080447",
+          "text": "France - FR"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/it-it/articles/115005080447",
+          "text": "Italia - IT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/ko-kr/articles/115005080447",
+          "text": "한국 - KO"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/nl-nl/articles/115005080447",
+          "text": "Nederland - NL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pl-pl/articles/115005080447",
+          "text": "Polska - PL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pt-br/articles/115005080447",
+          "text": "Brasil - PT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/sv-se/articles/115005080447",
+          "text": "Sverige - SV"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/115001509748",
+          "text": "Shopify"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/49375363814555",
+          "text": "Getting started with Shopify"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005080447-Shopify-data-reference#01H8CEA9BVHGJAQYPMY8HAB44V",
+          "text": "You will learn"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005080447-Shopify-data-reference#h_01HSKSF3JC583G0ZW3MB2143P6",
+          "text": "About the initial data sync"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005080447-Shopify-data-reference#01H8CEA9BVQ8VE41XN5M69SN08",
+          "text": "How to view your data"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005080447-Shopify-data-reference#01H8CEA9BV1F40P6KMS72KWP2K",
+          "text": "Checkout Started"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005080447-Shopify-data-reference#01H8CEA9BVT4JA6QMF3Q3SDH40",
+          "text": "Placed Order"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005080447-Shopify-data-reference#h_01JADBRNBQ8JYRZ8GGY30EZ05K",
+          "text": "Ordered Product"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005080447-Shopify-data-reference#01H8CEA9BVAVP3S5XW6HQ6JQ3F",
+          "text": "Fulfilled Order"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005080447-Shopify-data-reference#01H8CEA9BVFVYZB7Z01W6WJRM0",
+          "text": "Fulfilled Partial Order"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005080447-Shopify-data-reference#01H8CEA9BVKNRRX1JQ0PCYE4ZE",
+          "text": "Cancelled Order"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005080447-Shopify-data-reference#01H8CEA9BV5EHENFETE0JB8YW0",
+          "text": "Refunded Order"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005080447-Shopify-data-reference#01H8CEA9BV9N92HJCXSH2K84DN",
+          "text": "Confirmed Shipment"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005080447-Shopify-data-reference#01H8CEA9BWCYQH0NXXGTCW2MFX",
+          "text": "Delivered Shipment"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005080447-Shopify-data-reference#01H8CEA9BW40BDG52YW0HHSA0V",
+          "text": "Marked Out for Delivery"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005080447-Shopify-data-reference#h_01J6F8BS3BAQWSHXG199774JR0",
+          "text": "Active on Site"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005080447-Shopify-data-reference#h_01J6F8CB8ERSJFDA87R4BNZSSK",
+          "text": "Viewed Product"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005080447-Shopify-data-reference#h_01J6F8CQA7NGJTR97G3C62M4SJ",
+          "text": "Viewed Collection"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005080447-Shopify-data-reference#h_01J6F8F7BVY6YKBQ9J6CP5CP2K",
+          "text": "Submitted Search"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005080447-Shopify-data-reference#h_01J6F8FWMEH250MPETV9FSDWF3",
+          "text": "Added to Cart"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005080447-Shopify-data-reference#section2",
+          "text": "Synced customer data"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005080447-Shopify-data-reference#section3",
+          "text": "Frequency of the Shopify sync"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005080447-Shopify-data-reference#h_01J56FHFAQK6CQW4JN6F7MNX0S",
+          "text": "How we calculate revenue"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005080447-Shopify-data-reference#h_01JEEXDZ0SS0Z21J2A192AQ0N7",
+          "text": "Segmenting based on value"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005080447-Shopify-data-reference#additional-resources",
+          "text": "Additional resources"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005080407-How-to-Integrate-with-Shopify",
+          "text": "getting started with Shopify"
+        },
+        {
+          "href": "https://help.shopify.com/en/manual/shipping/understanding-shipping/shipping-carriers",
+          "text": "certain shipping carriers"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4401771131419",
+          "text": "setting up flows based on Fulfilled Partial Order events"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005247808",
+          "text": "UTM parameters"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005080407",
+          "text": "Getting started with Shopify"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005253248",
+          "text": "How to differentiate Shopify POS and Shopify web data"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115001002272",
+          "text": "Learn how to contact support"
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": ""
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": "Visit Community"
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": ""
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": "Hire a partner"
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/about",
+          "text": "About Klaviyo"
+        },
+        {
+          "href": "https://www.klaviyo.com/newsroom",
+          "text": "Newsroom"
+        },
+        {
+          "href": "https://investors.klaviyo.com/overview/default.aspx",
+          "text": "Investor relations"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Agency and tech partners"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Developers"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/retail",
+          "text": "Retail and ecommerce"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/restaurants",
+          "text": "Restaurant marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/wellness",
+          "text": "Wellness"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform",
+          "text": "B2C CRM overview"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai",
+          "text": "Klaviyo AI (K:AI)"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/marketing-automation",
+          "text": "Klaviyo Marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-service",
+          "text": "Klaviyo Service"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/analytics",
+          "text": "Klaviyo Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-data-platform",
+          "text": "Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare",
+          "text": "Klaviyo vs. Klaviyo alternatives"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-mailchimp",
+          "text": "Klaviyo vs. Mailchimp"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-postscript",
+          "text": "Klaviyo vs. Postscript"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-attentive",
+          "text": "Klaviyo vs. Attentive"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-salesforce-marketing-cloud",
+          "text": "Klaviyo vs. Salesforce"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-listrak",
+          "text": "Klaviyo vs. Listrak"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/omnichannel",
+          "text": "Omnichannel marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/email-marketing",
+          "text": "Email marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing",
+          "text": "SMS marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing/rcs",
+          "text": "RCS for Business"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/mobile-app-marketing",
+          "text": "Mobile app marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/whatsapp",
+          "text": "WhatsApp marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/social",
+          "text": "Social marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources",
+          "text": "Marketing resources"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources/marketing-campaign-calendar",
+          "text": "Marketing campaign calendar"
+        },
+        {
+          "href": "https://www.klaviyo.com/glossary",
+          "text": "Marketing glossary"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/email-subject-line-generator",
+          "text": "Subject line generator"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/roi-calculator",
+          "text": "ROI calculator"
+        },
+        {
+          "href": "https://www.klaviyo.com/customers",
+          "text": "Case studies"
+        },
+        {
+          "href": "https://www.klaviyo.com/composer",
+          "text": "Composer Beta"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/marketing-agent",
+          "text": "Marketing Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/customer-agent",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/customer-experience-hub",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/helpdesk",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/marketing-analytics",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/advanced-cdp",
+          "text": "Advanced Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/web-forms",
+          "text": "Web forms"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/email-templates",
+          "text": "Email templates"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/portfolio",
+          "text": "Portfolio"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform-integrations",
+          "text": "Apps and Integrations"
+        },
+        {
+          "href": "https://www.klaviyo.com/features",
+          "text": "Features"
+        },
+        {
+          "href": "https://www.klaviyo.com/whats-new",
+          "text": "What's new"
+        },
+        {
+          "href": "https://www.klaviyo.com/events",
+          "text": "Events"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help Center"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us",
+          "text": "Academy"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Community"
+        },
+        {
+          "href": "https://www.facebook.com/Klaviyo/",
+          "text": "Facebook"
+        },
+        {
+          "href": "https://twitter.com/klaviyo/",
+          "text": "Twitter"
+        },
+        {
+          "href": "https://www.linkedin.com/company/klaviyo/",
+          "text": "LinkedIn"
+        },
+        {
+          "href": "https://www.instagram.com/klaviyo/",
+          "text": "Instagram"
+        },
+        {
+          "href": "https://www.klaviyo.com/sitemap",
+          "text": "Site Map"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal",
+          "text": "Terms and Privacy"
+        },
+        {
+          "href": "https://www.klaviyo.com/security",
+          "text": "Security"
+        },
+        {
+          "href": "https://www.klaviyo.com/trust",
+          "text": "Trust"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal/intellectual-property-notices",
+          "text": "Intellectual Property Notices"
+        }
+      ],
+      "headings": [
+        {
+          "level": 1,
+          "id": "",
+          "text": "Shopify data reference"
+        },
+        {
+          "level": 2,
+          "id": "01H8CEA9BVHGJAQYPMY8HAB44V",
+          "text": "You will learn"
+        },
+        {
+          "level": 2,
+          "id": "h_01HSKSF3JC583G0ZW3MB2143P6",
+          "text": "About the initial data sync"
+        },
+        {
+          "level": 2,
+          "id": "01H8CEA9BVQ8VE41XN5M69SN08",
+          "text": "How to view your data"
+        },
+        {
+          "level": 2,
+          "id": "01H8CEA9BV1F40P6KMS72KWP2K",
+          "text": "Checkout Started"
+        },
+        {
+          "level": 3,
+          "id": "01H8CEA9BVDS1KHEF42SK89ZVB",
+          "text": "Checkout Started vs Abandoned Checkout"
+        },
+        {
+          "level": 3,
+          "id": "01H8CEA9BVHKY18N9J9HGF6WAD",
+          "text": "Do I need to disable the Abandoned Checkout notification in Shopify or will Klaviyo do this automatically?"
+        },
+        {
+          "level": 2,
+          "id": "01H8CEA9BVT4JA6QMF3Q3SDH40",
+          "text": "Placed Order"
+        },
+        {
+          "level": 3,
+          "id": "h_01J56FFKH586BTR7T105CNB0R9",
+          "text": "Triggering off of Placed Order events"
+        },
+        {
+          "level": 2,
+          "id": "h_01JADBRNBQ8JYRZ8GGY30EZ05K",
+          "text": "Ordered Product"
+        },
+        {
+          "level": 2,
+          "id": "01H8CEA9BVAVP3S5XW6HQ6JQ3F",
+          "text": "Fulfilled Order"
+        },
+        {
+          "level": 2,
+          "id": "01H8CEA9BVFVYZB7Z01W6WJRM0",
+          "text": "Fulfilled Partial Order"
+        },
+        {
+          "level": 2,
+          "id": "01H8CEA9BVKNRRX1JQ0PCYE4ZE",
+          "text": "Cancelled Order"
+        },
+        {
+          "level": 2,
+          "id": "01H8CEA9BV5EHENFETE0JB8YW0",
+          "text": "Refunded Order"
+        },
+        {
+          "level": 2,
+          "id": "01H8CEA9BV9N92HJCXSH2K84DN",
+          "text": "Confirmed Shipment"
+        },
+        {
+          "level": 2,
+          "id": "01H8CEA9BWCYQH0NXXGTCW2MFX",
+          "text": "Delivered Shipment"
+        },
+        {
+          "level": 2,
+          "id": "01H8CEA9BW40BDG52YW0HHSA0V",
+          "text": "Marked Out for Delivery"
+        },
+        {
+          "level": 2,
+          "id": "h_01J6F8BS3BAQWSHXG199774JR0",
+          "text": "Active on Site"
+        },
+        {
+          "level": 2,
+          "id": "h_01J6F8CB8ERSJFDA87R4BNZSSK",
+          "text": "Viewed Product"
+        },
+        {
+          "level": 2,
+          "id": "h_01J6F8CQA7NGJTR97G3C62M4SJ",
+          "text": "Viewed Collection"
+        },
+        {
+          "level": 2,
+          "id": "h_01J6F8F7BVY6YKBQ9J6CP5CP2K",
+          "text": "Submitted Search"
+        },
+        {
+          "level": 2,
+          "id": "h_01J6F8FWMEH250MPETV9FSDWF3",
+          "text": "Added to Cart"
+        },
+        {
+          "level": 2,
+          "id": "section2",
+          "text": "Synced customer data"
+        },
+        {
+          "level": 2,
+          "id": "section3",
+          "text": "Frequency of the Shopify sync"
+        },
+        {
+          "level": 2,
+          "id": "h_01J56FHFAQK6CQW4JN6F7MNX0S",
+          "text": "How we calculate revenue"
+        },
+        {
+          "level": 2,
+          "id": "h_01JEEXDZ0SS0Z21J2A192AQ0N7",
+          "text": "Segmenting based on value"
+        },
+        {
+          "level": 2,
+          "id": "additional-resources",
+          "text": "Additional resources"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "Explore more from Klaviyo"
+        }
+      ]
+    }
+  },
+  "rendered_page": {
+    "status": "fetched",
+    "error": ""
+  }
+}

@@ -1,0 +1,170 @@
+<h2 id="h_01JNPKCA13231DM3DGK5JPFD14">You will learn</h2>
+<p>Learn how to add subscribers to a list in Klaviyo. Uploading contacts is key when getting started with Klaviyo, particularly if you’re migrating from another service provider or pulling in information from a third party. </p>
+<h2 id="h_01JNPKCA13NRJ9PQZVQCSH1SHG">Before you begin</h2>
+<p>Please note the following before starting the import process: </p>
+<ul>
+<li>Your list must abide by <a href="https://www.klaviyo.com/legal/terms-of-service" target="_blank" rel="noopener noreferrer">Klaviyo's Terms of Service</a>. </li>
+<li>Turn off any flows triggered by the list you’re uploading, unless you want the flow to send to all of the imported contacts. </li>
+<li>Uploads do not trigger double opt-in</li>
+<li>Your CSV file must be 50 MB or less. Larger uploads must be split into multiple CSV files. </li>
+</ul>
+<h2 id="h_01JNPKCA1338NEQ67DVYBPBRND">Upload a CSV to a list</h2>
+<h3 id="h_01JNPKCA13BP238689TB9JG8K1">Format your CSV</h3>
+<h4 id="h_01JNPKCA13X5D8TKWHS0N8645T">Place email addresses or phone number in the first column</h4>
+<p>In general, the first column should be your customers’ email addresses (labeled either “Email” or “Email Address) or phone numbers (labeled “Phone Number”). If you are importing SMS subscribers, we recommend reading through our guide on <a href="https://help.klaviyo.com/hc/en-us/articles/360035428731">uploading SMS consent</a>. </p>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/34691449774235" width="624" height="207"></p>
+<div class="accordion accordion--default">
+<div class="accordion__item">
+<div class="accordion__item-title">
+<h4 id="h_01JNPKCA13J1AQ2CE0NH6KTKBE">Optional: indicate consent status</h4>
+</div>
+<div class="accordion__item-content">
+<p>If your list contains a mix of subscribed, suppressed, and unsubscribed contacts, include a column with the type of consent: </p>
+<ul>
+<li>Email Marketing Consent</li>
+<li>SMS Marketing Consent</li>
+<li>SMS Transactional Consent</li>
+</ul>
+<p>Alternatively, if you have a consent timestamp column (e.g., <em>Email Marketing Consent Timestamp</em>), you can indicate whether someone is:</p>
+<ul>
+<li>
+<strong>Subscribed</strong><br>Person is opted in to receive messages. </li>
+<li>
+<strong>Unsubscribed </strong><strong><br></strong>Person used to be subscribed but has since opted out. You cannot send messages if they are unsubscribed for that channel (e.g., you cannot send an SMS to someone who’s unsubscribed from text messaging, but you may be able to send an email, and vice versa). </li>
+<li>
+<strong>Never subscribed  </strong><strong><br></strong>Person never consented to receiving messages. This is also the default value if a cell in a consent column is blank. You cannot send mobile (SMS, push, etc.) messages to people marked as never subscribed; however, you can send emails and these are considered active profiles. </li>
+</ul>
+<p>If you don’t have a consent column, you’ll be asked what type of consent to add and your choices will be applied to all contacts within the CSV (e.g., they will all be marked as subscribed).   </p>
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/39882260008475">
+<div class="bs-callout bs-callout-default">
+<p>If you are importing a list to <a href="https://help.klaviyo.com/hc/en-us/articles/115005078267">resubscribe profiles</a>, do not include backdated consent timestamps in your CSV as they may be skipped during import. </p>
+</div>
+</div>
+</div>
+<div class="accordion__item">
+<div class="accordion__item-title">
+<h4 id="h_01JNPKCA13Q148TKSTCM8S2BPV">Optional: add other properties</h4>
+</div>
+<div class="accordion__item-content">
+<p>Your CSV can include additional columns if you want to upload more properties for that profile. These properties could be anything, from their name, birthday, date they subscribed, last click, etc.</p>
+<ul>
+<li>If using a Klaviyo property, use the Klaviyo property name as the header for the column. 
+<ul>
+<li>This allows that column to be easily mapped to the right property with the correct data type. </li>
+</ul>
+</li>
+<li>Dates must be in an <a href="https://developers.klaviyo.com/en/docs/acceptable_date_and_timestamp_formats_for_profile_and_event_properties">accepted format</a> (e.g., YYYY-mm-dd HH:MM:SS). </li>
+</ul>
+<p>Please also note that when adding properties: </p>
+<ul>
+<li>Any new value/column that you include in a CSV upload that does not already exist on a contact's profile will:
+<ul>
+<li>Create a new custom property</li>
+<li>Not affect existing custom properties</li>
+</ul>
+</li>
+<li>If the value already exists for a profile, the value from the CSV will overwrite the prior value.</li>
+<li>If you're interested in uploading a list of values for a single property (such as “Sizes”), you will need to use JSON syntax. Create an array of your values that looks like this: ["value1", "value2", "value 3"].</li>
+</ul>
+</div>
+</div>
+</div>
+<h3 id="h_01JNPKCA13NRD4QFNG6AVE1VZP">Import contacts with consent</h3>
+<div class="bs-callout bs-callout-default">
+<p>Check if you have any flows triggered by the list you want to select. If flows are triggered by this list, turn the flow to manual mode before continuing. </p>
+</div>
+<ol>
+<li>Navigate to <strong>Audience &gt; Lists &amp; segments</strong>.</li>
+<li>Select the list you want to add your contacts to (e.g., Newsletter).
+<ul>
+<li>If you want to create a new list, instead select <strong>Create New &gt; Create list</strong> and name the new list.<br><img src="https://klaviyo.zendesk.com/hc/article_attachments/34691431173915" width="624" height="320">
+</li>
+</ul>
+</li>
+<li>Open the <strong>Manage List </strong>dropdown in the upper right. </li>
+<li>Choose <strong>Import contacts</strong> from the dropdown.
+<ul>
+<li>If the option to import contacts does not appear, that means you either do not have the correct <a href="https://help.klaviyo.com/hc/en-us/articles/115005231648">user permissions</a> to upload contacts, or this is a segment, not a list.<br><img src="https://klaviyo.zendesk.com/hc/article_attachments/34691431179035">
+</li>
+</ul>
+</li>
+<li>Click <strong>Upload</strong> and select your CSV file of email subscribers.</li>
+<li>Click <strong>Next</strong>. </li>
+<li>Map each column from your CSV to an appropriate property in Klaviyo, then click <strong>Next</strong>.</li>
+<li>If your CSV includes a consent type (e.g., <em>Email Marketing Consent</em>) or timestamp (e.g., <em>Email Marketing Consent Timestamp</em>) column, Klaviyo knows to apply consent, so you can jump to step 10. </li>
+<li>If you have neither a consent timestamp or column indicating consent, you’ll see the following: 
+<ul>
+<li>Under <em>Did these contacts subscribe to messaging</em>, select <strong>Yes</strong> to add consent.<br><img src="https://klaviyo.zendesk.com/hc/article_attachments/34691449781659" width="624" height="301">
+</li>
+<li>Check the box for the types of consent to apply (e.g., <strong>Email</strong>).</li>
+</ul>
+</li>
+<li>When ready to proceed, click <strong>Import</strong>. </li>
+</ol>
+<p>The import process can take up to a couple of hours to complete. Please wait a few additional hours before you turn your list-triggered flows back on (if applicable). </p>
+<h2 id="h_01JNPKCA13QNEM41XQRY1PV0KS">Upload via copy/paste</h2>
+<p>As an alternative to uploading a CSV file, you can copy and paste a list of subscribers to upload them. </p>
+<ol>
+<li>Navigate to <strong>Audience &gt; Lists &amp; segments</strong>.</li>
+<li>Select the list that you want to add subscribers to.</li>
+<li>Click the <strong>Manage list</strong> dropdown in the upper right-hand corner. </li>
+<li>Click <strong>Import contacts</strong>. 
+<ol>
+<li>If the option to import contacts does not appear, that means you either do not have the correct <a href="https://help.klaviyo.com/hc/en-us/articles/115005231648">user permissions</a> to upload contacts, or this is a segment, not a list. </li>
+</ol>
+</li>
+<li>Click <strong>Switch to copy and paste CSV </strong>beneath the bottom-left corner of the upload tool.<br><img src="https://klaviyo.zendesk.com/hc/article_attachments/34691449791643" width="624" height="361">
+</li>
+<li>Paste contact information in this format:<br>Email,First Name,Last Name<br>someone1@example.com,George,Washington<br><a href="mailto:someone2@example.com,Abraham,Lincoln">someone2@example.com,Abraham,Lincoln</a><br>
+<div class="bs-callout bs-callout-default">
+<p>If you are adding properties with <a href="https://help.klaviyo.com/hc/en-us/articles/115005237648">list values</a> as part of your copy/paste import, use the following structure: <br>Email,Property <br>someone1@example.com,"[""a"",""b""]"</p>
+</div>
+</li>
+<li>Click <strong>Next</strong>.</li>
+<li>Map each column from your upload to an appropriate property in Klaviyo.</li>
+<li>To add consent (i.e., if you have explicit email consent for every contact): 
+<ol>
+<li>Under <em>Did these contacts subscribe to messaging</em>, select <strong>Yes</strong> to add consent.<br><img src="https://klaviyo.zendesk.com/hc/article_attachments/34691449781659" width="624" height="301">
+</li>
+<li>Choose the type of consent (e.g., <strong>Email</strong>). </li>
+</ol>
+</li>
+<li>Click <strong>Import</strong>.</li>
+</ol>
+<p>Add subscribers via Quick Add</p>
+<h2 id="h_01JRDEBT676AJMS3M0H6Z5QCZ8">Add subscribers via Quick Add (email only)</h2>
+<p>If you would like to quickly add a handful of individuals to your list, you can use the Quick Add option instead.</p>
+<ol>
+<li>Navigate to the list you'd like to add the profile to.</li>
+<li>Click <strong>Quick Add</strong>.
+<ol>
+<li>If the Quick Add button does not appear, that means you either do not have the correct <a href="https://help.klaviyo.com/hc/en-us/articles/115005231648">user permissions</a> to upload contacts, or this is a segment, not a list.<br><img src="https://klaviyo.zendesk.com/hc/article_attachments/34691431195291" width="566" height="176">
+</li>
+</ol>
+</li>
+<li>On the following page, fill in the <strong>Email</strong> field.</li>
+<li>If the person has explicitly opted in to receive emails from you, check the box for <em>Profile has granted explicit consent to receive email marketing</em>. <em><br></em><img src="https://klaviyo.zendesk.com/hc/article_attachments/34691449803675" width="624" height="1017">
+</li>
+<li>Optional: add other information about the contact, such as their name or title. </li>
+<li>Click <strong>Add subscriber</strong>.</li>
+</ol>
+<p>Once the CSV finishes importing, Klaviyo will either create a new profile or associate the data to an existing profile.</p>
+<p>With email for instance, Klaviyo looks for any existing profiles with that same email. Then, Klaviyo updates the consent status and any properties you chose to import to that contact. </p>
+<h2 id="h_01JNPKCA13TJM61VZ7S0N45YP6">Bulk remove consent </h2>
+<p>If you want to remove consent for profiles, you can use essentially the same import process. </p>
+<p>The only differences are that you must:</p>
+<ul>
+<li>Have a column for the type of consent (e.g., <em>Email Marketing Consent</em>). </li>
+<li>Add “Unsubscribed” for each profile within that column. 
+<ul>
+<li>Note that you cannot reset profiles in bulk to “Never Subscribed.” </li>
+</ul>
+</li>
+</ul>
+<h2 id="h_01HDRQY3QK4Q6XXX7DNTS4K4YW">Additional resources</h2>
+<ul>
+<li><a href="https://help.klaviyo.com/hc/en-us/articles/115005078807" target="_blank" rel="noopener">Troubleshooting list imports</a></li>
+<li><a href="https://help.klaviyo.com/hc/en-us/articles/360035428731">Upload SMS consent</a></li>
+<li><a href="https://help.klaviyo.com/hc/en-us/articles/115005078967" target="_blank" rel="noopener">Create and add subscribers to a new list</a></li>
+<li><a href="https://help.klaviyo.com/hc/en-us/articles/115005061447" target="_blank" rel="noopener">The difference between segments and lists</a></li>
+</ul>

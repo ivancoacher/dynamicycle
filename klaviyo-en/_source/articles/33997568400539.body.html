@@ -1,0 +1,89 @@
+<p>Learn how enable multi-brand support for Klaviyo's Gorgias integration, if you integrated Klaviyo and Gorgias before Klaviyo introduced support for multiple Gorgias brands. </p>
+<p>Tickets, SMS messages, WhatsApp messages and reviews can now be synced on a per-brand basis. If you manage multiple brands within one Gorgias account, syncing one Gorgias brand per Klaviyo account makes it easy to use your ticket data and organize your SMS and WhatsApp conversations. </p>
+<p>Enabling multi-brand support requires 4 steps:</p>
+<ol>
+<li>(Optional) Remove existing “incorrect” Gorgias profiles from Klaviyo</li>
+<li>Create rules in Gorgias to tag tickets by brand</li>
+<li>(Optional) Create views in Gorgias based on the brand tag </li>
+<li>Update your Gorgias integration settings</li>
+</ol>
+<p>Looking to integrate for the first time? Head to <a href="https://help.klaviyo.com/hc/en-us/articles/4408023789083">Getting started with Gorgias</a>.</p>
+<h2 id="h_01JX0K6WW7EBQ1Z295WYXHJHY5">Before you begin</h2>
+<p>Please note that when you update your Gorgias integration to enable multi-brand support, historical data previously synced through the integration will remain in your account, unless you choose to manually remove Klaviyo profiles. </p>
+<h2 id="h_01JX0K6WW82W17FT0E4BKQKN04">(Optional) Remove Gorgias profiles from Klaviyo</h2>
+<p>If you want to now associate your Klaviyo account with a specific Gorgias brand, you may want to remove Gorgias profiles previously synced through the integration. </p>
+<p>Since there is no brand associated with these older profiles, profiles from specific brands cannot be precisely deleted. Instead, we recommend deleting profiles that synced through your Gorgias integration but did not have any interactions with the ecommerce site associated with your Klaviyo account. These profiles are likely to have been synced from the “wrong” brand(s). </p>
+<p>To do this, we recommend creating a segment of these profiles and then deleting it. This should be done before you update your Gorgias integration.</p>
+<p>To create the segment:</p>
+<ol>
+<ol>
+<li>What someone has done or not done &gt; Opened Ticket (Gorgias) &gt; at least once &gt; over all time AND</li>
+<li>What someone has done or or not done &gt; Viewed Product &gt; zero times &gt; over all time AND</li>
+<li>What someone has done or or not done &gt; Checkout Started &gt; zero times &gt; over all time AND</li>
+<li>What someone has done or or not done &gt; Placed Order &gt; zero times &gt; over all time AND</li>
+<li>What someone has done or or not done &gt; Subscribed to List (Klaviyo) &gt; zero times &gt; over all time</li>
+</ol>
+<li>In Klaviyo, navigate to <strong>Audience &gt; Lists &amp; segments</strong>. </li>
+<li>Select <strong>Create New &gt; Create segment</strong>.</li>
+<li>Name your segment and select any tags. </li>
+<li>Add the following segment conditions, using events synced from your ecommerce platform:</li>
+<li>You can also add conditions for any other applicable events in your account, specifying that a profile has not tracked them.</li>
+<li>Click <strong>Create segment</strong>.</li>
+<li>Then, delete the segment you created above by following our <a href="https://help.klaviyo.com/hc/en-us/articles/24312135764251#h_01HT5F82SYT68E2X2Z68DC78RR">bulk deleting instructions</a>. </li>
+</ol>
+<h2 id="h_01JX0K6WW8T7Y96VQACADDYX2S">Create rules in Gorgias to tag tickets by brand</h2>
+<p>In Gorgias, for each brand, you’ll need to create a rule that looks at the email the user is writing in to, and then tags the ticket with the appropriate brand:</p>
+<ol>
+<ol>
+<li>WHEN &gt; TICKET CREATED &gt; THEN</li>
+<li>IF &gt; message integration &gt; IS &gt; [Brand-specific email address]</li>
+<li>THEN &gt; ADD TAGS &gt; [Brand-specific tag]<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/37720714482587" alt="">
+</li>
+</ol>
+<li>In your Gorgias settings, select <strong>Rules </strong>(found under <em>Productivity</em>). </li>
+<li>Add a new rule.</li>
+<li>Name your rule something descriptive.</li>
+<li>Add the following rule conditions:</li>
+<li>Make sure <em>Enable rule</em> is set to <strong>On</strong>.</li>
+<li>Click <strong>Create Rule</strong>.</li>
+</ol>
+<p>Repeat this process for each brand that you want to integrate with a separate Klaviyo account. </p>
+<h2 id="h_01JX0K94JPG8BSQSJNCQMMMBK3">(Optional) Create views in Gorgias based on the brand tag</h2>
+<p>After setting up rules to auto-tag tickets, we recommend creating a view in Gorgias for each brand, containing all of the tickets tagged with the brand name:</p>
+<ol>
+<li>In Gorgias, create a new view.</li>
+<li>Add the following filter: Tags &gt; Contains all of &gt; [Brand tag]<br>
+</li>
+</ol>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/37720796406427" alt=""></p>
+<p>Repeat this process for each brand that you want to integrate with a separate Klaviyo account. </p>
+<h2 id="h_01JX0K6WW8J56ZVWYPV42X3EZS">Update your Gorgias integration settings</h2>
+<p>To update your Gorgias integration settings and enable multi-brand support in a given Klaviyo account:</p>
+<ol>
+<li>In Klaviyo, select the <strong>Integrations</strong> tab.</li>
+<li>Select <em>Gorgias</em> from the list of enabled integrations.</li>
+<li>We recommend connecting one Gorgias brand per Klaviyo account. Under <em>Tickets</em>, select the tag corresponding to the Gorgias brand that you want to use with this Klaviyo account and sync new tickets to Klaviyo for.<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/37720914786459" alt="" width="595" height="152">
+</li>
+<li>If you’re using SMS conversations: Under <em>Conversations</em>, we recommend adding a tag corresponding to the Gorgias brand you want to use with this Klaviyo account.<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/37720900025883" alt="" width="599" height="174">
+</li>
+<li>Check the box to <em>Sync WhatsApp conversations</em> to use WhatsApp integration functionality.
+<ol>
+<li>Support agents can also use <a href="https://help.klaviyo.com/hc/en-us/articles/40116778911259">a template to extend the WhatsApp conversation</a>, ensuring they can continue engaging with the recipient beyond the 24-hour service window.<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/41259966180635" alt="Conversations box showing the option to sync WhatsApp conversations" width="1598" height="366">
+</li>
+</ol>
+</li>
+<li>If you’re using reviews: Under <em>Reviews</em>, we recommend adding a tag corresponding to the Gorgias brand you want to use with this Klaviyo account.<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/37720900027291" alt="" width="601" height="202">
+</li>
+<li>When you’re done, click <strong>Update settings</strong>.</li>
+</ol>
+<p>You’ll need to integrate with Gorgias and configure the above brand-related settings for each Klaviyo account that you want to connect with a Gorgias brand. </p>

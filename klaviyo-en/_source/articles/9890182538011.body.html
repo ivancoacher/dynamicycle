@@ -1,0 +1,85 @@
+<h2 id="h_01HY0V0W8ZAAF84YQBXC9E6QAM">You will learn </h2>
+<p>Learn about list bombing attacks and how you can remove fake email addresses to protect your lists. List bombing attacks fill your account with fake profiles, and can harm your sender reputation, data, and more. </p>
+<h2 id="h_01HY0V0W8ZF42RVA7WM8C7XR83">What is list bombing?</h2>
+<p>List bombing is a malicious attack where the attacker exploits a signup form or checkout page by making a large number of fake submissions, filling the associated list with emails and phone numbers that have not consented or are invalid. While an increase in email subscribers may initially seem like a good thing for your brand, this is only true if all the new leads are legitimate.</p>
+<p>If you send to fake profiles created through a list bombing attack, it can negatively impact your deliverability in the following ways: </p>
+<ul>
+<li>Higher hard bounce rates</li>
+<li>Higher spam complaints</li>
+<li>Lower open rates</li>
+<li>Negative impact to sender reputation</li>
+<li>Potential spam trap hits </li>
+<li>Potential blocklisting resulting in blocked email traffic<br>
+<p>Not all profiles submitted as part of a list bombing attack are fake email addresses. Bots can fill out forms with real email addresses, and profiles of people who have no knowledge of this are being added to marketing lists. When a company sends emails to mass amounts of profiles submitted by bots, many of them mark the email as spam. </p>
+<p>These are a few of the most commonly targeted forms that bots target. Keep in mind this is not an all inclusive list; bots can submit profiles anywhere there is an unprotected form:</p>
+</li>
+<li>
+<strong>Ecommerce checkouts</strong><br>
+Bots have been observed, especially for customers using an ecommerce platform (such as Shopify). The bots can start a checkout and abandon it using a real person’s email, and the event will sync to Klaviyo.</li>
+<li>
+<strong>Home page footer form</strong><br>
+Footer forms on a home page that collects email addresses and no other information has been a specific target of bots to sign up emails.</li>
+<li>
+<strong>Coupon codes (“$$OFF”, or “%OFF”) on the home page</strong><br>
+Bots target these forms specifically to get coupon codes which they later put on coupon / promo code websites to drive website visits to those pages.</li>
+<li>
+<strong>Forms without captcha</strong><br>
+Forms without captchas are susceptible to bots filling them out.</li>
+<li>
+<strong>API</strong><br>
+Bots submitted by 3rd party forms and synced to Klaviyo through our public API.</li>
+</ul>
+<h2 id="h_01HY0V0W8ZN0BJ28SGYHRG8AEK">How to identify a list bombing attack </h2>
+<p>The first indicator of list bombing is if you've experienced a sudden spike in new subscribers. This is particularly true if you haven't planned any list growth campaigns, so there is nothing to tie this spike to. If this happens, examine the recent email subscribers, looking out for the following trends: </p>
+<ul>
+<li>The emails all came in through a single point of entry (e.g., same signup form)</li>
+<li>There was a specific timeframe in which the influx of emails was captured </li>
+<li>All the emails are from the same domain (e.g., all are from @phish.com)</li>
+<li>The contacts have unconventional first and last names</li>
+<li>All submissions are from the same IP source</li>
+</ul>
+<h2 id="h_01HY0V0W906F8W817M326HAD1Y">How do you protect against list bombing?</h2>
+<h3 id="h_01J5R5S81V8PF4DNG9EBC8YSFR">CAPTCHA in forms</h3>
+<p>CAPTCHA is a tool that requires form submitters to complete a short task to verify that they are a real person and not a bot. When Klaviyo detects suspicious behavior or historical bot activity from a user’s IP address, they will be prompted to solve a CAPTCHA.</p>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/28720900531227" alt="Example reCAPTCHA" width="530" height="324"></p>
+<p>This functionality is automatically enabled for forms that collect email or SMS leads, or utilize a coupon code. Additionally, only users that have had suspicious activity will be prompted to complete the CAPTCHA. </p>
+<div class="bs-callout bs-callout-default">
+<p>The user must successfully complete the CAPTCHA in order to see their coupon code and submit the form. </p>
+</div>
+<h3 id="h_01HY0V0W9094GYBGB98F3V4DA7">Double opt-in </h3>
+<p><a href="https://help.klaviyo.com/hc/en-us/articles/115005251108">Double opt-in</a> is a process through which a new subscriber must confirm their subscription before being subscribed to a given list. It is the same for both email and SMS subscribers, and is on by default in Klaviyo.</p>
+<p>When double opt-in is enabled, new subscribers will receive a confirmation message immediately after signing up. This message will prompt them to confirm their subscription. Only subscribers who confirm their subscription will be successfully added to the list, making it harder for malicious actors to list bomb. </p>
+<h3 id="h_01HY0V0W905ATHPFN2JKG9V0F1">List bombing IP management</h3>
+<p>Klaviyo has a system in place to prevent list bombing called the List Bombing IP Management. The purpose of this system is to flag or block specific IP addresses that are making a large number of form submissions or <a href="https://developers.klaviyo.com/en/reference/subscribe_profiles">subscribe API</a> calls within a short period of time. If you are being list bombed, this system would block IP addresses with a large number of initial subscribe requests to protect your account from further profile subscriptions. </p>
+<p>Note that the IP blocking only occurs after the attack has already started to protect your account from further harm. This method of list bombing mitigation cannot prevent an attack entirely.</p>
+<h3 id="h_01HY0V0W9079CSKKK8WEAVD3QC">Honeypot form field</h3>
+<div class="bs-callout bs-callout-default">
+<p>This method requires a developer and access to the form’s HTML. If your forms are built through Klaviyo’s form editor, consider creating a custom form.</p>
+</div>
+<p>Adding a “honeypot” field to a website’s form is a method you can implement to easily identify if you are being list bombed. If you are using a custom, non-Klaviyo form, you can place a hidden field that is invisible on the front-end. If the form is submitted with a value set for the honeypot field, you can attribute the submission to a bot rather than a human user. </p>
+<p>Make sure that your honeypot <a href="https://help.klaviyo.com/hc/en-us/articles/115005080127">adds a custom property</a> to Klaviyo that you do not plan on using anywhere else. This allows you to use the honeypot field’s custom property to identify profiles submitted by a bot with segmentation in Klaviyo: </p>
+<p class="wysiwyg-text-align-center"><img src="https://klaviyo.zendesk.com/hc/article_attachments/28720895209243" alt="Example honeypot segment"></p>
+<p></p>
+<p>For instructions on how to create a honeypot field, we recommend reading the following resource:</p>
+<ul>
+<li><a href="https://dev.to/felipperegazio/how-to-create-a-simple-honeypot-to-protect-your-web-forms-from-spammers--25n8">How to create a simple Honeypot protect your Forms against Spammers</a></li>
+</ul>
+<h2 id="h_01HY0V0W906AVXVM2JY9609XEC">What to do if you experience list bombing </h2>
+<p>If you experience list bombing, the next thing you should do is clean out the profiles that were created. Based on the trends that you notice with the new subscriptions, take the data points and create a segment to help pull in all the emails that were submitted during the attack. </p>
+<p>A segment you can use to identify profiles that are likely submitted as part of a list bombing attempt is:</p>
+<ul>
+<li>If someone can or cannot receive marketing &gt; Person <em>can receive email marketing</em><br>
+AND</li>
+<li>What someone has done &gt; Person has <em>Received Email</em> is at least 3 in the last 180 days<br>
+AND</li>
+<li>What someone has done &gt; Person has <em>Opened Email</em> 0 times over all time<br>
+AND</li>
+<li>What someone has done &gt; Person has <em>Clicked Email</em> 0 times over all time<br>
+AND</li>
+<li>What someone has done &gt; Person has <em>Placed Order</em> 0 times over all time</li>
+</ul>
+<p>Once the segment is created, <a href="https://help.klaviyo.com/hc/en-us/articles/115005073867">suppress the profiles</a> so they cannot receive any sends from you. </p>
+<div class="bs-callout bs-callout-default">
+<p>If you have questions on building a segment that captures profiles created through a list bombing attack, reach out to our <a href="https://help.klaviyo.com/hc/en-us/articles/115001002272-How-to-Contact-Support">Support Team</a>.</p>
+</div>
+<p>It is also best practice to re-enable double opt-in on your lists if you have fallen victim to a list bombing attack. Once a brand has been targeted, it is more likely that they'll be targeted again in the future. By securing your forms through double opt-in, you can prevent future attacks.</p>

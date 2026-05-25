@@ -1,0 +1,784 @@
+{
+  "captured_at": "2026-05-23T16:18:45Z",
+  "article": {
+    "id": 14837232353691,
+    "url": "https://klaviyo.zendesk.com/api/v2/help_center/en-us/articles/14837232353691.json",
+    "html_url": "https://klaviyo.zendesk.com/hc/en-us/articles/14837232353691-Understanding-how-segment-conditions-evaluate-null-or-empty-values",
+    "author_id": 390819509472,
+    "comments_disabled": true,
+    "draft": false,
+    "promoted": false,
+    "position": 8,
+    "vote_sum": 0,
+    "vote_count": 0,
+    "section_id": 49375416013339,
+    "created_at": "2023-04-24T14:52:40Z",
+    "updated_at": "2026-04-21T13:54:28Z",
+    "name": "Understanding how segment conditions evaluate null or empty values",
+    "title": "Understanding how segment conditions evaluate null or empty values",
+    "source_locale": "en-us",
+    "locale": "en-us",
+    "outdated": false,
+    "outdated_locales": [],
+    "edited_at": "2026-03-27T15:06:48Z",
+    "user_segment_id": null,
+    "permission_group_id": 146372,
+    "content_tag_ids": [],
+    "label_names": [],
+    "body": "<h2 id=\"h_01HCWR6SBY6HRM5BQMSQEDK791\">You will learn</h2>\n<p>Learn about segmentation and properties that aren’t set or have no values in Klaviyo. These changes were implemented in April 2023.</p>\n<div class=\"bs-callout bs-callout-default\">\n<p>In addition to the changes outlined below, all segmentation with dates now uses the UTC timezone. Learn about the changes to <a href=\"https://help.klaviyo.com/hc/en-us/articles/4403222359451\">segmenting with dates</a>. </p>\n</div>\n<h2 id=\"h_01HCWR6SBYRFKDKP218DX50YAB\">Key terms</h2>\n<ul>\n<li>\n<strong>Property not set\n</strong>A property that doesn’t exist on a profile</li>\n<li>\n<strong>Property with no value</strong>\nA property that is set on a profile, but doesn’t have an associated value</li>\n</ul>\n<h2 id=\"h_01HCWR6SBZKE77DJ2BWMZST4R4\">Properties that aren’t set and booleans</h2>\n<p>In boolean conditions (i.e., true/false conditions), properties that don’t exist are no longer considered in the evaluation. </p>\n<ul>\n<li>\n<strong>Old system\n</strong>Profiles where property does not exist used to be evaluated as False.</li>\n<li>\n<strong>New system\n</strong>Profiles where property does not exist are now excluded from evaluation.</li>\n</ul>\n<p>Consider the condition <strong>Properties about someone &gt; VIP &gt; is False</strong>. A Klaviyo account contains the following profiles: </p>\n<table>\n<tbody>\n<tr>\n<td><strong>Profiles</strong></td>\n<td><strong>Under the old system: </strong></td>\n<td><strong>Under the new system: </strong></td>\n</tr>\n<tr>\n<td>100 profiles where <strong>VIP = true</strong>\n</td>\n<td>🚫 Excluded from segment</td>\n<td>🚫 Excluded from segment</td>\n</tr>\n<tr>\n<td>50 profiles where <strong>VIP = false</strong>\n</td>\n<td>✅ Included in segment</td>\n<td>✅ Included in segment</td>\n</tr>\n<tr>\n<td>25 profiles where <strong>VIP property</strong> is not set </td>\n<td>✅ Included in segment</td>\n<td>🚫 Excluded from segment</td>\n</tr>\n</tbody>\n</table>\n<p>Before the change, this segment contained <strong>75 profiles</strong>. After the change, it includes <strong>50 profiles</strong>. </p>\n<h3 id=\"h_01HCWR6SBZTJFPV9Q9BK8KMHPS\">Why this is better</h3>\n<p>The new system more accurately evaluates only True or False conditions, and you have the option to explicitly include profiles where that property is not set, if desired, by adding the condition <strong>OR Properties about someone &gt; [profile property] &gt; is not set</strong>. </p>\n<h2 id=\"h_01HCWR6SBZT75A9TASE1CFMY3C\">Properties that aren’t set and text conditions </h2>\n<p>Historically, when evaluating profile properties that don’t exist for text conditions, these values have been treated as if they contain the text “None.” Now, these values are excluded from consideration in text conditions. </p>\n<ul>\n<li>\n<strong>Old system\n</strong>Text conditions that searched for strings like “N,” “No,” and “None” included properties that aren’t set.</li>\n<li>\n<strong>New system\n</strong>Properties that don’t exist on the profile are now excluded from evaluation.</li>\n</ul>\n<p>Consider the condition <strong>Properties about someone &gt; Do you eat tofu &gt; contains “No”</strong>. A Klaviyo account contains the following profiles: </p>\n<table>\n<tbody>\n<tr>\n<td><strong>Profiles</strong></td>\n<td><strong>Under the old system: </strong></td>\n<td><strong>Under the new system: </strong></td>\n</tr>\n<tr>\n<td>50 profiles where <strong>Do you eat tofu = Yes</strong>\n</td>\n<td>🚫 Excluded from segment</td>\n<td>🚫 Excluded from segment</td>\n</tr>\n<tr>\n<td>25 profiles where <strong>Do you eat tofu = No</strong>\n</td>\n<td>✅ Included in segment</td>\n<td>✅ Included in segment</td>\n</tr>\n<tr>\n<td>15 profiles where the property <strong>Do you eat tofu</strong> is not set</td>\n<td>✅ Included in segment</td>\n<td>🚫 Excluded from segment</td>\n</tr>\n</tbody>\n</table>\n<p>Before the change, this segment contained <strong>40 profiles</strong>. It would count the 25 who answered “No,” and the 15 profiles where that value was not set, because it was treating their empty values as “None.” After the change, it includes <strong>25 profiles</strong>. </p>\n<h3 id=\"h_01HCWR6SBZNXDS85WXK8V4H523\">Why this is better</h3>\n<p>The new system does not erroneously set the string “None” in profile properties that aren’t set. This means that any searches that include “N,” “No,” “Non,” and “None” will no longer include these properties. </p>\n<h2 id=\"h_01HCWR6SBZJM30R88V9EFM3G18\">Properties that aren’t set and negative conditions</h2>\n<p>When a segment uses negative conditions (i.e., a profile property “is not” a specific value, or “does not contain” a specific string), the segment will no longer include properties that aren’t set.</p>\n<ul>\n<li>\n<strong>Old system\n</strong>Properties that aren’t set used to be included in segments with negative conditions. </li>\n<li>\n<strong>New system\n</strong>Properties that aren’t set are now excluded from evaluation.</li>\n</ul>\n<p>Consider the condition <strong>Properties about someone &gt; Favorite color &gt; doesn’t equal &gt; red</strong>. A Klaviyo account contains the following profiles: </p>\n<table>\n<tbody>\n<tr>\n<td><strong>Profiles</strong></td>\n<td><strong>Under the old system: </strong></td>\n<td><strong>Under the new system: </strong></td>\n</tr>\n<tr>\n<td>60 profiles where <strong>Favorite color = red</strong>\n</td>\n<td>🚫 Excluded from segment</td>\n<td>🚫 Excluded from segment</td>\n</tr>\n<tr>\n<td>45 profiles where <strong>Favorite color = blue</strong>\n</td>\n<td>✅ Included in segment</td>\n<td>✅ Included in segment</td>\n</tr>\n<tr>\n<td>100 profiles where the property <strong>Favorite color</strong> is not set</td>\n<td>✅ Included in segment</td>\n<td>🚫 Excluded from segment</td>\n</tr>\n</tbody>\n</table>\n<p>Before the change, this segment contained <strong>145 profiles</strong>. After the change, it includes <strong>45 profiles</strong>. </p>\n<h3 id=\"h_01HCWR6SBZ8Z1MTB2QQE2SQXW5\">Why this is better</h3>\n<p>The previous system was ambiguous, and it was unclear why certain profiles were being included when they did not have a profile property. There was also no straightforward way to exclude those profiles if desired. </p>\n<p>The new system makes it explicit that only profiles where the property is set are included. If you want to include profiles which do not have the profile property set, you can do so by adding <strong>OR Properties about someone &gt; [profile property] &gt; is not set</strong>.</p>\n<h2 id=\"h_01HCWR6SBZF1NZQT8E3SJZTET1\">Countries that aren't set and the \"Is or is not within the EU (GDPR)\" criteria</h2>\n<p>When a segment criteria contains the definition “If someone is or is not within the EU (GDPR)” “Location is not within European Union/United States,” the segment will no longer include profiles where the Country property is not set.</p>\n<ul>\n<li>\n<strong>Old system\n</strong>Profiles where property does not exist used to be included in this segment.</li>\n<li>\n<strong>New system</strong>\nProfiles where property does not exist are now excluded from evaluation.</li>\n</ul>\n<p>Consider the condition <strong>If someone is or is not within the EU (GDPR) &gt; Location is not &gt; within &gt; European Union</strong>. A Klaviyo account contains the following profiles:</p>\n<table>\n<tbody>\n<tr>\n<td><strong>Profiles</strong></td>\n<td><strong>Under the old system: </strong></td>\n<td><strong>Under the new system: </strong></td>\n</tr>\n<tr>\n<td>50 profiles where <strong>Country</strong> = USA</td>\n<td>✅ Included in segment</td>\n<td>✅ Included in segment</td>\n</tr>\n<tr>\n<td>40 profiles where <strong>Country </strong>= Spain</td>\n<td>🚫 Excluded from segment</td>\n<td>🚫 Excluded from segment</td>\n</tr>\n<tr>\n<td>20 profiles where <strong>Country </strong>= France</td>\n<td>🚫 Excluded from segment</td>\n<td>🚫 Excluded from segment</td>\n</tr>\n<tr>\n<td>100 profiles where the property <strong>Country </strong>is not set</td>\n<td>✅ Included in segment</td>\n<td>🚫 Excluded from segment</td>\n</tr>\n</tbody>\n</table>\n<p>Before the change, this segment contained <strong>150 profiles</strong>. After the change, it includes <strong>50 profiles</strong>.</p>\n<h3 id=\"h_01HCWR6SC02R4TP2CCW4KMZ8A9\">Why this is better</h3>\n<p>The new system more accurately evaluates only profiles with a known country. You can the option to explicitly include profiles without a known country, if desired, by adding the condition <strong>OR Properties about someone &gt; Country &gt; is not set</strong>. </p>",
+    "user_segment_ids": []
+  },
+  "normalized": {
+    "id": "14837232353691",
+    "title": "Understanding how segment conditions evaluate null or empty values",
+    "source_url": "https://help.klaviyo.com/hc/en-us/articles/14837232353691-Understanding-how-segment-conditions-evaluate-null-or-empty-values",
+    "section_id": 49375416013339,
+    "section": "Build and use segments",
+    "category_id": 115000867867,
+    "category": "Audience",
+    "category_slug": "analytics-audience",
+    "klaviyo_updated": "2026-04-21T13:54:28Z",
+    "created_at": "2023-04-24T14:52:40Z",
+    "draft": false,
+    "promoted": false,
+    "position": 8,
+    "label_names": []
+  },
+  "files": {
+    "body_html": "_source/articles/14837232353691.body.html",
+    "rendered_html": "_source/rendered/14837232353691.html"
+  },
+  "assets": {
+    "api_body": {
+      "images": [],
+      "links": [
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4403222359451",
+          "text": "segmenting with dates"
+        }
+      ],
+      "headings": [
+        {
+          "level": 2,
+          "id": "h_01HCWR6SBY6HRM5BQMSQEDK791",
+          "text": "You will learn"
+        },
+        {
+          "level": 2,
+          "id": "h_01HCWR6SBYRFKDKP218DX50YAB",
+          "text": "Key terms"
+        },
+        {
+          "level": 2,
+          "id": "h_01HCWR6SBZKE77DJ2BWMZST4R4",
+          "text": "Properties that aren’t set and booleans"
+        },
+        {
+          "level": 3,
+          "id": "h_01HCWR6SBZTJFPV9Q9BK8KMHPS",
+          "text": "Why this is better"
+        },
+        {
+          "level": 2,
+          "id": "h_01HCWR6SBZT75A9TASE1CFMY3C",
+          "text": "Properties that aren’t set and text conditions"
+        },
+        {
+          "level": 3,
+          "id": "h_01HCWR6SBZNXDS85WXK8V4H523",
+          "text": "Why this is better"
+        },
+        {
+          "level": 2,
+          "id": "h_01HCWR6SBZJM30R88V9EFM3G18",
+          "text": "Properties that aren’t set and negative conditions"
+        },
+        {
+          "level": 3,
+          "id": "h_01HCWR6SBZ8Z1MTB2QQE2SQXW5",
+          "text": "Why this is better"
+        },
+        {
+          "level": 2,
+          "id": "h_01HCWR6SBZF1NZQT8E3SJZTET1",
+          "text": "Countries that aren't set and the \"Is or is not within the EU (GDPR)\" criteria"
+        },
+        {
+          "level": 3,
+          "id": "h_01HCWR6SC02R4TP2CCW4KMZ8A9",
+          "text": "Why this is better"
+        }
+      ]
+    },
+    "rendered_page": {
+      "images": [
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/7ff492c2b417b7ecfe572f839a8a81398693c1f7-1920x1080.webp",
+          "alt": "",
+          "width": "",
+          "height": ""
+        }
+      ],
+      "links": [
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/14837232353691-Understanding-how-segment-conditions-evaluate-null-or-empty-values#site-content",
+          "text": "Skip to main content"
+        },
+        {
+          "href": "https://www.klaviyo.com",
+          "text": "Home"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center"
+        },
+        {
+          "href": "https://www.klaviyo.com/enterprise",
+          "text": "Enterprise"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Partners"
+        },
+        {
+          "href": "https://www.klaviyo.com/careers",
+          "text": "Careers"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": "Log in"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": ""
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center Find step-by-step instructions and troubleshooting solutions in our knowledge base."
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000032731",
+          "text": "Integrations"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000312411",
+          "text": "Flows"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867867",
+          "text": "Audience"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867667",
+          "text": "Campaigns"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/360000190711",
+          "text": "Sign-up forms"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000873988",
+          "text": "Deliverability & compliance"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/29173800271259",
+          "text": "SMS"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/16638219724187",
+          "text": "Reviews"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/18073014919195",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/34141283979931",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/37659126754075",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/33948021740315",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/39746685522331",
+          "text": "WhatsApp"
+        },
+        {
+          "href": "https://academy.klaviyo.com",
+          "text": "Klaviyo Academy Expert training and education to help you succeed with Klaviyo, and beyond."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Quick+guide&resource=academy_courses",
+          "text": "Quick guides Learn marketing strategies and concepts in 15 minutes or less."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Course&resource=academy_courses",
+          "text": "Courses Master key marketing topics through structured lessons and exams."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/best-practices",
+          "text": "Best practices Discover top product and marketing strategies for your business."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/learning-paths",
+          "text": "Learning paths Complete curated learning journeys tailored to your marketing goals."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses",
+          "text": "Explore all resources"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Live+training&resource=academy_courses",
+          "text": "Live trainings Build confidence through hands-on interactive workshops and thought-provoking strategy sessions."
+        },
+        {
+          "href": "https://www.bigmarker.com/klaviyo-customer-education/Office-hours-Getting-started-with-Klaviyo",
+          "text": "Live office hours Join a strategic discussion where you can ask questions and get answers in real-time."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/private-live-training",
+          "text": "1:1 Live training Book a private training session with an expert to jumpstart your platform knowledge and confidence."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/credentials",
+          "text": "Klaviyo credentials Dig deeper into select topics and showcase your expertise with a final exam to earn a certificate and digital badge."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/certificates/klaviyo-practitioner-certificate",
+          "text": "Klaviyo practitioner certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/deliverability-certificate",
+          "text": "Deliverability certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/developer-certificate",
+          "text": "Klaviyo developer certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses&select=Certificate",
+          "text": "See all certificates"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Klaviyo Community Join our thriving community network to connect with brands like yours—online and in person."
+        },
+        {
+          "href": "https://community.klaviyo.com/topic/new",
+          "text": "Ask a question Post a question and get thoughtful answers from Klaviyo powerusers."
+        },
+        {
+          "href": "https://community.klaviyo.com/p/roadmap",
+          "text": "Product roadmap"
+        },
+        {
+          "href": "https://community.klaviyo.com/search/activity/recent",
+          "text": "Recent threads"
+        },
+        {
+          "href": "https://community.klaviyo.com/p/champions",
+          "text": "Meet the Champions"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups",
+          "text": "Browse all groups Your people are waiting. New ideas and connections are a click away."
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/developer-group-64",
+          "text": "Developer group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/entrepreneur-user-group-118",
+          "text": "Entrepreneur group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/woo-user-group-87",
+          "text": "WooCommerce group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/new-york-meetup-chapter-82",
+          "text": "New York City"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/los-angeles-meetup-chapter-83",
+          "text": "Los Angeles"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/austin-meetup-chapter-85",
+          "text": "Austin"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/san-diego-meetup-chapter-86",
+          "text": "San Diego"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/amsterdam-meetup-chapter-84",
+          "text": "Amsterdam"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Klaviyo Developers Access API documentation and developer guides to help you build with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/get_started",
+          "text": "Get started Access key resources and a step-by-step checklist for how to start developing with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/build_your_integration",
+          "text": "Grow your app's reach Learn how to join our ecosystem and get your app listed on our marketplace."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/developer-tools",
+          "text": "Developer tools Generate sample data, monitor your API usage, and access our Postman collections."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/reference/api_overview",
+          "text": "API reference Browse our full catalog of API docs."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/changelog_",
+          "text": "Changelog"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/api_versioning_and_deprecation_policy",
+          "text": "Versioning & deprecation policy"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/rate_limits_and_error_handling",
+          "text": "Rate limits & error handling"
+        },
+        {
+          "href": "https://youtube.com/playlist?list=PLHkNfHgtxcUanrkMnKPdkRzuWU7MGv_xM&si=pkG-KH7IT_TUHOGC",
+          "text": "API tutorials on YouTube Subscribe to our Klaviyo API Tutorials playlist for easy access to step-by-step developer walkthroughs."
+        },
+        {
+          "href": "https://www.klaviyo.com/contact-us",
+          "text": "Contact us"
+        },
+        {
+          "href": "https://www.klaviyo.com/sign-up",
+          "text": "Sign up"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": "Search"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/14837232353691",
+          "text": "United States - EN"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/de-de/articles/14837232353691",
+          "text": "Deutschland - DE"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-es/articles/14837232353691",
+          "text": "España - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-mx/articles/14837232353691",
+          "text": "México - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/fr-fr/articles/14837232353691",
+          "text": "France - FR"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/it-it/articles/14837232353691",
+          "text": "Italia - IT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/ko-kr/articles/14837232353691",
+          "text": "한국 - KO"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/nl-nl/articles/14837232353691",
+          "text": "Nederland - NL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pl-pl/articles/14837232353691",
+          "text": "Polska - PL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pt-br/articles/14837232353691",
+          "text": "Brasil - PT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/sv-se/articles/14837232353691",
+          "text": "Sverige - SV"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/14512077651099",
+          "text": "Lists and segments"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/49375416013339",
+          "text": "Build and use segments"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/14837232353691-Understanding-how-segment-conditions-evaluate-null-or-empty-values#h_01HCWR6SBY6HRM5BQMSQEDK791",
+          "text": "You will learn"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/14837232353691-Understanding-how-segment-conditions-evaluate-null-or-empty-values#h_01HCWR6SBYRFKDKP218DX50YAB",
+          "text": "Key terms"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/14837232353691-Understanding-how-segment-conditions-evaluate-null-or-empty-values#h_01HCWR6SBZKE77DJ2BWMZST4R4",
+          "text": "Properties that aren’t set and booleans"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/14837232353691-Understanding-how-segment-conditions-evaluate-null-or-empty-values#h_01HCWR6SBZT75A9TASE1CFMY3C",
+          "text": "Properties that aren’t set and text conditions"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/14837232353691-Understanding-how-segment-conditions-evaluate-null-or-empty-values#h_01HCWR6SBZJM30R88V9EFM3G18",
+          "text": "Properties that aren’t set and negative conditions"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/14837232353691-Understanding-how-segment-conditions-evaluate-null-or-empty-values#h_01HCWR6SBZF1NZQT8E3SJZTET1",
+          "text": "Countries that aren't set and the \"Is or is not within the EU (GDPR)\" criteria"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4403222359451",
+          "text": "segmenting with dates"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115001002272",
+          "text": "Learn how to contact support"
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": ""
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": "Visit Community"
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": ""
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": "Hire a partner"
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/about",
+          "text": "About Klaviyo"
+        },
+        {
+          "href": "https://www.klaviyo.com/newsroom",
+          "text": "Newsroom"
+        },
+        {
+          "href": "https://investors.klaviyo.com/overview/default.aspx",
+          "text": "Investor relations"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Agency and tech partners"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Developers"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/retail",
+          "text": "Retail and ecommerce"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/restaurants",
+          "text": "Restaurant marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/wellness",
+          "text": "Wellness"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform",
+          "text": "B2C CRM overview"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai",
+          "text": "Klaviyo AI (K:AI)"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/marketing-automation",
+          "text": "Klaviyo Marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-service",
+          "text": "Klaviyo Service"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/analytics",
+          "text": "Klaviyo Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-data-platform",
+          "text": "Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare",
+          "text": "Klaviyo vs. Klaviyo alternatives"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-mailchimp",
+          "text": "Klaviyo vs. Mailchimp"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-postscript",
+          "text": "Klaviyo vs. Postscript"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-attentive",
+          "text": "Klaviyo vs. Attentive"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-salesforce-marketing-cloud",
+          "text": "Klaviyo vs. Salesforce"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-listrak",
+          "text": "Klaviyo vs. Listrak"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/omnichannel",
+          "text": "Omnichannel marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/email-marketing",
+          "text": "Email marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing",
+          "text": "SMS marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing/rcs",
+          "text": "RCS for Business"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/mobile-app-marketing",
+          "text": "Mobile app marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/whatsapp",
+          "text": "WhatsApp marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/social",
+          "text": "Social marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources",
+          "text": "Marketing resources"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources/marketing-campaign-calendar",
+          "text": "Marketing campaign calendar"
+        },
+        {
+          "href": "https://www.klaviyo.com/glossary",
+          "text": "Marketing glossary"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/email-subject-line-generator",
+          "text": "Subject line generator"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/roi-calculator",
+          "text": "ROI calculator"
+        },
+        {
+          "href": "https://www.klaviyo.com/customers",
+          "text": "Case studies"
+        },
+        {
+          "href": "https://www.klaviyo.com/composer",
+          "text": "Composer Beta"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/marketing-agent",
+          "text": "Marketing Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/customer-agent",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/customer-experience-hub",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/helpdesk",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/marketing-analytics",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/advanced-cdp",
+          "text": "Advanced Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/web-forms",
+          "text": "Web forms"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/email-templates",
+          "text": "Email templates"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/portfolio",
+          "text": "Portfolio"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform-integrations",
+          "text": "Apps and Integrations"
+        },
+        {
+          "href": "https://www.klaviyo.com/features",
+          "text": "Features"
+        },
+        {
+          "href": "https://www.klaviyo.com/whats-new",
+          "text": "What's new"
+        },
+        {
+          "href": "https://www.klaviyo.com/events",
+          "text": "Events"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help Center"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us",
+          "text": "Academy"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Community"
+        },
+        {
+          "href": "https://www.facebook.com/Klaviyo/",
+          "text": "Facebook"
+        },
+        {
+          "href": "https://twitter.com/klaviyo/",
+          "text": "Twitter"
+        },
+        {
+          "href": "https://www.linkedin.com/company/klaviyo/",
+          "text": "LinkedIn"
+        },
+        {
+          "href": "https://www.instagram.com/klaviyo/",
+          "text": "Instagram"
+        },
+        {
+          "href": "https://www.klaviyo.com/sitemap",
+          "text": "Site Map"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal",
+          "text": "Terms and Privacy"
+        },
+        {
+          "href": "https://www.klaviyo.com/security",
+          "text": "Security"
+        },
+        {
+          "href": "https://www.klaviyo.com/trust",
+          "text": "Trust"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal/intellectual-property-notices",
+          "text": "Intellectual Property Notices"
+        }
+      ],
+      "headings": [
+        {
+          "level": 1,
+          "id": "",
+          "text": "Understanding how segment conditions evaluate null or empty values"
+        },
+        {
+          "level": 2,
+          "id": "h_01HCWR6SBY6HRM5BQMSQEDK791",
+          "text": "You will learn"
+        },
+        {
+          "level": 2,
+          "id": "h_01HCWR6SBYRFKDKP218DX50YAB",
+          "text": "Key terms"
+        },
+        {
+          "level": 2,
+          "id": "h_01HCWR6SBZKE77DJ2BWMZST4R4",
+          "text": "Properties that aren’t set and booleans"
+        },
+        {
+          "level": 3,
+          "id": "h_01HCWR6SBZTJFPV9Q9BK8KMHPS",
+          "text": "Why this is better"
+        },
+        {
+          "level": 2,
+          "id": "h_01HCWR6SBZT75A9TASE1CFMY3C",
+          "text": "Properties that aren’t set and text conditions"
+        },
+        {
+          "level": 3,
+          "id": "h_01HCWR6SBZNXDS85WXK8V4H523",
+          "text": "Why this is better"
+        },
+        {
+          "level": 2,
+          "id": "h_01HCWR6SBZJM30R88V9EFM3G18",
+          "text": "Properties that aren’t set and negative conditions"
+        },
+        {
+          "level": 3,
+          "id": "h_01HCWR6SBZ8Z1MTB2QQE2SQXW5",
+          "text": "Why this is better"
+        },
+        {
+          "level": 2,
+          "id": "h_01HCWR6SBZF1NZQT8E3SJZTET1",
+          "text": "Countries that aren't set and the \"Is or is not within the EU (GDPR)\" criteria"
+        },
+        {
+          "level": 3,
+          "id": "h_01HCWR6SC02R4TP2CCW4KMZ8A9",
+          "text": "Why this is better"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "Explore more from Klaviyo"
+        }
+      ]
+    }
+  },
+  "rendered_page": {
+    "status": "fetched",
+    "error": ""
+  }
+}

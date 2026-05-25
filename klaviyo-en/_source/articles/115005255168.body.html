@@ -1,0 +1,86 @@
+<h2 id="section0">You will learn</h2>
+<p>Learn how to integrate DonorPerfect with Klaviyo. After completing these steps, you'll be able to personalize and target emails based on each Contributor's donation and website activity. Here's some of the data we sync from DonorPerfect:</p>
+<ul>
+<li>Amount of contribution</li>
+<li>Contributor information, including first and last name, location, and how they found your site</li>
+<li>Whether the donation is recurring and, if so, how often in will occur</li>
+<li>Whether the contributor wants to be anonymous</li>
+</ul>
+<p>First, you'll need to find your DonorPerfect API key, then you'll enable the integration in Klaviyo.</p>
+<h2 id="section1">Find your API key</h2>
+<p>You can retrieve your API Key from your DonorPerfect Account Manager. Send your account manager an email requesting your API Key and they will send it to you shortly. </p>
+<h2 id="section2">Add the DonorPerfect integration in Klaviyo</h2>
+<ol>
+<li>In Klaviyo, select the <strong>Integrations</strong> tab.</li>
+<li>On the next page, click <strong>Explore apps</strong>, search for <em>DonorPerfect</em>, and click the card.</li>
+<li>Then, click <strong>Install</strong>.</li>
+<li>Add your DonorPerfect API Key and click <strong>Connect to DonorPerfect</strong>.</li>
+<li>On the next page, choose to <strong>Add all DonorPerfect donors to a Klaviyo list</strong>, and then select a list from the dropdown that appears.<br><img src="https://klaviyo.zendesk.com/hc/article_attachments/28704476528923">
+</li>
+<li>Click <strong>Complete setup</strong>.</li>
+</ol>
+<h2 id="h_01HH34JJEW0B5FFXY9JV855SYJ">Monitor the Klaviyo sync and verify data</h2>
+<p>To check on your DonorPerfect integration once you've integrated:</p>
+<ol>
+<li>Click the <strong>Analytics</strong> dropdown in Klaviyo and select the <strong>Metrics</strong> tab.</li>
+<li>Click the <strong>Made Contribution</strong> metric to verify that there is data populated for this metric. If there is data, all you need to do is wait until your initial DonorPerfect integration sync has completed; this process can take up to a couple hours depending on how much data you have in your account. Klaviyo will import all of your historic DonorPerfect data. To verify this, you can compare the number of contributions on a particular day in Klaviyo with what's in your DonorPerfect interface and confirm they match.</li>
+<li>For example, when exploring the <strong>Made Contribution</strong> metric in Klaviyo, you can hover over yesterday's data point or look at the table of data below the chart to see how many contributions were reported yesterday.</li>
+<li>Compare that number to what's stored in DonorPerfect from yesterday and you should see they match exactly. If they don't, the issue is most likely that your Klaviyo account's timezone doesn't match your DonorPerfect's account timezone.</li>
+<li>To check your timezone setting in Klaviyo: 
+<ol>
+<li>Click your account name in the lower left.</li>
+<li>Select then clicking <strong>Settings</strong><strong> &gt; Organization</strong>.</li>
+<li>Scroll down to <em>Timezone</em>.</li>
+</ol>
+</li>
+</ol>
+<h2 id="section4">DonorPerfect data</h2>
+<p>There is 1 major metric that is captured by DonorPerfect and loaded into Klaviyo: <strong>Made Contribution</strong>.</p>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/28704476521755" alt="DonorPerfect Made Contribution metric in Klaviyo in Metrics tab"></p>
+<h3 id="h_01HH34JJEXD9PPCDJ5HDWP03HH">The Made Contribution metric</h3>
+<p>This event is tracked when a supporter makes a contribution in DonorPerfect. The event Klaviyo tracks includes all of the information DonorPerfect collects, including the contribution amount, whether the donation is recurring and, if so, how often the donation will recur. You can filter and target <em>Made Contribution </em>events based on the following criteria:</p>
+<ul>
+<li><strong>Value</strong></li>
+<li><strong>Campaign</strong></li>
+<li><strong>First Gift</strong></li>
+<li><strong>Gift Type</strong></li>
+<li><strong>In Memory Of</strong></li>
+<li>
+<strong>Is Recurring</strong> (True of False)</li>
+</ul>
+<p>Here is an example of the data we receive along with a Made Contribution<em> </em>event:</p>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/28704484671643" alt="Made Contribution metric activity details popup in Klaviyo" width="556" height="254"></p>
+<h3 id="h_01HH34JJEX0761FTV46QED8285">Customer data</h3>
+<p>In addition to the metric Klaviyo syncs from DonorPerfect, there are also custom properties that are added to each Klaviyo profile. You can use these properties in segments and flows. Here are the properties that are automatically synced from DonorPerfect:</p>
+<ul>
+<li>Email</li>
+<li>First Name</li>
+<li>Last Name</li>
+<li>City</li>
+<li>State/Region</li>
+<li>Zip Code</li>
+<li>Country</li>
+<li>Phone Number</li>
+</ul>
+<h3 id="h_01HH34JJEX6ET57ENE0WQ720VC">How often DonorPerfect data syncs</h3>
+<p>Metrics and profile properties from DonorPerfect are synced using webhooks. This means that DonorPerfect indicates to Klaviyo when an event has occurred and Klaviyo will then pull all data for the event. This occurs almost instantaneously. </p>
+<h2 id="h_01HH34JJEXS69A3TFJHPGS3HZH">Add Klaviyo onsite tracking</h2>
+<p>The final step here is adding Klaviyo's <em>Active on Site</em> tracking code to your website footer. This Klaviyo tracking code will allow us to track an <em>Active on Site </em>metric for you so that you can see and leverage data related to site visits and visitor behavior. Through this metric, Klaviyo will track website activity for known browsers.</p>
+<p>For example, you can use the <em>Active on Site</em> metric to create segments of people who have visited your site (while logged in), but haven't yet made a donation. </p>
+<ol>
+<li>The following tracking script can be found in Klaviyo by selecting the <strong>Integrations </strong>tab, then clicking<strong> Manage data &gt; Set up web tracking </strong>in the upper right corner.</li>
+<li>We've also included the Klaviyo <em>Active on Site</em> tracking script here, which you can paste into the main template of your app before the <code>&lt;/body&gt;</code> tag. Remember to add your own API key, found under <strong>Account name &gt; Settings &gt; API keys</strong>, where you see 'Public API Key':
+<pre><code>&lt;script type="application/javascript" async
+ src="https://static.klaviyo.com/onsite/js/klaviyo.js?company_id=Public API Key"&gt;&lt;/script&gt;
+</code></pre>
+</li>
+<li>You will then need to enter your site URL on the <em>Set Up Web Tracking</em> page. Once you have entered your URL, click <strong>Next</strong> to test the tracking setup. You should receive a success message if it's working correctly. <br><img src="https://klaviyo.zendesk.com/hc/article_attachments/28704484675867" alt="Step 2 of set up web tracking with text box for URL and Next button with blue background" width="577" height="82">
+</li>
+</ol>
+<h2 id="h_01HH34JJEX58MGJEST2KY1KEN0">Outcome</h2>
+<p>You have now integrated with DonorPerfect, verified your synced data, and added Klaviyo onsite tracking. </p>
+<h2 id="h_01HH34JJEXXCA3G0RAE1YJYNH5">Additional resources</h2>
+<ul>
+<li><a href="https://help.klaviyo.com/hc/en-us/articles/115005081007" target="_blank" rel="noopener">Integration FAQ reference</a></li>
+<li><a href="https://help.klaviyo.com/hc/en-us/articles/115005253208" target="_blank" rel="noopener">How often integrations sync reference</a></li>
+</ul>

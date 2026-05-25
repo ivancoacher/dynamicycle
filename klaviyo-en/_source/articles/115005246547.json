@@ -1,0 +1,979 @@
+{
+  "captured_at": "2026-05-23T16:17:22Z",
+  "article": {
+    "id": 115005246547,
+    "url": "https://klaviyo.zendesk.com/api/v2/help_center/en-us/articles/115005246547.json",
+    "html_url": "https://klaviyo.zendesk.com/hc/en-us/articles/115005246547-How-to-set-up-coupons-for-Magento-1-x",
+    "author_id": 20350272227,
+    "comments_disabled": true,
+    "draft": false,
+    "promoted": false,
+    "position": 2,
+    "vote_sum": 26,
+    "vote_count": 74,
+    "section_id": 49375551401115,
+    "created_at": "2017-04-04T14:16:52Z",
+    "updated_at": "2026-04-21T13:54:22Z",
+    "name": "How to set up coupons (for Magento 1.x)",
+    "title": "How to set up coupons (for Magento 1.x)",
+    "source_locale": "en-us",
+    "locale": "en-us",
+    "outdated": false,
+    "outdated_locales": [],
+    "edited_at": "2026-03-13T13:45:09Z",
+    "user_segment_id": null,
+    "permission_group_id": 146372,
+    "content_tag_ids": [],
+    "label_names": [],
+    "body": "<div class=\"bs-callout bs-callout-default\"><p>Klaviyo's Magento 1 integration is no longer accepting new installations and will reach full end-of-support in late 2027. Klaviyo Support is no longer able to assist with Magento 1–related requests.</p></div><h2 id=\"h_01KKKQ1Q7BCPZ1W3A6EGY13N48\">You will learn</h2><p>Magento supports <a href=\"http://docs.magento.com/m1/ce/user_guide/marketing/price-rules-shopping-cart.html\" data-cke-saved-href=\"http://docs.magento.com/m1/ce/user_guide/marketing/price-rules-shopping-cart.html\">Shopping Cart Price Rules</a> that can be used to apply a discount to a customer's order. Coupon codes can be created for existing price rules, so that shoppers can easily leverage a given code to apply a discount during the checkout process.</p><p>Klaviyo's Coupons for Magento feature allows Magento 1.0 stores to do the following:</p><ul>\n<li data-list-item-id=\"e0cfca8d8f20104839d6eb66ef0e27c8f\">Create new coupons in Klaviyo associated with pre-existing price rules in Magento.</li>\n<li data-list-item-id=\"e03e4816a17079dc53ab07c918f6bbeb5\">Include dynamic coupons within flow emails, so each recipient receives a unique code.</li>\n</ul><p>This guide will explain how to get setup with Magento coupons in Klaviyo.</p><div class=\"bs-callout bs-callout-default\"><p>Dynamic coupon codes are not currently available when sending campaign emails. Sending unique coupon codes in a campaign would require generating thousands of codes per second. Klaviyo cannot guarantee a specific Magento server's rate-limiting settings will not impact the generation of dynamic coupons at this volume and velocity. Due to this, dynamic coupons are only available when sending flow emails.</p></div><h2 id=\"h_01KKKQ1Q7B3TJKGF89TYZ0BT6H\">Requirements</h2><p>As a prerequisite, ensure that you've <a href=\"https://help.klaviyo.com/hc/en-us/articles/115005082187\" target=\"_blank\" rel=\"noopener noreferrer\">enabled the Magento integration in Klaviyo and installed the Klaviyo extension in Magento</a>.</p><h2 id=\"h_01KKKQ1Q7BEAGKX5DGW5DZ1X5G\">Enable the REST API</h2><p>Start by enabling the REST API by creating a new REST Role and giving it full access, then assigning the role to one of your admin users.</p><ol>\n<li data-list-item-id=\"e634ddb782cfa4e99fa4590e6f47d66be\">Click on <strong>System &gt; Web Services &gt; REST - Roles</strong>.</li>\n<li data-list-item-id=\"e2fc4dff88275b337ee238cbce3582c3f\">Create a new Admin role. For the field <em>Role Name</em> enter a name, for example \"Administrator\".</li>\n<li data-list-item-id=\"e28f95deaee28283163bd085a900497a2\">Click on the<strong> Role API Resources</strong> tab on the left. Set <em>Resource Access</em> to <strong>All</strong> and click <strong>Save Role</strong>.</li>\n<li data-list-item-id=\"e6f402c05986a74fd8ded562977a50f2c\">Next, navigate to <strong>System &gt; Web Services &gt; REST - Attributes</strong>.</li>\n<li data-list-item-id=\"ec4ca65631e717a0a328aa2dde96adb60\">Select <strong>Admin</strong> from the list of user types.</li>\n<li data-list-item-id=\"e5f79e2fa3b227e3372aaaec39172c363\">Set <em>Resource Access</em> to <strong>All</strong> and click <strong>Save.</strong>\n</li>\n<li data-list-item-id=\"e805ee6772626fa7076500c39216bbdf7\">Next, navigate to <strong>System &gt; Permissions &gt; Users</strong>.</li>\n<li data-list-item-id=\"ee25d2d3057c2d4330ed96433bd0e0a54\">Select an admin user from the list and click <strong>Edit user</strong>.</li>\n<li data-list-item-id=\"e74503c4b1c5240e29fb477a5f0c6c6f9\">Click the <strong>REST role</strong> tab on the left sidebar.</li>\n<li data-list-item-id=\"e42bab18aef43df5eca9a4d6dca33dc26\">Click the radio button to assign the new REST admin role to your user.<br><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28717985502747\">\n</li>\n<li data-list-item-id=\"e8292cf972b9dd87fdb758fad62054026\">Click <strong>Save User</strong>.</li>\n</ol><p>You've now enabled the REST API for your Magento store.</p><div class=\"bs-callout bs-callout-default\"><p>If you are unsure whether or not your REST API is configured properly, please review the steps outlined in our <a href=\"#h_01GZ248ZJVNJTRVFYKMTKFXFEK\" target=\"_self\" rel=\"undefined\">resource on troubleshooting coupons for Magento 1x</a>.</p></div><h2 id=\"h_01KKKQ1Q7BJYCAXY7H6T8AZ0FG\">Generate REST Credentials in Magento</h2><p>To enable Klaviyo's Magento Coupons feature, first generate REST API credentials from your Magento store using the REST admin account you just made, and then paste these into your Klaviyo account.</p><ol>\n<li data-list-item-id=\"ee0573d64af31dc92566c4585576b2cc5\">Log in as the REST admin user you created in the <a href=\"https://help.klaviyo.com/hc/en-us/articles/115005246547#enable-the-rest-api2\" target=\"_self\" rel=\"undefined\">Enable the REST API section above</a>\n</li>\n<li data-list-item-id=\"ef83e3bbbdb00d423d08776632a87b18a\">Click on <strong>System &gt; Configuration</strong> and then click on <strong>Klaviyo</strong> under the <em>Customers</em> section.</li>\n<li data-list-item-id=\"e87abb96f4eac341dcea7a30c57249ae8\">Click <strong>Generate OAuth Tokens</strong>.<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28717985489051\" alt=\"763276\">\n</li>\n</ol><p>The <em>Consumer Key, Consumer Secret, Authorization Token</em> and the <em>Authorization Secret</em> will populate. You will copy/paste these values into your Klaviyo account in the next step.</p><h2 id=\"h_01KKKQ1Q7BAXMPJXRPGA44CWQM\">Setup Magento Coupons in Klaviyo</h2><ol>\n<li data-list-item-id=\"e32daea21751844f28da43a30553f834c\">From your Klaviyo account, <a href=\"https://www.klaviyo.com/integration/magento\">navigate to your Magento integration</a>.</li>\n<li data-list-item-id=\"ef9c3e1b1d28a2e47ec4a6bc26a121649\">Click the <strong>Advanced Options</strong> arrow to expand the <em>Coupon Settings</em>.</li>\n<li data-list-item-id=\"ef946d7a893f64d8670938ac5db4996a0\">\n<p>Paste in the REST credentials you created above.</p>\n<div class=\"bs-callout bs-callout-default\"><p>Your Magento server must support HMAC-SHA1 signatures for OAuth authentication.</p></div>\n<p><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28717985495067\"></p>\n</li>\n<li data-list-item-id=\"ecd51a814e228e370d7ef841a19101d30\">Click <strong>Update Magento Settings.</strong>\n</li>\n</ol><p>Klaviyo will validate your REST credentials and you will be able to start creating coupons with the Coupons tab of your account.</p><h2 id=\"h_01KKKQ1Q7BC9KKS4RNYC9K2G7W\">Create a Magento Coupon in Klaviyo</h2><p>When you first navigate to <a href=\"https://www.klaviyo.com/coupons\" data-cke-saved-href=\"https://www.klaviyo.com/coupons\">the <em>Coupons</em> tab in your Klaviyo account</a> after providing your REST credentials, you will see the message, \"You haven't added any coupons yet.\" </p><div class=\"bs-callout bs-callout-default\">Before you create a new coupon, you will first need to define a Price Rule in Magento that will include all the specifications for the coupon. Price Rules cannot be created from within Klaviyo. A new coupon created in Klaviyo must reference a pre-existing Price Rule in Magento.<br><br>When creating a Price Rule in Magento, note that the option to associate a new Price Rule with a specific coupon should be left set to Specific Coupon and you must have the <em>Use Auto Generation</em> checkbox selected.</div><ol>\n<li data-list-item-id=\"ee937dcff474f1ee36f58d2398b082511\">Click <strong>Add Coupon</strong> to create a new coupon.</li>\n<li data-list-item-id=\"e6f6cb0fb655f595d3400d2c0bcb17e1f\">Fill in the following information: <em>Coupon Name</em> and the <em>Magento Rule ID.</em>\n</li>\n</ol><ul>\n<li data-list-item-id=\"e9cefc2abb7a3fefee8ef367b0ef58357\">\n<strong>Coupon Name: </strong>The name you specify can consist of only letters, numbers and underscores and can be up to 32 characters long</li>\n<li data-list-item-id=\"ece42d9c24f1f22884990241f61a13fb5\">\n<strong>Magento Rule ID:</strong> Create a rule in Magento first, and paste the ID of that rule here to associate it with this coupon</li>\n</ul><p><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28717985497243\"></p><p>All created coupons will appear with the following overview details:</p><ul>\n<li data-list-item-id=\"ef4dd11fc665d5d8514a077dfb770fbb2\">\n<strong>Coupon Name: </strong>Name of the coupon</li>\n<li data-list-item-id=\"eafab7772c2b3d8c6a34d7a0c2362f8e9\">\n<strong>Active Timeframe:</strong> There are the following options:<ul>\n<li data-list-item-id=\"e924acc78ea1be7cae7629fede99a95a2\">Active, No Expiration</li>\n<li data-list-item-id=\"e23a032673202cfd0bcee7bfe7d18adb8\">Date A - No Expiration</li>\n<li data-list-item-id=\"ee858e78e3c59d9c006238a3d1144369b\">Date A - Date B</li>\n<li data-list-item-id=\"e131d89d1089735e7f780c9bd1b811d6a\">Active, Expires Date B</li>\n</ul>\n</li>\n<li data-list-item-id=\"e17ea12e513a661958d58d7f42e4dddfa\">\n<strong>Created Date:</strong> Date the coupon was created</li>\n<li data-list-item-id=\"e2d6a7c9932fb1502af6288490721faab\">\n<strong>Last Updated Date: </strong>Date the coupon was last updated</li>\n</ul><p>Coupons can be edited and deleted from this tab via the dropdown on the right-hand side.<br><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28717985500315\"></p><h2 id=\"h_01KKKQ1Q7BXSRN357GTWCV9KCK\">Use a Magento Coupon in a Flow Email</h2><p>Once a coupon is created, you can insert it into a flow email using the following placeholder variable. <span style=\"font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;\">You can only add one coupon code per email. You can display the same coupon code in multiple places, but you cannot use multiple codes.</span></p><pre class=\"wysiwyg-code-block\"><code class=\"language-auto language-html\">{% coupon_code 'CouponName' %}</code></pre><p>Replace <em>CouponName</em> with the name of your coupon. For example:</p><p><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28717991395995\" alt=\"mceclip0__2_.png\"></p><h2 id=\"h_01KKKQ1Q7B6YX3YYWARYXYCZAZ\">Use Unique Coupons in SMS Flow Messages</h2><p>Unique coupons are also available for your <a href=\"https://help.klaviyo.com/hc/en-us/articles/360044863132-Using-Unique-Coupon-Codes-in-SMS-and-MMS-Messages\" target=\"_blank\" rel=\"noopener noreferrer\">SMS/MMS messages</a> in flows. Generate the codes just like you would for email. Then, use the template tag below to add the coupon code to your SMS or MMS message:</p><p><code class=\"language-html\">{% coupon_code 'CouponName' %}</code>.</p><p>In the snippet, change <em>CouponName</em> to the name of the coupon you want and add it into the message (either flow or campaign).</p><p class=\"wysiwyg-text-align-center\"><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/47772696564635\" alt=\"2020-06-16_17-58-37.png\"></p><p class=\"wysiwyg-text-align-left\">Unlike in emails, you can only use one coupon code per SMS message. With email, you have access to <a href=\"https://help.klaviyo.com/hc/en-us/articles/115005258208-Show-or-Hide-Template-Blocks-Based-on-Dynamic-Variables\" target=\"_blank\" rel=\"noopener noreferrer\">hidden blocks</a> to send different coupons based on where someone lives or what they’ve done. If you try to add multiple coupons to an SMS message, you will see an error message.</p><p class=\"wysiwyg-text-align-center\"><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28717991397787\" alt=\"2020-06-17_09-51-08.png\"></p><p class=\"wysiwyg-text-align-center\"> </p><h2 id=\"h_01GZ248ZJVNJTRVFYKMTKFXFEK\">Troubleshoot Errors</h2><h3 id=\"h_01KKKQ1Q7CR8V6QMMPE27XHJ6T\">Error Message: “Unable to connect to the REST API with the specified REST credentials. Please check that these credentials are valid in your Magento admin.\"</h3><p>If you are seeing this error message in Klaviyo, there are two likely root causes:</p><ol>\n<li data-list-item-id=\"ea5665d4b0fb4d87ef18c2e9d11e732a5\">Your Magento server is not set up to support HMAC-SHA1 signatures for OAuth authentication.</li>\n<li data-list-item-id=\"e2c016fedc6273a674facd45b80ec39fa\">You may have not enabled full role access for the REST API.</li>\n</ol><p>To resolve this issue, enable HMAC-SHA1 signatures for OAuth authentication on your Magento server. Then complete the following steps to update your REST permissions:</p><ol>\n<li data-list-item-id=\"e3fa2cd7dcb09cd9ac46296d859ac4220\">Uncomment, or add, the rewrite rule in your .htaccess file. This is the line you’ll want to ensure is un-commented:<br><code class=\"language-bash\">RewriteRule ^api/rest api.php?type=rest [QSA,L]</code>\n</li>\n<li data-list-item-id=\"e33a700c85743258bda1d34db0d732c5b\">Double check that your REST Role is setup correctly<br>We cover the instructions for this in our <a href=\"https://help.klaviyo.com/hc/en-us/articles/115005246547#enable-the-rest-api\">guide to setting up coupons for Magento in the section linked here</a>.</li>\n<li data-list-item-id=\"e75d45afed2c581df1dd1e8f3f2961178\">Another common cause is that various Apache modules can strip “Authorization: Basic base64 (user:password)” header.<br>Check out <a style=\"background-color: #ffffff;\" href=\"https://devhacksandgoodies.wordpress.com/2014/06/27/apache-pass-authorization-header-to-phps-_serverhttp_authorization/\">this post for more information</a>\n</li>\n</ol><h3 id=\"h_01KKKQ1Q7C2BA2NT797HFFHBPJ\">Coupon codes populated into emails by Klaviyo are not unique -- all recipients appear to be receiving the same code.</h3><p>When creating a Price Rule in Magento, the option to associate a new Price Rule with a specific coupon should be left set to <span class=\"wysiwyg-underline\">Specific Coupon</span> and you must have the <span class=\"wysiwyg-underline\">“Use Auto Generation”</span> checkbox selected.</p><p>Click on your Price Rule in Magento, and under <em>General Information</em>, scroll down to the line option \"Coupon\" and change this setting to \"Specific Coupon\". Next, check the box for auto generation here. This should fix the issue and allow us to generate a new unique coupon code for each email recipient.</p>",
+    "user_segment_ids": []
+  },
+  "normalized": {
+    "id": "115005246547",
+    "title": "How to set up coupons (for Magento 1.x)",
+    "source_url": "https://help.klaviyo.com/hc/en-us/articles/115005246547-How-to-set-up-coupons-for-Magento-1-x",
+    "section_id": 49375551401115,
+    "section": "Coupons and ecommerce integrations",
+    "category_id": 4414879524891,
+    "category": "Content",
+    "category_slug": "content",
+    "klaviyo_updated": "2026-04-21T13:54:22Z",
+    "created_at": "2017-04-04T14:16:52Z",
+    "draft": false,
+    "promoted": false,
+    "position": 2,
+    "label_names": []
+  },
+  "files": {
+    "body_html": "_source/articles/115005246547.body.html",
+    "rendered_html": "_source/rendered/115005246547.html"
+  },
+  "assets": {
+    "api_body": {
+      "images": [
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28717985502747",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28717985489051",
+          "alt": "763276",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28717985495067",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28717985497243",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28717985500315",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28717991395995",
+          "alt": "mceclip0__2_.png",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/47772696564635",
+          "alt": "2020-06-16_17-58-37.png",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28717991397787",
+          "alt": "2020-06-17_09-51-08.png",
+          "width": "",
+          "height": ""
+        }
+      ],
+      "links": [
+        {
+          "href": "http://docs.magento.com/m1/ce/user_guide/marketing/price-rules-shopping-cart.html",
+          "text": "Shopping Cart Price Rules"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005082187",
+          "text": "enabled the Magento integration in Klaviyo and installed the Klaviyo extension in Magento"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005246547-How-to-set-up-coupons-for-Magento-1-x#h_01GZ248ZJVNJTRVFYKMTKFXFEK",
+          "text": "resource on troubleshooting coupons for Magento 1x"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005246547#enable-the-rest-api2",
+          "text": "Enable the REST API section above"
+        },
+        {
+          "href": "https://www.klaviyo.com/integration/magento",
+          "text": "navigate to your Magento integration"
+        },
+        {
+          "href": "https://www.klaviyo.com/coupons",
+          "text": "the Coupons tab in your Klaviyo account"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360044863132-Using-Unique-Coupon-Codes-in-SMS-and-MMS-Messages",
+          "text": "SMS/MMS messages"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005258208-Show-or-Hide-Template-Blocks-Based-on-Dynamic-Variables",
+          "text": "hidden blocks"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005246547#enable-the-rest-api",
+          "text": "guide to setting up coupons for Magento in the section linked here"
+        },
+        {
+          "href": "https://devhacksandgoodies.wordpress.com/2014/06/27/apache-pass-authorization-header-to-phps-_serverhttp_authorization/",
+          "text": "this post for more information"
+        }
+      ],
+      "headings": [
+        {
+          "level": 2,
+          "id": "h_01KKKQ1Q7BCPZ1W3A6EGY13N48",
+          "text": "You will learn"
+        },
+        {
+          "level": 2,
+          "id": "h_01KKKQ1Q7B3TJKGF89TYZ0BT6H",
+          "text": "Requirements"
+        },
+        {
+          "level": 2,
+          "id": "h_01KKKQ1Q7BEAGKX5DGW5DZ1X5G",
+          "text": "Enable the REST API"
+        },
+        {
+          "level": 2,
+          "id": "h_01KKKQ1Q7BJYCAXY7H6T8AZ0FG",
+          "text": "Generate REST Credentials in Magento"
+        },
+        {
+          "level": 2,
+          "id": "h_01KKKQ1Q7BAXMPJXRPGA44CWQM",
+          "text": "Setup Magento Coupons in Klaviyo"
+        },
+        {
+          "level": 2,
+          "id": "h_01KKKQ1Q7BC9KKS4RNYC9K2G7W",
+          "text": "Create a Magento Coupon in Klaviyo"
+        },
+        {
+          "level": 2,
+          "id": "h_01KKKQ1Q7BXSRN357GTWCV9KCK",
+          "text": "Use a Magento Coupon in a Flow Email"
+        },
+        {
+          "level": 2,
+          "id": "h_01KKKQ1Q7B6YX3YYWARYXYCZAZ",
+          "text": "Use Unique Coupons in SMS Flow Messages"
+        },
+        {
+          "level": 2,
+          "id": "h_01GZ248ZJVNJTRVFYKMTKFXFEK",
+          "text": "Troubleshoot Errors"
+        },
+        {
+          "level": 3,
+          "id": "h_01KKKQ1Q7CR8V6QMMPE27XHJ6T",
+          "text": "Error Message: “Unable to connect to the REST API with the specified REST credentials. Please check that these credentials are valid in your Magento admin.\""
+        },
+        {
+          "level": 3,
+          "id": "h_01KKKQ1Q7C2BA2NT797HFFHBPJ",
+          "text": "Coupon codes populated into emails by Klaviyo are not unique -- all recipients appear to be receiving the same code."
+        }
+      ]
+    },
+    "rendered_page": {
+      "images": [
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/7ff492c2b417b7ecfe572f839a8a81398693c1f7-1920x1080.webp",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/f93a77021c81315223583dd2bbf2cacee113341f-1400x345.png",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/7d11b32e17c76511612caa572478f4da850faff6-1164x612.png",
+          "alt": "763276",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/79b1ab04a6c3149d23557076636ccad0d42aa932-1179x1117.png",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/7daa4e8ba8d461847ebffb974fe44b4ebde419a9-915x446.png",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/027f1333ea095e61afdc0163c491bc67e4309749-891x171.png",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/a411790ee81946398f174449e878ce6f4f83f31a-1184x1082.png",
+          "alt": "mceclip0__2_.png",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/8022572a21738bf0f9548f5d0610481a7ec20a8d-2148x1240.png",
+          "alt": "2020-06-16_17-58-37.png",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/e91efdf228679a3ac5ef34f16d42597f6082b6d4-2106x1244.png",
+          "alt": "2020-06-17_09-51-08.png",
+          "width": "",
+          "height": ""
+        }
+      ],
+      "links": [
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005246547-How-to-set-up-coupons-for-Magento-1-x#site-content",
+          "text": "Skip to main content"
+        },
+        {
+          "href": "https://www.klaviyo.com",
+          "text": "Home"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center"
+        },
+        {
+          "href": "https://www.klaviyo.com/enterprise",
+          "text": "Enterprise"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Partners"
+        },
+        {
+          "href": "https://www.klaviyo.com/careers",
+          "text": "Careers"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": "Log in"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": ""
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center Find step-by-step instructions and troubleshooting solutions in our knowledge base."
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000032731",
+          "text": "Integrations"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000312411",
+          "text": "Flows"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867867",
+          "text": "Audience"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867667",
+          "text": "Campaigns"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/360000190711",
+          "text": "Sign-up forms"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000873988",
+          "text": "Deliverability & compliance"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/29173800271259",
+          "text": "SMS"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/16638219724187",
+          "text": "Reviews"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/18073014919195",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/34141283979931",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/37659126754075",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/33948021740315",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/39746685522331",
+          "text": "WhatsApp"
+        },
+        {
+          "href": "https://academy.klaviyo.com",
+          "text": "Klaviyo Academy Expert training and education to help you succeed with Klaviyo, and beyond."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Quick+guide&resource=academy_courses",
+          "text": "Quick guides Learn marketing strategies and concepts in 15 minutes or less."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Course&resource=academy_courses",
+          "text": "Courses Master key marketing topics through structured lessons and exams."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/best-practices",
+          "text": "Best practices Discover top product and marketing strategies for your business."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/learning-paths",
+          "text": "Learning paths Complete curated learning journeys tailored to your marketing goals."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses",
+          "text": "Explore all resources"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Live+training&resource=academy_courses",
+          "text": "Live trainings Build confidence through hands-on interactive workshops and thought-provoking strategy sessions."
+        },
+        {
+          "href": "https://www.bigmarker.com/klaviyo-customer-education/Office-hours-Getting-started-with-Klaviyo",
+          "text": "Live office hours Join a strategic discussion where you can ask questions and get answers in real-time."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/private-live-training",
+          "text": "1:1 Live training Book a private training session with an expert to jumpstart your platform knowledge and confidence."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/credentials",
+          "text": "Klaviyo credentials Dig deeper into select topics and showcase your expertise with a final exam to earn a certificate and digital badge."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/certificates/klaviyo-practitioner-certificate",
+          "text": "Klaviyo practitioner certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/deliverability-certificate",
+          "text": "Deliverability certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/developer-certificate",
+          "text": "Klaviyo developer certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses&select=Certificate",
+          "text": "See all certificates"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Klaviyo Community Join our thriving community network to connect with brands like yours—online and in person."
+        },
+        {
+          "href": "https://community.klaviyo.com/topic/new",
+          "text": "Ask a question Post a question and get thoughtful answers from Klaviyo powerusers."
+        },
+        {
+          "href": "https://community.klaviyo.com/p/roadmap",
+          "text": "Product roadmap"
+        },
+        {
+          "href": "https://community.klaviyo.com/search/activity/recent",
+          "text": "Recent threads"
+        },
+        {
+          "href": "https://community.klaviyo.com/p/champions",
+          "text": "Meet the Champions"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups",
+          "text": "Browse all groups Your people are waiting. New ideas and connections are a click away."
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/developer-group-64",
+          "text": "Developer group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/entrepreneur-user-group-118",
+          "text": "Entrepreneur group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/woo-user-group-87",
+          "text": "WooCommerce group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/new-york-meetup-chapter-82",
+          "text": "New York City"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/los-angeles-meetup-chapter-83",
+          "text": "Los Angeles"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/austin-meetup-chapter-85",
+          "text": "Austin"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/san-diego-meetup-chapter-86",
+          "text": "San Diego"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/amsterdam-meetup-chapter-84",
+          "text": "Amsterdam"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Klaviyo Developers Access API documentation and developer guides to help you build with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/get_started",
+          "text": "Get started Access key resources and a step-by-step checklist for how to start developing with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/build_your_integration",
+          "text": "Grow your app's reach Learn how to join our ecosystem and get your app listed on our marketplace."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/developer-tools",
+          "text": "Developer tools Generate sample data, monitor your API usage, and access our Postman collections."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/reference/api_overview",
+          "text": "API reference Browse our full catalog of API docs."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/changelog_",
+          "text": "Changelog"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/api_versioning_and_deprecation_policy",
+          "text": "Versioning & deprecation policy"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/rate_limits_and_error_handling",
+          "text": "Rate limits & error handling"
+        },
+        {
+          "href": "https://youtube.com/playlist?list=PLHkNfHgtxcUanrkMnKPdkRzuWU7MGv_xM&si=pkG-KH7IT_TUHOGC",
+          "text": "API tutorials on YouTube Subscribe to our Klaviyo API Tutorials playlist for easy access to step-by-step developer walkthroughs."
+        },
+        {
+          "href": "https://www.klaviyo.com/contact-us",
+          "text": "Contact us"
+        },
+        {
+          "href": "https://www.klaviyo.com/sign-up",
+          "text": "Sign up"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": "Search"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005246547",
+          "text": "United States - EN"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/de-de/articles/115005246547",
+          "text": "Deutschland - DE"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-es/articles/115005246547",
+          "text": "España - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-mx/articles/115005246547",
+          "text": "México - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/fr-fr/articles/115005246547",
+          "text": "France - FR"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/it-it/articles/115005246547",
+          "text": "Italia - IT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/ko-kr/articles/115005246547",
+          "text": "한국 - KO"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/nl-nl/articles/115005246547",
+          "text": "Nederland - NL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pl-pl/articles/115005246547",
+          "text": "Polska - PL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pt-br/articles/115005246547",
+          "text": "Brasil - PT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/sv-se/articles/115005246547",
+          "text": "Sverige - SV"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/4414879524891",
+          "text": "Content"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/14544782046619",
+          "text": "Coupons"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/49375551401115",
+          "text": "Coupons and ecommerce integrations"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005246547-How-to-set-up-coupons-for-Magento-1-x#h_01KKKQ1Q7BCPZ1W3A6EGY13N48",
+          "text": "You will learn"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005246547-How-to-set-up-coupons-for-Magento-1-x#h_01KKKQ1Q7B3TJKGF89TYZ0BT6H",
+          "text": "Requirements"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005246547-How-to-set-up-coupons-for-Magento-1-x#h_01KKKQ1Q7BEAGKX5DGW5DZ1X5G",
+          "text": "Enable the REST API"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005246547-How-to-set-up-coupons-for-Magento-1-x#h_01KKKQ1Q7BJYCAXY7H6T8AZ0FG",
+          "text": "Generate REST Credentials in Magento"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005246547-How-to-set-up-coupons-for-Magento-1-x#h_01KKKQ1Q7BAXMPJXRPGA44CWQM",
+          "text": "Setup Magento Coupons in Klaviyo"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005246547-How-to-set-up-coupons-for-Magento-1-x#h_01KKKQ1Q7BC9KKS4RNYC9K2G7W",
+          "text": "Create a Magento Coupon in Klaviyo"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005246547-How-to-set-up-coupons-for-Magento-1-x#h_01KKKQ1Q7BXSRN357GTWCV9KCK",
+          "text": "Use a Magento Coupon in a Flow Email"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005246547-How-to-set-up-coupons-for-Magento-1-x#h_01KKKQ1Q7B6YX3YYWARYXYCZAZ",
+          "text": "Use Unique Coupons in SMS Flow Messages"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005246547-How-to-set-up-coupons-for-Magento-1-x#h_01GZ248ZJVNJTRVFYKMTKFXFEK",
+          "text": "Troubleshoot Errors"
+        },
+        {
+          "href": "http://docs.magento.com/m1/ce/user_guide/marketing/price-rules-shopping-cart.html",
+          "text": "Shopping Cart Price Rules"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005082187",
+          "text": "enabled the Magento integration in Klaviyo and installed the Klaviyo extension in Magento"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005246547-How-to-set-up-coupons-for-Magento-1-x#h_01GZ248ZJVNJTRVFYKMTKFXFEK",
+          "text": "resource on troubleshooting coupons for Magento 1x"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005246547#enable-the-rest-api2",
+          "text": "Enable the REST API section above"
+        },
+        {
+          "href": "https://www.klaviyo.com/integration/magento",
+          "text": "navigate to your Magento integration"
+        },
+        {
+          "href": "https://www.klaviyo.com/coupons",
+          "text": "the Coupons tab in your Klaviyo account"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360044863132-Using-Unique-Coupon-Codes-in-SMS-and-MMS-Messages",
+          "text": "SMS/MMS messages"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005258208-Show-or-Hide-Template-Blocks-Based-on-Dynamic-Variables",
+          "text": "hidden blocks"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005246547#enable-the-rest-api",
+          "text": "guide to setting up coupons for Magento in the section linked here"
+        },
+        {
+          "href": "https://devhacksandgoodies.wordpress.com/2014/06/27/apache-pass-authorization-header-to-phps-_serverhttp_authorization/",
+          "text": "this post for more information"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115001002272",
+          "text": "Learn how to contact support"
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": ""
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": "Visit Community"
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": ""
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": "Hire a partner"
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/about",
+          "text": "About Klaviyo"
+        },
+        {
+          "href": "https://www.klaviyo.com/newsroom",
+          "text": "Newsroom"
+        },
+        {
+          "href": "https://investors.klaviyo.com/overview/default.aspx",
+          "text": "Investor relations"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Agency and tech partners"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Developers"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/retail",
+          "text": "Retail and ecommerce"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/restaurants",
+          "text": "Restaurant marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/wellness",
+          "text": "Wellness"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform",
+          "text": "B2C CRM overview"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai",
+          "text": "Klaviyo AI (K:AI)"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/marketing-automation",
+          "text": "Klaviyo Marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-service",
+          "text": "Klaviyo Service"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/analytics",
+          "text": "Klaviyo Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-data-platform",
+          "text": "Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare",
+          "text": "Klaviyo vs. Klaviyo alternatives"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-mailchimp",
+          "text": "Klaviyo vs. Mailchimp"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-postscript",
+          "text": "Klaviyo vs. Postscript"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-attentive",
+          "text": "Klaviyo vs. Attentive"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-salesforce-marketing-cloud",
+          "text": "Klaviyo vs. Salesforce"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-listrak",
+          "text": "Klaviyo vs. Listrak"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/omnichannel",
+          "text": "Omnichannel marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/email-marketing",
+          "text": "Email marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing",
+          "text": "SMS marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing/rcs",
+          "text": "RCS for Business"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/mobile-app-marketing",
+          "text": "Mobile app marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/whatsapp",
+          "text": "WhatsApp marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/social",
+          "text": "Social marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources",
+          "text": "Marketing resources"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources/marketing-campaign-calendar",
+          "text": "Marketing campaign calendar"
+        },
+        {
+          "href": "https://www.klaviyo.com/glossary",
+          "text": "Marketing glossary"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/email-subject-line-generator",
+          "text": "Subject line generator"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/roi-calculator",
+          "text": "ROI calculator"
+        },
+        {
+          "href": "https://www.klaviyo.com/customers",
+          "text": "Case studies"
+        },
+        {
+          "href": "https://www.klaviyo.com/composer",
+          "text": "Composer Beta"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/marketing-agent",
+          "text": "Marketing Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/customer-agent",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/customer-experience-hub",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/helpdesk",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/marketing-analytics",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/advanced-cdp",
+          "text": "Advanced Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/web-forms",
+          "text": "Web forms"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/email-templates",
+          "text": "Email templates"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/portfolio",
+          "text": "Portfolio"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform-integrations",
+          "text": "Apps and Integrations"
+        },
+        {
+          "href": "https://www.klaviyo.com/features",
+          "text": "Features"
+        },
+        {
+          "href": "https://www.klaviyo.com/whats-new",
+          "text": "What's new"
+        },
+        {
+          "href": "https://www.klaviyo.com/events",
+          "text": "Events"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help Center"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us",
+          "text": "Academy"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Community"
+        },
+        {
+          "href": "https://www.facebook.com/Klaviyo/",
+          "text": "Facebook"
+        },
+        {
+          "href": "https://twitter.com/klaviyo/",
+          "text": "Twitter"
+        },
+        {
+          "href": "https://www.linkedin.com/company/klaviyo/",
+          "text": "LinkedIn"
+        },
+        {
+          "href": "https://www.instagram.com/klaviyo/",
+          "text": "Instagram"
+        },
+        {
+          "href": "https://www.klaviyo.com/sitemap",
+          "text": "Site Map"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal",
+          "text": "Terms and Privacy"
+        },
+        {
+          "href": "https://www.klaviyo.com/security",
+          "text": "Security"
+        },
+        {
+          "href": "https://www.klaviyo.com/trust",
+          "text": "Trust"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal/intellectual-property-notices",
+          "text": "Intellectual Property Notices"
+        }
+      ],
+      "headings": [
+        {
+          "level": 1,
+          "id": "",
+          "text": "How to set up coupons (for Magento 1.x)"
+        },
+        {
+          "level": 2,
+          "id": "h_01KKKQ1Q7BCPZ1W3A6EGY13N48",
+          "text": "You will learn"
+        },
+        {
+          "level": 2,
+          "id": "h_01KKKQ1Q7B3TJKGF89TYZ0BT6H",
+          "text": "Requirements"
+        },
+        {
+          "level": 2,
+          "id": "h_01KKKQ1Q7BEAGKX5DGW5DZ1X5G",
+          "text": "Enable the REST API"
+        },
+        {
+          "level": 2,
+          "id": "h_01KKKQ1Q7BJYCAXY7H6T8AZ0FG",
+          "text": "Generate REST Credentials in Magento"
+        },
+        {
+          "level": 2,
+          "id": "h_01KKKQ1Q7BAXMPJXRPGA44CWQM",
+          "text": "Setup Magento Coupons in Klaviyo"
+        },
+        {
+          "level": 2,
+          "id": "h_01KKKQ1Q7BC9KKS4RNYC9K2G7W",
+          "text": "Create a Magento Coupon in Klaviyo"
+        },
+        {
+          "level": 2,
+          "id": "h_01KKKQ1Q7BXSRN357GTWCV9KCK",
+          "text": "Use a Magento Coupon in a Flow Email"
+        },
+        {
+          "level": 2,
+          "id": "h_01KKKQ1Q7B6YX3YYWARYXYCZAZ",
+          "text": "Use Unique Coupons in SMS Flow Messages"
+        },
+        {
+          "level": 2,
+          "id": "h_01GZ248ZJVNJTRVFYKMTKFXFEK",
+          "text": "Troubleshoot Errors"
+        },
+        {
+          "level": 3,
+          "id": "h_01KKKQ1Q7CR8V6QMMPE27XHJ6T",
+          "text": "Error Message: “Unable to connect to the REST API with the specified REST credentials. Please check that these credentials are valid in your Magento admin.\""
+        },
+        {
+          "level": 3,
+          "id": "h_01KKKQ1Q7C2BA2NT797HFFHBPJ",
+          "text": "Coupon codes populated into emails by Klaviyo are not unique -- all recipients appear to be receiving the same code."
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "Explore more from Klaviyo"
+        }
+      ]
+    }
+  },
+  "rendered_page": {
+    "status": "fetched",
+    "error": ""
+  }
+}

@@ -1,0 +1,150 @@
+<h2 id="h_01HGGNRN083CS9ARAVQ753H5X5">You will learn</h2>
+<p>Learn how to integrate OpenCart with Klaviyo. After completing these steps, you'll be able to personalize and target emails based on each customer's purchase and website activity. The OpenCart integration syncs every hour.</p>
+<h2 id="h_01HGGNRN08Z96RSJWKKAB9XTDE">Before you begin </h2>
+<p>Please note that Klaviyo does not sync your catalog from OpenCart.</p>
+<h2 id="h_01HGGNRN08XH5FK0M59YJKZBDR">Add the OpenCart integration</h2>
+<p>The process of adding Klaviyo's OpenCart integration is multi-step and requires taking actions inside of both OpenCart and Klaviyo.</p>
+<p>To get started, Klaviyo currently supports OpenCart 1.4.x and 1.5.x. Download the Klaviyo OpenCart module from here: <a href="https://www.klaviyo.com/media/downloads/OpenCartKlaviyo-1.1.0.tgz">https://www.klaviyo.com/media/downloads/OpenCartKlaviyo-1.1.0.tgz</a>.</p>
+<ol>
+<li>Unzip the file into the root of your OpenCart installation.</li>
+<li>Log in to the OpenCart admin section and go to the <strong>Extensions &gt; Modules</strong> page.</li>
+<li>Install the Klaviyo module and then click <em>Edit</em> for the Klaviyo module.</li>
+<li>The last thing to do with your OpenCart install is copy and paste the following PHP code at the end of the `upload/index.php`, right before the `$response-&gt;getOutput();` line:
+<pre><code class="language-php">// [Klaviyo] Save customer cart if it exists.
+if ($registry-&gt;get('cart')-&gt;hasProducts()) {
+  $registry-&gt;get('load')-&gt;model('module/klaviyo');
+
+  if ($registry-&gt;get('customer')-&gt;isLogged()) {
+    $registry-&gt;get('model_module_klaviyo')-&gt;saveCustomerCart(
+      session_id(),
+      $registry-&gt;get('customer')-&gt;getId(),
+      $session-&gt;data['cart']
+    );
+  } else if (array_key_exists('guest', $session-&gt;data)) {
+    $registry-&gt;get('model_module_klaviyo')-&gt;saveGuestCart(
+      session_id(),
+      $session-&gt;data['guest'],
+      $session-&gt;data['cart']
+    );
+  }
+}</code></pre>
+</li>
+<li>In Klaviyo, select the <strong>Integrations</strong> tab.</li>
+<li>Click <strong>Explore apps</strong> and search for <em>OpenCart</em>, then click the card. Then, click <strong>Install</strong>.</li>
+<li>You will be taken to an <em>Integration Settings </em>page. On the settings page, enter the URL of your OpenCart site and click <strong>Connect to OpenCart</strong>.<br><img src="https://klaviyo.zendesk.com/hc/article_attachments/28715969274139" width="599" height="483">
+</li>
+<li>On the next page, copy the API key under <em>Klaviyo OpenCart Module</em> and paste it into the Klaviyo module settings in OpenCart. Save the Klaviyo module settings in the OpenCart admin.<br><img src="https://klaviyo.zendesk.com/hc/article_attachments/28715969282587" width="503" height="178">
+</li>
+<li>If desired, check the setting <em>Add new OpenCart customers to a Klaviyo list</em>, then select a list from the dropdown.</li>
+<li>Back in Klaviyo, click <strong>Complete setup </strong>to start syncing data.</li>
+</ol>
+<h2 id="h_01HGGNRN08S8AA3CEX8TBPQ8BR">Install Klaviyo onsite tracking</h2>
+<p>To track onsite activity in OpenCart, first find your Klaviyo public API key by logging in to your account, clicking your account name in the lower left corner, and navigating to<strong> Settings &gt; API Keys</strong>. Your public key is six characters long. There are two types of onsite tracking you can install:</p>
+<ul>
+<li>
+<strong>Active on Site<br></strong>This metric is tracked whenever an identifiable browser visits your website</li>
+<li>
+<strong>Viewed Product<br></strong>This metric is tracked whenever an identifiable browser views a product page on your website</li>
+</ul>
+<h3 id="h_01HGGNRN08KY1XB7JTFJTSAP2H">Add "Active on Site" tracking</h3>
+<p>This metric is tracked whenever an identifiable browser visits your website. To begin tracking <em>Active on Site</em> activity:</p>
+<ol>
+<li>Add the following snippet of code to your main store template so it's included on all pages. You should place this snippet either with other analytics scripts you use or right before the closing <em>&lt;/body&gt;</em> tag:<br>
+<pre><code class="language-javascript">&lt;script type="text/javascript" async="" src="https://static.klaviyo.com/onsite/js/PUBLIC_API_KEY/klaviyo.js&gt;&lt;/script&gt;
+&lt;script type="text/javascript"&gt; 
+//Initialize Klaviyo object on page load
+!function(){if(!window.klaviyo){window._klOnsite=window._klOnsite||[];try{window.klaviyo=new Proxy({},{get:function(n,i){return"push"===i?function(){var n;(n=window._klOnsite).push.apply(n,arguments)}:function(){for(var n=arguments.length,o=new Array(n),w=0;w&lt;n;w++)o[w]=arguments[w];var t="function"==typeof o[o.length-1]?o.pop():void 0,e=new Promise((function(n){window._klOnsite.push([i].concat(o,[function(i){t&amp;&amp;t(i),n(i)}]))}));return e}}})}catch(n){window.klaviyo=window.klaviyo||[],window.klaviyo.push=function(){var n;(n=window._klOnsite).push.apply(n,arguments)}}}}(); &lt;/script&gt;
+</code></pre>
+</li>
+<li>Make sure to replace <code style="font-size: 15px;">PUBLIC_API_KEY</code> with your Klaviyo account's Public API key.</li>
+<li>If visitors or customers can create accounts for your store, add the following snippet directly below the first snippet:
+<pre><code class="language-javascript">&lt;script type="text/javascript"&gt;
+  var klaviyo = window.klaviyo || [];
+  {% if user.is_logged_in %}
+  klaviyo.identify({
+    $email: '{{ user.email }}',
+    $first_name: '{{ user.first_name }}',
+    $last_name: '{{ user.last_name }}'
+    });
+  {% endif %}
+&lt;/script&gt;</code></pre>
+</li>
+<li>Depending on the types of templates you use for your website, the <em>{% if user.is_logged_in %}</em> and <em>{{ user.email }} </em>syntax are likely different. Using the template language available, you want to check if the person viewing the current page is logged in. If so, you should output their email and name, if available. If you don't have name information, remove those two lines and the trailing comma after the email <em>$email</em> line.</li>
+</ol>
+<h3 id="h_01HGGNRN08TAYMFZRDXZBDM8GV">Add "Viewed Product" tracking</h3>
+<p>If you'd like to set up <a href="https://help.klaviyo.com/hc/en-us/articles/115002775252-Create-a-Browse-Abandonment-Flow">a Browse Abandonment flow</a> or build segments based on product browsing data, you'll want to add JavaScript event tracking for a "Viewed Product" metric.</p>
+<ol>
+<li>On your product page template, add the following snippet:
+<pre><code class="language-javascript">&lt;script type="text/javascript"&gt;
+    var klaviyo = window.klaviyo || [];
+    klaviyo.track("Viewed Product", {
+      Title: '{{ product.title }}',
+      ItemId: {{ product.id }},
+      Categories: {{ category in product.categories|json }}, // The list of categories is an array of strings. 
+      ImageUrl: '{{ product.image_url }}',
+      Url: '{{ product.url }}',
+      Metadata: {
+        Brand: '{{ product.brand }}',
+        Price: {{ product.price }},
+        CompareAtPrice: {{ product.compare_at_price }} // If you have a compare at price. You could also include this for a sale or special price.
+      }
+  });
+&lt;/script&gt;</code></pre>
+</li>
+<li>The snippet above uses the <code>{{ }}</code> placeholder syntax which may be different for your OpenCart store. The important part is that product fields are dynamically rendered based on which product page you're viewing.</li>
+<li>After <em>Viewed Product</em> tracking has been configured for your site, <em>Viewed Product</em> data should begin populating in your Klaviyo account as known visitors browse your product pages.</li>
+</ol>
+<h3 id="h_01HGGNRN08SW3W3WW2B9CQASV9">How onsite tracking works</h3>
+<p>When you add Klaviyo web tracking to your site, we are only able to track the browsing activity of "known browsers" - i.e. browsers that have visited and engaged at least once before. There are two key ways we are able to identify a site visitor for web tracking purposes:</p>
+<ul>
+<li>If someone has, at some point, clicked through a Klaviyo email to your website</li>
+<li>If someone has, at some point, subscribed/opted-in through a Klaviyo form</li>
+</ul>
+<p>Klaviyo will not track anonymous browsers.</p>
+<h2 id="h_01HGGNRN08PSDKEACG7PHAB1K3">Monitor the Klaviyo sync</h2>
+<p>The time it will take to sync all historic customer and order data from your OpenCart store depends on the size of your store. Once this historic sync is complete, you will see a green border around your OpenCart integration under <em>Enabled Integrations</em>.</p>
+<p>To check your integration:</p>
+<ol>
+<li>Navigate to your account's <strong>Metrics</strong> tab, found under <strong>Analytics</strong>. Here, you can filter to view all OpenCart metrics. Find OpenCart's <em>Placed Order</em><strong> </strong>metric and click on the Activity Feed icon. If your integration has begun syncing data, you will start to see <em>Placed Order</em> events populate here.</li>
+<li>We will automatically sync all historic order data. To verify this, you can compare the number of event on a particular day in Klaviyo with what's in your OpenCart interface and confirm they match.</li>
+<li>For example, when exploring the Placed Order metric, you can mouse over yesterday's data point or look at the table of data below the chart to see how many orders were reported yesterday.</li>
+<li>Compare that number to what's stored in OpenCart from yesterday and you should see they match exactly. If they don't, the issue is most likely that your Klaviyo account's timezone doesn't match your set OpenCart timezone.</li>
+<li>
+<p>To check or update your account's timezone:</p>
+<ul>
+<li>
+<p>Click your organization name in the bottom left.</p>
+</li>
+<li>Select <strong>Settings</strong>.</li>
+<li>Go to the <strong>Organization </strong>tab. </li>
+</ul>
+</li>
+</ol>
+<h2 id="h_01HGGNRN08EAYYQVN6VPRDQDXE">Data synced from OpenCart</h2>
+<ul>
+<li>
+<strong>Sales and order data<br></strong>Which products were purchased, including product details and images.</li>
+<li>
+<strong>Customer information<br></strong>First name, last name, location, and customer group.</li>
+<li>
+<strong>Started checkout data<br></strong>Used to trigger Abandoned Cart emails. This is enabled by the PHP code snippet you added when integrating.</li>
+<li>
+<strong>Fulfilled order data<br></strong>Used to track when orders are shipped.</li>
+<li>
+<strong>Onsite tracking<br></strong>When people visit your website</li>
+</ul>
+<p>To your OpenCart metrics, navigate to<strong> Analytics &gt; Metrics </strong>in Klaviyo<strong>,</strong> where you can filter by OpenCart.</p>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/28715969267995" alt="Metrics tab in Klaviyo filtered by OpenCart with Fulfilled Order, Ordered Product, Placed Order, and Started Checkout in list"></p>
+<p>By default, Klaviyo syncs the following statuses for <em>Placed Order</em> and <em>Fulfilled Order</em> metrics:</p>
+<ul>
+<li>
+<strong>Placed Order: </strong>Pending, Processed, Processing, Shipped, Complete</li>
+<li>
+<strong>Fulfilled Order: </strong>Shipped, Complete</li>
+</ul>
+<h2 id="h_01HGGNRN08Q72TEEBPBP6ZDEGE">Additional resources</h2>
+<ul>
+<li><a href="https://klaviyo.zendesk.com/hc/en-us/articles/115005253208" target="_blank" rel="noopener">How often integrations sync reference</a></li>
+<li>Need more help integrating with Klaviyo? Check out <a href="https://klaviyo.partnerpage.io/?utm_source=helpcenter&amp;utm_medium=integrations" target="_blank" rel="noopener">Klaviyo's Agency Partners</a>
+</li>
+</ul>

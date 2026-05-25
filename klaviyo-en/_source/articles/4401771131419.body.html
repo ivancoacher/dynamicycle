@@ -1,0 +1,68 @@
+<h2 id="h_01HH2RA2BJ0C9ZT1V55JAS9R1M">You will learn</h2>
+<p>Learn how to create a Klaviyo flow for partial orders placed through Shopify. If you often deliver orders as separate shipments rather than all at once (or your fulfillment center does), you can let customers know when each item is fulfilled via a fulfilled partial order flow. This flow lets your customers know exactly when a certain item is on its way, leading to a better overall customer experience.</p>
+<p>In Klaviyo, you can use the <em>Fulfilled Partial Order</em> metric to trigger this flow when one or more items are fulfilled. You can also combine this with a standard fulfilled order flow, which sends only when every item in an order has been fulfilled. In this article, we go over different options for configuring your partial and full fulfillment order flows.</p>
+<h2 id="h_01HH2RA2BJYHE22XCYRFBQRHR2">Create a fulfilled partial order flow from the flow library</h2>
+<p>After you integrate your Shopify store with Klaviyo, you'll find several best practice flows populated automatically within the <a href="https://www.klaviyo.com/library/flows">flow library</a>, including a pre-built fulfilled partial order flow.</p>
+<ol>
+<li>Navigate to the <strong>Flows</strong> tab.</li>
+<li>Click <strong>Create flow.</strong>
+</li>
+<li>Search for <em>Partial Shipping Confirmation.</em>
+</li>
+<li>Click on one of the pre-built flow options.</li>
+</ol>
+<h2 id="01HH2RPKSFAJF7KKHW05090KZ1">Set up a fulfilled partial order flow from scratch</h2>
+<p>To create a fulfilled partial order flow from scratch:</p>
+<ol>
+<li>Create a metric-triggered flow.</li>
+<li>For the flow trigger, select <strong>Fulfilled Partial Order </strong>from the Shopify metrics under <em>Your metrics</em>.<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/34376136026267" alt="" width="298" height="436">
+</li>
+<li>Click <strong>Save</strong>.</li>
+<li>Add in your message(s). If you plan to send an SMS, first drag in a conditional split so that the text message only sends to those who are opted in to SMS marketing, as shown below. In this case, we recommend adding an email, so that everyone who isn’t subscribed to SMS will still get updated about their order.<br>
+</li>
+</ol>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/28720772234907" alt="Conditional split that checks for SMS consent." width="550" height="526"></p>
+<h2 id="h_01HH2RA2BJEZF7WW9M2D528KVH">Options for sending fulfillment messages</h2>
+<p>Depending on your use case, you can set up your fulfilled and fulfilled partial order flows in several different ways. For example, you can send:</p>
+<ul>
+<li>When the entire order is fulfilled</li>
+<li>Each time part of the order is fulfilled</li>
+<li>Do both, depending on whether or not the entire order is fulfilled at the same time</li>
+</ul>
+<h3 id="h_01HH2RA2BJ6YS4QPRCWR0RYXJ2">Sending only when the entire order is fulfilled</h3>
+<p>If you want to send only one message when the entire order is fulfilled, use a regular fulfilled order flow. This is essentially the same as a fulfilled partial order flow except that it is triggered by the <em>Fulfilled Order</em> metric.</p>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/28720772238747" alt="Fulfilled order email following the Fulfilled Order trigger." width="371" height="375"></p>
+<h3 id="h_01HH2RA2BJEEDP282C6J111K6F">Send when each part of the order is fulfilled</h3>
+<p>If you want to send messages each time part of the order is fulfilled, you can use the fulfilled partial order flow shown above.</p>
+<p>When the last item(s) in an order are fulfilled, you have two options:</p>
+<ul>
+<li>Sending two messages, one from a fulfilled order flow and one from a fulfilled partial order flow</li>
+<li>Sending one message via a fulfilled order flow</li>
+</ul>
+<p>For the first approach, you do not need to change either your fulfilled or fulfilled partial order flows. However, make sure to explain exactly what the difference is in your messages. For instance, the fulfilled order flow should make it clear that the entire order has been fulfilled, rather than it being partially done. </p>
+<p>If you want to only send one message for the final item, add a trigger filter to your fulfilled partial order flow. Set the filter to be <em>FulfillmentStatus equals partial</em>.</p>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/28720772241179" alt="Trigger filter with configuration 'FulfillmentStatus equals partial'." width="401" height="279"></p>
+<h3 id="h_01HH2RA2BJ71SHB4CE5KMY34RR">Send different flows based on if the entire order is fulfilled</h3>
+<p>You can also have the best of both worlds:</p>
+<ul>
+<li>Send a message each time part of an order is fulfilled</li>
+<li>Send a single message when the entire order is fulfilled at the same time</li>
+</ul>
+<p>To set this up, you do not need to add any trigger or flow filters to your partial fulfillment flow.</p>
+<p>In your regular fulfillment flow, add the trigger filter <em>HasPartialFulfillments is false</em>.</p>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/28720760472731" alt="Trigger filter with configuration 'HasPartialFulfillments is false'." width="401" height="247"></p>
+<h2 id="h_01HH2RA2BJ3D8VZW1R3MNCW7G3">Additional resources</h2>
+<ul>
+<li>Find out more about what syncs from Shopify in: <a href="https://help.klaviyo.com/hc/en-us/articles/115005080447">Shopify data reference</a>
+</li>
+<li>Learn more about flows: 
+<ul>
+<li><a href="https://help.klaviyo.com/hc/en-us/articles/360003165732">How to use flows to send transactional emails</a></li>
+<li><a href="https://help.klaviyo.com/hc/en-us/articles/360028872611">How to create a post-purchase flow</a></li>
+<li><a href="https://help.klaviyo.com/hc/en-us/articles/115002775212">How to create an upsell or cross-sell flow</a></li>
+</ul>
+</li>
+</ul>
+<p></p>

@@ -1,0 +1,396 @@
+<h2 id="h_01HCMT58PNZ5897T4GM5X9C8BQ">You will learn</h2>
+<p>Learn how to set up a branded sending domain (also known as a dedicated sending domain) so that when emails reach inbox providers, they will appear to come from your brand instead of Klaviyo.</p>
+<div class="bs-callout bs-callout-default">
+<p>If you are bringing over an existing branded sending domain from a prior email service provider (ESP), head to our detailed <a href="https://help.klaviyo.com/hc/en-us/articles/9042531198747">migration guide</a>. </p>
+</div>
+<p></p>
+<p>
+<script src="https://fast.wistia.com/embed/medias/yuhwp4mwi2.jsonp" async="async"></script>
+<script src="https://fast.wistia.com/assets/external/E-v1.js" async="async"></script>
+</p>
+<div class="wistia_responsive_padding" style="padding: 56.25% 0 0 0; position: relative;">
+<div class="wistia_responsive_wrapper" style="height: 100%; left: 0; position: absolute; top: 0; width: 100%;">
+<div class="wistia_embed wistia_async_yuhwp4mwi2 qualityMin=720 seo=false videoFoam=true" style="height: 100%; position: relative; width: 100%;">
+<div class="wistia_swatch" style="height: 100%; left: 0; opacity: 0; overflow: hidden; position: absolute; top: 0; transition: opacity 200ms; width: 100%;"><img style="filter: blur(5px); height: 100%; object-fit: contain; width: 100%;" src="https://fast.wistia.com/embed/medias/yuhwp4mwi2/swatch" alt="" aria-hidden="true"></div>
+</div>
+</div>
+</div>
+<h2 id="h_01HCMT58PNKA2WEZ30451JVDGW">What is a branded sending domain?</h2>
+<p>A branded sending domain allows you to send emails that appear to be coming from your brand and allows you to have better overall control of your sender reputation. Any company is eligible to create a branded sending domain.</p>
+<p>By default, most users will start out sending from a shared IP and Klaviyo domain. This domain will appear in the sender information at the top of an email message as shown below (i.e., “sent on behalf of '' or “via klaviyomail.com”).</p>
+<p>In the example below from Gmail, your recipients see that your sender email address includes "via klaviyomail.com” because you are using a shared sending domain.</p>
+<p class="wysiwyg-text-align-center"><img src="https://klaviyo.zendesk.com/hc/article_attachments/28723622866075" alt="An example of an email with klaviyomail.com domain before it has been updated"></p>
+<p>By moving to a branded sending domain, you will remove the "via klaviyomail.com" message that is displayed beside your sender email address. This also means that your emails will no longer be sent by a shared domain, allowing inbox providers to more easily verify your identity and pass <a href="https://help.klaviyo.com/hc/en-us/articles/4402601857307">email authentication protocols like DMARC</a>. </p>
+<div class="bs-callout bs-callout-default">
+<p>Google and Yahoo have announced new sender requirements that they are planning to start enforcing in February of 2024. While already best practice, setting up a branded sending domain will be a requirement for bulk senders to land in Gmail inboxes.</p>
+<p>Google considers those who send 5000 or more emails to Google accounts per day to be "bulk senders." All traffic from a sender counts towards that 5000 email threshold, including transactional emails. </p>
+<p>Learn more about <a href="https://www.klaviyo.com/blog/gmail-update">Gmail and Yahoo’s upcoming sender requirements.</a></p>
+</div>
+<h2 id="h_01HCMT58PNW2A4VPKP41Z1BV26">About generating domain name systems (DNS) with Klaviyo</h2>
+<p>A key part of connecting a branded sending domain is generating the required DNS records. To generate your records, you'll need to enter the information below when setting up your branded sending domain in Klaviyo.</p>
+<ul>
+<li>
+<strong>Root domain</strong><br>
+This is the domain that you purchased or registered with a domain registrar, and it reflects your brand's website domain. You may also have email addresses that reflect this domain. For example, if your company is called <em>Hello World</em>, your brand's root domain may be <em>helloworld.com</em> and your friendly from-address may be <em>name@helloworld.com</em>.</li>
+<li>
+<strong>Branded sending domain</strong><br>
+This is the domain that will be used to send emails from Klaviyo and will appear in your email headers. It's important to note that the branded sending domain must have a unique, unused subdomain so as not to interfere with any external email configurations on your root domain. The most commonly used subdomain name at Klaviyo is "send." Using the example above, Hello World's branded sending domain could be <em>send.helloworld.com</em>. However, you can use any subdomain that is not already in use.</li>
+</ul>
+<div class="bs-callout bs-callout-default">
+<p>Multiple companies, and thus multiple Klaviyo accounts, can use a given sending domain as long as all relevant DNS records are in place. If your company has multiple child brands with separate Klaviyo accounts, you can use the same branded sending domain in each account. In order to do this, you will need to connect the branded sending domain to each account and generate the unique DNS records required for each one.</p>
+</div>
+<h2 id="h_01HCMVG59HRH4JK31ES0H9K3S3">Dynamic vs. static routing </h2>
+<p>When setting up your branded sending domain, you can select whether you’d like to delegate your subdomain to Klaviyo so it can dynamically select the best sending provider option. </p>
+<p>By delegating your subdomain, you are providing Klaviyo authorization to manage your brand's subdomain and create DNS records. These permissions are only used for tasks related to your sending, and subdomain delegation does not impact your brand's root domain or any other subdomains.</p>
+<p>You can revoke the subdomain delegation at any point by removing the associated DNS records added during the branded sending domain setup process. </p>
+<p>In Klaviyo, you can select the following routing options when setting up your branded domain: </p>
+<ul>
+<li>
+<strong>Dynamic</strong><br>
+Delegate your subdomain to Klaviyo to dynamically select an email sending provider for optimal performance, reputation, and stability.</li>
+<li>
+<strong>Static</strong><br>
+Allow Klaviyo to send email through a single, static email sending provider.</li>
+</ul>
+<p>When generating DNS records, Klaviyo will create NS records for the <em>Dynamic</em> routing option, and CNAME records for the <em>Static</em> routing option.</p>
+<div class="bs-callout bs-callout-default">
+<p>Some DNS providers do not support NS records. If your DNS provider does not support NS records, you must use the <em>Static</em> routing option. </p>
+</div>
+<p>Klaviyo recommends selecting the <em>Dynamic </em>routing option to best optimize your sending performance. </p>
+<p>If you are on a branded sending domain created prior to this feature, or decide you'd like to move from <em>Static</em> to <em>Dynamic</em>, remove your domain in Klaviyo and delete the existing CNAME records for the subdomain in your DNS provider. Once complete, go through the setup process with the <em>Dynamic</em> option. Note that record propagation can take up to 48 hours. </p>
+<h2 id="h_01HCMT58PN7S90JCFTVCTCQ0BD">Requirements for creating a branded sending domain</h2>
+<h3 id="h_01HCMT58PNYW55PDR6TDCR3PBP">Before you begin </h3>
+<p>Before starting this process, new Klaviyo accounts should make sure that you'll have time to <a href="https://help.klaviyo.com/hc/en-us/articles/360025945671">warm your infrastructure</a>.</p>
+<p>Additionally, it is important that you own the domain you are using to send email, and you, or someone on your team, has access to the DNS host to create the required records.</p>
+<div class="bs-callout bs-callout-default">
+<p>Existing Klaviyo customers moving to a branded sending domain do not have to warm infrastructure again, as long as you have:</p>
+<ul>
+<li>A domain that has been registered for at least 30 days AND</li>
+<li>You’ve used the domain to send email already (e.g., you used this domain in the past with a prior email service provider or with Klaviyo in your from address).</li>
+</ul>
+</div>
+<p>Before applying any domain changes to your account, pause all sending. Once you have applied the change and tested, you can then resume flows and schedule any future campaigns.</p>
+<h3 id="h_01HCMT58PN59ZBM7HZVS06Q0M4">Checklist</h3>
+<ol>
+<li>Connect branded sending domain and generate DNS records.</li>
+<li>Update DNS records with your DNS provider (note that this is not done within Klaviyo).</li>
+<li>Verify and apply your domain.</li>
+<li>New Klaviyo accounts can then warm their sending infrastructure. For existing Klaviyo accounts with at least a 30 day sending history, they can return to normal sending and do not have to warm their infrastructure again.</li>
+</ol>
+<h2 id="h_01HCMT58PN23FZWBGHTNDDRY3K">Generate DNS records in Klaviyo</h2>
+<p>Klaviyo requires 3 CNAME or 4 NS records for email authentication, and one TXT record for domain ownership verification. The Dynamic routing option uses NS records, while the Static routing option uses CNAME records.</p>
+<div class="bs-callout bs-callout-default">
+<p>Only those with <em>Owner</em>, <em>Admin</em>, <em>Manager</em>, and <em>Campaign Coordinator</em><a href="https://help.klaviyo.com/hc/en-us/articles/115005231648">user roles</a> can set up a branded sending domain.</p>
+</div>
+<ol>
+<li>Click on your company name in the bottom left corner of your account.</li>
+<li>Select <strong>Settings</strong>.<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28723628194843" alt="Klaviyo account menu in bottom left corner" width="375" height="458">
+</li>
+<li>Choose <strong>Domains </strong>from the main tab.</li>
+<li>Select<strong> Add Domain.</strong>
+</li>
+<li>Verify your brand's root domain is correct. Klaviyo automatically pulls the domain from your account. <br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28723622878235" alt="root domain.jpg" width="400" height="331">
+</li>
+<li>Click <strong>Next</strong>.</li>
+<li>Specify an arbitrary and unused subdomain (i.e., one that you do not currently have in use elsewhere in your marketing) under <em>Sending domain</em> (e.g., "send").<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/38091860756891" alt="">
+</li>
+<li>Select your desired <em>Routing</em> type (i.e., <em>Dynamic</em> or <em>Static</em>).<br>
+
+<div class="bs-callout bs-callout-default">
+<p>The <em>Dynamic</em> option is only available for domains that support a dynamic configuration.</p>
+</div>
+</li>
+<li>Select whether you’d like to add a DMARC record to your domain (this is recommended to meet Gmail and Yahoo sender requirements). Only domains currently missing a DMARC record will see this option.</li>
+<li>Select whether you want to connect a domain with Entri, or set it up manually.<br>
+</li>
+</ol>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/38092031975067" alt=""></p>
+<div class="bs-callout bs-callout-default">
+<p>Only domains eligible for an integration with Entri will see the automatic setup option. </p>
+</div>
+<p>If you choose to manually set up your domain, the generated DNS records will be presented to you so you can manually add them to your DNS. With automatic configuration through Entri, the records will be added automatically on your behalf.</p>
+<div class="bs-callout bs-callout-default">
+<p>At this time it is not possible to use a static branded sending domain with dedicated click tracking on Sendgrid infrastructure. If you are using dedicated click tracking with Sendgrid, update your CNAME records to use Klaviyo infrastructure or set up a dynamic branded sending domain.</p>
+</div>
+<h3 id="h_01J3DR7QMBA9Y5SC6W620FPWSA">DNS records</h3>
+<p class="wysiwyg-text-align-left">In an example where the intended sending domain is <em>send.helloworld.com</em>, with “send” as the subdomain and “helloworld.com” as the root domain, the generated DNS records will have the following structure.</p>
+<div class="bs-callout bs-callout-default">
+<p class="wysiwyg-text-align-left">These are just examples and the actual CNAME record values for your account will be different. Make sure to use the values generated in your account. </p>
+</div>
+<table style="width: 650px; height: 267px">
+<tbody>
+<tr>
+<td style="width: 233.906px; height: 10px"><strong>Host</strong></td>
+<td style="width: 315.903px; height: 10px"><strong>Value</strong></td>
+<td style="width: 65.7465px; height: 10px"><strong>Record Type</strong></td>
+</tr>
+<tr>
+<td style="width: 233.906px; height: 42px">send.helloworld.com</td>
+<td style="width: 315.903px; height: 42px">ns1.klaviyo.com</td>
+<td style="width: 65.7465px; height: 42px">NS</td>
+</tr>
+<tr>
+<td style="width: 233.906px; height: 22px">send.helloworld.com</td>
+<td style="width: 315.903px; height: 22px">ns2.klaviyo.com</td>
+<td style="width: 65.7465px; height: 22px">NS</td>
+</tr>
+<tr>
+<td style="width: 233.906px; height: 22px">send.helloworld.com</td>
+<td style="width: 315.903px; height: 22px">ns3.klaviyo.com</td>
+<td style="width: 65.7465px; height: 22px">NS</td>
+</tr>
+<tr>
+<td style="width: 233.906px; height: 24px">send.helloworld.com</td>
+<td style="width: 315.903px; height: 24px">ns4.klaviyo.com</td>
+<td style="width: 65.7465px; height: 24px">NS</td>
+</tr>
+<tr>
+<td style="width: 233.906px; height: 24px">helloworld.com</td>
+<td style="width: 315.903px; height: 24px">klaviyo-site-verification=public_API_key</td>
+<td style="width: 65.7465px; height: 24px">TXT</td>
+</tr>
+</tbody>
+</table>
+<p>With the <em>Static </em>routing option that uses CNAME records, the records will look like: </p>
+<table style="width: 651px; height: 215px">
+<tbody>
+<tr>
+<td style="width: 230.781px; height: 10px"><strong>Host</strong></td>
+<td style="width: 321.319px; height: 10px"><strong>Value</strong></td>
+<td style="width: 64.4444px; height: 10px"><strong>Record Type</strong></td>
+</tr>
+<tr>
+<td style="width: 230.781px; height: 42px">send.helloworld.com</td>
+<td style="width: 321.319px; height: 42px">1.klaviyodns.com</td>
+<td style="width: 64.4444px; height: 42px">CNAME</td>
+</tr>
+<tr>
+<td style="width: 230.781px; height: 22px">kl._domainkey.helloworld.com</td>
+<td style="width: 321.319px; height: 22px">kl1.domainkey.1.klaviyodns.com</td>
+<td style="width: 64.4444px; height: 22px">CNAME</td>
+</tr>
+<tr>
+<td style="width: 230.781px; height: 22px">kl2._domainkey.helloworld.com</td>
+<td style="width: 321.319px; height: 22px">kl2.domainkey.1.klaviyodns.com</td>
+<td style="width: 64.4444px; height: 22px">CNAME</td>
+</tr>
+<tr>
+<td style="width: 230.781px; height: 22px">helloworld.com</td>
+<td style="width: 321.319px; height: 22px">klaviyo-site-verification=public_API_key</td>
+<td style="width: 64.4444px; height: 22px">TXT</td>
+</tr>
+</tbody>
+</table>
+<p>If your brand's intended sending domain has two subdomains, such as <em>send.mail.helloworld.com,</em> “send” would be used for the subdomain and “mail.helloworld.com” for the root domain. The expected DNS records would be the following:</p>
+<table style="width: 651px; height: 260px">
+<tbody>
+<tr>
+<td style="width: 234.167px; height: 10px"><strong>Host</strong></td>
+<td style="width: 316.233px; height: 10px"><strong>Value</strong></td>
+<td style="width: 66.1458px; height: 10px"><strong>Record Type</strong></td>
+</tr>
+<tr>
+<td style="width: 234.167px; height: 42px">send.mail.helloworld.com</td>
+<td style="width: 316.233px; height: 42px">ns1.klaviyo.com</td>
+<td style="width: 66.1458px; height: 42px">NS</td>
+</tr>
+<tr>
+<td style="width: 234.167px; height: 22px">send.mail.helloworld.com</td>
+<td style="width: 316.233px; height: 22px">ns2.klaviyo.com</td>
+<td style="width: 66.1458px; height: 22px">NS</td>
+</tr>
+<tr>
+<td style="width: 234.167px; height: 22px">send.mail.helloworld.com</td>
+<td style="width: 316.233px; height: 22px">ns3.klaviyo.com</td>
+<td style="width: 66.1458px; height: 22px">NS</td>
+</tr>
+<tr>
+<td style="width: 234.167px; height: 24px">send.mail.helloworld.com</td>
+<td style="width: 316.233px; height: 24px">ns4.klaviyo.com</td>
+<td style="width: 66.1458px; height: 24px">NS</td>
+</tr>
+<tr>
+<td style="width: 234.167px; height: 24px">helloworld.com</td>
+<td style="width: 316.233px; height: 24px">klaviyo-site-verification=public_API_key</td>
+<td style="width: 66.1458px; height: 24px">TXT</td>
+</tr>
+</tbody>
+</table>
+<p>With the <em>Static </em>routing option that uses CNAME records, the records will look like: </p>
+<table style="width: 650px; height: 211px">
+<tbody>
+<tr>
+<td style="width: 256.719px; height: 10px"><strong>Host</strong></td>
+<td style="width: 309.375px; height: 10px"><strong>Value</strong></td>
+<td style="width: 54.8611px; height: 10px"><strong>Record Type</strong></td>
+</tr>
+<tr>
+<td style="width: 256.719px; height: 42px">send.mail.helloworld.com</td>
+<td style="width: 309.375px; height: 42px">1.klaviyodns.com</td>
+<td style="width: 54.8611px; height: 42px">CNAME</td>
+</tr>
+<tr>
+<td style="width: 256.719px; height: 22px">kl._domainkey.mail.helloworld.com</td>
+<td style="width: 309.375px; height: 22px">kl1.domainkey.1.klaviyodns.com</td>
+<td style="width: 54.8611px; height: 22px">CNAME</td>
+</tr>
+<tr>
+<td style="width: 256.719px; height: 22px">kl2._domainkey.mail.helloworld.com</td>
+<td style="width: 309.375px; height: 22px">kl2.domainkey.1.klaviyodns.com</td>
+<td style="width: 54.8611px; height: 22px">CNAME</td>
+</tr>
+<tr>
+<td style="width: 256.719px; height: 22px">helloworld.com</td>
+<td style="width: 309.375px; height: 22px">klaviyo-site-verification=public_API_key</td>
+<td style="width: 54.8611px; height: 22px">TXT</td>
+</tr>
+</tbody>
+</table>
+<h2 id="h_01J3DJFR28JWVF1T25D8M5DDKE">DMARC</h2>
+<p>DMARC is an <a href="https://help.klaviyo.com/hc/en-us/articles/4402601857307">email authentication</a> policy that allows inbox providers to verify the authenticity of an email, giving domain owners the ability to protect their domain from unauthorized use. A DMARC policy is also a <a href="https://www.klaviyo.com/blog/gmail-update">sender requirement</a> established by Gmail and Yahoo to successfully land in inboxes.</p>
+<p>If you’d like Klaviyo to generate a DMARC record, toggle on the Add DMARC record option when setting up your branded sending domain.</p>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/28723622880923" alt="Inner Wrapper.jpg" width="401" height="291"></p>
+<div class="bs-callout bs-callout-default">
+<p>Klaviyo will generate the following DMARC record, which will not impact the delivery of your emails but satisfy Gmail and Yahoo sender requirements:</p>
+<p>v=DMARC1; p=none;</p>
+</div>
+<h2 id="h_01HCMT58PNVM37BM628JXP3GJJ">Update your DNS records</h2>
+<h3 id="h_01J3DJJ0JDYS6072A3QBN3T0VN">Automatically publish records with Entri</h3>
+<p>To have Klaviyo automatically publish DNS records on your behalf, select the Connect with Entri option during the branded sending domain set up process.</p>
+<p>When proceeding with this option, Klaviyo will analyze your domain to detect the DNS provider it is hosted with. Once identified, you will be prompted to login to your DNS provider with the appropriate credentials, giving Klaviyo access to publish records on your behalf.</p>
+<div class="bs-callout bs-callout-default">
+<p>If Klaviyo is not able to detect your DNS provider, you’ll need to manually set up your branded sending domain.</p>
+</div>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/28723622903195" alt="login.jpg" width="400" height="394"></p>
+<p>If another member of your team manages your DNS settings, you can forward the login by selecting <em>Or forward login to someone else</em>. Additionally, you can view the records being added by selecting <em>Show added DNS</em> records.</p>
+<p>Once signed in, Klaviyo will set the necessary records and your domain will be successfully configured for sending. You’ll see a confirmation once the configuration is complete.</p>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/28723628222363" alt="Entri Modal.jpg" width="400" height="408"></p>
+<h3 id="h_01J3DJN13JC00VJKARZ0T1YM6Q">Set up your domain manually</h3>
+<p>If you choose to manually set up your branded sending domain, this step of the process requires you to complete tasks outside of Klaviyo. You will need to apply your new DNS records, which were generated in Klaviyo, to your domain. Note that you will need to go to your company’s DNS provider’s platform to make these changes. You may also need to consult your IT team on the below next steps.</p>
+<div class="bs-callout bs-callout-default">
+<p>You do not need to create your subdomain within your DNS settings. CNAME and NS records should be added to your brand's root domain, and automatically redirect the subdomain specified during the branded domain setup process to Klaviyo infrastructure via the records.</p>
+<p>Not all domain registration services allow you to directly edit all DNS records. If you cannot update the records, contact your DNS provider for information on how to update them.</p>
+</div>
+<ol>
+<li>After selecting <em>Set up manually</em>, select your domain provider on the <em>Find your DNS zone file</em> page. Based on your domain provider, Klaviyo will show the steps to find the zone file in your DNS provider’s platform. The zone file is where you’ll add the generated DNS records to.</li>
+<li>Select <strong>Next</strong>.</li>
+<li>Hover over and click the text to copy the generated DNS records to your clipboard so you can add them to your DNS zone file.</li>
+<li>Add the records to your zone file in your DNS provider’s platform.</li>
+</ol>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/28723628225307" alt="Records.jpg" width="600" height="538"></p>
+<p>Some common DNS providers include: </p>
+<ul>
+<li><a href="https://www.godaddy.com/help/manage-dns-zone-files-680">GoDaddy</a></li>
+<li><a href="https://support.google.com/a/answer/48090?hl=en">Google Domains</a></li>
+<li><a href="https://www.hostgator.com/help/article/manage-dns-records-with-hostgatorenom">Hostgator</a></li>
+<li><a href="https://help.hover.com/hc/en-us/articles/217282457-How-to-Edit-DNS-records-A-CNAME-MX-TXT-and-SRV-Updated-Aug-2015-">Hover</a></li>
+<li><a href="https://www.namecheap.com/support/knowledgebase/article.aspx/9214/31/cpanel-email-deliverability-tool--spf-and-dkim-records/">Namecheap</a></li>
+<li><a href="https://support.squarespace.com/hc/en-us/articles/205812348-Opening-Advanced-DNS-settings">Squarespace</a></li>
+<li><a href="https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/resource-record-sets-editing.html">AWS</a></li>
+<li><a href="https://developers.cloudflare.com/dns/manage-dns-records/how-to/create-dns-records/">Cloudflare</a></li>
+</ul>
+<div class="accordion accordion--default">
+<div class="accordion__item">
+<div class="accordion__item-title"><strong>For BigCommerce Domains</strong></div>
+<div class="accordion__item-content">
+<p>If you are a merchant using BigCommerce Domains as your DNS provider, the host values for your DNS records are slightly different from what you’ll see provided in Klaviyo. </p>
+<div class="bs-callout bs-callout-default">
+<p>You must use the <em>Static</em> routing option when setting up a branded sending domain as the NS records associated with the <em>Dynamic</em> option are not supported.</p>
+</div>
+<p>For the <em>Host</em> of the 3 CNAME records, you must append a period followed by your root domain name to the <em>Host</em> of the records provided in Klaviyo. For example, if your brand’s root domain is <em>helloworld.com</em>, the <em>Host </em>values you must enter into BigCommerce look like this:</p>
+<div class="bs-callout bs-callout-default">
+<p>These are just examples and the actual CNAME record values for your account will be different. Make sure to use the values generated in your account. </p>
+</div>
+<table style="width: 651px; height: 215px">
+<tbody>
+<tr>
+<td style="width: 230.781px; height: 10px"><strong>Host</strong></td>
+<td style="width: 321.319px; height: 10px"><strong>Value</strong></td>
+<td style="width: 64.4444px; height: 10px"><strong>Record Type</strong></td>
+</tr>
+<tr>
+<td style="width: 230.781px; height: 42px">send.helloworld.com</td>
+<td style="width: 321.319px; height: 42px">1.klaviyodns.com</td>
+<td style="width: 64.4444px; height: 42px">CNAME</td>
+</tr>
+<tr>
+<td style="width: 230.781px; height: 22px">kl._domainkey.helloworld.com</td>
+<td style="width: 321.319px; height: 22px">kl1.domainkey.1.klaviyodns.com</td>
+<td style="width: 64.4444px; height: 22px">CNAME</td>
+</tr>
+<tr>
+<td style="width: 230.781px; height: 22px">kl2._domainkey.helloworld.com</td>
+<td style="width: 321.319px; height: 22px">kl2.domainkey.1.klaviyodns.com</td>
+<td style="width: 64.4444px; height: 22px">CNAME</td>
+</tr>
+<tr>
+<td style="width: 230.781px; height: 22px">helloworld.com</td>
+<td style="width: 321.319px; height: 22px">klaviyo-site-verification=public_API_key</td>
+<td style="width: 64.4444px; height: 22px">TXT</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="bs-callout bs-callout-default">
+<p>If you use Google Domains as your DNS provider and are connecting a branded sending domain with the <em>Dynamic</em> routing option, add all the NS records <a href="https://community.klaviyo.com/analytics-and-deliverability-72/help-dns-record-for-google-domains-10653">into a single record</a> with the "Add more to this record option."</p>
+</div>
+<div class="bs-callout bs-callout-default">
+<p>If your DNS provider does not accept the "@" symbol during this process, then your TXT record will need to be added with your root domain as the hostname. The “@” symbol is just the shorthand method to achieve the same result (i.e., placement of a TXT record on the root domain). For example, the record will simply be:</p>
+<p><code>Type: TXT<br>
+Hostname: YOURWEBSITE.COM<br>
+Value: klaviyo-site-verification=YOUR_PUBLIC_API_KEY</code></p>
+</div>
+<h2 id="h_01HCMT58PP4MWX06XR3PFJ5R5D">Verify and apply your domain</h2>
+<p>You should only begin the steps below if you are ready to start sending with your domain. If you are connecting a new branded sending domain with no emailing history, you will need to first <a href="https://help.klaviyo.com/hc/en-us/articles/360025945671">warm this domain.</a></p>
+<div class="bs-callout bs-callout-default">
+<p>If you are an existing account who has at least a 30-day sending history with Klaviyo, you do not have to re-warm.</p>
+</div>
+<p>Select the Verify button to begin the verification process once you have added the generated records to your DNS. When first accessing the verify records step, it is expected to see the records have not been verified yet.</p>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/28723622898203" alt="verify.jpg" width="601" height="339"></p>
+<p>Review any message that appears. You will see one of the following messages:</p>
+<ul>
+<li>If a campaign is conflicting, you will see a notification that the deliverability may be impacted. To avoid any conflicting errors, a best practice is to make sure there are no campaigns actively sending or scheduled to go out soon. It is also best practice (but is not required) to pause flows and campaigns until after you apply and test your changes.</li>
+<li>If your records are valid, you will see a success message. This success message may indicate that you need to warm your infrastructure again. Note that this only applies to brand new Klaviyo accounts or newly registered domains (within the last 30 days). If you are an existing account who has at least a 30-day sending history with Klaviyo, you do not have to re-warm.</li>
+<li>If your records are not valid, you will see an error indicating what has not been set up correctly.</li>
+</ul>
+<p>Once the records have been verified, select <strong>Apply Domain</strong> when you are ready to begin sending on your branded domain.</p>
+<div class="bs-callout bs-callout-default">
+<p>It can take up to 48 hours for DNS records to update after they are published in your DNS settings.</p>
+</div>
+<p>Klaviyo will now apply your branded sending domain to your account, and produce a success message when completed. </p>
+<p>You should exclude the subdomain in your from-address that you use to send emails (e.g. <em>@send.yourbusiness.com</em>). If it is included in your from-address, you will not be able to receive responses from recipients to emails from your Klaviyo account. Instead, it is advised to just use the root domain alone for your from-address (e.g. <em>@yourbusiness.com</em>).</p>
+<h3 id="h_01HCMT58PPNCVPAXY6KVDEX74S">Troubleshooting error messages</h3>
+<p>If for some reason the domain cannot be applied, an error message will appear instead, directing you to try again. We recommend that you first use a free, online DNS record checker to review your branded sending domain and attempt to diagnose the issue. The following services provide this quick check:</p>
+<ul>
+<li><a href="https://dmarcian.com/dkim-inspector/">https://dmarcian.com/dkim-inspector/</a></li>
+<li><a href="https://www.whatsmydns.net/">https://www.whatsmydns.net/</a></li>
+<li><a href="https://dnschecker.org/">https://dnschecker.org/</a></li>
+</ul>
+<div class="bs-callout bs-callout-default">
+<p><a href="https://help.klaviyo.com/hc/en-us/articles/4417768780827">Discover additional guidance and tips on branded sending domain troubleshooting</a>.</p>
+</div>
+<p>If the problem cannot be resolved using one of the above tools, please contact our Support Team for further assistance. After you have set up your domain, when you return to the <em>Domains</em> page, you will see these changes in place. You will also see the date on which these changes took place and instructions on how to warm your sending infrastructure in the next 2 to 4 weeks.</p>
+<h2 id="h_01HCMT58PPSD5N1XRPWM25WTEA">Warm your sending infrastructure</h2>
+<p>If you are a new, qualifying Klaviyo account starting on a branded sending domain or using a newly registered domain (registered within the last 30 days), it is essential to <a href="https://help.klaviyo.com/hc/en-us/articles/360025945671">warm your sending infrastructure</a> in the first 2 to 4 weeks after setting up your branded sending domain. Warming your domain strengthens your sender reputation. Depending on what data you are bringing over to Klaviyo and the use cases you have, you will need to follow the <a href="https://help.klaviyo.com/hc/en-us/articles/360025945671-How-to-warm-your-sending-infrastructure">warming or platform introduction process</a> applicable to you.</p>
+<div class="bs-callout bs-callout-default">
+<p>Existing Klaviyo customers moving to a branded sending domain do not have to warm infrastructure again, as long as you have:</p>
+<ul>
+<li>A domain that has been registered for at least 30 days AND</li>
+<li>You’ve used the domain to send email already (e.g., you used this domain in the past with a prior email service provider or with Klaviyo in your from address).</li>
+</ul>
+</div>
+<h2 id="h_01JQ4QJTZ6JSEMR53HWV3BG29G">Disconnected sending domain alert</h2>
+<p>Branded sending domains become disconnected when the required DNS records are removed. In these cases, Klaviyo will notify you so that you can fix the necessary DNS records.</p>
+<p>You'll receive the alert in your notification inbox in Klaviyo.</p>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/35380098109339" alt=""></p>
+<p>Only users with the necessary <a href="https://help.klaviyo.com/hc/en-us/articles/115005231648">permissions</a> to configure a branded sending domain will receive the alert. </p>
+<h2 id="h_01JT44V2AG302YSHET054AP880">Outcome</h2>
+<p>Once you configure your branded sending domains, all your emails (i.e., marketing and transactional emails) will be sent through your brand's domain rather than Klaviyo's shared sending domain.</p>

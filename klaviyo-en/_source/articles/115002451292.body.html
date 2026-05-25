@@ -1,0 +1,138 @@
+<h2>Overview</h2>
+<p>This guide covers syncing your Shopify signup form to a list in your Klaviyo account. We use Shopify's 10 free themes as examples. If you plan to use this method to sync a form from a customized theme, keep in mind that if you edited your signup form, you may need to edit some of the items in the code snippet used below.</p>
+<div class="bs-callout bs-callout-success">
+<h4>Learn more</h4>
+<p>We also have a guide for <a href="https://help.klaviyo.com/hc/en-us/articles/115001618871-Add-a-Klaviyo-Form-to-a-Shopify-Free-Theme">adding a Klaviyo form to all of Shopify's free themes</a>.</p>
+</div>
+<script src="https://fast.wistia.com/embed/medias/pe4fxluyvn.jsonp" async=""></script>
+<script src="https://fast.wistia.com/assets/external/E-v1.js" async=""></script>
+<div class="wistia_responsive_padding" style="padding: 56.25% 0 0 0; position: relative;">
+<div class="wistia_responsive_wrapper" style="height: 100%; left: 0; position: absolute; top: 0; width: 100%;">
+<div class="wistia_embed wistia_async_pe4fxluyvn videoFoam=true" style="height: 100%; width: 100%;"> </div>
+</div>
+</div>
+<p><br>The snippet that you add to your Shopify <code class="language-html">theme.liquid</code> file is slightly different depending on your theme. Choose your theme from the list below, and follow the respective instructions. You can also check out our section on <a href="https://help.klaviyo.com/hc/en-us/articles/115002451292#using-a-custom-theme">using a custom theme</a> if you don't see your theme on the list below.</p>
+<table>
+<tbody>
+<tr>
+<td><a href="https://help.klaviyo.com/hc/en-us/articles/115002451292#shopify-themes-that-include-jquery-3-2-1-or-higher">Themes with jQuery 3.2.1 or higher</a></td>
+<td><a href="https://help.klaviyo.com/hc/en-us/articles/115002451292#shopify-themes-with-a-jquery-version-lower-than-3-2-1-or-no-jquery">Themes with a jQuery version &lt; 3.2.1</a></td>
+</tr>
+<tr>
+<td>
+<ul>
+<li>Brooklyn</li>
+<li>Supply</li>
+<li>Jumpstart</li>
+<li>Pop</li>
+<li>Simple</li>
+</ul>
+</td>
+<td>
+<ul>
+<li>Minimal</li>
+<li>Narrative</li>
+<li>Debut</li>
+<li>Venture</li>
+<li>Boundless</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<h2>Shopify Themes That Include jQuery 3.2.1 or Higher</h2>
+<p>Use the following snippet to sync your Shopify signup form to a list in your Klaviyo account. Remember to update the list id in the snippet. The basic process is as follows:</p>
+<ol>
+<li>From your Shopify admin click <strong>Online Store</strong>, and then from the <em>Actions</em> dropdown click <strong>Edit Code</strong> to open your web editor.</li>
+<li>Open your <code class="language-html">theme.liquid</code> file and paste in the code snippet below. Paste the snippet before the closing <code class="language-html">&lt;/body&gt;</code> tag.<br>
+<pre><code class="language-js">&lt;script type="text/javascript"&gt;
+    $("input[name='contact[email]']").on('blur', function(e) {
+        e.preventDefault();
+        var email = $(this).val();
+        var settings = {
+            "async": true,
+            "crossDomain": true,
+            "url": "https://manage.kmail-lists.com/subscriptions/external/subscribe",
+            "method": "POST",
+            "headers": {
+                "content-type": "application/x-www-form-urlencoded",
+                "cache-control": "no-cache"
+            },
+            "data": {
+                "g": "LIST_ID",
+                "$fields": "$source",
+                "email": email,
+                "$source": "Shopify form"
+            }
+        };
+        $.ajax(settings).done(function (response) {
+            console.log(response);
+        });
+    });
+&lt;/script&gt;</code></pre>
+</li>
+<li>From your Klaviyo account, select the list you want to sync and copy the <a href="https://help.klaviyo.com/hc/en-us/articles/115005078647-Find-a-List-ID">list id</a>.<br><img src="https://klaviyo.zendesk.com/hc/article_attachments/28716062299547" alt="listID.png">
+</li>
+<li>From your Shopify account, add the list id to the code snippet in your <code class="language-html">theme.liquid</code> file. At this step, you can also <a href="https://help.klaviyo.com/hc/en-us/articles/115002451292#modify-the--source-of-your-form">modify the $source of this form if you'd like</a>.<br><img src="https://klaviyo.zendesk.com/hc/article_attachments/28716062302107" alt="shopifyDefaultFormListid.png">
+</li>
+<li>Save your updated <code class="language-html">theme.liquid</code> file.</li>
+</ol>
+<p>You can now test your signup form to ensure that it is working. First, enter your email address into the form. Next, check your inbox and confirm your subscription with the opt-in email. Last, search for your email address in your Klaviyo account to confirm that your profile has been added.</p>
+<p>If you continue to experience any difficulties please <a href="https://help.klaviyo.com/hc/en-us/articles/115001002272-How-to-Contact-Support">contact our support team</a>.</p>
+<h2>Shopify Themes With a jQuery Version Lower than 3.2.1 or no jQuery</h2>
+<p>Use the following snippet to sync your Shopify signup form to a list in your Klaviyo account. Remember to update the list id in the snippet. The basic process is as follows:</p>
+<ol>
+<li>From your Shopify admin click <strong>Online Store</strong>, and then from the <em>Actions</em> dropdown click <strong>Edit Code</strong> to open your web editor.</li>
+<li>Open your <code class="language-html">theme.liquid</code> file and paste in the code snippet below. Paste the snippet before the closing <code class="language-html">&lt;/body&gt;</code> tag.<br>
+<pre><code class="language-js">
+</code><code class="language-js">&lt;script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"&gt;&lt;/script&gt;
+&lt;script&gt;var $KL = jQuery.noConflict(true);&lt;/script&gt;
+&lt;script type="text/javascript"&gt;
+    $KL("input[name='contact[email]']").on('blur', function(e) {
+        e.preventDefault();
+        var email = $KL(this).val();
+        var settings = {
+            "async": true,
+            "crossDomain": true,
+            "url": "https://manage.kmail-lists.com/subscriptions/external/subscribe",
+            "method": "POST",
+            "headers": {
+                "content-type": "application/x-www-form-urlencoded",
+                "cache-control": "no-cache"
+            },
+            "data": {
+                "g": "LIST_ID",
+                "$fields": "$source",
+                "email": email,
+                "$source": "Shopify form"
+            }
+        };
+        $KL.ajax(settings).done(function (response) {
+            console.log(response);
+        });
+    });
+&lt;/script&gt;</code></pre>
+</li>
+<li>From your Klaviyo account, select the list you want to sync and copy the <a href="https://help.klaviyo.com/hc/en-us/articles/115005078647-Find-a-List-ID">list id</a>.<br><img src="https://klaviyo.zendesk.com/hc/article_attachments/28716062299547" alt="listID.png">
+</li>
+<li>From your Shopify account, add the list id to the code snippet in your <code class="language-html">theme.liquid</code> file. At this step, you can also <a href="https://help.klaviyo.com/hc/en-us/articles/115002451292#modify-the--source-of-your-form">modify the $source of this form if you'd like</a>.<br><img src="https://klaviyo.zendesk.com/hc/article_attachments/28716062302107" alt="shopifyDefaultFormListid.png">
+</li>
+<li>Save your updated <code class="language-html">theme.liquid</code> file.</li>
+</ol>
+<p>You can now test your signup form to ensure that it is working. First, enter your email address into the form. Next, check your inbox and confirm your subscription with the opt-in email. Last, search for your email address in your Klaviyo account to confirm that your profile has been added.</p>
+<p>If you continue to experience any difficulties please <a href="https://help.klaviyo.com/hc/en-us/articles/115001002272-How-to-Contact-Support">contact our support team</a>.</p>
+<h2>Using a Custom Theme</h2>
+<p>If you're using a custom theme you first have to verify the version of jQuery that your theme uses, then select a code snippet accordingly. As well, if your theme has modified the standard Shopify signup signup form, you will need to modify the snippet so that it is targeting the email input element with the correct id.</p>
+<ol>
+<li>Navigate to your site and open the console of your web browser (if you're using Chrome on a Mac you can press <kbd>⌥</kbd>-<kbd>⌘</kbd>-<kbd>J).</kbd>
+</li>
+<li>The following command returns the current version of jQuery on your site: <code class="language-html">$.fn</code>. <br><img src="https://klaviyo.zendesk.com/hc/article_attachments/28716051920923">
+</li>
+<li>If your jQuery version is 3.2.1 or higher, you can use the instructions in the section for <a href="https://help.klaviyo.com/hc/en-us/articles/115002451292#shopify-themes-that-include-jquery-3-2-1-or-higher">Shopify Themes That Include jQuery 3.2.1 or Higher</a>.</li>
+<li>If your jQuery version is lower than 3.2.1, you can use the instructions in the section for <a href="https://help.klaviyo.com/hc/en-us/articles/115002451292#shopify-themes-with-a-jquery-version-lower-than-3-2-1">Shopify Themes With a jQuery Version Lower than 3.2.1</a>.</li>
+</ol>
+<p>If you continue to experience any difficulties please <a href="https://help.klaviyo.com/hc/en-us/articles/115001002272-How-to-Contact-Support">contact our support team</a>.</p>
+<h2>Modify the <code class="language-html">$source</code> of Your Form</h2>
+<p>In the default snippets on this page, you can modify the line with <code class="language-html">$source": "Shopify form"</code> if you'd like to change the <code class="language-html">$source</code> property that appears on your customer's profiles within Klaviyo. Change only the value of this expression. For example, updating to <code class="language-html">“$source”: “Homepage form”</code> will set a user's <code class="language-html">$source</code> on their profile as follows:</p>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/28716051912347"></p>
+<p>Take care when modifying elements of this form. If you find your form is not working correctly, contact customer support or try adding the form from scratch using the default code snippets in this article.</p>

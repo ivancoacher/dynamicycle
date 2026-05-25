@@ -1,0 +1,95 @@
+<h2 id="h_01J0V118WVYEMBSR8DJX36EV7D">You will learn</h2>
+<p>Learn how to make sure out-of-stock items are not displayed in abandoned cart or browse abandonment emails by updating the way dynamic content is populated in your emails.</p>
+<p>If you often sell out of popular items, it's possible that a customer will place an item in his/her cart one minute and come back hours later to find the same item out-of-stock. While abandoned cart and browse abandonment flows can drive significant revenue to your business, fast selling inventory can make it challenging to send reminders that don't fall flat. Encouraging customers to return to a cart full of out-of-stock items can lead to a frustrating customer experience.</p>
+<h2 id="h_01J0V118WW3M2AVNW2CKY84CWT">Before you begin</h2>
+<div class="bs-callout bs-callout-gold">
+<p>If you have not already, read our guide on <a href="https://help.klaviyo.com/hc/en-us/articles/115005080407-How-to-Integrate-with-Shopify" target="_blank" rel="noopener">getting started with Shopify</a> for step-by-step instructions on integrating, before continuing with this article.</p>
+</div>
+<p>Before following the steps in this article, it's important to note the following:</p>
+<ul>
+<li>Klaviyo will only "un-publish" out-of-stock items for Shopify stores if you do not allow customers to purchase products when they go out-of-stock.</li>
+<li>If you have multiple variations of an item, all variations must be out-of-stock in order for Klaviyo to consider the entire item out-of-stock and unpublish it.</li>
+</ul>
+<h2 id="h_01J0V118WWR0C3RSDWEH4ZCXHR">The abandoned cart flow</h2>
+<p>Klaviyo's default abandoned cart email templates (for our abandoned cart flow triggered by <em>Checkout Started</em>) feature a dynamic table that is used to populate each email with the specific items the recipient left behind in their abandoned cart.</p>
+<p>If you would like an abandoned cart email to automatically be canceled if it is going to feature one or more items that have since gone out-of-stock, you will need to adjust the image section of the existing dynamic table in a given template.</p>
+<ol>
+<li>In Klaviyo, open the abandoned cart flow email template you wish to edit. </li>
+<li>Click on your dynamic table. Under <strong>Content</strong>, you'll see Column 1 currently selected.</li>
+<li>If Column 1 is currently set to <strong>Image</strong>, switch it to <strong>Text</strong>.<br><img src="https://klaviyo.zendesk.com/hc/article_attachments/32421808336795" width="239" height="325">
+</li>
+<li>Under <strong>Cell Content</strong>, click the <strong>Source code</strong> icon. <br><img src="https://klaviyo.zendesk.com/hc/article_attachments/32421808345755" width="236" height="171">
+</li>
+<li>Copy and paste the following snippet into the source code text box:<br>
+<pre><code class="language-js">{% catalog item.product_id unpublished="cancel" %} 
+&lt;a href="{{ event.extra.responsive_checkout_url }}"&gt; 
+&lt;img alt="" src="{{ catalog_item.featured_image.thumbnail.src }}" style="width: 200px;" width="200px" /&gt;&lt;/a&gt; 
+{% endcatalog %}
+</code></pre>
+</li>
+<li>Once you've finished, click <strong>Done</strong> in the upper left. </li>
+<li>Save your template. </li>
+</ol>
+<p>This code will ensure that:</p>
+<ul>
+<li>Before a given email in your flow is scheduled to send, Klaviyo will look up each item that will dynamically populate in the individual email.</li>
+<li>If any one item is "unpublished" in your catalog at time of lookup, the entire email will get skipped.</li>
+</ul>
+<p>For a given flow email, you can navigate to<strong> Analytics &gt; Recipient Activity &gt; Other </strong>and see a category labeled: <strong>Skipped: Catalog Item Unavailable</strong>. This is where you can view all emails that were canceled - i.e. skipped - because an item featured in the email was out-of-stock or otherwise unavailable (if the item is no longer in your catalog).</p>
+<p>It is not possible to remove a single out-of-stock item from an email and send the rest of the email as scheduled. If at least one item in a cart has gone out of stock, the entire email will be canceled.</p>
+<h3 id="h_01J0V118WWHXP4WFBBC5R9DMVF">Responsive checkout page in Shopify</h3>
+<p>If you're having trouble with the "Return to Cart" button in your abandoned cart flow emails linking to the correct page, you may have to change the link that your button is pointing to. </p>
+<ol>
+<li>In Klaviyo, open the abandoned cart flow email template you wish to edit. </li>
+<li>Click on the "Return to Cart" button to edit the link URL.</li>
+<li>Change the Link URL from
+<pre><code class="language-html">{{ event.extra.checkout_url }}</code></pre>
+to the following:
+<pre><code class="language-html">{{ event.extra.responsive_checkout_url }}<br></code></pre>
+</li>
+<li>The image below shows an example.<br><img src="https://klaviyo.zendesk.com/hc/article_attachments/32421808352923" width="240" height="191">
+</li>
+</ol>
+<h2 id="h_01J0V118WW4MTNYV3YE9WWF6B0">The browse abandonment flow</h2>
+<p>Klaviyo's default browse abandonment email template features a dynamic table block that is used to populate each email with the specific item a recipient browsed your website.</p>
+<p>If you would like browse abandonment emails to automatically be canceled if they are going to feature an item that has since gone out-of-stock, you will need to adjust the image section of the existing table in a given template.</p>
+<ol>
+<li>In Klaviyo, open the browse abandonment flow email template you wish to edit.</li>
+<li>Click on your dynamic table. Under <strong>Content</strong>, you'll see Column 1 currently selected.</li>
+<li>If Column 1 is currently set to <strong>Image</strong>, switch it to <strong>Text</strong>.<br><img src="https://klaviyo.zendesk.com/hc/article_attachments/32421808358171" width="255" height="347">
+</li>
+<li>Under <strong>Cell Content</strong>, click the <strong>Source code</strong> icon. <br><img src="https://klaviyo.zendesk.com/hc/article_attachments/32421808360859" width="264" height="191">
+</li>
+<li>Copy and paste the following snippet into the source code text box:
+<pre><code class="language-js">{% catalog event.ProductID unpublished="cancel" %} <br>&lt;a href="{{ catalog_item.url }}"&gt;<br>&lt;img src="{{ catalog_item.featured_image.full.src }}" style="width: 200px;" width="200px" /&gt;&lt;/a&gt; <br>{% endcatalog %}
+</code></pre>
+</li>
+<li>Once you've finished, click <strong>Done</strong> in the upper left. </li>
+<li>Save your template. </li>
+</ol>
+<p>This will ensure that:</p>
+<ul>
+<li>Before a given email in your flow is scheduled to send, Klaviyo will look up the item that will dynamically populate in the individual email.</li>
+<li>If this item is "unpublished" in your catalog at the time of lookup, the email will be skipped.</li>
+</ul>
+<p>For a given flow email, you can navigate to <strong>Analytics &gt; Recipient Activity &gt; Other</strong> and you will see a category labeled: <strong>Skipped: Catalog Item Unavailable</strong>. This is where you can view all emails that were canceled - i.e. skipped - because an item featured in the email was out-of-stock or otherwise unavailable (if the item is no longer in your catalog).</p>
+<h2 id="h_01J0V118WWHMV0X5A6BGFK1E9W">How to test your out-of-stock feature</h2>
+<p>You can test this feature by:</p>
+<ol>
+<li>Adjust your email templates as explained above.</li>
+<li>View an item on your site and/or start a checkout with a single item in your cart.</li>
+<li>Wait until you see your tracked event appear in your account's <strong>Metric's tab</strong>, under <strong>Analytics</strong>.</li>
+<li>Temporarily mark this single item out-of-stock in your store's backend.</li>
+<li>Navigate to the flow that is triggered by the action you took (<em>Viewed Product</em> or <em>Started Checkout</em>) and has your newly adjusted email templates.</li>
+<li>Click to preview one of these emails, and make sure the "choose a recent event to preview with" window features your own recent event.</li>
+<li>When you click <strong>Preview</strong>, you should see a preview where the item's image doesn't populate and instead the following message appears: <strong>Item (Number) is not published and unavailable</strong><em>.<br><img src="https://klaviyo.zendesk.com/hc/article_attachments/28716329389467" alt="Example email preview in Klaviyo showing block with item unavailable, outlined in red" width="347" height="268"><br></em>
+</li>
+</ol>
+<h2 id="h_01J0V118WWJP91DA7PHA02W5K7">Outcome</h2>
+<p>You've now learned how to make sure out-of-stock items are not displayed in abandoned cart or browse abandonment emails, and how to test your out-of-stock feature. </p>
+<h2 id="h_01J0V118WWG4JEP0DZSS394CDQ">Additional resources</h2>
+<ul>
+<li><a href="https://klaviyo.zendesk.com/hc/en-us/articles/115002779411" target="_blank" rel="noopener">How to create an abandoned cart flow</a></li>
+<li><a href="https://klaviyo.zendesk.com/hc/en-us/articles/115002775252" target="_blank" rel="noopener">How to create a browse abandonment flow</a></li>
+<li><a href="https://klaviyo.zendesk.com/hc/en-us/articles/360001895651" target="_blank" rel="noopener">How to install back in stock for Shopify</a></li>
+</ul>

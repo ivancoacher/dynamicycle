@@ -1,0 +1,917 @@
+{
+  "captured_at": "2026-05-23T16:15:23Z",
+  "article": {
+    "id": 17760478970907,
+    "url": "https://klaviyo.zendesk.com/api/v2/help_center/en-us/articles/17760478970907.json",
+    "html_url": "https://klaviyo.zendesk.com/hc/en-us/articles/17760478970907-Understand-webhooks-in-Advanced-KDP",
+    "author_id": 397882329931,
+    "comments_disabled": false,
+    "draft": false,
+    "promoted": false,
+    "position": 0,
+    "vote_sum": 0,
+    "vote_count": 0,
+    "section_id": 49375661121819,
+    "created_at": "2023-08-08T13:51:43Z",
+    "updated_at": "2026-04-21T13:56:43Z",
+    "name": "Understand webhooks in Advanced KDP",
+    "title": "Understand webhooks in Advanced KDP",
+    "source_locale": "en-us",
+    "locale": "en-us",
+    "outdated": false,
+    "outdated_locales": [],
+    "edited_at": "2025-07-16T18:13:25Z",
+    "user_segment_id": null,
+    "permission_group_id": 146372,
+    "content_tag_ids": [],
+    "label_names": [],
+    "body": "<h2 id=\"01H7ZGTX44W0RP1CCJWDNDK7Z4\">You will learn</h2>\n<p>Learn about webhooks, and how you can use them to send information to your third-party applications in response to events captured in Klaviyo. For more detailed information on how to receive system webhooks, head to our developer resource on <a href=\"https://developers.klaviyo.com/en/docs/working_with_system_webhooks\" target=\"_blank\" rel=\"noopener noreferrer\">working with system webhooks</a>.</p>\n<div class=\"bs-callout bs-callout-default\">\n<p><a href=\"https://help.klaviyo.com/hc/en-us/articles/17655007276059\">Advanced KDP</a> is not included in Klaviyo’s standard marketing application, and a subscription is required to access the associated functionality. Head to our <a href=\"https://help.klaviyo.com/hc/en-us/articles/115000976672\" target=\"_blank\" rel=\"noopener noreferrer\">billing guide</a> to learn about how to purchase this plan.</p>\n</div>\n<p>\n<script src=\"https://fast.wistia.net/player.js\" async=\"async\"></script>\n</p>\n<div class=\"wistia_responsive_padding\" style=\"padding: 56.25% 0 0 0; position: relative;\">\n<div class=\"wistia_responsive_wrapper\" style=\"height: 100%; left: 0; position: absolute; top: 0; width: 100%;\"><iframe class=\"wistia_embed\" title=\"Webhooks in Klaviyo CDP Video\" src=\"https://fast.wistia.net/embed/iframe/kwiicwga5w?web_component=true&amp;seo=true\" name=\"wistia_embed\" width=\"100%\" height=\"100%\" frameborder=\"0\" scrolling=\"no\" allow=\"autoplay; fullscreen\"></iframe></div>\n</div>\n<h2 id=\"01H7ZGTX44952GHBZBCNDB9KXA\">What are webhooks?</h2>\n<p>Webhooks allow Klaviyo to pass information or “call” other applications, tools, and servers via HTTP requests. They can send information about an event that has happened (e.g. an order placed, a new customer subscribed, etc) or notify your external systems that the event has occurred.</p>\n<p>Klaviyo supports 2 kinds of webhooks:</p>\n<ol>\n<li>\n<strong>Webhooks in Advanced KDP</strong><br>Webhooks available as part of Advanced KDP are used to notify your external systems that a particular event has occurred, and allow you to send information in response to a wide array of events without the limitations of being in a Flow.</li>\n<li>\n<strong>Flow webhooks</strong><br>Flow webhooks are only available within the flows interface, and are triggered when the Flow reaches a certain stage or step. They can be used to send data about the event or recipient that triggered the Flow.</li>\n</ol>\n<h3 id=\"01H7ZGTX44NC0BH86C3H6K5Y57\">Key components of webhooks</h3>\n<p>Webhooks are made of a few key components:</p>\n<ul>\n<li>\n<strong>Topic</strong><br>The event that causes a webhook to fire</li>\n<li>\n<strong>Body (or “the payload”)</strong><br>The data that the webhook sends</li>\n<li>\n<strong>Headers</strong><br>A place to pass additional information (such as authentication)</li>\n</ul>\n<h2 id=\"01H7ZGTX4523N8MJ5J9AWB5K8W\">How do webhooks in Advanced KDP differ from Flow webhooks?</h2>\n<p>You can use webhooks in Advanced KDP or Flow webhooks depending on your needs.</p>\n<h3 id=\"01H7ZGTX45J4FHTWD93KY2JDDW\">Events included</h3>\n<p>Flow webhooks can only respond to a subset of Klaviyo events, and do not support message related events like <em>Unsubscribed</em>, <em>Received email</em>, or <em>Clicked email</em> as flows generally end with message receipt rather than begin with them. Meanwhile, webhooks in the Advanced KDP allow you to send information in response to any event in your account.</p>\n<p>These include:</p>\n<ul>\n<li>Email events (e.g., <em>Received email</em>, <em>Clicked email</em>, <em>Marked email as spam, Unsubscribe</em>)</li>\n<li>SMS events (e.g., <em>Sent SMS</em>, <em>Received SMS</em>)</li>\n<li>Push notification events (e.g., <em>Received push</em>, <em>Bounced push</em>)</li>\n<li>Events from integrations ( i.e., events from first-party integrations created by Klaviyo)</li>\n<li>API events (e.g., events synced through <a href=\"https://developers.klaviyo.com/en/reference/api_overview\" target=\"_blank\" rel=\"noopener noreferrer\">Klaviyo’s APIs</a>)</li>\n</ul>\n<h3 id=\"01H7ZGTX4504BCYBFKSFY3C2RM\">Payload</h3>\n<p>Flow webhooks allow you to customize the data included in the request, but you must manually construct the payload. Meanwhile, webhooks in Advanced KDP use a prebuilt payload that does not require any manual work on your end, and are used to notify external systems that an event has occurred.</p>\n<h3 id=\"01H7ZGTX45NEF5Y63WJS7ZV3AX\">Flow limitations</h3>\n<p>Flow webhooks must be configured within the flows interface, and do not allow you to use several triggers at once. Different triggers must be created through individual flows, and are dependent on the Flow’s overall status (e.g., a flow in draft would not send data through the Flow webhook). Meanwhile, webhooks in Advanced KDP exist outside of the flows interface, and are not dependent on the series of steps leading up the webhook action like a Flow webhook.</p>\n<h2 id=\"01H7ZGTX45CQBFD02NYKVT7PSP\">Set up webhooks</h2>\n<p>To set up a webhook in Klaviyo, navigate to <em>Webhooks</em> under <strong>Advanced KDP</strong> <strong>&gt;</strong> <strong>Data managment &gt; Webhooks</strong> in Klaviyo.</p>\n<p>To add a new webhook, click the <strong>Create webhook</strong> button.</p>\n<ol>\n<li>On the <em>Create a webhook</em> modal, enter the information. This includes:\n<ul>\n<li>\n<strong>Name</strong><br>How you’ll identify your webhook</li>\n<li>\n<strong>Endpoint URL</strong><br>The URL associated with the destination for the webhook request</li>\n<li>\n<strong>Secret key</strong><br>A unique identifier to identify Klaviyo webhook requests in your other systems</li>\n<li>\n<strong>Description</strong><br>An optional description for your webhook.</li>\n</ul>\n</li>\n<li>In the <em>Topics</em> section, choose the events that you would like to trigger the webhook notification</li>\n</ol>\n<p class=\"wysiwyg-text-align-center\"><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28704486678683\" alt=\"Create webhook modal\" width=\"550\" height=\"534\"></p>\n<div class=\"bs-callout bs-callout-default\">\n<p>The callback URL must:</p>\n<ul>\n<li>Be a valid URL format</li>\n<li>Start with HTTPS://</li>\n<li>Not have a self-signed SSL certificate</li>\n<li>Not redirect to another URL</li>\n</ul>\n</div>\n<p>Once you have created your webhook, it will be listed on the <em>Webhooks</em> page along with the:</p>\n<ul>\n<li>Webhook name</li>\n<li>Webhook URL</li>\n<li>Time of the latest sync</li>\n<li>Status</li>\n</ul>\n<p class=\"wysiwyg-text-align-center\"><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28704478568859\" alt=\"List of created webhooks\" width=\"597\" height=\"151\"></p>\n<div class=\"bs-callout bs-callout-default\">\n<p>Note that it can take up to 15 minutes for the webhook to start sending to the URL.</p>\n</div>\n<p>You can delete or disable your webhook using the menu next to the item.</p>\n<h2 id=\"01H81RK0Y1A2N1M0EAHNB2XT0C\">Test system webhooks </h2>\n<p>When setting up a webhook in Klaviyo, you can test it to make sure that the connection is successful. To test your webhook, use the <strong>Test connection </strong>button after entering the required fields.</p>\n<p class=\"wysiwyg-text-align-center\"><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/39030496797723\" alt=\"test connection.jpg\" width=\"464\" height=\"402\"></p>\n<p>A menu will appear where you can select a topic and send a test to your callback URL. </p>\n<p class=\"wysiwyg-text-align-center\"><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28704478571931\" alt=\"Test webhook modal\" width=\"400\" height=\"379\"></p>\n<p>After performing the test, you’ll see a message indicating whether it was successful, along with the header and body for the request populated in the <em>Response</em> tab.</p>\n<div class=\"bs-callout bs-callout-default\">\n<p>To verify that a webhook notification is from Klaviyo, use the secret key you created to identify the request.</p>\n</div>\n<p class=\"wysiwyg-text-align-center\"><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28704478574491\" alt=\"Test successful indicator\" width=\"390\" height=\"591\"></p>\n<h2 id=\"01H7ZPEB0K490AVPCF99TS51PY\">Example payload</h2>\n<p>Below is an example of the payload for a webhook request in response to the <em>Email delivered</em> topic. </p>\n<div class=\"bs-callout bs-callout-default\">\n<p>Note that the payload may be different based on your account-specific data. </p>\n</div>\n<pre><code class=\"language-json5\">\n{\n  \"meta\": {\n    \"timestamp\": \"2023-08-10T07:25:23.700369+00:00\",\n    \"klaviyo_webhook_id\": \"ID\",\n    \"version\": \"2023-06-03\"\n  },\n  \"data\": [\n    {\n      \"topic\": \"event: email_delivered\",\n      \"external_id\": \"ID\",\n      \"payload\": {\n        \"data\": {\n          \"id\": \"ID\",\n          \"type\": \"event\",\n          \"links\": {\n            \"self\": \"https://a.klaviyo.com/api/events/ID/\"\n          },\n          \"attributes\": {\n            \"uuid\": \"96150200-374e-11ee-8001-a163313bc6c2\",\n            \"datetime\": \"2023-08-10 07:21:56+00:00\",\n            \"timestamp\": 1691652116,\n            \"event_properties\": {\n              \"$ESP\": 0,\n              \"Subject\": \"? Free (Cool!) Swag Alert ?\",\n              \"$message\": \"01H7F525FKR31P27Y7PNGVBBKK\",\n              \"$event_id\": \"01H7F525FKR31P27Y7PNGVBBKK:125423419905414052533228990613763937641\",\n              \"$group_ids\": [\n                \"V7adxq\"\n              ],\n              \"$attribution\": {\n                \"$send_ts\": 0,\n                \"$attributed_event_id\": \"\"\n              },\n              \"Email Domain\": \"klaviyo-demo.com\",\n              \"Campaign Name\": \"Daily Newsletter: 2023-08-10\",\n              \"Inbox Provider\": \"Amazon SES Inbound\",\n              \"$_cohort$message_send_cohort\": \"1691652081:01H7F525FKR31P27Y7PNGVBBKK\"\n            }\n          },\n          \"relationships\": {\n            \"metric\": {\n              \"data\": {\n                \"id\": \"ID\",\n                \"type\": \"metric\"\n              },\n              \"links\": {\n                \"self\": \"https://a.klaviyo.com/api/events/ID/relationships/metric/\",\n                \"related\": \"https://a.klaviyo.com/api/events/ID/metric/\"\n              }\n            },\n            \"profile\": {\n              \"data\": {\n                \"id\": \"ID\",\n                \"type\": \"profile\"\n              },\n              \"links\": {\n                \"self\": \"https://a.klaviyo.com/api/events/ID/relationships/profile/\",\n                \"related\": \"https://a.klaviyo.com/api/events/ID/profile/\"\n              }\n            }\n          }\n        }\n      }\n    },\n  </code></pre>\n<h2 id=\"01H7ZGTX45NXVKGPQQJFANWK53\">Additional resources</h2>\n<p><a href=\"https://developers.klaviyo.com/en/docs/how_to_add_a_webhook_action_to_a_flow\">How to add a webhook action to a Flow</a></p>\n<p><a href=\"https://help.klaviyo.com/hc/en-us/articles/4534329515931\">Understanding Klaviyo webhooks</a></p>\n<p><a href=\"https://developers.klaviyo.com/en/docs/working_with_system_webhooks\" target=\"_blank\" rel=\"noopener noreferrer\">Working with system webhooks (Klaviyo's Webhooks API)</a></p>",
+    "user_segment_ids": []
+  },
+  "normalized": {
+    "id": "17760478970907",
+    "title": "Understand webhooks in Advanced KDP",
+    "source_url": "https://help.klaviyo.com/hc/en-us/articles/17760478970907-Understand-webhooks-in-Advanced-KDP",
+    "section_id": 49375661121819,
+    "section": "Webhooks",
+    "category_id": 18073014919195,
+    "category": "Advanced KDP & Marketing Analytics",
+    "category_slug": "advanced-kdp-marketing-analytics",
+    "klaviyo_updated": "2026-04-21T13:56:43Z",
+    "created_at": "2023-08-08T13:51:43Z",
+    "draft": false,
+    "promoted": false,
+    "position": 0,
+    "label_names": []
+  },
+  "files": {
+    "body_html": "_source/articles/17760478970907.body.html",
+    "rendered_html": "_source/rendered/17760478970907.html"
+  },
+  "assets": {
+    "api_body": {
+      "images": [
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28704486678683",
+          "alt": "Create webhook modal",
+          "width": "550",
+          "height": "534"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28704478568859",
+          "alt": "List of created webhooks",
+          "width": "597",
+          "height": "151"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/39030496797723",
+          "alt": "test connection.jpg",
+          "width": "464",
+          "height": "402"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28704478571931",
+          "alt": "Test webhook modal",
+          "width": "400",
+          "height": "379"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28704478574491",
+          "alt": "Test successful indicator",
+          "width": "390",
+          "height": "591"
+        }
+      ],
+      "links": [
+        {
+          "href": "https://developers.klaviyo.com/en/docs/working_with_system_webhooks",
+          "text": "working with system webhooks"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/17655007276059",
+          "text": "Advanced KDP"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115000976672",
+          "text": "billing guide"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/reference/api_overview",
+          "text": "Klaviyo’s APIs"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/how_to_add_a_webhook_action_to_a_flow",
+          "text": "How to add a webhook action to a Flow"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4534329515931",
+          "text": "Understanding Klaviyo webhooks"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/working_with_system_webhooks",
+          "text": "Working with system webhooks (Klaviyo's Webhooks API)"
+        }
+      ],
+      "headings": [
+        {
+          "level": 2,
+          "id": "01H7ZGTX44W0RP1CCJWDNDK7Z4",
+          "text": "You will learn"
+        },
+        {
+          "level": 2,
+          "id": "01H7ZGTX44952GHBZBCNDB9KXA",
+          "text": "What are webhooks?"
+        },
+        {
+          "level": 3,
+          "id": "01H7ZGTX44NC0BH86C3H6K5Y57",
+          "text": "Key components of webhooks"
+        },
+        {
+          "level": 2,
+          "id": "01H7ZGTX4523N8MJ5J9AWB5K8W",
+          "text": "How do webhooks in Advanced KDP differ from Flow webhooks?"
+        },
+        {
+          "level": 3,
+          "id": "01H7ZGTX45J4FHTWD93KY2JDDW",
+          "text": "Events included"
+        },
+        {
+          "level": 3,
+          "id": "01H7ZGTX4504BCYBFKSFY3C2RM",
+          "text": "Payload"
+        },
+        {
+          "level": 3,
+          "id": "01H7ZGTX45NEF5Y63WJS7ZV3AX",
+          "text": "Flow limitations"
+        },
+        {
+          "level": 2,
+          "id": "01H7ZGTX45CQBFD02NYKVT7PSP",
+          "text": "Set up webhooks"
+        },
+        {
+          "level": 2,
+          "id": "01H81RK0Y1A2N1M0EAHNB2XT0C",
+          "text": "Test system webhooks"
+        },
+        {
+          "level": 2,
+          "id": "01H7ZPEB0K490AVPCF99TS51PY",
+          "text": "Example payload"
+        },
+        {
+          "level": 2,
+          "id": "01H7ZGTX45NXVKGPQQJFANWK53",
+          "text": "Additional resources"
+        }
+      ]
+    },
+    "rendered_page": {
+      "images": [
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/7ff492c2b417b7ecfe572f839a8a81398693c1f7-1920x1080.webp",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://fast.wistia.com/embed/medias/kwiicwga5w/swatch",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/1e1fffd8d775e4b75de7a2884b8f54d21ba966c7-1000x971.jpg?w=550",
+          "alt": "Create webhook modal",
+          "width": "550",
+          "height": "534"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/b4b26d3dbe74ef40ab9eed053798aae9ef5cffdf-1000x253.jpg?w=597",
+          "alt": "List of created webhooks",
+          "width": "597",
+          "height": "151"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/90db3d67f3238ed6dcf9f5ba863b212d91a9883d-1140x986.jpg?w=464",
+          "alt": "test connection.jpg",
+          "width": "464",
+          "height": "402"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/f686dd559d011a644c4c1fc4f892c2534dd582dc-788x746.jpg?w=400",
+          "alt": "Test webhook modal",
+          "width": "400",
+          "height": "379"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/46d1a2e87696c1ab420a3b3024b3c2fbaeedaf48-480x727.jpg?w=390",
+          "alt": "Test successful indicator",
+          "width": "390",
+          "height": "591"
+        }
+      ],
+      "links": [
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/17760478970907-Understand-webhooks-in-Advanced-KDP#site-content",
+          "text": "Skip to main content"
+        },
+        {
+          "href": "https://www.klaviyo.com",
+          "text": "Home"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center"
+        },
+        {
+          "href": "https://www.klaviyo.com/enterprise",
+          "text": "Enterprise"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Partners"
+        },
+        {
+          "href": "https://www.klaviyo.com/careers",
+          "text": "Careers"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": "Log in"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": ""
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center Find step-by-step instructions and troubleshooting solutions in our knowledge base."
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000032731",
+          "text": "Integrations"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000312411",
+          "text": "Flows"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867867",
+          "text": "Audience"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867667",
+          "text": "Campaigns"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/360000190711",
+          "text": "Sign-up forms"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000873988",
+          "text": "Deliverability & compliance"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/29173800271259",
+          "text": "SMS"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/16638219724187",
+          "text": "Reviews"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/18073014919195",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/34141283979931",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/37659126754075",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/33948021740315",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/39746685522331",
+          "text": "WhatsApp"
+        },
+        {
+          "href": "https://academy.klaviyo.com",
+          "text": "Klaviyo Academy Expert training and education to help you succeed with Klaviyo, and beyond."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Quick+guide&resource=academy_courses",
+          "text": "Quick guides Learn marketing strategies and concepts in 15 minutes or less."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Course&resource=academy_courses",
+          "text": "Courses Master key marketing topics through structured lessons and exams."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/best-practices",
+          "text": "Best practices Discover top product and marketing strategies for your business."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/learning-paths",
+          "text": "Learning paths Complete curated learning journeys tailored to your marketing goals."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses",
+          "text": "Explore all resources"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Live+training&resource=academy_courses",
+          "text": "Live trainings Build confidence through hands-on interactive workshops and thought-provoking strategy sessions."
+        },
+        {
+          "href": "https://www.bigmarker.com/klaviyo-customer-education/Office-hours-Getting-started-with-Klaviyo",
+          "text": "Live office hours Join a strategic discussion where you can ask questions and get answers in real-time."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/private-live-training",
+          "text": "1:1 Live training Book a private training session with an expert to jumpstart your platform knowledge and confidence."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/credentials",
+          "text": "Klaviyo credentials Dig deeper into select topics and showcase your expertise with a final exam to earn a certificate and digital badge."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/certificates/klaviyo-practitioner-certificate",
+          "text": "Klaviyo practitioner certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/deliverability-certificate",
+          "text": "Deliverability certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/developer-certificate",
+          "text": "Klaviyo developer certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses&select=Certificate",
+          "text": "See all certificates"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Klaviyo Community Join our thriving community network to connect with brands like yours—online and in person."
+        },
+        {
+          "href": "https://community.klaviyo.com/topic/new",
+          "text": "Ask a question Post a question and get thoughtful answers from Klaviyo powerusers."
+        },
+        {
+          "href": "https://community.klaviyo.com/p/roadmap",
+          "text": "Product roadmap"
+        },
+        {
+          "href": "https://community.klaviyo.com/search/activity/recent",
+          "text": "Recent threads"
+        },
+        {
+          "href": "https://community.klaviyo.com/p/champions",
+          "text": "Meet the Champions"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups",
+          "text": "Browse all groups Your people are waiting. New ideas and connections are a click away."
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/developer-group-64",
+          "text": "Developer group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/entrepreneur-user-group-118",
+          "text": "Entrepreneur group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/woo-user-group-87",
+          "text": "WooCommerce group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/new-york-meetup-chapter-82",
+          "text": "New York City"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/los-angeles-meetup-chapter-83",
+          "text": "Los Angeles"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/austin-meetup-chapter-85",
+          "text": "Austin"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/san-diego-meetup-chapter-86",
+          "text": "San Diego"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/amsterdam-meetup-chapter-84",
+          "text": "Amsterdam"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Klaviyo Developers Access API documentation and developer guides to help you build with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/get_started",
+          "text": "Get started Access key resources and a step-by-step checklist for how to start developing with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/build_your_integration",
+          "text": "Grow your app's reach Learn how to join our ecosystem and get your app listed on our marketplace."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/developer-tools",
+          "text": "Developer tools Generate sample data, monitor your API usage, and access our Postman collections."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/reference/api_overview",
+          "text": "API reference Browse our full catalog of API docs."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/changelog_",
+          "text": "Changelog"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/api_versioning_and_deprecation_policy",
+          "text": "Versioning & deprecation policy"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/rate_limits_and_error_handling",
+          "text": "Rate limits & error handling"
+        },
+        {
+          "href": "https://youtube.com/playlist?list=PLHkNfHgtxcUanrkMnKPdkRzuWU7MGv_xM&si=pkG-KH7IT_TUHOGC",
+          "text": "API tutorials on YouTube Subscribe to our Klaviyo API Tutorials playlist for easy access to step-by-step developer walkthroughs."
+        },
+        {
+          "href": "https://www.klaviyo.com/contact-us",
+          "text": "Contact us"
+        },
+        {
+          "href": "https://www.klaviyo.com/sign-up",
+          "text": "Sign up"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": "Search"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/17760478970907",
+          "text": "United States - EN"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/de-de/articles/17760478970907",
+          "text": "Deutschland - DE"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-es/articles/17760478970907",
+          "text": "España - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-mx/articles/17760478970907",
+          "text": "México - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/fr-fr/articles/17760478970907",
+          "text": "France - FR"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/it-it/articles/17760478970907",
+          "text": "Italia - IT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/ko-kr/articles/17760478970907",
+          "text": "한국 - KO"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/nl-nl/articles/17760478970907",
+          "text": "Nederland - NL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pl-pl/articles/17760478970907",
+          "text": "Polska - PL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pt-br/articles/17760478970907",
+          "text": "Brasil - PT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/sv-se/articles/17760478970907",
+          "text": "Sverige - SV"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/18073014919195",
+          "text": "Advanced KDP & Marketing Analytics"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/28478928202523",
+          "text": "Data management (Advanced KDP)"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/49375661121819",
+          "text": "Webhooks"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/17760478970907-Understand-webhooks-in-Advanced-KDP#01H7ZGTX44W0RP1CCJWDNDK7Z4",
+          "text": "You will learn"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/17760478970907-Understand-webhooks-in-Advanced-KDP#01H7ZGTX44952GHBZBCNDB9KXA",
+          "text": "What are webhooks?"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/17760478970907-Understand-webhooks-in-Advanced-KDP#01H7ZGTX4523N8MJ5J9AWB5K8W",
+          "text": "How do webhooks in Advanced KDP differ from Flow webhooks?"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/17760478970907-Understand-webhooks-in-Advanced-KDP#01H7ZGTX45CQBFD02NYKVT7PSP",
+          "text": "Set up webhooks"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/17760478970907-Understand-webhooks-in-Advanced-KDP#01H81RK0Y1A2N1M0EAHNB2XT0C",
+          "text": "Test system webhooks"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/17760478970907-Understand-webhooks-in-Advanced-KDP#01H7ZPEB0K490AVPCF99TS51PY",
+          "text": "Example payload"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/17760478970907-Understand-webhooks-in-Advanced-KDP#additional-resources",
+          "text": "Additional resources"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/working_with_system_webhooks",
+          "text": "working with system webhooks"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/17655007276059",
+          "text": "Advanced KDP"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115000976672",
+          "text": "billing guide"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/reference/api_overview",
+          "text": "Klaviyo’s APIs"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/how_to_add_a_webhook_action_to_a_flow",
+          "text": "How to add a webhook action to a Flow"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4534329515931",
+          "text": "Understanding webhooks in flows"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/working_with_system_webhooks",
+          "text": "Working with system webhooks (Klaviyo's Webhooks API)"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115001002272",
+          "text": "Learn how to contact support"
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": ""
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": "Visit Community"
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": ""
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": "Hire a partner"
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/about",
+          "text": "About Klaviyo"
+        },
+        {
+          "href": "https://www.klaviyo.com/newsroom",
+          "text": "Newsroom"
+        },
+        {
+          "href": "https://investors.klaviyo.com/overview/default.aspx",
+          "text": "Investor relations"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Agency and tech partners"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Developers"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/retail",
+          "text": "Retail and ecommerce"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/restaurants",
+          "text": "Restaurant marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/wellness",
+          "text": "Wellness"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform",
+          "text": "B2C CRM overview"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai",
+          "text": "Klaviyo AI (K:AI)"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/marketing-automation",
+          "text": "Klaviyo Marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-service",
+          "text": "Klaviyo Service"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/analytics",
+          "text": "Klaviyo Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-data-platform",
+          "text": "Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare",
+          "text": "Klaviyo vs. Klaviyo alternatives"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-mailchimp",
+          "text": "Klaviyo vs. Mailchimp"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-postscript",
+          "text": "Klaviyo vs. Postscript"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-attentive",
+          "text": "Klaviyo vs. Attentive"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-salesforce-marketing-cloud",
+          "text": "Klaviyo vs. Salesforce"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-listrak",
+          "text": "Klaviyo vs. Listrak"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/omnichannel",
+          "text": "Omnichannel marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/email-marketing",
+          "text": "Email marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing",
+          "text": "SMS marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing/rcs",
+          "text": "RCS for Business"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/mobile-app-marketing",
+          "text": "Mobile app marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/whatsapp",
+          "text": "WhatsApp marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/social",
+          "text": "Social marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources",
+          "text": "Marketing resources"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources/marketing-campaign-calendar",
+          "text": "Marketing campaign calendar"
+        },
+        {
+          "href": "https://www.klaviyo.com/glossary",
+          "text": "Marketing glossary"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/email-subject-line-generator",
+          "text": "Subject line generator"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/roi-calculator",
+          "text": "ROI calculator"
+        },
+        {
+          "href": "https://www.klaviyo.com/customers",
+          "text": "Case studies"
+        },
+        {
+          "href": "https://www.klaviyo.com/composer",
+          "text": "Composer Beta"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/marketing-agent",
+          "text": "Marketing Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/customer-agent",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/customer-experience-hub",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/helpdesk",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/marketing-analytics",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/advanced-cdp",
+          "text": "Advanced Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/web-forms",
+          "text": "Web forms"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/email-templates",
+          "text": "Email templates"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/portfolio",
+          "text": "Portfolio"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform-integrations",
+          "text": "Apps and Integrations"
+        },
+        {
+          "href": "https://www.klaviyo.com/features",
+          "text": "Features"
+        },
+        {
+          "href": "https://www.klaviyo.com/whats-new",
+          "text": "What's new"
+        },
+        {
+          "href": "https://www.klaviyo.com/events",
+          "text": "Events"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help Center"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us",
+          "text": "Academy"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Community"
+        },
+        {
+          "href": "https://www.facebook.com/Klaviyo/",
+          "text": "Facebook"
+        },
+        {
+          "href": "https://twitter.com/klaviyo/",
+          "text": "Twitter"
+        },
+        {
+          "href": "https://www.linkedin.com/company/klaviyo/",
+          "text": "LinkedIn"
+        },
+        {
+          "href": "https://www.instagram.com/klaviyo/",
+          "text": "Instagram"
+        },
+        {
+          "href": "https://www.klaviyo.com/sitemap",
+          "text": "Site Map"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal",
+          "text": "Terms and Privacy"
+        },
+        {
+          "href": "https://www.klaviyo.com/security",
+          "text": "Security"
+        },
+        {
+          "href": "https://www.klaviyo.com/trust",
+          "text": "Trust"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal/intellectual-property-notices",
+          "text": "Intellectual Property Notices"
+        }
+      ],
+      "headings": [
+        {
+          "level": 1,
+          "id": "",
+          "text": "Understand webhooks in Advanced KDP"
+        },
+        {
+          "level": 2,
+          "id": "01H7ZGTX44W0RP1CCJWDNDK7Z4",
+          "text": "You will learn"
+        },
+        {
+          "level": 2,
+          "id": "01H7ZGTX44952GHBZBCNDB9KXA",
+          "text": "What are webhooks?"
+        },
+        {
+          "level": 3,
+          "id": "01H7ZGTX44NC0BH86C3H6K5Y57",
+          "text": "Key components of webhooks"
+        },
+        {
+          "level": 2,
+          "id": "01H7ZGTX4523N8MJ5J9AWB5K8W",
+          "text": "How do webhooks in Advanced KDP differ from Flow webhooks?"
+        },
+        {
+          "level": 3,
+          "id": "01H7ZGTX45J4FHTWD93KY2JDDW",
+          "text": "Events included"
+        },
+        {
+          "level": 3,
+          "id": "01H7ZGTX4504BCYBFKSFY3C2RM",
+          "text": "Payload"
+        },
+        {
+          "level": 3,
+          "id": "01H7ZGTX45NEF5Y63WJS7ZV3AX",
+          "text": "Flow limitations"
+        },
+        {
+          "level": 2,
+          "id": "01H7ZGTX45CQBFD02NYKVT7PSP",
+          "text": "Set up webhooks"
+        },
+        {
+          "level": 2,
+          "id": "01H81RK0Y1A2N1M0EAHNB2XT0C",
+          "text": "Test system webhooks"
+        },
+        {
+          "level": 2,
+          "id": "01H7ZPEB0K490AVPCF99TS51PY",
+          "text": "Example payload"
+        },
+        {
+          "level": 2,
+          "id": "additional-resources",
+          "text": "Additional resources"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "Explore more from Klaviyo"
+        }
+      ]
+    }
+  },
+  "rendered_page": {
+    "status": "fetched",
+    "error": ""
+  }
+}

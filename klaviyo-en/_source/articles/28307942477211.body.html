@@ -1,0 +1,105 @@
+<p>Learn how to allow your customers to submit a review directly from their email. With this option configured, reviewers won’t need to open a new window to leave a review.  </p>
+<div class="bs-callout bs-callout-default">
+<p>This feature is currently available only to accounts with their language set to <em>English</em> in <strong>Reviews &gt; Reviews settings &gt; General</strong>. </p>
+</div>
+<h2 id="h_01J5BMHT1HAPZRQDVCY9KB8XP4">Enable in-email review collection </h2>
+<ol>
+<li>In Klaviyo, navigate to <strong>Reviews</strong>. </li>
+<li>Select <strong>Review settings &gt; Review requests</strong>. </li>
+<li>In the <em>In-email review collection</em> card, select <strong>Enable</strong>, then confirm your choice in the modal that appears. </li>
+</ol>
+<p>If the <strong>Enable</strong> button is not visible, you’ve already enabled this feature; proceed to the next section. </p>
+<p>Once you complete this step, Klaviyo will add a universal content block to your account. You must add this block to the email(s) in your review request flow. </p>
+<h2 id="h_01J5BMHT1HJDSSE974PV89X6K4">Add a review collection block to a flow email </h2>
+<div class="bs-callout bs-callout-default">
+<p>This block is only supported in flows triggered by the <em>Ready to review</em> event. If you add this block to any other flow or a campaign, it will not render correctly. </p>
+</div>
+<ol>
+<li>Navigate to your review request flow. </li>
+<li>Open an email template in the flow. </li>
+<li>From the <em>Content</em> tab, select <strong>Universal</strong>.<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28722600135067" alt="The universal content tab" width="428" height="165">
+</li>
+<li>Search for<strong> In-email review collection - Klaviyo Reviews</strong>. </li>
+<li>Click and drag the in-email review request block into your email. </li>
+<li>Delete the previous star rating block from your message.</li>
+</ol>
+<p>Before making edits to the in-email review request block, <a href="https://help.klaviyo.com/hc/en-us/articles/115005413888">save a copy</a> of it first. There is no way to revert your block to its original settings after making changes. Editing this block requires making direct edits to the code, and is only recommended for developers or code-savvy marketers. </p>
+<h3 id="h_01J5BMHT1H2J2HJAA2X7ABAAY4">In-app email block code</h3>
+<p>If you need to revert to the original version of the in-email review collection block, copy your preferred code snippet below and paste it into an HTML block or a text block’s source code field: </p>
+<div class="accordion accordion--default">
+<div class="accordion__item">
+<div class="accordion__item-title"><strong>Without review headline</strong></div>
+<div class="accordion__item-content">
+<pre><code class="language-text">&lt;div class="kl_reviews__email_submission" style="display: block; margin: auto; padding: 24px;"&gt;&lt;!--[if !mso]&gt;&lt;!--&gt;&lt;form action="{{ event.review_link }}" method="GET"&gt;
+    &lt;h4 class="kl_reviews__email_submission__header" style="font-weight: bold;"&gt;Rating&lt;/h4&gt;
+    &lt;table class="kl_reviews__email_submission__ratings" style="width: 100%; margin-bottom: 32px;"&gt;
+        &lt;tbody&gt;
+            &lt;tr&gt;
+                &lt;td style="width: 20%;"&gt;&lt;input id="rating1" style="display: block; cursor: pointer; margin-bottom: 8px;" name="rating" type="radio" value="1"&gt; &lt;label style="display: block; cursor: pointer;" for="rating1"&gt;1 ★&lt;/label&gt;&lt;/td&gt;
+                &lt;td style="width: 20%;"&gt;&lt;input id="rating2" style="display: block; cursor: pointer; margin-bottom: 8px;" name="rating" type="radio" value="2"&gt; &lt;label style="display: block; cursor: pointer;" for="rating2"&gt;2 ★&lt;/label&gt;&lt;/td&gt;
+                &lt;td style="width: 20%;"&gt;&lt;input id="rating3" style="display: block; cursor: pointer; margin-bottom: 8px;" name="rating" type="radio" value="3"&gt; &lt;label style="display: block; cursor: pointer;" for="rating3"&gt;3 ★&lt;/label&gt;&lt;/td&gt;
+                &lt;td style="width: 20%;"&gt;&lt;input id="rating4" style="display: block; cursor: pointer; margin-bottom: 8px;" name="rating" type="radio" value="4"&gt; &lt;label style="display: block; cursor: pointer;" for="rating4"&gt;4 ★&lt;/label&gt;&lt;/td&gt;
+                &lt;td style="width: 20%;"&gt;&lt;input id="rating5" style="display: block; cursor: pointer; margin-bottom: 8px;" name="rating" type="radio" value="5"&gt; &lt;label style="display: block; cursor: pointer;" for="rating5"&gt;5 ★&lt;/label&gt;&lt;/td&gt;
+            &lt;/tr&gt;
+        &lt;/tbody&gt;
+    &lt;/table&gt;
+    &lt;h4 class="kl_reviews__email_submission__header" style="font-weight: bold;"&gt;Your review&lt;/h4&gt;
+    &lt;textarea class="kl_reviews__email_submission__content" style="display: block; width: 99%; height: 120px; border: 1px solid #d9d9d9; border-radius: 4px; margin-bottom: 32px; font-size: 16px;" name="content"&gt;&amp;#8203;&lt;/textarea&gt; &lt;button class="kl_reviews__email_submission__submit" style="display: block; width: 100%; border-radius: 2px; background-color: #000; color: #fff; cursor: pointer; border: none; height: 50px; font-size: 16px; margin-bottom: 32px;" type="submit"&gt; Submit review &lt;/button&gt;&lt;/form&gt;&lt;!--&lt;![endif]--&gt;
+   &lt;h4 class="kl_reviews__email_submission__fallback" style="text-align: center; font-weight: bold;"&gt;Having trouble with the form?&lt;/h4&gt;
+   &lt;a class="kl_reviews__email_submission__fallback_link" href="{{ event.review_link }}" style="display: block; text-align: center; cursor: pointer; font-size: 14px; font-weight: 400;"&gt;Write review on the web&lt;/a&gt;
+&lt;/div&gt;</code></pre>
+</div>
+</div>
+<div class="accordion__item">
+<div class="accordion__item-title"><strong>With review headline</strong></div>
+<div class="accordion__item-content">
+<pre><code class="language-text">&lt;div class="kl_reviews__email_submission" style="display: block; margin: auto; padding: 24px;"&gt;&lt;!--[if !mso]&gt;&lt;!--&gt;&lt;form action="{{ event.review_link }}" method="GET"&gt;
+    &lt;h4 class="kl_reviews__email_submission__header" style="font-weight: bold;"&gt;Rating&lt;/h4&gt;
+    &lt;table class="kl_reviews__email_submission__ratings" style="width: 100%; margin-bottom: 32px;"&gt;
+        &lt;tbody&gt;
+            &lt;tr&gt;
+                &lt;td style="width: 20%;"&gt;&lt;input id="rating1" style="display: block; cursor: pointer; margin-bottom: 8px;" name="rating" type="radio" value="1"&gt; &lt;label style="display: block; cursor: pointer;" for="rating1"&gt;1 ★&lt;/label&gt;&lt;/td&gt;
+                &lt;td style="width: 20%;"&gt;&lt;input id="rating2" style="display: block; cursor: pointer; margin-bottom: 8px;" name="rating" type="radio" value="2"&gt; &lt;label style="display: block; cursor: pointer;" for="rating2"&gt;2 ★&lt;/label&gt;&lt;/td&gt;
+                &lt;td style="width: 20%;"&gt;&lt;input id="rating3" style="display: block; cursor: pointer; margin-bottom: 8px;" name="rating" type="radio" value="3"&gt; &lt;label style="display: block; cursor: pointer;" for="rating3"&gt;3 ★&lt;/label&gt;&lt;/td&gt;
+                &lt;td style="width: 20%;"&gt;&lt;input id="rating4" style="display: block; cursor: pointer; margin-bottom: 8px;" name="rating" type="radio" value="4"&gt; &lt;label style="display: block; cursor: pointer;" for="rating4"&gt;4 ★&lt;/label&gt;&lt;/td&gt;
+                &lt;td style="width: 20%;"&gt;&lt;input id="rating5" style="display: block; cursor: pointer; margin-bottom: 8px;" name="rating" type="radio" value="5"&gt; &lt;label style="display: block; cursor: pointer;" for="rating5"&gt;5 ★&lt;/label&gt;&lt;/td&gt;
+            &lt;/tr&gt;
+        &lt;/tbody&gt;
+    &lt;/table&gt;
+    &lt;h4 class="kl_reviews__email_submission__header" style="font-weight: bold;"&gt;Your review&lt;/h4&gt;
+    &lt;textarea class="kl_reviews__email_submission__content" style="display: block; width: 99%; height: 120px; border: 1px solid #d9d9d9; border-radius: 4px; margin-bottom: 32px; font-size: 16px;" name="content"&gt;&amp;#8203;&lt;/textarea&gt;
+    &lt;h4 class="kl_reviews__email_submission__header" style="font-weight: bold;"&gt;Review headline&lt;/h4&gt;
+    &lt;input class="kl_reviews__email_submission__headline" style="display: block; width: 99%; height: 36px; border: 1px solid #d9d9d9; border-radius: 4px; margin-bottom: 32px; font-size: 16px;" name="headline" type="text"&gt; 
+    &lt;button class="kl_reviews__email_submission__submit" style="display: block; width: 100%; border-radius: 2px; background-color: #000; color: #fff; cursor: pointer; border: none; height: 50px; font-size: 16px; margin-bottom: 32px;" type="submit"&gt; Submit review &lt;/button&gt;&lt;/form&gt;&lt;!--&lt;![endif]--&gt;
+    &lt;h4 class="kl_reviews__email_submission__fallback" style="text-align: center; font-weight: bold;"&gt;Having trouble with the form?&lt;/h4&gt;
+    &lt;a class="kl_reviews__email_submission__fallback_link" href="{{ event.review_link }}" style="display: block; text-align: center; cursor: pointer; font-size: 14px; font-weight: 400;"&gt;Write review on the web&lt;/a&gt;
+&lt;/div&gt;</code></pre>
+</div>
+</div>
+</div>
+<h3 id="h_01J5BMJCFEA3JF0QPFE2H8K92X">About the in-email review block</h3>
+<p>The in-email review block contains 3 fields: </p>
+<ul>
+<li>
+<strong>Review rating</strong><br>
+A radio button option to select 1-5 stars </li>
+<li>
+<strong>Review content</strong><br>
+An open text field for review content </li>
+<li>
+<strong>Review headline</strong><br>
+An open text field for a review headline or title (only visible if selected in the review submission page editor)</li>
+</ul>
+<p>These fields are not editable. Custom questions will not appear in the in-email review block.</p>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/28722600137371" alt="An example of the in-email review collection form" width="510" height="494"></p>
+<h2 id="h_01J5BMJCFEBPA5NSVYAHHNX7BG">Limitations </h2>
+<p>This functionality relies on the HTML &lt;form&gt; element, which is <a href="https://www.caniemail.com/features/html-form/">not supported by all inbox providers</a>. If a recipient opens your review request email in an inbox that doesn’t support the form element, they will see a link to submit a review instead. </p>
+<p>Custom questions are not supported for in-email review collection. If you have custom questions, reviewers will only see them in certain scenarios. </p>
+<ul>
+<li>If you have <strong>required</strong> custom questions, submitting the in-email review form will redirect reviewers to a new tab where they must complete the custom questions to submit their review. Partial review submissions will not be stored. </li>
+<li>If you have <strong>non-required</strong> custom questions, reviewers will see a success page after  submitting their review from their inbox. Only those who navigate to the product page and click the <strong>Write a review</strong> button will see your custom questions.</li>
+</ul>
+<h2 id="h_01J5BMJCFEP38TDE6CCMQZGR4E">Outcome </h2>
+<p>Once you complete these steps, your customers can submit reviews directly in email, without needing to open another tab or window to access your review request form. </p>

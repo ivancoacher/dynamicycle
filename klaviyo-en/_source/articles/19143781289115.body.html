@@ -1,0 +1,49 @@
+<h2 id="h_01HBC720AND71W4PKJ3F7XEDGJ">You will learn</h2>
+<p>Learn how to allowlist IP addresses for outbound Klaviyo integration traffic to ensure that your firewall is not blocking Klaviyo’s requests. All outbound Klaviyo integration traffic is behind a set of predictable, static IP addresses so that you can have a high level of confidence that this traffic is coming from Klaviyo. This is especially applicable to customers using self-hosted ecommerce integrations such as Magento 2 and WooCommerce. </p>
+<p>Please note that integration traffic does not include flow-triggered webhook traffic, which uses different IP addresses. </p>
+<h2 id="h_01HBC720ANTVRRQ1EFWDZXF4KF">What IP addresses does Klaviyo use for integration traffic?</h2>
+<p>The IP address range used by Klaviyo for integration traffic is 207.211.192.0 - 207.211.207.255. This is the range that you should allowlist. This range can be represented as the CIDR address <code>207.211.192.0/20</code>.</p>
+<p>If you are restricted from allowlisting /20 ranges, our range can be represented as 16 /24 ranges. Thus, you would need to allowlist:</p>
+<p><code>207.211.192.0/24</code></p>
+<p><code>207.211.193.0/24</code></p>
+<p><code>207.211.194.0/24</code></p>
+<p><code>207.211.195.0/24</code></p>
+<p><code>207.211.196.0/24</code></p>
+<p><code>207.211.197.0/24</code></p>
+<p><code>207.211.198.0/24</code></p>
+<p><code>207.211.199.0/24</code></p>
+<p><code>207.211.200.0/24</code></p>
+<p><code>207.211.201.0/24</code></p>
+<p><code>207.211.202.0/24</code></p>
+<p><code>207.211.203.0/24</code></p>
+<p><code>207.211.204.0/24</code></p>
+<p><code>207.211.205.0/24</code></p>
+<p><code>207.211.206.0/24</code></p>
+<p><code>207.211.207.0/24</code></p>
+<h2 id="h_01HBC720ANG7VCR7KQH9E5AK1C">How-to examples</h2>
+<h3 id="h_01HBC720ANWGN79940APHPMK7F">How to allowlist in Cloudflare</h3>
+<p>Cloudflare does not accept allowlisting /20 ranges, so you'll need to allowlist all 16 of the /24 ranges given above.</p>
+<ol>
+<li>Log in to your <a href="https://dash.cloudflare.com/">Cloudflare dashboard</a> and select your account and domain.</li>
+<li>Go to<strong> Security &gt; WAF &gt; Tools</strong>.</li>
+<li>Under <em>IP Access Rule</em>s, enter the following details:
+<ol>
+<li>For <em>Value</em>, enter the first range: <code>207.211.192.0/24</code>.</li>
+<li>Select the <strong>Allow</strong> action.</li>
+<li>For<em> Zone</em>, select whether the rule applies to the current website only or to all websites in the account.</li>
+<li>Enter a note for the rule (optional).</li>
+</ol>
+</li>
+<li>Select <strong>Add</strong>.</li>
+<li>Repeat this process for each of the 16 /24 ranges given in the section above.</li>
+</ol>
+<p>You can learn more about IP access rules in <a href="https://developers.cloudflare.com/waf/tools/ip-access-rules/">Cloudflare’s documentation</a>.</p>
+<h3 id="h_01HBC720ANWQSTJ3F9CSH1AJ8C">How to allowlist in Akamai</h3>
+<ol>
+<li>In the <a href="https://console.janrain.com/#/login">Console</a>, from the Edit page, click <strong>Add New IP Address</strong>.</li>
+<li>In the <em>Whitelist an IP network</em> field, type <code>207.211.192.0/20</code>. </li>
+<li>When you are finished, click the <em>Save changes</em> icon.</li>
+</ol>
+<p>You can learn more about managing IP allowlists in <a href="https://techdocs.akamai.com/identity-cloud/docs/manage-property-ip-allow-lists">Akamai’s documentation</a>.</p>
+<h2 id="h_01HBC720ANN7NXZ1EGXB7TMM2D">Outcome</h2>
+<p>You’ve successfully allowlisted Klaviyo’s static IP addresses for outbound integration traffic. Your firewall or security provider will now safely let that traffic through, knowing that it originates from Klaviyo.</p>

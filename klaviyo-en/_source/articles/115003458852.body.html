@@ -1,0 +1,308 @@
+<p>Learn what data Klaviyo imports from your Magento 2 store when you integrate the two platforms. Klaviyo's integration with Magento 2 pulls in all of the historical data in your Magento 2 store with the initial historic sync. Once enabled the integration will also begin to sync order and customer data every 30 minutes. Examples of this data include the information associated with past placed orders, fulfilled orders, etc.</p>
+<p>In Klaviyo, you can navigate to your account's <em>Analytics tab</em> in the left sidebar to view all of the metrics in your account; the metrics with a Magento 2 icon are the order events synced from your Magento 2 integration. You will also see Klaviyo onsite tracking events with a gear icon; these are also tracked through the integration.</p>
+<p class="wysiwyg-text-align-center"><img src="https://klaviyo.zendesk.com/hc/article_attachments/35507590825499" width="390" height="426"></p>
+<p class="wysiwyg-text-align-center"><strong><img src="https://klaviyo.zendesk.com/hc/article_attachments/35507597379867" width="406" height="338"></strong></p>
+<h2 id="01H8PQV0GFXC7AP0M9GEQ342WB">How Klaviyo determines Magento 2 metrics</h2>
+<h3 id="01H8PQV0GFG4BEN0GWFKD7RF3A">Order metrics</h3>
+<p>Magento 2 order metrics are determined by the <em>Status</em> field in an order in your Magento 2 store.</p>
+<p>Each time an order is created, or its status is updated, it will be evaluated against the matrix below to determine which events should be triggered.</p>
+<table>
+<tbody>
+<tr>
+<td>
+<p><strong>Magento Order Status</strong></p>
+</td>
+<td>
+<p><strong>Metric Triggered in Klaviyo</strong></p>
+</td>
+</tr>
+<tr>
+<td>
+<p>complete</p>
+</td>
+<td>
+<p>Fulfilled Order</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>canceled, cancelled</p>
+</td>
+<td>
+<p>Canceled Order</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>pay_aborted</p>
+</td>
+<td>
+<p>Canceled Payment</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>closed</p>
+</td>
+<td>
+<p>Refunded Order</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>All other order statuses</p>
+</td>
+<td>
+<p>Placed Order</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>If you have custom order statuses that should not trigger a <em>Placed Order </em>metric, or do not align with the table above, <a href="https://klaviyo.zendesk.com/hc/en-us/articles/115001002272" target="_blank" rel="noopener">please let us know</a> and we can adjust the order status mapping accordingly in your integration.</p>
+<p>Orders with a status of “pending_payment” will be ignored.</p>
+<h3 id="01H8PQV0GFQG0W5Y3SBT8R2N3J">Started Checkout metric</h3>
+<p>With a standard Magento checkout, this event is triggered when a customer enters their contact and shipping information on the first page of the Magento checkout process and clicks <em>Continue</em>. </p>
+<p>The <em>Started Checkout</em> event relies on a “Quote” being created and having an email address associated with it. This happens after the customer has entered their email address at the “Shipping Information” stage of checkout. If a customer does not complete the checkout, this quote is synced to Klaviyo as a <em>Started Checkout</em> event.</p>
+<p>If the customer proceeds to complete the order, this quote is converted to an “invoice” in Magento’s database. As a result a <em>Started Checkout</em> event is not sent to Klaviyo. Instead, a <em>Placed Order</em> event is sent. Note that it may take up to 1 hour for<em> Started Checkout</em> events to sync to Klaviyo.</p>
+<h3 id="01H8PQV0GGMQ163VYNB3BT465Z">Fulfilled Shipment metric</h3>
+<p>This metric is triggered when a new Shipment is created in your Magento 2 store.</p>
+<h2 id="01H8PQV0GGNPJBW13F5ND4P30G">Magento 2 metric data</h2>
+<p>This section covers each of the Magento 2 metrics and the data that is available for filtering when creating segments and flows.</p>
+<h3 id="01H8PQV0GG2WZR1YF3PX7BYHW0">Cancelled Order</h3>
+<p>This event is triggered when an order status is changed to <em>cancelled </em>or <em>canceled</em> in your Magento 2 store.</p>
+<ul>
+<li>
+<strong>ProductCategories<br></strong>The categories of the products in the cancelled order.</li>
+<li>
+<strong>Value<br></strong>The value of the cancelled order.</li>
+<li>
+<strong>Discounted<br></strong>(True or False) The discount state of the cancelled order.</li>
+<li>
+<strong>OrderedProducts<br></strong>The names of the products in the cancelled order.</li>
+<li>
+<strong>OrderedProductCount<br></strong>The number of products in the cancelled order.</li>
+<li>
+<strong>OrderCurrencyCode<br></strong>The currency code used with the cancelled order.</li>
+<li>
+<strong>CartPriceRuleIDs<br></strong>An array of Cart Price Rule IDs (numeric id strings) which include automatically applied rules and the rule for an applied coupon.</li>
+<li>
+<strong>external_catalog_id</strong><br>Used in catalog organization in Klaviyo.</li>
+</ul>
+<h3 id="01H8PQV0GG4AQA8C9XM6PSYTHM">Fulfilled Order</h3>
+<p>This event is tracked when you set an order status to <em>complete</em> in your Magento 2 store.</p>
+<ul>
+<li>
+<strong>ProductCategories<br></strong>The categories of the products in the order.</li>
+<li>
+<strong>Value<br></strong>The value of the order.</li>
+<li>
+<strong>Discounted<br></strong>Whether the order is discounted or not.</li>
+<li>
+<strong>OrderedProducts<br></strong>The names of the products in the order.</li>
+<li>
+<strong>OrderedProductCount<br></strong>The number of products in the order.</li>
+<li>
+<strong>OrderCurrencyCode<br></strong>The currency code used with the order.</li>
+<li>
+<strong>external_catalog_id</strong><br>Used in catalog organization in Klaviyo.</li>
+</ul>
+<h3 id="01H8PQV0GG7RRY9WCD11Y71QMF">Fulfilled Shipment</h3>
+<p>This event is tracked when a new <em>Shipment</em> is created in your Magento 2 store.</p>
+<ul>
+<li>
+<strong>StoreName<br></strong>The name of the store where the order was placed.</li>
+<li>
+<strong>StoreID<br></strong>The ID of the store where the order was placed.</li>
+<li>
+<strong>BillingAddress<br></strong>The billing address for the order.</li>
+<li>
+<strong>Tracks<br></strong>Information on shipment tracking.</li>
+<li>
+<strong>external_catalog_id</strong><br>Used in catalog organization in Klaviyo.</li>
+</ul>
+<h3 id="01H8PQV0GGGPM5JE96K0HYPQNK">Ordered Product</h3>
+<p>This event is tracked once for every product a user orders when they place an order.</p>
+<ul>
+<li>
+<strong>SKU<br></strong>The SKU of the product.</li>
+<li>
+<strong>OrderCurrencyCode<br></strong>The currency code of the product.</li>
+<li>
+<strong>Price<br></strong>The value of the product.</li>
+<li>
+<strong>Categories<br></strong>The category of the product.</li>
+<li>
+<strong>Discounted<br></strong>Any discounts applied to the product.</li>
+<li>
+<strong>Quantity<br></strong>The number of products.</li>
+<li>
+<strong>Value<br></strong>The value of the product.</li>
+<li>
+<strong>ProductID<br></strong>The ID of the product.</li>
+<li>
+<strong>RootProductID<br></strong>The ID of the parent product.</li>
+<li>
+<strong>external_catalog_id</strong><br>Used in catalog organization in Klaviyo.</li>
+</ul>
+<div class="bs-callout bs-callout-default">
+<p>Ordered Product metric has a number of other data fields available for tracking. <a href="https://help.klaviyo.com/hc/en-us/articles/115005076747-View-Raw-Metric-or-Event-Data-in-Klaviyo" target="_blank" rel="noopener">View the raw data</a> of an individual Ordered Product event to see all of the available data for this event.</p>
+</div>
+<h3 id="01H8PQV0GG1G7HBRV8NPNP6GBZ">Placed Order</h3>
+<p>This event is tracked when a user places an order.</p>
+<ul>
+<li>
+<strong>ProductCategories<br></strong>The categories of the products in the order.</li>
+<li>
+<strong>Value<br></strong>The value of the order.</li>
+<li>
+<strong>Discounted<br></strong>Whether the order is discounted or not.</li>
+<li>
+<strong>OrderedProducts<br></strong>The names of the products in the order.</li>
+<li>
+<strong>OrderedProductCount<br></strong>The number of products in the order.</li>
+<li>
+<strong>OrderCurrencyCode<br></strong>The currency code used with the order.</li>
+<li>
+<strong>CartPriceRuleIDs<br></strong>An array of Cart Price Rule IDs (numeric id strings) which include automatically applied rules and the rule for an applied coupon.</li>
+<li>
+<strong>external_catalog_id</strong><br>Used in catalog organization in Klaviyo.</li>
+</ul>
+<h3 id="01H8PQV0GGS9CN9D920NSTE0SA">Refunded Order</h3>
+<p>This event is triggered when a customer refunds an order. </p>
+<ul>
+<li>
+<strong>Value<br></strong>The value of the order.</li>
+<li>
+<strong>Discounted<br></strong>Whether the order is discounted or not. </li>
+<li>
+<strong>OrderedProducts<br></strong>The names of all the products in the order.</li>
+<li>
+<strong>OrderedProductCount<br></strong>The number of products in the order. </li>
+<li>
+<strong>OrderCurrencyCode<br></strong>The currency code used with the order. </li>
+<li>
+<strong>ProductCategories<br></strong>The categories of the products in the order. </li>
+<li>
+<strong>CartPriceRuleIDs<br></strong>An array of Cart Price Rule IDs (numeric id strings) which include automatically applied rules and the rule for an applied coupon.</li>
+<li>
+<strong>external_catalog_id</strong><br>Used in catalog organization in Klaviyo.</li>
+</ul>
+<h3 id="01H8PQV0GG3EWNP37Q3D4AS9J0">Started Checkout</h3>
+<p>This event is triggered when a customer with a known email address begins a checkout. On a standard checkout page this event is triggered when a customer enters their contact and shipping information on the first page of the Magento checkout process and clicks <em>Continue</em>. A <em>Started Checkout </em>event is not sent to Klaviyo if the user completes checkout. Instead, a <em>Placed Order</em> event is logged.</p>
+<ul>
+<li>
+<strong>Value<br></strong>The value of the order during the checkout.</li>
+<li>
+<strong>ItemCount<br></strong>The number of items in the order. </li>
+<li>
+<strong>Items<br></strong>The items in the order. </li>
+<li>
+<strong>ProductCategories<br></strong>The categories of the products in the order. </li>
+<li>
+<strong>ProductNames<br></strong>The names of the products in the order. </li>
+<li>
+<strong>StoreName<br></strong>The name of the store where the order was started.</li>
+<li>
+<strong>StoreID<br></strong>The ID of the store where the order was started.</li>
+<li>
+<strong>external_catalog_id</strong><br>Used in catalog organization in Klaviyo.</li>
+</ul>
+<h3 id="01H8PQV0GGPFGK28YTSFB15QJ5">Added To Cart</h3>
+<p>Please note that this metric is only tracked if you are using Klaviyo extension version 4.0.0 and above. This metric is tracked when a customer who has been cookied by Klaviyo adds an item to their cart.</p>
+<p>It includes detailed information about the item that was added. This is useful when creating segments based on what products users have added to cart, or when building an abandoned cart flow. You can filter and target <em>Added To Cart</em> metrics based on the following criteria:</p>
+<ul>
+<li>
+<strong>MaskedQuoteId<br></strong>MaskedQuoteId or Unique identifier for logged in customers.</li>
+<li>
+<strong>AddedItemCategories<br></strong>The categories to which the item belongs.</li>
+<li>
+<strong>AddedItemProductName<br></strong>The name of the product in your store (e.g., Red T-shirt).</li>
+<li>
+<strong>AddedItemDescription<br></strong>The description of the item.</li>
+<li>
+<strong>AddedItemImageURLKey<br></strong>The URL of the image of the item.</li>
+<li>
+<strong>AddedItemPrice<br></strong>The price of the item.</li>
+<li>
+<strong>AddedItemProductID<br></strong>The custom ID in your Magento 2 store of the product, e.g., 1234.</li>
+<li>
+<strong>AddedItemSKU<br></strong>The SKU of the item in your store (e.g., REDMEDIUMTSHIRT).</li>
+<li>
+<strong>AddedItemURL<br></strong>The URL of the item.</li>
+<li>
+<strong>external_catalog_id</strong><br>Used in catalog organization in Klaviyo.</li>
+<li>
+<strong>integration_key</strong><br>Your eCommerce platform (Magento 2).</li>
+</ul>
+<p>Klaviyo generates a key, the cart rebuild key, that allows you to create a link that rebuilds the customer's cart in case they return to their cart via an email triggered by this event on another device. This key can be found within the ‘extra’ property array. You can create this link using the following URL:</p>
+<pre><code class="language-js">{{ organization.url|trim_slash }}reclaim/checkout/cart?quote_id={{ event.MaskedQuoteId }}
+</code></pre>
+<h3 id="h_01JQPPZXX34N8N0KA61T3E3DKV">Viewed Product</h3>
+<p>This metric is tracked when a customer views a product on your site. You can filter and target <em>Viewed Product</em> metrics based on the following criteria:</p>
+<ul>
+<li>
+<strong>ProductID</strong><br>The ID of the product.</li>
+<li>
+<strong>Name</strong><br>The name of the product.</li>
+<li>
+<strong>SKU</strong><br>The SKU for the product.</li>
+<li>
+<strong>URL</strong><br>The URL for the product.</li>
+<li>
+<strong>Price</strong><br>The price of the product.</li>
+<li>
+<strong>FinalPrice</strong><br>The final price after any discounts.</li>
+<li>
+<strong>Categories</strong><br>An array containing the categories the product belongs to.</li>
+<li>
+<strong>ImageURL</strong><br>The URL for the product's image.</li>
+<li>
+<strong>external_catalog_id</strong><br>Used in catalog organization in Klaviyo.</li>
+<li>
+<strong>integration_key</strong><br>Your eCommerce platform (Magento 2).</li>
+</ul>
+<h3 id="h_01JQPPZXX37R50CGSZKEAH44F7">Active on Site</h3>
+<p>This metric is tracked when a customer is active on your site. You can filter and target <em>Active on Site</em> metrics based on the following criteria:</p>
+<ul>
+<li>
+<strong>utm_medium</strong><br>The medium for the utm tracking parameter (e.g., campaign).</li>
+<li>
+<strong>kx_present</strong><br>(True or False) Whether the <a href="https://help.klaviyo.com/hc/en-us/articles/115005076767#h_01HADAYAACCVC5TX5932PQ2AZA" target="_blank" rel="noopener noreferrer">kx parameter</a> is present.</li>
+<li>
+<strong>os</strong><br>The operating system of the user's device.</li>
+<li>
+<strong>initial_page_path</strong><br>The URL path of the initial page the user landed on.</li>
+<li>
+<strong>browser</strong><br>The user's browser type.</li>
+<li>
+<strong>page</strong><br>The URL of the page the user was active on.</li>
+<li>
+<strong>utm_campaign</strong><br>The UTM tracking parameter for the campaign.</li>
+<li>
+<strong>utm_source</strong><br>The UTM source (e.g., Klaviyo).</li>
+</ul>
+<h3 id="01H8PQV0GGKGATN6FHF5CD0PHK">Synced customer data</h3>
+<p>Klaviyo creates a contact from the creation of an existing order, an existing customer record, or when a checkout is started. Klaviyo will create a new Klaviyo Profile for every synced contact, and will populate this profile with the following information:</p>
+<ul>
+<li>Email</li>
+<li>First and Last Name</li>
+<li>City, State/Region, Zip Code, Country</li>
+<li>Phone Number</li>
+<li>Magento Account Created (e.g., YYY-mm-dd hh:mm:ss; 2015-05-21 13:04:00)</li>
+<li>Magento Customer Group (e.g., Wholesale)</li>
+<li>Magento Store (e.g., US Store)</li>
+<li>Date of Birth (e.g., YYYY-mm-dd; 1990-03-25)</li>
+<li>Gender</li>
+</ul>
+<p>If you update the customer group in Magento 2, even after the original profile has been created in Klaviyo, the customer group will update in Klaviyo.</p>
+<div class="bs-callout bs-callout-default">
+<p>Website_ID will not be pulled. Suppressions are not copied into Klaviyo so they will not be in the Klaviyo platform.</p>
+<p>Klaviyo cannot pull custom image locations.</p>
+</div>
+<h2 id="01H8PQV0GGCNJ93CPHNNXFF0M4">Revenue value</h2>
+<p>You may see that the <em>Revenue </em>value on your Klaviyo dashboard does not always match up with the revenue value you see in Magento; this is because Klaviyo does not subtract cancelled and refunded orders from our revenue calculation.</p>
+<h2 id="01H8PQV0GGF7KYBBPEE97EM5S5">Additional resources</h2>
+<ul>
+<li><a href="https://klaviyo.zendesk.com/hc/en-us/articles/115005254348" target="_blank" rel="noopener">How to integrate with Magento 2.x (CE and EE)</a></li>
+<li><a href="https://klaviyo.zendesk.com/hc/en-us/articles/5510750923035" target="_blank" rel="noopener">Troubleshooting your Magento 2 integration</a></li>
+</ul>

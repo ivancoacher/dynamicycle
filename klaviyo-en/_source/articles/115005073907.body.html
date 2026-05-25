@@ -1,0 +1,60 @@
+<h2 id="section0">You will learn</h2>
+<p>Learn where to find location information for a profile, how it is used and updated, and more. When syncing or creating a new profile, Klaviyo determines the location and timezone information based on the profile's billing address. If a profile hasn't purchased, location and timezone are determined based on IP geolocation. </p>
+<h2 id="h_01HGZQQ2WXRAEB41VQ0GV2C41Y">Find location information in a profile</h2>
+<p>You can find the location for a profile by navigating to their profile page in Klaviyo, where the location is displayed in the header along with any contact information.</p>
+<p class="wysiwyg-text-align-center"><img src="https://klaviyo.zendesk.com/hc/article_attachments/33101716556571" alt="Top of the profile page"></p>
+<h2 id="h_01HGZQQ2WX6GEZ03DPBG41PANJ">How locations are used and updated in Klaviyo</h2>
+<p>A profile's location and timezone are used when <a href="https://help.klaviyo.com/hc/en-us/articles/115005054847#schedule-and-send-your-campaign6">sending based on recipients' timezones</a>, <a href="https://help.klaviyo.com/hc/en-us/articles/115005065887">creating location-based segments</a>, or adding location- or timezone-specific filters to flows.</p>
+<p>Here is an example outline of how a profile's location and timezone information are set and updated:</p>
+<ol>
+<li>
+<strong>A profile visits your website or submits a form.</strong> The request includes their IP address but no address data, so Klaviyo estimates their location and timezone from the IP.</li>
+<li>
+<strong>The profile places an order through Shopify.</strong> Klaviyo's Shopify integration extracts the billing address from the order and updates the profile's location and timezone. Because this
+address data is more authoritative than an IP-based estimate, it takes priority.</li>
+<li>
+<strong>The profile continues browsing your site.</strong> Even though these interactions include an IP address, the profile's location is now protected — IP-based estimation will not overwrite address
+data set by Shopify.</li>
+<li>
+<strong>A customer update syncs from Shopify.</strong> If the customer's default address in Shopify differs from the billing address on their last order, the profile's location will be updated to reflect the customer record. Both sources carry the same authority, so the most recently synced data is what appears on the profile.
+
+Note that email opens and clicks do not update a profile's location or timezone, even if the profile has no other location data.
+</li>
+</ol>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/33101716559387" alt="Example of where location and timezone are displayed in a profile"></p>
+<div class="bs-callout bs-callout-default">
+<p>If you are using a custom integration, billing address is not used to determine location. You'll need to set profiles' locations with the location object in the Profiles API. Learn more about <a href="https://developers.klaviyo.com/en/docs/guide_to_integrating_a_platform_without_a_pre_built_klaviyo_integration">custom integrations</a> and Klaviyo's <a href="https://developers.klaviyo.com/en/reference/create_profile">Profiles API</a>. </p>
+<p>When collecting phone numbers, the number's area code does not affect the location saved on the profile. However, area code can be used to determine a recipient's <a href="https://help.klaviyo.com/hc/en-us/articles/22711363273627">quiet hours</a>.</p>
+</div>
+<h2 id="section1">IP geolocation</h2>
+<p>Klaviyo uses IP geolocation to set a profile's location when a billing address has not been received. Klaviyo can identify a person via their IP and sets a location when that profile:</p>
+<ul>
+<li>Click through a message</li>
+<li>Subscribe via a Klaviyo sign-up form</li>
+<li>Are captured by Klaviyo's web tracking snippet <br>
+<p>Although IP geolocation is used as the industry standard, it can sometimes be inaccurate. Here are a few reasons you might see discrepancies between a profile's IP geolocation and where they are actually located:</p>
+</li>
+<li>Klaviyo checks someone's IP whenever they open an email or are captured via web tracking. For example, if someone is on a trip to China when they open the email, their IP will reflect this, even if their typical location is in California.</li>
+<li>IPs are not static, and the location affiliated with an IP is also not static; this makes IP geolocation imperfect.<br>
+<div class="bs-callout bs-callout-default">
+<p>If a user's internet service provider assigns an IPv6 address to their connection, their location may not be captured correctly.</p>
+</div>
+<p>This is most relevant when you want to schedule a campaign that sends to each recipient in their own timezone. Depending on where a recipient was the last time they opened an email or opted-in via a sign-up form, it's possible that the timezone Klaviyo has recorded for a recipient at send time will not be the same timezone the recipient is in when they receive your next campaign.</p>
+<p>Additional situations where Klaviyo won't be able to get accurate IP data from email open events:</p>
+</li>
+<li>If the <em>Opened Email</em> event, when tracked, goes through a proxy; this is true of emails opened in Gmail.</li>
+<li>If the <em>Opened Email</em> event is synced to Klaviyo through an integration, like Mailchimp. In this case, the IP we assess will be a Mailchimp server IP and not the actual email recipient's IP.</li>
+</ul>
+<h2 id="section2">Update location information yourself</h2>
+<p>If you want to update any location-related properties for one or more profiles (either by <a href="https://help.klaviyo.com/hc/en-us/articles/115005074627#add-a-custom-property-yourself2">manually importing</a> this location data or <a href="https://developers.klaviyo.com/en/reference/update_profile">using the API</a>), you need to reference the relevant Klaviyo property name:</p>
+<ul>
+<li>
+<strong>City: </strong>the city where they live</li>
+<li>
+<strong>State/Region: </strong>the state/region where they live</li>
+<li>
+<strong>Country:</strong> the country where they live</li>
+<li>
+<strong>Zip Code:</strong> the postal code where they live</li>
+</ul>
+<p>For more information about properties and how to manage and update them, head to our <a href="https://klaviyo.zendesk.com/hc/en-us/articles/115005074627">guide on properties</a>.</p>

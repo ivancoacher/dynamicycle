@@ -1,0 +1,212 @@
+<h2 id="h_01HGGHQG2G353EVVEJ7JMW7Q2K">You will learn</h2>
+<p>Learn how to use SMS in your back in stock flows with Klaviyo. </p>
+<p>By adding an SMS to your back in stock flow, you can immediately alert subscribers about products they’re interested in. Back in stock messages create a sense of urgency, prompting your recipients to buy as soon as they get the text. Text messages are typically read within 3 minutes and are seen much quicker than emails, making them the best option for back in stock messages. </p>
+<h2 id="h_01HGGHQG2GF0HC05HVDZPH1KXM">Before you begin</h2>
+<p>Before you add SMS to your back in stock flows, note the following:</p>
+<ul>
+<li>You must have already <a href="https://help.klaviyo.com/hc/en-us/articles/4404274419355">turned on SMS </a>in your Klaviyo account.</li>
+<li>Individuals must be current SMS subscribers to receive text messages from a back in stock flow</li>
+<li>SMS back in stock flows are only available for Shopify, BigCommerce, PrestaShop, and Magento 2 stores, as well as stores with inventory-aware catalogs synced via custom catalog feed or API.</li>
+<li>You must have set up back in stock for your ecommerce store:
+<ul>
+<li><a href="https://help.klaviyo.com/hc/en-us/articles/38767539287323">Shopify back in stock instructions</a></li>
+<li><a href="https://help.klaviyo.com/hc/en-us/articles/38767539287323">BigCommerce back in stock instructions</a></li>
+<li><a href="https://help.klaviyo.com/hc/en-us/articles/33059375555099">PrestaShop back in stock instructions</a></li>
+<li><a href="https://developers.klaviyo.com/en/docs/set-up-back-in-stock-for-magento-2">Magento 2 back in stock</a></li>
+<li><a href="https://developers.klaviyo.com/en/docs/how-to-enable-back-in-stock-for-custom-catalog-feeds">Custom catalog feeds back in stock</a></li>
+<li><a href="https://developers.klaviyo.com/en/docs/how_to_set_up_custom_back_in_stock">API back in stock</a></li>
+</ul>
+</li>
+<li>Limit the number of text messages in your back in stock flow to 1 or 2 SMS.</li>
+</ul>
+<h2 id="h_01HGGHQG2G1H90NNFRYQVK741R">Use SMS in your back in stock flows</h2>
+<p>There are 2 options for using SMS in your back in stock flows:</p>
+<ul>
+<li>Use SMS and email together in a flow (recommended) </li>
+<li>Make a separate, SMS-only back in stock flow<br>
+<p>These options have a similar setup; the main differences are that:</p>
+</li>
+<li>The first method is more omnichannel, and it will be easier to analyze how your audience responds to SMS versus email</li>
+<li>For SMS-only flows, you need to configure the <a href="https://help.klaviyo.com/hc/en-us/articles/115003872251">back in stock flow’s settings</a> (e.g., minimum inventory and customer notification rules)</li>
+</ul>
+<p>Since the omnichannel approach is easier to maintain, analyze, and improve, we only go over that approach in this article.</p>
+<h3 id="h_01HGGHQG2GSTT0BV61GED2FV5Z">Add SMS into a back in stock flow</h3>
+<ol>
+<li>Navigate to the <strong>Flows </strong>tab.</li>
+<li>Either:
+<ol>
+<li>Locate your existing back in stock flow (if you made one previously).</li>
+<li>Search for a back in stock flow template:
+<ol>
+<li>Click <strong>Create flow</strong>
+</li>
+<li>Search “back in stock” </li>
+<li>Select one of the back in stock flows</li>
+<li>Name the flow in the modal</li>
+<li>Click <strong>Use template</strong><br>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>Add a conditional split after the Back in Stock Delay.<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28715964512667" alt="A conditional split placed directly below the Back in Stock delay" width="400" height="524">
+</li>
+<li>Set the split to <em>If someone can or cannot receive marketing &gt; cannot receive &gt; SMS marketing</em>.<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/33955881875483" alt="" width="368" height="190">
+</li>
+<li>Click <strong>Save</strong> for the conditional split.</li>
+<li>Drag an SMS message onto the <em>No </em>path.<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/33955881878427" alt="">
+</li>
+<li>Select the SMS and next to <em>Content</em>, click <strong>Edit .</strong>
+</li>
+<li>Add in your content:<br>
+<ul>
+<ul>
+<li>Example: “[Name of item] is back in stock! Grab yours before they’re gone again:
+<ul>
+<li>To dynamically insert the name of the product, you must use an event variable. Check out this article for instructions on <a href="https://help.klaviyo.com/hc/en-us/articles/115002779071">finding event variables and examples.</a><br>
+</li>
+</ul>
+</li>
+</ul>
+</ul>
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/33955910919067" alt="" width="310" height="184">
+</li>
+<li>After the text, insert catalog tags for the item that’s back in stock.<br>
+<ul>
+<ul>
+<li>Note: catalog tags are specific to your integration; for examples, click on the name of your ecommerce platform below:</li>
+</ul>
+</ul>
+</li>
+</ol>
+<div class="accordion accordion--default">
+<div class="accordion__item">
+<div class="accordion__item-title"><strong>BigCommerce</strong></div>
+<div class="accordion__item-content">
+<table style="width: 717px">
+<tbody>
+<tr>
+<td style="width: 72px"><strong>Product Detail</strong></td>
+<td style="width: 645px"><strong>Dynamic Event Variable (BigCommerce Stores)</strong></td>
+</tr>
+<tr>
+<td style="width: 72px"><em>Product Title</em></td>
+<td style="width: 645px">{% catalog event.VariantId integration='bigcommerce' %} {{ catalog_item.title }} {% endcatalog %}</td>
+</tr>
+<tr>
+<td style="width: 72px"><em>Variant Image</em></td>
+<td style="width: 645px">{% catalog event.VariantId integration='bigcommerce' %} {{ catalog_item.variant.featured_image.full.src|default:catalog_item.featured_image.full.src }} {% endcatalog %}</td>
+</tr>
+<tr>
+<td style="width: 72px"><em>Product URL</em></td>
+<td style="width: 645px">{% catalog event.VariantId integration='bigcommerce' %}{{ catalog_item.url }}{% endcatalog %}</td>
+</tr>
+<tr>
+<td style="width: 72px"><em>Product Price</em></td>
+<td style="width: 645px">{% catalog event.VariantId integration='bigcommerce' %}{% currency_format catalog_item.metadata.price|floatformat:2 %}{% endcatalog %}</td>
+</tr>
+<tr>
+<td style="width: 72px"><em>Variant Title</em></td>
+<td style="width: 645px">{% catalog event.VariantId integration="bigcommerce" %} {{ catalog_item.variant.title }} {% endcatalog %}</td>
+</tr>
+<tr>
+<td style="width: 72px"><em>Variant URL</em></td>
+<td style="width: 645px">{% catalog event.VariantId integration='bigcommerce' %}{{ catalog_item.url }}?variant={{ catalog_item.variant.id }}{% endcatalog %}</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<ul>
+<ul>
+<li>
+<strong>Shopify</strong><br>
+<table style="width: 717px">
+<tbody>
+<tr>
+<td style="width: 72px"><strong>Product Detail</strong></td>
+<td style="width: 645px"><strong>Dynamic Event Variable (Shopify Stores)</strong></td>
+</tr>
+<tr>
+<td style="width: 72px"><em>Product Title</em></td>
+<td style="width: 645px">{% catalog event.VariantId integration='shopify' %} {{ catalog_item.title }} {% endcatalog %}</td>
+</tr>
+<tr>
+<td style="width: 72px"><em>Variant Image</em></td>
+<td style="width: 645px">{% catalog event.VariantId integration='shopify' %} {{ catalog_item.variant.featured_image.full.src|default:catalog_item.featured_image.full.src }} {% endcatalog %}</td>
+</tr>
+<tr>
+<td style="width: 72px"><em>Product URL</em></td>
+<td style="width: 645px">{% catalog event.VariantId integration='shopify' %}{{ catalog_item.url }}{% endcatalog %}</td>
+</tr>
+<tr>
+<td style="width: 72px"><em>Product Price</em></td>
+<td style="width: 645px">{% catalog event.VariantId integration='shopify' %}{% currency_format catalog_item.variant.price|floatformat:2 %}{% endcatalog %}</td>
+</tr>
+<tr>
+<td style="width: 72px"><em>Variant Title</em></td>
+<td style="width: 645px">{% catalog event.VariantId integration="shopify" %} {{ catalog_item.variant.title }} {% endcatalog %}</td>
+</tr>
+<tr>
+<td style="width: 72px"><em>Variant URL</em></td>
+<td style="width: 645px">{% catalog event.VariantId integration='shopify' %}{{ catalog_item.url }}?variant={{ catalog_item.variant.id }}{% endcatalog %}</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li><strong> Magento 2</strong></li>
+</ul>
+</ul>
+<table style="width: 717px">
+<tbody>
+<tr>
+<td style="width: 72px"><strong>Product Detail</strong></td>
+<td style="width: 645px"><strong>Dynamic Event Variable (Magento 2 Stores)</strong></td>
+</tr>
+<tr>
+<td style="width: 72px"><em>Product Title</em></td>
+<td style="width: 645px">{% catalog event.VariantId integration='magento_two' %} {{ catalog_item.title }} {% endcatalog %}</td>
+</tr>
+<tr>
+<td style="width: 72px"><em>Variant Image</em></td>
+<td style="width: 645px">{% catalog event.VariantId integration='magento_two' %} {{ catalog_item.variant.featured_image.full.src|default:catalog_item.featured_image.full.src }} {% endcatalog %}</td>
+</tr>
+<tr>
+<td style="width: 72px"><em>Product URL</em></td>
+<td style="width: 645px">{% catalog event.VariantId integration='magento_two' %}{{ catalog_item.url }}{% endcatalog %}</td>
+</tr>
+<tr>
+<td style="width: 72px"><em>Product Price</em></td>
+<td style="width: 645px">{% catalog event.VariantId integration='magento_two' %}{% currency_format catalog_item.variant.price|floatformat:2 %}{% endcatalog %}</td>
+</tr>
+<tr>
+<td style="width: 72px"><em>Variant Title</em></td>
+<td style="width: 645px">{% catalog event.VariantId integration="magento_two" %} {{ catalog_item.variant.title }} {% endcatalog %}</td>
+</tr>
+<tr>
+<td style="width: 72px"><em>Variant URL</em></td>
+<td style="width: 645px">{% catalog event.VariantId integration='magento_two' %}{{ catalog_item.url }}?variant={{ catalog_item.variant.id }}{% endcatalog %}</td>
+</tr>
+</tbody>
+</table>
+<ol>
+<li>Click <strong>Preview &amp; test</strong> to test the back in stock SMS.</li>
+<li>Once you confirm that the back in stock message appears as expected, click <strong>Save &amp; continue</strong> in the upper right.</li>
+<li>Select <strong>Update Action Statuses</strong>.</li>
+<li>Choose <strong>Live</strong> from the dropdown and then click <strong>Update</strong>.<br>
+<br>
+</li>
+</ol>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/28715971073051" alt="Modal to update all flow action statuses when Live is selected" width="391" height="206"></p>
+<h2 id="h_01HGGHQG2HKVAV5VN0ZG2KDWV0">Outcome and next steps</h2>
+<p>You can now send back in stock flow messages via SMS. </p>
+<h3 id="h_01HGGHQG2HXXMF26V551N4E685">Optimizing the flow</h3>
+<p>We recommend keeping an eye on how your audience responds to these messages, as it’s important to make sure you’re seeing high engagement. </p>
+<p>If engagement is low, test whether your audience prefers email or SMS. Each business is unique, and so is their audience. Your audience may prefer to receive back in stock alerts via email rather than SMS. </p>

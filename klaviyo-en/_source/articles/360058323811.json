@@ -1,0 +1,856 @@
+{
+  "captured_at": "2026-05-23T16:16:47Z",
+  "article": {
+    "id": 360058323811,
+    "url": "https://klaviyo.zendesk.com/api/v2/help_center/en-us/articles/360058323811.json",
+    "html_url": "https://klaviyo.zendesk.com/hc/en-us/articles/360058323811-Salesforce-Commerce-Cloud-data-reference",
+    "author_id": 409167690492,
+    "comments_disabled": true,
+    "draft": false,
+    "promoted": false,
+    "position": 1,
+    "vote_sum": 2,
+    "vote_count": 8,
+    "section_id": 49375912534427,
+    "created_at": "2021-03-11T16:26:42Z",
+    "updated_at": "2026-04-21T13:54:53Z",
+    "name": "Salesforce Commerce Cloud data reference",
+    "title": "Salesforce Commerce Cloud data reference",
+    "source_locale": "en-us",
+    "locale": "en-us",
+    "outdated": false,
+    "outdated_locales": [],
+    "edited_at": "2025-04-22T14:36:37Z",
+    "user_segment_id": null,
+    "permission_group_id": 146372,
+    "content_tag_ids": [],
+    "label_names": [],
+    "body": "<h2 id=\"h_01HYKH8WDECM4TPBG839XFH0Z2\">You will learn</h2>\n<p>Learn what data syncs from Salesforce Commerce Cloud to Klaviyo after you <a href=\"https://help.klaviyo.com/hc/en-us/articles/360033744951\" target=\"_blank\" rel=\"noopener\">enable Klaviyo's Salesforce Commerce Cloud integration</a>, and how you can view it. </p>\n<h2 id=\"h_01HYKH8WDEZ2S6Z5W2A50PPY01\">View your Salesforce Commerce Cloud metrics </h2>\n<p>In your Klaviyo account, click the <strong>Analytics</strong> dropdown and select <strong>Metrics</strong>. Here, you can view all of the metrics in your account, including those synced from Salesforce Commerce Cloud.</p>\n<p>If you enabled <em>Label Events as SFCC</em> when integrating, the following events will appear with an SFCC icon:</p>\n<ul>\n<li>Viewed Category</li>\n<li>Viewed Product</li>\n<li>Searched Site</li>\n<li>Added to Cart</li>\n<li>Started Checkout</li>\n<li>Placed Order</li>\n<li>Ordered Product</li>\n<li>Order Confirmation</li>\n</ul>\n<p>Otherwise, SFCC events will appear with a gear icon. The <em>Active on Site</em> metric will always appear with gear icon, whether you've enabled branding or not. </p>\n<h2 id=\"h_01HYKH8WDEQCV9BAMGK0ZPEFJF\">Salesforce Commerce Cloud metrics </h2>\n<p>Below is a list of all the metrics synced from Salesforce Commerce Cloud and an explanation of the data included with each metric. You can also <a href=\"https://help.klaviyo.com/hc/en-us/articles/115005076747-View-Raw-Metric-or-Event-Data-in-Klaviyo\" target=\"_blank\" rel=\"noopener\">view the raw data for each metric</a> within Klaviyo.</p>\n<h3 id=\"h_01HYKH8WDETJQKC1YF8Y747QGX\">Active on Site</h3>\n<p>This metric is tracked when a cookied visitor is active on your site. </p>\n<h3 id=\"h_01HYKH8WDEMCKANRT7JAWV6507\">Searched Site</h3>\n<p>This metric is tracked when a cookied visitor initiates a search. </p>\n<h3 id=\"h_01HYKH8WDEQ9KXGPQ89EJG1HBV\">Viewed Product</h3>\n<p>This metric is tracked when a cookied visitor views a product page on your site. </p>\n<h3 id=\"h_01HYKH8WDECPV4B9PB33QW3SBS\">Viewed Category</h3>\n<p>This metric is tracked when a cookied visitor views a category page on your site.</p>\n<h3 id=\"h_01HYKH8WDEVEGV185K3KQMX018\">Add to Cart or Added to Cart</h3>\n<p>This metric is tracked when a cookied visitor adds or modifies an item in their cart. If you are using our cartridge version 23.7.0 or later, this metric will be called <em>Added to Cart</em>. If you are using a cartridge prior to 23.7.0, this metric will be called<em> Add to Cart</em>. If you upgraded your cartridge configured the corresponding setting, it will still be called <em>Add to Cart </em>for continuity purposes. Note that using the name <em>Added to Cart </em>will allow for the use of future pre-built Klaviyo flows relying on this metric. </p>\n<p>This metric tracks each time someone adds something to their cart, and logs each item in the cart at that time (the first <em>Added to Cart</em> event tracks the first item, the second event tracks the first and second item, etc.). </p>\n<h3 id=\"h_01HYKH8WDED5SBADQ9RTXRVP71\">Started Checkout</h3>\n<p>This event is tracked when someone enters their email at checkout, then tabs or clicks away from the email field. This event includes a cartRebuildingLink property that can be used to link customers back to their carts. </p>\n<h3 id=\"h_01HYKH8WDEGZ276TG9NEV9W2CQ\">Order Confirmation</h3>\n<p>This metric is similar to <em>Placed Order</em> but syncs in real time, as opposed to hourly, and is segmentable using the <em>itemCategories</em> property. </p>\n<p>Note that while Klaviyo may sync many details about a given metric, not all synced properties are available for segmentation. For data management purposes, only the primary details of a metric are synced as \"top-level\" properties, and only these top-level properties are segmentable. Commerce Cloud's <em>Placed Order</em> and <em>Ordered Product </em>metrics do not sync with a top-level <em>itemCategories</em> property. If you wish to segment using the <em>itemCategories</em> property, you will need to use the <em>Order Confirmation</em> metric to do so. This is ideal for real-time order confirmation emails.</p>\n<h3 id=\"h_01HYKH8WDEX439RR91G1B1TANT\">Placed Order</h3>\n<p>This metric is tracked when a customer completes the checkout process and orders from you in your Salesforce Commerce Cloud store. The event will list all of the product information about the items someone purchased, including product names and variant information. You can then use that information in purchase follow-up emails. You can filter and target <em>Placed Order</em> events based on the following criteria:</p>\n<ul>\n<li>\n<strong>$value</strong><strong><br></strong>The total order value, including shipping and any applied discounts.</li>\n<li>\n<strong>ItemNames</strong><br>The names of the ordered products (e.g., t-shirt or pants).</li>\n<li>\n<strong>ItemCount</strong><strong><br></strong>The number of items in the order (e.g., 2).</li>\n<li>\n<strong>OrderNumber</strong><strong><br></strong>The order number associated with your store.</li>\n<li>\n<strong>SiteID</strong><br>The ID of the site.</li>\n<li>\n<strong>Status</strong><br>The status of the order.</li>\n<li>\n<strong>external_catalog_id</strong><br>Set to your SiteID; used in catalog organization in Klaviyo.</li>\n</ul>\n<h3 id=\"h_01HYKH8WDE9SYMY6HY3AYK7W8P\">Ordered Product</h3>\n<p>This metric is also tracked when a customer places an order, but a separate event is tracked for each item someone purchases. For example, if someone buys a t-shirt and a pair of pants, one <em>Placed Order</em> event will be tracked for the purchase as a whole along with 2 <em>Ordered Product</em> events: 1 for the t-shirt and 1 for the pants.</p>\n<p>The metrics Klaviyo tracks include detailed information about each product someone purchases. This is useful when creating behavioral segments based on product variant options and other detailed information that's not available in the <em>Placed Order</em> event. You can filter and target <em>Ordered Product </em>events based on the following criteria:</p>\n<ul>\n<li>\n<strong>$value</strong><br>The total value of the item purchased; no shipping costs or discounts included.</li>\n<li>\n<strong>Name</strong><br>The name or title of the ordered product (e.g., t-shirt).</li>\n<li>\n<strong>Price</strong><br>The price of the item.</li>\n<li>\n<strong>SKU</strong><br>The SKU of the product variant.</li>\n<li>\n<strong>ProductID</strong><br>The ID associated with the product in your store. </li>\n<li>\n<strong>Quantity</strong><br>The total quantity ordered of the product.</li>\n<li>\n<strong>SiteID</strong><br>The ID of the site.</li>\n<li>\n<strong>CurrencyCode</strong><br>The currency code used to purchase the product (e.g., USD).</li>\n<li>\n<strong>external_catalog_id</strong><br>Set to your SiteID; used in catalog organization in Klaviyo.</li>\n</ul>\n<p><em>Placed Order </em>and <em>Ordered Product </em>events are synced to Klaviyo seconds apart. For this reason, it is important to be consistent with the metric you use to trigger and filter your flows and segments. For example, if a flow is triggered by the <em>Placed Order</em> metric and you add a filter to exclude anyone who <em>Ordered Product</em> since starting the flow, all recipients will be skipped because the two events are separate, but sync seconds apart. As a best practice, use <em>Placed Order </em>to trigger and filter flows and segments.</p>\n<h2 id=\"h_01HYKH8WDE3KEZFSJJANQPM224\">Salesforce Commerce Cloud metric sources</h2>\n<p>Different Salesforce Commerce Cloud metrics flow into Klaviyo in different ways: some through the Klaviyo cartridge, and some through the OCAPI integration. When you integrated with Salesforce Commerce Cloud, you should have both installed the Klaviyo cartridge in SFCC and enabled the SFCC OCAPI integration in Klaviyo. For more information on these steps, see our article on <a href=\"https://help.klaviyo.com/hc/en-us/articles/360033744951\" target=\"_blank\" rel=\"noopener\">integrating with Salesforce Commerce Cloud</a>.</p>\n<p>The metrics that flow in through the cartridge are the following:</p>\n<ul>\n<li>Order Confirmation</li>\n<li>Searched Site</li>\n<li>Viewed Category</li>\n<li>Viewed Product</li>\n<li>Added to Cart</li>\n<li>Started Checkout</li>\n</ul>\n<p>The metrics that flow in through OCAPI are the following:</p>\n<ul>\n<li>Placed Order</li>\n<li>Ordered Product</li>\n</ul>\n<p>Historical data syncs every hour from OCAPI. Your catalog should sync every 8 hours, and all other metrics will sync in real time. </p>\n<h2 id=\"h_01HYKH8WDE94QJ3FS0HZ6YQ4NY\">Additional resources</h2>\n<ul>\n<li><a href=\"https://help.klaviyo.com/hc/en-us/articles/360033744951\" target=\"_blank\" rel=\"noopener\">Getting started with Salesforce Commerce Cloud</a></li>\n<li><a href=\"https://help.klaviyo.com/hc/en-us/articles/16708128591259\" target=\"_blank\" rel=\"noopener\">How to upgrade your Salesforce Commerce Cloud cartridge</a></li>\n<li><a href=\"https://developers.klaviyo.com/en\" target=\"_blank\" rel=\"noopener\">Klaviyo Developer Portal</a></li>\n</ul>",
+    "user_segment_ids": []
+  },
+  "normalized": {
+    "id": "360058323811",
+    "title": "Salesforce Commerce Cloud data reference",
+    "source_url": "https://help.klaviyo.com/hc/en-us/articles/360058323811-Salesforce-Commerce-Cloud-data-reference",
+    "section_id": 49375912534427,
+    "section": "Salesforce Commerce Cloud",
+    "category_id": 115000032731,
+    "category": "Integrations",
+    "category_slug": "integrations",
+    "klaviyo_updated": "2026-04-21T13:54:53Z",
+    "created_at": "2021-03-11T16:26:42Z",
+    "draft": false,
+    "promoted": false,
+    "position": 1,
+    "label_names": []
+  },
+  "files": {
+    "body_html": "_source/articles/360058323811.body.html",
+    "rendered_html": "_source/rendered/360058323811.html"
+  },
+  "assets": {
+    "api_body": {
+      "images": [],
+      "links": [
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360033744951",
+          "text": "enable Klaviyo's Salesforce Commerce Cloud integration"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005076747-View-Raw-Metric-or-Event-Data-in-Klaviyo",
+          "text": "view the raw data for each metric"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360033744951",
+          "text": "integrating with Salesforce Commerce Cloud"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360033744951",
+          "text": "Getting started with Salesforce Commerce Cloud"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/16708128591259",
+          "text": "How to upgrade your Salesforce Commerce Cloud cartridge"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Klaviyo Developer Portal"
+        }
+      ],
+      "headings": [
+        {
+          "level": 2,
+          "id": "h_01HYKH8WDECM4TPBG839XFH0Z2",
+          "text": "You will learn"
+        },
+        {
+          "level": 2,
+          "id": "h_01HYKH8WDEZ2S6Z5W2A50PPY01",
+          "text": "View your Salesforce Commerce Cloud metrics"
+        },
+        {
+          "level": 2,
+          "id": "h_01HYKH8WDEQCV9BAMGK0ZPEFJF",
+          "text": "Salesforce Commerce Cloud metrics"
+        },
+        {
+          "level": 3,
+          "id": "h_01HYKH8WDETJQKC1YF8Y747QGX",
+          "text": "Active on Site"
+        },
+        {
+          "level": 3,
+          "id": "h_01HYKH8WDEMCKANRT7JAWV6507",
+          "text": "Searched Site"
+        },
+        {
+          "level": 3,
+          "id": "h_01HYKH8WDEQ9KXGPQ89EJG1HBV",
+          "text": "Viewed Product"
+        },
+        {
+          "level": 3,
+          "id": "h_01HYKH8WDECPV4B9PB33QW3SBS",
+          "text": "Viewed Category"
+        },
+        {
+          "level": 3,
+          "id": "h_01HYKH8WDEVEGV185K3KQMX018",
+          "text": "Add to Cart or Added to Cart"
+        },
+        {
+          "level": 3,
+          "id": "h_01HYKH8WDED5SBADQ9RTXRVP71",
+          "text": "Started Checkout"
+        },
+        {
+          "level": 3,
+          "id": "h_01HYKH8WDEGZ276TG9NEV9W2CQ",
+          "text": "Order Confirmation"
+        },
+        {
+          "level": 3,
+          "id": "h_01HYKH8WDEX439RR91G1B1TANT",
+          "text": "Placed Order"
+        },
+        {
+          "level": 3,
+          "id": "h_01HYKH8WDE9SYMY6HY3AYK7W8P",
+          "text": "Ordered Product"
+        },
+        {
+          "level": 2,
+          "id": "h_01HYKH8WDE3KEZFSJJANQPM224",
+          "text": "Salesforce Commerce Cloud metric sources"
+        },
+        {
+          "level": 2,
+          "id": "h_01HYKH8WDE94QJ3FS0HZ6YQ4NY",
+          "text": "Additional resources"
+        }
+      ]
+    },
+    "rendered_page": {
+      "images": [
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/7ff492c2b417b7ecfe572f839a8a81398693c1f7-1920x1080.webp",
+          "alt": "",
+          "width": "",
+          "height": ""
+        }
+      ],
+      "links": [
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360058323811-Salesforce-Commerce-Cloud-data-reference#site-content",
+          "text": "Skip to main content"
+        },
+        {
+          "href": "https://www.klaviyo.com",
+          "text": "Home"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center"
+        },
+        {
+          "href": "https://www.klaviyo.com/enterprise",
+          "text": "Enterprise"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Partners"
+        },
+        {
+          "href": "https://www.klaviyo.com/careers",
+          "text": "Careers"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": "Log in"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": ""
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center Find step-by-step instructions and troubleshooting solutions in our knowledge base."
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000032731",
+          "text": "Integrations"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000312411",
+          "text": "Flows"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867867",
+          "text": "Audience"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867667",
+          "text": "Campaigns"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/360000190711",
+          "text": "Sign-up forms"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000873988",
+          "text": "Deliverability & compliance"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/29173800271259",
+          "text": "SMS"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/16638219724187",
+          "text": "Reviews"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/18073014919195",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/34141283979931",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/37659126754075",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/33948021740315",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/39746685522331",
+          "text": "WhatsApp"
+        },
+        {
+          "href": "https://academy.klaviyo.com",
+          "text": "Klaviyo Academy Expert training and education to help you succeed with Klaviyo, and beyond."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Quick+guide&resource=academy_courses",
+          "text": "Quick guides Learn marketing strategies and concepts in 15 minutes or less."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Course&resource=academy_courses",
+          "text": "Courses Master key marketing topics through structured lessons and exams."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/best-practices",
+          "text": "Best practices Discover top product and marketing strategies for your business."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/learning-paths",
+          "text": "Learning paths Complete curated learning journeys tailored to your marketing goals."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses",
+          "text": "Explore all resources"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Live+training&resource=academy_courses",
+          "text": "Live trainings Build confidence through hands-on interactive workshops and thought-provoking strategy sessions."
+        },
+        {
+          "href": "https://www.bigmarker.com/klaviyo-customer-education/Office-hours-Getting-started-with-Klaviyo",
+          "text": "Live office hours Join a strategic discussion where you can ask questions and get answers in real-time."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/private-live-training",
+          "text": "1:1 Live training Book a private training session with an expert to jumpstart your platform knowledge and confidence."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/credentials",
+          "text": "Klaviyo credentials Dig deeper into select topics and showcase your expertise with a final exam to earn a certificate and digital badge."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/certificates/klaviyo-practitioner-certificate",
+          "text": "Klaviyo practitioner certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/deliverability-certificate",
+          "text": "Deliverability certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/developer-certificate",
+          "text": "Klaviyo developer certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses&select=Certificate",
+          "text": "See all certificates"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Klaviyo Community Join our thriving community network to connect with brands like yours—online and in person."
+        },
+        {
+          "href": "https://community.klaviyo.com/topic/new",
+          "text": "Ask a question Post a question and get thoughtful answers from Klaviyo powerusers."
+        },
+        {
+          "href": "https://community.klaviyo.com/p/roadmap",
+          "text": "Product roadmap"
+        },
+        {
+          "href": "https://community.klaviyo.com/search/activity/recent",
+          "text": "Recent threads"
+        },
+        {
+          "href": "https://community.klaviyo.com/p/champions",
+          "text": "Meet the Champions"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups",
+          "text": "Browse all groups Your people are waiting. New ideas and connections are a click away."
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/developer-group-64",
+          "text": "Developer group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/entrepreneur-user-group-118",
+          "text": "Entrepreneur group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/woo-user-group-87",
+          "text": "WooCommerce group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/new-york-meetup-chapter-82",
+          "text": "New York City"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/los-angeles-meetup-chapter-83",
+          "text": "Los Angeles"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/austin-meetup-chapter-85",
+          "text": "Austin"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/san-diego-meetup-chapter-86",
+          "text": "San Diego"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/amsterdam-meetup-chapter-84",
+          "text": "Amsterdam"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Klaviyo Developers Access API documentation and developer guides to help you build with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/get_started",
+          "text": "Get started Access key resources and a step-by-step checklist for how to start developing with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/build_your_integration",
+          "text": "Grow your app's reach Learn how to join our ecosystem and get your app listed on our marketplace."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/developer-tools",
+          "text": "Developer tools Generate sample data, monitor your API usage, and access our Postman collections."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/reference/api_overview",
+          "text": "API reference Browse our full catalog of API docs."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/changelog_",
+          "text": "Changelog"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/api_versioning_and_deprecation_policy",
+          "text": "Versioning & deprecation policy"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/rate_limits_and_error_handling",
+          "text": "Rate limits & error handling"
+        },
+        {
+          "href": "https://youtube.com/playlist?list=PLHkNfHgtxcUanrkMnKPdkRzuWU7MGv_xM&si=pkG-KH7IT_TUHOGC",
+          "text": "API tutorials on YouTube Subscribe to our Klaviyo API Tutorials playlist for easy access to step-by-step developer walkthroughs."
+        },
+        {
+          "href": "https://www.klaviyo.com/contact-us",
+          "text": "Contact us"
+        },
+        {
+          "href": "https://www.klaviyo.com/sign-up",
+          "text": "Sign up"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": "Search"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360058323811",
+          "text": "United States - EN"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/de-de/articles/360058323811",
+          "text": "Deutschland - DE"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-es/articles/360058323811",
+          "text": "España - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-mx/articles/360058323811",
+          "text": "México - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/fr-fr/articles/360058323811",
+          "text": "France - FR"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/it-it/articles/360058323811",
+          "text": "Italia - IT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/ko-kr/articles/360058323811",
+          "text": "한국 - KO"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/nl-nl/articles/360058323811",
+          "text": "Nederland - NL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pl-pl/articles/360058323811",
+          "text": "Polska - PL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pt-br/articles/360058323811",
+          "text": "Brasil - PT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/sv-se/articles/360058323811",
+          "text": "Sverige - SV"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/49375912534427",
+          "text": "Salesforce Commerce Cloud"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360058323811-Salesforce-Commerce-Cloud-data-reference#h_01HYKH8WDECM4TPBG839XFH0Z2",
+          "text": "You will learn"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360058323811-Salesforce-Commerce-Cloud-data-reference#h_01HYKH8WDEZ2S6Z5W2A50PPY01",
+          "text": "View your Salesforce Commerce Cloud metrics"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360058323811-Salesforce-Commerce-Cloud-data-reference#h_01HYKH8WDEQCV9BAMGK0ZPEFJF",
+          "text": "Salesforce Commerce Cloud metrics"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360058323811-Salesforce-Commerce-Cloud-data-reference#h_01HYKH8WDE3KEZFSJJANQPM224",
+          "text": "Salesforce Commerce Cloud metric sources"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360058323811-Salesforce-Commerce-Cloud-data-reference#additional-resources",
+          "text": "Additional resources"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360033744951",
+          "text": "enable Klaviyo's Salesforce Commerce Cloud integration"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005076747-View-Raw-Metric-or-Event-Data-in-Klaviyo",
+          "text": "view the raw data for each metric"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360033744951",
+          "text": "integrating with Salesforce Commerce Cloud"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360033744951",
+          "text": "Getting started with Salesforce Commerce Cloud"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/16708128591259",
+          "text": "How to upgrade your Salesforce Commerce Cloud cartridge"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Klaviyo Developer Portal"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115001002272",
+          "text": "Learn how to contact support"
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": ""
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": "Visit Community"
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": ""
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": "Hire a partner"
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/about",
+          "text": "About Klaviyo"
+        },
+        {
+          "href": "https://www.klaviyo.com/newsroom",
+          "text": "Newsroom"
+        },
+        {
+          "href": "https://investors.klaviyo.com/overview/default.aspx",
+          "text": "Investor relations"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Agency and tech partners"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Developers"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/retail",
+          "text": "Retail and ecommerce"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/restaurants",
+          "text": "Restaurant marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/wellness",
+          "text": "Wellness"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform",
+          "text": "B2C CRM overview"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai",
+          "text": "Klaviyo AI (K:AI)"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/marketing-automation",
+          "text": "Klaviyo Marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-service",
+          "text": "Klaviyo Service"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/analytics",
+          "text": "Klaviyo Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-data-platform",
+          "text": "Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare",
+          "text": "Klaviyo vs. Klaviyo alternatives"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-mailchimp",
+          "text": "Klaviyo vs. Mailchimp"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-postscript",
+          "text": "Klaviyo vs. Postscript"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-attentive",
+          "text": "Klaviyo vs. Attentive"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-salesforce-marketing-cloud",
+          "text": "Klaviyo vs. Salesforce"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-listrak",
+          "text": "Klaviyo vs. Listrak"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/omnichannel",
+          "text": "Omnichannel marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/email-marketing",
+          "text": "Email marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing",
+          "text": "SMS marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing/rcs",
+          "text": "RCS for Business"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/mobile-app-marketing",
+          "text": "Mobile app marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/whatsapp",
+          "text": "WhatsApp marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/social",
+          "text": "Social marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources",
+          "text": "Marketing resources"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources/marketing-campaign-calendar",
+          "text": "Marketing campaign calendar"
+        },
+        {
+          "href": "https://www.klaviyo.com/glossary",
+          "text": "Marketing glossary"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/email-subject-line-generator",
+          "text": "Subject line generator"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/roi-calculator",
+          "text": "ROI calculator"
+        },
+        {
+          "href": "https://www.klaviyo.com/customers",
+          "text": "Case studies"
+        },
+        {
+          "href": "https://www.klaviyo.com/composer",
+          "text": "Composer Beta"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/marketing-agent",
+          "text": "Marketing Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/customer-agent",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/customer-experience-hub",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/helpdesk",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/marketing-analytics",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/advanced-cdp",
+          "text": "Advanced Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/web-forms",
+          "text": "Web forms"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/email-templates",
+          "text": "Email templates"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/portfolio",
+          "text": "Portfolio"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform-integrations",
+          "text": "Apps and Integrations"
+        },
+        {
+          "href": "https://www.klaviyo.com/features",
+          "text": "Features"
+        },
+        {
+          "href": "https://www.klaviyo.com/whats-new",
+          "text": "What's new"
+        },
+        {
+          "href": "https://www.klaviyo.com/events",
+          "text": "Events"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help Center"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us",
+          "text": "Academy"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Community"
+        },
+        {
+          "href": "https://www.facebook.com/Klaviyo/",
+          "text": "Facebook"
+        },
+        {
+          "href": "https://twitter.com/klaviyo/",
+          "text": "Twitter"
+        },
+        {
+          "href": "https://www.linkedin.com/company/klaviyo/",
+          "text": "LinkedIn"
+        },
+        {
+          "href": "https://www.instagram.com/klaviyo/",
+          "text": "Instagram"
+        },
+        {
+          "href": "https://www.klaviyo.com/sitemap",
+          "text": "Site Map"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal",
+          "text": "Terms and Privacy"
+        },
+        {
+          "href": "https://www.klaviyo.com/security",
+          "text": "Security"
+        },
+        {
+          "href": "https://www.klaviyo.com/trust",
+          "text": "Trust"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal/intellectual-property-notices",
+          "text": "Intellectual Property Notices"
+        }
+      ],
+      "headings": [
+        {
+          "level": 1,
+          "id": "",
+          "text": "Salesforce Commerce Cloud data reference"
+        },
+        {
+          "level": 2,
+          "id": "h_01HYKH8WDECM4TPBG839XFH0Z2",
+          "text": "You will learn"
+        },
+        {
+          "level": 2,
+          "id": "h_01HYKH8WDEZ2S6Z5W2A50PPY01",
+          "text": "View your Salesforce Commerce Cloud metrics"
+        },
+        {
+          "level": 2,
+          "id": "h_01HYKH8WDEQCV9BAMGK0ZPEFJF",
+          "text": "Salesforce Commerce Cloud metrics"
+        },
+        {
+          "level": 3,
+          "id": "h_01HYKH8WDETJQKC1YF8Y747QGX",
+          "text": "Active on Site"
+        },
+        {
+          "level": 3,
+          "id": "h_01HYKH8WDEMCKANRT7JAWV6507",
+          "text": "Searched Site"
+        },
+        {
+          "level": 3,
+          "id": "h_01HYKH8WDEQ9KXGPQ89EJG1HBV",
+          "text": "Viewed Product"
+        },
+        {
+          "level": 3,
+          "id": "h_01HYKH8WDECPV4B9PB33QW3SBS",
+          "text": "Viewed Category"
+        },
+        {
+          "level": 3,
+          "id": "h_01HYKH8WDEVEGV185K3KQMX018",
+          "text": "Add to Cart or Added to Cart"
+        },
+        {
+          "level": 3,
+          "id": "h_01HYKH8WDED5SBADQ9RTXRVP71",
+          "text": "Started Checkout"
+        },
+        {
+          "level": 3,
+          "id": "h_01HYKH8WDEGZ276TG9NEV9W2CQ",
+          "text": "Order Confirmation"
+        },
+        {
+          "level": 3,
+          "id": "h_01HYKH8WDEX439RR91G1B1TANT",
+          "text": "Placed Order"
+        },
+        {
+          "level": 3,
+          "id": "h_01HYKH8WDE9SYMY6HY3AYK7W8P",
+          "text": "Ordered Product"
+        },
+        {
+          "level": 2,
+          "id": "h_01HYKH8WDE3KEZFSJJANQPM224",
+          "text": "Salesforce Commerce Cloud metric sources"
+        },
+        {
+          "level": 2,
+          "id": "additional-resources",
+          "text": "Additional resources"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "Explore more from Klaviyo"
+        }
+      ]
+    }
+  },
+  "rendered_page": {
+    "status": "fetched",
+    "error": ""
+  }
+}

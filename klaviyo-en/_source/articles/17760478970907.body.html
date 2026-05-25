@@ -1,0 +1,171 @@
+<h2 id="01H7ZGTX44W0RP1CCJWDNDK7Z4">You will learn</h2>
+<p>Learn about webhooks, and how you can use them to send information to your third-party applications in response to events captured in Klaviyo. For more detailed information on how to receive system webhooks, head to our developer resource on <a href="https://developers.klaviyo.com/en/docs/working_with_system_webhooks" target="_blank" rel="noopener noreferrer">working with system webhooks</a>.</p>
+<div class="bs-callout bs-callout-default">
+<p><a href="https://help.klaviyo.com/hc/en-us/articles/17655007276059">Advanced KDP</a> is not included in Klaviyo’s standard marketing application, and a subscription is required to access the associated functionality. Head to our <a href="https://help.klaviyo.com/hc/en-us/articles/115000976672" target="_blank" rel="noopener noreferrer">billing guide</a> to learn about how to purchase this plan.</p>
+</div>
+<p>
+<script src="https://fast.wistia.net/player.js" async="async"></script>
+</p>
+<div class="wistia_responsive_padding" style="padding: 56.25% 0 0 0; position: relative;">
+<div class="wistia_responsive_wrapper" style="height: 100%; left: 0; position: absolute; top: 0; width: 100%;"><iframe class="wistia_embed" title="Webhooks in Klaviyo CDP Video" src="https://fast.wistia.net/embed/iframe/kwiicwga5w?web_component=true&amp;seo=true" name="wistia_embed" width="100%" height="100%" frameborder="0" scrolling="no" allow="autoplay; fullscreen"></iframe></div>
+</div>
+<h2 id="01H7ZGTX44952GHBZBCNDB9KXA">What are webhooks?</h2>
+<p>Webhooks allow Klaviyo to pass information or “call” other applications, tools, and servers via HTTP requests. They can send information about an event that has happened (e.g. an order placed, a new customer subscribed, etc) or notify your external systems that the event has occurred.</p>
+<p>Klaviyo supports 2 kinds of webhooks:</p>
+<ol>
+<li>
+<strong>Webhooks in Advanced KDP</strong><br>Webhooks available as part of Advanced KDP are used to notify your external systems that a particular event has occurred, and allow you to send information in response to a wide array of events without the limitations of being in a Flow.</li>
+<li>
+<strong>Flow webhooks</strong><br>Flow webhooks are only available within the flows interface, and are triggered when the Flow reaches a certain stage or step. They can be used to send data about the event or recipient that triggered the Flow.</li>
+</ol>
+<h3 id="01H7ZGTX44NC0BH86C3H6K5Y57">Key components of webhooks</h3>
+<p>Webhooks are made of a few key components:</p>
+<ul>
+<li>
+<strong>Topic</strong><br>The event that causes a webhook to fire</li>
+<li>
+<strong>Body (or “the payload”)</strong><br>The data that the webhook sends</li>
+<li>
+<strong>Headers</strong><br>A place to pass additional information (such as authentication)</li>
+</ul>
+<h2 id="01H7ZGTX4523N8MJ5J9AWB5K8W">How do webhooks in Advanced KDP differ from Flow webhooks?</h2>
+<p>You can use webhooks in Advanced KDP or Flow webhooks depending on your needs.</p>
+<h3 id="01H7ZGTX45J4FHTWD93KY2JDDW">Events included</h3>
+<p>Flow webhooks can only respond to a subset of Klaviyo events, and do not support message related events like <em>Unsubscribed</em>, <em>Received email</em>, or <em>Clicked email</em> as flows generally end with message receipt rather than begin with them. Meanwhile, webhooks in the Advanced KDP allow you to send information in response to any event in your account.</p>
+<p>These include:</p>
+<ul>
+<li>Email events (e.g., <em>Received email</em>, <em>Clicked email</em>, <em>Marked email as spam, Unsubscribe</em>)</li>
+<li>SMS events (e.g., <em>Sent SMS</em>, <em>Received SMS</em>)</li>
+<li>Push notification events (e.g., <em>Received push</em>, <em>Bounced push</em>)</li>
+<li>Events from integrations ( i.e., events from first-party integrations created by Klaviyo)</li>
+<li>API events (e.g., events synced through <a href="https://developers.klaviyo.com/en/reference/api_overview" target="_blank" rel="noopener noreferrer">Klaviyo’s APIs</a>)</li>
+</ul>
+<h3 id="01H7ZGTX4504BCYBFKSFY3C2RM">Payload</h3>
+<p>Flow webhooks allow you to customize the data included in the request, but you must manually construct the payload. Meanwhile, webhooks in Advanced KDP use a prebuilt payload that does not require any manual work on your end, and are used to notify external systems that an event has occurred.</p>
+<h3 id="01H7ZGTX45NEF5Y63WJS7ZV3AX">Flow limitations</h3>
+<p>Flow webhooks must be configured within the flows interface, and do not allow you to use several triggers at once. Different triggers must be created through individual flows, and are dependent on the Flow’s overall status (e.g., a flow in draft would not send data through the Flow webhook). Meanwhile, webhooks in Advanced KDP exist outside of the flows interface, and are not dependent on the series of steps leading up the webhook action like a Flow webhook.</p>
+<h2 id="01H7ZGTX45CQBFD02NYKVT7PSP">Set up webhooks</h2>
+<p>To set up a webhook in Klaviyo, navigate to <em>Webhooks</em> under <strong>Advanced KDP</strong> <strong>&gt;</strong> <strong>Data managment &gt; Webhooks</strong> in Klaviyo.</p>
+<p>To add a new webhook, click the <strong>Create webhook</strong> button.</p>
+<ol>
+<li>On the <em>Create a webhook</em> modal, enter the information. This includes:
+<ul>
+<li>
+<strong>Name</strong><br>How you’ll identify your webhook</li>
+<li>
+<strong>Endpoint URL</strong><br>The URL associated with the destination for the webhook request</li>
+<li>
+<strong>Secret key</strong><br>A unique identifier to identify Klaviyo webhook requests in your other systems</li>
+<li>
+<strong>Description</strong><br>An optional description for your webhook.</li>
+</ul>
+</li>
+<li>In the <em>Topics</em> section, choose the events that you would like to trigger the webhook notification</li>
+</ol>
+<p class="wysiwyg-text-align-center"><img src="https://klaviyo.zendesk.com/hc/article_attachments/28704486678683" alt="Create webhook modal" width="550" height="534"></p>
+<div class="bs-callout bs-callout-default">
+<p>The callback URL must:</p>
+<ul>
+<li>Be a valid URL format</li>
+<li>Start with HTTPS://</li>
+<li>Not have a self-signed SSL certificate</li>
+<li>Not redirect to another URL</li>
+</ul>
+</div>
+<p>Once you have created your webhook, it will be listed on the <em>Webhooks</em> page along with the:</p>
+<ul>
+<li>Webhook name</li>
+<li>Webhook URL</li>
+<li>Time of the latest sync</li>
+<li>Status</li>
+</ul>
+<p class="wysiwyg-text-align-center"><img src="https://klaviyo.zendesk.com/hc/article_attachments/28704478568859" alt="List of created webhooks" width="597" height="151"></p>
+<div class="bs-callout bs-callout-default">
+<p>Note that it can take up to 15 minutes for the webhook to start sending to the URL.</p>
+</div>
+<p>You can delete or disable your webhook using the menu next to the item.</p>
+<h2 id="01H81RK0Y1A2N1M0EAHNB2XT0C">Test system webhooks </h2>
+<p>When setting up a webhook in Klaviyo, you can test it to make sure that the connection is successful. To test your webhook, use the <strong>Test connection </strong>button after entering the required fields.</p>
+<p class="wysiwyg-text-align-center"><img src="https://klaviyo.zendesk.com/hc/article_attachments/39030496797723" alt="test connection.jpg" width="464" height="402"></p>
+<p>A menu will appear where you can select a topic and send a test to your callback URL. </p>
+<p class="wysiwyg-text-align-center"><img src="https://klaviyo.zendesk.com/hc/article_attachments/28704478571931" alt="Test webhook modal" width="400" height="379"></p>
+<p>After performing the test, you’ll see a message indicating whether it was successful, along with the header and body for the request populated in the <em>Response</em> tab.</p>
+<div class="bs-callout bs-callout-default">
+<p>To verify that a webhook notification is from Klaviyo, use the secret key you created to identify the request.</p>
+</div>
+<p class="wysiwyg-text-align-center"><img src="https://klaviyo.zendesk.com/hc/article_attachments/28704478574491" alt="Test successful indicator" width="390" height="591"></p>
+<h2 id="01H7ZPEB0K490AVPCF99TS51PY">Example payload</h2>
+<p>Below is an example of the payload for a webhook request in response to the <em>Email delivered</em> topic. </p>
+<div class="bs-callout bs-callout-default">
+<p>Note that the payload may be different based on your account-specific data. </p>
+</div>
+<pre><code class="language-json5">
+{
+  "meta": {
+    "timestamp": "2023-08-10T07:25:23.700369+00:00",
+    "klaviyo_webhook_id": "ID",
+    "version": "2023-06-03"
+  },
+  "data": [
+    {
+      "topic": "event: email_delivered",
+      "external_id": "ID",
+      "payload": {
+        "data": {
+          "id": "ID",
+          "type": "event",
+          "links": {
+            "self": "https://a.klaviyo.com/api/events/ID/"
+          },
+          "attributes": {
+            "uuid": "96150200-374e-11ee-8001-a163313bc6c2",
+            "datetime": "2023-08-10 07:21:56+00:00",
+            "timestamp": 1691652116,
+            "event_properties": {
+              "$ESP": 0,
+              "Subject": "? Free (Cool!) Swag Alert ?",
+              "$message": "01H7F525FKR31P27Y7PNGVBBKK",
+              "$event_id": "01H7F525FKR31P27Y7PNGVBBKK:125423419905414052533228990613763937641",
+              "$group_ids": [
+                "V7adxq"
+              ],
+              "$attribution": {
+                "$send_ts": 0,
+                "$attributed_event_id": ""
+              },
+              "Email Domain": "klaviyo-demo.com",
+              "Campaign Name": "Daily Newsletter: 2023-08-10",
+              "Inbox Provider": "Amazon SES Inbound",
+              "$_cohort$message_send_cohort": "1691652081:01H7F525FKR31P27Y7PNGVBBKK"
+            }
+          },
+          "relationships": {
+            "metric": {
+              "data": {
+                "id": "ID",
+                "type": "metric"
+              },
+              "links": {
+                "self": "https://a.klaviyo.com/api/events/ID/relationships/metric/",
+                "related": "https://a.klaviyo.com/api/events/ID/metric/"
+              }
+            },
+            "profile": {
+              "data": {
+                "id": "ID",
+                "type": "profile"
+              },
+              "links": {
+                "self": "https://a.klaviyo.com/api/events/ID/relationships/profile/",
+                "related": "https://a.klaviyo.com/api/events/ID/profile/"
+              }
+            }
+          }
+        }
+      }
+    },
+  </code></pre>
+<h2 id="01H7ZGTX45NXVKGPQQJFANWK53">Additional resources</h2>
+<p><a href="https://developers.klaviyo.com/en/docs/how_to_add_a_webhook_action_to_a_flow">How to add a webhook action to a Flow</a></p>
+<p><a href="https://help.klaviyo.com/hc/en-us/articles/4534329515931">Understanding Klaviyo webhooks</a></p>
+<p><a href="https://developers.klaviyo.com/en/docs/working_with_system_webhooks" target="_blank" rel="noopener noreferrer">Working with system webhooks (Klaviyo's Webhooks API)</a></p>

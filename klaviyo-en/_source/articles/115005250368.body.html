@@ -1,0 +1,167 @@
+<p>Learn best practices to strengthen your sender reputation if you are seeing deliverability issues with specific inbox providers or email domains. If your deliverability issues are not limited to specific inbox providers or domains, see our guide on <a href="https://help.klaviyo.com/hc/en-us/articles/8983758025883" target="_self">repairing your sender reputation.</a></p>
+<h2 id="h_01J6F3NNR82790TERC60RHDEJN">Before you begin</h2>
+<p>If you're a brand new sender, it is important to <a href="https://help.klaviyo.com/hc/en-us/articles/360025945671">establish a good reputation upfront</a> before diagnosing any issues related to sending to specific domains. This will allow you to gradually send to a broader audience while maintaining a good reputation and high open rates. However, if you've damaged your sender reputation, these best practices will help you get back on track and rebuild engagement.</p>
+<p>Note that most mailbox providers use the same metrics to determine sending reputation, so if you are noticing a low reputation with one mailbox provider then it will inevitably be an issue for all of the other mailbox providers as well. Therefore, we advise you to perform list cleanup on all mailbox providers if you notice a sign that you have a low sending reputation. To do this please consult our guide, <a href="https://klaviyo.zendesk.com/hc/en-us/articles/360044054732">How to create an unengaged segment</a>, and suppress the members of that segment.</p>
+<h2 id="h_01J6F3NNR8JMPXXMPQEJTW2SPN">Strengthening your sender reputation for an inbox provider or email domain</h2>
+<p>Most major email clients (e.g., Gmail and Yahoo) track how recipients interact with emails from your domain. </p>
+<p>Specifically they look at positive and negative engagements including but not limited to:</p>
+<ul>
+<li>Open rates</li>
+<li>Click rates</li>
+<li>Bounce rates</li>
+<li>Spam complaint rates</li>
+<li>Unsubscribe rates </li>
+</ul>
+<p>Inbox providers use this information to determine where your emails will be placed. This means that low performance in these areas increase the likelihood of your next campaign landing in the spam folder.</p>
+<p>Creating <a href="https://help.klaviyo.com/hc/en-us/articles/115005237908">segments</a> in Klaviyo makes it easy to isolate engaged and <a href="https://help.klaviyo.com/hc/en-us/articles/360044054732#h_01HC35WR6A0ZKH4M7MNG9RN8T3">unengaged profiles</a> so that you know which audience to target with email content.</p>
+<p>If you notice that your open rates only suffer for customers using a specific inbox provider or email domain, you can take steps to improve your sender reputation for this group.</p>
+<div class="bs-callout bs-callout-default">
+<p>Note that you can filter customers based on both inbox provider and email domain when segmenting and analyzing data in Klaviyo. The domain of an email address is what comes after the @ (i.e., "yourname@domain.com"). Klaviyo recommends using the inbox provider when troubleshooting deliverability issues, as multiple email domains can rely on the sorting performed by a single inbox provider.</p>
+</div>
+<p>To expedite the process of improving your sender reputation, you will need to do the following for your next 3-5 campaigns:</p>
+<ul>
+<li>Remove all email addresses with the low-performing inbox provider or domain from your regular sending lists.</li>
+<li>Create a segment of email addresses using the inbox provider or domain that have recently engaged with your campaigns, and separately send to this segment alongside your regular sending list.</li>
+</ul>
+<h3 id="h_01J6F3NNR8EGZF6ARWV4QFB13B">How to exclude low-performing email addresses from a sending list</h3>
+<p>If you have a main list that you are planning to email, create a segment based on the list that excludes subscribers using the inbox provider experiencing performance issues. By sending to this segment in place of the main list, you can contact all the list members that are not using the inbox provider facing deliverability issues, allowing you to protect your sender reputation.</p>
+<p>To do this, create a segment with two conditions:</p>
+<ul>
+<li>
+<em>If someone is in or not in a list &gt; Person is in [insert list name]</em>,<br>AND</li>
+<li>
+<em>What someone has done &gt; Received Email zero times over all time</em>,<br>WHERE <em>Inbox Provider equals [inbox provider]</em>
+</li>
+</ul>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/28716064420635" alt="Segment of customers on list excluding those from low performing inbox" width="704" height="346"></p>
+<p>If you are filtering based on the customer email domain, use the two conditions:</p>
+<ul>
+<li>
+<em>If someone is in or not in a list &gt; Person is in [insert list name],</em><em><br></em>AND</li>
+<li><em>Properties about someone &gt; Email doesn’t contain [email domain]</em></li>
+</ul>
+<p><em><img src="https://klaviyo.zendesk.com/hc/article_attachments/28716064412827" alt="Segment of profiles in the main mailing list that are not using the low performing domain" width="705" height="286"></em></p>
+<p>If you have an existing segment that you plan to target with a campaign, add the following condition to exclude all subscribers from the low-performing inbox provider:</p>
+<ul>
+<li>AND<br><em>What someone has done &gt; Received Email zero times over all time</em>,<br>WHERE <em>Inbox Provider equals [inbox provider]</em>
+</li>
+</ul>
+<p><span style="color: #323b43;">For email domain, this would be: </span></p>
+<ul>
+<li>AND<br><em>Properties about someone &gt; Email doesn’t contain [email domain]</em>
+</li>
+</ul>
+<div class="bs-callout bs-callout-default">
+<p>After creating your segment of customers using low-performing inbox providers or domains, it may be tempting to try to regain unengaged users with a winback campaign right away. However, we recommend waiting until you've sent to your engaged audiences for at least 3 weeks. If you try to send a campaign to these inactive profiles before attempting to improve your sender reputation, it's likely that this campaign will end up in spam for most recipients. Instead, consider <a href="https://help.klaviyo.com/hc/en-us/articles/115002775192" target="_self">creating a winback flow</a> to reach out to unengaged profiles.</p>
+</div>
+<h3 id="h_01J6F3NNR8YQ7TWZ4Z4NJ2XNBW">How to isolate engaged subscribers from a low-performing inbox provider or email domain</h3>
+<p>Now that you excluded all subscribers using the low-performing inbox provider or domain from your regular sends, you can isolate the domain’s engaged customers so you can send to them separately.</p>
+<p>You’ll need to create segments with the profiles from the domain that have recently engaged with your campaign and include this segment in your next sends.</p>
+<p>When repairing reputation, it is important that you contact the right engagement cohort based on how often you send. Use the segment structures below, paired with the values that match your sending frequency:</p>
+<ul>
+<li>
+<em>If someone is in or not in a list &gt; Person is in [insert list name]</em>,<br>AND</li>
+<li>
+<em>What someone has done &gt; Received Email at least once over all time</em>,<br>WHERE <em>Inbox Provider equals [inbox provider]</em><br>AND</li>
+<li>
+<em>What someone has done (or not done) &gt; has Opened Email at least X times in the last X days</em><br>WHERE <em>Apple Privacy Open equals False</em>
+</li>
+</ul>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/28716064417435" alt="Segment of engaged profiles using low performing inbox provider"></p>
+<p><span style="color: #323b43;">For email domains, this segment would use the following conditions:</span></p>
+<ul>
+<li><em><em>If someone is in or not in a list &gt; Person is in [insert list name],</em><em><br></em>AND</em></li>
+<li>
+<em>Properties about someone &gt; Email contains [email domain]</em><em><br></em>AND</li>
+<li>
+<em>What someone has done (or not done) &gt; has Opened Email at least X times in the last X days</em><em><br></em>Where<em> Apple Privacy Open equals False </em>
+</li>
+</ul>
+<p><em><img src="https://klaviyo.zendesk.com/hc/article_attachments/28716064415259" alt="Segment of engaged users using the low performing email domain"></em></p>
+<div class="accordion accordion--default">
+<div class="accordion__item">
+<div class="accordion__item-title"><strong>If you send daily</strong></div>
+<div class="accordion__item-content">
+<ul>
+<li>Week 1: Send to <em>Very Highly Engaged</em> audience with 5 or more opens in the last 30 days</li>
+<li>Week 2: Send to <em>Highly Engaged</em> audience with 3 or more opens in the last 30 days</li>
+<li>Week 3+: Send to <em>Engaged</em> audience with 1 or more opens in the last 30 days</li>
+</ul>
+<p>If you see a drop in performance, you can go back to <em>Highly</em> or<em> Very Highly</em> to repair your reputation again.</p>
+</div>
+</div>
+<div class="accordion__item">
+<div class="accordion__item-title"><strong>If you send 3 times per week</strong></div>
+<div class="accordion__item-content">
+<ul>
+<li>Week 1: Send to <em>Very Highly Engaged</em> audience with 5 or more opens in the last 60 days</li>
+<li>Week 2: Send to <em>Highly Engaged</em> audience with 3 or more opens in the last 60 days</li>
+<li>Week 3+: Send to <em>Engaged</em> audience with 1 or more opens in the last 60 days</li>
+</ul>
+<p>If you see a drop in performance, you can go back to <em>Highly</em> or<em> Very Highly</em> to repair your reputation again.</p>
+</div>
+</div>
+<div class="accordion__item">
+<div class="accordion__item-title"><strong>If you send 2 times per week</strong></div>
+<div class="accordion__item-content">
+<ul>
+<li>Week 1: Send to <em>Very Highly Engaged</em> audience with 5 or more opens in the last 90 days</li>
+<li>Week 2: Send to <em>Highly Engaged</em> audience with 3 or more opens in the last 90 days</li>
+<li>Week 3+: Send to <em>Engaged</em> audience with 1 or more opens in the last 90 days</li>
+</ul>
+<p>If you see a drop in performance, you can go back to <em>Highly</em> or<em> Very Highly</em> to repair your reputation again.</p>
+</div>
+</div>
+<div class="accordion__item">
+<div class="accordion__item-title"><strong>If you send weekly</strong></div>
+<div class="accordion__item-content">
+<ul>
+<li>Week 1: Send to <em>Very Highly Engaged</em> audience with 5 or more opens in the last 180 days</li>
+<li>Week 2: Send to <em>Highly Engaged</em> audience with 3 or more opens in the last 180 days</li>
+<li>Week 3+: Send to <em>Engaged</em> audience with 1 or more opens in the last 180 days</li>
+</ul>
+<p>If you see a drop in performance, you can go back to <em>Highly</em> or<em> Very Highly</em> to repair your reputation again.</p>
+</div>
+</div>
+<div class="accordion__item">
+<div class="accordion__item-title"><strong>If you send monthly</strong></div>
+<div class="accordion__item-content">
+<ul>
+<li>Week 1: Send to <em>Very Highly Engaged</em> audience with 5 or more opens in the last 275 days</li>
+<li>Week 2: Send to <em>Highly Engaged</em> audience with 3 or more opens in the last 275 days</li>
+<li>Week 3+: Send to <em>Engaged</em> audience with 1 or more opens in the last 275 days</li>
+</ul>
+<p>If you see a drop in performance, you can go back to <em>Highly</em> or<em> Very Highly</em> to repair your reputation again.</p>
+<p> </p>
+</div>
+</div>
+</div>
+<p> </p>
+<p>If you typically send to a segment, you can add two new conditions to only include engaged addresses from the inbox provider:</p>
+<ul>
+<li>
+<em>What someone has done &gt; Received Email at least once over all time</em>,<br>WHERE <em>Inbox Provider equals [inbox provider]</em><br>AND</li>
+<li>
+<em>What someone has done (or not done) &gt; has Opened Email at least X times in the last X days</em><br>WHERE <em>Apple Privacy Open equals False</em>
+</li>
+</ul>
+<p><span style="color: #323b43;">For email domain, add the conditions:</span></p>
+<ul>
+<li>
+<em>Properties about someone &gt; Email contains [email domain]</em><em><br></em>AND</li>
+<li>
+<em><em>What someone has done (or not done) &gt; has Opened Email at least X times in the last X days<br></em></em>WHERE <em>Apple Privacy Open equals False</em>
+</li>
+</ul>
+<div class="bs-callout bs-callout-default">
+<p>With the release of iOS15, macOS Monterey, iPadOS 15, and WatchOS 8, Apple Mail Privacy Protection (MPP) changed the way that we receive open rate data on your emails by prefetching our tracking pixel. With this change, it’s important to understand that open rates will be inflated.</p>
+<p>If your campaign analytics show a large number of iOS openers, we suggest identifying these affected opens in your individual <a href="https://help.klaviyo.com/hc/en-us/articles/4416791883163">subscriber segments</a>.</p>
+<p>For complete information on MPP opens, visit our <a href="https://www.klaviyo.com/blog/apple-ios15-klaviyo">iOS 15: How to Prepare for Apple’s Changes</a> guide.</p>
+</div>
+<p><br>If you attempt to re-engage unengaged subscribers and are unsuccessful, we recommend <a href="https://help.klaviyo.com/hc/en-us/articles/115005078347">suppressing them</a> or otherwise ensuring they remain isolated from your main sending list moving forward.</p>
+<h2 id="h_01J6F3NNR85876GAG4SWMRCS20">Additional resources</h2>
+<ul>
+<li><a href="https://help.klaviyo.com/hc/en-us/articles/360025945671">How to ramp and warm your sending infrastructure</a></li>
+<li><a href="https://help.klaviyo.com/hc/en-us/articles/115000357752">How to set up a dedicated sending domain</a></li>
+<li><a href="https://help.klaviyo.com/hc/en-us/articles/115005237908">Getting started with segments</a></li>
+</ul>

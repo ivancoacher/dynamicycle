@@ -1,0 +1,855 @@
+{
+  "captured_at": "2026-05-23T16:17:59Z",
+  "article": {
+    "id": 360022594552,
+    "url": "https://klaviyo.zendesk.com/api/v2/help_center/en-us/articles/360022594552.json",
+    "html_url": "https://klaviyo.zendesk.com/hc/en-us/articles/360022594552-How-to-add-a-Klaviyo-embed-form-to-your-BigCommerce-site",
+    "author_id": 20424705848,
+    "comments_disabled": true,
+    "draft": false,
+    "promoted": false,
+    "position": 4,
+    "vote_sum": 1,
+    "vote_count": 85,
+    "section_id": 49375361359643,
+    "created_at": "2019-02-01T20:32:13Z",
+    "updated_at": "2026-04-21T13:54:43Z",
+    "name": "How to add a Klaviyo embed form to your BigCommerce site",
+    "title": "How to add a Klaviyo embed form to your BigCommerce site",
+    "source_locale": "en-us",
+    "locale": "en-us",
+    "outdated": false,
+    "outdated_locales": [],
+    "edited_at": "2025-03-27T18:03:47Z",
+    "user_segment_id": null,
+    "permission_group_id": 146372,
+    "content_tag_ids": [],
+    "label_names": [],
+    "body": "<h2 id=\"h_01JFB0Z06D022TWJSSSTSYTPFC\">You will learn</h2>\n<p>Learn how to add a Klaviyo embed form to your BigCommerce site, which requires creating the form in Klaviyo, and then pasting it's embed code to your site’s files where you want it to appear (e.g., the footer).</p>\n<p>This guide shows how to replace the BigCommerce default sign-up form with a Klaviyo embed form.</p>\n<h2 id=\"h_01JFB0Z06EFA34YFGRVSR522NC\">Before you begin</h2>\n<p>Before creating an embed form in Klaviyo, you must first integrate with BigCommerce, and then enable sign-up form functionality (also called \"onsite tracking\"). If you checked the setting <em>Automatically add Klaviyo onsite JavaScript</em> when <a href=\"https://help.klaviyo.com/hc/en-us/articles/115005082547-Integrate-with-BigCommerce-Stencil-Themes#step-3---install-klaviyo-js-and-viewed-product-tracking5\" target=\"_blank\" rel=\"noopener\">integrating with BigCommerce</a>, you’re all set. </p>\n<p>If not:</p>\n<ol>\n<li>In Klaviyo, select the <strong>Integrations</strong> tab.<br><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/32015108658459\" alt=\"An example account name selected in Klaviyo showing the Integrations tab being selected from the navigation menu.\">\n</li>\n<li>Click <strong>BigCommerce</strong>.</li>\n<li>Check the setting <strong>Automatically add Klaviyo onsite javascript</strong>.</li>\n<li>Click <strong>Save</strong>.</li>\n</ol>\n<p>The example in this article uses BigCommerce’s default Cornerstone theme. Keep in mind that your theme may differ, along with the names of some files or locations of code snippets.</p>\n<h2 id=\"h_01JFB0Z06E10KXMMW950XCARV0\">Adding the form's embed code to your site</h2>\n<p>First, <a href=\"https://help.klaviyo.com/hc/en-us/articles/360006897412\">create and publish an embed form in Klaviyo</a>. This section will go over the next steps of pasting your form's embed code on your BigCommerce site so it displays and syncs data properly.</p>\n<ol>\n<li>If you have not already, copy the embed code for your embed form. You can access the form’s embed code by opening the form in the editor and clicking into the <strong>Targeting &amp; behavior</strong> section.<br><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/32015108670619\" alt=\"An example form's embed code highlighted to copy from the Display menu of the Targeting and behaviors tab within the form editor.\" width=\"468\" height=\"372\">\n</li>\n<li>Navigate to your website and locate the default BigCommerce sign-up form. If you’re using a Cornerstone theme, it’s in the footer of the site.<br><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28723630357531\" alt=\"A BigCommerce storefront showing sample products and an email subscription form in the site footer\" width=\"553\" height=\"251\">\n<ul>\n<li>If you do not see a default form on your website:\n<ul>\n<li>Open your BigCommerce dashboard.</li>\n<li>Navigate to <strong>Marketing &gt; Email Marketing</strong>\n</li>\n<li>Check the box labeled <em>Allow newsletter subscriptions</em>. This enables you to collect email consent from visitors on your website, and also adds a default email sign-up box on your BigCommerce site. If this box is already checked and you still don’t see a default form, then your theme may not include one.</li>\n</ul>\n</li>\n</ul>\n</li>\n<li>Open your BigCommerce dashboard, then navigate to <strong>Storefront &gt; Themes</strong>.</li>\n<li>From the <em>Current Theme</em> section, click the <strong>Advanced</strong> dropdown then choose <strong>Edit Theme Files</strong>.<br><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28723625055131\" alt=\"BigCommerce dashboard showing Current Theme with Advanced Settings dropdown open and Edit Theme Files highlighted in blue.\" width=\"614\" height=\"379\">\n<ul>\n<li>If you’re using a default theme, you will not be able to select this option. Instead:<br>\n<ul>\n<li>Click <strong>Make a Copy</strong>, name it, then select <strong>Save a Copy</strong>. </li>\n<li>Once it’s added to the <em>Themes</em> section, select the 3 dots, then choose <strong>Edit Theme Files</strong>. Note that any edits you make will only apply to the theme you're editing, and you'll need to apply the theme to your website to see the changes reflected.</li>\n</ul>\n</li>\n</ul>\n</li>\n<li>In the left sidebar, open the file corresponding to where the default form appeared on your site. If the default form was located in the footer, like in the example, navigate to <strong>templates &gt; components &gt; common</strong>, and click the <strong>footer.html</strong> file.</li>\n<li>Use the find shortcut (Command+F on Mac or Control+F on Windows) to search the word “newsletter” within the footer file.<br><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/32015094392091\" alt=\"The find shortcut command searching the term \">\n</li>\n<li>Within the code beneath it, find the reference to the form. In the example, the form is referenced in a different file path: {{&gt; components/common/subscription-form}}.<br><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/32015094399003\" alt=\"The file path for the newsletter form referenced within an example site's footer file.\">\n</li>\n<li>In the left sidebar, follow the file path referenced in the code (in this example, select <strong>components &gt; common &gt; subscription-form</strong>). You’ll see the actual components of the default form from here.\n<ul>\n<li>Because the default form's header and language matches the rest of our site's styles, we're only going to replace the actual form input. In the source code, you can see that the default form’s input is contained in the &lt;form&gt; element.</li>\n</ul>\n</li>\n<li>Highlight everything between the opening and closing &lt;form&gt; tags, then paste the embed code that you copied from Klaviyo to replace the highlighted text. <br><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/32015108693787\" alt=\"The subscription-form file for an example website showing the default form input highlighted within the form tags.\">\n</li>\n<li>Click <strong>Save and apply file</strong> to apply these changes to your website.\n<ul>\n<li>If the button only says <strong>Save file</strong>, then the file you just edited is not your <em>Current Theme</em> yet. You’ll need to click <strong>Save file</strong>, then scroll up and select <strong>Edit Theme Files &gt; Save &gt; Use as Active Theme</strong> in the top right corner to apply the theme to your website. </li>\n</ul>\n</li>\n</ol>\n<p>Once you’ve pasted the embed code, saved, and applied the changes in BigCommerce, navigate back to your website and refresh the page. Your Klaviyo embed form will display on your site and begin adding new subscribers to the Klaviyo list linked to the form. </p>\n<p>If you don’t see your form, see <a href=\"https://help.klaviyo.com/hc/en-us/articles/360006897412#h_01JFAQY2NHMG3PPV523K4ESXEV\" target=\"_blank\" rel=\"noopener noreferrer\">troubleshooting embed forms</a>.</p>\n<h2 id=\"h_01JFB1VS4P493K3WS96BZXSGD8\">Next steps</h2>\n<p>Next, create a <a href=\"https://help.klaviyo.com/hc/en-us/articles/115002775172\" target=\"_blank\" rel=\"noopener noreferrer\">welcome series flow</a> to make an immediate impact on your new subscribers.</p>\n<h2 id=\"h_01JFB0Z06EF316DDFV9A01CB6N\">Additional resources</h2>\n<ul>\n<li><a href=\"https://help.klaviyo.com/hc/en-us/articles/115002775172-How-to-Create-an-Email-Welcome-Series\" target=\"_blank\" rel=\"noopener\">How to create an email welcome series</a></li>\n<li><a href=\"https://help.klaviyo.com/hc/en-us/articles/4403594764315-How-to-Disable-Notification-Emails-Sent-by-BigCommerce\" target=\"_blank\" rel=\"noopener\">How to disable notification emails sent by BigCommerce</a></li>\n</ul>",
+    "user_segment_ids": []
+  },
+  "normalized": {
+    "id": "360022594552",
+    "title": "How to add a Klaviyo embed form to your BigCommerce site",
+    "source_url": "https://help.klaviyo.com/hc/en-us/articles/360022594552-How-to-add-a-Klaviyo-embed-form-to-your-BigCommerce-site",
+    "section_id": 49375361359643,
+    "section": "BigCommerce best practices",
+    "category_id": 115000032731,
+    "category": "Integrations",
+    "category_slug": "integrations",
+    "klaviyo_updated": "2026-04-21T13:54:43Z",
+    "created_at": "2019-02-01T20:32:13Z",
+    "draft": false,
+    "promoted": false,
+    "position": 4,
+    "label_names": []
+  },
+  "files": {
+    "body_html": "_source/articles/360022594552.body.html",
+    "rendered_html": "_source/rendered/360022594552.html"
+  },
+  "assets": {
+    "api_body": {
+      "images": [
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/32015108658459",
+          "alt": "An example account name selected in Klaviyo showing the Integrations tab being selected from the navigation menu.",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/32015108670619",
+          "alt": "An example form's embed code highlighted to copy from the Display menu of the Targeting and behaviors tab within the form editor.",
+          "width": "468",
+          "height": "372"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28723630357531",
+          "alt": "A BigCommerce storefront showing sample products and an email subscription form in the site footer",
+          "width": "553",
+          "height": "251"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28723625055131",
+          "alt": "BigCommerce dashboard showing Current Theme with Advanced Settings dropdown open and Edit Theme Files highlighted in blue.",
+          "width": "614",
+          "height": "379"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/32015094392091",
+          "alt": "The find shortcut command searching the term ",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/32015094399003",
+          "alt": "The file path for the newsletter form referenced within an example site's footer file.",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/32015108693787",
+          "alt": "The subscription-form file for an example website showing the default form input highlighted within the form tags.",
+          "width": "",
+          "height": ""
+        }
+      ],
+      "links": [
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005082547-Integrate-with-BigCommerce-Stencil-Themes#step-3---install-klaviyo-js-and-viewed-product-tracking5",
+          "text": "integrating with BigCommerce"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360006897412",
+          "text": "create and publish an embed form in Klaviyo"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360006897412#h_01JFAQY2NHMG3PPV523K4ESXEV",
+          "text": "troubleshooting embed forms"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115002775172",
+          "text": "welcome series flow"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115002775172-How-to-Create-an-Email-Welcome-Series",
+          "text": "How to create an email welcome series"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4403594764315-How-to-Disable-Notification-Emails-Sent-by-BigCommerce",
+          "text": "How to disable notification emails sent by BigCommerce"
+        }
+      ],
+      "headings": [
+        {
+          "level": 2,
+          "id": "h_01JFB0Z06D022TWJSSSTSYTPFC",
+          "text": "You will learn"
+        },
+        {
+          "level": 2,
+          "id": "h_01JFB0Z06EFA34YFGRVSR522NC",
+          "text": "Before you begin"
+        },
+        {
+          "level": 2,
+          "id": "h_01JFB0Z06E10KXMMW950XCARV0",
+          "text": "Adding the form's embed code to your site"
+        },
+        {
+          "level": 2,
+          "id": "h_01JFB1VS4P493K3WS96BZXSGD8",
+          "text": "Next steps"
+        },
+        {
+          "level": 2,
+          "id": "h_01JFB0Z06EF316DDFV9A01CB6N",
+          "text": "Additional resources"
+        }
+      ]
+    },
+    "rendered_page": {
+      "images": [
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/7ff492c2b417b7ecfe572f839a8a81398693c1f7-1920x1080.webp",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/81cf6fef9eb1e095644bdc462db81253af795985-458x266.jpg",
+          "alt": "An example account name selected in Klaviyo showing the Integrations tab being selected from the navigation menu.",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/5a0d28fc4ca9a782c56345a03642af932b4a3a5f-954x758.jpg?w=468",
+          "alt": "An example form's embed code highlighted to copy from the Display menu of the Targeting and behaviors tab within the form editor.",
+          "width": "468",
+          "height": "372"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/27d674d889e655d00a8719b94e613bc86ac33358-1233x561.jpg?w=553",
+          "alt": "A BigCommerce storefront showing sample products and an email subscription form in the site footer",
+          "width": "553",
+          "height": "251"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/76491e5ae5d093b16510459fd4e453f8c7a2a3ec-847x523.jpg?w=614",
+          "alt": "BigCommerce dashboard showing Current Theme with Advanced Settings dropdown open and Edit Theme Files highlighted in blue.",
+          "width": "614",
+          "height": "379"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/3fa5e5d1237a79a0ed8b870a81bfe9fbff2a22a7-2422x1496.jpg",
+          "alt": "The find shortcut command searching the term ",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/ad9ed00bea31afe35dfa97e7be864e5a2254ecd0-1590x254.jpg",
+          "alt": "The file path for the newsletter form referenced within an example site's footer file.",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/f0cf54545d7f2d096bfef69450ceaf7ce05a7567-2338x1310.jpg",
+          "alt": "The subscription-form file for an example website showing the default form input highlighted within the form tags.",
+          "width": "",
+          "height": ""
+        }
+      ],
+      "links": [
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360022594552-How-to-add-a-Klaviyo-embed-form-to-your-BigCommerce-site#site-content",
+          "text": "Skip to main content"
+        },
+        {
+          "href": "https://www.klaviyo.com",
+          "text": "Home"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center"
+        },
+        {
+          "href": "https://www.klaviyo.com/enterprise",
+          "text": "Enterprise"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Partners"
+        },
+        {
+          "href": "https://www.klaviyo.com/careers",
+          "text": "Careers"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": "Log in"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": ""
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center Find step-by-step instructions and troubleshooting solutions in our knowledge base."
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000032731",
+          "text": "Integrations"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000312411",
+          "text": "Flows"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867867",
+          "text": "Audience"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867667",
+          "text": "Campaigns"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/360000190711",
+          "text": "Sign-up forms"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000873988",
+          "text": "Deliverability & compliance"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/29173800271259",
+          "text": "SMS"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/16638219724187",
+          "text": "Reviews"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/18073014919195",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/34141283979931",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/37659126754075",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/33948021740315",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/39746685522331",
+          "text": "WhatsApp"
+        },
+        {
+          "href": "https://academy.klaviyo.com",
+          "text": "Klaviyo Academy Expert training and education to help you succeed with Klaviyo, and beyond."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Quick+guide&resource=academy_courses",
+          "text": "Quick guides Learn marketing strategies and concepts in 15 minutes or less."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Course&resource=academy_courses",
+          "text": "Courses Master key marketing topics through structured lessons and exams."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/best-practices",
+          "text": "Best practices Discover top product and marketing strategies for your business."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/learning-paths",
+          "text": "Learning paths Complete curated learning journeys tailored to your marketing goals."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses",
+          "text": "Explore all resources"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Live+training&resource=academy_courses",
+          "text": "Live trainings Build confidence through hands-on interactive workshops and thought-provoking strategy sessions."
+        },
+        {
+          "href": "https://www.bigmarker.com/klaviyo-customer-education/Office-hours-Getting-started-with-Klaviyo",
+          "text": "Live office hours Join a strategic discussion where you can ask questions and get answers in real-time."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/private-live-training",
+          "text": "1:1 Live training Book a private training session with an expert to jumpstart your platform knowledge and confidence."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/credentials",
+          "text": "Klaviyo credentials Dig deeper into select topics and showcase your expertise with a final exam to earn a certificate and digital badge."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/certificates/klaviyo-practitioner-certificate",
+          "text": "Klaviyo practitioner certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/deliverability-certificate",
+          "text": "Deliverability certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/developer-certificate",
+          "text": "Klaviyo developer certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses&select=Certificate",
+          "text": "See all certificates"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Klaviyo Community Join our thriving community network to connect with brands like yours—online and in person."
+        },
+        {
+          "href": "https://community.klaviyo.com/topic/new",
+          "text": "Ask a question Post a question and get thoughtful answers from Klaviyo powerusers."
+        },
+        {
+          "href": "https://community.klaviyo.com/p/roadmap",
+          "text": "Product roadmap"
+        },
+        {
+          "href": "https://community.klaviyo.com/search/activity/recent",
+          "text": "Recent threads"
+        },
+        {
+          "href": "https://community.klaviyo.com/p/champions",
+          "text": "Meet the Champions"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups",
+          "text": "Browse all groups Your people are waiting. New ideas and connections are a click away."
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/developer-group-64",
+          "text": "Developer group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/entrepreneur-user-group-118",
+          "text": "Entrepreneur group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/woo-user-group-87",
+          "text": "WooCommerce group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/new-york-meetup-chapter-82",
+          "text": "New York City"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/los-angeles-meetup-chapter-83",
+          "text": "Los Angeles"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/austin-meetup-chapter-85",
+          "text": "Austin"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/san-diego-meetup-chapter-86",
+          "text": "San Diego"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/amsterdam-meetup-chapter-84",
+          "text": "Amsterdam"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Klaviyo Developers Access API documentation and developer guides to help you build with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/get_started",
+          "text": "Get started Access key resources and a step-by-step checklist for how to start developing with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/build_your_integration",
+          "text": "Grow your app's reach Learn how to join our ecosystem and get your app listed on our marketplace."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/developer-tools",
+          "text": "Developer tools Generate sample data, monitor your API usage, and access our Postman collections."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/reference/api_overview",
+          "text": "API reference Browse our full catalog of API docs."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/changelog_",
+          "text": "Changelog"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/api_versioning_and_deprecation_policy",
+          "text": "Versioning & deprecation policy"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/rate_limits_and_error_handling",
+          "text": "Rate limits & error handling"
+        },
+        {
+          "href": "https://youtube.com/playlist?list=PLHkNfHgtxcUanrkMnKPdkRzuWU7MGv_xM&si=pkG-KH7IT_TUHOGC",
+          "text": "API tutorials on YouTube Subscribe to our Klaviyo API Tutorials playlist for easy access to step-by-step developer walkthroughs."
+        },
+        {
+          "href": "https://www.klaviyo.com/contact-us",
+          "text": "Contact us"
+        },
+        {
+          "href": "https://www.klaviyo.com/sign-up",
+          "text": "Sign up"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": "Search"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360022594552",
+          "text": "United States - EN"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/de-de/articles/360022594552",
+          "text": "Deutschland - DE"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-es/articles/360022594552",
+          "text": "España - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-mx/articles/360022594552",
+          "text": "México - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/fr-fr/articles/360022594552",
+          "text": "France - FR"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/it-it/articles/360022594552",
+          "text": "Italia - IT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/ko-kr/articles/360022594552",
+          "text": "한국 - KO"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/nl-nl/articles/360022594552",
+          "text": "Nederland - NL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pl-pl/articles/360022594552",
+          "text": "Polska - PL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pt-br/articles/360022594552",
+          "text": "Brasil - PT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/sv-se/articles/360022594552",
+          "text": "Sverige - SV"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/115001509808",
+          "text": "BigCommerce"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/49375361359643",
+          "text": "BigCommerce best practices"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360022594552-How-to-add-a-Klaviyo-embed-form-to-your-BigCommerce-site#h_01JFB0Z06D022TWJSSSTSYTPFC",
+          "text": "You will learn"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360022594552-How-to-add-a-Klaviyo-embed-form-to-your-BigCommerce-site#h_01JFB0Z06EFA34YFGRVSR522NC",
+          "text": "Before you begin"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360022594552-How-to-add-a-Klaviyo-embed-form-to-your-BigCommerce-site#h_01JFB0Z06E10KXMMW950XCARV0",
+          "text": "Adding the form's embed code to your site"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360022594552-How-to-add-a-Klaviyo-embed-form-to-your-BigCommerce-site#h_01JFB1VS4P493K3WS96BZXSGD8",
+          "text": "Next steps"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360022594552-How-to-add-a-Klaviyo-embed-form-to-your-BigCommerce-site#additional-resources",
+          "text": "Additional resources"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005082547-Integrate-with-BigCommerce-Stencil-Themes#step-3---install-klaviyo-js-and-viewed-product-tracking5",
+          "text": "integrating with BigCommerce"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360006897412",
+          "text": "create and publish an embed form in Klaviyo"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360006897412#h_01JFAQY2NHMG3PPV523K4ESXEV",
+          "text": "troubleshooting embed forms"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115002775172",
+          "text": "welcome series flow"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115002775172",
+          "text": "How to create an email welcome series"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4403594764315",
+          "text": "How to disable notification emails sent by BigCommerce"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115001002272",
+          "text": "Learn how to contact support"
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": ""
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": "Visit Community"
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": ""
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": "Hire a partner"
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/about",
+          "text": "About Klaviyo"
+        },
+        {
+          "href": "https://www.klaviyo.com/newsroom",
+          "text": "Newsroom"
+        },
+        {
+          "href": "https://investors.klaviyo.com/overview/default.aspx",
+          "text": "Investor relations"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Agency and tech partners"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Developers"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/retail",
+          "text": "Retail and ecommerce"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/restaurants",
+          "text": "Restaurant marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/wellness",
+          "text": "Wellness"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform",
+          "text": "B2C CRM overview"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai",
+          "text": "Klaviyo AI (K:AI)"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/marketing-automation",
+          "text": "Klaviyo Marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-service",
+          "text": "Klaviyo Service"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/analytics",
+          "text": "Klaviyo Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-data-platform",
+          "text": "Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare",
+          "text": "Klaviyo vs. Klaviyo alternatives"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-mailchimp",
+          "text": "Klaviyo vs. Mailchimp"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-postscript",
+          "text": "Klaviyo vs. Postscript"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-attentive",
+          "text": "Klaviyo vs. Attentive"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-salesforce-marketing-cloud",
+          "text": "Klaviyo vs. Salesforce"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-listrak",
+          "text": "Klaviyo vs. Listrak"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/omnichannel",
+          "text": "Omnichannel marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/email-marketing",
+          "text": "Email marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing",
+          "text": "SMS marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing/rcs",
+          "text": "RCS for Business"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/mobile-app-marketing",
+          "text": "Mobile app marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/whatsapp",
+          "text": "WhatsApp marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/social",
+          "text": "Social marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources",
+          "text": "Marketing resources"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources/marketing-campaign-calendar",
+          "text": "Marketing campaign calendar"
+        },
+        {
+          "href": "https://www.klaviyo.com/glossary",
+          "text": "Marketing glossary"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/email-subject-line-generator",
+          "text": "Subject line generator"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/roi-calculator",
+          "text": "ROI calculator"
+        },
+        {
+          "href": "https://www.klaviyo.com/customers",
+          "text": "Case studies"
+        },
+        {
+          "href": "https://www.klaviyo.com/composer",
+          "text": "Composer Beta"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/marketing-agent",
+          "text": "Marketing Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/customer-agent",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/customer-experience-hub",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/helpdesk",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/marketing-analytics",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/advanced-cdp",
+          "text": "Advanced Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/web-forms",
+          "text": "Web forms"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/email-templates",
+          "text": "Email templates"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/portfolio",
+          "text": "Portfolio"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform-integrations",
+          "text": "Apps and Integrations"
+        },
+        {
+          "href": "https://www.klaviyo.com/features",
+          "text": "Features"
+        },
+        {
+          "href": "https://www.klaviyo.com/whats-new",
+          "text": "What's new"
+        },
+        {
+          "href": "https://www.klaviyo.com/events",
+          "text": "Events"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help Center"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us",
+          "text": "Academy"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Community"
+        },
+        {
+          "href": "https://www.facebook.com/Klaviyo/",
+          "text": "Facebook"
+        },
+        {
+          "href": "https://twitter.com/klaviyo/",
+          "text": "Twitter"
+        },
+        {
+          "href": "https://www.linkedin.com/company/klaviyo/",
+          "text": "LinkedIn"
+        },
+        {
+          "href": "https://www.instagram.com/klaviyo/",
+          "text": "Instagram"
+        },
+        {
+          "href": "https://www.klaviyo.com/sitemap",
+          "text": "Site Map"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal",
+          "text": "Terms and Privacy"
+        },
+        {
+          "href": "https://www.klaviyo.com/security",
+          "text": "Security"
+        },
+        {
+          "href": "https://www.klaviyo.com/trust",
+          "text": "Trust"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal/intellectual-property-notices",
+          "text": "Intellectual Property Notices"
+        }
+      ],
+      "headings": [
+        {
+          "level": 1,
+          "id": "",
+          "text": "How to add a Klaviyo embed form to your BigCommerce site"
+        },
+        {
+          "level": 2,
+          "id": "h_01JFB0Z06D022TWJSSSTSYTPFC",
+          "text": "You will learn"
+        },
+        {
+          "level": 2,
+          "id": "h_01JFB0Z06EFA34YFGRVSR522NC",
+          "text": "Before you begin"
+        },
+        {
+          "level": 2,
+          "id": "h_01JFB0Z06E10KXMMW950XCARV0",
+          "text": "Adding the form's embed code to your site"
+        },
+        {
+          "level": 2,
+          "id": "h_01JFB1VS4P493K3WS96BZXSGD8",
+          "text": "Next steps"
+        },
+        {
+          "level": 2,
+          "id": "additional-resources",
+          "text": "Additional resources"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "Explore more from Klaviyo"
+        }
+      ]
+    }
+  },
+  "rendered_page": {
+    "status": "fetched",
+    "error": ""
+  }
+}

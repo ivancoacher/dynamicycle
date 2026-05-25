@@ -1,0 +1,937 @@
+{
+  "captured_at": "2026-05-23T16:14:39Z",
+  "article": {
+    "id": 35146367972763,
+    "url": "https://klaviyo.zendesk.com/api/v2/help_center/en-us/articles/35146367972763.json",
+    "html_url": "https://klaviyo.zendesk.com/hc/en-us/articles/35146367972763-How-to-use-custom-objects-in-templates",
+    "author_id": 397882329931,
+    "comments_disabled": false,
+    "draft": false,
+    "promoted": false,
+    "position": 0,
+    "vote_sum": 0,
+    "vote_count": 0,
+    "section_id": 49375857053851,
+    "created_at": "2025-03-20T14:48:39Z",
+    "updated_at": "2026-04-21T13:54:40Z",
+    "name": "How to use custom objects in templates",
+    "title": "How to use custom objects in templates",
+    "source_locale": "en-us",
+    "locale": "en-us",
+    "outdated": false,
+    "outdated_locales": [],
+    "edited_at": "2026-02-20T13:33:11Z",
+    "user_segment_id": null,
+    "permission_group_id": 146372,
+    "content_tag_ids": [],
+    "label_names": [],
+    "body": "<div class=\"bs-callout bs-callout-requirements ignore-for-search\"><p>You must have access to <a href=\"https://help.klaviyo.com/hc/en-us/articles/35105337172123\" target=\"_blank\" rel=\"noopener noreferrer\">custom objects</a> to use this functionality. </p></div><h2 id=\"h_01JPTH5R88S33HCKM283J5XBX4\">You will learn</h2><p>Learn how to use custom objects in templates, so you can use object data in flow and campaign sends.</p><p>You must <a href=\"https://help.klaviyo.com/hc/en-us/articles/35105337172123\" target=\"_blank\" rel=\"noopener noreferrer\">create an object</a> first before you can use custom object data in templates.</p><h2 id=\"h_01JPTH5R88ZG3QXWK7AT8F34QM\">Accessing object data through the personalization menu </h2><p>You can personalize text blocks in template editor using properties from a custom object, or the count of records for an object.</p><p>Learn <a href=\"https://help.klaviyo.com/hc/en-us/articles/4407911841435\" target=\"_blank\" rel=\"noopener noreferrer\">how to use Klaviyo's template editor</a>. </p><p>To get started with adding object data into your templates:</p><ol>\n<li data-list-item-id=\"e41f7f40b1c98fa518dccf9382c0a608a\">Add a new text block or select an existing text block.</li>\n<li data-list-item-id=\"ef11aeaa6c66df212d1ec4e22d9835610\">Double click in to the text block and then position your cursor where you want to insert your dynamic property. </li>\n<li data-list-item-id=\"ed7bdda6c28af2613491b69f0b6e20fcb\">Select the <strong>Personalization </strong>button in the top right. </li>\n</ol><p class=\"wysiwyg-text-align-center\"><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/35160309938075\" width=\"624\" height=\"177\"></p><ol start=\"3\"><li data-list-item-id=\"e1c3668e47edbfe17eff44e631bdc7554\">In the personalization modal, select <strong>Objects </strong>from the <em>All types </em>dropdown.</li></ol><p class=\"wysiwyg-text-align-center\"><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/35160309944475\" width=\"241\" height=\"387\"></p><ol start=\"4\">\n<li data-list-item-id=\"e8a304fc753d548a5da02998ee41345ef\">Within <em>Objects</em>, you’ll see all the objects on your account that you can use to pull data into the template. Select the object that contains the data you’d like to use in the template. </li>\n<li data-list-item-id=\"eb7b5cb7562f31e40946705de7cbd67c1\">Select the specific object property or<a href=\"#h_01JPTH5R8840K0Q3XWH2CFYWRY\" target=\"_blank\" rel=\"noopener noreferrer\"> object filter</a> to include in the template. You can also create a new object filter here.</li>\n<li data-list-item-id=\"e20d1362b975459cd87f1280b1be488af\">Set the default text and any styles for your text.</li>\n</ol><p>To specify the capitalization rules for object data, you'll need to manually set the rule in the personalization tag. For example: </p><ul>\n<li data-list-item-id=\"ef870a26632b4c148ee8e438ab7aef473\">\n<strong>{{ object.full_name|title|default:'value' }}</strong><br>John Doe </li>\n<li data-list-item-id=\"e0c4bbd519c30ddc4eb19cd0593d3d56d\">\n<strong>{{ object.full_name|upper|default:'value' }}</strong><br>JOHN DOE</li>\n<li data-list-item-id=\"e7fe9152185d27ce5a2d5ed4495fc65cf\">\n<strong>{{ object.full_name|lower|default:'value' }}</strong><br>john doe </li>\n</ul><p>Learn more about <a href=\"https://developers.klaviyo.com/en/docs/glossary_of_variable_filters\" target=\"_blank\" rel=\"noopener noreferrer\">modifying values with Django filters. </a></p><h2 id=\"h_01JPTH5R889GMM7XPNS3FSB4SE\">Accessing object data with personalization tags</h2><p>You can use personalization tags in emails (including the email’s subject line), SMS/MMS messages, push notifications, and Customer Hub to display object data.</p><p>Learn <a href=\"https://help.klaviyo.com/hc/en-us/articles/18986347580827\" target=\"_blank\" rel=\"noopener noreferrer\">how to use personalization tags in Klaviyo</a>.</p><h3 id=\"h_01JY7ERDFJDZWR1VM4KZJZ5ET7\">Object personalization tag reference</h3><p>You can use the following personalization tags with objects.</p><p><strong>Using the object that triggered a flow</strong></p><div class=\"bs-callout bs-callout-default\"><p>{{ object }} is only available when an object has triggered a flow. The {{ object }} template tag is only available in date triggered flows based on an object. This is similar to the {{ event }} template tag for event triggered flows.</p></div><p>These examples use the following:</p><ul>\n<li data-list-item-id=\"e7c84474f65d246ad98fe2ee54cb94624\">Object called <em>Pet </em>which is referenced with the <em>object </em>tag in the template.  </li>\n<li data-list-item-id=\"e5131202140f47703de3546b1fd932c28\">Object property called <em>Name</em>\n</li>\n</ul><div><figure class=\"wysiwyg-table wysiwyg-table-align-left\" style=\"width: 100%;\"><table class=\"wysiwyg-table-resized\">\n<colgroup>\n<col style=\"width: NaN%;\">\n<col style=\"width: NaN%;\">\n</colgroup>\n<tbody>\n<tr>\n<td><strong>Structure</strong></td>\n<td><strong>Example</strong></td>\n</tr>\n<tr>\n<td>{{ object.object_property }}</td>\n<td>{{ object.Name }}</td>\n</tr>\n<tr>\n<td>{{ object | lookup:'object_property' }}</td>\n<td>{{ object | lookup:'Name' }}</td>\n</tr>\n</tbody>\n</table></figure></div><p><strong>Getting an object by ID</strong></p><p>These examples use the following:</p><ul>\n<li data-list-item-id=\"e66d1cc60967e4f82eee46c20c6a68251\">Object called <em>Pet</em>\n</li>\n<li data-list-item-id=\"ee2b080323e2feceea6bd268ce7bce4c1\">Object property called <em>Name</em>\n</li>\n<li data-list-item-id=\"ef312e8182020646a586437cbac53994f\">Event that triggered the flow with an object property called <em>pet_id</em>. This field is the same as the object ID for the <em>Pet</em> object.</li>\n</ul><div><figure class=\"wysiwyg-table wysiwyg-table-align-left\" style=\"width: 100%;\"><table class=\"wysiwyg-table-resized\">\n<colgroup>\n<col style=\"width: NaN%;\">\n<col style=\"width: NaN%;\">\n</colgroup>\n<tbody>\n<tr>\n<td><strong>Structure </strong></td>\n<td><strong>Example</strong></td>\n</tr>\n<tr>\n<td>{% customobject event.object_id  object_type_title=\"Title\" as alias %}<br>{{ alias.object_property }}<br>{% endcustomobject %}</td>\n<td>{% customobject event.pet_id  object_type_title=\"Pet\" as pet %}<br>{{ pet.Name }}<br>{% endcustomobject %}</td>\n</tr>\n<tr>\n<td>{% customobject event.object_id  object_type_title=\"Title\" as alias %}<br>{{ alias | lookup:'object_property' }}<br>{% endcustomobject %}</td>\n<td>{% customobject event.pet_id  object_type_title=\"Pet\" as pet %}<br>{{ pet | lookup:'Name' }}<br>{% endcustomobject %}</td>\n</tr>\n</tbody>\n</table></figure></div><p><strong>Return a single object from an object filter </strong></p><p>These examples use the following:</p><ul>\n<li data-list-item-id=\"e4450b2128a0cc7965ce2d602cc385414\">An additional object filter called <em>oldest_dog</em>\n</li>\n<li data-list-item-id=\"e18ef28c25b71433245f805fb2f803c74\">Object property called <em>Name</em>\n</li>\n</ul><div><figure class=\"wysiwyg-table wysiwyg-table-align-left\" style=\"width: 100%;\"><table class=\"wysiwyg-table-resized\">\n<colgroup>\n<col style=\"width: NaN%;\">\n<col style=\"width: NaN%;\">\n</colgroup>\n<tbody>\n<tr>\n<td><strong>Structure</strong></td>\n<td><strong>Example</strong></td>\n</tr>\n<tr>\n<td>{{ object_filter.object_filter_name.object_property}}</td>\n<td>{{ object_filter.oldest_dog.Name }}</td>\n</tr>\n<tr>\n<td>{{ object_filter.object_filter_name | lookup: 'object_property' }}</td>\n<td>{{ object_filter.oldest_dog | lookup: 'Name' }}</td>\n</tr>\n</tbody>\n</table></figure></div><p><strong>Return an integer from an object filter </strong></p><p>These examples use the following:</p><ul><li data-list-item-id=\"eac45b7c1d0b03cf94c127849583b8ed8\">An additional object filter called <em>count_of_dogs</em>\n</li></ul><div><figure class=\"wysiwyg-table wysiwyg-table-align-left\" style=\"width: 100%;\"><table class=\"wysiwyg-table-resized\">\n<colgroup>\n<col style=\"width: NaN%;\">\n<col style=\"width: NaN%;\">\n</colgroup>\n<tbody>\n<tr>\n<td><strong>Structure</strong></td>\n<td><strong>Example</strong></td>\n</tr>\n<tr>\n<td>{{ object_filter.object_filter_name }}</td>\n<td>{{ object_filter.count_of_dogs }}</td>\n</tr>\n</tbody>\n</table></figure></div><p><span style=\"color: #000000;\"><strong>Retrieve object records</strong></span></p><p>To retrieve the most recent object records for an object, you’ll need to loop through all the object records. This example uses the following:</p><ul><li data-list-item-id=\"e8caac7a315f2c0af29175b305347d287\">Object called <em>Pets</em>\n</li></ul><div><figure class=\"wysiwyg-table wysiwyg-table-align-left\" style=\"width: 100%;\"><table class=\"wysiwyg-table-resized\">\n<colgroup>\n<col style=\"width: NaN%;\">\n<col style=\"width: NaN%;\">\n</colgroup>\n<tbody>\n<tr>\n<td><span style=\"color: #000000;\"><strong>Structure</strong></span></td>\n<td><span style=\"color: #000000;\"><strong>Example</strong></span></td>\n</tr>\n<tr>\n<td>{% customobjects object_type_title=\"Title\" as alias %}<br>{% for object_instance in alias %}<br>{{ object_instance.record }}<br>{% endfor %}<br>{% endcustomobjects %}</td>\n<td>\n<span style=\"color: #232121;\">{% customobjects object_type_title=\"Pet Profile\" as pets %}</span><br><span style=\"color: #232121;\">{% for pet in pets %}</span><br><span style=\"color: #232121;\">{{ pet.name }}</span><br><span style=\"color: #232121;\">{% endfor %}</span><br><span style=\"color: #232121;\">{% endcustomobjects %}</span>\n</td>\n</tr>\n</tbody>\n</table></figure></div><h2 id=\"01JY7EPHSMAS2C0SP2T9CC0V0V\">Object data in subject lines</h2><p>You can personalize your subject lines with any of the custom object tags:</p><ul>\n<li data-list-item-id=\"e303d151cea6417a3838abda14726077c\">{% object_filter %}</li>\n<li data-list-item-id=\"eccc44cb0e3a5ce38bfd87a93b3c561f3\">{% object %}</li>\n<li data-list-item-id=\"edf66f4393856eb105c6f49df31bad04c\">{% customobject %}</li>\n</ul><p>For example, you can use the {% object %} tag in the subject line of your message to display the name of a customers pet directly. </p><p>Draft view:</p><p><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/37963491682331\" width=\"585\" height=\"71\"></p><p>Email preview:</p><p><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/37963491688475\" width=\"441\" height=\"45\"></p><h2 id=\"h_01JPTH5R88GVH1XY8Y4MVYVJ3B\">Object data in show/hide logic</h2><p>You can also configure whether to show or hide block in a template based on object data. Dynamically showing or hiding a block based on object data uses the same tags as the template builder. You can reference objects by ID, properties from object filters, or aggregates from object filters.</p><div class=\"bs-callout bs-callout-requirements ignore-for-search\"><p>You must create object filters before you can reference them in show/hide logic.</p></div><p>For example, if you have a <em>Pet</em> object with a property called <em>Breed</em>, you can choose to only show a block to pet owners with a certain breed of dog using the <em>object.Breed </em>condition. </p><p>To set show/hide logic, click on the block you’d like to set the rules for and select <strong>Use code</strong> on the <em>Display</em> tab. </p><p>Enter the condition directly in the code editor. You can use object filters and the object template tag if it’s a message for a date-triggered flow based on object data.</p><p class=\"wysiwyg-text-align-center\"><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/37963491690267\" width=\"460\" height=\"325\"></p><p>For more flexibility (e.g., making some information conditional on information returned by {% customobject %} or {% customobjects %}) then consider using <a href=\"https://help.klaviyo.com/hc/en-us/articles/7655926841499\" target=\"_blank\" rel=\"noopener noreferrer\">advanced conditional logic</a> with {% if … %} logic directly in a text block.</p><h2 id=\"h_01JPTH5R8840K0Q3XWH2CFYWRY\">Object filters</h2><h3 id=\"h_01JPTM3Z6RZ1EZW12GDFZH9WXC\"><span style=\"color: #434343;\">What is an object filter?</span></h3><p>Object filters enable you to limit the returned object records based on specific criteria you set so you can display records of a certain type. </p><h3 id=\"h_01JPTH5R88V7ZKMSMK5DCNWVZG\"><span style=\"color: #434343;\">Create a new object filter</span></h3><p>To get started with creating an object filter:</p><ol>\n<li data-list-item-id=\"e72eecb54e5829cd30b1f4bca00ddb3b9\">Add a new text block or edit the text in an existing text block in your template. </li>\n<li data-list-item-id=\"e5729ac7df53d8a1696168a6afbd71743\">Select the <strong>Personalization </strong>button. </li>\n</ol><p class=\"wysiwyg-text-align-center\"><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/35160309938075\" width=\"624\" height=\"177\"></p><ol start=\"3\">\n<li data-list-item-id=\"e77ab90212e9dd1728de66a118b10ab23\">Within the personalization model, select <strong>Objects </strong>from the <em>All types </em>dropdown. </li>\n<li data-list-item-id=\"e7d03165cf637039b246b467c5dcab342\">Select the object that contains the data you’d like to set a filter for. </li>\n<li data-list-item-id=\"ea08341194ac38bb5844ef882db6cd51c\">Select the object property you’d like to set a filter for. </li>\n<li data-list-item-id=\"e48c443f97b6d0a0232b0380df7879af2\">Select <strong>Create new filter</strong>. </li>\n</ol><p>On the <em>Create object filter</em> modal, set the following information: </p><ul>\n<li data-list-item-id=\"ed59b7484d201125e58798a25a533a54f\">\n<strong>Name</strong><br>Create a name for your object filter.</li>\n<li data-list-item-id=\"e737181f2d57aa760bbd604cf2d5b81c1\">\n<strong>Filter conditions </strong><br>Define the rules an object must meet to be included in the text block. </li>\n<li data-list-item-id=\"e0bc56b460c9bc520e5db05d689230c9a\">\n<strong>Behavior when multiple records meet the conditions</strong><br>Define the behavior for cases where multiple records meet the conditions.</li>\n</ul><p class=\"wysiwyg-text-align-center\"><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/35305347554715\" width=\"500\" height=\"426\"></p><p>Once your object filter is created, you can use it in show/hide logic and personalization tags to display specific object records based on the criteria you set. </p><h2 id=\"h_01JXDHNVXSBXTW94RXD9NAFNJ3\">Additional resources </h2><p><a href=\"https://help.klaviyo.com/hc/en-us/articles/35105337172123\">Getting started with objects</a></p><p><a href=\"https://help.klaviyo.com/hc/en-us/articles/4408802648731\">Message personalization reference</a></p><p><a href=\"https://help.klaviyo.com/hc/en-us/articles/27843522951707\">How to use the preview panel for message personalization</a></p>",
+    "user_segment_ids": []
+  },
+  "normalized": {
+    "id": "35146367972763",
+    "title": "How to use custom objects in templates",
+    "source_url": "https://help.klaviyo.com/hc/en-us/articles/35146367972763-How-to-use-custom-objects-in-templates",
+    "section_id": 49375857053851,
+    "section": "Use objects in Klaviyo",
+    "category_id": 4414879524891,
+    "category": "Content",
+    "category_slug": "content",
+    "klaviyo_updated": "2026-04-21T13:54:40Z",
+    "created_at": "2025-03-20T14:48:39Z",
+    "draft": false,
+    "promoted": false,
+    "position": 0,
+    "label_names": []
+  },
+  "files": {
+    "body_html": "_source/articles/35146367972763.body.html",
+    "rendered_html": "_source/rendered/35146367972763.html"
+  },
+  "assets": {
+    "api_body": {
+      "images": [
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/35160309938075",
+          "alt": "",
+          "width": "624",
+          "height": "177"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/35160309944475",
+          "alt": "",
+          "width": "241",
+          "height": "387"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/37963491682331",
+          "alt": "",
+          "width": "585",
+          "height": "71"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/37963491688475",
+          "alt": "",
+          "width": "441",
+          "height": "45"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/37963491690267",
+          "alt": "",
+          "width": "460",
+          "height": "325"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/35305347554715",
+          "alt": "",
+          "width": "500",
+          "height": "426"
+        }
+      ],
+      "links": [
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/35105337172123",
+          "text": "custom objects"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/35105337172123",
+          "text": "create an object"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4407911841435",
+          "text": "how to use Klaviyo's template editor"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/35146367972763-How-to-use-custom-objects-in-templates#h_01JPTH5R8840K0Q3XWH2CFYWRY",
+          "text": "object filter"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/glossary_of_variable_filters",
+          "text": "modifying values with Django filters."
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/18986347580827",
+          "text": "how to use personalization tags in Klaviyo"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/7655926841499",
+          "text": "advanced conditional logic"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/35105337172123",
+          "text": "Getting started with objects"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4408802648731",
+          "text": "Message personalization reference"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/27843522951707",
+          "text": "How to use the preview panel for message personalization"
+        }
+      ],
+      "headings": [
+        {
+          "level": 2,
+          "id": "h_01JPTH5R88S33HCKM283J5XBX4",
+          "text": "You will learn"
+        },
+        {
+          "level": 2,
+          "id": "h_01JPTH5R88ZG3QXWK7AT8F34QM",
+          "text": "Accessing object data through the personalization menu"
+        },
+        {
+          "level": 2,
+          "id": "h_01JPTH5R889GMM7XPNS3FSB4SE",
+          "text": "Accessing object data with personalization tags"
+        },
+        {
+          "level": 3,
+          "id": "h_01JY7ERDFJDZWR1VM4KZJZ5ET7",
+          "text": "Object personalization tag reference"
+        },
+        {
+          "level": 2,
+          "id": "01JY7EPHSMAS2C0SP2T9CC0V0V",
+          "text": "Object data in subject lines"
+        },
+        {
+          "level": 2,
+          "id": "h_01JPTH5R88GVH1XY8Y4MVYVJ3B",
+          "text": "Object data in show/hide logic"
+        },
+        {
+          "level": 2,
+          "id": "h_01JPTH5R8840K0Q3XWH2CFYWRY",
+          "text": "Object filters"
+        },
+        {
+          "level": 3,
+          "id": "h_01JPTM3Z6RZ1EZW12GDFZH9WXC",
+          "text": "What is an object filter?"
+        },
+        {
+          "level": 3,
+          "id": "h_01JPTH5R88V7ZKMSMK5DCNWVZG",
+          "text": "Create a new object filter"
+        },
+        {
+          "level": 2,
+          "id": "h_01JXDHNVXSBXTW94RXD9NAFNJ3",
+          "text": "Additional resources"
+        }
+      ]
+    },
+    "rendered_page": {
+      "images": [
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/7ff492c2b417b7ecfe572f839a8a81398693c1f7-1920x1080.webp",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/e47231298041dbf92ae59635114d3a708b13480a-1600x454.jpg?w=624",
+          "alt": "",
+          "width": "624",
+          "height": "177"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/5c676687beaeeda39d7cc7c99ef82a33f8c2dc8c-550x884.png?w=241",
+          "alt": "",
+          "width": "241",
+          "height": "387"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/c3aa856db8d6b3ad6c963dd7dfed1ad85c8a6f49-1184x144.png?w=585",
+          "alt": "",
+          "width": "585",
+          "height": "71"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/8689b7c75c09a03adc992c9840f820a4dedfbb06-1032x106.png?w=441",
+          "alt": "",
+          "width": "441",
+          "height": "45"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/e4afc5ee5b25cd0560e97afba1aedeecdb836bfc-950x672.png?w=460",
+          "alt": "",
+          "width": "460",
+          "height": "325"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/7d5bbdab8163c4d029f8c9bfc6eba9c660e0855c-1288x1096.png?w=500",
+          "alt": "",
+          "width": "500",
+          "height": "426"
+        }
+      ],
+      "links": [
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/35146367972763-How-to-use-custom-objects-in-templates#site-content",
+          "text": "Skip to main content"
+        },
+        {
+          "href": "https://www.klaviyo.com",
+          "text": "Home"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center"
+        },
+        {
+          "href": "https://www.klaviyo.com/enterprise",
+          "text": "Enterprise"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Partners"
+        },
+        {
+          "href": "https://www.klaviyo.com/careers",
+          "text": "Careers"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": "Log in"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": ""
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center Find step-by-step instructions and troubleshooting solutions in our knowledge base."
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000032731",
+          "text": "Integrations"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000312411",
+          "text": "Flows"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867867",
+          "text": "Audience"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867667",
+          "text": "Campaigns"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/360000190711",
+          "text": "Sign-up forms"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000873988",
+          "text": "Deliverability & compliance"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/29173800271259",
+          "text": "SMS"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/16638219724187",
+          "text": "Reviews"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/18073014919195",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/34141283979931",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/37659126754075",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/33948021740315",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/39746685522331",
+          "text": "WhatsApp"
+        },
+        {
+          "href": "https://academy.klaviyo.com",
+          "text": "Klaviyo Academy Expert training and education to help you succeed with Klaviyo, and beyond."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Quick+guide&resource=academy_courses",
+          "text": "Quick guides Learn marketing strategies and concepts in 15 minutes or less."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Course&resource=academy_courses",
+          "text": "Courses Master key marketing topics through structured lessons and exams."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/best-practices",
+          "text": "Best practices Discover top product and marketing strategies for your business."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/learning-paths",
+          "text": "Learning paths Complete curated learning journeys tailored to your marketing goals."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses",
+          "text": "Explore all resources"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Live+training&resource=academy_courses",
+          "text": "Live trainings Build confidence through hands-on interactive workshops and thought-provoking strategy sessions."
+        },
+        {
+          "href": "https://www.bigmarker.com/klaviyo-customer-education/Office-hours-Getting-started-with-Klaviyo",
+          "text": "Live office hours Join a strategic discussion where you can ask questions and get answers in real-time."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/private-live-training",
+          "text": "1:1 Live training Book a private training session with an expert to jumpstart your platform knowledge and confidence."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/credentials",
+          "text": "Klaviyo credentials Dig deeper into select topics and showcase your expertise with a final exam to earn a certificate and digital badge."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/certificates/klaviyo-practitioner-certificate",
+          "text": "Klaviyo practitioner certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/deliverability-certificate",
+          "text": "Deliverability certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/developer-certificate",
+          "text": "Klaviyo developer certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses&select=Certificate",
+          "text": "See all certificates"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Klaviyo Community Join our thriving community network to connect with brands like yours—online and in person."
+        },
+        {
+          "href": "https://community.klaviyo.com/topic/new",
+          "text": "Ask a question Post a question and get thoughtful answers from Klaviyo powerusers."
+        },
+        {
+          "href": "https://community.klaviyo.com/p/roadmap",
+          "text": "Product roadmap"
+        },
+        {
+          "href": "https://community.klaviyo.com/search/activity/recent",
+          "text": "Recent threads"
+        },
+        {
+          "href": "https://community.klaviyo.com/p/champions",
+          "text": "Meet the Champions"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups",
+          "text": "Browse all groups Your people are waiting. New ideas and connections are a click away."
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/developer-group-64",
+          "text": "Developer group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/entrepreneur-user-group-118",
+          "text": "Entrepreneur group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/woo-user-group-87",
+          "text": "WooCommerce group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/new-york-meetup-chapter-82",
+          "text": "New York City"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/los-angeles-meetup-chapter-83",
+          "text": "Los Angeles"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/austin-meetup-chapter-85",
+          "text": "Austin"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/san-diego-meetup-chapter-86",
+          "text": "San Diego"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/amsterdam-meetup-chapter-84",
+          "text": "Amsterdam"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Klaviyo Developers Access API documentation and developer guides to help you build with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/get_started",
+          "text": "Get started Access key resources and a step-by-step checklist for how to start developing with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/build_your_integration",
+          "text": "Grow your app's reach Learn how to join our ecosystem and get your app listed on our marketplace."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/developer-tools",
+          "text": "Developer tools Generate sample data, monitor your API usage, and access our Postman collections."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/reference/api_overview",
+          "text": "API reference Browse our full catalog of API docs."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/changelog_",
+          "text": "Changelog"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/api_versioning_and_deprecation_policy",
+          "text": "Versioning & deprecation policy"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/rate_limits_and_error_handling",
+          "text": "Rate limits & error handling"
+        },
+        {
+          "href": "https://youtube.com/playlist?list=PLHkNfHgtxcUanrkMnKPdkRzuWU7MGv_xM&si=pkG-KH7IT_TUHOGC",
+          "text": "API tutorials on YouTube Subscribe to our Klaviyo API Tutorials playlist for easy access to step-by-step developer walkthroughs."
+        },
+        {
+          "href": "https://www.klaviyo.com/contact-us",
+          "text": "Contact us"
+        },
+        {
+          "href": "https://www.klaviyo.com/sign-up",
+          "text": "Sign up"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": "Search"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/35146367972763",
+          "text": "United States - EN"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/de-de/articles/35146367972763",
+          "text": "Deutschland - DE"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-es/articles/35146367972763",
+          "text": "España - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-mx/articles/35146367972763",
+          "text": "México - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/fr-fr/articles/35146367972763",
+          "text": "France - FR"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/it-it/articles/35146367972763",
+          "text": "Italia - IT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/ko-kr/articles/35146367972763",
+          "text": "한국 - KO"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/nl-nl/articles/35146367972763",
+          "text": "Nederland - NL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pl-pl/articles/35146367972763",
+          "text": "Polska - PL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pt-br/articles/35146367972763",
+          "text": "Brasil - PT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/sv-se/articles/35146367972763",
+          "text": "Sverige - SV"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/4414879524891",
+          "text": "Content"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/35105327347355",
+          "text": "Objects"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/49375857053851",
+          "text": "Use objects in Klaviyo"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/35146367972763-How-to-use-custom-objects-in-templates#h_01JPTH5R88S33HCKM283J5XBX4",
+          "text": "You will learn"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/35146367972763-How-to-use-custom-objects-in-templates#h_01JPTH5R88ZG3QXWK7AT8F34QM",
+          "text": "Accessing object data through the personalization menu"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/35146367972763-How-to-use-custom-objects-in-templates#h_01JPTH5R889GMM7XPNS3FSB4SE",
+          "text": "Accessing object data with personalization tags"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/35146367972763-How-to-use-custom-objects-in-templates#01JY7EPHSMAS2C0SP2T9CC0V0V",
+          "text": "Object data in subject lines"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/35146367972763-How-to-use-custom-objects-in-templates#h_01JPTH5R88GVH1XY8Y4MVYVJ3B",
+          "text": "Object data in show/hide logic"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/35146367972763-How-to-use-custom-objects-in-templates#h_01JPTH5R8840K0Q3XWH2CFYWRY",
+          "text": "Object filters"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/35146367972763-How-to-use-custom-objects-in-templates#additional-resources",
+          "text": "Additional resources"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/35105337172123",
+          "text": "custom objects"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/35105337172123",
+          "text": "create an object"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4407911841435",
+          "text": "how to use Klaviyo's template editor"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/35146367972763-How-to-use-custom-objects-in-templates#h_01JPTH5R8840K0Q3XWH2CFYWRY",
+          "text": "object filter"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/glossary_of_variable_filters",
+          "text": "modifying values with Django filters."
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/18986347580827",
+          "text": "how to use personalization tags in Klaviyo"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/7655926841499",
+          "text": "advanced conditional logic"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/35105337172123",
+          "text": "Getting started with custom objects"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4408802648731",
+          "text": "Message personalization reference"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/27843522951707",
+          "text": "How to use the preview panel for message personalization"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115001002272",
+          "text": "Learn how to contact support"
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": ""
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": "Visit Community"
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": ""
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": "Hire a partner"
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/about",
+          "text": "About Klaviyo"
+        },
+        {
+          "href": "https://www.klaviyo.com/newsroom",
+          "text": "Newsroom"
+        },
+        {
+          "href": "https://investors.klaviyo.com/overview/default.aspx",
+          "text": "Investor relations"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Agency and tech partners"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Developers"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/retail",
+          "text": "Retail and ecommerce"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/restaurants",
+          "text": "Restaurant marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/wellness",
+          "text": "Wellness"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform",
+          "text": "B2C CRM overview"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai",
+          "text": "Klaviyo AI (K:AI)"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/marketing-automation",
+          "text": "Klaviyo Marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-service",
+          "text": "Klaviyo Service"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/analytics",
+          "text": "Klaviyo Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-data-platform",
+          "text": "Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare",
+          "text": "Klaviyo vs. Klaviyo alternatives"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-mailchimp",
+          "text": "Klaviyo vs. Mailchimp"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-postscript",
+          "text": "Klaviyo vs. Postscript"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-attentive",
+          "text": "Klaviyo vs. Attentive"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-salesforce-marketing-cloud",
+          "text": "Klaviyo vs. Salesforce"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-listrak",
+          "text": "Klaviyo vs. Listrak"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/omnichannel",
+          "text": "Omnichannel marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/email-marketing",
+          "text": "Email marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing",
+          "text": "SMS marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing/rcs",
+          "text": "RCS for Business"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/mobile-app-marketing",
+          "text": "Mobile app marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/whatsapp",
+          "text": "WhatsApp marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/social",
+          "text": "Social marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources",
+          "text": "Marketing resources"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources/marketing-campaign-calendar",
+          "text": "Marketing campaign calendar"
+        },
+        {
+          "href": "https://www.klaviyo.com/glossary",
+          "text": "Marketing glossary"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/email-subject-line-generator",
+          "text": "Subject line generator"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/roi-calculator",
+          "text": "ROI calculator"
+        },
+        {
+          "href": "https://www.klaviyo.com/customers",
+          "text": "Case studies"
+        },
+        {
+          "href": "https://www.klaviyo.com/composer",
+          "text": "Composer Beta"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/marketing-agent",
+          "text": "Marketing Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/customer-agent",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/customer-experience-hub",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/helpdesk",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/marketing-analytics",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/advanced-cdp",
+          "text": "Advanced Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/web-forms",
+          "text": "Web forms"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/email-templates",
+          "text": "Email templates"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/portfolio",
+          "text": "Portfolio"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform-integrations",
+          "text": "Apps and Integrations"
+        },
+        {
+          "href": "https://www.klaviyo.com/features",
+          "text": "Features"
+        },
+        {
+          "href": "https://www.klaviyo.com/whats-new",
+          "text": "What's new"
+        },
+        {
+          "href": "https://www.klaviyo.com/events",
+          "text": "Events"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help Center"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us",
+          "text": "Academy"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Community"
+        },
+        {
+          "href": "https://www.facebook.com/Klaviyo/",
+          "text": "Facebook"
+        },
+        {
+          "href": "https://twitter.com/klaviyo/",
+          "text": "Twitter"
+        },
+        {
+          "href": "https://www.linkedin.com/company/klaviyo/",
+          "text": "LinkedIn"
+        },
+        {
+          "href": "https://www.instagram.com/klaviyo/",
+          "text": "Instagram"
+        },
+        {
+          "href": "https://www.klaviyo.com/sitemap",
+          "text": "Site Map"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal",
+          "text": "Terms and Privacy"
+        },
+        {
+          "href": "https://www.klaviyo.com/security",
+          "text": "Security"
+        },
+        {
+          "href": "https://www.klaviyo.com/trust",
+          "text": "Trust"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal/intellectual-property-notices",
+          "text": "Intellectual Property Notices"
+        }
+      ],
+      "headings": [
+        {
+          "level": 1,
+          "id": "",
+          "text": "How to use custom objects in templates"
+        },
+        {
+          "level": 2,
+          "id": "h_01JPTH5R88S33HCKM283J5XBX4",
+          "text": "You will learn"
+        },
+        {
+          "level": 2,
+          "id": "h_01JPTH5R88ZG3QXWK7AT8F34QM",
+          "text": "Accessing object data through the personalization menu"
+        },
+        {
+          "level": 2,
+          "id": "h_01JPTH5R889GMM7XPNS3FSB4SE",
+          "text": "Accessing object data with personalization tags"
+        },
+        {
+          "level": 3,
+          "id": "h_01JY7ERDFJDZWR1VM4KZJZ5ET7",
+          "text": "Object personalization tag reference"
+        },
+        {
+          "level": 2,
+          "id": "01JY7EPHSMAS2C0SP2T9CC0V0V",
+          "text": "Object data in subject lines"
+        },
+        {
+          "level": 2,
+          "id": "h_01JPTH5R88GVH1XY8Y4MVYVJ3B",
+          "text": "Object data in show/hide logic"
+        },
+        {
+          "level": 2,
+          "id": "h_01JPTH5R8840K0Q3XWH2CFYWRY",
+          "text": "Object filters"
+        },
+        {
+          "level": 3,
+          "id": "h_01JPTM3Z6RZ1EZW12GDFZH9WXC",
+          "text": "What is an object filter?"
+        },
+        {
+          "level": 3,
+          "id": "h_01JPTH5R88V7ZKMSMK5DCNWVZG",
+          "text": "Create a new object filter"
+        },
+        {
+          "level": 2,
+          "id": "additional-resources",
+          "text": "Additional resources"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "Explore more from Klaviyo"
+        }
+      ]
+    }
+  },
+  "rendered_page": {
+    "status": "fetched",
+    "error": ""
+  }
+}

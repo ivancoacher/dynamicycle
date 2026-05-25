@@ -1,0 +1,99 @@
+<h2 id="h_01HYKH8WDECM4TPBG839XFH0Z2">You will learn</h2>
+<p>Learn what data syncs from Salesforce Commerce Cloud to Klaviyo after you <a href="https://help.klaviyo.com/hc/en-us/articles/360033744951" target="_blank" rel="noopener">enable Klaviyo's Salesforce Commerce Cloud integration</a>, and how you can view it. </p>
+<h2 id="h_01HYKH8WDEZ2S6Z5W2A50PPY01">View your Salesforce Commerce Cloud metrics </h2>
+<p>In your Klaviyo account, click the <strong>Analytics</strong> dropdown and select <strong>Metrics</strong>. Here, you can view all of the metrics in your account, including those synced from Salesforce Commerce Cloud.</p>
+<p>If you enabled <em>Label Events as SFCC</em> when integrating, the following events will appear with an SFCC icon:</p>
+<ul>
+<li>Viewed Category</li>
+<li>Viewed Product</li>
+<li>Searched Site</li>
+<li>Added to Cart</li>
+<li>Started Checkout</li>
+<li>Placed Order</li>
+<li>Ordered Product</li>
+<li>Order Confirmation</li>
+</ul>
+<p>Otherwise, SFCC events will appear with a gear icon. The <em>Active on Site</em> metric will always appear with gear icon, whether you've enabled branding or not. </p>
+<h2 id="h_01HYKH8WDEQCV9BAMGK0ZPEFJF">Salesforce Commerce Cloud metrics </h2>
+<p>Below is a list of all the metrics synced from Salesforce Commerce Cloud and an explanation of the data included with each metric. You can also <a href="https://help.klaviyo.com/hc/en-us/articles/115005076747-View-Raw-Metric-or-Event-Data-in-Klaviyo" target="_blank" rel="noopener">view the raw data for each metric</a> within Klaviyo.</p>
+<h3 id="h_01HYKH8WDETJQKC1YF8Y747QGX">Active on Site</h3>
+<p>This metric is tracked when a cookied visitor is active on your site. </p>
+<h3 id="h_01HYKH8WDEMCKANRT7JAWV6507">Searched Site</h3>
+<p>This metric is tracked when a cookied visitor initiates a search. </p>
+<h3 id="h_01HYKH8WDEQ9KXGPQ89EJG1HBV">Viewed Product</h3>
+<p>This metric is tracked when a cookied visitor views a product page on your site. </p>
+<h3 id="h_01HYKH8WDECPV4B9PB33QW3SBS">Viewed Category</h3>
+<p>This metric is tracked when a cookied visitor views a category page on your site.</p>
+<h3 id="h_01HYKH8WDEVEGV185K3KQMX018">Add to Cart or Added to Cart</h3>
+<p>This metric is tracked when a cookied visitor adds or modifies an item in their cart. If you are using our cartridge version 23.7.0 or later, this metric will be called <em>Added to Cart</em>. If you are using a cartridge prior to 23.7.0, this metric will be called<em> Add to Cart</em>. If you upgraded your cartridge configured the corresponding setting, it will still be called <em>Add to Cart </em>for continuity purposes. Note that using the name <em>Added to Cart </em>will allow for the use of future pre-built Klaviyo flows relying on this metric. </p>
+<p>This metric tracks each time someone adds something to their cart, and logs each item in the cart at that time (the first <em>Added to Cart</em> event tracks the first item, the second event tracks the first and second item, etc.). </p>
+<h3 id="h_01HYKH8WDED5SBADQ9RTXRVP71">Started Checkout</h3>
+<p>This event is tracked when someone enters their email at checkout, then tabs or clicks away from the email field. This event includes a cartRebuildingLink property that can be used to link customers back to their carts. </p>
+<h3 id="h_01HYKH8WDEGZ276TG9NEV9W2CQ">Order Confirmation</h3>
+<p>This metric is similar to <em>Placed Order</em> but syncs in real time, as opposed to hourly, and is segmentable using the <em>itemCategories</em> property. </p>
+<p>Note that while Klaviyo may sync many details about a given metric, not all synced properties are available for segmentation. For data management purposes, only the primary details of a metric are synced as "top-level" properties, and only these top-level properties are segmentable. Commerce Cloud's <em>Placed Order</em> and <em>Ordered Product </em>metrics do not sync with a top-level <em>itemCategories</em> property. If you wish to segment using the <em>itemCategories</em> property, you will need to use the <em>Order Confirmation</em> metric to do so. This is ideal for real-time order confirmation emails.</p>
+<h3 id="h_01HYKH8WDEX439RR91G1B1TANT">Placed Order</h3>
+<p>This metric is tracked when a customer completes the checkout process and orders from you in your Salesforce Commerce Cloud store. The event will list all of the product information about the items someone purchased, including product names and variant information. You can then use that information in purchase follow-up emails. You can filter and target <em>Placed Order</em> events based on the following criteria:</p>
+<ul>
+<li>
+<strong>$value</strong><strong><br></strong>The total order value, including shipping and any applied discounts.</li>
+<li>
+<strong>ItemNames</strong><br>The names of the ordered products (e.g., t-shirt or pants).</li>
+<li>
+<strong>ItemCount</strong><strong><br></strong>The number of items in the order (e.g., 2).</li>
+<li>
+<strong>OrderNumber</strong><strong><br></strong>The order number associated with your store.</li>
+<li>
+<strong>SiteID</strong><br>The ID of the site.</li>
+<li>
+<strong>Status</strong><br>The status of the order.</li>
+<li>
+<strong>external_catalog_id</strong><br>Set to your SiteID; used in catalog organization in Klaviyo.</li>
+</ul>
+<h3 id="h_01HYKH8WDE9SYMY6HY3AYK7W8P">Ordered Product</h3>
+<p>This metric is also tracked when a customer places an order, but a separate event is tracked for each item someone purchases. For example, if someone buys a t-shirt and a pair of pants, one <em>Placed Order</em> event will be tracked for the purchase as a whole along with 2 <em>Ordered Product</em> events: 1 for the t-shirt and 1 for the pants.</p>
+<p>The metrics Klaviyo tracks include detailed information about each product someone purchases. This is useful when creating behavioral segments based on product variant options and other detailed information that's not available in the <em>Placed Order</em> event. You can filter and target <em>Ordered Product </em>events based on the following criteria:</p>
+<ul>
+<li>
+<strong>$value</strong><br>The total value of the item purchased; no shipping costs or discounts included.</li>
+<li>
+<strong>Name</strong><br>The name or title of the ordered product (e.g., t-shirt).</li>
+<li>
+<strong>Price</strong><br>The price of the item.</li>
+<li>
+<strong>SKU</strong><br>The SKU of the product variant.</li>
+<li>
+<strong>ProductID</strong><br>The ID associated with the product in your store. </li>
+<li>
+<strong>Quantity</strong><br>The total quantity ordered of the product.</li>
+<li>
+<strong>SiteID</strong><br>The ID of the site.</li>
+<li>
+<strong>CurrencyCode</strong><br>The currency code used to purchase the product (e.g., USD).</li>
+<li>
+<strong>external_catalog_id</strong><br>Set to your SiteID; used in catalog organization in Klaviyo.</li>
+</ul>
+<p><em>Placed Order </em>and <em>Ordered Product </em>events are synced to Klaviyo seconds apart. For this reason, it is important to be consistent with the metric you use to trigger and filter your flows and segments. For example, if a flow is triggered by the <em>Placed Order</em> metric and you add a filter to exclude anyone who <em>Ordered Product</em> since starting the flow, all recipients will be skipped because the two events are separate, but sync seconds apart. As a best practice, use <em>Placed Order </em>to trigger and filter flows and segments.</p>
+<h2 id="h_01HYKH8WDE3KEZFSJJANQPM224">Salesforce Commerce Cloud metric sources</h2>
+<p>Different Salesforce Commerce Cloud metrics flow into Klaviyo in different ways: some through the Klaviyo cartridge, and some through the OCAPI integration. When you integrated with Salesforce Commerce Cloud, you should have both installed the Klaviyo cartridge in SFCC and enabled the SFCC OCAPI integration in Klaviyo. For more information on these steps, see our article on <a href="https://help.klaviyo.com/hc/en-us/articles/360033744951" target="_blank" rel="noopener">integrating with Salesforce Commerce Cloud</a>.</p>
+<p>The metrics that flow in through the cartridge are the following:</p>
+<ul>
+<li>Order Confirmation</li>
+<li>Searched Site</li>
+<li>Viewed Category</li>
+<li>Viewed Product</li>
+<li>Added to Cart</li>
+<li>Started Checkout</li>
+</ul>
+<p>The metrics that flow in through OCAPI are the following:</p>
+<ul>
+<li>Placed Order</li>
+<li>Ordered Product</li>
+</ul>
+<p>Historical data syncs every hour from OCAPI. Your catalog should sync every 8 hours, and all other metrics will sync in real time. </p>
+<h2 id="h_01HYKH8WDE94QJ3FS0HZ6YQ4NY">Additional resources</h2>
+<ul>
+<li><a href="https://help.klaviyo.com/hc/en-us/articles/360033744951" target="_blank" rel="noopener">Getting started with Salesforce Commerce Cloud</a></li>
+<li><a href="https://help.klaviyo.com/hc/en-us/articles/16708128591259" target="_blank" rel="noopener">How to upgrade your Salesforce Commerce Cloud cartridge</a></li>
+<li><a href="https://developers.klaviyo.com/en" target="_blank" rel="noopener">Klaviyo Developer Portal</a></li>
+</ul>

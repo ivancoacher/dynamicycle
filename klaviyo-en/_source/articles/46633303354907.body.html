@@ -1,0 +1,179 @@
+<p>RCS, SMS, and MMS are all mobile messaging channels, but they differ significantly in capabilities, user experience, tracking, and performance measurement.</p>
+<p>This article explains how each channel works, when to use them, and what to expect when comparing performance.</p>
+<h2 id="h_01KHC09ZTZBT9E2DD9078H0FCM"><strong>Overview</strong></h2>
+<table>
+<tbody>
+<tr>
+<td></td>
+<td style="text-align: center"><strong>SMS</strong></td>
+<td style="text-align: center"><strong>MMS</strong></td>
+<td style="text-align: center"><strong>Basic RCS</strong></td>
+<td><strong>Single RCS</strong></td>
+</tr>
+<tr>
+<td><strong>Delivery Receipts</strong></td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td><strong>Read Receipts</strong></td>
+<td>No</td>
+<td>No</td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td><strong>Click Tracking</strong></td>
+<td>Yes (via shortened links)</td>
+<td>Yes (via shortened links)</td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td><strong>Encryption</strong></td>
+<td>No</td>
+<td>No</td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td><strong>Character Limit</strong></td>
+<td>160 (reduced to 70 with non-GSM characters such as emojis)</td>
+<td>1,600 (reduced to 1,000 with non-GSM characters)</td>
+<td>160</td>
+<td>3,072 (text-only) or 2,000 (with media)</td>
+</tr>
+<tr>
+<td><strong>Media</strong></td>
+<td>No</td>
+<td>Yes, but with size restrictions (one media file per message up to 600 KB)</td>
+<td>No</td>
+<td>High-quality media (one media file per message up to 100 MB)</td>
+</tr>
+<tr>
+<td><strong>Interactive Elements</strong></td>
+<td>No</td>
+<td>No</td>
+<td>Partial (quick actions in the US only)</td>
+<td>Yes (cards, buttons, quick actions etc.)</td>
+</tr>
+<tr>
+<td><strong>Location Sharing</strong></td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+<td>
+<p>Yes</p>
+<p><em>not yet supported in Klaviyo</em></p>
+</td>
+</tr>
+<tr>
+<td><strong>Payment &amp; App Integrations</strong></td>
+<td>No</td>
+<td>No</td>
+<td>Yes</td>
+<td>
+<p>Yes</p>
+<p><em>not yet supported in Klaviyo</em></p>
+</td>
+</tr>
+<tr>
+<td><strong>Device Reach</strong></td>
+<td>All mobile phones with a network connection</td>
+<td>All mobile phones with a network connection</td>
+<td>RCS-capable devices only (Android 5.0+ or iOS 18+ on supported networks)</td>
+<td>RCS-capable devices only (Android 5.0+ or iOS 18+ on supported networks)</td>
+</tr>
+<tr>
+<td><strong>Verified Senders</strong></td>
+<td>No</td>
+<td>No</td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td><strong>Branded Senders</strong></td>
+<td>Partial (for alphanumeric senders only)</td>
+<td>No</td>
+<td>Yes (company logo &amp; info page)</td>
+<td>Yes (company logo &amp; info page)</td>
+</tr>
+<tr>
+<td><strong>Message History</strong></td>
+<td>No</td>
+<td>No</td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td><strong>Throughput</strong></td>
+<td>Uses SS7 signalling via SMSCs, limited by payload and latency</td>
+<td>Uses SS7 signalling + WAP/HTTP for multimedia, typically slower than SMS</td>
+<td>Uses modern IP networks (LTE, 5G, Wi-Fi) for fast, efficient delivery</td>
+<td>Uses modern IP networks (LTE, 5G, Wi-Fi) for fast, efficient delivery</td>
+</tr>
+</tbody>
+</table>
+<h2 id="h_01KHC0NJ9T718AFCZSRWA5ERF1"><strong>Performance Metrics</strong></h2>
+<p>When comparing performance across channels, it is important to understand structural differences in how performance metrics are measured.</p>
+<h4 id="h_01KHC18B4CTW9AE5H800H1S69R"><strong>Delivery rates</strong></h4>
+<p>When comparing delivery performance across channels, it is important to understand how delivery is reported differently for SMS and RCS.</p>
+<p><strong>SMS delivery reporting</strong></p>
+<p>With SMS, delivery reporting is not always deterministic. Carriers do not consistently return a delivery receipt or a failure. For every message send via SMS, we receive either:</p>
+<ul>
+<li>A confirmed delivery receipt</li>
+<li>A failure event, or</li>
+<li>No explicit event is returned<br>
+<p>In a small percentage of cases (less than 3%) where no explicit event is received after 12 hours, the message is assumed to be delivered. </p>
+<p><strong>RCS delivery reporting</strong></p>
+<p>With RCS, delivery reporting is deterministic. For every message sent via RCS, we receive either:</p>
+</li>
+<li>A confirmed delivery receipt, or</li>
+<li>A failure event<br>
+<p>There are no assumed deliveries. Every message has a definitive status. </p>
+<p><strong>RCS failure categories</strong></p>
+</li>
+<li>
+<strong>Device unreachable</strong> - Delivery was attempted for up to 24 hours without success. After this window, the message is marked as failed and categorized as '<strong>Device unreachable</strong>'.</li>
+<li>
+<strong>Device not capable -</strong> The recipient’s handset cannot receive RCS. This may be due to RCS being disabled, an unsupported network, or an unsupported operating system. The message is marked as failed and categorised as '<strong>Device not RCS capable</strong>'.</li>
+</ul>
+<p>If a failure is due to the device being incapable of receiving RCS, Klaviyo updates the phone number's metadata so that future text messages default to SMS for that recipient.</p>
+<h4 id="h_01KHC0QMM25NVFHBR6GMCQJ63B"><strong>Click rates</strong></h4>
+<p>Note: if you have chosen not to exclude bot clicks from your reporting, RCS click rates may appear lower than SMS click rates. RCS experiences significantly fewer bot clicks due to how links and clicks are handled within the RCS ecosystem. As a result, RCS click rates are generally more reflective of genuine human engagement.</p>
+<p><strong>Removing bot clicks in reporting</strong></p>
+<p>Klaviyo recommends excluding bot clicks from both your account’s reporting data and attribution calculations. This way, your attribution windows for capturing actions align with your reporting data. Learn how to <a href="https://help.klaviyo.com/hc/en-us/articles/11118357030555#h_01J5X2K26S69K6ZGMY3NDBX2J6">remove bot clicks</a>.</p>
+<p><strong>Note</strong>. Even with bot filtering enabled, not all bot traffic can be removed from SMS reporting. As a result SMS click rates may appear higher than RCS.</p>
+<p><strong>What to compare instead</strong></p>
+<p>Rather than comparing raw click rates, we recommend focusing on:</p>
+<ul>
+<li>Conversion rate (placed order rate)</li>
+<li>KAV</li>
+<li>Revenue per recipient</li>
+</ul>
+<p>These metrics better reflect real customer behaviour and true business impact.</p>
+<h4 id="h_01KHCH2MTWEQAMEEZ1BNHE7GRF"><strong>Opt-outs</strong></h4>
+<p>Opt outs are separate from delivery failures and are handled differently across SMS and RCS.</p>
+<p><strong>SMS opt outs</strong></p>
+<p>An SMS opt out occurs when a recipient:</p>
+<ul>
+<li>Replies with a recognised keyword such as STOP (two way SIDs such as TFNs, LCs, or SCs), or</li>
+<li>Clicks an unsubscribe link (one way SIDs such as Alphas)<br>
+<p>In both cases:</p>
+</li>
+<li>The recipient’s text messaging marketing consent is removed</li>
+<li>Future RCS and SMS messages cannot be sent unless the recipient opts in again<br>
+<p><strong>Important</strong>: If a recipient blocks a phone number directly on their device, this does not generate an event back to Klaviyo. Messages may continue to be technically delivered but will not be seen by the recipient.</p>
+<p><strong>RCS opt outs</strong></p>
+<p>With RCS, recipients can opt out in two primary ways:</p>
+</li>
+<li>Replying with STOP (or equivalent), or</li>
+<li>Clicking “Block this sender” within the RCS agent information screen<br>
+<p>In both cases:</p>
+</li>
+<li>The recipient’s text messaging marketing consent is removed</li>
+<li>Future RCS and SMS messages cannot be sent unless the recipient opts in again</li>
+</ul>
+<p><strong>Important</strong>: If a recipient has iOS Unknown Senders filtering enabled and has not marked your RCS agent as known, messages may be routed to the Unknown Senders inbox and may not be actively seen. For more information, see <a href="https://klaviyo.zendesk.com/hc/en-us/articles/42318061895579">Understanding Unknown Senders filtering on iOS and how it affects RCS.</a></p>

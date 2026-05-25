@@ -1,0 +1,39 @@
+<h2 id="h_01HNZKR94HBXCADGMDQAHBHEGC">Overview</h2>
+<p>Magento 2 version 2.2.0 requires an older version of the Klaviyo extension that does not allow for OAuth setup within the extension settings. For customers currently using v2.2.0 (versions older than 2.2.0 are not supported), we recommend you add OAuth to your integration manually. We also recommend updating to the latest version of Magento 2 to take advantage of all new and upcoming Klaviyo integration features. This guide covers how to set up OAuth after you have already installed the extension and configured webhooks. If you need to install the Klaviyo extension for Magento 2, please check out <a href="https://klaviyo.zendesk.com/hc/en-us/articles/115005254348">our instructions for installation</a>.</p>
+<h2 id="h_01HNZKR94HYBGZDMBGGDP0DRSN">Set up OAuth</h2>
+<p>First, make sure you are logged in to your Magento 2 account. Here, we’ll enable OAuth to securely connect your Klaviyo account to the Magento 2 extension you've just installed.</p>
+<p>Navigate to <strong>Systems </strong>from the left hand navigation pane and select<strong> Integrations</strong>. Click <strong>Add New Integration</strong> in the top right corner to manually set up your integration with OAuth authentication. Give your new integration a name in the <em>Name</em> field and enter your secure password in the <em>Your Password</em> field.</p>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/28723544125339" alt="manualoauth.png"></p>
+<p>Fill in the <em>Callback URL </em>field with the following URL and update the &lt;<em>Company ID&gt; </em>to your Klaviyo public API key. Be sure to delete any extra spaces in the URL that may be automatically added.</p>
+<pre><code class="language-text">https://www.klaviyo.com/integration-oauth-one/magento-two/auth/confirm?c=&lt;Company ID&gt;</code></pre>
+<p>Then, update the <em>Identity Link URL</em> using the following URL:</p>
+<pre><code class="language-text">https://www.klaviyo.com/integration-oauth-one/magento-two/auth/handle</code></pre>
+<p>Select the <strong>API</strong> tab on the left and navigate to <strong>Resource Access </strong>drop down menu. We recommend that you select <strong>All</strong> to grant all API access rules needed by Klaviyo. </p>
+<p>If you wish to allow only specific selections, ensure the following are checked.</p>
+<ul>
+<li>"Catalog &gt; Inventory &gt; Categories"</li>
+<li>"Carts &gt; Manage Carts"</li>
+<li>"Customers &gt; Customer Groups"</li>
+<li>"Customers &gt; All Customers"</li>
+<li>"Sales &gt; Operations &gt; Orders &gt; Actions &gt; View" </li>
+<li>"Stores &gt; Attributes &gt; Product"</li>
+<li>"Catalog &gt; Inventory &gt; Products"</li>
+<li>"Sales &gt; Operations &gt; Shipments"</li>
+<li>"Stores &gt; Settings &gt; All Stores"</li>
+<li>"Marketing &gt; Communications &gt; Newsletter Subscribers"</li>
+</ul>
+<p>When you have finished making your selections, click <strong>Save.</strong></p>
+<p>Then locate the integration with the name you used above and click <strong>Activate</strong>.</p>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/28723522207899" alt="activateoauth.png"></p>
+<p>Activating the integration will open up a window requesting you to approve access. Click <strong>Allow</strong> to be redirected to Klaviyo to complete the integration setup.</p>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/28723522209691" alt="oauthperms.png"></p>
+<p>Sign in if you have not already done so, or confirm your account name and ID are correct and click <strong>Integrate Magento 2. </strong>This will add the Magento 2 integration to your Klaviyo account associated with the API key you used for setup. If you are logged into multiple Klaviyo accounts and the correct account is not displaying, log out of any other sessions.</p>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/28723544135451" alt="m2authorize.png" width="572" height="432"></p>
+<p>If the window closes automatically, the connection was successful. </p>
+<p>If you receive the following error instead, ensure that the API keys used in the first step correspond to the account you are currently logged in to.</p>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/28723522214811" alt="apierror.png" width="611" height="200"></p>
+<p>When establishing the connection between Magento and Klaviyo, if you receive a list of errors instead, you can click each error to learn more about the cause.<br>
+</p>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/28723522217627" alt="oauthgenerror.png" width="637" height="373"></p>
+<h2 id="h_01HNZKR94HZ39S8G7MKW0S06G8">Next steps</h2>
+<p>Now that you have enabled OAuth, proceed to <a href="https://help.klaviyo.com/hc/en-us/articles/115005254348#enable-the-magento-2-integration-in-klaviyo8">enabling the Magento 2 integration in Klaviyo</a>.</p>

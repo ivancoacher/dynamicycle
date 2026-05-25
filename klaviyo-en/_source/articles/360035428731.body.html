@@ -1,0 +1,305 @@
+<div class="bs-callout bs-callout-requirements">
+<p>To import consent, you must:</p>
+<ul>
+<li data-list-item-id="e2b5ca4db112e902cdd31e76db20a89d1">Be an Owner or Admin</li>
+<li data-list-item-id="ef3dd084114f35cb48781e19f4c4680b1">Have set up SMS</li>
+</ul>
+</div><p>Find out how to add and remove SMS transactional or marketing consent in Klaviyo. Importing your SMS subscribers is an essential part of migrating providers or simply consolidating your data. </p><h2 id="h_01JNPF254DVXJ1R78TKEC96EXG">Before you begin</h2><h3 id="h_01JNPF254D3MX04RA7AF19TP77">General requirements to import SMS consent </h3><p>To import a list of phone number contacts with consent, you should:</p><ol>
+<li data-list-item-id="e226d94cc30a11acf832d031bf19a4dcd">
+<a href="https://help.klaviyo.com/hc/en-us/articles/4404274419355">Set up SMS</a> and have an SMS sending number for each country that you are importing.  <ul><li data-list-item-id="e918ca51dca7b3a27f8944814933c8dc7">Note: you can only import consent for countries <a href="https://help.klaviyo.com/hc/en-us/articles/4402914866843">where Klaviyo SMS is available</a>.</li></ul>
+</li>
+<li data-list-item-id="e7fe95e0b2e01856b1b1f1ef3f66e6c62">Turn off any welcome flows (those triggered by the <em>Consented to receive SMS</em> metric or the list you’re importing to).<ul><li data-list-item-id="e8c4fd8293830c47100110f07e2cb46f4">Also, wait at least 2 hours after importing before you turn your flow live again.</li></ul>
+</li>
+</ol><div class="accordion accordion--default">
+<div class="accordion__item">
+<div class="accordion__item-title"><strong>Why do I need to set up SMS first and have a sending number? </strong></div>
+<div class="accordion__item-content">
+<p>Klaviyo cannot add SMS consent if: </p>
+<ul>
+<li data-list-item-id="e5680314713f9c2c300cf2f7da2824166">SMS isn’t set up in Klaviyo</li>
+<li data-list-item-id="ece131a179ba318708d030df06e9e6e6c">You’re trying to add consent for a country where SMS isn’t available</li>
+<li data-list-item-id="e4ac7a70203cc09f61a530bda676996c6">Don’t have an SMS sending number for a country. </li>
+</ul>
+<p>The profiles are imported with phone numbers, but they wouldn’t have consent for SMS.  </p>
+<p>To check your SMS setup and sending numbers, navigate to<strong> Settings &gt; SMS</strong>.</p>
+</div>
+</div>
+<div class="accordion__item">
+<div class="accordion__item-title"><strong>Why should I turn off welcome flows?</strong></div>
+<div class="accordion__item-content">
+<p>If you don’t, every new contact from the CSV you uploaded will be added to any welcome flow. Thus, you should set your welcome flows to manual mode before importing. Welcome flows include those triggered by either: </p>
+<ul>
+<li data-list-item-id="e3d418fc86d4cf7bcb1440a4c8eff4b1e">The <em>Consented to receive SMS</em> metric (which is the best option for any SMS welcome series)</li>
+<li data-list-item-id="e200724542690e094b1070d49d713c243">The list you’re uploading to.</li>
+</ul>
+<p>You should also wait at least 2 hours after the import finishes to turn these flows live again. </p>
+</div>
+</div>
+</div><h2 id="h_01JSMH4K2KVKNTZDERRVGGBPRS">Obtain your list of contacts</h2><p>Depending on your SMS provider, you may need to build in time to get a list of your SMS subscribers.</p><p>At minimum, you need: </p><ul>
+<li data-list-item-id="e050e773375711e4a94bbba5f2ab1e3a7">Phone number</li>
+<li data-list-item-id="e0911de8c4f35d08a8c3359c1fd7faabf">Opt-in status (i.e., whether they are currently subscribed or not)</li>
+</ul><p>Additionally, you may want to include aspects like name, email, consent timestamp, etc. </p><div class="accordion accordion--default">
+<div class="accordion__item">
+<h3 class="accordion__item-title" id="h_01JSMJE0T5YBB86C4TNBZ9H1XF">Attentive</h3>
+<div class="accordion__item-content">
+<p>Attentive requires that you reach out to your account representative to receive an export of your SMS subscribers as a CSV file. It is not currently possible to export the file yourself. When migrating to Klaviyo, plan for turnaround time for Attentive to complete this request.</p>
+<p>If the CSV file you receive contains contacts who have opted out of SMS messaging, as indicated in the <em>opt_out</em> column of your export:</p>
+<ol>
+<li data-list-item-id="e13a0d0b976c63f0ae3fde38ea9ef96ea">Add a column labeled "SMS Marketing Consent."</li>
+<li data-list-item-id="ed4fef76210ec58439ad67e1c728eff57">Mark any contacts that have opted out as "Unsubscribed" in this column. </li>
+</ol>
+</div>
+</div>
+<div class="accordion__item">
+<h3 class="accordion__item-title" id="h_01JSMJE7B0YAS8A5RQGX06P702">Emotive</h3>
+<div class="accordion__item-content"><p>Emotive does not allow you to export a list of all SMS subscribers directly from your account. You must contact them to get this list.</p></div>
+</div>
+<div class="accordion__item">
+<h3 class="accordion__item-title" id="h_01JSMJEBXGYESVQYRGB2A5EVRE">Postscript</h3>
+<div class="accordion__item-content">
+<p>Postscript allows you to export a list of all SMS subscribers directly from your account into a CSV file. This list simplifies the import process into Klaviyo.</p>
+<p>For Postscript specifically, consider exporting information like: </p>
+<ul>
+<li data-list-item-id="e672a384822643bcbd4c8fb44dd9d3f8e">subscriber_created_at_utc (this is the SMS marketing consent timestamp)</li>
+<li data-list-item-id="e98f19f96fab82896d46f0e704018ea94">Customer_id</li>
+<li data-list-item-id="e75514a077bff575adcbf9bbc59eef513">Last_keyword_subscribed_to</li>
+<li data-list-item-id="e1059aafde921a6cfbb86bae8f0dcf9c7">Automation_and_campaign_texts_sent_count</li>
+</ul>
+<p>To learn how to export this segment in Postscript, consult <a href="https://help.postscript.io/hc/en-us/articles/1260804630310-">their help doc on exporting subscriber data</a>. You will need to export each segment separately.</p>
+</div>
+</div>
+<div class="accordion__item">
+<h3 class="accordion__item-title" id="h_01JSMJEH40SHFRMYK2N4840K6T">Retention Rocket</h3>
+<div class="accordion__item-content"><p>Retention Rocket requires that you contact your account representative to receive an export of your SMS subscribers as a CSV file. It is not currently possible to export this file yourself. When migrating to Klaviyo, plan for turnaround time for your Retention Rocket representative to complete this request.</p></div>
+</div>
+<div class="accordion__item">
+<h3 class="accordion__item-title" id="h_01JSMJEN533XHSVP7ADTXBSKAG">Yotpo / SMSBump</h3>
+<div class="accordion__item-content"><p>Use Klaviyo's <a href="https://help.klaviyo.com/hc/en-us/articles/39598076123547" target="_blank" rel="noopener noreferrer">Yotpo Email &amp; SMS Migration integration</a> to easily bring both SMS and email subscribers into Klaviyo.</p></div>
+</div>
+</div><h2 id="h_01JNPF254DMC63DXHXG38V15WT">Prepare your CSV for importing</h2><p>For an example CSV, see this <a href="https://docs.google.com/spreadsheets/d/1cqJb4hH4Kbv0xw_yf14vKS4CyKlzDNY7toG_nqUrhPI/edit?gid=0#gid=0">template</a>. </p><div class="accordion accordion--default">
+<div class="accordion__item">
+<div class="accordion__item-title">
+<h3 id="h_01JNPF254DFXQC04S05WQKDJSR">Include a phone number as the first or second column</h3>
+</div>
+<div class="accordion__item-content">
+<p>Klaviyo uses either email or phone number as a profile’s unique identifier. </p>
+<p>When importing:</p>
+<ul>
+<li>Use email as the first column if you have an email address for each person</li>
+<li>Otherwise, use phone number as the first column</li>
+</ul>
+</div>
+</div>
+<div class="accordion__item">
+<div class="accordion__item-title">
+<h3 id="h_01JNPF254EE0HQYTNW1033RDSZ">Indicate the SMS subscriber’s country </h3>
+</div>
+<div class="accordion__item-content">
+<p>You need to indicate the country for each person you’re importing either by:</p>
+<ul>
+<li>Adding the country code before the phone number</li>
+<li>Including a column labeled “Country”</li>
+</ul>
+<div>
+<table style="width: 100%; margin-left: 0px; margin-right: auto;">
+<colgroup> <col> <col> </colgroup>
+<tbody>
+<tr>
+<td class="wysiwyg-text-align-center" style="width: 50%;"><strong>Example with country code</strong></td>
+<td class="wysiwyg-text-align-center" style="width: 50%;"><strong>Example with country column</strong></td>
+</tr>
+<tr>
+<td class="wysiwyg-text-align-center" style="width: 50%;"><img src="https://klaviyo.zendesk.com/hc/article_attachments/28711677302683" alt="Indicating the country via a country code" width="207" height="272"></td>
+<td class="wysiwyg-text-align-center" style="width: 50%;"><img src="https://klaviyo.zendesk.com/hc/article_attachments/28711698750619" alt="Example with country column.png"></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Watch the video or check out this article for <a href="https://help.klaviyo.com/hc/en-us/articles/5306587861531">instructions on indicating the SMS subscriber’s country</a>. </p>
+<script src="https://fast.wistia.com/embed/medias/ld30gq77eh.jsonp" async="async"></script>
+<script src="https://fast.wistia.com/assets/external/E-v1.js" async="async"></script>
+<div class="wistia_responsive_padding" style="padding: 56.25% 0 0 0; position: relative;">
+<div class="wistia_responsive_wrapper" style="height: 100%; left: 0; position: absolute; top: 0; width: 100%;">
+<div class="wistia_embed wistia_async_ld30gq77eh seo=false videoFoam=true" style="height: 100%; position: relative; width: 100%;">
+<div class="wistia_swatch" style="height: 100%; left: 0; opacity: 0; overflow: hidden; position: absolute; top: 0; transition: opacity 200ms; width: 100%;"><img style="filter: blur(5px); height: 100%; object-fit: contain; width: 100%;" src="https://fast.wistia.com/embed/medias/ld30gq77eh/swatch" alt="" aria-hidden="true"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="accordion__item">
+<div class="accordion__item-title">
+<h3 id="h_01JNPF254EV600CEKG0GG4XDDQ">Indicate if consent is for SMS marketing or transactional </h3>
+</div>
+<div class="accordion__item-content">
+<p>Say your CSV has a mix of marketing- and transactional-only profiles. </p>
+<p>You can use 2 columns to indicate the type (transactional or marketing) of someone’s SMS consent. Label the columns: </p>
+<ul>
+<li>
+<em>SMS Marketing Consent </em>
+<ul>
+<li>Marketing consent allows you to send any type of SMS: both promotional (product announcement, abandonment reminder, etc) and transactional messages.</li>
+<li>This is required if you want to import profiles with only SMS marketing consent. </li>
+</ul>
+</li>
+<li>
+<em>SMS Transactional Consent </em>
+<ul>
+<li>SMS transactional consent means you can only send messages marked as transactional in Klaviyo, like post-purchase flow messages. </li>
+<li>This column is only needed if you have transactional-only profiles, as you can send transactional messages to anyone who consented to SMS marketing.</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="accordion__item">
+<div class="accordion__item-title">
+<h3 id="h_01JNPF254ENNHKBBSTNACN44KY">Add consent status (subscribe, unsubscribed, never subscribed)</h3>
+</div>
+<div class="accordion__item-content">
+<p>Including the consent status is key if your CSV includes a mix of either:</p>
+<ul>
+<li>Subscribed and unsubscribed subscribers </li>
+<li>Marketing- and transactional-only subscribers </li>
+</ul>
+<p>There are 3 consent statuses available: </p>
+<ul>
+<li>
+<strong>Subscribe</strong><br>Person is opted in to receive messages. </li>
+<li>
+<strong>Unsubscribed </strong><strong><br></strong>Person used to be subscribed but has since opted out. You cannot send messages if they are unsubscribed for that channel (e.g., you cannot send an SMS to someone who’s unsubscribed, but you may be able to send an email). </li>
+<li>
+<strong>Never subscribed  </strong><strong><br></strong>Person never consented to receiving messages. This is also the default value if a cell in a consent column is blank. You cannot send mobile (SMS, push, etc.) messages to people marked as never subscribed; however, you can send emails and these are considered active profiles. </li>
+</ul>
+<p>Klaviyo will not apply SMS marketing consent if someone is marked as either <em>unsubscribed</em> or <em>never subscribed</em>. However, if they are marked as subscribed for marketing consent, they are always marked as subscribed for transactional consent. </p>
+<div>
+<table style="width: 100%; margin-left: 0px; margin-right: auto;">
+<colgroup> <col> <col> <col> <col> </colgroup>
+<tbody>
+<tr>
+<td> </td>
+<td><strong>SMS marketing consent</strong></td>
+<td><strong>SMS transactional consent</strong></td>
+<td><strong>Is consent added to the profile?</strong></td>
+</tr>
+<tr>
+<td>Profile A</td>
+<td>Subscribe</td>
+<td>Subscribe</td>
+<td>Yes, they are consented to both SMS marketing and transactional consent. </td>
+</tr>
+<tr>
+<td>Profile B</td>
+<td>Subscribe</td>
+<td>Never subscribed</td>
+<td>Yes, but only for SMS marketing consent. The profile will show “never subscribed" for transactional consent. </td>
+</tr>
+<tr>
+<td>Profile C</td>
+<td>Never subscribed</td>
+<td>Subscribe</td>
+<td>Yes, but the profile is only consented to SMS transactional consent.  </td>
+</tr>
+<tr>
+<td>Profile D</td>
+<td>Unsubscribed</td>
+<td>Never subscribed</td>
+<td>No, and the profile is marked "unsubscribed" for SMS marketing and "never subscribed” for SMS transactional.  </td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The way SMS providers export this information varies, so you may have to reformat the spreadsheet you received from your previous SMS provider to indicate the consent status.</p>
+</div>
+</div>
+<div class="accordion__item">
+<div class="accordion__item-title">
+<h3 id="h_01JNPF254EYJ74N8GMM008ZGFJ">Optional: add consent timestamp </h3>
+</div>
+<div class="accordion__item-content">
+<p>While optional, the timestamp is usually good to include if it’s available. To do so, check that:</p>
+<ul>
+<li>The timestamp is in an <a href="https://developers.klaviyo.com/en/docs/acceptable_date_and_timestamp_formats_for_profile_and_event_properties" target="_blank" rel="noopener noreferrer">accepted date/time format</a>.</li>
+<li>The column is labeled either:
+<ul>
+<li><em>SMS Marketing Timestamp</em></li>
+<li>
+<em>SMS Transactional Timestamp</em> (if also importing transactional consent)</li>
+</ul>
+</li>
+</ul>
+<p>If you choose not to include the timestamp, you will need to check a box to confirm that all profiles are currently opted into SMS. </p>
+<p>Adding the consent timestamp is not recommended in certain cases. Mostly, this occurs if you try to re-upload consent for a profile and the opt-out date is more recent than the consent timestamp. In this case, SMS consent won't be re-added to the profile. </p>
+</div>
+</div>
+<div class="accordion__item">
+<div class="accordion__item-title">
+<h3 id="h_01JNPF254ERXDQBYMKKN7DCJQ0">Recommended information</h3>
+</div>
+<div class="accordion__item-content">
+<p>Some information is "recommended" because it's helpful, but not required to add SMS consent. There are also columns you may think are helpful, but could cause errors in the import process.</p>
+<p>See the table below for details of other information you may want to (or not want to) include. </p>
+<div>
+<table style="width: 100%; margin-left: 0px; margin-right: auto;">
+<colgroup> <col> <col> </colgroup>
+<tbody>
+<tr>
+<td><strong>Do include</strong></td>
+<td><strong>Don't include</strong></td>
+</tr>
+<tr>
+<td>Email address (if included, this should be the first column in the CSV)</td>
+<td>"Subscribed to SMS" column</td>
+</tr>
+<tr>
+<td>First name</td>
+<td>A “consent” column to indicate whether someone is subscribed to SMS marketing, SMS transactional, email, etc.</td>
+</tr>
+<tr>
+<td>Last name</td>
+<td> </td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div><h2 id="h_01JNPF254EE76PRHW8FSBDGQMN">Import a list of phone numbers with SMS consent</h2><ol>
+<li data-list-item-id="e64c53f6094b8dc6bb0c8765db7a45c48">Navigate to <strong>Audience &gt; Lists &amp; segments</strong>.</li>
+<li data-list-item-id="ee6f434f831b41d70543589a449fb7204">Select the list you want to add your contacts to (e.g., SMS Subscribers).</li>
+<li data-list-item-id="e0bf515cf917176235984c5212d4d05b6">Open the <strong>Manage List </strong>dropdown in the upper right. </li>
+<li data-list-item-id="eb6df53de2e3470e0407a4c6d8dc2d86d">Choose <strong>Import contacts</strong> from the dropdown.<ul><li data-list-item-id="ebe06e5e88449f339184ce804b71a64d1">Note that you must be an Owner or Admin to see this option. <br><img src="https://klaviyo.zendesk.com/hc/article_attachments/34691454053147" width="340" height="423">
+</li></ul>
+</li>
+<li data-list-item-id="e38b987dd9795d75e3a8e79d10b10f4e9">Click <strong>Upload</strong> and select your CSV file of SMS subscribers.</li>
+<li data-list-item-id="ed6ad9f24427a0575e257a737f0a9d0c5">Click <strong>Next</strong>. </li>
+<li data-list-item-id="ecacfbcc833a9c23eabfca285893455b3">Map each column from your CSV to an appropriate property in Klaviyo, then click <strong>Next</strong>.</li>
+<li data-list-item-id="ed8e4d0080f4e8b1afe6a7778939a220a">If your CSV includes columns indicating the type of consent or include the consent timestamp, the import will add the consent accordingly. <ul><li data-list-item-id="e382e33947f174303e2629af7661f1570">Example: if you include an<em> SMS Transactional Consent</em> column (but not one for marketing consent).<ul>
+<li data-list-item-id="ef517975e286bda1202c7587d9c1383af"> Profiles marked as “Subscribe” are imported with only SMS transactional consent. </li>
+<li data-list-item-id="e587950031e3d210c9560949f388342da">All other profiles (those marked as “Unsubscribed” or “Never subscribed”) are imported without consent. </li>
+</ul>
+</li></ul>
+</li>
+<li data-list-item-id="e5714ac71cd177703d6bba8a2b2a07ae5">If you don't have a consent timestamp or a column indicating consent (e.g., <em>SMS Marketing Consent</em>), you’ll see the following: <ul>
+<li data-list-item-id="e60ae01a2efbf9a131224989605b0d3e5">Under <em>Did these contacts subscribe to messaging</em>, select <strong>Yes</strong> to add consent.<br><img src="https://klaviyo.zendesk.com/hc/article_attachments/34691454056859" width="624" height="301">
+</li>
+<li data-list-item-id="e8066f6e06e376a1fa4e29d08f7d2ea6b">Check the boxes for the types of consent to apply: <strong>Email</strong>, <strong>SMS</strong>, or both.<br><img src="https://klaviyo.zendesk.com/hc/article_attachments/34691454061083" width="624" height="491">
+</li>
+<li data-list-item-id="e2d7d057fc8c943362d550838dc1ad3cf">Choose the type of consent to apply. The option you pick depends on the consent types in your CSV: <ul>
+<li data-list-item-id="eb7b5f4154320cd652fca24e3bdeda16c">If every profile is consented only to SMS transactional, choose <strong>Only transactional messages</strong>. </li>
+<li data-list-item-id="e4f79b22f223ff5fc96fb87e7a8e2d971">If every profile should be consented to both SMS marketing and transactional, choose <strong>Marketing and transactional messages</strong>.</li>
+<li data-list-item-id="ebf71b7ff55b809a7604d8160ecafd3ee">To import only SMS marketing, you must format your CSV so that it includes a column labeled <em>SMS Marketing consent</em>, then re-upload the CSV.  </li>
+</ul>
+</li>
+</ul>
+</li>
+<li data-list-item-id="ef9975d930eeae7ded9316c3653117e42">When ready to proceed, click <strong>Import</strong>. </li>
+</ol><p>The import process can take up to a couple of hours to complete.</p><p>Once all the numbers are imported, Klaviyo will either create a new profile or associate the data to an existing profile. For instance, if you import a phone-number-only CSV, Klaviyo will look for profiles with the same phone number, update that profile's SMS consent status, and include any other profile properties attributed to that contact. </p><div class="bs-callout bs-callout-default"><p>If the phone number provided is invalid, the row will be skipped and the profile will not be imported, even if a valid e-mail address is included in a different column.</p></div><h2 id="h_01JNPF254E4FW8TKM60FB4SMVD">Bulk remove SMS consent </h2><p>If you want to remove consent for profiles, you can use essentially the same import process. </p><p>The only differences are that you must:</p><ul>
+<li data-list-item-id="e510a6e264ff86a17d4c1602df908612b">Have a column for <em>SMS Marketing Consent</em> or <em>SMS Transactional Consent</em> (depending on the type of consent you want to remove). </li>
+<li data-list-item-id="e813e13f21cce5254b136af259343c2d4">Add “Unsubscribed” for each profile within that column. <ul><li data-list-item-id="ebb9587a2a394cf6bbec389d4ff9d8049">Note that you cannot reset profiles in bulk to “Never Subscribed.” </li></ul>
+</li>
+</ul><h2 id="h_01HMEBQTXGP3ZJY58GFQ75Y6JZ">Additional resources</h2><ul>
+<li data-list-item-id="e0e96c02be0b3128c6a8cdbe6d7123a28"><a href="https://help.klaviyo.com/hc/en-us/articles/5306587861531" target="_blank" rel="noopener noreferrer">Indicate the country for an SMS CSV</a></li>
+<li data-list-item-id="eeb4528b23bf7c16b8e975608b5a5d47f"><a href="https://help.klaviyo.com/hc/en-us/articles/5302764979611" target="_blank" rel="noopener noreferrer">Remove opted-out SMS profiles from CSVs</a></li>
+<li data-list-item-id="e29e90b3a37c999e6f9aba9c7d3319ff2"><a href="https://help.klaviyo.com/hc/en-us/articles/5227452906523" target="_self">Bulk unsubscribe SMS contacts</a></li>
+</ul>

@@ -1,0 +1,941 @@
+{
+  "captured_at": "2026-05-23T16:18:16Z",
+  "article": {
+    "id": 360024310292,
+    "url": "https://klaviyo.zendesk.com/api/v2/help_center/en-us/articles/360024310292.json",
+    "html_url": "https://klaviyo.zendesk.com/hc/en-us/articles/360024310292-How-to-create-an-Added-to-Cart-event-for-BigCommerce",
+    "author_id": 20424705848,
+    "comments_disabled": true,
+    "draft": false,
+    "promoted": false,
+    "position": 5,
+    "vote_sum": -3,
+    "vote_count": 89,
+    "section_id": 49375361359643,
+    "created_at": "2019-02-26T17:16:38Z",
+    "updated_at": "2026-04-21T13:54:44Z",
+    "name": "How to create an \"Added to Cart\" event for BigCommerce",
+    "title": "How to create an \"Added to Cart\" event for BigCommerce",
+    "source_locale": "en-us",
+    "locale": "en-us",
+    "outdated": false,
+    "outdated_locales": [],
+    "edited_at": "2024-05-06T14:47:28Z",
+    "user_segment_id": null,
+    "permission_group_id": 146372,
+    "content_tag_ids": [],
+    "label_names": [],
+    "body": "<h2 id=\"h_01HTJ9366JR29KNVJ50CDBT1T1\">You will learn</h2>\n<p>Learn how to create an <em>Added to Cart </em>event for BigCommerce that tracks when a customer adds an item to their cart and can trigger an abandoned cart flow. <em>Added to Cart</em> events do not automatically track when you integrate with BigCommerce; you must first add (and potentially modify) a JavaScript snippet (included in this guide) to your BigCommerce theme files.</p>\n<ul>\n<li>You do not need to create the <em>Added to Cart</em> event to send an abandoned cart flow; the <em>Added to Cart</em> abandoned cart flow is separate from the standard abandoned cart flow, which is triggered by <em>Started Checkout</em>. </li>\n<li>Klaviyo’s built-in BigCommerce integration already tracks a <em>Started Checkout</em> event when a customer enters their email during the checkout process after adding item(s) to their cart. </li>\n</ul>\n<h2 id=\"h_01HTJ9366JSKXV2F1XX799H9D6\">Before you begin</h2>\n<p>The <em>Added to Cart </em>event is only tracked for users previously <a href=\"https://help.klaviyo.com/hc/en-us/articles/360034666712-About-Cookies-in-Klaviyo\" target=\"_blank\" rel=\"noopener\">cookied by Klaviyo</a>. </p>\n<p>You must already have <em>Viewed Product</em> tracking installed in order for the <em>Added to Cart</em> event to function properly. Typically, Klaviyo customers install this during the BigCommerce integration process and the instructions can be found in our <a href=\"https://help.klaviyo.com/hc/en-us/articles/115005082547-How-to-Integrate-with-BigCommerce#add-viewed-product-tracking4\" target=\"_blank\" rel=\"noopener\">integration article</a>. </p>\n<h2 id=\"h_01HTJ9366KNH8WX00MFV29RZRN\">Add the snippet</h2>\n<ol>\n<li>Open your BigCommerce admin and navigate to <strong>Storefront &gt; My Themes</strong>.</li>\n<li>Find your current theme, and click the <strong>Advanced Settings</strong> dropdown.</li>\n<li>Search for the <strong>product.html</strong> file and click to open it.</li>\n<li>Paste the snippet below directly underneath the Klaviyo <em>Viewed Product</em> snippet.\n<pre><code class=\"language-js\">&lt;script text=\"text/javascript\"&gt; \n//Initialize Klaviyo object immediately on page load\n!function(){if(!window.klaviyo){window._klOnsite=window._klOnsite||[];try{window.klaviyo=new Proxy({},{get:function(n,i){return\"push\"===i?function(){var n;(n=window._klOnsite).push.apply(n,arguments)}:function(){for(var n=arguments.length,o=new Array(n),w=0;w&lt;n;w++)o[w]=arguments[w];var t=\"function\"==typeof o[o.length-1]?o.pop():void 0,e=new Promise((function(n){window._klOnsite.push([i].concat(o,[function(i){t&amp;&amp;t(i),n(i)}]))}));return e}}})}catch(n){window.klaviyo=window.klaviyo||[],window.klaviyo.push=function(){var n;(n=window._klOnsite).push.apply(n,arguments)}}}}(); &lt;/script&gt;\n&lt;script text=\"text/javascript\"&gt;\n//Added to Cart\nvar klaviyo = window.klaviyo || [];\ndocument.getElementById(\"form-action-addToCart\").addEventListener('click',function (){\n   klaviyo.track(\"Added to Cart\", item);\n});\n&lt;/script&gt;</code></pre>\n</li>\n<li>Next, check if you need to modify your snippet. To do this, you’ll need to check the ID of the “Add to Cart” button on your site, and see if it matches the “Add to Cart” variable highlighted in the snippet below, whose default is <code>form-action-addToCart</code>.<br><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28717387201051\">\n</li>\n<li>To check the ID of the button, open up one of your site’s product pages, right-click your “Add to Cart” button, and select <strong>Inspect</strong>.<br><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28717387183515\" alt=\"BigCommerce store with demo item Smith Journal, right click menu open on Add to Cart button with Inspect highlighted in blue\" width=\"582\" height=\"458\">\n</li>\n<li>The console will open, showing the source code of the “Add to Cart” button. The following image shows the ID of the \"Add to Cart\" button highlighted in the console.<br><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28717387187867\" alt=\"BigCommerce store demo item with Chrome console open and add to cart button ID, form-action-addToCart, highlighted\" width=\"625\" height=\"208\">\n</li>\n<li>The ID of the button on the page shown here matches <code>form-action-addToCart</code>, so no changes need to be made.\n<ul>\n<li>If the ID of the “Add to Cart” button on your site isn’t <code>form-action-addToCart</code>, you’ll need to change the variable text within the quotes to match the button’s ID</li>\n</ul>\n</li>\n<li>If your source code isn’t showing a button ID, skip ahead to the <a href=\"https://help.klaviyo.com/hc/en-us/articles/360024310292#alternate-snippet-for--add-to-cart--button-without-a-button-id3\" target=\"_self\">next section</a> and learn how to use an alternate snippet with class notation instead of button notation. </li>\n<li>When you’re done, save your <strong>product.html</strong> file. </li>\n</ol>\n<p>You’ve finished adding the snippet and will now track the <em>Added to Cart</em> event. </p>\n<h2 id=\"h_01HTJ9366KNYT8NN1RT9JP0NK7\">Alternate snippet for \"Add to Cart\" button without a button ID</h2>\n<p>For styling reasons, some sites use a class notation instead of a button ID for “Add to Cart” buttons.</p>\n<p>If your “Add to Cart<em>”</em> button does not have a button ID (which you can determine by following the steps in the previous section) and instead uses a class notation, you should use the alternate code snippet below to enable the <em>Added to Cart</em> event. </p>\n<ol>\n<li>If your button is defined by class notation, paste the following alternate snippet at the bottom of your <strong>product.html</strong> file:\n<pre><code class=\"language-js\">&lt;script text=\"text/javascript\"&gt; \n//Initialize Klaviyo object immediately on page load\n!function(){if(!window.klaviyo){window._klOnsite=window._klOnsite||[];try{window.klaviyo=new Proxy({},{get:function(n,i){return\"push\"===i?function(){var n;(n=window._klOnsite).push.apply(n,arguments)}:function(){for(var n=arguments.length,o=new Array(n),w=0;w&lt;n;w++)o[w]=arguments[w];var t=\"function\"==typeof o[o.length-1]?o.pop():void 0,e=new Promise((function(n){window._klOnsite.push([i].concat(o,[function(i){t&amp;&amp;t(i),n(i)}]))}));return e}}})}catch(n){window.klaviyo=window.klaviyo||[],window.klaviyo.push=function(){var n;(n=window._klOnsite).push.apply(n,arguments)}}}}(); &lt;/script&gt;\n&lt;script text=\"text/javascript\"&gt;\n//Viewed Product\nvar klaviyo = window.klaviyo || [];<br>var classname = document.getElementsByClassName(\"add-to-cart\");<br>var addToCart = function() {<br>   klaviyo.track(\"Added to Cart\", item);<br>}; <br>for (var i = 0; i &lt; classname.length; i++) {<br>   classname[i].addEventListener('click', addToCart, false);<br>}\n&lt;/script&gt;\n</code></pre>\n</li>\n<li>This code will likely need to be modified with your class name. Compare your button class name in between the quotations, highlighted in the following example, with the contents in between the parentheses after <code>getElementsByClassName</code> in the code snippet above. For example, the class name in the screenshot is <code>btn product-form_cart-submit btn--secondary-accent</code> and the class in the snippet is named <code>add-to-cart</code>.<br><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28717387188891\" alt=\"Add to cart button code in Chrome console with button class, btn product-form_cart-submit btn--secondary-accent, higlighted in yellow\"><br>\n<ul>\n<li>If these two don't match, change the code snippet to reflect the class name for your button.</li>\n</ul>\n</li>\n<li>For example, the code snippet below has been modified with the classname value <code>btn product-form_cart-submit btn--secondary-accent</code> surrounded by double quotations.<br><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28717380936347\">\n</li>\n<li>Save your <strong>product.html</strong> file</li>\n</ol>\n<p>Once you save, you’ve finished adding the snippet and can now track the <em>Added to Cart</em> event. </p>\n<h2 id=\"h_01HTJ9366K818MV9586CHK64AT\">Troubleshooting your \"Added to Cart\" snippet</h2>\n<p>After you’ve added the snippet, it should watch the \"Add to Cart'' button and track an <em>Added to Cart</em> event whenever a cookied visitor clicks this button. </p>\n<p>This event functions similarly to the <em>Viewed Product</em> event. Each item someone adds to their cart will trigger a new event. You can view these events by:</p>\n<ol>\n<li>Navigating to <strong>Analytics &gt; Metrics </strong>in Klaviyo</li>\n<li>Searching for the event</li>\n<li>Clicking <strong>Activity Feed<br><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28717380926747\" alt=\"Added to cart metric activity feed in Klaviyo, list shows profile names that have recently added to cart\" width=\"558\" height=\"324\"><br></strong>\n</li>\n</ol>\n<p>If you don’t see <em>Added to Cart</em> events in your account, try the following:</p>\n<ul>\n<li>Make sure your Klaviyo.js (also known as the Active on Site snippet) is working, which is necessary for <em>Added to Cart</em> to function properly. This should have been added to your site automatically when you integrated with Klaviyo, but you can check that it’s working by following the steps in the <a href=\"https://help.klaviyo.com/hc/en-us/articles/115005082547-How-to-Integrate-with-BigCommerce#confirm-web-tracking-installation3\" target=\"_blank\" rel=\"noopener\">confirming onsite tracking installation section of our BigCommerce integration article</a>.</li>\n<li>Check that your<em> Viewed Product </em>tracking is working, which is also necessary for <em>Added to Cart </em>to function properly. This snippet is added manually, and you can learn how to add and test it in the <a href=\"https://help.klaviyo.com/hc/en-us/articles/115005082547-How-to-Integrate-with-BigCommerce#add-viewed-product-tracking4\" target=\"_blank\" rel=\"noopener\">Viewed Product section of our integration article</a>. </li>\n</ul>\n<div>\n<p>If you are still encountering problems with your <em>Added to Cart</em> snippet, it could be due to an issue with identifying the “Add to Cart” button. In this case, <a href=\"https://help.klaviyo.com/hc/en-us/articles/115001002272-How-to-Contact-Support\" target=\"_blank\" rel=\"noopener\">please contact Klaviyo support</a>. </p>\n</div>\n<h2 id=\"h_01HTJ9366KBY251D1F8TH79YZQ\">The \"Added to Cart\" abandoned cart flow</h2>\n<p>When creating an abandoned cart flow (either using <em>Added to Cart</em> or <em>Started Checkout</em>) you can leverage Klaviyo SMS in addition to email. For compliance reasons, make sure to only send one SMS in your flow and if you are using multiple types of abandoned cart flows, make sure to only use SMS in one of them. </p>\n<p>In the <em>Essentials</em> section of the library, you will find the standard abandoned cart reminder flow. This flow is triggered by the <em>Started Checkout</em> event.</p>\n<p><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28717380929051\" alt=\"Card for standard abandoned cart reminder flow for BigCommerce in the Klaviyo flow library\" width=\"337\" height=\"202\"></p>\n<p>To get started with an abandoned cart flow using the <em>Added to Cart</em> event, we recommend using the pre-built flow available in Klaviyo's <a href=\"https://www.klaviyo.com/library/flows\" target=\"_blank\" rel=\"noopener\">Flow Library</a> which has the proper flow filters already set up. This flow tends to target more casual potential shoppers who have yet to start checkout.</p>\n<p>The abandoned cart flow triggered by the <em>Added to Cart</em> event can be found in the \"Prevent lost sales\" goal section. </p>\n<p><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28717380931483\" alt=\"Card for added to cart abandoned cart reminder flow for BigCommerce in the Klaviyo flow library\" width=\"338\" height=\"201\"></p>\n<p>If you implemented the BigCommerce <em>Added to Cart</em> snippet, this flow will be ready to go with all the recommended filters and dynamic email content ready to power personalized cart followup emails.</p>\n<h2 id=\"h_01HTJ9366KD4HT59G54ZXZ8E2Y\">Are you using Amazon Buy with Prime?</h2>\n<p>If you're using Buy with Prime to power payment and fulfillment for any of the products on your store, you should:</p>\n<ul>\n<li>\n<a href=\"https://help.klaviyo.com/hc/en-us/articles/14708088221467\" target=\"_blank\" rel=\"noopener\">Integrate Buy with Prime with Klaviyo</a><span> </span>to bring Buy with Prime data into your Klaviyo account.</li>\n<li>For your abandoned \"Added to Cart\" flow, add the following flow filters to exclude customers who started checkouts or made purchases via Buy with Prime from receiving incorrect messaging:<br>\n<ul>\n<li>\n<em>Started Checkout </em>(Buy with Prime)<em> zero times since starting this flow </em>AND</li>\n<li>\n<em>Placed Order</em><span> </span>(Buy with Prime)<span> </span><em>zero times since starting this flow.</em>\n</li>\n</ul>\n</li>\n</ul>\n<h2 id=\"h_01HTJ9366KM3ZMMXT5QC3PJDKF\">Additional resources</h2>\n<ul>\n<li><a href=\"https://help.klaviyo.com/hc/en-us/articles/115002779411-Guide-to-Creating-an-Abandoned-Cart-Flow\" target=\"_blank\" rel=\"noopener\">Creating an abandoned cart flow</a></li>\n<li><a href=\"https://help.klaviyo.com/hc/en-us/articles/115005082587-Reviewing-Your-BigCommerce-Data\" target=\"_blank\" rel=\"noopener\">BigCommerce data reference</a></li>\n</ul>",
+    "user_segment_ids": []
+  },
+  "normalized": {
+    "id": "360024310292",
+    "title": "How to create an \"Added to Cart\" event for BigCommerce",
+    "source_url": "https://help.klaviyo.com/hc/en-us/articles/360024310292-How-to-create-an-Added-to-Cart-event-for-BigCommerce",
+    "section_id": 49375361359643,
+    "section": "BigCommerce best practices",
+    "category_id": 115000032731,
+    "category": "Integrations",
+    "category_slug": "integrations",
+    "klaviyo_updated": "2026-04-21T13:54:44Z",
+    "created_at": "2019-02-26T17:16:38Z",
+    "draft": false,
+    "promoted": false,
+    "position": 5,
+    "label_names": []
+  },
+  "files": {
+    "body_html": "_source/articles/360024310292.body.html",
+    "rendered_html": "_source/rendered/360024310292.html"
+  },
+  "assets": {
+    "api_body": {
+      "images": [
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28717387201051",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28717387183515",
+          "alt": "BigCommerce store with demo item Smith Journal, right click menu open on Add to Cart button with Inspect highlighted in blue",
+          "width": "582",
+          "height": "458"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28717387187867",
+          "alt": "BigCommerce store demo item with Chrome console open and add to cart button ID, form-action-addToCart, highlighted",
+          "width": "625",
+          "height": "208"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28717387188891",
+          "alt": "Add to cart button code in Chrome console with button class, btn product-form_cart-submit btn--secondary-accent, higlighted in yellow",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28717380936347",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28717380926747",
+          "alt": "Added to cart metric activity feed in Klaviyo, list shows profile names that have recently added to cart",
+          "width": "558",
+          "height": "324"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28717380929051",
+          "alt": "Card for standard abandoned cart reminder flow for BigCommerce in the Klaviyo flow library",
+          "width": "337",
+          "height": "202"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28717380931483",
+          "alt": "Card for added to cart abandoned cart reminder flow for BigCommerce in the Klaviyo flow library",
+          "width": "338",
+          "height": "201"
+        }
+      ],
+      "links": [
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360034666712-About-Cookies-in-Klaviyo",
+          "text": "cookied by Klaviyo"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005082547-How-to-Integrate-with-BigCommerce#add-viewed-product-tracking4",
+          "text": "integration article"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360024310292#alternate-snippet-for--add-to-cart--button-without-a-button-id3",
+          "text": "next section"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005082547-How-to-Integrate-with-BigCommerce#confirm-web-tracking-installation3",
+          "text": "confirming onsite tracking installation section of our BigCommerce integration article"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005082547-How-to-Integrate-with-BigCommerce#add-viewed-product-tracking4",
+          "text": "Viewed Product section of our integration article"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115001002272-How-to-Contact-Support",
+          "text": "please contact Klaviyo support"
+        },
+        {
+          "href": "https://www.klaviyo.com/library/flows",
+          "text": "Flow Library"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/14708088221467",
+          "text": "Integrate Buy with Prime with Klaviyo"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115002779411-Guide-to-Creating-an-Abandoned-Cart-Flow",
+          "text": "Creating an abandoned cart flow"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005082587-Reviewing-Your-BigCommerce-Data",
+          "text": "BigCommerce data reference"
+        }
+      ],
+      "headings": [
+        {
+          "level": 2,
+          "id": "h_01HTJ9366JR29KNVJ50CDBT1T1",
+          "text": "You will learn"
+        },
+        {
+          "level": 2,
+          "id": "h_01HTJ9366JSKXV2F1XX799H9D6",
+          "text": "Before you begin"
+        },
+        {
+          "level": 2,
+          "id": "h_01HTJ9366KNH8WX00MFV29RZRN",
+          "text": "Add the snippet"
+        },
+        {
+          "level": 2,
+          "id": "h_01HTJ9366KNYT8NN1RT9JP0NK7",
+          "text": "Alternate snippet for \"Add to Cart\" button without a button ID"
+        },
+        {
+          "level": 2,
+          "id": "h_01HTJ9366K818MV9586CHK64AT",
+          "text": "Troubleshooting your \"Added to Cart\" snippet"
+        },
+        {
+          "level": 2,
+          "id": "h_01HTJ9366KBY251D1F8TH79YZQ",
+          "text": "The \"Added to Cart\" abandoned cart flow"
+        },
+        {
+          "level": 2,
+          "id": "h_01HTJ9366KD4HT59G54ZXZ8E2Y",
+          "text": "Are you using Amazon Buy with Prime?"
+        },
+        {
+          "level": 2,
+          "id": "h_01HTJ9366KM3ZMMXT5QC3PJDKF",
+          "text": "Additional resources"
+        }
+      ]
+    },
+    "rendered_page": {
+      "images": [
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/7ff492c2b417b7ecfe572f839a8a81398693c1f7-1920x1080.webp",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/580abcea16e98957a56307330094855d3c11eedc-1248x166.png",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/a6d368f288f770c69c6e5c5cec2ba79d2dbd4532-1908x1502.jpg?w=582",
+          "alt": "BigCommerce store with demo item Smith Journal, right click menu open on Add to Cart button with Inspect highlighted in blue",
+          "width": "582",
+          "height": "458"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/6e51e0dc18cf674283083926c999d7a81a64bdaf-1549x516.jpg?w=625",
+          "alt": "BigCommerce store demo item with Chrome console open and add to cart button ID, form-action-addToCart, highlighted",
+          "width": "625",
+          "height": "208"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/ce5d4e2dbdccf2c9d02c72a109ef03d8bc2e3860-1376x50.jpg",
+          "alt": "Add to cart button code in Chrome console with button class, btn product-form_cart-submit btn--secondary-accent, higlighted in yellow",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/9509176c3c0b38a6cf7b9f8b1b764664f80f5949-1188x290.png",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/8769848addf37716428e6c6fae5f651a30fc488a-1234x716.jpg?w=558",
+          "alt": "Added to cart metric activity feed in Klaviyo, list shows profile names that have recently added to cart",
+          "width": "558",
+          "height": "324"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/add58febccef41b6a364647ddca108d9b8a5a448-568x340.jpg?w=337",
+          "alt": "Card for standard abandoned cart reminder flow for BigCommerce in the Klaviyo flow library",
+          "width": "337",
+          "height": "202"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/b597993dfb4234fbb8ee90940ff24ff73e37e677-566x336.jpg?w=338",
+          "alt": "Card for added to cart abandoned cart reminder flow for BigCommerce in the Klaviyo flow library",
+          "width": "338",
+          "height": "201"
+        }
+      ],
+      "links": [
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360024310292-How-to-create-an-Added-to-Cart-event-for-BigCommerce#site-content",
+          "text": "Skip to main content"
+        },
+        {
+          "href": "https://www.klaviyo.com",
+          "text": "Home"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center"
+        },
+        {
+          "href": "https://www.klaviyo.com/enterprise",
+          "text": "Enterprise"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Partners"
+        },
+        {
+          "href": "https://www.klaviyo.com/careers",
+          "text": "Careers"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": "Log in"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": ""
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center Find step-by-step instructions and troubleshooting solutions in our knowledge base."
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000032731",
+          "text": "Integrations"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000312411",
+          "text": "Flows"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867867",
+          "text": "Audience"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867667",
+          "text": "Campaigns"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/360000190711",
+          "text": "Sign-up forms"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000873988",
+          "text": "Deliverability & compliance"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/29173800271259",
+          "text": "SMS"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/16638219724187",
+          "text": "Reviews"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/18073014919195",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/34141283979931",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/37659126754075",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/33948021740315",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/39746685522331",
+          "text": "WhatsApp"
+        },
+        {
+          "href": "https://academy.klaviyo.com",
+          "text": "Klaviyo Academy Expert training and education to help you succeed with Klaviyo, and beyond."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Quick+guide&resource=academy_courses",
+          "text": "Quick guides Learn marketing strategies and concepts in 15 minutes or less."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Course&resource=academy_courses",
+          "text": "Courses Master key marketing topics through structured lessons and exams."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/best-practices",
+          "text": "Best practices Discover top product and marketing strategies for your business."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/learning-paths",
+          "text": "Learning paths Complete curated learning journeys tailored to your marketing goals."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses",
+          "text": "Explore all resources"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Live+training&resource=academy_courses",
+          "text": "Live trainings Build confidence through hands-on interactive workshops and thought-provoking strategy sessions."
+        },
+        {
+          "href": "https://www.bigmarker.com/klaviyo-customer-education/Office-hours-Getting-started-with-Klaviyo",
+          "text": "Live office hours Join a strategic discussion where you can ask questions and get answers in real-time."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/private-live-training",
+          "text": "1:1 Live training Book a private training session with an expert to jumpstart your platform knowledge and confidence."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/credentials",
+          "text": "Klaviyo credentials Dig deeper into select topics and showcase your expertise with a final exam to earn a certificate and digital badge."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/certificates/klaviyo-practitioner-certificate",
+          "text": "Klaviyo practitioner certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/deliverability-certificate",
+          "text": "Deliverability certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/developer-certificate",
+          "text": "Klaviyo developer certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses&select=Certificate",
+          "text": "See all certificates"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Klaviyo Community Join our thriving community network to connect with brands like yours—online and in person."
+        },
+        {
+          "href": "https://community.klaviyo.com/topic/new",
+          "text": "Ask a question Post a question and get thoughtful answers from Klaviyo powerusers."
+        },
+        {
+          "href": "https://community.klaviyo.com/p/roadmap",
+          "text": "Product roadmap"
+        },
+        {
+          "href": "https://community.klaviyo.com/search/activity/recent",
+          "text": "Recent threads"
+        },
+        {
+          "href": "https://community.klaviyo.com/p/champions",
+          "text": "Meet the Champions"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups",
+          "text": "Browse all groups Your people are waiting. New ideas and connections are a click away."
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/developer-group-64",
+          "text": "Developer group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/entrepreneur-user-group-118",
+          "text": "Entrepreneur group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/woo-user-group-87",
+          "text": "WooCommerce group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/new-york-meetup-chapter-82",
+          "text": "New York City"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/los-angeles-meetup-chapter-83",
+          "text": "Los Angeles"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/austin-meetup-chapter-85",
+          "text": "Austin"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/san-diego-meetup-chapter-86",
+          "text": "San Diego"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/amsterdam-meetup-chapter-84",
+          "text": "Amsterdam"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Klaviyo Developers Access API documentation and developer guides to help you build with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/get_started",
+          "text": "Get started Access key resources and a step-by-step checklist for how to start developing with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/build_your_integration",
+          "text": "Grow your app's reach Learn how to join our ecosystem and get your app listed on our marketplace."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/developer-tools",
+          "text": "Developer tools Generate sample data, monitor your API usage, and access our Postman collections."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/reference/api_overview",
+          "text": "API reference Browse our full catalog of API docs."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/changelog_",
+          "text": "Changelog"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/api_versioning_and_deprecation_policy",
+          "text": "Versioning & deprecation policy"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/rate_limits_and_error_handling",
+          "text": "Rate limits & error handling"
+        },
+        {
+          "href": "https://youtube.com/playlist?list=PLHkNfHgtxcUanrkMnKPdkRzuWU7MGv_xM&si=pkG-KH7IT_TUHOGC",
+          "text": "API tutorials on YouTube Subscribe to our Klaviyo API Tutorials playlist for easy access to step-by-step developer walkthroughs."
+        },
+        {
+          "href": "https://www.klaviyo.com/contact-us",
+          "text": "Contact us"
+        },
+        {
+          "href": "https://www.klaviyo.com/sign-up",
+          "text": "Sign up"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": "Search"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360024310292",
+          "text": "United States - EN"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/de-de/articles/360024310292",
+          "text": "Deutschland - DE"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-es/articles/360024310292",
+          "text": "España - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-mx/articles/360024310292",
+          "text": "México - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/fr-fr/articles/360024310292",
+          "text": "France - FR"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/it-it/articles/360024310292",
+          "text": "Italia - IT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/ko-kr/articles/360024310292",
+          "text": "한국 - KO"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/nl-nl/articles/360024310292",
+          "text": "Nederland - NL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pl-pl/articles/360024310292",
+          "text": "Polska - PL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pt-br/articles/360024310292",
+          "text": "Brasil - PT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/sv-se/articles/360024310292",
+          "text": "Sverige - SV"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/115001509808",
+          "text": "BigCommerce"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/49375361359643",
+          "text": "BigCommerce best practices"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360024310292-How-to-create-an-Added-to-Cart-event-for-BigCommerce#h_01HTJ9366JR29KNVJ50CDBT1T1",
+          "text": "You will learn"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360024310292-How-to-create-an-Added-to-Cart-event-for-BigCommerce#h_01HTJ9366JSKXV2F1XX799H9D6",
+          "text": "Before you begin"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360024310292-How-to-create-an-Added-to-Cart-event-for-BigCommerce#h_01HTJ9366KNH8WX00MFV29RZRN",
+          "text": "Add the snippet"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360024310292-How-to-create-an-Added-to-Cart-event-for-BigCommerce#h_01HTJ9366KNYT8NN1RT9JP0NK7",
+          "text": "Alternate snippet for \"Add to Cart\" button without a button ID"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360024310292-How-to-create-an-Added-to-Cart-event-for-BigCommerce#h_01HTJ9366K818MV9586CHK64AT",
+          "text": "Troubleshooting your \"Added to Cart\" snippet"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360024310292-How-to-create-an-Added-to-Cart-event-for-BigCommerce#h_01HTJ9366KBY251D1F8TH79YZQ",
+          "text": "The \"Added to Cart\" abandoned cart flow"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360024310292-How-to-create-an-Added-to-Cart-event-for-BigCommerce#h_01HTJ9366KD4HT59G54ZXZ8E2Y",
+          "text": "Are you using Amazon Buy with Prime?"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360024310292-How-to-create-an-Added-to-Cart-event-for-BigCommerce#additional-resources",
+          "text": "Additional resources"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360034666712-About-Cookies-in-Klaviyo",
+          "text": "cookied by Klaviyo"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005082547-How-to-Integrate-with-BigCommerce#add-viewed-product-tracking4",
+          "text": "integration article"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360024310292#alternate-snippet-for--add-to-cart--button-without-a-button-id3",
+          "text": "next section"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005082547-How-to-Integrate-with-BigCommerce#confirm-web-tracking-installation3",
+          "text": "confirming onsite tracking installation section of our BigCommerce integration article"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005082547-How-to-Integrate-with-BigCommerce#add-viewed-product-tracking4",
+          "text": "Viewed Product section of our integration article"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115001002272-How-to-Contact-Support",
+          "text": "please contact Klaviyo support"
+        },
+        {
+          "href": "https://www.klaviyo.com/library/flows",
+          "text": "Flow Library"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/14708088221467",
+          "text": "Integrate Buy with Prime with Klaviyo"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115002779411",
+          "text": "How to create an abandoned cart flow"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005082587",
+          "text": "BigCommerce data reference"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115001002272",
+          "text": "Learn how to contact support"
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": ""
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": "Visit Community"
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": ""
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": "Hire a partner"
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/about",
+          "text": "About Klaviyo"
+        },
+        {
+          "href": "https://www.klaviyo.com/newsroom",
+          "text": "Newsroom"
+        },
+        {
+          "href": "https://investors.klaviyo.com/overview/default.aspx",
+          "text": "Investor relations"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Agency and tech partners"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Developers"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/retail",
+          "text": "Retail and ecommerce"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/restaurants",
+          "text": "Restaurant marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/wellness",
+          "text": "Wellness"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform",
+          "text": "B2C CRM overview"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai",
+          "text": "Klaviyo AI (K:AI)"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/marketing-automation",
+          "text": "Klaviyo Marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-service",
+          "text": "Klaviyo Service"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/analytics",
+          "text": "Klaviyo Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-data-platform",
+          "text": "Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare",
+          "text": "Klaviyo vs. Klaviyo alternatives"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-mailchimp",
+          "text": "Klaviyo vs. Mailchimp"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-postscript",
+          "text": "Klaviyo vs. Postscript"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-attentive",
+          "text": "Klaviyo vs. Attentive"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-salesforce-marketing-cloud",
+          "text": "Klaviyo vs. Salesforce"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-listrak",
+          "text": "Klaviyo vs. Listrak"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/omnichannel",
+          "text": "Omnichannel marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/email-marketing",
+          "text": "Email marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing",
+          "text": "SMS marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing/rcs",
+          "text": "RCS for Business"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/mobile-app-marketing",
+          "text": "Mobile app marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/whatsapp",
+          "text": "WhatsApp marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/social",
+          "text": "Social marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources",
+          "text": "Marketing resources"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources/marketing-campaign-calendar",
+          "text": "Marketing campaign calendar"
+        },
+        {
+          "href": "https://www.klaviyo.com/glossary",
+          "text": "Marketing glossary"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/email-subject-line-generator",
+          "text": "Subject line generator"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/roi-calculator",
+          "text": "ROI calculator"
+        },
+        {
+          "href": "https://www.klaviyo.com/customers",
+          "text": "Case studies"
+        },
+        {
+          "href": "https://www.klaviyo.com/composer",
+          "text": "Composer Beta"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/marketing-agent",
+          "text": "Marketing Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/customer-agent",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/customer-experience-hub",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/helpdesk",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/marketing-analytics",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/advanced-cdp",
+          "text": "Advanced Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/web-forms",
+          "text": "Web forms"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/email-templates",
+          "text": "Email templates"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/portfolio",
+          "text": "Portfolio"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform-integrations",
+          "text": "Apps and Integrations"
+        },
+        {
+          "href": "https://www.klaviyo.com/features",
+          "text": "Features"
+        },
+        {
+          "href": "https://www.klaviyo.com/whats-new",
+          "text": "What's new"
+        },
+        {
+          "href": "https://www.klaviyo.com/events",
+          "text": "Events"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help Center"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us",
+          "text": "Academy"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Community"
+        },
+        {
+          "href": "https://www.facebook.com/Klaviyo/",
+          "text": "Facebook"
+        },
+        {
+          "href": "https://twitter.com/klaviyo/",
+          "text": "Twitter"
+        },
+        {
+          "href": "https://www.linkedin.com/company/klaviyo/",
+          "text": "LinkedIn"
+        },
+        {
+          "href": "https://www.instagram.com/klaviyo/",
+          "text": "Instagram"
+        },
+        {
+          "href": "https://www.klaviyo.com/sitemap",
+          "text": "Site Map"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal",
+          "text": "Terms and Privacy"
+        },
+        {
+          "href": "https://www.klaviyo.com/security",
+          "text": "Security"
+        },
+        {
+          "href": "https://www.klaviyo.com/trust",
+          "text": "Trust"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal/intellectual-property-notices",
+          "text": "Intellectual Property Notices"
+        }
+      ],
+      "headings": [
+        {
+          "level": 1,
+          "id": "",
+          "text": "How to create an \"Added to Cart\" event for BigCommerce"
+        },
+        {
+          "level": 2,
+          "id": "h_01HTJ9366JR29KNVJ50CDBT1T1",
+          "text": "You will learn"
+        },
+        {
+          "level": 2,
+          "id": "h_01HTJ9366JSKXV2F1XX799H9D6",
+          "text": "Before you begin"
+        },
+        {
+          "level": 2,
+          "id": "h_01HTJ9366KNH8WX00MFV29RZRN",
+          "text": "Add the snippet"
+        },
+        {
+          "level": 2,
+          "id": "h_01HTJ9366KNYT8NN1RT9JP0NK7",
+          "text": "Alternate snippet for \"Add to Cart\" button without a button ID"
+        },
+        {
+          "level": 2,
+          "id": "h_01HTJ9366K818MV9586CHK64AT",
+          "text": "Troubleshooting your \"Added to Cart\" snippet"
+        },
+        {
+          "level": 2,
+          "id": "h_01HTJ9366KBY251D1F8TH79YZQ",
+          "text": "The \"Added to Cart\" abandoned cart flow"
+        },
+        {
+          "level": 2,
+          "id": "h_01HTJ9366KD4HT59G54ZXZ8E2Y",
+          "text": "Are you using Amazon Buy with Prime?"
+        },
+        {
+          "level": 2,
+          "id": "additional-resources",
+          "text": "Additional resources"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "Explore more from Klaviyo"
+        }
+      ]
+    }
+  },
+  "rendered_page": {
+    "status": "fetched",
+    "error": ""
+  }
+}

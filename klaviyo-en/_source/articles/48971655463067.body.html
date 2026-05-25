@@ -1,0 +1,236 @@
+<h2 id="9q4e5iu9yw3i">You will learn</h2>
+<p>Learn how to use the <code>{% barcode %}</code> tag to generate <a href="https://en.wikipedia.org/wiki/Code_128" target="_blank" rel="noopener noreferrer">Code 128</a> barcodes in your email, MMS, RCS, and WhatsApp messages. The barcode value can be a static string, a profile property, an event variable, or a Klaviyo coupon code.</p>
+<h3 id="dxc9mulub8z4">Quick reference</h3>
+<table>
+<tbody>
+<tr>
+<th>Channel</th>
+<th>Mode</th>
+<th>Where to add the tag</th>
+</tr>
+<tr>
+<td>Email</td>
+<td>
+<code>html</code> or <code>url</code>
+</td>
+<td>Text block, HTML block, or image block URL field</td>
+</tr>
+<tr>
+<td>MMS</td>
+<td>
+<code>url</code> (default)</td>
+<td>Dynamic Image section</td>
+</tr>
+<tr>
+<td>RCS</td>
+<td><code>rcs</code></td>
+<td>Dynamic Image section</td>
+</tr>
+<tr>
+<td>WhatsApp</td>
+<td>
+<code>url</code> (default)</td>
+<td>Dynamic Image section</td>
+</tr>
+</tbody>
+</table>
+<h2 id="28zyjwnysh5h">Before you begin</h2>
+<p>The <code>{% barcode %}</code> tag works by generating a URL. When that URL is loaded (in a preview, an inbox, or a mobile device), it renders a PNG image of the barcode. This means the barcode image isn't created until the URL is actually fetched.</p>
+<p>The <code>{% barcode %}</code> tag is supported in:</p>
+<ul>
+<li>Email</li>
+<li>MMS</li>
+<li>RCS</li>
+<li>WhatsApp</li>
+</ul>
+<div class="bs-callout bs-callout-default">
+<p>If you're currently using <code>{% barcode_code %}</code> from the <a href="https://help.klaviyo.com/hc/en-us/articles/115005084727" target="_blank" rel="noopener noreferrer">Getting started with coupon codes</a> article, the <code>{% barcode %}</code> tag is the recommended replacement. It supports all channels (not just email) and works with any value, not only Klaviyo coupon codes. The <code>{% barcode_code %}</code> tag still works for existing implementations, but new barcodes should use <code>{% barcode %}</code>.</p>
+</div>
+<h2 id="wstschg9eofu">Basic usage</h2>
+<p>The simplest way to use the barcode tag is:</p>
+<pre><code class="language-text">{% barcode 'MyCode' %}</code></pre>
+<p>This produces a URL that returns a PNG image of a barcode. When scanned, the barcode contains the value <code>MyCode</code>.</p>
+<div class="bs-callout bs-callout-warning">
+<p>The barcode value is required. The tag must always include a value — either a static string in quotes or a variable. A tag with no value (or a variable that resolves to empty) will produce an invalid URL.</p>
+</div>
+<p>You can customize the barcode by passing arguments to the tag. For example:</p>
+<pre><code class="language-text">{% barcode 'MyCode' width=200 height=100 %}</code></pre>
+<p>See the arguments reference section below for all available options.</p>
+<h2 id="pzx9a2bj9k3j">Using barcodes with different channels</h2>
+<h3 id="qltuwpyopipp">Email</h3>
+<p>For email, you have two options for how the barcode renders:</p>
+<p><strong>Option 1: HTML mode (recommended for email)</strong></p>
+<p>Set <code>mode=html</code> to have the tag output an HTML <code>&lt;img&gt;</code> element directly. This is the simplest approach for including a barcode in an email.</p>
+<pre><code class="language-text">{% barcode 'MyCode' mode=html %}</code></pre>
+<p>Place this tag in a text block or HTML block in the email template editor.</p>
+<p><strong>Option 2: URL mode</strong></p>
+<p>Leave the mode unset (or set <code>mode=url</code>) to get a URL, then place that URL in an image block's image URL field. This gives you more control over the image styling.</p>
+<pre><code class="language-text">{% barcode 'MyCode' %}</code></pre>
+<div class="bs-callout bs-callout-default">
+<p>If the barcode doesn't appear in a text block, check whether the block has show/hide logic applied that may be hiding it.</p>
+</div>
+<h3 id="zjs1fl9kgsqy">MMS</h3>
+<p>For MMS messages, add the barcode tag in the <strong>Dynamic Image</strong> section of the SMS/MMS editor, not in the text body.</p>
+<ol>
+<li>Open your MMS message in the editor.</li>
+<li>Click the <strong>Add image</strong> icon in the message box.</li>
+<li>Go to the <strong>Dynamic Image</strong> tab.</li>
+<li>Paste your barcode tag, for example:<br>
+<pre><code class="language-text">{% barcode person.LoyaltyId %}</code></pre>
+</li>
+<li>Click <strong>Save</strong>.</li>
+</ol>
+<p>This follows the same process as adding any dynamic image to an MMS. For more details, see <a href="https://help.klaviyo.com/hc/en-us/articles/1260806102230" target="_blank" rel="noopener noreferrer">How to add a dynamic image to a text message</a>.</p>
+<h3 id="rkrb5nunm1tk">RCS</h3>
+<p>For RCS messages, use <code>mode=rcs</code> to format the barcode for RCS image requirements. This mode automatically sets dimensions that display correctly on both Android and iOS.</p>
+<pre><code class="language-text">{% barcode 'MyCode' mode=rcs %}</code></pre>
+<p>Add the barcode tag in the Dynamic Image section of the RCS message editor, the same way you would for MMS.</p>
+<p><strong>RCS defaults:</strong></p>
+<ul>
+<li>Width: 600px</li>
+<li>Height: 300px</li>
+<li>Padded to: 1440x720px</li>
+</ul>
+<p>These defaults follow Klaviyo's RCS image formatting recommendations. You can override them with custom <code>width</code>, <code>height</code>, <code>padded_width</code>, and <code>padded_height</code> values if needed.</p>
+<div class="bs-callout bs-callout-default">
+<p>If your custom barcode dimensions exceed 1440x720px, the default padding will not be applied because the image won't fit in the standard canvas. In this case, provide your own <code>padded_width</code> and <code>padded_height</code> values.</p>
+</div>
+<h3 id="tpoz3jgpmysp">WhatsApp</h3>
+<p>For WhatsApp messages, add the barcode tag in the Dynamic Image section of the message editor, the same way you would for MMS.</p>
+<pre><code class="language-text">{% barcode person.MembershipId %}</code></pre>
+<p>No special configuration or mode is needed for WhatsApp. The default <code>mode=url</code> works correctly.</p>
+<h2 id="t9r3pz5lkuor">Barcode tag arguments reference</h2>
+<table>
+<tbody>
+<tr>
+<th>Argument</th>
+<th>Usage</th>
+<th>Values</th>
+<th>Default</th>
+</tr>
+<tr>
+<td><code>width</code></td>
+<td>Sets the width of the barcode</td>
+<td>A number (rendered size must not exceed 4096px; see Scaling and sizing)</td>
+<td>100</td>
+</tr>
+<tr>
+<td><code>height</code></td>
+<td>Sets the height of the barcode</td>
+<td>A number (rendered size must not exceed 4096px; see Scaling and sizing)</td>
+<td>50</td>
+</tr>
+<tr>
+<td><code>mode</code></td>
+<td>Sets the output format</td>
+<td>
+<code>url</code>, <code>html</code>, or <code>rcs</code>
+</td>
+<td><code>url</code></td>
+</tr>
+<tr>
+<td><code>coupon</code></td>
+<td>Specifies that the value is a Klaviyo-managed coupon code</td>
+<td>
+<code>True</code> or <code>False</code>
+</td>
+<td><code>False</code></td>
+</tr>
+<tr>
+<td><code>padded_width</code></td>
+<td>Width of the padded image area in pixels. Must be provided with <code>padded_height</code>. Not scaled.</td>
+<td>A number less than 4096</td>
+<td>None (1440 for <code>mode=rcs</code>)</td>
+</tr>
+<tr>
+<td><code>padded_height</code></td>
+<td>Height of the padded image area in pixels. Must be provided with <code>padded_width</code>. Not scaled.</td>
+<td>A number less than 4096</td>
+<td>None (720 for <code>mode=rcs</code>)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="cq3kyoos8f6b">Using barcodes with profile properties and event data</h2>
+<p>You can use profile properties or event variables as the barcode value, so each recipient gets a unique barcode.</p>
+<p><strong>Profile property examples:</strong></p>
+<pre><code class="language-text">{% barcode person.LoyaltyId %}
+{% barcode person.email %}
+{% barcode person.MembershipNumber %}</code></pre>
+<p><strong>Event variable examples (for metric-triggered flows):</strong></p>
+<pre><code class="language-text">{% barcode event.Code %}
+{% barcode event.OrderId %}</code></pre>
+<p><strong>Handling missing values:</strong></p>
+<p>If a recipient doesn't have the property set, the barcode URL will be invalid and the image won't load. You have two options:</p>
+<p>Option 1: Use a <code>default</code><strong> filter</strong> to set a meaningful fallback value:</p>
+<pre><code class="language-text">{% barcode person.BarcodeCode|default:'STORE-MEMBER' %}</code></pre>
+<p>Make sure the default is a value that makes sense if scanned. A generic placeholder like "fallback" would produce a scannable but useless barcode.</p>
+<p><strong>Option 2: Use a conditional statement</strong> to hide the barcode entirely when the value is missing:</p>
+<pre><code class="language-text">{% if person.BarcodeCode %}
+  {% barcode person.BarcodeCode mode=html %}
+{% endif %}</code></pre>
+<div class="bs-callout bs-callout-warning">
+<p>Always handle the missing-value case when the barcode value comes from a profile property or event variable. Without a default or conditional, recipients missing that property will see a broken image.</p>
+</div>
+<p><strong>Combined example for email:</strong></p>
+<pre><code class="language-text">{% barcode person.LoyaltyId width=200 height=75 mode=html %}</code></pre>
+<h2 id="p5pwnklfj7k5">Using barcodes with Klaviyo coupon codes</h2>
+<p>If you use Klaviyo-managed coupon codes and want to render them as barcodes, set <code>coupon=True</code>. This tells the system to assign a coupon code to the recipient and use that code as the barcode value.</p>
+<pre><code class="language-text">{% barcode 'ShopifyCoupon' coupon=True %}</code></pre>
+<p>This works across all channels. For example, to send a coupon barcode via RCS:</p>
+<pre><code class="language-text">{% barcode 'ShopifyCoupon' coupon=True mode=rcs %}</code></pre>
+<div class="bs-callout bs-callout-default">
+<p>Only set <code>coupon=True</code> when using Klaviyo-managed coupon codes. If you manage your own coupon codes and store them as a profile property, reference the property directly without <code>coupon=True</code>:</p>
+<pre><code class="language-text">{% barcode person.CouponCode %}</code></pre>
+</div>
+<h2 id="5kouowrblhul">Scaling and sizing</h2>
+<p>By default, the barcode's width and height are scaled by a factor of <strong>3x</strong>. This means:</p>
+<ul>
+<li>A <code>width</code> of 100 renders at <strong>300px</strong> actual width</li>
+<li>A <code>height</code> of 50 renders at <strong>150px</strong> actual height<br>
+<p><strong>Exception:</strong> When <code>mode=rcs</code>, the scaling factor is <strong>1x</strong>. This allows more precise control over the barcode dimensions to fit RCS image formatting requirements.</p>
+<p><strong>Padding values are not scaled.</strong> The <code>padded_width</code> and <code>padded_height</code> arguments always represent actual pixel values. Because the inner barcode is scaled by 3x, your padding values must be larger than 3 times the width and height. For example:</p>
+<pre><code class="language-text">{% barcode 'Code' width=200 height=100 padded_width=700 padded_height=400 %}</code></pre>
+<p>Here, the barcode renders at 600x300px (200×3, 100×3) within a 700x400px padded canvas.</p>
+<p><strong>Maximum image size:</strong> The barcode service will not generate images larger than <strong>4096x4096 pixels</strong>. This limit applies to the <em>rendered</em> size after scaling. For non-RCS barcodes (3x scaling), that means the maximum <code>width</code> argument is approximately 1365 (1365 × 3 = 4095px). For RCS barcodes (1x scaling), the maximum is 4096.</p>
+<p><strong>Width guidelines for long codes:</strong></p>
+</li>
+<li>For non-RCS barcodes: if your code exceeds <strong>15 characters</strong>, increase the width beyond the default of 100 (which renders at 300px).</li>
+<li>For RCS barcodes: if your code exceeds <strong>30 characters</strong>, increase the width beyond the default of 600px.</li>
+</ul>
+<p>If the width is too narrow to encode the data, the barcode image will fail to generate.</p>
+<h2 id="wvu4rg9y0tbo">Troubleshooting</h2>
+<h3 id="pqgc014102hq">Always preview before sending</h3>
+<p>Because the <code>{% barcode %}</code> tag produces a URL at render time and the image isn't generated until that URL is fetched, failures may not be apparent until you preview or send the message. Follow these steps to catch issues early:</p>
+<ol>
+<li>
+<strong>Preview the message.</strong> If the barcode doesn't load in the preview, it won't load when sent.</li>
+<li>
+<strong>Scan the barcode.</strong> Use a barcode scanning tool (such as <a href="https://www.imagetotext.info/barcode-scanner" target="_blank" rel="noopener noreferrer">imagetotext.info/barcode-scanner</a>) to verify the barcode encodes the expected value.</li>
+<li>
+<strong>Send a test message to yourself</strong> before sending to your audience.</li>
+</ol>
+<h3 id="kbcx13ri4061">Common issues</h3>
+<p><strong>The barcode image doesn't load</strong></p>
+<p>The most common cause is an empty barcode value. This happens when the tag references a profile property or event variable that the recipient doesn't have. For example:</p>
+<pre><code class="language-text">{% barcode person.BarcodeCode %}</code></pre>
+<p>If the recipient has no <code>BarcodeCode</code> value, the generated URL will be missing the code, and the image won't render. To fix this, add a <code>default</code> filter:</p>
+<pre><code class="language-text">{% barcode person.BarcodeCode|default:'defaultCode' %}</code></pre>
+<p><strong>The barcode image fails to generate but the URL looks correct</strong></p>
+<p>The barcode width is likely too narrow to encode all the data in your code. Try increasing the <code>width</code> value. As a rule of thumb:</p>
+<ul>
+<li>Codes over 15 characters need a width larger than the default 100 (300px rendered).</li>
+<li>RCS codes over 30 characters need a width larger than the default 600px.</li>
+</ul>
+<p><strong>The barcode doesn't appear in a text block (email)</strong></p>
+<p>Check whether the text block has show/hide logic applied. If a condition is hiding the block, the barcode won't render even if the tag is correct. Open the block's settings to verify.</p>
+<h2 id="or1w55vddyav">Additional resources</h2>
+<ul>
+<li>
+<a href="https://help.klaviyo.com/hc/en-us/articles/115005084727" target="_blank" rel="noopener noreferrer">Getting started with coupon codes in Klaviyo</a> — Learn how to create and manage coupon codes, including how to use the older <code>{% barcode_code %}</code> tag for coupon barcodes in email.</li>
+<li>
+<a href="https://help.klaviyo.com/hc/en-us/articles/1260806102230" target="_blank" rel="noopener noreferrer">How to add a dynamic image to a text message</a> — Learn how to add dynamic images to MMS messages, including where to find the Dynamic Image section in the editor.</li>
+<li>
+<a href="https://help.klaviyo.com/hc/en-us/articles/4408802648731" target="_blank" rel="noopener noreferrer">Message personalization reference</a> — Reference for all personalization tags available in Klaviyo, including profile properties, event variables, and filters.</li>
+<li>
+<a href="https://help.klaviyo.com/hc/en-us/articles/360041074911" target="_blank" rel="noopener noreferrer">Understanding MMS image and GIF best practices</a> — Best practices for image sizing and formatting in MMS messages.</li>
+</ul>

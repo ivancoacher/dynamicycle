@@ -1,0 +1,989 @@
+{
+  "captured_at": "2026-05-23T16:17:40Z",
+  "article": {
+    "id": 360039859932,
+    "url": "https://klaviyo.zendesk.com/api/v2/help_center/en-us/articles/360039859932.json",
+    "html_url": "https://klaviyo.zendesk.com/hc/en-us/articles/360039859932-Formatting-dates-for-CSV-files-reference",
+    "author_id": 386982900592,
+    "comments_disabled": true,
+    "draft": false,
+    "promoted": false,
+    "position": 3,
+    "vote_sum": -12,
+    "vote_count": 128,
+    "section_id": 49375383465243,
+    "created_at": "2020-02-27T15:50:33Z",
+    "updated_at": "2026-04-21T13:54:47Z",
+    "name": "Formatting dates for CSV files reference",
+    "title": "Formatting dates for CSV files reference",
+    "source_locale": "en-us",
+    "locale": "en-us",
+    "outdated": false,
+    "outdated_locales": [],
+    "edited_at": "2025-02-24T21:51:33Z",
+    "user_segment_id": null,
+    "permission_group_id": 146372,
+    "content_tag_ids": [],
+    "label_names": [],
+    "body": "<h2 id=\"h_01JAT94VJYAKAZWCF02V0TA1YB\">You will learn</h2>\n<p>Learn how to edit dates in Excel and Google files to match the required date format in Klaviyo. This will make the process of uploading a CSV with customer data seamless and help you avoid upload errors.</p>\n<p>When you run an ecommerce business that sells to customers around the world, many of these customers will format dates differently. Likewise, when you import dates from an Excel or Google File, these systems may reformat dates according to their default date settings. For example, Excel may reformat “March 1, 2020” to “1-Mar”.</p>\n<div class=\"bs-callout bs-callout-default\">\n<p>When you import dates with timestamps, map this field to the date data type in Klaviyo. However, if you import a date without a timestamp, a default time of midnight UTC is applied if mapped to the date data type. This may cause date based flows to send a day early or late depending on the account’s timezone. For that reason, if you only upload dates (no timestamps), map them to the text data type instead.</p>\n</div>\n<h2 id=\"h_01JAT6TPJ18HG6Z6CM3682YP7C\">Acceptable date and timestamp formats</h2>\n<p>See the example below for information around formatting your date and timestamps in a CSV file. Note that, you must format dates as either YYYY-MM-DD or MM/DD/YYYY. If there's no time of day associated with your date, you can set it to midnight by using the HH:MM:SS value 00:00:00.</p>\n<div class=\"bs-callout bs-callout-default\">\n<p>If you do not include seconds on your timestamps they will default to 0. For example, a timestamp of <code>2014-09-30 13:34</code> would be submitted to Klaviyo as <code>2014-09-30 13:34:<strong>00</strong></code></p>\n</div>\n<p>For example, the date September 30, 2014, at 1:34:08 pm should be formatted using one of the following supported formats:</p>\n<ul>\n<li><code>2014-09-30 13:34:08</code></li>\n<li><code>2014-09-30 13:34:08+00:00</code></li>\n<li><code>09/30/2014 13:34:08</code></li>\n<li><code>09/30/14 13:34:08</code></li>\n<li><code>09/30/2014 13:34</code></li>\n<li><code>09/30/14 13:34</code></li>\n<li><code>2014-09-30T13:34:08</code></li>\n<li><code>2014-09-30 13:34:08.000001</code></li>\n<li><code>2014-09-30T13:34:08.000001</code></li>\n<li><code>2014-09-30 13:34:08.000001-04:00</code></li>\n<li>\n<code>1412098448</code> (Unix)</li>\n</ul>\n<h2 id=\"h_01JAT94VJYW49R35X9GB5WE6KB\">Microsoft Excel</h2>\n<h3 id=\"h_01JAT94VJYZWDS9WA9K446TARQ\">Edit for consistency</h3>\n<p>To edit dates and timestamps within an Excel file, first select the cells that you want to reformat. Press <strong>Command+1 </strong>or<strong> Control+1</strong> (if you are using a macOS) or <strong>CTRL+1</strong> (if you are using Windows).</p>\n<p class=\"wysiwyg-text-align-center\"><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28716330281755\" alt=\"Sample Excel data with dates\"></p>\n<p>A <em>Format Cells</em> popup will appear. Select <strong>Number</strong> from the main tab (if it is not already selected), and under <em>Category</em>, select <strong>Date</strong>.</p>\n<p class=\"wysiwyg-text-align-center\"><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28716353282203\" alt=\"Excel's date format options menu\" width=\"667\" height=\"635\"></p>\n<p>Under <em>Type</em>, choose your desired date format. Make sure that you <a href=\"https://klaviyo.zendesk.com/hc/en-us/articles/115005253428\" target=\"_blank\" rel=\"noopener\">choose a date and timestamp format that is supported within Klaviyo</a>.</p>\n<p>For example, if you select <strong>2012-03-14</strong> (which is supported in Klaviyo) it will reformat each selected cell to reflect this formatting, as shown below.</p>\n<p class=\"wysiwyg-text-align-center\"><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28716330289307\" alt=\"Sample data in Excel with consistent date formatting\"></p>\n<h3 id=\"h_01JAT94VJY7ZH491CNKJ5DMVPG\">Edit for location</h3>\n<p>You can also change date formatting by location, or locale, under <em>Language</em> <em>(location)</em> in the <em>Format Cells</em> popup.</p>\n<p>In the above example, <em>English (United States)</em> is selected; thus, the dates will reflect US formatting (MM/DD). However, if you based in the UK, for example, and want dates to reflect the UK formatting (DD/MM), select <strong>English (United Kingdom)</strong> from the dropdown.</p>\n<p class=\"wysiwyg-text-align-center\"><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28716330296603\" alt=\"The Excel language setting\" width=\"557\" height=\"74\"></p>\n<p>Once your Excel file reflects the correct date/timestamp formatting, click <strong>File </strong>&gt;<strong> Save As</strong>. Save your file as a CSV.</p>\n<p>Then, head back to your Klaviyo account and <a href=\"https://help.klaviyo.com/hc/en-us/articles/115005078967\" target=\"_blank\" rel=\"noopener\">upload your CSV file to a list</a>.</p>\n<div class=\"bs-callout bs-callout-default\">\n<p>If these customers already exist in your account, when you upload your CSV to your list, new profiles will not be added. Instead, their profile will be updated to reflect the changes you make when you map fields. This will avoid duplicating customer information and cluttering your account.</p>\n</div>\n<h2 id=\"h_01JAT94VJYPCNXNE7SHYA0RAD0\">Google Sheets</h2>\n<h3 id=\"h_01JAT94VJY5Z3EDM20XKW9S1DZ\">Edit for location</h3>\n<p>You can change dates in Google Sheets to reflect your native date format, or locale, as well. For example, if you are in the UK, you may want to change the US date formatting (MM/DD) to UK formatting (DD/MM).</p>\n<p>To do so, head to <strong>File </strong>&gt;<strong> Spreadsheet Settings</strong>. The following popup will appear.</p>\n<p class=\"wysiwyg-text-align-center\"><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28716330299931\" alt=\"Google Sheets' setting modal\" width=\"607\" height=\"390\"></p>\n<p>Edit the <em>Locale</em> to reflect your location by selecting your country in the dropdown. You can also edit the <em>Display language </em>and<em> Time zone</em> as well. Then, click <strong>Save settings</strong>.</p>\n<p>If you're in the UK, set your <em>Locale</em> as <strong>United Kingdom</strong> and save this change. After saving, your dates will reformat to reflect this change.</p>\n<div class=\"bs-callout bs-callout-default\">\n<p>Ideally, edit <em>Locale</em> prior to reformatting for consistency. However, if you edit <em>Locale</em> second and then do not immediately see a change to your cells, simply select them again and click<strong> Format </strong>&gt;<strong> Number </strong>&gt;<strong> Date</strong>. Google Sheets will then update to reflect location changes.</p>\n</div>\n<h3 id=\"h_01JAT94VJY19PSW0J6973MW9N2\">Edit for consistency</h3>\n<p>To edit dates and timestamps for consistency within a Google spreadsheet, select the cells that you want to reformat.</p>\n<p class=\"wysiwyg-text-align-center\"><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28716330305563\" alt=\"A set of data in Google Sheets with dates\" width=\"573\" height=\"204\"></p>\n<p>Select <strong>Format </strong>&gt;<strong> Number </strong>&gt;<strong> Date</strong> (or <strong>Date time</strong> if you want to edit both the date and time in your file).</p>\n<p class=\"wysiwyg-text-align-center\"><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28716330310555\" alt=\"The date formatting option in a dropdown menu in Google Sheets\" width=\"524\" height=\"545\"></p>\n<p>This will update your dates to reflect the default Google Sheets formatting, as shown in the image below.</p>\n<p class=\"wysiwyg-text-align-center\"><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28716330313883\" alt=\"A set of data in Google Sheets with consistently formatted dates\" width=\"605\" height=\"217\"></p>\n<p>Alternatively, you can find date information by selecting the <strong>123</strong> dropdown.</p>\n<p class=\"wysiwyg-text-align-center\"><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28716353308315\" alt=\"The Date option from the 123 menu in Google Sheets\" width=\"401\" height=\"629\"></p>\n<p>Now that you have one consistent format across your spreadsheet, make sure that it aligns with <a href=\"https://klaviyo.zendesk.com/hc/en-us/articles/115005253428\" target=\"_blank\" rel=\"noopener\">Klaviyo’s guidelines for formatting dates and timestamps</a>.</p>\n<p>In the example above, the date does not include 0s in the Month and Day listed which are needed when you upload dates in Klaviyo. If this is the case and you need to update the default format, select <strong>More Formats</strong>.<br><br>Then click <strong>More date and time formats</strong>. Alternatively, you can create your own custom format.</p>\n<p><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28716353310235\" alt=\"The option to further customize dates in Google Sheets\"></p>\n<p>After selecting <strong>More data and time formats</strong>, a popup will appear showing your current date format. You can then choose from a variety of options. Select your desired format. Then, click <strong>Apply</strong>.</p>\n<p>For example, you may choose <strong>08/05/1930</strong> which is an acceptable format in Klaviyo.</p>\n<p class=\"wysiwyg-text-align-center\"><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28716353313307\" alt=\"A custom date and time format\" width=\"468\" height=\"505\"></p>\n<p>This will update all of your dates to appear in your desired format which can then be uploaded into Klaviyo.</p>\n<p class=\"wysiwyg-text-align-center\"><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28716353322139\" alt=\"A date column in Google Sheets with consistently formatted dates\" width=\"516\" height=\"182\"></p>\n<p>From there, navigate to <strong>File </strong>&gt;<strong> Download</strong>, and download your Google Sheet as a CSV file. Next, you will be able to <a href=\"https://help.klaviyo.com/hc/en-us/articles/115005078967\" target=\"_self\">upload your CSV file to a Klaviyo list</a>.</p>\n<p>If these customers already exist in your account, when you upload your CSV to your list, new profiles will not be added. Instead, their profile will be updated to reflect the changes you make when you map fields. This will avoid duplicating customer information and cluttering your account.</p>\n<div class=\"bs-callout bs-callout-default\">\n<p>To maintain the security of your data, Klaviyo's support team is not able to open your CSV files. If you need assistance troubleshooting a list import, <a href=\"https://help.klaviyo.com/hc/en-us/articles/115001002272\" target=\"_blank\" rel=\"noopener\">contact the support team</a> with a detailed description of the problem and screenshots of the error you encounter.</p>\n</div>\n<h2 id=\"h_01JAT95TDDJ91DMRVS6DJC9E1V\">CSV upload example</h2>\n<p>Below is an example of what this CSV file may look like as you upload it with the correct date/time formats.</p>\n<p><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/30318677964699\" alt=\"Example of a CSV with dates and times\"></p>\n<h2 id=\"h_01JAT94VJYSXAJH0YBKDA2YTEG\">Additional resources</h2>\n<ul>\n<li><a href=\"https://klaviyo.zendesk.com/hc/en-us/articles/115005253428\" target=\"_blank\" rel=\"noopener\">Acceptable date and timestamp formats for profile and event properties</a></li>\n<li><a href=\"https://klaviyo.zendesk.com/hc/en-us/articles/115005074627\" target=\"_blank\" rel=\"noopener\">Profile properties reference</a></li>\n</ul>",
+    "user_segment_ids": []
+  },
+  "normalized": {
+    "id": "360039859932",
+    "title": "Formatting dates for CSV files reference",
+    "source_url": "https://help.klaviyo.com/hc/en-us/articles/360039859932-Formatting-dates-for-CSV-files-reference",
+    "section_id": 49375383465243,
+    "section": "Build and use lists",
+    "category_id": 115000867867,
+    "category": "Audience",
+    "category_slug": "analytics-audience",
+    "klaviyo_updated": "2026-04-21T13:54:47Z",
+    "created_at": "2020-02-27T15:50:33Z",
+    "draft": false,
+    "promoted": false,
+    "position": 3,
+    "label_names": []
+  },
+  "files": {
+    "body_html": "_source/articles/360039859932.body.html",
+    "rendered_html": "_source/rendered/360039859932.html"
+  },
+  "assets": {
+    "api_body": {
+      "images": [
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28716330281755",
+          "alt": "Sample Excel data with dates",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28716353282203",
+          "alt": "Excel's date format options menu",
+          "width": "667",
+          "height": "635"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28716330289307",
+          "alt": "Sample data in Excel with consistent date formatting",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28716330296603",
+          "alt": "The Excel language setting",
+          "width": "557",
+          "height": "74"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28716330299931",
+          "alt": "Google Sheets' setting modal",
+          "width": "607",
+          "height": "390"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28716330305563",
+          "alt": "A set of data in Google Sheets with dates",
+          "width": "573",
+          "height": "204"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28716330310555",
+          "alt": "The date formatting option in a dropdown menu in Google Sheets",
+          "width": "524",
+          "height": "545"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28716330313883",
+          "alt": "A set of data in Google Sheets with consistently formatted dates",
+          "width": "605",
+          "height": "217"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28716353308315",
+          "alt": "The Date option from the 123 menu in Google Sheets",
+          "width": "401",
+          "height": "629"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28716353310235",
+          "alt": "The option to further customize dates in Google Sheets",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28716353313307",
+          "alt": "A custom date and time format",
+          "width": "468",
+          "height": "505"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28716353322139",
+          "alt": "A date column in Google Sheets with consistently formatted dates",
+          "width": "516",
+          "height": "182"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/30318677964699",
+          "alt": "Example of a CSV with dates and times",
+          "width": "",
+          "height": ""
+        }
+      ],
+      "links": [
+        {
+          "href": "https://klaviyo.zendesk.com/hc/en-us/articles/115005253428",
+          "text": "choose a date and timestamp format that is supported within Klaviyo"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005078967",
+          "text": "upload your CSV file to a list"
+        },
+        {
+          "href": "https://klaviyo.zendesk.com/hc/en-us/articles/115005253428",
+          "text": "Klaviyo’s guidelines for formatting dates and timestamps"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005078967",
+          "text": "upload your CSV file to a Klaviyo list"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115001002272",
+          "text": "contact the support team"
+        },
+        {
+          "href": "https://klaviyo.zendesk.com/hc/en-us/articles/115005253428",
+          "text": "Acceptable date and timestamp formats for profile and event properties"
+        },
+        {
+          "href": "https://klaviyo.zendesk.com/hc/en-us/articles/115005074627",
+          "text": "Profile properties reference"
+        }
+      ],
+      "headings": [
+        {
+          "level": 2,
+          "id": "h_01JAT94VJYAKAZWCF02V0TA1YB",
+          "text": "You will learn"
+        },
+        {
+          "level": 2,
+          "id": "h_01JAT6TPJ18HG6Z6CM3682YP7C",
+          "text": "Acceptable date and timestamp formats"
+        },
+        {
+          "level": 2,
+          "id": "h_01JAT94VJYW49R35X9GB5WE6KB",
+          "text": "Microsoft Excel"
+        },
+        {
+          "level": 3,
+          "id": "h_01JAT94VJYZWDS9WA9K446TARQ",
+          "text": "Edit for consistency"
+        },
+        {
+          "level": 3,
+          "id": "h_01JAT94VJY7ZH491CNKJ5DMVPG",
+          "text": "Edit for location"
+        },
+        {
+          "level": 2,
+          "id": "h_01JAT94VJYPCNXNE7SHYA0RAD0",
+          "text": "Google Sheets"
+        },
+        {
+          "level": 3,
+          "id": "h_01JAT94VJY5Z3EDM20XKW9S1DZ",
+          "text": "Edit for location"
+        },
+        {
+          "level": 3,
+          "id": "h_01JAT94VJY19PSW0J6973MW9N2",
+          "text": "Edit for consistency"
+        },
+        {
+          "level": 2,
+          "id": "h_01JAT95TDDJ91DMRVS6DJC9E1V",
+          "text": "CSV upload example"
+        },
+        {
+          "level": 2,
+          "id": "h_01JAT94VJYSXAJH0YBKDA2YTEG",
+          "text": "Additional resources"
+        }
+      ]
+    },
+    "rendered_page": {
+      "images": [
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/7ff492c2b417b7ecfe572f839a8a81398693c1f7-1920x1080.webp",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/e234e0c39576c8798905807cf717630ccb978b92-1600x338.jpg",
+          "alt": "Sample Excel data with dates",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/8a6381832d1c417ca5a6b90a7735f788a8e0f23b-1600x1522.jpg?w=667",
+          "alt": "Excel's date format options menu",
+          "width": "667",
+          "height": "635"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/d64913b1b0d2f7a10030d005d99c9cbb82b58975-1600x344.jpg",
+          "alt": "Sample data in Excel with consistent date formatting",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/8fd85dd3e9934609585e7922288f721467b2fe05-1608x214.jpg?w=557",
+          "alt": "The Excel language setting",
+          "width": "557",
+          "height": "74"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/cf78d47e395043da2d28175ee81fb186ba2ecf43-1600x1028.jpg?w=607",
+          "alt": "Google Sheets' setting modal",
+          "width": "607",
+          "height": "390"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/21b7f0def90847b683b2a9c2c266717878fd1f64-1000x356.jpg?w=573",
+          "alt": "A set of data in Google Sheets with dates",
+          "width": "573",
+          "height": "204"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/ec9f90bade5a27fc52fdd9542ec6a3e127ed4040-1000x1040.jpg?w=524",
+          "alt": "The date formatting option in a dropdown menu in Google Sheets",
+          "width": "524",
+          "height": "545"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/1a1b24deeb9643c4fd1010fffc53bdc73b35abf8-1000x358.jpg?w=605",
+          "alt": "A set of data in Google Sheets with consistently formatted dates",
+          "width": "605",
+          "height": "217"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/8d6d3c55dc569ab581c9f969d67f5306c8dbff5c-1000x1570.jpg?w=401",
+          "alt": "The Date option from the 123 menu in Google Sheets",
+          "width": "401",
+          "height": "629"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/9ce68d3e0e2fa0c374ef9345283f672f7902e507-1600x1242.jpg",
+          "alt": "The option to further customize dates in Google Sheets",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/9d856d033deea4187827e57b59bb2a403fcbc093-1000x1078.jpg?w=468",
+          "alt": "A custom date and time format",
+          "width": "468",
+          "height": "505"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/a5f524df0ff9c9b07d9adf70c7f0b4af225b9787-1200x424.jpg?w=516",
+          "alt": "A date column in Google Sheets with consistently formatted dates",
+          "width": "516",
+          "height": "182"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/ea38dd3a328e8d577df8328ba273142423dea8d2-1680x1027.gif",
+          "alt": "Example of a CSV with dates and times",
+          "width": "",
+          "height": ""
+        }
+      ],
+      "links": [
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360039859932-Formatting-dates-for-CSV-files-reference#site-content",
+          "text": "Skip to main content"
+        },
+        {
+          "href": "https://www.klaviyo.com",
+          "text": "Home"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center"
+        },
+        {
+          "href": "https://www.klaviyo.com/enterprise",
+          "text": "Enterprise"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Partners"
+        },
+        {
+          "href": "https://www.klaviyo.com/careers",
+          "text": "Careers"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": "Log in"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": ""
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center Find step-by-step instructions and troubleshooting solutions in our knowledge base."
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000032731",
+          "text": "Integrations"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000312411",
+          "text": "Flows"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867867",
+          "text": "Audience"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867667",
+          "text": "Campaigns"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/360000190711",
+          "text": "Sign-up forms"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000873988",
+          "text": "Deliverability & compliance"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/29173800271259",
+          "text": "SMS"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/16638219724187",
+          "text": "Reviews"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/18073014919195",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/34141283979931",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/37659126754075",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/33948021740315",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/39746685522331",
+          "text": "WhatsApp"
+        },
+        {
+          "href": "https://academy.klaviyo.com",
+          "text": "Klaviyo Academy Expert training and education to help you succeed with Klaviyo, and beyond."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Quick+guide&resource=academy_courses",
+          "text": "Quick guides Learn marketing strategies and concepts in 15 minutes or less."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Course&resource=academy_courses",
+          "text": "Courses Master key marketing topics through structured lessons and exams."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/best-practices",
+          "text": "Best practices Discover top product and marketing strategies for your business."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/learning-paths",
+          "text": "Learning paths Complete curated learning journeys tailored to your marketing goals."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses",
+          "text": "Explore all resources"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Live+training&resource=academy_courses",
+          "text": "Live trainings Build confidence through hands-on interactive workshops and thought-provoking strategy sessions."
+        },
+        {
+          "href": "https://www.bigmarker.com/klaviyo-customer-education/Office-hours-Getting-started-with-Klaviyo",
+          "text": "Live office hours Join a strategic discussion where you can ask questions and get answers in real-time."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/private-live-training",
+          "text": "1:1 Live training Book a private training session with an expert to jumpstart your platform knowledge and confidence."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/credentials",
+          "text": "Klaviyo credentials Dig deeper into select topics and showcase your expertise with a final exam to earn a certificate and digital badge."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/certificates/klaviyo-practitioner-certificate",
+          "text": "Klaviyo practitioner certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/deliverability-certificate",
+          "text": "Deliverability certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/developer-certificate",
+          "text": "Klaviyo developer certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses&select=Certificate",
+          "text": "See all certificates"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Klaviyo Community Join our thriving community network to connect with brands like yours—online and in person."
+        },
+        {
+          "href": "https://community.klaviyo.com/topic/new",
+          "text": "Ask a question Post a question and get thoughtful answers from Klaviyo powerusers."
+        },
+        {
+          "href": "https://community.klaviyo.com/p/roadmap",
+          "text": "Product roadmap"
+        },
+        {
+          "href": "https://community.klaviyo.com/search/activity/recent",
+          "text": "Recent threads"
+        },
+        {
+          "href": "https://community.klaviyo.com/p/champions",
+          "text": "Meet the Champions"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups",
+          "text": "Browse all groups Your people are waiting. New ideas and connections are a click away."
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/developer-group-64",
+          "text": "Developer group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/entrepreneur-user-group-118",
+          "text": "Entrepreneur group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/woo-user-group-87",
+          "text": "WooCommerce group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/new-york-meetup-chapter-82",
+          "text": "New York City"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/los-angeles-meetup-chapter-83",
+          "text": "Los Angeles"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/austin-meetup-chapter-85",
+          "text": "Austin"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/san-diego-meetup-chapter-86",
+          "text": "San Diego"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/amsterdam-meetup-chapter-84",
+          "text": "Amsterdam"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Klaviyo Developers Access API documentation and developer guides to help you build with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/get_started",
+          "text": "Get started Access key resources and a step-by-step checklist for how to start developing with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/build_your_integration",
+          "text": "Grow your app's reach Learn how to join our ecosystem and get your app listed on our marketplace."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/developer-tools",
+          "text": "Developer tools Generate sample data, monitor your API usage, and access our Postman collections."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/reference/api_overview",
+          "text": "API reference Browse our full catalog of API docs."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/changelog_",
+          "text": "Changelog"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/api_versioning_and_deprecation_policy",
+          "text": "Versioning & deprecation policy"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/rate_limits_and_error_handling",
+          "text": "Rate limits & error handling"
+        },
+        {
+          "href": "https://youtube.com/playlist?list=PLHkNfHgtxcUanrkMnKPdkRzuWU7MGv_xM&si=pkG-KH7IT_TUHOGC",
+          "text": "API tutorials on YouTube Subscribe to our Klaviyo API Tutorials playlist for easy access to step-by-step developer walkthroughs."
+        },
+        {
+          "href": "https://www.klaviyo.com/contact-us",
+          "text": "Contact us"
+        },
+        {
+          "href": "https://www.klaviyo.com/sign-up",
+          "text": "Sign up"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": "Search"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360039859932",
+          "text": "United States - EN"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/de-de/articles/360039859932",
+          "text": "Deutschland - DE"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-es/articles/360039859932",
+          "text": "España - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-mx/articles/360039859932",
+          "text": "México - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/fr-fr/articles/360039859932",
+          "text": "France - FR"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/it-it/articles/360039859932",
+          "text": "Italia - IT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/ko-kr/articles/360039859932",
+          "text": "한국 - KO"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/nl-nl/articles/360039859932",
+          "text": "Nederland - NL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pl-pl/articles/360039859932",
+          "text": "Polska - PL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pt-br/articles/360039859932",
+          "text": "Brasil - PT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/sv-se/articles/360039859932",
+          "text": "Sverige - SV"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/14512077651099",
+          "text": "Lists and segments"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/49375383465243",
+          "text": "Build and use lists"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360039859932-Formatting-dates-for-CSV-files-reference#h_01JAT94VJYAKAZWCF02V0TA1YB",
+          "text": "You will learn"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360039859932-Formatting-dates-for-CSV-files-reference#h_01JAT6TPJ18HG6Z6CM3682YP7C",
+          "text": "Acceptable date and timestamp formats"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360039859932-Formatting-dates-for-CSV-files-reference#h_01JAT94VJYW49R35X9GB5WE6KB",
+          "text": "Microsoft Excel"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360039859932-Formatting-dates-for-CSV-files-reference#h_01JAT94VJYPCNXNE7SHYA0RAD0",
+          "text": "Google Sheets"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360039859932-Formatting-dates-for-CSV-files-reference#h_01JAT95TDDJ91DMRVS6DJC9E1V",
+          "text": "CSV upload example"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360039859932-Formatting-dates-for-CSV-files-reference#additional-resources",
+          "text": "Additional resources"
+        },
+        {
+          "href": "https://klaviyo.zendesk.com/hc/en-us/articles/115005253428",
+          "text": "choose a date and timestamp format that is supported within Klaviyo"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005078967",
+          "text": "upload your CSV file to a list"
+        },
+        {
+          "href": "https://klaviyo.zendesk.com/hc/en-us/articles/115005253428",
+          "text": "Klaviyo’s guidelines for formatting dates and timestamps"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005078967",
+          "text": "upload your CSV file to a Klaviyo list"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115001002272",
+          "text": "contact the support team"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005253428",
+          "text": "Acceptable date and timestamp formats for profile and event properties reference"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005074627",
+          "text": "Profile properties reference"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115001002272",
+          "text": "Learn how to contact support"
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": ""
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": "Visit Community"
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": ""
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": "Hire a partner"
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/about",
+          "text": "About Klaviyo"
+        },
+        {
+          "href": "https://www.klaviyo.com/newsroom",
+          "text": "Newsroom"
+        },
+        {
+          "href": "https://investors.klaviyo.com/overview/default.aspx",
+          "text": "Investor relations"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Agency and tech partners"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Developers"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/retail",
+          "text": "Retail and ecommerce"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/restaurants",
+          "text": "Restaurant marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/wellness",
+          "text": "Wellness"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform",
+          "text": "B2C CRM overview"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai",
+          "text": "Klaviyo AI (K:AI)"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/marketing-automation",
+          "text": "Klaviyo Marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-service",
+          "text": "Klaviyo Service"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/analytics",
+          "text": "Klaviyo Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-data-platform",
+          "text": "Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare",
+          "text": "Klaviyo vs. Klaviyo alternatives"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-mailchimp",
+          "text": "Klaviyo vs. Mailchimp"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-postscript",
+          "text": "Klaviyo vs. Postscript"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-attentive",
+          "text": "Klaviyo vs. Attentive"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-salesforce-marketing-cloud",
+          "text": "Klaviyo vs. Salesforce"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-listrak",
+          "text": "Klaviyo vs. Listrak"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/omnichannel",
+          "text": "Omnichannel marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/email-marketing",
+          "text": "Email marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing",
+          "text": "SMS marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing/rcs",
+          "text": "RCS for Business"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/mobile-app-marketing",
+          "text": "Mobile app marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/whatsapp",
+          "text": "WhatsApp marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/social",
+          "text": "Social marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources",
+          "text": "Marketing resources"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources/marketing-campaign-calendar",
+          "text": "Marketing campaign calendar"
+        },
+        {
+          "href": "https://www.klaviyo.com/glossary",
+          "text": "Marketing glossary"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/email-subject-line-generator",
+          "text": "Subject line generator"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/roi-calculator",
+          "text": "ROI calculator"
+        },
+        {
+          "href": "https://www.klaviyo.com/customers",
+          "text": "Case studies"
+        },
+        {
+          "href": "https://www.klaviyo.com/composer",
+          "text": "Composer Beta"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/marketing-agent",
+          "text": "Marketing Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/customer-agent",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/customer-experience-hub",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/helpdesk",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/marketing-analytics",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/advanced-cdp",
+          "text": "Advanced Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/web-forms",
+          "text": "Web forms"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/email-templates",
+          "text": "Email templates"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/portfolio",
+          "text": "Portfolio"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform-integrations",
+          "text": "Apps and Integrations"
+        },
+        {
+          "href": "https://www.klaviyo.com/features",
+          "text": "Features"
+        },
+        {
+          "href": "https://www.klaviyo.com/whats-new",
+          "text": "What's new"
+        },
+        {
+          "href": "https://www.klaviyo.com/events",
+          "text": "Events"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help Center"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us",
+          "text": "Academy"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Community"
+        },
+        {
+          "href": "https://www.facebook.com/Klaviyo/",
+          "text": "Facebook"
+        },
+        {
+          "href": "https://twitter.com/klaviyo/",
+          "text": "Twitter"
+        },
+        {
+          "href": "https://www.linkedin.com/company/klaviyo/",
+          "text": "LinkedIn"
+        },
+        {
+          "href": "https://www.instagram.com/klaviyo/",
+          "text": "Instagram"
+        },
+        {
+          "href": "https://www.klaviyo.com/sitemap",
+          "text": "Site Map"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal",
+          "text": "Terms and Privacy"
+        },
+        {
+          "href": "https://www.klaviyo.com/security",
+          "text": "Security"
+        },
+        {
+          "href": "https://www.klaviyo.com/trust",
+          "text": "Trust"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal/intellectual-property-notices",
+          "text": "Intellectual Property Notices"
+        }
+      ],
+      "headings": [
+        {
+          "level": 1,
+          "id": "",
+          "text": "Formatting dates for CSV files reference"
+        },
+        {
+          "level": 2,
+          "id": "h_01JAT94VJYAKAZWCF02V0TA1YB",
+          "text": "You will learn"
+        },
+        {
+          "level": 2,
+          "id": "h_01JAT6TPJ18HG6Z6CM3682YP7C",
+          "text": "Acceptable date and timestamp formats"
+        },
+        {
+          "level": 2,
+          "id": "h_01JAT94VJYW49R35X9GB5WE6KB",
+          "text": "Microsoft Excel"
+        },
+        {
+          "level": 3,
+          "id": "h_01JAT94VJYZWDS9WA9K446TARQ",
+          "text": "Edit for consistency"
+        },
+        {
+          "level": 3,
+          "id": "h_01JAT94VJY7ZH491CNKJ5DMVPG",
+          "text": "Edit for location"
+        },
+        {
+          "level": 2,
+          "id": "h_01JAT94VJYPCNXNE7SHYA0RAD0",
+          "text": "Google Sheets"
+        },
+        {
+          "level": 3,
+          "id": "h_01JAT94VJY5Z3EDM20XKW9S1DZ",
+          "text": "Edit for location"
+        },
+        {
+          "level": 3,
+          "id": "h_01JAT94VJY19PSW0J6973MW9N2",
+          "text": "Edit for consistency"
+        },
+        {
+          "level": 2,
+          "id": "h_01JAT95TDDJ91DMRVS6DJC9E1V",
+          "text": "CSV upload example"
+        },
+        {
+          "level": 2,
+          "id": "additional-resources",
+          "text": "Additional resources"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "Explore more from Klaviyo"
+        }
+      ]
+    }
+  },
+  "rendered_page": {
+    "status": "fetched",
+    "error": ""
+  }
+}

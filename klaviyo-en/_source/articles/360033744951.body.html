@@ -1,0 +1,473 @@
+<h2 id="h_01HGGQ1HWYJ1PY6YZEKVWF42MG">You will learn</h2>
+<p>Learn how to integrate Salesforce Commerce Cloud with Klaviyo. The Klaviyo cartridge and API integration allows websites using Salesforce Commerce Cloud (formerly Demandware) to quickly connect and send both real-time and historic data to Klaviyo. When you integrate Klaviyo with Salesforce Commerce Cloud (SFCC), Klaviyo will start tracking actions people take in real-time like website navigation, search tracking, viewing products, viewing categories, adding items to a cart, checking out, and ordering.</p>
+<p>There are 3 main steps to integrating SFCC with Klaviyo:</p>
+<ol>
+<li>Installing the Klaviyo cartridge in SFCC.</li>
+<li>Adding enablement snippets to SFCC.</li>
+<li>Enabling the SFCC OCAPI integration in Klaviyo.</li>
+</ol>
+<h2 id="h_01HGGQ1HWYNG35S85KNKDMZYPA">Before you begin</h2>
+<p>Klaviyo integrates with both SFCC Controller-based Site Genesis (SG) and Storefront Reference Architecture (SFRA) sites. Each framework requires a slightly different cartridge setup and snippets, described below.</p>
+<div class="bs-callout bs-callout-default">
+<p>Are you using a Klaviyo SFCC cartridge below version 23.7.0? 23.7.0 and up include a number of additional features, a more complete out-of-the-box install, and improvements related to developer experience. If you would like to upgrade, read <a href="https://help.klaviyo.com/hc/en-us/articles/16708128591259">How to upgrade your Salesforce Commerce Cloud cartridge</a>.</p>
+</div>
+<p>In order to use our version 23.7.0 cartridge (or any higher version), we recommend updating your SFCC compatibility mode to 21.7 or higher.</p>
+<p>If you'd like to start by integrating your development environment first, you can create a linked Klaviyo account using <a href="https://help.klaviyo.com/hc/en-us/articles/360002165611-Multi-Account-User-Privileges#create-multiple-accounts-with-the-same-email-address2">the method described in this article</a> and connect your development environment with that account. We recommend including the word "Dev" or "Staging" in the company name you use when setting up the account, in order to better differentiate between accounts when logged in. </p>
+<h2 id="h_01HGGQ1HWYMD11HN1G0KTC4SCN">Set up the Klaviyo cartridges</h2>
+<h3 id="h_01HGGQ1HWYEJ70YCG6TT7J8SGE">Download the cartridges</h3>
+<p>You can find our app listing on the <a href="https://appexchange.salesforce.com/listingDetail?listingId=a0N4V00000Jg1peUAB&amp;tab=e">Salesforce AppExchange</a>. On the AppExchange, you can learn more about Klaviyo and click <strong>Get It Now</strong> to be brought to Github, where our cartridges are available in a zip file for download. If you have a SFRA site, download the KlaviyoSFRA zip file, and if you have a Site Genesis site, download the KlaviyoSG zip file. </p>
+<p>You will need to set up 2 cartridges, both of which are included in the zip file you downloaded. These cartridges include:</p>
+<ul>
+<li>int_klaviyo or int_klaviyo_sfra: A site-specific cartridge; int_klaviyo is for Site Genesis-based websites, and int_klaviyo_sfra is for SFRA-based websites.</li>
+<li>int_klaviyo_core: for both types of infrastructures, containing some basic, overlapping functionality.</li>
+</ul>
+<h3 id="h_01HGGQ1HWY1YWX3HQ9GWKBZGKB">Import the cartridges</h3>
+<p>The first step is to import the cartridges in Visual Studio Code or Eclipse so they're available to link with your SFCC instance.</p>
+<h4 id="h_01HGGQ1HWYMS6AS460XC4NTFAQ">In VS Code</h4>
+<ol>
+<li>Copy and paste the int_klaviyo_core cartridge.</li>
+<li>Copy either the int_klaviyo (Site Genesis) or int_klaviyo_sfra (SFRA) folders into the codebase as siblings to your other cartridge folders.</li>
+</ol>
+<h4 id="h_01HGGQ1HWY50GR070TPPTRYACG">In Eclipse</h4>
+<ol>
+<li>Navigate to<strong> Administration &gt; Import &gt; General &gt; Existing Projects into Workspace</strong>.</li>
+<li>Import the int_klaviyo_core directory using the import wizard.</li>
+<li>Select the SFCC instance with which to connect the cartridge.</li>
+<li>Select <strong>Properties</strong>.</li>
+<li>Select <strong>Project References</strong>.</li>
+<li>Check in the int_klaviyo_core cartridge.</li>
+<li>Repeat steps 2 through 6 for the other cartridge specific to your framework (either int_klaviyo or int_klaviyo_sfra).</li>
+</ol>
+<h3 id="h_01HGGQ1HWY8QJYKV63EYAJTHVG">Add the cartridges to the cartridge path</h3>
+<p>Once the cartridges are imported, they need to be added to the list of cartridges used by your site using SFCC's Business Manager.</p>
+<ol>
+<li>Navigate to <strong>Administration &gt; Sites &gt; Manage Sites</strong>.</li>
+<li>Select your site.</li>
+<li>Select the <strong>Settings</strong> tab.</li>
+<li>At the beginning of the cartridge path input labeled Cartridges, add the names of the imported Klaviyo cartridges with the core cartridge last (either, int_klaviyo:int_klaviyo_core or int_klaviyo_sfra:int_klaviyo_core).</li>
+<li>Click <strong>Apply</strong>.</li>
+</ol>
+<p>Once you've clicked Apply, you should now see the 2 cartridges at the beginning of the field labeled <em>Effective Cartridge Path</em>.<br>
+</p>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/28711698596635" alt=""></p>
+<h3 id="h_01HGGQ1HWYYK4YDGCGFYHZ6JPA">Add services</h3>
+<p>After importing the cartridges and adding them to the site cartridge path, the Klaviyo service must be added to enable settings configuration for the cartridge. In the root directory of the Klaviyo cartridges zip file is another zip file called metadata.zip. The following directions will reference this zip file.</p>
+<ol>
+<li>Navigate to <strong>Administration &gt; Site Development &gt; Site Import &amp; Export &gt; Services</strong>.</li>
+<li>Upload, then import the metadata.zip file.<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28711698559131" alt="" width="519" height="277">
+</li>
+<li>When you're prompted to confirm whether you'd like to import the selected archive, select <strong>OK</strong>.</li>
+<li>You should now see the import running under the <em>Status</em> section near the bottom of the page.<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28711677142427" alt="" width="513" height="104">
+</li>
+<li>You will now have access to a preferences page at <strong>Merchant tools &gt; Site Preferences &gt; Custom Preferences &gt; klaviyo</strong>.<br>
+<br>
+From here, you can manage the following settings:<br>
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28711677147035" alt="" width="613" height="570">
+<ul>
+<ul>
+<li>
+<strong>Klaviyo Enabled</strong><br>
+Must be set to "Yes" to enable the cartridge.</li>
+<li>
+<strong>Klaviyo Private Key</strong><br>
+A <a href="https://help.klaviyo.com/hc/en-us/articles/115005062267">Klaviyo private API key</a>. Make sure that the Klaviyo private API key you use for this integration has been granted full access. </li>
+<li>
+<strong>Klaviyo Account</strong><br>
+Your <a href="https://help.klaviyo.com/hc/en-us/articles/115005062267-Manage-Your-Account-s-API-Keys#your-public-api-key---site-id2">Klaviyo public API key, or Site ID</a>.</li>
+<li>
+<strong>Label Events as SFCC</strong><br>
+If you choose to label events as SFCC, you will have access to pre-built flows in Klaviyo using SFCC data. A current drawback to labeling events is that if you choose to label them, you will not have access to <em>Viewed Product</em> or <em>Added to Cart</em> recommendations in Klaviyo product feeds. <br>
+
+<ul>
+<li>If you previously installed a cartridge version older than 23.7.0, and are now upgrading to version 23.7.0 or higher, set to <em>No</em>. Integrations created before July 13, 2023 (i.e., cartridge versions prior to 23.7.0) generate metrics that are not labeled as SFCC. If you used a version prior to 23.7.0 in the past, this setting accounts for the old naming conventions to prevent a discontinuity of metric data in your account. </li>
+</ul>
+</li>
+<li>
+<strong>Send Added To Cart Event as “Add To Cart”</strong><br>
+If you previously installed a cartridge version older than 23.7.0, and are now upgrading to version 23.7.0 or higher, set to <em>Yes</em>. Otherwise, set to <em>No</em>. This setting prevents the discontinuity of metric data in your account. </li>
+<li>
+<strong>Klaviyo Email Field Selectors </strong>and<strong> Checkout Email Field Selector</strong><br>
+Please see the section below for detailed information on how to configure these 2 fields.</li>
+<li>
+<strong>Image Type</strong><br>
+The product image type you would like used in event data sent to Klaviyo. If you're not sure which image type to set, navigate to <strong>Merchant tools &gt; Products and Catalogs &gt; Products</strong>, click on a product, and determine which view type you want to use based on what's available (eg. large, medium, small, hi-res).</li>
+<li>
+<strong>Marketing Email List ID</strong><br>
+You can collect email subscribers at checkout and sync them to a Klaviyo list. This setting is the ID of the list in Klaviyo that you wish to add email subscribers to. Learn <a href="https://help.klaviyo.com/hc/en-us/articles/115005078647">how to find a list ID in Klaviyo</a>. To collect email subscribers at checkout, you’ll also need to add a checkbox snippet which is described in a later section.</li>
+<li>
+<strong>Marketing SMS List ID </strong><br>
+You can collect SMS subscribers at checkout and sync them to a Klaviyo list. This setting is the ID Klaviyo list that you wish to add SMS subscribers to. Learn <a href="https://help.klaviyo.com/hc/en-us/articles/115005078647">how to find a list ID in Klaviyo</a>. If you gather both SMS and email subscribers, choose a different list for SMS than for email. This makes sure that consent will always be properly attributed to the correct channel. To collect SMS subscribers at checkout, you’ll need some other prerequisites, along with a checkbox snippet, which are described in a later section.<br>
+</li>
+</ul>
+</ul>
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28711698587803" alt="">
+</li>
+<li>The metadata.zip file will also create a new service in SFCC. Navigating to <strong>Administration &gt; Operations &gt; Services</strong>, you should now see 2 new entries under the Services tab called KlaviyoEventService and KlaviyoSubscribeProfilesService, each with respective profile and credentials entries.</li>
+</ol>
+<h3 id="h_01HGGQ1HWYHQB6T208BTGWG89V">Configuring Klaviyo Email Field Selectors and Checkout Email Field Selector </h3>
+<p>These preferences are integral to Klaviyo successfully identifying and tracking site visitors. If a visitor is not identified to Klaviyo, then no events will be tracked for that visitor. Once you are done integrating, you can learn how to test your Klaviyo email and checkout email field selector setup in the <em>Test your SFCC setup</em> section below. </p>
+<h4 id="h_01HGGQ1HWZSSVGXVAB7NVB9A2N">Klaviyo Email Field Selectors</h4>
+<p>The Klaviyo Email Field Selectors site preference is used to target any and all email and phone number input fields on the site (with the exception of the email input located in checkout, which is dealt with below). We identify these fields via standard CSS selectors, with each being added individually to the site preference (which is a “Set of Strings,” allowing for multiple string values to be entered one by one). Any complex selector that could be used in a standard stylesheet to target a specific element can be used, e.g., #dwfrm_login div.username input.input-text is acceptable, as are selectors that can target multiple elements across the site based on shared attributes, e.g., input[type=email]. Be sure to avoid targeting inputs via any dynamically generated IDs — a very common case in SiteGen — as those IDs will change based on page load and thus fail (e.g., #dwfrm_login_username_d0fignzngiyq).</p>
+<p>Note that fields added to the DOM post page load can still be targeted. Examples of this include an email address field that gets inserted into a modal after an AJAX call, or one that gets injected into the DOM by third-party JavaScripts.</p>
+<p>Also note that phone number fields alone may not fully identify the user to Klaviyo, depending on your SMS settings within your Klaviyo account (if SMS is enabled and you have a sending number associated with the country of the input phone number, the browser will be identified). As such, adding CSS selectors to target phone number fields can be considered “nice to have,” or “as-needed,” whereas adding them for email fields should be considered essential.</p>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/28711677152283" alt="" width="538" height="255"></p>
+<h4 id="h_01HGGQ1HWZ97YVY3YK67EWSV0F">Checkout Email Field Selector</h4>
+<p>The email collection field in checkout is a special case, and as such has its own site preference for targeting. The principle works exactly the same as the Klaviyo Email Field Selectors site preference: simply enter a single CSS selector that targets the email address field in your site’s checkout flow, regardless of whether it appears at the start, end, or in the middle of checkout.</p>
+<p>Successfully configuring this site preference to target the email collection field in checkout is essential to correctly track the <em>Started Checkout</em> event, and as such it is highly recommended that you test to ensure that <em>Started Checkout</em> events appear in Klaviyo after an email address is entered into the email collection field in checkout. </p>
+<p>Also note that the checkout email field targeted by the Checkout Email Field Selector site preference will automatically get wired to identify the user, in addition to triggering the <em>Started Checkout</em> event (i.e., there is no need to include the CSS selector for the checkout email field in both the Klaviyo Email Field Selectors and Checkout Email Field Selector site preferences).</p>
+<h3 id="h_01HGGQ1HWZGNW97NTWBRPCREZF">Add setup snippets</h3>
+<p>The last part of the cartridge setup is to add the snippets to your site template files in order to enable the cartridge to communicate with the site. These steps differ greatly for Site Genesis (SG) and Storefront Reference Architecture (SFRA) infrastructures, so make sure to follow the correct instructions for your setup.</p>
+<h4 id="h_01HGGQ1HWZVSRPVM1BYM3R1W1J">Storefront Reference Architecture (SFRA) snippet setup</h4>
+<p>Add the following code to the bottom of your pageFooter.isml file:</p>
+<pre><code class="language-text">&lt;isinclude template="klaviyo/klaviyoFooter"/&gt;</code></pre>
+<p>You have now completed snippet setup for your SFRA store. </p>
+<h4 id="h_01HGGQ1HWZDE24X19VW2W20ZK6">Site Genesis (SG) snippet setup</h4>
+<ol>
+<li>To add the KlaviyoFooter.isml to the global footer: Add the following code to the bottom of your footer.isml file (or any similar template that is loaded near the bottom of every page).<br>
+
+<pre><code class="language-text">&lt;isinclude template="klaviyo/klaviyoFooter"/&gt;</code></pre>
+</li>
+<li>To Add snippets for server-side user identification: Add the following snippet to your Account-Show and Cart-Show controllers anywhere before the call to render their respective templates (i.e., app.getView(...)).<br>
+
+<pre><code class="language-text">   // KLAVIYO
+    var klaviyoUtils = require('*/cartridge/scripts/klaviyo/utils'), klid;
+    if(klaviyoUtils.klaviyoEnabled &amp;&amp; 
+    !klaviyoUtils.getKlaviyoExchangeID()){
+    klid = klaviyoUtils.getProfileInfo();
+    }
+    // END KLAVIYO</code></pre>
+</li>
+<li>Then, you’ll update the app.getView(...) call to include klid in as a pdict variable.<br>
+<ul>
+<ul>
+<li> In your Account-Show controller:<br>
+
+<pre><code class="language-text">app.getView({downloadAvailable: true, klid: klid}).render('account/accountoverview');
+// KLAVIYO: added 'klid: klid'</code></pre>
+</li>
+<li>In your Cart-Show controller:<br>
+</li>
+</ul>
+</ul>
+<pre><code class="language-text">app.getView('Cart', {cart: app.getModel('Cart').get(),RegistrationStatus: false,klid: klid // KLAVIYO: added 'klid: klid'}).render('checkout/cart/cart');
+        </code></pre>
+</li>
+<li>To add the <em>Added To Cart</em> snippet to the Cart-AddProduct controller: Add the following snippet to your Cart-AddProduct controller anywhere before the call to render the template (i.e., app.getView(...)).<br>
+
+<pre><code class="language-text"> /* Klaviyo Added to Cart event tracking */
+    var BasketMgr = require('dw/order/BasketMgr');
+    var klaviyoUtils = require('*/cartridge/scripts/klaviyo/utils');
+    var addedToCartData = require('*/cartridge/scripts/klaviyo/eventData/addedToCart');
+    if(klaviyoUtils.klaviyoEnabled){
+    var exchangeID = klaviyoUtils.getKlaviyoExchangeID();
+    var dataObj, serviceCallResult, currentBasket;
+    var isKlDebugOn = request.getHttpReferer().includes('kldebug=true') ? true
+    : false;
+    if (exchangeID) {
+    currentBasket = BasketMgr.getCurrentBasket();
+    if (currentBasket &amp;&amp; currentBasket.getProductLineItems().toArray().length)
+    {
+    dataObj = addedToCartData.getData(currentBasket);
+    serviceCallResult = klaviyoUtils.trackEvent(exchangeID, dataObj, klaviyoUtils.EVENT_NAMES.addedToCart,
+    false);
+    if (isKlDebugOn) {
+    var klDebugData = klaviyoUtils.prepareDebugData(dataObj);
+    var serviceCallData = klaviyoUtils.prepareDebugData(serviceCallResult);
+    var siteGenKlDebutData = `&lt;input type="hidden" name="siteGenKlDebutData"
+    id="siteGenKlDebutData" value="${klDebugData}"/&gt;`;
+    var siteGenServiceCallData = `&lt;input type="hidden" name="siteGenServiceCallData"
+    id="siteGenServiceCallData" value="${serviceCallData}"/&gt;`;
+    response.writer.print(siteGenKlDebutData);
+    response.writer.print(siteGenServiceCallData);
+    }
+    }
+    }
+    }
+    /* END Klaviyo Added to Cart event tracking */</code></pre>
+</li>
+<li>
+<em>Started Checkout</em> snippets: When adding Klaviyo snippets to checkout controllers to track <em>Started Checkout </em>events, it’s important to keep the following in mind:<br>
+<ul>
+<ul>
+<li>The goal of adding these snippets is to check if an email address has been attached to the Basket object within the checkout flow, and when it’s attached, fire the <em>Started Checkout </em>event. It is important to catch the association of an email address with the Basket as early as possible in the checkout flow.</li>
+<li>Due to site-based checkout customization, it is not possible for Klaviyo to define exactly which controller will be the first to receive a Basket object with an email address attached to it.</li>
+<li>We recommend adding the code snippets to all major routes that are triggered within checkout. If you are capable of using the debugger to identify exactly when the email address gets attached to the basket in your checkout flow, feel free to add the snippets only to that route, but thoroughly test to ensure that all possible checkout paths (guest, logged in, logging in within checkout, etc.) trigger the code.</li>
+</ul>
+</ul>
+</li>
+<li>The snippet for the first route hit in checkout (typically COCustomer-Start) follows. Insert it anywhere before the call to render the template (i.e., app.getView(...)). Note the key difference in this snippet — passing the first argument KLCheckoutHelpers.startedCheckoutHelper method as true instead of false — as compared to the other checkout snippets (highlighted below). Note that in the snippet below, the KLCheckoutHelpers.startedCheckoutHelper method is true instead of false (like in the other checkout snippets. This is essential to let the code know that we have a new <em>Started Checkout</em> event to track.<br>
+<pre><code class="language-text">/* Klaviyo Started Checkout event tracking */
+   var KLCheckoutHelpers = require('*/cartridge/scripts/klaviyo/checkoutHelpers');
+   var customerEmail = KLCheckoutHelpers.getEmailFromBasket();
+   var KLTplVars = KLCheckoutHelpers.startedCheckoutHelper(true, customerEmail);
+   if (KLTplVars.klDebugData || KLTplVars.serviceCallData) {
+       app.getView({
+           klDebugData: KLTplVars.klDebugData,
+           serviceCallData: KLTplVars.serviceCallData
+       }).render('klaviyo/klaviyoDebug');
+   }
+   /* END Klaviyo Started Checkout event tracking */
+</code></pre>
+</li>
+<li>Then, update the app.getView(...) call to include klid in as a pdict variable:<br>
+<pre><code class="language-text">app.getView({
+  ContinueURL: URLUtils.https('COCustomer-LoginForm').append('scope', 'checkout'),
+klid: KLTplVars.klid, // KLAVIYO: added 'klid: klid'
+}).render('checkout/checkoutlogin');</code></pre>
+</li>
+<li>The following snippets should be added to the first route that fires after an email address has been attached to the Basket object. If you are unsure, or simply want to cover your bases, we recommend adding this snippet to all of the following routes:As with the above snippets, add this snippet anywhere before the call to render the template, or before calls to subsequent controllers (example from COBilling-Save: app.getController(‘COSummary’).Start()). <br>
+<ul>
+<ul>
+<li>COShipping-Start</li>
+<li>COBilling-PublicStart</li>
+<li>COBilling-Save</li>
+<li>COPlaceOrder-Start</li>
+</ul>
+</ul>
+<pre><code class="language-text">/* Klaviyo Started Checkout event tracking */
+  var KLCheckoutHelpers = require('*/cartridge/scripts/klaviyo/checkoutHelpers');
+var customerEmail = KLCheckoutHelpers.getEmailFromBasket();
+  var KLTplVars = KLCheckoutHelpers.startedCheckoutHelper(false, customerEmail);
+if (KLTplVars.klDebugData || KLTplVars.serviceCallData) {
+app.getView({
+klDebugData: KLTplVars.klDebugData,
+serviceCallData: KLTplVars.serviceCallData
+}).render('klaviyo/klaviyoDebug');
+}
+/* END Klaviyo Started Checkout event tracking */</code></pre>
+</li>
+<li>For routes that do call templates directly (e.g., COShipping-Start), update the app.getView(...) call to include klid in as a pdict variable. Here is an example for the COShipping-Start route:<br>
+<pre><code class="language-text">app.getView({
+ContinueURL: URLUtils.https('COShipping-SingleShipping'),
+Basket: cart.object,
+HomeDeliveries: homeDeliveries,
+klid: KLTplVars.klid, // KLAVIYO: added 'klid: klid'
+}).render('checkout/shipping/singleshipping');</code></pre>
+</li>
+<li>To add <em>Order Confirmation</em> snippet to the COSummary-ShowConfirmation controller: Add the following snippet to your COSummary-ShowConfirmation controller anywhere before the call to render the template.</li>
+</ol>
+<pre><code class="language-text">/* Klaviyo Order Confirmation event tracking */
+  var klaviyoUtils = require('*/cartridge/scripts/klaviyo/utils');
+  var orderConfirmationData = require('*/cartridge/scripts/klaviyo/eventData/orderConfirmation');
+var Logger = require('dw/system/Logger');
+if (klaviyoUtils.klaviyoEnabled){
+session.privacy.klaviyoCheckoutTracked = false;
+var exchangeID = klaviyoUtils.getKlaviyoExchangeID();
+var dataObj, serviceCallResult;
+if (order &amp;&amp; order.customerEmail) {
+// check to see if the status is new or created
+  if (order.status == dw.order.Order.ORDER_STATUS_NEW || order.status == dw.order.Order.ORDER_STATUS_OPEN)
+  {
+dataObj = orderConfirmationData.getData(order, exchangeID);
+  serviceCallResult = klaviyoUtils.trackEvent(exchangeID, dataObj, klaviyoUtils.EVENT_NAMES.orderConfirmation,
+  order.customerEmail);
+}
+  if('KLEmailSubscribe' in session.custom || 'KLSmsSubscribe' in session.custom)
+  {
+var email = order.customerEmail;
+var phone = order.defaultShipment.shippingAddress.phone;
+var e164PhoneRegex = new RegExp(/^\+[1-9]\d{1,14}$/);
+if (phone) {
+  // NOTE: Klaviyo only accepts phone numbers that include + and the country code
+  at the start (ex for US: +16465551212)
+  // in order to successfully get users subscribed to SMS list you must collect
+  the country code in your order phone number field!
+phone = '+' + phone.replace(/[^a-z0-9]/gi, '');
+if(!e164PhoneRegex.test(phone)) {
+if (session.custom.KLSmsSubscribe) {
+  var logger = Logger.getLogger('Klaviyo', 'Klaviyo.core: Order-Confirm');
+  logger.error(`SMS Subscription requested by user, but an invalid phone number
+  was provided. Phone number: ${phone}`);
+}
+phone = null;
+}
+}
+if (email || phone) {
+klaviyoUtils.subscribeUser(email, phone);
+}
+}
+}
+}
+/* END Klaviyo Order Confirmation event tracking */</code></pre>
+<p>You have now completed snippet setup for your Site Genesis store. </p>
+<h3 id="h_01HGGQ1HWZXYWYVWT17EF2RBWV">Add consent at checkout checkbox snippets (SG and SFRA)</h3>
+<div class="bs-callout bs-callout-default">
+<p>Please note the following prerequisites for syncing SMS consent at checkout to Klaviyo:</p>
+<ul>
+<li>
+<a href="https://help.klaviyo.com/hc/en-us/articles/4404274419355">Enable SMS in Klaviyo and set up sending numbers</a>.</li>
+<li>The phone number field on your checkout form must support a country code.</li>
+</ul>
+</div>
+<p>To collect consent at checkout for email and SMS, you’ll need to include code snippets for the consent checkboxes to appear where desired, in addition to configuring the List ID settings noted in the <em>Add services</em> section above.</p>
+<p>For example, for these snippets to appear in checkout they can be placed in the shipmentCard.isml template (app_storefront_base) within SFRA or placed in the billing.isml template (app_storefront_core) within SiteGen. </p>
+<p>Below are the ISML snippets for both Site Genesis and SFRA, and they can be placed anywhere in the checkout flow that best suits your specific site. Note that for consent at checkout to function correctly on Site Genesis, you must have included the Order Confirmation snippet referenced in the <em>Add setup snippets</em> section above.</p>
+<p>The snippets below assume that your opt-in language for email and SMS is contained in a properties resource bundle called 'checkout'. You will need to replace `your.email.subscribe.resource.string.here` and `your.sms.subscribe.resource.string.here` with the keys corresponding to your email and SMS opt-in language, respectively. This language will appear next to the checkbox. </p>
+<p>For instance, your opt-in language might look like this:</p>
+<ul>
+<li>
+<strong>Email</strong><br>
+Subscribe to email updates</li>
+<li>
+<strong>SMS</strong><br>
+Subscribe to SMS updates. By checking this box and entering your phone number above, you consent to receive marketing text messages (such as [promotion codes] and [cart reminders]) from [company name] at the number provided, including messages sent by autodialer. Consent is not a condition of any purchase. Message and data rates may apply. Message frequency varies. You can unsubscribe at any time by replying STOP or clicking the unsubscribe link (where available) in one of our messages. View our Privacy Policy [link] and Terms of Service [link].</li>
+</ul>
+<pre><code class="language-text"> &lt;isset name="KLEmailSubscribed" value="${(session.custom.KLEmailSubscribe
+  == true) ? 'checked' : ''}" scope="page" /&gt;
+  &lt;isset name="KLSmsSubscribed" value="${(session.custom.KLSmsSubscribe == true)
+  ? 'checked' : ''}" scope="page" /&gt;
+  &lt;input type="checkbox" id="KLEmailSubscribe" ${KLEmailSubscribed} /&gt; ${Resource.msg('your.email.subscribe.resource.string.here',
+  'checkout', null)} &lt;br /&gt;
+  &lt;input type="checkbox" id="KLSmsSubscribe" ${KLSmsSubscribed} /&gt; ${Resource.msg('your.sms.subscribe.resource.string.here',
+  'checkout', null)}
+</code></pre>
+<h2 id="h_01HGGQ1HWZ25BP19MFSGQ4JQCC">Enable the OCAPI integration in Klaviyo</h2>
+<h3 id="h_01HGGQ1HWZY59Z739QX2Y206TK">Endpoints</h3>
+<p>In order to integrate with SFCC for product catalog and historic/ongoing order data, Klaviyo makes use of four OCAPI endpoints:</p>
+<ul>
+<li>
+<strong>/order_search</strong><br>
+Syncs historical order data to Klaviyo syncs ongoing order events every 60 minutes. The <em>Ordered Product</em> and <em>Placed Order</em> events will sync additional data for segmentation and flow filtering, and are ideal for enhanced personalization not available from the <em>Order Confirmation</em> event. For real-time order confirmation emails, use the <em>Order Confirmation</em> event from the cartridge.</li>
+<li>
+<strong>/sites</strong><br>
+Allows you to select which site Klaviyo syncs data from during your integration setup.</li>
+<li>
+<strong>/product_search</strong><br>
+Connects your catalog to Klaviyo to enable functionality including product recommendations in emails.</li>
+<li>
+<strong>/products/*/variations</strong><br>
+Enables syncing variants to Klaviyo to enable functionality such as back in stock, low inventory, and price drop flows. </li>
+</ul>
+<h3 id="h_01HGGQ1HWZ2BF2H680TFD98ZK4">SFCC-side setup</h3>
+<p>Before we can communicate with SFCC's OCAPI, some permissions and settings must be set up in SFCC.</p>
+<p>Please note that while the Klaviyo integration requires POST permissions for <em>order_search</em> and <em>product_search</em>, we are not actually posting data to SFCC; this is due to the design of SFCC's OCAPI.</p>
+<ol>
+<li>Navigate to <a href="https://account.demandware.com/dw/account/APIAdmin">https://account.demandware.com/dw/account/APIAdmin</a> and add an API client for Klaviyo. The API Client ID and password will be required to generate the bearer token for OCAPI.</li>
+<li>Once the API client is added, navigate to <strong>Administration &gt; Site Development &gt; Open Commerce API Settings</strong> in the SFCC Business Manager.</li>
+<li>Add the following snippets, replacing the API version and Client ID. We support API versions 19.5 and above as well as 18.8. Replace CLIENT_ID with the API Client ID generated from the API client setup in the previous step (this should look something like "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"). If the settings already exist for these APIs, you may only need to add the highlighted sections below to the existing clients JSON array.
+<ol>
+<li>Add the following JSON under the type <em>Shop</em> and context <em>Global (organization-wide)</em>, replacing SHOP_API_VERSION with your OCAPI Shop API version, then click<strong> Save</strong>.<br>
+Once added, the settings should appear similar to this:<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28711698592795" alt="">
+<pre><code class="language-text">{
+ "_v":"SHOP_API_VERSION",
+ "clients":[
+ {
+ "client_id":"CLIENT_ID",
+ "resources":[
+ {
+ "resource_id":"/order_search",
+ "methods":["post"],
+ "read_attributes":"(**)",
+ "write_attributes":"(**)"
+ }
+ ]
+ }
+ ]
+ }
+</code></pre>
+</li>
+<li>Add the following JSON under the type <em>Data</em> and context <em>Global (organization-wide)</em>, replacing DATA_API_VERSION with your OCAPI Data API version, then click <strong>Save</strong>.<br>
+Once added, the settings should appear similar to this:<br>
+</li>
+</ol>
+</li>
+</ol>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/28711677167515" alt=""></p>
+<pre><code class="language-text">{
+ "_v":"DATA_API_VERSION",
+ "clients":[
+ {
+ "client_id":"CLIENT_ID",
+ "resources":[
+ {
+ "resource_id":"/product_search",
+ "methods":["post"],
+ "read_attributes":"(**)",
+ "write_attributes":"(**)"
+ },
+ {
+ "resource_id":"/sites",
+ "methods":["get"],
+ "read_attributes":"(**)",
+ },
+ {
+ "resource_id":"/products/*/variations",
+ "methods":["get"],
+ "read_attributes":"(**)",
+ }
+ ]
+ }
+ ]
+}</code></pre>
+<h3 id="h_01HGGQ1HWZDD4CC4ENSSSZA290">Klaviyo-side setup</h3>
+<ol>
+<li>In Klaviyo, select<strong> Integrations &gt; Add integrations</strong>.</li>
+<li>Search for <em>Salesforce Commerce Cloud</em> and click the card, then click <strong>Install</strong>.</li>
+<li>Click <strong>Connect to Salesforce Commerce Cloud</strong> on the landing page. </li>
+<li>On the next page, fill out the following information: <br>
+<ul>
+<ul>
+<li>
+<strong>Store URL</strong><br>
+Your website domain (e.g., example.com or dev03-na01-example.demandware.net).</li>
+<li>
+<strong>Auth token</strong><br>
+<a href="https://documentation.b2c.commercecloud.salesforce.com/DOC1/index.jsp?topic=%2Fcom.demandware.dochelp%2FOCAPI%2Fcurrent%2Fusage%2FOAuth.html">Create an auth token</a> for this integration that will be used to request a bearer token. The auth token is generated by <a href="https://www.base64encode.org/">base-64 encoding</a> the client ID and password joined by a colon (e.g., xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx:password).</li>
+<li>
+<strong>Data API Version</strong><br>
+The version of your Data API for which you added access in the SFCC-side Setup step (e.g., v19_10).</li>
+<li>
+<strong>Shop API Version</strong><br>
+The version of your Shop API for which you added access in the SFCC-side Setup step (e.g. v19_10).</li>
+<li>
+<strong>Catalog ID</strong><br>
+The ID of the SFCC catalog to sync with Klaviyo (e.g., storefront-catalog-en). You can find your Catalog ID in Salesforce Business Manager under <strong>Merchant Tools &gt; Products and Catalogs &gt; Catalogs</strong>. <br>
+</li>
+</ul>
+</ul>
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28711677165723" alt="">
+</li>
+<li>Once you've entered these credentials, click the <strong>Retrieve list of sites</strong> link to retrieve a list of sites on your SFCC instance.</li>
+<li>After the sites are retrieved, select the site(s) to integrate with this account and click <strong>Complete setup</strong>. Your integration should now start syncing your order, catalog, and customer data.</li>
+</ol>
+<h2 id="h_01HGGQ1HWZPY8DM55MSWH8G44B">Test your SFCC integration</h2>
+<p>To test out your cartridge setup, go to your site and follow these instructions:</p>
+<ol>
+<li>Cookie yourself by adding the url parameter utm_email as your email address to your address bar. For example: https://www.example.com/?utm_email=your@email.com.</li>
+<li>Search your catalog.</li>
+<li>View a category page.</li>
+<li>View a product page.</li>
+<li>Add an item to your cart.</li>
+<li>Place a test order.</li>
+<li>Navigate <strong>Analytics &gt; Metrics</strong> in Klaviyo, then look for metrics coming from Salesforce Commerce Cloud.</li>
+</ol>
+<h3 id="h_01HGGQ1HWZRGMWH2VJ1DRFXG89">Test Klaviyo Email Field Selectors</h3>
+<p>To test that a given email field has been properly targeted and is correctly identifying the user to Klaviyo:</p>
+<ol>
+<li>Open an incognito browser window.</li>
+<li>In the Developer Console enter the following command and hit enter:<br>
+<code>klaviyo.isIdentified();</code><br>
+This should result in the following output:<br>
+<code>Promise {&lt;fulfilled&gt;: false}</code>
+</li>
+<li>Type an email address into the targeted field and click the tab key to change focus to any other element on the page.</li>
+<li>Return to the Developer Console and enter <code>klaviyo.isIdentified();</code> again. This should result in the following output:<br>
+<code>Promise {&lt;fulfilled&gt;: true}</code>
+</li>
+<li>You can double check that Klaviyo is indeed receiving Identify calls by heading to <strong>Analytics &gt; Metrics </strong>in Klaviyo and finding the activity feed of <em>Active on Site</em> events, where you should see the email address(es) that you have entered listed.</li>
+</ol>
+<h3 id="h_01HGGQ1HWZJEE78R9QY8S2MD52">Test Checkout Email Field Selector</h3>
+<p>To test that the checkout email collection field is successfully triggering the <em>Started Checkout </em>event:</p>
+<ol>
+<li>Add one or more products to the cart, and then start checkout.</li>
+<li>Within checkout, type an email address into the targeted field and click the tab key to change focus to any other element on the page.</li>
+<li>You can double-check that Klaviyo is indeed receiving Identify calls by heading to <strong>Analytics &gt; Metrics </strong>in Klaviyo and finding the activity feed of <em>Started Checkout</em> events, where you should see that your recent event was tracked.</li>
+</ol>
+<h2 id="h_01HGGQ1HWZEAN20RAB3PAHN41V">Outcome</h2>
+<p>You've now integrated Salesforce Commerce Cloud with Klaviyo and tested your integration.</p>

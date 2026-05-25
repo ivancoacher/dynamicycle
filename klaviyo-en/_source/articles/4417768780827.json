@@ -1,0 +1,1016 @@
+{
+  "captured_at": "2026-05-23T16:15:45Z",
+  "article": {
+    "id": 4417768780827,
+    "url": "https://klaviyo.zendesk.com/api/v2/help_center/en-us/articles/4417768780827.json",
+    "html_url": "https://klaviyo.zendesk.com/hc/en-us/articles/4417768780827-Troubleshooting-branded-sending-domain-issues",
+    "author_id": 1265141506249,
+    "comments_disabled": false,
+    "draft": false,
+    "promoted": false,
+    "position": 0,
+    "vote_sum": 5,
+    "vote_count": 25,
+    "section_id": 49375400060059,
+    "created_at": "2022-02-04T21:34:40Z",
+    "updated_at": "2026-04-21T13:56:57Z",
+    "name": "Troubleshooting branded sending domain issues",
+    "title": "Troubleshooting branded sending domain issues",
+    "source_locale": "en-us",
+    "locale": "en-us",
+    "outdated": false,
+    "outdated_locales": [],
+    "edited_at": "2026-04-17T01:01:41Z",
+    "user_segment_id": null,
+    "permission_group_id": 146372,
+    "content_tag_ids": [],
+    "label_names": [],
+    "body": "<h2 id=\"h_01HCN6GRMAGQ6X1CKAV6QSTX4H\">You will learn</h2>\n<p>Learn how to diagnose verification issues when setting up your branded sending domain (also known as a dedicated sending domain) in Klaviyo. </p>\n<p>A branded sending domain enables you to send emails that appear from your brand, rather than from Klaviyo’s shared domain. For setup instructions, visit our guide on <a href=\"https://help.klaviyo.com/hc/en-us/articles/115000357752\">how to set up a branded sending domain</a>.</p>\n<div class=\"bs-callout bs-callout-default\">\n<p>Google and Yahoo have announced new sender requirements that they are planning to start enforcing in February of 2024. While already best practice, setting up a branded sending domain will be a requirement for bulk senders to land in Gmail inboxes.</p>\n<p>Google considers those who send 5000 or more emails to Google accounts per day to be \"bulk senders.\" All traffic from a sender counts towards that 5000 email threshold, including transactional emails. </p>\n<p>Learn more about <a href=\"https://www.klaviyo.com/blog/gmail-update\">Gmail and Yahoo’s upcoming sender requirements.</a></p>\n</div>\n<h2 id=\"h_01HCN6GRMAGWCFD88K2B4SDMB8\">Before you begin</h2>\n<p>Before starting the troubleshooting steps below, confirm that you have attempted to verify your sending domain in Klaviyo and are seeing errors.</p>\n<p class=\"wysiwyg-text-align-left\">Note that Klaviyo will not automatically apply your domain after verification, as we want to ensure that you are ready to warm your sending infrastructure first if applicable. Once verified, you will need to click <strong>Apply domain</strong>. We also recommend giving time for the DNS to propagate and for the cache to clear. Depending on your DNS provider, this process could take up to 48 hours. </p>\n<h2 id=\"h_01HCN6GRMASTBGNVQFC0FN4ZEW\">Troubleshooting using 3rd party tools</h2>\n<p>Klaviyo requires 3 CNAME or NS records for email authentication, and one TXT record for domain ownership verification. When setting up a branded domain in Klaviyo, you’ll see similar records presented based on your <a href=\"https://klaviyo.zendesk.com/hc/en-us/articles/360055457791\">subdomain</a> choice: </p>\n<p class=\"wysiwyg-text-align-center\"><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28705664613147\" alt=\"NS records\" width=\"389\" height=\"410\"></p>\n<p></p>\n<div class=\"bs-callout bs-callout-default\">\n<p class=\"wysiwyg-text-align-left\">When setting your branded sending domain, selecting the <em>Dynamic </em>routing method requires adding NS records to your DNS provider, while the <em>Static</em> routing option requires CNAME records. Klaviyo recommends using the <em>Dynamic </em>routing option to best optimize your sends, but if your DNS provider does not support NS records consider using the <em>Static</em> routing option.</p>\n<p class=\"wysiwyg-text-align-left\">If your brand chooses to use a 2nd level subdomain like <em>example.send.klaviyo.com</em>, the root domain would be <em>send.example.com</em> and the sending domain would be <em>example.send.klaviyo.com.</em></p>\n</div>\n<p class=\"wysiwyg-text-align-left\">In an example where the intended sending domain is <em>send.klaviyo.com</em>, with “send” as the subdomain and “klaviyo.com<em>”</em> as the root domain, the expected DNS records would be the following: <br>\n<br>\nFor the <em>Dynamic</em> routing option:</p>\n<table style=\"width: 650px; height: 267px\">\n<tbody>\n<tr>\n<td style=\"width: 233.906px; height: 10px\"><strong>Host</strong></td>\n<td style=\"width: 315.903px; height: 10px\"><strong>Value</strong></td>\n<td style=\"width: 65.7465px; height: 10px\"><strong>Record Type</strong></td>\n</tr>\n<tr>\n<td style=\"width: 233.906px; height: 42px\">send.helloworld.com</td>\n<td style=\"width: 315.903px; height: 42px\">ns1.klaviyo.com</td>\n<td style=\"width: 65.7465px; height: 42px\">NS</td>\n</tr>\n<tr>\n<td style=\"width: 233.906px; height: 22px\">send.helloworld.com</td>\n<td style=\"width: 315.903px; height: 22px\">ns2.klaviyo.com</td>\n<td style=\"width: 65.7465px; height: 22px\">NS</td>\n</tr>\n<tr>\n<td style=\"width: 233.906px; height: 22px\">send.helloworld.com</td>\n<td style=\"width: 315.903px; height: 22px\">ns3.klaviyo.com</td>\n<td style=\"width: 65.7465px; height: 22px\">NS</td>\n</tr>\n<tr>\n<td style=\"width: 233.906px; height: 24px\">send.helloworld.com</td>\n<td style=\"width: 315.903px; height: 24px\">ns4.klaviyo.com</td>\n<td style=\"width: 65.7465px; height: 24px\">NS</td>\n</tr>\n<tr>\n<td style=\"width: 233.906px; height: 24px\">helloworld.com</td>\n<td style=\"width: 315.903px; height: 24px\">klaviyo-site-verification=public_API_key</td>\n<td style=\"width: 65.7465px; height: 24px\">TXT</td>\n</tr>\n</tbody>\n</table>\n<p>For the <em>Static</em> routing option:</p>\n<div class=\"bs-callout bs-callout-default\">\n<p class=\"wysiwyg-text-align-left\">These are just examples and the actual CNAME record values for your account will be different. Make sure to use the values generated in your account. </p>\n</div>\n<table style=\"width: 651px; height: 223px\">\n<tbody>\n<tr>\n<td style=\"width: 230.625px; height: 10px\"><strong>Host</strong></td>\n<td style=\"width: 321.094px; height: 10px\"><strong>Value</strong></td>\n<td style=\"width: 64.8264px; height: 10px\"><strong>Record Type</strong></td>\n</tr>\n<tr>\n<td style=\"width: 230.625px; height: 42px\">send.klaviyo.com</td>\n<td style=\"width: 321.094px; height: 42px\">1.klaviyodns.com</td>\n<td style=\"width: 64.8264px; height: 42px\">CNAME</td>\n</tr>\n<tr>\n<td style=\"width: 230.625px; height: 22px\">kl._domainkey.klaviyo.com</td>\n<td style=\"width: 321.094px; height: 22px\">kl1.domainkey.1.klaviyodns.com</td>\n<td style=\"width: 64.8264px; height: 22px\">CNAME</td>\n</tr>\n<tr>\n<td style=\"width: 230.625px; height: 22px\">kl2._domainkey.klaviyo.com</td>\n<td style=\"width: 321.094px; height: 22px\">kl2.domainkey.1.klaviyodns.com</td>\n<td style=\"width: 64.8264px; height: 22px\">CNAME</td>\n</tr>\n<tr>\n<td style=\"width: 230.625px; height: 22px\">klaviyo.com</td>\n<td style=\"width: 321.094px; height: 22px\">klaviyo-site-verification=public_API_key</td>\n<td style=\"width: 64.8264px; height: 22px\">TXT</td>\n</tr>\n</tbody>\n</table>\n<p>A helpful set of tools to check if your records are propagating correctly are MxToolbox's DNS lookups: </p>\n<ul>\n<li><a href=\"https://mxtoolbox.com/SuperTool.aspx\">DNS lookup</a></li>\n<li><a href=\"https://mxtoolbox.com/TXTLookup.aspx\">TXT lookup</a></li>\n</ul>\n<p>You can use the DNS lookup tool to search the host for each of the CNAME and NS records, and the TXT lookup tool for the TXT record. </p>\n<h2 id=\"h_01HCN6GRMAEFMMPJXEZHX4PSM8\">NS and CNAME lookup examples</h2>\n<div class=\"bs-callout bs-callout-default\">\n<p>Use the DNS check option from the dropdown on MxToolbox:</p>\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28705664615835\" alt=\"DNS check .jpg\" width=\"508\" height=\"222\">\n</div>\n<h3 id=\"h_01HHMGYFKFSKM21VJE36HZA5KR\">NS records</h3>\n<p><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28705664614299\" alt=\"NS troubleshoot.jpg\"></p>\n<h3 id=\"h_01HHMGYNMBBF2BP5PDN941HPZY\">CNAME records</h3>\n<p class=\"wysiwyg-text-align-left\">send.klaviyo.com:</p>\n<p class=\"wysiwyg-text-align-left\"><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/36642522069531\" alt=\"send.klaviyo.com.jpg\" width=\"650\" height=\"309\"></p>\n<p>kl._domainkey.klaviyo.com:</p>\n<p class=\"wysiwyg-text-align-center\"><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/36642522076699\" alt=\"kl._domainkey.klaviyo.com  .jpg\" width=\"649\" height=\"304\"></p>\n<p>kl2._domainkey.klaviyo.com:</p>\n<p class=\"wysiwyg-text-align-center\"><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/36642522084763\" alt=\"kl2._domainkey.klaviyo.com  .jpg\" width=\"649\" height=\"308\"></p>\n<h3 id=\"h_01HCN6GRMAQ1QZV46FPXF9JDJE\">TXT lookup example</h3>\n<p>klaviyo.com: </p>\n<p class=\"wysiwyg-text-align-center\"><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28705664611739\" alt=\"TXT lookup for klaviyo.com\"></p>\n<p>Based on whether you are seeing values returned by the queries, there are some common errors that may be the source of the issue.</p>\n<h2 id=\"h_01HCN6GRMAS8SNRV1JMHPH1XY5\">If queries are returning values </h2>\n<div class=\"bs-callout bs-callout-default\">\n<p>In order for your sending domain to be successfully verified in Klaviyo, the values returned by your queries must match those presented in Klaviyo exactly. Ensure that there are not any discrepancies between the values you are seeing returned, and those in Klaviyo. </p>\n</div>\n<h3 id=\"h_01HCN6GRMAYYNYXDDS28J97MB2\">Root domain being appended to values automatically</h3>\n<p>Some DNS providers expect a period (.) at the end of the added value. Without this period, the DNS provider assumes that the entire value field is a subdomain of the domain being configured, and will automatically add the root domain. For example, if you entered <em>u161779.wl030.sendgrid </em>(with no period at the end), this would make the value <em>u161779.wl030.sendgrid.net.rootdomain.com</em> instead of just <em>u161779.wl030.sendgrid.net.</em></p>\n<h2 id=\"h_01HCN6GRMBEFEPYMJKGHAPTFHJ\">If queries are not returning values </h2>\n<h3 id=\"h_01HCN6GRMBJJN4G58CCVN4Y6A5\">Root domain duplicated in the hostname</h3>\n<p>We also recommend checking if your DNS provider expects only the subdomains in the host name fields, and automatically appends the root domain. For example, if you add the CNAME record<em> send.domain.com</em> it would automatically become <em>send.domain.com.domain.com</em>. </p>\n<p>Instead, you might need to only add the “send” subdomain in this instance for the record’s host name to be <em>send.domain.com.</em> Compare your other DNS records to see if you need to append it or if your provider automatically does this.</p>\n<h3 id=\"h_01HCN6GRMBB5KPZ56G0W33EBVT\">Records being proxied</h3>\n<p>If your DNS provider allows you to proxy records, you will see issues with the setup of the branded domain in Klaviyo if this feature is enabled. This commonly happens with Cloudflare but is possible with other DNS providers too. You’ll need to disable the proxying of your records for them to resolve over the internet, and so their presence can be verified by the sending domain set up tool in Klaviyo. Record proxying will need to stay disabled after the set up process as well for emails to authenticate as expected. </p>\n<h2 id=\"h_01HCN6GRMBXKK7WKZHYANWHYFJ\">Other DNS provider issues </h2>\n<h3 id=\"h_01HCN6GRMB3JBPT21X59YTKXJE\">DNS provider does not support @ symbol </h3>\n<p>In cases where a DNS provider does not support the symbol “@”, the root domain would need to be set as the hostname for the site verification record. The “@” symbol is the shorthand for the root domain (business.com), so you can use either option depending on what your DNS provider supports. </p>\n<h3 id=\"h_01HCN6GRMB7TJHF94TAX0Q29JR\">DNS provider does not support underscores</h3>\n<p>Some DNS providers do not support underscores for CNAME records. However, in order for your sending domain to be functional within Klaviyo, these underscores are necessary.</p>\n<p>If your DNS provider does not support underscores in your CNAME, we suggest first reaching out to your DNS provider’s support team and seeing if they can create the record for you. Often DNS providers will be able to manually adjust your CNAME to include the underscore if you reach out to them.</p>\n<p>If your DNS provider ultimately cannot support underscores, <a href=\"https://www.hostinger.com/tutorials/how-to-change-domain-nameservers\">consider using another provider</a> as these will be necessary to your domain setup in Klaviyo.</p>\n<h3 id=\"h_01HCN6GRMB1R5JQ1B1WTFHHNP7\">A TXT value already exists on the root domain</h3>\n<p>If there is an existing TXT record on your root domain, you can append the Klaviyo value to your existing field. As long as the Klaviyo requested value is present, the record will be successfully validated when setting up your branded domain in Klaviyo. </p>\n<h2 id=\"h_01HCN6GRMBSGJW42WFAEHKREVG\">DMARC</h2>\n<p>For emails to be <a href=\"https://help.klaviyo.com/hc/en-us/articles/4402601857307\">DMARC compliant</a>, the root domain on your account needs to align with the from-address domain of your emails. </p>\n<p>For example, if you send an email using <em>sales@example.com</em> as the from-address, where example.com is protected by DMARC, your account will need to use a branded sending domain like <em>send.example.com</em> for all emails sent from Klaviyo to meet DMARC authentication requirements.</p>",
+    "user_segment_ids": []
+  },
+  "normalized": {
+    "id": "4417768780827",
+    "title": "Troubleshooting branded sending domain issues",
+    "source_url": "https://help.klaviyo.com/hc/en-us/articles/4417768780827-Troubleshooting-branded-sending-domain-issues",
+    "section_id": 49375400060059,
+    "section": "Monitor deliverability and metrics",
+    "category_id": 115000873988,
+    "category": "Deliverability & compliance",
+    "category_slug": "deliverability-compliance",
+    "klaviyo_updated": "2026-04-21T13:56:57Z",
+    "created_at": "2022-02-04T21:34:40Z",
+    "draft": false,
+    "promoted": false,
+    "position": 0,
+    "label_names": []
+  },
+  "files": {
+    "body_html": "_source/articles/4417768780827.body.html",
+    "rendered_html": "_source/rendered/4417768780827.html"
+  },
+  "assets": {
+    "api_body": {
+      "images": [
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28705664613147",
+          "alt": "NS records",
+          "width": "389",
+          "height": "410"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28705664615835",
+          "alt": "DNS check .jpg",
+          "width": "508",
+          "height": "222"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28705664614299",
+          "alt": "NS troubleshoot.jpg",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/36642522069531",
+          "alt": "send.klaviyo.com.jpg",
+          "width": "650",
+          "height": "309"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/36642522076699",
+          "alt": "kl._domainkey.klaviyo.com  .jpg",
+          "width": "649",
+          "height": "304"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/36642522084763",
+          "alt": "kl2._domainkey.klaviyo.com  .jpg",
+          "width": "649",
+          "height": "308"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28705664611739",
+          "alt": "TXT lookup for klaviyo.com",
+          "width": "",
+          "height": ""
+        }
+      ],
+      "links": [
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115000357752",
+          "text": "how to set up a branded sending domain"
+        },
+        {
+          "href": "https://www.klaviyo.com/blog/gmail-update",
+          "text": "Gmail and Yahoo’s upcoming sender requirements."
+        },
+        {
+          "href": "https://klaviyo.zendesk.com/hc/en-us/articles/360055457791",
+          "text": "subdomain"
+        },
+        {
+          "href": "https://mxtoolbox.com/SuperTool.aspx",
+          "text": "DNS lookup"
+        },
+        {
+          "href": "https://mxtoolbox.com/TXTLookup.aspx",
+          "text": "TXT lookup"
+        },
+        {
+          "href": "https://www.hostinger.com/tutorials/how-to-change-domain-nameservers",
+          "text": "consider using another provider"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4402601857307",
+          "text": "DMARC compliant"
+        }
+      ],
+      "headings": [
+        {
+          "level": 2,
+          "id": "h_01HCN6GRMAGQ6X1CKAV6QSTX4H",
+          "text": "You will learn"
+        },
+        {
+          "level": 2,
+          "id": "h_01HCN6GRMAGWCFD88K2B4SDMB8",
+          "text": "Before you begin"
+        },
+        {
+          "level": 2,
+          "id": "h_01HCN6GRMASTBGNVQFC0FN4ZEW",
+          "text": "Troubleshooting using 3rd party tools"
+        },
+        {
+          "level": 2,
+          "id": "h_01HCN6GRMAEFMMPJXEZHX4PSM8",
+          "text": "NS and CNAME lookup examples"
+        },
+        {
+          "level": 3,
+          "id": "h_01HHMGYFKFSKM21VJE36HZA5KR",
+          "text": "NS records"
+        },
+        {
+          "level": 3,
+          "id": "h_01HHMGYNMBBF2BP5PDN941HPZY",
+          "text": "CNAME records"
+        },
+        {
+          "level": 3,
+          "id": "h_01HCN6GRMAQ1QZV46FPXF9JDJE",
+          "text": "TXT lookup example"
+        },
+        {
+          "level": 2,
+          "id": "h_01HCN6GRMAS8SNRV1JMHPH1XY5",
+          "text": "If queries are returning values"
+        },
+        {
+          "level": 3,
+          "id": "h_01HCN6GRMAYYNYXDDS28J97MB2",
+          "text": "Root domain being appended to values automatically"
+        },
+        {
+          "level": 2,
+          "id": "h_01HCN6GRMBEFEPYMJKGHAPTFHJ",
+          "text": "If queries are not returning values"
+        },
+        {
+          "level": 3,
+          "id": "h_01HCN6GRMBJJN4G58CCVN4Y6A5",
+          "text": "Root domain duplicated in the hostname"
+        },
+        {
+          "level": 3,
+          "id": "h_01HCN6GRMBB5KPZ56G0W33EBVT",
+          "text": "Records being proxied"
+        },
+        {
+          "level": 2,
+          "id": "h_01HCN6GRMBXKK7WKZHYANWHYFJ",
+          "text": "Other DNS provider issues"
+        },
+        {
+          "level": 3,
+          "id": "h_01HCN6GRMB3JBPT21X59YTKXJE",
+          "text": "DNS provider does not support @ symbol"
+        },
+        {
+          "level": 3,
+          "id": "h_01HCN6GRMB7TJHF94TAX0Q29JR",
+          "text": "DNS provider does not support underscores"
+        },
+        {
+          "level": 3,
+          "id": "h_01HCN6GRMB1R5JQ1B1WTFHHNP7",
+          "text": "A TXT value already exists on the root domain"
+        },
+        {
+          "level": 2,
+          "id": "h_01HCN6GRMBSGJW42WFAEHKREVG",
+          "text": "DMARC"
+        }
+      ]
+    },
+    "rendered_page": {
+      "images": [
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/7ff492c2b417b7ecfe572f839a8a81398693c1f7-1920x1080.webp",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/d1c4899b354e5b5e6789e4b563277f2b1e31a2f7-860x906.jpg?w=389",
+          "alt": "NS records",
+          "width": "389",
+          "height": "410"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28705664615835",
+          "alt": "DNS check .jpg",
+          "width": "508",
+          "height": "222"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/94e3f3b4352ef3a9ec0f2290185656927a21c95e-792x395.jpg",
+          "alt": "NS troubleshoot.jpg",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/bdbd6eacfb9eb5837949b95b285dace7dc19d0d8-1412x672.jpg?w=650",
+          "alt": "send.klaviyo.com.jpg",
+          "width": "650",
+          "height": "309"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/46d2b31101890df60f27159fb6bb7211b63bd73b-1860x872.jpg?w=649",
+          "alt": "kl._domainkey.klaviyo.com  .jpg",
+          "width": "649",
+          "height": "304"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/693f03f6487cd34fee31e80eb7a045d2f0766985-1444x684.jpg?w=649",
+          "alt": "kl2._domainkey.klaviyo.com  .jpg",
+          "width": "649",
+          "height": "308"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/400f2938394afdd021be50ccb1aa56aa4eb4dd77-635x252.jpg",
+          "alt": "TXT lookup for klaviyo.com",
+          "width": "",
+          "height": ""
+        }
+      ],
+      "links": [
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4417768780827-Troubleshooting-branded-sending-domain-issues#site-content",
+          "text": "Skip to main content"
+        },
+        {
+          "href": "https://www.klaviyo.com",
+          "text": "Home"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center"
+        },
+        {
+          "href": "https://www.klaviyo.com/enterprise",
+          "text": "Enterprise"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Partners"
+        },
+        {
+          "href": "https://www.klaviyo.com/careers",
+          "text": "Careers"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": "Log in"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": ""
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center Find step-by-step instructions and troubleshooting solutions in our knowledge base."
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000032731",
+          "text": "Integrations"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000312411",
+          "text": "Flows"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867867",
+          "text": "Audience"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867667",
+          "text": "Campaigns"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/360000190711",
+          "text": "Sign-up forms"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000873988",
+          "text": "Deliverability & compliance"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/29173800271259",
+          "text": "SMS"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/16638219724187",
+          "text": "Reviews"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/18073014919195",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/34141283979931",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/37659126754075",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/33948021740315",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/39746685522331",
+          "text": "WhatsApp"
+        },
+        {
+          "href": "https://academy.klaviyo.com",
+          "text": "Klaviyo Academy Expert training and education to help you succeed with Klaviyo, and beyond."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Quick+guide&resource=academy_courses",
+          "text": "Quick guides Learn marketing strategies and concepts in 15 minutes or less."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Course&resource=academy_courses",
+          "text": "Courses Master key marketing topics through structured lessons and exams."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/best-practices",
+          "text": "Best practices Discover top product and marketing strategies for your business."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/learning-paths",
+          "text": "Learning paths Complete curated learning journeys tailored to your marketing goals."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses",
+          "text": "Explore all resources"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Live+training&resource=academy_courses",
+          "text": "Live trainings Build confidence through hands-on interactive workshops and thought-provoking strategy sessions."
+        },
+        {
+          "href": "https://www.bigmarker.com/klaviyo-customer-education/Office-hours-Getting-started-with-Klaviyo",
+          "text": "Live office hours Join a strategic discussion where you can ask questions and get answers in real-time."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/private-live-training",
+          "text": "1:1 Live training Book a private training session with an expert to jumpstart your platform knowledge and confidence."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/credentials",
+          "text": "Klaviyo credentials Dig deeper into select topics and showcase your expertise with a final exam to earn a certificate and digital badge."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/certificates/klaviyo-practitioner-certificate",
+          "text": "Klaviyo practitioner certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/deliverability-certificate",
+          "text": "Deliverability certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/developer-certificate",
+          "text": "Klaviyo developer certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses&select=Certificate",
+          "text": "See all certificates"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Klaviyo Community Join our thriving community network to connect with brands like yours—online and in person."
+        },
+        {
+          "href": "https://community.klaviyo.com/topic/new",
+          "text": "Ask a question Post a question and get thoughtful answers from Klaviyo powerusers."
+        },
+        {
+          "href": "https://community.klaviyo.com/p/roadmap",
+          "text": "Product roadmap"
+        },
+        {
+          "href": "https://community.klaviyo.com/search/activity/recent",
+          "text": "Recent threads"
+        },
+        {
+          "href": "https://community.klaviyo.com/p/champions",
+          "text": "Meet the Champions"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups",
+          "text": "Browse all groups Your people are waiting. New ideas and connections are a click away."
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/developer-group-64",
+          "text": "Developer group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/entrepreneur-user-group-118",
+          "text": "Entrepreneur group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/woo-user-group-87",
+          "text": "WooCommerce group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/new-york-meetup-chapter-82",
+          "text": "New York City"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/los-angeles-meetup-chapter-83",
+          "text": "Los Angeles"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/austin-meetup-chapter-85",
+          "text": "Austin"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/san-diego-meetup-chapter-86",
+          "text": "San Diego"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/amsterdam-meetup-chapter-84",
+          "text": "Amsterdam"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Klaviyo Developers Access API documentation and developer guides to help you build with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/get_started",
+          "text": "Get started Access key resources and a step-by-step checklist for how to start developing with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/build_your_integration",
+          "text": "Grow your app's reach Learn how to join our ecosystem and get your app listed on our marketplace."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/developer-tools",
+          "text": "Developer tools Generate sample data, monitor your API usage, and access our Postman collections."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/reference/api_overview",
+          "text": "API reference Browse our full catalog of API docs."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/changelog_",
+          "text": "Changelog"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/api_versioning_and_deprecation_policy",
+          "text": "Versioning & deprecation policy"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/rate_limits_and_error_handling",
+          "text": "Rate limits & error handling"
+        },
+        {
+          "href": "https://youtube.com/playlist?list=PLHkNfHgtxcUanrkMnKPdkRzuWU7MGv_xM&si=pkG-KH7IT_TUHOGC",
+          "text": "API tutorials on YouTube Subscribe to our Klaviyo API Tutorials playlist for easy access to step-by-step developer walkthroughs."
+        },
+        {
+          "href": "https://www.klaviyo.com/contact-us",
+          "text": "Contact us"
+        },
+        {
+          "href": "https://www.klaviyo.com/sign-up",
+          "text": "Sign up"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": "Search"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4417768780827",
+          "text": "United States - EN"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/de-de/articles/4417768780827",
+          "text": "Deutschland - DE"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-es/articles/4417768780827",
+          "text": "España - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-mx/articles/4417768780827",
+          "text": "México - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/fr-fr/articles/4417768780827",
+          "text": "France - FR"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/it-it/articles/4417768780827",
+          "text": "Italia - IT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/ko-kr/articles/4417768780827",
+          "text": "한국 - KO"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/nl-nl/articles/4417768780827",
+          "text": "Nederland - NL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pl-pl/articles/4417768780827",
+          "text": "Polska - PL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pt-br/articles/4417768780827",
+          "text": "Brasil - PT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/sv-se/articles/4417768780827",
+          "text": "Sverige - SV"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/14416651431323",
+          "text": "Email deliverability"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/49375400060059",
+          "text": "Monitor deliverability and metrics"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4417768780827-Troubleshooting-branded-sending-domain-issues#h_01HCN6GRMAGQ6X1CKAV6QSTX4H",
+          "text": "You will learn"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4417768780827-Troubleshooting-branded-sending-domain-issues#h_01HCN6GRMAGWCFD88K2B4SDMB8",
+          "text": "Before you begin"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4417768780827-Troubleshooting-branded-sending-domain-issues#h_01HCN6GRMASTBGNVQFC0FN4ZEW",
+          "text": "Troubleshooting using 3rd party tools"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4417768780827-Troubleshooting-branded-sending-domain-issues#h_01HCN6GRMAEFMMPJXEZHX4PSM8",
+          "text": "NS and CNAME lookup examples"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4417768780827-Troubleshooting-branded-sending-domain-issues#h_01HCN6GRMAS8SNRV1JMHPH1XY5",
+          "text": "If queries are returning values"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4417768780827-Troubleshooting-branded-sending-domain-issues#h_01HCN6GRMBEFEPYMJKGHAPTFHJ",
+          "text": "If queries are not returning values"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4417768780827-Troubleshooting-branded-sending-domain-issues#h_01HCN6GRMBXKK7WKZHYANWHYFJ",
+          "text": "Other DNS provider issues"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4417768780827-Troubleshooting-branded-sending-domain-issues#h_01HCN6GRMBSGJW42WFAEHKREVG",
+          "text": "DMARC"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4417768780827-Troubleshooting-branded-sending-domain-issues#additional-resources",
+          "text": "Additional resources"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115000357752",
+          "text": "how to set up a branded sending domain"
+        },
+        {
+          "href": "https://www.klaviyo.com/blog/gmail-update",
+          "text": "Gmail and Yahoo’s upcoming sender requirements."
+        },
+        {
+          "href": "https://klaviyo.zendesk.com/hc/en-us/articles/360055457791",
+          "text": "subdomain"
+        },
+        {
+          "href": "https://mxtoolbox.com/SuperTool.aspx",
+          "text": "DNS lookup"
+        },
+        {
+          "href": "https://mxtoolbox.com/TXTLookup.aspx",
+          "text": "TXT lookup"
+        },
+        {
+          "href": "https://www.hostinger.com/tutorials/how-to-change-domain-nameservers",
+          "text": "consider using another provider"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4402601857307",
+          "text": "DMARC compliant"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115000357752",
+          "text": "How to set up a branded sending domain"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360055457791",
+          "text": "Understanding what a branded sending subdomain is"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/7674941873947",
+          "text": "Understanding branded vs. shared sending domains"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115001002272",
+          "text": "Learn how to contact support"
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": ""
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": "Visit Community"
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": ""
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": "Hire a partner"
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/about",
+          "text": "About Klaviyo"
+        },
+        {
+          "href": "https://www.klaviyo.com/newsroom",
+          "text": "Newsroom"
+        },
+        {
+          "href": "https://investors.klaviyo.com/overview/default.aspx",
+          "text": "Investor relations"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Agency and tech partners"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Developers"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/retail",
+          "text": "Retail and ecommerce"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/restaurants",
+          "text": "Restaurant marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/wellness",
+          "text": "Wellness"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform",
+          "text": "B2C CRM overview"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai",
+          "text": "Klaviyo AI (K:AI)"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/marketing-automation",
+          "text": "Klaviyo Marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-service",
+          "text": "Klaviyo Service"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/analytics",
+          "text": "Klaviyo Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-data-platform",
+          "text": "Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare",
+          "text": "Klaviyo vs. Klaviyo alternatives"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-mailchimp",
+          "text": "Klaviyo vs. Mailchimp"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-postscript",
+          "text": "Klaviyo vs. Postscript"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-attentive",
+          "text": "Klaviyo vs. Attentive"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-salesforce-marketing-cloud",
+          "text": "Klaviyo vs. Salesforce"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-listrak",
+          "text": "Klaviyo vs. Listrak"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/omnichannel",
+          "text": "Omnichannel marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/email-marketing",
+          "text": "Email marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing",
+          "text": "SMS marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing/rcs",
+          "text": "RCS for Business"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/mobile-app-marketing",
+          "text": "Mobile app marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/whatsapp",
+          "text": "WhatsApp marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/social",
+          "text": "Social marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources",
+          "text": "Marketing resources"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources/marketing-campaign-calendar",
+          "text": "Marketing campaign calendar"
+        },
+        {
+          "href": "https://www.klaviyo.com/glossary",
+          "text": "Marketing glossary"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/email-subject-line-generator",
+          "text": "Subject line generator"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/roi-calculator",
+          "text": "ROI calculator"
+        },
+        {
+          "href": "https://www.klaviyo.com/customers",
+          "text": "Case studies"
+        },
+        {
+          "href": "https://www.klaviyo.com/composer",
+          "text": "Composer Beta"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/marketing-agent",
+          "text": "Marketing Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/customer-agent",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/customer-experience-hub",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/helpdesk",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/marketing-analytics",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/advanced-cdp",
+          "text": "Advanced Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/web-forms",
+          "text": "Web forms"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/email-templates",
+          "text": "Email templates"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/portfolio",
+          "text": "Portfolio"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform-integrations",
+          "text": "Apps and Integrations"
+        },
+        {
+          "href": "https://www.klaviyo.com/features",
+          "text": "Features"
+        },
+        {
+          "href": "https://www.klaviyo.com/whats-new",
+          "text": "What's new"
+        },
+        {
+          "href": "https://www.klaviyo.com/events",
+          "text": "Events"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help Center"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us",
+          "text": "Academy"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Community"
+        },
+        {
+          "href": "https://www.facebook.com/Klaviyo/",
+          "text": "Facebook"
+        },
+        {
+          "href": "https://twitter.com/klaviyo/",
+          "text": "Twitter"
+        },
+        {
+          "href": "https://www.linkedin.com/company/klaviyo/",
+          "text": "LinkedIn"
+        },
+        {
+          "href": "https://www.instagram.com/klaviyo/",
+          "text": "Instagram"
+        },
+        {
+          "href": "https://www.klaviyo.com/sitemap",
+          "text": "Site Map"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal",
+          "text": "Terms and Privacy"
+        },
+        {
+          "href": "https://www.klaviyo.com/security",
+          "text": "Security"
+        },
+        {
+          "href": "https://www.klaviyo.com/trust",
+          "text": "Trust"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal/intellectual-property-notices",
+          "text": "Intellectual Property Notices"
+        }
+      ],
+      "headings": [
+        {
+          "level": 1,
+          "id": "",
+          "text": "Troubleshooting branded sending domain issues"
+        },
+        {
+          "level": 2,
+          "id": "h_01HCN6GRMAGQ6X1CKAV6QSTX4H",
+          "text": "You will learn"
+        },
+        {
+          "level": 2,
+          "id": "h_01HCN6GRMAGWCFD88K2B4SDMB8",
+          "text": "Before you begin"
+        },
+        {
+          "level": 2,
+          "id": "h_01HCN6GRMASTBGNVQFC0FN4ZEW",
+          "text": "Troubleshooting using 3rd party tools"
+        },
+        {
+          "level": 2,
+          "id": "h_01HCN6GRMAEFMMPJXEZHX4PSM8",
+          "text": "NS and CNAME lookup examples"
+        },
+        {
+          "level": 3,
+          "id": "h_01HHMGYFKFSKM21VJE36HZA5KR",
+          "text": "NS records"
+        },
+        {
+          "level": 3,
+          "id": "h_01HHMGYNMBBF2BP5PDN941HPZY",
+          "text": "CNAME records"
+        },
+        {
+          "level": 3,
+          "id": "h_01HCN6GRMAQ1QZV46FPXF9JDJE",
+          "text": "TXT lookup example"
+        },
+        {
+          "level": 2,
+          "id": "h_01HCN6GRMAS8SNRV1JMHPH1XY5",
+          "text": "If queries are returning values"
+        },
+        {
+          "level": 3,
+          "id": "h_01HCN6GRMAYYNYXDDS28J97MB2",
+          "text": "Root domain being appended to values automatically"
+        },
+        {
+          "level": 2,
+          "id": "h_01HCN6GRMBEFEPYMJKGHAPTFHJ",
+          "text": "If queries are not returning values"
+        },
+        {
+          "level": 3,
+          "id": "h_01HCN6GRMBJJN4G58CCVN4Y6A5",
+          "text": "Root domain duplicated in the hostname"
+        },
+        {
+          "level": 3,
+          "id": "h_01HCN6GRMBB5KPZ56G0W33EBVT",
+          "text": "Records being proxied"
+        },
+        {
+          "level": 2,
+          "id": "h_01HCN6GRMBXKK7WKZHYANWHYFJ",
+          "text": "Other DNS provider issues"
+        },
+        {
+          "level": 3,
+          "id": "h_01HCN6GRMB3JBPT21X59YTKXJE",
+          "text": "DNS provider does not support @ symbol"
+        },
+        {
+          "level": 3,
+          "id": "h_01HCN6GRMB7TJHF94TAX0Q29JR",
+          "text": "DNS provider does not support underscores"
+        },
+        {
+          "level": 3,
+          "id": "h_01HCN6GRMB1R5JQ1B1WTFHHNP7",
+          "text": "A TXT value already exists on the root domain"
+        },
+        {
+          "level": 2,
+          "id": "h_01HCN6GRMBSGJW42WFAEHKREVG",
+          "text": "DMARC"
+        },
+        {
+          "level": 2,
+          "id": "additional-resources",
+          "text": "Additional resources"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "Explore more from Klaviyo"
+        }
+      ]
+    }
+  },
+  "rendered_page": {
+    "status": "fetched",
+    "error": ""
+  }
+}

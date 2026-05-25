@@ -1,0 +1,164 @@
+<h2 id="h_01HCJKQKJGDBFN051NQB5XVBYV">You will learn</h2>
+<p>Learn about all the available conditions you can use to dynamically display a block, section, or custom-coded piece of content only to certain recipients. To learn how to use these conditions in your templates, head to our article on <a href="https://help.klaviyo.com/hc/en-us/articles/7655965301531">how to show or hide template blocks based on dynamic variables</a>. </p>
+<p>Learn how to use conditional logic:</p>
+<ul>
+<li><a href="#h_01G90PC1GF28BCKX1H83E6W1GJ">Where you can use conditions</a></li>
+<li><a href="#h_01G90PEBD7E3H2Y9YSE41Q7FK9">Tips for success</a></li>
+<li><a href="#h_01G90PC71XXASDF3ERB4F39QDK">Condition structures</a></li>
+<li><a href="#h_01G90PE5WWGQETTSC7K9GY2SKX">Build complex conditions</a></li>
+</ul>
+<h2 id="h_01G90PC1GF28BCKX1H83E6W1GJ">Where you can use conditions</h2>
+<p>You can use conditions in: </p>
+<ul>
+<li>
+<strong>Emails</strong>
+<ul>
+<li>Create show/hide logic to dynamically <a href="https://help.klaviyo.com/hc/en-us/articles/7655965301531">display blocks or sections only to certain people</a>. 
+<ul>
+<li>If you prefer not to write code, use the <a href="https://klaviyo.zendesk.com/hc/en-us/articles/7655965301531">show/hide logic builder</a> instead. </li>
+</ul>
+</li>
+<li>Write if/else conditionals to <a href="https://developers.klaviyo.com/en/docs/use_conditionals_in_messages">create custom Django statements</a>.</li>
+</ul>
+</li>
+<li>
+<strong>Customer Hub</strong>
+<ul>
+<li>Write if/else conditionals to <a href="https://developers.klaviyo.com/en/docs/use_conditionals_in_messages">create custom Django statements</a> in content blocks</li>
+</ul>
+</li>
+</ul>
+<h2 id="h_01G90PEBD7E3H2Y9YSE41Q7FK9">Tips for success</h2>
+<p>When building out show/hide conditions, pay attention to the details. Show/hide conditions are case-sensitive, and spelling must exactly match your profile or event data. </p>
+<p>Also, make sure to consider all possible viewers. For example, if you show a specific block only to residents of a certain state, cover all possible spellings of that state name (e.g., Massachusetts, massachusetts, mass, MA). Also take into consideration profiles who may not have the property set at all.</p>
+<p>Once you’ve built the message and applied your conditions, <a href="https://help.klaviyo.com/hc/en-us/articles/115005081907-How-to-Preview-and-Send-Test-Emails-in-Klaviyo">preview</a> using a variety of profiles to confirm that the message displays as you intended for all scenarios. </p>
+<h2 id="h_01G90PC71XXASDF3ERB4F39QDK">Condition structures</h2>
+<p>Conditions should include 1-3 elements, depending on your goal for the block and the data you’re using. The condition must at least include a variable (e.g., <em>person|lookup:'Favorite Color'</em>). It may also include a comparison function, like = (equals) or &gt; (greater than) and a value, which specifies a property value to look for. Additionally, certain conditions begin with <em>not</em>, if you’d like the block to only appear for profiles that do not meet a condition. </p>
+<p>The chart below contains a complete list of possible structures a show/hide condition can follow. </p>
+<table>
+<tbody>
+<tr>
+<td style="width: 236.164px; background-color: #eeeeee"><strong>Sample condition</strong></td>
+<td style="width: 299.227px; background-color: #eeeeee"><strong>Show the block if...</strong></td>
+<td style="width: 130.609px; background-color: #eeeeee"><strong>Acceptable data types</strong></td>
+</tr>
+<tr>
+<td style="width: 236.164px">person|lookup:'Favorite Color'</td>
+<td style="width: 299.227px">The <code>Favorite Color</code> property is set (has any value) and is not the boolean <em>False</em>
+</td>
+<td style="width: 130.609px">Any</td>
+</tr>
+<tr>
+<td style="width: 236.164px">not person|lookup:'Favorite Color'</td>
+<td style="width: 299.227px">The <code>Favorite Color</code> property is not set (does not exist on the profile, or is empty), or is the boolean value <em>False</em>
+</td>
+<td style="width: 130.609px">Any</td>
+</tr>
+<tr>
+<td style="width: 236.164px">person|lookup:'Favorite Color' == 'green'</td>
+<td style="width: 299.227px">The <code>Favorite Color</code> property has the value <code>green</code>
+</td>
+<td style="width: 130.609px">Text, Number</td>
+</tr>
+<tr>
+<td style="width: 236.164px">person|lookup:'Favorite Color' != 'green'</td>
+<td style="width: 299.227px">The <code>Favorite Color</code> property does not have the value <code>green</code>
+</td>
+<td style="width: 130.609px">Text, Number</td>
+</tr>
+<tr>
+<td style="width: 236.164px">person|lookup:'Age' &gt; 20</td>
+<td style="width: 299.227px">The <code>Age</code> property contains a number greater than 20</td>
+<td style="width: 130.609px">Number</td>
+</tr>
+<tr>
+<td style="width: 236.164px">person|lookup:'Age' &gt;= 20</td>
+<td style="width: 299.227px">The <code>Age</code> property contains a number greater than or equal to 20</td>
+<td style="width: 130.609px">Number</td>
+</tr>
+<tr>
+<td style="width: 236.164px">person|lookup:'Age' &lt; 20</td>
+<td style="width: 299.227px">The <code>Age</code> property contains a number less than 20</td>
+<td style="width: 130.609px">Number</td>
+</tr>
+<tr>
+<td style="width: 236.164px">person|lookup:'Age' &lt;= 20</td>
+<td style="width: 299.227px">The <code>Age</code> property contains a number less than or equal to 20</td>
+<td style="width: 130.609px">Number</td>
+</tr>
+<tr>
+<td style="width: 236.164px">'green' in person|lookup:'Favorite Colors'</td>
+<td style="width: 299.227px">
+<p>The property <code>Favorite Colors</code> contains a list, and <code>green</code> is one of the list items, OR</p>
+<p>The property <code>Favorite Colors</code> contains text, and <code>green</code> exists anywhere in the text</p>
+</td>
+<td style="width: 130.609px">List, Text</td>
+</tr>
+<tr>
+<td style="width: 236.164px">not 'green' in person|lookup:'Favorite Colors'</td>
+<td style="width: 299.227px">
+<p>The property <code>Favorite Colors</code> contains a list, and <code>green</code> is not one of the list items, OR</p>
+<p>The property <code>Favorite Colors</code> contains text, and <code>green</code> does not exist anywhere in the text</p>
+</td>
+<td style="width: 130.609px">List, Text</td>
+</tr>
+</tbody>
+</table>
+<h3 id="h_01HCJKQKJH5T0RKWNY5T0TKZZ2">Conditions for booleans</h3>
+<p>If you are referencing data stored as a boolean, you’ll need to use 1 and 0 rather than “true” and “false” in your show/hide condition definition. Do not surround the 1 or 0 in quotes. Use the sample conditions below as a template.</p>
+<table>
+<tbody>
+<tr>
+<td style="background-color: #eee"><strong>Sample condition</strong></td>
+<td style="background-color: #eee"><strong>Show the block if...</strong></td>
+</tr>
+<tr>
+<td>person|lookup:'VIP' == 1</td>
+<td>The <code>VIP</code> property is set to the boolean value <code>true</code>
+</td>
+</tr>
+<tr>
+<td>person|lookup:'VIP' == 0</td>
+<td>The <code>VIP</code> property is set to the boolean value <code>false</code>
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="h_01HCJKQKJKTB6G9DX1GXT8QC7C">Conditions for booleans stored as text</h3>
+<p>If your true/false data is stored as text, not as a boolean, use the sample conditions for text properties above. If you aren’t sure, or if you are referencing a property that contains both booleans and text, you can use these structures to cover all scenarios. Include all spellings and capitalizations that are present in your data. </p>
+<table>
+<tbody>
+<tr>
+<td style="background-color: #eee"><strong>Sample condition</strong></td>
+<td style="background-color: #eee"><strong>Show the block if...</strong></td>
+</tr>
+<tr>
+<td>person|lookup:'VIP' == 1 or person|lookup:'VIP' == 'true' or person|lookup:'VIP' == 'True'</td>
+<td>The <code>VIP</code> property is set to the boolean value <code>true</code> or the strings <code>true</code> or <code>True</code>
+</td>
+</tr>
+<tr>
+<td>person|lookup:'VIP' == 0 or person|lookup:'VIP' == 'false' or person|lookup:'VIP' == 'False'</td>
+<td>The <code>VIP</code> property is set to the boolean value <code>false</code> or the strings <code>false</code> or <code>False</code>
+</td>
+</tr>
+</tbody>
+</table>
+<h2 id="h_01G90PE5WWGQETTSC7K9GY2SKX">Build complex conditions</h2>
+<p>If you would like your block to display to people who meet multiple criteria, or if you have a complex use case, you can use multiple show/hide conditions for one block. To do so, connect a series of conditions with AND or OR. For example, if you want to display a block to anyone in Massachusetts, but Massachusetts is spelled differently on some profiles, you can use a condition like this: </p>
+<p><em>person.location.region == 'Massachusetts' or person.location.region == 'massachusetts' or person.location.region == 'mass' or person.location.region == 'MA'</em></p>
+<p>If you only want to show a block to people whose favorite color is green, and who are also VIPs, you can use a condition like this: </p>
+<p><em>person|lookup:'Favorite Color' == 'green' and person|lookup:'VIP'== 1</em></p>
+<h3 id="h_01J8JFW0C92YQZ7C477DEAFV4N">Conditional statements and the inline text editor</h3>
+<p>When you add certain conditional statements to a text block, they may disappear from the inline text editor. The code is still present; it is just hidden. To view and edit conditional statements, open the text block's <em>Source code</em> field. </p>
+<p>The following tags are only visible in a text block's <em>Source code</em> field: </p>
+<ul>
+<li>{% for ... %}</li>
+<li>{% endfor %}</li>
+<li>{% if ... %}</li>
+<li>{% elif ... %}</li>
+<li>{% else %}</li>
+<li>{% endif %}</li>
+<li>{% with ... %}</li>
+<li>{% endwith %}</li>
+</ul>

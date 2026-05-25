@@ -1,0 +1,65 @@
+<h2 id="h_01J42C63P09H1SCKKX00PPMX09">You will learn</h2>
+<p>Learn how to use the preview panel to understand the personalization data available for your messages and how to access personalization variables. Use the preview modal as your source of truth for personalization options. </p>
+<h2 id="h_01J42C63P0M6V1N5WCK02M3WC4">Preview panel for templates, campaigns, and flows </h2>
+<p>Open the preview panel for any message by clicking <strong>Preview &amp; test</strong>. Here, you have the option to choose your data source. Depending on where the message is, you’ll have slightly different options. </p>
+<h3 id="h_01J42C63P07EQ29P9M28W8JWE4">Templates</h3>
+<p>If you edit a template by navigating to <strong>Content &gt; Templates</strong>, you can toggle between profile and event data. For profile data, you can select a specific profile. For event data, you can select a specific event. </p>
+<div class="bs-callout bs-callout-warning">
+<p>Event personalization is only supported for flows triggered by that event. If you use a personalization tag from an event, but send that email another way (e.g., a campaign, a flow triggered by a different event, or a flow triggered by a list), the personalization will not render. </p>
+</div>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/34449970392347" width="505" height="197"></p>
+<h3 id="h_01J42C63P0A3TM32KCPWWKX2R0">Campaigns</h3>
+<p>If you edit a campaign message, you’ll only have access to profile personalization, not event personalization. Event data is not supported for campaigns, because campaigns cannot be associated with a specific event. </p>
+<h3 id="h_01J42C63P06E2H5BTNCH4Y0174">Flows</h3>
+<p>If you edit a message that is part of a flow triggered by a metric, price drop, low inventory, or back in stock, the preview panel will include both profile and event personalization tags. Profile personalization is supported in all flows; use the <em>Add personalization</em> button in a text block to add these tags. </p>
+<h2 id="h_01J42C63P03ENW5HES8XY80ZN7">Choosing a profile to preview</h2>
+<p>When reviewing profile personalization options in the preview modal, the default profile is the user profile associated with your Klaviyo login. Note that this is different from the profile for your email in your own Klaviyo account, and has a very limited set of personalization tag options, like first and last name. </p>
+<p>To see all the data available in a real customer account, select another profile. </p>
+<p>Learn how to change the preview profile for different messages: </p>
+<ul>
+<li>
+<strong>Templates, campaigns, and flow messages (not event-triggered)</strong><br>Use the <em>Search profiles</em> field in the preview modal.<br><img src="https://klaviyo.zendesk.com/hc/article_attachments/34449986377627" width="403" height="83">
+</li>
+<li>
+<strong>Event-triggered flow messages </strong><br>Profile data in event-triggered flow messages comes from the profiles that most recently took the trigger action. Use the arrows to toggle between up to 10 recent events and select the associated profile. <br><img src="https://klaviyo.zendesk.com/hc/article_attachments/34449970406683" width="411" height="56">
+</li>
+</ul>
+<h2 id="h_01J42C63P05ZB4ZS79TVJCX29G">Choose an event to preview </h2>
+<p>When you edit an email by navigating to <strong>Content &gt; Templates</strong>, you have the option to select an event to preview. When you edit an event-triggered flow message, the event is selected automatically. </p>
+<p>In both scenarios, you can toggle through the last 10 instances of the event to choose one to preview as. Use the arrows to navigate through them until you find one that you’d like to preview with. </p>
+<h2 id="h_01J42C63P0QMP5YXV91PRXTZAV">Basic personalization tags</h2>
+<p>Once you’ve selected a profile or event to preview as, hover over any piece of data to see the personalization tag. Click to copy it to your clipboard, then paste it into your message. </p>
+<p class="wysiwyg-text-align-center"><img src="https://klaviyo.zendesk.com/hc/article_attachments/34449970410267" width="373" height="179"></p>
+<p>These tags can be used as-is, or you can use <a href="https://help.klaviyo.com/hc/en-us/articles/360058907911">filters</a> to adjust how they display. Every variable you copy from the preview modal includes the <em>default</em> filter, <em>|default:''</em>. You can delete this filter, leave it as-is, or fill it in to set a default value. Default values appear when no data is available for a particular recipient. If you don’t set a default value, the variable will not render if data is unavailable. </p>
+<h2 id="h_01J42C63P05AB42YC7SZ4HFXNH">Advanced personalization tags </h2>
+<p>If you’re looking at event data, there might be an overwhelming amount to sort through. Events often contain a large quantity of metadata, which is information about the action someone took to trigger the event. </p>
+<p>Generally, some of this data is “nested,” which means it’s stored inside of another variable. Nested data is used to organize information that is related. </p>
+<p>The <em>Placed Order</em> event is one event that uses nested data. The event’s metadata likely includes details about the person who ordered, as well as the items they ordered. Here’s an example of some of the data you might see: </p>
+<ul>
+<li>
+<strong>Address</strong><br>The customer’s address details are nested under the <em>shipping_address</em> heading, which contains their street address, city, state, and country.<br><img src="https://klaviyo.zendesk.com/hc/article_attachments/28717391600411" alt="Nested event data" width="335" height="241">
+</li>
+<li>
+<strong>Purchased products</strong><br>The items they purchased are listed under the <em>line_items</em> heading. Immediately under the <em>line_items</em> heading is another heading, <em>0</em>. Within the <em>0</em> heading are details about the first product ordered. If you scroll further, you might see a second heading, <em>1</em>, which represents the second ordered item. In numbered data like this, the structure of each entry is generally the same, but each entry will contain details about a different item (e.g., a product in their order).<br><img src="https://klaviyo.zendesk.com/hc/article_attachments/28717391602971" alt="Complex nested event data" width="244" height="356">
+</li>
+</ul>
+<p>Nested data is indicated by a small arrow icon. Click this icon to collapse an entry and hide its contents, to make the data easier to navigate. </p>
+<p>The personalization tag always represents the path you use to find it within the data. For example, an unnested event variable will follow a structure like this: {{ event.source }}. However, a nested variable found by navigating to <strong>extra &gt; customer &gt; default_address &gt; address1</strong> would look like this: {{ event.extra.customer.default_address.address1 }}. </p>
+<h3 id="h_01J42C63P0RDJHT1D9Z7HZJGTS">Iterating through nested variables</h3>
+<p>If you select a variable that contains a number, like {{ event.extra.line_items.0.product.title }}, that means it is possible to iterate through each item in the list. You can iterate through list items with a <a href="https://developers.klaviyo.com/en/docs/django_message_design#for-blocks" target="_blank" rel="noopener noreferrer">for loop</a>, a <a href="https://help.klaviyo.com/hc/en-us/articles/4408802445339" target="_blank" rel="noopener noreferrer">content repeat</a>, or a <a href="https://help.klaviyo.com/hc/en-us/articles/4408802597659" target="_blank" rel="noopener noreferrer">dynamic table block</a>. </p>
+<p>If you choose not to use one of these iteration tools, make sure to always use the first item in a list, as some recipients might only have one item. You can tell if a variable references the first list item by reviewing the number in the variable itself: </p>
+<ul>
+<li>{{ event.extra.line_items.0.product.title }} is the variable for the title for the first item in an order. </li>
+<li>{{ event.extra.line_items.1.product.title }} is the variable for the title for the second item in an order. </li>
+<li>{{ event.extra.line_items.2.product.title }} is the variable for the title for the third item in an order. </li>
+</ul>
+<div class="bs-callout bs-callout-default">
+<p>We only recommend this process for technically savvy marketers, or for anyone who has access to a developer. While our product does support custom dynamic content, our support team cannot help you build out your custom templates beyond offering the general guidance covered in this documentation.</p>
+</div>
+<h2 id="h_01J42C63P0ZSY2DJJG9FG9AZJ3">Outcome</h2>
+<p>After reading this article and trying these steps in your own account, you should understand how to navigate the preview modal and find the personalization data you need for your messages. </p>
+<h2 id="h_01J42C63P0H3ECKRTJKA3PM8V6">Additional resources</h2>
+<ul>
+<li><a href="https://klaviyo.zendesk.com/hc/en-us/articles/4408802648731" target="_blank" rel="noopener noreferrer">Message personalization reference</a></li>
+<li><a href="https://klaviyo.zendesk.com/hc/en-us/articles/25825620314651" target="_blank" rel="noopener noreferrer">How to skip lines in a dynamic table block</a></li>
+</ul>

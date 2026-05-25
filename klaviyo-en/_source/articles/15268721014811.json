@@ -1,0 +1,911 @@
+{
+  "captured_at": "2026-05-23T16:15:31Z",
+  "article": {
+    "id": 15268721014811,
+    "url": "https://klaviyo.zendesk.com/api/v2/help_center/en-us/articles/15268721014811.json",
+    "html_url": "https://klaviyo.zendesk.com/hc/en-us/articles/15268721014811-Understand-the-domains-that-play-a-role-in-email-deliverability",
+    "author_id": 397882329931,
+    "comments_disabled": false,
+    "draft": false,
+    "promoted": false,
+    "position": 0,
+    "vote_sum": 1,
+    "vote_count": 1,
+    "section_id": 49375299121435,
+    "created_at": "2023-05-08T16:11:24Z",
+    "updated_at": "2026-04-21T13:54:28Z",
+    "name": "Understand the domains that play a role in email deliverability",
+    "title": "Understand the domains that play a role in email deliverability",
+    "source_locale": "en-us",
+    "locale": "en-us",
+    "outdated": false,
+    "outdated_locales": [],
+    "edited_at": "2025-01-16T12:14:42Z",
+    "user_segment_id": null,
+    "permission_group_id": 146372,
+    "content_tag_ids": [],
+    "label_names": [],
+    "body": "<h2 id=\"h_01HJ4CKXM35E6PCH707W30QE75\">You will learn</h2>\n<p>Learn about the different domains that play a role in the delivery of your emails, as well as the importance of domain alignment.</p>\n<h2 id=\"h_01HJ4CKXM3E0X2ZYM3NB2E6YVN\">From Address domain</h2>\n<p>The From Address domain, also known as the “friendly from address domain,” refers to the domain associated with the email address that you are sending from. </p>\n<p>This is the most important domain in your emails because your subscribers see this in their inbox. It represents your brand, and is the primary domain that email providers use to track your reputation.</p>\n<p> In a typical inbox, like Gmail, you will see the From Address here:</p>\n<p class=\"wysiwyg-text-align-center\"><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28717994485659\" alt=\"domain after @ in friendly from address\"></p>\n<p>You can <a href=\"https://help.klaviyo.com/hc/en-us/articles/360024994912\">set the From Address</a> and the accompanying \"From\" name for any campaign in Klaviyo.</p>\n<h2 id=\"h_01HJ4CKXM3BF1PBPH2BG68BQ1Y\">Sending domain</h2>\n<p>A sending domain is the domain used to send emails, andshow subscribers where your emails are sent from. By default, most users will begin with sending from a shared Klaviyo domain. This domain will appear in the sender information at the top of an email message.</p>\n<p>In the example below from Gmail, your recipients see that your sender email address includes \"via klaviyomail.com” because you are using a shared sending domain.</p>\n<p class=\"wysiwyg-text-align-center\"><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28717994492315\" alt=\"Via klaviyomail.com showing due to shared domain\"></p>\n<p>A <a href=\"https://help.klaviyo.com/hc/en-us/articles/7674941873947\">branded sending domain</a> allows you to send emails that appear to be coming from your brand to give you better control of your sender reputation. Moving to a branded sending domain will remove the \"via klaviyomail.com\" message displayed beside your sender email address. This also means that your emails will no longer be sent by a shared domain.</p>\n<div class=\"bs-callout bs-callout-default\">\n<p>Google and Yahoo have announced new sender requirements that they are planning to start enforcing in February of 2024. While already best practice, setting up a branded sending domain will be a requirement for bulk senders to land in Gmail inboxes.</p>\n<p>Google considers those who send 5000 or more emails to Google accounts per day to be \"bulk senders.\" All traffic from a sender counts towards that 5000 email threshold, including transactional emails. </p>\n<p>Learn more about <a href=\"https://www.klaviyo.com/blog/gmail-update\">Gmail and Yahoo’s upcoming sender requirements.</a></p>\n</div>\n<h2 id=\"h_01HJ4CKXM3X182P928ATGSYF93\">Return-Path domain</h2>\n<p>A Return-Path domain (also known as: Mail From, Envelope From, origin, bounce address, SPF domain, mailed-by, mail server domain) represents the domain name of the server that sent the email. </p>\n<p>This domain is necessary for the delivery of your message; however, it's usually hidden from the recipient. For example, Gmail shows it in a hidden dropdown as the “mailed-by” domain. You can see this by clicking <strong>to me</strong> in your Gmail message.</p>\n<p><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28717994495387\" alt=\"Mailed by domain in message details of inbox\"></p>\n<p>With Klaviyo, the Return-Path domain will be similar to <em>klaviyomail.com</em><strong>. </strong>This domain is also where bounce notifications will go, and is managed by Klaviyo. If a message bounces, it will automatically log the event in your account. </p>\n<p>When an inbox provider like Gmail receives a message, they check the Return-Path domain for the <a href=\"https://help.klaviyo.com/hc/en-us/articles/4402601857307\">SPF record</a>. Since Klaviyo manages the Return-Path domain for you, SPF is functional by default. You do not need to modify any SPF records for Klaviyo.</p>\n<div class=\"bs-callout bs-callout-default\">\n<p>SPF on the Return-Path will always pass with Klaviyo, but your reporting may show that it fails “alignment.” When this happens, the Return-Path domain is passing SPF, but it does not match the From Address domain. You might also see this in Google Postmaster Tools; however, this is not an issue unless you have set up <a href=\"https://help.klaviyo.com/hc/en-us/articles/4402601857307\">DMARC</a> without setting up and aligning DKIM with your sending domain. </p>\n</div>\n<h2 id=\"h_01HJ4CKXM3S8VEDGYREJWV51SQ\">DKIM domain</h2>\n<p>A DKIM domain (also known as the “signed-by domain”, d= domain) cryptographically signs emails that you send, allowing the receiving mailbox provider to confirm that the owner of the domain sent the message. This domain does not have to match the From Address or the Return-Path, and is only used to sign the email. </p>\n<p>By default, it will be a domain owned and operated by Klaviyo, like <em>klaviyomail</em>. This allows DKIM to work immediately when you start with Klaviyo. </p>\n<div class=\"bs-callout bs-callout-default\">\n<p>Note that you can only DKIM-sign your messages with a domain you own. The DKIM domain is an important part of your overall sender reputation, and its own reputation has a major influence on whether the message is delivered.</p>\n</div>\n<p>The DKIM domain will appear after the “via” header and also as the “signed-by” within Gmail:</p>\n<p class=\"wysiwyg-text-align-center\"><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28718022231067\" alt=\"DKIM domain shown for signed-by in message details\"></p>\n<p>When you set up a <a href=\"https://help.klaviyo.com/hc/en-us/articles/7674941873947\">branded sending domain</a>, your email will be DKIM-signed by your own domain in addition to a shared domain.</p>\n<h2 id=\"h_01HJ4CKXM3DCV9C1GQW1AYY8SZ\">Click tracking domain</h2>\n<p>Click tracking domains are used to track clicks on the links you include in your content. When someone clicks a link, they will be redirected through a URL associated with the click tracking domain, and then immediately passed through to the original URL.</p>\n<p>If you hover over a link in your inbox you will see the full tracking link:</p>\n<p class=\"wysiwyg-text-align-center\"><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28718022237211\" alt=\"Dedicated click tracking domain shown on hover\" width=\"481\" height=\"366\"></p>\n<p><a href=\"https://help.klaviyo.com/hc/en-us/articles/7676795223707\">Dedicated click tracking</a> allows you to display your own domain on click tracking links, rather than Klaviyo's. Having recognizable links in the emails coming from your brand will help you build trust with your customers that receive those emails. Instead of a long string of letters and numbers from a <em>trk.klaviyomail</em> encoded link, they will see your brand’s name when hovering over links in your email. This familiarity may increase the chances that they will click on your links.</p>\n<p>Additionally, many mailbox providers and filtering software will consider the reputation of all domains used in your messaging. Using the same root domain in both your dedicated click tracking links and your sending domain creates alignment across your brand identity.</p>\n<h2 id=\"h_01HJ4CKXM3SN1N1C60PN9KR9NX\">Domain alignment for DMARC</h2>\n<p>In order to be DMARC compliant, you must have a branded sending domain that matches the domain in your sender email address (i.e. your From Address). For example, if you send an email using <em>sales@example.com</em> as the From Address and <em>example.com</em> is protected by DMARC, your account will need to use a branded sending domain like <em>send.example.com</em> to meet DMARC requirements.</p>\n<p>DMARC is not required to send marketing emails on Klaviyo. To configure and implement a DMARC policy, we recommend working with your IT team and a 3rd-party DMARC service provider.</p>\n<div class=\"bs-callout bs-callout-default\">\n<p>Note that neither the Return-path nor the DKIM domain will match your From Address when you start with Klaviyo. This is the default scenario for any new Klaviyo customer. Your domains don't need to align unless you have set up DMARC.</p>\n</div>\n<p>However, you can align the DKIM domain with your from-address by <a href=\"https://help.klaviyo.com/hc/en-us/articles/115000357752\">setting up a branded sending domain</a>. </p>\n<h2 id=\"h_01HJ4CKXM4YVHYFB7MP77AB8AM\">Benefits of domain alignment</h2>\n<p>There are 2 major benefits of domain alignment:</p>\n<ol>\n<li>Domain alignment allows DMARC to “pass.\" You will need to align either the DKIM domain to match with your From Address to achieve this. </li>\n<li>Aligning as many domains as possible helps you further establish your domain reputation. Inbox providers and spam filters often consider domain alignment when deciding if you are a reputable. Recipients are more likely to trust you as a sender if your domains align (i.e., From Address domain matches click tracking domain, etc).</li>\n</ol>\n<p>It is best practice to align all domains if possible. By setting up and aligning your sending and DKIM domain, click tracking domain, and From Address domain, inbox providers will more favorably determine your sending reputation.</p>\n<h2 id=\"h_01HJ4CKXM4N623G628JY32VP3W\">Additional resources</h2>\n<ul>\n<li><a href=\"https://help.klaviyo.com/hc/en-us/articles/4402601857307\">Understanding email authentication</a></li>\n<li><a href=\"https://help.klaviyo.com/hc/en-us/articles/115005247008\">Understanding email deliverability </a></li>\n</ul>",
+    "user_segment_ids": []
+  },
+  "normalized": {
+    "id": "15268721014811",
+    "title": "Understand the domains that play a role in email deliverability",
+    "source_url": "https://help.klaviyo.com/hc/en-us/articles/15268721014811-Understand-the-domains-that-play-a-role-in-email-deliverability",
+    "section_id": 49375299121435,
+    "section": "Getting started with email deliverability",
+    "category_id": 115000873988,
+    "category": "Deliverability & compliance",
+    "category_slug": "deliverability-compliance",
+    "klaviyo_updated": "2026-04-21T13:54:28Z",
+    "created_at": "2023-05-08T16:11:24Z",
+    "draft": false,
+    "promoted": false,
+    "position": 0,
+    "label_names": []
+  },
+  "files": {
+    "body_html": "_source/articles/15268721014811.body.html",
+    "rendered_html": "_source/rendered/15268721014811.html"
+  },
+  "assets": {
+    "api_body": {
+      "images": [
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28717994485659",
+          "alt": "domain after @ in friendly from address",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28717994492315",
+          "alt": "Via klaviyomail.com showing due to shared domain",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28717994495387",
+          "alt": "Mailed by domain in message details of inbox",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28718022231067",
+          "alt": "DKIM domain shown for signed-by in message details",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28718022237211",
+          "alt": "Dedicated click tracking domain shown on hover",
+          "width": "481",
+          "height": "366"
+        }
+      ],
+      "links": [
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360024994912",
+          "text": "set the From Address"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/7674941873947",
+          "text": "branded sending domain"
+        },
+        {
+          "href": "https://www.klaviyo.com/blog/gmail-update",
+          "text": "Gmail and Yahoo’s upcoming sender requirements."
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4402601857307",
+          "text": "SPF record"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4402601857307",
+          "text": "DMARC"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/7676795223707",
+          "text": "Dedicated click tracking"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115000357752",
+          "text": "setting up a branded sending domain"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4402601857307",
+          "text": "Understanding email authentication"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005247008",
+          "text": "Understanding email deliverability"
+        }
+      ],
+      "headings": [
+        {
+          "level": 2,
+          "id": "h_01HJ4CKXM35E6PCH707W30QE75",
+          "text": "You will learn"
+        },
+        {
+          "level": 2,
+          "id": "h_01HJ4CKXM3E0X2ZYM3NB2E6YVN",
+          "text": "From Address domain"
+        },
+        {
+          "level": 2,
+          "id": "h_01HJ4CKXM3BF1PBPH2BG68BQ1Y",
+          "text": "Sending domain"
+        },
+        {
+          "level": 2,
+          "id": "h_01HJ4CKXM3X182P928ATGSYF93",
+          "text": "Return-Path domain"
+        },
+        {
+          "level": 2,
+          "id": "h_01HJ4CKXM3S8VEDGYREJWV51SQ",
+          "text": "DKIM domain"
+        },
+        {
+          "level": 2,
+          "id": "h_01HJ4CKXM3DCV9C1GQW1AYY8SZ",
+          "text": "Click tracking domain"
+        },
+        {
+          "level": 2,
+          "id": "h_01HJ4CKXM3SN1N1C60PN9KR9NX",
+          "text": "Domain alignment for DMARC"
+        },
+        {
+          "level": 2,
+          "id": "h_01HJ4CKXM4YVHYFB7MP77AB8AM",
+          "text": "Benefits of domain alignment"
+        },
+        {
+          "level": 2,
+          "id": "h_01HJ4CKXM4N623G628JY32VP3W",
+          "text": "Additional resources"
+        }
+      ]
+    },
+    "rendered_page": {
+      "images": [
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/7ff492c2b417b7ecfe572f839a8a81398693c1f7-1920x1080.webp",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/c6ce6cf784f5cfbd0eb9a5bd3413b96f04780d46-544x118.jpg",
+          "alt": "domain after @ in friendly from address",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/c1790b10b302db18c25d83041f7cd444f177937e-951x200.jpg",
+          "alt": "Via klaviyomail.com showing due to shared domain",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/e1328784df2b1d9840255654487d3ba2f52b62f4-974x430.jpg",
+          "alt": "Mailed by domain in message details of inbox",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/a0907637417e595bf545b005245ef491725921b8-1080x452.jpg",
+          "alt": "DKIM domain shown for signed-by in message details",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/75fb6cc115370d4fcdf57972dad2c000e0f2b3b2-512x390.jpg?w=481",
+          "alt": "Dedicated click tracking domain shown on hover",
+          "width": "481",
+          "height": "366"
+        }
+      ],
+      "links": [
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/15268721014811-Understand-the-domains-that-play-a-role-in-email-deliverability#site-content",
+          "text": "Skip to main content"
+        },
+        {
+          "href": "https://www.klaviyo.com",
+          "text": "Home"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center"
+        },
+        {
+          "href": "https://www.klaviyo.com/enterprise",
+          "text": "Enterprise"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Partners"
+        },
+        {
+          "href": "https://www.klaviyo.com/careers",
+          "text": "Careers"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": "Log in"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": ""
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center Find step-by-step instructions and troubleshooting solutions in our knowledge base."
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000032731",
+          "text": "Integrations"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000312411",
+          "text": "Flows"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867867",
+          "text": "Audience"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867667",
+          "text": "Campaigns"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/360000190711",
+          "text": "Sign-up forms"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000873988",
+          "text": "Deliverability & compliance"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/29173800271259",
+          "text": "SMS"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/16638219724187",
+          "text": "Reviews"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/18073014919195",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/34141283979931",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/37659126754075",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/33948021740315",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/39746685522331",
+          "text": "WhatsApp"
+        },
+        {
+          "href": "https://academy.klaviyo.com",
+          "text": "Klaviyo Academy Expert training and education to help you succeed with Klaviyo, and beyond."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Quick+guide&resource=academy_courses",
+          "text": "Quick guides Learn marketing strategies and concepts in 15 minutes or less."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Course&resource=academy_courses",
+          "text": "Courses Master key marketing topics through structured lessons and exams."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/best-practices",
+          "text": "Best practices Discover top product and marketing strategies for your business."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/learning-paths",
+          "text": "Learning paths Complete curated learning journeys tailored to your marketing goals."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses",
+          "text": "Explore all resources"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Live+training&resource=academy_courses",
+          "text": "Live trainings Build confidence through hands-on interactive workshops and thought-provoking strategy sessions."
+        },
+        {
+          "href": "https://www.bigmarker.com/klaviyo-customer-education/Office-hours-Getting-started-with-Klaviyo",
+          "text": "Live office hours Join a strategic discussion where you can ask questions and get answers in real-time."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/private-live-training",
+          "text": "1:1 Live training Book a private training session with an expert to jumpstart your platform knowledge and confidence."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/credentials",
+          "text": "Klaviyo credentials Dig deeper into select topics and showcase your expertise with a final exam to earn a certificate and digital badge."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/certificates/klaviyo-practitioner-certificate",
+          "text": "Klaviyo practitioner certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/deliverability-certificate",
+          "text": "Deliverability certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/developer-certificate",
+          "text": "Klaviyo developer certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses&select=Certificate",
+          "text": "See all certificates"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Klaviyo Community Join our thriving community network to connect with brands like yours—online and in person."
+        },
+        {
+          "href": "https://community.klaviyo.com/topic/new",
+          "text": "Ask a question Post a question and get thoughtful answers from Klaviyo powerusers."
+        },
+        {
+          "href": "https://community.klaviyo.com/p/roadmap",
+          "text": "Product roadmap"
+        },
+        {
+          "href": "https://community.klaviyo.com/search/activity/recent",
+          "text": "Recent threads"
+        },
+        {
+          "href": "https://community.klaviyo.com/p/champions",
+          "text": "Meet the Champions"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups",
+          "text": "Browse all groups Your people are waiting. New ideas and connections are a click away."
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/developer-group-64",
+          "text": "Developer group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/entrepreneur-user-group-118",
+          "text": "Entrepreneur group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/woo-user-group-87",
+          "text": "WooCommerce group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/new-york-meetup-chapter-82",
+          "text": "New York City"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/los-angeles-meetup-chapter-83",
+          "text": "Los Angeles"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/austin-meetup-chapter-85",
+          "text": "Austin"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/san-diego-meetup-chapter-86",
+          "text": "San Diego"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/amsterdam-meetup-chapter-84",
+          "text": "Amsterdam"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Klaviyo Developers Access API documentation and developer guides to help you build with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/get_started",
+          "text": "Get started Access key resources and a step-by-step checklist for how to start developing with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/build_your_integration",
+          "text": "Grow your app's reach Learn how to join our ecosystem and get your app listed on our marketplace."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/developer-tools",
+          "text": "Developer tools Generate sample data, monitor your API usage, and access our Postman collections."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/reference/api_overview",
+          "text": "API reference Browse our full catalog of API docs."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/changelog_",
+          "text": "Changelog"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/api_versioning_and_deprecation_policy",
+          "text": "Versioning & deprecation policy"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/rate_limits_and_error_handling",
+          "text": "Rate limits & error handling"
+        },
+        {
+          "href": "https://youtube.com/playlist?list=PLHkNfHgtxcUanrkMnKPdkRzuWU7MGv_xM&si=pkG-KH7IT_TUHOGC",
+          "text": "API tutorials on YouTube Subscribe to our Klaviyo API Tutorials playlist for easy access to step-by-step developer walkthroughs."
+        },
+        {
+          "href": "https://www.klaviyo.com/contact-us",
+          "text": "Contact us"
+        },
+        {
+          "href": "https://www.klaviyo.com/sign-up",
+          "text": "Sign up"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": "Search"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/15268721014811",
+          "text": "United States - EN"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/de-de/articles/15268721014811",
+          "text": "Deutschland - DE"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-es/articles/15268721014811",
+          "text": "España - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-mx/articles/15268721014811",
+          "text": "México - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/fr-fr/articles/15268721014811",
+          "text": "France - FR"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/it-it/articles/15268721014811",
+          "text": "Italia - IT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/ko-kr/articles/15268721014811",
+          "text": "한국 - KO"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/nl-nl/articles/15268721014811",
+          "text": "Nederland - NL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pl-pl/articles/15268721014811",
+          "text": "Polska - PL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pt-br/articles/15268721014811",
+          "text": "Brasil - PT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/sv-se/articles/15268721014811",
+          "text": "Sverige - SV"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/14416651431323",
+          "text": "Email deliverability"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/49375299121435",
+          "text": "Getting started with email deliverability"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/15268721014811-Understand-the-domains-that-play-a-role-in-email-deliverability#h_01HJ4CKXM35E6PCH707W30QE75",
+          "text": "You will learn"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/15268721014811-Understand-the-domains-that-play-a-role-in-email-deliverability#h_01HJ4CKXM3E0X2ZYM3NB2E6YVN",
+          "text": "From Address domain"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/15268721014811-Understand-the-domains-that-play-a-role-in-email-deliverability#h_01HJ4CKXM3BF1PBPH2BG68BQ1Y",
+          "text": "Sending domain"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/15268721014811-Understand-the-domains-that-play-a-role-in-email-deliverability#h_01HJ4CKXM3X182P928ATGSYF93",
+          "text": "Return-Path domain"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/15268721014811-Understand-the-domains-that-play-a-role-in-email-deliverability#h_01HJ4CKXM3S8VEDGYREJWV51SQ",
+          "text": "DKIM domain"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/15268721014811-Understand-the-domains-that-play-a-role-in-email-deliverability#h_01HJ4CKXM3DCV9C1GQW1AYY8SZ",
+          "text": "Click tracking domain"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/15268721014811-Understand-the-domains-that-play-a-role-in-email-deliverability#h_01HJ4CKXM3SN1N1C60PN9KR9NX",
+          "text": "Domain alignment for DMARC"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/15268721014811-Understand-the-domains-that-play-a-role-in-email-deliverability#h_01HJ4CKXM4YVHYFB7MP77AB8AM",
+          "text": "Benefits of domain alignment"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/15268721014811-Understand-the-domains-that-play-a-role-in-email-deliverability#additional-resources",
+          "text": "Additional resources"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360024994912",
+          "text": "set the From Address"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/7674941873947",
+          "text": "branded sending domain"
+        },
+        {
+          "href": "https://www.klaviyo.com/blog/gmail-update",
+          "text": "Gmail and Yahoo’s upcoming sender requirements."
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4402601857307",
+          "text": "SPF record"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4402601857307",
+          "text": "DMARC"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/7676795223707",
+          "text": "Dedicated click tracking"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115000357752",
+          "text": "setting up a branded sending domain"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4402601857307",
+          "text": "Understanding email authentication"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005247008",
+          "text": "Understanding email deliverability"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115001002272",
+          "text": "Learn how to contact support"
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": ""
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": "Visit Community"
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": ""
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": "Hire a partner"
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/about",
+          "text": "About Klaviyo"
+        },
+        {
+          "href": "https://www.klaviyo.com/newsroom",
+          "text": "Newsroom"
+        },
+        {
+          "href": "https://investors.klaviyo.com/overview/default.aspx",
+          "text": "Investor relations"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Agency and tech partners"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Developers"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/retail",
+          "text": "Retail and ecommerce"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/restaurants",
+          "text": "Restaurant marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/wellness",
+          "text": "Wellness"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform",
+          "text": "B2C CRM overview"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai",
+          "text": "Klaviyo AI (K:AI)"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/marketing-automation",
+          "text": "Klaviyo Marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-service",
+          "text": "Klaviyo Service"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/analytics",
+          "text": "Klaviyo Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-data-platform",
+          "text": "Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare",
+          "text": "Klaviyo vs. Klaviyo alternatives"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-mailchimp",
+          "text": "Klaviyo vs. Mailchimp"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-postscript",
+          "text": "Klaviyo vs. Postscript"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-attentive",
+          "text": "Klaviyo vs. Attentive"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-salesforce-marketing-cloud",
+          "text": "Klaviyo vs. Salesforce"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-listrak",
+          "text": "Klaviyo vs. Listrak"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/omnichannel",
+          "text": "Omnichannel marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/email-marketing",
+          "text": "Email marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing",
+          "text": "SMS marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing/rcs",
+          "text": "RCS for Business"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/mobile-app-marketing",
+          "text": "Mobile app marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/whatsapp",
+          "text": "WhatsApp marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/social",
+          "text": "Social marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources",
+          "text": "Marketing resources"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources/marketing-campaign-calendar",
+          "text": "Marketing campaign calendar"
+        },
+        {
+          "href": "https://www.klaviyo.com/glossary",
+          "text": "Marketing glossary"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/email-subject-line-generator",
+          "text": "Subject line generator"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/roi-calculator",
+          "text": "ROI calculator"
+        },
+        {
+          "href": "https://www.klaviyo.com/customers",
+          "text": "Case studies"
+        },
+        {
+          "href": "https://www.klaviyo.com/composer",
+          "text": "Composer Beta"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/marketing-agent",
+          "text": "Marketing Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/customer-agent",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/customer-experience-hub",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/helpdesk",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/marketing-analytics",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/advanced-cdp",
+          "text": "Advanced Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/web-forms",
+          "text": "Web forms"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/email-templates",
+          "text": "Email templates"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/portfolio",
+          "text": "Portfolio"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform-integrations",
+          "text": "Apps and Integrations"
+        },
+        {
+          "href": "https://www.klaviyo.com/features",
+          "text": "Features"
+        },
+        {
+          "href": "https://www.klaviyo.com/whats-new",
+          "text": "What's new"
+        },
+        {
+          "href": "https://www.klaviyo.com/events",
+          "text": "Events"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help Center"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us",
+          "text": "Academy"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Community"
+        },
+        {
+          "href": "https://www.facebook.com/Klaviyo/",
+          "text": "Facebook"
+        },
+        {
+          "href": "https://twitter.com/klaviyo/",
+          "text": "Twitter"
+        },
+        {
+          "href": "https://www.linkedin.com/company/klaviyo/",
+          "text": "LinkedIn"
+        },
+        {
+          "href": "https://www.instagram.com/klaviyo/",
+          "text": "Instagram"
+        },
+        {
+          "href": "https://www.klaviyo.com/sitemap",
+          "text": "Site Map"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal",
+          "text": "Terms and Privacy"
+        },
+        {
+          "href": "https://www.klaviyo.com/security",
+          "text": "Security"
+        },
+        {
+          "href": "https://www.klaviyo.com/trust",
+          "text": "Trust"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal/intellectual-property-notices",
+          "text": "Intellectual Property Notices"
+        }
+      ],
+      "headings": [
+        {
+          "level": 1,
+          "id": "",
+          "text": "Understand the domains that play a role in email deliverability"
+        },
+        {
+          "level": 2,
+          "id": "h_01HJ4CKXM35E6PCH707W30QE75",
+          "text": "You will learn"
+        },
+        {
+          "level": 2,
+          "id": "h_01HJ4CKXM3E0X2ZYM3NB2E6YVN",
+          "text": "From Address domain"
+        },
+        {
+          "level": 2,
+          "id": "h_01HJ4CKXM3BF1PBPH2BG68BQ1Y",
+          "text": "Sending domain"
+        },
+        {
+          "level": 2,
+          "id": "h_01HJ4CKXM3X182P928ATGSYF93",
+          "text": "Return-Path domain"
+        },
+        {
+          "level": 2,
+          "id": "h_01HJ4CKXM3S8VEDGYREJWV51SQ",
+          "text": "DKIM domain"
+        },
+        {
+          "level": 2,
+          "id": "h_01HJ4CKXM3DCV9C1GQW1AYY8SZ",
+          "text": "Click tracking domain"
+        },
+        {
+          "level": 2,
+          "id": "h_01HJ4CKXM3SN1N1C60PN9KR9NX",
+          "text": "Domain alignment for DMARC"
+        },
+        {
+          "level": 2,
+          "id": "h_01HJ4CKXM4YVHYFB7MP77AB8AM",
+          "text": "Benefits of domain alignment"
+        },
+        {
+          "level": 2,
+          "id": "additional-resources",
+          "text": "Additional resources"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "Explore more from Klaviyo"
+        }
+      ]
+    }
+  },
+  "rendered_page": {
+    "status": "fetched",
+    "error": ""
+  }
+}

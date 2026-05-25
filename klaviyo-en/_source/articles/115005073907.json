@@ -1,0 +1,828 @@
+{
+  "captured_at": "2026-05-23T16:18:34Z",
+  "article": {
+    "id": 115005073907,
+    "url": "https://klaviyo.zendesk.com/api/v2/help_center/en-us/articles/115005073907.json",
+    "html_url": "https://klaviyo.zendesk.com/hc/en-us/articles/115005073907-Understanding-when-and-how-Klaviyo-sets-a-profile-s-location",
+    "author_id": 20424705848,
+    "comments_disabled": true,
+    "draft": false,
+    "promoted": false,
+    "position": 6,
+    "vote_sum": 35,
+    "vote_count": 173,
+    "section_id": 49375415469339,
+    "created_at": "2017-03-30T16:47:21Z",
+    "updated_at": "2026-05-18T18:44:56Z",
+    "name": "Understanding when and how Klaviyo sets a profile's location",
+    "title": "Understanding when and how Klaviyo sets a profile's location",
+    "source_locale": "en-us",
+    "locale": "en-us",
+    "outdated": false,
+    "outdated_locales": [],
+    "edited_at": "2026-05-18T18:44:56Z",
+    "user_segment_id": null,
+    "permission_group_id": 146372,
+    "content_tag_ids": [],
+    "label_names": [],
+    "body": "<h2 id=\"section0\">You will learn</h2>\n<p>Learn where to find location information for a profile, how it is used and updated, and more. When syncing or creating a new profile, Klaviyo determines the location and timezone information based on the profile's billing address. If a profile hasn't purchased, location and timezone are determined based on IP geolocation. </p>\n<h2 id=\"h_01HGZQQ2WXRAEB41VQ0GV2C41Y\">Find location information in a profile</h2>\n<p>You can find the location for a profile by navigating to their profile page in Klaviyo, where the location is displayed in the header along with any contact information.</p>\n<p class=\"wysiwyg-text-align-center\"><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/33101716556571\" alt=\"Top of the profile page\"></p>\n<h2 id=\"h_01HGZQQ2WX6GEZ03DPBG41PANJ\">How locations are used and updated in Klaviyo</h2>\n<p>A profile's location and timezone are used when <a href=\"https://help.klaviyo.com/hc/en-us/articles/115005054847#schedule-and-send-your-campaign6\">sending based on recipients' timezones</a>, <a href=\"https://help.klaviyo.com/hc/en-us/articles/115005065887\">creating location-based segments</a>, or adding location- or timezone-specific filters to flows.</p>\n<p>Here is an example outline of how a profile's location and timezone information are set and updated:</p>\n<ol>\n<li>\n<strong>A profile visits your website or submits a form.</strong> The request includes their IP address but no address data, so Klaviyo estimates their location and timezone from the IP.</li>\n<li>\n<strong>The profile places an order through Shopify.</strong> Klaviyo's Shopify integration extracts the billing address from the order and updates the profile's location and timezone. Because this\naddress data is more authoritative than an IP-based estimate, it takes priority.</li>\n<li>\n<strong>The profile continues browsing your site.</strong> Even though these interactions include an IP address, the profile's location is now protected — IP-based estimation will not overwrite address\ndata set by Shopify.</li>\n<li>\n<strong>A customer update syncs from Shopify.</strong> If the customer's default address in Shopify differs from the billing address on their last order, the profile's location will be updated to reflect the customer record. Both sources carry the same authority, so the most recently synced data is what appears on the profile.\n\nNote that email opens and clicks do not update a profile's location or timezone, even if the profile has no other location data.\n</li>\n</ol>\n<p><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/33101716559387\" alt=\"Example of where location and timezone are displayed in a profile\"></p>\n<div class=\"bs-callout bs-callout-default\">\n<p>If you are using a custom integration, billing address is not used to determine location. You'll need to set profiles' locations with the location object in the Profiles API. Learn more about <a href=\"https://developers.klaviyo.com/en/docs/guide_to_integrating_a_platform_without_a_pre_built_klaviyo_integration\">custom integrations</a> and Klaviyo's <a href=\"https://developers.klaviyo.com/en/reference/create_profile\">Profiles API</a>. </p>\n<p>When collecting phone numbers, the number's area code does not affect the location saved on the profile. However, area code can be used to determine a recipient's <a href=\"https://help.klaviyo.com/hc/en-us/articles/22711363273627\">quiet hours</a>.</p>\n</div>\n<h2 id=\"section1\">IP geolocation</h2>\n<p>Klaviyo uses IP geolocation to set a profile's location when a billing address has not been received. Klaviyo can identify a person via their IP and sets a location when that profile:</p>\n<ul>\n<li>Click through a message</li>\n<li>Subscribe via a Klaviyo sign-up form</li>\n<li>Are captured by Klaviyo's web tracking snippet <br>\n<p>Although IP geolocation is used as the industry standard, it can sometimes be inaccurate. Here are a few reasons you might see discrepancies between a profile's IP geolocation and where they are actually located:</p>\n</li>\n<li>Klaviyo checks someone's IP whenever they open an email or are captured via web tracking. For example, if someone is on a trip to China when they open the email, their IP will reflect this, even if their typical location is in California.</li>\n<li>IPs are not static, and the location affiliated with an IP is also not static; this makes IP geolocation imperfect.<br>\n<div class=\"bs-callout bs-callout-default\">\n<p>If a user's internet service provider assigns an IPv6 address to their connection, their location may not be captured correctly.</p>\n</div>\n<p>This is most relevant when you want to schedule a campaign that sends to each recipient in their own timezone. Depending on where a recipient was the last time they opened an email or opted-in via a sign-up form, it's possible that the timezone Klaviyo has recorded for a recipient at send time will not be the same timezone the recipient is in when they receive your next campaign.</p>\n<p>Additional situations where Klaviyo won't be able to get accurate IP data from email open events:</p>\n</li>\n<li>If the <em>Opened Email</em> event, when tracked, goes through a proxy; this is true of emails opened in Gmail.</li>\n<li>If the <em>Opened Email</em> event is synced to Klaviyo through an integration, like Mailchimp. In this case, the IP we assess will be a Mailchimp server IP and not the actual email recipient's IP.</li>\n</ul>\n<h2 id=\"section2\">Update location information yourself</h2>\n<p>If you want to update any location-related properties for one or more profiles (either by <a href=\"https://help.klaviyo.com/hc/en-us/articles/115005074627#add-a-custom-property-yourself2\">manually importing</a> this location data or <a href=\"https://developers.klaviyo.com/en/reference/update_profile\">using the API</a>), you need to reference the relevant Klaviyo property name:</p>\n<ul>\n<li>\n<strong>City: </strong>the city where they live</li>\n<li>\n<strong>State/Region: </strong>the state/region where they live</li>\n<li>\n<strong>Country:</strong> the country where they live</li>\n<li>\n<strong>Zip Code:</strong> the postal code where they live</li>\n</ul>\n<p>For more information about properties and how to manage and update them, head to our <a href=\"https://klaviyo.zendesk.com/hc/en-us/articles/115005074627\">guide on properties</a>.</p>",
+    "user_segment_ids": []
+  },
+  "normalized": {
+    "id": "115005073907",
+    "title": "Understanding when and how Klaviyo sets a profile's location",
+    "source_url": "https://help.klaviyo.com/hc/en-us/articles/115005073907-Understanding-when-and-how-Klaviyo-sets-a-profile-s-location",
+    "section_id": 49375415469339,
+    "section": "Understand profiles",
+    "category_id": 115000867867,
+    "category": "Audience",
+    "category_slug": "analytics-audience",
+    "klaviyo_updated": "2026-05-18T18:44:56Z",
+    "created_at": "2017-03-30T16:47:21Z",
+    "draft": false,
+    "promoted": false,
+    "position": 6,
+    "label_names": []
+  },
+  "files": {
+    "body_html": "_source/articles/115005073907.body.html",
+    "rendered_html": "_source/rendered/115005073907.html"
+  },
+  "assets": {
+    "api_body": {
+      "images": [
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/33101716556571",
+          "alt": "Top of the profile page",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/33101716559387",
+          "alt": "Example of where location and timezone are displayed in a profile",
+          "width": "",
+          "height": ""
+        }
+      ],
+      "links": [
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005054847#schedule-and-send-your-campaign6",
+          "text": "sending based on recipients' timezones"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005065887",
+          "text": "creating location-based segments"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/guide_to_integrating_a_platform_without_a_pre_built_klaviyo_integration",
+          "text": "custom integrations"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/reference/create_profile",
+          "text": "Profiles API"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/22711363273627",
+          "text": "quiet hours"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005074627#add-a-custom-property-yourself2",
+          "text": "manually importing"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/reference/update_profile",
+          "text": "using the API"
+        },
+        {
+          "href": "https://klaviyo.zendesk.com/hc/en-us/articles/115005074627",
+          "text": "guide on properties"
+        }
+      ],
+      "headings": [
+        {
+          "level": 2,
+          "id": "section0",
+          "text": "You will learn"
+        },
+        {
+          "level": 2,
+          "id": "h_01HGZQQ2WXRAEB41VQ0GV2C41Y",
+          "text": "Find location information in a profile"
+        },
+        {
+          "level": 2,
+          "id": "h_01HGZQQ2WX6GEZ03DPBG41PANJ",
+          "text": "How locations are used and updated in Klaviyo"
+        },
+        {
+          "level": 2,
+          "id": "section1",
+          "text": "IP geolocation"
+        },
+        {
+          "level": 2,
+          "id": "section2",
+          "text": "Update location information yourself"
+        }
+      ]
+    },
+    "rendered_page": {
+      "images": [
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/7ff492c2b417b7ecfe572f839a8a81398693c1f7-1920x1080.webp",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/ce5082847587820e5381b99f86e6fdb385e763fa-2242x282.png",
+          "alt": "Top of the profile page",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/7db94feb2b339eff450ae408c2719bf1dd01e509-1354x1282.png",
+          "alt": "Example of where location and timezone are displayed in a profile",
+          "width": "",
+          "height": ""
+        }
+      ],
+      "links": [
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005073907-Understanding-when-and-how-Klaviyo-sets-a-profile-s-location#site-content",
+          "text": "Skip to main content"
+        },
+        {
+          "href": "https://www.klaviyo.com",
+          "text": "Home"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center"
+        },
+        {
+          "href": "https://www.klaviyo.com/enterprise",
+          "text": "Enterprise"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Partners"
+        },
+        {
+          "href": "https://www.klaviyo.com/careers",
+          "text": "Careers"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": "Log in"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": ""
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center Find step-by-step instructions and troubleshooting solutions in our knowledge base."
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000032731",
+          "text": "Integrations"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000312411",
+          "text": "Flows"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867867",
+          "text": "Audience"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867667",
+          "text": "Campaigns"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/360000190711",
+          "text": "Sign-up forms"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000873988",
+          "text": "Deliverability & compliance"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/29173800271259",
+          "text": "SMS"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/16638219724187",
+          "text": "Reviews"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/18073014919195",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/34141283979931",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/37659126754075",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/33948021740315",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/39746685522331",
+          "text": "WhatsApp"
+        },
+        {
+          "href": "https://academy.klaviyo.com",
+          "text": "Klaviyo Academy Expert training and education to help you succeed with Klaviyo, and beyond."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Quick+guide&resource=academy_courses",
+          "text": "Quick guides Learn marketing strategies and concepts in 15 minutes or less."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Course&resource=academy_courses",
+          "text": "Courses Master key marketing topics through structured lessons and exams."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/best-practices",
+          "text": "Best practices Discover top product and marketing strategies for your business."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/learning-paths",
+          "text": "Learning paths Complete curated learning journeys tailored to your marketing goals."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses",
+          "text": "Explore all resources"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Live+training&resource=academy_courses",
+          "text": "Live trainings Build confidence through hands-on interactive workshops and thought-provoking strategy sessions."
+        },
+        {
+          "href": "https://www.bigmarker.com/klaviyo-customer-education/Office-hours-Getting-started-with-Klaviyo",
+          "text": "Live office hours Join a strategic discussion where you can ask questions and get answers in real-time."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/private-live-training",
+          "text": "1:1 Live training Book a private training session with an expert to jumpstart your platform knowledge and confidence."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/credentials",
+          "text": "Klaviyo credentials Dig deeper into select topics and showcase your expertise with a final exam to earn a certificate and digital badge."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/certificates/klaviyo-practitioner-certificate",
+          "text": "Klaviyo practitioner certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/deliverability-certificate",
+          "text": "Deliverability certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/developer-certificate",
+          "text": "Klaviyo developer certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses&select=Certificate",
+          "text": "See all certificates"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Klaviyo Community Join our thriving community network to connect with brands like yours—online and in person."
+        },
+        {
+          "href": "https://community.klaviyo.com/topic/new",
+          "text": "Ask a question Post a question and get thoughtful answers from Klaviyo powerusers."
+        },
+        {
+          "href": "https://community.klaviyo.com/p/roadmap",
+          "text": "Product roadmap"
+        },
+        {
+          "href": "https://community.klaviyo.com/search/activity/recent",
+          "text": "Recent threads"
+        },
+        {
+          "href": "https://community.klaviyo.com/p/champions",
+          "text": "Meet the Champions"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups",
+          "text": "Browse all groups Your people are waiting. New ideas and connections are a click away."
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/developer-group-64",
+          "text": "Developer group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/entrepreneur-user-group-118",
+          "text": "Entrepreneur group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/woo-user-group-87",
+          "text": "WooCommerce group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/new-york-meetup-chapter-82",
+          "text": "New York City"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/los-angeles-meetup-chapter-83",
+          "text": "Los Angeles"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/austin-meetup-chapter-85",
+          "text": "Austin"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/san-diego-meetup-chapter-86",
+          "text": "San Diego"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/amsterdam-meetup-chapter-84",
+          "text": "Amsterdam"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Klaviyo Developers Access API documentation and developer guides to help you build with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/get_started",
+          "text": "Get started Access key resources and a step-by-step checklist for how to start developing with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/build_your_integration",
+          "text": "Grow your app's reach Learn how to join our ecosystem and get your app listed on our marketplace."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/developer-tools",
+          "text": "Developer tools Generate sample data, monitor your API usage, and access our Postman collections."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/reference/api_overview",
+          "text": "API reference Browse our full catalog of API docs."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/changelog_",
+          "text": "Changelog"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/api_versioning_and_deprecation_policy",
+          "text": "Versioning & deprecation policy"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/rate_limits_and_error_handling",
+          "text": "Rate limits & error handling"
+        },
+        {
+          "href": "https://youtube.com/playlist?list=PLHkNfHgtxcUanrkMnKPdkRzuWU7MGv_xM&si=pkG-KH7IT_TUHOGC",
+          "text": "API tutorials on YouTube Subscribe to our Klaviyo API Tutorials playlist for easy access to step-by-step developer walkthroughs."
+        },
+        {
+          "href": "https://www.klaviyo.com/contact-us",
+          "text": "Contact us"
+        },
+        {
+          "href": "https://www.klaviyo.com/sign-up",
+          "text": "Sign up"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": "Search"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005073907",
+          "text": "United States - EN"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/de-de/articles/115005073907",
+          "text": "Deutschland - DE"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-es/articles/115005073907",
+          "text": "España - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-mx/articles/115005073907",
+          "text": "México - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/fr-fr/articles/115005073907",
+          "text": "France - FR"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/it-it/articles/115005073907",
+          "text": "Italia - IT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/ko-kr/articles/115005073907",
+          "text": "한국 - KO"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/nl-nl/articles/115005073907",
+          "text": "Nederland - NL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pl-pl/articles/115005073907",
+          "text": "Polska - PL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pt-br/articles/115005073907",
+          "text": "Brasil - PT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/sv-se/articles/115005073907",
+          "text": "Sverige - SV"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/14508656438555",
+          "text": "Profiles"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/49375415469339",
+          "text": "Understand profiles"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005073907-Understanding-when-and-how-Klaviyo-sets-a-profile-s-location#section0",
+          "text": "You will learn"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005073907-Understanding-when-and-how-Klaviyo-sets-a-profile-s-location#h_01HGZQQ2WXRAEB41VQ0GV2C41Y",
+          "text": "Find location information in a profile"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005073907-Understanding-when-and-how-Klaviyo-sets-a-profile-s-location#h_01HGZQQ2WX6GEZ03DPBG41PANJ",
+          "text": "How locations are used and updated in Klaviyo"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005073907-Understanding-when-and-how-Klaviyo-sets-a-profile-s-location#section1",
+          "text": "IP geolocation"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005073907-Understanding-when-and-how-Klaviyo-sets-a-profile-s-location#section2",
+          "text": "Update location information yourself"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005073907-Understanding-when-and-how-Klaviyo-sets-a-profile-s-location#additional-resources",
+          "text": "Additional resources"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005054847#schedule-and-send-your-campaign6",
+          "text": "sending based on recipients' timezones"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005065887",
+          "text": "creating location-based segments"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/guide_to_integrating_a_platform_without_a_pre_built_klaviyo_integration",
+          "text": "custom integrations"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/reference/create_profile",
+          "text": "Profiles API"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/22711363273627",
+          "text": "quiet hours"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005074627#add-a-custom-property-yourself2",
+          "text": "manually importing"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/reference/update_profile",
+          "text": "using the API"
+        },
+        {
+          "href": "https://klaviyo.zendesk.com/hc/en-us/articles/115005074627",
+          "text": "guide on properties"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005065887",
+          "text": "How to create a location-based segment"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005074627",
+          "text": "Profile properties reference"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115001002272",
+          "text": "Learn how to contact support"
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": ""
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": "Visit Community"
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": ""
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": "Hire a partner"
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/about",
+          "text": "About Klaviyo"
+        },
+        {
+          "href": "https://www.klaviyo.com/newsroom",
+          "text": "Newsroom"
+        },
+        {
+          "href": "https://investors.klaviyo.com/overview/default.aspx",
+          "text": "Investor relations"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Agency and tech partners"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Developers"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/retail",
+          "text": "Retail and ecommerce"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/restaurants",
+          "text": "Restaurant marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/wellness",
+          "text": "Wellness"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform",
+          "text": "B2C CRM overview"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai",
+          "text": "Klaviyo AI (K:AI)"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/marketing-automation",
+          "text": "Klaviyo Marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-service",
+          "text": "Klaviyo Service"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/analytics",
+          "text": "Klaviyo Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-data-platform",
+          "text": "Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare",
+          "text": "Klaviyo vs. Klaviyo alternatives"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-mailchimp",
+          "text": "Klaviyo vs. Mailchimp"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-postscript",
+          "text": "Klaviyo vs. Postscript"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-attentive",
+          "text": "Klaviyo vs. Attentive"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-salesforce-marketing-cloud",
+          "text": "Klaviyo vs. Salesforce"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-listrak",
+          "text": "Klaviyo vs. Listrak"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/omnichannel",
+          "text": "Omnichannel marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/email-marketing",
+          "text": "Email marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing",
+          "text": "SMS marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing/rcs",
+          "text": "RCS for Business"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/mobile-app-marketing",
+          "text": "Mobile app marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/whatsapp",
+          "text": "WhatsApp marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/social",
+          "text": "Social marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources",
+          "text": "Marketing resources"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources/marketing-campaign-calendar",
+          "text": "Marketing campaign calendar"
+        },
+        {
+          "href": "https://www.klaviyo.com/glossary",
+          "text": "Marketing glossary"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/email-subject-line-generator",
+          "text": "Subject line generator"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/roi-calculator",
+          "text": "ROI calculator"
+        },
+        {
+          "href": "https://www.klaviyo.com/customers",
+          "text": "Case studies"
+        },
+        {
+          "href": "https://www.klaviyo.com/composer",
+          "text": "Composer Beta"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/marketing-agent",
+          "text": "Marketing Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/customer-agent",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/customer-experience-hub",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/helpdesk",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/marketing-analytics",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/advanced-cdp",
+          "text": "Advanced Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/web-forms",
+          "text": "Web forms"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/email-templates",
+          "text": "Email templates"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/portfolio",
+          "text": "Portfolio"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform-integrations",
+          "text": "Apps and Integrations"
+        },
+        {
+          "href": "https://www.klaviyo.com/features",
+          "text": "Features"
+        },
+        {
+          "href": "https://www.klaviyo.com/whats-new",
+          "text": "What's new"
+        },
+        {
+          "href": "https://www.klaviyo.com/events",
+          "text": "Events"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help Center"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us",
+          "text": "Academy"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Community"
+        },
+        {
+          "href": "https://www.facebook.com/Klaviyo/",
+          "text": "Facebook"
+        },
+        {
+          "href": "https://twitter.com/klaviyo/",
+          "text": "Twitter"
+        },
+        {
+          "href": "https://www.linkedin.com/company/klaviyo/",
+          "text": "LinkedIn"
+        },
+        {
+          "href": "https://www.instagram.com/klaviyo/",
+          "text": "Instagram"
+        },
+        {
+          "href": "https://www.klaviyo.com/sitemap",
+          "text": "Site Map"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal",
+          "text": "Terms and Privacy"
+        },
+        {
+          "href": "https://www.klaviyo.com/security",
+          "text": "Security"
+        },
+        {
+          "href": "https://www.klaviyo.com/trust",
+          "text": "Trust"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal/intellectual-property-notices",
+          "text": "Intellectual Property Notices"
+        }
+      ],
+      "headings": [
+        {
+          "level": 1,
+          "id": "",
+          "text": "Understanding when and how Klaviyo sets a profile's location"
+        },
+        {
+          "level": 2,
+          "id": "section0",
+          "text": "You will learn"
+        },
+        {
+          "level": 2,
+          "id": "h_01HGZQQ2WXRAEB41VQ0GV2C41Y",
+          "text": "Find location information in a profile"
+        },
+        {
+          "level": 2,
+          "id": "h_01HGZQQ2WX6GEZ03DPBG41PANJ",
+          "text": "How locations are used and updated in Klaviyo"
+        },
+        {
+          "level": 2,
+          "id": "section1",
+          "text": "IP geolocation"
+        },
+        {
+          "level": 2,
+          "id": "section2",
+          "text": "Update location information yourself"
+        },
+        {
+          "level": 2,
+          "id": "additional-resources",
+          "text": "Additional resources"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "Explore more from Klaviyo"
+        }
+      ]
+    }
+  },
+  "rendered_page": {
+    "status": "fetched",
+    "error": ""
+  }
+}

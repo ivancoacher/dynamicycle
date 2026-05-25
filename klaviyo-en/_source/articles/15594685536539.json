@@ -1,0 +1,855 @@
+{
+  "captured_at": "2026-05-23T16:19:17Z",
+  "article": {
+    "id": 15594685536539,
+    "url": "https://klaviyo.zendesk.com/api/v2/help_center/en-us/articles/15594685536539.json",
+    "html_url": "https://klaviyo.zendesk.com/hc/en-us/articles/15594685536539-Understand-push-notification-delivery",
+    "author_id": 397882329931,
+    "comments_disabled": false,
+    "draft": false,
+    "promoted": false,
+    "position": 14,
+    "vote_sum": 0,
+    "vote_count": 0,
+    "section_id": 49375884050075,
+    "created_at": "2023-05-19T14:26:04Z",
+    "updated_at": "2026-04-20T16:48:44Z",
+    "name": "Understand push notification delivery",
+    "title": "Understand push notification delivery",
+    "source_locale": "en-us",
+    "locale": "en-us",
+    "outdated": false,
+    "outdated_locales": [],
+    "edited_at": "2026-04-20T16:48:44Z",
+    "user_segment_id": null,
+    "permission_group_id": 146372,
+    "content_tag_ids": [],
+    "label_names": [],
+    "body": "<p>Learn about push notification delivery, including how it is delivered and why it might fail.</p>\n<h2 id=\"h_01HBRFFMP5NPS7X1FDZZ0Z5NHP\">Push notification delivery</h2>\n<p>Push notification delivery refers to when a push notification is successfully delivered to a recipient’s device. </p>\n<div class=\"bs-callout bs-callout-default\">\n<p>A profile may have more than 1 push token if they have your mobile app installed on multiple devices. Push notifications will be attempted for all the devices with a token stored on the profile.</p>\n</div>\n<p>The concept of <a href=\"https://help.klaviyo.com/hc/en-us/articles/115005247008\">deliverability</a> does not apply to push notifications like it does for email, as there is no sorting performed once the recipient’s device successfully receives the notification. </p>\n<p>When you send a push notification through a campaign or flow, Klaviyo checks the push and then sends it to Apple Push Notification Service (APNs) for iOS, or Android’s push notification service, Firebase Cloud Messaging (FCM) for delivery to the recipient’s device. You may see some push notifications skipped if there is an issue with delivery.</p>\n<p>APNs and FCM will either accept the notification and attempt to deliver it to the recipient's device, or reject the notification with a series of possible errors.</p>\n<p>Klaviyo only has insight into whether these services accept the notification or reject it. Klaviyo cannot confirm if the notification fails after APNs or FCM accepts the push.</p>\n<div class=\"bs-callout bs-callout-default\">\n<p>Want to request a feature for Klaviyo push notifications? Fill out this <a href=\"https://forms.gle/7iPm6JQ4eKB6H2C4A\">Google form</a> to tell us about it! </p>\n</div>\n<h2 id=\"h_01HBRFFMP5NVYNYAJGQ7C0ZJYE\">Reasons for rejection </h2>\n<p>If Klaviyo receives an error response from APNs or FCM after sending a notification, an event called <em>Bounced push</em> is created for each token affected by the failed delivery. This will appear in the receiving profile’s activity feed along with the recipient activity for the respective flow or campaign the notification was sent from. </p>\n<p>The <em>Bounced push</em> event includes metadata that shows the error code message (e.g., ExpiredToken) returned by APNs or Firebase. If you are seeing delivery issues, work with your app developer to resolve the error based on the description in the event. </p>\n<div class=\"bs-callout bs-callout-default\">\n<p>To view the metadata for an event, click on <strong>Activity details</strong> for the event on the profile’s activity log.</p>\n</div>\n<h3 id=\"h_01JS269JRRJFKZ1H2RDG5KDFEF\">Silent push</h3>\n<p>You are able to see the delivery rate and bounce rate for an individual silent push notifications; however, silent push notifications are excluded from all aggregated performance reporting in Klaviyo. This includes things like mobile push open rates over time, since they do not have opens or conversions.</p>\n<p>Please note that you will see different events for silent push than for standard push, namely <em>Received Silent Push</em> and<em> Bounced Silent Push</em>.</p>\n<p>If you are having issues with silent push notifications being delivered on iOS, note that iOS does not guarantee the delivery of silent push notifications. They may not deliver them <a href=\"https://developer.apple.com/library/archive/technotes/tn2265/_index.html#//apple_ref/doc/uid/DTS40010376-CH1-TNTAG23\">based on the device's current state</a>, like battery level and network connection. </p>\n<h3 id=\"h_01HBRFFMP5H0EFN98D1A5G0AT4\">iOS</h3>\n<p>For iOS push notifications sent through APNs, rejections may occur for at least one of the reasons listed in Apple’s reference for <a href=\"https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/handling_notification_responses_from_apns\">handling notification responses from APNs</a>.</p>\n<table style=\"width: 680px; height: 517px\">\n<tbody>\n<tr>\n<td style=\"width: 76.75px; height: 10px\"><strong>Status code</strong></td>\n<td style=\"width: 217.531px; height: 10px\"><strong>APNs error string</strong></td>\n<td style=\"width: 351.719px; height: 10px\"><strong>APNs description</strong></td>\n</tr>\n<tr>\n<td style=\"width: 76.75px; height: 67px\">400</td>\n<td style=\"width: 217.531px; height: 67px\">BadDeviceToken</td>\n<td style=\"width: 351.719px; height: 67px\">The specified device token was bad. Verify that the request contains a valid token and that the token matches the environment.</td>\n</tr>\n<tr>\n<td style=\"width: 76.75px; height: 22px\">400</td>\n<td style=\"width: 217.531px; height: 22px\">BadTopic</td>\n<td style=\"width: 351.719px; height: 22px\">The apns-topic value is invalid.</td>\n</tr>\n<tr>\n<td style=\"width: 76.75px; height: 44px\">400</td>\n<td style=\"width: 217.531px; height: 44px\">DeviceTokenNotForTopic</td>\n<td style=\"width: 351.719px; height: 44px\">The device token does not match the specified topic.</td>\n</tr>\n<tr>\n<td style=\"width: 76.75px; height: 22px\">400</td>\n<td style=\"width: 217.531px; height: 22px\">DuplicateHeaders</td>\n<td style=\"width: 351.719px; height: 22px\">One or more headers were repeated.</td>\n</tr>\n<tr>\n<td style=\"width: 76.75px; height: 22px\">400</td>\n<td style=\"width: 217.531px; height: 22px\">IdleTimeout</td>\n<td style=\"width: 351.719px; height: 22px\">Idle time out.</td>\n</tr>\n<tr>\n<td style=\"width: 76.75px; height: 22px\">400</td>\n<td style=\"width: 217.531px; height: 22px\">InvalidPushType</td>\n<td style=\"width: 351.719px; height: 22px\">The apns-push-type value is invalid.</td>\n</tr>\n<tr>\n<td style=\"width: 76.75px; height: 22px\">400</td>\n<td style=\"width: 217.531px; height: 22px\">PayloadEmpty</td>\n<td style=\"width: 351.719px; height: 22px\">The message payload was empty.</td>\n</tr>\n<tr>\n<td style=\"width: 76.75px; height: 22px\">403</td>\n<td style=\"width: 217.531px; height: 22px\">BadCertificate</td>\n<td style=\"width: 351.719px; height: 22px\">The certificate was bad.</td>\n</tr>\n<tr>\n<td style=\"width: 76.75px; height: 44px\">403</td>\n<td style=\"width: 217.531px; height: 44px\">BadCertificateEnvironment</td>\n<td style=\"width: 351.719px; height: 44px\">The client certificate was for the wrong environment.</td>\n</tr>\n<tr>\n<td style=\"width: 76.75px; height: 44px\">403</td>\n<td style=\"width: 217.531px; height: 44px\">InvalidProviderToken</td>\n<td style=\"width: 351.719px; height: 44px\">The provider token is not valid or the token signature could not be verified.</td>\n</tr>\n<tr>\n<td style=\"width: 76.75px; height: 22px\">404</td>\n<td style=\"width: 217.531px; height: 22px\">BadPath</td>\n<td style=\"width: 351.719px; height: 22px\">The request contained a bad :path value.</td>\n</tr>\n<tr>\n<td style=\"width: 76.75px; height: 22px\">405</td>\n<td style=\"width: 217.531px; height: 22px\">MethodNotAllowed</td>\n<td style=\"width: 351.719px; height: 22px\">The specified :method was not POST.</td>\n</tr>\n<tr>\n<td style=\"width: 76.75px; height: 22px\">410</td>\n<td style=\"width: 217.531px; height: 22px\">ExpiredToken</td>\n<td style=\"width: 351.719px; height: 22px\">The device token has expired.</td>\n</tr>\n<tr>\n<td style=\"width: 76.75px; height: 44px\">410</td>\n<td style=\"width: 217.531px; height: 44px\">Unregistered</td>\n<td style=\"width: 351.719px; height: 44px\">The device token is inactive for the specified topic.</td>\n</tr>\n<tr>\n<td style=\"width: 76.75px; height: 22px\">429</td>\n<td style=\"width: 217.531px; height: 22px\">TooManyProviderTokenUpdates</td>\n<td style=\"width: 351.719px; height: 22px\">The provider token is being updated too often.</td>\n</tr>\n<tr>\n<td style=\"width: 76.75px; height: 22px\">500</td>\n<td style=\"width: 217.531px; height: 22px\">InternalServerError</td>\n<td style=\"width: 351.719px; height: 22px\">An internal server error occurred.</td>\n</tr>\n<tr>\n<td style=\"width: 76.75px; height: 22px\">503</td>\n<td style=\"width: 217.531px; height: 22px\">ServiceUnavailable</td>\n<td style=\"width: 351.719px; height: 22px\">The service is unavailable.</td>\n</tr>\n</tbody>\n</table>\n<h3 id=\"h_01HBRFFMP6RZX5YK92CA4T8QK4\">Android</h3>\n<p>For Android push notifications sent through FCM, rejections may occur for at least one of the reasons listed in Google’s reference for <a href=\"https://firebase.google.com/docs/reference/fcm/rest/v1/ErrorCode\">FCM error codes.</a></p>\n<table style=\"width: 682px; height: 757px\">\n<tbody>\n<tr>\n<td style=\"width: 67.7188px; height: 43px\"><strong>Status code</strong></td>\n<td style=\"width: 223.859px; height: 43px\"><strong>FCM error string</strong></td>\n<td style=\"width: 356.422px; height: 43px\"><strong>FCM description</strong></td>\n</tr>\n<tr>\n<td style=\"width: 67.7188px; height: 24px\">400</td>\n<td style=\"width: 223.859px; height: 24px\">INVALID_ARGUMENT</td>\n<td style=\"width: 356.422px; height: 24px\">Check the format of the registration token you pass to the server. Make sure it matches the registration token the client app receives from registering with Firebase Notifications. Do not truncate or add additional characters.</td>\n</tr>\n<tr>\n<td style=\"width: 67.7188px; height: 67px\">400</td>\n<td style=\"width: 223.859px; height: 67px\">INVALID_ARGUMENT</td>\n<td style=\"width: 356.422px; height: 67px\">Make sure the message was addressed to a registration token whose package name matches the value passed in the request.</td>\n</tr>\n<tr>\n<td style=\"width: 67.7188px; height: 111px\">400</td>\n<td style=\"width: 223.859px; height: 111px\">INVALID_ARGUMENT</td>\n<td style=\"width: 356.422px; height: 111px\">Check that the total size of the payload data included in a message does not exceed FCM limits: 4096 bytes for most messages, or 2048 bytes in the case of messages to topics. This includes both the keys and the values.</td>\n</tr>\n<tr>\n<td style=\"width: 67.7188px; height: 179px\">400</td>\n<td style=\"width: 223.859px; height: 179px\">INVALID_ARGUMENT</td>\n<td style=\"width: 356.422px; height: 179px\">Check that the payload data does not contain a key (such as from, or gcm, or any value prefixed by google) that is used internally by FCM. Note that some words (such as collapse_key) are also used by FCM but are allowed in the payload, in which case the payload value will be overridden by the FCM value.</td>\n</tr>\n<tr>\n<td style=\"width: 67.7188px; height: 67px\">400</td>\n<td style=\"width: 223.859px; height: 67px\">INVALID_ARGUMENT</td>\n<td style=\"width: 356.422px; height: 67px\">Check that the value used in ttl is an integer representing a duration in seconds between 0 and 2,419,200 (4 weeks).</td>\n</tr>\n<tr>\n<td style=\"width: 67.7188px; height: 44px\">400</td>\n<td style=\"width: 223.859px; height: 44px\">INVALID_ARGUMENT</td>\n<td style=\"width: 356.422px; height: 44px\">Check that the provided parameters have the right name and type.</td>\n</tr>\n<tr>\n<td style=\"width: 67.7188px; height: 44px\">403</td>\n<td style=\"width: 223.859px; height: 44px\">SENDER_ID_MISMATCH</td>\n<td style=\"width: 356.422px; height: 44px\">The authenticated sender ID is different from the sender ID for the registration token.</td>\n</tr>\n<tr>\n<td style=\"width: 67.7188px; height: 67px\">404</td>\n<td style=\"width: 223.859px; height: 67px\">UNREGISTERED</td>\n<td style=\"width: 356.422px; height: 67px\">App instance was unregistered from FCM. This usually means that the token used is no longer valid and a new one must be used.</td>\n</tr>\n<tr>\n<td style=\"width: 67.7188px; height: 67px\">429</td>\n<td style=\"width: 223.859px; height: 67px\">QUOTA_EXCEEDED</td>\n<td style=\"width: 356.422px; height: 67px\">Sending limit exceeded for the message target. An extension of type google.rpc.QuotaFailure is returned to specify which quota was exceeded.</td>\n</tr>\n<tr>\n<td style=\"width: 67.7188px; height: 22px\">500</td>\n<td style=\"width: 223.859px; height: 22px\">INTERNAL</td>\n<td style=\"width: 356.422px; height: 22px\">An unknown internal error occurred.</td>\n</tr>\n<tr>\n<td style=\"width: 67.7188px; height: 22px\">503</td>\n<td style=\"width: 223.859px; height: 22px\">UNAVAILABLE</td>\n<td style=\"width: 356.422px; height: 22px\">The server is overloaded.</td>\n</tr>\n</tbody>\n</table>\n<div class=\"bs-callout bs-callout-default\">\n<p>You will also see a <em>Bounced push</em> event if the recipient is missing or has an invalid push token.</p>\n</div>\n<h2 id=\"h_01HBRFFMP6ESF42GM1APXX6HA3\">Best practices </h2>\n<h3 id=\"h_01HBRFFMP643SPYMR85A5PZVZT\">Collect user consent </h3>\n<p>In order to send a standard push notification to a profile, you must collect their <a href=\"https://help.klaviyo.com/hc/en-us/articles/4404203889947\">explicit consent </a>first.</p>\n<p>To collect push notification consent, you must provide customers with a permission screen prompt during their first interaction with your mobile app. </p>\n<p>It is best practice for your permission screen prompt to include consent language that provides the following information and allows them to opt in or opt out:</p>\n<ul>\n<li>\n<strong>What types of notifications your brand sends</strong><br>\nInclude details about the different push notifications your brand plans to send (for example, account changes, account changes, reminders, and special discounts).</li>\n<li>\n<strong>Why users should opt in</strong><br>\nInclude information around why a customer should provide permissions (for example, to receive important updates or early access to sales).</li>\n</ul>\n<p>Learn more about collecting <a href=\"https://help.klaviyo.com/hc/en-us/articles/14781686592283\">push notification consent. </a></p>\n<h3 id=\"h_01HBRFFMP6FJGR8FH2H2BJK63T\">Send relevant notifications </h3>\n<p>When sending push notification campaigns, it is important to take advantage of Klaviyo’s <a href=\"https://help.klaviyo.com/hc/en-us/articles/115005237908\">segmentation</a> to send content that is personalized and relevant to your subscribers.</p>\n<p>For example, if you know that you have a segment of dedicated repeat customers, you could use push notifications to alert them to new deals or promotions before anyone else.</p>\n<p>By ensuring that the content you send customers is relevant to their interests and preferences, you can reduce the likelihood of customers opting out and maximize your ability to reach your customers with push notifications. </p>\n<h3 id=\"h_01HBRFFMP6QA321NR6HTG3ZCM8\">Monitor and analyze performance </h3>\n<p>It is essential to continually monitor your push notification performance with Klaviyo to quickly identify delivery issues and drops in key <a href=\"https://help.klaviyo.com/hc/en-us/articles/15307358769051\">push metrics</a>.</p>\n<p>The best way to do so is to monitor the following push notification events: </p>\n<ul>\n<li>Received push</li>\n<li>Opened push</li>\n<li>Bounced push</li>\n</ul>\n<p>You can set up a <a href=\"https://help.klaviyo.com/hc/en-us/articles/360046234772\">multi-metric report</a> in Klaviyo to monitor how your performance with these events changes over time.</p>",
+    "user_segment_ids": []
+  },
+  "normalized": {
+    "id": "15594685536539",
+    "title": "Understand push notification delivery",
+    "source_url": "https://help.klaviyo.com/hc/en-us/articles/15594685536539-Understand-push-notification-delivery",
+    "section_id": 49375884050075,
+    "section": "Push notification campaigns",
+    "category_id": 49375106949275,
+    "category": "Campaigns",
+    "category_slug": "campaigns",
+    "klaviyo_updated": "2026-04-20T16:48:44Z",
+    "created_at": "2023-05-19T14:26:04Z",
+    "draft": false,
+    "promoted": false,
+    "position": 14,
+    "label_names": []
+  },
+  "files": {
+    "body_html": "_source/articles/15594685536539.body.html",
+    "rendered_html": "_source/rendered/15594685536539.html"
+  },
+  "assets": {
+    "api_body": {
+      "images": [],
+      "links": [
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005247008",
+          "text": "deliverability"
+        },
+        {
+          "href": "https://forms.gle/7iPm6JQ4eKB6H2C4A",
+          "text": "Google form"
+        },
+        {
+          "href": "https://developer.apple.com/library/archive/technotes/tn2265/_index.html#//apple_ref/doc/uid/DTS40010376-CH1-TNTAG23",
+          "text": "based on the device's current state"
+        },
+        {
+          "href": "https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/handling_notification_responses_from_apns",
+          "text": "handling notification responses from APNs"
+        },
+        {
+          "href": "https://firebase.google.com/docs/reference/fcm/rest/v1/ErrorCode",
+          "text": "FCM error codes."
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4404203889947",
+          "text": "explicit consent"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/14781686592283",
+          "text": "push notification consent."
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005237908",
+          "text": "segmentation"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/15307358769051",
+          "text": "push metrics"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360046234772",
+          "text": "multi-metric report"
+        }
+      ],
+      "headings": [
+        {
+          "level": 2,
+          "id": "h_01HBRFFMP5NPS7X1FDZZ0Z5NHP",
+          "text": "Push notification delivery"
+        },
+        {
+          "level": 2,
+          "id": "h_01HBRFFMP5NVYNYAJGQ7C0ZJYE",
+          "text": "Reasons for rejection"
+        },
+        {
+          "level": 3,
+          "id": "h_01JS269JRRJFKZ1H2RDG5KDFEF",
+          "text": "Silent push"
+        },
+        {
+          "level": 3,
+          "id": "h_01HBRFFMP5H0EFN98D1A5G0AT4",
+          "text": "iOS"
+        },
+        {
+          "level": 3,
+          "id": "h_01HBRFFMP6RZX5YK92CA4T8QK4",
+          "text": "Android"
+        },
+        {
+          "level": 2,
+          "id": "h_01HBRFFMP6ESF42GM1APXX6HA3",
+          "text": "Best practices"
+        },
+        {
+          "level": 3,
+          "id": "h_01HBRFFMP643SPYMR85A5PZVZT",
+          "text": "Collect user consent"
+        },
+        {
+          "level": 3,
+          "id": "h_01HBRFFMP6FJGR8FH2H2BJK63T",
+          "text": "Send relevant notifications"
+        },
+        {
+          "level": 3,
+          "id": "h_01HBRFFMP6QA321NR6HTG3ZCM8",
+          "text": "Monitor and analyze performance"
+        }
+      ]
+    },
+    "rendered_page": {
+      "images": [
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/7ff492c2b417b7ecfe572f839a8a81398693c1f7-1920x1080.webp",
+          "alt": "",
+          "width": "",
+          "height": ""
+        }
+      ],
+      "links": [
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/15594685536539-Understand-push-notification-delivery#site-content",
+          "text": "Skip to main content"
+        },
+        {
+          "href": "https://www.klaviyo.com",
+          "text": "Home"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center"
+        },
+        {
+          "href": "https://www.klaviyo.com/enterprise",
+          "text": "Enterprise"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Partners"
+        },
+        {
+          "href": "https://www.klaviyo.com/careers",
+          "text": "Careers"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": "Log in"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": ""
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center Find step-by-step instructions and troubleshooting solutions in our knowledge base."
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000032731",
+          "text": "Integrations"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000312411",
+          "text": "Flows"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867867",
+          "text": "Audience"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867667",
+          "text": "Campaigns"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/360000190711",
+          "text": "Sign-up forms"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000873988",
+          "text": "Deliverability & compliance"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/29173800271259",
+          "text": "SMS"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/16638219724187",
+          "text": "Reviews"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/18073014919195",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/34141283979931",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/37659126754075",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/33948021740315",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/39746685522331",
+          "text": "WhatsApp"
+        },
+        {
+          "href": "https://academy.klaviyo.com",
+          "text": "Klaviyo Academy Expert training and education to help you succeed with Klaviyo, and beyond."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Quick+guide&resource=academy_courses",
+          "text": "Quick guides Learn marketing strategies and concepts in 15 minutes or less."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Course&resource=academy_courses",
+          "text": "Courses Master key marketing topics through structured lessons and exams."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/best-practices",
+          "text": "Best practices Discover top product and marketing strategies for your business."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/learning-paths",
+          "text": "Learning paths Complete curated learning journeys tailored to your marketing goals."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses",
+          "text": "Explore all resources"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Live+training&resource=academy_courses",
+          "text": "Live trainings Build confidence through hands-on interactive workshops and thought-provoking strategy sessions."
+        },
+        {
+          "href": "https://www.bigmarker.com/klaviyo-customer-education/Office-hours-Getting-started-with-Klaviyo",
+          "text": "Live office hours Join a strategic discussion where you can ask questions and get answers in real-time."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/private-live-training",
+          "text": "1:1 Live training Book a private training session with an expert to jumpstart your platform knowledge and confidence."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/credentials",
+          "text": "Klaviyo credentials Dig deeper into select topics and showcase your expertise with a final exam to earn a certificate and digital badge."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/certificates/klaviyo-practitioner-certificate",
+          "text": "Klaviyo practitioner certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/deliverability-certificate",
+          "text": "Deliverability certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/developer-certificate",
+          "text": "Klaviyo developer certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses&select=Certificate",
+          "text": "See all certificates"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Klaviyo Community Join our thriving community network to connect with brands like yours—online and in person."
+        },
+        {
+          "href": "https://community.klaviyo.com/topic/new",
+          "text": "Ask a question Post a question and get thoughtful answers from Klaviyo powerusers."
+        },
+        {
+          "href": "https://community.klaviyo.com/p/roadmap",
+          "text": "Product roadmap"
+        },
+        {
+          "href": "https://community.klaviyo.com/search/activity/recent",
+          "text": "Recent threads"
+        },
+        {
+          "href": "https://community.klaviyo.com/p/champions",
+          "text": "Meet the Champions"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups",
+          "text": "Browse all groups Your people are waiting. New ideas and connections are a click away."
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/developer-group-64",
+          "text": "Developer group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/entrepreneur-user-group-118",
+          "text": "Entrepreneur group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/woo-user-group-87",
+          "text": "WooCommerce group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/new-york-meetup-chapter-82",
+          "text": "New York City"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/los-angeles-meetup-chapter-83",
+          "text": "Los Angeles"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/austin-meetup-chapter-85",
+          "text": "Austin"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/san-diego-meetup-chapter-86",
+          "text": "San Diego"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/amsterdam-meetup-chapter-84",
+          "text": "Amsterdam"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Klaviyo Developers Access API documentation and developer guides to help you build with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/get_started",
+          "text": "Get started Access key resources and a step-by-step checklist for how to start developing with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/build_your_integration",
+          "text": "Grow your app's reach Learn how to join our ecosystem and get your app listed on our marketplace."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/developer-tools",
+          "text": "Developer tools Generate sample data, monitor your API usage, and access our Postman collections."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/reference/api_overview",
+          "text": "API reference Browse our full catalog of API docs."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/changelog_",
+          "text": "Changelog"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/api_versioning_and_deprecation_policy",
+          "text": "Versioning & deprecation policy"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/rate_limits_and_error_handling",
+          "text": "Rate limits & error handling"
+        },
+        {
+          "href": "https://youtube.com/playlist?list=PLHkNfHgtxcUanrkMnKPdkRzuWU7MGv_xM&si=pkG-KH7IT_TUHOGC",
+          "text": "API tutorials on YouTube Subscribe to our Klaviyo API Tutorials playlist for easy access to step-by-step developer walkthroughs."
+        },
+        {
+          "href": "https://www.klaviyo.com/contact-us",
+          "text": "Contact us"
+        },
+        {
+          "href": "https://www.klaviyo.com/sign-up",
+          "text": "Sign up"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": "Search"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/15594685536539",
+          "text": "United States - EN"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/de-de/articles/15594685536539",
+          "text": "Deutschland - DE"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-es/articles/15594685536539",
+          "text": "España - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-mx/articles/15594685536539",
+          "text": "México - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/fr-fr/articles/15594685536539",
+          "text": "France - FR"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/it-it/articles/15594685536539",
+          "text": "Italia - IT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/ko-kr/articles/15594685536539",
+          "text": "한국 - KO"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/nl-nl/articles/15594685536539",
+          "text": "Nederland - NL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pl-pl/articles/15594685536539",
+          "text": "Polska - PL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pt-br/articles/15594685536539",
+          "text": "Brasil - PT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/sv-se/articles/15594685536539",
+          "text": "Sverige - SV"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/50026805374363",
+          "text": "Push Notifications"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/50026848876443",
+          "text": "Send push notifications"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/15594685536539-Understand-push-notification-delivery#h_01HBRFFMP5NPS7X1FDZZ0Z5NHP",
+          "text": "Push notification delivery"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/15594685536539-Understand-push-notification-delivery#h_01HBRFFMP5NVYNYAJGQ7C0ZJYE",
+          "text": "Reasons for rejection"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/15594685536539-Understand-push-notification-delivery#h_01HBRFFMP6ESF42GM1APXX6HA3",
+          "text": "Best practices"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/15594685536539-Understand-push-notification-delivery#additional-resources",
+          "text": "Additional resources"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005247008",
+          "text": "deliverability"
+        },
+        {
+          "href": "https://forms.gle/7iPm6JQ4eKB6H2C4A",
+          "text": "Google form"
+        },
+        {
+          "href": "https://developer.apple.com/library/archive/technotes/tn2265/_index.html#//apple_ref/doc/uid/DTS40010376-CH1-TNTAG23",
+          "text": "based on the device's current state"
+        },
+        {
+          "href": "https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/handling_notification_responses_from_apns",
+          "text": "handling notification responses from APNs"
+        },
+        {
+          "href": "https://firebase.google.com/docs/reference/fcm/rest/v1/ErrorCode",
+          "text": "FCM error codes."
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4404203889947",
+          "text": "explicit consent"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/14781686592283",
+          "text": "push notification consent."
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005237908",
+          "text": "segmentation"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/15307358769051",
+          "text": "push metrics"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360046234772",
+          "text": "multi-metric report"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/14781686592283",
+          "text": "Understanding push notification consent"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360006653972",
+          "text": "How to send a push notification campaign"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/12932500186907",
+          "text": "Understanding your push notification settings"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115001002272",
+          "text": "Learn how to contact support"
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": ""
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": "Visit Community"
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": ""
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": "Hire a partner"
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/about",
+          "text": "About Klaviyo"
+        },
+        {
+          "href": "https://www.klaviyo.com/newsroom",
+          "text": "Newsroom"
+        },
+        {
+          "href": "https://investors.klaviyo.com/overview/default.aspx",
+          "text": "Investor relations"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Agency and tech partners"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Developers"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/retail",
+          "text": "Retail and ecommerce"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/restaurants",
+          "text": "Restaurant marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/wellness",
+          "text": "Wellness"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform",
+          "text": "B2C CRM overview"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai",
+          "text": "Klaviyo AI (K:AI)"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/marketing-automation",
+          "text": "Klaviyo Marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-service",
+          "text": "Klaviyo Service"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/analytics",
+          "text": "Klaviyo Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-data-platform",
+          "text": "Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare",
+          "text": "Klaviyo vs. Klaviyo alternatives"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-mailchimp",
+          "text": "Klaviyo vs. Mailchimp"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-postscript",
+          "text": "Klaviyo vs. Postscript"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-attentive",
+          "text": "Klaviyo vs. Attentive"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-salesforce-marketing-cloud",
+          "text": "Klaviyo vs. Salesforce"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-listrak",
+          "text": "Klaviyo vs. Listrak"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/omnichannel",
+          "text": "Omnichannel marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/email-marketing",
+          "text": "Email marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing",
+          "text": "SMS marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing/rcs",
+          "text": "RCS for Business"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/mobile-app-marketing",
+          "text": "Mobile app marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/whatsapp",
+          "text": "WhatsApp marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/social",
+          "text": "Social marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources",
+          "text": "Marketing resources"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources/marketing-campaign-calendar",
+          "text": "Marketing campaign calendar"
+        },
+        {
+          "href": "https://www.klaviyo.com/glossary",
+          "text": "Marketing glossary"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/email-subject-line-generator",
+          "text": "Subject line generator"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/roi-calculator",
+          "text": "ROI calculator"
+        },
+        {
+          "href": "https://www.klaviyo.com/customers",
+          "text": "Case studies"
+        },
+        {
+          "href": "https://www.klaviyo.com/composer",
+          "text": "Composer Beta"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/marketing-agent",
+          "text": "Marketing Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/customer-agent",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/customer-experience-hub",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/helpdesk",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/marketing-analytics",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/advanced-cdp",
+          "text": "Advanced Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/web-forms",
+          "text": "Web forms"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/email-templates",
+          "text": "Email templates"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/portfolio",
+          "text": "Portfolio"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform-integrations",
+          "text": "Apps and Integrations"
+        },
+        {
+          "href": "https://www.klaviyo.com/features",
+          "text": "Features"
+        },
+        {
+          "href": "https://www.klaviyo.com/whats-new",
+          "text": "What's new"
+        },
+        {
+          "href": "https://www.klaviyo.com/events",
+          "text": "Events"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help Center"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us",
+          "text": "Academy"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Community"
+        },
+        {
+          "href": "https://www.facebook.com/Klaviyo/",
+          "text": "Facebook"
+        },
+        {
+          "href": "https://twitter.com/klaviyo/",
+          "text": "Twitter"
+        },
+        {
+          "href": "https://www.linkedin.com/company/klaviyo/",
+          "text": "LinkedIn"
+        },
+        {
+          "href": "https://www.instagram.com/klaviyo/",
+          "text": "Instagram"
+        },
+        {
+          "href": "https://www.klaviyo.com/sitemap",
+          "text": "Site Map"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal",
+          "text": "Terms and Privacy"
+        },
+        {
+          "href": "https://www.klaviyo.com/security",
+          "text": "Security"
+        },
+        {
+          "href": "https://www.klaviyo.com/trust",
+          "text": "Trust"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal/intellectual-property-notices",
+          "text": "Intellectual Property Notices"
+        }
+      ],
+      "headings": [
+        {
+          "level": 1,
+          "id": "",
+          "text": "Understand push notification delivery"
+        },
+        {
+          "level": 2,
+          "id": "h_01HBRFFMP5NPS7X1FDZZ0Z5NHP",
+          "text": "Push notification delivery"
+        },
+        {
+          "level": 2,
+          "id": "h_01HBRFFMP5NVYNYAJGQ7C0ZJYE",
+          "text": "Reasons for rejection"
+        },
+        {
+          "level": 3,
+          "id": "h_01JS269JRRJFKZ1H2RDG5KDFEF",
+          "text": "Silent push"
+        },
+        {
+          "level": 3,
+          "id": "h_01HBRFFMP5H0EFN98D1A5G0AT4",
+          "text": "iOS"
+        },
+        {
+          "level": 3,
+          "id": "h_01HBRFFMP6RZX5YK92CA4T8QK4",
+          "text": "Android"
+        },
+        {
+          "level": 2,
+          "id": "h_01HBRFFMP6ESF42GM1APXX6HA3",
+          "text": "Best practices"
+        },
+        {
+          "level": 3,
+          "id": "h_01HBRFFMP643SPYMR85A5PZVZT",
+          "text": "Collect user consent"
+        },
+        {
+          "level": 3,
+          "id": "h_01HBRFFMP6FJGR8FH2H2BJK63T",
+          "text": "Send relevant notifications"
+        },
+        {
+          "level": 3,
+          "id": "h_01HBRFFMP6QA321NR6HTG3ZCM8",
+          "text": "Monitor and analyze performance"
+        },
+        {
+          "level": 2,
+          "id": "additional-resources",
+          "text": "Additional resources"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "Explore more from Klaviyo"
+        }
+      ]
+    }
+  },
+  "rendered_page": {
+    "status": "fetched",
+    "error": ""
+  }
+}

@@ -1,0 +1,88 @@
+<h2 id="a752cd68f89c">You will learn</h2>
+<p>What tools are, what they do, and how they fit alongside skills and content. By the end, you’ll know when a tool is the right building block and when to reach for something else.</p>
+<p><strong>Note:</strong> Customer Agent comes with tools out of the box. Creating fully custom tools from scratch is currently in closed beta. If you’re not in the beta, you won’t see a dedicated Tools page — but the tools that come with Customer Agent still run behind the scenes when skills use them. You can see the tools a skill uses by clicking into the skill’s details.</p>
+<h2 id="e7507a535d8b">What a tool is</h2>
+<p>A <strong>tool</strong> is a specific capability Customer Agent can use during a conversation to fetch data or take an action. If skills are what Customer Agent knows how to <em>handle</em>, tools are the concrete things it can <em>do</em>.</p>
+<p>For example, when a shopper asks “Where is my order?”, Customer Agent uses the Get Customer Orders tool to pull that shopper’s order data from Shopify, then responds with the tracking info.</p>
+<h2 id="ceea7e0b134c">What tools do</h2>
+<p>Tools fall into three categories:</p>
+<ul>
+<li>
+<strong>Fetch data</strong> — Look up an order, search your product catalog, pull a customer’s subscriptions or coupons</li>
+<li>
+<strong>Take action</strong> — Cancel a subscription, apply a discount, create a support ticket (via fully custom tools)</li>
+<li>
+<strong>Integrate with external systems</strong> — Call your OMS, CRM, loyalty platform, or any HTTP endpoint (via fully custom tools)</li>
+</ul>
+<h2 id="ffe19762c957">Tools vs. content</h2>
+<p>Content is <strong>static knowledge</strong> Customer Agent uses to answer questions — your shipping policy, product descriptions, FAQs. Tools are <strong>dynamic actions</strong> that fetch real-time data or change something.</p>
+<p>A good test: if the answer is the same for every customer, it belongs in content. If the answer depends on <em>who</em> is asking or <em>what</em> they’ve done, it needs a tool.</p>
+<h2 id="391dc8237ef7">Tools vs. skills</h2>
+<p>Skills define <strong>what Customer Agent handles</strong>. Tools define <strong>how it acts</strong> during that handling.</p>
+<p>A single skill can use multiple tools. A single tool can be used by multiple skills. For example, <code>Get Customer Orders</code> is used by Order Tracking, Order Editing, and Returns &amp; Exchanges.</p>
+<p>For a deeper decision framework, see [[Understanding skills vs. tools]].</p>
+<h2 id="ca80341ae0e6">Tools that come with Customer Agent</h2>
+<p>Customer Agent comes with a set of tools out of the box that skills use. You don’t set them up — they run when a skill needs them. Examples:</p>
+<table>
+<tbody>
+<tr>
+<td><strong>Tool</strong></td>
+<td><strong>What it does</strong></td>
+</tr>
+<tr>
+<td>Get Customer Orders</td>
+<td>Fetches recent customer orders from Shopify.</td>
+</tr>
+<tr>
+<td>Search Shop Catalog</td>
+<td>Searches for products from the online store, hosted on Shopify.</td>
+</tr>
+<tr>
+<td>Search Company Knowledge</td>
+<td>Looks up company knowledge across indexed webpages, uploaded files, and snippets of text.</td>
+</tr>
+<tr>
+<td>Get Customer Coupons</td>
+<td>Fetches customer coupons for the provided profile ID.</td>
+</tr>
+<tr>
+<td>Get Customer Subscriptions</td>
+<td>Fetches subscriptions for the provided profile ID.</td>
+</tr>
+<tr>
+<td>Get Product Recommendations</td>
+<td>Fetches personalized product recommendations based on customer preferences and interests.</td>
+</tr>
+<tr>
+<td>Get Profile</td>
+<td>Fetches customer profile data.</td>
+</tr>
+</tbody>
+</table>
+<p>If you’re in the beta for creating fully custom tools, you can see the full list on the Tools page. If you’re not, you can view which tools a skill uses by clicking into that skill’s details.</p>
+<h2 id="247a8845aca1">Fully custom tools 🏷️ BETA</h2>
+<p>Creating fully custom tools from scratch lets you connect Customer Agent to any HTTP endpoint — your OMS, CRM, loyalty platform, or anything else with an API. Use a fully custom tool when the tools Customer Agent comes with don’t cover what you need.</p>
+<p>Access is limited to brands in the managed beta. See [[How to create a tool]] to build one.</p>
+<h2 id="9d85d449372e">How tools get used</h2>
+<p>Tools are attached to skills. A skill’s instructions tell Customer Agent which tools are available and when to use them.</p>
+<p>The flow inside a single conversation:</p>
+<ol>
+<li>Shopper sends a message</li>
+<li>Router picks a skill based on intent</li>
+<li>Skill’s instructions decide whether a tool is needed</li>
+<li>Customer Agent uses the tool to fetch data or take an action</li>
+<li>Customer Agent generates a response using what the tool returned</li>
+</ol>
+<h2 id="f793d5c1a98a">Anatomy of a tool</h2>
+<p>Every tool has these parts:</p>
+<ul>
+<li>
+<strong>Name</strong> — Short identifier (e.g., <code>Get Customer Orders</code>)</li>
+<li>
+<strong>Description</strong> — Natural-language explanation of what the tool does. This matters: it drives whether Customer Agent decides to use the tool for a given request.</li>
+<li>
+<strong>Input schema</strong> — The parameters the tool takes (e.g., <code>profile_id</code>, <code>order_id</code>)</li>
+<li>
+<strong>HTTP config</strong> <em>(fully custom tools only)</em> — The method, URL, headers, and body</li>
+</ul>
+<p>A good tool description is specific and unambiguous. Vague descriptions cause Customer Agent to skip a tool when it shouldn’t use one, or use a tool when it shouldn’t.</p>

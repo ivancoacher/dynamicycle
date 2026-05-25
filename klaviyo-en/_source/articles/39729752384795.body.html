@@ -1,0 +1,96 @@
+<h2 id="h_01K3P0MZ3949PWNK5N8QDKV00P">You will learn</h2>
+<p>Learn about Klaviyo’s identity resolution functionality as part of Advanced KDP. This builds upon Klaviyo’s standard <a href="https://help.klaviyo.com/hc/en-us/articles/12902308138011">identity resolution</a> functionality to enable more robust handling of duplicate profiles identified based on overlapping identifiers.</p>
+<div class="bs-callout bs-callout-default">
+<p><a href="https://help.klaviyo.com/hc/en-us/articles/17655007276059">Advanced KDP</a> is not included in Klaviyo’s standard marketing application, and a subscription is required to access the associated functionality. Head to our <a href="https://help.klaviyo.com/hc/en-us/articles/115000976672">billing guide</a> to learn how to purchase this plan.</p>
+</div>
+<h2 id="h_01K3P0MZ3D2YKQBN3K1V5FYK80">Identity resolution transformations vs. identity resolution </h2>
+<p>Klaviyo natively offers <a href="https://help.klaviyo.com/hc/en-us/articles/12902308138011">identity resolution</a> that consolidates customers’ interactions across multiple channels under a single record. This standard identity resolution in Klaviyo uses deterministic profile merging, resolving the identities of different profiles that share a common identifier—most often, a unique email address—based on the existing data in your account.</p>
+<p>Meanwhile, the identity resolution transformations within Advanced KDP build upon this deterministic merging functionality by exploring profiles with different email addresses but other overlapping identifiers such as the same phone number.</p>
+<h2 id="h_01K3P0MZ3EYQ3RYB8F4RMH35Z3">Identity resolution transformations</h2>
+<p>The first available identity resolution transformation offered as part of AKDP is aimed at reducing the number of duplicate profiles for a contact due to misspellings or typos in the email address. In the future, Klaviyo will offer additional merge logic, such as deduplicating profiles that exist due to the use of email aliases, as well as probabilistic merging based on shared first name, last name, address and more.</p>
+<p>These transformations can be toggled on and off, but do not need to be further configured. </p>
+<h3 id="h_01K3P0MZ3F5E9HKBTDGSPFR14J">Manage identity resolution transformations </h3>
+<div class="bs-callout bs-callout-default">
+<p><strong>Profile merging is a permanent action.</strong> Any profiles merged from an identity resolution transformation cannot be un-merged.</p>
+</div>
+<p>To activate identity resolution transformations: </p>
+<ol>
+<li>Navigate to the <em>Transformation</em> tab under <strong>Advanced KDP</strong><strong>&gt;</strong><strong>Data management &gt; Transformation</strong>.</li>
+<li>Select the <strong>Identity resolution </strong>tab.</li>
+<li>Select <strong>Activate </strong>on the identity resolution transformation you'd like to enable. <br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/40442765151515" alt="" width="624" height="391">
+</li>
+<li>We highly recommend you<strong> download a preview </strong>prior to activating any merge rule, to ensure you understand how profiles will be clustered and merged upon activation</li>
+<li>Complete the confirmation prompt and select <strong>Activate</strong>. </li>
+</ol>
+<p class="wysiwyg-text-align-center"><img src="https://klaviyo.zendesk.com/hc/article_attachments/40442765166619" alt="" width="380" height="638"></p>
+<p>Once activated, you’ll see an <em>Active </em>status for the transformation on the <em>Identity resolution </em>tab. By clicking into an active transformation, you can download a log of merges within the past 30 days using the <strong>Download merge log </strong>button or disable the transformation by selecting the <strong>Deactivate</strong> button. </p>
+<p class="wysiwyg-text-align-center"><img src="https://klaviyo.zendesk.com/hc/article_attachments/40442773443995" alt="" width="352" height="593"></p>
+<h3 id="h_01K3P0MZ3P8AFGS99W88YTYZ7H">Merge log</h3>
+<p>To view a record of the profile merges performed by the transformation, select the transformation and click the <strong>Download merge log</strong> button. This will export a CSV of merges in the last 30 days with the following information: </p>
+<ul>
+<li>
+<strong>Source profile ID</strong><br>
+<p>The <a href="https://help.klaviyo.com/hc/en-us/articles/115005247088#h_01H93XCYWWRTEWCFEMEADSYC0Q">Klaviyo ID</a> of the source profile.</p>
+</li>
+<li>
+<strong>Source email</strong><br>
+The email address of the source profile.</li>
+<li>
+<strong>Source external ID</strong><br>
+The external ID of the source profile.</li>
+<li>
+<strong>Source phone number</strong><br>
+The phone number of the source profile.</li>
+<li>
+<strong>Destination profile ID</strong><br>
+The <a href="https://help.klaviyo.com/hc/en-us/articles/115005247088#h_01H93XCYWWRTEWCFEMEADSYC0Q">Klaviyo ID</a> of the destination profile.</li>
+<li>
+<strong>Destination email </strong><br>
+The email address of the destination profile.</li>
+<li>
+<strong>Destination external ID</strong><br>
+<p>The external ID of the destination profile.</p>
+</li>
+<li>
+<strong>Destination phone number</strong><br>
+The phone number of the destination profile.</li>
+<li><strong>Merged at</strong></li>
+</ul>
+<p>The timestamp for the profile merge. </p>
+<h2 id="h_01K3P0MZ3T3RBZC03HSNSCS0PW">Identity resolution transformation methods </h2>
+<p>Klaviyo supports the following transformation methods for identity resolution. </p>
+<h3 id="h_01K3P0MZ3V67XC8BJ1Y99N06RV"><strong>Email typo merge</strong></h3>
+<p>Email typo merge identifies profiles that share the same phone number and appear to be duplicates due to a typo in an email address. For example, say 2 profiles have the same phone number but email addresses that are example@klaviyo.com and exampke@klaviyo.com. It is highly likely that these profiles belong to the same customer, but they made a typo when engaging with your brand in a specific context like signing up for a marketing list. The email typo merge transformation will automatically merge these profiles when activated. </p>
+<div class="accordion accordion--default">
+<div class="accordion__item">
+<div class="accordion__item-title"><strong>Merge logic</strong></div>
+<div class="accordion__item-content">
+<p>For 2 profiles to be merged by the email typo deduplication transformation, they must meet the following conditions:</p>
+<ul>
+<li>The profiles must share the same phone number.</li>
+<li>The email addresses of the profiles differ only by 1 character.</li>
+<li>The difference between email addresses is either due to a typo in the domain name OR one profile is suppressed due to an invalid or bounced email (i.e. it is unreachable).<br>
+<p>If these conditions are all met, the merge will be performed in the following manner: </p>
+</li>
+<li>If a profile has an invalid email address, the profile with the valid email address is retained (i.e., reachable and then no typo in domain name). Note that manually suppressed profiles without any other issues are considered reachable.</li>
+<li>If profile A and profile B are both unreachable, do not merge.</li>
+<li>If both profiles are reachable
+<ul>
+<li>If email A has a domain which is more standard (e.g., gmail vs. gnail), email A is retained.</li>
+<li>If it is not possible to determine which email is more standard, do not merge.</li>
+</ul>
+</li>
+</ul>
+<p>Any email events associated with the invalid email address (e.g., <em>Received email</em>) will not be merged into the destination profile. However, other events (e.g., onsite events like <em>Viewed product</em>) will be merged into the destination profile. </p>
+</div>
+</div>
+</div>
+<h3 id="h_01K3P0MZ3ZQ7WQPNRGB2WXEWAT"><strong>Email alias merge</strong></h3>
+<div class="bs-callout bs-callout-default">
+<p>This feature is not yet released, but is coming soon.</p>
+</div>
+<p>Email alias merge identifies profiles that share the same phone number and appear to be duplicates due to a “+” used to create email aliases. Email aliases are alternative email addresses that forward emails to the primary email account's inbox.</p>
+<p>For example, say 2 profiles have the same phone number but email addresses are example@klaviyo.com and example+marketing@klaviyo.com. Emails sent to <a href="mailto:example+@klaviyo.com">example+marketing@klaviyo.com</a> will be forwarded to <a href="mailto:example@klaviyo.com">example@klaviyo.com</a> or land in the same inbox and thus will always belong to the same customer.</p>
+<p>With this transformation, the profile with an email address that is an alias (i.e., same email address with a “+” at the end) will be merged into the corresponding primary profile.</p>

@@ -1,0 +1,51 @@
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/41426468027419" alt="Snowflake-updated.gif" width="1440" height="900"></p>
+<div class="bs-callout bs-callout-default">
+<p><a href="https://help.klaviyo.com/hc/en-us/articles/17655007276059">Advanced KDP</a> is not included in Klaviyo’s standard marketing application, and a subscription is required to access the associated functionality. Head to our <a href="https://help.klaviyo.com/hc/en-us/articles/115000976672">billing guide</a> to learn about how to purchase this plan.</p>
+</div>
+<h2 id="h_01K5ZEDVJ4BWZYVKFG8YC09NHR">Introduction   .</h2>
+<p>Data warehouse import allows Klaviyo to connect directly to your Snowflake or BigQuery data warehouse and configure import syncs for tables (or views) of profile data.</p>
+<p>Events and custom object import syncs are coming soon, as is support for additional data warehouses.</p>
+<h2 id="h_01K5ZEE23S26BSYC0RZZKE964H">How does data warehouse import in Klaviyo work?</h2>
+<p>After establishing a connection to your warehouse, you can select a dataset (e.g. a table or a view) to sync.</p>
+<p>The dataset must contain a profile identifier and a modified_at timestamp. Data columns can be mapped to specific profile properties, including custom properties.</p>
+<p>At the desired interval (e.g. hourly, daily), Klaviyo will extract any records that were created or modified since the last run and then import them, creating or updating profiles accordingly.</p>
+<p>If you do not have a fully-joined dataset with all the fields you want to sync, you can create multiple syncs with different field mappings (e.g. contact info, loyalty balances, and custom segments).</p>
+<p>E-mail and text messaging consent work the same way file or SFTP uploads do in terms of valid values and formats.</p>
+<h2 id="h_01K5ZEEBJ3ADWAQV7H8EXSR1K2">Common use cases</h2>
+<h3 id="h_01K5ZEEG4D6MQMC7CKWAJEZ7TY">Profile management</h3>
+<ul>
+<li>Create new profiles in Klaviyo that originate in systems not directly integrated with Klaviyo (e.g. POS, reservation, or order management systems)</li>
+<li>Update profile info in Klaviyo from offline sources that are available in-warehouse.</li>
+</ul>
+<h3 id="h_01K5ZEG3H1C0AQ1H3P7FK2EM9N">Profile enrichment</h3>
+<ul>
+<li>Sync loyalty program balances to a custom Loyalty_Balance property.</li>
+<li>Sync scores or categories from custom models running in the warehouse (e.g. intent scores for bespoke lifecycle events, affinity categories, churn risk, or LTV metrics.)</li>
+<li>Sync third party demographic or behavioral enrichment data to custom profile properties</li>
+<li>Sync support or service touch points into custom profile fields to represent whether the customer has open service requests, days since last service visit, or the most recent category of support interaction.</li>
+</ul>
+<h3 id="h_01K5ZEG9EXSE80JWXMRAKYRBX1">Custom segmentation</h3>
+<ul>
+<li>Perform complex segmentation in-warehouse and sync the segment names to custom profile properties to use as criteria in segments or flows.</li>
+<li>Perform segmentation in-warehouse based on sensitive, confidential, or regulated data and sync segment group assignments or profile flags with sanitized names (e.g. Group A, Group B) as a custom profile property</li>
+</ul>
+<h2 id="h_01K5ZG53CEH80YN8D75MASA621">Setup Guide</h2>
+<h3 id="h_01K5ZGKJZMRR0G2SZRZ1BK1PKX">Establishing a connection </h3>
+<p>These articles provide step-by-step instructions for setting up data warehouse import.</p>
+<p><a href="https://klaviyo.zendesk.com/hc/en-us/articles/41373252392731"><strong>Connecting Klaviyo and Snowflake</strong></a></p>
+<p><a href="https://klaviyo.zendesk.com/hc/en-us/articles/41406928654107"><strong>Connecting Klaviyo and BigQuery</strong></a></p>
+<p><a href="https://klaviyo.zendesk.com/hc/en-us/articles/42790298131611"><strong>Connecting Klaviyo and Redshift</strong></a></p>
+<p><a href="https://klaviyo.zendesk.com/hc/en-us/articles/42790208080283"><strong>Connecting Klaviyo and Databricks</strong></a></p>
+<h3 id="h_01KEYFVCQ8DAK5F6TQJXREQ1NY">Importing Event Data</h3>
+<p><a href="https://klaviyo.zendesk.com/hc/en-us/articles/45442043369499">Understanding Data Warehouse Event Import</a></p>
+<h3 id="h_01K6BB2TJ9V2RP6M7C25QFT7AX">Debugging New Syncs</h3>
+<p>If you've set up a new sync and are not seeing profiles updated as you might expect, we recommend utilizing the error reporting in the web-based list upload tool to validate your data, especially in the case of consent fields and timestamps.</p>
+<p><strong>To identify any potential errors in your source data:</strong></p>
+<ol>
+<li>Export your source table/view to a CSV file.</li>
+<li>Go to <a href="https://www.klaviyo.com/lists">Audience | Lists &amp; Segments</a> in your dashboard.</li>
+<li>Select an existing list or create a new list for testing purposes</li>
+<li>Select <em>Import contacts</em> in the <em>Manage List</em> menu in the top right.</li>
+<li>Upload your csv file from step #1.</li>
+<li>If there are any issues with the data that would prevent a successful sync from completing, they will be made available in a downloadable error file.</li>
+</ol>

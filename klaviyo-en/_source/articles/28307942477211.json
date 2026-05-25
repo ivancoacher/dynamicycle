@@ -1,0 +1,786 @@
+{
+  "captured_at": "2026-05-23T16:14:54Z",
+  "article": {
+    "id": 28307942477211,
+    "url": "https://klaviyo.zendesk.com/api/v2/help_center/en-us/articles/28307942477211.json",
+    "html_url": "https://klaviyo.zendesk.com/hc/en-us/articles/28307942477211-How-to-use-in-email-review-collection",
+    "author_id": 390819509472,
+    "comments_disabled": true,
+    "draft": false,
+    "promoted": false,
+    "position": 0,
+    "vote_sum": 0,
+    "vote_count": 0,
+    "section_id": 49375666744731,
+    "created_at": "2024-08-15T18:27:02Z",
+    "updated_at": "2026-04-20T16:49:46Z",
+    "name": "How to use in-email review collection",
+    "title": "How to use in-email review collection",
+    "source_locale": "en-us",
+    "locale": "en-us",
+    "outdated": false,
+    "outdated_locales": [],
+    "edited_at": "2026-04-17T00:55:54Z",
+    "user_segment_id": null,
+    "permission_group_id": 146372,
+    "content_tag_ids": [],
+    "label_names": [],
+    "body": "<p>Learn how to allow your customers to submit a review directly from their email. With this option configured, reviewers won’t need to open a new window to leave a review.  </p>\n<div class=\"bs-callout bs-callout-default\">\n<p>This feature is currently available only to accounts with their language set to <em>English</em> in <strong>Reviews &gt; Reviews settings &gt; General</strong>. </p>\n</div>\n<h2 id=\"h_01J5BMHT1HAPZRQDVCY9KB8XP4\">Enable in-email review collection </h2>\n<ol>\n<li>In Klaviyo, navigate to <strong>Reviews</strong>. </li>\n<li>Select <strong>Review settings &gt; Review requests</strong>. </li>\n<li>In the <em>In-email review collection</em> card, select <strong>Enable</strong>, then confirm your choice in the modal that appears. </li>\n</ol>\n<p>If the <strong>Enable</strong> button is not visible, you’ve already enabled this feature; proceed to the next section. </p>\n<p>Once you complete this step, Klaviyo will add a universal content block to your account. You must add this block to the email(s) in your review request flow. </p>\n<h2 id=\"h_01J5BMHT1HJDSSE974PV89X6K4\">Add a review collection block to a flow email </h2>\n<div class=\"bs-callout bs-callout-default\">\n<p>This block is only supported in flows triggered by the <em>Ready to review</em> event. If you add this block to any other flow or a campaign, it will not render correctly. </p>\n</div>\n<ol>\n<li>Navigate to your review request flow. </li>\n<li>Open an email template in the flow. </li>\n<li>From the <em>Content</em> tab, select <strong>Universal</strong>.<br>\n\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28722600135067\" alt=\"The universal content tab\" width=\"428\" height=\"165\">\n</li>\n<li>Search for<strong> In-email review collection - Klaviyo Reviews</strong>. </li>\n<li>Click and drag the in-email review request block into your email. </li>\n<li>Delete the previous star rating block from your message.</li>\n</ol>\n<p>Before making edits to the in-email review request block, <a href=\"https://help.klaviyo.com/hc/en-us/articles/115005413888\">save a copy</a> of it first. There is no way to revert your block to its original settings after making changes. Editing this block requires making direct edits to the code, and is only recommended for developers or code-savvy marketers. </p>\n<h3 id=\"h_01J5BMHT1H2J2HJAA2X7ABAAY4\">In-app email block code</h3>\n<p>If you need to revert to the original version of the in-email review collection block, copy your preferred code snippet below and paste it into an HTML block or a text block’s source code field: </p>\n<div class=\"accordion accordion--default\">\n<div class=\"accordion__item\">\n<div class=\"accordion__item-title\"><strong>Without review headline</strong></div>\n<div class=\"accordion__item-content\">\n<pre><code class=\"language-text\">&lt;div class=\"kl_reviews__email_submission\" style=\"display: block; margin: auto; padding: 24px;\"&gt;&lt;!--[if !mso]&gt;&lt;!--&gt;&lt;form action=\"{{ event.review_link }}\" method=\"GET\"&gt;\n    &lt;h4 class=\"kl_reviews__email_submission__header\" style=\"font-weight: bold;\"&gt;Rating&lt;/h4&gt;\n    &lt;table class=\"kl_reviews__email_submission__ratings\" style=\"width: 100%; margin-bottom: 32px;\"&gt;\n        &lt;tbody&gt;\n            &lt;tr&gt;\n                &lt;td style=\"width: 20%;\"&gt;&lt;input id=\"rating1\" style=\"display: block; cursor: pointer; margin-bottom: 8px;\" name=\"rating\" type=\"radio\" value=\"1\"&gt; &lt;label style=\"display: block; cursor: pointer;\" for=\"rating1\"&gt;1 ★&lt;/label&gt;&lt;/td&gt;\n                &lt;td style=\"width: 20%;\"&gt;&lt;input id=\"rating2\" style=\"display: block; cursor: pointer; margin-bottom: 8px;\" name=\"rating\" type=\"radio\" value=\"2\"&gt; &lt;label style=\"display: block; cursor: pointer;\" for=\"rating2\"&gt;2 ★&lt;/label&gt;&lt;/td&gt;\n                &lt;td style=\"width: 20%;\"&gt;&lt;input id=\"rating3\" style=\"display: block; cursor: pointer; margin-bottom: 8px;\" name=\"rating\" type=\"radio\" value=\"3\"&gt; &lt;label style=\"display: block; cursor: pointer;\" for=\"rating3\"&gt;3 ★&lt;/label&gt;&lt;/td&gt;\n                &lt;td style=\"width: 20%;\"&gt;&lt;input id=\"rating4\" style=\"display: block; cursor: pointer; margin-bottom: 8px;\" name=\"rating\" type=\"radio\" value=\"4\"&gt; &lt;label style=\"display: block; cursor: pointer;\" for=\"rating4\"&gt;4 ★&lt;/label&gt;&lt;/td&gt;\n                &lt;td style=\"width: 20%;\"&gt;&lt;input id=\"rating5\" style=\"display: block; cursor: pointer; margin-bottom: 8px;\" name=\"rating\" type=\"radio\" value=\"5\"&gt; &lt;label style=\"display: block; cursor: pointer;\" for=\"rating5\"&gt;5 ★&lt;/label&gt;&lt;/td&gt;\n            &lt;/tr&gt;\n        &lt;/tbody&gt;\n    &lt;/table&gt;\n    &lt;h4 class=\"kl_reviews__email_submission__header\" style=\"font-weight: bold;\"&gt;Your review&lt;/h4&gt;\n    &lt;textarea class=\"kl_reviews__email_submission__content\" style=\"display: block; width: 99%; height: 120px; border: 1px solid #d9d9d9; border-radius: 4px; margin-bottom: 32px; font-size: 16px;\" name=\"content\"&gt;&amp;#8203;&lt;/textarea&gt; &lt;button class=\"kl_reviews__email_submission__submit\" style=\"display: block; width: 100%; border-radius: 2px; background-color: #000; color: #fff; cursor: pointer; border: none; height: 50px; font-size: 16px; margin-bottom: 32px;\" type=\"submit\"&gt; Submit review &lt;/button&gt;&lt;/form&gt;&lt;!--&lt;![endif]--&gt;\n   &lt;h4 class=\"kl_reviews__email_submission__fallback\" style=\"text-align: center; font-weight: bold;\"&gt;Having trouble with the form?&lt;/h4&gt;\n   &lt;a class=\"kl_reviews__email_submission__fallback_link\" href=\"{{ event.review_link }}\" style=\"display: block; text-align: center; cursor: pointer; font-size: 14px; font-weight: 400;\"&gt;Write review on the web&lt;/a&gt;\n&lt;/div&gt;</code></pre>\n</div>\n</div>\n<div class=\"accordion__item\">\n<div class=\"accordion__item-title\"><strong>With review headline</strong></div>\n<div class=\"accordion__item-content\">\n<pre><code class=\"language-text\">&lt;div class=\"kl_reviews__email_submission\" style=\"display: block; margin: auto; padding: 24px;\"&gt;&lt;!--[if !mso]&gt;&lt;!--&gt;&lt;form action=\"{{ event.review_link }}\" method=\"GET\"&gt;\n    &lt;h4 class=\"kl_reviews__email_submission__header\" style=\"font-weight: bold;\"&gt;Rating&lt;/h4&gt;\n    &lt;table class=\"kl_reviews__email_submission__ratings\" style=\"width: 100%; margin-bottom: 32px;\"&gt;\n        &lt;tbody&gt;\n            &lt;tr&gt;\n                &lt;td style=\"width: 20%;\"&gt;&lt;input id=\"rating1\" style=\"display: block; cursor: pointer; margin-bottom: 8px;\" name=\"rating\" type=\"radio\" value=\"1\"&gt; &lt;label style=\"display: block; cursor: pointer;\" for=\"rating1\"&gt;1 ★&lt;/label&gt;&lt;/td&gt;\n                &lt;td style=\"width: 20%;\"&gt;&lt;input id=\"rating2\" style=\"display: block; cursor: pointer; margin-bottom: 8px;\" name=\"rating\" type=\"radio\" value=\"2\"&gt; &lt;label style=\"display: block; cursor: pointer;\" for=\"rating2\"&gt;2 ★&lt;/label&gt;&lt;/td&gt;\n                &lt;td style=\"width: 20%;\"&gt;&lt;input id=\"rating3\" style=\"display: block; cursor: pointer; margin-bottom: 8px;\" name=\"rating\" type=\"radio\" value=\"3\"&gt; &lt;label style=\"display: block; cursor: pointer;\" for=\"rating3\"&gt;3 ★&lt;/label&gt;&lt;/td&gt;\n                &lt;td style=\"width: 20%;\"&gt;&lt;input id=\"rating4\" style=\"display: block; cursor: pointer; margin-bottom: 8px;\" name=\"rating\" type=\"radio\" value=\"4\"&gt; &lt;label style=\"display: block; cursor: pointer;\" for=\"rating4\"&gt;4 ★&lt;/label&gt;&lt;/td&gt;\n                &lt;td style=\"width: 20%;\"&gt;&lt;input id=\"rating5\" style=\"display: block; cursor: pointer; margin-bottom: 8px;\" name=\"rating\" type=\"radio\" value=\"5\"&gt; &lt;label style=\"display: block; cursor: pointer;\" for=\"rating5\"&gt;5 ★&lt;/label&gt;&lt;/td&gt;\n            &lt;/tr&gt;\n        &lt;/tbody&gt;\n    &lt;/table&gt;\n    &lt;h4 class=\"kl_reviews__email_submission__header\" style=\"font-weight: bold;\"&gt;Your review&lt;/h4&gt;\n    &lt;textarea class=\"kl_reviews__email_submission__content\" style=\"display: block; width: 99%; height: 120px; border: 1px solid #d9d9d9; border-radius: 4px; margin-bottom: 32px; font-size: 16px;\" name=\"content\"&gt;&amp;#8203;&lt;/textarea&gt;\n    &lt;h4 class=\"kl_reviews__email_submission__header\" style=\"font-weight: bold;\"&gt;Review headline&lt;/h4&gt;\n    &lt;input class=\"kl_reviews__email_submission__headline\" style=\"display: block; width: 99%; height: 36px; border: 1px solid #d9d9d9; border-radius: 4px; margin-bottom: 32px; font-size: 16px;\" name=\"headline\" type=\"text\"&gt; \n    &lt;button class=\"kl_reviews__email_submission__submit\" style=\"display: block; width: 100%; border-radius: 2px; background-color: #000; color: #fff; cursor: pointer; border: none; height: 50px; font-size: 16px; margin-bottom: 32px;\" type=\"submit\"&gt; Submit review &lt;/button&gt;&lt;/form&gt;&lt;!--&lt;![endif]--&gt;\n    &lt;h4 class=\"kl_reviews__email_submission__fallback\" style=\"text-align: center; font-weight: bold;\"&gt;Having trouble with the form?&lt;/h4&gt;\n    &lt;a class=\"kl_reviews__email_submission__fallback_link\" href=\"{{ event.review_link }}\" style=\"display: block; text-align: center; cursor: pointer; font-size: 14px; font-weight: 400;\"&gt;Write review on the web&lt;/a&gt;\n&lt;/div&gt;</code></pre>\n</div>\n</div>\n</div>\n<h3 id=\"h_01J5BMJCFEA3JF0QPFE2H8K92X\">About the in-email review block</h3>\n<p>The in-email review block contains 3 fields: </p>\n<ul>\n<li>\n<strong>Review rating</strong><br>\nA radio button option to select 1-5 stars </li>\n<li>\n<strong>Review content</strong><br>\nAn open text field for review content </li>\n<li>\n<strong>Review headline</strong><br>\nAn open text field for a review headline or title (only visible if selected in the review submission page editor)</li>\n</ul>\n<p>These fields are not editable. Custom questions will not appear in the in-email review block.</p>\n<p><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28722600137371\" alt=\"An example of the in-email review collection form\" width=\"510\" height=\"494\"></p>\n<h2 id=\"h_01J5BMJCFEBPA5NSVYAHHNX7BG\">Limitations </h2>\n<p>This functionality relies on the HTML &lt;form&gt; element, which is <a href=\"https://www.caniemail.com/features/html-form/\">not supported by all inbox providers</a>. If a recipient opens your review request email in an inbox that doesn’t support the form element, they will see a link to submit a review instead. </p>\n<p>Custom questions are not supported for in-email review collection. If you have custom questions, reviewers will only see them in certain scenarios. </p>\n<ul>\n<li>If you have <strong>required</strong> custom questions, submitting the in-email review form will redirect reviewers to a new tab where they must complete the custom questions to submit their review. Partial review submissions will not be stored. </li>\n<li>If you have <strong>non-required</strong> custom questions, reviewers will see a success page after  submitting their review from their inbox. Only those who navigate to the product page and click the <strong>Write a review</strong> button will see your custom questions.</li>\n</ul>\n<h2 id=\"h_01J5BMJCFEP38TDE6CCMQZGR4E\">Outcome </h2>\n<p>Once you complete these steps, your customers can submit reviews directly in email, without needing to open another tab or window to access your review request form. </p>",
+    "user_segment_ids": []
+  },
+  "normalized": {
+    "id": "28307942477211",
+    "title": "How to use in-email review collection",
+    "source_url": "https://help.klaviyo.com/hc/en-us/articles/28307942477211-How-to-use-in-email-review-collection",
+    "section_id": 49375666744731,
+    "section": "Build and use reviews",
+    "category_id": 49375133274139,
+    "category": "Reviews",
+    "category_slug": "reviews",
+    "klaviyo_updated": "2026-04-20T16:49:46Z",
+    "created_at": "2024-08-15T18:27:02Z",
+    "draft": false,
+    "promoted": false,
+    "position": 0,
+    "label_names": []
+  },
+  "files": {
+    "body_html": "_source/articles/28307942477211.body.html",
+    "rendered_html": "_source/rendered/28307942477211.html"
+  },
+  "assets": {
+    "api_body": {
+      "images": [
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28722600135067",
+          "alt": "The universal content tab",
+          "width": "428",
+          "height": "165"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28722600137371",
+          "alt": "An example of the in-email review collection form",
+          "width": "510",
+          "height": "494"
+        }
+      ],
+      "links": [
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005413888",
+          "text": "save a copy"
+        },
+        {
+          "href": "https://www.caniemail.com/features/html-form/",
+          "text": "not supported by all inbox providers"
+        }
+      ],
+      "headings": [
+        {
+          "level": 2,
+          "id": "h_01J5BMHT1HAPZRQDVCY9KB8XP4",
+          "text": "Enable in-email review collection"
+        },
+        {
+          "level": 2,
+          "id": "h_01J5BMHT1HJDSSE974PV89X6K4",
+          "text": "Add a review collection block to a flow email"
+        },
+        {
+          "level": 3,
+          "id": "h_01J5BMHT1H2J2HJAA2X7ABAAY4",
+          "text": "In-app email block code"
+        },
+        {
+          "level": 3,
+          "id": "h_01J5BMJCFEA3JF0QPFE2H8K92X",
+          "text": "About the in-email review block"
+        },
+        {
+          "level": 2,
+          "id": "h_01J5BMJCFEBPA5NSVYAHHNX7BG",
+          "text": "Limitations"
+        },
+        {
+          "level": 2,
+          "id": "h_01J5BMJCFEP38TDE6CCMQZGR4E",
+          "text": "Outcome"
+        }
+      ]
+    },
+    "rendered_page": {
+      "images": [
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/7ff492c2b417b7ecfe572f839a8a81398693c1f7-1920x1080.webp",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/8e5b5677bf06a8f4c471f8698a816af3773d6d2a-782x302.png?w=428",
+          "alt": "The universal content tab",
+          "width": "428",
+          "height": "165"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/cdfaa5838ab153fad5e4f026d3c9138e35aa7948-1168x1132.png?w=510",
+          "alt": "An example of the in-email review collection form",
+          "width": "510",
+          "height": "494"
+        }
+      ],
+      "links": [
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/28307942477211-How-to-use-in-email-review-collection#site-content",
+          "text": "Skip to main content"
+        },
+        {
+          "href": "https://www.klaviyo.com",
+          "text": "Home"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center"
+        },
+        {
+          "href": "https://www.klaviyo.com/enterprise",
+          "text": "Enterprise"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Partners"
+        },
+        {
+          "href": "https://www.klaviyo.com/careers",
+          "text": "Careers"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": "Log in"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": ""
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center Find step-by-step instructions and troubleshooting solutions in our knowledge base."
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000032731",
+          "text": "Integrations"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000312411",
+          "text": "Flows"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867867",
+          "text": "Audience"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867667",
+          "text": "Campaigns"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/360000190711",
+          "text": "Sign-up forms"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000873988",
+          "text": "Deliverability & compliance"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/29173800271259",
+          "text": "SMS"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/16638219724187",
+          "text": "Reviews"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/18073014919195",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/34141283979931",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/37659126754075",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/33948021740315",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/39746685522331",
+          "text": "WhatsApp"
+        },
+        {
+          "href": "https://academy.klaviyo.com",
+          "text": "Klaviyo Academy Expert training and education to help you succeed with Klaviyo, and beyond."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Quick+guide&resource=academy_courses",
+          "text": "Quick guides Learn marketing strategies and concepts in 15 minutes or less."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Course&resource=academy_courses",
+          "text": "Courses Master key marketing topics through structured lessons and exams."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/best-practices",
+          "text": "Best practices Discover top product and marketing strategies for your business."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/learning-paths",
+          "text": "Learning paths Complete curated learning journeys tailored to your marketing goals."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses",
+          "text": "Explore all resources"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Live+training&resource=academy_courses",
+          "text": "Live trainings Build confidence through hands-on interactive workshops and thought-provoking strategy sessions."
+        },
+        {
+          "href": "https://www.bigmarker.com/klaviyo-customer-education/Office-hours-Getting-started-with-Klaviyo",
+          "text": "Live office hours Join a strategic discussion where you can ask questions and get answers in real-time."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/private-live-training",
+          "text": "1:1 Live training Book a private training session with an expert to jumpstart your platform knowledge and confidence."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/credentials",
+          "text": "Klaviyo credentials Dig deeper into select topics and showcase your expertise with a final exam to earn a certificate and digital badge."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/certificates/klaviyo-practitioner-certificate",
+          "text": "Klaviyo practitioner certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/deliverability-certificate",
+          "text": "Deliverability certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/developer-certificate",
+          "text": "Klaviyo developer certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses&select=Certificate",
+          "text": "See all certificates"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Klaviyo Community Join our thriving community network to connect with brands like yours—online and in person."
+        },
+        {
+          "href": "https://community.klaviyo.com/topic/new",
+          "text": "Ask a question Post a question and get thoughtful answers from Klaviyo powerusers."
+        },
+        {
+          "href": "https://community.klaviyo.com/p/roadmap",
+          "text": "Product roadmap"
+        },
+        {
+          "href": "https://community.klaviyo.com/search/activity/recent",
+          "text": "Recent threads"
+        },
+        {
+          "href": "https://community.klaviyo.com/p/champions",
+          "text": "Meet the Champions"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups",
+          "text": "Browse all groups Your people are waiting. New ideas and connections are a click away."
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/developer-group-64",
+          "text": "Developer group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/entrepreneur-user-group-118",
+          "text": "Entrepreneur group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/woo-user-group-87",
+          "text": "WooCommerce group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/new-york-meetup-chapter-82",
+          "text": "New York City"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/los-angeles-meetup-chapter-83",
+          "text": "Los Angeles"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/austin-meetup-chapter-85",
+          "text": "Austin"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/san-diego-meetup-chapter-86",
+          "text": "San Diego"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/amsterdam-meetup-chapter-84",
+          "text": "Amsterdam"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Klaviyo Developers Access API documentation and developer guides to help you build with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/get_started",
+          "text": "Get started Access key resources and a step-by-step checklist for how to start developing with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/build_your_integration",
+          "text": "Grow your app's reach Learn how to join our ecosystem and get your app listed on our marketplace."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/developer-tools",
+          "text": "Developer tools Generate sample data, monitor your API usage, and access our Postman collections."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/reference/api_overview",
+          "text": "API reference Browse our full catalog of API docs."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/changelog_",
+          "text": "Changelog"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/api_versioning_and_deprecation_policy",
+          "text": "Versioning & deprecation policy"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/rate_limits_and_error_handling",
+          "text": "Rate limits & error handling"
+        },
+        {
+          "href": "https://youtube.com/playlist?list=PLHkNfHgtxcUanrkMnKPdkRzuWU7MGv_xM&si=pkG-KH7IT_TUHOGC",
+          "text": "API tutorials on YouTube Subscribe to our Klaviyo API Tutorials playlist for easy access to step-by-step developer walkthroughs."
+        },
+        {
+          "href": "https://www.klaviyo.com/contact-us",
+          "text": "Contact us"
+        },
+        {
+          "href": "https://www.klaviyo.com/sign-up",
+          "text": "Sign up"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": "Search"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/28307942477211",
+          "text": "United States - EN"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/de-de/articles/28307942477211",
+          "text": "Deutschland - DE"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-es/articles/28307942477211",
+          "text": "España - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-mx/articles/28307942477211",
+          "text": "México - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/fr-fr/articles/28307942477211",
+          "text": "France - FR"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/it-it/articles/28307942477211",
+          "text": "Italia - IT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/ko-kr/articles/28307942477211",
+          "text": "한국 - KO"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/nl-nl/articles/28307942477211",
+          "text": "Nederland - NL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pl-pl/articles/28307942477211",
+          "text": "Polska - PL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pt-br/articles/28307942477211",
+          "text": "Brasil - PT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/sv-se/articles/28307942477211",
+          "text": "Sverige - SV"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/49375133274139",
+          "text": "Reviews"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/49375666744731",
+          "text": "Build and use reviews"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/28307942477211-How-to-use-in-email-review-collection#h_01J5BMHT1HAPZRQDVCY9KB8XP4",
+          "text": "Enable in-email review collection"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/28307942477211-How-to-use-in-email-review-collection#h_01J5BMHT1HJDSSE974PV89X6K4",
+          "text": "Add a review collection block to a flow email"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/28307942477211-How-to-use-in-email-review-collection#h_01J5BMJCFEBPA5NSVYAHHNX7BG",
+          "text": "Limitations"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/28307942477211-How-to-use-in-email-review-collection#h_01J5BMJCFEP38TDE6CCMQZGR4E",
+          "text": "Outcome"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/28307942477211-How-to-use-in-email-review-collection#additional-resources",
+          "text": "Additional resources"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005413888",
+          "text": "save a copy"
+        },
+        {
+          "href": "https://www.caniemail.com/features/html-form/",
+          "text": "not supported by all inbox providers"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/22567673911707",
+          "text": "Understanding reviews performance"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/20817781267739",
+          "text": "How to respond to customer reviews"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115001002272",
+          "text": "Learn how to contact support"
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": ""
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": "Visit Community"
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": ""
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": "Hire a partner"
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/about",
+          "text": "About Klaviyo"
+        },
+        {
+          "href": "https://www.klaviyo.com/newsroom",
+          "text": "Newsroom"
+        },
+        {
+          "href": "https://investors.klaviyo.com/overview/default.aspx",
+          "text": "Investor relations"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Agency and tech partners"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Developers"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/retail",
+          "text": "Retail and ecommerce"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/restaurants",
+          "text": "Restaurant marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/wellness",
+          "text": "Wellness"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform",
+          "text": "B2C CRM overview"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai",
+          "text": "Klaviyo AI (K:AI)"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/marketing-automation",
+          "text": "Klaviyo Marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-service",
+          "text": "Klaviyo Service"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/analytics",
+          "text": "Klaviyo Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-data-platform",
+          "text": "Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare",
+          "text": "Klaviyo vs. Klaviyo alternatives"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-mailchimp",
+          "text": "Klaviyo vs. Mailchimp"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-postscript",
+          "text": "Klaviyo vs. Postscript"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-attentive",
+          "text": "Klaviyo vs. Attentive"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-salesforce-marketing-cloud",
+          "text": "Klaviyo vs. Salesforce"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-listrak",
+          "text": "Klaviyo vs. Listrak"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/omnichannel",
+          "text": "Omnichannel marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/email-marketing",
+          "text": "Email marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing",
+          "text": "SMS marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing/rcs",
+          "text": "RCS for Business"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/mobile-app-marketing",
+          "text": "Mobile app marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/whatsapp",
+          "text": "WhatsApp marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/social",
+          "text": "Social marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources",
+          "text": "Marketing resources"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources/marketing-campaign-calendar",
+          "text": "Marketing campaign calendar"
+        },
+        {
+          "href": "https://www.klaviyo.com/glossary",
+          "text": "Marketing glossary"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/email-subject-line-generator",
+          "text": "Subject line generator"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/roi-calculator",
+          "text": "ROI calculator"
+        },
+        {
+          "href": "https://www.klaviyo.com/customers",
+          "text": "Case studies"
+        },
+        {
+          "href": "https://www.klaviyo.com/composer",
+          "text": "Composer Beta"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/marketing-agent",
+          "text": "Marketing Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/customer-agent",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/customer-experience-hub",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/helpdesk",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/marketing-analytics",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/advanced-cdp",
+          "text": "Advanced Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/web-forms",
+          "text": "Web forms"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/email-templates",
+          "text": "Email templates"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/portfolio",
+          "text": "Portfolio"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform-integrations",
+          "text": "Apps and Integrations"
+        },
+        {
+          "href": "https://www.klaviyo.com/features",
+          "text": "Features"
+        },
+        {
+          "href": "https://www.klaviyo.com/whats-new",
+          "text": "What's new"
+        },
+        {
+          "href": "https://www.klaviyo.com/events",
+          "text": "Events"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help Center"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us",
+          "text": "Academy"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Community"
+        },
+        {
+          "href": "https://www.facebook.com/Klaviyo/",
+          "text": "Facebook"
+        },
+        {
+          "href": "https://twitter.com/klaviyo/",
+          "text": "Twitter"
+        },
+        {
+          "href": "https://www.linkedin.com/company/klaviyo/",
+          "text": "LinkedIn"
+        },
+        {
+          "href": "https://www.instagram.com/klaviyo/",
+          "text": "Instagram"
+        },
+        {
+          "href": "https://www.klaviyo.com/sitemap",
+          "text": "Site Map"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal",
+          "text": "Terms and Privacy"
+        },
+        {
+          "href": "https://www.klaviyo.com/security",
+          "text": "Security"
+        },
+        {
+          "href": "https://www.klaviyo.com/trust",
+          "text": "Trust"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal/intellectual-property-notices",
+          "text": "Intellectual Property Notices"
+        }
+      ],
+      "headings": [
+        {
+          "level": 1,
+          "id": "",
+          "text": "How to use in-email review collection"
+        },
+        {
+          "level": 2,
+          "id": "h_01J5BMHT1HAPZRQDVCY9KB8XP4",
+          "text": "Enable in-email review collection"
+        },
+        {
+          "level": 2,
+          "id": "h_01J5BMHT1HJDSSE974PV89X6K4",
+          "text": "Add a review collection block to a flow email"
+        },
+        {
+          "level": 3,
+          "id": "h_01J5BMHT1H2J2HJAA2X7ABAAY4",
+          "text": "In-app email block code"
+        },
+        {
+          "level": 3,
+          "id": "h_01J5BMJCFEA3JF0QPFE2H8K92X",
+          "text": "About the in-email review block"
+        },
+        {
+          "level": 2,
+          "id": "h_01J5BMJCFEBPA5NSVYAHHNX7BG",
+          "text": "Limitations"
+        },
+        {
+          "level": 2,
+          "id": "h_01J5BMJCFEP38TDE6CCMQZGR4E",
+          "text": "Outcome"
+        },
+        {
+          "level": 2,
+          "id": "additional-resources",
+          "text": "Additional resources"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "Explore more from Klaviyo"
+        }
+      ]
+    }
+  },
+  "rendered_page": {
+    "status": "fetched",
+    "error": ""
+  }
+}

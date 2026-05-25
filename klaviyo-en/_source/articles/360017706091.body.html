@@ -1,0 +1,102 @@
+<h2 id="h_01HCNRMBZ35DF7X8CMRA0GAA94">You will learn</h2>
+<p>Learn how contacts move through a flow. Flows are automated Klaviyo workflows that are set in motion by an initial trigger and then include one or more steps. Flows can be built to send timely communications to recipients, or they can simply apply certain actions, like <a href="https://help.klaviyo.com/hc/en-us/articles/360001768432-Update-Profile-Property-Action">updating a specific field on a profile</a>.</p>
+<p>This guide explains how contacts will move through a flow, including:</p>
+<ul>
+<li>How recipients are scheduled for flow messages</li>
+<li>What happens when you update a time delay in an active flow</li>
+<li>How adding a new step affects flow recipients</li>
+<li>What happens when you reorder the steps in an active flow</li>
+<li>What happens when you delete a step in an active flow</li>
+</ul>
+<h2 id="h_01HCNRMBZ3KKC3JP5830CE9AQR">How recipients are scheduled for flow messages</h2>
+<p>When someone new enters a flow after qualifying based on the flow's trigger, they will immediately be scheduled for the first step in the series.</p>
+<p>This first step could be an action, like an email, or it could be a logic assessment, like a conditional split. </p>
+<ul>
+<li>If there is no time delay before this first step, you will see the recipient quickly move through the step and be scheduled for the next step.</li>
+<li>If you have a time delay before this first step, the recipient will remain in a <em>Waiting</em> area until the scheduled time arrives. The "scheduled" state for a recipient is the Waiting state. </li>
+</ul>
+<p>A recipient is only scheduled for one step in a flow at a time if the flow is live.</p>
+<div class="bs-callout bs-callout-default">
+<p>If multiple action steps follow each other without time delays between, they will all occur around the same time. This can be useful for non-message actions such as profile property update or list update actions, but it's best practice to put time delays between messages.</p>
+</div>
+<p>Let's say your flow is set up to send Email #1 in a flow after 1 hour, and Email #2 after 1 day. Someone new entering the flow will be in the <em>Waiting</em> bucket for Email #1 until an hour passes.</p>
+<p>After this person receives Email #1, they will immediately be scheduled for Email #2. Only after this person moves past Email #1 will you see them will move to the <em>Waiting</em> bucket for Email #2.</p>
+<p class="wysiwyg-text-align-center"><img src="https://klaviyo.zendesk.com/hc/article_attachments/28717380738587" alt="An example of a basic flow with a 1 hour delay followed by Email #1, then a 1 day delay followed by Email #2" width="300" height="548"></p>
+<p>If you have an integration that doesn't sync immediately: Note that qualified profiles will still be scheduled for the first step in a flow as long as the information for the triggering event is synced into Klaviyo within four hours of the event occurring or, if a time delay is the first step after the trigger, as long as the sync falls within the timeframe of the time delay — whichever comes last.</p>
+<p>If the difference in the synced (i.e., recorded) time and the actual time for an event is greater than both the four-hour default window and the time delay, they will be skipped from the flow. You can refer to <a href="https://help.klaviyo.com/hc/en-us/articles/115005253208" target="_self">how often your integration syncs data into Klaviyo</a>. </p>
+<h2 id="h_01J685SMKQ0RJTJ428V0SMQR8F">How changing message template or content affects received messages</h2>
+<p>Flows will use whatever is the current version of a message at send time. In other words, if you change the template and content of a message, whoever is currently scheduled to receive that message will receive the updated version when the message finally sends. This also applies to recipients with the <em>Needs Review</em> status for manual or previously manual messages.</p>
+<h2 id="h_01HCNRMBZ3SDF9QTA6DPYF6KRK">How a message in draft affects a recipient's progress</h2>
+<p>If all messages in a flow are set to draft, no one will enter the flow until at least one message is set to live or manual. Once people enter a flow, if a message is set to draft status, it does not stop the recipient from moving through the flow. Flow recipients will skip any draft messages and move onto the next step. They will not be scheduled for any draft messages nor will they show in the analytics for the message. If there are no steps after the draft message, they will exit the flow.</p>
+<p>If you'd like to schedule someone for a message, but want to wait indefinitely before sending it, set the message status to manual.</p>
+<h2 id="h_01HCNRMBZ34GGS7J732ZFFD5NS">How a message in manual affects a recipient's progress</h2>
+<p>If a message is set to manual status, recipients will be put in the <em>Needs Review</em> list for the message, but it does not stop the recipient from moving through a flow.</p>
+<p>For example, say your flow setup is similar to the one shown below, with the first message in manual mode, followed by a 3 day time delay and then the second message. </p>
+<p class="wysiwyg-text-align-center"><img src="https://klaviyo.zendesk.com/hc/article_attachments/28717387001371" alt="An example of a flow with the first message after the trigger set to Manual status followed by a 5 day time delay and a second message" width="300" height="546"></p>
+<p class="wysiwyg-text-align-left">In this case, once recipients hit the <em>Needs Review</em> stage for the first message, they'll continue in the flow. Thus, after 3 days, they'll receive the second email, even if you haven't sent them the first yet. </p>
+<h2 id="h_01HCNRMBZ3C4BJ7ZBMAJEZZ6Z4">Updating the time delay in an active flow</h2>
+<p>If you update the time delay before a step, those already in the flow who haven't made it to that step yet will automatically be scheduled according to the updated timing when they do get there.</p>
+<p>Let's say you have a flow where Email #1 is set to send after 2 days, and Email #2 is set to send 5 days later.</p>
+<p class="wysiwyg-text-align-center"><img src="https://klaviyo.zendesk.com/hc/article_attachments/28717380749467" alt="An example of a flow where Email #1 is set to send after 2 days, and Email #2 is set to send 5 days later" width="300" height="819"></p>
+<p>Becky enters a flow and is waiting to receive Email #1 the next day. While she's scheduled for Email #1, you update Email #2 to send 2 days later (instead of 5 days later). As soon as Becky receives Email #1, she'll be scheduled for Email #2 according to the updated timing and receive this email 2 days later. </p>
+<p class="wysiwyg-text-align-center"><img src="https://klaviyo.zendesk.com/hc/article_attachments/28717387007131" alt="An example of a flow where Email #1 is set to send after 2 days, and Email #2 was changed from 5 days to 2 days later" width="300" height="790"></p>
+<p>For this same flow, however, Joe entered a few days before Becky and is already in the <strong>Waiting</strong><em> </em>bucket for Email #2. When you update the time delay before this email, Joe will not be rescheduled to receive the flow sooner. He will still receive this second email 5 days after the first because he was scheduled for this second email before you made the timing update.</p>
+<p>If you update the time delay before a step, those already scheduled in the <strong>Waiting</strong> bucket will not be rescheduled.</p>
+<p>Note that if you set a time delay component to wait until a specific day, you will not be able to view the expected number of days for any emails and SMS that come after this delay. Suppose you have a time delay that waits for 5 days and only sends on a Monday or Friday. In this case, Klaviyo cannot determine when a recipient will receive the following message, as each person in the flow is going to have a different number of days before they are sent the message. </p>
+<h2 id="h_01HCNRMBZ383PESXB0B2N4S1RT">Adding a new step into an active flow</h2>
+<p>If you add a new step to an existing flow series (e.g., an email, an update profile property action, a split, etc.), recipients currently scheduled at any previous step will automatically be scheduled for the new step in the sequence.</p>
+<p>For example, let's say you have a welcome series with 3 emails spanning 1 week after someone subscribes. You want to make this series longer and add 3 more emails at the end. Now, the flow spans 2 weeks after someone subscribes.</p>
+<p>Recipients currently in your sequence will automatically be scheduled for the new emails. You do not need to add past profiles to your flow or take any other action. This is only true for recipients who are still moving through the flow.</p>
+<p>Recipients who already exited the flow prior to these new emails being added will not be scheduled to receive them. In this case, you would need to <a href="https://klaviyo.zendesk.com/hc/en-us/articles/360049924272" target="_blank" rel="noopener noreferrer">add past profiles</a> to the flow in order to ensure that those who already exited the flow, but are still within the proper timeframe for your newly added emails, receive the new emails in the proper sequence.</p>
+<h2 id="h_01HCNRMBZ3YEK6DDA2CVR24P4N">Reordering steps in an active flow</h2>
+<p>Contacts are scheduled for all steps in a flow one-at-a-time, and they must move through one step before being scheduled for the next.</p>
+<p>This means for those moving through a flow, any changes made to steps still ahead of them will impact their journey.</p>
+<p>However, if someone is already scheduled (in <em>Waiting</em>) for a given step, they will remain scheduled for that step even if you move it elsewhere in the sequence. Additionally, say they are scheduled (in <em>Waiting</em>) for a first email or SMS, and you adjust the flow to add steps before this first touch, they will not receive these above steps unless you add past profiles.</p>
+<p>For example, let's say you have a flow series with four emails:</p>
+<ul>
+<li>Becky received Emails #1 and #2, and is currently scheduled for Email #3. While Becky is still scheduled for Email #3, you drag this email to the top of the flow.</li>
+<li>New contacts entering the flow will get this email first, but Becky will still get it at her originally scheduled time.</li>
+<li>After Becky receives Email #3, we will attempt to schedule her for the next step (Email #1). <em>If a contact has already moved through a step in a sequence and arrives at it again because you've reordered the steps, the contact will not be scheduled a second time.</em> In this case, you placed Email #3 before Emails #1 and #2, but because Becky already received Emails #1 and #2 she won't be scheduled for them again.</li>
+<li>Becky will be scheduled to receive Email #4 because it is the next email in the sequence that she has not already received.</li>
+<li>The only way that Becky can receive any new emails added before the next email she is scheduled for is to add past profiles.</li>
+</ul>
+<h2 id="h_01HCNRMBZ4020T9PX19A5BDGXY">Deleting steps in an active flow</h2>
+<p>If you delete a step that has contacts waiting, those contacts will move to the next step in your flow. When deleting a step from your flow, you will also be deleting any data associated with that step as well. For emails or SMS, you can keep that data by setting the message mode to <strong>Draft</strong>. Contacts will not be scheduled for messages in draft mode, and will move on to the next step in your flow. </p>
+<p>The only exception to this is if:</p>
+<ul>
+<li>The step being deleted is a split (conditional or trigger)</li>
+<li>There's no delay directly before the split</li>
+</ul>
+<p>In this case, when the split is deleted, any contacts in waiting will be removed from the flow. Otherwise, they'll continue on to the next step. </p>
+<h2 id="h_01HTJSD6R60YFYW7Q1VT5A2MTN">Review profile progress through a flow</h2>
+<p>There are two ways to review profiles going through a flow:</p>
+<ul>
+<li>Reviewing profiles that have gone through a specific step within your flow.</li>
+<li>Reviewing profiles who have completed a flow.</li>
+</ul>
+<p>To view profiles who have gone through specific steps within your flow:</p>
+<ol>
+<li>In the flow builder, click the step you want to review and select <strong>View details</strong> on the right hand side.</li>
+<li>Click the <em>Recipient activity</em> tab to view all profiles who went through this step. You can view profiles who are waiting to go through, recipients that have successfully went through, and profiles who have skipped this step.</li>
+</ol>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/28717387009179"></p>
+<p>To track profiles who complete a flow, you will need to use the update property action at the end of your flow to tag customers who have completed your flow. If you have multiple paths customers can go down, you will need to add an update property action to the end of each path.</p>
+<ol>
+<li>In the flow builder, drag and drop the <strong>Profile property update</strong> block to the end of your flow.</li>
+<li>Click <strong>Add step</strong> and under the first dropdown, select <strong>Create new property</strong>.</li>
+<li>Under property label, add the name of the property you want to use to track when profiles end the flow and change text to boolean. This will allow you to set the property as true or false.</li>
+<li>Once profiles have been tagged with this custom property, you will be able to create a segment of all profiles who have ended the flow and were tagged by your property. If no one has been tagged yet, you will not be able to create the segment.</li>
+</ol>
+<p>If your flow has flow filters on the trigger of the flow, and if profiles fail those flow filters, they will skip the profile property update action. To avoid this from happening, you can remove the flow filters from the trigger of your flow and add them directly to the emails or SMS messages within your flow.</p>
+<ol>
+<li>Click the email or SMS message within your flow.</li>
+<li>On the right side under <em>Settings</em>, click <strong>Add filter</strong> and re-add the filters to every email or SMS message within your flow. This way, the filters are checked before each email is sent but will not impact the profile property update action.</li>
+</ol>
+<h2 id="h_01HCNRMBZ4Y30SPWNDKJE5T7ZZ">Additional resources</h2>
+<ul>
+<li><a href="https://help.klaviyo.com/hc/en-us/articles/360046164352-Understanding-the-Timing-of-a-Flow" target="_blank" rel="noopener noreferrer">Understanding the timing of a flow</a></li>
+<li><a href="https://help.klaviyo.com/hc/en-us/articles/115003883992-Introduction-to-Flow-Branching" target="_blank" rel="noopener noreferrer">Understanding flow branching</a></li>
+<li><a href="https://help.klaviyo.com/hc/en-us/articles/115002779051-About-Flow-Triggers-and-Filters" target="_blank" rel="noopener noreferrer">Understand flow triggers and filters</a></li>
+<li><a href="https://academy.klaviyo.com/automating-the-customer-journey-with-flows" target="_blank" rel="noopener noreferrer">Automating the customer journey with flows</a></li>
+</ul>
+<p> </p>

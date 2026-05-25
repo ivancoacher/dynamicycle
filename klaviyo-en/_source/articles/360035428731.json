@@ -1,0 +1,946 @@
+{
+  "captured_at": "2026-05-23T16:16:11Z",
+  "article": {
+    "id": 360035428731,
+    "url": "https://klaviyo.zendesk.com/api/v2/help_center/en-us/articles/360035428731.json",
+    "html_url": "https://klaviyo.zendesk.com/hc/en-us/articles/360035428731-How-to-upload-a-list-of-SMS-contacts",
+    "author_id": 20350272227,
+    "comments_disabled": true,
+    "draft": false,
+    "promoted": false,
+    "position": 0,
+    "vote_sum": 72,
+    "vote_count": 326,
+    "section_id": 49375804348443,
+    "created_at": "2019-10-22T16:03:03Z",
+    "updated_at": "2026-04-21T13:54:46Z",
+    "name": "How to upload a list of SMS contacts",
+    "title": "How to upload a list of SMS contacts",
+    "source_locale": "en-us",
+    "locale": "en-us",
+    "outdated": false,
+    "outdated_locales": [],
+    "edited_at": "2026-01-29T14:46:14Z",
+    "user_segment_id": null,
+    "permission_group_id": 146372,
+    "content_tag_ids": [],
+    "label_names": [],
+    "body": "<div class=\"bs-callout bs-callout-requirements\">\n<p>To import consent, you must:</p>\n<ul>\n<li data-list-item-id=\"e2b5ca4db112e902cdd31e76db20a89d1\">Be an Owner or Admin</li>\n<li data-list-item-id=\"ef3dd084114f35cb48781e19f4c4680b1\">Have set up SMS</li>\n</ul>\n</div><p>Find out how to add and remove SMS transactional or marketing consent in Klaviyo. Importing your SMS subscribers is an essential part of migrating providers or simply consolidating your data. </p><h2 id=\"h_01JNPF254DVXJ1R78TKEC96EXG\">Before you begin</h2><h3 id=\"h_01JNPF254D3MX04RA7AF19TP77\">General requirements to import SMS consent </h3><p>To import a list of phone number contacts with consent, you should:</p><ol>\n<li data-list-item-id=\"e226d94cc30a11acf832d031bf19a4dcd\">\n<a href=\"https://help.klaviyo.com/hc/en-us/articles/4404274419355\">Set up SMS</a> and have an SMS sending number for each country that you are importing.  <ul><li data-list-item-id=\"e918ca51dca7b3a27f8944814933c8dc7\">Note: you can only import consent for countries <a href=\"https://help.klaviyo.com/hc/en-us/articles/4402914866843\">where Klaviyo SMS is available</a>.</li></ul>\n</li>\n<li data-list-item-id=\"e7fe95e0b2e01856b1b1f1ef3f66e6c62\">Turn off any welcome flows (those triggered by the <em>Consented to receive SMS</em> metric or the list you’re importing to).<ul><li data-list-item-id=\"e8c4fd8293830c47100110f07e2cb46f4\">Also, wait at least 2 hours after importing before you turn your flow live again.</li></ul>\n</li>\n</ol><div class=\"accordion accordion--default\">\n<div class=\"accordion__item\">\n<div class=\"accordion__item-title\"><strong>Why do I need to set up SMS first and have a sending number? </strong></div>\n<div class=\"accordion__item-content\">\n<p>Klaviyo cannot add SMS consent if: </p>\n<ul>\n<li data-list-item-id=\"e5680314713f9c2c300cf2f7da2824166\">SMS isn’t set up in Klaviyo</li>\n<li data-list-item-id=\"ece131a179ba318708d030df06e9e6e6c\">You’re trying to add consent for a country where SMS isn’t available</li>\n<li data-list-item-id=\"e4ac7a70203cc09f61a530bda676996c6\">Don’t have an SMS sending number for a country. </li>\n</ul>\n<p>The profiles are imported with phone numbers, but they wouldn’t have consent for SMS.  </p>\n<p>To check your SMS setup and sending numbers, navigate to<strong> Settings &gt; SMS</strong>.</p>\n</div>\n</div>\n<div class=\"accordion__item\">\n<div class=\"accordion__item-title\"><strong>Why should I turn off welcome flows?</strong></div>\n<div class=\"accordion__item-content\">\n<p>If you don’t, every new contact from the CSV you uploaded will be added to any welcome flow. Thus, you should set your welcome flows to manual mode before importing. Welcome flows include those triggered by either: </p>\n<ul>\n<li data-list-item-id=\"e3d418fc86d4cf7bcb1440a4c8eff4b1e\">The <em>Consented to receive SMS</em> metric (which is the best option for any SMS welcome series)</li>\n<li data-list-item-id=\"e200724542690e094b1070d49d713c243\">The list you’re uploading to.</li>\n</ul>\n<p>You should also wait at least 2 hours after the import finishes to turn these flows live again. </p>\n</div>\n</div>\n</div><h2 id=\"h_01JSMH4K2KVKNTZDERRVGGBPRS\">Obtain your list of contacts</h2><p>Depending on your SMS provider, you may need to build in time to get a list of your SMS subscribers.</p><p>At minimum, you need: </p><ul>\n<li data-list-item-id=\"e050e773375711e4a94bbba5f2ab1e3a7\">Phone number</li>\n<li data-list-item-id=\"e0911de8c4f35d08a8c3359c1fd7faabf\">Opt-in status (i.e., whether they are currently subscribed or not)</li>\n</ul><p>Additionally, you may want to include aspects like name, email, consent timestamp, etc. </p><div class=\"accordion accordion--default\">\n<div class=\"accordion__item\">\n<h3 class=\"accordion__item-title\" id=\"h_01JSMJE0T5YBB86C4TNBZ9H1XF\">Attentive</h3>\n<div class=\"accordion__item-content\">\n<p>Attentive requires that you reach out to your account representative to receive an export of your SMS subscribers as a CSV file. It is not currently possible to export the file yourself. When migrating to Klaviyo, plan for turnaround time for Attentive to complete this request.</p>\n<p>If the CSV file you receive contains contacts who have opted out of SMS messaging, as indicated in the <em>opt_out</em> column of your export:</p>\n<ol>\n<li data-list-item-id=\"e13a0d0b976c63f0ae3fde38ea9ef96ea\">Add a column labeled \"SMS Marketing Consent.\"</li>\n<li data-list-item-id=\"ed4fef76210ec58439ad67e1c728eff57\">Mark any contacts that have opted out as \"Unsubscribed\" in this column. </li>\n</ol>\n</div>\n</div>\n<div class=\"accordion__item\">\n<h3 class=\"accordion__item-title\" id=\"h_01JSMJE7B0YAS8A5RQGX06P702\">Emotive</h3>\n<div class=\"accordion__item-content\"><p>Emotive does not allow you to export a list of all SMS subscribers directly from your account. You must contact them to get this list.</p></div>\n</div>\n<div class=\"accordion__item\">\n<h3 class=\"accordion__item-title\" id=\"h_01JSMJEBXGYESVQYRGB2A5EVRE\">Postscript</h3>\n<div class=\"accordion__item-content\">\n<p>Postscript allows you to export a list of all SMS subscribers directly from your account into a CSV file. This list simplifies the import process into Klaviyo.</p>\n<p>For Postscript specifically, consider exporting information like: </p>\n<ul>\n<li data-list-item-id=\"e672a384822643bcbd4c8fb44dd9d3f8e\">subscriber_created_at_utc (this is the SMS marketing consent timestamp)</li>\n<li data-list-item-id=\"e98f19f96fab82896d46f0e704018ea94\">Customer_id</li>\n<li data-list-item-id=\"e75514a077bff575adcbf9bbc59eef513\">Last_keyword_subscribed_to</li>\n<li data-list-item-id=\"e1059aafde921a6cfbb86bae8f0dcf9c7\">Automation_and_campaign_texts_sent_count</li>\n</ul>\n<p>To learn how to export this segment in Postscript, consult <a href=\"https://help.postscript.io/hc/en-us/articles/1260804630310-\">their help doc on exporting subscriber data</a>. You will need to export each segment separately.</p>\n</div>\n</div>\n<div class=\"accordion__item\">\n<h3 class=\"accordion__item-title\" id=\"h_01JSMJEH40SHFRMYK2N4840K6T\">Retention Rocket</h3>\n<div class=\"accordion__item-content\"><p>Retention Rocket requires that you contact your account representative to receive an export of your SMS subscribers as a CSV file. It is not currently possible to export this file yourself. When migrating to Klaviyo, plan for turnaround time for your Retention Rocket representative to complete this request.</p></div>\n</div>\n<div class=\"accordion__item\">\n<h3 class=\"accordion__item-title\" id=\"h_01JSMJEN533XHSVP7ADTXBSKAG\">Yotpo / SMSBump</h3>\n<div class=\"accordion__item-content\"><p>Use Klaviyo's <a href=\"https://help.klaviyo.com/hc/en-us/articles/39598076123547\" target=\"_blank\" rel=\"noopener noreferrer\">Yotpo Email &amp; SMS Migration integration</a> to easily bring both SMS and email subscribers into Klaviyo.</p></div>\n</div>\n</div><h2 id=\"h_01JNPF254DMC63DXHXG38V15WT\">Prepare your CSV for importing</h2><p>For an example CSV, see this <a href=\"https://docs.google.com/spreadsheets/d/1cqJb4hH4Kbv0xw_yf14vKS4CyKlzDNY7toG_nqUrhPI/edit?gid=0#gid=0\">template</a>. </p><div class=\"accordion accordion--default\">\n<div class=\"accordion__item\">\n<div class=\"accordion__item-title\">\n<h3 id=\"h_01JNPF254DFXQC04S05WQKDJSR\">Include a phone number as the first or second column</h3>\n</div>\n<div class=\"accordion__item-content\">\n<p>Klaviyo uses either email or phone number as a profile’s unique identifier. </p>\n<p>When importing:</p>\n<ul>\n<li>Use email as the first column if you have an email address for each person</li>\n<li>Otherwise, use phone number as the first column</li>\n</ul>\n</div>\n</div>\n<div class=\"accordion__item\">\n<div class=\"accordion__item-title\">\n<h3 id=\"h_01JNPF254EE0HQYTNW1033RDSZ\">Indicate the SMS subscriber’s country </h3>\n</div>\n<div class=\"accordion__item-content\">\n<p>You need to indicate the country for each person you’re importing either by:</p>\n<ul>\n<li>Adding the country code before the phone number</li>\n<li>Including a column labeled “Country”</li>\n</ul>\n<div>\n<table style=\"width: 100%; margin-left: 0px; margin-right: auto;\">\n<colgroup> <col> <col> </colgroup>\n<tbody>\n<tr>\n<td class=\"wysiwyg-text-align-center\" style=\"width: 50%;\"><strong>Example with country code</strong></td>\n<td class=\"wysiwyg-text-align-center\" style=\"width: 50%;\"><strong>Example with country column</strong></td>\n</tr>\n<tr>\n<td class=\"wysiwyg-text-align-center\" style=\"width: 50%;\"><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28711677302683\" alt=\"Indicating the country via a country code\" width=\"207\" height=\"272\"></td>\n<td class=\"wysiwyg-text-align-center\" style=\"width: 50%;\"><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28711698750619\" alt=\"Example with country column.png\"></td>\n</tr>\n</tbody>\n</table>\n</div>\n<p>Watch the video or check out this article for <a href=\"https://help.klaviyo.com/hc/en-us/articles/5306587861531\">instructions on indicating the SMS subscriber’s country</a>. </p>\n<script src=\"https://fast.wistia.com/embed/medias/ld30gq77eh.jsonp\" async=\"async\"></script>\n<script src=\"https://fast.wistia.com/assets/external/E-v1.js\" async=\"async\"></script>\n<div class=\"wistia_responsive_padding\" style=\"padding: 56.25% 0 0 0; position: relative;\">\n<div class=\"wistia_responsive_wrapper\" style=\"height: 100%; left: 0; position: absolute; top: 0; width: 100%;\">\n<div class=\"wistia_embed wistia_async_ld30gq77eh seo=false videoFoam=true\" style=\"height: 100%; position: relative; width: 100%;\">\n<div class=\"wistia_swatch\" style=\"height: 100%; left: 0; opacity: 0; overflow: hidden; position: absolute; top: 0; transition: opacity 200ms; width: 100%;\"><img style=\"filter: blur(5px); height: 100%; object-fit: contain; width: 100%;\" src=\"https://fast.wistia.com/embed/medias/ld30gq77eh/swatch\" alt=\"\" aria-hidden=\"true\"></div>\n</div>\n</div>\n</div>\n</div>\n</div>\n<div class=\"accordion__item\">\n<div class=\"accordion__item-title\">\n<h3 id=\"h_01JNPF254EV600CEKG0GG4XDDQ\">Indicate if consent is for SMS marketing or transactional </h3>\n</div>\n<div class=\"accordion__item-content\">\n<p>Say your CSV has a mix of marketing- and transactional-only profiles. </p>\n<p>You can use 2 columns to indicate the type (transactional or marketing) of someone’s SMS consent. Label the columns: </p>\n<ul>\n<li>\n<em>SMS Marketing Consent </em>\n<ul>\n<li>Marketing consent allows you to send any type of SMS: both promotional (product announcement, abandonment reminder, etc) and transactional messages.</li>\n<li>This is required if you want to import profiles with only SMS marketing consent. </li>\n</ul>\n</li>\n<li>\n<em>SMS Transactional Consent </em>\n<ul>\n<li>SMS transactional consent means you can only send messages marked as transactional in Klaviyo, like post-purchase flow messages. </li>\n<li>This column is only needed if you have transactional-only profiles, as you can send transactional messages to anyone who consented to SMS marketing.</li>\n</ul>\n</li>\n</ul>\n</div>\n</div>\n<div class=\"accordion__item\">\n<div class=\"accordion__item-title\">\n<h3 id=\"h_01JNPF254ENNHKBBSTNACN44KY\">Add consent status (subscribe, unsubscribed, never subscribed)</h3>\n</div>\n<div class=\"accordion__item-content\">\n<p>Including the consent status is key if your CSV includes a mix of either:</p>\n<ul>\n<li>Subscribed and unsubscribed subscribers </li>\n<li>Marketing- and transactional-only subscribers </li>\n</ul>\n<p>There are 3 consent statuses available: </p>\n<ul>\n<li>\n<strong>Subscribe</strong><br>Person is opted in to receive messages. </li>\n<li>\n<strong>Unsubscribed </strong><strong><br></strong>Person used to be subscribed but has since opted out. You cannot send messages if they are unsubscribed for that channel (e.g., you cannot send an SMS to someone who’s unsubscribed, but you may be able to send an email). </li>\n<li>\n<strong>Never subscribed  </strong><strong><br></strong>Person never consented to receiving messages. This is also the default value if a cell in a consent column is blank. You cannot send mobile (SMS, push, etc.) messages to people marked as never subscribed; however, you can send emails and these are considered active profiles. </li>\n</ul>\n<p>Klaviyo will not apply SMS marketing consent if someone is marked as either <em>unsubscribed</em> or <em>never subscribed</em>. However, if they are marked as subscribed for marketing consent, they are always marked as subscribed for transactional consent. </p>\n<div>\n<table style=\"width: 100%; margin-left: 0px; margin-right: auto;\">\n<colgroup> <col> <col> <col> <col> </colgroup>\n<tbody>\n<tr>\n<td> </td>\n<td><strong>SMS marketing consent</strong></td>\n<td><strong>SMS transactional consent</strong></td>\n<td><strong>Is consent added to the profile?</strong></td>\n</tr>\n<tr>\n<td>Profile A</td>\n<td>Subscribe</td>\n<td>Subscribe</td>\n<td>Yes, they are consented to both SMS marketing and transactional consent. </td>\n</tr>\n<tr>\n<td>Profile B</td>\n<td>Subscribe</td>\n<td>Never subscribed</td>\n<td>Yes, but only for SMS marketing consent. The profile will show “never subscribed\" for transactional consent. </td>\n</tr>\n<tr>\n<td>Profile C</td>\n<td>Never subscribed</td>\n<td>Subscribe</td>\n<td>Yes, but the profile is only consented to SMS transactional consent.  </td>\n</tr>\n<tr>\n<td>Profile D</td>\n<td>Unsubscribed</td>\n<td>Never subscribed</td>\n<td>No, and the profile is marked \"unsubscribed\" for SMS marketing and \"never subscribed” for SMS transactional.  </td>\n</tr>\n</tbody>\n</table>\n</div>\n<p>The way SMS providers export this information varies, so you may have to reformat the spreadsheet you received from your previous SMS provider to indicate the consent status.</p>\n</div>\n</div>\n<div class=\"accordion__item\">\n<div class=\"accordion__item-title\">\n<h3 id=\"h_01JNPF254EYJ74N8GMM008ZGFJ\">Optional: add consent timestamp </h3>\n</div>\n<div class=\"accordion__item-content\">\n<p>While optional, the timestamp is usually good to include if it’s available. To do so, check that:</p>\n<ul>\n<li>The timestamp is in an <a href=\"https://developers.klaviyo.com/en/docs/acceptable_date_and_timestamp_formats_for_profile_and_event_properties\" target=\"_blank\" rel=\"noopener noreferrer\">accepted date/time format</a>.</li>\n<li>The column is labeled either:\n<ul>\n<li><em>SMS Marketing Timestamp</em></li>\n<li>\n<em>SMS Transactional Timestamp</em> (if also importing transactional consent)</li>\n</ul>\n</li>\n</ul>\n<p>If you choose not to include the timestamp, you will need to check a box to confirm that all profiles are currently opted into SMS. </p>\n<p>Adding the consent timestamp is not recommended in certain cases. Mostly, this occurs if you try to re-upload consent for a profile and the opt-out date is more recent than the consent timestamp. In this case, SMS consent won't be re-added to the profile. </p>\n</div>\n</div>\n<div class=\"accordion__item\">\n<div class=\"accordion__item-title\">\n<h3 id=\"h_01JNPF254ERXDQBYMKKN7DCJQ0\">Recommended information</h3>\n</div>\n<div class=\"accordion__item-content\">\n<p>Some information is \"recommended\" because it's helpful, but not required to add SMS consent. There are also columns you may think are helpful, but could cause errors in the import process.</p>\n<p>See the table below for details of other information you may want to (or not want to) include. </p>\n<div>\n<table style=\"width: 100%; margin-left: 0px; margin-right: auto;\">\n<colgroup> <col> <col> </colgroup>\n<tbody>\n<tr>\n<td><strong>Do include</strong></td>\n<td><strong>Don't include</strong></td>\n</tr>\n<tr>\n<td>Email address (if included, this should be the first column in the CSV)</td>\n<td>\"Subscribed to SMS\" column</td>\n</tr>\n<tr>\n<td>First name</td>\n<td>A “consent” column to indicate whether someone is subscribed to SMS marketing, SMS transactional, email, etc.</td>\n</tr>\n<tr>\n<td>Last name</td>\n<td> </td>\n</tr>\n</tbody>\n</table>\n</div>\n</div>\n</div>\n</div><h2 id=\"h_01JNPF254EE76PRHW8FSBDGQMN\">Import a list of phone numbers with SMS consent</h2><ol>\n<li data-list-item-id=\"e64c53f6094b8dc6bb0c8765db7a45c48\">Navigate to <strong>Audience &gt; Lists &amp; segments</strong>.</li>\n<li data-list-item-id=\"ee6f434f831b41d70543589a449fb7204\">Select the list you want to add your contacts to (e.g., SMS Subscribers).</li>\n<li data-list-item-id=\"e0bf515cf917176235984c5212d4d05b6\">Open the <strong>Manage List </strong>dropdown in the upper right. </li>\n<li data-list-item-id=\"eb6df53de2e3470e0407a4c6d8dc2d86d\">Choose <strong>Import contacts</strong> from the dropdown.<ul><li data-list-item-id=\"ebe06e5e88449f339184ce804b71a64d1\">Note that you must be an Owner or Admin to see this option. <br><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/34691454053147\" width=\"340\" height=\"423\">\n</li></ul>\n</li>\n<li data-list-item-id=\"e38b987dd9795d75e3a8e79d10b10f4e9\">Click <strong>Upload</strong> and select your CSV file of SMS subscribers.</li>\n<li data-list-item-id=\"ed6ad9f24427a0575e257a737f0a9d0c5\">Click <strong>Next</strong>. </li>\n<li data-list-item-id=\"ecacfbcc833a9c23eabfca285893455b3\">Map each column from your CSV to an appropriate property in Klaviyo, then click <strong>Next</strong>.</li>\n<li data-list-item-id=\"ed8e4d0080f4e8b1afe6a7778939a220a\">If your CSV includes columns indicating the type of consent or include the consent timestamp, the import will add the consent accordingly. <ul><li data-list-item-id=\"e382e33947f174303e2629af7661f1570\">Example: if you include an<em> SMS Transactional Consent</em> column (but not one for marketing consent).<ul>\n<li data-list-item-id=\"ef517975e286bda1202c7587d9c1383af\"> Profiles marked as “Subscribe” are imported with only SMS transactional consent. </li>\n<li data-list-item-id=\"e587950031e3d210c9560949f388342da\">All other profiles (those marked as “Unsubscribed” or “Never subscribed”) are imported without consent. </li>\n</ul>\n</li></ul>\n</li>\n<li data-list-item-id=\"e5714ac71cd177703d6bba8a2b2a07ae5\">If you don't have a consent timestamp or a column indicating consent (e.g., <em>SMS Marketing Consent</em>), you’ll see the following: <ul>\n<li data-list-item-id=\"e60ae01a2efbf9a131224989605b0d3e5\">Under <em>Did these contacts subscribe to messaging</em>, select <strong>Yes</strong> to add consent.<br><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/34691454056859\" width=\"624\" height=\"301\">\n</li>\n<li data-list-item-id=\"e8066f6e06e376a1fa4e29d08f7d2ea6b\">Check the boxes for the types of consent to apply: <strong>Email</strong>, <strong>SMS</strong>, or both.<br><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/34691454061083\" width=\"624\" height=\"491\">\n</li>\n<li data-list-item-id=\"e2d7d057fc8c943362d550838dc1ad3cf\">Choose the type of consent to apply. The option you pick depends on the consent types in your CSV: <ul>\n<li data-list-item-id=\"eb7b5f4154320cd652fca24e3bdeda16c\">If every profile is consented only to SMS transactional, choose <strong>Only transactional messages</strong>. </li>\n<li data-list-item-id=\"e4f79b22f223ff5fc96fb87e7a8e2d971\">If every profile should be consented to both SMS marketing and transactional, choose <strong>Marketing and transactional messages</strong>.</li>\n<li data-list-item-id=\"ebf71b7ff55b809a7604d8160ecafd3ee\">To import only SMS marketing, you must format your CSV so that it includes a column labeled <em>SMS Marketing consent</em>, then re-upload the CSV.  </li>\n</ul>\n</li>\n</ul>\n</li>\n<li data-list-item-id=\"ef9975d930eeae7ded9316c3653117e42\">When ready to proceed, click <strong>Import</strong>. </li>\n</ol><p>The import process can take up to a couple of hours to complete.</p><p>Once all the numbers are imported, Klaviyo will either create a new profile or associate the data to an existing profile. For instance, if you import a phone-number-only CSV, Klaviyo will look for profiles with the same phone number, update that profile's SMS consent status, and include any other profile properties attributed to that contact. </p><div class=\"bs-callout bs-callout-default\"><p>If the phone number provided is invalid, the row will be skipped and the profile will not be imported, even if a valid e-mail address is included in a different column.</p></div><h2 id=\"h_01JNPF254E4FW8TKM60FB4SMVD\">Bulk remove SMS consent </h2><p>If you want to remove consent for profiles, you can use essentially the same import process. </p><p>The only differences are that you must:</p><ul>\n<li data-list-item-id=\"e510a6e264ff86a17d4c1602df908612b\">Have a column for <em>SMS Marketing Consent</em> or <em>SMS Transactional Consent</em> (depending on the type of consent you want to remove). </li>\n<li data-list-item-id=\"e813e13f21cce5254b136af259343c2d4\">Add “Unsubscribed” for each profile within that column. <ul><li data-list-item-id=\"ebb9587a2a394cf6bbec389d4ff9d8049\">Note that you cannot reset profiles in bulk to “Never Subscribed.” </li></ul>\n</li>\n</ul><h2 id=\"h_01HMEBQTXGP3ZJY58GFQ75Y6JZ\">Additional resources</h2><ul>\n<li data-list-item-id=\"e0e96c02be0b3128c6a8cdbe6d7123a28\"><a href=\"https://help.klaviyo.com/hc/en-us/articles/5306587861531\" target=\"_blank\" rel=\"noopener noreferrer\">Indicate the country for an SMS CSV</a></li>\n<li data-list-item-id=\"eeb4528b23bf7c16b8e975608b5a5d47f\"><a href=\"https://help.klaviyo.com/hc/en-us/articles/5302764979611\" target=\"_blank\" rel=\"noopener noreferrer\">Remove opted-out SMS profiles from CSVs</a></li>\n<li data-list-item-id=\"e29e90b3a37c999e6f9aba9c7d3319ff2\"><a href=\"https://help.klaviyo.com/hc/en-us/articles/5227452906523\" target=\"_self\">Bulk unsubscribe SMS contacts</a></li>\n</ul>",
+    "user_segment_ids": []
+  },
+  "normalized": {
+    "id": "360035428731",
+    "title": "How to upload a list of SMS contacts",
+    "source_url": "https://help.klaviyo.com/hc/en-us/articles/360035428731-How-to-upload-a-list-of-SMS-contacts",
+    "section_id": 49375804348443,
+    "section": "Import SMS contacts",
+    "category_id": 29173800271259,
+    "category": "SMS",
+    "category_slug": "sms-whatsapp",
+    "klaviyo_updated": "2026-04-21T13:54:46Z",
+    "created_at": "2019-10-22T16:03:03Z",
+    "draft": false,
+    "promoted": false,
+    "position": 0,
+    "label_names": []
+  },
+  "files": {
+    "body_html": "_source/articles/360035428731.body.html",
+    "rendered_html": "_source/rendered/360035428731.html"
+  },
+  "assets": {
+    "api_body": {
+      "images": [
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28711677302683",
+          "alt": "Indicating the country via a country code",
+          "width": "207",
+          "height": "272"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28711698750619",
+          "alt": "Example with country column.png",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://fast.wistia.com/embed/medias/ld30gq77eh/swatch",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/34691454053147",
+          "alt": "",
+          "width": "340",
+          "height": "423"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/34691454056859",
+          "alt": "",
+          "width": "624",
+          "height": "301"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/34691454061083",
+          "alt": "",
+          "width": "624",
+          "height": "491"
+        }
+      ],
+      "links": [
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4404274419355",
+          "text": "Set up SMS"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4402914866843",
+          "text": "where Klaviyo SMS is available"
+        },
+        {
+          "href": "https://help.postscript.io/hc/en-us/articles/1260804630310-",
+          "text": "their help doc on exporting subscriber data"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/39598076123547",
+          "text": "Yotpo Email & SMS Migration integration"
+        },
+        {
+          "href": "https://docs.google.com/spreadsheets/d/1cqJb4hH4Kbv0xw_yf14vKS4CyKlzDNY7toG_nqUrhPI/edit?gid=0#gid=0",
+          "text": "template"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/5306587861531",
+          "text": "instructions on indicating the SMS subscriber’s country"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/acceptable_date_and_timestamp_formats_for_profile_and_event_properties",
+          "text": "accepted date/time format"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/5306587861531",
+          "text": "Indicate the country for an SMS CSV"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/5302764979611",
+          "text": "Remove opted-out SMS profiles from CSVs"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/5227452906523",
+          "text": "Bulk unsubscribe SMS contacts"
+        }
+      ],
+      "headings": [
+        {
+          "level": 2,
+          "id": "h_01JNPF254DVXJ1R78TKEC96EXG",
+          "text": "Before you begin"
+        },
+        {
+          "level": 3,
+          "id": "h_01JNPF254D3MX04RA7AF19TP77",
+          "text": "General requirements to import SMS consent"
+        },
+        {
+          "level": 2,
+          "id": "h_01JSMH4K2KVKNTZDERRVGGBPRS",
+          "text": "Obtain your list of contacts"
+        },
+        {
+          "level": 3,
+          "id": "h_01JSMJE0T5YBB86C4TNBZ9H1XF",
+          "text": "Attentive"
+        },
+        {
+          "level": 3,
+          "id": "h_01JSMJE7B0YAS8A5RQGX06P702",
+          "text": "Emotive"
+        },
+        {
+          "level": 3,
+          "id": "h_01JSMJEBXGYESVQYRGB2A5EVRE",
+          "text": "Postscript"
+        },
+        {
+          "level": 3,
+          "id": "h_01JSMJEH40SHFRMYK2N4840K6T",
+          "text": "Retention Rocket"
+        },
+        {
+          "level": 3,
+          "id": "h_01JSMJEN533XHSVP7ADTXBSKAG",
+          "text": "Yotpo / SMSBump"
+        },
+        {
+          "level": 2,
+          "id": "h_01JNPF254DMC63DXHXG38V15WT",
+          "text": "Prepare your CSV for importing"
+        },
+        {
+          "level": 3,
+          "id": "h_01JNPF254DFXQC04S05WQKDJSR",
+          "text": "Include a phone number as the first or second column"
+        },
+        {
+          "level": 3,
+          "id": "h_01JNPF254EE0HQYTNW1033RDSZ",
+          "text": "Indicate the SMS subscriber’s country"
+        },
+        {
+          "level": 3,
+          "id": "h_01JNPF254EV600CEKG0GG4XDDQ",
+          "text": "Indicate if consent is for SMS marketing or transactional"
+        },
+        {
+          "level": 3,
+          "id": "h_01JNPF254ENNHKBBSTNACN44KY",
+          "text": "Add consent status (subscribe, unsubscribed, never subscribed)"
+        },
+        {
+          "level": 3,
+          "id": "h_01JNPF254EYJ74N8GMM008ZGFJ",
+          "text": "Optional: add consent timestamp"
+        },
+        {
+          "level": 3,
+          "id": "h_01JNPF254ERXDQBYMKKN7DCJQ0",
+          "text": "Recommended information"
+        },
+        {
+          "level": 2,
+          "id": "h_01JNPF254EE76PRHW8FSBDGQMN",
+          "text": "Import a list of phone numbers with SMS consent"
+        },
+        {
+          "level": 2,
+          "id": "h_01JNPF254E4FW8TKM60FB4SMVD",
+          "text": "Bulk remove SMS consent"
+        },
+        {
+          "level": 2,
+          "id": "h_01HMEBQTXGP3ZJY58GFQ75Y6JZ",
+          "text": "Additional resources"
+        }
+      ]
+    },
+    "rendered_page": {
+      "images": [
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/7ff492c2b417b7ecfe572f839a8a81398693c1f7-1920x1080.webp",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/a7f3dd54abff980f666e4fd1d5630aab2cf13f9e-292x384.png",
+          "alt": "Indicating the country via a country code",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/b4fa3d97926b7de4e4ca7d7b4d5c6d2ffe3e3581-488x378.png",
+          "alt": "Example with country column.png",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://fast.wistia.com/embed/medias/ld30gq77eh/swatch",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/68b9eb0cfbbedee2ae4a6a59196bad23736c5370-552x686.png?w=340",
+          "alt": "",
+          "width": "340",
+          "height": "423"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/f92c94e3ffec83aa69939fef9901da275cf439ed-1008x486.png?w=624",
+          "alt": "",
+          "width": "624",
+          "height": "301"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/55e9272d4544bc5b5dd8dfdea139b45aefc0081b-1004x790.png?w=624",
+          "alt": "",
+          "width": "624",
+          "height": "491"
+        }
+      ],
+      "links": [
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360035428731-How-to-upload-a-list-of-SMS-contacts#site-content",
+          "text": "Skip to main content"
+        },
+        {
+          "href": "https://www.klaviyo.com",
+          "text": "Home"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center"
+        },
+        {
+          "href": "https://www.klaviyo.com/enterprise",
+          "text": "Enterprise"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Partners"
+        },
+        {
+          "href": "https://www.klaviyo.com/careers",
+          "text": "Careers"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": "Log in"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": ""
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center Find step-by-step instructions and troubleshooting solutions in our knowledge base."
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000032731",
+          "text": "Integrations"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000312411",
+          "text": "Flows"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867867",
+          "text": "Audience"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867667",
+          "text": "Campaigns"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/360000190711",
+          "text": "Sign-up forms"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000873988",
+          "text": "Deliverability & compliance"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/29173800271259",
+          "text": "SMS"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/16638219724187",
+          "text": "Reviews"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/18073014919195",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/34141283979931",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/37659126754075",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/33948021740315",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/39746685522331",
+          "text": "WhatsApp"
+        },
+        {
+          "href": "https://academy.klaviyo.com",
+          "text": "Klaviyo Academy Expert training and education to help you succeed with Klaviyo, and beyond."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Quick+guide&resource=academy_courses",
+          "text": "Quick guides Learn marketing strategies and concepts in 15 minutes or less."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Course&resource=academy_courses",
+          "text": "Courses Master key marketing topics through structured lessons and exams."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/best-practices",
+          "text": "Best practices Discover top product and marketing strategies for your business."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/learning-paths",
+          "text": "Learning paths Complete curated learning journeys tailored to your marketing goals."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses",
+          "text": "Explore all resources"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Live+training&resource=academy_courses",
+          "text": "Live trainings Build confidence through hands-on interactive workshops and thought-provoking strategy sessions."
+        },
+        {
+          "href": "https://www.bigmarker.com/klaviyo-customer-education/Office-hours-Getting-started-with-Klaviyo",
+          "text": "Live office hours Join a strategic discussion where you can ask questions and get answers in real-time."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/private-live-training",
+          "text": "1:1 Live training Book a private training session with an expert to jumpstart your platform knowledge and confidence."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/credentials",
+          "text": "Klaviyo credentials Dig deeper into select topics and showcase your expertise with a final exam to earn a certificate and digital badge."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/certificates/klaviyo-practitioner-certificate",
+          "text": "Klaviyo practitioner certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/deliverability-certificate",
+          "text": "Deliverability certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/developer-certificate",
+          "text": "Klaviyo developer certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses&select=Certificate",
+          "text": "See all certificates"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Klaviyo Community Join our thriving community network to connect with brands like yours—online and in person."
+        },
+        {
+          "href": "https://community.klaviyo.com/topic/new",
+          "text": "Ask a question Post a question and get thoughtful answers from Klaviyo powerusers."
+        },
+        {
+          "href": "https://community.klaviyo.com/p/roadmap",
+          "text": "Product roadmap"
+        },
+        {
+          "href": "https://community.klaviyo.com/search/activity/recent",
+          "text": "Recent threads"
+        },
+        {
+          "href": "https://community.klaviyo.com/p/champions",
+          "text": "Meet the Champions"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups",
+          "text": "Browse all groups Your people are waiting. New ideas and connections are a click away."
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/developer-group-64",
+          "text": "Developer group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/entrepreneur-user-group-118",
+          "text": "Entrepreneur group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/woo-user-group-87",
+          "text": "WooCommerce group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/new-york-meetup-chapter-82",
+          "text": "New York City"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/los-angeles-meetup-chapter-83",
+          "text": "Los Angeles"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/austin-meetup-chapter-85",
+          "text": "Austin"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/san-diego-meetup-chapter-86",
+          "text": "San Diego"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/amsterdam-meetup-chapter-84",
+          "text": "Amsterdam"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Klaviyo Developers Access API documentation and developer guides to help you build with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/get_started",
+          "text": "Get started Access key resources and a step-by-step checklist for how to start developing with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/build_your_integration",
+          "text": "Grow your app's reach Learn how to join our ecosystem and get your app listed on our marketplace."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/developer-tools",
+          "text": "Developer tools Generate sample data, monitor your API usage, and access our Postman collections."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/reference/api_overview",
+          "text": "API reference Browse our full catalog of API docs."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/changelog_",
+          "text": "Changelog"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/api_versioning_and_deprecation_policy",
+          "text": "Versioning & deprecation policy"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/rate_limits_and_error_handling",
+          "text": "Rate limits & error handling"
+        },
+        {
+          "href": "https://youtube.com/playlist?list=PLHkNfHgtxcUanrkMnKPdkRzuWU7MGv_xM&si=pkG-KH7IT_TUHOGC",
+          "text": "API tutorials on YouTube Subscribe to our Klaviyo API Tutorials playlist for easy access to step-by-step developer walkthroughs."
+        },
+        {
+          "href": "https://www.klaviyo.com/contact-us",
+          "text": "Contact us"
+        },
+        {
+          "href": "https://www.klaviyo.com/sign-up",
+          "text": "Sign up"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": "Search"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360035428731",
+          "text": "United States - EN"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/de-de/articles/360035428731",
+          "text": "Deutschland - DE"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-es/articles/360035428731",
+          "text": "España - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-mx/articles/360035428731",
+          "text": "México - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/fr-fr/articles/360035428731",
+          "text": "France - FR"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/it-it/articles/360035428731",
+          "text": "Italia - IT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/ko-kr/articles/360035428731",
+          "text": "한국 - KO"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/nl-nl/articles/360035428731",
+          "text": "Nederland - NL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pl-pl/articles/360035428731",
+          "text": "Polska - PL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pt-br/articles/360035428731",
+          "text": "Brasil - PT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/sv-se/articles/360035428731",
+          "text": "Sverige - SV"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/29514293664539",
+          "text": "Getting started with SMS"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/49375804348443",
+          "text": "Import SMS contacts"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360035428731-How-to-upload-a-list-of-SMS-contacts#h_01JNPF254DVXJ1R78TKEC96EXG",
+          "text": "Before you begin"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360035428731-How-to-upload-a-list-of-SMS-contacts#h_01JSMH4K2KVKNTZDERRVGGBPRS",
+          "text": "Obtain your list of contacts"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360035428731-How-to-upload-a-list-of-SMS-contacts#h_01JNPF254DMC63DXHXG38V15WT",
+          "text": "Prepare your CSV for importing"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360035428731-How-to-upload-a-list-of-SMS-contacts#h_01JNPF254EE76PRHW8FSBDGQMN",
+          "text": "Import a list of phone numbers with SMS consent"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360035428731-How-to-upload-a-list-of-SMS-contacts#h_01JNPF254E4FW8TKM60FB4SMVD",
+          "text": "Bulk remove SMS consent"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360035428731-How-to-upload-a-list-of-SMS-contacts#additional-resources",
+          "text": "Additional resources"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4404274419355",
+          "text": "Set up SMS"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4402914866843",
+          "text": "where Klaviyo SMS is available"
+        },
+        {
+          "href": "https://help.postscript.io/hc/en-us/articles/1260804630310-",
+          "text": "their help doc on exporting subscriber data"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/39598076123547",
+          "text": "Yotpo Email & SMS Migration integration"
+        },
+        {
+          "href": "https://docs.google.com/spreadsheets/d/1cqJb4hH4Kbv0xw_yf14vKS4CyKlzDNY7toG_nqUrhPI/edit?gid=0#gid=0",
+          "text": "template"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/5306587861531",
+          "text": "instructions on indicating the SMS subscriber’s country"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/acceptable_date_and_timestamp_formats_for_profile_and_event_properties",
+          "text": "accepted date/time format"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/5306587861531",
+          "text": "How to indicate the country for an SMS import"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115001002272",
+          "text": "Learn how to contact support"
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": ""
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": "Visit Community"
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": ""
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": "Hire a partner"
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/about",
+          "text": "About Klaviyo"
+        },
+        {
+          "href": "https://www.klaviyo.com/newsroom",
+          "text": "Newsroom"
+        },
+        {
+          "href": "https://investors.klaviyo.com/overview/default.aspx",
+          "text": "Investor relations"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Agency and tech partners"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Developers"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/retail",
+          "text": "Retail and ecommerce"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/restaurants",
+          "text": "Restaurant marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/wellness",
+          "text": "Wellness"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform",
+          "text": "B2C CRM overview"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai",
+          "text": "Klaviyo AI (K:AI)"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/marketing-automation",
+          "text": "Klaviyo Marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-service",
+          "text": "Klaviyo Service"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/analytics",
+          "text": "Klaviyo Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-data-platform",
+          "text": "Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare",
+          "text": "Klaviyo vs. Klaviyo alternatives"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-mailchimp",
+          "text": "Klaviyo vs. Mailchimp"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-postscript",
+          "text": "Klaviyo vs. Postscript"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-attentive",
+          "text": "Klaviyo vs. Attentive"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-salesforce-marketing-cloud",
+          "text": "Klaviyo vs. Salesforce"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-listrak",
+          "text": "Klaviyo vs. Listrak"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/omnichannel",
+          "text": "Omnichannel marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/email-marketing",
+          "text": "Email marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing",
+          "text": "SMS marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing/rcs",
+          "text": "RCS for Business"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/mobile-app-marketing",
+          "text": "Mobile app marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/whatsapp",
+          "text": "WhatsApp marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/social",
+          "text": "Social marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources",
+          "text": "Marketing resources"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources/marketing-campaign-calendar",
+          "text": "Marketing campaign calendar"
+        },
+        {
+          "href": "https://www.klaviyo.com/glossary",
+          "text": "Marketing glossary"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/email-subject-line-generator",
+          "text": "Subject line generator"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/roi-calculator",
+          "text": "ROI calculator"
+        },
+        {
+          "href": "https://www.klaviyo.com/customers",
+          "text": "Case studies"
+        },
+        {
+          "href": "https://www.klaviyo.com/composer",
+          "text": "Composer Beta"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/marketing-agent",
+          "text": "Marketing Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/customer-agent",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/customer-experience-hub",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/helpdesk",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/marketing-analytics",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/advanced-cdp",
+          "text": "Advanced Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/web-forms",
+          "text": "Web forms"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/email-templates",
+          "text": "Email templates"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/portfolio",
+          "text": "Portfolio"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform-integrations",
+          "text": "Apps and Integrations"
+        },
+        {
+          "href": "https://www.klaviyo.com/features",
+          "text": "Features"
+        },
+        {
+          "href": "https://www.klaviyo.com/whats-new",
+          "text": "What's new"
+        },
+        {
+          "href": "https://www.klaviyo.com/events",
+          "text": "Events"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help Center"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us",
+          "text": "Academy"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Community"
+        },
+        {
+          "href": "https://www.facebook.com/Klaviyo/",
+          "text": "Facebook"
+        },
+        {
+          "href": "https://twitter.com/klaviyo/",
+          "text": "Twitter"
+        },
+        {
+          "href": "https://www.linkedin.com/company/klaviyo/",
+          "text": "LinkedIn"
+        },
+        {
+          "href": "https://www.instagram.com/klaviyo/",
+          "text": "Instagram"
+        },
+        {
+          "href": "https://www.klaviyo.com/sitemap",
+          "text": "Site Map"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal",
+          "text": "Terms and Privacy"
+        },
+        {
+          "href": "https://www.klaviyo.com/security",
+          "text": "Security"
+        },
+        {
+          "href": "https://www.klaviyo.com/trust",
+          "text": "Trust"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal/intellectual-property-notices",
+          "text": "Intellectual Property Notices"
+        }
+      ],
+      "headings": [
+        {
+          "level": 1,
+          "id": "",
+          "text": "How to upload a list of SMS contacts"
+        },
+        {
+          "level": 2,
+          "id": "h_01JNPF254DVXJ1R78TKEC96EXG",
+          "text": "Before you begin"
+        },
+        {
+          "level": 3,
+          "id": "h_01JNPF254D3MX04RA7AF19TP77",
+          "text": "General requirements to import SMS consent"
+        },
+        {
+          "level": 2,
+          "id": "h_01JSMH4K2KVKNTZDERRVGGBPRS",
+          "text": "Obtain your list of contacts"
+        },
+        {
+          "level": 2,
+          "id": "h_01JNPF254DMC63DXHXG38V15WT",
+          "text": "Prepare your CSV for importing"
+        },
+        {
+          "level": 2,
+          "id": "h_01JNPF254EE76PRHW8FSBDGQMN",
+          "text": "Import a list of phone numbers with SMS consent"
+        },
+        {
+          "level": 2,
+          "id": "h_01JNPF254E4FW8TKM60FB4SMVD",
+          "text": "Bulk remove SMS consent"
+        },
+        {
+          "level": 2,
+          "id": "additional-resources",
+          "text": "Additional resources"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "Explore more from Klaviyo"
+        }
+      ]
+    }
+  },
+  "rendered_page": {
+    "status": "fetched",
+    "error": ""
+  }
+}

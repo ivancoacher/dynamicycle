@@ -1,0 +1,196 @@
+<h2 id="01FJZ2C75XRVYVGV97Q7GWRDRN">You will learn</h2>
+<p>Learn how to use dynamic table blocks to add product and other event information to your metric-triggered flows. In this article, you'll learn how to create a dynamic block using the example of an abandoned cart reminder showing the products that were left behind.</p>
+<p>If you use one of Klaviyo’s prebuilt ecommerce integrations (e.g., Shopify, BigCommerce, Magento, or WooCommerce), you don’t need to build these blocks manually. Instead, <a href="https://help.klaviyo.com/hc/en-us/articles/115002774932#klaviyo-s-built-in-flows3">use the flow library</a> to find pre-built, fully functional flow emails to use as templates. </p>
+<p>Within a metric-triggered flow, you can personalize the content of your emails based on the event that triggers the flow. For example, if someone starts a checkout, you can include product images and prices within an abandoned cart email to encourage recipients to return to their cart and finish their purchase. The dynamic table block will automatically repeat with the information specified for each item in the cart.</p>
+<p></p>
+<p>
+<script src="https://fast.wistia.com/embed/medias/m3tjywjv11.jsonp" async="async"></script>
+<script src="https://fast.wistia.com/assets/external/E-v1.js" async="async"></script>
+</p>
+<div class="wistia_responsive_padding" style="padding: 56.25% 0 0 0; position: relative;">
+<div class="wistia_responsive_wrapper" style="height: 100%; left: 0; position: absolute; top: 0; width: 100%;">
+<div class="wistia_embed wistia_async_m3tjywjv11 seo=false videoFoam=true" style="height: 100%; position: relative; width: 100%;">
+<div class="wistia_swatch" style="height: 100%; left: 0; opacity: 0; overflow: hidden; position: absolute; top: 0; transition: opacity 200ms; width: 100%;"><img style="filter: blur(5px); height: 100%; object-fit: contain; width: 100%;" src="https://fast.wistia.com/embed/medias/m3tjywjv11/swatch" alt="" aria-hidden="true"></div>
+</div>
+</div>
+</div>
+<h2 id="01FJZ2C75XA7GB2AY3WP81N3CV">Before you begin</h2>
+<p>Before you can jump in, make sure that you have event data to use. Navigate to <strong>Analytics &gt; Metrics</strong> to make sure the event exists in Klaviyo.</p>
+<p>If you are unfamiliar with using event or profile data in emails, check out our <a href="https://help.klaviyo.com/hc/en-us/articles/4408802648731">message personalization reference</a> as a first step. </p>
+<p>It will also be helpful to understand <a href="https://help.klaviyo.com/hc/en-us/articles/115005237648-About-Data-Types">data types in Klaviyo</a>, particularly <strong>lists</strong> (i.e., arrays). An array is a way to store multiple pieces of data that are structured the same way. For example, a customer’s cart items are stored as an array within a <em>Checkout Started</em> event. The <em>items</em> array contains one entry per item ordered, and each entry contains the details for that item (e.g., item name, image URL, quantity, size, color, etc.). </p>
+<h2 id="h_01J3JJRY7VVDCG3HXFNDTMKBKQ">What types of flows can use dynamic table blocks? </h2>
+<p>Dynamic table blocks contain information about one or more products that a customer interacted with in some way (e.g., purchased or left in their cart). These table blocks are useful for events that might contain different numbers of products, depending on a customer action. Dynamic table blocks are useful for flows triggered by these events: </p>
+<ul>
+<li>Placed order (order confirmation flow)</li>
+<li>Started checkout (abandoned checkout flow) </li>
+<li>Fulfilled order (shipping confirmation flow) </li>
+<li>Cancelled order (cancellation confirmation) </li>
+<li>Any other events that contain a list of one or more products<br>
+<p>Dynamic table blocks are <strong>not</strong> useful if your event always contains a single product. The events below require static table blocks instead. </p>
+</li>
+<li>Added to cart (abandoned checkout flow)</li>
+<li>Viewed product (browse abandonment flow) </li>
+</ul>
+<p>Learn how to create a <a href="#h_01J3JJSKQ3AD2SVKG4N26Z1R6C">static table block for single-product events</a>. </p>
+<h2 id="01FJZ2C75YES3QPFRFGRXJ8JEX">1. Create your flow</h2>
+<p>Start by creating your flow:</p>
+<ol>
+<li>Navigate to the <strong>Flows</strong> tab in Klaviyo.</li>
+<li>Click <strong>Create flow</strong>. </li>
+<li>Click <strong>Build your own</strong>. </li>
+<li>Name your flow and click <strong>Create flow</strong>. </li>
+<li>Under <em>Select a trigger</em>, click <strong>Your metrics</strong>. </li>
+<li>Select which integration your trigger metric is sent from (e.g., Shopify).</li>
+<li>Choose the event that should trigger your flow. In this example, we'll use the<em> Checkout Started</em> event. This ensures that we have access to the event data necessary to construct an abandoned cart block.</li>
+<li>Click <strong>Done</strong>. </li>
+<li>Drag and drop an <em>Email</em> action into the flow.</li>
+</ol>
+<h2 id="01FJZ2C75YR4KDEARBXYYVW6EZ">2. Add a dynamic table to your flow email</h2>
+<p>Next, add a dynamic table to your flow email:</p>
+<ol>
+<li>Click the email block you added to your flow in the last section. </li>
+<li>Next to <em>Template</em>, click <strong>Select template</strong>. </li>
+<li>Choose a template to use as your base.</li>
+<li>Drag a table block into your email.</li>
+<li>Click <strong>Styles &gt;</strong><strong>Dynamic</strong> to convert the table into a dynamic block. You’ll see 2 fields appear: <em>Row Collection</em> and <em>Row alias, </em>which you will fill in in step 3 and 4.</li>
+<li>Click back to the <strong>Content</strong> tab to adjust your column types.</li>
+<li>Generally, an abandoned cart message shows images of the abandoned items on the left and details about the item on the right. Click on the left or right row selector, then click <strong>Text</strong> or <strong>Image</strong> to change the cell type.<br>
+</li>
+</ol>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/34449970537755" alt="" width="287" height="358"></p>
+<h2 id="01FJZ2C75YNWEST3ZQF7T83HHF">3. Identify your row collection</h2>
+<p>In this step, you'll add the name of the array you plan to iterate over to the <em>Row collection</em> field. To find the name of your array:</p>
+<ol>
+<li>Click <strong>Preview &amp; test</strong>.</li>
+<li>Scroll through the preview data for your event until you find an array that contains the information you need. <br>
+If no one has completed the flow’s trigger action yet, there will be no preview data available for the flow. You can navigate to your site to take the action (e.g., add items to your cart and start a checkout), and then your event will display within Klaviyo’s preview options.<br>
+<br>
+In this example, there are 2 arrays that store item information: <br>
+You’ll want to use the more detailed array, <em>line_items</em>, since it contains the detailed information needed to display in the repeating table block. To find the appropriate variable to set in the <em>Row collection</em> field, select two variables within the first section of the array and copy them. In this example, copy the tags for <em>variant_price</em> and <em>title</em>. Here are the two tags from this example: <code>{{ event.extra.line_items.0.variant_price }}{{ event.extra.line_items.0.title }}</code><br>
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/34449970543771" alt="" width="362" height="239">
+<ul>
+<ul>
+<li>
+<em>Items</em><br>
+A top-level array containing a simple list of each item’s name.</li>
+<li>
+<em>line_items</em>,<br>
+An array nested within the <em>extra</em> array containing more detail, including each item’s title, price, SKU, and image URL.<br>
+</li>
+</ul>
+</ul>
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28713383352859" alt="Two item subsections in event data" width="310" height="494">
+</li>
+<li>Ignore the curly brackets and look at the variables within them. Note that the beginning of both variables are the same: <code>event.extra.line_items.0</code>. </li>
+<li>Use everything up to (but excluding) the dot and the number at the end of this portion of the variable as your <em>Row collection</em>. In this example, the appropriate setting for the <em>Row collection</em> field is <code>event.extra.line_items</code>.</li>
+</ol>
+<h3 id="h_01JBHX4ZQC6EM6MWY8V96C7625">Set fallback content (optional)</h3>
+<p>Fallback content will appear if there is no data in the row collection you select. This is only necessary when you build a table based on data that does not consistently appear within the trigger event. To add fallback content, toggle on the <em>Fallback content</em> option and add content (i.e., text or an image) to the field that appears. </p>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/30543874467611" alt="The option to add fallback content" width="325" height="395"></p>
+<h2 id="01FJZ2C75Y86MC11R6K6B9W74H">4. Choose a row alias</h2>
+<p>Your row alias can be any text you’d like to use (with no special characters or spaces). You’ll use this alias within your dynamic table block to identify variables that should be pulled from the array you selected above. It’s helpful to choose a simple but descriptive alias, so it’s easy to remember. </p>
+<p>In this example, the dynamic table block repeats over a list of items in an abandoned cart, so <em>item</em> is a good alias to use. If your block repeats over a list of blog posts, then you could use <em>post</em> as your alias.</p>
+<p>You can use any alias you’d like; just make sure to consistently use that alias in variables from your array (as outlined in the following steps). </p>
+<p class="wysiwyg-text-align-center"><img src="https://klaviyo.zendesk.com/hc/article_attachments/34449986488987" alt="" width="405" height="590"></p>
+<p>Once you’ve filled out the <em>Row Collection</em> and <em>Row Alias</em> fields, you’re ready to start building your table. </p>
+<h2 id="01FJZ2C75YSBRKE8DN87SG9R44">5. Add dynamic product details</h2>
+<p>After the data source is set up, you can use tags to add text in your email. Since this email is for an abandoned cart flow, it’s important to show the name of the product left behind, along with other details like a price and link to purchase.</p>
+<p>To input the product title in your block:</p>
+<ol>
+<li>Navigate to one of the table's columns. If you want an image in the first column and the text in the second, click on the column selector on the right of the block’s <strong>Content</strong> section.</li>
+<li>Paste in the full event variable from the preview modal (e.g., <code>{{ event.extra.line_items.0.title  }}</code>).</li>
+<li>Replace the row collection within the variable (i.e., the text you used for the <em>Row collection</em>) and the following dot and number with the alias selected in the last step (e.g., <em>item</em>), keeping the surrounding brackets. For this example, <code>{{ event.extra.line_items.0.title  }}</code> becomes <code>{{ item.title }}</code>.<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/34449970550939" alt="" width="345" height="190">
+</li>
+<li>Preview the email to ensure that the title shows up. If it doesn’t appear, double check the spelling, capitalization, and formatting of the text, as well as your settings in the <strong>Styles</strong> tab, to ensure there are no errors.</li>
+</ol>
+<p>Repeat the same steps to add in additional item details. </p>
+<h3 id="01FJZ2C75YC0M6W160FCT5DCET">Hyperlinking a product title</h3>
+<p>To add a hyperlink to the product title: </p>
+<ol>
+<li>Find the product URL variable in your event details.</li>
+<li>Replace the row collection and number with your row alias, as with the variable above (e.g., <em>{{ event.extra.line_items.url }}</em> becomes <em>{{ item.url }}</em>). </li>
+<li>Highlight the full variable for the item’s title (e.g., <code>{{ item.title }}</code>). </li>
+<li>Click the link icon and paste your URL variable into the <em>URL</em> field.</li>
+</ol>
+<div class="accordion accordion--default">
+<div class="accordion__item">
+<div class="accordion__item-title"><strong>Common product URL variables by integration</strong></div>
+<div class="accordion__item-content">
+<p><strong>BigCommerce</strong><br>
+Event variable: {{ event.extra.items.0.product.url }}<br>
+Final tag: {{ organization.url }}{{ item.product.url }}</p>
+<p><strong>Magento 1</strong><br>
+Event variable: {{ event.extra.line_items.0.product.key }}<br>
+Final tag: {{ organization.url }}{{ item.product.key }}</p>
+<p><strong>Magento 2</strong><br>
+Event variable: {{ event.Items.0.Product.FullURL }}<br>
+Final tag: {{ item.Product.FullURL }}</p>
+<p><strong>Shopify</strong><br>
+Event variable: {{ event.extra.line_items.0.product.handle }}<br>
+Final tag: {{ organization.url }}products/{{ item.product.handle }}</p>
+<p><strong>WooCommerce </strong><br>
+Event variable: {{ event.extra.Items.0.URL }}<br>
+Final tag: {{ item.URL }}     </p>
+</div>
+</div>
+</div>
+<h3 id="01FJZ2C75YPVB6865MCJSG3T3G">Considerations for currency variables</h3>
+<p>If your item price is passed as a number in your event details (with no currency symbol), use the <code>currency_format</code> tag to apply currency formatting. To apply this tag, replace variable_name in the code below with the full price variable, excluding curly brackets from the original variable: </p>
+<p><code>{% currency_format variable_name %}</code></p>
+<p>So, your final variable might look like this: </p>
+<p><code>{% currency_format item.price %}</code></p>
+<h2 id="01FJZ2C75YEB7AY8H3K8YMQKG3">6. Add an image</h2>
+<p>To insert a dynamic image, find the event variable for the image in the preview modal. Often, this variable is listed under image, img, or src, but it depends on your integration. Here, it is under src: <code>{{ event.extra.line_items.0.product.images.0.src  }}</code>. Apply the same adjustments to this variable as outlined in step five (replacing <code>event.extra.line_items.0</code> with <code>item</code>). This is an event variable array within <code>event.extra.line_items</code>, which holds the images for this specific item.</p>
+<ol>
+<li>Once you have this variable, head to the column where you want to display the image (the left column, in this case).</li>
+<li>Click <strong>Image</strong> under <em>Cell content</em> if it’s currently set to <em>Text</em>.</li>
+<li>Click <strong>Select image</strong>.</li>
+<li>In the <em>Dynamic Image</em> tab, paste your image variable into the <em>Dynamic variable or dynamic URL</em> field.</li>
+<li>Input the customized image event variable, <code>{{ item.product.images.0.src }}</code>.</li>
+<li>Click <strong>Save</strong>.</li>
+<li>Add the product URL variable from step five in the <em>Link address </em>field so the image is clickable.</li>
+<li>Set a max width for the image, starting with 250-300 and adjusting as needed.</li>
+<li>Once you finish making changes, click <strong>Done</strong> and preview your email to make sure it appears as expected. If an image doesn’t appear, check the spelling of the variable against the one in the preview modal.</li>
+</ol>
+<h2 id="01FJZ2C75YNWAKTKS70450NCS7">7. Preview your email</h2>
+<p>After completing the steps above, the email template should look similar to the one below when previewed.</p>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/34449970555547" alt=""></p>
+<p>To see how this would look with dynamic content, and to make sure the links work properly, click <strong>Preview &amp; test</strong>. If there are any errors, check the spelling and structure of your variables, as well as your block's <strong>Styles</strong> tab. </p>
+<p>You can use these same concepts to build out additional dynamic blocks for flows triggered based on different metrics.</p>
+<h2 id="h_01J3JJSKQ3AD2SVKG4N26Z1R6C">Create a static table block for single-product events </h2>
+<p>If an event can only ever contain a single product, use a static table block. For these events, there is no need to set a <em>Row collection</em> or <em>Row alias</em>, and you can use unedited variables directly from your event data. </p>
+<ol>
+<li>Navigate to the <strong>Flows</strong> tab in Klaviyo.</li>
+<li>Click <strong>Create flow</strong>. </li>
+<li>Click <strong>Build your own</strong>. </li>
+<li>Name your flow and click <strong>Create flow</strong>. </li>
+<li>Under <em>Select a trigger</em>, click <strong>Your metrics</strong>. </li>
+<li>Choose a single-product metric, like <em>Viewed product</em> or <em>Added to cart</em>. </li>
+<li>Click <strong>Done</strong>. </li>
+<li>Drag and drop an <em>Email</em> action into the flow.</li>
+<li>Next to <em>Template</em>, click <strong>Select template</strong>. </li>
+<li>Select a template to use as your base.</li>
+<li>Drag a table block into your email.</li>
+<li>By default, the <em>Data</em> field is set to <strong>Static</strong> under <em>Styles</em>; do not change this setting.<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/34449986497051" alt="" width="363" height="332">
+</li>
+<li>Click <strong>Preview &amp; test</strong> to see the variables available for your message. Click the image URL variable to copy it.<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28713383369243" alt="Select an image URL variable" width="325" height="131">
+</li>
+<li>Using the <em>Cell selector</em> and <em>Cell Content</em> fields, set the left cell to use the <strong>Image</strong> cell type.</li>
+<li>Click <strong>Select image</strong>. </li>
+<li>Select <strong>Dynamic Image</strong>. </li>
+<li>Paste the image URL variable you copied into the <em>Dynamic variable or dynamic URL</em> field. </li>
+<li>Click <strong>Save</strong>. </li>
+<li>Set the right cell to use the <strong>Text</strong> cell type. </li>
+<li>Copy any variables you’d like to display (e.g., product title, product price) and paste them into the text cell.<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/34449970567195" alt="" width="330" height="275">
+</li>
+<li>Add additional blocks, like a CTA button to return to their cart, and style the email as desired.</li>
+<li>When you’re finished, click <strong>Exit</strong>.</li>
+</ol>

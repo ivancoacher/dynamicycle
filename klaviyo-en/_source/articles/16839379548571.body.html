@@ -1,0 +1,72 @@
+<h2 id="h_01HGXSN00YSY9EDMEC7Z86W4X5">You will learn</h2>
+<p>Learn how to add push notifications to your abandoned cart flow to diversify the types of communication sent to your customers.</p>
+<h2 id="h_01HGXSN00YJCS26JNMP8AEMFGB">Before you begin</h2>
+<p>Learn <a href="https://help.klaviyo.com/hc/en-us/articles/115002779411-How-to-create-an-abandoned-cart-flow">how to create an abandoned cart flow</a> if you don’t have one set up in your account yet.</p>
+<p>Before you can send push notifications, note that:</p>
+<ul>
+<li>You must <a href="https://help.klaviyo.com/hc/en-us/articles/360023213971">set up push notifications</a> in your Klaviyo account. </li>
+<li>Only app users that consent to notifications will receive push notifications from you. When an app user opts in to receive notifications, they are assigned a token that allows you to target them with push notifications through both campaigns and flows in Klaviyo.</li>
+</ul>
+<h2 id="h_01HGXSN00YJ1BBTM3DTNZ5VDRZ">Add a push notification to your abandoned cart flow</h2>
+<p>Follow these steps to add push to your abandoned cart flow:</p>
+<ol>
+<li>From the main Klaviyo navigation, head to the <strong>Flows</strong> tab.</li>
+<li>Click the name of your abandoned cart flow to open it in the flow builder.</li>
+<li>After the first time delay, add a conditional split with the condition: <em>If someone can or cannot receive marketing &gt;</em> Person<em> cannot receive &gt; mobile push marketing</em>.<br><br>This allows you to keep your existing flow on the left side in the YES path while you add your push notifications to the NO path. With this split, you can send a push notification to those subscribed to push and send a different type of message (e.g., email or SMS) to those who are not subscribed to receive push notifications.<br><img src="https://klaviyo.zendesk.com/hc/article_attachments/29158784347803" alt="Abandoned cart flow with a conditional split that checks if a profile cannot receive push">
+</li>
+<li>In the left sidebar, drag the push notification action into the NO path of your push conditional split.<br><img src="https://klaviyo.zendesk.com/hc/article_attachments/29158784353051" alt="Abandoned cart flow with a push notification message added to the NO path of the split">
+</li>
+<li>Optional: In the sidebar, choose whether you would like to enable/disable <a href="https://help.klaviyo.com/hc/en-us/articles/115002779311">Smart Sending</a> via the <em>Skip recently messaged profiles</em> setting. This setting is disabled by default. We recommend keeping it on for abandoned cart flows.</li>
+<li>Click <strong>Edit</strong> next to <em>Content</em>. Under <em>Type</em>, choose <strong>Standard</strong>.</li>
+<li>Configure the title (optional) and body of the message, such as:<br>“Did you forget something? Click here to return to your cart”<br>“Your cart is about to expire!”</li>
+<li>Optional<strong>: </strong>If you have a static coupon that is usable by all customers, you can include this in your push notification. For dynamic coupons, consider adding an email or SMS to your push notification path, since someone can easily refer back to an SMS or email as opposed to a push notification.<br>In the example below, a customer is notified of their abandoned cart through push and then sent a coupon through email or SMS a few days later. They are then reminded of the coupon through push a few more days later.<br><img src="https://klaviyo.zendesk.com/hc/article_attachments/28722598280859" alt="Example of a flow which first sends a push notification and then sends either an email or SMS."><br>An abandoned cart flow’s filters will remove someone from the flow if they place an order, so if they are still in the flow, you know they haven’t used their coupon. You can add multiple push notifications with delays leading up to the expiration of the coupon, but don’t send a notification every day as this can overwhelm them.</li>
+<li>Select the <strong>Behaviors</strong> tab and select the open action for when the recipient taps the notification. To link a customer back to their cart, choose <strong>Deep link</strong> and enter a URL that links the customer to their cart in your app to the relevant field for either iOS or Android. Whether or not this is possible and the exact URL will depend on the design of your app. Consult your development team if you are unsure about this.<br><img src="https://klaviyo.zendesk.com/hc/article_attachments/36088733830171" width="354" height="273">
+</li>
+<li>Configure the following optional behaviors: 
+<ul>
+<li>
+<strong>Show badge count (iOS only)<br></strong>Show the badge count on the message.</li>
+<li>
+<strong>Play sound (iOS only)</strong><br>Play a sound when the recipient receives the message.</li>
+<li>
+<strong>Custom data</strong><br>Trigger app behaviors via <a href="https://help.klaviyo.com/hc/en-us/articles/34331971195675" target="_blank" rel="noopener noreferrer">key-value pairs</a>.</li>
+</ul>
+</li>
+<li>When you're done with the message settings and content, click <strong>Save &amp; continue</strong>.</li>
+<li>Once you're finished configuring your flow, set your message statuses live.</li>
+</ol>
+<h2 id="h_01HGXSN00Y2DJ03FVJXYW7XRQF">Best practices</h2>
+<h3 id="h_01HGXSN010BVNR7JQQV3K35XYZ">Message content</h3>
+<p>Make sure your push notifications contain relevant and actionable information related to your customer’s cart. Avoid overusing emojis. Multiple repeating emojis are often associated with spam.</p>
+<p>Here are some examples of content to include in your push notification messages:</p>
+<ul>
+<li>Let them know they have an abandoned cart.</li>
+<li>Alert them that their cart is going to expire.</li>
+<li>Remind them to use a coupon.</li>
+</ul>
+<p>If you mention a coupon code in a push notification, make sure that you have included it in an email or SMS first so that the customer can go back and reference it. You can also send it to the profile’s in-app inbox or show it in a banner within the app. </p>
+<h3 id="h_01HGXSN010ZQGGTQKN1KRZJM8W">Message channel diversity</h3>
+<p>Don’t send push notifications at the same time as other types of messages. Subscribers may already have notifications set up for when they have received an email or SMS, so receiving a push notification at the same time can be redundant.</p>
+<p>While push notifications are convenient and helpful, focus on other types of messages such as SMS and email. In an abandoned cart flow, your primary means of communication with your customers will be through email or SMS messages. Unlike with push, SMS and email can include information such as the list of products the customer abandoned.</p>
+<h3 id="h_01HGXSN010FW70484WTBH5NYP0">Separate email, SMS, and push</h3>
+<p>If you are using email, SMS, and push, make sure to have splits that check for push and SMS consent individually while making email the default message type. See the example below:</p>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/28722598283547" alt="Example flow which has conditional splits that check for push and SMS consent respectively."></p>
+<h3 id="h_01HGXSN011ZBWJVPW523ST1F0E">Split based on website activity</h3>
+<p>You can also use splits to send different messages depending on if someone has visited your website before or has only used your app. This is useful if you want to encourage app-only users to visit your website for exclusive promotions and content.</p>
+<p>In the example below, a conditional split with the condition <em>What someone has done (or not done) &gt; Active on Site &gt; at least once &gt; over all time</em> is used to check if the person in the flow has ever visited your website. If they have not, but they are subscribed to push, then you know that they have only used your app.</p>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/21912959707547" alt="Conditional split configured to check if someone has triggered Active on Site at least once over all time."></p>
+<h3 id="h_01HGXSN011S8TBJXYP70H5ZM39">Split based on custom metrics</h3>
+<p>If you are using custom metrics to track customer activity in your app, you can split based on these metrics in order to send exclusive coupons or promotional information. Consider implementing custom metrics that track activity such as:</p>
+<ul>
+<li>Profile completed</li>
+<li>Location added</li>
+<li>App rated</li>
+</ul>
+<p>Someone completing the actions listed above is engaged with your app. If you want to reserve abandoned cart coupons only for engaged profiles, using customer metrics in a split is a great way to do this.</p>
+<h2 id="h_01HGXSN0114J8GYGBJA6CHGA14">Additional resources</h2>
+<p>Find out more about abandoned carts:</p>
+<ul>
+<li><a href="https://help.klaviyo.com/hc/en-us/articles/9352115400219-How-to-add-SMS-to-your-abandoned-cart-flow">How to add SMS to your abandoned cart flow</a></li>
+<li><a href="https://help.klaviyo.com/hc/en-us/articles/360032334511-How-to-create-and-target-a-segment-of-recent-cart-abandoners">How to create and target a segment of recent cart abandoners</a></li>
+<li>Learn how to <a href="https://help.klaviyo.com/hc/en-us/articles/12278373016603-Troubleshooting-a-metric-triggered-flow">troubleshoot your abandoned cart flow</a>.</li>
+</ul>

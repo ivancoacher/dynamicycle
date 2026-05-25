@@ -1,0 +1,868 @@
+{
+  "captured_at": "2026-05-23T16:17:10Z",
+  "article": {
+    "id": 7423954176283,
+    "url": "https://klaviyo.zendesk.com/api/v2/help_center/en-us/articles/7423954176283.json",
+    "html_url": "https://klaviyo.zendesk.com/hc/en-us/articles/7423954176283-How-to-create-or-clone-a-private-API-key",
+    "author_id": 388325929192,
+    "comments_disabled": true,
+    "draft": false,
+    "promoted": false,
+    "position": 2,
+    "vote_sum": 8,
+    "vote_count": 66,
+    "section_id": 49375463241883,
+    "created_at": "2022-07-18T18:59:52Z",
+    "updated_at": "2026-04-21T13:55:04Z",
+    "name": "How to create or clone a private API key",
+    "title": "How to create or clone a private API key",
+    "source_locale": "en-us",
+    "locale": "en-us",
+    "outdated": false,
+    "outdated_locales": [],
+    "edited_at": "2026-04-17T01:03:30Z",
+    "user_segment_id": null,
+    "permission_group_id": 146372,
+    "content_tag_ids": [],
+    "label_names": [],
+    "body": "<div class=\"bs-callout bs-callout-requirements\">\n<p>You must be an Owner or Admin to create, clone, or delete a private API key.</p>\n</div>\n<h2 id=\"h_01HDKDXQA08SXBH3SN41YES8HC\">You will learn</h2>\n<p>Learn how to create a private API key, which is a unique identifier used for API calls, as well as define a scope. </p>\n<p>Both private API keys and scopes help you protect your and your customers’ data by limiting what third parties can access.</p>\n<h2 id=\"h_01JEEBG3787YFMHZ6KBFTBCV34\">About private API keys and scopes</h2>\n<p>When you make an API call, it allows one software to connect to another. This connection allows a software to request, edit, or add information to the other.  </p>\n<p>A private API key makes sure that this request has the right permissions (i.e., that it came from an authorized user, account, or program). Think of it like a house key: it lets you and your family in, but keeps out everyone else.</p>\n<p>Including a scope for a private API key adds another layer of authorization, limiting what specific elements a third party can access. Scopes are similar to a hotel key, only giving you access to certain areas (like your room or the gym) and not the whole building. </p>\n<h3 id=\"h_01JEEBG378SE4VY1QJZ8FRWPBR\">Types of scopes</h3>\n<p>When you create a private API key, you must select its scope. In other words, you must decide whether you want a third party to:</p>\n<ul>\n<li>Not have any access to an API endpoint.</li>\n<li>View all data for an API endpoint, but not be able to make changes (also called “read-only”). </li>\n<li>Create, delete, and make other changes to anything associated with that endpoint (also called “full access” or “write access”).</li>\n</ul>\n<p>For example, say you want to <a href=\"https://developers.klaviyo.com/en/reference/create_list_relationships\">add subscribers to a Klaviyo list</a> from a third-party software. In that case, you must have full (write) access to the API endpoints for lists, profiles, and bulk subscribing profiles. However, the third party does not need access to any other endpoint. </p>\n<p>You can learn about <a href=\"https://developers.klaviyo.com/en/reference/api_overview\">Klaviyo’s APIs</a> and see the<a href=\"https://developers.klaviyo.com/en/docs/authenticate_\">available scopes for each endpoint</a> on the Developer Portal. </p>\n<h2 id=\"h_01JEEBG37811EE3QPJ49DWSR17\">Before you begin</h2>\n<p>Please note the following: </p>\n<ul>\n<li>After you create a private API key, you cannot:\n<ul>\n<li>View the private API key again. \n<ul>\n<li>Tip: securely save private API keys and note down what you want to use them for, such as in a password manager. </li>\n</ul>\n</li>\n<li>Add or edit its scopes. \n<ul>\n<li>If you need to change scopes, the only option is to delete the original private API key and then create a new one with the correct scope. </li>\n</ul>\n</li>\n</ul>\n</li>\n<li>Private API keys have full access by default.</li>\n</ul>\n<p>If you're not sure which API endpoints, scopes, or permissions you need, please contact a developer or reach out to a<a href=\"https://connect.klaviyo.com/\">Klaviyo partner</a> for help. </p>\n<h2 id=\"h_01HDKDXQA1ZGSRCGM041B507KG\">Create a private API key </h2>\n<div class=\"bs-callout bs-callout-default\">\n<p>You will not be able view a private API key after creating it. Instead, you should treat private API keys like a password: only sharing these keys with parties you trust and saving them in a secure place, such as a vault or password manager.</p>\n</div>\n<ol>\n<li>Click your organization name in the bottom left.</li>\n<li>Navigate to <strong>Settings</strong>.</li>\n<li>Click <strong>API keys</strong>.<br>\n\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28723522966299\" alt=\"API keys tab in account settings\">\n</li>\n<li>Click <strong>Create Private API Key</strong>.</li>\n<li>Name the API key.</li>\n<li>Choose the scope you want to give the API key:<br>\n<ul>\n<ul>\n<li>Read-only</li>\n<li>Full</li>\n<li>Custom<br>\n</li>\n</ul>\n</ul>\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28723522963355\" alt=\"Page to create a private API key with a scope\" width=\"537\" height=\"267\">\n</li>\n<li>Select <strong>Create</strong>.</li>\n</ol>\n<p>Now, when you share a private API key, the third party will only have access to the information you defined in the scope. </p>\n<h2 id=\"h_01HDKDXQA1638ZGGA6XSW7TN4W\">Using queries </h2>\n<p>Queries are used in advanced scenarios. If you are not already familiar with queries or how to use them, we recommend working with a developer. </p>\n<h4 id=\"h_01HDKDXQA11PJFDGZM4WYXA7Z5\">Include</h4>\n<p>Note that if you try to use the <code>include</code> query, you will have to change the format from what’s listed above.</p>\n<p>For example, the profiles endpoint is <em>/api/profiles</em>.</p>\n<p>However, if you add the include query parameter (<em>/api/profiles?include=list</em>), you will also need <em>list:read</em> or <em>list:full access</em>, depending on what type of API call you’re making.</p>\n<h4 id=\"h_01HDKDXQA1G95MSK4G1B5D1NQS\">Scopes</h4>\n<p>Using the <code>scopes</code> parameter, you can create a URL parameter to autofill in what scope access you need for your private API key. </p>\n<p>In the scopes query, include a comma-separated list of the scopes you want to pre-select. </p>\n<p>An example URL is: <br>\n<em>https://www.klaviyo.com/create-private-api-key?scopes=campaigns:read,campaigns:write</em></p>\n<p>Navigate to our Developer Portal to see the <a href=\"https://developers.klaviyo.com/en/docs/authenticate_\">scopes you can use in this query</a>.</p>\n<h2 id=\"h_01HWR5598AGCJ6J9GVVD1Z79H3\">Clone a private API key</h2>\n<p>With private API keys, cloning allows you to create a new key that has the same scopes and permissions as the original key.</p>\n<p>Note that:</p>\n<ul>\n<li>Cloning does not generate the same key as the original private API key.</li>\n<li>You cannot re-name a cloned API key; it has the same name as the original key. </li>\n</ul>\n<p>To clone a private API key: </p>\n<ol>\n<li>Navigate to the <strong>API keys </strong>tab. </li>\n<li>Click the 3-dot menu next to the key you want to clone. </li>\n<li>Select <strong>Clone &gt; Clone</strong>. <br>\n\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28723544939931\" alt=\"Menu to clone or delete a private API key\">\n</li>\n<li>Copy or download the new private API key and store it in a secure place. </li>\n<li>Make sure to delete your old key if it's no longer needed. </li>\n</ol>",
+    "user_segment_ids": []
+  },
+  "normalized": {
+    "id": "7423954176283",
+    "title": "How to create or clone a private API key",
+    "source_url": "https://help.klaviyo.com/hc/en-us/articles/7423954176283-How-to-create-or-clone-a-private-API-key",
+    "section_id": 49375463241883,
+    "section": "API keys",
+    "category_id": 115000867647,
+    "category": "Account & billing",
+    "category_slug": "account-billing",
+    "klaviyo_updated": "2026-04-21T13:55:04Z",
+    "created_at": "2022-07-18T18:59:52Z",
+    "draft": false,
+    "promoted": false,
+    "position": 2,
+    "label_names": []
+  },
+  "files": {
+    "body_html": "_source/articles/7423954176283.body.html",
+    "rendered_html": "_source/rendered/7423954176283.html"
+  },
+  "assets": {
+    "api_body": {
+      "images": [
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28723522966299",
+          "alt": "API keys tab in account settings",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28723522963355",
+          "alt": "Page to create a private API key with a scope",
+          "width": "537",
+          "height": "267"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28723544939931",
+          "alt": "Menu to clone or delete a private API key",
+          "width": "",
+          "height": ""
+        }
+      ],
+      "links": [
+        {
+          "href": "https://developers.klaviyo.com/en/reference/create_list_relationships",
+          "text": "add subscribers to a Klaviyo list"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/reference/api_overview",
+          "text": "Klaviyo’s APIs"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/authenticate_",
+          "text": "available scopes for each endpoint"
+        },
+        {
+          "href": "https://connect.klaviyo.com/",
+          "text": "Klaviyo partner"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/authenticate_",
+          "text": "scopes you can use in this query"
+        }
+      ],
+      "headings": [
+        {
+          "level": 2,
+          "id": "h_01HDKDXQA08SXBH3SN41YES8HC",
+          "text": "You will learn"
+        },
+        {
+          "level": 2,
+          "id": "h_01JEEBG3787YFMHZ6KBFTBCV34",
+          "text": "About private API keys and scopes"
+        },
+        {
+          "level": 3,
+          "id": "h_01JEEBG378SE4VY1QJZ8FRWPBR",
+          "text": "Types of scopes"
+        },
+        {
+          "level": 2,
+          "id": "h_01JEEBG37811EE3QPJ49DWSR17",
+          "text": "Before you begin"
+        },
+        {
+          "level": 2,
+          "id": "h_01HDKDXQA1ZGSRCGM041B507KG",
+          "text": "Create a private API key"
+        },
+        {
+          "level": 2,
+          "id": "h_01HDKDXQA1638ZGGA6XSW7TN4W",
+          "text": "Using queries"
+        },
+        {
+          "level": 4,
+          "id": "h_01HDKDXQA11PJFDGZM4WYXA7Z5",
+          "text": "Include"
+        },
+        {
+          "level": 4,
+          "id": "h_01HDKDXQA1G95MSK4G1B5D1NQS",
+          "text": "Scopes"
+        },
+        {
+          "level": 2,
+          "id": "h_01HWR5598AGCJ6J9GVVD1Z79H3",
+          "text": "Clone a private API key"
+        }
+      ]
+    },
+    "rendered_page": {
+      "images": [
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/7ff492c2b417b7ecfe572f839a8a81398693c1f7-1920x1080.webp",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/4b4d39253502f354dd6401b03dfc8d02e5ea8f9c-1398x834.png",
+          "alt": "API keys tab in account settings",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/c1c60b8c07b67ddb53f02f9ce0f12a88b1284fa4-2520x1252.jpg?w=537",
+          "alt": "Page to create a private API key with a scope",
+          "width": "537",
+          "height": "267"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/f210bc19bf8d0a42bc79d8563f5beafd3bccecd5-1418x828.jpg",
+          "alt": "Menu to clone or delete a private API key",
+          "width": "",
+          "height": ""
+        }
+      ],
+      "links": [
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/7423954176283-How-to-create-or-clone-a-private-API-key#site-content",
+          "text": "Skip to main content"
+        },
+        {
+          "href": "https://www.klaviyo.com",
+          "text": "Home"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center"
+        },
+        {
+          "href": "https://www.klaviyo.com/enterprise",
+          "text": "Enterprise"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Partners"
+        },
+        {
+          "href": "https://www.klaviyo.com/careers",
+          "text": "Careers"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": "Log in"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": ""
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center Find step-by-step instructions and troubleshooting solutions in our knowledge base."
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000032731",
+          "text": "Integrations"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000312411",
+          "text": "Flows"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867867",
+          "text": "Audience"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867667",
+          "text": "Campaigns"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/360000190711",
+          "text": "Sign-up forms"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000873988",
+          "text": "Deliverability & compliance"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/29173800271259",
+          "text": "SMS"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/16638219724187",
+          "text": "Reviews"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/18073014919195",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/34141283979931",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/37659126754075",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/33948021740315",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/39746685522331",
+          "text": "WhatsApp"
+        },
+        {
+          "href": "https://academy.klaviyo.com",
+          "text": "Klaviyo Academy Expert training and education to help you succeed with Klaviyo, and beyond."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Quick+guide&resource=academy_courses",
+          "text": "Quick guides Learn marketing strategies and concepts in 15 minutes or less."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Course&resource=academy_courses",
+          "text": "Courses Master key marketing topics through structured lessons and exams."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/best-practices",
+          "text": "Best practices Discover top product and marketing strategies for your business."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/learning-paths",
+          "text": "Learning paths Complete curated learning journeys tailored to your marketing goals."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses",
+          "text": "Explore all resources"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Live+training&resource=academy_courses",
+          "text": "Live trainings Build confidence through hands-on interactive workshops and thought-provoking strategy sessions."
+        },
+        {
+          "href": "https://www.bigmarker.com/klaviyo-customer-education/Office-hours-Getting-started-with-Klaviyo",
+          "text": "Live office hours Join a strategic discussion where you can ask questions and get answers in real-time."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/private-live-training",
+          "text": "1:1 Live training Book a private training session with an expert to jumpstart your platform knowledge and confidence."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/credentials",
+          "text": "Klaviyo credentials Dig deeper into select topics and showcase your expertise with a final exam to earn a certificate and digital badge."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/certificates/klaviyo-practitioner-certificate",
+          "text": "Klaviyo practitioner certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/deliverability-certificate",
+          "text": "Deliverability certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/developer-certificate",
+          "text": "Klaviyo developer certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses&select=Certificate",
+          "text": "See all certificates"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Klaviyo Community Join our thriving community network to connect with brands like yours—online and in person."
+        },
+        {
+          "href": "https://community.klaviyo.com/topic/new",
+          "text": "Ask a question Post a question and get thoughtful answers from Klaviyo powerusers."
+        },
+        {
+          "href": "https://community.klaviyo.com/p/roadmap",
+          "text": "Product roadmap"
+        },
+        {
+          "href": "https://community.klaviyo.com/search/activity/recent",
+          "text": "Recent threads"
+        },
+        {
+          "href": "https://community.klaviyo.com/p/champions",
+          "text": "Meet the Champions"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups",
+          "text": "Browse all groups Your people are waiting. New ideas and connections are a click away."
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/developer-group-64",
+          "text": "Developer group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/entrepreneur-user-group-118",
+          "text": "Entrepreneur group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/woo-user-group-87",
+          "text": "WooCommerce group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/new-york-meetup-chapter-82",
+          "text": "New York City"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/los-angeles-meetup-chapter-83",
+          "text": "Los Angeles"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/austin-meetup-chapter-85",
+          "text": "Austin"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/san-diego-meetup-chapter-86",
+          "text": "San Diego"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/amsterdam-meetup-chapter-84",
+          "text": "Amsterdam"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Klaviyo Developers Access API documentation and developer guides to help you build with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/get_started",
+          "text": "Get started Access key resources and a step-by-step checklist for how to start developing with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/build_your_integration",
+          "text": "Grow your app's reach Learn how to join our ecosystem and get your app listed on our marketplace."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/developer-tools",
+          "text": "Developer tools Generate sample data, monitor your API usage, and access our Postman collections."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/reference/api_overview",
+          "text": "API reference Browse our full catalog of API docs."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/changelog_",
+          "text": "Changelog"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/api_versioning_and_deprecation_policy",
+          "text": "Versioning & deprecation policy"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/rate_limits_and_error_handling",
+          "text": "Rate limits & error handling"
+        },
+        {
+          "href": "https://youtube.com/playlist?list=PLHkNfHgtxcUanrkMnKPdkRzuWU7MGv_xM&si=pkG-KH7IT_TUHOGC",
+          "text": "API tutorials on YouTube Subscribe to our Klaviyo API Tutorials playlist for easy access to step-by-step developer walkthroughs."
+        },
+        {
+          "href": "https://www.klaviyo.com/contact-us",
+          "text": "Contact us"
+        },
+        {
+          "href": "https://www.klaviyo.com/sign-up",
+          "text": "Sign up"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": "Search"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/7423954176283",
+          "text": "United States - EN"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/de-de/articles/7423954176283",
+          "text": "Deutschland - DE"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-es/articles/7423954176283",
+          "text": "España - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-mx/articles/7423954176283",
+          "text": "México - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/fr-fr/articles/7423954176283",
+          "text": "France - FR"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/it-it/articles/7423954176283",
+          "text": "Italia - IT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/ko-kr/articles/7423954176283",
+          "text": "한국 - KO"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/nl-nl/articles/7423954176283",
+          "text": "Nederland - NL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pl-pl/articles/7423954176283",
+          "text": "Polska - PL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pt-br/articles/7423954176283",
+          "text": "Brasil - PT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/sv-se/articles/7423954176283",
+          "text": "Sverige - SV"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867647",
+          "text": "Account & billing"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/14542887837083",
+          "text": "Account"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/49375463241883",
+          "text": "API keys"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/7423954176283-How-to-create-or-clone-a-private-API-key#h_01HDKDXQA08SXBH3SN41YES8HC",
+          "text": "You will learn"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/7423954176283-How-to-create-or-clone-a-private-API-key#h_01JEEBG3787YFMHZ6KBFTBCV34",
+          "text": "About private API keys and scopes"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/7423954176283-How-to-create-or-clone-a-private-API-key#h_01JEEBG37811EE3QPJ49DWSR17",
+          "text": "Before you begin"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/7423954176283-How-to-create-or-clone-a-private-API-key#h_01HDKDXQA1ZGSRCGM041B507KG",
+          "text": "Create a private API key"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/7423954176283-How-to-create-or-clone-a-private-API-key#h_01HDKDXQA1638ZGGA6XSW7TN4W",
+          "text": "Using queries"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/7423954176283-How-to-create-or-clone-a-private-API-key#h_01HWR5598AGCJ6J9GVVD1Z79H3",
+          "text": "Clone a private API key"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/7423954176283-How-to-create-or-clone-a-private-API-key#additional-resources",
+          "text": "Additional resources"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/reference/create_list_relationships",
+          "text": "add subscribers to a Klaviyo list"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/reference/api_overview",
+          "text": "Klaviyo’s APIs"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/authenticate_",
+          "text": "available scopes for each endpoint"
+        },
+        {
+          "href": "https://connect.klaviyo.com/",
+          "text": "Klaviyo partner"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/authenticate_",
+          "text": "scopes you can use in this query"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360045726811",
+          "text": "Getting started with Klaviyo APIs"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360052448451",
+          "text": "How to keep your account secure"
+        },
+        {
+          "href": "https://developers.klaviyo.com/",
+          "text": "developer docs"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115001002272",
+          "text": "Learn how to contact support"
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": ""
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": "Visit Community"
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": ""
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": "Hire a partner"
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/about",
+          "text": "About Klaviyo"
+        },
+        {
+          "href": "https://www.klaviyo.com/newsroom",
+          "text": "Newsroom"
+        },
+        {
+          "href": "https://investors.klaviyo.com/overview/default.aspx",
+          "text": "Investor relations"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Agency and tech partners"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Developers"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/retail",
+          "text": "Retail and ecommerce"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/restaurants",
+          "text": "Restaurant marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/wellness",
+          "text": "Wellness"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform",
+          "text": "B2C CRM overview"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai",
+          "text": "Klaviyo AI (K:AI)"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/marketing-automation",
+          "text": "Klaviyo Marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-service",
+          "text": "Klaviyo Service"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/analytics",
+          "text": "Klaviyo Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-data-platform",
+          "text": "Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare",
+          "text": "Klaviyo vs. Klaviyo alternatives"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-mailchimp",
+          "text": "Klaviyo vs. Mailchimp"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-postscript",
+          "text": "Klaviyo vs. Postscript"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-attentive",
+          "text": "Klaviyo vs. Attentive"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-salesforce-marketing-cloud",
+          "text": "Klaviyo vs. Salesforce"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-listrak",
+          "text": "Klaviyo vs. Listrak"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/omnichannel",
+          "text": "Omnichannel marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/email-marketing",
+          "text": "Email marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing",
+          "text": "SMS marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing/rcs",
+          "text": "RCS for Business"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/mobile-app-marketing",
+          "text": "Mobile app marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/whatsapp",
+          "text": "WhatsApp marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/social",
+          "text": "Social marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources",
+          "text": "Marketing resources"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources/marketing-campaign-calendar",
+          "text": "Marketing campaign calendar"
+        },
+        {
+          "href": "https://www.klaviyo.com/glossary",
+          "text": "Marketing glossary"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/email-subject-line-generator",
+          "text": "Subject line generator"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/roi-calculator",
+          "text": "ROI calculator"
+        },
+        {
+          "href": "https://www.klaviyo.com/customers",
+          "text": "Case studies"
+        },
+        {
+          "href": "https://www.klaviyo.com/composer",
+          "text": "Composer Beta"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/marketing-agent",
+          "text": "Marketing Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/customer-agent",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/customer-experience-hub",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/helpdesk",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/marketing-analytics",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/advanced-cdp",
+          "text": "Advanced Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/web-forms",
+          "text": "Web forms"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/email-templates",
+          "text": "Email templates"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/portfolio",
+          "text": "Portfolio"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform-integrations",
+          "text": "Apps and Integrations"
+        },
+        {
+          "href": "https://www.klaviyo.com/features",
+          "text": "Features"
+        },
+        {
+          "href": "https://www.klaviyo.com/whats-new",
+          "text": "What's new"
+        },
+        {
+          "href": "https://www.klaviyo.com/events",
+          "text": "Events"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help Center"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us",
+          "text": "Academy"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Community"
+        },
+        {
+          "href": "https://www.facebook.com/Klaviyo/",
+          "text": "Facebook"
+        },
+        {
+          "href": "https://twitter.com/klaviyo/",
+          "text": "Twitter"
+        },
+        {
+          "href": "https://www.linkedin.com/company/klaviyo/",
+          "text": "LinkedIn"
+        },
+        {
+          "href": "https://www.instagram.com/klaviyo/",
+          "text": "Instagram"
+        },
+        {
+          "href": "https://www.klaviyo.com/sitemap",
+          "text": "Site Map"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal",
+          "text": "Terms and Privacy"
+        },
+        {
+          "href": "https://www.klaviyo.com/security",
+          "text": "Security"
+        },
+        {
+          "href": "https://www.klaviyo.com/trust",
+          "text": "Trust"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal/intellectual-property-notices",
+          "text": "Intellectual Property Notices"
+        }
+      ],
+      "headings": [
+        {
+          "level": 1,
+          "id": "",
+          "text": "How to create or clone a private API key"
+        },
+        {
+          "level": 2,
+          "id": "h_01HDKDXQA08SXBH3SN41YES8HC",
+          "text": "You will learn"
+        },
+        {
+          "level": 2,
+          "id": "h_01JEEBG3787YFMHZ6KBFTBCV34",
+          "text": "About private API keys and scopes"
+        },
+        {
+          "level": 3,
+          "id": "h_01JEEBG378SE4VY1QJZ8FRWPBR",
+          "text": "Types of scopes"
+        },
+        {
+          "level": 2,
+          "id": "h_01JEEBG37811EE3QPJ49DWSR17",
+          "text": "Before you begin"
+        },
+        {
+          "level": 2,
+          "id": "h_01HDKDXQA1ZGSRCGM041B507KG",
+          "text": "Create a private API key"
+        },
+        {
+          "level": 2,
+          "id": "h_01HDKDXQA1638ZGGA6XSW7TN4W",
+          "text": "Using queries"
+        },
+        {
+          "level": 4,
+          "id": "",
+          "text": "Include"
+        },
+        {
+          "level": 4,
+          "id": "",
+          "text": "Scopes"
+        },
+        {
+          "level": 2,
+          "id": "h_01HWR5598AGCJ6J9GVVD1Z79H3",
+          "text": "Clone a private API key"
+        },
+        {
+          "level": 2,
+          "id": "additional-resources",
+          "text": "Additional resources"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "Explore more from Klaviyo"
+        }
+      ]
+    }
+  },
+  "rendered_page": {
+    "status": "fetched",
+    "error": ""
+  }
+}

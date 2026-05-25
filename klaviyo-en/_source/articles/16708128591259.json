@@ -1,0 +1,918 @@
+{
+  "captured_at": "2026-05-23T16:17:31Z",
+  "article": {
+    "id": 16708128591259,
+    "url": "https://klaviyo.zendesk.com/api/v2/help_center/en-us/articles/16708128591259.json",
+    "html_url": "https://klaviyo.zendesk.com/hc/en-us/articles/16708128591259-How-to-upgrade-your-Salesforce-Commerce-Cloud-cartridge",
+    "author_id": 409167690492,
+    "comments_disabled": true,
+    "draft": false,
+    "promoted": false,
+    "position": 3,
+    "vote_sum": 0,
+    "vote_count": 0,
+    "section_id": 49375912534427,
+    "created_at": "2023-06-27T15:34:02Z",
+    "updated_at": "2026-04-21T13:54:30Z",
+    "name": "How to upgrade your Salesforce Commerce Cloud cartridge",
+    "title": "How to upgrade your Salesforce Commerce Cloud cartridge",
+    "source_locale": "en-us",
+    "locale": "en-us",
+    "outdated": false,
+    "outdated_locales": [],
+    "edited_at": "2025-07-31T14:10:45Z",
+    "user_segment_id": null,
+    "permission_group_id": 146372,
+    "content_tag_ids": [],
+    "label_names": [],
+    "body": "<h2 id=\"h_01HMF40ECZC4A278YBHA4YGMCH\">You will learn</h2>\n<p>Learn how to upgrade your Klaviyo Salesforce Commerce Cloud cartridge. </p>\n<p>Are you using a cartridge version older than 23.7.0? We recommend upgrading immediately to version 23.7.0 or higher. Older versions of the cartridge use Klaviyo’s v1 and v2 APIs which are retired and no longer operate as expected. We always recommend upgrading to our newest version (currently, 25.7.0).</p>\n<h2 id=\"h_01HMF40ECZ3S8ZYXGYCG97G4VW\">Before you begin</h2>\n<p>Version 23.7.0 includes a number of meaningful improvements, some of which are architectural changes around how events are triggered. Special considerations for upgrading from any version below 23.70 to any version above it are detailed below.</p>\n<h2 id=\"h_01HMF40ECZJAYF5NGF0A8KKCWG\">Understand your current integration</h2>\n<p>It is important to be familiar with your current SFCC integration and what changes or customizations may have been made specifically for your website. Most importantly, you should consider whether or not the specific event data you send to Klaviyo has been altered or augmented, and if you’ve added any custom events.</p>\n<p>We recommend comparing your code that assembles event data against the previous version of the Klaviyo cartridge, <a href=\"https://github.com/klaviyo/SFCC_Klaviyo/releases\" target=\"_blank\" rel=\"noopener\">available on Klaviyo’s Github</a>. Assuming that your integration has not been heavily customized, you will find your current data assembly functions in <code>int_klaviyo_core/cartridge/scripts/utils/klaviyo/klaviyoUtils.js</code>, and for <em>Order Confirmation</em> in <code>int_klaviyo_core/cartridge/scripts/utils/klaviyo/emailUtils.js</code>.</p>\n<p>Note any customizations so that you can re-apply them once the new cartridge has been installed.</p>\n<h2 id=\"h_01HMF40ECZ9E2KP016VFD4104Y\">Connect an SFCC sandbox to a Klaviyo test account</h2>\n<p>If you have not yet created a secondary Klaviyo account for testing, separate from the account that is tied to your SFCC production environment, you should do so. Then, connect your SFCC sandbox environment to the new account. We recommend completing this step using your prior Klaviyo cartridge version so that you can verify that events are successfully being sent to and received by your secondary Klaviyo account before proceeding to upgrade your codebase with the new Klaviyo cartridge.</p>\n<h2 id=\"h_01HMF40ECZ3GXCA2P03G7GFBD6\">Remove the previous Klaviyo cartridge code</h2>\n<p>If your integration was not heavily customized, you will be able to remove the majority of the previous Klaviyo integration by simply deleting the two Klaviyo cartridge folders: int_klaviyo_core and either int_klaviyo (for Site Genesis) or int_klaviyo_sfra (for SFRA) from the codebase. However, you will also have to remove any Klaviyo-specific code that may have been added to template files, and possibly JavaScript files.</p>\n<h3 id=\"h_01HMF40ECZ8WW1HK7MMXPRFW0M\">For Site Genesis</h3>\n<p>Standard integrations for Site Genesis will have the following code added to footer_UI.isml:</p>\n<pre><code class=\"language-javascript\">&lt;isinclude template=\"components/footer/klaviyoFooter\"/&gt;</code></pre>\n<p>They will also have the following block added to minicart.isml, cart.isml, and any other “cart” isml files:</p>\n<pre><code class=\"language-javascript\">&lt;isif condition=\"${pdict.CurrentHttpParameterMap.cartAction == 'add' || pdict.CurrentHttpParameterMap.cartAction\n  == 'update'}\"&gt;\n   &lt;isinclude url=\"${URLUtils.url('Klaviyo-RenderKlaviyoAddToCart')}\"/&gt;\n&lt;/isif&gt;</code></pre>\n<h3 id=\"h_01HMF40ECZWCF082YEA8H6SN55\">For SFRA</h3>\n<p>Standard integrations for SFCC will have the following code added to pageFooter.isml:</p>\n<pre><code class=\"language-javascript\">&lt;isinclude template=\"klaviyo/klaviyoFooter\"/&gt;</code></pre>\n<p>They will also have the following code added to to the AddProduct route in the Cart.js controller:</p>\n<pre><code class=\"language-javascript\"> if(dw.system.Site.getCurrent().getCustomPreferenceValue('klaviyo_enabled')){\n   var KlaviyoUtils = require('*/cartridge/scripts/utils/klaviyo/klaviyoUtils');\n KlaviyoUtils.trackAddToCart();\n}</code></pre>\n<p>For both Site Genesis and SFRA, after the cartridge folders and the above mentioned code snippets have been removed, it is advisable to search the codebase for the word “Klaviyo.” Make sure you’re familiar with what any Klaviyo-related code that remains in your codebase is doing before removing it, as these blocks may represent customizations that you will need to put back in place after the new cartridge is installed.</p>\n<h2 id=\"h_01HMF40ECZZ3VZF382BD287QCK\">Remove services</h2>\n<p>The previous integration will have created a KlaviyoTrackService, KlaviyoTrackProfile and KlaviyoTrackCredentials at <strong>Administration &gt; Operations &gt; Service</strong>. All three can be safely removed as the process of integrating the new Klaviyo cartridge will create new services with different names.</p>\n<p>It is not critical that the old services be removed, but it is recommended that you clean them out to avoid future confusion.</p>\n<h2 id=\"h_01HMF40ECZDFJEV592GZZYSAGC\">Review site preferences</h2>\n<p>The process of integrating the new Klaviyo cartridge will retain some of the previous Klaviyo site preferences, and will also add some new ones. Take a look at your site preferences in the <em>Klaviyo</em> preference group at <strong>Merchant tools &gt; Site Preferences &gt; Custom Preferences &gt; klaviyo</strong>, and check to see if any custom preferences have been added specifically for your website. If you customized the cartridge to add your own settings, you'll want to preserve them. For reference, here are the four site preferences that are built into the previous Klaviyo integration:</p>\n<ul>\n<li>\n<strong>Klaviyo Enabled (ID: klaviyo_enabled) </strong><strong><br></strong>Flag if Klaviyo is on or off.</li>\n<li>\n<strong>Klaviyo Account (ID: klaviyo_account)</strong><strong><br></strong>Your Klaviyo public API key, or Site ID.</li>\n<li>\n<strong>Klaviyo Private API Key (ID: klaviyo_api_key) </strong><br>A Klaviyo private api key.</li>\n<li>\n<strong>Image Type for Klaviyo (ID: klaviyo_image_size)</strong><br>Large, small, thumbnail, etc.</li>\n</ul>\n<p>Before setting up the new cartridge, we recommend backing up your current site preferences by exporting them at <strong>Administration &gt; Site Development &gt; Site Import &amp; Export</strong>. Expand <strong>Sites</strong>, then your <strong>Site Name</strong>, and check the Site Preferences box before entering a filename to export them to. Your current Klaviyo preferences should not be adversely affected when you later install the new cartridge, but it is a good idea to back them up for future reference.</p>\n<h2 id=\"h_01HMF40ECZQX8D5VJP2ABD9Q65\">Remove the Klaviyo cartridges from the cartridge path</h2>\n<p>Remove int_klaviyo_core and either int_klaviyo (Site Genesis) or int_klaviyo_sfra (SFRA) from your cartridge path at <strong>Administration &gt; Sites &gt; Manage Sites &gt; [Site Name] &gt; Settings</strong>. If you do not perform this step, you will get errors resulting from SFCC looking for cartridges to load that no longer exist.</p>\n<h2 id=\"h_01HMF40ECZ08PH28F19A6VYS6D\">Check the developer console and server side log for errors</h2>\n<p>At this point, you should no longer have any Klaviyo code in your codebase. We recommend reviewing your frontend, visiting pages such as Search Results, PLPs, and PDPs, and performing actions such as adding products to cart, entering, and completing checkout. As you do so, keep an eye on the Developer Console to see if any new errors are generated. Do the same with the Request Log. If you are seeing new errors related to Klaviyo, there is a good chance that you have not fully removed all of the previous Klaviyo code. It is important to track down the source of any new errors and note them before removing them.</p>\n<h2 id=\"h_01HMF40ECZW931Y2K1P26DB6BR\">Install the new Klaviyo cartridge</h2>\n<p>Follow the steps laid out in <a href=\"https://help.klaviyo.com/hc/en-us/articles/360033744951\" target=\"_blank\" rel=\"noopener\">Getting started with Salesforce Commerce Cloud</a> to integrate the new cartridge into your codebase. There may be steps that you do not need to complete - for example, your SFCC instance may or may not have the connections already established for the OCAPI portion - but in general, you should follow each step of integration. You will definitely need to replace both Klaviyo cartridges and add back code snippets. </p>\n<div class=\"bs-callout bs-callout-default\">Do not simply copy/paste the new cartridge folders over the old ones. Per the instructions above, delete the old folders completely before adding the new ones.</div>\n<p>Note that after importing metadata.zip, you will have four new site preferences, in addition to the four that were created by the previous version of the cartridge. Your previous preferences should not have been affected by importing the new ones, but it is recommended that you double-check that all Klaviyo site preferences are correct before proceeding.</p>\n<p>Since you are upgrading from a cartridge prior to version 23.7.0, the new site preferences <em>Label Events as SFCC</em> and <em>Send Added To Cart Event as ‘Add To Cart’</em> should be set to <em>No</em> and <em>Yes</em>, respectively. This will continue sending events without the <em>Salesforce Commerce Cloud</em> metric label and use the <em>Add To Cart</em> event type (as opposed to the new<em> Added to Cart</em>). Having these two site preferences set incorrectly will result in a breakage of reporting and potentially, a breakage of existing flows in Klaviyo.</p>\n<h2 id=\"h_01HMF40ECZX77RBV9RW4FMZCZ2\">Verify that all out-of-the-box events are working</h2>\n<p>Before attempting to add back in any customizations from your previous integration, be sure to verify that the new installation of the Klaviyo cartridge is working correctly. Use the frontend to generate events for<em> Searched Site</em>, <em>Viewed Category</em>, <em>Viewed Product,</em> <em>Added To Cart</em>, <em>Started Checkout</em> and <em>Order Confirmation</em>, and then check your Klaviyo account to make sure that these events are being tracked correctly. </p>\n<p>Check the developer console for any new errors that may be related to the integration on all pages that generate Klaviyo events. Enable verbose service logging by checking the <em>Communication Log Enabled </em>checkbox at <strong>Administration &gt; Operations &gt; Services &gt; KlaviyoEventService - Details</strong>, and then review the server-side log files to verify that there are no errors, and that event data is being properly generated for each event type.</p>\n<h2 id=\"h_01HMF40ECZ7SVWQTW19J4V245A\">Compare event data with production</h2>\n<p>You should now compare the event data in your testing and production Klaviyo accounts to ensure that nothing is missing, and that current values match the expected type. It is important to determine if any reporting or flows will be affected by the new integration. You will find that additional properties are now being set and sent to Klaviyo compared to the prior cartridge version. </p>\n<h2 id=\"h_01HMF40ECZR0W8RF68EPT634BM\">Add back site-specific customizations</h2>\n<p>You can now start adding customizations back into your Klaviyo code. Due to the fact that there are heavy structural and architectural changes with the newest Klaviyo cartridge, it is unlikely that you will be able to simply copy and paste custom code directly into the Klaviyo cartridge.</p>\n<p>Each event type in the Klaviyo cartridge has a getData function that lives in a separate script file named for each event type. These files can be found in the <code>int_klaviyo_core/cartridge/scripts/klaviyo/eventData</code> folder, and are the most likely place that you will alter in order to add or update the data objects that get passed for each event. If you are creating new custom events, we recommend following the established pattern of adding code to server-side controllers <em>(</em>i.e., directly in SiteGen or via server.append in SFRA) that calls a getData function from a script file dedicated to the new event, and then uses the trackEvent function to send that data to Klaviyo via the KlaviyoEventService.</p>\n<h2 id=\"h_01HMF40ECZ28PWHHVFBHY2WH62\">Outcome</h2>\n<p>You’ve now upgraded your Klaviyo cartridge for Salesforce Commerce Cloud. </p>\n<h2 id=\"h_01HMF40ECZWFHMNJEDE2H8CXT8\">Additional resources </h2>\n<ul>\n<li><a href=\"https://help.klaviyo.com/hc/en-us/articles/360033744951\" target=\"_blank\" rel=\"noopener\">Getting started with Salesforce Commerce Cloud</a></li>\n<li><a href=\"https://help.klaviyo.com/hc/en-us/articles/360058323811\" target=\"_blank\" rel=\"noopener\">Salesforce Commerce Cloud data reference</a></li>\n<li><a href=\"https://help.klaviyo.com/hc/en-us/articles/115005253208\" target=\"_blank\" rel=\"noopener\">How often integrations sync reference</a></li>\n<li><a href=\"https://help.klaviyo.com/hc/en-us/articles/115001002272\" target=\"_blank\" rel=\"noopener\">How to contact support</a></li>\n</ul>",
+    "user_segment_ids": []
+  },
+  "normalized": {
+    "id": "16708128591259",
+    "title": "How to upgrade your Salesforce Commerce Cloud cartridge",
+    "source_url": "https://help.klaviyo.com/hc/en-us/articles/16708128591259-How-to-upgrade-your-Salesforce-Commerce-Cloud-cartridge",
+    "section_id": 49375912534427,
+    "section": "Salesforce Commerce Cloud",
+    "category_id": 115000032731,
+    "category": "Integrations",
+    "category_slug": "integrations",
+    "klaviyo_updated": "2026-04-21T13:54:30Z",
+    "created_at": "2023-06-27T15:34:02Z",
+    "draft": false,
+    "promoted": false,
+    "position": 3,
+    "label_names": []
+  },
+  "files": {
+    "body_html": "_source/articles/16708128591259.body.html",
+    "rendered_html": "_source/rendered/16708128591259.html"
+  },
+  "assets": {
+    "api_body": {
+      "images": [],
+      "links": [
+        {
+          "href": "https://github.com/klaviyo/SFCC_Klaviyo/releases",
+          "text": "available on Klaviyo’s Github"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360033744951",
+          "text": "Getting started with Salesforce Commerce Cloud"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360058323811",
+          "text": "Salesforce Commerce Cloud data reference"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005253208",
+          "text": "How often integrations sync reference"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115001002272",
+          "text": "How to contact support"
+        }
+      ],
+      "headings": [
+        {
+          "level": 2,
+          "id": "h_01HMF40ECZC4A278YBHA4YGMCH",
+          "text": "You will learn"
+        },
+        {
+          "level": 2,
+          "id": "h_01HMF40ECZ3S8ZYXGYCG97G4VW",
+          "text": "Before you begin"
+        },
+        {
+          "level": 2,
+          "id": "h_01HMF40ECZJAYF5NGF0A8KKCWG",
+          "text": "Understand your current integration"
+        },
+        {
+          "level": 2,
+          "id": "h_01HMF40ECZ9E2KP016VFD4104Y",
+          "text": "Connect an SFCC sandbox to a Klaviyo test account"
+        },
+        {
+          "level": 2,
+          "id": "h_01HMF40ECZ3GXCA2P03G7GFBD6",
+          "text": "Remove the previous Klaviyo cartridge code"
+        },
+        {
+          "level": 3,
+          "id": "h_01HMF40ECZ8WW1HK7MMXPRFW0M",
+          "text": "For Site Genesis"
+        },
+        {
+          "level": 3,
+          "id": "h_01HMF40ECZWCF082YEA8H6SN55",
+          "text": "For SFRA"
+        },
+        {
+          "level": 2,
+          "id": "h_01HMF40ECZZ3VZF382BD287QCK",
+          "text": "Remove services"
+        },
+        {
+          "level": 2,
+          "id": "h_01HMF40ECZDFJEV592GZZYSAGC",
+          "text": "Review site preferences"
+        },
+        {
+          "level": 2,
+          "id": "h_01HMF40ECZQX8D5VJP2ABD9Q65",
+          "text": "Remove the Klaviyo cartridges from the cartridge path"
+        },
+        {
+          "level": 2,
+          "id": "h_01HMF40ECZ08PH28F19A6VYS6D",
+          "text": "Check the developer console and server side log for errors"
+        },
+        {
+          "level": 2,
+          "id": "h_01HMF40ECZW931Y2K1P26DB6BR",
+          "text": "Install the new Klaviyo cartridge"
+        },
+        {
+          "level": 2,
+          "id": "h_01HMF40ECZX77RBV9RW4FMZCZ2",
+          "text": "Verify that all out-of-the-box events are working"
+        },
+        {
+          "level": 2,
+          "id": "h_01HMF40ECZ7SVWQTW19J4V245A",
+          "text": "Compare event data with production"
+        },
+        {
+          "level": 2,
+          "id": "h_01HMF40ECZR0W8RF68EPT634BM",
+          "text": "Add back site-specific customizations"
+        },
+        {
+          "level": 2,
+          "id": "h_01HMF40ECZ28PWHHVFBHY2WH62",
+          "text": "Outcome"
+        },
+        {
+          "level": 2,
+          "id": "h_01HMF40ECZWFHMNJEDE2H8CXT8",
+          "text": "Additional resources"
+        }
+      ]
+    },
+    "rendered_page": {
+      "images": [
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/7ff492c2b417b7ecfe572f839a8a81398693c1f7-1920x1080.webp",
+          "alt": "",
+          "width": "",
+          "height": ""
+        }
+      ],
+      "links": [
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/16708128591259-How-to-upgrade-your-Salesforce-Commerce-Cloud-cartridge#site-content",
+          "text": "Skip to main content"
+        },
+        {
+          "href": "https://www.klaviyo.com",
+          "text": "Home"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center"
+        },
+        {
+          "href": "https://www.klaviyo.com/enterprise",
+          "text": "Enterprise"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Partners"
+        },
+        {
+          "href": "https://www.klaviyo.com/careers",
+          "text": "Careers"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": "Log in"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": ""
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center Find step-by-step instructions and troubleshooting solutions in our knowledge base."
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000032731",
+          "text": "Integrations"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000312411",
+          "text": "Flows"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867867",
+          "text": "Audience"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867667",
+          "text": "Campaigns"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/360000190711",
+          "text": "Sign-up forms"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000873988",
+          "text": "Deliverability & compliance"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/29173800271259",
+          "text": "SMS"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/16638219724187",
+          "text": "Reviews"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/18073014919195",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/34141283979931",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/37659126754075",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/33948021740315",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/39746685522331",
+          "text": "WhatsApp"
+        },
+        {
+          "href": "https://academy.klaviyo.com",
+          "text": "Klaviyo Academy Expert training and education to help you succeed with Klaviyo, and beyond."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Quick+guide&resource=academy_courses",
+          "text": "Quick guides Learn marketing strategies and concepts in 15 minutes or less."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Course&resource=academy_courses",
+          "text": "Courses Master key marketing topics through structured lessons and exams."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/best-practices",
+          "text": "Best practices Discover top product and marketing strategies for your business."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/learning-paths",
+          "text": "Learning paths Complete curated learning journeys tailored to your marketing goals."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses",
+          "text": "Explore all resources"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Live+training&resource=academy_courses",
+          "text": "Live trainings Build confidence through hands-on interactive workshops and thought-provoking strategy sessions."
+        },
+        {
+          "href": "https://www.bigmarker.com/klaviyo-customer-education/Office-hours-Getting-started-with-Klaviyo",
+          "text": "Live office hours Join a strategic discussion where you can ask questions and get answers in real-time."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/private-live-training",
+          "text": "1:1 Live training Book a private training session with an expert to jumpstart your platform knowledge and confidence."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/credentials",
+          "text": "Klaviyo credentials Dig deeper into select topics and showcase your expertise with a final exam to earn a certificate and digital badge."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/certificates/klaviyo-practitioner-certificate",
+          "text": "Klaviyo practitioner certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/deliverability-certificate",
+          "text": "Deliverability certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/developer-certificate",
+          "text": "Klaviyo developer certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses&select=Certificate",
+          "text": "See all certificates"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Klaviyo Community Join our thriving community network to connect with brands like yours—online and in person."
+        },
+        {
+          "href": "https://community.klaviyo.com/topic/new",
+          "text": "Ask a question Post a question and get thoughtful answers from Klaviyo powerusers."
+        },
+        {
+          "href": "https://community.klaviyo.com/p/roadmap",
+          "text": "Product roadmap"
+        },
+        {
+          "href": "https://community.klaviyo.com/search/activity/recent",
+          "text": "Recent threads"
+        },
+        {
+          "href": "https://community.klaviyo.com/p/champions",
+          "text": "Meet the Champions"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups",
+          "text": "Browse all groups Your people are waiting. New ideas and connections are a click away."
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/developer-group-64",
+          "text": "Developer group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/entrepreneur-user-group-118",
+          "text": "Entrepreneur group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/woo-user-group-87",
+          "text": "WooCommerce group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/new-york-meetup-chapter-82",
+          "text": "New York City"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/los-angeles-meetup-chapter-83",
+          "text": "Los Angeles"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/austin-meetup-chapter-85",
+          "text": "Austin"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/san-diego-meetup-chapter-86",
+          "text": "San Diego"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/amsterdam-meetup-chapter-84",
+          "text": "Amsterdam"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Klaviyo Developers Access API documentation and developer guides to help you build with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/get_started",
+          "text": "Get started Access key resources and a step-by-step checklist for how to start developing with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/build_your_integration",
+          "text": "Grow your app's reach Learn how to join our ecosystem and get your app listed on our marketplace."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/developer-tools",
+          "text": "Developer tools Generate sample data, monitor your API usage, and access our Postman collections."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/reference/api_overview",
+          "text": "API reference Browse our full catalog of API docs."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/changelog_",
+          "text": "Changelog"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/api_versioning_and_deprecation_policy",
+          "text": "Versioning & deprecation policy"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/rate_limits_and_error_handling",
+          "text": "Rate limits & error handling"
+        },
+        {
+          "href": "https://youtube.com/playlist?list=PLHkNfHgtxcUanrkMnKPdkRzuWU7MGv_xM&si=pkG-KH7IT_TUHOGC",
+          "text": "API tutorials on YouTube Subscribe to our Klaviyo API Tutorials playlist for easy access to step-by-step developer walkthroughs."
+        },
+        {
+          "href": "https://www.klaviyo.com/contact-us",
+          "text": "Contact us"
+        },
+        {
+          "href": "https://www.klaviyo.com/sign-up",
+          "text": "Sign up"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": "Search"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/16708128591259",
+          "text": "United States - EN"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/de-de/articles/16708128591259",
+          "text": "Deutschland - DE"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-es/articles/16708128591259",
+          "text": "España - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-mx/articles/16708128591259",
+          "text": "México - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/fr-fr/articles/16708128591259",
+          "text": "France - FR"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/it-it/articles/16708128591259",
+          "text": "Italia - IT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/ko-kr/articles/16708128591259",
+          "text": "한국 - KO"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/nl-nl/articles/16708128591259",
+          "text": "Nederland - NL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pl-pl/articles/16708128591259",
+          "text": "Polska - PL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pt-br/articles/16708128591259",
+          "text": "Brasil - PT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/sv-se/articles/16708128591259",
+          "text": "Sverige - SV"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/49375912534427",
+          "text": "Salesforce Commerce Cloud"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/16708128591259-How-to-upgrade-your-Salesforce-Commerce-Cloud-cartridge#h_01HMF40ECZC4A278YBHA4YGMCH",
+          "text": "You will learn"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/16708128591259-How-to-upgrade-your-Salesforce-Commerce-Cloud-cartridge#h_01HMF40ECZ3S8ZYXGYCG97G4VW",
+          "text": "Before you begin"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/16708128591259-How-to-upgrade-your-Salesforce-Commerce-Cloud-cartridge#h_01HMF40ECZJAYF5NGF0A8KKCWG",
+          "text": "Understand your current integration"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/16708128591259-How-to-upgrade-your-Salesforce-Commerce-Cloud-cartridge#h_01HMF40ECZ9E2KP016VFD4104Y",
+          "text": "Connect an SFCC sandbox to a Klaviyo test account"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/16708128591259-How-to-upgrade-your-Salesforce-Commerce-Cloud-cartridge#h_01HMF40ECZ3GXCA2P03G7GFBD6",
+          "text": "Remove the previous Klaviyo cartridge code"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/16708128591259-How-to-upgrade-your-Salesforce-Commerce-Cloud-cartridge#h_01HMF40ECZZ3VZF382BD287QCK",
+          "text": "Remove services"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/16708128591259-How-to-upgrade-your-Salesforce-Commerce-Cloud-cartridge#h_01HMF40ECZDFJEV592GZZYSAGC",
+          "text": "Review site preferences"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/16708128591259-How-to-upgrade-your-Salesforce-Commerce-Cloud-cartridge#h_01HMF40ECZQX8D5VJP2ABD9Q65",
+          "text": "Remove the Klaviyo cartridges from the cartridge path"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/16708128591259-How-to-upgrade-your-Salesforce-Commerce-Cloud-cartridge#h_01HMF40ECZ08PH28F19A6VYS6D",
+          "text": "Check the developer console and server side log for errors"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/16708128591259-How-to-upgrade-your-Salesforce-Commerce-Cloud-cartridge#h_01HMF40ECZW931Y2K1P26DB6BR",
+          "text": "Install the new Klaviyo cartridge"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/16708128591259-How-to-upgrade-your-Salesforce-Commerce-Cloud-cartridge#h_01HMF40ECZX77RBV9RW4FMZCZ2",
+          "text": "Verify that all out-of-the-box events are working"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/16708128591259-How-to-upgrade-your-Salesforce-Commerce-Cloud-cartridge#h_01HMF40ECZ7SVWQTW19J4V245A",
+          "text": "Compare event data with production"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/16708128591259-How-to-upgrade-your-Salesforce-Commerce-Cloud-cartridge#h_01HMF40ECZR0W8RF68EPT634BM",
+          "text": "Add back site-specific customizations"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/16708128591259-How-to-upgrade-your-Salesforce-Commerce-Cloud-cartridge#h_01HMF40ECZ28PWHHVFBHY2WH62",
+          "text": "Outcome"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/16708128591259-How-to-upgrade-your-Salesforce-Commerce-Cloud-cartridge#additional-resources",
+          "text": "Additional resources"
+        },
+        {
+          "href": "https://github.com/klaviyo/SFCC_Klaviyo/releases",
+          "text": "available on Klaviyo’s Github"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360033744951",
+          "text": "Getting started with Salesforce Commerce Cloud"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360058323811",
+          "text": "Salesforce Commerce Cloud data reference"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005253208",
+          "text": "How often integrations sync reference"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115001002272",
+          "text": "How to contact support"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115001002272",
+          "text": "Learn how to contact support"
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": ""
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": "Visit Community"
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": ""
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": "Hire a partner"
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/about",
+          "text": "About Klaviyo"
+        },
+        {
+          "href": "https://www.klaviyo.com/newsroom",
+          "text": "Newsroom"
+        },
+        {
+          "href": "https://investors.klaviyo.com/overview/default.aspx",
+          "text": "Investor relations"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Agency and tech partners"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Developers"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/retail",
+          "text": "Retail and ecommerce"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/restaurants",
+          "text": "Restaurant marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/wellness",
+          "text": "Wellness"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform",
+          "text": "B2C CRM overview"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai",
+          "text": "Klaviyo AI (K:AI)"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/marketing-automation",
+          "text": "Klaviyo Marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-service",
+          "text": "Klaviyo Service"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/analytics",
+          "text": "Klaviyo Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-data-platform",
+          "text": "Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare",
+          "text": "Klaviyo vs. Klaviyo alternatives"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-mailchimp",
+          "text": "Klaviyo vs. Mailchimp"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-postscript",
+          "text": "Klaviyo vs. Postscript"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-attentive",
+          "text": "Klaviyo vs. Attentive"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-salesforce-marketing-cloud",
+          "text": "Klaviyo vs. Salesforce"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-listrak",
+          "text": "Klaviyo vs. Listrak"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/omnichannel",
+          "text": "Omnichannel marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/email-marketing",
+          "text": "Email marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing",
+          "text": "SMS marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing/rcs",
+          "text": "RCS for Business"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/mobile-app-marketing",
+          "text": "Mobile app marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/whatsapp",
+          "text": "WhatsApp marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/social",
+          "text": "Social marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources",
+          "text": "Marketing resources"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources/marketing-campaign-calendar",
+          "text": "Marketing campaign calendar"
+        },
+        {
+          "href": "https://www.klaviyo.com/glossary",
+          "text": "Marketing glossary"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/email-subject-line-generator",
+          "text": "Subject line generator"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/roi-calculator",
+          "text": "ROI calculator"
+        },
+        {
+          "href": "https://www.klaviyo.com/customers",
+          "text": "Case studies"
+        },
+        {
+          "href": "https://www.klaviyo.com/composer",
+          "text": "Composer Beta"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/marketing-agent",
+          "text": "Marketing Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/customer-agent",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/customer-experience-hub",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/helpdesk",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/marketing-analytics",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/advanced-cdp",
+          "text": "Advanced Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/web-forms",
+          "text": "Web forms"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/email-templates",
+          "text": "Email templates"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/portfolio",
+          "text": "Portfolio"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform-integrations",
+          "text": "Apps and Integrations"
+        },
+        {
+          "href": "https://www.klaviyo.com/features",
+          "text": "Features"
+        },
+        {
+          "href": "https://www.klaviyo.com/whats-new",
+          "text": "What's new"
+        },
+        {
+          "href": "https://www.klaviyo.com/events",
+          "text": "Events"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help Center"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us",
+          "text": "Academy"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Community"
+        },
+        {
+          "href": "https://www.facebook.com/Klaviyo/",
+          "text": "Facebook"
+        },
+        {
+          "href": "https://twitter.com/klaviyo/",
+          "text": "Twitter"
+        },
+        {
+          "href": "https://www.linkedin.com/company/klaviyo/",
+          "text": "LinkedIn"
+        },
+        {
+          "href": "https://www.instagram.com/klaviyo/",
+          "text": "Instagram"
+        },
+        {
+          "href": "https://www.klaviyo.com/sitemap",
+          "text": "Site Map"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal",
+          "text": "Terms and Privacy"
+        },
+        {
+          "href": "https://www.klaviyo.com/security",
+          "text": "Security"
+        },
+        {
+          "href": "https://www.klaviyo.com/trust",
+          "text": "Trust"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal/intellectual-property-notices",
+          "text": "Intellectual Property Notices"
+        }
+      ],
+      "headings": [
+        {
+          "level": 1,
+          "id": "",
+          "text": "How to upgrade your Salesforce Commerce Cloud cartridge"
+        },
+        {
+          "level": 2,
+          "id": "h_01HMF40ECZC4A278YBHA4YGMCH",
+          "text": "You will learn"
+        },
+        {
+          "level": 2,
+          "id": "h_01HMF40ECZ3S8ZYXGYCG97G4VW",
+          "text": "Before you begin"
+        },
+        {
+          "level": 2,
+          "id": "h_01HMF40ECZJAYF5NGF0A8KKCWG",
+          "text": "Understand your current integration"
+        },
+        {
+          "level": 2,
+          "id": "h_01HMF40ECZ9E2KP016VFD4104Y",
+          "text": "Connect an SFCC sandbox to a Klaviyo test account"
+        },
+        {
+          "level": 2,
+          "id": "h_01HMF40ECZ3GXCA2P03G7GFBD6",
+          "text": "Remove the previous Klaviyo cartridge code"
+        },
+        {
+          "level": 3,
+          "id": "h_01HMF40ECZ8WW1HK7MMXPRFW0M",
+          "text": "For Site Genesis"
+        },
+        {
+          "level": 3,
+          "id": "h_01HMF40ECZWCF082YEA8H6SN55",
+          "text": "For SFRA"
+        },
+        {
+          "level": 2,
+          "id": "h_01HMF40ECZZ3VZF382BD287QCK",
+          "text": "Remove services"
+        },
+        {
+          "level": 2,
+          "id": "h_01HMF40ECZDFJEV592GZZYSAGC",
+          "text": "Review site preferences"
+        },
+        {
+          "level": 2,
+          "id": "h_01HMF40ECZQX8D5VJP2ABD9Q65",
+          "text": "Remove the Klaviyo cartridges from the cartridge path"
+        },
+        {
+          "level": 2,
+          "id": "h_01HMF40ECZ08PH28F19A6VYS6D",
+          "text": "Check the developer console and server side log for errors"
+        },
+        {
+          "level": 2,
+          "id": "h_01HMF40ECZW931Y2K1P26DB6BR",
+          "text": "Install the new Klaviyo cartridge"
+        },
+        {
+          "level": 2,
+          "id": "h_01HMF40ECZX77RBV9RW4FMZCZ2",
+          "text": "Verify that all out-of-the-box events are working"
+        },
+        {
+          "level": 2,
+          "id": "h_01HMF40ECZ7SVWQTW19J4V245A",
+          "text": "Compare event data with production"
+        },
+        {
+          "level": 2,
+          "id": "h_01HMF40ECZR0W8RF68EPT634BM",
+          "text": "Add back site-specific customizations"
+        },
+        {
+          "level": 2,
+          "id": "h_01HMF40ECZ28PWHHVFBHY2WH62",
+          "text": "Outcome"
+        },
+        {
+          "level": 2,
+          "id": "additional-resources",
+          "text": "Additional resources"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "Explore more from Klaviyo"
+        }
+      ]
+    }
+  },
+  "rendered_page": {
+    "status": "fetched",
+    "error": ""
+  }
+}

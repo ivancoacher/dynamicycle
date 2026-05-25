@@ -1,0 +1,37 @@
+<div class="article-content">
+<h2 id="section0">You will learn</h2>
+<p>Learn how to view the raw event or profile activity data that Klaviyo receives from your integrations or API calls. This can be useful if you want to verify a profile's data along with a given event, or simply review this data to better understand what's being captured per metric.</p>
+<h2 id="section1">Finding raw metric data</h2>
+<ol>
+<li>To view raw metric or event data, go to the <strong>Analytics</strong> <strong>&gt;</strong> <strong>Metrics. </strong>
+</li>
+<li>You can view your activity feed data by searching for a metric in the <em>Seach metrics</em> field above or by the clicking into a metric from the list below.</li>
+<li>Once inside the metric, navigate to the <strong>Activity feed</strong> tab.<br><img src="https://klaviyo.zendesk.com/hc/article_attachments/28720891621915" alt="activity_feed_tab.jpg" width="600" height="128">
+<div class="bs-callout bf-callout-default">Note that if you click the activity feed button at the top of the metrics page, you will not be able to see the raw data output here. Profile activity details are only accessible from within a specific metric.</div>
+</li>
+<li>Find a profile that you want to review and click on the <strong>three dot menu</strong> on the right.</li>
+<li>Click on <strong><em>Activity Details</em></strong>.<br><img src="https://klaviyo.zendesk.com/hc/article_attachments/28720891619483" alt="activity_details-new.jpg">
+</li>
+</ol>
+<p>You will then see a modal containing all JSON information related to that metric and specific profile. For example, if you use the <em>Opened Email</em> metric you will see information on the email domain used, associated message, client type, client OS, client OS family, client name, message name, etc. The example below uses <em>Added to Cart</em> and captures information such as the product name, product ID, URL, image URL, price, etc.</p>
+<p class="wysiwyg-text-align-center"><img src="https://klaviyo.zendesk.com/hc/article_attachments/28720891626395" alt="activity_details_modal-new.jpg" width="558" height="445"></p>
+<p>You can then copy a JSON version of any or all of this event data if you wish.</p>
+<center></center>
+<div id="rate_article_container">
+<h2 id="h_01JMFHASF4SXY0ZD222QJZDVF0">Understanding timestamps</h2>
+<p>Now that you retrieved data from the <em>Activity Details</em>, it’s important to understand the meaning behind the two timestamps included in this information. The two times are often but not always identical.</p>
+<p>The first timestamp refers to the time the event is first triggered. For example, if the trigger for a flow is <em>Checkout Started</em>, then this timestamp details exactly when the checkout occurs on your ecommerce site. The second timestamp is the time in which the event appears in Klaviyo. Usually, these timestamps are the same or seconds apart, as shown in the example below.</p>
+<p class="wysiwyg-text-align-center"><img src="https://klaviyo.zendesk.com/hc/article_attachments/28720891616155" alt="Activity details timestamp at top with activity and recorded timestamps as the same value"></p>
+<p>Depending on your <a href="https://help.klaviyo.com/hc/en-us/categories/115000032731-Ecommerce-Integrations" target="_blank" rel="noopener">integration</a>, the time it takes for Klaviyo to receive this information from the other source may lead to a delay. An example of this type of expected delay is displayed below.</p>
+<p class="wysiwyg-text-align-center"><img src="https://klaviyo.zendesk.com/hc/article_attachments/28720846537371" alt="Activity details timestamp at top with activity and recorded timestamps as different values"></p>
+<p>In the examples above, the first timestamp is the same (first image), and the second timestamp (second image) states exactly when Klaviyo registers the event from your integration. Learn more about <a href="https://klaviyo.zendesk.com/hc/en-us/articles/115005253208" target="_blank" rel="noopener">how often particular integrations sync</a>.</p>
+<h4 id="h_01JMFHASF57JN6J8ZQVNSP1PZH">Why both timestamps are important</h4>
+<p>Understanding timestamps is vital to ensuring that your emails are timely and relevant. It's important to take any delay in event syncing into consideration when planning your marketing strategy, especially when creating flows. For an abandoned cart flow, if a customer begins a checkout and then completes their purchase, this event data may take an hour (as is the case for WooCommerce) for Klaviyo to register that they completed a purchase. If you set your first flow email to send out a half-hour after the <em>Checkout Started</em> event and we have not received confirmation that the checkout was completed, this customer may receive the abandoned cart flow email by mistake.</p>
+<p>In general, if you have an integration with a sync delay, we recommend that you set your flow emails to send an hour (or later) after a trigger event to avoid unintended consequences. This is best practice, with the exception of a welcome series which often sends immediately after someone subscribes and would not be affected negatively by a time delay.</p>
+<h2 id="h_01JMFHASF557P7GRAQ0X4MCE9J">Additional resources</h2>
+<ul>
+<li><a href="https://klaviyo.zendesk.com/hc/en-us/articles/115005253208" target="_blank" rel="noopener">How often integrations sync reference</a></li>
+<li><a href="https://klaviyo.zendesk.com/hc/en-us/articles/115005076787" target="_blank" rel="noopener">Getting started with metrics</a></li>
+</ul>
+</div>
+</div>

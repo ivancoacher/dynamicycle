@@ -1,0 +1,453 @@
+<h2 id="h_01HBVE5VJJZ61P9CDGA1ZTERF6">You will learn </h2>
+<p>Learn how to set up single sign-on (SSO) for your Klaviyo account or portfolio. Currently, only identity provided (IdP) single sign-on is supported in Klaviyo.</p>
+<div class="accordion accordion--default">
+<div class="accordion__item">
+<div class="accordion__item-title"><strong>Why use SSO?</strong></div>
+<div class="accordion__item-content">
+<p>Single sign-on (SSO) helps protect you, as well as your customers, by making your account more secure. If you have SSO set up for your business, you can require your Klaviyo users to log in using their SSO credentials.</p>
+<p>Plus, if you use SSO for your organization, you and your users can remain logged in to Klaviyo for a longer period of time before re-entering your credentials.</p>
+</div>
+</div>
+</div>
+<h2 id="h_01HBVE5VJJXK6TXC10N0CMMHMY">Before you begin</h2>
+<div class="bs-callout bs-callout-warning">
+<p>We strongly suggest reaching out to your company’s IT department to help you set this up because there are certain steps you will need to take within your company’s identity provider. If needed, you can temporarily <a href="https://help.klaviyo.com/hc/en-us/articles/360053547071">make them an admin in your account</a> to set up SSO.</p>
+</div>
+<p>Please note: </p>
+<ul>
+<li>You must have a paid plan to use SSO. </li>
+<li>You must be an Owner or Admin to set up this feature.</li>
+<li>Klaviyo does not support service provider (SP) SSO, only IdP SSO.</li>
+</ul>
+<p>If you use identity provided (IdP) single sign-on (SSO), you can use this to log in to Klaviyo. Security assertion markup language 2.0 (SAML 2.0) SSO gives members access to Klaviyo through an IdP of your choice.</p>
+<p>Examples of IdP SSO providers include Okta, OneLogin, Microsoft Entra ID, and more. </p>
+<div class="bs-callout bs-callout-default">
+<p>If you enforce SSO for all users, any new user will need to accept the invitation and then log in using SSO. </p>
+</div>
+<div class="accordion accordion--default">
+<div class="accordion__item">
+<div class="accordion__item-title"><strong>View and use the exemption list</strong></div>
+<div class="accordion__item-content">
+<p>Users added to the exemption list will be able to bypass SSO and log in with a username and password when SSO is enforced for a company. This is important if there is an IdP outage or when you do not want to add a partner, contractor, or agency member to your IdP instance.</p>
+<p>Note that you will only be able to view the exemption list once SSO is set up. </p>
+</div>
+</div>
+<div class="accordion__item">
+<div class="accordion__item-title"><strong>What is a workplace ID?</strong></div>
+<div class="accordion__item-content">
+<p>Also called the SSO login identifier, the workplace ID is required to set up SAML SSO in Klaviyo. It is usually the same name as your company. You'll create this ID as part of step 3 of the Klaviyo setup process (discussed in this section below).</p>
+<p>After setting up a workplace ID, users can go directly to your company's custom URL (e.g., www.klaviyo.com/sso/workplace/&lt;id&gt;) to log in to Klaviyo. We recommend telling users to bookmark this URL to speed up the login process.  </p>
+<ul>
+<li>The ID cannot be longer than 63 characters.</li>
+<li>The ID must be URL safe, so it can contain only upper- or lowercase letters, hyphens (-), periods (.), underscores (_), and tildes (~).</li>
+<li>The ID should be simple and easy for users to remember (such as your company name).
+<ul>
+<li>For example, Klaviyo’s workplace ID is “Klaviyo.”</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<h3 id="h_01HC074EC31RW8NNG8S72S4YJT">About just-in-time (JIT) provisioning</h3>
+<p>After you set up SSO, you will have the option to enable just-in-time (JIT) provisioning in Klaviyo. When a user is added to an account with JIT provisioning, the user will need to accept the invite in their email to start accessing the account.</p>
+<p>Note that once SSO is enabled and JIT provisioning is turned on, you can only update the <a href="https://help.klaviyo.com/hc/en-us/articles/115005231648">user's Klaviyo role</a> inside of the IdP and will no longer be able to update any roles inside of Klaviyo. To update a role, you will need to do so inside your IdP or by temporarily turning off both JIT and <a href="https://help.klaviyo.com/hc/en-us/articles/10952782535579">SCIM</a> to update inside of Klaviyo.</p>
+<div class="accordion accordion--default">
+<div class="accordion__item">
+<div class="accordion__item-title"><strong>What is JIT?</strong></div>
+<div class="accordion__item-content">
+<p>When JIT provisioning is enabled, IT admins no longer need to create accounts manually for each user in each of their applications. Instead, user accounts are created the first time users try to log in to an application, as long as the user has permission for that app.</p>
+<p>For instance, IT admins can automatically grant Klaviyo access to all users in their IdP so that those users' accounts will automatically be created the first time they log in to Klaviyo via their SSO portal or through Klaviyo-initiated login.</p>
+</div>
+</div>
+</div>
+<h2 id="h_01HBVE5VJK55AK4ZAZWZWX9ZTP">Set up SAML SSO</h2>
+<ol>
+<li>In Klaviyo, click your organization name in the bottom left corner.</li>
+<li>Click <strong>Settings</strong>. </li>
+<li>Select <strong>Security</strong>.</li>
+<li>Click <strong>Set up SSO</strong>. (Note that multi-factor authentication is not required.)<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28716331657371" alt="Security tab in Klaviyo">
+</li>
+<li>Copy the <em>Klaviyo SSO URL</em> and<em> Audience URI (Service Provider Entity ID)</em> for use in the next section.<br>
+</li>
+</ol>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/28716354655515" alt="Top of the SSO configuration page, where you copy the Klaviyo SSO URL and audience URI"></p>
+<h2 id="h_01HCN7BZ47KQWZBN92ZZ1GR2HV">Log in to your SSO provider</h2>
+<p>Open the dropdowns below for IdP-specific instructions. In general, you will need to: </p>
+<ol>
+<li>Open a new tab and log in to your SSO provider. </li>
+<li>Find the confirmation settings for your provider.</li>
+<li>Paste in the Klaviyo SSO URL and save.</li>
+<li>Download or locate your IdP’s metadata. </li>
+<li>Assign users and their roles to the Klaviyo app.</li>
+</ol>
+<ul>
+<ul>
+<li>To have your role passing correctly to Klaviyo, we recommend using the key format. (Some IdPs convert attributes to lowercase in their protocol, so the label format is not recommended) </li>
+</ul>
+</ul>
+<table style="width: 100%">
+<tbody>
+<tr>
+<td style="width: 50%"><strong>Account user roles</strong></td>
+<td style="width: 50%"><strong>Portfolio user roles</strong></td>
+</tr>
+<tr>
+<td style="width: 50%">owner</td>
+<td style="width: 50%">portfolio_owner</td>
+</tr>
+<tr>
+<td style="width: 50%">admin</td>
+<td style="width: 50%">portfolio_admin</td>
+</tr>
+<tr>
+<td style="width: 50%">manager</td>
+<td style="width: 50%">portfolio_manager</td>
+</tr>
+<tr>
+<td style="width: 50%">analyst</td>
+<td style="width: 50%">portfolio_analyst</td>
+</tr>
+<tr>
+<td style="width: 50%">campaign_coordinator</td>
+<td style="width: 50%"></td>
+</tr>
+<tr>
+<td style="width: 50%">content_creator</td>
+<td style="width: 50%"></td>
+</tr>
+<tr>
+<td style="width: 50%">support</td>
+<td style="width: 50%"></td>
+</tr>
+</tbody>
+</table>
+<div class="bs-callout bs-callout-default">
+<p>The roles depend on the type of account where you're setting up SSO. In a normal account, only <a href="https://help.klaviyo.com/hc/en-us/articles/115005231648">account user roles</a> are applicable. In a portfolio account, only <a href="https://help.klaviyo.com/hc/en-us/articles/25181702319643">portfolio user roles</a> are applicable</p>
+</div>
+<div class="accordion accordion--default">
+<div class="accordion__item">
+<div class="accordion__item-title"><strong>Okta</strong></div>
+<div class="accordion__item-content">
+<ol>
+<li>Log in to your Okta admin account. </li>
+<li>Navigate to <strong>Application &gt; Applications</strong>. </li>
+<li>Select <strong>Create App Integration</strong>.<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28716331667611" alt="Applications page in Okta, where you can create app integration">
+</li>
+<li>In the modal, select the option for <strong>SAML 2.0</strong>.<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28716354670747" alt="Sign-in options when SAML 2.0 is selected">
+</li>
+<li>Click <strong>Next</strong>. </li>
+<li>Name the integration (e.g., “Klaviyo”).<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28716331685403" alt="Step 1 of the Okta integration wizard, where you can name the app">
+</li>
+<li>Click <strong>Next</strong>.</li>
+<li>In the <em>Single sign-on URL</em> field, paste in the <em>Klaviyo SSO URL </em>from the Klaviyo SSO setup screen. </li>
+<li>In the <em>Audience URI (SP Entity ID)</em> field, paste the <em>Audience URI (Service Provider Entity ID)</em> from Klaviyo.</li>
+<li>Set the <em>Name ID</em> format field to <strong>EmailAddress</strong>.</li>
+<li>Change the <em>Application username </em>to <strong>Email</strong>. </li>
+<li>Check that the <em>Update application username on </em>is set to <strong>Create and update</strong>. <br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28716354798619" alt="SAML configuration settings to for the Klaviyo integration">
+</li>
+<li>Click <strong>Next</strong>. </li>
+<li>Select <strong>I’m an Okta </strong><strong>customer adding an internal app</strong>. <br>
+<ul>
+<ul>
+<li>You do not need to check or fill out any other information on this page. </li>
+</ul>
+</ul>
+</li>
+<li>Scroll to the bottom of the page and click <strong>Finish</strong>. </li>
+<li>Go to the <strong>Sign On </strong>tab.<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28716354685211" alt="Sign On tab for an app in Okta">
+</li>
+<li>Scroll down to the <em>SAML Signing Certificates</em> section.</li>
+<li>Find an active certificate and then click the <strong>Actions </strong>dropdown. </li>
+<li>Click <strong>View IdP metadata</strong>.<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28716354687515" alt="Actions dropdown when View IdP metadata is selected">
+</li>
+<li>A new tab will open that should look like the one below.<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28716331703067" alt="Example of the XML metadata page">
+</li>
+<li>In the new tab, right click and select <strong>Save as &gt; Save</strong> so that you can upload this file to Klaviyo later. </li>
+<li>Navigate back to Okta. </li>
+<li>Go to the <strong>Assignments </strong>tab. </li>
+<li>Click <strong>Assign</strong>.</li>
+<li>Choose whether to assign the app to an individual (i.e., people) or to a group.<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28716354673435" alt="Options to assign users to an app by people or groups">
+</li>
+<li>Find the people or groups you want to assign Klaviyo to, and click <strong>Assign </strong>next to their name(s).<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28716331705371" alt="Example of assigning a user by the People option">
+</li>
+<li>If you’re selecting individuals: <br>
+<ul>
+<ul>
+<li>Choose the username for each individual; the default is their username in Okta.</li>
+<li>Click <strong>Save and go back</strong>.<br>
+</li>
+</ul>
+</ul>
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28716331709211" alt="Modal to assign a username to an individual">
+</li>
+<li>When you are finished, click <strong>Done</strong>. </li>
+</ol>
+</div>
+</div>
+<div class="accordion__item">
+<div class="accordion__item-title"><strong>One Login</strong></div>
+<div class="accordion__item-content">
+<ol>
+<li>Log in to your One Login account.</li>
+<li>Navigate to <strong>Applications &gt; Applications</strong>.<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28716331678363" alt="Applications dropdown when the subitem Applications is highlighted">
+</li>
+<li>Click <strong>Add App </strong>in the upper right corner.<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28716331682971" alt="Applications page in One Login when Add App is selected">
+</li>
+<li>Search for “Klaviyo” and then select the result that appears.<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28716354700443" alt="Searching Klaviyo in the One Login apps">
+</li>
+<li>Optional: choose the display name, upload a new icon, or add a description for this app.</li>
+<li>Click <strong>Save</strong> in the upper right. </li>
+<li>Navigate to <strong>Configuration </strong>in the left sidebar.<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28716331718427" alt="Configuration page with no information in it">
+</li>
+<li>In the <em>SAML Consumer URL </em>field, paste your <em>Klaviyo SSO URL</em>. </li>
+<li>In the <em>Audience (SP EntityID) </em>field, paste your <em>Audience URI (Service Provider Entity ID)</em>. </li>
+<li>Click <strong>Save</strong>. </li>
+<li>Click <strong>SSO </strong>in the left sidebar. </li>
+<li>Open the <em>SAML Signature Algorithm </em>dropdown.</li>
+<li>Select <strong>SHA-256</strong>.<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28716354710939" alt="SAML Signature Algorithm dropdown when SHA-256 is highlighted">
+</li>
+<li>Optional: scroll down to change your login display settings.<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28716331729179" alt="Login display settings for an app in One Login">
+</li>
+<li>Click <strong>Save</strong>. </li>
+<li>Open the <strong>More Actions</strong> dropdown in the upper right.</li>
+<li>Select <strong>SAML Metadata</strong>. This will download the file you need to upload in the next section.<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28716331734939" alt="More Actions dropdown when SAML metadata is highlighted">
+<p>Before moving on to the next section, you need to add users to the Klaviyo app in One Login and then assign their roles. </p>
+</li>
+<li>To add users to the Klaviyo app, click <strong>Users &gt; Users</strong> in the upper left.<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28716331739163" alt="Users menu dropdown">
+</li>
+<li>Select a user to access Klaviyo. We recommend assigning the person who is setting up SSO in Klaviyo. </li>
+<li>Select <strong>Applications </strong>in the left sidebar.</li>
+<li>Click the plus button on the right side to add an application to this user.</li>
+<li>Select <strong>Klaviyo</strong> from the dropdown.<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28716354727579" alt="Selecting Klaviyo as the application for a user">
+</li>
+<li>Click <strong>Continue</strong>. </li>
+<li>In the resulting modal, scroll down to the <em>role </em>dropdown.</li>
+<li>Open this dropdown and select the <a href="https://help.klaviyo.com/hc/en-us/articles/115005231648">Klaviyo role</a> this user should be assigned.<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28716331715099" alt="Selecting a Klaviyo role for a user">
+</li>
+<li>Click <strong>Save</strong>. </li>
+</ol>
+</div>
+</div>
+<div class="accordion__item">
+<div class="accordion__item-title"><strong>Microsoft Entra ID (Azure AD)</strong></div>
+<div class="accordion__item-content">
+<ol>
+<li>Log in to Microsoft Entra ID (formerly known as Azure AD).</li>
+<li>Click <strong>Microsoft Entra ID</strong>. </li>
+<li>Select the <strong>Add</strong> dropdown and then click <strong>Enterprise Application</strong>.</li>
+<li>Click <strong>Create your own application</strong>.<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28716354728219" alt="Microsoft Entra ID Gallery, where you can create an application">
+</li>
+<li>Name the application “Klaviyo,” then click <strong>Create</strong>. </li>
+<li>Click <strong>Single sign-on</strong> in the left sidebar.<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28716331767067" alt="Single sign-on method page for an application, which defaults to disabled">
+</li>
+<li>Select <strong>SAML</strong>. </li>
+<li>Click <strong>Edit </strong>in the <em>Basic SAML Configuration </em>box.<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28716331749787" alt="Basic SAML configuration box, step 1 in the single sign-on page">
+</li>
+<li>In the right sidebar that appears, click <strong>Add identifier </strong>under <em>Identifier (Entity ID)</em>.<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28716331753115" alt="Sidebar to configure SAML for an application's SSO">
+</li>
+<li>In the field that appears, paste in the <em>Audience URI</em><em>(Service Provider Entity ID) </em>from Klaviyo.</li>
+<li>Under <em>Reply URL (Assertion Consumer Service URL)</em>, click <strong>Add reply URL</strong>. </li>
+<li>Here, paste the <em>Klaviyo SSO URL </em>from Klaviyo.<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28716331755419" alt="Example of SAML configuration after adding an identifier and Reply URL">
+</li>
+<li>Note: if you want to add in a <em>Sign on URL</em>, you must first create a workplace ID, which is discussed in the next section. We recommend finishing the setup process and then coming back to this step. </li>
+<li>Click <strong>Save </strong>in the top left corner of the sidebar before clicking the <strong>X </strong>in the upper right. </li>
+<li>Scroll down to the <em>SAML Certificates </em>box (step 3 on the <em>Single sign-on page</em> in Entra).<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28716354742555" alt="Step 3 of the Single sign-on page">
+</li>
+<li>Next to <em>Federation Metadata XML</em>, click <strong>Download</strong>.<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28716354754203" alt="SAML certificates box where only the Federated Metadata XML option is highlighted">
+</li>
+<li>Still within the <em>SAML Certificates</em> box, click <strong>Edit </strong>in the upper right.</li>
+<li>In the sidebar that appears on the right, check that the:<br>
+<ul>
+<ul>
+<li>
+<em>Signing Option </em>requires that the SAML assertion be signed (here, we set it to <strong>Sign SAML assertion</strong>). Note that signing the response is optional. </li>
+<li>
+<em>Signing Algorithm </em>is set to <strong>SHA-256</strong>.<br>
+</li>
+</ul>
+</ul>
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28716331761307" alt="Sidebar to edit the SAML certificates' signing option and algorithm">
+</li>
+<li>Scroll back up to the <em>Attributes &amp; Claims</em> box (step 2 on <em>Single sign-on page</em> in Entra) and click <strong>Edit</strong>.<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28716354759579" alt="Step 2 of the Single sign-on page, which is the Attributes and claims box">
+</li>
+<li>Click <strong>Unique User Identifier (Name ID)</strong> in the <em>Required Claim </em>section.<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28716354763419" alt="Manage claim modal where the Unique User Identifier row is highlighted">
+</li>
+<li>Click the <strong>Source attribute </strong>dropdown.<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28716331779995" alt="Source attribute field for the unique user identifier">
+</li>
+<li>Search for “user.mail” and then select it.<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28716354776347" alt="Searching user.mail for the source attribute">
+</li>
+<li>Click <strong>Save</strong> in the upper left corner to go back to the <em>Attributes &amp; Claims </em>page. </li>
+<li>Select <strong>Add new claim</strong> in the upper left.<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28716354779419" alt="Adding new claim in the Attributes &amp; Claim page">
+</li>
+<li>Enter “role” for the name. </li>
+<li>Change the <em>Source attribute </em>to "user.assignedroles."<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28716331810331" alt="Azure 14 new role claim.png">
+</li>
+<li>Click <strong>Save</strong>. </li>
+<li>Click <strong>Home</strong> to go back to the directory. </li>
+<li>In the left sidebar, click <strong>App registrations</strong>.<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28716354789659" alt="App registrations tab in the left sidebar">
+</li>
+<li>Go to the <strong>All applications </strong>tab.<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28716354791707" alt="All applications tab in the app registrations page">
+</li>
+<li>Click into the Klaviyo app.</li>
+<li>Select <strong>App roles &gt; Create app role</strong>.<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28716354783003" alt="Create app role in the app roles page">
+</li>
+<li>Create the display name for each role.</li>
+<li>Select <strong>Users/Groups</strong> as the <em>Allowed member types</em>.</li>
+<li>Assign one of these values exactly how it appears below:<br>
+
+<ul>
+<ul>
+<li>admin</li>
+<li>manager</li>
+<li>analyst</li>
+<li>campaign_coordinator</li>
+<li>content_creator</li>
+<li>support<br>
+</li>
+</ul>
+</ul>
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28716331794459" alt="Example of assigning a user as the owner of a Klaviyo account">
+</li>
+<li>Add a description, then click <strong>Apply</strong>.<br>
+<p>Then, to assign users to the Klaviyo app, follow these steps: </p>
+</li>
+<li>Navigate to <strong>Microsoft Entra ID &gt; Enterprise applications</strong>. </li>
+<li>Click the <strong>Klaviyo</strong> app.</li>
+<li>Navigate to <strong>Users and groups &gt; Add user/group</strong>.<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28716331802267" alt="Users and groups page for the example Klaviyo application">
+</li>
+<li>Click into <strong>Users</strong> to populate the right sidebar. <br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28716354796443" alt="Selecting users for an app">
+</li>
+<li>Select the user(s) you want to add to the Klaviyo app.</li>
+<li>Click <strong>Select</strong>.</li>
+<li>Click into <strong>Select a role</strong>.<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28716331796635" alt="Assigning roles for the selected users">
+</li>
+<li>Choose the role this user should have in Klaviyo. </li>
+<li>Click <strong>Select</strong> to confirm the role. </li>
+<li>Click <strong>Assign</strong> in the bottom left. </li>
+</ol>
+</div>
+</div>
+</div>
+<h2 id="h_01HCN7BZ48EE7YH5ZH01HD9CZ9">Finish setup in Klaviyo</h2>
+<ol>
+<li>Navigate back to your Klaviyo tab to the <em>SSO Setup </em>page.</li>
+<li>Choose to either:<br>
+<ul>
+<ul>
+<li>Add in your IdP issuer and SSO.<br>
+Or</li>
+<li>Upload a file with this information.<br>
+</li>
+</ul>
+</ul>
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28716354659099" alt="Second step of the SSO configuration page, where you add information about your iDP issuer">
+</li>
+<li>Create your SSO login identifier (also called the workplace ID) for your SSO login; often, this is the same name as your company.<br>
+
+<ul>
+<ul>
+<li>The ID cannot be longer than 63 characters.</li>
+<li>The ID must be URL safe, so it can contain only upper- or lowercase letters, hyphens (-), periods (.), underscores (_), and tildes (~).</li>
+<li>The ID should be simple and easy for users to remember (such as your company name).
+<ul>
+<li>For example, Klaviyo’s workplace ID is “Klaviyo.”</li>
+</ul>
+</li>
+</ul>
+</ul>
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28716354664987" alt="Third step of the SSO configuration page, where you add your workplace ID">
+</li>
+<li>Click <strong>Test SSO</strong>.</li>
+<li>Check the<strong> Enable SSO </strong>box. </li>
+<li>Optional: check one or more of the following boxes.</li>
+</ol>
+<ul>
+<ul>
+<li>Require SSO for all users.</li>
+<li>IdP initiated log in.</li>
+<li>Just-in-time (JIT) provisioning.<br>
+</li>
+</ul>
+</ul>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/28716354646811" alt="Options for using SSO once it's been set up" width="522" height="338"></p>
+<h2 id="h_01HBVE5VJKTB1A6P03TJV96S2V">Outcome </h2>
+<p>Now you'll be able to log in to Klaviyo using your SSO provider. </p>

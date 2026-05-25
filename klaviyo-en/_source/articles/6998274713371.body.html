@@ -1,0 +1,137 @@
+<h2 id="h_01G6W4E472QT850B5ZPSEKFEX5">Before you begin</h2>
+<p><em>Started Checkout</em> tracking is included with many ecommerce integrations and does not require any additional setup. Before consulting this guide, make sure you have properly set up, configured, and enabled your ecommerce integration.</p>
+<p>It is important to understand how <em>Started Checkout </em>events trigger for different integrations. See the list below for a quick overview on how each ecommerce integration triggers the event. You can click on the name of each integration to learn more.</p>
+<ul>
+<ul>
+<li>A customer is logged into their account, adds something to their cart, then views the checkout page</li>
+<li>A customer who is not logged in adds something to their cart, views the checkout page, and enters a billing email address</li>
+</ul>
+<li>
+<a href="https://help.klaviyo.com/hc/en-us/articles/115005080447">Shopify</a><br>
+Referred to as <em>Checkout Started</em> and tracks after a customer fills out the email address field on the checkout page. This applies to both one-page checkout and multi-page checkout.</li>
+<li>
+<a href="https://help.klaviyo.com/hc/en-us/articles/115005082587">BigCommerce</a><br>
+Tracks when a customer enters their contact and shipping information on the first page of the BigCommerce checkout process and clicks “Continue”</li>
+<li>
+<a href="https://help.klaviyo.com/hc/en-us/articles/115005254528">Magento 1</a><br>
+Referred to as <em>Checkout Started</em> and tracks when a customer enters their contact and shipping information on the first page of the Magento checkout process and clicks “Continue”</li>
+<li>
+<a href="https://help.klaviyo.com/hc/en-us/articles/115003458852">Magento 2</a><br>
+This event only tracks if the customer does not proceed to place an order by the time a Magento 2 periodic sync occurs (which happens every 30 minutes.) For example, if a customer starts checkout right after the last periodic sync but does not complete checkout within 30 minutes, a <em>Started Checkout</em> event is sent to Klaviyo. If they proceed to place an order within those 30 minutes, a <em>Started Checkout</em> event will not be recorded, and a <em>Placed Order</em> event will track instead.<br>
+<br>
+This event tracks when one of the following occurs:
+<ul>
+<li>A customer is logged into their account, adds something to their cart, then views the checkout page</li>
+<li>A customer who is not logged in adds something to their cart, views the checkout page, and enters a billing email address</li>
+<li>A customer logs into their account, adds something to their cart, and navigates to the checkout page</li>
+<li>Without logging in, or using guest checkout, a customer adds something to their cart, navigates to the checkout page, and enters their email address</li>
+</ul>
+</li>
+<li>
+<a href="https://help.klaviyo.com/hc/en-us/articles/360030732832">WooCommerce</a><br>
+Tracks when one of the following occurs:</li>
+<li>
+<a href="https://help.klaviyo.com/hc/en-us/articles/360055123191">PrestaShop</a><br>
+Tracks when one of the following occurs:</li>
+<li>
+<a href="https://help.klaviyo.com/hc/en-us/articles/115005083107">Shift4Shop</a><br>
+Tracks when a customer enters their contact and shipping information on the first page of the Shift4Shop checkout process and clicks “Continue”</li>
+</ul>
+<p>If you’re using an ecommerce platform without a pre-built Klaviyo integration, or a custom platform, learn <a href="https://developers.klaviyo.com/en/docs/guide-to-integrating-a-platform-without-a-pre-built-klaviyo-integration#started-checkout">how to enable Started Checkout tracking</a> on our Developer site.</p>
+<h2 id="h_01G6W4EPHW2E7Y4E662V5YE8SP">Test Started Checkout events</h2>
+<div class="bs-callout bs-callout-default">
+<p>The <em>Started Checkout </em>event is commonly used to set up abandoned cart flows. If you have recently set up your account and are attempting to create an abandoned cart flow from Klaviyo’s Flows Library, you may encounter the following warning message:</p>
+<p>"We have not received any recent <em>Started Checkout</em> events. If you think there might be a problem, contact our Success Team for help."</p>
+<p>This does not necessarily mean there is a problem with your account or integration, but it may mean no <em>Started Checkout</em> events have triggered yet. If your site is new, this is most likely the case. You can trigger an event by following the steps below to cause this warning to disappear.</p>
+</div>
+<p>To test your <em>Started Checkout </em>tracking is set up properly, follow these steps:</p>
+<ol>
+<li>Navigate to your website.</li>
+<li>Navigate to a product page on your site with a product in stock.</li>
+<li>Click the “Add to Cart” button on the page.</li>
+<li>Proceed to checkout with the item(s) in your cart.</li>
+<li>On the first page of checkout, fill out all required contact information and click <strong>Continue</strong> to move to the next step of the checkout process.</li>
+<li>Search in Klaviyo for the email address you used during checkout<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28716066498843" alt="The searchbar can be found in the top right of Klaviyo where you can search for profiles by email address.">
+<p>You should see that a Klaviyo profile has been created for you (if one didn't exist already) and that a <em>Started Checkout </em>event has been tracked on your activity feed.</p>
+<div class="bs-callout bs-callout-default">
+<p>Not all ecommerce integrations sync data in realtime due to limitations with some ecommerce platforms. For some integrations, you may need to wait 30 minutes to an hour before events are tracked. Please see our article on <a href="https://help.klaviyo.com/hc/en-us/articles/115005253208">how often integrations sync</a> for more information.</p>
+</div>
+<p>To see a feed of all <em>Started Checkout </em>metrics over time:</p>
+</li>
+<li>Navigate to the <a href="https://www.klaviyo.com/analytics/">Analytics tab</a> of your account.</li>
+<li>Click into <strong>Metrics.</strong>
+</li>
+<li>Filter by <em>Started Checkout </em>(or <em>Checkout Started</em> for Shopify and Magento 1) to view tracked data in an activity feed, activity map, charts, best people, and cohort reports.<br>
+</li>
+</ol>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/28716056049691" alt="At the top of the Metrics page there is a searchbar where you can search for different metric by name."></p>
+<p>Once you’ve reviewed the troubleshooting scenarios below and made changes, you should test your tracking again to make sure it’s working correctly. </p>
+<h2 id="01H8KXNDHRNTS8CB09T2XSW21E">Troubleshooting scenarios</h2>
+<p>Review the following questions in order to diagnose the cause of your <em>Started Checkout</em> issues. Note that some steps are general, and others depend on what ecommerce platform you are using.</p>
+<div class="accordion accordion--default">
+<div class="accordion__item">
+<div class="accordion__item-title"><strong>Are you having issues tracking other metrics as well?</strong></div>
+<div class="accordion__item-content">
+<p>If you are having issues tracking other metrics as well as <em>Started Checkout</em>, there may be an issue with your integration’s setup.</p>
+<p>Follow these steps to see if your integration is set up correctly:</p>
+<ol>
+<ol>
+<li>If the keys appear to match on both sides, check to see if there are any blank spaces before or after the keys. Delete any leading or trailing blank spaces because they can cause errors.</li>
+</ol>
+<li>Navigate to the Integrations page of your account.</li>
+<li>In the <em>Enabled Integrations</em> tab, make sure that your ecommerce integration is in the list. Otherwise, follow the relevant setup guide linked in the <a href="#h_01G6W4E472QT850B5ZPSEKFEX5">Before you begin section</a> of this article to make sure you have followed all steps correctly for setting up and configuring your ecommerce integration. </li>
+<li>If your ecommerce integration is enabled, click <strong>View Settings</strong> to check for error messages related to the integration and that all required fields have been filled out.<br>
+<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28716066504091" alt="The integration settings link can be found to the right of each integration in the Enabled Integrations tab.">
+</li>
+<li>If your integration requires use of a public API key, private API key, consumer key, and/or consumer secret, make sure the information in Klaviyo matches what is in your ecommerce platform.</li>
+<li>If you are still encountering issues with your integration, please <a href="https://help.klaviyo.com/hc/en-us/articles/115001002272-How-to-Contact-Support">contact Klaviyo support</a> for further troubleshooting.</li>
+</ol>
+</div>
+</div>
+<div class="accordion__item">
+<div class="accordion__item-title"><strong>Have you recently switched ecommerce platforms?</strong></div>
+<div class="accordion__item-content">
+<p>When you migrate ecommerce platforms, make sure to switch the metrics used for your flows and analytics to the metrics for your new ecommerce platform. For example, if you were to switch from BigCommerce to Shopify, your account’s analytics and flows may still be set to use BigCommerce’s <em>Started Checkout </em>metric rather than Shopify’s <em>Started Checkout</em> metric. See the guides below for further assistance:</p>
+<ul>
+<li><a href="https://help.klaviyo.com/hc/en-us/articles/360003124151-Updating-Klaviyo-After-Switching-Ecommerce-Platforms">How to update Klaviyo after switching ecommerce platforms</a></li>
+<li><a href="https://help.klaviyo.com/hc/en-us/articles/115005199947-How-to-Change-the-Conversion-Metric-for-Flow-and-Campaign-Reports">How to change the conversion metric for flow and campaign reports</a></li>
+<li><a href="https://help.klaviyo.com/hc/en-us/articles/115002775052-How-to-change-a-flow-trigger">How to change a flow trigger</a></li>
+</ul>
+</div>
+</div>
+<div class="accordion__item">
+<div class="accordion__item-title"><strong>Are you using a third-party service for your checkout page?</strong></div>
+<div class="accordion__item-content">
+<p>If you are using a third-party app or extension to handle your checkout process, this may prevent checkout events from triggering properly for your ecommerce platform which will in turn prevent Klaviyo from tracking <em>Started Checkout </em>events.</p>
+<p>In order to test for this, try disabling the app or extension responsible for managing your checkout process and see if you are able to trigger a <em>Started Checkout </em>event using the steps provided in the <a href="#h_01G6W4EPHW2E7Y4E662V5YE8SP">Test Started Checkout events section</a> of this guide.</p>
+</div>
+</div>
+<div class="accordion__item">
+<div class="accordion__item-title"><strong>For Wix users: Does your store use a single page for checkout?</strong></div>
+<div class="accordion__item-content">
+<p>In order for Klaviyo to track <em>Started Checkout </em>events on Wix, the shipping and billing info must be on separate pages. If you have a single page checkout process, it is recommended that you adjust any settings, theme, or extension to ensure your checkout process requires the customer to enter information on multiple pages.</p>
+</div>
+</div>
+<div class="accordion__item">
+<div class="accordion__item-title"><strong>For WooCommerce and Magento users: Are you using the most recent version of your integration plugin?</strong></div>
+<div class="accordion__item-content">
+<p>If you are using WooCommerce or Magento, problems with <em>Started Checkout </em>tracking might be related to other issues with your platform’s Klaviyo plugin.</p>
+<p>Check to see if you are using the most up-to-date version of the plugin for your integration. If needed, update to the latest version within WooCommerce or Magento, or you can download the latest version from the relevant platform’s listing.</p>
+<ul>
+<ul>
+<li><a href="https://marketplace.magento.com/klaviyo-magento2-extension.html">Setup Wizard install</a></li>
+<li><a href="https://packagist.org/packages/klaviyo/magento2-extension">Composer install</a></li>
+</ul>
+<li><a href="https://wordpress.org/plugins/klaviyo/">Klaviyo WordPress (WooCommerce) plugin</a></li>
+<li><a href="https://www.klaviyo.com/media/downloads/MagentoKlaviyo-Latest.tgz">Klaviyo Magento 1 extension</a></li>
+<li>Klaviyo Magento 2 extension</li>
+</ul>
+</div>
+</div>
+</div>
+<h2 id="01H8KXNDHS5FSC6S1NQF8TGDMS">Contact Klaviyo support</h2>
+<p>If you are still encountering issues after consulting this list and testing your tracking, please reach out in our <a href="https://community.klaviyo.com/got-a-question-1">Community</a> or to our <a href="https://help.klaviyo.com/hc/en-us/articles/115001002272-How-to-Contact-Support">Support Team</a>.</p>

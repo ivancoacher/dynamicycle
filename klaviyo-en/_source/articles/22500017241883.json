@@ -1,0 +1,900 @@
+{
+  "captured_at": "2026-05-23T16:15:09Z",
+  "article": {
+    "id": 22500017241883,
+    "url": "https://klaviyo.zendesk.com/api/v2/help_center/en-us/articles/22500017241883.json",
+    "html_url": "https://klaviyo.zendesk.com/hc/en-us/articles/22500017241883-How-to-add-Klaviyo-Reviews-widgets-to-your-mobile-app-using-Tapcart",
+    "author_id": 390819509472,
+    "comments_disabled": true,
+    "draft": false,
+    "promoted": false,
+    "position": 0,
+    "vote_sum": 0,
+    "vote_count": 0,
+    "section_id": 49375666744731,
+    "created_at": "2024-01-30T16:27:15Z",
+    "updated_at": "2026-04-20T16:49:29Z",
+    "name": "How to add Klaviyo Reviews widgets to your mobile app using Tapcart",
+    "title": "How to add Klaviyo Reviews widgets to your mobile app using Tapcart",
+    "source_locale": "en-us",
+    "locale": "en-us",
+    "outdated": false,
+    "outdated_locales": [],
+    "edited_at": "2026-04-20T16:49:29Z",
+    "user_segment_id": null,
+    "permission_group_id": 146372,
+    "content_tag_ids": [],
+    "label_names": [],
+    "body": "<h2 id=\"h_01HNDJ2XVKHZSGCCHTVS2RMM17\">You will learn</h2>\n<p>Learn how to add Klaviyo Reviews widgets to a mobile app built with Tapcart. These widgets can be added to your Tapcart app using custom blocks: </p>\n<ul>\n<li>\n<strong>Star rating widget </strong><br>\nProduct pages only; show a product’s overall star rating</li>\n<li>\n<strong>Product reviews widget </strong><br>\nProduct pages only; show a summary and list of all reviews for a product, plus buttons to ask a question or leave a review </li>\n<li>\n<strong>Featured reviews carousel widget</strong><br>\nAny page; show a selection of featured reviews across several products </li>\n</ul>\n<p>Tapcart is only available for stores built with Shopify.</p>\n<h2 id=\"h_01HNDJ2XVMH6Z272F878PMCR32\">Before you begin</h2>\n<p>This process is only available to companies who:</p>\n<ul>\n<li>Have already built a mobile app with Tapcart</li>\n<li>Use a Tapcart Enterprise plan</li>\n<li>Have an active Klaviyo Reviews plan</li>\n</ul>\n<p>If you haven’t set up Klaviyo Reviews yet, head to our article on <a href=\"https://help.klaviyo.com/hc/en-us/articles/15937542819355\">getting started with Klaviyo Reviews</a>.</p>\n<h2 id=\"h_01HNDJ2XVM2ZTSFS0A19B64FRF\">Add Klaviyo Reviews widgets using a custom block in Tapcart</h2>\n<p>Follow these steps to add any reviews widget in Tapcart. You’ll need to repeat these steps (i.e., create a separate custom block) for all 3 widgets. </p>\n<ol>\n<li>Open the Tapcart editor. </li>\n<li>In <em>App Studio</em>, switch from <em>Design Blocks</em> to <strong>Custom Blocks</strong>.<br>\n\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28723685323035\" alt=\"launch blocks editor\" width=\"383\" height=\"223\">\n</li>\n<li>Click <strong>Launch Blocks Editor</strong> to create a new custom block. </li>\n<li>Name the widget something clear, like <em>Klaviyo Star Rating custom block</em>. </li>\n<li>In the <strong>JS</strong> tab of the block editor, add the following code snippet. Replace PUBLIC_API_KEY with your <a href=\"https://help.klaviyo.com/hc/en-us/articles/115005062267\">6-character Klaviyo site ID</a>.<br>\n\n<pre><code class=\"language-text\">var script = document.createElement('script');\nscript.type = 'text/javascript';\nscript.async = true;\nscript.src = 'https://static.klaviyo.com/onsite/js/PUBLIC_API_KEY/klaviyo.js&amp;module=reviews';\ndocument.head.appendChild(script);</code></pre>\n</li>\n<li>In the <strong>HTML</strong> tab of the block editor, paste the snippet for the widget you’d like to add (e.g., the star rating widget). Find the code snippets below: \n<ol>\n<li><a href=\"https://klaviyo.zendesk.com/hc/en-us/articles/undefined#h_01HNDJ2XVMJGSX6T4QKBBDDBZ2\">Star rating widget code</a></li>\n<li><a href=\"https://klaviyo.zendesk.com/hc/en-us/articles/undefined#h_01HNDJ2XVMZEZKE2MH9KF46K6M\">Product reviews widget code</a></li>\n<li>\n<a href=\"https://klaviyo.zendesk.com/hc/en-us/articles/undefined#h_01HNDJ2XVMV6D8422M9NF6BSS4\">Featured reviews carousel widget code</a><br>\n\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28723663126811\" alt=\"Tapcart HTML tab\">\n</li>\n</ol>\n</li>\n<li>Click <strong>Save</strong>. </li>\n<li>Click <strong>Close</strong> to exit the editor. </li>\n<li>From the <strong>App Studio</strong> dropdown, select <strong>Product detail</strong>.<br>\n<br>\n\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28723663130907\" alt=\"product detail page\" width=\"306\" height=\"305\">\n<div class=\"bs-callout bs-callout-default\">\n<p>This step is required for the star rating and product reviews widgets. You can place the featured review widget on any app page. </p>\n</div>\n</li>\n<li>Drag the saved custom block you just created into your template. </li>\n<li>The editor may not load the widget directly; instead, you’ll see the block name as plain text. This is expected. </li>\n<li>Click <strong>Preview your app</strong> and navigate to the page where you added your app. Note that the widget appears correctly.</li>\n</ol>\n<div class=\"bs-callout bs-callout-default\">\n<p>The <strong>Ask a question</strong> and <strong>Leave a review</strong> buttons will not work in preview mode. Once you publish the changes to your app, clicking these buttons in the app will open a new browser tab.</p>\n</div>\n<h2 id=\"h_01HNDJ2XVMY25NEJ7M548FMV6N\">Code snippets</h2>\n<h3 id=\"h_01HNDJ2XVMJGSX6T4QKBBDDBZ2\">Star rating widget</h3>\n<pre><code class=\"language-text\">&lt;div class=\"klaviyo-star-rating-widget\" data-id=\"{{product.id}}\" data-product-title=\"{{product.title}}\" data-product-type=\"{{product.type}}\"&gt;&lt;/div&gt;\n</code></pre>\n<h3 id=\"h_01HNDJ2XVMZEZKE2MH9KF46K6M\">Product reviews widget</h3>\n<pre><code class=\"language-text\">&lt;div id=\"klaviyo-reviews-all\" data-id=\"{{product.id}}\"&gt;&lt;/div&gt;\n</code></pre>\n<h3 id=\"h_01HNDJ2XVMV6D8422M9NF6BSS4\">Featured reviews carousel</h3>\n<pre><code class=\"language-text\">&lt;div id=\"klaviyo-featured-reviews-carousel\"&gt;&lt;/div&gt;\n</code></pre>\n<h2 id=\"h_01J1870H2A1FKWF3MBVYN07WXW\">Preview app widgets</h2>\n<p>The Klaviyo Reviews widgets won't automatically appear in the Tapcart preview, but will load correctly on your app. This is because the widgets require a real product ID in order to know which reviews to display. To preview the widgets, add a product ID variable in the <em>Variable Preview Values</em> field in the Tapcart editor. </p>\n<ol>\n<li>In the Tapcart <em>App Studio</em>, select <strong>Custom</strong> to view your custom widgets. </li>\n<li>Click the three dots icon next to one of your review widget blocks and click <strong>Launch Editor</strong>. </li>\n<li>Click <strong>Settings</strong>. <br>\n\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28723663139099\" alt=\"The settings button\" width=\"652\" height=\"71\">\n</li>\n<li>Scroll or search through the JSON to find the <em>id</em> variable within the <em>product</em> object. Note that there are other <em>id</em> variables within other objects; you only need to edit the product ID shown here. <br>\n\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28723663133979\" alt=\"The product ID variable within the code\" width=\"338\" height=\"240\">\n</li>\n<li>Replace the sample product ID with the ID for a product in your store that has at least 1 review. To find a product ID, navigate to <strong>Content &gt; Products</strong> in Klaviyo, then copy an item ID. <br>\n\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28723663136667\" alt=\"An item ID in Klaviyo\" width=\"652\" height=\"150\">\n</li>\n<li>Click <strong>Save</strong>. </li>\n<li>Repeat these steps for your other review widget blocks. </li>\n<li>If the previews don't appear correctly right away, refresh the editor. </li>\n</ol>\n<h2 id=\"h_01HNDJ2XVMA85SZ2GZY5ECHKC5\">Style app widgets </h2>\n<p>Any changes made in the main widget editor will apply to both your website and your app. To apply changes to just your app, add custom CSS to the <strong>CSS</strong> tab of the custom block editor in Tapcart. Learn how to use custom CSS to style Klaviyo Reviews widgets. </p>",
+    "user_segment_ids": []
+  },
+  "normalized": {
+    "id": "22500017241883",
+    "title": "How to add Klaviyo Reviews widgets to your mobile app using Tapcart",
+    "source_url": "https://help.klaviyo.com/hc/en-us/articles/22500017241883-How-to-add-Klaviyo-Reviews-widgets-to-your-mobile-app-using-Tapcart",
+    "section_id": 49375666744731,
+    "section": "Build and use reviews",
+    "category_id": 49375133274139,
+    "category": "Reviews",
+    "category_slug": "reviews",
+    "klaviyo_updated": "2026-04-20T16:49:29Z",
+    "created_at": "2024-01-30T16:27:15Z",
+    "draft": false,
+    "promoted": false,
+    "position": 0,
+    "label_names": []
+  },
+  "files": {
+    "body_html": "_source/articles/22500017241883.body.html",
+    "rendered_html": "_source/rendered/22500017241883.html"
+  },
+  "assets": {
+    "api_body": {
+      "images": [
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28723685323035",
+          "alt": "launch blocks editor",
+          "width": "383",
+          "height": "223"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28723663126811",
+          "alt": "Tapcart HTML tab",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28723663130907",
+          "alt": "product detail page",
+          "width": "306",
+          "height": "305"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28723663139099",
+          "alt": "The settings button",
+          "width": "652",
+          "height": "71"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28723663133979",
+          "alt": "The product ID variable within the code",
+          "width": "338",
+          "height": "240"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28723663136667",
+          "alt": "An item ID in Klaviyo",
+          "width": "652",
+          "height": "150"
+        }
+      ],
+      "links": [
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/15937542819355",
+          "text": "getting started with Klaviyo Reviews"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005062267",
+          "text": "6-character Klaviyo site ID"
+        },
+        {
+          "href": "https://klaviyo.zendesk.com/hc/en-us/articles/undefined#h_01HNDJ2XVMJGSX6T4QKBBDDBZ2",
+          "text": "Star rating widget code"
+        },
+        {
+          "href": "https://klaviyo.zendesk.com/hc/en-us/articles/undefined#h_01HNDJ2XVMZEZKE2MH9KF46K6M",
+          "text": "Product reviews widget code"
+        },
+        {
+          "href": "https://klaviyo.zendesk.com/hc/en-us/articles/undefined#h_01HNDJ2XVMV6D8422M9NF6BSS4",
+          "text": "Featured reviews carousel widget code"
+        }
+      ],
+      "headings": [
+        {
+          "level": 2,
+          "id": "h_01HNDJ2XVKHZSGCCHTVS2RMM17",
+          "text": "You will learn"
+        },
+        {
+          "level": 2,
+          "id": "h_01HNDJ2XVMH6Z272F878PMCR32",
+          "text": "Before you begin"
+        },
+        {
+          "level": 2,
+          "id": "h_01HNDJ2XVM2ZTSFS0A19B64FRF",
+          "text": "Add Klaviyo Reviews widgets using a custom block in Tapcart"
+        },
+        {
+          "level": 2,
+          "id": "h_01HNDJ2XVMY25NEJ7M548FMV6N",
+          "text": "Code snippets"
+        },
+        {
+          "level": 3,
+          "id": "h_01HNDJ2XVMJGSX6T4QKBBDDBZ2",
+          "text": "Star rating widget"
+        },
+        {
+          "level": 3,
+          "id": "h_01HNDJ2XVMZEZKE2MH9KF46K6M",
+          "text": "Product reviews widget"
+        },
+        {
+          "level": 3,
+          "id": "h_01HNDJ2XVMV6D8422M9NF6BSS4",
+          "text": "Featured reviews carousel"
+        },
+        {
+          "level": 2,
+          "id": "h_01J1870H2A1FKWF3MBVYN07WXW",
+          "text": "Preview app widgets"
+        },
+        {
+          "level": 2,
+          "id": "h_01HNDJ2XVMA85SZ2GZY5ECHKC5",
+          "text": "Style app widgets"
+        }
+      ]
+    },
+    "rendered_page": {
+      "images": [
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/7ff492c2b417b7ecfe572f839a8a81398693c1f7-1920x1080.webp",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/edeb2f70724bcf5a3275514c914073f7ea90c505-1572x916.jpg?w=383",
+          "alt": "launch blocks editor",
+          "width": "383",
+          "height": "223"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/5c6cb9936a01a1555a61a12099474c2c4fc208c0-1600x612.jpg",
+          "alt": "Tapcart HTML tab",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/21eaf7aabe15563bf87cfd5f437026182c62a1c6-482x480.jpg?w=306",
+          "alt": "product detail page",
+          "width": "306",
+          "height": "305"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/917d70fdd77ba5651ba04edabc602ce1afbadedf-2532x276.png?w=652",
+          "alt": "The settings button",
+          "width": "652",
+          "height": "71"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/59f882fedd6e02a80f442768b1c97e56e9ea06f8-630x448.png?w=338",
+          "alt": "The product ID variable within the code",
+          "width": "338",
+          "height": "240"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/0a5a08c9615fe2e2923d19e8bd0424be41a933b3-2598x596.png?w=652",
+          "alt": "An item ID in Klaviyo",
+          "width": "652",
+          "height": "150"
+        }
+      ],
+      "links": [
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/22500017241883-How-to-add-Klaviyo-Reviews-widgets-to-your-mobile-app-using-Tapcart#site-content",
+          "text": "Skip to main content"
+        },
+        {
+          "href": "https://www.klaviyo.com",
+          "text": "Home"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center"
+        },
+        {
+          "href": "https://www.klaviyo.com/enterprise",
+          "text": "Enterprise"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Partners"
+        },
+        {
+          "href": "https://www.klaviyo.com/careers",
+          "text": "Careers"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": "Log in"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": ""
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center Find step-by-step instructions and troubleshooting solutions in our knowledge base."
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000032731",
+          "text": "Integrations"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000312411",
+          "text": "Flows"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867867",
+          "text": "Audience"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867667",
+          "text": "Campaigns"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/360000190711",
+          "text": "Sign-up forms"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000873988",
+          "text": "Deliverability & compliance"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/29173800271259",
+          "text": "SMS"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/16638219724187",
+          "text": "Reviews"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/18073014919195",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/34141283979931",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/37659126754075",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/33948021740315",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/39746685522331",
+          "text": "WhatsApp"
+        },
+        {
+          "href": "https://academy.klaviyo.com",
+          "text": "Klaviyo Academy Expert training and education to help you succeed with Klaviyo, and beyond."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Quick+guide&resource=academy_courses",
+          "text": "Quick guides Learn marketing strategies and concepts in 15 minutes or less."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Course&resource=academy_courses",
+          "text": "Courses Master key marketing topics through structured lessons and exams."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/best-practices",
+          "text": "Best practices Discover top product and marketing strategies for your business."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/learning-paths",
+          "text": "Learning paths Complete curated learning journeys tailored to your marketing goals."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses",
+          "text": "Explore all resources"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Live+training&resource=academy_courses",
+          "text": "Live trainings Build confidence through hands-on interactive workshops and thought-provoking strategy sessions."
+        },
+        {
+          "href": "https://www.bigmarker.com/klaviyo-customer-education/Office-hours-Getting-started-with-Klaviyo",
+          "text": "Live office hours Join a strategic discussion where you can ask questions and get answers in real-time."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/private-live-training",
+          "text": "1:1 Live training Book a private training session with an expert to jumpstart your platform knowledge and confidence."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/credentials",
+          "text": "Klaviyo credentials Dig deeper into select topics and showcase your expertise with a final exam to earn a certificate and digital badge."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/certificates/klaviyo-practitioner-certificate",
+          "text": "Klaviyo practitioner certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/deliverability-certificate",
+          "text": "Deliverability certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/developer-certificate",
+          "text": "Klaviyo developer certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses&select=Certificate",
+          "text": "See all certificates"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Klaviyo Community Join our thriving community network to connect with brands like yours—online and in person."
+        },
+        {
+          "href": "https://community.klaviyo.com/topic/new",
+          "text": "Ask a question Post a question and get thoughtful answers from Klaviyo powerusers."
+        },
+        {
+          "href": "https://community.klaviyo.com/p/roadmap",
+          "text": "Product roadmap"
+        },
+        {
+          "href": "https://community.klaviyo.com/search/activity/recent",
+          "text": "Recent threads"
+        },
+        {
+          "href": "https://community.klaviyo.com/p/champions",
+          "text": "Meet the Champions"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups",
+          "text": "Browse all groups Your people are waiting. New ideas and connections are a click away."
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/developer-group-64",
+          "text": "Developer group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/entrepreneur-user-group-118",
+          "text": "Entrepreneur group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/woo-user-group-87",
+          "text": "WooCommerce group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/new-york-meetup-chapter-82",
+          "text": "New York City"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/los-angeles-meetup-chapter-83",
+          "text": "Los Angeles"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/austin-meetup-chapter-85",
+          "text": "Austin"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/san-diego-meetup-chapter-86",
+          "text": "San Diego"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/amsterdam-meetup-chapter-84",
+          "text": "Amsterdam"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Klaviyo Developers Access API documentation and developer guides to help you build with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/get_started",
+          "text": "Get started Access key resources and a step-by-step checklist for how to start developing with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/build_your_integration",
+          "text": "Grow your app's reach Learn how to join our ecosystem and get your app listed on our marketplace."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/developer-tools",
+          "text": "Developer tools Generate sample data, monitor your API usage, and access our Postman collections."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/reference/api_overview",
+          "text": "API reference Browse our full catalog of API docs."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/changelog_",
+          "text": "Changelog"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/api_versioning_and_deprecation_policy",
+          "text": "Versioning & deprecation policy"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/rate_limits_and_error_handling",
+          "text": "Rate limits & error handling"
+        },
+        {
+          "href": "https://youtube.com/playlist?list=PLHkNfHgtxcUanrkMnKPdkRzuWU7MGv_xM&si=pkG-KH7IT_TUHOGC",
+          "text": "API tutorials on YouTube Subscribe to our Klaviyo API Tutorials playlist for easy access to step-by-step developer walkthroughs."
+        },
+        {
+          "href": "https://www.klaviyo.com/contact-us",
+          "text": "Contact us"
+        },
+        {
+          "href": "https://www.klaviyo.com/sign-up",
+          "text": "Sign up"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": "Search"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/22500017241883",
+          "text": "United States - EN"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/de-de/articles/22500017241883",
+          "text": "Deutschland - DE"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-es/articles/22500017241883",
+          "text": "España - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-mx/articles/22500017241883",
+          "text": "México - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/fr-fr/articles/22500017241883",
+          "text": "France - FR"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/it-it/articles/22500017241883",
+          "text": "Italia - IT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/ko-kr/articles/22500017241883",
+          "text": "한국 - KO"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/nl-nl/articles/22500017241883",
+          "text": "Nederland - NL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pl-pl/articles/22500017241883",
+          "text": "Polska - PL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pt-br/articles/22500017241883",
+          "text": "Brasil - PT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/sv-se/articles/22500017241883",
+          "text": "Sverige - SV"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/49375133274139",
+          "text": "Reviews"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/49375666744731",
+          "text": "Build and use reviews"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/22500017241883-How-to-add-Klaviyo-Reviews-widgets-to-your-mobile-app-using-Tapcart#h_01HNDJ2XVKHZSGCCHTVS2RMM17",
+          "text": "You will learn"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/22500017241883-How-to-add-Klaviyo-Reviews-widgets-to-your-mobile-app-using-Tapcart#h_01HNDJ2XVMH6Z272F878PMCR32",
+          "text": "Before you begin"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/22500017241883-How-to-add-Klaviyo-Reviews-widgets-to-your-mobile-app-using-Tapcart#h_01HNDJ2XVM2ZTSFS0A19B64FRF",
+          "text": "Add Klaviyo Reviews widgets using a custom block in Tapcart"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/22500017241883-How-to-add-Klaviyo-Reviews-widgets-to-your-mobile-app-using-Tapcart#h_01HNDJ2XVMY25NEJ7M548FMV6N",
+          "text": "Code snippets"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/22500017241883-How-to-add-Klaviyo-Reviews-widgets-to-your-mobile-app-using-Tapcart#h_01J1870H2A1FKWF3MBVYN07WXW",
+          "text": "Preview app widgets"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/22500017241883-How-to-add-Klaviyo-Reviews-widgets-to-your-mobile-app-using-Tapcart#h_01HNDJ2XVMA85SZ2GZY5ECHKC5",
+          "text": "Style app widgets"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/22500017241883-How-to-add-Klaviyo-Reviews-widgets-to-your-mobile-app-using-Tapcart#additional-resources",
+          "text": "Additional resources"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/15937542819355",
+          "text": "getting started with Klaviyo Reviews"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005062267",
+          "text": "6-character Klaviyo site ID"
+        },
+        {
+          "href": "https://klaviyo.zendesk.com/hc/en-us/articles/undefined#h_01HNDJ2XVMJGSX6T4QKBBDDBZ2",
+          "text": "Star rating widget code"
+        },
+        {
+          "href": "https://klaviyo.zendesk.com/hc/en-us/articles/undefined#h_01HNDJ2XVMZEZKE2MH9KF46K6M",
+          "text": "Product reviews widget code"
+        },
+        {
+          "href": "https://klaviyo.zendesk.com/hc/en-us/articles/undefined#h_01HNDJ2XVMV6D8422M9NF6BSS4",
+          "text": "Featured reviews carousel widget code"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/16319809379611",
+          "text": "How to request reviews from your customers with Klaviyo Reviews flows"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/19351110471323",
+          "text": "How to moderate reviews in Klaviyo"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/16691649553179",
+          "text": "Klaviyo Reviews data reference"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115001002272",
+          "text": "Learn how to contact support"
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": ""
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": "Visit Community"
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": ""
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": "Hire a partner"
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/about",
+          "text": "About Klaviyo"
+        },
+        {
+          "href": "https://www.klaviyo.com/newsroom",
+          "text": "Newsroom"
+        },
+        {
+          "href": "https://investors.klaviyo.com/overview/default.aspx",
+          "text": "Investor relations"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Agency and tech partners"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Developers"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/retail",
+          "text": "Retail and ecommerce"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/restaurants",
+          "text": "Restaurant marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/wellness",
+          "text": "Wellness"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform",
+          "text": "B2C CRM overview"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai",
+          "text": "Klaviyo AI (K:AI)"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/marketing-automation",
+          "text": "Klaviyo Marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-service",
+          "text": "Klaviyo Service"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/analytics",
+          "text": "Klaviyo Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-data-platform",
+          "text": "Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare",
+          "text": "Klaviyo vs. Klaviyo alternatives"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-mailchimp",
+          "text": "Klaviyo vs. Mailchimp"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-postscript",
+          "text": "Klaviyo vs. Postscript"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-attentive",
+          "text": "Klaviyo vs. Attentive"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-salesforce-marketing-cloud",
+          "text": "Klaviyo vs. Salesforce"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-listrak",
+          "text": "Klaviyo vs. Listrak"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/omnichannel",
+          "text": "Omnichannel marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/email-marketing",
+          "text": "Email marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing",
+          "text": "SMS marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing/rcs",
+          "text": "RCS for Business"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/mobile-app-marketing",
+          "text": "Mobile app marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/whatsapp",
+          "text": "WhatsApp marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/social",
+          "text": "Social marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources",
+          "text": "Marketing resources"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources/marketing-campaign-calendar",
+          "text": "Marketing campaign calendar"
+        },
+        {
+          "href": "https://www.klaviyo.com/glossary",
+          "text": "Marketing glossary"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/email-subject-line-generator",
+          "text": "Subject line generator"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/roi-calculator",
+          "text": "ROI calculator"
+        },
+        {
+          "href": "https://www.klaviyo.com/customers",
+          "text": "Case studies"
+        },
+        {
+          "href": "https://www.klaviyo.com/composer",
+          "text": "Composer Beta"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/marketing-agent",
+          "text": "Marketing Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/customer-agent",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/customer-experience-hub",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/helpdesk",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/marketing-analytics",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/advanced-cdp",
+          "text": "Advanced Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/web-forms",
+          "text": "Web forms"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/email-templates",
+          "text": "Email templates"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/portfolio",
+          "text": "Portfolio"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform-integrations",
+          "text": "Apps and Integrations"
+        },
+        {
+          "href": "https://www.klaviyo.com/features",
+          "text": "Features"
+        },
+        {
+          "href": "https://www.klaviyo.com/whats-new",
+          "text": "What's new"
+        },
+        {
+          "href": "https://www.klaviyo.com/events",
+          "text": "Events"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help Center"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us",
+          "text": "Academy"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Community"
+        },
+        {
+          "href": "https://www.facebook.com/Klaviyo/",
+          "text": "Facebook"
+        },
+        {
+          "href": "https://twitter.com/klaviyo/",
+          "text": "Twitter"
+        },
+        {
+          "href": "https://www.linkedin.com/company/klaviyo/",
+          "text": "LinkedIn"
+        },
+        {
+          "href": "https://www.instagram.com/klaviyo/",
+          "text": "Instagram"
+        },
+        {
+          "href": "https://www.klaviyo.com/sitemap",
+          "text": "Site Map"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal",
+          "text": "Terms and Privacy"
+        },
+        {
+          "href": "https://www.klaviyo.com/security",
+          "text": "Security"
+        },
+        {
+          "href": "https://www.klaviyo.com/trust",
+          "text": "Trust"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal/intellectual-property-notices",
+          "text": "Intellectual Property Notices"
+        }
+      ],
+      "headings": [
+        {
+          "level": 1,
+          "id": "",
+          "text": "How to add Klaviyo Reviews widgets to your mobile app using Tapcart"
+        },
+        {
+          "level": 2,
+          "id": "h_01HNDJ2XVKHZSGCCHTVS2RMM17",
+          "text": "You will learn"
+        },
+        {
+          "level": 2,
+          "id": "h_01HNDJ2XVMH6Z272F878PMCR32",
+          "text": "Before you begin"
+        },
+        {
+          "level": 2,
+          "id": "h_01HNDJ2XVM2ZTSFS0A19B64FRF",
+          "text": "Add Klaviyo Reviews widgets using a custom block in Tapcart"
+        },
+        {
+          "level": 2,
+          "id": "h_01HNDJ2XVMY25NEJ7M548FMV6N",
+          "text": "Code snippets"
+        },
+        {
+          "level": 3,
+          "id": "h_01HNDJ2XVMJGSX6T4QKBBDDBZ2",
+          "text": "Star rating widget"
+        },
+        {
+          "level": 3,
+          "id": "h_01HNDJ2XVMZEZKE2MH9KF46K6M",
+          "text": "Product reviews widget"
+        },
+        {
+          "level": 3,
+          "id": "h_01HNDJ2XVMV6D8422M9NF6BSS4",
+          "text": "Featured reviews carousel"
+        },
+        {
+          "level": 2,
+          "id": "h_01J1870H2A1FKWF3MBVYN07WXW",
+          "text": "Preview app widgets"
+        },
+        {
+          "level": 2,
+          "id": "h_01HNDJ2XVMA85SZ2GZY5ECHKC5",
+          "text": "Style app widgets"
+        },
+        {
+          "level": 2,
+          "id": "additional-resources",
+          "text": "Additional resources"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "Explore more from Klaviyo"
+        }
+      ]
+    }
+  },
+  "rendered_page": {
+    "status": "fetched",
+    "error": ""
+  }
+}

@@ -1,0 +1,912 @@
+{
+  "captured_at": "2026-05-23T16:17:12Z",
+  "article": {
+    "id": 5510750923035,
+    "url": "https://klaviyo.zendesk.com/api/v2/help_center/en-us/articles/5510750923035.json",
+    "html_url": "https://klaviyo.zendesk.com/hc/en-us/articles/5510750923035-Troubleshooting-your-Magento-2-integration",
+    "author_id": 396946107652,
+    "comments_disabled": true,
+    "draft": false,
+    "promoted": false,
+    "position": 2,
+    "vote_sum": -5,
+    "vote_count": 11,
+    "section_id": 49375848540187,
+    "created_at": "2022-04-21T16:25:44Z",
+    "updated_at": "2026-04-21T13:55:03Z",
+    "name": "Troubleshooting your Magento 2 integration",
+    "title": "Troubleshooting your Magento 2 integration",
+    "source_locale": "en-us",
+    "locale": "en-us",
+    "outdated": false,
+    "outdated_locales": [],
+    "edited_at": "2026-04-17T01:03:07Z",
+    "user_segment_id": null,
+    "permission_group_id": 146372,
+    "content_tag_ids": [],
+    "label_names": [],
+    "body": "<h2 id=\"h_01HNZKRP38BHPK8R9N4YKV43B8\">You will learn</h2>\n<p>Learn how to solve issues with your Magento 2 OAuth setup by following the troubleshooting steps described below. If you are still encountering issues after running through these steps, please reach out on our <a href=\"https://community.klaviyo.com/got-a-question-1\">Community</a> or <a href=\"https://help.klaviyo.com/hc/en-us/articles/115001002272-How-to-Contact-Support\">to our Support Team</a>. </p>\n<h2 id=\"h_01HNZKRP38HDPJP1XZTM2JCT67\">Before you begin</h2>\n<p>If you have not already, read our guide on <a href=\"https://help.klaviyo.com/hc/en-us/articles/115005254348-How-to-Integrate-with-Magento-2-x-CE-and-EE-\">Getting started with Magento 2</a> for step-by-step instructions to set up your Magento 2 integration.</p>\n<p>Klaviyo uses the OAuth protocol to generate an access token and retrieve data from your Magento 2 store. If you’ve customized your Magento 2 installation, it can cause Klaviyo’s OAuth procedure to fail. This article will guide you through a series of troubleshooting steps to identify where the failure is occurring.</p>\n<h2 id=\"h_01HRT2M0SXC8EMG0ZSKRYY5HY8\">General troubleshooting steps</h2>\n<h3 id=\"h_01HNZKRP38MB2B1FTQ112CM6XD\">Ensure your site is publicly accessible with a valid SSL certificate</h3>\n<p>Klaviyo’s OAuth procedure requires that your website is publicly accessible, otherwise the necessary API calls to generate the access tokens will fail. </p>\n<ol>\n<li>Ensure you have not password protected or IP restricted access to your store.</li>\n<li>Ensure that your store is accessible via HTTPS with a valid SSL certificate. You can test your certificate <a href=\"https://www.ssllabs.com/ssltest/analyze.html\">here</a>.</li>\n</ol>\n<h3 id=\"h_01HNZKRP39M1YRMTHQ38GQ7B80\">Ensure your firewall is not blocking Klaviyo’s requests</h3>\n<p>All outbound Klaviyo integration traffic is behind a set of predictable, static IP addresses so that you can have a high level of confidence that this traffic is coming from Klaviyo. Read our article to learn <a href=\"https://help.klaviyo.com/hc/en-us/articles/19143781289115\">how to allowlist Klaviyo integration traffic IP addresses</a>. </p>\n<h3 id=\"h_01HRT2ENSDEWMQVG1EQKY4DF6R\">Check your Magento 2 and Klaviyo extension versions</h3>\n<ol>\n<li>If you are using Magento v2.2.0, you'll need to <a href=\"https://help.klaviyo.com/hc/en-us/articles/4403350880411\">manually enable OAuth</a>.</li>\n<li>Make sure you’ve installed the correct Klaviyo extension (you may need to <a href=\"https://help.klaviyo.com/hc/en-us/articles/115005254348#h_01HNZMK310HQPFJWZ2NB1C6NSC\">upgrade</a>).</li>\n</ol>\n<h3 id=\"h_01HNZKRP3836D60H05CAYPQAJS\">Ensure OAuth endpoints are accessible</h3>\n<p>You may have extra or missing rewrite rules which can make the default Magento 2 OAuth endpoints inaccessible. Klaviyo needs to access these endpoints to generate the necessary credentials for the authorization process.</p>\n<p>Ensure that URLs below are accessible for your store:</p>\n<pre><code class=\"language-text\">https://[Store URL]/oauth/token/request</code></pre>\n<pre><code class=\"language-text\">https://[Store URL]/oauth/token/access</code></pre>\n<ol>\n<li>You can validate that they’re accessible by making a POST request like this:<br>\n<pre><code class=\"language-text\">curl --location --url 'https://[Store URL]/oauth/token/request' --request 'POST' -v</code></pre>\n<pre><code class=\"language-text\">curl --location --url 'https://[Store URL]/oauth/token/access' --request 'POST' -v</code></pre>\n</li>\n<li>You should expect a response similar to the following. It is normal to see an error when making a request in this manner, and it validates the endpoints are responding correctly. <br>\n\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28713384135323\" alt=\"curloauthendpoint.png\">\n</li>\n<li>If you do not receive a response related to OAuth, you should check that there are no redirects, invalid rewrite rules, or internal server errors preventing access to these URLs.</li>\n</ol>\n<p>This can be caused by a store subpath in your URL. Test for a store subpath issue by accessing the endpoints at:</p>\n<pre><code class=\"language-text\">https://[Store URL]/[Store Path]/oauth/token/request</code></pre>\n<pre><code class=\"language-text\">https://[Store URL]/[Store Path]/oauth/token/access</code></pre>\n<p>If these endpoints resolve, then include the below rewrite rules in your .htaccess file to solve the issue.</p>\n<pre><code class=\"language-text\">RewriteEngine on\nRewriteRule /oauth/token/request$ https://%{HTTP_HOST}/[Store Path]/oauth/token/request [L,R=301]\nRewriteRule /oauth/token/access$ https://%{HTTP_HOST}/[Store Path]/oauth/token/access [L,R=301]</code></pre>\n<h3 id=\"h_01HNZKRP39A58QZWHYXA5W8CFS\">Delete the integration and re-create it</h3>\n<p>If you’ve made changes after a previous failed integration attempt, it is a good idea to delete the original OAuth integration. The keys used may be invalid and will need to be regenerated.</p>\n<ol>\n<li>Within Magento, navigate to <strong>Systems</strong>\n</li>\n<li>Select <strong>Integrations</strong>\n</li>\n<li>Locate the Klaviyo integration record and delete it</li>\n</ol>\n<p>Once the integration record is deleted, follow the steps in our <a href=\"https://help.klaviyo.com/hc/en-us/articles/115005254348-How-to-Integrate-with-Magento-2-x-CE-and-EE-#setup-oauth7\">how to integrate with Magento 2</a> guide to create a new integration record and try again.</p>\n<h2 id=\"h_01HRT2P9DASCVX0J7PR27V1Z1B\">Magento version-specific issues</h2>\n<h3 id=\"h_01HRT2E9DZ8BQ285EVQDBMYS5D\">Failure specific to Magento 2.4.2</h3>\n<p>If you’re using Magento 2.4.2, there is a known issue where OAuth activations fail. Upon activating the integration, you may see an error message like the one shown below. Even if you don’t receive the error, the OAuth activation may have failed. Normally, the error can be found in your Magento logs.</p>\n<p class=\"wysiwyg-text-align-center\"><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28713384127643\" alt=\"m2oauthfailed.png\" width=\"485\" height=\"253\"></p>\n<p>In order to resolve this error, you will need to either:</p>\n<ul>\n<li>Upgrade to Magento 2.4.3. View Magento 2's documentation to <a href=\"https://devdocs.magento.com/cloud/project/project-upgrade.html\">upgrade your version</a>. </li>\n<li>Apply a patch as described <a href=\"https://github.com/klaviyo/magento2-klaviyo/issues/122\">on Klaviyo's github repository</a> for Magento 2.</li>\n</ul>\n<h3 id=\"h_01HRT2WYVPNEFG2XG7W4BE17MX\">Authentication failure specific to Magento 2.4.6</h3>\n<p>Are you on Magento 2.4.6 and experiencing a 401 authentication error after integrating with Klaviyo? This could be due to a known Magento bug affecting Magento version 2.4.6. To solve this, you'll need to enable bearer token authentication so that Klaviyo can make requests using it (instead of OAuth 1.0). To enable bearer token authentication:</p>\n<ol>\n<li>In your Magento admin, navigate to <strong>Stores &gt; Configuration &gt; Services &gt; OAuth &gt; Consumer Settings</strong>.</li>\n<li>For the setting <em>Allow OAuth Access Tokens to be used as stand-alone Bearer tokens</em>, select <em>Yes</em>.</li>\n<li>Click <strong>Save Config</strong>.<br>\n</li>\n</ol>\n<p><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28713384150683\" alt=\"\" width=\"526\" height=\"317\"></p>\n<p>After making this update, your previous authentication errors should resolve and integration syncs will resume.</p>",
+    "user_segment_ids": []
+  },
+  "normalized": {
+    "id": "5510750923035",
+    "title": "Troubleshooting your Magento 2 integration",
+    "source_url": "https://help.klaviyo.com/hc/en-us/articles/5510750923035-Troubleshooting-your-Magento-2-integration",
+    "section_id": 49375848540187,
+    "section": "Magento 2",
+    "category_id": 115000032731,
+    "category": "Integrations",
+    "category_slug": "integrations",
+    "klaviyo_updated": "2026-04-21T13:55:03Z",
+    "created_at": "2022-04-21T16:25:44Z",
+    "draft": false,
+    "promoted": false,
+    "position": 2,
+    "label_names": []
+  },
+  "files": {
+    "body_html": "_source/articles/5510750923035.body.html",
+    "rendered_html": "_source/rendered/5510750923035.html"
+  },
+  "assets": {
+    "api_body": {
+      "images": [
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28713384135323",
+          "alt": "curloauthendpoint.png",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28713384127643",
+          "alt": "m2oauthfailed.png",
+          "width": "485",
+          "height": "253"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28713384150683",
+          "alt": "",
+          "width": "526",
+          "height": "317"
+        }
+      ],
+      "links": [
+        {
+          "href": "https://community.klaviyo.com/got-a-question-1",
+          "text": "Community"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115001002272-How-to-Contact-Support",
+          "text": "to our Support Team"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005254348-How-to-Integrate-with-Magento-2-x-CE-and-EE-",
+          "text": "Getting started with Magento 2"
+        },
+        {
+          "href": "https://www.ssllabs.com/ssltest/analyze.html",
+          "text": "here"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/19143781289115",
+          "text": "how to allowlist Klaviyo integration traffic IP addresses"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4403350880411",
+          "text": "manually enable OAuth"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005254348#h_01HNZMK310HQPFJWZ2NB1C6NSC",
+          "text": "upgrade"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005254348-How-to-Integrate-with-Magento-2-x-CE-and-EE-#setup-oauth7",
+          "text": "how to integrate with Magento 2"
+        },
+        {
+          "href": "https://devdocs.magento.com/cloud/project/project-upgrade.html",
+          "text": "upgrade your version"
+        },
+        {
+          "href": "https://github.com/klaviyo/magento2-klaviyo/issues/122",
+          "text": "on Klaviyo's github repository"
+        }
+      ],
+      "headings": [
+        {
+          "level": 2,
+          "id": "h_01HNZKRP38BHPK8R9N4YKV43B8",
+          "text": "You will learn"
+        },
+        {
+          "level": 2,
+          "id": "h_01HNZKRP38HDPJP1XZTM2JCT67",
+          "text": "Before you begin"
+        },
+        {
+          "level": 2,
+          "id": "h_01HRT2M0SXC8EMG0ZSKRYY5HY8",
+          "text": "General troubleshooting steps"
+        },
+        {
+          "level": 3,
+          "id": "h_01HNZKRP38MB2B1FTQ112CM6XD",
+          "text": "Ensure your site is publicly accessible with a valid SSL certificate"
+        },
+        {
+          "level": 3,
+          "id": "h_01HNZKRP39M1YRMTHQ38GQ7B80",
+          "text": "Ensure your firewall is not blocking Klaviyo’s requests"
+        },
+        {
+          "level": 3,
+          "id": "h_01HRT2ENSDEWMQVG1EQKY4DF6R",
+          "text": "Check your Magento 2 and Klaviyo extension versions"
+        },
+        {
+          "level": 3,
+          "id": "h_01HNZKRP3836D60H05CAYPQAJS",
+          "text": "Ensure OAuth endpoints are accessible"
+        },
+        {
+          "level": 3,
+          "id": "h_01HNZKRP39A58QZWHYXA5W8CFS",
+          "text": "Delete the integration and re-create it"
+        },
+        {
+          "level": 2,
+          "id": "h_01HRT2P9DASCVX0J7PR27V1Z1B",
+          "text": "Magento version-specific issues"
+        },
+        {
+          "level": 3,
+          "id": "h_01HRT2E9DZ8BQ285EVQDBMYS5D",
+          "text": "Failure specific to Magento 2.4.2"
+        },
+        {
+          "level": 3,
+          "id": "h_01HRT2WYVPNEFG2XG7W4BE17MX",
+          "text": "Authentication failure specific to Magento 2.4.6"
+        }
+      ]
+    },
+    "rendered_page": {
+      "images": [
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/7ff492c2b417b7ecfe572f839a8a81398693c1f7-1920x1080.webp",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/0157ac3510b1849cd91396ace1aba9f80cc8996c-1246x229.png",
+          "alt": "curloauthendpoint.png",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/9b543aa48b33e995a8944b70e212a015d93b84ab-774x404.png?w=485",
+          "alt": "m2oauthfailed.png",
+          "width": "485",
+          "height": "253"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/5822c7e9bd27f8fd62e7314baedf137cd95a2f1b-1764x1062.png?w=526",
+          "alt": "",
+          "width": "526",
+          "height": "317"
+        }
+      ],
+      "links": [
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/5510750923035-Troubleshooting-your-Magento-2-integration#site-content",
+          "text": "Skip to main content"
+        },
+        {
+          "href": "https://www.klaviyo.com",
+          "text": "Home"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center"
+        },
+        {
+          "href": "https://www.klaviyo.com/enterprise",
+          "text": "Enterprise"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Partners"
+        },
+        {
+          "href": "https://www.klaviyo.com/careers",
+          "text": "Careers"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": "Log in"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": ""
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center Find step-by-step instructions and troubleshooting solutions in our knowledge base."
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000032731",
+          "text": "Integrations"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000312411",
+          "text": "Flows"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867867",
+          "text": "Audience"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867667",
+          "text": "Campaigns"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/360000190711",
+          "text": "Sign-up forms"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000873988",
+          "text": "Deliverability & compliance"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/29173800271259",
+          "text": "SMS"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/16638219724187",
+          "text": "Reviews"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/18073014919195",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/34141283979931",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/37659126754075",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/33948021740315",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/39746685522331",
+          "text": "WhatsApp"
+        },
+        {
+          "href": "https://academy.klaviyo.com",
+          "text": "Klaviyo Academy Expert training and education to help you succeed with Klaviyo, and beyond."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Quick+guide&resource=academy_courses",
+          "text": "Quick guides Learn marketing strategies and concepts in 15 minutes or less."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Course&resource=academy_courses",
+          "text": "Courses Master key marketing topics through structured lessons and exams."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/best-practices",
+          "text": "Best practices Discover top product and marketing strategies for your business."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/learning-paths",
+          "text": "Learning paths Complete curated learning journeys tailored to your marketing goals."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses",
+          "text": "Explore all resources"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Live+training&resource=academy_courses",
+          "text": "Live trainings Build confidence through hands-on interactive workshops and thought-provoking strategy sessions."
+        },
+        {
+          "href": "https://www.bigmarker.com/klaviyo-customer-education/Office-hours-Getting-started-with-Klaviyo",
+          "text": "Live office hours Join a strategic discussion where you can ask questions and get answers in real-time."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/private-live-training",
+          "text": "1:1 Live training Book a private training session with an expert to jumpstart your platform knowledge and confidence."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/credentials",
+          "text": "Klaviyo credentials Dig deeper into select topics and showcase your expertise with a final exam to earn a certificate and digital badge."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/certificates/klaviyo-practitioner-certificate",
+          "text": "Klaviyo practitioner certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/deliverability-certificate",
+          "text": "Deliverability certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/developer-certificate",
+          "text": "Klaviyo developer certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses&select=Certificate",
+          "text": "See all certificates"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Klaviyo Community Join our thriving community network to connect with brands like yours—online and in person."
+        },
+        {
+          "href": "https://community.klaviyo.com/topic/new",
+          "text": "Ask a question Post a question and get thoughtful answers from Klaviyo powerusers."
+        },
+        {
+          "href": "https://community.klaviyo.com/p/roadmap",
+          "text": "Product roadmap"
+        },
+        {
+          "href": "https://community.klaviyo.com/search/activity/recent",
+          "text": "Recent threads"
+        },
+        {
+          "href": "https://community.klaviyo.com/p/champions",
+          "text": "Meet the Champions"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups",
+          "text": "Browse all groups Your people are waiting. New ideas and connections are a click away."
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/developer-group-64",
+          "text": "Developer group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/entrepreneur-user-group-118",
+          "text": "Entrepreneur group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/woo-user-group-87",
+          "text": "WooCommerce group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/new-york-meetup-chapter-82",
+          "text": "New York City"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/los-angeles-meetup-chapter-83",
+          "text": "Los Angeles"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/austin-meetup-chapter-85",
+          "text": "Austin"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/san-diego-meetup-chapter-86",
+          "text": "San Diego"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/amsterdam-meetup-chapter-84",
+          "text": "Amsterdam"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Klaviyo Developers Access API documentation and developer guides to help you build with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/get_started",
+          "text": "Get started Access key resources and a step-by-step checklist for how to start developing with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/build_your_integration",
+          "text": "Grow your app's reach Learn how to join our ecosystem and get your app listed on our marketplace."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/developer-tools",
+          "text": "Developer tools Generate sample data, monitor your API usage, and access our Postman collections."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/reference/api_overview",
+          "text": "API reference Browse our full catalog of API docs."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/changelog_",
+          "text": "Changelog"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/api_versioning_and_deprecation_policy",
+          "text": "Versioning & deprecation policy"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/rate_limits_and_error_handling",
+          "text": "Rate limits & error handling"
+        },
+        {
+          "href": "https://youtube.com/playlist?list=PLHkNfHgtxcUanrkMnKPdkRzuWU7MGv_xM&si=pkG-KH7IT_TUHOGC",
+          "text": "API tutorials on YouTube Subscribe to our Klaviyo API Tutorials playlist for easy access to step-by-step developer walkthroughs."
+        },
+        {
+          "href": "https://www.klaviyo.com/contact-us",
+          "text": "Contact us"
+        },
+        {
+          "href": "https://www.klaviyo.com/sign-up",
+          "text": "Sign up"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": "Search"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/5510750923035",
+          "text": "United States - EN"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/de-de/articles/5510750923035",
+          "text": "Deutschland - DE"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-es/articles/5510750923035",
+          "text": "España - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-mx/articles/5510750923035",
+          "text": "México - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/fr-fr/articles/5510750923035",
+          "text": "France - FR"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/it-it/articles/5510750923035",
+          "text": "Italia - IT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/ko-kr/articles/5510750923035",
+          "text": "한국 - KO"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/nl-nl/articles/5510750923035",
+          "text": "Nederland - NL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pl-pl/articles/5510750923035",
+          "text": "Polska - PL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pt-br/articles/5510750923035",
+          "text": "Brasil - PT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/sv-se/articles/5510750923035",
+          "text": "Sverige - SV"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/14521703806363",
+          "text": "Adobe Commerce (Magento)"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/49375848540187",
+          "text": "Magento 2"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/5510750923035-Troubleshooting-your-Magento-2-integration#h_01HNZKRP38BHPK8R9N4YKV43B8",
+          "text": "You will learn"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/5510750923035-Troubleshooting-your-Magento-2-integration#h_01HNZKRP38HDPJP1XZTM2JCT67",
+          "text": "Before you begin"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/5510750923035-Troubleshooting-your-Magento-2-integration#h_01HRT2M0SXC8EMG0ZSKRYY5HY8",
+          "text": "General troubleshooting steps"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/5510750923035-Troubleshooting-your-Magento-2-integration#h_01HRT2P9DASCVX0J7PR27V1Z1B",
+          "text": "Magento version-specific issues"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/5510750923035-Troubleshooting-your-Magento-2-integration#additional-resources",
+          "text": "Additional resources"
+        },
+        {
+          "href": "https://community.klaviyo.com/got-a-question-1",
+          "text": "Community"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115001002272-How-to-Contact-Support",
+          "text": "to our Support Team"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005254348-How-to-Integrate-with-Magento-2-x-CE-and-EE-",
+          "text": "Getting started with Magento 2"
+        },
+        {
+          "href": "https://www.ssllabs.com/ssltest/analyze.html",
+          "text": "here"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/19143781289115",
+          "text": "how to allowlist Klaviyo integration traffic IP addresses"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4403350880411",
+          "text": "manually enable OAuth"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005254348#h_01HNZMK310HQPFJWZ2NB1C6NSC",
+          "text": "upgrade"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005254348-How-to-Integrate-with-Magento-2-x-CE-and-EE-#setup-oauth7",
+          "text": "how to integrate with Magento 2"
+        },
+        {
+          "href": "https://devdocs.magento.com/cloud/project/project-upgrade.html",
+          "text": "upgrade your version"
+        },
+        {
+          "href": "https://github.com/klaviyo/magento2-klaviyo/issues/122",
+          "text": "on Klaviyo's github repository"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115003458852",
+          "text": "Magento 2 data reference"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115003492771",
+          "text": "Guide to supporting multiple Magento stores (for Magento 2.x)"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115001002272",
+          "text": "Learn how to contact support"
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": ""
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": "Visit Community"
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": ""
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": "Hire a partner"
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/about",
+          "text": "About Klaviyo"
+        },
+        {
+          "href": "https://www.klaviyo.com/newsroom",
+          "text": "Newsroom"
+        },
+        {
+          "href": "https://investors.klaviyo.com/overview/default.aspx",
+          "text": "Investor relations"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Agency and tech partners"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Developers"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/retail",
+          "text": "Retail and ecommerce"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/restaurants",
+          "text": "Restaurant marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/wellness",
+          "text": "Wellness"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform",
+          "text": "B2C CRM overview"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai",
+          "text": "Klaviyo AI (K:AI)"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/marketing-automation",
+          "text": "Klaviyo Marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-service",
+          "text": "Klaviyo Service"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/analytics",
+          "text": "Klaviyo Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-data-platform",
+          "text": "Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare",
+          "text": "Klaviyo vs. Klaviyo alternatives"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-mailchimp",
+          "text": "Klaviyo vs. Mailchimp"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-postscript",
+          "text": "Klaviyo vs. Postscript"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-attentive",
+          "text": "Klaviyo vs. Attentive"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-salesforce-marketing-cloud",
+          "text": "Klaviyo vs. Salesforce"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-listrak",
+          "text": "Klaviyo vs. Listrak"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/omnichannel",
+          "text": "Omnichannel marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/email-marketing",
+          "text": "Email marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing",
+          "text": "SMS marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing/rcs",
+          "text": "RCS for Business"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/mobile-app-marketing",
+          "text": "Mobile app marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/whatsapp",
+          "text": "WhatsApp marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/social",
+          "text": "Social marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources",
+          "text": "Marketing resources"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources/marketing-campaign-calendar",
+          "text": "Marketing campaign calendar"
+        },
+        {
+          "href": "https://www.klaviyo.com/glossary",
+          "text": "Marketing glossary"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/email-subject-line-generator",
+          "text": "Subject line generator"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/roi-calculator",
+          "text": "ROI calculator"
+        },
+        {
+          "href": "https://www.klaviyo.com/customers",
+          "text": "Case studies"
+        },
+        {
+          "href": "https://www.klaviyo.com/composer",
+          "text": "Composer Beta"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/marketing-agent",
+          "text": "Marketing Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/customer-agent",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/customer-experience-hub",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/helpdesk",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/marketing-analytics",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/advanced-cdp",
+          "text": "Advanced Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/web-forms",
+          "text": "Web forms"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/email-templates",
+          "text": "Email templates"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/portfolio",
+          "text": "Portfolio"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform-integrations",
+          "text": "Apps and Integrations"
+        },
+        {
+          "href": "https://www.klaviyo.com/features",
+          "text": "Features"
+        },
+        {
+          "href": "https://www.klaviyo.com/whats-new",
+          "text": "What's new"
+        },
+        {
+          "href": "https://www.klaviyo.com/events",
+          "text": "Events"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help Center"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us",
+          "text": "Academy"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Community"
+        },
+        {
+          "href": "https://www.facebook.com/Klaviyo/",
+          "text": "Facebook"
+        },
+        {
+          "href": "https://twitter.com/klaviyo/",
+          "text": "Twitter"
+        },
+        {
+          "href": "https://www.linkedin.com/company/klaviyo/",
+          "text": "LinkedIn"
+        },
+        {
+          "href": "https://www.instagram.com/klaviyo/",
+          "text": "Instagram"
+        },
+        {
+          "href": "https://www.klaviyo.com/sitemap",
+          "text": "Site Map"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal",
+          "text": "Terms and Privacy"
+        },
+        {
+          "href": "https://www.klaviyo.com/security",
+          "text": "Security"
+        },
+        {
+          "href": "https://www.klaviyo.com/trust",
+          "text": "Trust"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal/intellectual-property-notices",
+          "text": "Intellectual Property Notices"
+        }
+      ],
+      "headings": [
+        {
+          "level": 1,
+          "id": "",
+          "text": "Troubleshooting your Magento 2 integration"
+        },
+        {
+          "level": 2,
+          "id": "h_01HNZKRP38BHPK8R9N4YKV43B8",
+          "text": "You will learn"
+        },
+        {
+          "level": 2,
+          "id": "h_01HNZKRP38HDPJP1XZTM2JCT67",
+          "text": "Before you begin"
+        },
+        {
+          "level": 2,
+          "id": "h_01HRT2M0SXC8EMG0ZSKRYY5HY8",
+          "text": "General troubleshooting steps"
+        },
+        {
+          "level": 3,
+          "id": "h_01HNZKRP38MB2B1FTQ112CM6XD",
+          "text": "Ensure your site is publicly accessible with a valid SSL certificate"
+        },
+        {
+          "level": 3,
+          "id": "h_01HNZKRP39M1YRMTHQ38GQ7B80",
+          "text": "Ensure your firewall is not blocking Klaviyo’s requests"
+        },
+        {
+          "level": 3,
+          "id": "h_01HRT2ENSDEWMQVG1EQKY4DF6R",
+          "text": "Check your Magento 2 and Klaviyo extension versions"
+        },
+        {
+          "level": 3,
+          "id": "h_01HNZKRP3836D60H05CAYPQAJS",
+          "text": "Ensure OAuth endpoints are accessible"
+        },
+        {
+          "level": 3,
+          "id": "h_01HNZKRP39A58QZWHYXA5W8CFS",
+          "text": "Delete the integration and re-create it"
+        },
+        {
+          "level": 2,
+          "id": "h_01HRT2P9DASCVX0J7PR27V1Z1B",
+          "text": "Magento version-specific issues"
+        },
+        {
+          "level": 3,
+          "id": "h_01HRT2E9DZ8BQ285EVQDBMYS5D",
+          "text": "Failure specific to Magento 2.4.2"
+        },
+        {
+          "level": 3,
+          "id": "h_01HRT2WYVPNEFG2XG7W4BE17MX",
+          "text": "Authentication failure specific to Magento 2.4.6"
+        },
+        {
+          "level": 2,
+          "id": "additional-resources",
+          "text": "Additional resources"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "Explore more from Klaviyo"
+        }
+      ]
+    }
+  },
+  "rendered_page": {
+    "status": "fetched",
+    "error": ""
+  }
+}

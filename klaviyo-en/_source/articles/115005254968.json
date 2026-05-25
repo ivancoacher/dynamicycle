@@ -1,0 +1,813 @@
+{
+  "captured_at": "2026-05-23T16:18:02Z",
+  "article": {
+    "id": 115005254968,
+    "url": "https://klaviyo.zendesk.com/api/v2/help_center/en-us/articles/115005254968.json",
+    "html_url": "https://klaviyo.zendesk.com/hc/en-us/articles/115005254968-How-to-integrate-with-Campaign-Monitor",
+    "author_id": 20424705848,
+    "comments_disabled": true,
+    "draft": false,
+    "promoted": false,
+    "position": 4,
+    "vote_sum": 22,
+    "vote_count": 48,
+    "section_id": 49375544319515,
+    "created_at": "2017-03-30T18:33:20Z",
+    "updated_at": "2026-04-21T13:54:24Z",
+    "name": "How to integrate with Campaign Monitor",
+    "title": "How to integrate with Campaign Monitor",
+    "source_locale": "en-us",
+    "locale": "en-us",
+    "outdated": false,
+    "outdated_locales": [],
+    "edited_at": "2025-07-29T15:31:58Z",
+    "user_segment_id": null,
+    "permission_group_id": 146372,
+    "content_tag_ids": [],
+    "label_names": [],
+    "body": "<h2 id=\"h_01J2YJBSPV80KZF232DCZ9E35D\">You will learn</h2>\n<p>Learn how to integrate Campaign Monitor with Klaviyo in order to sync your Campaign Monitor lists and contacts and track Campaign Monitor analytics in Klaviyo.</p>\n<p>Klaviyo syncs the following data from Campaign Monitor:</p>\n<ul>\n<li>Campaign Monitor contacts</li>\n<li>Received, clicked, and open metrics from Campaign Monitor</li>\n<li>Campaign Monitor lists (some or all, depending on your preferences)</li>\n</ul>\n<h2 id=\"h_01J2YJBSPVT6828DAHXX39WEKH\">Add the Campaign Monitor integration</h2>\n<ol>\n<li>First, you'll need to locate your API key in your Campaign Monitor account. From the <em>Account Settings</em> page in your Campaign Monitor account, click <strong>API Keys</strong>.</li>\n<li>Click <strong>Show API Key</strong> and copy the value. <br><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28715962541211\" alt=\"Manage API Key page in Campaign Monitor with API Key and Client ID blurred out\">\n</li>\n<li>In your Klaviyo account, select the <strong>Integrations</strong> tab, then click <strong>Explore apps. </strong>\n</li>\n<li>Search for <em>Campaign Monitor</em>, then click the card. </li>\n<li>Click <strong>Install</strong>.</li>\n<li>On the next page, add your Campaign Monitor API key and click <strong>Connect to Campaign Monitor</strong>. <br><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28715962550683\" width=\"563\" height=\"360\">\n</li>\n<li>On the next page, you can configure the following integration settings under <em>Advanced</em>:\n<ul>\n<li>\n<strong>Collect open and click data for Campaign Monitor campaigns</strong><br>Selecting this setting will sync open and click data from your Campaign Monitor campaigns.</li>\n<li>\n<strong>Create Klaviyo lists from Campaign Monitor lists</strong><br>Selecting this setting will create corresponding Klaviyo lists from your Campaign Monitor lists.</li>\n<li>\n<strong>Only create Klaviyo lists for specific Campaign Monitor lists</strong><br>Selecting this setting will allow you to specify which Campaign Monitor lists should be used to create corresponding Klaviyo lists. You will be prompted to add a comma separated list of Campaign Monitor list IDs. Please note that, even if you select this setting, all Campaign Monitor contacts who have received, opened, or clicked an email will sync to Klaviyo.<br><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/32010057312027\">\n</li>\n</ul>\n</li>\n<li>Click <strong>Complete setup </strong>when you're done.</li>\n</ol>\n<p>Once you've completed setup, data will begin to sync to Klaviyo within a few minutes. Klaviyo runs a historical sync as well as set up periodic syncs to pull in new data. Klaviyo receives historical engagement data from Campaign Monitor from the last 90 days. New data syncs to Klaviyo every hour.</p>\n<h2 id=\"h_01J2YJBSPVWSB7DXB9HX8X0H4Q\">Campaign Monitor data in Klaviyo</h2>\n<p>As your integration syncs, you should start to see data populate from your Campaign Monitor campaigns.</p>\n<p>Once the Campaign Monitor integration is present on your <em>Enabled Integrations</em> list and has a green border next to it, your integration is fully synced.</p>\n<p>To view your Campaign Monitor data in Klaviyo, click the <strong>Analytics</strong> dropdown and select <strong>Metrics</strong>. Here, you can filter by <em>Campaign Monitor</em>. </p>\n<p>Click the <strong>Received Email (Campaign Monitor)</strong> metric.</p>\n<p><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28715969163291\" alt=\"Metrics tab in Klaviyo showing Campaign Monitor metrics list\" width=\"672\" height=\"168\"></p>\n<h2 id=\"h_01J2YJBSPVCYEKZ88VQ53E1VAY\">Best practices</h2>\n<p>To ensure that you maintain good deliverability, you should only send your first few email campaigns to an engaged segment of your list(s) from Campaign Monitor. Since you'll have open and click data from Campaign Monitor, you'll be able to use this to segment your list. You should also include open and click data from Klaviyo, as this will add engaged users that interact with your Klaviyo emails going forward. Last, be sure to add conditions that limit your sends to customers who have been added to your main list. This will ensure that your emails are targeting customers that have opted into receiving messages (by joining your list).</p>\n<p>Build your engaged segment by using the conditions below. The open and click conditions below are scoped to 30 days. If you send emails less often, you can loosen these timeframes to 60 or even 90 days. Be sure to monitor your deliverability whenever increasing your engagement window. If you find your open and click rates decreasing, then tighten your engagement criteria by lowering the timeframe back to 30 days.</p>\n<p>To create the segment:</p>\n<ul>\n<li>Name: Engaged segment</li>\n<li>If someone is in or not in a list &gt; Person is &gt; in Email List</li>\n<li>AND What some has done (or not done) &gt; Opened Email (Campaign Monitor) &gt; at least once &gt; in the last &gt; 30 &gt; days</li>\n<li>OR What some has done (or not done) &gt; Clicked Email (Campaign Monitor) &gt; at least once &gt; in the last &gt; 30 &gt; days</li>\n<li>OR What some has done (or not done) &gt; Opened Email (Klaviyo) &gt; at least once &gt; in the last &gt; 30 &gt; days</li>\n<li>OR What some has done (or not done) &gt; Clicked Email (Klaviyo) &gt; at least once &gt; in the last &gt; 30 &gt; days</li>\n<li>OR If someone is in or not in a list &gt; Person is &gt; in Email List &gt; and was added in the last &gt; 7 &gt; days</li>\n</ul>\n<p><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28715969152539\" alt=\"Klaviyo segment builder with engaged segment definition for Campaign Monitor, Create segment button with blue background\" width=\"609\" height=\"907\"></p>\n<h2 id=\"h_01J2YJBSPV84AN6C8WBK1XCE9Q\" class=\"klaviyo-form-VLQGGu\">Outcome</h2>\n<p>You've now integrated Campaign Monitor with Klaviyo in order to track analytics and sync lists and contacts to Klaviyo.</p>\n<h2 id=\"h_01J2YJBSPV289FSK5DSN01K59X\">Additional Resources</h2>\n<ul>\n<li><a href=\"https://klaviyo.zendesk.com/hc/en-us/articles/115005082767\" target=\"_blank\" rel=\"noopener\">How to migrate from another email service provider to Klaviyo</a></li>\n<li><a href=\"https://help.klaviyo.com/hc/en-us/articles/115005237908\" target=\"_blank\" rel=\"noopener\">Getting started with segments</a></li>\n</ul>",
+    "user_segment_ids": []
+  },
+  "normalized": {
+    "id": "115005254968",
+    "title": "How to integrate with Campaign Monitor",
+    "source_url": "https://help.klaviyo.com/hc/en-us/articles/115005254968-How-to-integrate-with-Campaign-Monitor",
+    "section_id": 49375544319515,
+    "section": "Migrate from an email service provider",
+    "category_id": 115000032731,
+    "category": "Integrations",
+    "category_slug": "integrations",
+    "klaviyo_updated": "2026-04-21T13:54:24Z",
+    "created_at": "2017-03-30T18:33:20Z",
+    "draft": false,
+    "promoted": false,
+    "position": 4,
+    "label_names": []
+  },
+  "files": {
+    "body_html": "_source/articles/115005254968.body.html",
+    "rendered_html": "_source/rendered/115005254968.html"
+  },
+  "assets": {
+    "api_body": {
+      "images": [
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28715962541211",
+          "alt": "Manage API Key page in Campaign Monitor with API Key and Client ID blurred out",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28715962550683",
+          "alt": "",
+          "width": "563",
+          "height": "360"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/32010057312027",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28715969163291",
+          "alt": "Metrics tab in Klaviyo showing Campaign Monitor metrics list",
+          "width": "672",
+          "height": "168"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28715969152539",
+          "alt": "Klaviyo segment builder with engaged segment definition for Campaign Monitor, Create segment button with blue background",
+          "width": "609",
+          "height": "907"
+        }
+      ],
+      "links": [
+        {
+          "href": "https://klaviyo.zendesk.com/hc/en-us/articles/115005082767",
+          "text": "How to migrate from another email service provider to Klaviyo"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005237908",
+          "text": "Getting started with segments"
+        }
+      ],
+      "headings": [
+        {
+          "level": 2,
+          "id": "h_01J2YJBSPV80KZF232DCZ9E35D",
+          "text": "You will learn"
+        },
+        {
+          "level": 2,
+          "id": "h_01J2YJBSPVT6828DAHXX39WEKH",
+          "text": "Add the Campaign Monitor integration"
+        },
+        {
+          "level": 2,
+          "id": "h_01J2YJBSPVWSB7DXB9HX8X0H4Q",
+          "text": "Campaign Monitor data in Klaviyo"
+        },
+        {
+          "level": 2,
+          "id": "h_01J2YJBSPVCYEKZ88VQ53E1VAY",
+          "text": "Best practices"
+        },
+        {
+          "level": 2,
+          "id": "h_01J2YJBSPV84AN6C8WBK1XCE9Q",
+          "text": "Outcome"
+        },
+        {
+          "level": 2,
+          "id": "h_01J2YJBSPV289FSK5DSN01K59X",
+          "text": "Additional Resources"
+        }
+      ]
+    },
+    "rendered_page": {
+      "images": [
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/7ff492c2b417b7ecfe572f839a8a81398693c1f7-1920x1080.webp",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/25b32a5d1317e9b542cef977ea3fb53a2538aba0-1377x249.jpg",
+          "alt": "Manage API Key page in Campaign Monitor with API Key and Client ID blurred out",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/87a698603e1a5ae5e79cf33a0db0044be250800e-1740x1114.png?w=563",
+          "alt": "",
+          "width": "563",
+          "height": "360"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/5617c03d3221680d417993d6b2d5c6f32b284d5a-2094x1056.png",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/7c212ba841bb333b6df0944ad26a2963f6800c46-990x248.jpg?w=672",
+          "alt": "Metrics tab in Klaviyo showing Campaign Monitor metrics list",
+          "width": "672",
+          "height": "168"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/58061db88189e74d5a2fe7bab73c2ec80de4f36f-943x1404.png?w=609",
+          "alt": "Klaviyo segment builder with engaged segment definition for Campaign Monitor, Create segment button with blue background",
+          "width": "609",
+          "height": "907"
+        }
+      ],
+      "links": [
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005254968-How-to-integrate-with-Campaign-Monitor#site-content",
+          "text": "Skip to main content"
+        },
+        {
+          "href": "https://www.klaviyo.com",
+          "text": "Home"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center"
+        },
+        {
+          "href": "https://www.klaviyo.com/enterprise",
+          "text": "Enterprise"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Partners"
+        },
+        {
+          "href": "https://www.klaviyo.com/careers",
+          "text": "Careers"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": "Log in"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": ""
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center Find step-by-step instructions and troubleshooting solutions in our knowledge base."
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000032731",
+          "text": "Integrations"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000312411",
+          "text": "Flows"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867867",
+          "text": "Audience"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867667",
+          "text": "Campaigns"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/360000190711",
+          "text": "Sign-up forms"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000873988",
+          "text": "Deliverability & compliance"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/29173800271259",
+          "text": "SMS"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/16638219724187",
+          "text": "Reviews"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/18073014919195",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/34141283979931",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/37659126754075",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/33948021740315",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/39746685522331",
+          "text": "WhatsApp"
+        },
+        {
+          "href": "https://academy.klaviyo.com",
+          "text": "Klaviyo Academy Expert training and education to help you succeed with Klaviyo, and beyond."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Quick+guide&resource=academy_courses",
+          "text": "Quick guides Learn marketing strategies and concepts in 15 minutes or less."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Course&resource=academy_courses",
+          "text": "Courses Master key marketing topics through structured lessons and exams."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/best-practices",
+          "text": "Best practices Discover top product and marketing strategies for your business."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/learning-paths",
+          "text": "Learning paths Complete curated learning journeys tailored to your marketing goals."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses",
+          "text": "Explore all resources"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Live+training&resource=academy_courses",
+          "text": "Live trainings Build confidence through hands-on interactive workshops and thought-provoking strategy sessions."
+        },
+        {
+          "href": "https://www.bigmarker.com/klaviyo-customer-education/Office-hours-Getting-started-with-Klaviyo",
+          "text": "Live office hours Join a strategic discussion where you can ask questions and get answers in real-time."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/private-live-training",
+          "text": "1:1 Live training Book a private training session with an expert to jumpstart your platform knowledge and confidence."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/credentials",
+          "text": "Klaviyo credentials Dig deeper into select topics and showcase your expertise with a final exam to earn a certificate and digital badge."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/certificates/klaviyo-practitioner-certificate",
+          "text": "Klaviyo practitioner certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/deliverability-certificate",
+          "text": "Deliverability certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/developer-certificate",
+          "text": "Klaviyo developer certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses&select=Certificate",
+          "text": "See all certificates"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Klaviyo Community Join our thriving community network to connect with brands like yours—online and in person."
+        },
+        {
+          "href": "https://community.klaviyo.com/topic/new",
+          "text": "Ask a question Post a question and get thoughtful answers from Klaviyo powerusers."
+        },
+        {
+          "href": "https://community.klaviyo.com/p/roadmap",
+          "text": "Product roadmap"
+        },
+        {
+          "href": "https://community.klaviyo.com/search/activity/recent",
+          "text": "Recent threads"
+        },
+        {
+          "href": "https://community.klaviyo.com/p/champions",
+          "text": "Meet the Champions"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups",
+          "text": "Browse all groups Your people are waiting. New ideas and connections are a click away."
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/developer-group-64",
+          "text": "Developer group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/entrepreneur-user-group-118",
+          "text": "Entrepreneur group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/woo-user-group-87",
+          "text": "WooCommerce group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/new-york-meetup-chapter-82",
+          "text": "New York City"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/los-angeles-meetup-chapter-83",
+          "text": "Los Angeles"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/austin-meetup-chapter-85",
+          "text": "Austin"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/san-diego-meetup-chapter-86",
+          "text": "San Diego"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/amsterdam-meetup-chapter-84",
+          "text": "Amsterdam"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Klaviyo Developers Access API documentation and developer guides to help you build with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/get_started",
+          "text": "Get started Access key resources and a step-by-step checklist for how to start developing with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/build_your_integration",
+          "text": "Grow your app's reach Learn how to join our ecosystem and get your app listed on our marketplace."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/developer-tools",
+          "text": "Developer tools Generate sample data, monitor your API usage, and access our Postman collections."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/reference/api_overview",
+          "text": "API reference Browse our full catalog of API docs."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/changelog_",
+          "text": "Changelog"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/api_versioning_and_deprecation_policy",
+          "text": "Versioning & deprecation policy"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/rate_limits_and_error_handling",
+          "text": "Rate limits & error handling"
+        },
+        {
+          "href": "https://youtube.com/playlist?list=PLHkNfHgtxcUanrkMnKPdkRzuWU7MGv_xM&si=pkG-KH7IT_TUHOGC",
+          "text": "API tutorials on YouTube Subscribe to our Klaviyo API Tutorials playlist for easy access to step-by-step developer walkthroughs."
+        },
+        {
+          "href": "https://www.klaviyo.com/contact-us",
+          "text": "Contact us"
+        },
+        {
+          "href": "https://www.klaviyo.com/sign-up",
+          "text": "Sign up"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": "Search"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005254968",
+          "text": "United States - EN"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/de-de/articles/115005254968",
+          "text": "Deutschland - DE"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-es/articles/115005254968",
+          "text": "España - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-mx/articles/115005254968",
+          "text": "México - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/fr-fr/articles/115005254968",
+          "text": "France - FR"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/it-it/articles/115005254968",
+          "text": "Italia - IT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/ko-kr/articles/115005254968",
+          "text": "한국 - KO"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/nl-nl/articles/115005254968",
+          "text": "Nederland - NL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pl-pl/articles/115005254968",
+          "text": "Polska - PL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pt-br/articles/115005254968",
+          "text": "Brasil - PT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/sv-se/articles/115005254968",
+          "text": "Sverige - SV"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/49375918518171",
+          "text": "Migrate to Klaviyo"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/49375544319515",
+          "text": "Migrate from an email service provider"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005254968-How-to-integrate-with-Campaign-Monitor#h_01J2YJBSPV80KZF232DCZ9E35D",
+          "text": "You will learn"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005254968-How-to-integrate-with-Campaign-Monitor#h_01J2YJBSPVT6828DAHXX39WEKH",
+          "text": "Add the Campaign Monitor integration"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005254968-How-to-integrate-with-Campaign-Monitor#h_01J2YJBSPVWSB7DXB9HX8X0H4Q",
+          "text": "Campaign Monitor data in Klaviyo"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005254968-How-to-integrate-with-Campaign-Monitor#h_01J2YJBSPVCYEKZ88VQ53E1VAY",
+          "text": "Best practices"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005254968-How-to-integrate-with-Campaign-Monitor#h_01J2YJBSPV84AN6C8WBK1XCE9Q",
+          "text": "Outcome"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005254968-How-to-integrate-with-Campaign-Monitor#additional-resources",
+          "text": "Additional Resources"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005082767",
+          "text": "How to migrate from another email service provider to Klaviyo"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005237908",
+          "text": "Getting started with segments"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115001002272",
+          "text": "Learn how to contact support"
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": ""
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": "Visit Community"
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": ""
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": "Hire a partner"
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/about",
+          "text": "About Klaviyo"
+        },
+        {
+          "href": "https://www.klaviyo.com/newsroom",
+          "text": "Newsroom"
+        },
+        {
+          "href": "https://investors.klaviyo.com/overview/default.aspx",
+          "text": "Investor relations"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Agency and tech partners"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Developers"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/retail",
+          "text": "Retail and ecommerce"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/restaurants",
+          "text": "Restaurant marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/wellness",
+          "text": "Wellness"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform",
+          "text": "B2C CRM overview"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai",
+          "text": "Klaviyo AI (K:AI)"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/marketing-automation",
+          "text": "Klaviyo Marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-service",
+          "text": "Klaviyo Service"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/analytics",
+          "text": "Klaviyo Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-data-platform",
+          "text": "Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare",
+          "text": "Klaviyo vs. Klaviyo alternatives"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-mailchimp",
+          "text": "Klaviyo vs. Mailchimp"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-postscript",
+          "text": "Klaviyo vs. Postscript"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-attentive",
+          "text": "Klaviyo vs. Attentive"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-salesforce-marketing-cloud",
+          "text": "Klaviyo vs. Salesforce"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-listrak",
+          "text": "Klaviyo vs. Listrak"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/omnichannel",
+          "text": "Omnichannel marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/email-marketing",
+          "text": "Email marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing",
+          "text": "SMS marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing/rcs",
+          "text": "RCS for Business"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/mobile-app-marketing",
+          "text": "Mobile app marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/whatsapp",
+          "text": "WhatsApp marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/social",
+          "text": "Social marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources",
+          "text": "Marketing resources"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources/marketing-campaign-calendar",
+          "text": "Marketing campaign calendar"
+        },
+        {
+          "href": "https://www.klaviyo.com/glossary",
+          "text": "Marketing glossary"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/email-subject-line-generator",
+          "text": "Subject line generator"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/roi-calculator",
+          "text": "ROI calculator"
+        },
+        {
+          "href": "https://www.klaviyo.com/customers",
+          "text": "Case studies"
+        },
+        {
+          "href": "https://www.klaviyo.com/composer",
+          "text": "Composer Beta"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/marketing-agent",
+          "text": "Marketing Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/customer-agent",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/customer-experience-hub",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/helpdesk",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/marketing-analytics",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/advanced-cdp",
+          "text": "Advanced Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/web-forms",
+          "text": "Web forms"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/email-templates",
+          "text": "Email templates"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/portfolio",
+          "text": "Portfolio"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform-integrations",
+          "text": "Apps and Integrations"
+        },
+        {
+          "href": "https://www.klaviyo.com/features",
+          "text": "Features"
+        },
+        {
+          "href": "https://www.klaviyo.com/whats-new",
+          "text": "What's new"
+        },
+        {
+          "href": "https://www.klaviyo.com/events",
+          "text": "Events"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help Center"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us",
+          "text": "Academy"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Community"
+        },
+        {
+          "href": "https://www.facebook.com/Klaviyo/",
+          "text": "Facebook"
+        },
+        {
+          "href": "https://twitter.com/klaviyo/",
+          "text": "Twitter"
+        },
+        {
+          "href": "https://www.linkedin.com/company/klaviyo/",
+          "text": "LinkedIn"
+        },
+        {
+          "href": "https://www.instagram.com/klaviyo/",
+          "text": "Instagram"
+        },
+        {
+          "href": "https://www.klaviyo.com/sitemap",
+          "text": "Site Map"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal",
+          "text": "Terms and Privacy"
+        },
+        {
+          "href": "https://www.klaviyo.com/security",
+          "text": "Security"
+        },
+        {
+          "href": "https://www.klaviyo.com/trust",
+          "text": "Trust"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal/intellectual-property-notices",
+          "text": "Intellectual Property Notices"
+        }
+      ],
+      "headings": [
+        {
+          "level": 1,
+          "id": "",
+          "text": "How to integrate with Campaign Monitor"
+        },
+        {
+          "level": 2,
+          "id": "h_01J2YJBSPV80KZF232DCZ9E35D",
+          "text": "You will learn"
+        },
+        {
+          "level": 2,
+          "id": "h_01J2YJBSPVT6828DAHXX39WEKH",
+          "text": "Add the Campaign Monitor integration"
+        },
+        {
+          "level": 2,
+          "id": "h_01J2YJBSPVWSB7DXB9HX8X0H4Q",
+          "text": "Campaign Monitor data in Klaviyo"
+        },
+        {
+          "level": 2,
+          "id": "h_01J2YJBSPVCYEKZ88VQ53E1VAY",
+          "text": "Best practices"
+        },
+        {
+          "level": 2,
+          "id": "h_01J2YJBSPV84AN6C8WBK1XCE9Q",
+          "text": "Outcome"
+        },
+        {
+          "level": 2,
+          "id": "additional-resources",
+          "text": "Additional Resources"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "Explore more from Klaviyo"
+        }
+      ]
+    }
+  },
+  "rendered_page": {
+    "status": "fetched",
+    "error": ""
+  }
+}

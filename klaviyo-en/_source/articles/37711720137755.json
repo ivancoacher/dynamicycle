@@ -1,0 +1,996 @@
+{
+  "captured_at": "2026-05-23T16:16:30Z",
+  "article": {
+    "id": 37711720137755,
+    "url": "https://klaviyo.zendesk.com/api/v2/help_center/en-us/articles/37711720137755.json",
+    "html_url": "https://klaviyo.zendesk.com/hc/en-us/articles/37711720137755-Frequently-asked-questions-about-custom-objects",
+    "author_id": 36441921701531,
+    "comments_disabled": false,
+    "draft": false,
+    "promoted": false,
+    "position": 1,
+    "vote_sum": 0,
+    "vote_count": 0,
+    "section_id": 49375872847131,
+    "created_at": "2025-06-05T14:37:19Z",
+    "updated_at": "2026-04-21T13:56:55Z",
+    "name": "Frequently asked questions about custom objects",
+    "title": "Frequently asked questions about custom objects",
+    "source_locale": "en-us",
+    "locale": "en-us",
+    "outdated": false,
+    "outdated_locales": [],
+    "edited_at": "2026-02-10T14:31:55Z",
+    "user_segment_id": null,
+    "permission_group_id": 146372,
+    "content_tag_ids": [],
+    "label_names": [],
+    "body": "<h2 id=\"h_01JX07RWPJ4C70YDP2N5J5ZC4E\">You will learn</h2><p>Learn about frequently asked questions related to custom objects in Klaviyo. If you don’t see your question in the resource below, please reach out on our <a href=\"https://community.klaviyo.com/\" target=\"_blank\" rel=\"noopener noreferrer\">Community forum</a>.</p><h2 id=\"h_01JX07R0ZP17W9HB4VS83Z0953\">General questions about objects</h2><h3 id=\"h_01JXJQA21MZKMSKYXRYH8NV0TK\">Do I need a developer to create an object?</h3><p>Yes, this feature depends on the use of <a href=\"https://developers.klaviyo.com/en/reference/custom_objects_api_overview\" target=\"_blank\" rel=\"noopener noreferrer\">APIs</a> to send data sources and ultimately create objects.</p><h3 id=\"h_01JX07R0ZPF61843VYCS28EA79\">Can I create custom objects using Klaviyo forms or CSV uploads?</h3><p>Klaviyo currently requires accounts to create new custom objects by sending us data via API. </p><h3 id=\"h_01JX07R0ZPTZSW8DDSJ2SEK3NW\">When should I use a custom object versus a profile property or event?</h3><p>You should use custom objects when you have a many-to-one relationship between the category that your custom object represents and your profiles. For example, if you want to keep information about your customer’s pets, and your customer may have more than one pet, representing these as a custom object works much better than profile properties or events.</p><p>When tracking items like a membership status, where a profile can only have one status at a time, profile property is a better fit. However, if you’d like to store other details about a profile’s membership as well, an object can work better. </p><p>When tracking something broad, like how many times a recipient has opened an email, we recommend using events.</p><h3 id=\"h_01JX2QR335SVFKCSTVM2GCF501\">Can I update my custom object after creation?</h3><p>Yes, you can always add additional, non-required properties to your custom object. For more, read about <a href=\"https://help.klaviyo.com/hc/en-us/articles/35105337172123\" target=\"_blank\" rel=\"noopener noreferrer\">updating a custom object</a>. </p><h3 id=\"h_01JX07R0ZP9WQ269CM7YNTJSTW\">When should I emit an event versus updating the custom object’s properties?</h3><p>Events are intended to trigger flows quickly, allowing you to send timely and relevant messaging. When the status of an object changes and you want to trigger a message as a result of this, you should update the object with the new information and send us an event to trigger the flow.</p><p>You can <a href=\"https://help.klaviyo.com/hc/en-us/articles/35146367972763\" target=\"_blank\" rel=\"noopener noreferrer\">personalize templates</a> with the object information in the event triggered flow. There are two ways to achieve this: </p><ol>\n<li data-list-item-id=\"ecfdbd57a9c48c91e201943471b2f3c30\">Use the <code class=\"language-html\">{{ event }}</code> tag to add relevant properties in your event’s metadata for use in your template. This works well when timeliness is important.</li>\n<li data-list-item-id=\"e8b094a7c3f169e0bd8f82f542c9f7508\">Include the object’s ID in the event’s metadata, which allows you to get the object in the template with the <code class=\"language-html\">{% customobject id={{ event.pet_id }} as pet %}</code>. However, it can take some time for the object to be updated with the latest properties so it is possible the flow triggered a message to send before the object was updated.</li>\n</ol><h2 id=\"h_01JX07R0ZPN1TW9TCQMYPNZV0D\">Questions about sending object data </h2><h3 id=\"h_01JXJQBAGGNKJMXYGTJNWG6REE\">How do I start sending my data for custom objects?</h3><ol>\n<li data-list-item-id=\"e0ccfdea3d7998a15a343fe6ae151ad6a\">Create a new data source <a href=\"https://developers.klaviyo.com/en/reference/create_data_source\" target=\"_blank\" rel=\"noopener noreferrer\">using our API</a>.</li>\n<li data-list-item-id=\"e0f90a6c46e460d288c84f13eb4aa2500\">Define your data structure (see example JSON).</li>\n<li data-list-item-id=\"e3a44f6a146db6945934b5c7bcebb5b80\">Send your data source records to Klaviyo via <a href=\"https://developers.klaviyo.com/en/reference/bulk_create_data_source_records\" target=\"_blank\" rel=\"noopener noreferrer\">API</a>.</li>\n<li data-list-item-id=\"ea0382a494156dc86bc317f16fb81e484\">\n<a href=\"https://help.klaviyo.com/hc/en-us/articles/35105337172123#h_01JPSTEQJQYKW8Y4AEKSPQ6YSF\" target=\"_blank\" rel=\"noopener noreferrer\">Create</a> your custom object.</li>\n<li data-list-item-id=\"e539cfd2ba79ba7b5978f1512f9299c5f\">Create the relationship between your custom object and your profiles.</li>\n</ol><h3 id=\"h_01JX0871G2Y83YD0EG9A8R9ZYA\">How are data sources created and used?</h3><div class=\"bs-callout bs-callout-default\"><p>Custom objects are created from data sources. Your developer will need to create a new data source using our <a href=\"https://developers.klaviyo.com/en/reference/create_data_source\" target=\"_blank\" rel=\"noopener noreferrer\">Custom Objects API</a>.</p></div><p>After creating a new data source, Klaviyo will return a unique identifier as part of the response to your API request. This allows Klaviyo to identify data sources, especially in cases where an account has multiple data sources (e.g., 1 for each custom integration, data warehouse, or custom 3rd party integration that the brand relies on for their business).</p><p>With this unique identifier, your developer can then create data source records through <a href=\"https://developers.klaviyo.com/en/reference/bulk_create_data_source_records\" target=\"_blank\" rel=\"noopener noreferrer\">Klaviyo’s API</a>.</p><h3 id=\"h_01JXJQC1AAAX97NCB2HV0DA50E\"><strong>How should I format my data?</strong></h3><p>Your developer will need to send JSON-formatted data to Klaviyo. We recommend sending your data as text with a comma separated list. You will be able to use segmentation and flow filtering’s “contains” operator to filter for the values in this comma separated string. See the <a href=\"https://help.klaviyo.com/hc/en-us/articles/115005062847\" target=\"_blank\" rel=\"noopener noreferrer\">segment conditions reference</a> for more information on filtering.  </p><p id=\"h_01JX0955E5JN0GPGS95ESDEM0G\">Supported <a href=\"https://help.klaviyo.com/hc/en-us/articles/115005237648\" target=\"_blank\" rel=\"noopener noreferrer\">data types</a> in custom objects:</p><ul>\n<li data-list-item-id=\"ec6c9480d49e1b335b7938d7de643e413\">Text</li>\n<li data-list-item-id=\"e85319c3b56ec512d100ce1d68b6d68cf\">Integer</li>\n<li data-list-item-id=\"e6dce3fa45bd6694861a4dcdfb25315b1\">Decimal</li>\n<li data-list-item-id=\"e6a6ffb8c232dbfdfaa2cc4ea5204d405\">\n<a href=\"https://help.klaviyo.com/hc/en-us/articles/115005237648#h_01J15GVP683H6QPWVMJDA9HGYM\" target=\"_blank\" rel=\"noopener noreferrer\">Date</a> - All datetimes are converted to UTC in our system. For example, if you upload “2025-04-03” it is converted to “2025-04-03 00:00:00”. For customers with time zones three hours ahead, the datetime would read “2025-04-02 21:00:00”.</li>\n<li data-list-item-id=\"e0751ad798a61c04024118d9750856387\"><a href=\"https://help.klaviyo.com/hc/en-us/articles/115005237648#h_01J15GVP68YBJZ962DJ3TRRR9H\" target=\"_blank\" rel=\"noopener noreferrer\">Boolean</a></li>\n</ul><p>The list data type is not currently supported. For an example payload for the data source record API, see <a href=\"https://developers.klaviyo.com/en/reference/bulk_create_data_source_records\" target=\"_blank\" rel=\"noopener noreferrer\">Bulk Create Data Source Records</a>.</p><div class=\"bs-callout bs-callout-default\"><p>When sending phone numbers, they must be in <a href=\"https://help.klaviyo.com/hc/en-us/articles/360046055671\" target=\"_blank\" rel=\"noopener noreferrer\">E.164 format</a>. When sending dates, they must be in one of our <a href=\"https://developers.klaviyo.com/en/docs/acceptable_date_and_timestamp_formats_for_profile_and_event_properties\" target=\"_blank\" rel=\"noopener noreferrer\">acceptable timestamp formats</a>.</p></div><h3 id=\"h_01JXJQBY3GDTPDY7ZVE24220AS\"><strong>What are the data limits for custom objects?</strong></h3><p>You can upload a maximum of 2 KB per property and 8 KB per total record.</p><h3 id=\"h_01JXJQC5HAG1HD57QVTASZ233P\"><strong>Can I map with nested data?</strong></h3><p>We recommend defining your JSON object without nesting the properties you want to use for your custom object. If your source data is deeply nested or uses a list, you will need to manually enter the JSON path into the object manager. For lists, you can only map a property to a position within that list (e.g., the first or second value).</p><h3 id=\"h_01JXJQCA4C310N66N3AA2QGWV3\"><strong>Can I associate multiple identifiers with a profile?</strong></h3><p>Yes, if you want to use 2 or more profile identifiers (e.g., email and phone number) to associate your custom object records to a profile, ensure you include both of those properties in every sync, even if the value of one of them is null.  </p><h2 id=\"h_01JX2TK9X6AAQ74Z0Y050GEVJD\">Questions about using objects with flows </h2><h3 id=\"h_01JX38X7RTVV0Y2QJBKQBA23WS\">If my object didn’t trigger a flow and I don’t have an object id from an event, can I still personalize my messaging?</h3><p>Yes, you can use <a href=\"https://help.klaviyo.com/hc/en-us/articles/35146367972763#h_01JPTH5R8840K0Q3XWH2CFYWRY\" target=\"_blank\" rel=\"noopener noreferrer\">object filters</a> to find the right object when personalizing your messaging. </p><h3 id=\"h_01JX39S6SP3WMT434HY4MQ6GNC\">Can I preview flow messages when an object triggers a flow? </h3><p>At this time, it is not possible to use the preview function in the app to view a message when you use the <code class=\"language-html\">{{ object }}</code> tag.</p><p>To test a flow message:</p><ol>\n<li data-list-item-id=\"e1269205776e75f25d765353271ddf108\">Create a <a href=\"https://help.klaviyo.com/hc/en-us/articles/360002732652\" target=\"_blank\" rel=\"noopener noreferrer\">date-triggered flow</a> and set it to live.</li>\n<li data-list-item-id=\"ec95284c68d15d121e15a8cd89b7b5366\">Create a profile with an object that has a date that will trigger in at least 24 hours.</li>\n</ol><h3 id=\"h_01JX399P39AV8NKTMJX0GQA1VR\">Can I update my objects using flow actions like webhooks and Klaviyo code?</h3><p>At this time, we advise you to update your original data source first and then send the revised object back to Klaviyo in the permitted format. If these two systems fall out of sync, you risk sending an out of date record back to Klaviyo from your system, reverting it to the original value.</p><p> </p>",
+    "user_segment_ids": []
+  },
+  "normalized": {
+    "id": "37711720137755",
+    "title": "Frequently asked questions about custom objects",
+    "source_url": "https://help.klaviyo.com/hc/en-us/articles/37711720137755-Frequently-asked-questions-about-custom-objects",
+    "section_id": 49375872847131,
+    "section": "Getting started with objects",
+    "category_id": 4414879524891,
+    "category": "Content",
+    "category_slug": "content",
+    "klaviyo_updated": "2026-04-21T13:56:55Z",
+    "created_at": "2025-06-05T14:37:19Z",
+    "draft": false,
+    "promoted": false,
+    "position": 1,
+    "label_names": []
+  },
+  "files": {
+    "body_html": "_source/articles/37711720137755.body.html",
+    "rendered_html": "_source/rendered/37711720137755.html"
+  },
+  "assets": {
+    "api_body": {
+      "images": [],
+      "links": [
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Community forum"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/reference/custom_objects_api_overview",
+          "text": "APIs"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/35105337172123",
+          "text": "updating a custom object"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/35146367972763",
+          "text": "personalize templates"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/reference/create_data_source",
+          "text": "using our API"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/reference/bulk_create_data_source_records",
+          "text": "API"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/35105337172123#h_01JPSTEQJQYKW8Y4AEKSPQ6YSF",
+          "text": "Create"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/reference/create_data_source",
+          "text": "Custom Objects API"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/reference/bulk_create_data_source_records",
+          "text": "Klaviyo’s API"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005062847",
+          "text": "segment conditions reference"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005237648",
+          "text": "data types"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005237648#h_01J15GVP683H6QPWVMJDA9HGYM",
+          "text": "Date"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005237648#h_01J15GVP68YBJZ962DJ3TRRR9H",
+          "text": "Boolean"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/reference/bulk_create_data_source_records",
+          "text": "Bulk Create Data Source Records"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360046055671",
+          "text": "E.164 format"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/acceptable_date_and_timestamp_formats_for_profile_and_event_properties",
+          "text": "acceptable timestamp formats"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/35146367972763#h_01JPTH5R8840K0Q3XWH2CFYWRY",
+          "text": "object filters"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360002732652",
+          "text": "date-triggered flow"
+        }
+      ],
+      "headings": [
+        {
+          "level": 2,
+          "id": "h_01JX07RWPJ4C70YDP2N5J5ZC4E",
+          "text": "You will learn"
+        },
+        {
+          "level": 2,
+          "id": "h_01JX07R0ZP17W9HB4VS83Z0953",
+          "text": "General questions about objects"
+        },
+        {
+          "level": 3,
+          "id": "h_01JXJQA21MZKMSKYXRYH8NV0TK",
+          "text": "Do I need a developer to create an object?"
+        },
+        {
+          "level": 3,
+          "id": "h_01JX07R0ZPF61843VYCS28EA79",
+          "text": "Can I create custom objects using Klaviyo forms or CSV uploads?"
+        },
+        {
+          "level": 3,
+          "id": "h_01JX07R0ZPTZSW8DDSJ2SEK3NW",
+          "text": "When should I use a custom object versus a profile property or event?"
+        },
+        {
+          "level": 3,
+          "id": "h_01JX2QR335SVFKCSTVM2GCF501",
+          "text": "Can I update my custom object after creation?"
+        },
+        {
+          "level": 3,
+          "id": "h_01JX07R0ZP9WQ269CM7YNTJSTW",
+          "text": "When should I emit an event versus updating the custom object’s properties?"
+        },
+        {
+          "level": 2,
+          "id": "h_01JX07R0ZPN1TW9TCQMYPNZV0D",
+          "text": "Questions about sending object data"
+        },
+        {
+          "level": 3,
+          "id": "h_01JXJQBAGGNKJMXYGTJNWG6REE",
+          "text": "How do I start sending my data for custom objects?"
+        },
+        {
+          "level": 3,
+          "id": "h_01JX0871G2Y83YD0EG9A8R9ZYA",
+          "text": "How are data sources created and used?"
+        },
+        {
+          "level": 3,
+          "id": "h_01JXJQC1AAAX97NCB2HV0DA50E",
+          "text": "How should I format my data?"
+        },
+        {
+          "level": 3,
+          "id": "h_01JXJQBY3GDTPDY7ZVE24220AS",
+          "text": "What are the data limits for custom objects?"
+        },
+        {
+          "level": 3,
+          "id": "h_01JXJQC5HAG1HD57QVTASZ233P",
+          "text": "Can I map with nested data?"
+        },
+        {
+          "level": 3,
+          "id": "h_01JXJQCA4C310N66N3AA2QGWV3",
+          "text": "Can I associate multiple identifiers with a profile?"
+        },
+        {
+          "level": 2,
+          "id": "h_01JX2TK9X6AAQ74Z0Y050GEVJD",
+          "text": "Questions about using objects with flows"
+        },
+        {
+          "level": 3,
+          "id": "h_01JX38X7RTVV0Y2QJBKQBA23WS",
+          "text": "If my object didn’t trigger a flow and I don’t have an object id from an event, can I still personalize my messaging?"
+        },
+        {
+          "level": 3,
+          "id": "h_01JX39S6SP3WMT434HY4MQ6GNC",
+          "text": "Can I preview flow messages when an object triggers a flow?"
+        },
+        {
+          "level": 3,
+          "id": "h_01JX399P39AV8NKTMJX0GQA1VR",
+          "text": "Can I update my objects using flow actions like webhooks and Klaviyo code?"
+        }
+      ]
+    },
+    "rendered_page": {
+      "images": [
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/7ff492c2b417b7ecfe572f839a8a81398693c1f7-1920x1080.webp",
+          "alt": "",
+          "width": "",
+          "height": ""
+        }
+      ],
+      "links": [
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/37711720137755-Frequently-asked-questions-about-custom-objects#site-content",
+          "text": "Skip to main content"
+        },
+        {
+          "href": "https://www.klaviyo.com",
+          "text": "Home"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center"
+        },
+        {
+          "href": "https://www.klaviyo.com/enterprise",
+          "text": "Enterprise"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Partners"
+        },
+        {
+          "href": "https://www.klaviyo.com/careers",
+          "text": "Careers"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": "Log in"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": ""
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center Find step-by-step instructions and troubleshooting solutions in our knowledge base."
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000032731",
+          "text": "Integrations"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000312411",
+          "text": "Flows"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867867",
+          "text": "Audience"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867667",
+          "text": "Campaigns"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/360000190711",
+          "text": "Sign-up forms"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000873988",
+          "text": "Deliverability & compliance"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/29173800271259",
+          "text": "SMS"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/16638219724187",
+          "text": "Reviews"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/18073014919195",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/34141283979931",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/37659126754075",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/33948021740315",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/39746685522331",
+          "text": "WhatsApp"
+        },
+        {
+          "href": "https://academy.klaviyo.com",
+          "text": "Klaviyo Academy Expert training and education to help you succeed with Klaviyo, and beyond."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Quick+guide&resource=academy_courses",
+          "text": "Quick guides Learn marketing strategies and concepts in 15 minutes or less."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Course&resource=academy_courses",
+          "text": "Courses Master key marketing topics through structured lessons and exams."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/best-practices",
+          "text": "Best practices Discover top product and marketing strategies for your business."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/learning-paths",
+          "text": "Learning paths Complete curated learning journeys tailored to your marketing goals."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses",
+          "text": "Explore all resources"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Live+training&resource=academy_courses",
+          "text": "Live trainings Build confidence through hands-on interactive workshops and thought-provoking strategy sessions."
+        },
+        {
+          "href": "https://www.bigmarker.com/klaviyo-customer-education/Office-hours-Getting-started-with-Klaviyo",
+          "text": "Live office hours Join a strategic discussion where you can ask questions and get answers in real-time."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/private-live-training",
+          "text": "1:1 Live training Book a private training session with an expert to jumpstart your platform knowledge and confidence."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/credentials",
+          "text": "Klaviyo credentials Dig deeper into select topics and showcase your expertise with a final exam to earn a certificate and digital badge."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/certificates/klaviyo-practitioner-certificate",
+          "text": "Klaviyo practitioner certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/deliverability-certificate",
+          "text": "Deliverability certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/developer-certificate",
+          "text": "Klaviyo developer certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses&select=Certificate",
+          "text": "See all certificates"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Klaviyo Community Join our thriving community network to connect with brands like yours—online and in person."
+        },
+        {
+          "href": "https://community.klaviyo.com/topic/new",
+          "text": "Ask a question Post a question and get thoughtful answers from Klaviyo powerusers."
+        },
+        {
+          "href": "https://community.klaviyo.com/p/roadmap",
+          "text": "Product roadmap"
+        },
+        {
+          "href": "https://community.klaviyo.com/search/activity/recent",
+          "text": "Recent threads"
+        },
+        {
+          "href": "https://community.klaviyo.com/p/champions",
+          "text": "Meet the Champions"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups",
+          "text": "Browse all groups Your people are waiting. New ideas and connections are a click away."
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/developer-group-64",
+          "text": "Developer group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/entrepreneur-user-group-118",
+          "text": "Entrepreneur group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/woo-user-group-87",
+          "text": "WooCommerce group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/new-york-meetup-chapter-82",
+          "text": "New York City"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/los-angeles-meetup-chapter-83",
+          "text": "Los Angeles"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/austin-meetup-chapter-85",
+          "text": "Austin"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/san-diego-meetup-chapter-86",
+          "text": "San Diego"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/amsterdam-meetup-chapter-84",
+          "text": "Amsterdam"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Klaviyo Developers Access API documentation and developer guides to help you build with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/get_started",
+          "text": "Get started Access key resources and a step-by-step checklist for how to start developing with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/build_your_integration",
+          "text": "Grow your app's reach Learn how to join our ecosystem and get your app listed on our marketplace."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/developer-tools",
+          "text": "Developer tools Generate sample data, monitor your API usage, and access our Postman collections."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/reference/api_overview",
+          "text": "API reference Browse our full catalog of API docs."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/changelog_",
+          "text": "Changelog"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/api_versioning_and_deprecation_policy",
+          "text": "Versioning & deprecation policy"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/rate_limits_and_error_handling",
+          "text": "Rate limits & error handling"
+        },
+        {
+          "href": "https://youtube.com/playlist?list=PLHkNfHgtxcUanrkMnKPdkRzuWU7MGv_xM&si=pkG-KH7IT_TUHOGC",
+          "text": "API tutorials on YouTube Subscribe to our Klaviyo API Tutorials playlist for easy access to step-by-step developer walkthroughs."
+        },
+        {
+          "href": "https://www.klaviyo.com/contact-us",
+          "text": "Contact us"
+        },
+        {
+          "href": "https://www.klaviyo.com/sign-up",
+          "text": "Sign up"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": "Search"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/37711720137755",
+          "text": "United States - EN"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/de-de/articles/37711720137755",
+          "text": "Deutschland - DE"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-es/articles/37711720137755",
+          "text": "España - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-mx/articles/37711720137755",
+          "text": "México - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/fr-fr/articles/37711720137755",
+          "text": "France - FR"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/it-it/articles/37711720137755",
+          "text": "Italia - IT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/ko-kr/articles/37711720137755",
+          "text": "한국 - KO"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/nl-nl/articles/37711720137755",
+          "text": "Nederland - NL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pl-pl/articles/37711720137755",
+          "text": "Polska - PL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pt-br/articles/37711720137755",
+          "text": "Brasil - PT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/sv-se/articles/37711720137755",
+          "text": "Sverige - SV"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/4414879524891",
+          "text": "Content"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/35105327347355",
+          "text": "Objects"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/49375872847131",
+          "text": "Getting started with objects"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/37711720137755-Frequently-asked-questions-about-custom-objects#h_01JX07RWPJ4C70YDP2N5J5ZC4E",
+          "text": "You will learn"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/37711720137755-Frequently-asked-questions-about-custom-objects#h_01JX07R0ZP17W9HB4VS83Z0953",
+          "text": "General questions about objects"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/37711720137755-Frequently-asked-questions-about-custom-objects#h_01JX07R0ZPN1TW9TCQMYPNZV0D",
+          "text": "Questions about sending object data"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/37711720137755-Frequently-asked-questions-about-custom-objects#h_01JX2TK9X6AAQ74Z0Y050GEVJD",
+          "text": "Questions about using objects with flows"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Community forum"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/reference/custom_objects_api_overview",
+          "text": "APIs"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/35105337172123",
+          "text": "updating a custom object"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/35146367972763",
+          "text": "personalize templates"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/reference/create_data_source",
+          "text": "using our API"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/reference/bulk_create_data_source_records",
+          "text": "API"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/35105337172123#h_01JPSTEQJQYKW8Y4AEKSPQ6YSF",
+          "text": "Create"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/reference/create_data_source",
+          "text": "Custom Objects API"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/reference/bulk_create_data_source_records",
+          "text": "Klaviyo’s API"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005062847",
+          "text": "segment conditions reference"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005237648",
+          "text": "data types"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005237648#h_01J15GVP683H6QPWVMJDA9HGYM",
+          "text": "Date"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005237648#h_01J15GVP68YBJZ962DJ3TRRR9H",
+          "text": "Boolean"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/reference/bulk_create_data_source_records",
+          "text": "Bulk Create Data Source Records"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360046055671",
+          "text": "E.164 format"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/acceptable_date_and_timestamp_formats_for_profile_and_event_properties",
+          "text": "acceptable timestamp formats"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/35146367972763#h_01JPTH5R8840K0Q3XWH2CFYWRY",
+          "text": "object filters"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360002732652",
+          "text": "date-triggered flow"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115001002272",
+          "text": "Learn how to contact support"
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": ""
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": "Visit Community"
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": ""
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": "Hire a partner"
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/about",
+          "text": "About Klaviyo"
+        },
+        {
+          "href": "https://www.klaviyo.com/newsroom",
+          "text": "Newsroom"
+        },
+        {
+          "href": "https://investors.klaviyo.com/overview/default.aspx",
+          "text": "Investor relations"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Agency and tech partners"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Developers"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/retail",
+          "text": "Retail and ecommerce"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/restaurants",
+          "text": "Restaurant marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/wellness",
+          "text": "Wellness"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform",
+          "text": "B2C CRM overview"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai",
+          "text": "Klaviyo AI (K:AI)"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/marketing-automation",
+          "text": "Klaviyo Marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-service",
+          "text": "Klaviyo Service"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/analytics",
+          "text": "Klaviyo Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-data-platform",
+          "text": "Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare",
+          "text": "Klaviyo vs. Klaviyo alternatives"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-mailchimp",
+          "text": "Klaviyo vs. Mailchimp"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-postscript",
+          "text": "Klaviyo vs. Postscript"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-attentive",
+          "text": "Klaviyo vs. Attentive"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-salesforce-marketing-cloud",
+          "text": "Klaviyo vs. Salesforce"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-listrak",
+          "text": "Klaviyo vs. Listrak"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/omnichannel",
+          "text": "Omnichannel marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/email-marketing",
+          "text": "Email marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing",
+          "text": "SMS marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing/rcs",
+          "text": "RCS for Business"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/mobile-app-marketing",
+          "text": "Mobile app marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/whatsapp",
+          "text": "WhatsApp marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/social",
+          "text": "Social marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources",
+          "text": "Marketing resources"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources/marketing-campaign-calendar",
+          "text": "Marketing campaign calendar"
+        },
+        {
+          "href": "https://www.klaviyo.com/glossary",
+          "text": "Marketing glossary"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/email-subject-line-generator",
+          "text": "Subject line generator"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/roi-calculator",
+          "text": "ROI calculator"
+        },
+        {
+          "href": "https://www.klaviyo.com/customers",
+          "text": "Case studies"
+        },
+        {
+          "href": "https://www.klaviyo.com/composer",
+          "text": "Composer Beta"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/marketing-agent",
+          "text": "Marketing Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/customer-agent",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/customer-experience-hub",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/helpdesk",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/marketing-analytics",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/advanced-cdp",
+          "text": "Advanced Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/web-forms",
+          "text": "Web forms"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/email-templates",
+          "text": "Email templates"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/portfolio",
+          "text": "Portfolio"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform-integrations",
+          "text": "Apps and Integrations"
+        },
+        {
+          "href": "https://www.klaviyo.com/features",
+          "text": "Features"
+        },
+        {
+          "href": "https://www.klaviyo.com/whats-new",
+          "text": "What's new"
+        },
+        {
+          "href": "https://www.klaviyo.com/events",
+          "text": "Events"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help Center"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us",
+          "text": "Academy"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Community"
+        },
+        {
+          "href": "https://www.facebook.com/Klaviyo/",
+          "text": "Facebook"
+        },
+        {
+          "href": "https://twitter.com/klaviyo/",
+          "text": "Twitter"
+        },
+        {
+          "href": "https://www.linkedin.com/company/klaviyo/",
+          "text": "LinkedIn"
+        },
+        {
+          "href": "https://www.instagram.com/klaviyo/",
+          "text": "Instagram"
+        },
+        {
+          "href": "https://www.klaviyo.com/sitemap",
+          "text": "Site Map"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal",
+          "text": "Terms and Privacy"
+        },
+        {
+          "href": "https://www.klaviyo.com/security",
+          "text": "Security"
+        },
+        {
+          "href": "https://www.klaviyo.com/trust",
+          "text": "Trust"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal/intellectual-property-notices",
+          "text": "Intellectual Property Notices"
+        }
+      ],
+      "headings": [
+        {
+          "level": 1,
+          "id": "",
+          "text": "Frequently asked questions about custom objects"
+        },
+        {
+          "level": 2,
+          "id": "h_01JX07RWPJ4C70YDP2N5J5ZC4E",
+          "text": "You will learn"
+        },
+        {
+          "level": 2,
+          "id": "h_01JX07R0ZP17W9HB4VS83Z0953",
+          "text": "General questions about objects"
+        },
+        {
+          "level": 3,
+          "id": "h_01JXJQA21MZKMSKYXRYH8NV0TK",
+          "text": "Do I need a developer to create an object?"
+        },
+        {
+          "level": 3,
+          "id": "h_01JX07R0ZPF61843VYCS28EA79",
+          "text": "Can I create custom objects using Klaviyo forms or CSV uploads?"
+        },
+        {
+          "level": 3,
+          "id": "h_01JX07R0ZPTZSW8DDSJ2SEK3NW",
+          "text": "When should I use a custom object versus a profile property or event?"
+        },
+        {
+          "level": 3,
+          "id": "h_01JX2QR335SVFKCSTVM2GCF501",
+          "text": "Can I update my custom object after creation?"
+        },
+        {
+          "level": 3,
+          "id": "h_01JX07R0ZP9WQ269CM7YNTJSTW",
+          "text": "When should I emit an event versus updating the custom object’s properties?"
+        },
+        {
+          "level": 2,
+          "id": "h_01JX07R0ZPN1TW9TCQMYPNZV0D",
+          "text": "Questions about sending object data"
+        },
+        {
+          "level": 3,
+          "id": "h_01JXJQBAGGNKJMXYGTJNWG6REE",
+          "text": "How do I start sending my data for custom objects?"
+        },
+        {
+          "level": 3,
+          "id": "h_01JX0871G2Y83YD0EG9A8R9ZYA",
+          "text": "How are data sources created and used?"
+        },
+        {
+          "level": 3,
+          "id": "h_01JXJQC1AAAX97NCB2HV0DA50E",
+          "text": "How should I format my data?"
+        },
+        {
+          "level": 3,
+          "id": "h_01JXJQBY3GDTPDY7ZVE24220AS",
+          "text": "What are the data limits for custom objects?"
+        },
+        {
+          "level": 3,
+          "id": "h_01JXJQC5HAG1HD57QVTASZ233P",
+          "text": "Can I map with nested data?"
+        },
+        {
+          "level": 3,
+          "id": "h_01JXJQCA4C310N66N3AA2QGWV3",
+          "text": "Can I associate multiple identifiers with a profile?"
+        },
+        {
+          "level": 2,
+          "id": "h_01JX2TK9X6AAQ74Z0Y050GEVJD",
+          "text": "Questions about using objects with flows"
+        },
+        {
+          "level": 3,
+          "id": "h_01JX38X7RTVV0Y2QJBKQBA23WS",
+          "text": "If my object didn’t trigger a flow and I don’t have an object id from an event, can I still personalize my messaging?"
+        },
+        {
+          "level": 3,
+          "id": "h_01JX39S6SP3WMT434HY4MQ6GNC",
+          "text": "Can I preview flow messages when an object triggers a flow?"
+        },
+        {
+          "level": 3,
+          "id": "h_01JX399P39AV8NKTMJX0GQA1VR",
+          "text": "Can I update my objects using flow actions like webhooks and Klaviyo code?"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "Explore more from Klaviyo"
+        }
+      ]
+    }
+  },
+  "rendered_page": {
+    "status": "fetched",
+    "error": ""
+  }
+}

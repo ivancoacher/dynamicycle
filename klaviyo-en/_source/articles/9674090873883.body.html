@@ -1,0 +1,220 @@
+<h2 id="h_01HWB7FCYQ1K05R97TMXK1WAJ0">You will learn</h2>
+<p>Learn how to troubleshoot errors for single sign-on (SSO) with Klaviyo. This article is meant for those familiar with SSO, such as IT professionals. </p>
+<p>For more information, please see this article on <a href="https://help.klaviyo.com/hc/en-us/articles/9353860331035">how to set up single sign-on</a>.</p>
+<h2 id="h_01HWB7FCYQC3NZXDX2WPJNHJHM">List of errors and how to fix them</h2>
+<p>We break down all the potential errors you can experience when setting up SSO. Errors tend to happen when there’s missing or incorrect information. </p>
+<p>The table below shows all potential errors, where to go to fix them, and how to fix them. </p>
+<table>
+<tbody>
+<tr>
+<td><strong>Error</strong></td>
+<td><strong>How to fix it</strong></td>
+</tr>
+<tr>
+<td>Missing SSO configuration for {email} ({company_id})</td>
+<td>Make sure the SSO configuration settings are saved in Klaviyo.</td>
+</tr>
+<tr>
+<td>SSO disabled for {email} ({company_id})</td>
+<td>Enable SSO in the SSO configuration panel in Klaviyo.</td>
+</tr>
+<tr>
+<td>Missing SSO configuration for ({company_id})</td>
+<td>Make sure the SSO configuration settings are saved.</td>
+</tr>
+<tr>
+<td>SSO disabled for ({company_id})</td>
+<td>Enable SSO in the SSO configuration panel in Klaviyo.</td>
+</tr>
+<tr>
+<td>Cannot provision new SSO user for {email} in account ({company_id}) (Just-in-Time provisioning not enabled)</td>
+<td>If you would like to use Just-in-Time user provisioning, turn it on in the SSO configuration panel for your IdP SSO provider. </td>
+</tr>
+<tr>
+<td>IdP-Initiated SSO is disabled for {email} ({company_id})</td>
+<td>If you would like to use IdP-initiated SSO, you can enable it in the SSO configuration panel. </td>
+</tr>
+<tr>
+<td><em>Missing SSO configuration for ({company_id})</em></td>
+<td>Make sure your SSO configuration is set up and saved. </td>
+</tr>
+<tr>
+<td>This user is part of more than 1 company in Klaviyo. Their first or last name in Klaviyo is different from the value you have provided. Please contact this user and update their name in your IdP to match the value in Klaviyo</td>
+<td>The admin should ask the user to update their name if it does not match what is in their IdP.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="h_01HWB7FCYRYSVR147170MG5BEB">SSO configuration errors</h3>
+<table style="width: 100%; height: 190px">
+<tbody>
+<tr>
+<td style="width: 33.3333%; height: 14px"><strong>Error</strong></td>
+<td colspan="2" style="width: 66.6666%; height: 14px"><strong>How to fix it</strong></td>
+<td style="width: 1.57143%"></td>
+</tr>
+<tr>
+<td style="width: 33.3333%; height: 22px">Unsupported SAML version</td>
+<td colspan="2" style="width: 66.6666%; height: 22px">Go to your IdP SSO provider and update to SAML 2.0. </td>
+<td style="width: 1.57143%"></td>
+</tr>
+<tr>
+<td style="width: 33.3333%; height: 22px">Missing ID attribute on SAML Response</td>
+<td colspan="2" style="width: 66.6666%; height: 22px">Check that you have the correct ID in your IdP setting and that it’s in the correct format.</td>
+<td style="width: 1.57143%"></td>
+</tr>
+<tr>
+<td rowspan="2" style="width: 33.3333%">Missing role attribute</td>
+<td colspan="2" style="width: 66.6666%">Navigate to your SSO provider and make sure to include the role attribute in the SAML assertion. Role value must be one of the following. </td>
+<td style="width: 1.57143%"></td>
+</tr>
+<tr>
+<td style="width: 33.3333%; height: 22px">
+<p><a href="https://help.klaviyo.com/hc/en-us/articles/115005231648">Account user roles</a>:<br>
+</p>
+<ul>
+<li>owner</li>
+<li>admin</li>
+<li>manager</li>
+<li>analyst</li>
+<li>campaign_coordinator</li>
+<li>content_creator</li>
+<li>support</li>
+</ul>
+</td>
+<td style="width: 33.3333%; height: 22px">
+<p><a href="https://help.klaviyo.com/hc/en-us/articles/25181702319643">Portfolio user roles</a>:</p>
+<ul>
+<li>portfolio_owner</li>
+<li>portfolio_admin</li>
+<li>portfolio_manager</li>
+<li>portfolio_analyst</li>
+</ul>
+</td>
+<td style="width: 1.57143%"></td>
+</tr>
+<tr>
+<td style="width: 33.3333%; height: 22px">SAML Response must contain 1 assertion</td>
+<td colspan="2" style="width: 66.6666%; height: 22px">Navigate to your SSO provider and make sure to include the role attribute in the SAML assertion. </td>
+<td style="width: 1.57143%"></td>
+</tr>
+<tr>
+<td style="width: 33.3333%; height: 22px">Invalid SAML Response. Not match the saml-schema-protocol-2.0.xsd</td>
+<td colspan="2" style="width: 66.6666%; height: 22px">Make sure your SAML response adheres schema protocol for SAML 2.0. </td>
+<td style="width: 1.57143%"></td>
+</tr>
+<tr>
+<td style="width: 33.3333%; height: 67px">The assertion of the Response is not encrypted and the SP require it </td>
+<td colspan="2" style="width: 66.6666%; height: 22px">Klaviyo requires the assertion to be encrypted. Make sure you’re using an assertion that is encrypted. </td>
+<td style="width: 1.57143%"></td>
+</tr>
+<tr>
+<td style="width: 33.3333%; height: 44px">The Assertion must include a Conditions element</td>
+<td colspan="2" style="width: 66.6666%; height: 22px">Ensure that the SAML response assertion for your IdP includes a conditions element. </td>
+<td style="width: 1.57143%"></td>
+</tr>
+<tr>
+<td style="width: 33.3333%; height: 44px">The Assertion must include an AuthnStatement element</td>
+<td colspan="2" style="width: 66.6666%; height: 22px">Ensure that the SAML response assertion for your IdP includes an AuthnStatement element. </td>
+<td style="width: 1.57143%"></td>
+</tr>
+<tr>
+<td style="width: 33.3333%; height: 44px">There is no AttributeStatement on the Response</td>
+<td colspan="2" style="width: 66.6666%; height: 22px">Ensure that the SAML response assertion for your IdP includes an AttributeStatement element. </td>
+<td style="width: 1.57143%"></td>
+</tr>
+<tr>
+<td style="width: 33.3333%; height: 67px">There is an EncryptedAttribute in the Response and this SP not support them</td>
+<td colspan="2" style="width: 66.6666%; height: 22px">Klaviyo does not support when an attribute is encrypted. Check the settings for your IdP and make sure no attribute is encrypted. </td>
+<td style="width: 1.57143%"></td>
+</tr>
+<tr>
+<td style="width: 33.3333%; height: 134px">The response has an empty Destination value</td>
+<td colspan="2" style="width: 66.6666%; height: 22px">Go to your IdP and fill in the destination. Note that the name for this value may not be “destination,” as it varies. If you don’t see “destination,” look for other common names for this value: “Reply URL,” “ACS URL,” “Assertion Consumer Service URL,” “Trusted URL,” and “Endpoint URL.” </td>
+<td style="width: 1.57143%"></td>
+</tr>
+<tr>
+<td style="width: 33.3333%; height: 89px">%s is not a valid audience for this Response</td>
+<td colspan="2" style="width: 66.6666%; height: 22px">Make sure that the audience Id in your IdP matches exactly with the Audience URI (Service Provider Entity ID) provided in your SSO configuration panel, including the https:// prefix.</td>
+<td style="width: 1.57143%"></td>
+</tr>
+<tr>
+<td style="width: 33.3333%; height: 67px">Invalid issuer in the Assertion/Response (expected %(idpEntityId)s, got %(issuer)s)</td>
+<td colspan="2" style="width: 66.6666%; height: 22px">Make sure the IdP SSO URL field in the SSO admin panel matches with the SSO URL provided by your identity provider</td>
+<td style="width: 1.57143%"></td>
+</tr>
+<tr>
+<td style="width: 33.3333%; height: 111px">The attributes have expired, based on the SessionNotOnOrAfter of the AttributeStatement of this Response</td>
+<td colspan="2" style="width: 66.6666%; height: 22px">Retry logging in. If that doesn’t work, extend the expiration window for your SAML response in your IdP, as it may be too short. </td>
+<td style="width: 1.57143%"></td>
+</tr>
+<tr>
+<td style="width: 33.3333%; height: 44px">A valid SubjectConfirmation was not found on this Response</td>
+<td colspan="2" style="width: 66.6666%; height: 22px">Check the settings for your IdP and look for the subject confirmation method. Make sure it’s formatted correctly. </td>
+<td style="width: 1.57143%"></td>
+</tr>
+<tr>
+<td style="width: 33.3333%; height: 193px">The Assertion of the Response is not signed and the SP require it</td>
+<td colspan="2" style="width: 66.6666%; height: 22px">
+<p>Either </p>
+<ul>
+<li>Go to the SSO page for workspace and uncheck the box for Assertions Signed<br>
+Or</li>
+<li>Go to your IdP settings and turn on signing assertions of responses </li>
+</ul>
+<p>Contact your IdP if you need help. </p>
+</td>
+<td style="width: 1.57143%"></td>
+</tr>
+<tr>
+<td style="width: 33.3333%; height: 170px">The Message of the Response is not signed and the SP require it</td>
+<td colspan="2" style="width: 66.6666%; height: 22px">
+<p>Either:</p>
+<ul>
+<li>Go to the SSO page for workspace and uncheck the box for Responses Signed<br>
+Or</li>
+<li>Go to your IdP settings and turn on signing responses</li>
+</ul>
+<p>Contact your IdP if you need help. </p>
+<p> </p>
+</td>
+<td style="width: 1.57143%"></td>
+</tr>
+<tr>
+<td style="width: 33.3333%; height: 44px">No Signature found. SAML Response rejected</td>
+<td colspan="2" style="width: 66.6666%; height: 22px">Check that the SAML message from your IdP is properly signed. </td>
+<td style="width: 1.57143%"></td>
+</tr>
+<tr>
+<td style="width: 33.3333%; height: 44px">Signature validation failed. SAML Response rejected</td>
+<td colspan="2" style="width: 66.6666%; height: 22px">Go to your workspace’s SSO page and make sure the certificate matches the certificate sent from your IdP.  </td>
+<td style="width: 1.57143%"></td>
+</tr>
+<tr>
+<td style="width: 33.3333%; height: 44px">SAML Response not found, Only supported HTTP_POST Binding</td>
+<td colspan="2" style="width: 66.6666%; height: 22px">Check that your IdP is sending a HTTP_POST request. </td>
+<td style="width: 1.57143%"></td>
+</tr>
+</tbody>
+</table>
+<h2 id="h_01HWB7FCYRQRGCSX8W1210EA1A">Other troubleshooting tips</h2>
+<p>Open the dropdown that best matches the issue you're having for information on how to solve it. </p>
+<div class="accordion accordion--default">
+<div class="accordion__item">
+<div class="accordion__item-title"><strong>I can't edit a user's role in Klaviyo</strong></div>
+<div class="accordion__item-content">
+<p>The most likely cause of this is if you're using just-in-time (JIT) provisioning. When JIT is turned on, you are not able to edit a user's role in Klaviyo. </p>
+<p>To do so, the best option is to:</p>
+<ol>
+<li>Temporarily turn off JIT provisioning.</li>
+<li>Update the user's role in Klaviyo. </li>
+<li>Turn JIT back on. </li>
+</ol>
+</div>
+</div>
+<div class="accordion__item">
+<div class="accordion__item-title"><strong>I can't view the exemption list</strong></div>
+<div class="accordion__item-content">
+<p>You need to have SSO set up in order to see the exemption list. For instructions, see our <a href="https://help.klaviyo.com/hc/en-us/articles/9353860331035">article on how to enable SSO in Klaviyo</a>. </p>
+</div>
+</div>
+</div>

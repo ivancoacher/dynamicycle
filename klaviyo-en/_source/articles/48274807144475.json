@@ -1,0 +1,793 @@
+{
+  "captured_at": "2026-05-23T16:10:43Z",
+  "article": {
+    "id": 48274807144475,
+    "url": "https://klaviyo.zendesk.com/api/v2/help_center/en-us/articles/48274807144475.json",
+    "html_url": "https://klaviyo.zendesk.com/hc/en-us/articles/48274807144475-Multi-Email-Profiles",
+    "author_id": 42496943775643,
+    "comments_disabled": false,
+    "draft": false,
+    "promoted": false,
+    "position": 0,
+    "vote_sum": 0,
+    "vote_count": 0,
+    "section_id": 14508656438555,
+    "created_at": "2026-03-25T21:19:45Z",
+    "updated_at": "2026-05-14T07:11:06Z",
+    "name": "Multi Email Profiles",
+    "title": "Multi Email Profiles",
+    "source_locale": "en-us",
+    "locale": "en-us",
+    "outdated": false,
+    "outdated_locales": [],
+    "edited_at": "2026-05-13T22:28:02Z",
+    "user_segment_id": null,
+    "permission_group_id": 146372,
+    "content_tag_ids": [],
+    "label_names": [],
+    "body": "<h1 id=\"45f00c0100d5\"><strong>What is Multi-Email Profiles?</strong></h1>\n<p>Multi-Email Profiles (MEP) is a Klaviyo feature that lets you store and manage up to 5 email addresses on a single customer profile. Instead of your customers appearing as multiple separate profiles every time they use a different email, Klaviyo keeps everything in one place so you always have a complete, accurate picture of who they are.</p>\n<p>This means better personalization, cleaner analytics, and more consistent experiences across every channel you use.</p>\n<h1 id=\"39769727522c\"><strong>Why does this matter?</strong></h1>\n<p>Your customers don't stick to one email address. They might sign up with their personal Gmail, check out with a work address, and click a link from a third address they use for shopping. Without MEP, each of those interactions creates a separate profile in Klaviyo, leading to:</p>\n<ul>\n<li>Duplicate profiles cluttering your account</li>\n<li>Broken automation flows and missed triggers</li>\n<li>Inconsistent consent and suppression records</li>\n<li>Fragmented data that makes personalization harder</li>\n<li>Inflated contact counts and skewed analytics</li>\n</ul>\n<p>MEP solves this by unifying all of a customer's email addresses under one profile.</p>\n<h1 id=\"952897379daf\"><strong>How profiles get merged</strong></h1>\n<h2 id=\"83d86cda9258\"><strong>What triggers a merge?</strong></h2>\n<p>Klaviyo merges profiles when it can confirm they belong to the same person. This happens when two profiles share an <strong>External ID</strong> a unique identifier your store or integration provides to Klaviyo, such as a customer ID from your ecommerce platform.</p>\n<p>There are three ways to add email addresses to a profile:</p>\n<ul>\n<li>\n<strong>Automatic merge:</strong> When two profiles share an External ID, Klaviyo automatically merges them and combines their email addresses.</li>\n<li>\n<strong>Klaviyo UI:</strong> You can manually add secondary email addresses directly on the profile page in Klaviyo.</li>\n<li>\n<strong>PATCH API:</strong> Developers can use the PATCH API to add emails programmatically using Klaviyo's identity resolution rules.</li>\n</ul>\n<h2 id=\"40a334428e34\"><strong>What carries over when profiles merge?</strong></h2>\n<p>When profiles merge, Klaviyo designates one as the <strong>destination profile</strong> — the one that keeps its Primary Email and identity. Everything from the other profiles is folded in:</p>\n<ul>\n<li>Additional email addresses (up to the 5-email cap)</li>\n<li>Profile properties</li>\n<li>Event history and activity</li>\n<li>Consent and suppression records</li>\n</ul>\n<div class=\"bs-callout bs-callout-default\">\n<p><strong>Important: </strong>Each email address keeps its own consent and suppression status after a merge. Subscribing or unsubscribing one email does not affect the others.</p>\n</div>\n<h2 id=\"83edc31cf4bf\"><strong>What happens when a profile already has 5 emails?</strong></h2>\n<p>Each profile can hold a maximum of 5 email addresses. If a 6th is added:</p>\n<ul>\n<li>The new address is added.</li>\n<li>The least recently updated address on the profile is automatically removed to stay within the limit.</li>\n</ul>\n<h1 id=\"ccfdd5439a6d\"><strong>How Klaviyo picks the Primary Email</strong></h1>\n<p>Every profile has one <strong>Primary Email</strong> — the address Klaviyo uses by default when sending campaigns and flows. Here's how Klaviyo determines which address gets that role:</p>\n<p><strong>Step 1 — Consent</strong></p>\n<p>Klaviyo picks the email that's opted in or subscribed to marketing. An address that can actively and legally receive mail always comes first.</p>\n<p><strong>Step 2 — Engagement</strong></p>\n<p>If multiple emails have consent, the one tied to the most recent Placed Order or non-bot email click becomes the Primary. The most engaged address is the best choice for reaching your customer.</p>\n<p><strong>Step 3 — Fallback</strong></p>\n<p>If there's no clear consent or engagement signal, Klaviyo uses the most recently added email as a tiebreaker.</p>\n<h2 id=\"bbf97c11d15b\"><strong>When does the Primary Email update?</strong></h2>\n<p>The Primary Email isn't fixed — Klaviyo re-evaluates it automatically.</p>\n<div class=\"bs-callout bs-callout-default\">\n<p><strong>In real time (within about an hour):</strong></p>\n<ul>\n<li>A new email address is added to the profile</li>\n<li>The current Primary Email unsubscribes, bounces, or is removed</li>\n</ul>\n</div>\n<div class=\"bs-callout bs-callout-default\">\n<p><strong>Every night:</strong></p>\n<ul>\n<li>Klaviyo runs a nightly check across all profiles to confirm the right Primary Email is still active and valid</li>\n</ul>\n</div>\n<h1 id=\"6cabd5cb5f9e\"><strong>Which email address gets the message?</strong></h1>\n<table>\n<tbody>\n<tr>\n<th><strong>Send type</strong></th>\n<th><strong>Which email gets the message</strong></th>\n</tr>\n<tr>\n<td><strong>Campaigns and segments</strong></td>\n<td>When you send a campaign to a segment, every profile receives it at their Primary Email. Secondary emails are not included in campaign sends.</td>\n</tr>\n<tr>\n<td><strong>Event-triggered flows</strong></td>\n<td>For flows triggered by events (like an Abandoned Cart flow), Klaviyo sends to the email address associated with the triggering event — not necessarily the Primary Email.</td>\n</tr>\n</tbody>\n</table>\n<div class=\"bs-callout bs-callout-default\">\n<p><strong>Example: Abandoned Cart</strong></p>\n<p>Your customer browses using their work email and leaves items in their cart. The Abandoned Cart event is linked to their work email, so Klaviyo sends the flow to that address — even if their Primary Email is different.</p>\n</div>\n<p>If that event email is unsubscribed or unreachable, Klaviyo skips the flow entirely. It will not fall back to the Primary Email or any other address on the profile.</p>\n<h1 id=\"765bae6452cd\"><strong>Frequently asked questions</strong></h1>\n<div class=\"accordion accordion--default\">\n<div class=\"accordion__item\">\n<div class=\"accordion__item-title\"><strong>How does MEP get created?</strong></div>\n<div class=\"accordion__item-content\">\n<p>Getting started with MEP is straightforward. There are three ways profiles get merged or have emails added:</p>\n<ul>\n<li>\n<strong>Automatic merge via External ID:</strong> When Klaviyo detects two profiles sharing the same External ID (typically a customer ID from your store), it automatically merges them into a single MEP. No manual step needed.</li>\n<li>\n<strong>Manually through the Klaviyo UI:</strong> You can add a secondary email directly on any profile page in Klaviyo.</li>\n<li>\n<strong>Via the PATCH API:</strong> Developers can use the PATCH API alongside Klaviyo's existing identity resolution rules to add emails programmatically.</li>\n</ul>\n<p>Merges are fully automatic — neither you nor your customer needs to confirm or approve anything.</p>\n</div>\n</div>\n<div class=\"accordion__item\">\n<div class=\"accordion__item-title\"><strong>Does having multiple emails on a profile affect my bill?</strong></div>\n<div class=\"accordion__item-content\">\n<p>Billing is based on profiles, not individual email addresses. A profile with 3 email addresses still counts as 1 contact toward your plan.</p>\n<p>In fact, MEP can help reduce your billable contact count. If you previously had duplicate profiles for the same customer using different email addresses, merging them into one MEP profile removes those duplicates — meaning fewer contacts overall.</p>\n</div>\n</div>\n<div class=\"accordion__item\">\n<div class=\"accordion__item-title\"><strong>What happens if the Primary Email is unsubscribed or unreachable at send time?</strong></div>\n<div class=\"accordion__item-content\">\n<p><strong>For campaigns:</strong> Klaviyo sends only to the Primary Email. If it's unsubscribed or unreachable at send time, that profile is skipped entirely. Klaviyo will not fall back to a secondary email.</p>\n<p><strong>For event-triggered flows:</strong> Klaviyo sends to the email tied to the triggering event, which may differ from the Primary Email. If that event email is unsubscribed or unreachable, the flow is skipped. There is no fallback to the Primary Email or any other address on the profile.</p>\n</div>\n</div>\n</div>\n<div class=\"accordion accordion--default\">\n<div class=\"accordion__item\">\n<div class=\"accordion__item-title\"><strong>What happens if I try to add more than 5 emails to a Profile? </strong></div>\n<div class=\"accordion__item-content\">\n<p>If a CSV contains multiple rows for the same profile, each with a different email address, behavior depends on the ingestion method.</p>\n<h4 id=\"a9c0f5c10176\">List Import UI / SFTP</h4>\n<p>The transform layer deduplicates rows before processing, so only the <strong>last row</strong> for a profile is retained (within the same chunk). Earlier email values are discarded.</p>\n<p>To preserve multiple emails:</p>\n<ul>\n<li>\n<strong>SFTP:</strong> Use <code>append_emails</code> columns</li>\n<li>\n<strong>List Import UI:</strong> Map multiple email columns</li>\n</ul>\n<p>Both approaches generate a <code>patch_identifiers</code> payload that appends all emails correctly.</p>\n<h4 id=\"2510e4f44b2f\">Bulk API</h4>\n<p>All rows are sent to the profiles service, where <code>_merge_payloads()</code> combines updates for the same profile.</p>\n<p><code>patch_identifiers</code> uses a dedicated merge path (<code>_merge_patch_identifiers()</code>) that accumulates append/unappend operations instead of overwriting them, so all email addresses are preserved across rows.</p>\n<h4 id=\"c9dc915216bf\">UI Behavior</h4>\n<p>When manually adding emails in the UI, a banner will prompt you to delete an existing email before adding a new one.</p>\n</div>\n</div>\n</div>",
+    "user_segment_ids": []
+  },
+  "normalized": {
+    "id": "48274807144475",
+    "title": "Multi Email Profiles",
+    "source_url": "https://help.klaviyo.com/hc/en-us/articles/48274807144475-Multi-Email-Profiles",
+    "section_id": 14508656438555,
+    "section": "Profiles",
+    "category_id": 115000867867,
+    "category": "Audience",
+    "category_slug": "analytics-audience",
+    "klaviyo_updated": "2026-05-14T07:11:06Z",
+    "created_at": "2026-03-25T21:19:45Z",
+    "draft": false,
+    "promoted": false,
+    "position": 0,
+    "label_names": []
+  },
+  "files": {
+    "body_html": "_source/articles/48274807144475.body.html",
+    "rendered_html": "_source/rendered/48274807144475.html"
+  },
+  "assets": {
+    "api_body": {
+      "images": [],
+      "links": [],
+      "headings": [
+        {
+          "level": 1,
+          "id": "45f00c0100d5",
+          "text": "What is Multi-Email Profiles?"
+        },
+        {
+          "level": 1,
+          "id": "39769727522c",
+          "text": "Why does this matter?"
+        },
+        {
+          "level": 1,
+          "id": "952897379daf",
+          "text": "How profiles get merged"
+        },
+        {
+          "level": 2,
+          "id": "83d86cda9258",
+          "text": "What triggers a merge?"
+        },
+        {
+          "level": 2,
+          "id": "40a334428e34",
+          "text": "What carries over when profiles merge?"
+        },
+        {
+          "level": 2,
+          "id": "83edc31cf4bf",
+          "text": "What happens when a profile already has 5 emails?"
+        },
+        {
+          "level": 1,
+          "id": "ccfdd5439a6d",
+          "text": "How Klaviyo picks the Primary Email"
+        },
+        {
+          "level": 2,
+          "id": "bbf97c11d15b",
+          "text": "When does the Primary Email update?"
+        },
+        {
+          "level": 1,
+          "id": "6cabd5cb5f9e",
+          "text": "Which email address gets the message?"
+        },
+        {
+          "level": 1,
+          "id": "765bae6452cd",
+          "text": "Frequently asked questions"
+        },
+        {
+          "level": 4,
+          "id": "a9c0f5c10176",
+          "text": "List Import UI / SFTP"
+        },
+        {
+          "level": 4,
+          "id": "2510e4f44b2f",
+          "text": "Bulk API"
+        },
+        {
+          "level": 4,
+          "id": "c9dc915216bf",
+          "text": "UI Behavior"
+        }
+      ]
+    },
+    "rendered_page": {
+      "images": [
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/7ff492c2b417b7ecfe572f839a8a81398693c1f7-1920x1080.webp",
+          "alt": "",
+          "width": "",
+          "height": ""
+        }
+      ],
+      "links": [
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/48274807144475-Multi-Email-Profiles#site-content",
+          "text": "Skip to main content"
+        },
+        {
+          "href": "https://www.klaviyo.com",
+          "text": "Home"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center"
+        },
+        {
+          "href": "https://www.klaviyo.com/enterprise",
+          "text": "Enterprise"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Partners"
+        },
+        {
+          "href": "https://www.klaviyo.com/careers",
+          "text": "Careers"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": "Log in"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": ""
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center Find step-by-step instructions and troubleshooting solutions in our knowledge base."
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000032731",
+          "text": "Integrations"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000312411",
+          "text": "Flows"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867867",
+          "text": "Audience"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867667",
+          "text": "Campaigns"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/360000190711",
+          "text": "Sign-up forms"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000873988",
+          "text": "Deliverability & compliance"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/29173800271259",
+          "text": "SMS"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/16638219724187",
+          "text": "Reviews"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/18073014919195",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/34141283979931",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/37659126754075",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/33948021740315",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/39746685522331",
+          "text": "WhatsApp"
+        },
+        {
+          "href": "https://academy.klaviyo.com",
+          "text": "Klaviyo Academy Expert training and education to help you succeed with Klaviyo, and beyond."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Quick+guide&resource=academy_courses",
+          "text": "Quick guides Learn marketing strategies and concepts in 15 minutes or less."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Course&resource=academy_courses",
+          "text": "Courses Master key marketing topics through structured lessons and exams."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/best-practices",
+          "text": "Best practices Discover top product and marketing strategies for your business."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/learning-paths",
+          "text": "Learning paths Complete curated learning journeys tailored to your marketing goals."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses",
+          "text": "Explore all resources"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Live+training&resource=academy_courses",
+          "text": "Live trainings Build confidence through hands-on interactive workshops and thought-provoking strategy sessions."
+        },
+        {
+          "href": "https://www.bigmarker.com/klaviyo-customer-education/Office-hours-Getting-started-with-Klaviyo",
+          "text": "Live office hours Join a strategic discussion where you can ask questions and get answers in real-time."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/private-live-training",
+          "text": "1:1 Live training Book a private training session with an expert to jumpstart your platform knowledge and confidence."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/credentials",
+          "text": "Klaviyo credentials Dig deeper into select topics and showcase your expertise with a final exam to earn a certificate and digital badge."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/certificates/klaviyo-practitioner-certificate",
+          "text": "Klaviyo practitioner certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/deliverability-certificate",
+          "text": "Deliverability certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/developer-certificate",
+          "text": "Klaviyo developer certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses&select=Certificate",
+          "text": "See all certificates"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Klaviyo Community Join our thriving community network to connect with brands like yours—online and in person."
+        },
+        {
+          "href": "https://community.klaviyo.com/topic/new",
+          "text": "Ask a question Post a question and get thoughtful answers from Klaviyo powerusers."
+        },
+        {
+          "href": "https://community.klaviyo.com/p/roadmap",
+          "text": "Product roadmap"
+        },
+        {
+          "href": "https://community.klaviyo.com/search/activity/recent",
+          "text": "Recent threads"
+        },
+        {
+          "href": "https://community.klaviyo.com/p/champions",
+          "text": "Meet the Champions"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups",
+          "text": "Browse all groups Your people are waiting. New ideas and connections are a click away."
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/developer-group-64",
+          "text": "Developer group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/entrepreneur-user-group-118",
+          "text": "Entrepreneur group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/woo-user-group-87",
+          "text": "WooCommerce group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/new-york-meetup-chapter-82",
+          "text": "New York City"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/los-angeles-meetup-chapter-83",
+          "text": "Los Angeles"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/austin-meetup-chapter-85",
+          "text": "Austin"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/san-diego-meetup-chapter-86",
+          "text": "San Diego"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/amsterdam-meetup-chapter-84",
+          "text": "Amsterdam"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Klaviyo Developers Access API documentation and developer guides to help you build with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/get_started",
+          "text": "Get started Access key resources and a step-by-step checklist for how to start developing with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/build_your_integration",
+          "text": "Grow your app's reach Learn how to join our ecosystem and get your app listed on our marketplace."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/developer-tools",
+          "text": "Developer tools Generate sample data, monitor your API usage, and access our Postman collections."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/reference/api_overview",
+          "text": "API reference Browse our full catalog of API docs."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/changelog_",
+          "text": "Changelog"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/api_versioning_and_deprecation_policy",
+          "text": "Versioning & deprecation policy"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/rate_limits_and_error_handling",
+          "text": "Rate limits & error handling"
+        },
+        {
+          "href": "https://youtube.com/playlist?list=PLHkNfHgtxcUanrkMnKPdkRzuWU7MGv_xM&si=pkG-KH7IT_TUHOGC",
+          "text": "API tutorials on YouTube Subscribe to our Klaviyo API Tutorials playlist for easy access to step-by-step developer walkthroughs."
+        },
+        {
+          "href": "https://www.klaviyo.com/contact-us",
+          "text": "Contact us"
+        },
+        {
+          "href": "https://www.klaviyo.com/sign-up",
+          "text": "Sign up"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": "Search"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/48274807144475",
+          "text": "United States - EN"
+        },
+        {
+          "href": "https://help.klaviyo.com/de-de",
+          "text": "Deutschland - DE"
+        },
+        {
+          "href": "https://help.klaviyo.com/es-es",
+          "text": "España - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/es-mx",
+          "text": "México - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/fr-fr",
+          "text": "France - FR"
+        },
+        {
+          "href": "https://help.klaviyo.com/it-it",
+          "text": "Italia - IT"
+        },
+        {
+          "href": "https://help.klaviyo.com/ko-kr",
+          "text": "한국 - KO"
+        },
+        {
+          "href": "https://help.klaviyo.com/nl-nl",
+          "text": "Nederland - NL"
+        },
+        {
+          "href": "https://help.klaviyo.com/pl-pl",
+          "text": "Polska - PL"
+        },
+        {
+          "href": "https://help.klaviyo.com/pt-br",
+          "text": "Brasil - PT"
+        },
+        {
+          "href": "https://help.klaviyo.com/sv-se",
+          "text": "Sverige - SV"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/14508656438555",
+          "text": "Profiles"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/48274807144475-Multi-Email-Profiles#what-triggers-a-merge",
+          "text": "What triggers a merge?"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/48274807144475-Multi-Email-Profiles#what-carries-over-when-profiles-merge",
+          "text": "What carries over when profiles merge?"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/48274807144475-Multi-Email-Profiles#what-happens-when-a-profile-already-has-5-emails",
+          "text": "What happens when a profile already has 5 emails?"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/48274807144475-Multi-Email-Profiles#when-does-the-primary-email-update",
+          "text": "When does the Primary Email update?"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115001002272",
+          "text": "Learn how to contact support"
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": ""
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": "Visit Community"
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": ""
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": "Hire a partner"
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/about",
+          "text": "About Klaviyo"
+        },
+        {
+          "href": "https://www.klaviyo.com/newsroom",
+          "text": "Newsroom"
+        },
+        {
+          "href": "https://investors.klaviyo.com/overview/default.aspx",
+          "text": "Investor relations"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Agency and tech partners"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Developers"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/retail",
+          "text": "Retail and ecommerce"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/restaurants",
+          "text": "Restaurant marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/wellness",
+          "text": "Wellness"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform",
+          "text": "B2C CRM overview"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai",
+          "text": "Klaviyo AI (K:AI)"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/marketing-automation",
+          "text": "Klaviyo Marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-service",
+          "text": "Klaviyo Service"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/analytics",
+          "text": "Klaviyo Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-data-platform",
+          "text": "Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare",
+          "text": "Klaviyo vs. Klaviyo alternatives"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-mailchimp",
+          "text": "Klaviyo vs. Mailchimp"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-postscript",
+          "text": "Klaviyo vs. Postscript"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-attentive",
+          "text": "Klaviyo vs. Attentive"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-salesforce-marketing-cloud",
+          "text": "Klaviyo vs. Salesforce"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-listrak",
+          "text": "Klaviyo vs. Listrak"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/omnichannel",
+          "text": "Omnichannel marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/email-marketing",
+          "text": "Email marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing",
+          "text": "SMS marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing/rcs",
+          "text": "RCS for Business"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/mobile-app-marketing",
+          "text": "Mobile app marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/whatsapp",
+          "text": "WhatsApp marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/social",
+          "text": "Social marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources",
+          "text": "Marketing resources"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources/marketing-campaign-calendar",
+          "text": "Marketing campaign calendar"
+        },
+        {
+          "href": "https://www.klaviyo.com/glossary",
+          "text": "Marketing glossary"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/email-subject-line-generator",
+          "text": "Subject line generator"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/roi-calculator",
+          "text": "ROI calculator"
+        },
+        {
+          "href": "https://www.klaviyo.com/customers",
+          "text": "Case studies"
+        },
+        {
+          "href": "https://www.klaviyo.com/composer",
+          "text": "Composer Beta"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/marketing-agent",
+          "text": "Marketing Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/customer-agent",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/customer-experience-hub",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/helpdesk",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/marketing-analytics",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/advanced-cdp",
+          "text": "Advanced Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/web-forms",
+          "text": "Web forms"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/email-templates",
+          "text": "Email templates"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/portfolio",
+          "text": "Portfolio"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform-integrations",
+          "text": "Apps and Integrations"
+        },
+        {
+          "href": "https://www.klaviyo.com/features",
+          "text": "Features"
+        },
+        {
+          "href": "https://www.klaviyo.com/whats-new",
+          "text": "What's new"
+        },
+        {
+          "href": "https://www.klaviyo.com/events",
+          "text": "Events"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help Center"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us",
+          "text": "Academy"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Community"
+        },
+        {
+          "href": "https://www.facebook.com/Klaviyo/",
+          "text": "Facebook"
+        },
+        {
+          "href": "https://twitter.com/klaviyo/",
+          "text": "Twitter"
+        },
+        {
+          "href": "https://www.linkedin.com/company/klaviyo/",
+          "text": "LinkedIn"
+        },
+        {
+          "href": "https://www.instagram.com/klaviyo/",
+          "text": "Instagram"
+        },
+        {
+          "href": "https://www.klaviyo.com/sitemap",
+          "text": "Site Map"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal",
+          "text": "Terms and Privacy"
+        },
+        {
+          "href": "https://www.klaviyo.com/security",
+          "text": "Security"
+        },
+        {
+          "href": "https://www.klaviyo.com/trust",
+          "text": "Trust"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal/intellectual-property-notices",
+          "text": "Intellectual Property Notices"
+        }
+      ],
+      "headings": [
+        {
+          "level": 1,
+          "id": "",
+          "text": "Multi Email Profiles"
+        },
+        {
+          "level": 1,
+          "id": "",
+          "text": "What is Multi-Email Profiles?"
+        },
+        {
+          "level": 1,
+          "id": "",
+          "text": "Why does this matter?"
+        },
+        {
+          "level": 1,
+          "id": "",
+          "text": "How profiles get merged"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "What triggers a merge?"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "What carries over when profiles merge?"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "What happens when a profile already has 5 emails?"
+        },
+        {
+          "level": 1,
+          "id": "",
+          "text": "How Klaviyo picks the Primary Email"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "When does the Primary Email update?"
+        },
+        {
+          "level": 1,
+          "id": "",
+          "text": "Which email address gets the message?"
+        },
+        {
+          "level": 1,
+          "id": "",
+          "text": "Frequently asked questions"
+        },
+        {
+          "level": 4,
+          "id": "",
+          "text": "List Import UI / SFTP"
+        },
+        {
+          "level": 4,
+          "id": "",
+          "text": "Bulk API"
+        },
+        {
+          "level": 4,
+          "id": "",
+          "text": "UI Behavior"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "Explore more from Klaviyo"
+        }
+      ]
+    }
+  },
+  "rendered_page": {
+    "status": "fetched",
+    "error": ""
+  }
+}

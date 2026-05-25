@@ -1,0 +1,942 @@
+{
+  "captured_at": "2026-05-23T16:14:11Z",
+  "article": {
+    "id": 45194892526747,
+    "url": "https://klaviyo.zendesk.com/api/v2/help_center/en-us/articles/45194892526747.json",
+    "html_url": "https://klaviyo.zendesk.com/hc/en-us/articles/45194892526747-Getting-started-with-geofences",
+    "author_id": 403118733631,
+    "comments_disabled": true,
+    "draft": false,
+    "promoted": false,
+    "position": 0,
+    "vote_sum": 0,
+    "vote_count": 0,
+    "section_id": 45191949659547,
+    "created_at": "2026-01-07T21:53:56Z",
+    "updated_at": "2026-05-01T18:53:40Z",
+    "name": "Getting started with geofences",
+    "title": "Getting started with geofences",
+    "source_locale": "en-us",
+    "locale": "en-us",
+    "outdated": false,
+    "outdated_locales": [],
+    "edited_at": "2026-05-01T18:31:41Z",
+    "user_segment_id": null,
+    "permission_group_id": 146372,
+    "content_tag_ids": [
+      "01KED6AWS1MW80V3CQT9ZX8FT0"
+    ],
+    "label_names": [],
+    "body": "<h2 id=\"h_01KED4DPGQ1RCG3ZF7CVJGH90K\"><strong>You will learn</strong></h2>\n<p>Learn how to create geofences in Klaviyo so that you can message profiles that are near your stores and drive in-store engagement. This article walks you through creating your first geofence.</p>\n<div class=\"bs-callout bs-callout-default\">\n<p>Only accounts with a mobile app can use geofencing. Your app must be on one of the following versions of the Klaviyo mobile SDKs.</p>\n<table>\n<tbody>\n<tr>\n<td>iOS SDK</td>\n<td>v 5.2.0 or later</td>\n</tr>\n<tr>\n<td>Android SDK</td>\n<td>v 4.2.0 or later</td>\n</tr>\n<tr>\n<td>React Native SDK</td>\n<td>v 2.2.0 or later</td>\n</tr>\n</tbody>\n</table>\n<p>Additionally, your app must request that users share their location to track when they enter or exit a geofence. Klaviyo will not create geofence events for profiles who do not share their location.</p>\n</div>\n<h2 id=\"h_01KED4DPGRNEM07ZCT45XXK7BV\"><strong>What are geofences?</strong></h2>\n<p>A <strong>geofence</strong> is a virtual boundary, defined by a center point and radius, around a real-world physical location. Geofences allow you to track when profiles enter or exit a specific area and then message those profiles with timely, relevant, location-based messages. </p>\n<p>For example, you can set up a geofence with a 500 meter radius around your store. Then you can create a flow that triggers when a mobile app user enters the geofence and sends a text message with an enticing offer to visit the store. </p>\n<p>You can use geofences for a variety of purposes, including: </p>\n<ul>\n<li>Triggering a flow to send real-time, location-based messages,</li>\n<li>Building segments of profiles that have entered your stores and sending those profiles campaigns about store-specific promotions or events,</li>\n<li>Creating reports and dashboards based on geofencing events to measure in-store engagement.</li>\n</ul>\n<h2 id=\"h_01KEHJKVCKJJ4Z9EXRE55DZR03\"><strong>Before you begin</strong></h2>\n<ol>\n<li>If you have not already, confirm with your mobile app development team that your app is using the latest version of the <a href=\"https://developers.klaviyo.com/en/docs/sdk_overview#mobile-sdks\">Klaviyo mobile SDKs</a> and that it is able to track users' locations. </li>\n<li>In addition, read through our <a href=\"https://help.klaviyo.com/hc/en-us/articles/115002774932\">guide to flows</a> and <a href=\"https://help.klaviyo.com/hc/en-us/articles/115005237908\">guide to segments</a> to ensure that you are familiar with how to leverage geofencing events across Klaviyo.</li>\n</ol>\n<h2 id=\"h_01KED4G1WN65M6ETA60EAG4HT6\"><strong>How geofencing works in Klaviyo</strong></h2>\n<ol>\n<li>You create one or more geofences in the <strong>Audience &gt; Geofences </strong>tab.</li>\n<li>Profiles download your mobile app and share their location.</li>\n<li>When a profile opens your mobile app, Klaviyo retrieves the closest 20 geofences to the profile’s current location, stores them on the device, and begins monitoring for interactions with those geofences.</li>\n<li>When the device enters or exits a geofence, Klaviyo generates an event – Entered Geofence or Exited Geofence, respectively.</li>\n<li>You use those events in flows, segments, and reporting to drive in-store conversion and analyze your locations' performance.</li>\n</ol>\n<h2 id=\"h_01KED4G1WNYC4A2RKP4WQR5ZPJ\"><strong>How to create a geofence</strong></h2>\n<div class=\"bs-callout bs-callout-default\">\n<p>Geofencing is subject to regional privacy and location-data regulations. Some regions require a minimum geofence radius or place restrictions on how location data can be used. Make sure your geofence settings comply with all applicable local laws.</p>\n</div>\n<p>To create a geofence:</p>\n<ol>\n<li>Navigate to <strong>Audience &gt; Geofences.</strong><br>\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/45264207933339\" alt=\"Menu showing the Geofences tab under Audience\" width=\"225\" height=\"159\">\n</li>\n<li>Click <strong>Create geofence</strong>.<br>\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/45264207936539\" alt=\"Geofences page showing the create geofence button\" width=\"1123\" height=\"213\">\n</li>\n<li>Add a geofence <strong>name</strong>.</li>\n<li>Search for the address of your desired location in the map search bar to automatically populate the address, latitude, and longitude fields. You may also manually enter the latitude and longitude coordinates if your location does not have a defined address.</li>\n<li>Define the <strong>radius</strong> in meters. Values may range from 50 meters to 10,000 meters. While Klaviyo allows any value in this range, note that local regulations may require a minimum geofence radius.<br>\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/45264194984731\" alt=\"Map and form where you add the name, address, latitude, longitude, and radius for a geofence\" width=\"1119\" height=\"731\">\n</li>\n<li>Select which events – enter and/or exit – you would like to track for the geofence. If you select only <strong>Enter</strong>, Klaviyo will not generate Exited Geofence events when devices leave a geofence.<br>\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/45264207940251\" alt=\"Field where you select the events to create\" width=\"1164\" height=\"458\">\n</li>\n<li>Click <strong>Save</strong>.</li>\n</ol>\n<p>Once saved, the geofence will appear in both the list and map views. You can create up to 5,000 geofences in Klaviyo.</p>\n<h2 id=\"h_01KED4G1WPJ8D995JDTHTPHBXK\"><strong>View and manage geofences</strong></h2>\n<p>You can view your geofences in two different views within the <strong>Geofences</strong> tab.</p>\n<h3 id=\"9befdc2daddb\"><strong>List view</strong></h3>\n<ul>\n<li>In the <strong>List view</strong>, you may view a table with all of your geofences, including their name, address, and radius. Additionally, you may search or sort the table based on the geofence name.</li>\n<li>To edit a geofence, click on the name of the geofence OR open the three-dot menu and click <strong>Edit.</strong>\n</li>\n</ul>\n<p><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/45266896086171\" alt=\"List of an account's geofences\" width=\"1124\" height=\"318\"></p>\n<h3 id=\"f151206d2e03\"><strong>Map view</strong></h3>\n<ul>\n<li>In the <strong>Map view</strong>, you may visualize all of your geofences on an interactive map. You can pan and zoom the map to find a specific area, or you can search for a specific address.</li>\n<li>To edit a geofence, click on a geofence on the map and then click <strong>Edit</strong> in the drawer that appears on the right<strong>.</strong>\n</li>\n</ul>\n<p><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/45266896087707\" alt=\"Map of an account's geofences\" width=\"1134\" height=\"755\"></p>\n<h2 id=\"5cca7c48e7dd\"><strong>Disable geofences</strong></h2>\n<p>On occasion, you may want to stop generating events for a specific geofence. For example, if a store closes for renovation or if an annual event ends, you likely want to turn off the geofence without fully deleting it from Klaviyo so that you do not need to recreate it in the future. </p>\n<p>To disable a geofence, select the geofence from the list view. Then on the edit screen, click the toggle button next to <strong>Enable geofence. </strong>To start tracking events for the geofence in the future, click the toggle button again.</p>\n<p class=\"wysiwyg-text-align-none\"><img src=\"https://cdn.sanity.io/images/6ct6b26e/help-center-prod/437215831a2214e2fa480d097bdf3529398ebb7f-320x138.png\" alt=\"The Enable geofence toggle in the Geofence Details panel, shown in the on position.\" width=\"full\"></p>\n<h2 id=\"h_01KED4G1WPYGJ9JMPM4G9Z3FJ8\"><strong>Geofence events </strong></h2>\n<p>Depending on your geofences’ settings, Klaviyo will generate the following events when a device that is sharing its location interacts with a geofence:</p>\n<ul>\n<li>Entered geofence - created when a device crosses into the geofence.</li>\n<li>Exited geofence<strong> </strong>- created when a device leaves the geofence.<br>\n<p>Each event includes metadata such as:</p>\n</li>\n<li>Geofence name</li>\n<li>Latitude and longitude</li>\n<li>Radius</li>\n</ul>\n<p>You then can use these events in segments, flow, or reporting, just like any other event in Klaviyo.</p>\n<h2 id=\"h_01KED4G1WP1TYECGGD06CYAETT\"><strong>Use geofencing in flows and segments</strong></h2>\n<h3 id=\"h_01KED4G1WP0KQGFWS7R486YJAB\"><strong>Trigger flows</strong></h3>\n<p>Use geofence events to send messages when customers are near your store. A few example use cases are:</p>\n<ul>\n<li>Trigger a flow off of the Entered Geofence event to send a welcome offer or in-store only deals when a profile enters your store.</li>\n<li>Trigger a flow using the Exited Geofence event if a profile did not make an in-store purchase. Wait a few hours and then send a message encouraging the profile to purchase online.</li>\n</ul>\n<h3 id=\"h_01KED4G1WPE8QFAJ39D2M140SK\"><strong>Build segments</strong></h3>\n<p>Create segments of profiles that have entered your geofences to know which profiles have visited your retail stores. Then leverage these segments to send location-specific offers to profiles. </p>\n<p>For example, build a segment of profiles that have entered the geofence for your New York City location in the last 90 days. Then send a campaign highlighting store specific news, like upcoming events or promotions.</p>",
+    "user_segment_ids": []
+  },
+  "normalized": {
+    "id": "45194892526747",
+    "title": "Getting started with geofences",
+    "source_url": "https://help.klaviyo.com/hc/en-us/articles/45194892526747-Getting-started-with-geofences",
+    "section_id": 45191949659547,
+    "section": "Geofences",
+    "category_id": 115000867867,
+    "category": "Audience",
+    "category_slug": "analytics-audience",
+    "klaviyo_updated": "2026-05-01T18:53:40Z",
+    "created_at": "2026-01-07T21:53:56Z",
+    "draft": false,
+    "promoted": false,
+    "position": 0,
+    "label_names": []
+  },
+  "files": {
+    "body_html": "_source/articles/45194892526747.body.html",
+    "rendered_html": "_source/rendered/45194892526747.html"
+  },
+  "assets": {
+    "api_body": {
+      "images": [
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/45264207933339",
+          "alt": "Menu showing the Geofences tab under Audience",
+          "width": "225",
+          "height": "159"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/45264207936539",
+          "alt": "Geofences page showing the create geofence button",
+          "width": "1123",
+          "height": "213"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/45264194984731",
+          "alt": "Map and form where you add the name, address, latitude, longitude, and radius for a geofence",
+          "width": "1119",
+          "height": "731"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/45264207940251",
+          "alt": "Field where you select the events to create",
+          "width": "1164",
+          "height": "458"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/45266896086171",
+          "alt": "List of an account's geofences",
+          "width": "1124",
+          "height": "318"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/45266896087707",
+          "alt": "Map of an account's geofences",
+          "width": "1134",
+          "height": "755"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/437215831a2214e2fa480d097bdf3529398ebb7f-320x138.png",
+          "alt": "The Enable geofence toggle in the Geofence Details panel, shown in the on position.",
+          "width": "full",
+          "height": ""
+        }
+      ],
+      "links": [
+        {
+          "href": "https://developers.klaviyo.com/en/docs/sdk_overview#mobile-sdks",
+          "text": "Klaviyo mobile SDKs"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115002774932",
+          "text": "guide to flows"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005237908",
+          "text": "guide to segments"
+        }
+      ],
+      "headings": [
+        {
+          "level": 2,
+          "id": "h_01KED4DPGQ1RCG3ZF7CVJGH90K",
+          "text": "You will learn"
+        },
+        {
+          "level": 2,
+          "id": "h_01KED4DPGRNEM07ZCT45XXK7BV",
+          "text": "What are geofences?"
+        },
+        {
+          "level": 2,
+          "id": "h_01KEHJKVCKJJ4Z9EXRE55DZR03",
+          "text": "Before you begin"
+        },
+        {
+          "level": 2,
+          "id": "h_01KED4G1WN65M6ETA60EAG4HT6",
+          "text": "How geofencing works in Klaviyo"
+        },
+        {
+          "level": 2,
+          "id": "h_01KED4G1WNYC4A2RKP4WQR5ZPJ",
+          "text": "How to create a geofence"
+        },
+        {
+          "level": 2,
+          "id": "h_01KED4G1WPJ8D995JDTHTPHBXK",
+          "text": "View and manage geofences"
+        },
+        {
+          "level": 3,
+          "id": "9befdc2daddb",
+          "text": "List view"
+        },
+        {
+          "level": 3,
+          "id": "f151206d2e03",
+          "text": "Map view"
+        },
+        {
+          "level": 2,
+          "id": "5cca7c48e7dd",
+          "text": "Disable geofences"
+        },
+        {
+          "level": 2,
+          "id": "h_01KED4G1WPYGJ9JMPM4G9Z3FJ8",
+          "text": "Geofence events"
+        },
+        {
+          "level": 2,
+          "id": "h_01KED4G1WP1TYECGGD06CYAETT",
+          "text": "Use geofencing in flows and segments"
+        },
+        {
+          "level": 3,
+          "id": "h_01KED4G1WP0KQGFWS7R486YJAB",
+          "text": "Trigger flows"
+        },
+        {
+          "level": 3,
+          "id": "h_01KED4G1WPE8QFAJ39D2M140SK",
+          "text": "Build segments"
+        }
+      ]
+    },
+    "rendered_page": {
+      "images": [
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/7ff492c2b417b7ecfe572f839a8a81398693c1f7-1920x1080.webp",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/f5df4cab1a40f7d27fbc227900449d251a216b3d-225x159.png?w=225",
+          "alt": "Menu showing the Geofences tab under Audience",
+          "width": "225",
+          "height": "159"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/fb3f0e6dc5b0c2d43ce5d8604e391317581201a9-1123x213.png?w=1123",
+          "alt": "Geofences page showing the create geofence button",
+          "width": "1123",
+          "height": "213"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/19b5281a3832f0c5fe4761b9f182edcd5aa72b01-1119x731.jpg?w=1119",
+          "alt": "Map and form where you add the name, address, latitude, longitude, and radius for a geofence",
+          "width": "1119",
+          "height": "731"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/f6666a92b2e18f62a24a1d60b5219539b883fbc8-1164x458.jpg?w=1164",
+          "alt": "Field where you select the events to create",
+          "width": "1164",
+          "height": "458"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/33377040135a2e2c53b2d7ecc4a2aaca629db42f-1124x318.png?w=1124",
+          "alt": "List of an account's geofences",
+          "width": "1124",
+          "height": "318"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/8f099deec7c681594e34a733defd63a4aeebfa88-1134x755.png?w=1134",
+          "alt": "Map of an account's geofences",
+          "width": "1134",
+          "height": "755"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/437215831a2214e2fa480d097bdf3529398ebb7f-320x138.png",
+          "alt": "The Enable geofence toggle in the Geofence Details panel, shown in the on position.",
+          "width": "",
+          "height": ""
+        }
+      ],
+      "links": [
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/45194892526747-Getting-started-with-geofences#site-content",
+          "text": "Skip to main content"
+        },
+        {
+          "href": "https://www.klaviyo.com",
+          "text": "Home"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center"
+        },
+        {
+          "href": "https://www.klaviyo.com/enterprise",
+          "text": "Enterprise"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Partners"
+        },
+        {
+          "href": "https://www.klaviyo.com/careers",
+          "text": "Careers"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": "Log in"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": ""
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center Find step-by-step instructions and troubleshooting solutions in our knowledge base."
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000032731",
+          "text": "Integrations"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000312411",
+          "text": "Flows"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867867",
+          "text": "Audience"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867667",
+          "text": "Campaigns"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/360000190711",
+          "text": "Sign-up forms"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000873988",
+          "text": "Deliverability & compliance"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/29173800271259",
+          "text": "SMS"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/16638219724187",
+          "text": "Reviews"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/18073014919195",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/34141283979931",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/37659126754075",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/33948021740315",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/39746685522331",
+          "text": "WhatsApp"
+        },
+        {
+          "href": "https://academy.klaviyo.com",
+          "text": "Klaviyo Academy Expert training and education to help you succeed with Klaviyo, and beyond."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Quick+guide&resource=academy_courses",
+          "text": "Quick guides Learn marketing strategies and concepts in 15 minutes or less."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Course&resource=academy_courses",
+          "text": "Courses Master key marketing topics through structured lessons and exams."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/best-practices",
+          "text": "Best practices Discover top product and marketing strategies for your business."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/learning-paths",
+          "text": "Learning paths Complete curated learning journeys tailored to your marketing goals."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses",
+          "text": "Explore all resources"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Live+training&resource=academy_courses",
+          "text": "Live trainings Build confidence through hands-on interactive workshops and thought-provoking strategy sessions."
+        },
+        {
+          "href": "https://www.bigmarker.com/klaviyo-customer-education/Office-hours-Getting-started-with-Klaviyo",
+          "text": "Live office hours Join a strategic discussion where you can ask questions and get answers in real-time."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/private-live-training",
+          "text": "1:1 Live training Book a private training session with an expert to jumpstart your platform knowledge and confidence."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/credentials",
+          "text": "Klaviyo credentials Dig deeper into select topics and showcase your expertise with a final exam to earn a certificate and digital badge."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/certificates/klaviyo-practitioner-certificate",
+          "text": "Klaviyo practitioner certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/deliverability-certificate",
+          "text": "Deliverability certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/developer-certificate",
+          "text": "Klaviyo developer certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses&select=Certificate",
+          "text": "See all certificates"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Klaviyo Community Join our thriving community network to connect with brands like yours—online and in person."
+        },
+        {
+          "href": "https://community.klaviyo.com/topic/new",
+          "text": "Ask a question Post a question and get thoughtful answers from Klaviyo powerusers."
+        },
+        {
+          "href": "https://community.klaviyo.com/p/roadmap",
+          "text": "Product roadmap"
+        },
+        {
+          "href": "https://community.klaviyo.com/search/activity/recent",
+          "text": "Recent threads"
+        },
+        {
+          "href": "https://community.klaviyo.com/p/champions",
+          "text": "Meet the Champions"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups",
+          "text": "Browse all groups Your people are waiting. New ideas and connections are a click away."
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/developer-group-64",
+          "text": "Developer group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/entrepreneur-user-group-118",
+          "text": "Entrepreneur group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/woo-user-group-87",
+          "text": "WooCommerce group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/new-york-meetup-chapter-82",
+          "text": "New York City"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/los-angeles-meetup-chapter-83",
+          "text": "Los Angeles"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/austin-meetup-chapter-85",
+          "text": "Austin"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/san-diego-meetup-chapter-86",
+          "text": "San Diego"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/amsterdam-meetup-chapter-84",
+          "text": "Amsterdam"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Klaviyo Developers Access API documentation and developer guides to help you build with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/get_started",
+          "text": "Get started Access key resources and a step-by-step checklist for how to start developing with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/build_your_integration",
+          "text": "Grow your app's reach Learn how to join our ecosystem and get your app listed on our marketplace."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/developer-tools",
+          "text": "Developer tools Generate sample data, monitor your API usage, and access our Postman collections."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/reference/api_overview",
+          "text": "API reference Browse our full catalog of API docs."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/changelog_",
+          "text": "Changelog"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/api_versioning_and_deprecation_policy",
+          "text": "Versioning & deprecation policy"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/rate_limits_and_error_handling",
+          "text": "Rate limits & error handling"
+        },
+        {
+          "href": "https://youtube.com/playlist?list=PLHkNfHgtxcUanrkMnKPdkRzuWU7MGv_xM&si=pkG-KH7IT_TUHOGC",
+          "text": "API tutorials on YouTube Subscribe to our Klaviyo API Tutorials playlist for easy access to step-by-step developer walkthroughs."
+        },
+        {
+          "href": "https://www.klaviyo.com/contact-us",
+          "text": "Contact us"
+        },
+        {
+          "href": "https://www.klaviyo.com/sign-up",
+          "text": "Sign up"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": "Search"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/45194892526747",
+          "text": "United States - EN"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/de-de/articles/45194892526747",
+          "text": "Deutschland - DE"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-es/articles/45194892526747",
+          "text": "España - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-mx/articles/45194892526747",
+          "text": "México - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/fr-fr/articles/45194892526747",
+          "text": "France - FR"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/it-it/articles/45194892526747",
+          "text": "Italia - IT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/ko-kr/articles/45194892526747",
+          "text": "한국 - KO"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/nl-nl/articles/45194892526747",
+          "text": "Nederland - NL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pl-pl/articles/45194892526747",
+          "text": "Polska - PL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pt-br/articles/45194892526747",
+          "text": "Brasil - PT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/sv-se/articles/45194892526747",
+          "text": "Sverige - SV"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/45191949659547",
+          "text": "Geofences"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/45194892526747-Getting-started-with-geofences#h_01KED4DPGQ1RCG3ZF7CVJGH90K",
+          "text": "You will learn"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/45194892526747-Getting-started-with-geofences#h_01KED4DPGRNEM07ZCT45XXK7BV",
+          "text": "What are geofences?"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/45194892526747-Getting-started-with-geofences#h_01KEHJKVCKJJ4Z9EXRE55DZR03",
+          "text": "Before you begin"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/45194892526747-Getting-started-with-geofences#h_01KED4G1WN65M6ETA60EAG4HT6",
+          "text": "How geofencing works in Klaviyo"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/45194892526747-Getting-started-with-geofences#h_01KED4G1WNYC4A2RKP4WQR5ZPJ",
+          "text": "How to create a geofence"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/45194892526747-Getting-started-with-geofences#h_01KED4G1WPJ8D995JDTHTPHBXK",
+          "text": "View and manage geofences"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/45194892526747-Getting-started-with-geofences#disable-geofences",
+          "text": "Disable geofences"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/45194892526747-Getting-started-with-geofences#h_01KED4G1WPYGJ9JMPM4G9Z3FJ8",
+          "text": "Geofence events"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/45194892526747-Getting-started-with-geofences#h_01KED4G1WP1TYECGGD06CYAETT",
+          "text": "Use geofencing in flows and segments"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/45194892526747-Getting-started-with-geofences#additional-resources",
+          "text": "Additional Resources"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/sdk_overview#mobile-sdks",
+          "text": "Klaviyo mobile SDKs"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115002774932",
+          "text": "guide to flows"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005237908",
+          "text": "guide to segments"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115002774932",
+          "text": "Getting started with flows"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005237908",
+          "text": "Getting started with segments"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115001002272",
+          "text": "Learn how to contact support"
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": ""
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": "Visit Community"
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": ""
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": "Hire a partner"
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/about",
+          "text": "About Klaviyo"
+        },
+        {
+          "href": "https://www.klaviyo.com/newsroom",
+          "text": "Newsroom"
+        },
+        {
+          "href": "https://investors.klaviyo.com/overview/default.aspx",
+          "text": "Investor relations"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Agency and tech partners"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Developers"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/retail",
+          "text": "Retail and ecommerce"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/restaurants",
+          "text": "Restaurant marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/wellness",
+          "text": "Wellness"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform",
+          "text": "B2C CRM overview"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai",
+          "text": "Klaviyo AI (K:AI)"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/marketing-automation",
+          "text": "Klaviyo Marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-service",
+          "text": "Klaviyo Service"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/analytics",
+          "text": "Klaviyo Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-data-platform",
+          "text": "Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare",
+          "text": "Klaviyo vs. Klaviyo alternatives"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-mailchimp",
+          "text": "Klaviyo vs. Mailchimp"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-postscript",
+          "text": "Klaviyo vs. Postscript"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-attentive",
+          "text": "Klaviyo vs. Attentive"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-salesforce-marketing-cloud",
+          "text": "Klaviyo vs. Salesforce"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-listrak",
+          "text": "Klaviyo vs. Listrak"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/omnichannel",
+          "text": "Omnichannel marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/email-marketing",
+          "text": "Email marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing",
+          "text": "SMS marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing/rcs",
+          "text": "RCS for Business"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/mobile-app-marketing",
+          "text": "Mobile app marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/whatsapp",
+          "text": "WhatsApp marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/social",
+          "text": "Social marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources",
+          "text": "Marketing resources"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources/marketing-campaign-calendar",
+          "text": "Marketing campaign calendar"
+        },
+        {
+          "href": "https://www.klaviyo.com/glossary",
+          "text": "Marketing glossary"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/email-subject-line-generator",
+          "text": "Subject line generator"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/roi-calculator",
+          "text": "ROI calculator"
+        },
+        {
+          "href": "https://www.klaviyo.com/customers",
+          "text": "Case studies"
+        },
+        {
+          "href": "https://www.klaviyo.com/composer",
+          "text": "Composer Beta"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/marketing-agent",
+          "text": "Marketing Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/customer-agent",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/customer-experience-hub",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/helpdesk",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/marketing-analytics",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/advanced-cdp",
+          "text": "Advanced Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/web-forms",
+          "text": "Web forms"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/email-templates",
+          "text": "Email templates"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/portfolio",
+          "text": "Portfolio"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform-integrations",
+          "text": "Apps and Integrations"
+        },
+        {
+          "href": "https://www.klaviyo.com/features",
+          "text": "Features"
+        },
+        {
+          "href": "https://www.klaviyo.com/whats-new",
+          "text": "What's new"
+        },
+        {
+          "href": "https://www.klaviyo.com/events",
+          "text": "Events"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help Center"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us",
+          "text": "Academy"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Community"
+        },
+        {
+          "href": "https://www.facebook.com/Klaviyo/",
+          "text": "Facebook"
+        },
+        {
+          "href": "https://twitter.com/klaviyo/",
+          "text": "Twitter"
+        },
+        {
+          "href": "https://www.linkedin.com/company/klaviyo/",
+          "text": "LinkedIn"
+        },
+        {
+          "href": "https://www.instagram.com/klaviyo/",
+          "text": "Instagram"
+        },
+        {
+          "href": "https://www.klaviyo.com/sitemap",
+          "text": "Site Map"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal",
+          "text": "Terms and Privacy"
+        },
+        {
+          "href": "https://www.klaviyo.com/security",
+          "text": "Security"
+        },
+        {
+          "href": "https://www.klaviyo.com/trust",
+          "text": "Trust"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal/intellectual-property-notices",
+          "text": "Intellectual Property Notices"
+        }
+      ],
+      "headings": [
+        {
+          "level": 1,
+          "id": "",
+          "text": "Getting started with geofences"
+        },
+        {
+          "level": 2,
+          "id": "h_01KED4DPGQ1RCG3ZF7CVJGH90K",
+          "text": "You will learn"
+        },
+        {
+          "level": 2,
+          "id": "h_01KED4DPGRNEM07ZCT45XXK7BV",
+          "text": "What are geofences?"
+        },
+        {
+          "level": 2,
+          "id": "h_01KEHJKVCKJJ4Z9EXRE55DZR03",
+          "text": "Before you begin"
+        },
+        {
+          "level": 2,
+          "id": "h_01KED4G1WN65M6ETA60EAG4HT6",
+          "text": "How geofencing works in Klaviyo"
+        },
+        {
+          "level": 2,
+          "id": "h_01KED4G1WNYC4A2RKP4WQR5ZPJ",
+          "text": "How to create a geofence"
+        },
+        {
+          "level": 2,
+          "id": "h_01KED4G1WPJ8D995JDTHTPHBXK",
+          "text": "View and manage geofences"
+        },
+        {
+          "level": 3,
+          "id": "",
+          "text": "List view"
+        },
+        {
+          "level": 3,
+          "id": "",
+          "text": "Map view"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "Disable geofences"
+        },
+        {
+          "level": 2,
+          "id": "h_01KED4G1WPYGJ9JMPM4G9Z3FJ8",
+          "text": "Geofence events"
+        },
+        {
+          "level": 2,
+          "id": "h_01KED4G1WP1TYECGGD06CYAETT",
+          "text": "Use geofencing in flows and segments"
+        },
+        {
+          "level": 3,
+          "id": "h_01KED4G1WP0KQGFWS7R486YJAB",
+          "text": "Trigger flows"
+        },
+        {
+          "level": 3,
+          "id": "h_01KED4G1WPE8QFAJ39D2M140SK",
+          "text": "Build segments"
+        },
+        {
+          "level": 2,
+          "id": "additional-resources",
+          "text": "Additional Resources"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "Explore more from Klaviyo"
+        }
+      ]
+    }
+  },
+  "rendered_page": {
+    "status": "fetched",
+    "error": ""
+  }
+}

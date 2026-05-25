@@ -1,0 +1,72 @@
+<h2 id="h_01HMF40ECZC4A278YBHA4YGMCH">You will learn</h2>
+<p>Learn how to upgrade your Klaviyo Salesforce Commerce Cloud cartridge. </p>
+<p>Are you using a cartridge version older than 23.7.0? We recommend upgrading immediately to version 23.7.0 or higher. Older versions of the cartridge use Klaviyo’s v1 and v2 APIs which are retired and no longer operate as expected. We always recommend upgrading to our newest version (currently, 25.7.0).</p>
+<h2 id="h_01HMF40ECZ3S8ZYXGYCG97G4VW">Before you begin</h2>
+<p>Version 23.7.0 includes a number of meaningful improvements, some of which are architectural changes around how events are triggered. Special considerations for upgrading from any version below 23.70 to any version above it are detailed below.</p>
+<h2 id="h_01HMF40ECZJAYF5NGF0A8KKCWG">Understand your current integration</h2>
+<p>It is important to be familiar with your current SFCC integration and what changes or customizations may have been made specifically for your website. Most importantly, you should consider whether or not the specific event data you send to Klaviyo has been altered or augmented, and if you’ve added any custom events.</p>
+<p>We recommend comparing your code that assembles event data against the previous version of the Klaviyo cartridge, <a href="https://github.com/klaviyo/SFCC_Klaviyo/releases" target="_blank" rel="noopener">available on Klaviyo’s Github</a>. Assuming that your integration has not been heavily customized, you will find your current data assembly functions in <code>int_klaviyo_core/cartridge/scripts/utils/klaviyo/klaviyoUtils.js</code>, and for <em>Order Confirmation</em> in <code>int_klaviyo_core/cartridge/scripts/utils/klaviyo/emailUtils.js</code>.</p>
+<p>Note any customizations so that you can re-apply them once the new cartridge has been installed.</p>
+<h2 id="h_01HMF40ECZ9E2KP016VFD4104Y">Connect an SFCC sandbox to a Klaviyo test account</h2>
+<p>If you have not yet created a secondary Klaviyo account for testing, separate from the account that is tied to your SFCC production environment, you should do so. Then, connect your SFCC sandbox environment to the new account. We recommend completing this step using your prior Klaviyo cartridge version so that you can verify that events are successfully being sent to and received by your secondary Klaviyo account before proceeding to upgrade your codebase with the new Klaviyo cartridge.</p>
+<h2 id="h_01HMF40ECZ3GXCA2P03G7GFBD6">Remove the previous Klaviyo cartridge code</h2>
+<p>If your integration was not heavily customized, you will be able to remove the majority of the previous Klaviyo integration by simply deleting the two Klaviyo cartridge folders: int_klaviyo_core and either int_klaviyo (for Site Genesis) or int_klaviyo_sfra (for SFRA) from the codebase. However, you will also have to remove any Klaviyo-specific code that may have been added to template files, and possibly JavaScript files.</p>
+<h3 id="h_01HMF40ECZ8WW1HK7MMXPRFW0M">For Site Genesis</h3>
+<p>Standard integrations for Site Genesis will have the following code added to footer_UI.isml:</p>
+<pre><code class="language-javascript">&lt;isinclude template="components/footer/klaviyoFooter"/&gt;</code></pre>
+<p>They will also have the following block added to minicart.isml, cart.isml, and any other “cart” isml files:</p>
+<pre><code class="language-javascript">&lt;isif condition="${pdict.CurrentHttpParameterMap.cartAction == 'add' || pdict.CurrentHttpParameterMap.cartAction
+  == 'update'}"&gt;
+   &lt;isinclude url="${URLUtils.url('Klaviyo-RenderKlaviyoAddToCart')}"/&gt;
+&lt;/isif&gt;</code></pre>
+<h3 id="h_01HMF40ECZWCF082YEA8H6SN55">For SFRA</h3>
+<p>Standard integrations for SFCC will have the following code added to pageFooter.isml:</p>
+<pre><code class="language-javascript">&lt;isinclude template="klaviyo/klaviyoFooter"/&gt;</code></pre>
+<p>They will also have the following code added to to the AddProduct route in the Cart.js controller:</p>
+<pre><code class="language-javascript"> if(dw.system.Site.getCurrent().getCustomPreferenceValue('klaviyo_enabled')){
+   var KlaviyoUtils = require('*/cartridge/scripts/utils/klaviyo/klaviyoUtils');
+ KlaviyoUtils.trackAddToCart();
+}</code></pre>
+<p>For both Site Genesis and SFRA, after the cartridge folders and the above mentioned code snippets have been removed, it is advisable to search the codebase for the word “Klaviyo.” Make sure you’re familiar with what any Klaviyo-related code that remains in your codebase is doing before removing it, as these blocks may represent customizations that you will need to put back in place after the new cartridge is installed.</p>
+<h2 id="h_01HMF40ECZZ3VZF382BD287QCK">Remove services</h2>
+<p>The previous integration will have created a KlaviyoTrackService, KlaviyoTrackProfile and KlaviyoTrackCredentials at <strong>Administration &gt; Operations &gt; Service</strong>. All three can be safely removed as the process of integrating the new Klaviyo cartridge will create new services with different names.</p>
+<p>It is not critical that the old services be removed, but it is recommended that you clean them out to avoid future confusion.</p>
+<h2 id="h_01HMF40ECZDFJEV592GZZYSAGC">Review site preferences</h2>
+<p>The process of integrating the new Klaviyo cartridge will retain some of the previous Klaviyo site preferences, and will also add some new ones. Take a look at your site preferences in the <em>Klaviyo</em> preference group at <strong>Merchant tools &gt; Site Preferences &gt; Custom Preferences &gt; klaviyo</strong>, and check to see if any custom preferences have been added specifically for your website. If you customized the cartridge to add your own settings, you'll want to preserve them. For reference, here are the four site preferences that are built into the previous Klaviyo integration:</p>
+<ul>
+<li>
+<strong>Klaviyo Enabled (ID: klaviyo_enabled) </strong><strong><br></strong>Flag if Klaviyo is on or off.</li>
+<li>
+<strong>Klaviyo Account (ID: klaviyo_account)</strong><strong><br></strong>Your Klaviyo public API key, or Site ID.</li>
+<li>
+<strong>Klaviyo Private API Key (ID: klaviyo_api_key) </strong><br>A Klaviyo private api key.</li>
+<li>
+<strong>Image Type for Klaviyo (ID: klaviyo_image_size)</strong><br>Large, small, thumbnail, etc.</li>
+</ul>
+<p>Before setting up the new cartridge, we recommend backing up your current site preferences by exporting them at <strong>Administration &gt; Site Development &gt; Site Import &amp; Export</strong>. Expand <strong>Sites</strong>, then your <strong>Site Name</strong>, and check the Site Preferences box before entering a filename to export them to. Your current Klaviyo preferences should not be adversely affected when you later install the new cartridge, but it is a good idea to back them up for future reference.</p>
+<h2 id="h_01HMF40ECZQX8D5VJP2ABD9Q65">Remove the Klaviyo cartridges from the cartridge path</h2>
+<p>Remove int_klaviyo_core and either int_klaviyo (Site Genesis) or int_klaviyo_sfra (SFRA) from your cartridge path at <strong>Administration &gt; Sites &gt; Manage Sites &gt; [Site Name] &gt; Settings</strong>. If you do not perform this step, you will get errors resulting from SFCC looking for cartridges to load that no longer exist.</p>
+<h2 id="h_01HMF40ECZ08PH28F19A6VYS6D">Check the developer console and server side log for errors</h2>
+<p>At this point, you should no longer have any Klaviyo code in your codebase. We recommend reviewing your frontend, visiting pages such as Search Results, PLPs, and PDPs, and performing actions such as adding products to cart, entering, and completing checkout. As you do so, keep an eye on the Developer Console to see if any new errors are generated. Do the same with the Request Log. If you are seeing new errors related to Klaviyo, there is a good chance that you have not fully removed all of the previous Klaviyo code. It is important to track down the source of any new errors and note them before removing them.</p>
+<h2 id="h_01HMF40ECZW931Y2K1P26DB6BR">Install the new Klaviyo cartridge</h2>
+<p>Follow the steps laid out in <a href="https://help.klaviyo.com/hc/en-us/articles/360033744951" target="_blank" rel="noopener">Getting started with Salesforce Commerce Cloud</a> to integrate the new cartridge into your codebase. There may be steps that you do not need to complete - for example, your SFCC instance may or may not have the connections already established for the OCAPI portion - but in general, you should follow each step of integration. You will definitely need to replace both Klaviyo cartridges and add back code snippets. </p>
+<div class="bs-callout bs-callout-default">Do not simply copy/paste the new cartridge folders over the old ones. Per the instructions above, delete the old folders completely before adding the new ones.</div>
+<p>Note that after importing metadata.zip, you will have four new site preferences, in addition to the four that were created by the previous version of the cartridge. Your previous preferences should not have been affected by importing the new ones, but it is recommended that you double-check that all Klaviyo site preferences are correct before proceeding.</p>
+<p>Since you are upgrading from a cartridge prior to version 23.7.0, the new site preferences <em>Label Events as SFCC</em> and <em>Send Added To Cart Event as ‘Add To Cart’</em> should be set to <em>No</em> and <em>Yes</em>, respectively. This will continue sending events without the <em>Salesforce Commerce Cloud</em> metric label and use the <em>Add To Cart</em> event type (as opposed to the new<em> Added to Cart</em>). Having these two site preferences set incorrectly will result in a breakage of reporting and potentially, a breakage of existing flows in Klaviyo.</p>
+<h2 id="h_01HMF40ECZX77RBV9RW4FMZCZ2">Verify that all out-of-the-box events are working</h2>
+<p>Before attempting to add back in any customizations from your previous integration, be sure to verify that the new installation of the Klaviyo cartridge is working correctly. Use the frontend to generate events for<em> Searched Site</em>, <em>Viewed Category</em>, <em>Viewed Product,</em> <em>Added To Cart</em>, <em>Started Checkout</em> and <em>Order Confirmation</em>, and then check your Klaviyo account to make sure that these events are being tracked correctly. </p>
+<p>Check the developer console for any new errors that may be related to the integration on all pages that generate Klaviyo events. Enable verbose service logging by checking the <em>Communication Log Enabled </em>checkbox at <strong>Administration &gt; Operations &gt; Services &gt; KlaviyoEventService - Details</strong>, and then review the server-side log files to verify that there are no errors, and that event data is being properly generated for each event type.</p>
+<h2 id="h_01HMF40ECZ7SVWQTW19J4V245A">Compare event data with production</h2>
+<p>You should now compare the event data in your testing and production Klaviyo accounts to ensure that nothing is missing, and that current values match the expected type. It is important to determine if any reporting or flows will be affected by the new integration. You will find that additional properties are now being set and sent to Klaviyo compared to the prior cartridge version. </p>
+<h2 id="h_01HMF40ECZR0W8RF68EPT634BM">Add back site-specific customizations</h2>
+<p>You can now start adding customizations back into your Klaviyo code. Due to the fact that there are heavy structural and architectural changes with the newest Klaviyo cartridge, it is unlikely that you will be able to simply copy and paste custom code directly into the Klaviyo cartridge.</p>
+<p>Each event type in the Klaviyo cartridge has a getData function that lives in a separate script file named for each event type. These files can be found in the <code>int_klaviyo_core/cartridge/scripts/klaviyo/eventData</code> folder, and are the most likely place that you will alter in order to add or update the data objects that get passed for each event. If you are creating new custom events, we recommend following the established pattern of adding code to server-side controllers <em>(</em>i.e., directly in SiteGen or via server.append in SFRA) that calls a getData function from a script file dedicated to the new event, and then uses the trackEvent function to send that data to Klaviyo via the KlaviyoEventService.</p>
+<h2 id="h_01HMF40ECZ28PWHHVFBHY2WH62">Outcome</h2>
+<p>You’ve now upgraded your Klaviyo cartridge for Salesforce Commerce Cloud. </p>
+<h2 id="h_01HMF40ECZWFHMNJEDE2H8CXT8">Additional resources </h2>
+<ul>
+<li><a href="https://help.klaviyo.com/hc/en-us/articles/360033744951" target="_blank" rel="noopener">Getting started with Salesforce Commerce Cloud</a></li>
+<li><a href="https://help.klaviyo.com/hc/en-us/articles/360058323811" target="_blank" rel="noopener">Salesforce Commerce Cloud data reference</a></li>
+<li><a href="https://help.klaviyo.com/hc/en-us/articles/115005253208" target="_blank" rel="noopener">How often integrations sync reference</a></li>
+<li><a href="https://help.klaviyo.com/hc/en-us/articles/115001002272" target="_blank" rel="noopener">How to contact support</a></li>
+</ul>

@@ -1,0 +1,1056 @@
+{
+  "captured_at": "2026-05-23T16:16:44Z",
+  "article": {
+    "id": 4408802648731,
+    "url": "https://klaviyo.zendesk.com/api/v2/help_center/en-us/articles/4408802648731.json",
+    "html_url": "https://klaviyo.zendesk.com/hc/en-us/articles/4408802648731-Message-personalization-reference",
+    "author_id": 390819509472,
+    "comments_disabled": true,
+    "draft": false,
+    "promoted": false,
+    "position": 1,
+    "vote_sum": 52,
+    "vote_count": 230,
+    "section_id": 49375545220123,
+    "created_at": "2021-10-22T14:39:37Z",
+    "updated_at": "2026-05-06T11:01:47Z",
+    "name": "Message personalization reference",
+    "title": "Message personalization reference",
+    "source_locale": "en-us",
+    "locale": "en-us",
+    "outdated": false,
+    "outdated_locales": [],
+    "edited_at": "2026-04-17T01:01:26Z",
+    "user_segment_id": null,
+    "permission_group_id": 146372,
+    "content_tag_ids": [],
+    "label_names": [],
+    "body": "<p>Learn how to use Klaviyo’s personalization variables, or tags, to customize the experience for your customers.</p>\n<p>Personalization tags can be used in emails (including the email’s subject line), SMS/MMS messages, push notifications, and Customer Hub. This article outlines certain available tags, their structures and forms, and how to customize them. To learn how to add personalization, head to our article on <a href=\"https://help.klaviyo.com/hc/en-us/articles/18986347580827\">adding personalization to your messages</a>. </p>\n<div class=\"bs-callout bs-callout-default\">\n<p>Personalization tags were previously called template tags and variable syntax. </p>\n</div>\n<h2 id=\"h_01HBRGTJ3GZNG14SY18NA4EA7Z\">About personalization tags</h2>\n<p>When you input tags into a text field, they look like the sentence on the left in the table below. Once the message is displayed, the tags are replaced by information from the recipient’s profile or event details, and will look like the sentence on the right.</p>\n<table style=\"width: 100%\">\n<tbody>\n<tr>\n<td>Hi <code>{{ first_name }} {{ last_name }}</code>, your favorite color is <code>{{ person|lookup:'Favorite Color' }}</code>\n</td>\n<td><em>Hi George Washington, your favorite color is Green </em></td>\n</tr>\n</tbody>\n</table>\n<p>Profile personalization generally begins with <code>person</code>, with the exception of a few special tags like <code>first_name</code> and <code>last_name</code>. Event variables, which can be used in metric-triggered flows, begin with <code>event</code>. Organization tags (like your company name and address) begin with <code>organization</code>. </p>\n<div class=\"bs-callout bs-callout-default\">\n<p>All personalization tags are case sensitive and must exactly match the property names they reference. Make sure your tags are spelled correctly and use the same casing that appears on your profiles. </p>\n</div>\n<h2 id=\"h_01HBRGTJ3G3Q55VQ136Z977SBR\">Profile personalization</h2>\n<p>Profile personalization enables you to display special Klaviyo properties in your messages. The list below covers all profile personalization (i.e., built-in Klaviyo properties). Select profile personalization tags are available from the <strong>Personalization</strong> menu in the email editor, or from the preview modal for SMS and push messages. </p>\n<p>If you’d like to add custom properties to your messages, jump ahead to the section on <a href=\"#h_01HBRGTJ3H2M4N326FXPBSA4AN\">custom personalization</a>. </p>\n<table style=\"width: 100%; height: 643px\">\n<tbody>\n<tr>\n<td style=\"width: 437.438px; height: 22px\"><strong>Tag</strong></td>\n<td style=\"width: 196.68px; height: 22px\"><strong>Profile property</strong></td>\n</tr>\n<tr>\n<td style=\"width: 437.438px; height: 23px\"><code>{{ email }}</code></td>\n<td style=\"width: 196.68px; height: 23px\">Email</td>\n</tr>\n<tr>\n<td style=\"width: 437.438px; height: 23px\"><code>{{ first_name }}</code></td>\n<td style=\"width: 196.68px; height: 23px\">First name</td>\n</tr>\n<tr>\n<td style=\"width: 437.438px; height: 23px\"><code>{{ last_name }}</code></td>\n<td style=\"width: 196.68px; height: 23px\">Last name</td>\n</tr>\n<tr>\n<td style=\"width: 437.438px; height: 23px\"><code>{{ person.organization }}</code></td>\n<td style=\"width: 196.68px; height: 23px\">Recipient organization</td>\n</tr>\n<tr>\n<td style=\"width: 437.438px; height: 23px\"><code>{{ person|lookup:\"$address1\" }}</code></td>\n<td style=\"width: 196.68px; height: 23px\">Address 1</td>\n</tr>\n<tr>\n<td style=\"width: 437.438px; height: 23px\"><code>{{ person.id }}</code></td>\n<td style=\"width: 196.68px; height: 23px\">Unique ID ($id/external ID)</td>\n</tr>\n<tr>\n<td style=\"width: 437.438px; height: 23px\"><code>{{ person|lookup:\"$latitude\" }}</code></td>\n<td style=\"width: 196.68px; height: 23px\">Latitude</td>\n</tr>\n<tr>\n<td style=\"width: 437.438px; height: 23px\"><code>{{ person|lookup:\"$longitude\" }}</code></td>\n<td style=\"width: 196.68px; height: 23px\">Longitude</td>\n</tr>\n<tr>\n<td style=\"width: 437.438px; height: 23px\"><code>{{ person.KlaviyoID }}</code></td>\n<td style=\"width: 196.68px; height: 23px\">Klaviyo ID</td>\n</tr>\n<tr>\n<td style=\"width: 437.438px; height: 23px\"><code>{{ person.full_name }}</code></td>\n<td style=\"width: 196.68px; height: 23px\">Full name</td>\n</tr>\n<tr>\n<td style=\"width: 437.438px; height: 23px\"><code>{{ person.title }}</code></td>\n<td style=\"width: 196.68px; height: 23px\">Title</td>\n</tr>\n<tr>\n<td style=\"width: 437.438px; height: 23px\"><code>{{ person.phone_number }}</code></td>\n<td style=\"width: 196.68px; height: 23px\">Phone Number</td>\n</tr>\n<tr>\n<td style=\"width: 437.438px; height: 23px\"><code>{{ person|lookup:'$address2' }}</code></td>\n<td style=\"width: 196.68px; height: 23px\">Address 2</td>\n</tr>\n<tr>\n<td style=\"width: 437.438px; height: 23px\"><code>{{ person.City }}</code></td>\n<td style=\"width: 196.68px; height: 23px\">City</td>\n</tr>\n<tr>\n<td style=\"width: 437.438px; height: 23px\"><code>{{ person.Region }}</code></td>\n<td style=\"width: 196.68px; height: 23px\">State / Region</td>\n</tr>\n<tr>\n<td style=\"width: 437.438px; height: 23px\"><code>{{ person.Country }}</code></td>\n<td style=\"width: 196.68px; height: 23px\">Country</td>\n</tr>\n<tr>\n<td style=\"width: 437.438px; height: 23px\"><code>{{ person.Zipcode }}</code></td>\n<td style=\"width: 196.68px; height: 23px\">Zip Code</td>\n</tr>\n<tr>\n<td style=\"width: 437.438px; height: 23px\"><code>{{ person|lookup:\"$source\" }}</code></td>\n<td style=\"width: 196.68px; height: 23px\">Source</td>\n</tr>\n<tr>\n<td style=\"width: 437.438px; height: 23px\"><code>{{ person|lookup:\"$consent\" }}</code></td>\n<td style=\"width: 196.68px; height: 23px\">Consent</td>\n</tr>\n<tr>\n<td style=\"width: 437.438px; height: 23px\"><code>{{ person|lookup:'$consent_form_id' }}</code></td>\n<td style=\"width: 196.68px; height: 23px\">$consent_form_id</td>\n</tr>\n<tr>\n<td style=\"width: 437.438px; height: 23px\"><code>{{ person|lookup:'$consent_form_version' }}</code></td>\n<td style=\"width: 196.68px; height: 23px\">$consent_form_version</td>\n</tr>\n<tr>\n<td style=\"width: 437.438px; height: 23px\"><code>{{ person|lookup:'$consent_method' }}</code></td>\n<td style=\"width: 196.68px; height: 23px\">$consent_method</td>\n</tr>\n<tr>\n<td style=\"width: 437.438px; height: 23px\"><code>{{ person|lookup:\"$timezone\" }}</code></td>\n<td style=\"width: 196.68px; height: 23px\">Recipient timezone</td>\n</tr>\n<tr>\n<td style=\"width: 437.438px; height: 23px\"><code>{{ person|lookup:'$consent_timestamp' }}</code></td>\n<td style=\"width: 196.68px; height: 23px\">$consent_timestamp</td>\n</tr>\n<tr>\n<td style=\"width: 437.438px; height: 23px\"><code>{{ person|lookup:'$phone_number_region' }}</code></td>\n<td style=\"width: 196.68px; height: 23px\">$phone_number_region</td>\n</tr>\n<tr>\n<td style=\"width: 437.438px; height: 23px\"><code>{{ person.ViewedItems }}</code></td>\n<td style=\"width: 196.68px; height: 23px\">Recently viewed items</td>\n</tr>\n<tr>\n<td style=\"width: 437.438px; height: 23px\"><code>{{ person|lookup:\"Expected Date Of Next Order\" }} </code></td>\n<td style=\"width: 196.68px; height: 23px\">Expected date of next order</td>\n</tr>\n</tbody>\n</table>\n<h2 id=\"h_01JVQG3GS5YAH5CNVJNDR35YEA\">Custom object tags</h2>\n<p><a href=\"https://help.klaviyo.com/hc/en-us/articles/35105337172123\">Custom object</a> tags enable you to use object data in flow and campaign sends. </p>\n<p>Review <a href=\"https://help.klaviyo.com/hc/en-us/articles/35146367972763#h_01JPTH5R889GMM7XPNS3FSB4SE\">tag references</a> for specific examples of how to use tags to get an object ID or return a count. </p>\n<div class=\"bs-callout bs-callout-requirements\">\n<p>You must create an object first before you can use custom object data in templates. The <code>{{ object }}</code> tag is only available when an object has triggered a flow.</p>\n</div>\n<table style=\"width: 100%; height: 256px\">\n<tbody>\n<tr>\n<td style=\"width: 68.5715%; height: 22px\"><strong>Tag</strong></td>\n<td style=\"width: 31.2857%; height: 22px\"><strong>Outcome</strong></td>\n</tr>\n<tr>\n<td style=\"width: 68.5715%; height: 23px\">\n<code>{{ object.object_property }}</code> </td>\n<td rowspan=\"2\" style=\"width: 31.2857%; height: 46px\">Return the object that triggered a flow </td>\n</tr>\n<tr>\n<td style=\"width: 68.5715%; height: 23px\">\n<code>{{ object | lookup:'object_property' }}</code> </td>\n</tr>\n<tr>\n<td style=\"width: 68.5715%; height: 44px\"><code>{{ object_filter.object_filter_name.object_property}}</code></td>\n<td rowspan=\"2\" style=\"width: 31.2857%; height: 88px\">Return a single object from an <a href=\"https://help.klaviyo.com/hc/en-us/articles/35146367972763#h_01JPTH5R8840K0Q3XWH2CFYWRY\">object filter </a>\n</td>\n</tr>\n<tr>\n<td style=\"width: 68.5715%; height: 44px\"><code>{{ object_filter.object_filter_name | lookup: 'object_property' }}</code></td>\n</tr>\n<tr>\n<td style=\"width: 68.5715%; height: 22px\"><code>{{ object_filter.object_filter_name }}</code></td>\n<td style=\"width: 31.2857%; height: 22px\">Return a count from an <a href=\"https://help.klaviyo.com/hc/en-us/articles/35146367972763#h_01JPTH5R8840K0Q3XWH2CFYWRY\">object filter</a>\n</td>\n</tr>\n<tr>\n<td style=\"width: 68.5715%; height: 34px\"><code>{% customobject id={{ event.object_id }} as alias %}</code></td>\n<td style=\"width: 31.2857%; height: 34px\">Retrieve an object by ID</td>\n</tr>\n<tr>\n<td style=\"width: 68.5715%; height: 44px\">\n<code>{% customobjects object_type_title=“Title” as alias %} </code><br>\n<code>{% for object_instance in alias %} </code><br>\n<code>{{ object_instance.record }} </code><br>\n<code>{% endfor %} </code><br>\n<code>{% endcustomobjects %}</code>\n</td>\n<td style=\"width: 31.2857%; height: 44px\">Retrieve all records for an object from one profile</td>\n</tr>\n</tbody>\n</table>\n<h2 id=\"h_01HBRGTJ3G98EQ18Y99JYY3QGV\">Organization tags</h2>\n<p>Organization tags allow you to include information about your company or organization in your messages. You can manage this information by navigating clicking your organization name in the bottom left corner, then selecting <strong>Settings &gt; Organization &gt; Contact Information</strong>. All organization tags start with <code>organization</code>. See the table below for the list of organization tags.</p>\n<table style=\"width: 100%\">\n<tbody>\n<tr>\n<td><strong>Organization tag</strong></td>\n<td><strong>Description</strong></td>\n</tr>\n<tr>\n<td><code>{{ organization.name }}</code></td>\n<td>Your organization’s name</td>\n</tr>\n<tr>\n<td><code>{{ organization.url }}</code></td>\n<td>Your organization’s website</td>\n</tr>\n<tr>\n<td><code>{{ organization.full_address }}</code></td>\n<td>Your organization’s full address, including city, state/region, and zip code</td>\n</tr>\n<tr>\n<td><code>{{ organization.street_address }}</code></td>\n<td>Your organization’s street address</td>\n</tr>\n<tr>\n<td><code>{{ organization.street_address2 }}</code></td>\n<td>The second part of your organization’s address (e.g., apartment or unit number)</td>\n</tr>\n<tr>\n<td><code>{{ organization.city }}</code></td>\n<td>Your organization’s city</td>\n</tr>\n<tr>\n<td><code>{{ organization.region }}</code></td>\n<td>Your organization’s state, province, or region</td>\n</tr>\n<tr>\n<td><code>{{ organization.zip_code }}</code></td>\n<td>Your organization’s zip code</td>\n</tr>\n</tbody>\n</table>\n<h2 id=\"h_01HBRGTJ3GAD7APM8T1MMW5Q4W\">Link and preview tags</h2>\n<p>Link and preview tags allow recipients to manage their subscription preferences and view your message in their browser. These include: </p>\n<ul>\n<li><a href=\"#h_01HBRGTJ3G4V514CV5YZSCS6PC\">Unsubscribe</a></li>\n<li><a href=\"#h_01HBRGTJ3HMN8N33EC4XF8M04C\">Manage preferences</a></li>\n<li><a href=\"#h_01HBRGTJ3H39MT5259FW7ENKWA\">Web view</a></li>\n<li><a href=\"#h_01HBRGTJ3H3PCEGB19NW374KDV\">Preview text</a></li>\n</ul>\n<p>These tags are only supported for email templates. If you click one of these links from a preview email, you'll be directed to a placeholder page, rather than a live consent page or preview. </p>\n<h3 id=\"h_01HBRGTJ3G4V514CV5YZSCS6PC\">Unsubscribe</h3>\n<p>Klaviyo requires an unsubscribe link in all emails. Use a simple unsubscribe tag for a link that says “Unsubscribe”, or add your own text in quotes. </p>\n<table style=\"width: 100%\">\n<tbody>\n<tr>\n<td><strong>Tag</strong></td>\n<td><strong>Output</strong></td>\n</tr>\n<tr>\n<td><code>{% unsubscribe %}</code></td>\n<td><em>Unsubscribe</em></td>\n</tr>\n<tr>\n<td>If you'd no longer like to receive emails, <code>{% unsubscribe 'click here' %}</code>.</td>\n<td>\n<em>If you'd no longer like to receive emails, </em><em>click here</em><em>.</em>\n</td>\n</tr>\n</tbody>\n</table>\n<p>Alternatively, you can use the <code>{% unsubscribe_link %}</code> tag to generate an unsubscribe URL. Rather than generating a full linked word or phrase, this tag creates just the unsubscribe URL. Use this tag if you’d like to use a different color for your unsubscribe link than the link color set in your template’s styles, or use a linked button or image rather than a text link. </p>\n<table style=\"width: 100%\">\n<tbody>\n<tr>\n<td><strong>Tag</strong></td>\n<td><strong>Output</strong></td>\n</tr>\n<tr>\n<td><code>This is a fancy &lt;a href=\"{% unsubscribe_link %}\" &gt;unsubscribe&lt;/a&gt; link.</code></td>\n<td>\n<em>This is a fancy </em><em>unsubscribe</em><em> link.</em>\n</td>\n</tr>\n</tbody>\n</table>\n<p>When a recipient clicks the unsubscribe link, they're taken to a <a href=\"https://help.klaviyo.com/hc/en-us/articles/115005251848\">customizable confirmation page</a>.</p>\n<h3 id=\"h_01HBRGTJ3HMN8N33EC4XF8M04C\">Manage preferences</h3>\n<p>Preference pages allow recipients to update their preferences, allowing you to segment and target your messaging more effectively. To include a link to this page for each recipient, use the manage preferences tag.</p>\n<p>You can create list-specific and general manage preference pages. List-specific pages are sent when you send a message to just one list. The general manage preferences page is used when you send to a segment, a combination of lists, and in flows that are not list-triggered. Learn more about <a href=\"https://help.klaviyo.com/hc/en-us/articles/115005251848-Understanding-Opt-in-Related-Pages-for-a-List\">manage preferences pages</a>. </p>\n<p>Use a simple manage preferences tag for a link that says “Manage Preferences”, or add your own text in quotes. </p>\n<table style=\"width: 100%\">\n<tbody>\n<tr>\n<td><strong>Tag</strong></td>\n<td><strong>Output</strong></td>\n</tr>\n<tr>\n<td><code>{% manage_preferences %}</code></td>\n<td><em>Manage Preferences</em></td>\n</tr>\n<tr>\n<td>Want to update your preferences? <code>{% manage_preferences 'Click here' %}</code>.</td>\n<td><em>Want to update your preferences? Click here.</em></td>\n</tr>\n</tbody>\n</table>\n<p>Alternatively, you can use the <code>{% manage_preferences_link %}</code> tag to generate a manage preferences URL. Rather than generating a full linked word or phrase, this tag creates just the URL for the recipient’s preference page. Use this tag if you’d like to use a different color for your link than the link color set in your template’s styles, or use a linked button or image rather than a text link. </p>\n<table style=\"width: 100%\">\n<tbody>\n<tr>\n<td><strong>Tag</strong></td>\n<td><strong>Output</strong></td>\n</tr>\n<tr>\n<td><code>This is a fancy &lt;a href=\"{% manage_preferences_link %}\" &gt;manage preferences&lt;/a&gt; link.</code></td>\n<td>\n<em>This is a fancy </em><em>manage preferences</em><em> link.</em>\n</td>\n</tr>\n</tbody>\n</table>\n<h3 id=\"h_01HBRGTJ3H39MT5259FW7ENKWA\">Web view</h3>\n<p>To give recipients the option to view an email in their web browser, you can use the web view tag. </p>\n<table style=\"width: 100%\">\n<tbody>\n<tr>\n<td><strong>Tag</strong></td>\n<td><strong>Output</strong></td>\n</tr>\n<tr>\n<td><code>{% web_view %}</code></td>\n<td><em>View in Your Browser</em></td>\n</tr>\n<tr>\n<td>Can't see this email? <code>{% web_view 'Open in your browser' %}</code>.</td>\n<td>\n<em>Can't see this email? </em><em>Open in your browser</em><em>.</em>\n</td>\n</tr>\n<tr>\n<td><code>This is a fancy &lt;a href=\"{% web_view_link %}\"&gt;web view&lt;/a&gt; link.</code></td>\n<td>\n<em>This is a fancy </em><em>web view link</em><em>. </em>\n</td>\n</tr>\n</tbody>\n</table>\n<h3 id=\"h_01HBRGTJ3H3PCEGB19NW374KDV\">Preview text</h3>\n<p>In some cases you may want to display your preview text inside the body of your template. You can reference any preview text you set on the email preview/setup screen by using the tag <code>{% render_variable preview_text %}</code>.</p>\n<p>If you update the preview text on the email preview screen, this tag displays your updated preview text.</p>\n<h2 id=\"h_01HBRGTJ3H2M4N326FXPBSA4AN\">Custom personalization and event tags</h2>\n<p>Custom tags reference custom profile properties (i.e., any data you collect about your contacts other than special Klaviyo properties and events), like someone’s birthday or contact preferences. Event tags reference a specific event’s data (e.g., a placed order event) and can only be used in flows triggered by that event. </p>\n<p>To add a custom tag, click <strong>Personalization</strong> in an email text field and locate the tag. To add an event tag, preview your message and copy the event variable tag from the preview data. Alternatively, use the formats outlined below to manually add custom tags to your templates. </p>\n<table style=\"width: 100%\">\n<tbody>\n<tr>\n<td><strong>Tag format</strong></td>\n<td><strong>Description</strong></td>\n<td><strong>Example</strong></td>\n</tr>\n<tr>\n<td><code>{{ person.property_name }}</code></td>\n<td>A simple profile personalization tag</td>\n<td><code>{{ person.Birthday }}</code></td>\n</tr>\n<tr>\n<td><code>{{ person|lookup:'property name' }}</code></td>\n<td>A profile personalization tag, if the property name contains spaces or special characters</td>\n<td><code>{{ person|lookup:'Favorite Color' }}</code></td>\n</tr>\n<tr>\n<td><code>{{ event.property_name }}</code></td>\n<td>A simple event variable tag</td>\n<td><code>{{ event.URL }}</code></td>\n</tr>\n<tr>\n<td><code>{{ event|lookup:'property name' }}</code></td>\n<td>An event variable tag, if the variable name contains spaces or special characters</td>\n<td><code>{{ event|lookup:'$value' }}</code></td>\n</tr>\n<tr>\n<td><code>{{ event.property.nested_variable }}</code></td>\n<td>An event variable tag, if the event variable is nested in the event data </td>\n<td><code>{{ event.extra.checkout_url }}</code></td>\n</tr>\n<tr>\n<td><code>{{ event|lookup:'property name'|lookup:'nested variable name' }}</code></td>\n<td>An event variable tag, if the event variable is nested in another variable with a name containing a space or special character</td>\n<td><code>{{ event|lookup:'Coupon Codes'|lookup:'0' }}</code></td>\n</tr>\n</tbody>\n</table>\n<p>Use dot (.) notation for tags with no spaces or special characters. If your property names contain spaces or special characters (e.g., $), use lookup notation. </p>\n<div class=\"bs-callout bs-callout-default\">\n<p>Note that, with nested properties, if one property name uses lookup notation, all later properties must also use lookup notation. This means that <code>event|lookup:'Collection Names'|lookup:'0'</code> is correct, but <code>event|lookup:'Collection Names'.0</code> is not. </p>\n</div>\n<h2 id=\"h_01HBRGTJ3HNSPM635W8QNZSYPA\">Customizing tags with filters</h2>\n<p>To customize the way your tags appear, apply template filters. Filters can be used to apply title case, set the number of decimal places for a number, and much more. Two of the most common filters are <code>default</code> and <code>title</code>. </p>\n<p>The <code>default</code> filter sets a default value to appear if a message recipient doesn’t have that property set. In the example below, 'friend' and 'tasty treats' are set as the default values in case a recipient’s name or favorite food is not set in their Klaviyo profile. </p>\n<table style=\"width: 100%\">\n<tbody>\n<tr>\n<td><strong>Text with personalization tags</strong></td>\n<td><strong>Output</strong></td>\n</tr>\n<tr>\n<td>Hey <code>{{ first_name|default:'friend' }}</code>, any interest in some <code>{{ person|lookup:'Favorite Food'|default:'tasty treats' }}</code>?</td>\n<td><em>Hey friend, any interest in some tasty treats? </em></td>\n</tr>\n</tbody>\n</table>\n<p>The <code>title</code> filter allows you to apply title casing to any text tag, to ensure it appears consistently once the message is sent. For example, some subscribers may use all capital or all lowercase letters when they fill out your signup form. Without a filter, their first name would use the casing they initially used when filling out your form. However, the title filter corrects the casing so their name appears correctly. </p>\n<table style=\"width: 100%\">\n<tbody>\n<tr>\n<td><strong>Text with personalization tags</strong></td>\n<td><strong>Output</strong></td>\n</tr>\n<tr>\n<td>Hey <code>{{ first_name|title }}</code>, have you seen our latest launch?</td>\n<td><em>Hey Elise, have you seen our latest launch?</em></td>\n</tr>\n</tbody>\n</table>\n<p>There are dozens of other filters available for your messages. Learn more about <a href=\"https://help.klaviyo.com/hc/en-us/articles/360058907911-Using-Filters-to-Customize-Template-Tags\">using filters to customize tags</a>. </p>\n<h2 id=\"h_01HBRGTJ3HEC5T3C1JWQ7GEEY4\">Date tags </h2>\n<p>Date tags give you a quick way to insert date information into an email. The date is in your account’s timezone and reflects the day or time a message was sent. </p>\n<p>The <code>{{ today }}</code> tag is one of the most common date tags, and it populates a timestamp when the message is sent. To use the today tag, paste the following line of code into your template: </p>\n<p><code>{% today \"%Y-%m-%d\" as today %} {{ today }}</code></p>\n<p>Note that using the <code>{{ today }}</code> tag without the preceding code will not render anything; the full line of code is necessary. </p>\n<p>To learn how to use or customize date tags, head to our article on <a href=\"https://help.klaviyo.com/hc/en-us/articles/115005257788-How-to-Format-Date-Variables-in-Templates\">date tags in templates</a>. </p>\n<h2 id=\"h_01JAB0VBMAP0P8EPX6XR7ZQTRP\">Currency tags </h2>\n<p>Event data like <em>Placed order</em>, <em>Added to cart</em>, and more often have financial value associated with them (e.g., a product’s price or the value of a customer’s cart). Use the {% currency_format ... %} tag to apply your country’s currency formatting to that value.</p>\n<p>For example, consider the $value field in the <em>Started checkout</em> metric below: </p>\n<p><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/30122495009307\" alt=\"\" width=\"322\" height=\"85\"></p>\n<p>Using just the variable {{ event|lookup:\"$value\" }}, this property will render with just one decimal place and no currency symbol in the email: </p>\n<p><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/30122450001947\" alt=\"\" width=\"82\" height=\"44\"></p>\n<p>However, with the currency format tag, {% currency_format event|lookup:\"$value\" %}, the number renders with a currency symbol and the correct number of decimal places: </p>\n<p><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/30122495025051\" alt=\"\" width=\"113\" height=\"53\"></p>\n<p>To use the currency format tag, replace the placeholder text in {% currency_format PLACEHOLDER %} with your variable.</p>\n<p>For example, if your variable is {{ event.item.price }}, the complete currency format tag would be {% currency_format event.item.price %}. If your tag includes filters (e.g., a default value in case the property is empty), include those in the tag too: {% currency_format event.item.price|default:”0” %}. </p>\n<h4 id=\"h_01JAB0VBMA8KJSR8HGRK2771TH\">How to select a country </h4>\n<p>There are 2 places you can set the currency format for your messages: </p>\n<ul>\n<li>\n<strong>For your entire account</strong><br>\nNavigate to <strong>Settings &gt; Organization &gt; Organization language and regional format</strong> and select an <em>Organization language</em>.</li>\n<li>\n<strong>For a specific message</strong><br>\nSelect a different currency format for a single message from that template’s <strong>Styles</strong> tab in the <em>Currency</em> section. </li>\n</ul>\n<h4 id=\"h_01JAB0VBMAQE3BXE48HS2J8PYA\">Troubleshooting the currency_format tag</h4>\n<p>This tag is only supported for variables that are numbers (e.g., 10, 24.56). Properties with the currency symbol included (e.g., $40, $76.30) are strings, and the currency_format tag cannot alter them. </p>\n<h2 id=\"h_01HBRGTJ3HGTEC37QBMB353G23\">Conditional statements</h2>\n<p>Conditional tags allow you to include content in your messages for recipients who meet certain criteria, and not include it for others. They give you powerful controls for personalizing your messages for each recipient.</p>\n<h3 id=\"h_01HBRGTJ3HJP5F7V9SBF0Y7MKX\">If statements</h3>\n<p>If statements allow you to control the content someone receives based on profile or event data. </p>\n<p>In the example below, a person will be shown the first line of text if they have more than 150 loyalty points. If they have less than 150, but more than 0, they will see the second line. And if they have no loyalty points, they will see the third message. </p>\n<pre><code class=\"language-text\">{% if person|lookup:'Loyalty Points' &gt; 150 %}\nHey VIP! You’ve always got free shipping &amp; free returns\n{% elif person|lookup:'Loyalty Points' &gt; 0 %}\nYou have {{ person|lookup:'Loyalty Points' }} points, and you just need 150 to become a VIP! \n{% else %}\nHave you heard about our VIP program? Join today on our website to start earning rewards.\n{% endif %}\n</code></pre>\n<p>Within an if statement, an initial <code>{% if ... %}</code> condition is required, as well as the closing <code>{% endif %}</code> tag. All other elements (i.e., <code>{% elif %}</code> and <code>{% else %}</code> tags) are optional. You can use an unlimited number of <code>{% elif %}</code> tags, followed by a maximum of one <code>{% else %}</code> tag. Each email recipient will only see the first message they qualify for. </p>\n<h3 id=\"h_01HBRGTJ3HRQ81DQ156ZSDW625\">For statements</h3>\n<p>\"For\" blocks allow you to iterate over each item in a variable that's storing a list and render them individually. Below is an example statement: </p>\n<table style=\"width: 100%\">\n<tbody>\n<tr>\n<td><code>{% for item in event.shopping_cart_items %}{{ item.name }} × {{ item.quantity }} {% endfor %}</code></td>\n<td>\n<p><em>Oversized Beach Blanket × 1 </em></p>\n<p><em>Beach Chairs × 4 </em></p>\n<p><em>SPF Sunscreen × 2 </em></p>\n<p><em>Plastic Cooler × 1 </em></p>\n</td>\n</tr>\n</tbody>\n</table>\n<p>Each <em>For</em> statement must contain the following: </p>\n<ul>\n<li>An opening <code>{% for ... %}</code> tag, containing a row alias (<em>item</em> in the example above) and row collection (<em>event.shopping_cart_items</em> in the example above)</li>\n<li>A closing <code>{% endfor %}</code> tag</li>\n</ul>\n<p>Between the two required tags, you can include any text you’d like. To include variables nested within the row collection, replace the beginning of the variable name (the row collection plus the number following the row collection) with your row alias. For example, the variable <code>{{ event.shopping_cart_items.0.name }}</code> would become <code>{{ item.name }}</code>. </p>\n<h3 id=\"h_01J8JFW0C92YQZ7C477DEAFV4N\">Conditional statements and the inline text editor</h3>\n<p>When you add certain conditional statements to a text block, they may disappear from the inline text editor. The code is still present; it is just hidden. To view and edit conditional statements, open the text block's <em>Source code</em> field. </p>\n<p>The following tags are only visible in a text block's <em>Source code</em> field: </p>\n<ul>\n<li>{% for ... %}</li>\n<li>{% endfor %}</li>\n<li>{% if ... %}</li>\n<li>{% elif ... %}</li>\n<li>{% else %}</li>\n<li>{% endif %}</li>\n<li>{% with ... %}</li>\n<li>{% endwith %}</li>\n</ul>",
+    "user_segment_ids": []
+  },
+  "normalized": {
+    "id": "4408802648731",
+    "title": "Message personalization reference",
+    "source_url": "https://help.klaviyo.com/hc/en-us/articles/4408802648731-Message-personalization-reference",
+    "section_id": 49375545220123,
+    "section": "Use variable syntax and tags",
+    "category_id": 4414879524891,
+    "category": "Content",
+    "category_slug": "content",
+    "klaviyo_updated": "2026-05-06T11:01:47Z",
+    "created_at": "2021-10-22T14:39:37Z",
+    "draft": false,
+    "promoted": false,
+    "position": 1,
+    "label_names": []
+  },
+  "files": {
+    "body_html": "_source/articles/4408802648731.body.html",
+    "rendered_html": "_source/rendered/4408802648731.html"
+  },
+  "assets": {
+    "api_body": {
+      "images": [
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/30122495009307",
+          "alt": "",
+          "width": "322",
+          "height": "85"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/30122450001947",
+          "alt": "",
+          "width": "82",
+          "height": "44"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/30122495025051",
+          "alt": "",
+          "width": "113",
+          "height": "53"
+        }
+      ],
+      "links": [
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/18986347580827",
+          "text": "adding personalization to your messages"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4408802648731-Message-personalization-reference#h_01HBRGTJ3H2M4N326FXPBSA4AN",
+          "text": "custom personalization"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/35105337172123",
+          "text": "Custom object"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/35146367972763#h_01JPTH5R889GMM7XPNS3FSB4SE",
+          "text": "tag references"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/35146367972763#h_01JPTH5R8840K0Q3XWH2CFYWRY",
+          "text": "object filter"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4408802648731-Message-personalization-reference#h_01HBRGTJ3G4V514CV5YZSCS6PC",
+          "text": "Unsubscribe"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4408802648731-Message-personalization-reference#h_01HBRGTJ3HMN8N33EC4XF8M04C",
+          "text": "Manage preferences"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4408802648731-Message-personalization-reference#h_01HBRGTJ3H39MT5259FW7ENKWA",
+          "text": "Web view"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4408802648731-Message-personalization-reference#h_01HBRGTJ3H3PCEGB19NW374KDV",
+          "text": "Preview text"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005251848",
+          "text": "customizable confirmation page"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005251848-Understanding-Opt-in-Related-Pages-for-a-List",
+          "text": "manage preferences pages"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360058907911-Using-Filters-to-Customize-Template-Tags",
+          "text": "using filters to customize tags"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005257788-How-to-Format-Date-Variables-in-Templates",
+          "text": "date tags in templates"
+        }
+      ],
+      "headings": [
+        {
+          "level": 2,
+          "id": "h_01HBRGTJ3GZNG14SY18NA4EA7Z",
+          "text": "About personalization tags"
+        },
+        {
+          "level": 2,
+          "id": "h_01HBRGTJ3G3Q55VQ136Z977SBR",
+          "text": "Profile personalization"
+        },
+        {
+          "level": 2,
+          "id": "h_01JVQG3GS5YAH5CNVJNDR35YEA",
+          "text": "Custom object tags"
+        },
+        {
+          "level": 2,
+          "id": "h_01HBRGTJ3G98EQ18Y99JYY3QGV",
+          "text": "Organization tags"
+        },
+        {
+          "level": 2,
+          "id": "h_01HBRGTJ3GAD7APM8T1MMW5Q4W",
+          "text": "Link and preview tags"
+        },
+        {
+          "level": 3,
+          "id": "h_01HBRGTJ3G4V514CV5YZSCS6PC",
+          "text": "Unsubscribe"
+        },
+        {
+          "level": 3,
+          "id": "h_01HBRGTJ3HMN8N33EC4XF8M04C",
+          "text": "Manage preferences"
+        },
+        {
+          "level": 3,
+          "id": "h_01HBRGTJ3H39MT5259FW7ENKWA",
+          "text": "Web view"
+        },
+        {
+          "level": 3,
+          "id": "h_01HBRGTJ3H3PCEGB19NW374KDV",
+          "text": "Preview text"
+        },
+        {
+          "level": 2,
+          "id": "h_01HBRGTJ3H2M4N326FXPBSA4AN",
+          "text": "Custom personalization and event tags"
+        },
+        {
+          "level": 2,
+          "id": "h_01HBRGTJ3HNSPM635W8QNZSYPA",
+          "text": "Customizing tags with filters"
+        },
+        {
+          "level": 2,
+          "id": "h_01HBRGTJ3HEC5T3C1JWQ7GEEY4",
+          "text": "Date tags"
+        },
+        {
+          "level": 2,
+          "id": "h_01JAB0VBMAP0P8EPX6XR7ZQTRP",
+          "text": "Currency tags"
+        },
+        {
+          "level": 4,
+          "id": "h_01JAB0VBMA8KJSR8HGRK2771TH",
+          "text": "How to select a country"
+        },
+        {
+          "level": 4,
+          "id": "h_01JAB0VBMAQE3BXE48HS2J8PYA",
+          "text": "Troubleshooting the currency_format tag"
+        },
+        {
+          "level": 2,
+          "id": "h_01HBRGTJ3HGTEC37QBMB353G23",
+          "text": "Conditional statements"
+        },
+        {
+          "level": 3,
+          "id": "h_01HBRGTJ3HJP5F7V9SBF0Y7MKX",
+          "text": "If statements"
+        },
+        {
+          "level": 3,
+          "id": "h_01HBRGTJ3HRQ81DQ156ZSDW625",
+          "text": "For statements"
+        },
+        {
+          "level": 3,
+          "id": "h_01J8JFW0C92YQZ7C477DEAFV4N",
+          "text": "Conditional statements and the inline text editor"
+        }
+      ]
+    },
+    "rendered_page": {
+      "images": [
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/7ff492c2b417b7ecfe572f839a8a81398693c1f7-1920x1080.webp",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/613a96ece881016159239bced8dd7f17e905d14f-778x204.png?w=322",
+          "alt": "",
+          "width": "322",
+          "height": "85"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/d09656cb6637e9d55e3a6818d9c290322e19b71b-140x76.png?w=82",
+          "alt": "",
+          "width": "82",
+          "height": "44"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/d9f9cdf74d1644291a29c35d8b01fd3a3726a01d-190x88.png?w=113",
+          "alt": "",
+          "width": "113",
+          "height": "53"
+        }
+      ],
+      "links": [
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4408802648731-Message-personalization-reference#site-content",
+          "text": "Skip to main content"
+        },
+        {
+          "href": "https://www.klaviyo.com",
+          "text": "Home"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center"
+        },
+        {
+          "href": "https://www.klaviyo.com/enterprise",
+          "text": "Enterprise"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Partners"
+        },
+        {
+          "href": "https://www.klaviyo.com/careers",
+          "text": "Careers"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": "Log in"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": ""
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center Find step-by-step instructions and troubleshooting solutions in our knowledge base."
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000032731",
+          "text": "Integrations"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000312411",
+          "text": "Flows"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867867",
+          "text": "Audience"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867667",
+          "text": "Campaigns"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/360000190711",
+          "text": "Sign-up forms"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000873988",
+          "text": "Deliverability & compliance"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/29173800271259",
+          "text": "SMS"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/16638219724187",
+          "text": "Reviews"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/18073014919195",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/34141283979931",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/37659126754075",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/33948021740315",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/39746685522331",
+          "text": "WhatsApp"
+        },
+        {
+          "href": "https://academy.klaviyo.com",
+          "text": "Klaviyo Academy Expert training and education to help you succeed with Klaviyo, and beyond."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Quick+guide&resource=academy_courses",
+          "text": "Quick guides Learn marketing strategies and concepts in 15 minutes or less."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Course&resource=academy_courses",
+          "text": "Courses Master key marketing topics through structured lessons and exams."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/best-practices",
+          "text": "Best practices Discover top product and marketing strategies for your business."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/learning-paths",
+          "text": "Learning paths Complete curated learning journeys tailored to your marketing goals."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses",
+          "text": "Explore all resources"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Live+training&resource=academy_courses",
+          "text": "Live trainings Build confidence through hands-on interactive workshops and thought-provoking strategy sessions."
+        },
+        {
+          "href": "https://www.bigmarker.com/klaviyo-customer-education/Office-hours-Getting-started-with-Klaviyo",
+          "text": "Live office hours Join a strategic discussion where you can ask questions and get answers in real-time."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/private-live-training",
+          "text": "1:1 Live training Book a private training session with an expert to jumpstart your platform knowledge and confidence."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/credentials",
+          "text": "Klaviyo credentials Dig deeper into select topics and showcase your expertise with a final exam to earn a certificate and digital badge."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/certificates/klaviyo-practitioner-certificate",
+          "text": "Klaviyo practitioner certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/deliverability-certificate",
+          "text": "Deliverability certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/developer-certificate",
+          "text": "Klaviyo developer certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses&select=Certificate",
+          "text": "See all certificates"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Klaviyo Community Join our thriving community network to connect with brands like yours—online and in person."
+        },
+        {
+          "href": "https://community.klaviyo.com/topic/new",
+          "text": "Ask a question Post a question and get thoughtful answers from Klaviyo powerusers."
+        },
+        {
+          "href": "https://community.klaviyo.com/p/roadmap",
+          "text": "Product roadmap"
+        },
+        {
+          "href": "https://community.klaviyo.com/search/activity/recent",
+          "text": "Recent threads"
+        },
+        {
+          "href": "https://community.klaviyo.com/p/champions",
+          "text": "Meet the Champions"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups",
+          "text": "Browse all groups Your people are waiting. New ideas and connections are a click away."
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/developer-group-64",
+          "text": "Developer group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/entrepreneur-user-group-118",
+          "text": "Entrepreneur group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/woo-user-group-87",
+          "text": "WooCommerce group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/new-york-meetup-chapter-82",
+          "text": "New York City"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/los-angeles-meetup-chapter-83",
+          "text": "Los Angeles"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/austin-meetup-chapter-85",
+          "text": "Austin"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/san-diego-meetup-chapter-86",
+          "text": "San Diego"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/amsterdam-meetup-chapter-84",
+          "text": "Amsterdam"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Klaviyo Developers Access API documentation and developer guides to help you build with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/get_started",
+          "text": "Get started Access key resources and a step-by-step checklist for how to start developing with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/build_your_integration",
+          "text": "Grow your app's reach Learn how to join our ecosystem and get your app listed on our marketplace."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/developer-tools",
+          "text": "Developer tools Generate sample data, monitor your API usage, and access our Postman collections."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/reference/api_overview",
+          "text": "API reference Browse our full catalog of API docs."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/changelog_",
+          "text": "Changelog"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/api_versioning_and_deprecation_policy",
+          "text": "Versioning & deprecation policy"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/rate_limits_and_error_handling",
+          "text": "Rate limits & error handling"
+        },
+        {
+          "href": "https://youtube.com/playlist?list=PLHkNfHgtxcUanrkMnKPdkRzuWU7MGv_xM&si=pkG-KH7IT_TUHOGC",
+          "text": "API tutorials on YouTube Subscribe to our Klaviyo API Tutorials playlist for easy access to step-by-step developer walkthroughs."
+        },
+        {
+          "href": "https://www.klaviyo.com/contact-us",
+          "text": "Contact us"
+        },
+        {
+          "href": "https://www.klaviyo.com/sign-up",
+          "text": "Sign up"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": "Search"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4408802648731",
+          "text": "United States - EN"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/de-de/articles/4408802648731",
+          "text": "Deutschland - DE"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-es/articles/4408802648731",
+          "text": "España - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-mx/articles/4408802648731",
+          "text": "México - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/fr-fr/articles/4408802648731",
+          "text": "France - FR"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/it-it/articles/4408802648731",
+          "text": "Italia - IT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/ko-kr/articles/4408802648731",
+          "text": "한국 - KO"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/nl-nl/articles/4408802648731",
+          "text": "Nederland - NL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pl-pl/articles/4408802648731",
+          "text": "Polska - PL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pt-br/articles/4408802648731",
+          "text": "Brasil - PT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/sv-se/articles/4408802648731",
+          "text": "Sverige - SV"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/4414879524891",
+          "text": "Content"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/14543554717467",
+          "text": "Templates"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/49375545220123",
+          "text": "Use variable syntax and tags"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4408802648731-Message-personalization-reference#h_01HBRGTJ3GZNG14SY18NA4EA7Z",
+          "text": "About personalization tags"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4408802648731-Message-personalization-reference#h_01HBRGTJ3G3Q55VQ136Z977SBR",
+          "text": "Profile personalization"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4408802648731-Message-personalization-reference#h_01JVQG3GS5YAH5CNVJNDR35YEA",
+          "text": "Custom object tags"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4408802648731-Message-personalization-reference#h_01HBRGTJ3G98EQ18Y99JYY3QGV",
+          "text": "Organization tags"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4408802648731-Message-personalization-reference#h_01HBRGTJ3GAD7APM8T1MMW5Q4W",
+          "text": "Link and preview tags"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4408802648731-Message-personalization-reference#h_01HBRGTJ3H2M4N326FXPBSA4AN",
+          "text": "Custom personalization and event tags"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4408802648731-Message-personalization-reference#h_01HBRGTJ3HNSPM635W8QNZSYPA",
+          "text": "Customizing tags with filters"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4408802648731-Message-personalization-reference#h_01HBRGTJ3HEC5T3C1JWQ7GEEY4",
+          "text": "Date tags"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4408802648731-Message-personalization-reference#h_01JAB0VBMAP0P8EPX6XR7ZQTRP",
+          "text": "Currency tags"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4408802648731-Message-personalization-reference#h_01HBRGTJ3HGTEC37QBMB353G23",
+          "text": "Conditional statements"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4408802648731-Message-personalization-reference#additional-resources",
+          "text": "Additional resources"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/18986347580827",
+          "text": "adding personalization to your messages"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4408802648731-Message-personalization-reference#h_01HBRGTJ3H2M4N326FXPBSA4AN",
+          "text": "custom personalization"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/35105337172123",
+          "text": "Custom object"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/35146367972763#h_01JPTH5R889GMM7XPNS3FSB4SE",
+          "text": "tag references"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/35146367972763#h_01JPTH5R8840K0Q3XWH2CFYWRY",
+          "text": "object filter"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4408802648731-Message-personalization-reference#h_01HBRGTJ3G4V514CV5YZSCS6PC",
+          "text": "Unsubscribe"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4408802648731-Message-personalization-reference#h_01HBRGTJ3HMN8N33EC4XF8M04C",
+          "text": "Manage preferences"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4408802648731-Message-personalization-reference#h_01HBRGTJ3H39MT5259FW7ENKWA",
+          "text": "Web view"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4408802648731-Message-personalization-reference#h_01HBRGTJ3H3PCEGB19NW374KDV",
+          "text": "Preview text"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005251848",
+          "text": "customizable confirmation page"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005251848-Understanding-Opt-in-Related-Pages-for-a-List",
+          "text": "manage preferences pages"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360058907911-Using-Filters-to-Customize-Template-Tags",
+          "text": "using filters to customize tags"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005257788-How-to-Format-Date-Variables-in-Templates",
+          "text": "date tags in templates"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005054847",
+          "text": "How to create and send an email campaign"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/27843522951707",
+          "text": "How to use the preview panel for message personalization"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4408802597659",
+          "text": "How to build dynamic blocks in a flow email"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4402386684187",
+          "text": "Troubleshooting email template error messages"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/33660517680795",
+          "text": "How to create content blocks for Customer Hub"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115001002272",
+          "text": "Learn how to contact support"
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": ""
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": "Visit Community"
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": ""
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": "Hire a partner"
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/about",
+          "text": "About Klaviyo"
+        },
+        {
+          "href": "https://www.klaviyo.com/newsroom",
+          "text": "Newsroom"
+        },
+        {
+          "href": "https://investors.klaviyo.com/overview/default.aspx",
+          "text": "Investor relations"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Agency and tech partners"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Developers"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/retail",
+          "text": "Retail and ecommerce"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/restaurants",
+          "text": "Restaurant marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/wellness",
+          "text": "Wellness"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform",
+          "text": "B2C CRM overview"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai",
+          "text": "Klaviyo AI (K:AI)"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/marketing-automation",
+          "text": "Klaviyo Marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-service",
+          "text": "Klaviyo Service"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/analytics",
+          "text": "Klaviyo Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-data-platform",
+          "text": "Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare",
+          "text": "Klaviyo vs. Klaviyo alternatives"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-mailchimp",
+          "text": "Klaviyo vs. Mailchimp"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-postscript",
+          "text": "Klaviyo vs. Postscript"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-attentive",
+          "text": "Klaviyo vs. Attentive"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-salesforce-marketing-cloud",
+          "text": "Klaviyo vs. Salesforce"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-listrak",
+          "text": "Klaviyo vs. Listrak"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/omnichannel",
+          "text": "Omnichannel marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/email-marketing",
+          "text": "Email marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing",
+          "text": "SMS marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing/rcs",
+          "text": "RCS for Business"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/mobile-app-marketing",
+          "text": "Mobile app marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/whatsapp",
+          "text": "WhatsApp marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/social",
+          "text": "Social marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources",
+          "text": "Marketing resources"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources/marketing-campaign-calendar",
+          "text": "Marketing campaign calendar"
+        },
+        {
+          "href": "https://www.klaviyo.com/glossary",
+          "text": "Marketing glossary"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/email-subject-line-generator",
+          "text": "Subject line generator"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/roi-calculator",
+          "text": "ROI calculator"
+        },
+        {
+          "href": "https://www.klaviyo.com/customers",
+          "text": "Case studies"
+        },
+        {
+          "href": "https://www.klaviyo.com/composer",
+          "text": "Composer Beta"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/marketing-agent",
+          "text": "Marketing Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/customer-agent",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/customer-experience-hub",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/helpdesk",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/marketing-analytics",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/advanced-cdp",
+          "text": "Advanced Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/web-forms",
+          "text": "Web forms"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/email-templates",
+          "text": "Email templates"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/portfolio",
+          "text": "Portfolio"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform-integrations",
+          "text": "Apps and Integrations"
+        },
+        {
+          "href": "https://www.klaviyo.com/features",
+          "text": "Features"
+        },
+        {
+          "href": "https://www.klaviyo.com/whats-new",
+          "text": "What's new"
+        },
+        {
+          "href": "https://www.klaviyo.com/events",
+          "text": "Events"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help Center"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us",
+          "text": "Academy"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Community"
+        },
+        {
+          "href": "https://www.facebook.com/Klaviyo/",
+          "text": "Facebook"
+        },
+        {
+          "href": "https://twitter.com/klaviyo/",
+          "text": "Twitter"
+        },
+        {
+          "href": "https://www.linkedin.com/company/klaviyo/",
+          "text": "LinkedIn"
+        },
+        {
+          "href": "https://www.instagram.com/klaviyo/",
+          "text": "Instagram"
+        },
+        {
+          "href": "https://www.klaviyo.com/sitemap",
+          "text": "Site Map"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal",
+          "text": "Terms and Privacy"
+        },
+        {
+          "href": "https://www.klaviyo.com/security",
+          "text": "Security"
+        },
+        {
+          "href": "https://www.klaviyo.com/trust",
+          "text": "Trust"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal/intellectual-property-notices",
+          "text": "Intellectual Property Notices"
+        }
+      ],
+      "headings": [
+        {
+          "level": 1,
+          "id": "",
+          "text": "Message personalization reference"
+        },
+        {
+          "level": 2,
+          "id": "h_01HBRGTJ3GZNG14SY18NA4EA7Z",
+          "text": "About personalization tags"
+        },
+        {
+          "level": 2,
+          "id": "h_01HBRGTJ3G3Q55VQ136Z977SBR",
+          "text": "Profile personalization"
+        },
+        {
+          "level": 2,
+          "id": "h_01JVQG3GS5YAH5CNVJNDR35YEA",
+          "text": "Custom object tags"
+        },
+        {
+          "level": 2,
+          "id": "h_01HBRGTJ3G98EQ18Y99JYY3QGV",
+          "text": "Organization tags"
+        },
+        {
+          "level": 2,
+          "id": "h_01HBRGTJ3GAD7APM8T1MMW5Q4W",
+          "text": "Link and preview tags"
+        },
+        {
+          "level": 3,
+          "id": "h_01HBRGTJ3G4V514CV5YZSCS6PC",
+          "text": "Unsubscribe"
+        },
+        {
+          "level": 3,
+          "id": "h_01HBRGTJ3HMN8N33EC4XF8M04C",
+          "text": "Manage preferences"
+        },
+        {
+          "level": 3,
+          "id": "h_01HBRGTJ3H39MT5259FW7ENKWA",
+          "text": "Web view"
+        },
+        {
+          "level": 3,
+          "id": "h_01HBRGTJ3H3PCEGB19NW374KDV",
+          "text": "Preview text"
+        },
+        {
+          "level": 2,
+          "id": "h_01HBRGTJ3H2M4N326FXPBSA4AN",
+          "text": "Custom personalization and event tags"
+        },
+        {
+          "level": 2,
+          "id": "h_01HBRGTJ3HNSPM635W8QNZSYPA",
+          "text": "Customizing tags with filters"
+        },
+        {
+          "level": 2,
+          "id": "h_01HBRGTJ3HEC5T3C1JWQ7GEEY4",
+          "text": "Date tags"
+        },
+        {
+          "level": 2,
+          "id": "h_01JAB0VBMAP0P8EPX6XR7ZQTRP",
+          "text": "Currency tags"
+        },
+        {
+          "level": 4,
+          "id": "",
+          "text": "How to select a country"
+        },
+        {
+          "level": 4,
+          "id": "",
+          "text": "Troubleshooting the currency_format tag"
+        },
+        {
+          "level": 2,
+          "id": "h_01HBRGTJ3HGTEC37QBMB353G23",
+          "text": "Conditional statements"
+        },
+        {
+          "level": 3,
+          "id": "h_01HBRGTJ3HJP5F7V9SBF0Y7MKX",
+          "text": "If statements"
+        },
+        {
+          "level": 3,
+          "id": "h_01HBRGTJ3HRQ81DQ156ZSDW625",
+          "text": "For statements"
+        },
+        {
+          "level": 3,
+          "id": "h_01J8JFW0C92YQZ7C477DEAFV4N",
+          "text": "Conditional statements and the inline text editor"
+        },
+        {
+          "level": 2,
+          "id": "additional-resources",
+          "text": "Additional resources"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "Explore more from Klaviyo"
+        }
+      ]
+    }
+  },
+  "rendered_page": {
+    "status": "fetched",
+    "error": ""
+  }
+}

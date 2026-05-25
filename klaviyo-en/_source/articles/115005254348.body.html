@@ -1,0 +1,231 @@
+<h2 id="section0">You will learn</h2>
+<p>Learn how to integrate Klaviyo with your Magento 2 CE or EE store. You'll need to install the Klaviyo extension in Magento, configure the extension and set up OAuth, then enable the integration in Klaviyo. This guide covers all required integration steps, as well as how to confirm your historical data sync is successful. </p>
+<h2 id="h_01HTN92ZW20CB0RN4R498TRH0S">Before you begin</h2>
+<div class="bs-callout bs-callout-default">
+<p>Please note that Magento 2 versions below 2.4.0 are not supported.</p>
+</div>
+<p>To ensure that Klaviyo can make the necessary API calls for integration, your Magento 2 server must have a publicly accessible hostname. Magento 2 servers hosted locally will be unable to fully integrate with Klaviyo.</p>
+<p>Klaviyo's Magento 2 extension should be installed via Composer. Please note that installation via Composer requires an IT administrator with SSH access to the server where Magento 2 is hosted. </p>
+<h2 id="h_01HGGJNFJT8CTEQ8PVGDVNB6GB">Install the Klaviyo extension in Magento 2</h2>
+<p></p>
+<p>
+<script src="https://fast.wistia.com/embed/medias/yc7dejd9jw.jsonp" async="async"></script>
+<script src="https://fast.wistia.com/assets/external/E-v1.js" async="async"></script>
+</p>
+<div class="wistia_responsive_padding" style="padding: 56.25% 0 0 0; position: relative;">
+<div class="wistia_responsive_wrapper" style="height: 100%; left: 0; position: absolute; top: 0; width: 100%;">
+<div class="wistia_embed wistia_async_yc7dejd9jw seo=false videoFoam=true" style="height: 100%; position: relative; width: 100%;">
+<div class="wistia_swatch" style="height: 100%; left: 0; opacity: 0; overflow: hidden; position: absolute; top: 0; transition: opacity 200ms; width: 100%;"><img style="filter: blur(5px); height: 100%; object-fit: contain; width: 100%;" src="https://fast.wistia.com/embed/medias/yc7dejd9jw/swatch" alt="" aria-hidden="true"></div>
+</div>
+</div>
+</div>
+<ol>
+<li>Log in to your Magento 2 server and navigate to the root directory of your Magento app from your command line tool. This guide shows example outputs for Terminal, but these steps can be modified for any command line tool of your choice.</li>
+<li>Run the following command to access the latest version of the Klaviyo extension from Packagist. Packagist is a repository for PHP code libraries which allows you to easily install the latest version of the extension.<br>
+<code>composer require klaviyo/magento2-extension</code>
+</li>
+<li>Run the following command to enable the Klaviyo extension you just downloaded:<br>
+<code>php bin/magento module:enable Klaviyo_Reclaim  --clear-static-content</code><br>
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28720758835867" alt="composer2.png">
+</li>
+<li>As displayed in the sample output, you must now enable any additional modules. Run the following command to enable them:<br>
+<code>php bin/magento setup:upgrade</code>
+</li>
+<li>Scan the output for <code>Module 'Klaviyo_Reclaim'</code> to confirm that the Klaviyo module is enabled and running.</li>
+<li>To ensure that the CSS and JS on your Magento 2 store continues to work properly, you’ll need to run a static content deploy command.<br>
+<code>php bin/magento setup:static-content:deploy -f</code><br>
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28720770744219" alt="composer3.png">
+</li>
+<li>You can now return to the Magento admin dashboard from your browser.</li>
+</ol>
+<p>Installation via Composer is complete! Proceed to the next section for configuration instructions.</p>
+<h2 id="h_01F7457S36328VFK8WPF1KMJ7Y">Configure the Klaviyo extension</h2>
+<h3 id="h_01HGGJNFJTF482A49CDDJ989V3">How-to video</h3>
+<p></p>
+<p>
+<script src="https://fast.wistia.com/embed/medias/m7vqtc4psz.jsonp" async="async"></script>
+<script src="https://fast.wistia.com/assets/external/E-v1.js" async="async"></script>
+</p>
+<div class="wistia_responsive_padding" style="padding: 56.25% 0 0 0; position: relative;">
+<div class="wistia_responsive_wrapper" style="height: 100%; left: 0; position: absolute; top: 0; width: 100%;">
+<div class="wistia_embed wistia_async_m7vqtc4psz seo=false videoFoam=true" style="height: 100%; position: relative; width: 100%;">
+<div class="wistia_swatch" style="height: 100%; left: 0; opacity: 0; overflow: hidden; position: absolute; top: 0; transition: opacity 200ms; width: 100%;"><img style="filter: blur(5px); height: 100%; object-fit: contain; width: 100%;" src="https://fast.wistia.com/embed/medias/m7vqtc4psz/swatch" alt="" aria-hidden="true"></div>
+</div>
+</div>
+</div>
+<ol>
+<li>In your Klaviyo account, navigate to the <a href="https://www.klaviyo.com/settings/account/api-keys">API keys tab</a>.</li>
+<li>In a new tab, navigate to your Magento store admin.</li>
+<li>Under <em>Settings</em>, click <strong>Stores</strong><strong>&gt;</strong><strong>Configuration</strong>.</li>
+<li>From the Klaviyo dropdown, click <strong>General</strong>.</li>
+<li>Set <em>Enable Klaviyo Extension</em> to <strong>Yes</strong>.</li>
+<li>Copy your six-digit Klaviyo public API key from the API keys tab and paste it in the corresponding box in Magento.</li>
+<li>On the Klaviyo API keys tab, generate a new private key and then paste it into the corresponding box in Magento. Authenticating with your private API key will allow you to sync Newsletter subscriptions from Magento to Klaviyo.</li>
+</ol>
+<p>In the next section, you'll set up OAuth, which enables other aspects of the integration.</p>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/28720770782235" alt="" width="658" height="294"></p>
+<h3 id="h_01GE569R42Y0GNBWM8ZFQ40408">Set up OAuth</h3>
+<p>Next, you'll enable OAuth authentication to securely connect your Klaviyo account to the Magento 2 extension. </p>
+<ol>
+<li>Navigate to the <strong>Setup OAuth</strong> tab in Magento.</li>
+<li>Give your integration a memorable name, as you will need to locate it by this name later.</li>
+<li>Click <strong>Save Config </strong>to proceed.<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28720758843931" alt="OAUTHtab.png">
+</li>
+<li>Locate <strong>System </strong>in the left hand navigation pane and select<strong> Integrations </strong>from the <em>System</em> tray.</li>
+<li>Locate your integration name and click <strong>Activate</strong>. Activating the integration will open up a window requesting you to approve access.<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28720770752923" alt="activateoauth.png">
+</li>
+<li>Click <strong>Allow</strong> to be redirected to Klaviyo, where you'll complete the integration setup.<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28720770756379" alt="oauthperms.png">
+</li>
+<li>Sign in to Klaviyo if prompted, or confirm your account name is correct and click <strong>Integrate. </strong>This will add the Magento 2 integration to the Klaviyo account associated with the API key you used for setup. If you are logged into multiple Klaviyo accounts and the correct account is not displaying, log out of any other sessions.<br>
+</li>
+</ol>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/28720758864027" alt="" width="497" height="221"></p>
+<p>If the window closes automatically, the connection was successful. You can also confirm success by opening your Klaviyo account in a new browser tab or window, selecting the <strong>Integrations </strong>tab, and looking for Magento 2 on the list.</p>
+<p>If you receive the following error instead, ensure that the API keys used in the first step correspond to the account you're currently logged in to.<br>
+</p>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/28720770768027" alt="apierror.png" width="611" height="200"></p>
+<p>When establishing the connection between Magento and Klaviyo, if you receive a list of errors instead, you can click each error to learn more about the cause.</p>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/28720758849819" alt="oauthgenerror.png" width="475" height="278"></p>
+<h3 id="h_01HGGJNFJTNN3STVEZQAQYY06A">Set a newsletter list</h3>
+<p>Next, you'll select a Klaviyo list to sync your newsletter subscribers to. You also have the option of using Klaviyo opt-in settings or Magento 2 opt-in settings for your chosen list.</p>
+<ol>
+<li>In Magento, click <strong>Newsletter</strong>.</li>
+<li>Select the Klaviyo list you want to sync your Magento sign-up form to from the dropdown.</li>
+<li>Click<strong> Save Config</strong>.</li>
+</ol>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/28720758855579" alt="newsletterm2.png"></p>
+<h3 id="h_01HGGJNFJTZ24NFMXF4DAYH9F3">Enable consent at checkout</h3>
+<p>Next, you can choose to enable consent at checkout for email and SMS.</p>
+<p>Please note that if you enable consent at checkout, you'll also need to enable webhooks (below) in order for consent at checkout to function properly. </p>
+<ol>
+<li>On the <em>Configuration</em> page, under <em>Klaviyo</em>, navigate to <strong>Consent at Checkout</strong>.<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28720758860571" alt="m2cac-new.png">
+</li>
+<li>You’ll see a section for collecting email consent and SMS consent. The two are treated separately, so that you can collect just email, just SMS, or both. If you gather both SMS and email subscribers, choose a different list for SMS than for email. This makes sure that consent will always be properly attributed to the correct channel.<br>
+<ul>
+<ul>
+<li>Consent will not sync (for both email and SMS) until the customer finishes placing the order and, if applicable, confirms their subscription due to double opt-in.</li>
+<li>Note that for users already logged in to your Magento 2 store, the email consent checkbox will not appear at checkout by default.</li>
+</ul>
+</ul>
+</li>
+<li>Under <em>Email</em>, select <strong>Yes</strong> for <em>Subscribe contacts to email marketing at checkout</em>.</li>
+<li>Select an email list to sync subscribers to, such as a newsletter.</li>
+<li>Enter the email opt-in checkbox text you wish to use.<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28720758831387" alt="2021-03-24_13-00-56.png" width="614" height="264">
+</li>
+<li>Under <em>SMS</em>, select <strong>Yes</strong> for <em>Subscribe contacts to SMS marketing at checkout</em>.</li>
+<li>Choose the list you want your SMS contacts to sync to. For additional detail regarding these settings, check out our guide to <a href="https://help.klaviyo.com/hc/en-us/articles/360058698511-How-to-Collect-SMS-Consent-at-Checkout-on-Magento-2">collecting SMS consent at checkout</a>.<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28720758825755" alt="m2smscac.png" width="547" height="325">
+</li>
+<li>Sort order allows you to change the placement of the email and SMS consent boxes. By default, these boxes appear under the first email input and shipping phone number field, respectively. Thus, if you haven’t rearranged the checkout page, you do not need to change the sort order. If you have changed the layout, adjust the sort order accordingly.</li>
+<li>When you are finished, click <strong>Save Config</strong> in the upper right.</li>
+</ol>
+<h3 id="h_01G63NZ3AZ4ZJ7PN86DMM80MG7">Enable webhooks</h3>
+<div class="bs-callout bs-callout-default">
+<p>Next, you'll enable Klaviyo webhooks in your Magento 2 account. Please note that enabling webhooks is required for consent at checkout to function correctly. </p>
+</div>
+<ol>
+<li>From the admin dashboard, navigate to <strong>Stores &gt; Configuration</strong>.</li>
+<li>Click on <strong>Klaviyo</strong> and select the <strong>Webhooks</strong> tab.</li>
+<li>Create a webhook secret and enter it into the corresponding <strong>Webhook Secret</strong> field. The webhook secret is a key that Klaviyo will use for validation. This secret can be anything you choose, but we recommend creating a secure string of letters and numbers. Magento will hide your webhook secret with asterisks for security purposes, so be careful to enter it correctly.<br>
+<br>
+If you are using a multi-store integration, the webhook secret in this field should be entered in your default configuration, and the same secret will be used as validation for each store configuration. The webhook secret should only be added to the default config and should not be added per store.<br>
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28720770746779" alt="m2webhooktab.png" width="642" height="267">
+</li>
+<li>Next to the webhooks you wish to enable, select <strong>Yes</strong> from the dropdown. To read more about the webhooks supported by Klaviyo, check out our <a href="https://help.klaviyo.com/hc/en-us/articles/360055336451">guide to webhooks for Magento 2</a>.</li>
+<li>Click <strong>Save Config</strong>.</li>
+</ol>
+<h2 id="h_01HGGJNFJTWGCZQA9A00XYNV61">Enable the Magento 2 integration in Klaviyo</h2>
+<h3 id="h_01HGGJNFJTFXXABZAJ06PY81RS">How-to video</h3>
+<p></p>
+<p>
+<script src="https://fast.wistia.com/embed/medias/evlfi7fbya.jsonp" async="async"></script>
+<script src="https://fast.wistia.com/assets/external/E-v1.js" async="async"></script>
+</p>
+<div class="wistia_responsive_padding" style="padding: 56.25% 0 0 0; position: relative;">
+<div class="wistia_responsive_wrapper" style="height: 100%; left: 0; position: absolute; top: 0; width: 100%;">
+<div class="wistia_embed wistia_async_evlfi7fbya seo=false videoFoam=true" style="height: 100%; position: relative; width: 100%;">
+<div class="wistia_swatch" style="height: 100%; left: 0; opacity: 0; overflow: hidden; position: absolute; top: 0; transition: opacity 200ms; width: 100%;"><img style="filter: blur(5px); height: 100%; object-fit: contain; width: 100%;" src="https://fast.wistia.com/embed/medias/evlfi7fbya/swatch" alt="" aria-hidden="true"></div>
+</div>
+</div>
+</div>
+<ol>
+<li>Open Klaviyo, then select <strong>Integrations</strong> from the left-hand navigation. Find Magento 2 on the list and select it.</li>
+<li>On the next page, you'll have the option to add new Magento 2 customers to a Klaviyo list. Click the checkbox to <em>Add new Magento 2 customers to a Klaviyo list</em> and select a list from the dropdown. Note that checking this setting will only add customers to the selected list, but not subscribe them to marketing messages.<br>
+<br>
+This setting will only sync new customers; existing customers need to be <a href="https://help.klaviyo.com/hc/en-us/articles/115005082407">manually migrated from your Magento list to Klaviyo</a>.<br>
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/47104011603483" alt="" width="624" height="724">
+</li>
+<li>Next, select which store views from Magento 2 you would like to sync to Klaviyo. All store views are synced to Klaviyo by default. This setting allows you to be selective about which stores you integrate with. If you’re using Multi-Source Inventory (MSI) in Magento 2, check <em>Specific Magento 2 store views</em> and select the stores you wish to sync in order to see your inventory properly represented in Klaviyo.</li>
+<li>Under <em>Advanced</em>, enable the following settings as needed: <br>
+<ul>
+<ul>
+<li>
+<strong>Special price settings</strong><br>
+This setting refers to a special sale price for items that can optionally take effect in a certain date range. We highly recommend enabling this feature if you're planning to use it, as it's more difficult to enable later. When you enable <em>Use special price for product prices when applicable</em>, the product block will display the special price when applicable. When using a dynamic product feed, the special price will populate at send time. When manually selecting items from your catalog, the special price will populate once you select the product(s). For each product, there are 4 metadata fields that will sync:
+<ul>
+<li>
+<strong>price</strong><br>
+(Required, float) The standard price of the item.</li>
+<li>
+<strong>special_price</strong><br>
+(Optional, float) This is a special sale price for the item. When this price is in effect, you will see this special_price next to a strikethrough of the price.</li>
+<li>
+<strong>special_from_date </strong><br>
+(Optional, date) This specifies a start date for special_price to take effect.</li>
+<li>
+<strong>special_to_date </strong><br>
+(Optional, date) This specifies an end date for special_price being in effect.</li>
+</ul>
+</li>
+<li>
+<strong>Custom Media Root URL</strong><br>
+This setting allows you to change the default path for your site images. Enable this setting if you host your product images on a URL that is different than your website. </li>
+</ul>
+</ul>
+</li>
+<li>Click <strong>Save</strong>.</li>
+</ol>
+<p>You've now successfully enabled the Magento 2 integration! Your data will begin to sync to Klaviyo in minutes. </p>
+<p>After the initial historical data sync is complete, the Magento 2 integration syncs every 30 minutes.</p>
+<h2 id="h_01HGGJNFJTRRJ56KE2K4D33R5P">Data synced with the Magento 2 integration</h2>
+<p>Klaviyo's Magento 2 integration pulls key customer information from your Magento platform.</p>
+<p>Here is some of the data we sync from Magento:</p>
+<ul>
+<li>Customer information including first name, last name, and location.</li>
+<li>Sales and order data including which items were purchased, item images, item categories, and any discounts applied.</li>
+<li>Fulfillment, refunded, and canceled order data.</li>
+<li>When people visit your website and which items they view; web tracking is handled by the extension.</li>
+</ul>
+<p>To learn more, head over to our <a href="https://help.klaviyo.com/hc/en-us/articles/115003458852">Magento 2 data reference</a>. </p>
+<h2 id="h_01HGGJNFJTH272JD3TSVRK7NX5">Convert Magento order values into a single currency</h2>
+<p>Klaviyo supports the conversion of all foreign currencies in Magento to one primary currency in Klaviyo. Please <a href="https://help.klaviyo.com/hc/en-us/articles/115001002272">contact support</a> to enable this feature. This is especially helpful if you have multiple stores with transactions in different currencies.</p>
+<p>When this feature is enabled:</p>
+<ul>
+<li>The conversion happens when Magento syncs order data into Klaviyo. </li>
+<li>Klaviyo will check if the <em>order_currency_code</em> is the same as the set <em>global_currency_code</em>. If not, Klaviyo will convert the order total from the order currency to the global currency specified to ensure that your financial analytics are accurate. Please note that order line items will remain in the order currency code and not be converted. </li>
+</ul>
+<h2 id="h_01HNZMK310HQPFJWZ2NB1C6NSC">Upgrade your extension</h2>
+<p>Looking to upgrade your Klaviyo Magento 2 extension? Follow the instructions detailed in the<a href="#h_01HGGJNFJT8CTEQ8PVGDVNB6GB"><em>Install</em></a><a href="#h_01HGGJNFJT8CTEQ8PVGDVNB6GB"> section a</a><a href="#h_01HGGJNFJT8CTEQ8PVGDVNB6GB">bove</a> and run the command to install the latest version. This will overwrite your current version and your update will be complete - there’s no need to re-configure the extension or re-enable the integration in Klaviyo.</p>
+<h2 id="h_01JYSCX35A6AA1XSG38E9YDBQ2">Re-sync your catalog</h2>
+<p>You can prompt a full historical re-sync of your Magento 2 catalog at any time. Re-syncing your catalog can help you take advantage of Klaviyo updates to inventory and variant-related features. </p>
+<p>To re-sync your catalog:</p>
+<ol>
+<li>In Klaviyo, select the <strong>Integrations</strong> tab.</li>
+<li>Select your Magento 2 integration from the list.</li>
+<li>Click the <strong>Data</strong> tab.</li>
+<li>Under <em>Sync catalog data</em>, click <strong>Re-sync</strong>.<br>
+<br>
+</li>
+</ol>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/38564204532379" alt=""></p>

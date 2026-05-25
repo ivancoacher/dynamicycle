@@ -1,0 +1,136 @@
+<h2 id="h_01HA7MVKCMEM3ZG7XWMQ7N66TV">You will learn</h2>
+<p>Learn how to add and use a custom web feed within an email. A custom web feed allows you to dynamically populate a feed of data from an external URL within a Klaviyo email. Before sending an email, Klaviyo makes an HTTP request to the URL and fetches the data. The content of the web feed is then available for use in your email.</p>
+<p>The power of web feeds is that they allow you to use a single template and pull in content dynamically, where you only need to keep the feed up-to-date and Klaviyo will ensure fresh content from your feed gets populated into every send.</p>
+<p>This article will go over adding and using a custom web feed in campaigns and flows.</p>
+<h2 id="h_01HA7MVKCMDW5ZVA0HE1BAYE1E">Before you begin</h2>
+<p>The first step to adding dynamic external content to any email in Klaviyo is creating your web feed source. Your feed must: </p>
+<ul>
+<li>Be hosted at an accessible URL in either JSON or XML format</li>
+<li>Be 3.3 MB or smaller</li>
+<li>Not use a redirecting URL </li>
+</ul>
+<p>Klaviyo will make an HTTP request to your specified URL and fetch your feed data. Due to how flow emails send continuously, Klaviyo will keep your feed content up-to-date by periodically querying your feed URL to pull in refreshed content on one of the following schedules: </p>
+<ul>
+<li>
+<strong>15-minute refresh</strong><br>Klaviyo will attempt to refresh your feed every 15 minutes. In order to accomplish this, your feed must load within five seconds and return with a successful response.</li>
+</ul>
+<div class="bs-callout bs-callout-default">
+<p>While Klaviyo refreshes web feeds every 15 minutes, it can take longer for the refresh to complete. For your web feed products to be updated campaigns, the feed should be updated at least 30 minutes prior to a campaign send.</p>
+</div>
+<ul>
+<li>
+<strong>Nightly refresh</strong><br>If your feed takes longer than five seconds to return, after three hours of trying, we will start trying to update your feed nightly instead. For ongoing nightly refreshes, your feed must load in under 30 seconds. </li>
+</ul>
+<p>If we cannot load your feed within 30 seconds for three nights in a row, you will not be able to use this feed in your emails. Flow emails relying on this feed will stop sending, and campaign and flow emails will not send until the feed is removed or the outstanding issue with your feed is resolved.</p>
+<p>When we query your feed, if we get an error response, we will be unable to access your feed content. We will follow the same pattern as above and retry for up to three days. In the meantime, emails will not send.</p>
+<p>If we are having trouble accessing your web feed, you will receive in-app and email notifications letting you know. An easy troubleshooting step is to double check the feed requirements and make sure they fit the parameters outlined above. </p>
+<p>Should you make changes to a feed — for example, reduce the size to speed upload time or fix an issue causing an error response — and would like Klaviyo to attempt a new refresh, navigate to the feed in the Data Feeds tab and click <strong>Update Data Feed</strong>. We will test and re-validate your feed. If your feed is valid and returns a timely response, we will resume trying to keep your content up-to-date. This is a good troubleshooting step to try if you are having trouble accessing your web feed, even if you have not made changes.</p>
+<h2 id="h_01HA7MVKCM4XMH60MFZVFR36B0">Django filters</h2>
+<p>We support the use of Django filters for the variables you insert. Below are a few commonly used filters, and you can learn more in our <a href="https://help.klaviyo.com/hc/en-us/articles/360058907911" target="_blank" rel="noopener">guide on Using Filters to Customize Variables</a> and the <a href="https://help.klaviyo.com/hc/en-us/articles/360058466052" target="_blank" rel="noopener">Glossary of Variable Filters</a>.</p>
+<h3 id="h_01HA7MVKCMS3SQRCD249KSE7VG">Limit post summary to X number of words</h3>
+<p>If you want to include a brief summary of a blog post under the post title (and your feed provides this summary text), you can use <a href="https://docs.djangoproject.com/en/4.2/ref/templates/builtins/#truncatechars" target="_blank" rel="noopener">the Truncate Filter</a>.</p>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/28723518838683" alt="An example of the truncatechars Django filter"></p>
+<p>To limit the summary of an article to 250 characters, for example, you may use:</p>
+<p><code>{{ item.summary|truncatechars:250 }}</code></p>
+<h2 id="h_01HA7MVKCMHHA9RBBRSMP496QY">Add a custom web feed</h2>
+<h3 id="h_01HA7MVKCMPY6AGBRJH2805GFN">Set up your feed</h3>
+<ol>
+<li>Click on your company name in the bottom-left corner of Klaviyo.</li>
+<li>Click <strong>Settings</strong>.</li>
+<li>Click <strong>Other</strong>.<strong><br></strong>
+</li>
+<li>Click <strong>Web feeds</strong>.</li>
+<li>Click <strong>Add Web Feed</strong>.<strong><br></strong>
+</li>
+<li>Fill in the web feed fields as follows:
+<ul>
+<li>
+<strong>Feed name </strong><br>You’ll later use this identifier in your template to access the feed’s content. Give your feed a short descriptive name. We recommend naming feeds either in camel case (e.g., "MyDataFeed") or all uppercase with spaces replaced by underscores (e.g., "MY_DATA_FEED"). Spaces are not permitted in feed names. </li>
+<li>
+<strong>Feed URL</strong><br>The endpoint Klaviyo uses to fetch the feed contents (i.e., the URL of the JSON or XML feed configured previously). If your feed contains private information, we strongly recommend using an HTTPS URL and including a nonce query parameter to secure your feed.</li>
+<li>
+<strong>Request method</strong><br>Specify the HTTP method that will be used to request your feed. If you’re not sure which to choose, select <strong>GET</strong>. </li>
+<li>
+<strong>Content type</strong><br>The format of the feed (either JSON or XML). We recommend using JSON if possible. For XML feeds, the feed will be converted to JSON.</li>
+</ul>
+</li>
+<li>Once you've filled out all the fields, click <strong>Add web feed</strong>. We will attempt to query the Feed URL and validate your feed is working properly. If we encounter an error, you will see an error message and will be unable to save this new feed until the issue is addressed.
+<ul>
+<li>Want to try this out but don't have your own web feed URL? Use ours. Copy the following URL for the Klaviyo Help Center into the <em>Feed URL</em> box and try it out in your own Klaviyo account:
+<pre>https://help.klaviyo.com/api/v2/help_center/en-us/articles.json</pre>
+</li>
+</ul>
+</li>
+<li>Klaviyo validates your feed and shows any potential errors. Once validated, you will see your feed in Klaviyo and it's ready to be used in emails.<br><img src="https://klaviyo.zendesk.com/hc/article_attachments/28723507172507" alt="A validated feed" width="335" height="193">
+</li>
+</ol>
+<h3 id="h_01HA7MVKCNDFRCGT8KMFYB1T9Q">Preview your feed</h3>
+<p>It's useful to preview a web feed before adding it to an email. To preview a feed:</p>
+<ol>
+<li>On the <em>Web feeds</em> page, find your feed. </li>
+<li>Click the three dots, then select <strong>Edit</strong>. <br><img src="https://klaviyo.zendesk.com/hc/article_attachments/28723518845467" alt="The Edit option" width="521" height="164">
+</li>
+<li>From the feed detail page, click <strong>Preview</strong>. </li>
+</ol>
+<p>When previewing your feed, you will either see the feed content or an error message if we cannot load the feed. </p>
+<p>If your feed is a JSON array, we'll automatically parse and show each row individually. If it's anything else, most likely a JSON dictionary, we'll show the entire dictionary.</p>
+<p>If you are actively developing your feed, use the <strong>Refresh</strong> button to pull the latest version of your feed. The preview page for a feed shows the entire feed. If your feed is large, it may take several seconds to display the contents. Keep in mind if your feed takes over 30 seconds to query, this will impact the performance of any emails relying on this feed.</p>
+<p>Now that you've added a web feed and previewed its contents, you can use it in an email.</p>
+<h2 id="h_01HA7MVKCNBRQ0MRZ6MCGBH6HK">Use a web feed in an email</h2>
+<p>For campaigns, Klaviyo will fetch each feed once per send, and store the returned content. Even if you're sending to thousands of recipients, Klaviyo won't make thousands of requests to your servers.</p>
+<h3 id="h_01HA7MVKCNHQQB946V0V3H3BXZ">Populate feed content in a template</h3>
+<p>In our example web feed from the previous section, we have an array of articles where each entry includes a name, URL, article ID, and more. After a feed is added to an email, it's available through the feeds variable:</p>
+<p><code>{{ feeds }}</code></p>
+<p>For example, for the JSON feed above, we can now reference or output the contents of the articles feed by including this syntax in our template:</p>
+<p><code>{{ feeds.Klaviyo_Help_Center }}</code></p>
+<p>Let's run through an example where we iterate over all entries in the array, displaying certain variables. We'll use the Klaviyo Blog feed as an example here, and iterate over Images.</p>
+<ol>
+<li>Drag a new text block into your email and place it where you want the web feed to populate.</li>
+<li>Turn on the Repeat Block/Content Repeat Feature: click into the text block’s <strong>Display Options</strong> tab, then click <strong>Create Repeat Rules</strong>.</li>
+<li>For the <em>Repeat For</em> field, insert <em>feeds.YOUR_FEED_NAME</em>, followed by the name of the variable(s) that contain the array you want to iterate through.
+<ul>
+<li>In our example, because we are iterating over the "articles" value as well, we will repeat for: <em>feeds.Klaviyo_Help_Center.articles</em>.</li>
+</ul>
+</li>
+<li>Your data may be nested within a series of variables. For example, your feed might be structured like this: 
+<pre><code>rss: {
+         ..... 
+         channel: { 
+                 ..... 
+                     item: { 
+                             .....}}}</code></pre>
+<p>In this case, you’d use <code style="font-size: 15px;">feeds.YOUR_FEED_NAME.rss.channel.item</code> as your <em>Repeat for</em>.</p>
+</li>
+<li>If you only want this block to iterate over a certain number of entries, use the "slice" filter. To use this filter, adjust the <em>Repeat For</em> value by adding the filter to the end:  <code>feeds.Klaviyo_Help_Center.articles|slice:':3'</code><br>In this example, <code>|slice:':3'</code> will cause only the first three entries to display. </li>
+<li>For the <em>Item Alias</em> field, insert: <code>item</code>
+</li>
+<li>Once you have configured the <em>Repeat Block/Content Repeat</em> feature, you can insert variables using the "item" alias.</li>
+<li>To identify and add variables, open your web feed’s preview and reference the way your data is structured. Any data nested within the array used in the <em>Repeat for</em> field can be used as a variable.<br>In this example, all of the data shown within the articles array is available for use in an email:<br><img src="https://klaviyo.zendesk.com/hc/article_attachments/28723507180827" alt="Data nested within the articles array" width="638" height="383">
+</li>
+<li>For first-level data, simply add <em>item</em> before the variable name shown in your data. For example, use <code>{{ item.title }}</code> to display an article’s title, or <code>{{ item.url }}</code> to display an article’s URL. </li>
+<li>To access data nested within the first-level variables, use dot notation (e.g., <code>{{ item.images.thumbnail_url }}</code>). To learn more about dot notations and template variables, head to our <a href="https://klaviyo.zendesk.com/hc/en-us/articles/4408802648731" target="_blank" rel="noopener">guide to template tags and variable syntax</a>. </li>
+<li>When you preview your template, you will notice that the <em>Repeat Block/Content Repeat</em> feature will allow this simple text block to automatically iterate over all entries in your feed. Only the variables you specify in the text block will show for each entry.</li>
+<li>If you are inserting an image, please note that you will need to edit the <em>Source code</em> field of the text block and contain the image in an <code>&lt;img src&gt;</code> tag.<br><img src="https://klaviyo.zendesk.com/hc/article_attachments/28723507183259" alt="custom web feed image" width="434" height="234">
+</li>
+</ol>
+<p>You've added a custom web feed to your email and can now dynamically populate a feed of data from your external URL. </p>
+<h2 id="h_01HA7MVKCNA10SNWK82WF4KE2Z">Test or validate your feed</h2>
+<p>If you receive an email or in-app notification that we are having trouble accessing your web feed:</p>
+<ol>
+<li>Navigate to your feed and click the <strong>Update feed</strong> button.</li>
+<li>Once validation completes, there are two types of error messages that you might see:
+<ul>
+<li>
+<strong>Invalid Response </strong><br>If we receive an error response when attempting to query your feed content, we will tell you the status code of the error. You will need to address the issue causing this error response before the feed can be successfully used within any email.</li>
+<li>
+<strong>Performance Issue</strong><br>If we do not get a response from your feed within 30 seconds, this will lead to sending delays. While you may have been able to save your feed historically, to mitigate the risk of sending delays, you will need to address the performance issue with your feed before re-validating and successfully saving it.</li>
+</ul>
+</li>
+</ol>
+<p>In both cases, if you use a problematic feed within a send, this will lead to sending delays or your email may be cancelled altogether. For flows, it is also likely emails are not sending.</p>
+<p>We recommend removing a problematic feed from all emails while you address any outstanding issues to prevent sending disruption.</p>
+<h2 id="h_01HA7MVKCNWFQRP61BTRQHC9R7">Additional resources</h2>
+<ul>
+<li><a href="https://help.klaviyo.com/hc/en-us/articles/360039881992" target="_blank" rel="noopener">Troubleshoot your Instagram web feed in emails</a></li>
+<li><a href="https://help.klaviyo.com/hc/en-us/articles/115005082787" target="_blank" rel="noopener">How to use product feeds and recommendations</a></li>
+</ul>

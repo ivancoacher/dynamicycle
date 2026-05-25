@@ -1,0 +1,288 @@
+<h2 id="h_01JA8CWSGQJNDQE8EXMSQNHVYT">You will learn</h2>
+<p>Learn how to show a particular block or section in an email to certain recipients using the template editor’s show/hide logic builder.  </p>
+<p>You can use this to display different content to, for example,  those in certain loyalty tiers or who purchased a particular product. This feature allows you to target your email content based on information about your subscribers, so each recipient has a highly personalized marketing experience.  </p>
+<h2 id="h_01JA8CWSGQ0F6TRJV1F92ZX01W">Before you begin</h2>
+<p>You can show/hide content based on: </p>
+<ul>
+<li>Profile data (i.e, profile or custom properties)</li>
+<li>
+<a href="https://help.klaviyo.com/hc/en-us/articles/115002779071-About-Using-Event-Variables-to-Personalize-Flows">Event variables</a>, but only for:
+<ul>
+<li>Event-triggered (also called metric-triggered) flows</li>
+<li>Custom-coded show/hide blocks</li>
+</ul>
+</li>
+</ul>
+<p>Before you craft your email, you must have the data you need in your account. In other words, you must have 1 event or profile with the property you want to use. </p>
+<div class="accordion accordion--default">
+<div class="accordion__item">
+<div class="accordion__item-title"><strong>Using profile data</strong></div>
+<div class="accordion__item-content">
+<p>If you want to show/hide conditions based on profile data (e.g., location, language, etc.), you need at least 1 profile with that data. </p>
+<p>Profile and custom properties can be added in the following ways: </p>
+<ul>
+<li><a href="https://help.klaviyo.com/hc/en-us/articles/360026474752">Sign-up forms</a></li>
+<li><a href="https://help.klaviyo.com/hc/en-us/articles/1260806293150-How-to-Import-Profile-Properties-Using-a-CSV-Upload">CSV uploads</a></li>
+<li><a href="https://help.klaviyo.com/hc/en-us/categories/115000032731-Ecommerce-Integrations">Ecommerce integrations</a></li>
+<li>List growth and loyalty integrations, like <a href="https://help.klaviyo.com/hc/en-us/articles/115000107112-How-to-Integrate-with-Typeform">Typeform</a> or <a href="https://connect.klaviyo.com/integrations/yotpo">Yotpo</a>
+</li>
+</ul>
+<p>Learn more about <a href="https://help.klaviyo.com/hc/en-us/articles/115000250912-About-Custom-Properties">profile properties</a> in Klaviyo. </p>
+</div>
+</div>
+<div class="accordion__item">
+<div class="accordion__item-title"><strong>Using event properties</strong></div>
+<div class="accordion__item-content">
+<p>Similarly for event properties, there must be 1 event in your Klaviyo account. Then, you can show/hide blocks based on that flow’s trigger event using custom-coded blocks. You cannot reference event data using the logic builder. </p>
+<p>So, in an abandoned cart flow with the trigger <em>Started Checkout</em>, you can build show/hide conditions based on a cart’s value or the specific items the customer added. </p>
+</div>
+</div>
+</div>
+<h2 id="h_01JA8CWSGQQX9F4T2C6GTV7WH4">Craft your message</h2>
+<div class="bs-callout bs-callout-default">
+<p>The show/hide logic builder supports profile data formatted as text, numbers, and lists. It does not support event data, dates, or booleans. If you’d like to use unsupported data in your show/hide condition, <a href="#h_01JA8CWSGRE9CWVYBE9HS1VR3H">use custom code to write the condition</a>. </p>
+</div>
+<ol>
+<li>Add a block or section to an email template. </li>
+<li>Select the <strong>Display</strong> tab.<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/30092349429659" alt="The display tab of a block" width="434" height="134">
+</li>
+<li>Under <em>Show/hide logic</em>, select <strong>Use logic builder</strong>. </li>
+<li>Select a condition. <br>
+<ul>
+<ul>
+<li>You can create a simple condition with a single criteria, or a more complex condition with several criteria connected by AND or OR. Learn more about <a href="https://help.klaviyo.com/hc/en-us/articles/360036534631">AND versus OR connectors</a>. </li>
+</ul>
+</ul>
+</li>
+<li>Use the <strong>Add condition</strong> button to add additional conditions, if desired. </li>
+<li>Select <strong>Save</strong>. </li>
+</ol>
+<div class="bs-callout bs-callout-warning">
+<p>If you use show/hide logic on a section and a block within that section, the settings can interact and cause conflicts. Learn more in our article on <a href="https://help.klaviyo.com/hc/en-us/articles/4408802299547-About-Display-Options-new-editor-">display options</a>. </p>
+</div>
+<h3 id="h_01JA8CWSGQSQEKGQ6YMXK58AAW">AND vs. OR in show/hide conditions </h3>
+<p>When evaluating show/hide logic, conditions connected by AND are evaluated before conditions connected by OR. Consider the order your logic will be evaluated when writing it to ensure it is interpreted as you intend. </p>
+<p>As an example, consider the following condition: </p>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/30092354160155" alt="A sample segment condition" width="523" height="369"></p>
+<p>Following these criteria, see whether the block is visible for some sample recipients: </p>
+<table style="width: 100%">
+<tbody>
+<tr>
+<td style="width: 23.8571%"><strong>Recipient</strong></td>
+<td style="width: 24.5714%"><strong>Does the block appear?</strong></td>
+<td style="width: 51.4286%"><strong>Why?</strong></td>
+</tr>
+<tr>
+<td style="width: 23.8571%">
+<p><strong>Jane</strong></p>
+<p>loyalty_points = 145</p>
+<p>Favorite color = green </p>
+<p>Favorite fruit = banana </p>
+</td>
+<td style="width: 24.5714%">No</td>
+<td style="width: 51.4286%">Jane could qualify if her favorite color was <em>blue</em>, or if her favorite fruit was <em>banana</em>. </td>
+</tr>
+<tr>
+<td style="width: 23.8571%">
+<p><strong>Alex</strong><br>
+loyalty_points = 73</p>
+<p>Favorite color = blue</p>
+<p>Favorite fruit = apple</p>
+</td>
+<td style="width: 24.5714%">No</td>
+<td style="width: 51.4286%">Alex could qualify with more loyalty points, or if his favorite fruit was <em>kiwi</em>.</td>
+</tr>
+<tr>
+<td style="width: 23.8571%">
+<p><strong>Amanda</strong><br>
+loyalty_points = 110</p>
+<p>Favorite color = blue</p>
+<p>Favorite fruit = pomegranate</p>
+</td>
+<td style="width: 24.5714%">Yes</td>
+<td style="width: 51.4286%">Amanda qualifies because she has &gt; 99 loyalty points and her favorite color is <em>blue</em>. Her favorite fruit is not considered because she meets both criteria on the opposite side of the OR operator. </td>
+</tr>
+<tr>
+<td style="width: 23.8571%">
+<p><strong>Stephanie</strong><br>
+loyalty_points = 42</p>
+<p>Favorite color = orange</p>
+<p>Favorite fruit = kiwi</p>
+</td>
+<td style="width: 24.5714%">Yes</td>
+<td style="width: 51.4286%">Stephanie qualifies because her favorite fruit is kiwi. The other conditions are not considered because she meets the criteria on one side of the OR operator. </td>
+</tr>
+</tbody>
+</table>
+<p></p>
+<h2 id="h_01JA8CWSGQAGAZEJDF865FQX7E">Use cases for show/hide blocks </h2>
+<h3 id="h_01JA8CWSGQFVG99TX00TJKK43B">Loyalty program banner</h3>
+<p>If you have a loyalty program, show active participants how many points they currently have. Offer contacts who haven’t yet signed up for the program an incentive for joining. To set this up, you’ll need 2 banners. </p>
+<p>Show active loyalty program participants a banner with this show hide condition: </p>
+<p>Loyalty points &gt; is greater than 0 </p>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/30092354168987" alt="A condition to show a block to those with more than 0 loyalty points" width="423" height="67"></p>
+<p>Show prospects a banner with this condition: </p>
+<p>loyalty_points &gt; is not set</p>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/30092354171547" alt="A condition to show a block to those without a loyalty points property" width="415" height="54"></p>
+<p>You may need to adjust the criteria based on the data available in your own account. </p>
+<h3 id="h_01JA8CWSGQAFS06588ZNWJYZV8">Personalized imagery</h3>
+<p>If you collect information about how your subscribers use your product, show them imagery that relates to them. </p>
+<p>For example, a brand that sells backpacks might ask whether subscribers use them for commuting, travel, or hiking. Depending on their answer, this brand could show imagery of their products in those environments. </p>
+<p>To set this up, you’ll need 3 image blocks showing your product in 3 different settings. </p>
+<p>Show commuters a picture of a biker wearing the backpack during a commute with this condition: </p>
+<p>Bag preference = Commuting</p>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/30092354173595" alt="A condition for those who use their bag to commute" width="440" height="54"></p>
+<p>Show travelers a picture of one of your backpacks in a busy airport with this condition: </p>
+<p>Bag preference = Travel</p>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/30092354178331" alt="A condition for those who use their bag to travel" width="443" height="55"></p>
+<p>Show everyone else a picture of one of your backpacks in a scenic outdoor landscape with this condition: </p>
+<p>Bag preference &gt; doesn’t equal &gt; Travel AND Bag preference &gt; doesn’t equal &gt; Commuting</p>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/30092349454747" alt="A condition for those who use their bag for anything else" width="446" height="128"></p>
+<p>Notice that the last image isn’t just targeted at hikers; anyone who isn’t a commuter or traveler will see it. It’s important to account for recipients who may not have this property set, so your email looks great for everyone. </p>
+<h3 id="h_01JA8CWSGQ5HGTR4NGCJQ7WA2A">Product-specific notes</h3>
+<div class="bs-callout bs-callout-default">
+<p>Referencing an item from within a flow’s trigger event requires using custom code.</p>
+</div>
+<p>Communicate product-specific information to cart abandoners, to give them key information that might influence their purchase decision. For example, if you are running out of a product, add a text block with a low-stock warning that only appears for people with that item in their cart with this condition:<br>
+ITEM_NAME in event.Items</p>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/30092349456411" alt="A condition for those with a specific item in their carts" width="292" height="54"></p>
+<h3 id="h_01JA8CWSGQHF6MXQ1NAK6QGA6N">Location-specific messaging </h3>
+<p>Location-specific conditions can only evaluate text; they cannot evaluate distance from a zip code. Show a custom banner to residents who live in a certain area, like those in the same town as your brick-and-mortar pop up shop with this condition:</p>
+<p>City = Boston</p>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/30092349459611" alt="A condition for residents of Boston" width="447" height="55"></p>
+<h2 id="h_01JA8CWSGQN6XT26GTMMHPAMN5">Troubleshooting show/hide blocks </h2>
+<p>If your show/hide block isn’t rendering as expected, use the <strong>Convert to code</strong> button to convert the builder logic to code. From there, you can inspect and tweak the code to render as expected. </p>
+<div class="bs-callout bs-callout-warning">
+<p>Converting logic to code is not reversible. </p>
+</div>
+<p>When troubleshooting, confirm the data type used in your condition value is the same as the data type in the profiles you are referencing. For example, the number 22 is different than the text value “22”. If your condition is set to <em>Number</em> but your values are stored as text on the profile, the condition won’t be able to evaluate correctly. </p>
+<h4 id="h_01JA8CWSGQ44V6KAK261Q6CETX">Converting text to numbers </h4>
+<p>If you have number properties, but they are stored as text within a profile, you can convert them to numbers within the custom code field using the |multiply filter. To use this, add the filter directly after the variable name: </p>
+<p>person.Birthday|multiply:"1" &gt; 21</p>
+<h4 id="h_01JA8CWSGQJDBAAERY1GB1BZDN">Booleans stored as text </h4>
+<p>If your true/false data is stored as text, not as a boolean, or if you are referencing a property that contains both booleans and text, you can use these structures to cover all scenarios. Include all spellings and capitalizations that are present in your data. </p>
+<table style="width: 100%">
+<tbody>
+<tr>
+<td><strong>Sample condition</strong></td>
+<td><strong>Show the block if...</strong></td>
+</tr>
+<tr>
+<td>person|lookup:'VIP' == 1 or person|lookup:'VIP' == 'true' or person|lookup:'VIP' == 'True'</td>
+<td>The VIP property is set to the boolean value true or the strings true or True</td>
+</tr>
+<tr>
+<td>person|lookup:'VIP' == 0 or person|lookup:'VIP' == 'false' or person|lookup:'VIP' == 'False'</td>
+<td>The VIP property is set to the boolean value false or the strings false or False</td>
+</tr>
+</tbody>
+</table>
+<h4 id="h_01JA8CWSGRTPH457S9N39H0Z9R">Non-alphanumeric characters in properties</h4>
+<p>If the properties or values referenced by your show/hide block contain non-alphanumeric characters (e.g., symbols like =, &lt;, or &gt;), your condition will not be supported, and you'll see an error message. For best results, use only letters (uppercase or lowercase, case-sensitive), numbers, underscores (_), or dashes (-). </p>
+<div class="accordion accordion--default">
+<div class="accordion__item">
+<div class="accordion__item-title"><strong>Custom coding show/hide blocks</strong></div>
+<div class="accordion__item-content">
+<p>If you prefer more control, or if you’d like to build a condition using event data, dates, or booleans, custom code your show/hide blocks rather than using the logic builder. To start from scratch using code, select the <strong>Use code</strong> button from the show/hide logic settings. </p>
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/30092354190363" alt="The custom code option" width="372" height="218">
+<p>Alternatively, convert an existing show/hide condition to use code with the <strong>Convert to code</strong> button. </p>
+<div class="bs-callout bs-callout-warning">
+<p>Converting logic to code is not reversible. </p>
+</div>
+<p>If you choose to use code, make sure you have a strong understanding of Django, programming logic, and Klaviyo’s data types. Klaviyo’s support team is not able to provide direct support or troubleshooting for custom code. </p>
+<p>
+<script src="https://fast.wistia.com/embed/medias/62idy7e4ug.jsonp" async="async"></script>
+<script src="https://fast.wistia.com/assets/external/E-v1.js" async="async"></script>
+</p>
+<div class="wistia_responsive_padding" style="padding: 56.25% 0 0 0; position: relative;">
+<div class="wistia_responsive_wrapper" style="height: 100%; left: 0; position: absolute; top: 0; width: 100%;">
+<div class="wistia_embed wistia_async_62idy7e4ug seo=false videoFoam=true" style="height: 100%; position: relative; width: 100%;">
+<div class="wistia_swatch" style="height: 100%; left: 0; opacity: 0; overflow: hidden; position: absolute; top: 0; transition: opacity 200ms; width: 100%;"><img style="filter: blur(5px); height: 100%; object-fit: contain; width: 100%;" src="https://fast.wistia.com/embed/medias/62idy7e4ug/swatch" alt="" aria-hidden="true"></div>
+</div>
+</div>
+</div>
+<p>Learn more about supported <a href="https://help.klaviyo.com/hc/en-us/articles/7655926841499">condition structures</a>. </p>
+<h3 id="h_01JA8CWSGRTFQHYQ3ZVRWZ31BG">Show/hide conditions based on event data</h3>
+<p>If your email is sent as part of an event-triggered flow (e.g., an abandoned cart or order confirmation flow), you can show/hide blocks based on the details of that flow’s trigger event. So, in an abandoned cart flow with the trigger <em>Started Checkout</em>, you can custom code show/hide conditions based on a cart’s value or the specific items the customer added. Learn more about <a href="https://help.klaviyo.com/hc/en-us/articles/115002779071-About-Using-Event-Variables-to-Personalize-Flows">event variables</a>.</p>
+<h3 id="h_01JA8CWSGRM01W9839A4CHT9XV">Understand how data is stored</h3>
+<p>Before configuring your show/hide condition, check to see how your data is stored. There are 5 <a href="https://help.klaviyo.com/hc/en-us/articles/115005237648-About-Data-Types">data types</a> in Klaviyo: </p>
+<ul>
+<li>Text</li>
+<li>Number</li>
+<li>Date</li>
+<li>Boolean</li>
+<li>List</li>
+</ul>
+<p>How your data is stored will influence which show/hide conditions will work for you. Learn how to <a href="https://help.klaviyo.com/hc/en-us/articles/115005237648-About-Data-Types">identify data types</a> in your own account.</p>
+<h3 id="h_01JA8CWSGRXHNFDZJG9EXKSCH4">Craft your message</h3>
+<p>The first step to adding custom-coded show/hide conditions in a message is to build the email template. This section will walk through a specific example, but you can follow the same steps to set any block to display based on your own criteria.</p>
+<p>For example, if your company sells leather bags, you may collect customer preferences for how they use their bags with a <a href="https://help.klaviyo.com/hc/en-us/articles/360026474752">sign-up form</a>, as shown below. </p>
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/30092354194587" alt="A sign-up form" width="544" height="262">
+<p>You can then display a different image based on your customer’s bag preference. For example, if the customer’s preference is “Work,” the bag will appear in an image next to a laptop. If the customer’s preference is “Outdoors,” the bag will appear near a scenic overlook on a hiking trail. </p>
+<ol>
+<li>Create a campaign or flow message.</li>
+<li>Add an image block.</li>
+<li>Upload the work-related image to the block.</li>
+<li>Click <strong>Display </strong>from the image block’s customization menu.</li>
+<li>Under <em>Show/hide logic</em>, select <strong>Use code</strong>. </li>
+<li>Add this condition: <em>person|lookup:'Bag Preference' == 'Work'</em>. </li>
+<li>Click <strong>Save Changes</strong>. </li>
+<li>Click <strong>Done</strong> on the block.</li>
+</ol>
+<p>This block will show only to people who have selected “Work” as their preference. </p>
+<p>
+<script src="https://fast.wistia.com/embed/medias/vlye260rwe.jsonp" async="async"></script>
+<script src="https://fast.wistia.com/assets/external/E-v1.js" async="async"></script>
+</p>
+<div class="wistia_responsive_padding" style="padding: 56.25% 0 0 0; position: relative;">
+<div class="wistia_responsive_wrapper" style="height: 100%; left: 0; position: absolute; top: 0; width: 100%;">
+<div class="wistia_embed wistia_async_vlye260rwe seo=false videoFoam=true" style="height: 100%; position: relative; width: 100%;">
+<div class="wistia_swatch" style="height: 100%; left: 0; opacity: 0; overflow: hidden; position: absolute; top: 0; transition: opacity 200ms; width: 100%;"><img style="filter: blur(5px); height: 100%; object-fit: contain; width: 100%;" src="https://fast.wistia.com/embed/medias/vlye260rwe/swatch" alt="" aria-hidden="true"></div>
+</div>
+</div>
+</div>
+<p>Next, add in the travel-related image to a new block under the work-related image. Follow the same steps as before, but this time, use the condition <em>person|lookup:'Bag Preference' == 'Outdoors'</em>. </p>
+<p>This block will only show to people who have selected “Outdoors” as their preference. </p>
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/30092354198171" alt="Bag preference = outdoors" width="624" height="287">
+<p>Finally, add in an image to appear for anyone who hasn’t selected either “Work” or “Outdoors.” Use a more generic image, and this condition: <em>person|lookup:'Bag Preference' != 'Work'</em> and <em>person|lookup:'Bag Preference' != 'Outdoors'</em>.</p>
+<p>Here, <em>!=</em> means "does not equal", so this condition looks for people who have chosen something other than “Work” or “Outdoors,” or have never selected a preference. </p>
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/30092349479835" alt="Bag preference = anything else" width="624" height="288">
+<p>Once you’ve configured each of the blocks, preview your message using 3 profiles. These profiles should be subscribers who meet one of each of the image criteria:</p>
+<ul>
+<li>Customer who chose “Outdoors” </li>
+<li>Customer who chose “Work”</li>
+<li>And customers with no preference/other preference</li>
+</ul>
+<p>You can use these steps to show or hide blocks based on any profile or event data in your account. </p>
+<h3 id="h_01JA8CWSGRRVF4XH7C0B9EMRCN">Create a show/hide condition with profile data</h3>
+<p>If you are building a custom-coded show/hide condition based on a profile property, replace the sample variable from the tables in the <a href="https://help.klaviyo.com/hc/en-us/articles/7655926841499">conditional logic reference</a> (e.g., <em>person|lookup:'Favorite Color'</em>) with your profile property. </p>
+<p>To find the correct variable to use:</p>
+<ol>
+<li>Click <strong>Personalization</strong> to open the personalization menu.</li>
+<li>Choose an option from the menu to add it to the text block.</li>
+<li>Copy the variable name from within the tag. To identify the variable name, remove the curly brackets around the variable, as well as <em>|default:''</em> at the end (if present), along with any other <a href="https://developers.klaviyo.com/en/docs/glossary_of_variable_filters">filters</a>.<br>
+For example, in the screenshot below, the full tag is <em>{{ person|lookup:"Accepts Marketing"|default:"" }}</em>. The variable name is <em>person|lookup:"Accepts Marketing"</em>, so select that portion to use in your show/hide condition. </li>
+</ol>
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/30092349483419" alt="A variable for show/hide logic" width="349" height="40">
+<h3 id="h_01JA8CWSGRVTQDZ7JNF5BQB5Q9">Create a show/hide condition with event data</h3>
+<p>You can use event data to show or hide a block if your message is part of an event-triggered flow. Only data within the trigger event can be used in a show/hide condition. </p>
+<p>To identify event variables:</p>
+<ol>
+<li>From the template editor, click <strong>Preview &amp; test</strong>.</li>
+<li>Under <em>Preview data source</em>, click <strong>Event</strong>.</li>
+<li>From the dropdown menu, select the event that will trigger the message you’re building. </li>
+<li>Scroll through the <em>Event properties</em> to find the data you’d like to include. </li>
+<li>Click the property name to copy the tag. </li>
+<li>Paste the tag into a text block or text editor. </li>
+<li>Remove the curly brackets (i.e., {{ and }}) from the tag, as well as any <a href="https://developers.klaviyo.com/en/docs/glossary_of_variable_filters">filters</a>.</li>
+<li>Use the variable that remains in your show/hide condition.</li>
+</ol>
+<p>In the screenshot below, you’ll see the tag <em>{{ event|lookup:'Item Count' }}.</em> You’ll only need the text <em>event|lookup:'Item Count'</em> for your show/hide condition. Note that your data may use a different structure, like <em>{{ event.extra.line_items.0.title }}</em> or <em>{{ event.ShippingAddress.address1 }}</em>. Use the variable as it appears in your event data. </p>
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/30092354216987" alt="Preview data to find event variables" width="624" height="313">
+<h3 id="h_01JA8CWSGRYDN5WR4ME3CNHZY3">Customize your show/hide conditions</h3>
+<p>Learn how to build custom show/hide conditions using the <a href="https://help.klaviyo.com/hc/en-us/articles/7655926841499">conditional logic reference</a>. This resource contains sample conditions, which you can customize using your own profile and event data. </p>
+</div>
+</div>
+</div>

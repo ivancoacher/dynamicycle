@@ -1,0 +1,866 @@
+{
+  "captured_at": "2026-05-23T16:14:18Z",
+  "article": {
+    "id": 42790208080283,
+    "url": "https://klaviyo.zendesk.com/api/v2/help_center/en-us/articles/42790208080283.json",
+    "html_url": "https://klaviyo.zendesk.com/hc/en-us/articles/42790208080283-Connecting-Klaviyo-and-Databricks",
+    "author_id": 38504994929947,
+    "comments_disabled": true,
+    "draft": false,
+    "promoted": false,
+    "position": 0,
+    "vote_sum": 0,
+    "vote_count": 0,
+    "section_id": 49375669200027,
+    "created_at": "2025-10-30T19:24:04Z",
+    "updated_at": "2026-04-21T13:54:56Z",
+    "name": "Connecting Klaviyo and Databricks",
+    "title": "Connecting Klaviyo and Databricks",
+    "source_locale": "en-us",
+    "locale": "en-us",
+    "outdated": false,
+    "outdated_locales": [],
+    "edited_at": "2026-04-17T01:00:05Z",
+    "user_segment_id": null,
+    "permission_group_id": 146372,
+    "content_tag_ids": [
+      "01K5ZGPK6XJJ7N6E2TM1YJK302",
+      "01K5ZGPT13E0CS1FPX67C61NZ3",
+      "01K5ZHSB085YXJE3AC3KTMQ7NW",
+      "01K8VQFE1J2RSS35BRX72M0TKW",
+      "01K8VQFHYXNPF0EZV868BDQ1AT"
+    ],
+    "label_names": [
+      "data warehouse",
+      "akdp",
+      "databricks"
+    ],
+    "body": "<div class=\"bs-callout bs-callout-default\">\n<p><a href=\"https://help.klaviyo.com/hc/en-us/articles/17655007276059\">Advanced KDP</a> is not included in Klaviyo’s standard marketing application, and a subscription is required to access the associated functionality. Head to our <a href=\"https://help.klaviyo.com/hc/en-us/articles/115000976672\">billing guide</a> to learn about how to purchase this plan.</p>\n</div>\n<h1 id=\"h_01K8VQEPP3RZBAM525QPXWX41G\">Environment Setup and Connection</h1>\n<p><strong>Overview:</strong> Follow these steps to prepare Databricks for Klaviyo. You’ll create required <em>schemas</em> (in a catalog), set up a dedicated account and access token for Klaviyo, assign the minimum required privileges, verify the configuration, and connect Databricks to Klaviyo.</p>\n<p><strong>Important:</strong> The Databricks connection currently supports <strong>importing data into Klaviyo</strong> only.</p>\n<ul>\n<li>\n<strong>Profiles</strong> and <strong>Events</strong> can be imported now.</li>\n<li>\n<strong>Exporting to Databricks</strong> is not yet available. Until then, exporting to S3 is recommended.</li>\n<li>\n<strong>Unity Catalog </strong>is required. To connect to a Databricks instance that uses Hive metastore (HMS), consider <a href=\"https://docs.databricks.com/aws/en/query-federation/hms-federation-concepts\">Hive metastore federation</a>.</li>\n</ul>\n<p>For details on how data warehouse imports work in Klaviyo—including schema structure, required tables, and field mappings—see <a href=\"https://klaviyo.zendesk.com/hc/en-us/articles/40939206649627\">How Data Warehouse Imports Work in Klaviyo</a> and <a href=\"https://klaviyo.zendesk.com/hc/en-us/articles/45442043369499\">Understanding Data Warehouse Event Import.</a></p>\n<hr>\n<h2 id=\"h_01K8VPRYQWTER950503Y1XSM64\">1) Create Required Schemas</h2>\n<p>In Databricks, <strong>schemas</strong> (sometimes called databases) live <strong>inside a catalog</strong>. You can use the default <code>main</code> catalog or another catalog if your workspace uses Unity Catalog.</p>\n<pre><code class=\"language-sql\">USE CATALOG main;  -- or your organization’s designated catalog\nCREATE SCHEMA IF NOT EXISTS KLAVIYO_IMPORT_FROM_DWH;\nCREATE SCHEMA IF NOT EXISTS KLAVIYO_TMP;</code></pre>\n<ul>\n<li>\n<code>KLAVIYO_IMPORT_FROM_DWH</code>: Tables and views created in this schema will be available for selection when configuring a new sync.</li>\n<li>\n<code>KLAVIYO_TMP</code>: temporary/staging data used during sync.</li>\n</ul>\n<p><strong>Note:</strong> If your workspace does not use Unity Catalog, Databricks treats “schema” and “database” as equivalent. You can use <code>CREATE DATABASE</code> instead of <code>CREATE SCHEMA</code>.</p>\n<hr>\n<h2 id=\"h_01K8VPRYQW7M9899ZXRSVPYARM\">2) Create the Klaviyo Service Account and Access Token</h2>\n<p>Klaviyo authenticates to Databricks using a dedicated account with a <strong>personal access token (PAT)</strong>. Use a non-human (service) account when possible and store the PAT securely (e.g., a password manager or secret store). You will provide this token to Klaviyo during initial setup.</p>\n<h3 id=\"h_01K8VPRYQWR8KHCBE96D8BKBN7\">2.1 Create the account</h3>\n<p>Create a Databricks workspace user or a service principal that Klaviyo will use exclusively for this integration.</p>\n<h3 id=\"h_01K8VPRYQWD3APST2RSG1Y9GFP\">2.2 Generate the personal access token</h3>\n<ul>\n<li>\n<strong>Workspace user account:</strong> Generate the token via the Databricks web UI (see Databricks docs): <a href=\"https://docs.databricks.com/aws/en/dev-tools/auth/pat#create-personal-access-tokens-for-workspace-users\">Create personal access tokens for workspace users</a>\n</li>\n<li>\n<strong>Service principal:</strong> Generate the token using the Databricks CLI (see Databricks docs): <a href=\"https://docs.databricks.com/aws/en/dev-tools/auth/pat#create-personal-access-tokens-for-service-principals\">Create personal access tokens via the Databricks CLI</a>\n</li>\n</ul>\n<p><strong>Important:</strong> Treat the PAT as a secret. Anyone with the token can access Databricks with the associated account’s permissions.</p>\n<hr>\n<h2 id=\"h_01K8VPRYQW2N5EYKF4WJEGMJPD\">3) Assign Required Permissions</h2>\n<p>Grant the Klaviyo account the following privileges on the schemas created in Step 1. Replace <code>klaviyo_service_user</code> with your actual username or service principal name, and prefix schemas with the correct catalog (e.g., <code>main</code>).</p>\n<table>\n<tbody>\n<tr>\n<th style=\"text-align: center\">Schema</th>\n<th style=\"text-align: center\">Minimum Required Privileges</th>\n<th style=\"text-align: center\">Purpose</th>\n</tr>\n<tr>\n<td><code>KLAVIYO_TMP</code></td>\n<td>\n<code>ALL PRIVILEGES</code> <em>or</em> the combination of <code>USE SCHEMA</code>, <code>MODIFY</code>, <code>SELECT</code>, and <code>CREATE TABLE</code>\n</td>\n<td>Allows Klaviyo to create and manage temporary tables during sync.</td>\n</tr>\n<tr>\n<td><code>KLAVIYO_IMPORT_FROM_DWH</code></td>\n<td>\n<code>USE SCHEMA</code>, <code>SELECT</code>\n</td>\n<td>Allows Klaviyo to read your tables and views.</td>\n</tr>\n</tbody>\n</table>\n<pre><code class=\"language-sql\">-- Grant permissions on temporary schema\nGRANT ALL PRIVILEGES ON SCHEMA main.KLAVIYO_TMP TO `klaviyo_service_user`;\n\n-- OR, grant granular privileges:\nGRANT USE SCHEMA, MODIFY, SELECT, CREATE TABLE ON SCHEMA main.KLAVIYO_TMP TO `klaviyo_service_user`;\n\n-- Grant read-only access to import schema\nGRANT USE SCHEMA, SELECT ON SCHEMA main.KLAVIYO_IMPORT_FROM_DWH TO `klaviyo_service_user`;\n</code></pre>\n<p><strong>Best practice:</strong> Apply the principle of least privilege—grant only what’s required.</p>\n<hr>\n<h2 id=\"h_01K8VPRYQWKEA12G31H6ETZM91\">4) Verify Your Setup (Optional)</h2>\n<h3 id=\"h_01K8VPRYQW2YFHGY6QFTA3H9YX\">4.1 Confirm the schemas exist</h3>\n<p>Run in a Databricks SQL notebook or editor:</p>\n<pre><code class=\"language-sql\">SHOW SCHEMAS IN main;  -- replace 'main' with your catalog if different</code></pre>\n<p>You should see:</p>\n<pre><code class=\"language-auto\">klaviyo_import_from_dwh\nklaviyo_tmp</code></pre>\n<h3 id=\"h_01K8VPRYQWM521DZZAWDY9X5KT\">4.2 Test authentication (using your PAT)</h3>\n<p>Use the Databricks CLI with the same token you plan to provide to Klaviyo:</p>\n<pre><code class=\"language-bash\"># Set your token and host (example for AWS)\nexport DATABRICKS_HOST=\"https://&lt;your-workspace&gt;.cloud.databricks.com\"\nexport DATABRICKS_TOKEN=\"&lt;your-PAT&gt;\"\n\n# Run a simple API call\ndatabricks current-user me</code></pre>\n<p><em>Expected result:</em> JSON output showing the user or service principal details (e.g., display name, user ID). If you get an HTTP 403 or authentication error, verify the token and host URL.</p>\n<h3 id=\"h_01K8VPRYQW2W9N9VDV3X1XSDJ2\">4.3 Check permissions on each schema</h3>\n<pre><code class=\"language-sql\">SHOW GRANTS ON SCHEMA main.klaviyo_tmp;\nSHOW GRANTS ON SCHEMA main.klaviyo_import_from_dwh;</code></pre>\n<p>Confirm that your Klaviyo account appears with the expected privileges (e.g., <code>USE SCHEMA</code>, <code>SELECT</code>, <code>MODIFY</code>, <code>CREATE TABLE</code>).</p>\n<h3 id=\"h_01K8VPRYQWQ1QEBBB57A2KJC54\">4.4 Validate create/read operations</h3>\n<pre><code class=\"language-sql\">-- Test create/drop in KLAVIYO_TMP\nUSE SCHEMA main.klaviyo_tmp;\nCREATE TABLE IF NOT EXISTS test_permissions (id INT);\nDROP TABLE test_permissions;\n\n-- Test select in KLAVIYO_IMPORT_FROM_DWH\nUSE SCHEMA main.klaviyo_import_from_dwh;\nSHOW TABLES;</code></pre>\n<p><strong>Tips:</strong></p>\n<ul>\n<li>Run these verification steps using the same identity and PAT that you’ll share with Klaviyo.</li>\n<li>Retain the SQL grant statements and verification output for audit/troubleshooting.</li>\n<li>Rotate the PAT on a regular cadence and after staff changes.</li>\n</ul>\n<hr>\n<h2 id=\"h_01K8VPRYQW9VTKZRAKC9WW7NS6\">5) Connect Klaviyo to Databricks</h2>\n<p>Once Databricks is configured, complete the connection in Klaviyo.</p>\n<ol>\n<li>In Klaviyo, open the <strong>left sidebar</strong> and navigate to <strong>Advanced &gt; Syncing</strong>.</li>\n<li>Click <strong>Create sync</strong>.</li>\n<li>Select <strong>Import data from your data warehouse</strong>.</li>\n<li>Choose <strong>Databricks</strong> as your data warehouse.</li>\n<li>Click <strong>Connect to Databricks</strong>.</li>\n</ol>\n<p>When prompted, provide the following connection details:</p>\n<table>\n<tbody>\n<tr>\n<th style=\"text-align: center\">Field</th>\n<th style=\"text-align: center\">Description</th>\n<th style=\"text-align: center\">Where to Find It</th>\n</tr>\n<tr>\n<td><strong>Hostname</strong></td>\n<td>The host indicated in the URL of your Databricks workspace.</td>\n<td>Found in your browser’s address bar when logged into Databricks:<br>\n<code>https://&lt;your-workspace&gt;.cloud.databricks.com</code><br>\n<br>\nExample: <code>abc-12345678.cloud.databricks.com</code>\n</td>\n</tr>\n<tr>\n<td><strong>HTTP Path</strong></td>\n<td>The HTTP path of the SQL Warehouse to use for queries.</td>\n<td>\n<p>In the Databricks UI:</p>\n<ol>\n<li>Go to <strong>SQL Warehouses</strong>.</li>\n<li>Select the warehouse you plan to use.</li>\n<li>Copy the <strong>HTTP Path</strong> under <strong>Connection details</strong>.</li>\n</ol>\n<p>Example: <code>/sql/1.0/warehouses/1234abcd5678efgh</code></p>\n</td>\n</tr>\n<tr>\n<td><strong>Catalog</strong></td>\n<td>The catalog containing your Klaviyo schemas (e.g., <code>main</code>).</td>\n<td>\n<p>Verify using:</p>\n<p>SHOW CATALOGS;</p>\n</td>\n</tr>\n<tr>\n<td><strong>Access Token</strong></td>\n<td>The personal access token (PAT) you created in Step 2.</td>\n<td>Store and paste the token securely during setup.</td>\n</tr>\n</tbody>\n</table>\n<p><strong>After you connect:</strong> Klaviyo will test the connection and confirm access to your Databricks environment. Once verified, you can configure syncs to import data from the schemas you prepared earlier.</p>\n<hr>\n<p><em>Next step:</em> After connecting successfully, proceed to create your first sync in Klaviyo and start importing data from Databricks.</p>",
+    "user_segment_ids": []
+  },
+  "normalized": {
+    "id": "42790208080283",
+    "title": "Connecting Klaviyo and Databricks",
+    "source_url": "https://help.klaviyo.com/hc/en-us/articles/42790208080283-Connecting-Klaviyo-and-Databricks",
+    "section_id": 49375669200027,
+    "section": "Syncing",
+    "category_id": 18073014919195,
+    "category": "Advanced KDP & Marketing Analytics",
+    "category_slug": "advanced-kdp-marketing-analytics",
+    "klaviyo_updated": "2026-04-21T13:54:56Z",
+    "created_at": "2025-10-30T19:24:04Z",
+    "draft": false,
+    "promoted": false,
+    "position": 0,
+    "label_names": [
+      "data warehouse",
+      "akdp",
+      "databricks"
+    ]
+  },
+  "files": {
+    "body_html": "_source/articles/42790208080283.body.html",
+    "rendered_html": "_source/rendered/42790208080283.html"
+  },
+  "assets": {
+    "api_body": {
+      "images": [],
+      "links": [
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/17655007276059",
+          "text": "Advanced KDP"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115000976672",
+          "text": "billing guide"
+        },
+        {
+          "href": "https://docs.databricks.com/aws/en/query-federation/hms-federation-concepts",
+          "text": "Hive metastore federation"
+        },
+        {
+          "href": "https://klaviyo.zendesk.com/hc/en-us/articles/40939206649627",
+          "text": "How Data Warehouse Imports Work in Klaviyo"
+        },
+        {
+          "href": "https://klaviyo.zendesk.com/hc/en-us/articles/45442043369499",
+          "text": "Understanding Data Warehouse Event Import."
+        },
+        {
+          "href": "https://docs.databricks.com/aws/en/dev-tools/auth/pat#create-personal-access-tokens-for-workspace-users",
+          "text": "Create personal access tokens for workspace users"
+        },
+        {
+          "href": "https://docs.databricks.com/aws/en/dev-tools/auth/pat#create-personal-access-tokens-for-service-principals",
+          "text": "Create personal access tokens via the Databricks CLI"
+        }
+      ],
+      "headings": [
+        {
+          "level": 1,
+          "id": "h_01K8VQEPP3RZBAM525QPXWX41G",
+          "text": "Environment Setup and Connection"
+        },
+        {
+          "level": 2,
+          "id": "h_01K8VPRYQWTER950503Y1XSM64",
+          "text": "1) Create Required Schemas"
+        },
+        {
+          "level": 2,
+          "id": "h_01K8VPRYQW7M9899ZXRSVPYARM",
+          "text": "2) Create the Klaviyo Service Account and Access Token"
+        },
+        {
+          "level": 3,
+          "id": "h_01K8VPRYQWR8KHCBE96D8BKBN7",
+          "text": "2.1 Create the account"
+        },
+        {
+          "level": 3,
+          "id": "h_01K8VPRYQWD3APST2RSG1Y9GFP",
+          "text": "2.2 Generate the personal access token"
+        },
+        {
+          "level": 2,
+          "id": "h_01K8VPRYQW2N5EYKF4WJEGMJPD",
+          "text": "3) Assign Required Permissions"
+        },
+        {
+          "level": 2,
+          "id": "h_01K8VPRYQWKEA12G31H6ETZM91",
+          "text": "4) Verify Your Setup (Optional)"
+        },
+        {
+          "level": 3,
+          "id": "h_01K8VPRYQW2YFHGY6QFTA3H9YX",
+          "text": "4.1 Confirm the schemas exist"
+        },
+        {
+          "level": 3,
+          "id": "h_01K8VPRYQWM521DZZAWDY9X5KT",
+          "text": "4.2 Test authentication (using your PAT)"
+        },
+        {
+          "level": 3,
+          "id": "h_01K8VPRYQW2W9N9VDV3X1XSDJ2",
+          "text": "4.3 Check permissions on each schema"
+        },
+        {
+          "level": 3,
+          "id": "h_01K8VPRYQWQ1QEBBB57A2KJC54",
+          "text": "4.4 Validate create/read operations"
+        },
+        {
+          "level": 2,
+          "id": "h_01K8VPRYQW9VTKZRAKC9WW7NS6",
+          "text": "5) Connect Klaviyo to Databricks"
+        }
+      ]
+    },
+    "rendered_page": {
+      "images": [
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/7ff492c2b417b7ecfe572f839a8a81398693c1f7-1920x1080.webp",
+          "alt": "",
+          "width": "",
+          "height": ""
+        }
+      ],
+      "links": [
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/42790208080283-Connecting-Klaviyo-and-Databricks#site-content",
+          "text": "Skip to main content"
+        },
+        {
+          "href": "https://www.klaviyo.com",
+          "text": "Home"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center"
+        },
+        {
+          "href": "https://www.klaviyo.com/enterprise",
+          "text": "Enterprise"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Partners"
+        },
+        {
+          "href": "https://www.klaviyo.com/careers",
+          "text": "Careers"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": "Log in"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": ""
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center Find step-by-step instructions and troubleshooting solutions in our knowledge base."
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000032731",
+          "text": "Integrations"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000312411",
+          "text": "Flows"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867867",
+          "text": "Audience"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867667",
+          "text": "Campaigns"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/360000190711",
+          "text": "Sign-up forms"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000873988",
+          "text": "Deliverability & compliance"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/29173800271259",
+          "text": "SMS"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/16638219724187",
+          "text": "Reviews"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/18073014919195",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/34141283979931",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/37659126754075",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/33948021740315",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/39746685522331",
+          "text": "WhatsApp"
+        },
+        {
+          "href": "https://academy.klaviyo.com",
+          "text": "Klaviyo Academy Expert training and education to help you succeed with Klaviyo, and beyond."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Quick+guide&resource=academy_courses",
+          "text": "Quick guides Learn marketing strategies and concepts in 15 minutes or less."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Course&resource=academy_courses",
+          "text": "Courses Master key marketing topics through structured lessons and exams."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/best-practices",
+          "text": "Best practices Discover top product and marketing strategies for your business."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/learning-paths",
+          "text": "Learning paths Complete curated learning journeys tailored to your marketing goals."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses",
+          "text": "Explore all resources"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Live+training&resource=academy_courses",
+          "text": "Live trainings Build confidence through hands-on interactive workshops and thought-provoking strategy sessions."
+        },
+        {
+          "href": "https://www.bigmarker.com/klaviyo-customer-education/Office-hours-Getting-started-with-Klaviyo",
+          "text": "Live office hours Join a strategic discussion where you can ask questions and get answers in real-time."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/private-live-training",
+          "text": "1:1 Live training Book a private training session with an expert to jumpstart your platform knowledge and confidence."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/credentials",
+          "text": "Klaviyo credentials Dig deeper into select topics and showcase your expertise with a final exam to earn a certificate and digital badge."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/certificates/klaviyo-practitioner-certificate",
+          "text": "Klaviyo practitioner certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/deliverability-certificate",
+          "text": "Deliverability certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/developer-certificate",
+          "text": "Klaviyo developer certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses&select=Certificate",
+          "text": "See all certificates"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Klaviyo Community Join our thriving community network to connect with brands like yours—online and in person."
+        },
+        {
+          "href": "https://community.klaviyo.com/topic/new",
+          "text": "Ask a question Post a question and get thoughtful answers from Klaviyo powerusers."
+        },
+        {
+          "href": "https://community.klaviyo.com/p/roadmap",
+          "text": "Product roadmap"
+        },
+        {
+          "href": "https://community.klaviyo.com/search/activity/recent",
+          "text": "Recent threads"
+        },
+        {
+          "href": "https://community.klaviyo.com/p/champions",
+          "text": "Meet the Champions"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups",
+          "text": "Browse all groups Your people are waiting. New ideas and connections are a click away."
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/developer-group-64",
+          "text": "Developer group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/entrepreneur-user-group-118",
+          "text": "Entrepreneur group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/woo-user-group-87",
+          "text": "WooCommerce group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/new-york-meetup-chapter-82",
+          "text": "New York City"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/los-angeles-meetup-chapter-83",
+          "text": "Los Angeles"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/austin-meetup-chapter-85",
+          "text": "Austin"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/san-diego-meetup-chapter-86",
+          "text": "San Diego"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/amsterdam-meetup-chapter-84",
+          "text": "Amsterdam"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Klaviyo Developers Access API documentation and developer guides to help you build with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/get_started",
+          "text": "Get started Access key resources and a step-by-step checklist for how to start developing with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/build_your_integration",
+          "text": "Grow your app's reach Learn how to join our ecosystem and get your app listed on our marketplace."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/developer-tools",
+          "text": "Developer tools Generate sample data, monitor your API usage, and access our Postman collections."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/reference/api_overview",
+          "text": "API reference Browse our full catalog of API docs."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/changelog_",
+          "text": "Changelog"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/api_versioning_and_deprecation_policy",
+          "text": "Versioning & deprecation policy"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/rate_limits_and_error_handling",
+          "text": "Rate limits & error handling"
+        },
+        {
+          "href": "https://youtube.com/playlist?list=PLHkNfHgtxcUanrkMnKPdkRzuWU7MGv_xM&si=pkG-KH7IT_TUHOGC",
+          "text": "API tutorials on YouTube Subscribe to our Klaviyo API Tutorials playlist for easy access to step-by-step developer walkthroughs."
+        },
+        {
+          "href": "https://www.klaviyo.com/contact-us",
+          "text": "Contact us"
+        },
+        {
+          "href": "https://www.klaviyo.com/sign-up",
+          "text": "Sign up"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": "Search"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/42790208080283",
+          "text": "United States - EN"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/de-de/articles/42790208080283",
+          "text": "Deutschland - DE"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-es/articles/42790208080283",
+          "text": "España - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-mx/articles/42790208080283",
+          "text": "México - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/fr-fr/articles/42790208080283",
+          "text": "France - FR"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/it-it/articles/42790208080283",
+          "text": "Italia - IT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/ko-kr/articles/42790208080283",
+          "text": "한국 - KO"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/nl-nl/articles/42790208080283",
+          "text": "Nederland - NL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pl-pl/articles/42790208080283",
+          "text": "Polska - PL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pt-br/articles/42790208080283",
+          "text": "Brasil - PT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/sv-se/articles/42790208080283",
+          "text": "Sverige - SV"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/18073014919195",
+          "text": "Advanced KDP & Marketing Analytics"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/28478928202523",
+          "text": "Data management (Advanced KDP)"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/49375669200027",
+          "text": "Syncing"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/42790208080283-Connecting-Klaviyo-and-Databricks#h_01K8VPRYQWTER950503Y1XSM64",
+          "text": "1) Create Required Schemas"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/42790208080283-Connecting-Klaviyo-and-Databricks#h_01K8VPRYQW7M9899ZXRSVPYARM",
+          "text": "2) Create the Klaviyo Service Account and Access Token"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/42790208080283-Connecting-Klaviyo-and-Databricks#h_01K8VPRYQW2N5EYKF4WJEGMJPD",
+          "text": "3) Assign Required Permissions"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/42790208080283-Connecting-Klaviyo-and-Databricks#h_01K8VPRYQWKEA12G31H6ETZM91",
+          "text": "4) Verify Your Setup (Optional)"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/42790208080283-Connecting-Klaviyo-and-Databricks#h_01K8VPRYQW9VTKZRAKC9WW7NS6",
+          "text": "5) Connect Klaviyo to Databricks"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/17655007276059",
+          "text": "Advanced KDP"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115000976672",
+          "text": "billing guide"
+        },
+        {
+          "href": "https://docs.databricks.com/aws/en/query-federation/hms-federation-concepts",
+          "text": "Hive metastore federation"
+        },
+        {
+          "href": "https://klaviyo.zendesk.com/hc/en-us/articles/40939206649627",
+          "text": "How Data Warehouse Imports Work in Klaviyo"
+        },
+        {
+          "href": "https://klaviyo.zendesk.com/hc/en-us/articles/45442043369499",
+          "text": "Understanding Data Warehouse Event Import."
+        },
+        {
+          "href": "https://docs.databricks.com/aws/en/dev-tools/auth/pat#create-personal-access-tokens-for-workspace-users",
+          "text": "Create personal access tokens for workspace users"
+        },
+        {
+          "href": "https://docs.databricks.com/aws/en/dev-tools/auth/pat#create-personal-access-tokens-for-service-principals",
+          "text": "Create personal access tokens via the Databricks CLI"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115001002272",
+          "text": "Learn how to contact support"
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": ""
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": "Visit Community"
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": ""
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": "Hire a partner"
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/about",
+          "text": "About Klaviyo"
+        },
+        {
+          "href": "https://www.klaviyo.com/newsroom",
+          "text": "Newsroom"
+        },
+        {
+          "href": "https://investors.klaviyo.com/overview/default.aspx",
+          "text": "Investor relations"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Agency and tech partners"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Developers"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/retail",
+          "text": "Retail and ecommerce"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/restaurants",
+          "text": "Restaurant marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/wellness",
+          "text": "Wellness"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform",
+          "text": "B2C CRM overview"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai",
+          "text": "Klaviyo AI (K:AI)"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/marketing-automation",
+          "text": "Klaviyo Marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-service",
+          "text": "Klaviyo Service"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/analytics",
+          "text": "Klaviyo Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-data-platform",
+          "text": "Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare",
+          "text": "Klaviyo vs. Klaviyo alternatives"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-mailchimp",
+          "text": "Klaviyo vs. Mailchimp"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-postscript",
+          "text": "Klaviyo vs. Postscript"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-attentive",
+          "text": "Klaviyo vs. Attentive"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-salesforce-marketing-cloud",
+          "text": "Klaviyo vs. Salesforce"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-listrak",
+          "text": "Klaviyo vs. Listrak"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/omnichannel",
+          "text": "Omnichannel marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/email-marketing",
+          "text": "Email marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing",
+          "text": "SMS marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing/rcs",
+          "text": "RCS for Business"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/mobile-app-marketing",
+          "text": "Mobile app marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/whatsapp",
+          "text": "WhatsApp marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/social",
+          "text": "Social marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources",
+          "text": "Marketing resources"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources/marketing-campaign-calendar",
+          "text": "Marketing campaign calendar"
+        },
+        {
+          "href": "https://www.klaviyo.com/glossary",
+          "text": "Marketing glossary"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/email-subject-line-generator",
+          "text": "Subject line generator"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/roi-calculator",
+          "text": "ROI calculator"
+        },
+        {
+          "href": "https://www.klaviyo.com/customers",
+          "text": "Case studies"
+        },
+        {
+          "href": "https://www.klaviyo.com/composer",
+          "text": "Composer Beta"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/marketing-agent",
+          "text": "Marketing Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/customer-agent",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/customer-experience-hub",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/helpdesk",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/marketing-analytics",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/advanced-cdp",
+          "text": "Advanced Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/web-forms",
+          "text": "Web forms"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/email-templates",
+          "text": "Email templates"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/portfolio",
+          "text": "Portfolio"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform-integrations",
+          "text": "Apps and Integrations"
+        },
+        {
+          "href": "https://www.klaviyo.com/features",
+          "text": "Features"
+        },
+        {
+          "href": "https://www.klaviyo.com/whats-new",
+          "text": "What's new"
+        },
+        {
+          "href": "https://www.klaviyo.com/events",
+          "text": "Events"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help Center"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us",
+          "text": "Academy"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Community"
+        },
+        {
+          "href": "https://www.facebook.com/Klaviyo/",
+          "text": "Facebook"
+        },
+        {
+          "href": "https://twitter.com/klaviyo/",
+          "text": "Twitter"
+        },
+        {
+          "href": "https://www.linkedin.com/company/klaviyo/",
+          "text": "LinkedIn"
+        },
+        {
+          "href": "https://www.instagram.com/klaviyo/",
+          "text": "Instagram"
+        },
+        {
+          "href": "https://www.klaviyo.com/sitemap",
+          "text": "Site Map"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal",
+          "text": "Terms and Privacy"
+        },
+        {
+          "href": "https://www.klaviyo.com/security",
+          "text": "Security"
+        },
+        {
+          "href": "https://www.klaviyo.com/trust",
+          "text": "Trust"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal/intellectual-property-notices",
+          "text": "Intellectual Property Notices"
+        }
+      ],
+      "headings": [
+        {
+          "level": 1,
+          "id": "",
+          "text": "Connecting Klaviyo and Databricks"
+        },
+        {
+          "level": 1,
+          "id": "",
+          "text": "Environment Setup and Connection"
+        },
+        {
+          "level": 2,
+          "id": "h_01K8VPRYQWTER950503Y1XSM64",
+          "text": "1) Create Required Schemas"
+        },
+        {
+          "level": 2,
+          "id": "h_01K8VPRYQW7M9899ZXRSVPYARM",
+          "text": "2) Create the Klaviyo Service Account and Access Token"
+        },
+        {
+          "level": 3,
+          "id": "h_01K8VPRYQWR8KHCBE96D8BKBN7",
+          "text": "2.1 Create the account"
+        },
+        {
+          "level": 3,
+          "id": "h_01K8VPRYQWD3APST2RSG1Y9GFP",
+          "text": "2.2 Generate the personal access token"
+        },
+        {
+          "level": 2,
+          "id": "h_01K8VPRYQW2N5EYKF4WJEGMJPD",
+          "text": "3) Assign Required Permissions"
+        },
+        {
+          "level": 2,
+          "id": "h_01K8VPRYQWKEA12G31H6ETZM91",
+          "text": "4) Verify Your Setup (Optional)"
+        },
+        {
+          "level": 3,
+          "id": "h_01K8VPRYQW2YFHGY6QFTA3H9YX",
+          "text": "4.1 Confirm the schemas exist"
+        },
+        {
+          "level": 3,
+          "id": "h_01K8VPRYQWM521DZZAWDY9X5KT",
+          "text": "4.2 Test authentication (using your PAT)"
+        },
+        {
+          "level": 3,
+          "id": "h_01K8VPRYQW2W9N9VDV3X1XSDJ2",
+          "text": "4.3 Check permissions on each schema"
+        },
+        {
+          "level": 3,
+          "id": "h_01K8VPRYQWQ1QEBBB57A2KJC54",
+          "text": "4.4 Validate create/read operations"
+        },
+        {
+          "level": 2,
+          "id": "h_01K8VPRYQW9VTKZRAKC9WW7NS6",
+          "text": "5) Connect Klaviyo to Databricks"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "Explore more from Klaviyo"
+        }
+      ]
+    }
+  },
+  "rendered_page": {
+    "status": "fetched",
+    "error": ""
+  }
+}

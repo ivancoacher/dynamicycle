@@ -1,0 +1,853 @@
+{
+  "captured_at": "2026-05-23T16:15:58Z",
+  "article": {
+    "id": 360054240252,
+    "url": "https://klaviyo.zendesk.com/api/v2/help_center/en-us/articles/360054240252.json",
+    "html_url": "https://klaviyo.zendesk.com/hc/en-us/articles/360054240252-Understanding-how-date-based-flows-schedule-recipients",
+    "author_id": 388325929192,
+    "comments_disabled": true,
+    "draft": false,
+    "promoted": false,
+    "position": 0,
+    "vote_sum": 14,
+    "vote_count": 32,
+    "section_id": 49375546655131,
+    "created_at": "2020-12-23T21:26:47Z",
+    "updated_at": "2026-04-21T13:54:51Z",
+    "name": "Understanding how date-based flows schedule recipients",
+    "title": "Understanding how date-based flows schedule recipients",
+    "source_locale": "en-us",
+    "locale": "en-us",
+    "outdated": false,
+    "outdated_locales": [],
+    "edited_at": "2025-07-16T17:53:33Z",
+    "user_segment_id": null,
+    "permission_group_id": 146372,
+    "content_tag_ids": [],
+    "label_names": [],
+    "body": "<h2 id=\"h_01HGY0CDYNP897RHFRBW691EBV\">You will learn</h2>\n<p>Learn how profiles enter date-based flows and what happens when a date is added or changed. For instance, what happens if someone is about to enter the flow, but the date is suddenly changed or deleted altogether? This article runs through what happens for date property-triggered flows when dates are added, updated, or deleted from a profile.</p>\n<h2 id=\"h_01HGY0CDYN86REZ4JMNTX1885X\">How profiles qualify for date-based flows</h2>\n<p>Klaviyo checks if someone qualifies for a flow daily via a check that runs a full day in advance. In addition, Klaviyo will check if someone qualifies for a flow whenever a date is added or updated on a profile. During this time, Klaviyo determines if a profile should enter a flow based on whether that date falls within the flow’s full timeline. A person will only be added to a flow if the day, month, and year fall within a flow’s timeline, so if a date is in the future (e.g., 12/1/2030), they won’t be added to a flow before that time. Additionally, if it's a reoccurring flow (e.g., monthly or weekly), that person will be scheduled for that flow and enter during the repeated date.</p>\n<div class=\"bs-callout bs-callout-default\">\n<p>Date-based flows will only schedule recipients for messages that are set to <em>Live</em> or <em>Manual</em> status.</p>\n</div>\n<p>Because the flow checks a full day in advance, this means that once the flow is set to live or manual, it will only schedule recipients whose date property is a full day after its status changed.</p>\n<p>For example, if you change a birthday flow from draft to live on March 1st:</p>\n<ul>\n<li>Someone whose birthday is on March 1st won't enter the flow.</li>\n<li>Someone whose birthday is on March 2nd might not enter the flow depending on what time it was set live.</li>\n<li>Someone whose birthday is on March 3rd or later will enter the flow.</li>\n</ul>\n<p>The above applies to profiles with an existing and unchanged date property. If a date property is modified or added to a profile the same day it goes live, they will still enter the flow since the property change causes them to be checked. However, they may not receive the first email if they entered the flow after the email was scheduled to send.</p>\n<h3>Date properties with time</h3>\n<p>Sometimes date properties have a timestamp. For example: 2025-04-30 17:08:06. For the purposes of flow triggering, the attached time is ignored.</p>\n<p>When Klaviyo triggers a flow, only the date that the profile should enter the flow is considered. After the date a profile should enter is known, any \"start time restrictions\" configured in the trigger settings are applied (start at 9 a.m., etc).</p>\n<h3 id=\"h_01K0A585VY8BKPE7BFA5HBF6FA\">Timezones</h3>\n<p>Date flows are always triggered from the point of view of the profile. This means that Klaviyo determines the date a profile should enter a flow based on its timezone. If the profile does not have a timezone assigned to it, the account's timezone will be used.</p>\n<h3 id=\"h_01JQ9RHH3WKENVJFTJ5VCMXGM6\">Yearly repetition</h3>\n<p>If a date-triggered flow is set to repeat yearly, Klaviyo will evaluate whether the profile enters the flow based on the day and month rather than the exact year. For example, if a flow is set to repeat yearly on someone's birthday and their birthday is set to 01/01/1990, the flow will trigger every year on 01/01 (January 1st), regardless of the exact year.</p>\n<p>This also applies to properties with a future date. If a profile property is set as 01/01/2030, and the flow is set to repeat yearly, it will trigger every year on 01/01, including years prior to 2030.</p>\n<h2 id=\"h_01HGY0CDYN8STZWHB1EY6WXSFQ\">What happens when a date is added for a same-day send</h2>\n<p>When a date is added on the same day that a message is scheduled to go out, the subscriber will get the message only if they added it before the message’s send time.</p>\n<p>For instance, let's say you have a birthday flow with an email that goes out at 12 p.m. in the recipient’s local time, and Sarah adds her birthday at 10 a.m. Since this is before the email is scheduled to go out, Sarah will get the message.</p>\n<p>As for Jane, she adds her birthday at 1 p.m. — an hour after the email sent out. In this case, Jane won’t receive the email that was already sent. However, Jane will continue in the flow if: </p>\n<ol>\n<li>There are more messages or steps in the flow</li>\n<li>The messages or steps are scheduled for later than when they added the birthday (e.g., if another email is scheduled to go out a week later) </li>\n</ol>\n<h2 id=\"h_01HGY0CDYNGKKGNJJ3PHT8SQA4\">What happens when the date falls within a flow’s timeline</h2>\n<p>If the date falls within the timeline of the flow, Klaviyo will pull the profile into the flow and insert them at the appropriate point based on the timing established within the series, as illustrated in the example below.</p>\n<p><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28717388845595\" alt=\"Example of a date property-triggered flow that triggers 9 months before a person's wedding.\" width=\"325\" height=\"733\"></p>\n<p>Say you have a wedding flow that starts nine months before someone's wedding. Every month leading up to their wedding date, you share content and products that may interest the bride or groom.</p>\n<p><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28717382519963\" alt=\"Example of a date property-triggered flow with time delays that wait 7 and 6 months before someone's wedding.\" width=\"325\" height=\"609\"></p>\n<p>If on February 1, you receive Jane Smith’s wedding date, and it's 7 months away. Klaviyo will automatically insert Jane at the <em>Wait until 7 Months before person's Wedding</em> point in time. She will immediately be scheduled to receive the appropriate content; here, the “What to do 7 months before the wedding” email.</p>\n<h2 id=\"h_01HGY0CDYN39G2BN03AEFVZD6R\">What happens when the date falls outside the flow’s timeline</h2>\n<p>If the date falls outside the timeline of a flow, or is deleted entirely, the profile will not be added to the flow at this time.</p>\n<p>For instance, say you have a birthday flow that sends out a message on the actual date and then ends. In this case, the timeline for the entire flow is one day.</p>\n<p><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28717382524315\" alt=\"Example of a conditional split that checks for SMS consent..\"></p>\n<p>If on February 1, Sarah Smith submits a form that lets you know that her birthday is June 1; Sarah will not enter the birthday flow immediately. Instead, she will only enter into the flow on her actual birthday in June.</p>\n<h2 id=\"h_01HGY0CDYNSVH9JVCEWWKGZKZ6\">What happens when a date is updated in the middle of a flow</h2>\n<p>Before every action in a flow (e.g., before every email or SMS that goes out), Klaviyo verifies that the date used to trigger the flow is still the same. This means that if someone is in a date-based flow but changes the date such that it falls outside the flow’s timeline, they will not be sent any further messages.</p>\n<p>For instance, say that Jane from the example above is in the middle of a wedding flow.</p>\n<p><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28717382525979\" alt=\"Example of a date property-triggered flow that triggers 9 months before a person's wedding.\" width=\"325\" height=\"800\"></p>\n<p>Originally, her wedding date is 5/1/2025 and she just passed the “Wait until 7 Months before person's Wedding” point and received the associated message. If she changes her date to 6/1/2025, she will exit the flow and not receive the subsequent messages at this time.</p>\n<p>Klaviyo will also automatically reschedule the person based on the updated date. This is particularly helpful for appointment-focused flows — if someone's appointment is rescheduled, all messages are automatically rescheduled around the new date.</p>\n<p>For the case above, Jane will automatically re-enter the flow from the beginning when her new wedding date approaches. This may mean she receives the same messages twice; however, this is a good thing, as the content will be personalized to where she is currently in wedding planning and she won’t need to comb through her emails for the previous messages.</p>\n<h2 id=\"h_01HGY0CDYP3RMDXC5BSKNW190C\">Additional resources</h2>\n<p>Learn more about date-based flows: </p>\n<ul>\n<li><a href=\"https://help.klaviyo.com/hc/en-us/articles/360002732652\" target=\"_blank\" rel=\"noopener\">How to create a date property-triggered flow</a></li>\n<li><a href=\"https://help.klaviyo.com/hc/en-us/articles/360054242492\" target=\"_blank\" rel=\"noopener\">How to build a birthday flow</a></li>\n<li><a href=\"https://help.klaviyo.com/hc/en-us/articles/360054705431\" target=\"_blank\" rel=\"noopener\">Understanding time delays in date property flows</a></li>\n</ul>\n<p> </p>",
+    "user_segment_ids": []
+  },
+  "normalized": {
+    "id": "360054240252",
+    "title": "Understanding how date-based flows schedule recipients",
+    "source_url": "https://help.klaviyo.com/hc/en-us/articles/360054240252-Understanding-how-date-based-flows-schedule-recipients",
+    "section_id": 49375546655131,
+    "section": "Lifecycle flows",
+    "category_id": 115000312411,
+    "category": "Flows",
+    "category_slug": "flows",
+    "klaviyo_updated": "2026-04-21T13:54:51Z",
+    "created_at": "2020-12-23T21:26:47Z",
+    "draft": false,
+    "promoted": false,
+    "position": 0,
+    "label_names": []
+  },
+  "files": {
+    "body_html": "_source/articles/360054240252.body.html",
+    "rendered_html": "_source/rendered/360054240252.html"
+  },
+  "assets": {
+    "api_body": {
+      "images": [
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28717388845595",
+          "alt": "Example of a date property-triggered flow that triggers 9 months before a person's wedding.",
+          "width": "325",
+          "height": "733"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28717382519963",
+          "alt": "Example of a date property-triggered flow with time delays that wait 7 and 6 months before someone's wedding.",
+          "width": "325",
+          "height": "609"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28717382524315",
+          "alt": "Example of a conditional split that checks for SMS consent..",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28717382525979",
+          "alt": "Example of a date property-triggered flow that triggers 9 months before a person's wedding.",
+          "width": "325",
+          "height": "800"
+        }
+      ],
+      "links": [
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360002732652",
+          "text": "How to create a date property-triggered flow"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360054242492",
+          "text": "How to build a birthday flow"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360054705431",
+          "text": "Understanding time delays in date property flows"
+        }
+      ],
+      "headings": [
+        {
+          "level": 2,
+          "id": "h_01HGY0CDYNP897RHFRBW691EBV",
+          "text": "You will learn"
+        },
+        {
+          "level": 2,
+          "id": "h_01HGY0CDYN86REZ4JMNTX1885X",
+          "text": "How profiles qualify for date-based flows"
+        },
+        {
+          "level": 3,
+          "id": "",
+          "text": "Date properties with time"
+        },
+        {
+          "level": 3,
+          "id": "h_01K0A585VY8BKPE7BFA5HBF6FA",
+          "text": "Timezones"
+        },
+        {
+          "level": 3,
+          "id": "h_01JQ9RHH3WKENVJFTJ5VCMXGM6",
+          "text": "Yearly repetition"
+        },
+        {
+          "level": 2,
+          "id": "h_01HGY0CDYN8STZWHB1EY6WXSFQ",
+          "text": "What happens when a date is added for a same-day send"
+        },
+        {
+          "level": 2,
+          "id": "h_01HGY0CDYNGKKGNJJ3PHT8SQA4",
+          "text": "What happens when the date falls within a flow’s timeline"
+        },
+        {
+          "level": 2,
+          "id": "h_01HGY0CDYN39G2BN03AEFVZD6R",
+          "text": "What happens when the date falls outside the flow’s timeline"
+        },
+        {
+          "level": 2,
+          "id": "h_01HGY0CDYNSVH9JVCEWWKGZKZ6",
+          "text": "What happens when a date is updated in the middle of a flow"
+        },
+        {
+          "level": 2,
+          "id": "h_01HGY0CDYP3RMDXC5BSKNW190C",
+          "text": "Additional resources"
+        }
+      ]
+    },
+    "rendered_page": {
+      "images": [
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/7ff492c2b417b7ecfe572f839a8a81398693c1f7-1920x1080.webp",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/ad77b4d486d3cfd704a8d64c60265e062843d6bb-400x902.jpg?w=325",
+          "alt": "Example of a date property-triggered flow that triggers 9 months before a person's wedding.",
+          "width": "325",
+          "height": "733"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/160d171b0d842d839457bbb46581aecf9605b633-400x750.jpg?w=325",
+          "alt": "Example of a date property-triggered flow with time delays that wait 7 and 6 months before someone's wedding.",
+          "width": "325",
+          "height": "609"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/32801726ab16bda4bc0661ce67204a5d5c571930-1162x1054.jpg",
+          "alt": "Example of a conditional split that checks for SMS consent..",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/b479bd2265e240c7f69471303e23a06321093da2-400x984.jpg?w=325",
+          "alt": "Example of a date property-triggered flow that triggers 9 months before a person's wedding.",
+          "width": "325",
+          "height": "800"
+        }
+      ],
+      "links": [
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360054240252-Understanding-how-date-based-flows-schedule-recipients#site-content",
+          "text": "Skip to main content"
+        },
+        {
+          "href": "https://www.klaviyo.com",
+          "text": "Home"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center"
+        },
+        {
+          "href": "https://www.klaviyo.com/enterprise",
+          "text": "Enterprise"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Partners"
+        },
+        {
+          "href": "https://www.klaviyo.com/careers",
+          "text": "Careers"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": "Log in"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": ""
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center Find step-by-step instructions and troubleshooting solutions in our knowledge base."
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000032731",
+          "text": "Integrations"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000312411",
+          "text": "Flows"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867867",
+          "text": "Audience"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867667",
+          "text": "Campaigns"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/360000190711",
+          "text": "Sign-up forms"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000873988",
+          "text": "Deliverability & compliance"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/29173800271259",
+          "text": "SMS"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/16638219724187",
+          "text": "Reviews"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/18073014919195",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/34141283979931",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/37659126754075",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/33948021740315",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/39746685522331",
+          "text": "WhatsApp"
+        },
+        {
+          "href": "https://academy.klaviyo.com",
+          "text": "Klaviyo Academy Expert training and education to help you succeed with Klaviyo, and beyond."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Quick+guide&resource=academy_courses",
+          "text": "Quick guides Learn marketing strategies and concepts in 15 minutes or less."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Course&resource=academy_courses",
+          "text": "Courses Master key marketing topics through structured lessons and exams."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/best-practices",
+          "text": "Best practices Discover top product and marketing strategies for your business."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/learning-paths",
+          "text": "Learning paths Complete curated learning journeys tailored to your marketing goals."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses",
+          "text": "Explore all resources"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Live+training&resource=academy_courses",
+          "text": "Live trainings Build confidence through hands-on interactive workshops and thought-provoking strategy sessions."
+        },
+        {
+          "href": "https://www.bigmarker.com/klaviyo-customer-education/Office-hours-Getting-started-with-Klaviyo",
+          "text": "Live office hours Join a strategic discussion where you can ask questions and get answers in real-time."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/private-live-training",
+          "text": "1:1 Live training Book a private training session with an expert to jumpstart your platform knowledge and confidence."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/credentials",
+          "text": "Klaviyo credentials Dig deeper into select topics and showcase your expertise with a final exam to earn a certificate and digital badge."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/certificates/klaviyo-practitioner-certificate",
+          "text": "Klaviyo practitioner certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/deliverability-certificate",
+          "text": "Deliverability certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/developer-certificate",
+          "text": "Klaviyo developer certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses&select=Certificate",
+          "text": "See all certificates"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Klaviyo Community Join our thriving community network to connect with brands like yours—online and in person."
+        },
+        {
+          "href": "https://community.klaviyo.com/topic/new",
+          "text": "Ask a question Post a question and get thoughtful answers from Klaviyo powerusers."
+        },
+        {
+          "href": "https://community.klaviyo.com/p/roadmap",
+          "text": "Product roadmap"
+        },
+        {
+          "href": "https://community.klaviyo.com/search/activity/recent",
+          "text": "Recent threads"
+        },
+        {
+          "href": "https://community.klaviyo.com/p/champions",
+          "text": "Meet the Champions"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups",
+          "text": "Browse all groups Your people are waiting. New ideas and connections are a click away."
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/developer-group-64",
+          "text": "Developer group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/entrepreneur-user-group-118",
+          "text": "Entrepreneur group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/woo-user-group-87",
+          "text": "WooCommerce group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/new-york-meetup-chapter-82",
+          "text": "New York City"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/los-angeles-meetup-chapter-83",
+          "text": "Los Angeles"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/austin-meetup-chapter-85",
+          "text": "Austin"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/san-diego-meetup-chapter-86",
+          "text": "San Diego"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/amsterdam-meetup-chapter-84",
+          "text": "Amsterdam"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Klaviyo Developers Access API documentation and developer guides to help you build with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/get_started",
+          "text": "Get started Access key resources and a step-by-step checklist for how to start developing with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/build_your_integration",
+          "text": "Grow your app's reach Learn how to join our ecosystem and get your app listed on our marketplace."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/developer-tools",
+          "text": "Developer tools Generate sample data, monitor your API usage, and access our Postman collections."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/reference/api_overview",
+          "text": "API reference Browse our full catalog of API docs."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/changelog_",
+          "text": "Changelog"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/api_versioning_and_deprecation_policy",
+          "text": "Versioning & deprecation policy"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/rate_limits_and_error_handling",
+          "text": "Rate limits & error handling"
+        },
+        {
+          "href": "https://youtube.com/playlist?list=PLHkNfHgtxcUanrkMnKPdkRzuWU7MGv_xM&si=pkG-KH7IT_TUHOGC",
+          "text": "API tutorials on YouTube Subscribe to our Klaviyo API Tutorials playlist for easy access to step-by-step developer walkthroughs."
+        },
+        {
+          "href": "https://www.klaviyo.com/contact-us",
+          "text": "Contact us"
+        },
+        {
+          "href": "https://www.klaviyo.com/sign-up",
+          "text": "Sign up"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": "Search"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360054240252",
+          "text": "United States - EN"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/de-de/articles/360054240252",
+          "text": "Deutschland - DE"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-es/articles/360054240252",
+          "text": "España - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-mx/articles/360054240252",
+          "text": "México - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/fr-fr/articles/360054240252",
+          "text": "France - FR"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/it-it/articles/360054240252",
+          "text": "Italia - IT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/ko-kr/articles/360054240252",
+          "text": "한국 - KO"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/nl-nl/articles/360054240252",
+          "text": "Nederland - NL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pl-pl/articles/360054240252",
+          "text": "Polska - PL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pt-br/articles/360054240252",
+          "text": "Brasil - PT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/sv-se/articles/360054240252",
+          "text": "Sverige - SV"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/14543713508123",
+          "text": "Flow best practices and examples"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/49375546655131",
+          "text": "Lifecycle flows"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360054240252-Understanding-how-date-based-flows-schedule-recipients#h_01HGY0CDYNP897RHFRBW691EBV",
+          "text": "You will learn"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360054240252-Understanding-how-date-based-flows-schedule-recipients#h_01HGY0CDYN86REZ4JMNTX1885X",
+          "text": "How profiles qualify for date-based flows"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360054240252-Understanding-how-date-based-flows-schedule-recipients#h_01HGY0CDYN8STZWHB1EY6WXSFQ",
+          "text": "What happens when a date is added for a same-day send"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360054240252-Understanding-how-date-based-flows-schedule-recipients#h_01HGY0CDYNGKKGNJJ3PHT8SQA4",
+          "text": "What happens when the date falls within a flow’s timeline"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360054240252-Understanding-how-date-based-flows-schedule-recipients#h_01HGY0CDYN39G2BN03AEFVZD6R",
+          "text": "What happens when the date falls outside the flow’s timeline"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360054240252-Understanding-how-date-based-flows-schedule-recipients#h_01HGY0CDYNSVH9JVCEWWKGZKZ6",
+          "text": "What happens when a date is updated in the middle of a flow"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360054240252-Understanding-how-date-based-flows-schedule-recipients#h_01HGY0CDYP3RMDXC5BSKNW190C",
+          "text": "Additional resources"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360002732652",
+          "text": "How to create a date property-triggered flow"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360054242492",
+          "text": "How to build a birthday flow"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360054705431",
+          "text": "Understanding time delays in date property flows"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115001002272",
+          "text": "Learn how to contact support"
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": ""
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": "Visit Community"
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": ""
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": "Hire a partner"
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/about",
+          "text": "About Klaviyo"
+        },
+        {
+          "href": "https://www.klaviyo.com/newsroom",
+          "text": "Newsroom"
+        },
+        {
+          "href": "https://investors.klaviyo.com/overview/default.aspx",
+          "text": "Investor relations"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Agency and tech partners"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Developers"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/retail",
+          "text": "Retail and ecommerce"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/restaurants",
+          "text": "Restaurant marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/wellness",
+          "text": "Wellness"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform",
+          "text": "B2C CRM overview"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai",
+          "text": "Klaviyo AI (K:AI)"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/marketing-automation",
+          "text": "Klaviyo Marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-service",
+          "text": "Klaviyo Service"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/analytics",
+          "text": "Klaviyo Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-data-platform",
+          "text": "Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare",
+          "text": "Klaviyo vs. Klaviyo alternatives"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-mailchimp",
+          "text": "Klaviyo vs. Mailchimp"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-postscript",
+          "text": "Klaviyo vs. Postscript"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-attentive",
+          "text": "Klaviyo vs. Attentive"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-salesforce-marketing-cloud",
+          "text": "Klaviyo vs. Salesforce"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-listrak",
+          "text": "Klaviyo vs. Listrak"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/omnichannel",
+          "text": "Omnichannel marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/email-marketing",
+          "text": "Email marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing",
+          "text": "SMS marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing/rcs",
+          "text": "RCS for Business"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/mobile-app-marketing",
+          "text": "Mobile app marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/whatsapp",
+          "text": "WhatsApp marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/social",
+          "text": "Social marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources",
+          "text": "Marketing resources"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources/marketing-campaign-calendar",
+          "text": "Marketing campaign calendar"
+        },
+        {
+          "href": "https://www.klaviyo.com/glossary",
+          "text": "Marketing glossary"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/email-subject-line-generator",
+          "text": "Subject line generator"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/roi-calculator",
+          "text": "ROI calculator"
+        },
+        {
+          "href": "https://www.klaviyo.com/customers",
+          "text": "Case studies"
+        },
+        {
+          "href": "https://www.klaviyo.com/composer",
+          "text": "Composer Beta"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/marketing-agent",
+          "text": "Marketing Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/customer-agent",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/customer-experience-hub",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/helpdesk",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/marketing-analytics",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/advanced-cdp",
+          "text": "Advanced Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/web-forms",
+          "text": "Web forms"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/email-templates",
+          "text": "Email templates"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/portfolio",
+          "text": "Portfolio"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform-integrations",
+          "text": "Apps and Integrations"
+        },
+        {
+          "href": "https://www.klaviyo.com/features",
+          "text": "Features"
+        },
+        {
+          "href": "https://www.klaviyo.com/whats-new",
+          "text": "What's new"
+        },
+        {
+          "href": "https://www.klaviyo.com/events",
+          "text": "Events"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help Center"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us",
+          "text": "Academy"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Community"
+        },
+        {
+          "href": "https://www.facebook.com/Klaviyo/",
+          "text": "Facebook"
+        },
+        {
+          "href": "https://twitter.com/klaviyo/",
+          "text": "Twitter"
+        },
+        {
+          "href": "https://www.linkedin.com/company/klaviyo/",
+          "text": "LinkedIn"
+        },
+        {
+          "href": "https://www.instagram.com/klaviyo/",
+          "text": "Instagram"
+        },
+        {
+          "href": "https://www.klaviyo.com/sitemap",
+          "text": "Site Map"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal",
+          "text": "Terms and Privacy"
+        },
+        {
+          "href": "https://www.klaviyo.com/security",
+          "text": "Security"
+        },
+        {
+          "href": "https://www.klaviyo.com/trust",
+          "text": "Trust"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal/intellectual-property-notices",
+          "text": "Intellectual Property Notices"
+        }
+      ],
+      "headings": [
+        {
+          "level": 1,
+          "id": "",
+          "text": "Understanding how date-based flows schedule recipients"
+        },
+        {
+          "level": 2,
+          "id": "h_01HGY0CDYNP897RHFRBW691EBV",
+          "text": "You will learn"
+        },
+        {
+          "level": 2,
+          "id": "h_01HGY0CDYN86REZ4JMNTX1885X",
+          "text": "How profiles qualify for date-based flows"
+        },
+        {
+          "level": 3,
+          "id": "date-properties-with-time",
+          "text": "Date properties with time"
+        },
+        {
+          "level": 3,
+          "id": "h_01K0A585VY8BKPE7BFA5HBF6FA",
+          "text": "Timezones"
+        },
+        {
+          "level": 3,
+          "id": "h_01JQ9RHH3WKENVJFTJ5VCMXGM6",
+          "text": "Yearly repetition"
+        },
+        {
+          "level": 2,
+          "id": "h_01HGY0CDYN8STZWHB1EY6WXSFQ",
+          "text": "What happens when a date is added for a same-day send"
+        },
+        {
+          "level": 2,
+          "id": "h_01HGY0CDYNGKKGNJJ3PHT8SQA4",
+          "text": "What happens when the date falls within a flow’s timeline"
+        },
+        {
+          "level": 2,
+          "id": "h_01HGY0CDYN39G2BN03AEFVZD6R",
+          "text": "What happens when the date falls outside the flow’s timeline"
+        },
+        {
+          "level": 2,
+          "id": "h_01HGY0CDYNSVH9JVCEWWKGZKZ6",
+          "text": "What happens when a date is updated in the middle of a flow"
+        },
+        {
+          "level": 2,
+          "id": "h_01HGY0CDYP3RMDXC5BSKNW190C",
+          "text": "Additional resources"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "Explore more from Klaviyo"
+        }
+      ]
+    }
+  },
+  "rendered_page": {
+    "status": "fetched",
+    "error": ""
+  }
+}

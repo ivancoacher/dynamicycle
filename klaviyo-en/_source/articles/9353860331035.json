@@ -1,0 +1,1372 @@
+{
+  "captured_at": "2026-05-23T16:15:39Z",
+  "article": {
+    "id": 9353860331035,
+    "url": "https://klaviyo.zendesk.com/api/v2/help_center/en-us/articles/9353860331035.json",
+    "html_url": "https://klaviyo.zendesk.com/hc/en-us/articles/9353860331035-How-to-set-up-single-sign-on-SSO",
+    "author_id": 388325929192,
+    "comments_disabled": true,
+    "draft": false,
+    "promoted": false,
+    "position": 0,
+    "vote_sum": -7,
+    "vote_count": 15,
+    "section_id": 49375482397083,
+    "created_at": "2022-10-04T20:23:36Z",
+    "updated_at": "2026-04-21T13:56:59Z",
+    "name": "How to set up single sign-on (SSO)",
+    "title": "How to set up single sign-on (SSO)",
+    "source_locale": "en-us",
+    "locale": "en-us",
+    "outdated": false,
+    "outdated_locales": [],
+    "edited_at": "2026-04-17T01:04:01Z",
+    "user_segment_id": null,
+    "permission_group_id": 146372,
+    "content_tag_ids": [],
+    "label_names": [],
+    "body": "<h2 id=\"h_01HBVE5VJJZ61P9CDGA1ZTERF6\">You will learn </h2>\n<p>Learn how to set up single sign-on (SSO) for your Klaviyo account or portfolio. Currently, only identity provided (IdP) single sign-on is supported in Klaviyo.</p>\n<div class=\"accordion accordion--default\">\n<div class=\"accordion__item\">\n<div class=\"accordion__item-title\"><strong>Why use SSO?</strong></div>\n<div class=\"accordion__item-content\">\n<p>Single sign-on (SSO) helps protect you, as well as your customers, by making your account more secure. If you have SSO set up for your business, you can require your Klaviyo users to log in using their SSO credentials.</p>\n<p>Plus, if you use SSO for your organization, you and your users can remain logged in to Klaviyo for a longer period of time before re-entering your credentials.</p>\n</div>\n</div>\n</div>\n<h2 id=\"h_01HBVE5VJJXK6TXC10N0CMMHMY\">Before you begin</h2>\n<div class=\"bs-callout bs-callout-warning\">\n<p>We strongly suggest reaching out to your company’s IT department to help you set this up because there are certain steps you will need to take within your company’s identity provider. If needed, you can temporarily <a href=\"https://help.klaviyo.com/hc/en-us/articles/360053547071\">make them an admin in your account</a> to set up SSO.</p>\n</div>\n<p>Please note: </p>\n<ul>\n<li>You must have a paid plan to use SSO. </li>\n<li>You must be an Owner or Admin to set up this feature.</li>\n<li>Klaviyo does not support service provider (SP) SSO, only IdP SSO.</li>\n</ul>\n<p>If you use identity provided (IdP) single sign-on (SSO), you can use this to log in to Klaviyo. Security assertion markup language 2.0 (SAML 2.0) SSO gives members access to Klaviyo through an IdP of your choice.</p>\n<p>Examples of IdP SSO providers include Okta, OneLogin, Microsoft Entra ID, and more. </p>\n<div class=\"bs-callout bs-callout-default\">\n<p>If you enforce SSO for all users, any new user will need to accept the invitation and then log in using SSO. </p>\n</div>\n<div class=\"accordion accordion--default\">\n<div class=\"accordion__item\">\n<div class=\"accordion__item-title\"><strong>View and use the exemption list</strong></div>\n<div class=\"accordion__item-content\">\n<p>Users added to the exemption list will be able to bypass SSO and log in with a username and password when SSO is enforced for a company. This is important if there is an IdP outage or when you do not want to add a partner, contractor, or agency member to your IdP instance.</p>\n<p>Note that you will only be able to view the exemption list once SSO is set up. </p>\n</div>\n</div>\n<div class=\"accordion__item\">\n<div class=\"accordion__item-title\"><strong>What is a workplace ID?</strong></div>\n<div class=\"accordion__item-content\">\n<p>Also called the SSO login identifier, the workplace ID is required to set up SAML SSO in Klaviyo. It is usually the same name as your company. You'll create this ID as part of step 3 of the Klaviyo setup process (discussed in this section below).</p>\n<p>After setting up a workplace ID, users can go directly to your company's custom URL (e.g., www.klaviyo.com/sso/workplace/&lt;id&gt;) to log in to Klaviyo. We recommend telling users to bookmark this URL to speed up the login process.  </p>\n<ul>\n<li>The ID cannot be longer than 63 characters.</li>\n<li>The ID must be URL safe, so it can contain only upper- or lowercase letters, hyphens (-), periods (.), underscores (_), and tildes (~).</li>\n<li>The ID should be simple and easy for users to remember (such as your company name).\n<ul>\n<li>For example, Klaviyo’s workplace ID is “Klaviyo.”</li>\n</ul>\n</li>\n</ul>\n</div>\n</div>\n</div>\n<h3 id=\"h_01HC074EC31RW8NNG8S72S4YJT\">About just-in-time (JIT) provisioning</h3>\n<p>After you set up SSO, you will have the option to enable just-in-time (JIT) provisioning in Klaviyo. When a user is added to an account with JIT provisioning, the user will need to accept the invite in their email to start accessing the account.</p>\n<p>Note that once SSO is enabled and JIT provisioning is turned on, you can only update the <a href=\"https://help.klaviyo.com/hc/en-us/articles/115005231648\">user's Klaviyo role</a> inside of the IdP and will no longer be able to update any roles inside of Klaviyo. To update a role, you will need to do so inside your IdP or by temporarily turning off both JIT and <a href=\"https://help.klaviyo.com/hc/en-us/articles/10952782535579\">SCIM</a> to update inside of Klaviyo.</p>\n<div class=\"accordion accordion--default\">\n<div class=\"accordion__item\">\n<div class=\"accordion__item-title\"><strong>What is JIT?</strong></div>\n<div class=\"accordion__item-content\">\n<p>When JIT provisioning is enabled, IT admins no longer need to create accounts manually for each user in each of their applications. Instead, user accounts are created the first time users try to log in to an application, as long as the user has permission for that app.</p>\n<p>For instance, IT admins can automatically grant Klaviyo access to all users in their IdP so that those users' accounts will automatically be created the first time they log in to Klaviyo via their SSO portal or through Klaviyo-initiated login.</p>\n</div>\n</div>\n</div>\n<h2 id=\"h_01HBVE5VJK55AK4ZAZWZWX9ZTP\">Set up SAML SSO</h2>\n<ol>\n<li>In Klaviyo, click your organization name in the bottom left corner.</li>\n<li>Click <strong>Settings</strong>. </li>\n<li>Select <strong>Security</strong>.</li>\n<li>Click <strong>Set up SSO</strong>. (Note that multi-factor authentication is not required.)<br>\n\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28716331657371\" alt=\"Security tab in Klaviyo\">\n</li>\n<li>Copy the <em>Klaviyo SSO URL</em> and<em> Audience URI (Service Provider Entity ID)</em> for use in the next section.<br>\n</li>\n</ol>\n<p><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28716354655515\" alt=\"Top of the SSO configuration page, where you copy the Klaviyo SSO URL and audience URI\"></p>\n<h2 id=\"h_01HCN7BZ47KQWZBN92ZZ1GR2HV\">Log in to your SSO provider</h2>\n<p>Open the dropdowns below for IdP-specific instructions. In general, you will need to: </p>\n<ol>\n<li>Open a new tab and log in to your SSO provider. </li>\n<li>Find the confirmation settings for your provider.</li>\n<li>Paste in the Klaviyo SSO URL and save.</li>\n<li>Download or locate your IdP’s metadata. </li>\n<li>Assign users and their roles to the Klaviyo app.</li>\n</ol>\n<ul>\n<ul>\n<li>To have your role passing correctly to Klaviyo, we recommend using the key format. (Some IdPs convert attributes to lowercase in their protocol, so the label format is not recommended) </li>\n</ul>\n</ul>\n<table style=\"width: 100%\">\n<tbody>\n<tr>\n<td style=\"width: 50%\"><strong>Account user roles</strong></td>\n<td style=\"width: 50%\"><strong>Portfolio user roles</strong></td>\n</tr>\n<tr>\n<td style=\"width: 50%\">owner</td>\n<td style=\"width: 50%\">portfolio_owner</td>\n</tr>\n<tr>\n<td style=\"width: 50%\">admin</td>\n<td style=\"width: 50%\">portfolio_admin</td>\n</tr>\n<tr>\n<td style=\"width: 50%\">manager</td>\n<td style=\"width: 50%\">portfolio_manager</td>\n</tr>\n<tr>\n<td style=\"width: 50%\">analyst</td>\n<td style=\"width: 50%\">portfolio_analyst</td>\n</tr>\n<tr>\n<td style=\"width: 50%\">campaign_coordinator</td>\n<td style=\"width: 50%\"></td>\n</tr>\n<tr>\n<td style=\"width: 50%\">content_creator</td>\n<td style=\"width: 50%\"></td>\n</tr>\n<tr>\n<td style=\"width: 50%\">support</td>\n<td style=\"width: 50%\"></td>\n</tr>\n</tbody>\n</table>\n<div class=\"bs-callout bs-callout-default\">\n<p>The roles depend on the type of account where you're setting up SSO. In a normal account, only <a href=\"https://help.klaviyo.com/hc/en-us/articles/115005231648\">account user roles</a> are applicable. In a portfolio account, only <a href=\"https://help.klaviyo.com/hc/en-us/articles/25181702319643\">portfolio user roles</a> are applicable</p>\n</div>\n<div class=\"accordion accordion--default\">\n<div class=\"accordion__item\">\n<div class=\"accordion__item-title\"><strong>Okta</strong></div>\n<div class=\"accordion__item-content\">\n<ol>\n<li>Log in to your Okta admin account. </li>\n<li>Navigate to <strong>Application &gt; Applications</strong>. </li>\n<li>Select <strong>Create App Integration</strong>.<br>\n\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28716331667611\" alt=\"Applications page in Okta, where you can create app integration\">\n</li>\n<li>In the modal, select the option for <strong>SAML 2.0</strong>.<br>\n\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28716354670747\" alt=\"Sign-in options when SAML 2.0 is selected\">\n</li>\n<li>Click <strong>Next</strong>. </li>\n<li>Name the integration (e.g., “Klaviyo”).<br>\n\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28716331685403\" alt=\"Step 1 of the Okta integration wizard, where you can name the app\">\n</li>\n<li>Click <strong>Next</strong>.</li>\n<li>In the <em>Single sign-on URL</em> field, paste in the <em>Klaviyo SSO URL </em>from the Klaviyo SSO setup screen. </li>\n<li>In the <em>Audience URI (SP Entity ID)</em> field, paste the <em>Audience URI (Service Provider Entity ID)</em> from Klaviyo.</li>\n<li>Set the <em>Name ID</em> format field to <strong>EmailAddress</strong>.</li>\n<li>Change the <em>Application username </em>to <strong>Email</strong>. </li>\n<li>Check that the <em>Update application username on </em>is set to <strong>Create and update</strong>. <br>\n\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28716354798619\" alt=\"SAML configuration settings to for the Klaviyo integration\">\n</li>\n<li>Click <strong>Next</strong>. </li>\n<li>Select <strong>I’m an Okta </strong><strong>customer adding an internal app</strong>. <br>\n<ul>\n<ul>\n<li>You do not need to check or fill out any other information on this page. </li>\n</ul>\n</ul>\n</li>\n<li>Scroll to the bottom of the page and click <strong>Finish</strong>. </li>\n<li>Go to the <strong>Sign On </strong>tab.<br>\n\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28716354685211\" alt=\"Sign On tab for an app in Okta\">\n</li>\n<li>Scroll down to the <em>SAML Signing Certificates</em> section.</li>\n<li>Find an active certificate and then click the <strong>Actions </strong>dropdown. </li>\n<li>Click <strong>View IdP metadata</strong>.<br>\n\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28716354687515\" alt=\"Actions dropdown when View IdP metadata is selected\">\n</li>\n<li>A new tab will open that should look like the one below.<br>\n\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28716331703067\" alt=\"Example of the XML metadata page\">\n</li>\n<li>In the new tab, right click and select <strong>Save as &gt; Save</strong> so that you can upload this file to Klaviyo later. </li>\n<li>Navigate back to Okta. </li>\n<li>Go to the <strong>Assignments </strong>tab. </li>\n<li>Click <strong>Assign</strong>.</li>\n<li>Choose whether to assign the app to an individual (i.e., people) or to a group.<br>\n\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28716354673435\" alt=\"Options to assign users to an app by people or groups\">\n</li>\n<li>Find the people or groups you want to assign Klaviyo to, and click <strong>Assign </strong>next to their name(s).<br>\n\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28716331705371\" alt=\"Example of assigning a user by the People option\">\n</li>\n<li>If you’re selecting individuals: <br>\n<ul>\n<ul>\n<li>Choose the username for each individual; the default is their username in Okta.</li>\n<li>Click <strong>Save and go back</strong>.<br>\n</li>\n</ul>\n</ul>\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28716331709211\" alt=\"Modal to assign a username to an individual\">\n</li>\n<li>When you are finished, click <strong>Done</strong>. </li>\n</ol>\n</div>\n</div>\n<div class=\"accordion__item\">\n<div class=\"accordion__item-title\"><strong>One Login</strong></div>\n<div class=\"accordion__item-content\">\n<ol>\n<li>Log in to your One Login account.</li>\n<li>Navigate to <strong>Applications &gt; Applications</strong>.<br>\n\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28716331678363\" alt=\"Applications dropdown when the subitem Applications is highlighted\">\n</li>\n<li>Click <strong>Add App </strong>in the upper right corner.<br>\n\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28716331682971\" alt=\"Applications page in One Login when Add App is selected\">\n</li>\n<li>Search for “Klaviyo” and then select the result that appears.<br>\n\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28716354700443\" alt=\"Searching Klaviyo in the One Login apps\">\n</li>\n<li>Optional: choose the display name, upload a new icon, or add a description for this app.</li>\n<li>Click <strong>Save</strong> in the upper right. </li>\n<li>Navigate to <strong>Configuration </strong>in the left sidebar.<br>\n\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28716331718427\" alt=\"Configuration page with no information in it\">\n</li>\n<li>In the <em>SAML Consumer URL </em>field, paste your <em>Klaviyo SSO URL</em>. </li>\n<li>In the <em>Audience (SP EntityID) </em>field, paste your <em>Audience URI (Service Provider Entity ID)</em>. </li>\n<li>Click <strong>Save</strong>. </li>\n<li>Click <strong>SSO </strong>in the left sidebar. </li>\n<li>Open the <em>SAML Signature Algorithm </em>dropdown.</li>\n<li>Select <strong>SHA-256</strong>.<br>\n\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28716354710939\" alt=\"SAML Signature Algorithm dropdown when SHA-256 is highlighted\">\n</li>\n<li>Optional: scroll down to change your login display settings.<br>\n\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28716331729179\" alt=\"Login display settings for an app in One Login\">\n</li>\n<li>Click <strong>Save</strong>. </li>\n<li>Open the <strong>More Actions</strong> dropdown in the upper right.</li>\n<li>Select <strong>SAML Metadata</strong>. This will download the file you need to upload in the next section.<br>\n\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28716331734939\" alt=\"More Actions dropdown when SAML metadata is highlighted\">\n<p>Before moving on to the next section, you need to add users to the Klaviyo app in One Login and then assign their roles. </p>\n</li>\n<li>To add users to the Klaviyo app, click <strong>Users &gt; Users</strong> in the upper left.<br>\n\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28716331739163\" alt=\"Users menu dropdown\">\n</li>\n<li>Select a user to access Klaviyo. We recommend assigning the person who is setting up SSO in Klaviyo. </li>\n<li>Select <strong>Applications </strong>in the left sidebar.</li>\n<li>Click the plus button on the right side to add an application to this user.</li>\n<li>Select <strong>Klaviyo</strong> from the dropdown.<br>\n\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28716354727579\" alt=\"Selecting Klaviyo as the application for a user\">\n</li>\n<li>Click <strong>Continue</strong>. </li>\n<li>In the resulting modal, scroll down to the <em>role </em>dropdown.</li>\n<li>Open this dropdown and select the <a href=\"https://help.klaviyo.com/hc/en-us/articles/115005231648\">Klaviyo role</a> this user should be assigned.<br>\n\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28716331715099\" alt=\"Selecting a Klaviyo role for a user\">\n</li>\n<li>Click <strong>Save</strong>. </li>\n</ol>\n</div>\n</div>\n<div class=\"accordion__item\">\n<div class=\"accordion__item-title\"><strong>Microsoft Entra ID (Azure AD)</strong></div>\n<div class=\"accordion__item-content\">\n<ol>\n<li>Log in to Microsoft Entra ID (formerly known as Azure AD).</li>\n<li>Click <strong>Microsoft Entra ID</strong>. </li>\n<li>Select the <strong>Add</strong> dropdown and then click <strong>Enterprise Application</strong>.</li>\n<li>Click <strong>Create your own application</strong>.<br>\n\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28716354728219\" alt=\"Microsoft Entra ID Gallery, where you can create an application\">\n</li>\n<li>Name the application “Klaviyo,” then click <strong>Create</strong>. </li>\n<li>Click <strong>Single sign-on</strong> in the left sidebar.<br>\n\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28716331767067\" alt=\"Single sign-on method page for an application, which defaults to disabled\">\n</li>\n<li>Select <strong>SAML</strong>. </li>\n<li>Click <strong>Edit </strong>in the <em>Basic SAML Configuration </em>box.<br>\n\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28716331749787\" alt=\"Basic SAML configuration box, step 1 in the single sign-on page\">\n</li>\n<li>In the right sidebar that appears, click <strong>Add identifier </strong>under <em>Identifier (Entity ID)</em>.<br>\n\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28716331753115\" alt=\"Sidebar to configure SAML for an application's SSO\">\n</li>\n<li>In the field that appears, paste in the <em>Audience URI</em><em>(Service Provider Entity ID) </em>from Klaviyo.</li>\n<li>Under <em>Reply URL (Assertion Consumer Service URL)</em>, click <strong>Add reply URL</strong>. </li>\n<li>Here, paste the <em>Klaviyo SSO URL </em>from Klaviyo.<br>\n\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28716331755419\" alt=\"Example of SAML configuration after adding an identifier and Reply URL\">\n</li>\n<li>Note: if you want to add in a <em>Sign on URL</em>, you must first create a workplace ID, which is discussed in the next section. We recommend finishing the setup process and then coming back to this step. </li>\n<li>Click <strong>Save </strong>in the top left corner of the sidebar before clicking the <strong>X </strong>in the upper right. </li>\n<li>Scroll down to the <em>SAML Certificates </em>box (step 3 on the <em>Single sign-on page</em> in Entra).<br>\n\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28716354742555\" alt=\"Step 3 of the Single sign-on page\">\n</li>\n<li>Next to <em>Federation Metadata XML</em>, click <strong>Download</strong>.<br>\n\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28716354754203\" alt=\"SAML certificates box where only the Federated Metadata XML option is highlighted\">\n</li>\n<li>Still within the <em>SAML Certificates</em> box, click <strong>Edit </strong>in the upper right.</li>\n<li>In the sidebar that appears on the right, check that the:<br>\n<ul>\n<ul>\n<li>\n<em>Signing Option </em>requires that the SAML assertion be signed (here, we set it to <strong>Sign SAML assertion</strong>). Note that signing the response is optional. </li>\n<li>\n<em>Signing Algorithm </em>is set to <strong>SHA-256</strong>.<br>\n</li>\n</ul>\n</ul>\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28716331761307\" alt=\"Sidebar to edit the SAML certificates' signing option and algorithm\">\n</li>\n<li>Scroll back up to the <em>Attributes &amp; Claims</em> box (step 2 on <em>Single sign-on page</em> in Entra) and click <strong>Edit</strong>.<br>\n\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28716354759579\" alt=\"Step 2 of the Single sign-on page, which is the Attributes and claims box\">\n</li>\n<li>Click <strong>Unique User Identifier (Name ID)</strong> in the <em>Required Claim </em>section.<br>\n\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28716354763419\" alt=\"Manage claim modal where the Unique User Identifier row is highlighted\">\n</li>\n<li>Click the <strong>Source attribute </strong>dropdown.<br>\n\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28716331779995\" alt=\"Source attribute field for the unique user identifier\">\n</li>\n<li>Search for “user.mail” and then select it.<br>\n\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28716354776347\" alt=\"Searching user.mail for the source attribute\">\n</li>\n<li>Click <strong>Save</strong> in the upper left corner to go back to the <em>Attributes &amp; Claims </em>page. </li>\n<li>Select <strong>Add new claim</strong> in the upper left.<br>\n\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28716354779419\" alt=\"Adding new claim in the Attributes &amp; Claim page\">\n</li>\n<li>Enter “role” for the name. </li>\n<li>Change the <em>Source attribute </em>to \"user.assignedroles.\"<br>\n\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28716331810331\" alt=\"Azure 14 new role claim.png\">\n</li>\n<li>Click <strong>Save</strong>. </li>\n<li>Click <strong>Home</strong> to go back to the directory. </li>\n<li>In the left sidebar, click <strong>App registrations</strong>.<br>\n\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28716354789659\" alt=\"App registrations tab in the left sidebar\">\n</li>\n<li>Go to the <strong>All applications </strong>tab.<br>\n\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28716354791707\" alt=\"All applications tab in the app registrations page\">\n</li>\n<li>Click into the Klaviyo app.</li>\n<li>Select <strong>App roles &gt; Create app role</strong>.<br>\n\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28716354783003\" alt=\"Create app role in the app roles page\">\n</li>\n<li>Create the display name for each role.</li>\n<li>Select <strong>Users/Groups</strong> as the <em>Allowed member types</em>.</li>\n<li>Assign one of these values exactly how it appears below:<br>\n\n<ul>\n<ul>\n<li>admin</li>\n<li>manager</li>\n<li>analyst</li>\n<li>campaign_coordinator</li>\n<li>content_creator</li>\n<li>support<br>\n</li>\n</ul>\n</ul>\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28716331794459\" alt=\"Example of assigning a user as the owner of a Klaviyo account\">\n</li>\n<li>Add a description, then click <strong>Apply</strong>.<br>\n<p>Then, to assign users to the Klaviyo app, follow these steps: </p>\n</li>\n<li>Navigate to <strong>Microsoft Entra ID &gt; Enterprise applications</strong>. </li>\n<li>Click the <strong>Klaviyo</strong> app.</li>\n<li>Navigate to <strong>Users and groups &gt; Add user/group</strong>.<br>\n\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28716331802267\" alt=\"Users and groups page for the example Klaviyo application\">\n</li>\n<li>Click into <strong>Users</strong> to populate the right sidebar. <br>\n\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28716354796443\" alt=\"Selecting users for an app\">\n</li>\n<li>Select the user(s) you want to add to the Klaviyo app.</li>\n<li>Click <strong>Select</strong>.</li>\n<li>Click into <strong>Select a role</strong>.<br>\n\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28716331796635\" alt=\"Assigning roles for the selected users\">\n</li>\n<li>Choose the role this user should have in Klaviyo. </li>\n<li>Click <strong>Select</strong> to confirm the role. </li>\n<li>Click <strong>Assign</strong> in the bottom left. </li>\n</ol>\n</div>\n</div>\n</div>\n<h2 id=\"h_01HCN7BZ48EE7YH5ZH01HD9CZ9\">Finish setup in Klaviyo</h2>\n<ol>\n<li>Navigate back to your Klaviyo tab to the <em>SSO Setup </em>page.</li>\n<li>Choose to either:<br>\n<ul>\n<ul>\n<li>Add in your IdP issuer and SSO.<br>\nOr</li>\n<li>Upload a file with this information.<br>\n</li>\n</ul>\n</ul>\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28716354659099\" alt=\"Second step of the SSO configuration page, where you add information about your iDP issuer\">\n</li>\n<li>Create your SSO login identifier (also called the workplace ID) for your SSO login; often, this is the same name as your company.<br>\n\n<ul>\n<ul>\n<li>The ID cannot be longer than 63 characters.</li>\n<li>The ID must be URL safe, so it can contain only upper- or lowercase letters, hyphens (-), periods (.), underscores (_), and tildes (~).</li>\n<li>The ID should be simple and easy for users to remember (such as your company name).\n<ul>\n<li>For example, Klaviyo’s workplace ID is “Klaviyo.”</li>\n</ul>\n</li>\n</ul>\n</ul>\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28716354664987\" alt=\"Third step of the SSO configuration page, where you add your workplace ID\">\n</li>\n<li>Click <strong>Test SSO</strong>.</li>\n<li>Check the<strong> Enable SSO </strong>box. </li>\n<li>Optional: check one or more of the following boxes.</li>\n</ol>\n<ul>\n<ul>\n<li>Require SSO for all users.</li>\n<li>IdP initiated log in.</li>\n<li>Just-in-time (JIT) provisioning.<br>\n</li>\n</ul>\n</ul>\n<p><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28716354646811\" alt=\"Options for using SSO once it's been set up\" width=\"522\" height=\"338\"></p>\n<h2 id=\"h_01HBVE5VJKTB1A6P03TJV96S2V\">Outcome </h2>\n<p>Now you'll be able to log in to Klaviyo using your SSO provider. </p>",
+    "user_segment_ids": []
+  },
+  "normalized": {
+    "id": "9353860331035",
+    "title": "How to set up single sign-on (SSO)",
+    "source_url": "https://help.klaviyo.com/hc/en-us/articles/9353860331035-How-to-set-up-single-sign-on-SSO",
+    "section_id": 49375482397083,
+    "section": "Security",
+    "category_id": 115000867647,
+    "category": "Account & billing",
+    "category_slug": "account-billing",
+    "klaviyo_updated": "2026-04-21T13:56:59Z",
+    "created_at": "2022-10-04T20:23:36Z",
+    "draft": false,
+    "promoted": false,
+    "position": 0,
+    "label_names": []
+  },
+  "files": {
+    "body_html": "_source/articles/9353860331035.body.html",
+    "rendered_html": "_source/rendered/9353860331035.html"
+  },
+  "assets": {
+    "api_body": {
+      "images": [
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28716331657371",
+          "alt": "Security tab in Klaviyo",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28716354655515",
+          "alt": "Top of the SSO configuration page, where you copy the Klaviyo SSO URL and audience URI",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28716331667611",
+          "alt": "Applications page in Okta, where you can create app integration",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28716354670747",
+          "alt": "Sign-in options when SAML 2.0 is selected",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28716331685403",
+          "alt": "Step 1 of the Okta integration wizard, where you can name the app",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28716354798619",
+          "alt": "SAML configuration settings to for the Klaviyo integration",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28716354685211",
+          "alt": "Sign On tab for an app in Okta",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28716354687515",
+          "alt": "Actions dropdown when View IdP metadata is selected",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28716331703067",
+          "alt": "Example of the XML metadata page",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28716354673435",
+          "alt": "Options to assign users to an app by people or groups",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28716331705371",
+          "alt": "Example of assigning a user by the People option",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28716331709211",
+          "alt": "Modal to assign a username to an individual",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28716331678363",
+          "alt": "Applications dropdown when the subitem Applications is highlighted",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28716331682971",
+          "alt": "Applications page in One Login when Add App is selected",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28716354700443",
+          "alt": "Searching Klaviyo in the One Login apps",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28716331718427",
+          "alt": "Configuration page with no information in it",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28716354710939",
+          "alt": "SAML Signature Algorithm dropdown when SHA-256 is highlighted",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28716331729179",
+          "alt": "Login display settings for an app in One Login",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28716331734939",
+          "alt": "More Actions dropdown when SAML metadata is highlighted",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28716331739163",
+          "alt": "Users menu dropdown",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28716354727579",
+          "alt": "Selecting Klaviyo as the application for a user",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28716331715099",
+          "alt": "Selecting a Klaviyo role for a user",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28716354728219",
+          "alt": "Microsoft Entra ID Gallery, where you can create an application",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28716331767067",
+          "alt": "Single sign-on method page for an application, which defaults to disabled",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28716331749787",
+          "alt": "Basic SAML configuration box, step 1 in the single sign-on page",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28716331753115",
+          "alt": "Sidebar to configure SAML for an application's SSO",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28716331755419",
+          "alt": "Example of SAML configuration after adding an identifier and Reply URL",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28716354742555",
+          "alt": "Step 3 of the Single sign-on page",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28716354754203",
+          "alt": "SAML certificates box where only the Federated Metadata XML option is highlighted",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28716331761307",
+          "alt": "Sidebar to edit the SAML certificates' signing option and algorithm",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28716354759579",
+          "alt": "Step 2 of the Single sign-on page, which is the Attributes and claims box",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28716354763419",
+          "alt": "Manage claim modal where the Unique User Identifier row is highlighted",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28716331779995",
+          "alt": "Source attribute field for the unique user identifier",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28716354776347",
+          "alt": "Searching user.mail for the source attribute",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28716354779419",
+          "alt": "Adding new claim in the Attributes & Claim page",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28716331810331",
+          "alt": "Azure 14 new role claim.png",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28716354789659",
+          "alt": "App registrations tab in the left sidebar",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28716354791707",
+          "alt": "All applications tab in the app registrations page",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28716354783003",
+          "alt": "Create app role in the app roles page",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28716331794459",
+          "alt": "Example of assigning a user as the owner of a Klaviyo account",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28716331802267",
+          "alt": "Users and groups page for the example Klaviyo application",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28716354796443",
+          "alt": "Selecting users for an app",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28716331796635",
+          "alt": "Assigning roles for the selected users",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28716354659099",
+          "alt": "Second step of the SSO configuration page, where you add information about your iDP issuer",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28716354664987",
+          "alt": "Third step of the SSO configuration page, where you add your workplace ID",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28716354646811",
+          "alt": "Options for using SSO once it's been set up",
+          "width": "522",
+          "height": "338"
+        }
+      ],
+      "links": [
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360053547071",
+          "text": "make them an admin in your account"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005231648",
+          "text": "user's Klaviyo role"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/10952782535579",
+          "text": "SCIM"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005231648",
+          "text": "account user roles"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/25181702319643",
+          "text": "portfolio user roles"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005231648",
+          "text": "Klaviyo role"
+        }
+      ],
+      "headings": [
+        {
+          "level": 2,
+          "id": "h_01HBVE5VJJZ61P9CDGA1ZTERF6",
+          "text": "You will learn"
+        },
+        {
+          "level": 2,
+          "id": "h_01HBVE5VJJXK6TXC10N0CMMHMY",
+          "text": "Before you begin"
+        },
+        {
+          "level": 3,
+          "id": "h_01HC074EC31RW8NNG8S72S4YJT",
+          "text": "About just-in-time (JIT) provisioning"
+        },
+        {
+          "level": 2,
+          "id": "h_01HBVE5VJK55AK4ZAZWZWX9ZTP",
+          "text": "Set up SAML SSO"
+        },
+        {
+          "level": 2,
+          "id": "h_01HCN7BZ47KQWZBN92ZZ1GR2HV",
+          "text": "Log in to your SSO provider"
+        },
+        {
+          "level": 2,
+          "id": "h_01HCN7BZ48EE7YH5ZH01HD9CZ9",
+          "text": "Finish setup in Klaviyo"
+        },
+        {
+          "level": 2,
+          "id": "h_01HBVE5VJKTB1A6P03TJV96S2V",
+          "text": "Outcome"
+        }
+      ]
+    },
+    "rendered_page": {
+      "images": [
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/7ff492c2b417b7ecfe572f839a8a81398693c1f7-1920x1080.webp",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/fcce797f185035769538b1da3c264976e323d73c-1840x1290.jpg",
+          "alt": "Security tab in Klaviyo",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/be318c6b009172734ccf82e36d42a3b6cb602025-2516x578.jpg",
+          "alt": "Top of the SSO configuration page, where you copy the Klaviyo SSO URL and audience URI",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/d30c02b0d6292c52df4406b83f055769a13427bf-1304x244.png",
+          "alt": "Applications page in Okta, where you can create app integration",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/d46b5a3b0a296eb3cdd39488310cf3e9634961ee-1874x1074.jpg",
+          "alt": "Sign-in options when SAML 2.0 is selected",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/09e059ed3b80912c0c9c22da07167200340bbb6e-2176x1104.jpg",
+          "alt": "Step 1 of the Okta integration wizard, where you can name the app",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/f4bdca8f2bcea9d6b04a8f312f783c3fe47a55ac-1420x1036.png",
+          "alt": "SAML configuration settings to for the Klaviyo integration",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/7108e2613312e688b1a3c3c41cc4ffde97870e67-1152x456.png",
+          "alt": "Sign On tab for an app in Okta",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/a0cd7d728b5825315f4e9b83f5ad014959dc3a01-1654x698.jpg",
+          "alt": "Actions dropdown when View IdP metadata is selected",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/3582cdf8ccadee5cfa7ed2b3d795db4af4576b69-2870x856.jpg",
+          "alt": "Example of the XML metadata page",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/f8ac7eddfee80113ff4d842487933254f46c9122-1528x648.jpg",
+          "alt": "Options to assign users to an app by people or groups",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/39a3d77341742a0cc06d5b2f5ea6114befecccbd-1386x1204.jpg",
+          "alt": "Example of assigning a user by the People option",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/aed70736c64b589701ae0fd9f21788931c6f9d9f-1380x484.png",
+          "alt": "Modal to assign a username to an individual",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/cfe3971738706993d066e78d891b99ea9ec4b66e-876x370.png",
+          "alt": "Applications dropdown when the subitem Applications is highlighted",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/918b7b560783473651b6202c81964a638de2d260-2762x678.jpg",
+          "alt": "Applications page in One Login when Add App is selected",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/baf09ef67af907572641fb3ddff74f18161812a6-1538x454.png",
+          "alt": "Searching Klaviyo in the One Login apps",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/a8a14ad58e1111c7d3a6f26d155d1b11073575a1-2804x622.png",
+          "alt": "Configuration page with no information in it",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/df5431f7c879114e19b4fdd33bb01b50113784e0-2026x1210.jpg",
+          "alt": "SAML Signature Algorithm dropdown when SHA-256 is highlighted",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/8edd21e4f453a2abc2382b91c4e19bd409aabcbc-2162x1042.jpg",
+          "alt": "Login display settings for an app in One Login",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/154c1760134ca0bfb7108d8850d7db5e2ec40d1d-620x562.png",
+          "alt": "More Actions dropdown when SAML metadata is highlighted",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/b68acc934b11ca8119347eef26c71d76d98a2041-678x760.png",
+          "alt": "Users menu dropdown",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/b9a7663844870cc6a5e8968b778d62ddcb961100-1110x612.png",
+          "alt": "Selecting Klaviyo as the application for a user",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/94b1f5e046f2cc28cf4d8066042958625ae82e74-1280x1186.png",
+          "alt": "Selecting a Klaviyo role for a user",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/d94ff44fbecda56c2306bca2c979f1b5bdd8af37-862x322.png",
+          "alt": "Microsoft Entra ID Gallery, where you can create an application",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/1672c96979e71e2105142f380ab6ad3e32c15f3f-2102x954.png",
+          "alt": "Single sign-on method page for an application, which defaults to disabled",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/801b89697a73ad761af8bf65e8313419f0a4ba65-1562x816.png",
+          "alt": "Basic SAML configuration box, step 1 in the single sign-on page",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/05a6214f1efa9673f691134bd05c9bf8901e0ae4-1706x1082.png",
+          "alt": "Sidebar to configure SAML for an application's SSO",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/490fffa1e314c87ee09141b543aa168c02fca65b-1672x974.png",
+          "alt": "Example of SAML configuration after adding an identifier and Reply URL",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/d2922a7b40e1d9de5be3d8bbc9dca732f67e3c98-2086x762.png",
+          "alt": "Step 3 of the Single sign-on page",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/849110f6cbe37901ac82af32550bd5f7efd38ea0-1352x452.jpg",
+          "alt": "SAML certificates box where only the Federated Metadata XML option is highlighted",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/8063ba42f05aa1ec769c66959b5b9b3fca73ad89-1694x550.png",
+          "alt": "Sidebar to edit the SAML certificates' signing option and algorithm",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/7ea2cbaa2b3814b85f6ba6481b23da92735ac4ee-1564x368.png",
+          "alt": "Step 2 of the Single sign-on page, which is the Attributes and claims box",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/357331481b366c42e4d759d063a91161a03ca8ad-1570x970.png",
+          "alt": "Manage claim modal where the Unique User Identifier row is highlighted",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/6df9ee9ea90714a3e52de2165487a6c57cb53c06-2846x956.png",
+          "alt": "Source attribute field for the unique user identifier",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/963910b0ffb8e71bc7663a93a76207445e389777-2838x382.png",
+          "alt": "Searching user.mail for the source attribute",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/25b81da309d7897c714f383d797adf03c35a5ec8-1030x250.png",
+          "alt": "Adding new claim in the Attributes & Claim page",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/9076acd94c50a4a838f53aabdeccae0d5b81d6ae-1466x626.png",
+          "alt": "Azure 14 new role claim.png",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/07b51825bf496ae9d404ddd6247e9dfb29dca0a5-520x1080.jpg",
+          "alt": "App registrations tab in the left sidebar",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/98e89912434b376c3ab4013f4e1530343b373313-2866x1024.png",
+          "alt": "All applications tab in the app registrations page",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/a405bfa692358133582ebe5d58999ed81bc10eac-2700x984.png",
+          "alt": "Create app role in the app roles page",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/06ace39a317c23543584870455671a81fd5a289f-1164x1238.png",
+          "alt": "Example of assigning a user as the owner of a Klaviyo account",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/e9ea0be51db99de0921660dc430ecfca06b69f91-1292x772.png",
+          "alt": "Users and groups page for the example Klaviyo application",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/3cf97f9899c17c6e0b7374d87b7f473711825806-2872x1242.png",
+          "alt": "Selecting users for an app",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/caaf5e99c01ffd77494f01168d62043c0903eca2-2854x1220.png",
+          "alt": "Assigning roles for the selected users",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/26d1b9214f7cb075e7f51d87291ab2dd534ffd35-1514x592.png",
+          "alt": "Second step of the SSO configuration page, where you add information about your iDP issuer",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/144fc7aad6d97073825467af7c8907db9b5af255-1060x340.png",
+          "alt": "Third step of the SSO configuration page, where you add your workplace ID",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/f75aca0d094b755fbdb54b8e99939b151bdad00c-778x504.jpg?w=522",
+          "alt": "Options for using SSO once it's been set up",
+          "width": "522",
+          "height": "338"
+        }
+      ],
+      "links": [
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/9353860331035-How-to-set-up-single-sign-on-SSO#site-content",
+          "text": "Skip to main content"
+        },
+        {
+          "href": "https://www.klaviyo.com",
+          "text": "Home"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center"
+        },
+        {
+          "href": "https://www.klaviyo.com/enterprise",
+          "text": "Enterprise"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Partners"
+        },
+        {
+          "href": "https://www.klaviyo.com/careers",
+          "text": "Careers"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": "Log in"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": ""
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center Find step-by-step instructions and troubleshooting solutions in our knowledge base."
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000032731",
+          "text": "Integrations"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000312411",
+          "text": "Flows"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867867",
+          "text": "Audience"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867667",
+          "text": "Campaigns"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/360000190711",
+          "text": "Sign-up forms"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000873988",
+          "text": "Deliverability & compliance"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/29173800271259",
+          "text": "SMS"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/16638219724187",
+          "text": "Reviews"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/18073014919195",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/34141283979931",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/37659126754075",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/33948021740315",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/39746685522331",
+          "text": "WhatsApp"
+        },
+        {
+          "href": "https://academy.klaviyo.com",
+          "text": "Klaviyo Academy Expert training and education to help you succeed with Klaviyo, and beyond."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Quick+guide&resource=academy_courses",
+          "text": "Quick guides Learn marketing strategies and concepts in 15 minutes or less."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Course&resource=academy_courses",
+          "text": "Courses Master key marketing topics through structured lessons and exams."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/best-practices",
+          "text": "Best practices Discover top product and marketing strategies for your business."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/learning-paths",
+          "text": "Learning paths Complete curated learning journeys tailored to your marketing goals."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses",
+          "text": "Explore all resources"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Live+training&resource=academy_courses",
+          "text": "Live trainings Build confidence through hands-on interactive workshops and thought-provoking strategy sessions."
+        },
+        {
+          "href": "https://www.bigmarker.com/klaviyo-customer-education/Office-hours-Getting-started-with-Klaviyo",
+          "text": "Live office hours Join a strategic discussion where you can ask questions and get answers in real-time."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/private-live-training",
+          "text": "1:1 Live training Book a private training session with an expert to jumpstart your platform knowledge and confidence."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/credentials",
+          "text": "Klaviyo credentials Dig deeper into select topics and showcase your expertise with a final exam to earn a certificate and digital badge."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/certificates/klaviyo-practitioner-certificate",
+          "text": "Klaviyo practitioner certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/deliverability-certificate",
+          "text": "Deliverability certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/developer-certificate",
+          "text": "Klaviyo developer certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses&select=Certificate",
+          "text": "See all certificates"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Klaviyo Community Join our thriving community network to connect with brands like yours—online and in person."
+        },
+        {
+          "href": "https://community.klaviyo.com/topic/new",
+          "text": "Ask a question Post a question and get thoughtful answers from Klaviyo powerusers."
+        },
+        {
+          "href": "https://community.klaviyo.com/p/roadmap",
+          "text": "Product roadmap"
+        },
+        {
+          "href": "https://community.klaviyo.com/search/activity/recent",
+          "text": "Recent threads"
+        },
+        {
+          "href": "https://community.klaviyo.com/p/champions",
+          "text": "Meet the Champions"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups",
+          "text": "Browse all groups Your people are waiting. New ideas and connections are a click away."
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/developer-group-64",
+          "text": "Developer group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/entrepreneur-user-group-118",
+          "text": "Entrepreneur group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/woo-user-group-87",
+          "text": "WooCommerce group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/new-york-meetup-chapter-82",
+          "text": "New York City"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/los-angeles-meetup-chapter-83",
+          "text": "Los Angeles"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/austin-meetup-chapter-85",
+          "text": "Austin"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/san-diego-meetup-chapter-86",
+          "text": "San Diego"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/amsterdam-meetup-chapter-84",
+          "text": "Amsterdam"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Klaviyo Developers Access API documentation and developer guides to help you build with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/get_started",
+          "text": "Get started Access key resources and a step-by-step checklist for how to start developing with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/build_your_integration",
+          "text": "Grow your app's reach Learn how to join our ecosystem and get your app listed on our marketplace."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/developer-tools",
+          "text": "Developer tools Generate sample data, monitor your API usage, and access our Postman collections."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/reference/api_overview",
+          "text": "API reference Browse our full catalog of API docs."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/changelog_",
+          "text": "Changelog"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/api_versioning_and_deprecation_policy",
+          "text": "Versioning & deprecation policy"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/rate_limits_and_error_handling",
+          "text": "Rate limits & error handling"
+        },
+        {
+          "href": "https://youtube.com/playlist?list=PLHkNfHgtxcUanrkMnKPdkRzuWU7MGv_xM&si=pkG-KH7IT_TUHOGC",
+          "text": "API tutorials on YouTube Subscribe to our Klaviyo API Tutorials playlist for easy access to step-by-step developer walkthroughs."
+        },
+        {
+          "href": "https://www.klaviyo.com/contact-us",
+          "text": "Contact us"
+        },
+        {
+          "href": "https://www.klaviyo.com/sign-up",
+          "text": "Sign up"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": "Search"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/9353860331035",
+          "text": "United States - EN"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/de-de/articles/9353860331035",
+          "text": "Deutschland - DE"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-es/articles/9353860331035",
+          "text": "España - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-mx/articles/9353860331035",
+          "text": "México - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/fr-fr/articles/9353860331035",
+          "text": "France - FR"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/it-it/articles/9353860331035",
+          "text": "Italia - IT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/ko-kr/articles/9353860331035",
+          "text": "한국 - KO"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/nl-nl/articles/9353860331035",
+          "text": "Nederland - NL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pl-pl/articles/9353860331035",
+          "text": "Polska - PL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pt-br/articles/9353860331035",
+          "text": "Brasil - PT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/sv-se/articles/9353860331035",
+          "text": "Sverige - SV"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867647",
+          "text": "Account & billing"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/14542887837083",
+          "text": "Account"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/49375482397083",
+          "text": "Security"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/9353860331035-How-to-set-up-single-sign-on-SSO#h_01HBVE5VJJZ61P9CDGA1ZTERF6",
+          "text": "You will learn"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/9353860331035-How-to-set-up-single-sign-on-SSO#h_01HBVE5VJJXK6TXC10N0CMMHMY",
+          "text": "Before you begin"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/9353860331035-How-to-set-up-single-sign-on-SSO#h_01HBVE5VJK55AK4ZAZWZWX9ZTP",
+          "text": "Set up SAML SSO"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/9353860331035-How-to-set-up-single-sign-on-SSO#h_01HCN7BZ47KQWZBN92ZZ1GR2HV",
+          "text": "Log in to your SSO provider"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/9353860331035-How-to-set-up-single-sign-on-SSO#h_01HCN7BZ48EE7YH5ZH01HD9CZ9",
+          "text": "Finish setup in Klaviyo"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/9353860331035-How-to-set-up-single-sign-on-SSO#h_01HBVE5VJKTB1A6P03TJV96S2V",
+          "text": "Outcome"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/9353860331035-How-to-set-up-single-sign-on-SSO#additional-resources",
+          "text": "Additional resources"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360053547071",
+          "text": "make them an admin in your account"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005231648",
+          "text": "user's Klaviyo role"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/10952782535579",
+          "text": "SCIM"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005231648",
+          "text": "account user roles"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/25181702319643",
+          "text": "portfolio user roles"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005231648",
+          "text": "Klaviyo role"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/9674090873883",
+          "text": "Troubleshoot SSO and SCIM errors"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360026617692",
+          "text": "How to set up multi-factor authentication (MFA)"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/10952782535579",
+          "text": "How to set up SCIM user provisioning"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115001002272",
+          "text": "Learn how to contact support"
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": ""
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": "Visit Community"
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": ""
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": "Hire a partner"
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/about",
+          "text": "About Klaviyo"
+        },
+        {
+          "href": "https://www.klaviyo.com/newsroom",
+          "text": "Newsroom"
+        },
+        {
+          "href": "https://investors.klaviyo.com/overview/default.aspx",
+          "text": "Investor relations"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Agency and tech partners"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Developers"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/retail",
+          "text": "Retail and ecommerce"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/restaurants",
+          "text": "Restaurant marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/wellness",
+          "text": "Wellness"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform",
+          "text": "B2C CRM overview"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai",
+          "text": "Klaviyo AI (K:AI)"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/marketing-automation",
+          "text": "Klaviyo Marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-service",
+          "text": "Klaviyo Service"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/analytics",
+          "text": "Klaviyo Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-data-platform",
+          "text": "Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare",
+          "text": "Klaviyo vs. Klaviyo alternatives"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-mailchimp",
+          "text": "Klaviyo vs. Mailchimp"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-postscript",
+          "text": "Klaviyo vs. Postscript"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-attentive",
+          "text": "Klaviyo vs. Attentive"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-salesforce-marketing-cloud",
+          "text": "Klaviyo vs. Salesforce"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-listrak",
+          "text": "Klaviyo vs. Listrak"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/omnichannel",
+          "text": "Omnichannel marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/email-marketing",
+          "text": "Email marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing",
+          "text": "SMS marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing/rcs",
+          "text": "RCS for Business"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/mobile-app-marketing",
+          "text": "Mobile app marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/whatsapp",
+          "text": "WhatsApp marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/social",
+          "text": "Social marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources",
+          "text": "Marketing resources"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources/marketing-campaign-calendar",
+          "text": "Marketing campaign calendar"
+        },
+        {
+          "href": "https://www.klaviyo.com/glossary",
+          "text": "Marketing glossary"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/email-subject-line-generator",
+          "text": "Subject line generator"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/roi-calculator",
+          "text": "ROI calculator"
+        },
+        {
+          "href": "https://www.klaviyo.com/customers",
+          "text": "Case studies"
+        },
+        {
+          "href": "https://www.klaviyo.com/composer",
+          "text": "Composer Beta"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/marketing-agent",
+          "text": "Marketing Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/customer-agent",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/customer-experience-hub",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/helpdesk",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/marketing-analytics",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/advanced-cdp",
+          "text": "Advanced Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/web-forms",
+          "text": "Web forms"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/email-templates",
+          "text": "Email templates"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/portfolio",
+          "text": "Portfolio"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform-integrations",
+          "text": "Apps and Integrations"
+        },
+        {
+          "href": "https://www.klaviyo.com/features",
+          "text": "Features"
+        },
+        {
+          "href": "https://www.klaviyo.com/whats-new",
+          "text": "What's new"
+        },
+        {
+          "href": "https://www.klaviyo.com/events",
+          "text": "Events"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help Center"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us",
+          "text": "Academy"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Community"
+        },
+        {
+          "href": "https://www.facebook.com/Klaviyo/",
+          "text": "Facebook"
+        },
+        {
+          "href": "https://twitter.com/klaviyo/",
+          "text": "Twitter"
+        },
+        {
+          "href": "https://www.linkedin.com/company/klaviyo/",
+          "text": "LinkedIn"
+        },
+        {
+          "href": "https://www.instagram.com/klaviyo/",
+          "text": "Instagram"
+        },
+        {
+          "href": "https://www.klaviyo.com/sitemap",
+          "text": "Site Map"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal",
+          "text": "Terms and Privacy"
+        },
+        {
+          "href": "https://www.klaviyo.com/security",
+          "text": "Security"
+        },
+        {
+          "href": "https://www.klaviyo.com/trust",
+          "text": "Trust"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal/intellectual-property-notices",
+          "text": "Intellectual Property Notices"
+        }
+      ],
+      "headings": [
+        {
+          "level": 1,
+          "id": "",
+          "text": "How to set up single sign-on (SSO)"
+        },
+        {
+          "level": 2,
+          "id": "h_01HBVE5VJJZ61P9CDGA1ZTERF6",
+          "text": "You will learn"
+        },
+        {
+          "level": 2,
+          "id": "h_01HBVE5VJJXK6TXC10N0CMMHMY",
+          "text": "Before you begin"
+        },
+        {
+          "level": 3,
+          "id": "h_01HC074EC31RW8NNG8S72S4YJT",
+          "text": "About just-in-time (JIT) provisioning"
+        },
+        {
+          "level": 2,
+          "id": "h_01HBVE5VJK55AK4ZAZWZWX9ZTP",
+          "text": "Set up SAML SSO"
+        },
+        {
+          "level": 2,
+          "id": "h_01HCN7BZ47KQWZBN92ZZ1GR2HV",
+          "text": "Log in to your SSO provider"
+        },
+        {
+          "level": 2,
+          "id": "h_01HCN7BZ48EE7YH5ZH01HD9CZ9",
+          "text": "Finish setup in Klaviyo"
+        },
+        {
+          "level": 2,
+          "id": "h_01HBVE5VJKTB1A6P03TJV96S2V",
+          "text": "Outcome"
+        },
+        {
+          "level": 2,
+          "id": "additional-resources",
+          "text": "Additional resources"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "Explore more from Klaviyo"
+        }
+      ]
+    }
+  },
+  "rendered_page": {
+    "status": "fetched",
+    "error": ""
+  }
+}

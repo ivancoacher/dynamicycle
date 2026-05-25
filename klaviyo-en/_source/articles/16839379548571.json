@@ -1,0 +1,901 @@
+{
+  "captured_at": "2026-05-23T16:15:25Z",
+  "article": {
+    "id": 16839379548571,
+    "url": "https://klaviyo.zendesk.com/api/v2/help_center/en-us/articles/16839379548571.json",
+    "html_url": "https://klaviyo.zendesk.com/hc/en-us/articles/16839379548571-How-to-add-push-to-an-abandoned-cart-flow",
+    "author_id": 403684872812,
+    "comments_disabled": true,
+    "draft": false,
+    "promoted": false,
+    "position": 0,
+    "vote_sum": 0,
+    "vote_count": 0,
+    "section_id": 49375519423259,
+    "created_at": "2023-07-03T11:00:47Z",
+    "updated_at": "2026-04-21T13:54:30Z",
+    "name": "How to add push to an abandoned cart flow",
+    "title": "How to add push to an abandoned cart flow",
+    "source_locale": "en-us",
+    "locale": "en-us",
+    "outdated": false,
+    "outdated_locales": [],
+    "edited_at": "2025-04-17T16:49:35Z",
+    "user_segment_id": null,
+    "permission_group_id": 146372,
+    "content_tag_ids": [],
+    "label_names": [],
+    "body": "<h2 id=\"h_01HGXSN00YSY9EDMEC7Z86W4X5\">You will learn</h2>\n<p>Learn how to add push notifications to your abandoned cart flow to diversify the types of communication sent to your customers.</p>\n<h2 id=\"h_01HGXSN00YJCS26JNMP8AEMFGB\">Before you begin</h2>\n<p>Learn <a href=\"https://help.klaviyo.com/hc/en-us/articles/115002779411-How-to-create-an-abandoned-cart-flow\">how to create an abandoned cart flow</a> if you don’t have one set up in your account yet.</p>\n<p>Before you can send push notifications, note that:</p>\n<ul>\n<li>You must <a href=\"https://help.klaviyo.com/hc/en-us/articles/360023213971\">set up push notifications</a> in your Klaviyo account. </li>\n<li>Only app users that consent to notifications will receive push notifications from you. When an app user opts in to receive notifications, they are assigned a token that allows you to target them with push notifications through both campaigns and flows in Klaviyo.</li>\n</ul>\n<h2 id=\"h_01HGXSN00YJ1BBTM3DTNZ5VDRZ\">Add a push notification to your abandoned cart flow</h2>\n<p>Follow these steps to add push to your abandoned cart flow:</p>\n<ol>\n<li>From the main Klaviyo navigation, head to the <strong>Flows</strong> tab.</li>\n<li>Click the name of your abandoned cart flow to open it in the flow builder.</li>\n<li>After the first time delay, add a conditional split with the condition: <em>If someone can or cannot receive marketing &gt;</em> Person<em> cannot receive &gt; mobile push marketing</em>.<br><br>This allows you to keep your existing flow on the left side in the YES path while you add your push notifications to the NO path. With this split, you can send a push notification to those subscribed to push and send a different type of message (e.g., email or SMS) to those who are not subscribed to receive push notifications.<br><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/29158784347803\" alt=\"Abandoned cart flow with a conditional split that checks if a profile cannot receive push\">\n</li>\n<li>In the left sidebar, drag the push notification action into the NO path of your push conditional split.<br><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/29158784353051\" alt=\"Abandoned cart flow with a push notification message added to the NO path of the split\">\n</li>\n<li>Optional: In the sidebar, choose whether you would like to enable/disable <a href=\"https://help.klaviyo.com/hc/en-us/articles/115002779311\">Smart Sending</a> via the <em>Skip recently messaged profiles</em> setting. This setting is disabled by default. We recommend keeping it on for abandoned cart flows.</li>\n<li>Click <strong>Edit</strong> next to <em>Content</em>. Under <em>Type</em>, choose <strong>Standard</strong>.</li>\n<li>Configure the title (optional) and body of the message, such as:<br>“Did you forget something? Click here to return to your cart”<br>“Your cart is about to expire!”</li>\n<li>Optional<strong>: </strong>If you have a static coupon that is usable by all customers, you can include this in your push notification. For dynamic coupons, consider adding an email or SMS to your push notification path, since someone can easily refer back to an SMS or email as opposed to a push notification.<br>In the example below, a customer is notified of their abandoned cart through push and then sent a coupon through email or SMS a few days later. They are then reminded of the coupon through push a few more days later.<br><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28722598280859\" alt=\"Example of a flow which first sends a push notification and then sends either an email or SMS.\"><br>An abandoned cart flow’s filters will remove someone from the flow if they place an order, so if they are still in the flow, you know they haven’t used their coupon. You can add multiple push notifications with delays leading up to the expiration of the coupon, but don’t send a notification every day as this can overwhelm them.</li>\n<li>Select the <strong>Behaviors</strong> tab and select the open action for when the recipient taps the notification. To link a customer back to their cart, choose <strong>Deep link</strong> and enter a URL that links the customer to their cart in your app to the relevant field for either iOS or Android. Whether or not this is possible and the exact URL will depend on the design of your app. Consult your development team if you are unsure about this.<br><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/36088733830171\" width=\"354\" height=\"273\">\n</li>\n<li>Configure the following optional behaviors: \n<ul>\n<li>\n<strong>Show badge count (iOS only)<br></strong>Show the badge count on the message.</li>\n<li>\n<strong>Play sound (iOS only)</strong><br>Play a sound when the recipient receives the message.</li>\n<li>\n<strong>Custom data</strong><br>Trigger app behaviors via <a href=\"https://help.klaviyo.com/hc/en-us/articles/34331971195675\" target=\"_blank\" rel=\"noopener noreferrer\">key-value pairs</a>.</li>\n</ul>\n</li>\n<li>When you're done with the message settings and content, click <strong>Save &amp; continue</strong>.</li>\n<li>Once you're finished configuring your flow, set your message statuses live.</li>\n</ol>\n<h2 id=\"h_01HGXSN00Y2DJ03FVJXYW7XRQF\">Best practices</h2>\n<h3 id=\"h_01HGXSN010BVNR7JQQV3K35XYZ\">Message content</h3>\n<p>Make sure your push notifications contain relevant and actionable information related to your customer’s cart. Avoid overusing emojis. Multiple repeating emojis are often associated with spam.</p>\n<p>Here are some examples of content to include in your push notification messages:</p>\n<ul>\n<li>Let them know they have an abandoned cart.</li>\n<li>Alert them that their cart is going to expire.</li>\n<li>Remind them to use a coupon.</li>\n</ul>\n<p>If you mention a coupon code in a push notification, make sure that you have included it in an email or SMS first so that the customer can go back and reference it. You can also send it to the profile’s in-app inbox or show it in a banner within the app. </p>\n<h3 id=\"h_01HGXSN010ZQGGTQKN1KRZJM8W\">Message channel diversity</h3>\n<p>Don’t send push notifications at the same time as other types of messages. Subscribers may already have notifications set up for when they have received an email or SMS, so receiving a push notification at the same time can be redundant.</p>\n<p>While push notifications are convenient and helpful, focus on other types of messages such as SMS and email. In an abandoned cart flow, your primary means of communication with your customers will be through email or SMS messages. Unlike with push, SMS and email can include information such as the list of products the customer abandoned.</p>\n<h3 id=\"h_01HGXSN010FW70484WTBH5NYP0\">Separate email, SMS, and push</h3>\n<p>If you are using email, SMS, and push, make sure to have splits that check for push and SMS consent individually while making email the default message type. See the example below:</p>\n<p><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28722598283547\" alt=\"Example flow which has conditional splits that check for push and SMS consent respectively.\"></p>\n<h3 id=\"h_01HGXSN011ZBWJVPW523ST1F0E\">Split based on website activity</h3>\n<p>You can also use splits to send different messages depending on if someone has visited your website before or has only used your app. This is useful if you want to encourage app-only users to visit your website for exclusive promotions and content.</p>\n<p>In the example below, a conditional split with the condition <em>What someone has done (or not done) &gt; Active on Site &gt; at least once &gt; over all time</em> is used to check if the person in the flow has ever visited your website. If they have not, but they are subscribed to push, then you know that they have only used your app.</p>\n<p><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/21912959707547\" alt=\"Conditional split configured to check if someone has triggered Active on Site at least once over all time.\"></p>\n<h3 id=\"h_01HGXSN011S8TBJXYP70H5ZM39\">Split based on custom metrics</h3>\n<p>If you are using custom metrics to track customer activity in your app, you can split based on these metrics in order to send exclusive coupons or promotional information. Consider implementing custom metrics that track activity such as:</p>\n<ul>\n<li>Profile completed</li>\n<li>Location added</li>\n<li>App rated</li>\n</ul>\n<p>Someone completing the actions listed above is engaged with your app. If you want to reserve abandoned cart coupons only for engaged profiles, using customer metrics in a split is a great way to do this.</p>\n<h2 id=\"h_01HGXSN0114J8GYGBJA6CHGA14\">Additional resources</h2>\n<p>Find out more about abandoned carts:</p>\n<ul>\n<li><a href=\"https://help.klaviyo.com/hc/en-us/articles/9352115400219-How-to-add-SMS-to-your-abandoned-cart-flow\">How to add SMS to your abandoned cart flow</a></li>\n<li><a href=\"https://help.klaviyo.com/hc/en-us/articles/360032334511-How-to-create-and-target-a-segment-of-recent-cart-abandoners\">How to create and target a segment of recent cart abandoners</a></li>\n<li>Learn how to <a href=\"https://help.klaviyo.com/hc/en-us/articles/12278373016603-Troubleshooting-a-metric-triggered-flow\">troubleshoot your abandoned cart flow</a>.</li>\n</ul>",
+    "user_segment_ids": []
+  },
+  "normalized": {
+    "id": "16839379548571",
+    "title": "How to add push to an abandoned cart flow",
+    "source_url": "https://help.klaviyo.com/hc/en-us/articles/16839379548571-How-to-add-push-to-an-abandoned-cart-flow",
+    "section_id": 49375519423259,
+    "section": "Abandoned cart flows",
+    "category_id": 115000312411,
+    "category": "Flows",
+    "category_slug": "flows",
+    "klaviyo_updated": "2026-04-21T13:54:30Z",
+    "created_at": "2023-07-03T11:00:47Z",
+    "draft": false,
+    "promoted": false,
+    "position": 0,
+    "label_names": []
+  },
+  "files": {
+    "body_html": "_source/articles/16839379548571.body.html",
+    "rendered_html": "_source/rendered/16839379548571.html"
+  },
+  "assets": {
+    "api_body": {
+      "images": [
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/29158784347803",
+          "alt": "Abandoned cart flow with a conditional split that checks if a profile cannot receive push",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/29158784353051",
+          "alt": "Abandoned cart flow with a push notification message added to the NO path of the split",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28722598280859",
+          "alt": "Example of a flow which first sends a push notification and then sends either an email or SMS.",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/36088733830171",
+          "alt": "",
+          "width": "354",
+          "height": "273"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28722598283547",
+          "alt": "Example flow which has conditional splits that check for push and SMS consent respectively.",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/21912959707547",
+          "alt": "Conditional split configured to check if someone has triggered Active on Site at least once over all time.",
+          "width": "",
+          "height": ""
+        }
+      ],
+      "links": [
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115002779411-How-to-create-an-abandoned-cart-flow",
+          "text": "how to create an abandoned cart flow"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360023213971",
+          "text": "set up push notifications"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115002779311",
+          "text": "Smart Sending"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/34331971195675",
+          "text": "key-value pairs"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/9352115400219-How-to-add-SMS-to-your-abandoned-cart-flow",
+          "text": "How to add SMS to your abandoned cart flow"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360032334511-How-to-create-and-target-a-segment-of-recent-cart-abandoners",
+          "text": "How to create and target a segment of recent cart abandoners"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/12278373016603-Troubleshooting-a-metric-triggered-flow",
+          "text": "troubleshoot your abandoned cart flow"
+        }
+      ],
+      "headings": [
+        {
+          "level": 2,
+          "id": "h_01HGXSN00YSY9EDMEC7Z86W4X5",
+          "text": "You will learn"
+        },
+        {
+          "level": 2,
+          "id": "h_01HGXSN00YJCS26JNMP8AEMFGB",
+          "text": "Before you begin"
+        },
+        {
+          "level": 2,
+          "id": "h_01HGXSN00YJ1BBTM3DTNZ5VDRZ",
+          "text": "Add a push notification to your abandoned cart flow"
+        },
+        {
+          "level": 2,
+          "id": "h_01HGXSN00Y2DJ03FVJXYW7XRQF",
+          "text": "Best practices"
+        },
+        {
+          "level": 3,
+          "id": "h_01HGXSN010BVNR7JQQV3K35XYZ",
+          "text": "Message content"
+        },
+        {
+          "level": 3,
+          "id": "h_01HGXSN010ZQGGTQKN1KRZJM8W",
+          "text": "Message channel diversity"
+        },
+        {
+          "level": 3,
+          "id": "h_01HGXSN010FW70484WTBH5NYP0",
+          "text": "Separate email, SMS, and push"
+        },
+        {
+          "level": 3,
+          "id": "h_01HGXSN011ZBWJVPW523ST1F0E",
+          "text": "Split based on website activity"
+        },
+        {
+          "level": 3,
+          "id": "h_01HGXSN011S8TBJXYP70H5ZM39",
+          "text": "Split based on custom metrics"
+        },
+        {
+          "level": 2,
+          "id": "h_01HGXSN0114J8GYGBJA6CHGA14",
+          "text": "Additional resources"
+        }
+      ]
+    },
+    "rendered_page": {
+      "images": [
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/7ff492c2b417b7ecfe572f839a8a81398693c1f7-1920x1080.webp",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/139b71fe74199607dc063047c7a05fc75f8c399e-894x590.jpg",
+          "alt": "Abandoned cart flow with a conditional split that checks if a profile cannot receive push",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/9a238db8590da7460e6b19dbd486aaa40118ee26-1000x583.jpg",
+          "alt": "Abandoned cart flow with a push notification message added to the NO path of the split",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/59564a458acd56fc101299424cd9f8a2303ea41c-1000x1254.jpg",
+          "alt": "Example of a flow which first sends a push notification and then sends either an email or SMS.",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/5c34a631055d30980b7f0d92f356325ec2720480-676x522.png?w=354",
+          "alt": "",
+          "width": "354",
+          "height": "273"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/2ba26df14e20f822f58bee6841e718909976f3a1-1000x558.jpg",
+          "alt": "Example flow which has conditional splits that check for push and SMS consent respectively.",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/f00ab3d4e1da0fef418b82333c0f26ee44be31d7-1200x458.jpg",
+          "alt": "Conditional split configured to check if someone has triggered Active on Site at least once over all time.",
+          "width": "",
+          "height": ""
+        }
+      ],
+      "links": [
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/16839379548571-How-to-add-push-to-an-abandoned-cart-flow#site-content",
+          "text": "Skip to main content"
+        },
+        {
+          "href": "https://www.klaviyo.com",
+          "text": "Home"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center"
+        },
+        {
+          "href": "https://www.klaviyo.com/enterprise",
+          "text": "Enterprise"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Partners"
+        },
+        {
+          "href": "https://www.klaviyo.com/careers",
+          "text": "Careers"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": "Log in"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": ""
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center Find step-by-step instructions and troubleshooting solutions in our knowledge base."
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000032731",
+          "text": "Integrations"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000312411",
+          "text": "Flows"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867867",
+          "text": "Audience"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867667",
+          "text": "Campaigns"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/360000190711",
+          "text": "Sign-up forms"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000873988",
+          "text": "Deliverability & compliance"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/29173800271259",
+          "text": "SMS"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/16638219724187",
+          "text": "Reviews"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/18073014919195",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/34141283979931",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/37659126754075",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/33948021740315",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/39746685522331",
+          "text": "WhatsApp"
+        },
+        {
+          "href": "https://academy.klaviyo.com",
+          "text": "Klaviyo Academy Expert training and education to help you succeed with Klaviyo, and beyond."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Quick+guide&resource=academy_courses",
+          "text": "Quick guides Learn marketing strategies and concepts in 15 minutes or less."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Course&resource=academy_courses",
+          "text": "Courses Master key marketing topics through structured lessons and exams."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/best-practices",
+          "text": "Best practices Discover top product and marketing strategies for your business."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/learning-paths",
+          "text": "Learning paths Complete curated learning journeys tailored to your marketing goals."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses",
+          "text": "Explore all resources"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Live+training&resource=academy_courses",
+          "text": "Live trainings Build confidence through hands-on interactive workshops and thought-provoking strategy sessions."
+        },
+        {
+          "href": "https://www.bigmarker.com/klaviyo-customer-education/Office-hours-Getting-started-with-Klaviyo",
+          "text": "Live office hours Join a strategic discussion where you can ask questions and get answers in real-time."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/private-live-training",
+          "text": "1:1 Live training Book a private training session with an expert to jumpstart your platform knowledge and confidence."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/credentials",
+          "text": "Klaviyo credentials Dig deeper into select topics and showcase your expertise with a final exam to earn a certificate and digital badge."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/certificates/klaviyo-practitioner-certificate",
+          "text": "Klaviyo practitioner certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/deliverability-certificate",
+          "text": "Deliverability certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/developer-certificate",
+          "text": "Klaviyo developer certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses&select=Certificate",
+          "text": "See all certificates"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Klaviyo Community Join our thriving community network to connect with brands like yours—online and in person."
+        },
+        {
+          "href": "https://community.klaviyo.com/topic/new",
+          "text": "Ask a question Post a question and get thoughtful answers from Klaviyo powerusers."
+        },
+        {
+          "href": "https://community.klaviyo.com/p/roadmap",
+          "text": "Product roadmap"
+        },
+        {
+          "href": "https://community.klaviyo.com/search/activity/recent",
+          "text": "Recent threads"
+        },
+        {
+          "href": "https://community.klaviyo.com/p/champions",
+          "text": "Meet the Champions"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups",
+          "text": "Browse all groups Your people are waiting. New ideas and connections are a click away."
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/developer-group-64",
+          "text": "Developer group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/entrepreneur-user-group-118",
+          "text": "Entrepreneur group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/woo-user-group-87",
+          "text": "WooCommerce group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/new-york-meetup-chapter-82",
+          "text": "New York City"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/los-angeles-meetup-chapter-83",
+          "text": "Los Angeles"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/austin-meetup-chapter-85",
+          "text": "Austin"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/san-diego-meetup-chapter-86",
+          "text": "San Diego"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/amsterdam-meetup-chapter-84",
+          "text": "Amsterdam"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Klaviyo Developers Access API documentation and developer guides to help you build with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/get_started",
+          "text": "Get started Access key resources and a step-by-step checklist for how to start developing with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/build_your_integration",
+          "text": "Grow your app's reach Learn how to join our ecosystem and get your app listed on our marketplace."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/developer-tools",
+          "text": "Developer tools Generate sample data, monitor your API usage, and access our Postman collections."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/reference/api_overview",
+          "text": "API reference Browse our full catalog of API docs."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/changelog_",
+          "text": "Changelog"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/api_versioning_and_deprecation_policy",
+          "text": "Versioning & deprecation policy"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/rate_limits_and_error_handling",
+          "text": "Rate limits & error handling"
+        },
+        {
+          "href": "https://youtube.com/playlist?list=PLHkNfHgtxcUanrkMnKPdkRzuWU7MGv_xM&si=pkG-KH7IT_TUHOGC",
+          "text": "API tutorials on YouTube Subscribe to our Klaviyo API Tutorials playlist for easy access to step-by-step developer walkthroughs."
+        },
+        {
+          "href": "https://www.klaviyo.com/contact-us",
+          "text": "Contact us"
+        },
+        {
+          "href": "https://www.klaviyo.com/sign-up",
+          "text": "Sign up"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": "Search"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/16839379548571",
+          "text": "United States - EN"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/de-de/articles/16839379548571",
+          "text": "Deutschland - DE"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-es/articles/16839379548571",
+          "text": "España - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-mx/articles/16839379548571",
+          "text": "México - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/fr-fr/articles/16839379548571",
+          "text": "France - FR"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/it-it/articles/16839379548571",
+          "text": "Italia - IT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/ko-kr/articles/16839379548571",
+          "text": "한국 - KO"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/nl-nl/articles/16839379548571",
+          "text": "Nederland - NL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pl-pl/articles/16839379548571",
+          "text": "Polska - PL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pt-br/articles/16839379548571",
+          "text": "Brasil - PT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/sv-se/articles/16839379548571",
+          "text": "Sverige - SV"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/14543713508123",
+          "text": "Flow best practices and examples"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/49375519423259",
+          "text": "Abandoned cart flows"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/16839379548571-How-to-add-push-to-an-abandoned-cart-flow#h_01HGXSN00YSY9EDMEC7Z86W4X5",
+          "text": "You will learn"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/16839379548571-How-to-add-push-to-an-abandoned-cart-flow#h_01HGXSN00YJCS26JNMP8AEMFGB",
+          "text": "Before you begin"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/16839379548571-How-to-add-push-to-an-abandoned-cart-flow#h_01HGXSN00YJ1BBTM3DTNZ5VDRZ",
+          "text": "Add a push notification to your abandoned cart flow"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/16839379548571-How-to-add-push-to-an-abandoned-cart-flow#h_01HGXSN00Y2DJ03FVJXYW7XRQF",
+          "text": "Best practices"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/16839379548571-How-to-add-push-to-an-abandoned-cart-flow#additional-resources",
+          "text": "Additional resources"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115002779411-How-to-create-an-abandoned-cart-flow",
+          "text": "how to create an abandoned cart flow"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360023213971",
+          "text": "set up push notifications"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115002779311",
+          "text": "Smart Sending"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/34331971195675",
+          "text": "key-value pairs"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/9352115400219",
+          "text": "How to add SMS to your abandoned cart flow"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360032334511",
+          "text": "How to create and target a segment of recent cart abandoners"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/12278373016603",
+          "text": "Troubleshooting a metric-triggered flow"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115001002272",
+          "text": "Learn how to contact support"
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": ""
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": "Visit Community"
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": ""
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": "Hire a partner"
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/about",
+          "text": "About Klaviyo"
+        },
+        {
+          "href": "https://www.klaviyo.com/newsroom",
+          "text": "Newsroom"
+        },
+        {
+          "href": "https://investors.klaviyo.com/overview/default.aspx",
+          "text": "Investor relations"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Agency and tech partners"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Developers"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/retail",
+          "text": "Retail and ecommerce"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/restaurants",
+          "text": "Restaurant marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/wellness",
+          "text": "Wellness"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform",
+          "text": "B2C CRM overview"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai",
+          "text": "Klaviyo AI (K:AI)"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/marketing-automation",
+          "text": "Klaviyo Marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-service",
+          "text": "Klaviyo Service"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/analytics",
+          "text": "Klaviyo Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-data-platform",
+          "text": "Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare",
+          "text": "Klaviyo vs. Klaviyo alternatives"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-mailchimp",
+          "text": "Klaviyo vs. Mailchimp"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-postscript",
+          "text": "Klaviyo vs. Postscript"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-attentive",
+          "text": "Klaviyo vs. Attentive"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-salesforce-marketing-cloud",
+          "text": "Klaviyo vs. Salesforce"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-listrak",
+          "text": "Klaviyo vs. Listrak"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/omnichannel",
+          "text": "Omnichannel marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/email-marketing",
+          "text": "Email marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing",
+          "text": "SMS marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing/rcs",
+          "text": "RCS for Business"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/mobile-app-marketing",
+          "text": "Mobile app marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/whatsapp",
+          "text": "WhatsApp marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/social",
+          "text": "Social marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources",
+          "text": "Marketing resources"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources/marketing-campaign-calendar",
+          "text": "Marketing campaign calendar"
+        },
+        {
+          "href": "https://www.klaviyo.com/glossary",
+          "text": "Marketing glossary"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/email-subject-line-generator",
+          "text": "Subject line generator"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/roi-calculator",
+          "text": "ROI calculator"
+        },
+        {
+          "href": "https://www.klaviyo.com/customers",
+          "text": "Case studies"
+        },
+        {
+          "href": "https://www.klaviyo.com/composer",
+          "text": "Composer Beta"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/marketing-agent",
+          "text": "Marketing Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/customer-agent",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/customer-experience-hub",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/helpdesk",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/marketing-analytics",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/advanced-cdp",
+          "text": "Advanced Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/web-forms",
+          "text": "Web forms"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/email-templates",
+          "text": "Email templates"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/portfolio",
+          "text": "Portfolio"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform-integrations",
+          "text": "Apps and Integrations"
+        },
+        {
+          "href": "https://www.klaviyo.com/features",
+          "text": "Features"
+        },
+        {
+          "href": "https://www.klaviyo.com/whats-new",
+          "text": "What's new"
+        },
+        {
+          "href": "https://www.klaviyo.com/events",
+          "text": "Events"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help Center"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us",
+          "text": "Academy"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Community"
+        },
+        {
+          "href": "https://www.facebook.com/Klaviyo/",
+          "text": "Facebook"
+        },
+        {
+          "href": "https://twitter.com/klaviyo/",
+          "text": "Twitter"
+        },
+        {
+          "href": "https://www.linkedin.com/company/klaviyo/",
+          "text": "LinkedIn"
+        },
+        {
+          "href": "https://www.instagram.com/klaviyo/",
+          "text": "Instagram"
+        },
+        {
+          "href": "https://www.klaviyo.com/sitemap",
+          "text": "Site Map"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal",
+          "text": "Terms and Privacy"
+        },
+        {
+          "href": "https://www.klaviyo.com/security",
+          "text": "Security"
+        },
+        {
+          "href": "https://www.klaviyo.com/trust",
+          "text": "Trust"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal/intellectual-property-notices",
+          "text": "Intellectual Property Notices"
+        }
+      ],
+      "headings": [
+        {
+          "level": 1,
+          "id": "",
+          "text": "How to add push to an abandoned cart flow"
+        },
+        {
+          "level": 2,
+          "id": "h_01HGXSN00YSY9EDMEC7Z86W4X5",
+          "text": "You will learn"
+        },
+        {
+          "level": 2,
+          "id": "h_01HGXSN00YJCS26JNMP8AEMFGB",
+          "text": "Before you begin"
+        },
+        {
+          "level": 2,
+          "id": "h_01HGXSN00YJ1BBTM3DTNZ5VDRZ",
+          "text": "Add a push notification to your abandoned cart flow"
+        },
+        {
+          "level": 2,
+          "id": "h_01HGXSN00Y2DJ03FVJXYW7XRQF",
+          "text": "Best practices"
+        },
+        {
+          "level": 3,
+          "id": "h_01HGXSN010BVNR7JQQV3K35XYZ",
+          "text": "Message content"
+        },
+        {
+          "level": 3,
+          "id": "h_01HGXSN010ZQGGTQKN1KRZJM8W",
+          "text": "Message channel diversity"
+        },
+        {
+          "level": 3,
+          "id": "h_01HGXSN010FW70484WTBH5NYP0",
+          "text": "Separate email, SMS, and push"
+        },
+        {
+          "level": 3,
+          "id": "h_01HGXSN011ZBWJVPW523ST1F0E",
+          "text": "Split based on website activity"
+        },
+        {
+          "level": 3,
+          "id": "h_01HGXSN011S8TBJXYP70H5ZM39",
+          "text": "Split based on custom metrics"
+        },
+        {
+          "level": 2,
+          "id": "additional-resources",
+          "text": "Additional resources"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "Explore more from Klaviyo"
+        }
+      ]
+    }
+  },
+  "rendered_page": {
+    "status": "fetched",
+    "error": ""
+  }
+}

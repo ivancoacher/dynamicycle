@@ -1,0 +1,188 @@
+<h2 id="h_01J9P5VGTP4B4GSR4RJR4PBFYE">You will learn</h2>
+<p>Learn about the metrics and customer data synced from PrestaShop to Klaviyo. 3 types of events sync from PrestaShop to Klaviyo: </p>
+<ul>
+<li>Order events sync every 30 minutes (e.g., <em>Placed Order</em>).</li>
+<li>Transactional order events sync in real time, if you choose to enable them in your module settings (e.g., <em>Placed Order Transactional</em>).</li>
+<li>Klaviyo onsite events (<em>Active on Site</em>, <em>Viewed Produc</em>t, and <em>Added to Cart</em>).</li>
+</ul>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/35198021096347" alt="" width="512" height="467"></p>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/28717851526427" alt="List of PrestaShop API metrics in Klaviyo"></p>
+<h2 id="h_01J9P5VGTPGGTAPW6MAC0MQASK">Transactional versus non-transactional metrics</h2>
+<p>If you toggled on <strong>Send real-time order events to Klaviyo</strong><a href="https://help.klaviyo.com/hc/en-us/articles/360054551492">when integrating</a>, a second set of order events labeled as transactional will sync to Klaviyo in real time. For instance, you’ll see a metric in Klaviyo labeled <em>Placed Order Transactional</em>, which will sync in real time, in addition to a metric labeled <em>Placed Order,</em> which will sync every 30 minutes. The real-time transactional events that sync to Klaviyo are:</p>
+<ul>
+<li>Placed Order Transactional</li>
+<li>Fulfilled Order Transactional </li>
+<li>Cancelled Order Transactional</li>
+<li>Refunded Order Transactional</li>
+</ul>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/28717851531163" alt="Transactional events toggle on in Klaviyo plugin settings in PrestaShop"></p>
+<h2 id="h_01J9P5VGTPSWWN05721TFGXSJE">PrestaShop metrics</h2>
+<p>You can view all PrestaShop metrics in Klaviyo by navigating to <strong>Analytics &gt; Metrics</strong>. Filter by <em>PrestaShop</em> to see order and transactional order events (they will have a PrestaShop icon) or filter by <em>API</em> to see Klaviyo onsite events (they will have a gear icon). </p>
+<h3 id="h_01J9P5VGTPEA1AD0HY916TDH26">Active on Site</h3>
+<p>This event is created when a customer is active on your PrestaShop store. </p>
+<h3 id="h_01J9P5VGTP8872CG1JBH1681G0">Viewed Product</h3>
+<p>Klaviyo tracks this event when a customer views a product on your PrestaShop store. This is useful if you'd like to set up a <a href="https://help.klaviyo.com/hc/en-us/articles/115002775252-Create-a-Browse-Abandonment-Flow">browse abandonment flow</a> or provide customers with <a href="https://help.klaviyo.com/hc/en-us/articles/115005082787">personalized product recommendations</a> based on product browsing data.</p>
+<h3 id="h_01J9P5VGTP3FNYSP8JJYJ8H77N">Added to Cart</h3>
+<p>This event is created when a customer adds an item to their cart.</p>
+<h3 id="h_01J9P5VGTPWSSGCZ7T0ENTZMPG">Started Checkout</h3>
+<p>The <em>Started Checkout</em> metric is created when:</p>
+<ul>
+<li>A customer logs in to their account, adds something to their cart, and navigates to the checkout page.</li>
+<li>Without logging in, or using guest checkout, a customer adds something to their cart, navigates to the checkout page, and enters their email address.<br>
+<p>Klaviyo captures the value of a cart at the time of checkout, as well as other pertinent details of a customer's cart that you can leverage for personalized abandoned cart emails. You can filter and target each event based on the following criteria:</p>
+</li>
+<li>
+<strong>Language</strong><br>
+The language used.</li>
+<li>
+<strong>CartID</strong><br>
+An ID assigned to the cart.</li>
+<li>
+<strong>Items</strong><br>
+The names of the products in the cart, e.g., Red T-shirt or Blue Pants.</li>
+<li>
+<strong>ItemCount</strong><br>
+The number of items in the cart.</li>
+<li>
+<strong>TotalDiscounts</strong><br>
+The total amount of any coupons or discounts if someone used a code, e.g., 10.00.</li>
+<li>
+<strong>Categories</strong><br>
+The complete set of categories for the products in the cart, e.g., t-shirts, men's, pants and sale.</li>
+<li>
+<strong>Tags</strong><br>
+The list of meta keywords for the products in the cart.</li>
+<li>
+<strong>ShopId</strong><br>
+The ID of the shop associated with the order.</li>
+<li>
+<strong>ReclaimCartUrl</strong><br>
+A URL that can be used to rebuild the customer’s cart, for instance in an abandoned cart email.</li>
+<li>
+<strong>$event_id</strong><br>
+The ID of this Started Checkout event.</li>
+<li>
+<strong>$value</strong><br>
+The value of the cart.</li>
+<li>
+<strong>$extra</strong><br>
+An array of extra data.</li>
+<li>
+<strong>external_catalog_id</strong><br>
+Used in catalog organization in Klaviyo.</li>
+<li>
+<strong>integration_key</strong><br>
+Your eCommerce platform (PrestaShop).</li>
+</ul>
+<h3 id="h_01J9P5VGTQW4622858W9AY5SN2">Placed Order, Fulfilled Order, Cancelled Order, and Refunded Order</h3>
+<p>All of these events are created based on the order status mapping you configured when integrating. Each event includes product information about the items purchased, including product names, categories, etc. You can filter and target each event based on the same criteria:</p>
+<ul>
+<li>
+<strong>$value</strong><br>
+The total value of the order.</li>
+<li>
+<strong>$extra</strong><br>
+An array of extra data.</li>
+<li>
+<strong>Categories</strong><br>
+The complete set of categories the products in the order, e.g., t-shirts, men's, pants and sale.</li>
+<li>
+<strong>ItemCount</strong><br>
+The number of items in the order, e.g., 2.</li>
+<li>
+<strong>Items</strong><br>
+The names of the products in the order, e.g., Red T-shirt or Blue Pants.</li>
+<li>
+<strong>ShopID</strong><br>
+The ID of the shop associated with the order.</li>
+<li>
+<strong>LanguageID</strong><br>
+Shop language ID as a two-letter code e.g., EN.</li>
+<li>
+<strong>TotalDiscounts</strong><br>
+The total amount of any coupons or discounts if someone used a code, e.g., 10.00.</li>
+<li>
+<strong>DiscountCodes</strong><br>
+Any discount or coupon codes someone used towards the order, e.g., SPRING10.</li>
+<li>
+<strong>Tags</strong><br>
+The list of meta keywords for products in the order.</li>
+<li>
+<strong>OrderStatus</strong><br>
+The status of the order, as configured in order status mapping, e.g., <em>Payment Accepted</em>.</li>
+<li>
+<strong>external_catalog_id</strong><br>
+Used in catalog organization in Klaviyo.</li>
+</ul>
+<h3 id="h_01J9P5VGTQ1W84YVF37311EA64">Ordered Product</h3>
+<p>By default, this event is tracked once for every product a user orders when they place an order. For example, if a customer buys a t-shirt and a pair of jeans, one <em>Placed Order</em> event is tracked along with two <em>Ordered Product </em>events.</p>
+<p>The event Klaviyo tracks includes detailed information about each product someone purchases. This is useful when creating behavioral segments based on product options and other detailed information that's not available in the <em>Placed Order </em>event. You can filter and target <em>Ordered Product</em> events based on the following criteria:</p>
+<ul>
+<li>
+<strong>Name</strong><br>
+The name of the ordered product.</li>
+<li>
+<strong>SKU</strong><br>
+The SKU of the ordered product.</li>
+<li>
+<strong>ProductId</strong><br>
+The ID of the ordered product.</li>
+<li>
+<strong>Quantity</strong><br>
+The quantity of the ordered product.</li>
+<li>
+<strong>Categories</strong><br>
+The complete set of categories for the product, e.g., t-shirts, men's, and sale.</li>
+<li>
+<strong>Tags</strong><br>
+The list of meta keywords for the product.</li>
+<li>
+<strong>$event_id</strong><br>
+An ID associated with this <em>Ordered Product</em> event.</li>
+<li>
+<strong>$value</strong><br>
+The value of the ordered product.</li>
+<li>
+<strong>$extra</strong><br>
+An array of extra data.</li>
+<li>
+<strong>external_catalog_id</strong><br>
+Used in catalog organization in Klaviyo.</li>
+</ul>
+<h2 id="section2">Synced customer data</h2>
+<p>In addition to the metrics Klaviyo syncs from PrestaShop, Klaviyo will also create a unique profile for every customer that we sync. When we sync contact information, there are also certain custom properties that may get added to each Klaviyo profile. Here are the properties automatically synced from PrestaShop:</p>
+<ul>
+<li>
+<strong>Email, First and Last Name, City, State/Region, Zip Code, Country, Phone Number</strong><br>
+These built-in Klaviyo fields are automatically populated with all available data from PrestaShop.</li>
+<li>
+<strong>$locale</strong><br>
+The language and country tag of the store the customer interacted with (e.g., "en-us").</li>
+<li>
+<strong>$locale-language</strong><br>
+The language tag derived from the <em>$locale</em> property (e.g., "en").</li>
+<li>
+<strong>$locale-country</strong><br>
+The country tag derived from the <em>$locale</em> property (e.g., "us").</li>
+<li>
+<strong>Last Order Currency</strong><br>
+The currency of the customer's last order.</li>
+<li>
+<strong>Birthday</strong><br>
+The customer's birthday.</li>
+<li>
+<strong>Gender</strong><br>
+The customer's gender.</li>
+<li>
+<strong>PrestaShop Account Created Date</strong><br>
+The date on which the customer created their PrestaShop account.</li>
+<li>
+<strong>PrestaShop Default Group</strong><br>
+The default PrestaShop group that the customer belongs to.</li>
+<li>
+<strong>PrestaShop Groups</strong><br>
+All PrestaShop groups that the customer belongs to.</li>
+<li>
+<strong>PrestaShop Shops</strong><br>
+The shop(s) with which a customer has interacted.</li>
+</ul>

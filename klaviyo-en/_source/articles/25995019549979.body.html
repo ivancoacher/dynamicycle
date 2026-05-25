@@ -1,0 +1,85 @@
+<h2 id="h_01J0PFTCQ7E7EDZB4QCP67Z3QT">You will learn</h2>
+<p>Learn how to select a product ID variable to display dynamic review quotes related to the products someone is interested in. These variables vary between events, so make sure to use the right variable for your flow.</p>
+<h2 id="h_01J0PFTCQ7QG74H8VDACF43N6N">Before you begin</h2>
+<p>This block is only available in accounts that use Klaviyo Reviews. Learn how to <a href="https://help.klaviyo.com/hc/en-us/articles/15937542819355">get started with Klaviyo Reviews</a>. </p>
+<h2 id="h_01J0PFTCQ7MS9PQ41N4QE1GG9Z">About dynamic review blocks</h2>
+<p>Dynamic review quote blocks can display different reviews depending on when the email is sent and what actions the recipient has taken, unlike static review blocks, which feature the same product for every recipient. </p>
+<p>This article specifically covers dynamic review blocks, not static. Static review quote blocks do not require a product ID variable.</p>
+<p>This process is only supported in certain flow emails: event-triggered flows, back in stock flows, low inventory flows, and price drop flows. Learn how to <a href="https://klaviyo.zendesk.com/hc/en-us/articles/18007373861915">add a dynamic review block</a> to your emails.</p>
+<p>In many cases, Klaviyo will auto-detect the product ID. In these cases, you don’t need to manually choose a product ID variable. If you see a button like the one below indicating your flow’s trigger, that means Klaviyo will auto-detect your product ID, and you do not need to follow the steps outlined here.</p>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/33237640856475" alt="" width="289" height="114"></p>
+<p>However, for some custom flows, you may need to manually input a product ID variable. If you see the <em>Product ID variable</em> field shown in the screenshot below, follow these steps to add a variable.</p>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/33237663341211" alt="" width="363" height="158"></p>
+<h2 id="h_01J0PFTCQ7EK644A5P977JGNQ7">Product ID variables</h2>
+<p>The table below offers the most common event variables used for review quote blocks. In addition to those in the table below, you can use any other event variable that references a product ID. To find a product ID variable other than those in the table below: </p>
+<ol>
+<li>From your flow email, click <strong>Preview &amp; test</strong>. </li>
+<li>Click the event variable you’d like to use in your review quote block. When you click the variable name, the tag will be copied to your clipboard. </li>
+<li>Remove all extraneous information from the tag: the curly quotes that surround it and any filters, which follow the tag information. For example, if the original tag was {{ event.product.id|default:”” }}, remove everything from the tag except <em>event.product.id</em>. </li>
+<li>Paste this variable into the <em>Event variable for product ID</em> field. </li>
+</ol>
+<div class="bs-callout bs-callout-default">
+<p>If a trigger event contains multiple items (e.g., abandoned cart flows), only the first item is considered when choosing reviews. We do not recommend using the second, third, or any other items, because not every instance of the event will contain multiple items. </p>
+</div>
+<h3 id="h_01J29X3A3VFF641ERSNNX3GE4A">Shopify product ID variables</h3>
+<table style="width: 100%">
+<tbody>
+<tr>
+<td><strong>Flow trigger</strong></td>
+<td><strong>Event variable</strong></td>
+</tr>
+<tr>
+<td>Browse abandonment </td>
+<td>event.ProductID</td>
+</tr>
+<tr>
+<td>Abandoned cart (<em>Add to cart</em> trigger)</td>
+<td>event.ProductID</td>
+</tr>
+<tr>
+<td>Abandoned checkout (<em>Checkout started</em> trigger)</td>
+<td>event.extra.line_items.0.product.id</td>
+</tr>
+<tr>
+<td>Back in stock </td>
+<td>event.ProductID</td>
+</tr>
+<tr>
+<td>Price drop </td>
+<td>event.product_id</td>
+</tr>
+<tr>
+<td>Low inventory</td>
+<td>event.product_id </td>
+</tr>
+<tr>
+<td>Placed order</td>
+<td>event.extra.line_items.0.product.id</td>
+</tr>
+</tbody>
+</table>
+<h3 id="h_01J29X3PT3FEDM1P4G1TQCEQPM">WooCommerce product ID variables</h3>
+<table style="height: 176px">
+<tbody>
+<tr>
+<td style="width: 336.148px; height: 22px"><strong>Flow trigger</strong></td>
+<td style="width: 215.414px; height: 22px"><strong>Event variable</strong></td>
+</tr>
+<tr>
+<td style="width: 336.148px; height: 22px">Browse abandonment </td>
+<td style="width: 215.414px; height: 22px">event.ProductID</td>
+</tr>
+<tr>
+<td style="width: 336.148px; height: 22px">Abandoned cart (<em>Add to cart</em> trigger)</td>
+<td style="width: 215.414px; height: 22px">event.ProductID</td>
+</tr>
+<tr>
+<td style="width: 336.148px; height: 22px">Abandoned checkout (<em>Checkout started</em> trigger)</td>
+<td style="width: 215.414px; height: 22px">event.extra.Items.0.ProductID</td>
+</tr>
+<tr>
+<td style="width: 336.148px; height: 22px">Placed order</td>
+<td style="width: 215.414px; height: 22px">event.extra.Items.0.ProductId</td>
+</tr>
+</tbody>
+</table>

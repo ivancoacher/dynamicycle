@@ -1,0 +1,790 @@
+{
+  "captured_at": "2026-05-23T16:11:49Z",
+  "article": {
+    "id": 46364536713755,
+    "url": "https://klaviyo.zendesk.com/api/v2/help_center/en-us/articles/46364536713755.json",
+    "html_url": "https://klaviyo.zendesk.com/hc/en-us/articles/46364536713755-Integrating-Yotpo-Loyalty-Referrals-with-Customer-Hub",
+    "author_id": 404359999751,
+    "comments_disabled": false,
+    "draft": false,
+    "promoted": false,
+    "position": 0,
+    "vote_sum": 0,
+    "vote_count": 0,
+    "section_id": 49375862170267,
+    "created_at": "2026-02-06T18:40:37Z",
+    "updated_at": "2026-04-21T13:55:02Z",
+    "name": "Integrating Yotpo Loyalty & Referrals with Customer Hub",
+    "title": "Integrating Yotpo Loyalty & Referrals with Customer Hub",
+    "source_locale": "en-us",
+    "locale": "en-us",
+    "outdated": false,
+    "outdated_locales": [],
+    "edited_at": "2026-04-17T01:02:29Z",
+    "user_segment_id": null,
+    "permission_group_id": 146372,
+    "content_tag_ids": [],
+    "label_names": [],
+    "body": "<p>This article provides an overview of the Yotpo Loyalty &amp; Referrals integration for Customer Hub, which allows you to deliver a native loyalty experience directly on your site. By integrating Yotpo with Customer Hub, shoppers can view their points, track VIP status, and redeem rewards without leaving your store or interacting with third-party widgets.</p>\n<h2 id=\"h_01KGT3VJTVM0KK41CPXKVGWY1B\">Benefits of the Integration</h2>\n<ul>\n<li>\n<strong>Reduced Friction</strong>: Shoppers can complete loyalty actions (like redemptions) entirely within Customer Hub, reducing redirects and keeping them engaged on-site.</li>\n<li>\n<strong>Unified Brand Experience</strong>: Loyalty information is presented using Customer Hub’s foundational layout and voice, creating a cohesive post-purchase journey.</li>\n<li>\n<strong>Increased Visibility</strong>: Surface loyalty value to both logged-in members and non-members to drive program enrollment and retention.</li>\n</ul>\n<h2 id=\"h_01KGT3MXSWXXS73J435TMK2AY9\">Before You Begin</h2>\n<p>To enable this integration, ensure you have:</p>\n<ol>\n<li>An active Yotpo Loyalty &amp; Referrals account.</li>\n<li>Customer Hub live on your site.</li>\n<li>Your Yotpo <strong>API Key</strong> and <strong>GUID</strong>.</li>\n<li>The existing Yotpo x Klaviyo integration managed within Yotpo to sync profile properties and events.</li>\n</ol>\n<h2 id=\"h_01KGT3SE0XV29ZCY2YSVHX0EZ2\">How to Enable the Yotpo Integration</h2>\n<ol>\n<li>In the Klaviyo app, navigate to <strong>KService &gt; Customer Hub</strong>.</li>\n<li>Open the <strong>Extension Settings</strong> page.</li>\n<li>Select <strong>Yotpo</strong> from the list of loyalty providers.<br>\n\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/46364536700955\" alt=\"Screenshot 2026-02-06 at 1.38.57 PM.png\" width=\"1898\" height=\"504\">\n</li>\n<li>Enter your Yotpo <strong>API Key</strong> and <strong>GUID</strong> into the required fields (these are stored securely to facilitate backend API calls).<br>\n\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/46364536706971\" alt=\"Screenshot 2026-02-06 at 1.39.04 PM.png\" width=\"1894\" height=\"748\">\n</li>\n<li>\n<strong>Save your changes</strong>. Once enabled, the loyalty experience will become visible to your customers in the Hub.</li>\n</ol>\n<h2 id=\"h_01KGT3RGPB5ZN5J906M8A0RPPT\">The Shopper Experience</h2>\n<p>The Yotpo integration adds two primary views to Customer Hub:</p>\n<h3 id=\"h_01KGT3MXT7F5E4W9ZYF1632ER4\">1. \"For You\" Loyalty Summary</h3>\n<p>When a shopper opens Customer Hub, they will see a concise rewards summary block. Depending on their status, they will see:</p>\n<ul>\n<li>\n<strong>Current Points Balance</strong>: Their real-time point total.</li>\n<li>\n<strong>VIP Tier</strong>: Their current membership level (e.g., Bronze, Silver, Gold).</li>\n<li>\n<strong>Best/Next Reward</strong>: A highlight of the most valuable reward they are currently eligible for or the next one they can earn.<br>\n</li>\n</ul>\n<p><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/46365040867611\" alt=\"Screenshot 2026-02-06 at 1.50.30 PM.png\" width=\"844\" height=\"672\"></p>\n<h3 id=\"h_01KGT3MXTAQSXTZ0GKD9VEXC96\">2. Rewards Page</h3>\n<p>For a deeper view, shoppers can navigate to a dedicated Rewards page within the Hub to access:</p>\n<ul>\n<li>\n<strong>Ways to Earn</strong>: Information on how to accumulate more points.</li>\n<li>\n<strong>Available Rewards</strong>: A list of fixed or variable redemption options.</li>\n<li>\n<strong>In-Hub Redemption</strong>: Shoppers can redeem points directly for a coupon code, which is then displayed for immediate use.</li>\n<li>\n<strong>Referral Link</strong>: A unique link for the shopper to share with friends.<br>\n</li>\n</ul>\n<p><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/46365049996187\" alt=\"Screenshot 2026-02-06 at 1.50.15 PM.png\" width=\"890\" height=\"1474\"></p>\n<h2 id=\"h_01KGT3PC1T0QBQC3FVDSWMMCMB\">Data and Profile Properties</h2>\n<p>The integration utilizes several profile properties synced from Yotpo to Klaviyo to personalize the experience:</p>\n<ul>\n<li>\n<code>swell_point_balance</code>: Displays the customer's current points.</li>\n<li>\n<code>swell_vip_tier_name</code>: Indicates the customer's current tier.</li>\n<li>\n<code>swell_referral_link</code>: Provides the customer's unique referral URL.</li>\n<li>\n<code>swell_has_account</code>: Identifies whether the shopper is a member of your loyalty program.</li>\n</ul>\n<p>Customer Hub also makes real-time calls to Yotpo’s APIs to fetch the most up-to-date program details, such as active redemption options and tier definitions, ensuring shoppers always see accurate data.</p>\n<p></p>",
+    "user_segment_ids": []
+  },
+  "normalized": {
+    "id": "46364536713755",
+    "title": "Integrating Yotpo Loyalty & Referrals with Customer Hub",
+    "source_url": "https://help.klaviyo.com/hc/en-us/articles/46364536713755-Integrating-Yotpo-Loyalty-Referrals-with-Customer-Hub",
+    "section_id": 49375862170267,
+    "section": "Integrate other platforms with Customer Hub",
+    "category_id": 34141283979931,
+    "category": "Customer Hub",
+    "category_slug": "customer-hub",
+    "klaviyo_updated": "2026-04-21T13:55:02Z",
+    "created_at": "2026-02-06T18:40:37Z",
+    "draft": false,
+    "promoted": false,
+    "position": 0,
+    "label_names": []
+  },
+  "files": {
+    "body_html": "_source/articles/46364536713755.body.html",
+    "rendered_html": "_source/rendered/46364536713755.html"
+  },
+  "assets": {
+    "api_body": {
+      "images": [
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/46364536700955",
+          "alt": "Screenshot 2026-02-06 at 1.38.57 PM.png",
+          "width": "1898",
+          "height": "504"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/46364536706971",
+          "alt": "Screenshot 2026-02-06 at 1.39.04 PM.png",
+          "width": "1894",
+          "height": "748"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/46365040867611",
+          "alt": "Screenshot 2026-02-06 at 1.50.30 PM.png",
+          "width": "844",
+          "height": "672"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/46365049996187",
+          "alt": "Screenshot 2026-02-06 at 1.50.15 PM.png",
+          "width": "890",
+          "height": "1474"
+        }
+      ],
+      "links": [],
+      "headings": [
+        {
+          "level": 2,
+          "id": "h_01KGT3VJTVM0KK41CPXKVGWY1B",
+          "text": "Benefits of the Integration"
+        },
+        {
+          "level": 2,
+          "id": "h_01KGT3MXSWXXS73J435TMK2AY9",
+          "text": "Before You Begin"
+        },
+        {
+          "level": 2,
+          "id": "h_01KGT3SE0XV29ZCY2YSVHX0EZ2",
+          "text": "How to Enable the Yotpo Integration"
+        },
+        {
+          "level": 2,
+          "id": "h_01KGT3RGPB5ZN5J906M8A0RPPT",
+          "text": "The Shopper Experience"
+        },
+        {
+          "level": 3,
+          "id": "h_01KGT3MXT7F5E4W9ZYF1632ER4",
+          "text": "1. \"For You\" Loyalty Summary"
+        },
+        {
+          "level": 3,
+          "id": "h_01KGT3MXTAQSXTZ0GKD9VEXC96",
+          "text": "2. Rewards Page"
+        },
+        {
+          "level": 2,
+          "id": "h_01KGT3PC1T0QBQC3FVDSWMMCMB",
+          "text": "Data and Profile Properties"
+        }
+      ]
+    },
+    "rendered_page": {
+      "images": [
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/7ff492c2b417b7ecfe572f839a8a81398693c1f7-1920x1080.webp",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/a36166ad4910ab64c8c4ead3447e03563bd5f2c7-1898x504.png?w=1898",
+          "alt": "Screenshot 2026-02-06 at 1.38.57 PM.png",
+          "width": "1898",
+          "height": "504"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/d441502ede98d77c4d2eb64727cd90f7aef80930-1894x748.png?w=1894",
+          "alt": "Screenshot 2026-02-06 at 1.39.04 PM.png",
+          "width": "1894",
+          "height": "748"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/583d962260e69e6cee33ff900a1f836e49073e77-844x672.png?w=844",
+          "alt": "Screenshot 2026-02-06 at 1.50.30 PM.png",
+          "width": "844",
+          "height": "672"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/ae505c61c04fc0621e48747d4653f20516f56414-890x1474.png?w=890",
+          "alt": "Screenshot 2026-02-06 at 1.50.15 PM.png",
+          "width": "890",
+          "height": "1474"
+        }
+      ],
+      "links": [
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/46364536713755-Integrating-Yotpo-Loyalty-Referrals-with-Customer-Hub#site-content",
+          "text": "Skip to main content"
+        },
+        {
+          "href": "https://www.klaviyo.com",
+          "text": "Home"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center"
+        },
+        {
+          "href": "https://www.klaviyo.com/enterprise",
+          "text": "Enterprise"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Partners"
+        },
+        {
+          "href": "https://www.klaviyo.com/careers",
+          "text": "Careers"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": "Log in"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": ""
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center Find step-by-step instructions and troubleshooting solutions in our knowledge base."
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000032731",
+          "text": "Integrations"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000312411",
+          "text": "Flows"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867867",
+          "text": "Audience"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867667",
+          "text": "Campaigns"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/360000190711",
+          "text": "Sign-up forms"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000873988",
+          "text": "Deliverability & compliance"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/29173800271259",
+          "text": "SMS"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/16638219724187",
+          "text": "Reviews"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/18073014919195",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/34141283979931",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/37659126754075",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/33948021740315",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/39746685522331",
+          "text": "WhatsApp"
+        },
+        {
+          "href": "https://academy.klaviyo.com",
+          "text": "Klaviyo Academy Expert training and education to help you succeed with Klaviyo, and beyond."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Quick+guide&resource=academy_courses",
+          "text": "Quick guides Learn marketing strategies and concepts in 15 minutes or less."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Course&resource=academy_courses",
+          "text": "Courses Master key marketing topics through structured lessons and exams."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/best-practices",
+          "text": "Best practices Discover top product and marketing strategies for your business."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/learning-paths",
+          "text": "Learning paths Complete curated learning journeys tailored to your marketing goals."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses",
+          "text": "Explore all resources"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Live+training&resource=academy_courses",
+          "text": "Live trainings Build confidence through hands-on interactive workshops and thought-provoking strategy sessions."
+        },
+        {
+          "href": "https://www.bigmarker.com/klaviyo-customer-education/Office-hours-Getting-started-with-Klaviyo",
+          "text": "Live office hours Join a strategic discussion where you can ask questions and get answers in real-time."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/private-live-training",
+          "text": "1:1 Live training Book a private training session with an expert to jumpstart your platform knowledge and confidence."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/credentials",
+          "text": "Klaviyo credentials Dig deeper into select topics and showcase your expertise with a final exam to earn a certificate and digital badge."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/certificates/klaviyo-practitioner-certificate",
+          "text": "Klaviyo practitioner certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/deliverability-certificate",
+          "text": "Deliverability certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/developer-certificate",
+          "text": "Klaviyo developer certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses&select=Certificate",
+          "text": "See all certificates"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Klaviyo Community Join our thriving community network to connect with brands like yours—online and in person."
+        },
+        {
+          "href": "https://community.klaviyo.com/topic/new",
+          "text": "Ask a question Post a question and get thoughtful answers from Klaviyo powerusers."
+        },
+        {
+          "href": "https://community.klaviyo.com/p/roadmap",
+          "text": "Product roadmap"
+        },
+        {
+          "href": "https://community.klaviyo.com/search/activity/recent",
+          "text": "Recent threads"
+        },
+        {
+          "href": "https://community.klaviyo.com/p/champions",
+          "text": "Meet the Champions"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups",
+          "text": "Browse all groups Your people are waiting. New ideas and connections are a click away."
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/developer-group-64",
+          "text": "Developer group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/entrepreneur-user-group-118",
+          "text": "Entrepreneur group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/woo-user-group-87",
+          "text": "WooCommerce group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/new-york-meetup-chapter-82",
+          "text": "New York City"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/los-angeles-meetup-chapter-83",
+          "text": "Los Angeles"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/austin-meetup-chapter-85",
+          "text": "Austin"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/san-diego-meetup-chapter-86",
+          "text": "San Diego"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/amsterdam-meetup-chapter-84",
+          "text": "Amsterdam"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Klaviyo Developers Access API documentation and developer guides to help you build with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/get_started",
+          "text": "Get started Access key resources and a step-by-step checklist for how to start developing with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/build_your_integration",
+          "text": "Grow your app's reach Learn how to join our ecosystem and get your app listed on our marketplace."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/developer-tools",
+          "text": "Developer tools Generate sample data, monitor your API usage, and access our Postman collections."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/reference/api_overview",
+          "text": "API reference Browse our full catalog of API docs."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/changelog_",
+          "text": "Changelog"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/api_versioning_and_deprecation_policy",
+          "text": "Versioning & deprecation policy"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/rate_limits_and_error_handling",
+          "text": "Rate limits & error handling"
+        },
+        {
+          "href": "https://youtube.com/playlist?list=PLHkNfHgtxcUanrkMnKPdkRzuWU7MGv_xM&si=pkG-KH7IT_TUHOGC",
+          "text": "API tutorials on YouTube Subscribe to our Klaviyo API Tutorials playlist for easy access to step-by-step developer walkthroughs."
+        },
+        {
+          "href": "https://www.klaviyo.com/contact-us",
+          "text": "Contact us"
+        },
+        {
+          "href": "https://www.klaviyo.com/sign-up",
+          "text": "Sign up"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": "Search"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/46364536713755",
+          "text": "United States - EN"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/de-de/articles/46364536713755",
+          "text": "Deutschland - DE"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-es/articles/46364536713755",
+          "text": "España - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-mx/articles/46364536713755",
+          "text": "México - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/fr-fr/articles/46364536713755",
+          "text": "France - FR"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/it-it/articles/46364536713755",
+          "text": "Italia - IT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/ko-kr/articles/46364536713755",
+          "text": "한국 - KO"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/nl-nl/articles/46364536713755",
+          "text": "Nederland - NL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pl-pl/articles/46364536713755",
+          "text": "Polska - PL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pt-br/articles/46364536713755",
+          "text": "Brasil - PT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/sv-se/articles/46364536713755",
+          "text": "Sverige - SV"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/34141442538139",
+          "text": "Set up Customer Hub"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/49375862170267",
+          "text": "Integrate other platforms with Customer Hub"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/46364536713755-Integrating-Yotpo-Loyalty-Referrals-with-Customer-Hub#h_01KGT3VJTVM0KK41CPXKVGWY1B",
+          "text": "Benefits of the Integration"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/46364536713755-Integrating-Yotpo-Loyalty-Referrals-with-Customer-Hub#h_01KGT3MXSWXXS73J435TMK2AY9",
+          "text": "Before You Begin"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/46364536713755-Integrating-Yotpo-Loyalty-Referrals-with-Customer-Hub#h_01KGT3SE0XV29ZCY2YSVHX0EZ2",
+          "text": "How to Enable the Yotpo Integration"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/46364536713755-Integrating-Yotpo-Loyalty-Referrals-with-Customer-Hub#h_01KGT3RGPB5ZN5J906M8A0RPPT",
+          "text": "The Shopper Experience"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/46364536713755-Integrating-Yotpo-Loyalty-Referrals-with-Customer-Hub#h_01KGT3PC1T0QBQC3FVDSWMMCMB",
+          "text": "Data and Profile Properties"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115001002272",
+          "text": "Learn how to contact support"
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": ""
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": "Visit Community"
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": ""
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": "Hire a partner"
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/about",
+          "text": "About Klaviyo"
+        },
+        {
+          "href": "https://www.klaviyo.com/newsroom",
+          "text": "Newsroom"
+        },
+        {
+          "href": "https://investors.klaviyo.com/overview/default.aspx",
+          "text": "Investor relations"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Agency and tech partners"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Developers"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/retail",
+          "text": "Retail and ecommerce"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/restaurants",
+          "text": "Restaurant marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/wellness",
+          "text": "Wellness"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform",
+          "text": "B2C CRM overview"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai",
+          "text": "Klaviyo AI (K:AI)"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/marketing-automation",
+          "text": "Klaviyo Marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-service",
+          "text": "Klaviyo Service"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/analytics",
+          "text": "Klaviyo Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-data-platform",
+          "text": "Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare",
+          "text": "Klaviyo vs. Klaviyo alternatives"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-mailchimp",
+          "text": "Klaviyo vs. Mailchimp"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-postscript",
+          "text": "Klaviyo vs. Postscript"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-attentive",
+          "text": "Klaviyo vs. Attentive"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-salesforce-marketing-cloud",
+          "text": "Klaviyo vs. Salesforce"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-listrak",
+          "text": "Klaviyo vs. Listrak"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/omnichannel",
+          "text": "Omnichannel marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/email-marketing",
+          "text": "Email marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing",
+          "text": "SMS marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing/rcs",
+          "text": "RCS for Business"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/mobile-app-marketing",
+          "text": "Mobile app marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/whatsapp",
+          "text": "WhatsApp marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/social",
+          "text": "Social marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources",
+          "text": "Marketing resources"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources/marketing-campaign-calendar",
+          "text": "Marketing campaign calendar"
+        },
+        {
+          "href": "https://www.klaviyo.com/glossary",
+          "text": "Marketing glossary"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/email-subject-line-generator",
+          "text": "Subject line generator"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/roi-calculator",
+          "text": "ROI calculator"
+        },
+        {
+          "href": "https://www.klaviyo.com/customers",
+          "text": "Case studies"
+        },
+        {
+          "href": "https://www.klaviyo.com/composer",
+          "text": "Composer Beta"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/marketing-agent",
+          "text": "Marketing Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/customer-agent",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/customer-experience-hub",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/helpdesk",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/marketing-analytics",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/advanced-cdp",
+          "text": "Advanced Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/web-forms",
+          "text": "Web forms"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/email-templates",
+          "text": "Email templates"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/portfolio",
+          "text": "Portfolio"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform-integrations",
+          "text": "Apps and Integrations"
+        },
+        {
+          "href": "https://www.klaviyo.com/features",
+          "text": "Features"
+        },
+        {
+          "href": "https://www.klaviyo.com/whats-new",
+          "text": "What's new"
+        },
+        {
+          "href": "https://www.klaviyo.com/events",
+          "text": "Events"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help Center"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us",
+          "text": "Academy"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Community"
+        },
+        {
+          "href": "https://www.facebook.com/Klaviyo/",
+          "text": "Facebook"
+        },
+        {
+          "href": "https://twitter.com/klaviyo/",
+          "text": "Twitter"
+        },
+        {
+          "href": "https://www.linkedin.com/company/klaviyo/",
+          "text": "LinkedIn"
+        },
+        {
+          "href": "https://www.instagram.com/klaviyo/",
+          "text": "Instagram"
+        },
+        {
+          "href": "https://www.klaviyo.com/sitemap",
+          "text": "Site Map"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal",
+          "text": "Terms and Privacy"
+        },
+        {
+          "href": "https://www.klaviyo.com/security",
+          "text": "Security"
+        },
+        {
+          "href": "https://www.klaviyo.com/trust",
+          "text": "Trust"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal/intellectual-property-notices",
+          "text": "Intellectual Property Notices"
+        }
+      ],
+      "headings": [
+        {
+          "level": 1,
+          "id": "",
+          "text": "Integrating Yotpo Loyalty & Referrals with Customer Hub"
+        },
+        {
+          "level": 2,
+          "id": "h_01KGT3VJTVM0KK41CPXKVGWY1B",
+          "text": "Benefits of the Integration"
+        },
+        {
+          "level": 2,
+          "id": "h_01KGT3MXSWXXS73J435TMK2AY9",
+          "text": "Before You Begin"
+        },
+        {
+          "level": 2,
+          "id": "h_01KGT3SE0XV29ZCY2YSVHX0EZ2",
+          "text": "How to Enable the Yotpo Integration"
+        },
+        {
+          "level": 2,
+          "id": "h_01KGT3RGPB5ZN5J906M8A0RPPT",
+          "text": "The Shopper Experience"
+        },
+        {
+          "level": 3,
+          "id": "h_01KGT3MXT7F5E4W9ZYF1632ER4",
+          "text": "1. \"For You\" Loyalty Summary"
+        },
+        {
+          "level": 3,
+          "id": "h_01KGT3MXTAQSXTZ0GKD9VEXC96",
+          "text": "2. Rewards Page"
+        },
+        {
+          "level": 2,
+          "id": "h_01KGT3PC1T0QBQC3FVDSWMMCMB",
+          "text": "Data and Profile Properties"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "Explore more from Klaviyo"
+        }
+      ]
+    }
+  },
+  "rendered_page": {
+    "status": "fetched",
+    "error": ""
+  }
+}

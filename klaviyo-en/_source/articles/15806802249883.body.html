@@ -1,0 +1,68 @@
+<h2 id="h_01HDZ14SKJ64H1CGW6A3861SNQ">You will learn</h2>
+<p>Learn how to add SMS to your browse abandonment flow to diversify the type of communication sent to your customers.</p>
+<div class="accordion accordion--default">
+<div class="accordion__item">
+<div class="accordion__item-title"><strong>What’s the difference between browse abandonment and abandoned cart flows? </strong></div>
+<div class="accordion__item-content">
+<p>To enter an abandoned cart flow, someone must add an item to their cart and (in some cases) begin to check out. </p>
+<p>As for browse abandonment flows, all they need to do is view an item and move on.</p>
+<p>Visiting a product page doesn’t indicate the same level of interest as adding an item to a shopping cart and beginning the checkout process, so we recommend making your browse abandonment messages a lighter touchpoint" than your abandoned cart flow, particularly when using SMS. </p>
+</div>
+</div>
+</div>
+<h2 id="h_01HDZ14SKJ9K6G0VEE2ZV3ZX77">Before you begin</h2>
+<p>Before you start adding SMS to your browse abandonment flow:</p>
+<ul>
+<li>
+<a href="https://help.klaviyo.com/hc/en-us/articles/4404274419355" target="_blank" rel="noopener">Turn on SMS</a> in your account settings. </li>
+<li>Learn <a href="https://help.klaviyo.com/hc/en-us/articles/115002775252" target="_blank" rel="noopener">how to create a browse abandonment</a> flow if you don’t yet have one in your account.</li>
+</ul>
+<h3 id="h_01HDZ14SKJ02P5PFF6T9NJR01Q">Browse abandonment compliance</h3>
+<p>Always use <a href="https://help.klaviyo.com/hc/en-us/articles/4408737146651" target="_blank" rel="noopener">quiet hours</a> for browse abandonment SMS messages. This feature, which is on by default, prevents SMS from sending too early or late in the day. Most countries forbid sending SMS during certain hours, and quiet hours can help you avoid fines. </p>
+<h2 id="h_01HDZ14SKJQ847GKE90NVFEAD3">Add an SMS action to a browse abandonment flow</h2>
+<ol>
+<li>Navigate to the <strong>Flows</strong> tab.</li>
+<li>Click the name of the browse abandonment flow where you want to include SMS.</li>
+<li>In the flow builder, place a conditional split after the first time delay.
+<ul>
+<li>Note: the time delay must be within 48 hours of when the flow triggers.</li>
+</ul>
+</li>
+<li>Use the following condition:<br><em>Person is or is not consented to receive SMS &gt; is not</em><br>This configuration allows you to add the split to an existing browse abandonment flow without having to rearrange your email path.<br><img src="https://klaviyo.zendesk.com/hc/article_attachments/28716333017627" alt="Adding a split to send SMS subscribers down a different path">
+</li>
+<li>On the NO path, add an SMS message.</li>
+<li>Click <strong>Configure Content </strong>in the left sidebar.</li>
+<li>Add in your message. For example:<br>“Hey {{ first_name|title|default:'there' }}, did you see something you liked? Time to check it out! {{ event.URL }}”<br><strong>Note</strong>: Dynamic content depends on your integration, so the tags in the example may not work for you. Learn more <a href="https://help.klaviyo.com/hc/en-us/articles/115002779071#01FK12GQZA6JMB1MN5JSXSM8GA">about dynamic content</a>.</li>
+<li>Drag the rejoin icon below the SMS message onto the email path after the first email. This allows you to continue sending customers emails after sending them an SMS message.<br><img src="https://klaviyo.zendesk.com/hc/article_attachments/28716355982491" alt="Rejoining the SMS and email paths after the first of each message">
+</li>
+<li>Do not turn off either quiet hours or Smart Sending for this message.<br>Quiet hours is an <a href="https://help.klaviyo.com/hc/en-us/articles/7956171032091">SMS compliance requirement</a>, while Smart Sending is a general best practice. </li>
+<li>Set the SMS message live.</li>
+</ol>
+<h2 id="h_01HDZ14SKJPJ9KG6E4Q1CCYH2G">Enhance your SMS browse abandonment flow</h2>
+<p>See the examples flows below for ways to customize your flow:</p>
+<h3 id="h_01HDZ14SKKS2C92NDHH7P8ZE7M">Item category split</h3>
+<p>If you want to split based on item categories:</p>
+<ol>
+<li>Add a <em>Trigger Split</em> with the condition:<br><em>Categories &gt; contains &gt; CategoryName</em>. </li>
+<li>Replace “CategoryName” with the name of the category you’d like to split based on. You can add multiple splits for different categories.</li>
+</ol>
+<p class="wysiwyg-text-align-center"><img src="https://klaviyo.zendesk.com/hc/article_attachments/28716355984795" alt="Separating the flow messages based on the product category"></p>
+<h3 id="h_01HDZ14SKK8W28EK1ZDZZWAWSA">New vs. returning customers</h3>
+<p>If you want to split based on whether the person browsing has purchased from you before:</p>
+<ol>
+<li>Add a conditional split with the condition:<br><em>What someone has done (or not done) &gt; Placed Order &gt; zero times &gt; over all time</em>. </li>
+<li>Put your message for new customers in the YES path </li>
+<li>Place your message for returning customers in the NO path.</li>
+</ol>
+<p class="wysiwyg-text-align-center"><img src="https://klaviyo.zendesk.com/hc/article_attachments/28716333022619" alt="Adding a split to separate messages for returning customers and new customers"></p>
+<h3 id="h_01HDZ14SKKA4QHXKGWY38G4MR6">Add customers to continue the conversation</h3>
+<p>While you can only send 1 SMS message to a site visitor who abandoned their session, you can ask the customer to continue chatting. If you ask a question and the subscriber responds, you can use flows or 1-on-1 SMS conversations to keep talking.</p>
+<p>For instance, you can say something like "No longer interested in X? Tell us why! 1 for too pricey, 2 for not my style, 3 for I’ll revisit later."</p>
+<p>If the subscriber replies, you either respond back via a conversation or set up a <a href="https://help.klaviyo.com/hc/en-us/articles/360049930372">flow to trigger for the incoming message</a>, customizing the response based on what the subscriber says.<br><img src="https://klaviyo.zendesk.com/hc/article_attachments/28716333026587" alt="The trigger filters of a flow that checks if the message contains 1, 2, or 3"><br><img src="https://klaviyo.zendesk.com/hc/article_attachments/28716333024411" alt="A Sent SMS flow to reply to a subscriber's reason for not buying an item they browsed"></p>
+<h2 id="h_01HDZ14SKKKB43Y5JXCSJQPR83">Additional resources</h2>
+<p>Learn how to use SMS in other flows:</p>
+<ul>
+<li><a href="https://help.klaviyo.com/hc/en-us/articles/360036122291">How to create an SMS welcome flow</a></li>
+<li><a href="https://help.klaviyo.com/hc/en-us/articles/9352115400219">How to add SMS to your abandoned cart flow</a></li>
+<li><a href="https://help.klaviyo.com/hc/en-us/articles/15800790306715" target="_blank" rel="noopener">How to add SMS to your thank you or order confirmation flow</a></li>
+</ul>

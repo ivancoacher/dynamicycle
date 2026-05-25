@@ -1,0 +1,62 @@
+<h2 id="h_01J4SKF4K47YABZAXD756NMDK1">You will learn </h2>
+<p>Learn how to use a campaign to request verified reviews from past purchasers. This process involves creating a segment of people who purchased a product, then sending them a campaign with a review request link. </p>
+<div class="bs-callout bs-callout-default">
+<p>Only request reviews for one product per campaign. The review request link used in this process is product-specific, so make sure to send your campaign to people who purchased that product. If you’d like to request reviews for multiple products, use multiple campaigns. </p>
+</div>
+<h2 id="h_01J4SKF4K49X6WN6DC37H352P1">Create a segment of potential reviewers </h2>
+<p>In order to build your segment, you’ll first need to locate the product ID. </p>
+<ol>
+<li>Navigate to <strong>Content &gt; Products</strong>. </li>
+<li>Find the product you’d like to request reviews for.<br>
+
+<div class="bs-callout bs-callout-default">
+<p>You can only request reviews for one product per campaign. If you’d like to request reviews for multiple products, send multiple campaigns to different segments. </p>
+</div>
+</li>
+<li>Copy the product ID from the <em>Item ID</em> column.<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28717888604443" alt="The item ID column in the reviews product tab" width="642" height="148">
+<p>Then, create your segment: </p>
+</li>
+<li>Navigate to <strong>Lists &amp; segments</strong>. </li>
+<li>Select <strong>Create new</strong>. </li>
+<li>Select <strong>Create segment</strong>. </li>
+<li>Give the segment a descriptive name, like “Potential reviewers for [product name]”</li>
+<li>Create this segment:<br>
+What someone has done (or not done) &gt; Fulfilled Order &gt; at least once in the last 90 days &gt; where Items contains [your item]<br>
+AND<br>
+What someone has done (or not done) &gt; Submitted review &gt; zero times over all time &gt; where product_external_id = [your product ID]<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28717888598683" alt="A segment of people who have ordered a certain product in the last 90 days but haven't ever left a review" width="624" height="341">
+</li>
+<li>Click <strong>Create segment</strong>. </li>
+</ol>
+<p>You can adjust the time frame for this segment based on your business needs. Use a time frame that includes anyone who might have helpful feedback, but excludes those who purchased the product too long ago to recall details about their experience. </p>
+<h2 id="h_01J4SKF4K48SRVFD0JFB7CMGD5">Send a campaign to request reviews </h2>
+<p>To create a campaign, first copy the manual review request link. You’ll use this for your campaign’s CTA. </p>
+<ol>
+<li>Navigate to <strong>Reviews</strong>. </li>
+<li>Select <strong>Products</strong>. </li>
+<li>Find the product you’d like to request reviews for. Make sure to use the same product used in your segment definition. </li>
+<li>Open the three dots (additional options) menu. </li>
+<li>Select <strong>Copy link to manual review</strong>.<br>
+</li>
+</ol>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/28717882522907" alt="Option to copy a link to leave a manual review" width="624" height="169"></p>
+<p>Once you’ve copied the review request link, <a href="https://help.klaviyo.com/hc/en-us/articles/115005054847">create a campaign</a> and use this link in your CTA (e.g., a featured button or text link). Then, send the campaign to the segment you created in the last step. </p>
+<div class="bs-callout bs-callout-default">
+<p>If you’re sending multiple review request campaigns around the same time, make sure to exclude segments you’ve sent to recently so that subscribers aren’t bombarded with review requests. </p>
+</div>
+<h2 id="h_01J4SKF4K4XBFABA569G2VK5AF">How are reviews verified? </h2>
+<p>It’s important to send review request campaigns only to people who actually purchased the product you’re requesting a review for. When someone submits a review after clicking the link in your campaign, Klaviyo will check their order history to see if they actually purchased the product they reviewed. If they have not purchased the product (or if their order hasn’t yet been fulfilled), the review will <strong>not </strong>be verified. If they have purchased the product within the last 5 years, the review <strong>will</strong> be verified. </p>
+<h2 id="h_01J4SKF4K47MEKWDKRZ8Y5209R">Follow up on campaign reviews </h2>
+<p>If you offer an incentive in your review request campaign, use a flow to deliver that incentive and thank them for their review. If the incentive you offered is the same as your standard review request flow, you don’t have to take any additional action: all reviewers will be routed to your review follow-up flow. However, if you offered a different incentive, you’ll need to create a separate flow. </p>
+<p>In your standard review follow up flow, add this profile filter: </p>
+<p>What someone has done &gt; Received email &gt; where Campaign Name = [your campaign name] &gt; zero times over all time<br>
+</p>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/28717882527003" alt="A flow filter to exclude those who have received your review request campaign" width="396" height="253"></p>
+<p>This filter will exclude recipients of your campaign from receiving your standard review follow up flow. </p>
+<p>Then, <a href="https://help.klaviyo.com/hc/en-us/articles/24898429283739">clone your review follow-up flow</a>. Change the profile filter to use this criteria instead: </p>
+<p>What someone has done &gt; Received email &gt; where Campaign Name = [your campaign name] &gt; at least once over all time </p>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/28717882517787" alt="A flow filter to include those who have received your review request campaign" width="405" height="260"></p>
+<p>Adjust the flow message(s) to use the incentive offered in your review request campaign, then set it live. A few weeks after your campaign is sent, turn the new flow off and remove the filter from the old flow; that way, campaign recipients who submit a later review for a different product won’t receive the wrong flow message. </p>

@@ -1,0 +1,247 @@
+<h2 id="h_01K5YK86P3B0HQEB37S4KYP3QV">You will learn</h2>
+<p>You’ll connect Customer Hub to a headless Shopify storefront, choose a login method, and publish the Hub so shoppers can access it site‐wide.</p>
+<div class="bs-callout bs-callout-requirements">
+<p>Customer Hub currently supports Shopify storefronts, including Shopify Headless. Additional eCommerce platform support is planned.</p>
+<p>For feedback about Customer Hub functionality, email customerhub@klaviyo.com.</p>
+</div>
+<h2 id="h_01K5YK8R7MBNQJVCA5MHRNT07B">Before you begin</h2>
+<h3 id="h_01K5YK8X0DCR6GHGY4FTE17XK7">Prerequisites </h3>
+<ol>
+<li>A headless Shopify storefront with access to the Storefront API (Public access token / Storefront API public key in Shopify’s Headless Admin).</li>
+<li>Your <strong>Klaviyo company ID</strong> (used by the onsite JavaScript loader).</li>
+<li>Decision on shopper login: Shopify Customer Account API <em>or</em> Klaviyo One Time Password (OTP).
+<ol>
+<li>If using existing accounts, have your storefront’s Login, Logout, and (optional) Manage account and Manage addresses routes ready.</li>
+</ol>
+</li>
+<li>Ability to edit your storefront code and deploy changes.</li>
+<li>
+<strong>Who can set this up:</strong> You need an account role that can edit <strong>Customer Hub</strong> settings and publish widgets (Owner, Admin, or a custom role that has write access to Content and API keys). </li>
+</ol>
+<p></p>
+<h2 id="h_01K5YKC1QBQNFN2X7B5MK1NCC6">Overview</h2>
+<p>Customer Hub is a site‐wide overlay that gives shoppers faster access to account actions and helpful shopping tools. For headless Shopify, you connect Klaviyo’s onsite script, choose a login method (Customer Accounts API or Klaviyo OTP), and optionally add:</p>
+<ol>
+<li>
+<strong>Active Product</strong>: shows the product a shopper is viewing inside the Hub.</li>
+<li>
+<strong>Recently Viewed</strong>: lists recently viewed products using Klaviyo’s tracking.</li>
+<li>
+<strong>Favorites</strong> and <strong>FAQs</strong> widgets: render on PDPs and inside the Hub.  </li>
+</ol>
+<p>Use Customer Hub when you want an on‐page assistance layer that drives product discovery and faster checkout, improving conversion and lifetime value.</p>
+<p></p>
+<h2 id="h_01K5YKPYGKG6C850DDKZG6ZNNB">Setup</h2>
+<h3 id="h_01K5YKDETEPAM65NZ4HCNJFQCE">1 - Configure Customer Hub Settings</h3>
+<p>First, follow <a href="https://klaviyo.zendesk.com/hc/en-us/articles/33660324811675">Getting started with Customer Hub </a>and complete the onboarding wizard, just like with any other setup. Once this is complete, go to <strong>Customer Hub &gt; Settings</strong>. You'll see the Headless Shopify configuration section. </p>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/42187682618011" alt="" width="1908" height="296"></p>
+<p>Toggle on <strong>Headless Shopify configuration</strong> and then paste your Storefront API public key from Shopify’s Headless Admin (Public access token). </p>
+<p>Under <strong>Shopper login</strong>, select Shopify Customer Account API (recommended so that all of your storefront apps can share Shopify's login) <em>or</em> Klaviyo One Time Password (OTP, only works with Klaviyo and won't log shoppers into any other apps). </p>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/42187686797083" alt="" width="1912" height="694"></p>
+<p>If you select <strong>Shopify Customer Account API</strong>, also enter your storefront <strong>Login</strong>, <strong>Logout</strong>, and optional <strong>Manage account</strong>/<strong>Manage addresses</strong> routes (used for redirects between the Hub and your site). </p>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/42187682622363" alt="" width="1908" height="1024"></p>
+<p>Publish visibility: set <strong>Customer Hub</strong> to <strong>Live</strong>. </p>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/42187682624283" alt="" width="1906" height="724"></p>
+<p></p>
+<h3 id="h_01K5YKQ8W20T35YRK1MA922N71">2 - Load the Customer Hub JavaScript (Developer instructions)</h3>
+<p><strong>Tip:</strong> If you already run Klaviyo onsite features, you may have a loader in place. Confirm before adding a second script. </p>
+<p>Create /public/customerHub.js (or equivalent) with the following loader (replace COMPANY_ID with your Klaviyo <a href="https://klaviyo.zendesk.com/hc/en-us/articles/115005062267">public API key</a>, also known as your Company ID):</p>
+<pre><code class="language-auto">// customerHub.js
+// TODO: Configuration
+const COMPANY_ID = '';
+const script = document.createElement('script');
+script.src = `https://static.klaviyo.com/onsite/js/${COMPANY_ID}/klaviyo.js`;
+script.async = true;
+script.onload = () =&gt; { console.log('Klaviyo JS script loaded successfully'); };
+script.onerror = () =&gt; { console.error('Failed to load Klaviyo JS script'); };
+document.body.appendChild(script);</code></pre>
+<p>The onsite script loads on every page. Look for the console message: “Klaviyo JS script loaded successfully.”  In your root layout (e.g., root.tsx), include the loader:</p>
+<pre><code class="language-auto">// root.tsx
+return (
+  &lt;html&gt;
+    &lt;body&gt;
+      &lt;script src="/customerHub.js" defer&gt;&lt;/script&gt;
+    &lt;/body&gt;
+  &lt;/html&gt;
+)</code></pre>
+<p>After this step, window.customerHubApi becomes available on pages where the Hub runs. </p>
+<p></p>
+<h3 id="h_01K5YKX6PBWF59XZN1CY5EMA4T">3 - Show the active product in Customer Hub</h3>
+<p>Add the hydrate call on your <strong>product detail page (PDP)</strong> so the current product appears in the Hub:</p>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/41414430637979" alt="" width="2686" height="2090"></p>
+<pre><code class="language-auto">&lt;!-- products.tsx --&gt;
+&lt;script type="text/javascript"&gt;
+  (function() {
+    function waitForCustomerHubApi() {
+      return new Promise((resolve) =&gt; {
+        const check = () =&gt; {
+          if (window.customerHubApi &amp;&amp; window.customerHubApi.hydrateProduct) {
+            resolve();
+          } else {
+            requestAnimationFrame(check);
+          }
+        };
+        check();
+      });
+    }
+    waitForCustomerHubApi().then(() =&gt; {
+      window.customerHubApi.hydrateProduct("your-product-handle");
+    });
+  })();
+&lt;/script&gt;</code></pre>
+<p><strong>T</strong>he Hub should now display an additional product card for the PDP the shopper is viewing on the "Chat" tab if you have it enabled. </p>
+<p></p>
+<h3 id="h_01K5YM0XQJD89BBYPF95N66PBK">4 - Enable recently viewed products in Customer Hub</h3>
+<p>Implement <strong>Viewed Product</strong> tracking so the Hub can populate <strong>Recently viewed</strong> items and you can use the metric elsewhere in Klaviyo. The following tracking snippets can also be directly added to your storefront, instructions can be found here in our Klaviyo Developers documentation: <a href="https://developers.klaviyo.com/en/docs/guide_to_integrating_a_platform_without_a_pre_built_klaviyo_integration#viewed-product-tracking-snippet">Integrate an ecommerce platform without a pre-built Klaviyo integration</a>.</p>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/41414422348059" alt="" width="1312" height="702"></p>
+<p></p>
+<h3 id="h_01K5YM4DFKVQTFXE64JQ1J1S7Q">5 - Enable account link takeover</h3>
+<p>In order for Klaviyo’s Customer Hub to open by clicking the account icon in your storefront’s header, you need to already have an existing a-tag that references a link with /account (in which case we will automatically replace it for you). Or you can also manually define the icon link to point to #k-hub in order to open the drawer.</p>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/41414422348699" alt="" width="928" height="187"></p>
+<h3 id="h_01K5YM9MAVZ2WN4W53VXV107AH">6 - Set up Customer Hub with Customer Accounts API authentication (recommended)</h3>
+<p>In order to use your existing storefront’s customer accounts and authentication setup, Customer Hub will require you to add a new API route to your storefront that will handle securely passing a logged in shopper’s access token to our services. What’s important is that the new API route is named and can be reached with ‘/api/authenticateCustomerHub’.<br>
+<br>
+Note: the following code snippet example is for Shopify’s Hydrogen framework, more customized storefronts may require some additional workaround, however the general approach will be outlined here.</p>
+<pre><code class="language-text">// ./app/routes/api.authenticateCustomerHub.js
+// TODO: Configuration
+const COMPANY_ID = '';
+export async function action({context}) {
+  // Pull the Customer Account API Client from your storefront's context
+  const {customerAccount} = context;
+  try {
+    // Get the access token for the current customer
+    const accessToken = await customerAccount.getAccessToken();
+    if (!accessToken) {
+      return new Response(JSON.stringify({message: 'User not logged in'}), {
+        status: 200,
+      });
+    }
+    // Send the access token to the Customer Hub API
+    const response = await fetch(
+      'https://atlas-app.services.klaviyo.com/api/onsite/headless-shopify-login',
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          access_token: accessToken,
+          company_id: COMPANY_ID,
+        }),
+      },
+    );
+    const responseData = await response.text();
+    // Return the actual response from Customer Hub with the same status code
+    return new Response(responseData, {
+      status: response.status,
+      headers: {
+        'Content-Type':
+          response.headers.get('content-type') || 'application/json',
+      },
+    });
+  } catch (error) {
+    return new Response(null, {status: 500});
+  }
+}</code></pre>
+<p>Once this is configured, as well as the storefront routes defined in Klaviyo’s settings, Customer Hub will be able link into your existing authentication setup and provide a seamless entry point into your existing customer accounts.</p>
+<h3 id="h_01K5YM9H7FR8JTQ827ZR29RWPN">7 - Add the Favorites widget (recommended)</h3>
+<p>Both Favorites and FAQs will work within the Customer Hub drawer. However, you can add these widgets too on PDPs for additional engagement.</p>
+<p>To add a Favorites entry point on PDPs and inside the Hub:</p>
+<pre><code class="language-auto">// products.tsx
+// Example identifiers:
+//   id: gid://shopify/Product/12345
+//   data-product-id: 12345
+const gid = "gid://shopify/Product/12345";
+const productId = gid.split('/').pop();
+
+return (
+  &lt;div
+    className="kl-hub-favorites-slot"
+    data-product-id={productId}
+  /&gt;
+)</code></pre>
+<p>Shoppers can now click <strong>Add to favorites</strong> on PDPs; the item appears in the Hub’s <strong>Favorite items</strong>. </p>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/41414422349723" alt="" width="988" height="596"></p>
+<p></p>
+<h3 id="h_01K5YM6SQ1BFWP52N2DHFDE4YQ">8 - Add FAQ blocks (recommended)</h3>
+<p>Similar to adding Favorites, adding <a href="https://klaviyo.zendesk.com/hc/en-us/articles/36400427885979">FAQ blocks</a> is as simple as adding a div on your product page with its product ID passed in to render FAQ’s that you can edit and design in Klaviyo.</p>
+<p>Add a product‐specific FAQs block that you design in Klaviyo:</p>
+<pre><code class="language-auto">// products.tsx
+// Example:
+const gid = "gid://shopify/Product/12345";
+const productId = gid.split('/').pop();
+
+return (
+  &lt;div className="klaviyo-faqs-slot" data-product-id={productId} /&gt;
+)</code></pre>
+<p>FAQ chips/buttons should now render on PDPs if they are set up, and are editable in Klaviyo</p>
+<p></p>
+<h2 id="h_01K5YMG0HKHWYRK1TC9153FY2A">Best practices</h2>
+<ol>
+<li>
+<strong>Publish to production only after verification</strong> — keep staging hidden until QA is complete; then set <strong>Live</strong> to expose the Hub. Impact: fewer support issues, faster time‐to‐value.</li>
+<li>
+<strong>Always hydrate the Active Product on PDPs</strong> — keeps product context visible in the Hub and nudges add‐to‐cart. Impact: conversion rate, RPR.</li>
+<li>
+<strong>Implement Viewed Product tracking early</strong> — populates Recently viewed and unlocks browse‐based flows. Impact: engagement and revenue from browse recovery.</li>
+<li>
+<strong>Add Favorites</strong> — creates a low‐friction save action and a persistent shortlist. Impact: repeat visits, add‐to‐cart.</li>
+<li>
+<strong>Use FAQs for objections</strong> — answer shipping, materials, or returns questions inline to reduce drop‐off. Impact: conversion rate.</li>
+<li>
+<strong>Prefer server‐side auth with Customer Accounts API</strong> when available — improves continuity for logged‐in shoppers. Impact: experience quality, support deflection.  </li>
+</ol>
+<p></p>
+<h2 id="h_01K5YMGR8D975NY23TMXGV996K">Measuring success</h2>
+<p><strong>Where to view results:</strong> Use <strong>Analytics &gt; Metrics</strong> to monitor <strong>Viewed Product</strong> activity and downstream flow/campaign performance. Use your ecommerce revenue dashboards to track conversion and AOV changes after enabling Customer Hub. <strong>Key metrics to watch:</strong> conversion rate from PDP, add‐to‐cart rate, sessions with Hub opens (if instrumented), revenue per recipient (RPR), and browse‐driven revenue tied to Viewed Product events. Quick fixes checklist: <strong>Low Recently viewed activity?</strong> Verify the <strong>Viewed Product</strong> tracking snippet is firing and events are attributed to profiles. <strong>Low add‐to‐cart from Hub?</strong> Ensure <strong>Active Product</strong> hydration runs on every PDP and that variants/prices are correct. <strong>Few Favorites adds?</strong> Move the Favorites slot near core PDP CTAs and confirm the data-product-id matches the product.  </p>
+<p></p>
+<h2 id="h_01K5YMGXQ5311WED8AFFAD3MVK">Troubleshooting</h2>
+<p><strong>Symptom:</strong> Customer Hub does not appear on the site.</p>
+<p><strong>Likely cause:</strong> Script not loading or Hub is <strong>Hidden</strong>.</p>
+<p><strong>Fix:</strong> Confirm customerHub.js loads (check console), the <strong>company ID</strong> is set, and <strong>Customer Hub</strong> visibility is <strong>Live</strong> in <strong>Customer Hub &gt; Settings</strong>. </p>
+<p></p>
+<p><strong>Symptom:</strong> Console shows “Failed to load Klaviyo JS script.”</p>
+<p><strong>Likely cause:</strong> Incorrect script URL or missing <strong>company ID</strong>.</p>
+<p><strong>Fix:</strong> Verify https://static.klaviyo.com/onsite/js/&lt;COMPANY_ID&gt;/klaviyo.js and that COMPANY_ID is populated. </p>
+<p></p>
+<p><strong>Symptom:</strong> Active Product card does not show in the Hub on PDPs.</p>
+<p><strong>Likely cause:</strong> hydrateProduct not called or wrong product handle.</p>
+<p><strong>Fix:</strong> Ensure the wait loop runs and call window.customerHubApi.hydrateProduct("&lt;handle&gt;") with the correct product handle. </p>
+<p></p>
+<p><strong>Symptom:</strong> Recently viewed section is empty.</p>
+<p><strong>Likely cause:</strong> Viewed Product tracking not implemented.</p>
+<p><strong>Fix:</strong> Add the <strong>Viewed Product</strong> tracking snippet from the developer guide and verify events in Klaviyo. </p>
+<p></p>
+<p><strong>Symptom:</strong> Favorites or FAQ widgets don’t render on PDP.</p>
+<p><strong>Likely cause:</strong> Missing container or wrong attribute.</p>
+<p><strong>Fix:</strong> Add &lt;div class="kl-hub-favorites-slot" data-product-id="..."&gt; and/or &lt;div class="klaviyo-faqs-slot" data-product-id="..."&gt; with the correct product ID. </p>
+<p></p>
+<p><strong>Symptom:</strong> Clicking the account icon doesn’t open the Hub.</p>
+<p><strong>Likely cause:</strong> Header link not pointing to /account or #k-hub.</p>
+<p><strong>Fix:</strong> Ensure the account anchor uses /account (auto‐takeover) or set href="#k-hub". </p>
+<p></p>
+<p><strong>Symptom:</strong> Shoppers are not recognized as logged in inside the Hub.</p>
+<p><strong>Likely cause:</strong> Missing /api/authenticateCustomerHub route or failing API request.</p>
+<p><strong>Fix:</strong> Implement the Hydrogen example (or your framework equivalent), send access_token and company_id to Klaviyo’s login endpoint, and return the response. </p>
+<p></p>
+<h2 id="h_01K5YMHCTYG2HRWRCP9SN8Y31W">FAQ</h2>
+<p><strong>Q:</strong> Do I have to use Shopify Customer Accounts API for login?</p>
+<p><strong>A:</strong> No. You can use <strong>Klaviyo One Time Password (OTP)</strong> instead. If you already use Shopify accounts, connect via the Customer Accounts API for a seamless experience. </p>
+<p></p>
+<p><strong>Q:</strong> Which storefront routes do I need to provide?</p>
+<p><strong>A:</strong> If using your existing accounts, provide <strong>Login</strong> and <strong>Logout</strong> routes; <strong>Manage account</strong> and <strong>Manage addresses</strong> are optional for deeper linking. </p>
+<p></p>
+<p><strong>Q:</strong> Where do I find the Storefront API public key?</p>
+<p><strong>A:</strong> In Shopify’s Headless Admin under <strong>Storefront API &gt; Public access token</strong> (also called <strong>Storefront API public key</strong>). </p>
+<p></p>
+<p><strong>Q:</strong> Can Customer Hub take over my account icon?</p>
+<p><strong>A:</strong> Yes. If your header’s account link uses /account, Customer Hub can automatically open; you can also point it to #k-hub. </p>
+<p></p>
+<p><strong>Q:</strong> Is Shopify Hydrogen required?</p>
+<p><strong>A:</strong> No. The authentication example uses Hydrogen, but any framework can implement a server route at /api/authenticateCustomerHub that posts the access token and company_id to Klaviyo. </p>
+<p></p>
+<p><strong>Q:</strong> Can Favorites and FAQs live on PDPs and inside the Hub?</p>
+<p><strong>A:</strong> Yes. Add the respective container divs on PDPs; they will also surface in the Hub drawer. </p>
+<p></p>
+<p></p>
+<p></p>

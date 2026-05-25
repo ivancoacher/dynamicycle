@@ -1,0 +1,69 @@
+<p>Learn about KlaviyoAIBot, including: </p>
+<ul>
+<li>What it is and what it crawls</li>
+<li>How to identify authentic requests</li>
+<li>How crawling respects site rules and how to control it</li>
+</ul>
+<p>This article is for anyone who sees traffic from KlaviyoAIBot and wants to confirm if it is legitimate or adjust how it is allowed to crawl.</p>
+<h2 id="h_01K3S2PMTCV0CETQ2CMQ7V2EWS">What is KlaviyoAIBot?</h2>
+<p>KlaviyoAIBot is Klaviyo’s web crawler for its Kai Customer Agent feature. KlaviyoAIBot fetches publicly available pages from domains and URLs that you have explicitly connected to your account. By indexing this content, Klaviyo can tailor AI experiences both on your website and within the Klaviyo platform. This is useful for content generation, AI answers, and product recommendations. </p>
+<p>You can add sources beyond your primary storefront, including help centers (such as Zendesk), blogs, and news articles. KlaviyoAIBot does not bypass authentication, paywalls, or access controls.</p>
+<h2 id="h_01K3S2PMTDMC7SMSWZT7QMHK55">How it works</h2>
+<ul>
+<li>
+<strong>Consent and scope</strong><br>
+Klaviyo crawls the domains and URLs that you have explicitly connected to your account. For instance, it will crawl any public Shopify pages that are integrated with your Klaviyo account but won’t search Wikipedia for related content.</li>
+<li>
+<strong>Respect for site rules</strong><br>
+KlaviyoAIBot only crawls the content you want crawled, following the Robots Exclusion Protocol (REP) as defined in .</li>
+<li>
+<strong>Politeness</strong>.<br>
+If your site signals rate limiting, Klaviyo reduces its rate automatically. Klaviyo respects standard HTTP responses like  or 503 along with a  header.</li>
+<li>
+<strong>Revisits</strong><br>
+Klaviyo periodically recrawls to keep content fresh. Frequency varies based on change signals and your configuration.</li>
+</ul>
+<h2 id="h_01K3S2PMTGBBAYGE51SDGNDPR1">How to identify KlaviyoAIBot</h2>
+<p>KlaviyoAIBot uses 2 complementary signals.</p>
+<p>If you see requests that claim to be KlaviyoAIBot that don't pass signature verification (or aren't marked as verified bots by Cloudflare), treat them as untrusted.</p>
+<h3 id="h_01K3S2PMTH3WJXJDQVP6VHSKMQ"></h3>
+<p>KlaviyoAIBot/1.0 (+https://help.klaviyo.com/hc/en-us/articles/&lt;article_id&gt;)</p>
+<h3 id="h_01K3S2PMTJF16RNT4RKP3TWDSQ">HTTP message signatures (web bot auth)</h3>
+<p>Every request is signed using <a href="https://www.rfc-editor.org/rfc/rfc9421">HTTP Message Signatures RFC 9421</a> and Cloudflare’s <a href="https://developers.cloudflare.com/bots/concepts/bot/verified-bots/web-bot-auth/">Web Bot Auth</a>. You can use this to verify that the request genuinely came from KlaviyoAIBot without relying on IP allowlists.</p>
+<p><strong>Tip</strong>: If your site is behind Cloudflare, Cloudflare will verify Klaviyo’s signatures for you and flag traffic as a Verified Bot (cf.bot_management.verified_bot = true). You can safely allow it in WAF rules with that field.</p>
+<p><strong>I see traffic that says it is KlaviyoAIBot. How do I know it is real?</strong><br>
+If you use Cloudflare, confirm the request is marked as a verified bot. If you do not use Cloudflare, verify that the request includes HTTP Message Signature headers that validate according to RFC 9421 and Web Bot Auth.</p>
+<h2 id="h_01K3S2PMTMZKBZ8NPK4WHS6P5X">What KlaviyoAIBot crawls</h2>
+<ul>
+<li>
+<strong>Your ecommerce store</strong><br>
+The ecommerce domain connected to Klaviyo.</li>
+<li>
+<strong>Additional sources</strong><br>
+Any other source connected to your website, such as help centers (e.g., Zendesk), documentation portals, knowledge bases, blogs, and news articles when the customer has connected them.</li>
+<li>
+<strong>Public content</strong><br>
+KlaviyoAIBot respects robots rules in robots.txt and does not attempt to access gated resources.</li>
+</ul>
+<h3 id="h_01K3S2PMTPXC2QG4C5AAFE5WJS">How to control or limit crawling</h3>
+<ul>
+<li>R<strong>obots.txt</strong><br>
+Add or update robots rules for the KlaviyoAIBot user-agent to allow or disallow sections. Find out more about <a href="https://developers.google.com/search/docs/crawling-indexing/robots/robots_txt">robots.txt</a> and <a href="https://datatracker.ietf.org/doc/html/rfc9309">REP</a>.</li>
+<li>
+<strong>Temporary slowdowns</strong><br>
+Return standard rate limiting responses, like <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429">429</a> or 503 with <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Retry-After">Retry-After</a>, to reduce rate without changing robots rules.</li>
+<li>
+<strong>Choose what’s connected</strong><br>
+You can add or remove  the domains and URLs you want connected at any time.</li>
+</ul>
+<p><strong>Can I block a specific section of my site?</strong><br>
+Yes. Use robots rules for KlaviyoAIBot in robots.txt to disallow those paths. If you don’t know how, contact </p>
+<p><strong>Does the bot obey temporary slowdown signals?</strong><br>
+Yes. Standard rate limiting responses like 429 or 503 together with Retry-After are honored.</p>
+<h2 id="h_01K3S2PMTSDJ7DPC4P68E24K9T">Data use and privacy</h2>
+<p>KlaviyoAIBot retrieves content to power AI features, such as for content generation, AI answers, and product recommendations. Crawled content is tied to your account and follows your settings.</p>
+<p>Klaviyo periodically updates the indexed content to keep it current as long as the source page remains publicly available. </p>
+<p>When a page becomes restricted via robots.txt or is removed from the source site, Klaviyo deletes the corresponding indexed content within a few days. </p>
+<p>When you disconnect a source from your account, Klaviyo removes the associated content immediately.</p>
+<p><strong>Do you publish IP ranges?</strong></p>
+<p>No. Verification is based on cryptographic signatures and Cloudflare’s Verified bots program rather than static IP allowlists.</p>

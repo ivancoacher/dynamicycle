@@ -1,0 +1,180 @@
+<div class="bs-callout bs-callout-default">
+<p><a href="https://help.klaviyo.com/hc/en-us/articles/17655007276059">Advanced KDP</a> is not included in Klaviyo’s standard marketing application, and a subscription is required to access the associated functionality. Head to our <a href="https://help.klaviyo.com/hc/en-us/articles/115000976672">billing guide</a> to learn about how to purchase this plan.</p>
+</div>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/43129485336987" alt="Screenshot 2025-11-09 at 12.41.47 PM.png" width="1123" height="811"></p>
+<h2 id="overview">Overview</h2>
+<p>This guide walks Redshift administrators through preparing Amazon Redshift for Klaviyo, granting the minimum required access, and completing the connection so you can import profile data on a schedule. You’ll learn how to:</p>
+<ol>
+<li>Create the <code>KLAVIYO_TMP</code> and <code>KLAVIYO_IMPORT_FROM_DWH</code> schemas</li>
+<li>Create a dedicated service user for Klaviyo</li>
+<li>Grant least-privilege permissions</li>
+<li>(Optional) Validate permissions and connectivity</li>
+<li>Connect Redshift to Klaviyo and start creating syncs</li>
+</ol>
+<p>For background on how data warehouse import works—including supported objects and best practices for table structure—see <a href="https://klaviyo.zendesk.com/hc/en-us/articles/40939206649627"><em>Understanding data warehouse import in Klaviyo</em></a>.</p>
+<h2 id="create-required-schemas">Create required schemas</h2>
+<p>Create two schemas in the database Redshift will use for Klaviyo:</p>
+<pre><code class="language-auto">-- Run as a Redshift DB admin or a role with CREATE SCHEMA
+CREATE SCHEMA IF NOT EXISTS klaviyo_import_from_dwh;
+CREATE SCHEMA IF NOT EXISTS klaviyo_tmp;</code></pre>
+<ul>
+<li>
+<code><strong>KLAVIYO_IMPORT_FROM_DWH</strong></code> – Place your final, ready-to-sync tables or views here. During setup, Klaviyo lists objects in this schema for you to choose from, so include only the tables you plan to import.</li>
+<li>
+<code><strong>KLAVIYO_TMP</strong></code> – Used exclusively by Klaviyo for temporary/staging tables during sync jobs. Don’t modify data here—Klaviyo manages and cleans up this schema automatically.</li>
+</ul>
+<h2 id="create-service-user">Create the Klaviyo service user</h2>
+<p>Create a dedicated database user for Klaviyo with a strong password that you can rotate independently.</p>
+<pre><code class="language-auto">-- Replace with your own names and a strong password
+CREATE USER klaviyo_data_transfer_user WITH PASSWORD 'REPLACE_WITH_STRONG_PASSWORD';</code></pre>
+<p>Create a role to manage grants for the service user:</p>
+<pre><code class="language-auto">CREATE ROLE klaviyo_data_transfer_role;
+GRANT ROLE klaviyo_data_transfer_role TO klaviyo_data_transfer_user;</code></pre>
+<p>Store the username and password securely—you’ll use them when connecting Klaviyo to Redshift.</p>
+<h2 id="grant-permissions">Grant required permissions (least privilege)</h2>
+<pre><code class="language-auto">-- 1) Allow temporary tables
+GRANT TEMPORARY ON DATABASE your_database TO ROLE klaviyo_data_transfer_role;
+
+-- 2) Permissions on the staging schema Klaviyo manages
+GRANT USAGE  ON SCHEMA klaviyo_tmp TO ROLE klaviyo_data_transfer_role;
+GRANT CREATE ON SCHEMA klaviyo_tmp TO ROLE klaviyo_data_transfer_role;
+
+-- 3) Read-only access to your import schema
+GRANT USAGE ON SCHEMA klaviyo_import_from_dwh TO ROLE klaviyo_data_transfer_role;
+GRANT SELECT ON ALL TABLES IN SCHEMA klaviyo_import_from_dwh TO ROLE klaviyo_data_transfer_role;
+-- Remember to grant access to new tables in the future
+
+-- 3a) Grant SELECT on specific views (repeat as needed)
+GRANT SELECT ON VIEW klaviyo_import_from_dwh.example_view_name TO ROLE klaviyo_data_transfer_role;
+</code></pre>
+<h2 id="verify-setup">(Optional) Verify your setup</h2>
+<p>Run a few quick checks as the Klaviyo user to confirm the grants are correct.</p>
+<pre><code class="language-auto">-- Switch to the target database
+SET search_path TO klaviyo_tmp;
+
+-- 4.1 Validate create/read in KLAVIYO_TMP
+CREATE TABLE IF NOT EXISTS permission_check (id INT);
+INSERT INTO permission_check VALUES (1);
+SELECT COUNT(*) FROM permission_check;  -- expect 1
+DROP TABLE permission_check;
+
+-- 4.2 Confirm visibility of import tables
+SET search_path TO klaviyo_import_from_dwh;
+SELECT tablename FROM pg_table_def
+WHERE schemaname = 'klaviyo_import_from_dwh'
+LIMIT 25;
+
+-- 4.3 Confirm SELECT on a source table or view
+SELECT * FROM klaviyo_import_from_dwh.EXAMPLE_TABLE;
+</code></pre>
+<h2 id="network-access">Network access</h2>
+<p>Klaviyo must be able to reach your Redshift endpoint.</p>
+<ul>
+<li>
+<strong>Public Redshift endpoint:</strong> allowlist Klaviyo’s static IPs in your firewall or security group.</li>
+<li>
+<strong>Private endpoint (e.g., PrivateLink):</strong> ensure connectivity through your internal network path and security policies.</li>
+</ul>
+<p>If using security groups, allow inbound access on your Redshift port (default <strong>5439</strong>) for Klaviyo’s IP ranges:</p>
+<pre><code class="language-auto">184.72.183.187/32
+52.206.71.52/32
+3.227.146.32/32
+44.198.39.11/32
+35.172.58.121/32
+3.228.37.244/32
+54.88.219.8/32
+3.214.211.176/32</code></pre>
+<h2 id="prepare-tables">Prepare your import tables (structure &amp; performance)</h2>
+<p>Ensure that all tables you plan to import follow these conventions for accurate, efficient incremental syncs:</p>
+<ul>
+<li>
+<strong>Timestamp column:</strong> Include a per-row creation or last-update timestamp (e.g., <code>inserted_at</code>, <code>updated_at</code>, <code>modified_at</code>).</li>
+<li>
+<strong>Monotonic updates:</strong> The timestamp should increase whenever a row changes.</li>
+<li>
+<strong>Timezone:</strong> Use UTC or include timezone information. If missing, Klaviyo assumes UTC.</li>
+<li>
+<strong>Consistent identifiers:</strong> Use the same profile identifiers (<code>email</code>, <code>phone</code>, <code>external_id</code>, etc.) across import tables to avoid duplicates.</li>
+<li>
+<strong>Consent formats:</strong> When syncing consent data, follow the same valid values/formats as used in file or SFTP uploads.</li>
+<li>
+<strong>Performance:</strong> Consider sort or dist keys on your timestamp column for efficient incremental reads.</li>
+<li>
+<strong>Views:</strong> You can import from tables or views, as long as a simple <code>SELECT</code> works for the Klaviyo user.</li>
+</ul>
+<h2 id="connect-in-klaviyo">Connect Redshift to Klaviyo</h2>
+<ol>
+<li>In Klaviyo, open the left sidebar and go to <strong>Advanced → Syncing</strong>.</li>
+<li>Click <strong>Create sync</strong>.</li>
+<li>Select <strong>Import data from your data warehouse</strong>.</li>
+<li>Choose <strong>Redshift</strong>.</li>
+<li>Click <strong>Connect to Redshift</strong> and enter the following connection details:</li>
+</ol>
+<table>
+<tbody>
+<tr>
+<th style="text-align: left">Field</th>
+<th style="text-align: left">Description</th>
+</tr>
+<tr>
+<td><strong>Host</strong></td>
+<td>Your Redshift endpoint (e.g., <code>example-cluster.abc123.us-east-1.redshift.amazonaws.com</code>)</td>
+</tr>
+<tr>
+<td><strong>Port</strong></td>
+<td>5439 (or your custom port)</td>
+</tr>
+<tr>
+<td><strong>Database</strong></td>
+<td>The database containing <code>klaviyo_tmp</code> and <code>klaviyo_import_from_dwh</code>
+</td>
+</tr>
+<tr>
+<td><strong>Username / Password</strong></td>
+<td>The Klaviyo service user credentials</td>
+</tr>
+</tbody>
+</table>
+<p>After you connect, Klaviyo will test your credentials and network connectivity. Once verified, you can create syncs and select tables or views from <code>klaviyo_import_from_dwh</code>.</p>
+<h2 id="troubleshooting">Troubleshooting tips</h2>
+<p><strong>Connection test fails</strong></p>
+<ul>
+<li>Verify that firewall or security group rules allow Klaviyo’s IPs to reach your Redshift endpoint on the correct port.</li>
+<li>Confirm SSL settings and that you’re using the correct endpoint (cluster vs. workgroup), region, and port.<br>
+<p><strong>Tables don’t appear</strong></p>
+</li>
+<li>Ensure tables are in <code>klaviyo_import_from_dwh</code>.</li>
+<li>Confirm the Klaviyo user has <code>USAGE</code> on the schema and <code>SELECT</code> on the tables or views.<br>
+<p><strong>No new rows syncing</strong></p>
+</li>
+<li>Verify your timestamp column updates on row changes and uses UTC or includes timezone info.<br>
+<p><strong>Permission errors at runtime</strong></p>
+</li>
+<li>Re-run the validation SQL as the Klaviyo user.</li>
+<li>Re-apply grants or default privileges if necessary.</li>
+</ul>
+<h2 id="security-maintenance">Security and maintenance</h2>
+<ul>
+<li>Rotate the service user password regularly and after staff changes.</li>
+<li>Limit the Klaviyo user to the two schemas above, and grant <code>USAGE</code> only where required.</li>
+<li>Keep a simple runbook documenting your exact <code>GRANT</code> statements and the IP ranges you’ve allowlisted.</li>
+</ul>
+<h2 id="faq">FAQ</h2>
+<p><strong>Can I import from multiple Redshift databases?</strong><br>
+Yes. Create the two schemas in each database and connect objects from each as separate syncs.</p>
+<p><strong>Can I use materialized views?</strong><br>
+Yes. Grant <code>SELECT</code> on the materialized view to the Klaviyo user.</p>
+<h2 id="appendix">Appendix: Example DDL for a simple import table</h2>
+<pre><code class="language-auto">CREATE TABLE klaviyo_import_from_dwh.profile_base (
+  external_id   VARCHAR(128),
+  email         VARCHAR(320),
+  phone         VARCHAR(32),
+  first_name    VARCHAR(128),
+  last_name     VARCHAR(128),
+  country       VARCHAR(64),
+  inserted_at   TIMESTAMP
+);
+
+-- ensure monotonically increasing timestamp on inserts/updates
+-- (use your ETL/ELT to set inserted_at = GETDATE() at load time)
+</code></pre>

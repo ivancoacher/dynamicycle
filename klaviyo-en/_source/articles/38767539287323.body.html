@@ -1,0 +1,172 @@
+<p>Learn how to set up and customize a back in stock sign-up form for your online store. Using Klaviyo’s form editor, you can customize both the “Notify me” button that appears when a product on your site is out of stock, and the form your customers use to sign up for back in stock notifications via email or SMS.</p>
+<h2 id="h_01JZPK49E15Z30KR2R03NK94TM">Before you begin</h2>
+<p>Back in stock forms are only available for Shopify and BigCommerce. If you’re using a different platform, refer to our <a href="https://help.klaviyo.com/hc/en-us/articles/115003872251">back in stock flow installation guide</a> instead. </p>
+<p>In this article, you’ll learn how to:</p>
+<ul>
+<li>Remove any existing Klaviyo back in stock code from your Shopify or BigCommerce store (if applicable)</li>
+<li>Enable and customize your back in stock button and sign-up form</li>
+</ul>
+<h2 id="h_01JZPK49E186H3EJMH0MSATAJ1">How the back in stock form works on your storefront</h2>
+<p>After you publish a back in stock form, Klaviyo automatically displays a customizable “Notify me” button on any product page where inventory is out of stock. You can customize this button in the form editor, alongside the form itself. The button appears and disappears automatically based on your product inventory.</p>
+<p>When a shopper clicks the “Notify me” button, your form appears, allowing them to choose how they want to be notified when the product is available again, depending on how you’ve configured your form:</p>
+<ul>
+<li>Email: If you include an email field, shoppers can enter their email address to receive a restock alert by email. You can also add an optional checkbox for shoppers to opt in to receive promotional marketing emails.</li>
+<li>Text messaging: If you include a phone number field, shoppers can enter their phone number to receive a restock alert by text message. In order to receive these text alerts, shoppers must provide explicit consent to receive promotional text messages. This consent is required and cannot be made optional, and your disclosure language must be present.</li>
+</ul>
+<p>After a shopper submits the form, Klaviyo logs a <em>Subscribed to Back In Stoc</em>k event on their profile. This event is used to trigger your <a href="https://help.klaviyo.com/hc/en-us/articles/115003872251">back in stock flow</a>. Shoppers who subscribe will automatically enter the flow and will receive a notification when the product is restocked.</p>
+<p>Note that A/B testing and non-traditional SMS opt-in methods (e.g., smart opt-in and tap-to-text) are not supported for back in stock forms.</p>
+<h2 id="h_01JZPK49E16XSA1KQ0HANS0TFP">Remove existing back in stock code snippet</h2>
+<p>If you previously installed Klaviyo’s back in stock code snippet, you must first remove it to prevent duplicate buttons or forms. </p>
+<p>Click one of the arrows below to expand the section below for instructions on removing the code from your store platform. If you’re unsure about which script or code to remove, contact your developer or refer to your original installation notes.</p>
+<div class="bs-callout bs-callout-default">
+<p>If you haven’t added any back in stock code before, skip ahead to the next section on creating your back in stock form.</p>
+</div>
+<div class="accordion accordion--default">
+<div class="accordion__item">
+<div class="accordion__item-title"><strong>Remove back in stock code from a Shopify siteIn your Shopify Admin, go to Online Store &gt; Themes.Next to your published theme, click the additional options menu (3 dots), then select Edit Code.Open the theme.liquid file.Use the find shortcut (Command+F on Mac or Control+F on Windows) to search the word “backinstock” within the file.Find and delete the following code snippet:&lt;script src="https://a.klaviyo.com/media/js/onsite/onsite.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+    var klaviyo = klaviyo || [];
+    klaviyo.init({
+      account: "PUBLIC_API_KEY",
+      platform: "shopify"
+    });
+    klaviyo.enable("backinstock",{ 
+    trigger: {
+      product_page_text: "Notify Me When Available",
+      product_page_class: "button",
+      product_page_text_align: "center",
+      product_page_margin: "0px",
+      replace_anchor: false
+    },
+    modal: {
+     headline: "{product_name}",
+     body_content: "Register to receive a notification when this item comes back in stock.",
+     email_field_label: "Email",
+     button_label: "Notify me when available",
+     subscription_success_label: "You're in! We'll let you know when it's back.",
+     footer_content: '',
+     additional_styles: "@import url('https://fonts.googleapis.com/css?family=Helvetica+Neue');",
+     drop_background_color: "#000",
+     background_color: "#fff",
+     text_color: "#222",
+     button_text_color: "#fff",
+     button_background_color: "#439fdb",
+     close_button_color: "#ccc",
+     error_background_color: "#fcd6d7",
+     error_text_color: "#C72E2F",
+     success_background_color: "#d3efcd",
+     success_text_color: "#1B9500"
+    }
+  });
+&lt;/script&gt;Click Save.Return to your website and refresh a product page for an out-of-stock item. Verify that the "Notify me" button is no longer visible.</strong></div>
+<div class="accordion__item-content">
+<p></p>
+</div>
+</div>
+<div class="accordion__item">
+<div class="accordion__item-title"><strong>Remove back in stock code from a BigCommerce site</strong></div>
+<div class="accordion__item-content">
+<p></p>
+<ol>
+<li>In your BigCommerce admin, go to <strong>Storefront &gt; Script Manager</strong>.</li>
+<li>Look for any scripts related to Klaviyo’s back in stock feature. These scripts may have a name like “Klaviyo Back in Stock” or be labeled according to your previous installation.</li>
+<li>Next to the script, click the additional options (3 dots) menu, and choose <strong>Delete</strong> to remove the script.<br>
+<div class="bs-callout bs-callout-default">
+<p>If you originally pasted the Klaviyo back in stock code directly into a theme file (e.g., in footer.html), you must manually remove the code from there. To do this, go to <strong>Storefront &gt; Themes &gt; Edit Theme Files</strong>, find the file containing the script, and delete the code snippet.</p>
+</div>
+</li>
+<li>Save your changes.</li>
+<li>Return to your website and refresh a product page for an out-of-stock item. Verify that the "Notify me" button is no longer visible.</li>
+</ol>
+<p></p>
+</div>
+</div>
+</div>
+<p><br>
+</p>
+<h2 id="h_01JZPK49E1QWNSAQRWBH5TBDYQ">Create a back in stock form</h2>
+<div class="bs-callout bs-callout-default">
+<p>You can only have one back in stock form in your account at a time, whether it is published or in draft mode. If a back in stock form already exists, you must delete it before creating a new one.</p>
+</div>
+<ol>
+<li>In Klaviyo’s main navigation, select the <strong>Sign-up forms</strong> tab.</li>
+<li>Click <strong>Create form</strong>.</li>
+<li>In the search bar, type “back in stock” and select a pre-built <em>Back in Stock</em> template to customize.<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/38774168078875" alt="Three Back in Stock popup form templates displayed for selection on the Create Form page." width="2088" height="848">
+<ul>
+<ul>
+<li>If you would prefer to start from a blank form, click <strong>Build a blank form</strong> and then choose <strong>Back in stock</strong> as the form type.</li>
+</ul>
+</ul>
+</li>
+<li>Choose what list(s) you want to collect email and SMS sign-ups to.</li>
+<li>Click <strong>Create form</strong>.<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/38774168081435" alt="Back in Stock Multi-step popup form setup screen with options for email and SMS subscriber lists." width="746" height="1268">
+</li>
+<li>Select the <strong>Product display button</strong> step in the menu bar. Note that this must always be the first step of the form, and cannot be deleted.</li>
+<li>In the editing menu on the left, choose where the button should appear on your product pages:<br>
+<ul>
+<ul>
+<li>
+<strong>Replace add to cart button</strong>: The "Notify me" button will replace the "Add to Cart" button for items that are out of stock.</li>
+<li>
+<strong>Stacked</strong>: The "Notify me" button will appear beneath the "Add to Cart" button (when it’s displayed as "Sold Out").<br>
+</li>
+</ul>
+</ul>
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/38774134029979" alt="Product display button settings with options to replace or stack the " width="2240" height="428">
+<div class="bs-callout bs-callout-default">
+<p>If you want to place the "Notify me" button in a different location, see the section below on using the <code>klaviyo-bis-trigger</code> for custom button placement.</p>
+</div>
+</li>
+<li>Use the options for <em>Text, Button style, Border, </em>and <em>Drop shadow</em> to update the label and styling of the "Notify me" button.</li>
+<li>Switch to the <strong>Email opt-in</strong> step and use the <strong>Styles</strong> menu to adjust colors, fonts, and layout so your form matches your brand. <br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/38774168089371" alt="Back in Stock form editor showing style customization options and a preview of the email opt-in popup." width="2146" height="1026">
+</li>
+<li>Apply the styling to each subsequent step in your form, such as SMS opt-in or Success steps, by clicking each step in the menu bar and repeating step 9.<br>
+<div class="bs-callout bs-callout-default">
+<p>Every input step must include at least 1 email or SMS input field. If a step has both, you can remove 1. If a step has only 1 of the 2 inputs, it cannot be deleted from that step. You can, however, delete the entire step if you only want to collect 1 channel. Email marketing consent is optional and can be removed.</p>
+</div>
+</li>
+<li>Shopify only (optional): To control where the "Notify me" button appears, go to <strong>Targeting and behavior &gt; Targeting</strong>, and use <a href="https://help.shopify.com/en/manual/shopify-admin/productivity-tools/using-tags">Shopify tags</a> to include or exclude specific products for which the button should appear. <br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/39062525638939" alt="BiS12.jpg" width="878" height="720">
+</li>
+<li>When you’re satisfied with your form, click <strong>Publish</strong> to set it live. Once your form is live, your product display button will automatically appear when an item on your site goes out of stock.</li>
+<li>After publishing, you’ll see a prompt in the publish confirmation modal to set up your back in stock flow.</li>
+</ol>
+<ul>
+<li>If you already have a back in stock flow set up with the <em>Subscribed to Back in Stock</em> metric as the trigger, it will begin working with your new back in stock form automatically. You do not need to create another one; click <strong>Dismiss</strong>.</li>
+<li>If not, click <strong>Exit and create flow</strong>, then head to our guide on <a href="https://help.klaviyo.com/hc/en-us/articles/115003872251#h_01HBBYWCR7VMA1Q70QTGAXQBGR">How to set up a back in stock flow</a>.</li>
+</ul>
+<p class="wysiwyg-text-align-center"><img src="https://klaviyo.zendesk.com/hc/article_attachments/38774134032027" alt="Modal with the message " width="1116" height="390"></p>
+<h2 id="h_01JZPK49E20JKBZJCBEFZBDKYW">Analytics for back in stock forms</h2>
+<p>You can monitor metrics for your back in stock form on its analytics page, including <em>Back in stock submits</em> and <em>Marketing opt-ins</em>. Note that the <em>Submit rate </em>is calculated based on the number of back in stock subscriptions, not marketing consent.</p>
+<p class="wysiwyg-text-align-center"><img src="https://klaviyo.zendesk.com/hc/article_attachments/38774168091291" alt="Analytics dashboard showing submit rate, back in stock submits, marketing opt-ins, and viewed form metrics." width="1828" height="1052"></p>
+<p>This page also includes graphs of the form’s data by step and by data collection type:</p>
+<ul>
+<li>
+<em>Engagement</em>: This refers to back in stock subscriptions (e.g., when a shopper signs up for email restock alerts).</li>
+<li>
+<em>Marketing opt-ins</em>: This refers to when shoppers provide consent to receive promotional messages, either by checking the marketing email opt-in box or by submitting a phone number, since text alerts always require promotional SMS consent.</li>
+</ul>
+<h2 id="h_01JZPK49E2BAG5EDR50K6GD9YE">Troubleshooting back in stock</h2>
+<p>If your back in stock experience isn’t working as expected, review the following common issues.</p>
+<h3 id="h_01K1TR47KT7P37FHV7SBXY3BY3">The "Notify me" button isn't appearing or is not in the right location</h3>
+<p>If the "Notify me" button is missing from your product page or you want to configure it to appear in a different, custom location, you can manually control its placement using the <code>klaviyo-bis-trigger</code> HTML attribute. </p>
+<pre><code class="language-auto">&lt;a class="klaviyo-bis-trigger" href="#"&gt;Notify Me When Available&lt;/a&gt;</code></pre>
+<p>Add this attribute to the specific HTML element where you want the "Notify me" button to be rendered, and Klaviyo will then display the button at that location instead of the default location. This solution can be helpful if you're using a custom or non-standard theme; however it will not always resolve a missing button issue. If you're having trouble configuring a custom button location, consult your developer.</p>
+<h3 id="h_01JZPK49E2M5QWW1NCPYRW386G">Compatibility with Shopify’s “Continue selling when out of stock” setting</h3>
+<p>Klaviyo’s back in stock feature does not work with Shopify’s “Continue selling when out of stock” setting. If this setting is enabled, the product always appears available, even with zero inventory. As a result:</p>
+<ul>
+<li>The “Notify Me” button and back in stock form will not appear.</li>
+<li>No back in stock emails will be sent, since Klaviyo cannot detect when inventory is restocked to trigger the flow.</li>
+</ul>
+<p>To use Klaviyo’s back in stock feature, make sure “Continue selling when out of stock” is disabled for those products.</p>
+<h3 id="h_01JZPK49E2H5N98WRQWDTWERD9">Are you using a Retina theme?</h3>
+<p>The Retina theme (from Out of the Sandbox) comes with a "Notify Me" form built into the product page. You will need to disable the default button that comes with your theme in order for the Klaviyo code to function.</p>
+<h3 id="h_01JZPK49E2FHYENYNNWPMYGKYR">Are you using a theme that hides a product if all variants are sold out?</h3>
+<p>If your Shopify theme hides a product when all the variants are sold out, you'll need to identify this area of the code in your product.liquid file and edit it to display all products, regardless of stock level.</p>

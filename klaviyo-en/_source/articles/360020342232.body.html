@@ -1,0 +1,54 @@
+<h2 id="h_01HT2TACN4FEXCFYSSJ44AVNGG">You will learn</h2>
+<p>Learn how to manually install Klaviyo’s<span> </span><em>Active on Site</em><span> </span>tracking snippet, also known as Klaviyo’s onsite JavaScript or Klaviyo.js, on your Shopify store. You should only do this if you experience very high web traffic or your site suffers from slow loading time for any other reason (though Klaviyo has recently<span> </span><a href="https://klaviyo.tech/improving-forms-performance-c67c98114d49" target="_blank" rel="noopener">improved load times</a><span> </span>and thus may not be the cause). Otherwise, we recommend you install Klaviyo.js by<span> </span><a href="https://help.klaviyo.com/hc/en-us/articles/4425956184731" target="_blank" rel="noopener">enabling Klaviyo’s Shopify app embed</a>.</p>
+<h2 id="h_01HT2TACN43V3KBV604MC7AD04">Before you begin</h2>
+<p>If you choose to manually install Klaviyo.js and previously had it enabled via Klaviyo's app embed, you must first disable the app embed in your Shopify theme settings.</p>
+<p class="wysiwyg-text-align-left"><img src="https://klaviyo.zendesk.com/hc/article_attachments/28716065121563" alt="Klaviyo app embed for onsite tracking in Shopify toggled off" width="322" height="335"></p>
+<div class="bs-callout bs-callout-default">
+<p>Because pasting this code requires access to your site's HTML and ecommerce platform, our support team is unable to offer hands-on assistance. If you don't have a developer on your team and are not comfortable adding the code yourself, consider <a href="https://klaviyo.partnerpage.io/">reaching out to a Klaviyo partner for assistance</a>.</p>
+</div>
+<h2 id="h_01HT2TACN4E0H0YM1KRRK2XXT0">Install Klaviyo.js on your Shopify store</h2>
+<ol>
+<li>Copy the code snippet below:
+<pre><code class="language-javascript">&lt;script type="text/javascript" async="" src="https://static.klaviyo.com/onsite/js/PUBLIC_API_KEY/klaviyo.js"&gt;&lt;/script&gt;</code></pre>
+</li>
+<li>In the code snippet, be sure to replace PUBLIC_API_KEY with <a href="https://www.klaviyo.com/account#api-keys-tab" target="_blank" rel="noopener">your six-digit Klaviyo Public API Key</a>.</li>
+<li>If you've enabled <a href="https://help.shopify.com/en/manual/customers/customer-accounts" target="_blank" rel="noopener">Customer Accounts</a> for your store, add an extra script to identify your customers with the email they use to log in to your store. The full set of scripts will look like the following:
+<pre><code class="language-javascript">&lt;script type="text/javascript" async="" src="https://static.klaviyo.com/onsite/js/PUBLIC_API_KEY/klaviyo.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript"&gt; 
+//Initialize the Klaviyo object on page load
+!function(){if(!window.klaviyo){window._klOnsite=window._klOnsite||[];try{window.klaviyo=new Proxy({},{get:function(n,i){return"push"===i?function(){var n;(n=window._klOnsite).push.apply(n,arguments)}:function(){for(var n=arguments.length,o=new Array(n),w=0;w&lt;n;w++)o[w]=arguments[w];var t="function"==typeof o[o.length-1]?o.pop():void 0,e=new Promise((function(n){window._klOnsite.push([i].concat(o,[function(i){t&amp;&amp;t(i),n(i)}]))}));return e}}})}catch(n){window.klaviyo=window.klaviyo||[],window.klaviyo.push=function(){var n;(n=window._klOnsite).push.apply(n,arguments)}}}}(); &lt;/script&gt;
+&lt;script type="text/javascript"&gt;
+//Customer accounts
+var klaviyo = window.klaviyo || [];
+if ("{{ customer.email }}") {klaviyo.identify({"$email" : "{{ customer.email }}"})};
+&lt;/script&gt;
+</code></pre>
+</li>
+<li>From your Shopify Admin click <strong>Online Store </strong>&gt;<strong> Themes</strong>. From the dropdown click <strong>Edit Code</strong>.<br><img src="https://klaviyo.zendesk.com/hc/article_attachments/28716065126043" alt="Shopify Themes page with Action dropdown open showing Edit Code optio">
+</li>
+<li>Search for the files you want to add the snippet to and click to open it in the editor. You can add the snippet to any page templates where you want to enable Klaviyo forms and tracking on the corresponding pages. </li>
+<li>Scroll to the bottom of the file and paste your snippet below the other code.<br><img src="https://klaviyo.zendesk.com/hc/article_attachments/30186621806875" width="606" height="340">
+</li>
+<li>Click <strong>Save</strong>.</li>
+</ol>
+<h2 id="h_01HT2TACN4GJK4HZKB7E3FEVAD">Test your Active on Site tracking</h2>
+<p>To test that your<span> </span><em>Active on Site</em><span> </span>tracking is set up properly, follow these steps:</p>
+<ol>
+<li>Navigate to your website.</li>
+<li>On your homepage, add the following to the end of the URL, replacing<span> </span><em>example@gmail.com</em><span> </span>with your email address:<br><em>?utm_email=example@gmail.com<br><img src="https://klaviyo.zendesk.com/hc/article_attachments/28716065123227" alt="Test store in Shopify with ?utm_email=example@gmail.com amended to URL" width="602" height="113"><br></em>
+</li>
+<li>Reload the page.</li>
+<li>Search in Klaviyo for your email address.<br><img src="https://klaviyo.zendesk.com/hc/article_attachments/28716065129883" alt="Klaviyo dashboard with email address in search bar" width="385" height="148">
+</li>
+</ol>
+<p>You should see that a Klaviyo profile has been created for you (if one didn't exist already) and that this activity has been tracked on your activity feed.</p>
+<p>Now that you've installed Klaviyo.js, you'll be able to utilize Active on Site tracking, Klaviyo sign-up forms, and more. </p>
+<div class="bs-callout bs-callout-default">
+<p>Based on your Customer Privacy settings in Shopify, Klaviyo may not track onsite events for visitors to your Shopify store in the EU, EEA, UK and Switzerland, unless they have provided consent.</p>
+</div>
+<h2 id="h_01HT2TACN4B934AMDEJMZVE5QQ">Additional resources</h2>
+<ul>
+<li><a href="https://klaviyo.zendesk.com/hc/en-us/articles/115005080407" target="_blank" rel="noopener">Getting started with Shopify</a></li>
+<li><a href="https://klaviyo.zendesk.com/hc/en-us/articles/115005076767" target="_blank" rel="noopener">Getting started with Klaviyo onsite tracking</a></li>
+<li><a href="https://klaviyo.zendesk.com/hc/en-us/articles/360026474752" target="_blank" rel="noopener">Getting started with sign-up forms</a></li>
+</ul>

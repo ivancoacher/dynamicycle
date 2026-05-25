@@ -1,0 +1,1030 @@
+{
+  "captured_at": "2026-05-23T16:18:26Z",
+  "article": {
+    "id": 4408802597659,
+    "url": "https://klaviyo.zendesk.com/api/v2/help_center/en-us/articles/4408802597659.json",
+    "html_url": "https://klaviyo.zendesk.com/hc/en-us/articles/4408802597659-How-to-build-dynamic-blocks-in-a-flow-email",
+    "author_id": 390819509472,
+    "comments_disabled": true,
+    "draft": false,
+    "promoted": false,
+    "position": 6,
+    "vote_sum": -26,
+    "vote_count": 228,
+    "section_id": 49375545220123,
+    "created_at": "2021-10-22T14:36:58Z",
+    "updated_at": "2026-04-23T11:25:46Z",
+    "name": "How to build dynamic blocks in a flow email",
+    "title": "How to build dynamic blocks in a flow email",
+    "source_locale": "en-us",
+    "locale": "en-us",
+    "outdated": false,
+    "outdated_locales": [],
+    "edited_at": "2026-04-17T01:01:24Z",
+    "user_segment_id": null,
+    "permission_group_id": 146372,
+    "content_tag_ids": [],
+    "label_names": [],
+    "body": "<h2 id=\"01FJZ2C75XRVYVGV97Q7GWRDRN\">You will learn</h2>\n<p>Learn how to use dynamic table blocks to add product and other event information to your metric-triggered flows. In this article, you'll learn how to create a dynamic block using the example of an abandoned cart reminder showing the products that were left behind.</p>\n<p>If you use one of Klaviyo’s prebuilt ecommerce integrations (e.g., Shopify, BigCommerce, Magento, or WooCommerce), you don’t need to build these blocks manually. Instead, <a href=\"https://help.klaviyo.com/hc/en-us/articles/115002774932#klaviyo-s-built-in-flows3\">use the flow library</a> to find pre-built, fully functional flow emails to use as templates. </p>\n<p>Within a metric-triggered flow, you can personalize the content of your emails based on the event that triggers the flow. For example, if someone starts a checkout, you can include product images and prices within an abandoned cart email to encourage recipients to return to their cart and finish their purchase. The dynamic table block will automatically repeat with the information specified for each item in the cart.</p>\n<p></p>\n<p>\n<script src=\"https://fast.wistia.com/embed/medias/m3tjywjv11.jsonp\" async=\"async\"></script>\n<script src=\"https://fast.wistia.com/assets/external/E-v1.js\" async=\"async\"></script>\n</p>\n<div class=\"wistia_responsive_padding\" style=\"padding: 56.25% 0 0 0; position: relative;\">\n<div class=\"wistia_responsive_wrapper\" style=\"height: 100%; left: 0; position: absolute; top: 0; width: 100%;\">\n<div class=\"wistia_embed wistia_async_m3tjywjv11 seo=false videoFoam=true\" style=\"height: 100%; position: relative; width: 100%;\">\n<div class=\"wistia_swatch\" style=\"height: 100%; left: 0; opacity: 0; overflow: hidden; position: absolute; top: 0; transition: opacity 200ms; width: 100%;\"><img style=\"filter: blur(5px); height: 100%; object-fit: contain; width: 100%;\" src=\"https://fast.wistia.com/embed/medias/m3tjywjv11/swatch\" alt=\"\" aria-hidden=\"true\"></div>\n</div>\n</div>\n</div>\n<h2 id=\"01FJZ2C75XA7GB2AY3WP81N3CV\">Before you begin</h2>\n<p>Before you can jump in, make sure that you have event data to use. Navigate to <strong>Analytics &gt; Metrics</strong> to make sure the event exists in Klaviyo.</p>\n<p>If you are unfamiliar with using event or profile data in emails, check out our <a href=\"https://help.klaviyo.com/hc/en-us/articles/4408802648731\">message personalization reference</a> as a first step. </p>\n<p>It will also be helpful to understand <a href=\"https://help.klaviyo.com/hc/en-us/articles/115005237648-About-Data-Types\">data types in Klaviyo</a>, particularly <strong>lists</strong> (i.e., arrays). An array is a way to store multiple pieces of data that are structured the same way. For example, a customer’s cart items are stored as an array within a <em>Checkout Started</em> event. The <em>items</em> array contains one entry per item ordered, and each entry contains the details for that item (e.g., item name, image URL, quantity, size, color, etc.). </p>\n<h2 id=\"h_01J3JJRY7VVDCG3HXFNDTMKBKQ\">What types of flows can use dynamic table blocks? </h2>\n<p>Dynamic table blocks contain information about one or more products that a customer interacted with in some way (e.g., purchased or left in their cart). These table blocks are useful for events that might contain different numbers of products, depending on a customer action. Dynamic table blocks are useful for flows triggered by these events: </p>\n<ul>\n<li>Placed order (order confirmation flow)</li>\n<li>Started checkout (abandoned checkout flow) </li>\n<li>Fulfilled order (shipping confirmation flow) </li>\n<li>Cancelled order (cancellation confirmation) </li>\n<li>Any other events that contain a list of one or more products<br>\n<p>Dynamic table blocks are <strong>not</strong> useful if your event always contains a single product. The events below require static table blocks instead. </p>\n</li>\n<li>Added to cart (abandoned checkout flow)</li>\n<li>Viewed product (browse abandonment flow) </li>\n</ul>\n<p>Learn how to create a <a href=\"#h_01J3JJSKQ3AD2SVKG4N26Z1R6C\">static table block for single-product events</a>. </p>\n<h2 id=\"01FJZ2C75YES3QPFRFGRXJ8JEX\">1. Create your flow</h2>\n<p>Start by creating your flow:</p>\n<ol>\n<li>Navigate to the <strong>Flows</strong> tab in Klaviyo.</li>\n<li>Click <strong>Create flow</strong>. </li>\n<li>Click <strong>Build your own</strong>. </li>\n<li>Name your flow and click <strong>Create flow</strong>. </li>\n<li>Under <em>Select a trigger</em>, click <strong>Your metrics</strong>. </li>\n<li>Select which integration your trigger metric is sent from (e.g., Shopify).</li>\n<li>Choose the event that should trigger your flow. In this example, we'll use the<em> Checkout Started</em> event. This ensures that we have access to the event data necessary to construct an abandoned cart block.</li>\n<li>Click <strong>Done</strong>. </li>\n<li>Drag and drop an <em>Email</em> action into the flow.</li>\n</ol>\n<h2 id=\"01FJZ2C75YR4KDEARBXYYVW6EZ\">2. Add a dynamic table to your flow email</h2>\n<p>Next, add a dynamic table to your flow email:</p>\n<ol>\n<li>Click the email block you added to your flow in the last section. </li>\n<li>Next to <em>Template</em>, click <strong>Select template</strong>. </li>\n<li>Choose a template to use as your base.</li>\n<li>Drag a table block into your email.</li>\n<li>Click <strong>Styles &gt;</strong><strong>Dynamic</strong> to convert the table into a dynamic block. You’ll see 2 fields appear: <em>Row Collection</em> and <em>Row alias, </em>which you will fill in in step 3 and 4.</li>\n<li>Click back to the <strong>Content</strong> tab to adjust your column types.</li>\n<li>Generally, an abandoned cart message shows images of the abandoned items on the left and details about the item on the right. Click on the left or right row selector, then click <strong>Text</strong> or <strong>Image</strong> to change the cell type.<br>\n</li>\n</ol>\n<p><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/34449970537755\" alt=\"\" width=\"287\" height=\"358\"></p>\n<h2 id=\"01FJZ2C75YNWEST3ZQF7T83HHF\">3. Identify your row collection</h2>\n<p>In this step, you'll add the name of the array you plan to iterate over to the <em>Row collection</em> field. To find the name of your array:</p>\n<ol>\n<li>Click <strong>Preview &amp; test</strong>.</li>\n<li>Scroll through the preview data for your event until you find an array that contains the information you need. <br>\nIf no one has completed the flow’s trigger action yet, there will be no preview data available for the flow. You can navigate to your site to take the action (e.g., add items to your cart and start a checkout), and then your event will display within Klaviyo’s preview options.<br>\n<br>\nIn this example, there are 2 arrays that store item information: <br>\nYou’ll want to use the more detailed array, <em>line_items</em>, since it contains the detailed information needed to display in the repeating table block. To find the appropriate variable to set in the <em>Row collection</em> field, select two variables within the first section of the array and copy them. In this example, copy the tags for <em>variant_price</em> and <em>title</em>. Here are the two tags from this example: <code>{{ event.extra.line_items.0.variant_price }}{{ event.extra.line_items.0.title }}</code><br>\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/34449970543771\" alt=\"\" width=\"362\" height=\"239\">\n<ul>\n<ul>\n<li>\n<em>Items</em><br>\nA top-level array containing a simple list of each item’s name.</li>\n<li>\n<em>line_items</em>,<br>\nAn array nested within the <em>extra</em> array containing more detail, including each item’s title, price, SKU, and image URL.<br>\n</li>\n</ul>\n</ul>\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28713383352859\" alt=\"Two item subsections in event data\" width=\"310\" height=\"494\">\n</li>\n<li>Ignore the curly brackets and look at the variables within them. Note that the beginning of both variables are the same: <code>event.extra.line_items.0</code>. </li>\n<li>Use everything up to (but excluding) the dot and the number at the end of this portion of the variable as your <em>Row collection</em>. In this example, the appropriate setting for the <em>Row collection</em> field is <code>event.extra.line_items</code>.</li>\n</ol>\n<h3 id=\"h_01JBHX4ZQC6EM6MWY8V96C7625\">Set fallback content (optional)</h3>\n<p>Fallback content will appear if there is no data in the row collection you select. This is only necessary when you build a table based on data that does not consistently appear within the trigger event. To add fallback content, toggle on the <em>Fallback content</em> option and add content (i.e., text or an image) to the field that appears. </p>\n<p><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/30543874467611\" alt=\"The option to add fallback content\" width=\"325\" height=\"395\"></p>\n<h2 id=\"01FJZ2C75Y86MC11R6K6B9W74H\">4. Choose a row alias</h2>\n<p>Your row alias can be any text you’d like to use (with no special characters or spaces). You’ll use this alias within your dynamic table block to identify variables that should be pulled from the array you selected above. It’s helpful to choose a simple but descriptive alias, so it’s easy to remember. </p>\n<p>In this example, the dynamic table block repeats over a list of items in an abandoned cart, so <em>item</em> is a good alias to use. If your block repeats over a list of blog posts, then you could use <em>post</em> as your alias.</p>\n<p>You can use any alias you’d like; just make sure to consistently use that alias in variables from your array (as outlined in the following steps). </p>\n<p class=\"wysiwyg-text-align-center\"><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/34449986488987\" alt=\"\" width=\"405\" height=\"590\"></p>\n<p>Once you’ve filled out the <em>Row Collection</em> and <em>Row Alias</em> fields, you’re ready to start building your table. </p>\n<h2 id=\"01FJZ2C75YSBRKE8DN87SG9R44\">5. Add dynamic product details</h2>\n<p>After the data source is set up, you can use tags to add text in your email. Since this email is for an abandoned cart flow, it’s important to show the name of the product left behind, along with other details like a price and link to purchase.</p>\n<p>To input the product title in your block:</p>\n<ol>\n<li>Navigate to one of the table's columns. If you want an image in the first column and the text in the second, click on the column selector on the right of the block’s <strong>Content</strong> section.</li>\n<li>Paste in the full event variable from the preview modal (e.g., <code>{{ event.extra.line_items.0.title  }}</code>).</li>\n<li>Replace the row collection within the variable (i.e., the text you used for the <em>Row collection</em>) and the following dot and number with the alias selected in the last step (e.g., <em>item</em>), keeping the surrounding brackets. For this example, <code>{{ event.extra.line_items.0.title  }}</code> becomes <code>{{ item.title }}</code>.<br>\n\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/34449970550939\" alt=\"\" width=\"345\" height=\"190\">\n</li>\n<li>Preview the email to ensure that the title shows up. If it doesn’t appear, double check the spelling, capitalization, and formatting of the text, as well as your settings in the <strong>Styles</strong> tab, to ensure there are no errors.</li>\n</ol>\n<p>Repeat the same steps to add in additional item details. </p>\n<h3 id=\"01FJZ2C75YC0M6W160FCT5DCET\">Hyperlinking a product title</h3>\n<p>To add a hyperlink to the product title: </p>\n<ol>\n<li>Find the product URL variable in your event details.</li>\n<li>Replace the row collection and number with your row alias, as with the variable above (e.g., <em>{{ event.extra.line_items.url }}</em> becomes <em>{{ item.url }}</em>). </li>\n<li>Highlight the full variable for the item’s title (e.g., <code>{{ item.title }}</code>). </li>\n<li>Click the link icon and paste your URL variable into the <em>URL</em> field.</li>\n</ol>\n<div class=\"accordion accordion--default\">\n<div class=\"accordion__item\">\n<div class=\"accordion__item-title\"><strong>Common product URL variables by integration</strong></div>\n<div class=\"accordion__item-content\">\n<p><strong>BigCommerce</strong><br>\nEvent variable: {{ event.extra.items.0.product.url }}<br>\nFinal tag: {{ organization.url }}{{ item.product.url }}</p>\n<p><strong>Magento 1</strong><br>\nEvent variable: {{ event.extra.line_items.0.product.key }}<br>\nFinal tag: {{ organization.url }}{{ item.product.key }}</p>\n<p><strong>Magento 2</strong><br>\nEvent variable: {{ event.Items.0.Product.FullURL }}<br>\nFinal tag: {{ item.Product.FullURL }}</p>\n<p><strong>Shopify</strong><br>\nEvent variable: {{ event.extra.line_items.0.product.handle }}<br>\nFinal tag: {{ organization.url }}products/{{ item.product.handle }}</p>\n<p><strong>WooCommerce </strong><br>\nEvent variable: {{ event.extra.Items.0.URL }}<br>\nFinal tag: {{ item.URL }}     </p>\n</div>\n</div>\n</div>\n<h3 id=\"01FJZ2C75YPVB6865MCJSG3T3G\">Considerations for currency variables</h3>\n<p>If your item price is passed as a number in your event details (with no currency symbol), use the <code>currency_format</code> tag to apply currency formatting. To apply this tag, replace variable_name in the code below with the full price variable, excluding curly brackets from the original variable: </p>\n<p><code>{% currency_format variable_name %}</code></p>\n<p>So, your final variable might look like this: </p>\n<p><code>{% currency_format item.price %}</code></p>\n<h2 id=\"01FJZ2C75YEB7AY8H3K8YMQKG3\">6. Add an image</h2>\n<p>To insert a dynamic image, find the event variable for the image in the preview modal. Often, this variable is listed under image, img, or src, but it depends on your integration. Here, it is under src: <code>{{ event.extra.line_items.0.product.images.0.src  }}</code>. Apply the same adjustments to this variable as outlined in step five (replacing <code>event.extra.line_items.0</code> with <code>item</code>). This is an event variable array within <code>event.extra.line_items</code>, which holds the images for this specific item.</p>\n<ol>\n<li>Once you have this variable, head to the column where you want to display the image (the left column, in this case).</li>\n<li>Click <strong>Image</strong> under <em>Cell content</em> if it’s currently set to <em>Text</em>.</li>\n<li>Click <strong>Select image</strong>.</li>\n<li>In the <em>Dynamic Image</em> tab, paste your image variable into the <em>Dynamic variable or dynamic URL</em> field.</li>\n<li>Input the customized image event variable, <code>{{ item.product.images.0.src }}</code>.</li>\n<li>Click <strong>Save</strong>.</li>\n<li>Add the product URL variable from step five in the <em>Link address </em>field so the image is clickable.</li>\n<li>Set a max width for the image, starting with 250-300 and adjusting as needed.</li>\n<li>Once you finish making changes, click <strong>Done</strong> and preview your email to make sure it appears as expected. If an image doesn’t appear, check the spelling of the variable against the one in the preview modal.</li>\n</ol>\n<h2 id=\"01FJZ2C75YNWAKTKS70450NCS7\">7. Preview your email</h2>\n<p>After completing the steps above, the email template should look similar to the one below when previewed.</p>\n<p><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/34449970555547\" alt=\"\"></p>\n<p>To see how this would look with dynamic content, and to make sure the links work properly, click <strong>Preview &amp; test</strong>. If there are any errors, check the spelling and structure of your variables, as well as your block's <strong>Styles</strong> tab. </p>\n<p>You can use these same concepts to build out additional dynamic blocks for flows triggered based on different metrics.</p>\n<h2 id=\"h_01J3JJSKQ3AD2SVKG4N26Z1R6C\">Create a static table block for single-product events </h2>\n<p>If an event can only ever contain a single product, use a static table block. For these events, there is no need to set a <em>Row collection</em> or <em>Row alias</em>, and you can use unedited variables directly from your event data. </p>\n<ol>\n<li>Navigate to the <strong>Flows</strong> tab in Klaviyo.</li>\n<li>Click <strong>Create flow</strong>. </li>\n<li>Click <strong>Build your own</strong>. </li>\n<li>Name your flow and click <strong>Create flow</strong>. </li>\n<li>Under <em>Select a trigger</em>, click <strong>Your metrics</strong>. </li>\n<li>Choose a single-product metric, like <em>Viewed product</em> or <em>Added to cart</em>. </li>\n<li>Click <strong>Done</strong>. </li>\n<li>Drag and drop an <em>Email</em> action into the flow.</li>\n<li>Next to <em>Template</em>, click <strong>Select template</strong>. </li>\n<li>Select a template to use as your base.</li>\n<li>Drag a table block into your email.</li>\n<li>By default, the <em>Data</em> field is set to <strong>Static</strong> under <em>Styles</em>; do not change this setting.<br>\n\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/34449986497051\" alt=\"\" width=\"363\" height=\"332\">\n</li>\n<li>Click <strong>Preview &amp; test</strong> to see the variables available for your message. Click the image URL variable to copy it.<br>\n\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28713383369243\" alt=\"Select an image URL variable\" width=\"325\" height=\"131\">\n</li>\n<li>Using the <em>Cell selector</em> and <em>Cell Content</em> fields, set the left cell to use the <strong>Image</strong> cell type.</li>\n<li>Click <strong>Select image</strong>. </li>\n<li>Select <strong>Dynamic Image</strong>. </li>\n<li>Paste the image URL variable you copied into the <em>Dynamic variable or dynamic URL</em> field. </li>\n<li>Click <strong>Save</strong>. </li>\n<li>Set the right cell to use the <strong>Text</strong> cell type. </li>\n<li>Copy any variables you’d like to display (e.g., product title, product price) and paste them into the text cell.<br>\n\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/34449970567195\" alt=\"\" width=\"330\" height=\"275\">\n</li>\n<li>Add additional blocks, like a CTA button to return to their cart, and style the email as desired.</li>\n<li>When you’re finished, click <strong>Exit</strong>.</li>\n</ol>",
+    "user_segment_ids": []
+  },
+  "normalized": {
+    "id": "4408802597659",
+    "title": "How to build dynamic blocks in a flow email",
+    "source_url": "https://help.klaviyo.com/hc/en-us/articles/4408802597659-How-to-build-dynamic-blocks-in-a-flow-email",
+    "section_id": 49375545220123,
+    "section": "Use variable syntax and tags",
+    "category_id": 4414879524891,
+    "category": "Content",
+    "category_slug": "content",
+    "klaviyo_updated": "2026-04-23T11:25:46Z",
+    "created_at": "2021-10-22T14:36:58Z",
+    "draft": false,
+    "promoted": false,
+    "position": 6,
+    "label_names": []
+  },
+  "files": {
+    "body_html": "_source/articles/4408802597659.body.html",
+    "rendered_html": "_source/rendered/4408802597659.html"
+  },
+  "assets": {
+    "api_body": {
+      "images": [
+        {
+          "src": "https://fast.wistia.com/embed/medias/m3tjywjv11/swatch",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/34449970537755",
+          "alt": "",
+          "width": "287",
+          "height": "358"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/34449970543771",
+          "alt": "",
+          "width": "362",
+          "height": "239"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28713383352859",
+          "alt": "Two item subsections in event data",
+          "width": "310",
+          "height": "494"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/30543874467611",
+          "alt": "The option to add fallback content",
+          "width": "325",
+          "height": "395"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/34449986488987",
+          "alt": "",
+          "width": "405",
+          "height": "590"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/34449970550939",
+          "alt": "",
+          "width": "345",
+          "height": "190"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/34449970555547",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/34449986497051",
+          "alt": "",
+          "width": "363",
+          "height": "332"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28713383369243",
+          "alt": "Select an image URL variable",
+          "width": "325",
+          "height": "131"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/34449970567195",
+          "alt": "",
+          "width": "330",
+          "height": "275"
+        }
+      ],
+      "links": [
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115002774932#klaviyo-s-built-in-flows3",
+          "text": "use the flow library"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4408802648731",
+          "text": "message personalization reference"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005237648-About-Data-Types",
+          "text": "data types in Klaviyo"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4408802597659-How-to-build-dynamic-blocks-in-a-flow-email#h_01J3JJSKQ3AD2SVKG4N26Z1R6C",
+          "text": "static table block for single-product events"
+        }
+      ],
+      "headings": [
+        {
+          "level": 2,
+          "id": "01FJZ2C75XRVYVGV97Q7GWRDRN",
+          "text": "You will learn"
+        },
+        {
+          "level": 2,
+          "id": "01FJZ2C75XA7GB2AY3WP81N3CV",
+          "text": "Before you begin"
+        },
+        {
+          "level": 2,
+          "id": "h_01J3JJRY7VVDCG3HXFNDTMKBKQ",
+          "text": "What types of flows can use dynamic table blocks?"
+        },
+        {
+          "level": 2,
+          "id": "01FJZ2C75YES3QPFRFGRXJ8JEX",
+          "text": "1. Create your flow"
+        },
+        {
+          "level": 2,
+          "id": "01FJZ2C75YR4KDEARBXYYVW6EZ",
+          "text": "2. Add a dynamic table to your flow email"
+        },
+        {
+          "level": 2,
+          "id": "01FJZ2C75YNWEST3ZQF7T83HHF",
+          "text": "3. Identify your row collection"
+        },
+        {
+          "level": 3,
+          "id": "h_01JBHX4ZQC6EM6MWY8V96C7625",
+          "text": "Set fallback content (optional)"
+        },
+        {
+          "level": 2,
+          "id": "01FJZ2C75Y86MC11R6K6B9W74H",
+          "text": "4. Choose a row alias"
+        },
+        {
+          "level": 2,
+          "id": "01FJZ2C75YSBRKE8DN87SG9R44",
+          "text": "5. Add dynamic product details"
+        },
+        {
+          "level": 3,
+          "id": "01FJZ2C75YC0M6W160FCT5DCET",
+          "text": "Hyperlinking a product title"
+        },
+        {
+          "level": 3,
+          "id": "01FJZ2C75YPVB6865MCJSG3T3G",
+          "text": "Considerations for currency variables"
+        },
+        {
+          "level": 2,
+          "id": "01FJZ2C75YEB7AY8H3K8YMQKG3",
+          "text": "6. Add an image"
+        },
+        {
+          "level": 2,
+          "id": "01FJZ2C75YNWAKTKS70450NCS7",
+          "text": "7. Preview your email"
+        },
+        {
+          "level": 2,
+          "id": "h_01J3JJSKQ3AD2SVKG4N26Z1R6C",
+          "text": "Create a static table block for single-product events"
+        }
+      ]
+    },
+    "rendered_page": {
+      "images": [
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/7ff492c2b417b7ecfe572f839a8a81398693c1f7-1920x1080.webp",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://fast.wistia.com/embed/medias/m3tjywjv11/swatch",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/296b2aafbf8587130e21248cd8cd7a4a78f40ea2-714x890.png?w=287",
+          "alt": "",
+          "width": "287",
+          "height": "358"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/34f757a4c2c6c31667b002671546f505b62d2017-940x622.png?w=362",
+          "alt": "",
+          "width": "362",
+          "height": "239"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/7b1c9e81bd852b3368847c66743078336c023246-804x1282.jpg?w=310",
+          "alt": "Two item subsections in event data",
+          "width": "310",
+          "height": "494"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/42bef87809ad5f1f93eb2552eae75859bf021aaa-698x848.png?w=325",
+          "alt": "The option to add fallback content",
+          "width": "325",
+          "height": "395"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/dfb6aa9723b8af7efa36d116c7fb78d973fd7321-714x1040.png?w=405",
+          "alt": "",
+          "width": "405",
+          "height": "590"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/555cf5690e0f2946ba70dda51500cd1001dbb63d-704x388.png?w=345",
+          "alt": "",
+          "width": "345",
+          "height": "190"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/edd3b156e32c05697ad697a82acc27867f603824-2006x970.jpg",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/ebecf8b26513f050205db3eba881fca8e3861d61-706x644.png?w=363",
+          "alt": "",
+          "width": "363",
+          "height": "332"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/fc646076aa7e17f4c8202f3fc23ad9d4069eaec0-644x260.png?w=325",
+          "alt": "Select an image URL variable",
+          "width": "325",
+          "height": "131"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/0529213ab676b9d9410167f109c0a01c336040dd-696x580.png?w=330",
+          "alt": "",
+          "width": "330",
+          "height": "275"
+        }
+      ],
+      "links": [
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4408802597659-How-to-build-dynamic-blocks-in-a-flow-email#site-content",
+          "text": "Skip to main content"
+        },
+        {
+          "href": "https://www.klaviyo.com",
+          "text": "Home"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center"
+        },
+        {
+          "href": "https://www.klaviyo.com/enterprise",
+          "text": "Enterprise"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Partners"
+        },
+        {
+          "href": "https://www.klaviyo.com/careers",
+          "text": "Careers"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": "Log in"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": ""
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center Find step-by-step instructions and troubleshooting solutions in our knowledge base."
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000032731",
+          "text": "Integrations"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000312411",
+          "text": "Flows"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867867",
+          "text": "Audience"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867667",
+          "text": "Campaigns"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/360000190711",
+          "text": "Sign-up forms"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000873988",
+          "text": "Deliverability & compliance"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/29173800271259",
+          "text": "SMS"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/16638219724187",
+          "text": "Reviews"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/18073014919195",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/34141283979931",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/37659126754075",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/33948021740315",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/39746685522331",
+          "text": "WhatsApp"
+        },
+        {
+          "href": "https://academy.klaviyo.com",
+          "text": "Klaviyo Academy Expert training and education to help you succeed with Klaviyo, and beyond."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Quick+guide&resource=academy_courses",
+          "text": "Quick guides Learn marketing strategies and concepts in 15 minutes or less."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Course&resource=academy_courses",
+          "text": "Courses Master key marketing topics through structured lessons and exams."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/best-practices",
+          "text": "Best practices Discover top product and marketing strategies for your business."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/learning-paths",
+          "text": "Learning paths Complete curated learning journeys tailored to your marketing goals."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses",
+          "text": "Explore all resources"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Live+training&resource=academy_courses",
+          "text": "Live trainings Build confidence through hands-on interactive workshops and thought-provoking strategy sessions."
+        },
+        {
+          "href": "https://www.bigmarker.com/klaviyo-customer-education/Office-hours-Getting-started-with-Klaviyo",
+          "text": "Live office hours Join a strategic discussion where you can ask questions and get answers in real-time."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/private-live-training",
+          "text": "1:1 Live training Book a private training session with an expert to jumpstart your platform knowledge and confidence."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/credentials",
+          "text": "Klaviyo credentials Dig deeper into select topics and showcase your expertise with a final exam to earn a certificate and digital badge."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/certificates/klaviyo-practitioner-certificate",
+          "text": "Klaviyo practitioner certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/deliverability-certificate",
+          "text": "Deliverability certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/developer-certificate",
+          "text": "Klaviyo developer certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses&select=Certificate",
+          "text": "See all certificates"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Klaviyo Community Join our thriving community network to connect with brands like yours—online and in person."
+        },
+        {
+          "href": "https://community.klaviyo.com/topic/new",
+          "text": "Ask a question Post a question and get thoughtful answers from Klaviyo powerusers."
+        },
+        {
+          "href": "https://community.klaviyo.com/p/roadmap",
+          "text": "Product roadmap"
+        },
+        {
+          "href": "https://community.klaviyo.com/search/activity/recent",
+          "text": "Recent threads"
+        },
+        {
+          "href": "https://community.klaviyo.com/p/champions",
+          "text": "Meet the Champions"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups",
+          "text": "Browse all groups Your people are waiting. New ideas and connections are a click away."
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/developer-group-64",
+          "text": "Developer group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/entrepreneur-user-group-118",
+          "text": "Entrepreneur group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/woo-user-group-87",
+          "text": "WooCommerce group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/new-york-meetup-chapter-82",
+          "text": "New York City"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/los-angeles-meetup-chapter-83",
+          "text": "Los Angeles"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/austin-meetup-chapter-85",
+          "text": "Austin"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/san-diego-meetup-chapter-86",
+          "text": "San Diego"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/amsterdam-meetup-chapter-84",
+          "text": "Amsterdam"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Klaviyo Developers Access API documentation and developer guides to help you build with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/get_started",
+          "text": "Get started Access key resources and a step-by-step checklist for how to start developing with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/build_your_integration",
+          "text": "Grow your app's reach Learn how to join our ecosystem and get your app listed on our marketplace."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/developer-tools",
+          "text": "Developer tools Generate sample data, monitor your API usage, and access our Postman collections."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/reference/api_overview",
+          "text": "API reference Browse our full catalog of API docs."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/changelog_",
+          "text": "Changelog"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/api_versioning_and_deprecation_policy",
+          "text": "Versioning & deprecation policy"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/rate_limits_and_error_handling",
+          "text": "Rate limits & error handling"
+        },
+        {
+          "href": "https://youtube.com/playlist?list=PLHkNfHgtxcUanrkMnKPdkRzuWU7MGv_xM&si=pkG-KH7IT_TUHOGC",
+          "text": "API tutorials on YouTube Subscribe to our Klaviyo API Tutorials playlist for easy access to step-by-step developer walkthroughs."
+        },
+        {
+          "href": "https://www.klaviyo.com/contact-us",
+          "text": "Contact us"
+        },
+        {
+          "href": "https://www.klaviyo.com/sign-up",
+          "text": "Sign up"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": "Search"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4408802597659",
+          "text": "United States - EN"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/de-de/articles/4408802597659",
+          "text": "Deutschland - DE"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-es/articles/4408802597659",
+          "text": "España - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-mx/articles/4408802597659",
+          "text": "México - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/fr-fr/articles/4408802597659",
+          "text": "France - FR"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/it-it/articles/4408802597659",
+          "text": "Italia - IT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/ko-kr/articles/4408802597659",
+          "text": "한국 - KO"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/nl-nl/articles/4408802597659",
+          "text": "Nederland - NL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pl-pl/articles/4408802597659",
+          "text": "Polska - PL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pt-br/articles/4408802597659",
+          "text": "Brasil - PT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/sv-se/articles/4408802597659",
+          "text": "Sverige - SV"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/4414879524891",
+          "text": "Content"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/14543554717467",
+          "text": "Templates"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/49375545220123",
+          "text": "Use variable syntax and tags"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4408802597659-How-to-build-dynamic-blocks-in-a-flow-email#01FJZ2C75XRVYVGV97Q7GWRDRN",
+          "text": "You will learn"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4408802597659-How-to-build-dynamic-blocks-in-a-flow-email#01FJZ2C75XA7GB2AY3WP81N3CV",
+          "text": "Before you begin"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4408802597659-How-to-build-dynamic-blocks-in-a-flow-email#h_01J3JJRY7VVDCG3HXFNDTMKBKQ",
+          "text": "What types of flows can use dynamic table blocks?"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4408802597659-How-to-build-dynamic-blocks-in-a-flow-email#01FJZ2C75YES3QPFRFGRXJ8JEX",
+          "text": "1. Create your flow"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4408802597659-How-to-build-dynamic-blocks-in-a-flow-email#01FJZ2C75YR4KDEARBXYYVW6EZ",
+          "text": "2. Add a dynamic table to your flow email"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4408802597659-How-to-build-dynamic-blocks-in-a-flow-email#01FJZ2C75YNWEST3ZQF7T83HHF",
+          "text": "3. Identify your row collection"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4408802597659-How-to-build-dynamic-blocks-in-a-flow-email#01FJZ2C75Y86MC11R6K6B9W74H",
+          "text": "4. Choose a row alias"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4408802597659-How-to-build-dynamic-blocks-in-a-flow-email#01FJZ2C75YSBRKE8DN87SG9R44",
+          "text": "5. Add dynamic product details"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4408802597659-How-to-build-dynamic-blocks-in-a-flow-email#01FJZ2C75YEB7AY8H3K8YMQKG3",
+          "text": "6. Add an image"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4408802597659-How-to-build-dynamic-blocks-in-a-flow-email#01FJZ2C75YNWAKTKS70450NCS7",
+          "text": "7. Preview your email"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4408802597659-How-to-build-dynamic-blocks-in-a-flow-email#h_01J3JJSKQ3AD2SVKG4N26Z1R6C",
+          "text": "Create a static table block for single-product events"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4408802597659-How-to-build-dynamic-blocks-in-a-flow-email#additional-resources",
+          "text": "Additional resources"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115002774932#klaviyo-s-built-in-flows3",
+          "text": "use the flow library"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4408802648731",
+          "text": "message personalization reference"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005237648-About-Data-Types",
+          "text": "data types in Klaviyo"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4408802597659-How-to-build-dynamic-blocks-in-a-flow-email#h_01J3JJSKQ3AD2SVKG4N26Z1R6C",
+          "text": "static table block for single-product events"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115002779411",
+          "text": "How to create an abandoned cart flow"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4408802648731",
+          "text": "Message personalization reference"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/19462923466651",
+          "text": "How to display products vertically in emails"
+        },
+        {
+          "href": "https://academy.klaviyo.com/apply-programming-logic-concepts-to-build-more-personalized-messages/1857035",
+          "text": "Apply programming logic concepts to build more personalized messages"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115001002272",
+          "text": "Learn how to contact support"
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": ""
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": "Visit Community"
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": ""
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": "Hire a partner"
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/about",
+          "text": "About Klaviyo"
+        },
+        {
+          "href": "https://www.klaviyo.com/newsroom",
+          "text": "Newsroom"
+        },
+        {
+          "href": "https://investors.klaviyo.com/overview/default.aspx",
+          "text": "Investor relations"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Agency and tech partners"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Developers"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/retail",
+          "text": "Retail and ecommerce"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/restaurants",
+          "text": "Restaurant marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/wellness",
+          "text": "Wellness"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform",
+          "text": "B2C CRM overview"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai",
+          "text": "Klaviyo AI (K:AI)"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/marketing-automation",
+          "text": "Klaviyo Marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-service",
+          "text": "Klaviyo Service"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/analytics",
+          "text": "Klaviyo Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-data-platform",
+          "text": "Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare",
+          "text": "Klaviyo vs. Klaviyo alternatives"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-mailchimp",
+          "text": "Klaviyo vs. Mailchimp"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-postscript",
+          "text": "Klaviyo vs. Postscript"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-attentive",
+          "text": "Klaviyo vs. Attentive"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-salesforce-marketing-cloud",
+          "text": "Klaviyo vs. Salesforce"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-listrak",
+          "text": "Klaviyo vs. Listrak"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/omnichannel",
+          "text": "Omnichannel marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/email-marketing",
+          "text": "Email marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing",
+          "text": "SMS marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing/rcs",
+          "text": "RCS for Business"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/mobile-app-marketing",
+          "text": "Mobile app marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/whatsapp",
+          "text": "WhatsApp marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/social",
+          "text": "Social marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources",
+          "text": "Marketing resources"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources/marketing-campaign-calendar",
+          "text": "Marketing campaign calendar"
+        },
+        {
+          "href": "https://www.klaviyo.com/glossary",
+          "text": "Marketing glossary"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/email-subject-line-generator",
+          "text": "Subject line generator"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/roi-calculator",
+          "text": "ROI calculator"
+        },
+        {
+          "href": "https://www.klaviyo.com/customers",
+          "text": "Case studies"
+        },
+        {
+          "href": "https://www.klaviyo.com/composer",
+          "text": "Composer Beta"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/marketing-agent",
+          "text": "Marketing Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/customer-agent",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/customer-experience-hub",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/helpdesk",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/marketing-analytics",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/advanced-cdp",
+          "text": "Advanced Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/web-forms",
+          "text": "Web forms"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/email-templates",
+          "text": "Email templates"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/portfolio",
+          "text": "Portfolio"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform-integrations",
+          "text": "Apps and Integrations"
+        },
+        {
+          "href": "https://www.klaviyo.com/features",
+          "text": "Features"
+        },
+        {
+          "href": "https://www.klaviyo.com/whats-new",
+          "text": "What's new"
+        },
+        {
+          "href": "https://www.klaviyo.com/events",
+          "text": "Events"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help Center"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us",
+          "text": "Academy"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Community"
+        },
+        {
+          "href": "https://www.facebook.com/Klaviyo/",
+          "text": "Facebook"
+        },
+        {
+          "href": "https://twitter.com/klaviyo/",
+          "text": "Twitter"
+        },
+        {
+          "href": "https://www.linkedin.com/company/klaviyo/",
+          "text": "LinkedIn"
+        },
+        {
+          "href": "https://www.instagram.com/klaviyo/",
+          "text": "Instagram"
+        },
+        {
+          "href": "https://www.klaviyo.com/sitemap",
+          "text": "Site Map"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal",
+          "text": "Terms and Privacy"
+        },
+        {
+          "href": "https://www.klaviyo.com/security",
+          "text": "Security"
+        },
+        {
+          "href": "https://www.klaviyo.com/trust",
+          "text": "Trust"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal/intellectual-property-notices",
+          "text": "Intellectual Property Notices"
+        }
+      ],
+      "headings": [
+        {
+          "level": 1,
+          "id": "",
+          "text": "How to build dynamic blocks in a flow email"
+        },
+        {
+          "level": 2,
+          "id": "01FJZ2C75XRVYVGV97Q7GWRDRN",
+          "text": "You will learn"
+        },
+        {
+          "level": 2,
+          "id": "01FJZ2C75XA7GB2AY3WP81N3CV",
+          "text": "Before you begin"
+        },
+        {
+          "level": 2,
+          "id": "h_01J3JJRY7VVDCG3HXFNDTMKBKQ",
+          "text": "What types of flows can use dynamic table blocks?"
+        },
+        {
+          "level": 2,
+          "id": "01FJZ2C75YES3QPFRFGRXJ8JEX",
+          "text": "1. Create your flow"
+        },
+        {
+          "level": 2,
+          "id": "01FJZ2C75YR4KDEARBXYYVW6EZ",
+          "text": "2. Add a dynamic table to your flow email"
+        },
+        {
+          "level": 2,
+          "id": "01FJZ2C75YNWEST3ZQF7T83HHF",
+          "text": "3. Identify your row collection"
+        },
+        {
+          "level": 3,
+          "id": "h_01JBHX4ZQC6EM6MWY8V96C7625",
+          "text": "Set fallback content (optional)"
+        },
+        {
+          "level": 2,
+          "id": "01FJZ2C75Y86MC11R6K6B9W74H",
+          "text": "4. Choose a row alias"
+        },
+        {
+          "level": 2,
+          "id": "01FJZ2C75YSBRKE8DN87SG9R44",
+          "text": "5. Add dynamic product details"
+        },
+        {
+          "level": 3,
+          "id": "01FJZ2C75YC0M6W160FCT5DCET",
+          "text": "Hyperlinking a product title"
+        },
+        {
+          "level": 3,
+          "id": "01FJZ2C75YPVB6865MCJSG3T3G",
+          "text": "Considerations for currency variables"
+        },
+        {
+          "level": 2,
+          "id": "01FJZ2C75YEB7AY8H3K8YMQKG3",
+          "text": "6. Add an image"
+        },
+        {
+          "level": 2,
+          "id": "01FJZ2C75YNWAKTKS70450NCS7",
+          "text": "7. Preview your email"
+        },
+        {
+          "level": 2,
+          "id": "h_01J3JJSKQ3AD2SVKG4N26Z1R6C",
+          "text": "Create a static table block for single-product events"
+        },
+        {
+          "level": 2,
+          "id": "additional-resources",
+          "text": "Additional resources"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "Explore more from Klaviyo"
+        }
+      ]
+    }
+  },
+  "rendered_page": {
+    "status": "fetched",
+    "error": ""
+  }
+}

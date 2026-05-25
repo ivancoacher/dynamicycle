@@ -1,0 +1,47 @@
+<h2 id="h_01HNG3XREH4BTDKPRDKAY77H0R">You will learn</h2>
+<p>Learn how to enable Klaviyo Back in Stock and variant syncing for Salesforce Commerce Cloud (SFCC). First, you’ll make sure Back in Stock is enabled within your SFCC integration via the addition of a snippet, which will also enable variant syncing. Then, you’ll set up a Back in Stock form on your site using Klaviyo’s APIs. Lastly, you’ll set up a Back in Stock flow in Klaviyo to email customers who have subscribed to alerts. </p>
+<h2 id="h_01HNG3XVB750JC2EWPYNG04GW9">Before you begin</h2>
+<p>If you've yet to integrate your SFCC store with Klaviyo, you should <a href="https://help.klaviyo.com/hc/en-us/articles/360033744951" target="_blank" rel="noopener noreferrer">integrate first</a>, then skip ahead to the <em>Add a Back in Stock form</em> section of this article.</p>
+<p>If you've already integrated Klaviyo with SFCC previously, please note that the following will happen when you enable Back in Stock in SFCC: </p>
+<ul>
+<li>Your Klaviyo catalog will be restructured. Variants that were previously synced as top-level products will now become nested variants under their respective parent. If you are using static product blocks in messaging for any of your product variants, these will need to be updated.</li>
+<li>For a brief period after you add the enable Back in Stock, your <em>Best-selling products</em> feed recommendations will appear empty, or may recommend unusual products. Within 3 days, these recommendations should return to normal. You may want to pause any messaging using the <em>Best-selling products</em> feed for this period.</li>
+</ul>
+<h2 id="h_01HNG3XZ2J2QEQ18CVN9VCS0ZZ">Enable Back in Stock / variant syncing for SFCC</h2>
+<p>To use Klaviyo’s Back in Stock functionality with SFCC, you’ll need to add a<em> /variations</em> snippet to your OCAPI Data API settings, if you haven’t done so already. This snippet also enables variant syncing. To do this:</p>
+<ol>
+<li>In your SFCC Business Manager, navigate to <strong>Administration &gt; Site Development &gt; Open Commerce API Settings</strong>.</li>
+<li>Add the following JSON as a listed resource under the type <em>Data</em> and context <em>Global (organization-wide)</em>, under the client_id assigned to Klaviyo (you should already have other snippets here):<br>
+<pre><code class="language-JSON">{
+               "resource_id":"/products/*/variations",
+               "methods":["get"],
+               "read_attributes":"(**)",
+               "write_attributes":"(**)"
+}</code></pre>
+Once added, the settings should appear similar to this:<br><img src="https://klaviyo.zendesk.com/hc/article_attachments/28704487196955" width="609" height="425">
+</li>
+<li>Click <strong>Save</strong>.</li>
+</ol>
+<p>That’s it! Next time your catalog sync runs (this sync runs every 8 hours), you’ll see product variants synced to your Klaviyo catalog. To view them:</p>
+<ol>
+<li>Head to <strong>Content &gt;</strong> <strong>Products</strong> in Klaviyo.</li>
+<li>Search for a parent product and click on it.</li>
+<li>Scroll to the bottom and click the <strong>Variants</strong> dropdown to verify that the variants are listed correctly.</li>
+</ol>
+<h2 id="h_01HNG3Y6TZ8VFNNMT92TDHHP42">Add a Back in Stock form</h2>
+<p>Now, it’s time to add a Back in Stock button and form to your site so that your customers can request back in stock alerts. This button and accompanying form should appear on out-of-stock product pages, and when it’s submitted, a request should be made to our <a href="https://developers.klaviyo.com/en/reference/create_back_in_stock_subscription" target="_blank" rel="noopener noreferrer">Back in Stock API</a>. </p>
+<p>Check out our developer portal to <a href="https://developers.klaviyo.com/en/docs/how_to_set_up_custom_back_in_stock#client-side-request" target="_blank" rel="noopener noreferrer">learn how to make client-side requests to our Back in Stock API and subscribe customers to email alerts</a>.</p>
+<h2 id="h_01HNG3Y9YZA5GR1F6JCNXN9AGR">Build your Back in Stock flow</h2>
+<p>Finally, you’ll want to create a flow to automatically message customers (via email, SMS, or both) who’ve subscribed to Back in Stock notifications:</p>
+<ul>
+<li>Check out our article to <a href="https://help.klaviyo.com/hc/en-us/articles/115003872251#h_01HBBYWCR7VMA1Q70QTGAXQBGR" target="_blank" rel="noopener noreferrer">learn how to set up this flow</a>. </li>
+<li class="wysiwyg-text-align-left">When setting up the flow, choose the pre-built Back in Stock flow for SFCC from the Flow Library:<br><img src="https://klaviyo.zendesk.com/hc/article_attachments/28704487199259" width="254" height="161">
+</li>
+<li>Make sure to <a href="https://help.klaviyo.com/hc/en-us/articles/115003872251#h_01HBBYXYTAXRW86A1XXE4FRV2T" target="_blank" rel="noopener noreferrer">configure your account’s Back in Stock flow settings</a>.</li>
+</ul>
+<h2 id="h_01HNG3YDRVSXSV33XWZ03VYPVZ">Additional resources</h2>
+<ul>
+<li><a href="https://help.klaviyo.com/hc/en-us/articles/360033744951" target="_blank" rel="noopener noreferrer">Getting started with SFCC</a></li>
+<li><a href="https://help.klaviyo.com/hc/en-us/articles/360058323811" target="_blank" rel="noopener noreferrer">SFCC data reference</a></li>
+<li><a href="https://help.klaviyo.com/hc/en-us/articles/16708128591259" target="_blank" rel="noopener noreferrer">How to upgrade your SFCC cartridge</a></li>
+</ul>

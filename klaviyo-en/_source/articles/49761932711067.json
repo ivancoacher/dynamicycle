@@ -1,0 +1,885 @@
+{
+  "captured_at": "2026-05-23T16:09:40Z",
+  "article": {
+    "id": 49761932711067,
+    "url": "https://klaviyo.zendesk.com/api/v2/help_center/en-us/articles/49761932711067.json",
+    "html_url": "https://klaviyo.zendesk.com/hc/en-us/articles/49761932711067-How-to-create-a-Skill-Beta",
+    "author_id": 32458090987419,
+    "comments_disabled": false,
+    "draft": false,
+    "promoted": false,
+    "position": 0,
+    "vote_sum": 0,
+    "vote_count": 0,
+    "section_id": 49192766741147,
+    "created_at": "2026-04-29T20:13:58Z",
+    "updated_at": "2026-04-29T20:13:58Z",
+    "name": "How to create a Skill (Beta)",
+    "title": "How to create a Skill (Beta)",
+    "source_locale": "en-us",
+    "locale": "en-us",
+    "outdated": false,
+    "outdated_locales": [],
+    "edited_at": "2026-04-29T20:13:58Z",
+    "user_segment_id": null,
+    "permission_group_id": 146372,
+    "content_tag_ids": [],
+    "label_names": [],
+    "body": "<blockquote>\n<strong>Beta feature.</strong> Creating fully custom skills from scratch is currently in a closed managed beta. If you don’t see the option to create a skill, your account doesn’t have beta access yet.</blockquote>\n<h2 id=\"061c10e83e70\">You will learn</h2>\n<p>How to build a fully custom skill from scratch, write a description and instructions that make Customer Agent use your skill at the right time, and test it before shoppers see it. This article also covers how to customize the skills Customer Agent comes with.</p>\n<h2 id=\"57d34bc58c31\">Before you begin</h2>\n<p>You’ll need:</p>\n<ul>\n<li>Customer Agent enabled and beta access for creating fully custom skills</li>\n<li>A clear idea of what your skill should handle — the type of question, situation, or workflow</li>\n<li>Any tools your skill will use — either tools that come with Customer Agent or fully custom tools you’ve built</li>\n</ul>\n<p>If you want Customer Agent to do something specific (look up data in your system, take an action in another platform), create the tool first or alongside your skill.</p>\n<h2 id=\"131ce0682c32\">What a skill is</h2>\n<p>A <strong>skill</strong> is a scoped capability that lets Customer Agent handle a specific type of shopper request. Customer Agent comes with skills out of the box, and creating fully custom skills from scratch is currently in closed beta.</p>\n<p>A skill has a <strong>Title</strong>, a <strong>When to use this skill</strong> section (how Customer Agent knows this skill should handle a given request), and a <strong>How to respond</strong> section (how Customer Agent should behave once the skill is picked). You can also attach tools and content scopes.</p>\n<p>For the underlying concepts, see the Understanding Customer Agent tools article and the Understanding skills vs. tools article.</p>\n<h2 id=\"6f6d4f259b06\">When to create a fully custom skill</h2>\n<p>Build a fully custom skill when:</p>\n<ul>\n<li>\n<strong>The skills Customer Agent comes with don’t cover your use case</strong> — you have a workflow or question type Customer Agent doesn’t handle out of the box</li>\n<li>\n<strong>Your business has industry-specific behavior</strong> — specialized rules, unique product configurations, domain language</li>\n<li>\n<strong>You want a multi-step custom process</strong> — for example, a quiz, a guided troubleshooter, or a workflow that chains several tools together</li>\n<li>\n<strong>You want to use a fully custom tool</strong> — fully custom tools only do something when attached to a skill</li>\n</ul>\n<h2 id=\"af76cd4a7f8e\">Set it up</h2>\n<h3 id=\"981d858b9e5c\">1. Open the Skills page</h3>\n<p>Navigate to <strong>Customer Agent &gt; Skills</strong>, then click <strong>Create skill</strong>.</p>\n<h3 id=\"599b10ec0e50\">2. Add a Title</h3>\n<p>A short identifier like “Size Guide” or “Warranty Claim.” The title is mainly for your reference and for organization — it isn’t used to decide when the skill fires.</p>\n<h3 id=\"3d41a3734dc4\">3. Write “When to use this skill”</h3>\n<p><strong>When to use this skill</strong> tells Customer Agent’s router when your skill should handle a request. Use natural language. Be specific about what this skill handles and, where useful, what it does <em>not</em> handle. Including example shopper questions helps the router recognize matching intent.</p>\n<p><strong>Good examples:</strong></p>\n<p><em>Size Guide skill:</em></p>\n<blockquote>Use this skill when the shopper asks about finding the right size for apparel or footwear — including sizing charts, fit advice, and size exchanges. Example questions: “What size should I get for this dress?”, “Do your shoes run small?”, “How do I know if this will fit?”, “Can I exchange for a different size?”. Do not use this skill for out-of-stock questions; those go to general support.</blockquote>\n<p><strong>Vague example (avoid):</strong></p>\n<blockquote>For questions about sizing and other product stuff.</blockquote>\n<p>The vague version doesn’t tell the router when to pick this skill over any other, and doesn’t show any concrete shopper questions it should match.</p>\n<h3 id=\"7b420f43eb96\">4. Write “How to respond”</h3>\n<p><strong>How to respond</strong> tells Customer Agent how to behave once your skill is picked. Think of it as a short playbook. The field is a rich text editor — you can type freely, and you can also type <code>/</code> to insert specific elements (headings, lists, tools, or handoff actions).</p>\n<p>Good “How to respond” content:</p>\n<ul>\n<li>Is specific and scoped to what this skill handles</li>\n<li>Describes how Customer Agent should approach the request — broken into clear topical sections (not numbered steps)</li>\n<li>Inserts tools via <code>/</code> at the point where each tool should run</li>\n<li>Inserts handoff actions via <code>/</code> where escalation applies</li>\n<li>Calls out what to do when data is missing or the request is out of scope<br>\n<p>Keep it concise. Long, meandering guidance hurts performance more than it helps.</p>\n<p><strong>What you can insert via </strong><code><strong>/</strong></code><strong>:</strong></p>\n</li>\n<li>\n<strong>Formatting</strong> — Text, Heading 1/2/3, Bullet list, Numbered list. Use these to structure the instructions so they’re easy to read and edit.</li>\n<li>\n<strong>Actions</strong> — Two handoff actions:\n<ul>\n<li>\n<em>Offer to hand off</em> — Customer Agent offers the shopper the option to connect with a human before handing off.</li>\n<li>\n<em>Hand off immediately</em> — Customer Agent hands off without asking.</li>\n</ul>\n</li>\n<li>\n<strong>Tools</strong> — Every tool attached to this skill shows up here. Insert a tool inline at the point where you want Customer Agent to use it.</li>\n</ul>\n<h3 id=\"c19b18a55f13\">5. Attach tools (optional)</h3>\n<p>If your skill needs to fetch data or take an action, attach the tools it should use. A skill can use multiple tools. The “How to respond” section should tell Customer Agent when to use which tool.</p>\n<p>See the How to create a tool article for building your own.</p>\n<h3 id=\"99e8353a2b74\">6. Attach content scopes (optional)</h3>\n<p>If your skill should only use specific content (for example, only a dedicated sizing guide rather than your entire knowledge base), set a content scope. Leave this blank to use all available content.</p>\n<h3 id=\"5e4b47e983c3\">7. Test in the playground</h3>\n<p>Click <strong>Test</strong> to open the playground. Send test messages that would normally route to your skill, and check:</p>\n<ul>\n<li>\n<strong>Router behavior</strong> — does Customer Agent actually pick your skill for the test message? If not, “When to use this skill” needs work.</li>\n<li>\n<strong>Response behavior</strong> — does Customer Agent follow the steps you described in “How to respond”?</li>\n<li>\n<strong>Tools</strong> — if the skill should use a tool, does it? With the right parameters?</li>\n<li>\n<strong>Response quality</strong> — is the output what a shopper would expect?</li>\n</ul>\n<p>Iterate on “When to use this skill” and “How to respond” based on what you see.</p>\n<h3 id=\"8c4dc9017205\">8. Enable the skill</h3>\n<p>When you’re satisfied with playground testing, enable the skill. It will start handling live conversations that match “When to use this skill.”</p>\n<h2 id=\"3bb0b5a4b397\">Writing a good “When to use this skill”</h2>\n<p>This is the most important field on a skill. The router uses it — and only it — to decide when your skill should handle a request. A good “When to use this skill”:</p>\n<ul>\n<li>\n<strong>Describes what the skill handles</strong> in plain language</li>\n<li>\n<strong>Is specific enough</strong> that the router won’t pick it for unrelated requests</li>\n<li>\n<strong>Is broad enough</strong> that the router picks it for all the requests it should handle</li>\n<li>\n<strong>Calls out edge cases</strong> where useful — what this skill does <em>not</em> handle</li>\n</ul>\n<p>Iterate with playground tests. If your skill fires when it shouldn’t, tighten “When to use this skill.” If it doesn’t fire when it should, broaden it or add examples.</p>\n<h2 id=\"57408d5df3a5\">Writing a good “How to respond”</h2>\n<p>This tells Customer Agent how to handle the request once the skill is picked. Good “How to respond” content:</p>\n<ul>\n<li>\n<strong>Is scoped</strong> to what this skill does — don’t try to cover everything</li>\n<li>\n<strong>Breaks the response into clear topical sections</strong> using headings (not numbered steps)</li>\n<li>\n<strong>Inserts tools inline</strong> at the point where each tool should run — type <code>/</code> and pick the tool from the menu</li>\n<li>\n<strong>Inserts handoff actions inline</strong> — type <code>/</code> and pick <em>Offer to hand off</em> or <em>Hand off immediately</em> where it applies</li>\n<li>\n<strong>Handles fallback cases</strong> — “If the data is missing, apologize and offer to hand off”</li>\n<li>\n<strong>Shows the shape of a good response</strong> — formatting, tone, what to include</li>\n</ul>\n<p><strong>Example (“How to respond” for an order-tracking skill):</strong></p>\n<blockquote>\n<strong>Identify shopper and order</strong>\nIf the shopper isn’t signed in, let them know they’ll need to log in to locate their order. Once signed in, locate the customer’s profile using their email or phone number to find their recent orders with /Get Profile.</blockquote>\n<blockquote>\n<strong>Check shipment status</strong>\nRetrieve the real-time status, tracking URL, and estimated delivery date for the specific order using /Order Status.</blockquote>\n<blockquote>\n<strong>Provide update</strong>\nCommunicate the current status clearly (e.g., Processing, Shipped, Delivered). If shipped, always provide the clickable tracking link.</blockquote>\n<h2 id=\"0f6abe999ac4\">Customizing existing skills</h2>\n<p>You can disable any skill Customer Agent comes with from the Skills page — useful if you don’t want Customer Agent handling a particular type of request.</p>\n<p>Editing existing skills (changing instructions, swapping tools) is coming soon. When it ships, this article will cover that flow.</p>\n<h2 id=\"ab47891801d3\">Troubleshooting</h2>\n<p><strong>Symptom:</strong> The skill never gets used.\n<strong>Likely cause:</strong> “When to use this skill” is too vague, or the router doesn’t recognize matching requests.\n<strong>Fix:</strong> Rewrite “When to use this skill” to be more specific about what the skill handles. Add example request types. Test with real shopper-style messages in the playground.</p>\n<p><strong>Symptom:</strong> The skill gets used at the wrong time.\n<strong>Likely cause:</strong> “When to use this skill” is too broad, or it overlaps with another skill.\n<strong>Fix:</strong> Narrow “When to use this skill.” Call out what the skill does <em>not</em> handle. Check if another skill should handle those requests instead.</p>\n<p><strong>Symptom:</strong> The skill doesn’t use its tool.\n<strong>Likely cause:</strong> The tool isn’t attached, or “How to respond” doesn’t insert the tool at the right step.\n<strong>Fix:</strong> Confirm the tool is attached to the skill. In “How to respond,” type <code>/</code> and insert the tool at the step where it should run.</p>\n<p><strong>Symptom:</strong> The skill ignores “How to respond.”\n<strong>Likely cause:</strong> “How to respond” is too long, contradictory, or unclear.\n<strong>Fix:</strong> Tighten it. Remove unrelated guidance. Break it into clear topical sections with headings. Test changes in the playground.</p>\n<h2 id=\"6390881ef065\">FAQ</h2>\n<p><strong>Can a fully custom skill use the tools Customer Agent comes with?</strong>\nYes. Attach any tool to your skill.</p>\n<p><strong>How do I disable a skill?</strong>\nToggle the skill off on the Skills page. You can re-enable it at any time. This works for both skills Customer Agent comes with and fully custom skills you’ve built.</p>\n<p><strong>How do I monitor how my skill is performing?</strong>\nThe Performance dashboard breaks down resolution by skill. See Understanding the performance dashboard for details.</p>\n<h2 id=\"2c3785c81e39\">Next steps</h2>\n<ul>\n<li>Build tools your skill will use</li>\n<li>Test your skill thoroughly in the playground</li>\n<li>Monitor the skill’s performance after it goes live</li>\n</ul>",
+    "user_segment_ids": []
+  },
+  "normalized": {
+    "id": "49761932711067",
+    "title": "How to create a Skill (Beta)",
+    "source_url": "https://help.klaviyo.com/hc/en-us/articles/49761932711067-How-to-create-a-Skill-Beta",
+    "section_id": 49192766741147,
+    "section": "Skills",
+    "category_id": 48274996158235,
+    "category": "Customer Agent",
+    "category_slug": "customer-agent",
+    "klaviyo_updated": "2026-04-29T20:13:58Z",
+    "created_at": "2026-04-29T20:13:58Z",
+    "draft": false,
+    "promoted": false,
+    "position": 0,
+    "label_names": []
+  },
+  "files": {
+    "body_html": "_source/articles/49761932711067.body.html",
+    "rendered_html": "_source/rendered/49761932711067.html"
+  },
+  "assets": {
+    "api_body": {
+      "images": [],
+      "links": [],
+      "headings": [
+        {
+          "level": 2,
+          "id": "061c10e83e70",
+          "text": "You will learn"
+        },
+        {
+          "level": 2,
+          "id": "57d34bc58c31",
+          "text": "Before you begin"
+        },
+        {
+          "level": 2,
+          "id": "131ce0682c32",
+          "text": "What a skill is"
+        },
+        {
+          "level": 2,
+          "id": "6f6d4f259b06",
+          "text": "When to create a fully custom skill"
+        },
+        {
+          "level": 2,
+          "id": "af76cd4a7f8e",
+          "text": "Set it up"
+        },
+        {
+          "level": 3,
+          "id": "981d858b9e5c",
+          "text": "1. Open the Skills page"
+        },
+        {
+          "level": 3,
+          "id": "599b10ec0e50",
+          "text": "2. Add a Title"
+        },
+        {
+          "level": 3,
+          "id": "3d41a3734dc4",
+          "text": "3. Write “When to use this skill”"
+        },
+        {
+          "level": 3,
+          "id": "7b420f43eb96",
+          "text": "4. Write “How to respond”"
+        },
+        {
+          "level": 3,
+          "id": "c19b18a55f13",
+          "text": "5. Attach tools (optional)"
+        },
+        {
+          "level": 3,
+          "id": "99e8353a2b74",
+          "text": "6. Attach content scopes (optional)"
+        },
+        {
+          "level": 3,
+          "id": "5e4b47e983c3",
+          "text": "7. Test in the playground"
+        },
+        {
+          "level": 3,
+          "id": "8c4dc9017205",
+          "text": "8. Enable the skill"
+        },
+        {
+          "level": 2,
+          "id": "3bb0b5a4b397",
+          "text": "Writing a good “When to use this skill”"
+        },
+        {
+          "level": 2,
+          "id": "57408d5df3a5",
+          "text": "Writing a good “How to respond”"
+        },
+        {
+          "level": 2,
+          "id": "0f6abe999ac4",
+          "text": "Customizing existing skills"
+        },
+        {
+          "level": 2,
+          "id": "ab47891801d3",
+          "text": "Troubleshooting"
+        },
+        {
+          "level": 2,
+          "id": "6390881ef065",
+          "text": "FAQ"
+        },
+        {
+          "level": 2,
+          "id": "2c3785c81e39",
+          "text": "Next steps"
+        }
+      ]
+    },
+    "rendered_page": {
+      "images": [
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/7ff492c2b417b7ecfe572f839a8a81398693c1f7-1920x1080.webp",
+          "alt": "",
+          "width": "",
+          "height": ""
+        }
+      ],
+      "links": [
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/49761932711067-How-to-create-a-Skill-Beta#site-content",
+          "text": "Skip to main content"
+        },
+        {
+          "href": "https://www.klaviyo.com",
+          "text": "Home"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center"
+        },
+        {
+          "href": "https://www.klaviyo.com/enterprise",
+          "text": "Enterprise"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Partners"
+        },
+        {
+          "href": "https://www.klaviyo.com/careers",
+          "text": "Careers"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": "Log in"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": ""
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center Find step-by-step instructions and troubleshooting solutions in our knowledge base."
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000032731",
+          "text": "Integrations"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000312411",
+          "text": "Flows"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867867",
+          "text": "Audience"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867667",
+          "text": "Campaigns"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/360000190711",
+          "text": "Sign-up forms"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000873988",
+          "text": "Deliverability & compliance"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/29173800271259",
+          "text": "SMS"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/16638219724187",
+          "text": "Reviews"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/18073014919195",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/34141283979931",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/37659126754075",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/33948021740315",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/39746685522331",
+          "text": "WhatsApp"
+        },
+        {
+          "href": "https://academy.klaviyo.com",
+          "text": "Klaviyo Academy Expert training and education to help you succeed with Klaviyo, and beyond."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Quick+guide&resource=academy_courses",
+          "text": "Quick guides Learn marketing strategies and concepts in 15 minutes or less."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Course&resource=academy_courses",
+          "text": "Courses Master key marketing topics through structured lessons and exams."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/best-practices",
+          "text": "Best practices Discover top product and marketing strategies for your business."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/learning-paths",
+          "text": "Learning paths Complete curated learning journeys tailored to your marketing goals."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses",
+          "text": "Explore all resources"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Live+training&resource=academy_courses",
+          "text": "Live trainings Build confidence through hands-on interactive workshops and thought-provoking strategy sessions."
+        },
+        {
+          "href": "https://www.bigmarker.com/klaviyo-customer-education/Office-hours-Getting-started-with-Klaviyo",
+          "text": "Live office hours Join a strategic discussion where you can ask questions and get answers in real-time."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/private-live-training",
+          "text": "1:1 Live training Book a private training session with an expert to jumpstart your platform knowledge and confidence."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/credentials",
+          "text": "Klaviyo credentials Dig deeper into select topics and showcase your expertise with a final exam to earn a certificate and digital badge."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/certificates/klaviyo-practitioner-certificate",
+          "text": "Klaviyo practitioner certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/deliverability-certificate",
+          "text": "Deliverability certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/developer-certificate",
+          "text": "Klaviyo developer certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses&select=Certificate",
+          "text": "See all certificates"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Klaviyo Community Join our thriving community network to connect with brands like yours—online and in person."
+        },
+        {
+          "href": "https://community.klaviyo.com/topic/new",
+          "text": "Ask a question Post a question and get thoughtful answers from Klaviyo powerusers."
+        },
+        {
+          "href": "https://community.klaviyo.com/p/roadmap",
+          "text": "Product roadmap"
+        },
+        {
+          "href": "https://community.klaviyo.com/search/activity/recent",
+          "text": "Recent threads"
+        },
+        {
+          "href": "https://community.klaviyo.com/p/champions",
+          "text": "Meet the Champions"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups",
+          "text": "Browse all groups Your people are waiting. New ideas and connections are a click away."
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/developer-group-64",
+          "text": "Developer group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/entrepreneur-user-group-118",
+          "text": "Entrepreneur group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/woo-user-group-87",
+          "text": "WooCommerce group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/new-york-meetup-chapter-82",
+          "text": "New York City"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/los-angeles-meetup-chapter-83",
+          "text": "Los Angeles"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/austin-meetup-chapter-85",
+          "text": "Austin"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/san-diego-meetup-chapter-86",
+          "text": "San Diego"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/amsterdam-meetup-chapter-84",
+          "text": "Amsterdam"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Klaviyo Developers Access API documentation and developer guides to help you build with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/get_started",
+          "text": "Get started Access key resources and a step-by-step checklist for how to start developing with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/build_your_integration",
+          "text": "Grow your app's reach Learn how to join our ecosystem and get your app listed on our marketplace."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/developer-tools",
+          "text": "Developer tools Generate sample data, monitor your API usage, and access our Postman collections."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/reference/api_overview",
+          "text": "API reference Browse our full catalog of API docs."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/changelog_",
+          "text": "Changelog"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/api_versioning_and_deprecation_policy",
+          "text": "Versioning & deprecation policy"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/rate_limits_and_error_handling",
+          "text": "Rate limits & error handling"
+        },
+        {
+          "href": "https://youtube.com/playlist?list=PLHkNfHgtxcUanrkMnKPdkRzuWU7MGv_xM&si=pkG-KH7IT_TUHOGC",
+          "text": "API tutorials on YouTube Subscribe to our Klaviyo API Tutorials playlist for easy access to step-by-step developer walkthroughs."
+        },
+        {
+          "href": "https://www.klaviyo.com/contact-us",
+          "text": "Contact us"
+        },
+        {
+          "href": "https://www.klaviyo.com/sign-up",
+          "text": "Sign up"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": "Search"
+        },
+        {
+          "href": "https://help.klaviyo.com/en-us",
+          "text": "United States - EN"
+        },
+        {
+          "href": "https://help.klaviyo.com/de-de",
+          "text": "Deutschland - DE"
+        },
+        {
+          "href": "https://help.klaviyo.com/es-es",
+          "text": "España - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/es-mx",
+          "text": "México - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/fr-fr",
+          "text": "France - FR"
+        },
+        {
+          "href": "https://help.klaviyo.com/it-it",
+          "text": "Italia - IT"
+        },
+        {
+          "href": "https://help.klaviyo.com/ko-kr",
+          "text": "한국 - KO"
+        },
+        {
+          "href": "https://help.klaviyo.com/nl-nl",
+          "text": "Nederland - NL"
+        },
+        {
+          "href": "https://help.klaviyo.com/pl-pl",
+          "text": "Polska - PL"
+        },
+        {
+          "href": "https://help.klaviyo.com/pt-br",
+          "text": "Brasil - PT"
+        },
+        {
+          "href": "https://help.klaviyo.com/sv-se",
+          "text": "Sverige - SV"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/48274996158235",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/49192766741147",
+          "text": "Skills"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/49761932711067-How-to-create-a-Skill-Beta#you-will-learn",
+          "text": "You will learn"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/49761932711067-How-to-create-a-Skill-Beta#before-you-begin",
+          "text": "Before you begin"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/49761932711067-How-to-create-a-Skill-Beta#what-a-skill-is",
+          "text": "What a skill is"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/49761932711067-How-to-create-a-Skill-Beta#when-to-create-a-fully-custom-skill",
+          "text": "When to create a fully custom skill"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/49761932711067-How-to-create-a-Skill-Beta#set-it-up",
+          "text": "Set it up"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/49761932711067-How-to-create-a-Skill-Beta#writing-a-good-when-to-use-this-skill",
+          "text": "Writing a good “When to use this skill”"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/49761932711067-How-to-create-a-Skill-Beta#writing-a-good-how-to-respond",
+          "text": "Writing a good “How to respond”"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/49761932711067-How-to-create-a-Skill-Beta#customizing-existing-skills",
+          "text": "Customizing existing skills"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/49761932711067-How-to-create-a-Skill-Beta#troubleshooting",
+          "text": "Troubleshooting"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/49761932711067-How-to-create-a-Skill-Beta#faq",
+          "text": "FAQ"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/49761932711067-How-to-create-a-Skill-Beta#next-steps",
+          "text": "Next steps"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115001002272",
+          "text": "Learn how to contact support"
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": ""
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": "Visit Community"
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": ""
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": "Hire a partner"
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/about",
+          "text": "About Klaviyo"
+        },
+        {
+          "href": "https://www.klaviyo.com/newsroom",
+          "text": "Newsroom"
+        },
+        {
+          "href": "https://investors.klaviyo.com/overview/default.aspx",
+          "text": "Investor relations"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Agency and tech partners"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Developers"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/retail",
+          "text": "Retail and ecommerce"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/restaurants",
+          "text": "Restaurant marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/wellness",
+          "text": "Wellness"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform",
+          "text": "B2C CRM overview"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai",
+          "text": "Klaviyo AI (K:AI)"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/marketing-automation",
+          "text": "Klaviyo Marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-service",
+          "text": "Klaviyo Service"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/analytics",
+          "text": "Klaviyo Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-data-platform",
+          "text": "Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare",
+          "text": "Klaviyo vs. Klaviyo alternatives"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-mailchimp",
+          "text": "Klaviyo vs. Mailchimp"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-postscript",
+          "text": "Klaviyo vs. Postscript"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-attentive",
+          "text": "Klaviyo vs. Attentive"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-salesforce-marketing-cloud",
+          "text": "Klaviyo vs. Salesforce"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-listrak",
+          "text": "Klaviyo vs. Listrak"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/omnichannel",
+          "text": "Omnichannel marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/email-marketing",
+          "text": "Email marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing",
+          "text": "SMS marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing/rcs",
+          "text": "RCS for Business"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/mobile-app-marketing",
+          "text": "Mobile app marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/whatsapp",
+          "text": "WhatsApp marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/social",
+          "text": "Social marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources",
+          "text": "Marketing resources"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources/marketing-campaign-calendar",
+          "text": "Marketing campaign calendar"
+        },
+        {
+          "href": "https://www.klaviyo.com/glossary",
+          "text": "Marketing glossary"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/email-subject-line-generator",
+          "text": "Subject line generator"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/roi-calculator",
+          "text": "ROI calculator"
+        },
+        {
+          "href": "https://www.klaviyo.com/customers",
+          "text": "Case studies"
+        },
+        {
+          "href": "https://www.klaviyo.com/composer",
+          "text": "Composer Beta"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/marketing-agent",
+          "text": "Marketing Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/customer-agent",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/customer-experience-hub",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/helpdesk",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/marketing-analytics",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/advanced-cdp",
+          "text": "Advanced Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/web-forms",
+          "text": "Web forms"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/email-templates",
+          "text": "Email templates"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/portfolio",
+          "text": "Portfolio"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform-integrations",
+          "text": "Apps and Integrations"
+        },
+        {
+          "href": "https://www.klaviyo.com/features",
+          "text": "Features"
+        },
+        {
+          "href": "https://www.klaviyo.com/whats-new",
+          "text": "What's new"
+        },
+        {
+          "href": "https://www.klaviyo.com/events",
+          "text": "Events"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help Center"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us",
+          "text": "Academy"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Community"
+        },
+        {
+          "href": "https://www.facebook.com/Klaviyo/",
+          "text": "Facebook"
+        },
+        {
+          "href": "https://twitter.com/klaviyo/",
+          "text": "Twitter"
+        },
+        {
+          "href": "https://www.linkedin.com/company/klaviyo/",
+          "text": "LinkedIn"
+        },
+        {
+          "href": "https://www.instagram.com/klaviyo/",
+          "text": "Instagram"
+        },
+        {
+          "href": "https://www.klaviyo.com/sitemap",
+          "text": "Site Map"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal",
+          "text": "Terms and Privacy"
+        },
+        {
+          "href": "https://www.klaviyo.com/security",
+          "text": "Security"
+        },
+        {
+          "href": "https://www.klaviyo.com/trust",
+          "text": "Trust"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal/intellectual-property-notices",
+          "text": "Intellectual Property Notices"
+        }
+      ],
+      "headings": [
+        {
+          "level": 1,
+          "id": "",
+          "text": "How to create a Skill (Beta)"
+        },
+        {
+          "level": 2,
+          "id": "you-will-learn",
+          "text": "You will learn"
+        },
+        {
+          "level": 2,
+          "id": "before-you-begin",
+          "text": "Before you begin"
+        },
+        {
+          "level": 2,
+          "id": "what-a-skill-is",
+          "text": "What a skill is"
+        },
+        {
+          "level": 2,
+          "id": "when-to-create-a-fully-custom-skill",
+          "text": "When to create a fully custom skill"
+        },
+        {
+          "level": 2,
+          "id": "set-it-up",
+          "text": "Set it up"
+        },
+        {
+          "level": 3,
+          "id": "h-1-open-the-skills-page",
+          "text": "1. Open the Skills page"
+        },
+        {
+          "level": 3,
+          "id": "h-2-add-a-title",
+          "text": "2. Add a Title"
+        },
+        {
+          "level": 3,
+          "id": "h-3-write-when-to-use-this-skill",
+          "text": "3. Write “When to use this skill”"
+        },
+        {
+          "level": 3,
+          "id": "h-4-write-how-to-respond",
+          "text": "4. Write “How to respond”"
+        },
+        {
+          "level": 3,
+          "id": "h-5-attach-tools-optional",
+          "text": "5. Attach tools (optional)"
+        },
+        {
+          "level": 3,
+          "id": "h-6-attach-content-scopes-optional",
+          "text": "6. Attach content scopes (optional)"
+        },
+        {
+          "level": 3,
+          "id": "h-7-test-in-the-playground",
+          "text": "7. Test in the playground"
+        },
+        {
+          "level": 3,
+          "id": "h-8-enable-the-skill",
+          "text": "8. Enable the skill"
+        },
+        {
+          "level": 2,
+          "id": "writing-a-good-when-to-use-this-skill",
+          "text": "Writing a good “When to use this skill”"
+        },
+        {
+          "level": 2,
+          "id": "writing-a-good-how-to-respond",
+          "text": "Writing a good “How to respond”"
+        },
+        {
+          "level": 2,
+          "id": "customizing-existing-skills",
+          "text": "Customizing existing skills"
+        },
+        {
+          "level": 2,
+          "id": "troubleshooting",
+          "text": "Troubleshooting"
+        },
+        {
+          "level": 2,
+          "id": "faq",
+          "text": "FAQ"
+        },
+        {
+          "level": 2,
+          "id": "next-steps",
+          "text": "Next steps"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "Explore more from Klaviyo"
+        }
+      ]
+    }
+  },
+  "rendered_page": {
+    "status": "fetched",
+    "error": ""
+  }
+}

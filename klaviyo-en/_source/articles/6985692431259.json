@@ -1,0 +1,1002 @@
+{
+  "captured_at": "2026-05-23T16:15:42Z",
+  "article": {
+    "id": 6985692431259,
+    "url": "https://klaviyo.zendesk.com/api/v2/help_center/en-us/articles/6985692431259.json",
+    "html_url": "https://klaviyo.zendesk.com/hc/en-us/articles/6985692431259-Troubleshooting-added-to-cart-tracking",
+    "author_id": 403684872812,
+    "comments_disabled": true,
+    "draft": false,
+    "promoted": false,
+    "position": 0,
+    "vote_sum": 4,
+    "vote_count": 24,
+    "section_id": 49375247843227,
+    "created_at": "2022-06-30T18:46:58Z",
+    "updated_at": "2026-04-21T13:55:04Z",
+    "name": "Troubleshooting added to cart tracking",
+    "title": "Troubleshooting added to cart tracking",
+    "source_locale": "en-us",
+    "locale": "en-us",
+    "outdated": false,
+    "outdated_locales": [],
+    "edited_at": "2026-04-17T01:03:23Z",
+    "user_segment_id": null,
+    "permission_group_id": 146372,
+    "content_tag_ids": [],
+    "label_names": [],
+    "body": "<h2 id=\"h_01G6W48MBT2PX8MCX7D6RVT14Z\">Before you begin</h2>\n<p>For some ecommerce platforms, <em>Added to Cart</em> events are tracked automatically. For other ecommerce platforms, a code snippet must be manually added to your site.</p>\n<p>Before consulting this guide, make sure you:</p>\n<ul>\n<li>Enable <em>Added to Cart </em>tracking, if it was not added automatically through your integration.</li>\n<li>Enable Klaviyo’s “Active on Site” JavaScript, known as Klaviyo.js, in order for <em>Added to Cart </em>tracking to work. Learn how in the <a href=\"#h_01G6W496F0XVGZDAWAJ2RW5KEG\">\"Active on Site\" section</a> below.<br>\n<p>If you are using BigCommerce, make sure to enable <em>Viewed Product</em> tracking, which is required in order for <em>Added to Cart </em>tracking to function properly. Guidance around enabling <em>Viewed Product</em> tracking is given in the setup guides linked below. If you are experiencing issues with <em>Viewed Product</em> tracking, please see our guide on <a href=\"https://help.klaviyo.com/hc/en-us/articles/4416172774939-Troubleshooting-Viewed-Product-Tracking\">troubleshooting Viewed Product tracking</a>.</p>\n<p>The following ecommerce integrations support <em>Added to Cart</em> tracking, and it works as follows:</p>\n</li>\n<li>\n<a href=\"https://help.klaviyo.com/hc/en-us/articles/115005080407\">Shopify</a><br>\nEnabled via a <a href=\"https://help.klaviyo.com/hc/en-us/articles/4425956184731#h_01J6F7TREZAJM7M3R3DFVZSDGT\">Shopify Server Pixel</a> when you check the <em>Track behavioral events</em> setting</li>\n<li>\n<a href=\"https://help.klaviyo.com/hc/en-us/articles/115005082547\">BigCommerce</a><br>\nRequires a <a href=\"https://help.klaviyo.com/hc/en-us/articles/360024310292\">manually installed code snippet</a>\n</li>\n<li>\n<a href=\"https://help.klaviyo.com/hc/en-us/articles/115005254348\">Magento 2</a><br>\nAutomatically added by Klaviyo</li>\n<li>\n<a href=\"https://help.klaviyo.com/hc/en-us/articles/115005255808\">WooCommerce</a><br>\nAutomatically added by Klaviyo</li>\n<li>\n<a href=\"https://help.klaviyo.com/hc/en-us/articles/360054551492-How-to-Integrate-with-PrestaShop\">PrestaShop</a><br>\nAutomatically added by Klaviyo</li>\n<li>\n<a href=\"https://help.klaviyo.com/hc/en-us/articles/360033744951\">Salesforce Commerce Cloud</a><br>\nAutomatically added by Klaviyo - only tracked for logged-in users</li>\n</ul>\n<p>If you’re using an ecommerce platform without a pre-built Klaviyo integration, or a custom platform, learn about <a href=\"https://developers.klaviyo.com/en/docs/guide-to-integrating-a-platform-without-a-pre-built-klaviyo-integration#viewed-product\">how to enable Viewed Product and Added to Cart tracking on our Developer site</a>.</p>\n<h2 id=\"h_01J6FASZBMDJER345SV8H7GB9K\">Test Added to Cart tracking</h2>\n<p>To test that your <em>Added to Cart </em>tracking is set up properly, follow these steps:</p>\n<ol>\n<li>Navigate to your website</li>\n<li>On your homepage, add the following to the end of the URL, replacing <em>example@gmail.com</em> with your email address:<br>\n<em>?utm_email=example@gmail.com</em><br>\n<br>\n\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28705664805275\" alt=\"After modifying the email address used in the example, add it to the end of your site's URL and visit your site in any browser.\">\n</li>\n<li>Reload the page</li>\n<li>Navigate to a product page on your site with a product that is in stock</li>\n<li>Click the “Add to Cart” button on the page</li>\n<li>Search in Klaviyo for the email address you used in step 2<br>\n\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28705664806427\" alt=\"The searchbar can be found in the top right of Klaviyo where you can search for profiles by email address.\">\n<p>You should see that a Klaviyo profile has been created for you (if one didn't exist already) and that an <em>Added to Cart</em> event has been tracked on your activity feed.</p>\n<p>To see a feed of all <em>Added to Cart </em>metrics over time:</p>\n</li>\n<li>Navigate to <strong>Analytics &gt; Metrics</strong> in Klaviyo.</li>\n<li>Filter by <em>Added to Cart </em>to view tracked data in an activity feed, activity map, charts, best people, and cohort reports. Please note that for Shopify, <em>Added to Cart</em> will have a Shopify icon, but for all other integrations it will have a gear icon.<br>\n</li>\n</ol>\n<p><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28705637945755\" alt=\"At the top of the Metrics page there is a searchbar where you can search for different metric by name.\"></p>\n<p>Once you’ve reviewed the troubleshooting scenarios below and made changes, you should test your tracking again to make sure it’s working correctly. </p>\n<h2 id=\"h_01J6FASZBM5FH8TYA500CGTT6V\">Troubleshooting scenarios</h2>\n<p>Review the following questions in order to diagnose the cause of your <em>Added to Cart</em> issues. Note that some steps are general, and others depend on what ecommerce platform you are using.</p>\n<div class=\"accordion accordion--default\">\n<div class=\"accordion__item\">\n<div class=\"accordion__item-title\"><strong>Have you enabled Klaviyo’s Active on Site tracking?</strong></div>\n<div class=\"accordion__item-content\">\n<p>In order for <em>Added to Cart</em> tracking to work correctly, you must first enable Klaviyo’s <em>Active on Site</em> tracking which allows your customers to be cookied. <em>Active on Site</em> tracking is enabled via the addition of a JavaScript snippet (known as “Klaviyo’s onsite JavaScript” or “Klaviyo.js”) to your site.</p>\n<p>Klaviyo adds Klaviyo.js automatically during the integration, though some integrations require that you check a setting to enable it. Learn about your specific ecommerce platform and how to test that Klaviyo.js is working:</p>\n<ol>\n<li>\n<strong>Shopify</strong><br>\nKlaviyo.js is added automatically through the integration or through the Klaviyo app embed in Shopify, if you enable it. Learn more about the <a href=\"https://help.klaviyo.com/hc/en-us/articles/4425956184731\">app embed and onsite tracking for Shopify</a>. </li>\n<li>\n<strong>WooCommerce</strong><br>\nKlaviyo.js is added automatically when you integrate with WooCommerce, and you can make sure that you’ve completed all steps by reading our <a href=\"https://help.klaviyo.com/hc/en-us/articles/115005255808-How-to-Integrate-with-WooCommerce\">WooCommerce integration guide</a>. To test your onsite JavaScript, select the <strong>Integrations</strong> tab, then click <strong>Manage data &gt;</strong><strong>Set up web tracking</strong>. Then, find the step where you can enter your site URL in the box, and follow the instructions to test your tracking.</li>\n<li>\n<strong>BigCommerce</strong><br>\nMake sure you’ve checked the option on your <a href=\"https://www.klaviyo.com/integration/bigcommerce\">integration settings page</a> to <em>Automatically add Klaviyo onsite JavaScript</em>. Then, <a href=\"https://help.klaviyo.com/hc/en-us/articles/115005082547-How-to-Integrate-with-BigCommerce#confirm-web-tracking-installation3\">follow the steps to test your onsite JavaScript</a>. </li>\n<li>\n<strong>Magento 2</strong><br>\nKlaviyo.js is added automatically when you integrate with Magento 2, and you can make sure that you’ve completed all steps by reading our <a href=\"https://help.klaviyo.com/hc/en-us/articles/115005254348-How-to-Integrate-with-Magento-2-x-CE-and-EE-\">Magento 2 integration guide</a>. To test your onsite JavaScript, select the <strong>Integrations</strong> tab, then click <strong>Manage data &gt;</strong><strong>Set up web tracking</strong>.</li>\n<li> Then, find the step where you can enter your site URL in the box, and follow the instructions to test your tracking. </li>\n<li>\n<strong>PrestaShop</strong><br>\nKlaviyo.js is added automatically when you integrate with PrestaShop, and you can make sure that you’ve completed all steps by reading our <a href=\"https://help.klaviyo.com/hc/en-us/articles/360054551492\">PrestaShop integration guide</a>. To test your onsite JavaScript, select the <strong>Integrations</strong> tab, then click <strong>Manage data &gt;</strong><strong>Set up web tracking</strong>.</li>\n<li> Then, find the step where you can enter your site URL in the box, and follow the instructions to test your tracking. </li>\n</ol>\n</div>\n</div>\n<div class=\"accordion__item\">\n<div class=\"accordion__item-title\"><strong>For Shopify users: have you enabled the app embed?</strong></div>\n<div class=\"accordion__item-content\">\n<p>Once you enable the app embed in Shopify and check the <em>Track 'Viewed Product' events</em> setting, <em>Viewed Product</em> tracking will turn on automatically. Read our article on <a href=\"https://help.klaviyo.com/hc/en-us/articles/4425956184731#enabling-the-klaviyo-app-embed-in-shopify4\">enabling the Klaviyo app embed in Shopify</a> for more information.</p>\n</div>\n</div>\n<div class=\"accordion__item\">\n<div class=\"accordion__item-title\"><strong>Have you recently switched ecommerce platforms?</strong></div>\n<div class=\"accordion__item-content\">\n<p>If you’ve recently switched ecommerce platforms, you’ll need to add both <em>Viewed Product</em> and <em>Added to Cart</em> tracking to your new site. Consult the information in the <a href=\"#h_01G6W48MBT2PX8MCX7D6RVT14Z\">Before you begin section</a> above to learn about <em>Viewed Product</em> and <em>Added to Cart </em>tracking for your new platform. </p>\n</div>\n</div>\n<div class=\"accordion__item\">\n<div class=\"accordion__item-title\"><strong>Have you recently updated your store’s theme, or made any other updates to your ecommerce platform?</strong></div>\n<div class=\"accordion__item-content\">\n<p>If you’ve recently updated your store’s theme, you may need to reinstall Klaviyo.js, the <em>Viewed Product</em> snippet, and the <em>Added to Cart </em>snippet (for BigCommerce) on your new theme depending on the platform. Making other updates to your ecommerce platform may also affect the snippets previously added to your site.</p>\n<p>To reinstall the <em>Viewed Product</em> snippet for BigCommerce, follow the instructions in the <a href=\"https://help.klaviyo.com/hc/en-us/articles/115005082547-How-to-Integrate-with-BigCommerce#confirm-web-tracking-installation3\">BigCommerce integration setup guide</a>, and for the <em>Added to Cart</em> snippet follow the <a href=\"https://help.klaviyo.com/hc/en-us/articles/360024310292-Guide-to-Creating-an-Added-to-Cart-Event-for-BigCommerce\">guide to creating an \"Added to Cart\" event for BigCommerce</a>.</p>\n<p>If you’re using WooCommerce or Magento, or are using the Klaviyo app embed in Shopify, but you’ve made changes to your site and now the event isn’t tracking, you should <a href=\"https://help.klaviyo.com/hc/en-us/articles/115001002272-How-to-Contact-Support\">contact Klaviyo support</a> to help diagnose the problem.</p>\n</div>\n</div>\n<div class=\"accordion__item\">\n<div class=\"accordion__item-title\"><strong>For BigCommerce users: Is your ecommerce store connected to multiple Klaviyo accounts?</strong></div>\n<div class=\"accordion__item-content\">\n<p>If you have one store connected to multiple Klaviyo accounts, this can cause problems with <em>Active on Site</em>, <em>Viewed Product</em>, and <em>Added to Cart</em> tracking. Duplicate Klaviyo.js can cause onsite tracking to break.</p>\n<p>To check if you have duplicate Klaviyo.js:</p>\n<ol>\n<li>Navigate to your main theme file. Klaviyo.js looks like this:<br>\n\n<pre><code class=\"language-text\">&lt;script type=\"text/javascript\" async=\"\" src=\"https://static.klaviyo.com/onsite/js/klaviyo.js?company_id=API_KEY\"&gt;&lt;/script&gt;</code></pre>\n</li>\n<li>If you search for company_id within the file and find it twice (and see two of the snippets shown above) then you have duplicate Klaviyo.js. There will typically be two different API keys after the equals sign, one from each Klaviyo account. </li>\n<li>To make sure the duplicate is removed correctly from your site, please <a href=\"https://help.klaviyo.com/hc/en-us/articles/115001002272-How-to-Contact-Support\">contact Klaviyo support</a>. </li>\n</ol>\n</div>\n</div>\n<div class=\"accordion__item\">\n<div class=\"accordion__item-title\"><strong>For BigCommerce users: Are you using the correct code snippet for your Add to Cart button?</strong></div>\n<div class=\"accordion__item-content\">\n<p>BigCommerce requires a manually installed code snippet to use <em>Added to Cart</em> tracking. There are 2 different snippets that can be installed into your theme depending on if your “Add to Cart” button has an ID or not. Please see our guide on <a href=\"https://help.klaviyo.com/hc/en-us/articles/360024310292\">how to create an \"Added to Cart\" event for BigCommerce</a> for more information on how to check this.</p>\n</div>\n</div>\n<div class=\"accordion__item\">\n<div class=\"accordion__item-title\"><strong>For WooCommerce and Magento users: Are you using the most recent version of your integration plugin?</strong></div>\n<div class=\"accordion__item-content\">\n<p>If you are using WooCommerce or Magento, problems with <em>Added to Cart </em>tracking might be related to other issues with your platform’s Klaviyo plugin.</p>\n<ol>\n<li>If <em>Added to Cart </em>events aren’t tracking, check to see if the <em>Started Checkout</em> event is tracking by searching for <em>Started Checkout</em> within <strong>Analytics &gt; Metrics</strong> in Klaviyo. </li>\n<li>If both <em>Added to Cart</em> and <em>Started Checkout</em> aren’t tracking, there may be an issue with your plugin.</li>\n<li>Check to see if you are using the most up-to-date version of the plugin for your integration. If needed, update to the latest version within WooCommerce or Magento, or you can download the latest version from the relevant platform’s listing.</li>\n</ol>\n<ul>\n<ul>\n<li><a href=\"https://wordpress.org/plugins/klaviyo/\">Klaviyo WordPress (WooCommerce) plugin</a></li>\n<li><a href=\"https://www.klaviyo.com/media/downloads/MagentoKlaviyo-Latest.tgz\">Klaviyo Magento 1 extension</a></li>\n<li><a href=\"https://help.klaviyo.com/hc/en-us/articles/115005254348#h_01F7458JT1BK3PB93NXHJPMSKE\">Klaviyo Magento 2 extension</a></li>\n</ul>\n</ul>\n</div>\n</div>\n<div class=\"accordion__item\">\n<div class=\"accordion__item-title\"><strong>For Shopify users: Do you require cookie consent for visitors in the EU, EEA, UK and Switzerland prior to permitting onsite tracking?</strong></div>\n<div class=\"accordion__item-content\">\n<p>Based on your Customer Privacy settings in Shopify, Klaviyo may not track onsite events for visitors to your Shopify store in the EU, EEA, UK and Switzerland, unless they have provided consent.</p>\n</div>\n</div>\n</div>\n<h2 id=\"h_01J6FASZBMYFYTFF0J5FQ6FXMK\">Contact Klaviyo support</h2>\n<p>If you are still encountering issues after consulting this list and testing your tracking, please reach out in our <a href=\"https://community.klaviyo.com/got-a-question-1\">Community</a> or to our <a href=\"https://help.klaviyo.com/hc/en-us/articles/115001002272-How-to-Contact-Support\">Support Team</a>. </p>\n<p>Learn how to troubleshoot other metrics:</p>\n<p>Other resources:</p>",
+    "user_segment_ids": []
+  },
+  "normalized": {
+    "id": "6985692431259",
+    "title": "Troubleshooting added to cart tracking",
+    "source_url": "https://help.klaviyo.com/hc/en-us/articles/6985692431259-Troubleshooting-added-to-cart-tracking",
+    "section_id": 49375247843227,
+    "section": "Metrics troubleshooting",
+    "category_id": 115000874048,
+    "category": "Analytics",
+    "category_slug": "analytics-audience",
+    "klaviyo_updated": "2026-04-21T13:55:04Z",
+    "created_at": "2022-06-30T18:46:58Z",
+    "draft": false,
+    "promoted": false,
+    "position": 0,
+    "label_names": []
+  },
+  "files": {
+    "body_html": "_source/articles/6985692431259.body.html",
+    "rendered_html": "_source/rendered/6985692431259.html"
+  },
+  "assets": {
+    "api_body": {
+      "images": [
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28705664805275",
+          "alt": "After modifying the email address used in the example, add it to the end of your site's URL and visit your site in any browser.",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28705664806427",
+          "alt": "The searchbar can be found in the top right of Klaviyo where you can search for profiles by email address.",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28705637945755",
+          "alt": "At the top of the Metrics page there is a searchbar where you can search for different metric by name.",
+          "width": "",
+          "height": ""
+        }
+      ],
+      "links": [
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/6985692431259-Troubleshooting-added-to-cart-tracking#h_01G6W496F0XVGZDAWAJ2RW5KEG",
+          "text": "\"Active on Site\" section"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4416172774939-Troubleshooting-Viewed-Product-Tracking",
+          "text": "troubleshooting Viewed Product tracking"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005080407",
+          "text": "Shopify"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4425956184731#h_01J6F7TREZAJM7M3R3DFVZSDGT",
+          "text": "Shopify Server Pixel"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005082547",
+          "text": "BigCommerce"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360024310292",
+          "text": "manually installed code snippet"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005254348",
+          "text": "Magento 2"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005255808",
+          "text": "WooCommerce"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360054551492-How-to-Integrate-with-PrestaShop",
+          "text": "PrestaShop"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360033744951",
+          "text": "Salesforce Commerce Cloud"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/guide-to-integrating-a-platform-without-a-pre-built-klaviyo-integration#viewed-product",
+          "text": "how to enable Viewed Product and Added to Cart tracking on our Developer site"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4425956184731",
+          "text": "app embed and onsite tracking for Shopify"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005255808-How-to-Integrate-with-WooCommerce",
+          "text": "WooCommerce integration guide"
+        },
+        {
+          "href": "https://www.klaviyo.com/integration/bigcommerce",
+          "text": "integration settings page"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005082547-How-to-Integrate-with-BigCommerce#confirm-web-tracking-installation3",
+          "text": "follow the steps to test your onsite JavaScript"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005254348-How-to-Integrate-with-Magento-2-x-CE-and-EE-",
+          "text": "Magento 2 integration guide"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360054551492",
+          "text": "PrestaShop integration guide"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4425956184731#enabling-the-klaviyo-app-embed-in-shopify4",
+          "text": "enabling the Klaviyo app embed in Shopify"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/6985692431259-Troubleshooting-added-to-cart-tracking#h_01G6W48MBT2PX8MCX7D6RVT14Z",
+          "text": "Before you begin section"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005082547-How-to-Integrate-with-BigCommerce#confirm-web-tracking-installation3",
+          "text": "BigCommerce integration setup guide"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360024310292-Guide-to-Creating-an-Added-to-Cart-Event-for-BigCommerce",
+          "text": "guide to creating an \"Added to Cart\" event for BigCommerce"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115001002272-How-to-Contact-Support",
+          "text": "contact Klaviyo support"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360024310292",
+          "text": "how to create an \"Added to Cart\" event for BigCommerce"
+        },
+        {
+          "href": "https://wordpress.org/plugins/klaviyo/",
+          "text": "Klaviyo WordPress (WooCommerce) plugin"
+        },
+        {
+          "href": "https://www.klaviyo.com/media/downloads/MagentoKlaviyo-Latest.tgz",
+          "text": "Klaviyo Magento 1 extension"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005254348#h_01F7458JT1BK3PB93NXHJPMSKE",
+          "text": "Klaviyo Magento 2 extension"
+        },
+        {
+          "href": "https://community.klaviyo.com/got-a-question-1",
+          "text": "Community"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115001002272-How-to-Contact-Support",
+          "text": "Support Team"
+        }
+      ],
+      "headings": [
+        {
+          "level": 2,
+          "id": "h_01G6W48MBT2PX8MCX7D6RVT14Z",
+          "text": "Before you begin"
+        },
+        {
+          "level": 2,
+          "id": "h_01J6FASZBMDJER345SV8H7GB9K",
+          "text": "Test Added to Cart tracking"
+        },
+        {
+          "level": 2,
+          "id": "h_01J6FASZBM5FH8TYA500CGTT6V",
+          "text": "Troubleshooting scenarios"
+        },
+        {
+          "level": 2,
+          "id": "h_01J6FASZBMYFYTFF0J5FQ6FXMK",
+          "text": "Contact Klaviyo support"
+        }
+      ]
+    },
+    "rendered_page": {
+      "images": [
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/7ff492c2b417b7ecfe572f839a8a81398693c1f7-1920x1080.webp",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/30ecd350281c6fd1a5c4019b245898a07d8c5ece-512x96.png",
+          "alt": "After modifying the email address used in the example, add it to the end of your site's URL and visit your site in any browser.",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/aaffe9ed60f1b5a9f7b73131fb652f98f6549f58-512x197.png",
+          "alt": "The searchbar can be found in the top right of Klaviyo where you can search for profiles by email address.",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/36d933da355b11f83bc86bff8772e5578014d2ad-459x238.png",
+          "alt": "At the top of the Metrics page there is a searchbar where you can search for different metric by name.",
+          "width": "",
+          "height": ""
+        }
+      ],
+      "links": [
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/6985692431259-Troubleshooting-added-to-cart-tracking#site-content",
+          "text": "Skip to main content"
+        },
+        {
+          "href": "https://www.klaviyo.com",
+          "text": "Home"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center"
+        },
+        {
+          "href": "https://www.klaviyo.com/enterprise",
+          "text": "Enterprise"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Partners"
+        },
+        {
+          "href": "https://www.klaviyo.com/careers",
+          "text": "Careers"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": "Log in"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": ""
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center Find step-by-step instructions and troubleshooting solutions in our knowledge base."
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000032731",
+          "text": "Integrations"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000312411",
+          "text": "Flows"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867867",
+          "text": "Audience"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867667",
+          "text": "Campaigns"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/360000190711",
+          "text": "Sign-up forms"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000873988",
+          "text": "Deliverability & compliance"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/29173800271259",
+          "text": "SMS"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/16638219724187",
+          "text": "Reviews"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/18073014919195",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/34141283979931",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/37659126754075",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/33948021740315",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/39746685522331",
+          "text": "WhatsApp"
+        },
+        {
+          "href": "https://academy.klaviyo.com",
+          "text": "Klaviyo Academy Expert training and education to help you succeed with Klaviyo, and beyond."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Quick+guide&resource=academy_courses",
+          "text": "Quick guides Learn marketing strategies and concepts in 15 minutes or less."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Course&resource=academy_courses",
+          "text": "Courses Master key marketing topics through structured lessons and exams."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/best-practices",
+          "text": "Best practices Discover top product and marketing strategies for your business."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/learning-paths",
+          "text": "Learning paths Complete curated learning journeys tailored to your marketing goals."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses",
+          "text": "Explore all resources"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Live+training&resource=academy_courses",
+          "text": "Live trainings Build confidence through hands-on interactive workshops and thought-provoking strategy sessions."
+        },
+        {
+          "href": "https://www.bigmarker.com/klaviyo-customer-education/Office-hours-Getting-started-with-Klaviyo",
+          "text": "Live office hours Join a strategic discussion where you can ask questions and get answers in real-time."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/private-live-training",
+          "text": "1:1 Live training Book a private training session with an expert to jumpstart your platform knowledge and confidence."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/credentials",
+          "text": "Klaviyo credentials Dig deeper into select topics and showcase your expertise with a final exam to earn a certificate and digital badge."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/certificates/klaviyo-practitioner-certificate",
+          "text": "Klaviyo practitioner certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/deliverability-certificate",
+          "text": "Deliverability certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/developer-certificate",
+          "text": "Klaviyo developer certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses&select=Certificate",
+          "text": "See all certificates"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Klaviyo Community Join our thriving community network to connect with brands like yours—online and in person."
+        },
+        {
+          "href": "https://community.klaviyo.com/topic/new",
+          "text": "Ask a question Post a question and get thoughtful answers from Klaviyo powerusers."
+        },
+        {
+          "href": "https://community.klaviyo.com/p/roadmap",
+          "text": "Product roadmap"
+        },
+        {
+          "href": "https://community.klaviyo.com/search/activity/recent",
+          "text": "Recent threads"
+        },
+        {
+          "href": "https://community.klaviyo.com/p/champions",
+          "text": "Meet the Champions"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups",
+          "text": "Browse all groups Your people are waiting. New ideas and connections are a click away."
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/developer-group-64",
+          "text": "Developer group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/entrepreneur-user-group-118",
+          "text": "Entrepreneur group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/woo-user-group-87",
+          "text": "WooCommerce group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/new-york-meetup-chapter-82",
+          "text": "New York City"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/los-angeles-meetup-chapter-83",
+          "text": "Los Angeles"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/austin-meetup-chapter-85",
+          "text": "Austin"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/san-diego-meetup-chapter-86",
+          "text": "San Diego"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/amsterdam-meetup-chapter-84",
+          "text": "Amsterdam"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Klaviyo Developers Access API documentation and developer guides to help you build with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/get_started",
+          "text": "Get started Access key resources and a step-by-step checklist for how to start developing with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/build_your_integration",
+          "text": "Grow your app's reach Learn how to join our ecosystem and get your app listed on our marketplace."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/developer-tools",
+          "text": "Developer tools Generate sample data, monitor your API usage, and access our Postman collections."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/reference/api_overview",
+          "text": "API reference Browse our full catalog of API docs."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/changelog_",
+          "text": "Changelog"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/api_versioning_and_deprecation_policy",
+          "text": "Versioning & deprecation policy"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/rate_limits_and_error_handling",
+          "text": "Rate limits & error handling"
+        },
+        {
+          "href": "https://youtube.com/playlist?list=PLHkNfHgtxcUanrkMnKPdkRzuWU7MGv_xM&si=pkG-KH7IT_TUHOGC",
+          "text": "API tutorials on YouTube Subscribe to our Klaviyo API Tutorials playlist for easy access to step-by-step developer walkthroughs."
+        },
+        {
+          "href": "https://www.klaviyo.com/contact-us",
+          "text": "Contact us"
+        },
+        {
+          "href": "https://www.klaviyo.com/sign-up",
+          "text": "Sign up"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": "Search"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/6985692431259",
+          "text": "United States - EN"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/de-de/articles/6985692431259",
+          "text": "Deutschland - DE"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-es/articles/6985692431259",
+          "text": "España - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-mx/articles/6985692431259",
+          "text": "México - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/fr-fr/articles/6985692431259",
+          "text": "France - FR"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/it-it/articles/6985692431259",
+          "text": "Italia - IT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/ko-kr/articles/6985692431259",
+          "text": "한국 - KO"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/nl-nl/articles/6985692431259",
+          "text": "Nederland - NL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pl-pl/articles/6985692431259",
+          "text": "Polska - PL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pt-br/articles/6985692431259",
+          "text": "Brasil - PT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/sv-se/articles/6985692431259",
+          "text": "Sverige - SV"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000874048",
+          "text": "Analytics"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/49375928290587",
+          "text": "Metrics"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/49375247843227",
+          "text": "Metrics troubleshooting"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/6985692431259-Troubleshooting-added-to-cart-tracking#h_01G6W48MBT2PX8MCX7D6RVT14Z",
+          "text": "Before you begin"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/6985692431259-Troubleshooting-added-to-cart-tracking#h_01J6FASZBMDJER345SV8H7GB9K",
+          "text": "Test Added to Cart tracking"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/6985692431259-Troubleshooting-added-to-cart-tracking#h_01J6FASZBM5FH8TYA500CGTT6V",
+          "text": "Troubleshooting scenarios"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/6985692431259-Troubleshooting-added-to-cart-tracking#h_01J6FASZBMYFYTFF0J5FQ6FXMK",
+          "text": "Contact Klaviyo support"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/6985692431259-Troubleshooting-added-to-cart-tracking#additional-resources",
+          "text": "Additional resources"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/6985692431259-Troubleshooting-added-to-cart-tracking#h_01G6W496F0XVGZDAWAJ2RW5KEG",
+          "text": "\"Active on Site\" section"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4416172774939-Troubleshooting-Viewed-Product-Tracking",
+          "text": "troubleshooting Viewed Product tracking"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005080407",
+          "text": "Shopify"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4425956184731#h_01J6F7TREZAJM7M3R3DFVZSDGT",
+          "text": "Shopify Server Pixel"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005082547",
+          "text": "BigCommerce"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360024310292",
+          "text": "manually installed code snippet"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005254348",
+          "text": "Magento 2"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005255808",
+          "text": "WooCommerce"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360054551492-How-to-Integrate-with-PrestaShop",
+          "text": "PrestaShop"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360033744951",
+          "text": "Salesforce Commerce Cloud"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/guide-to-integrating-a-platform-without-a-pre-built-klaviyo-integration#viewed-product",
+          "text": "how to enable Viewed Product and Added to Cart tracking on our Developer site"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4425956184731",
+          "text": "app embed and onsite tracking for Shopify"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005255808-How-to-Integrate-with-WooCommerce",
+          "text": "WooCommerce integration guide"
+        },
+        {
+          "href": "https://www.klaviyo.com/integration/bigcommerce",
+          "text": "integration settings page"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005082547-How-to-Integrate-with-BigCommerce#confirm-web-tracking-installation3",
+          "text": "follow the steps to test your onsite JavaScript"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005254348-How-to-Integrate-with-Magento-2-x-CE-and-EE-",
+          "text": "Magento 2 integration guide"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360054551492",
+          "text": "PrestaShop integration guide"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4425956184731#enabling-the-klaviyo-app-embed-in-shopify4",
+          "text": "enabling the Klaviyo app embed in Shopify"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/6985692431259-Troubleshooting-added-to-cart-tracking#h_01G6W48MBT2PX8MCX7D6RVT14Z",
+          "text": "Before you begin section"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005082547-How-to-Integrate-with-BigCommerce#confirm-web-tracking-installation3",
+          "text": "BigCommerce integration setup guide"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360024310292-Guide-to-Creating-an-Added-to-Cart-Event-for-BigCommerce",
+          "text": "guide to creating an \"Added to Cart\" event for BigCommerce"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115001002272-How-to-Contact-Support",
+          "text": "contact Klaviyo support"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360024310292",
+          "text": "how to create an \"Added to Cart\" event for BigCommerce"
+        },
+        {
+          "href": "https://wordpress.org/plugins/klaviyo/",
+          "text": "Klaviyo WordPress (WooCommerce) plugin"
+        },
+        {
+          "href": "https://www.klaviyo.com/media/downloads/MagentoKlaviyo-Latest.tgz",
+          "text": "Klaviyo Magento 1 extension"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005254348#h_01F7458JT1BK3PB93NXHJPMSKE",
+          "text": "Klaviyo Magento 2 extension"
+        },
+        {
+          "href": "https://community.klaviyo.com/got-a-question-1",
+          "text": "Community"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115001002272-How-to-Contact-Support",
+          "text": "Support Team"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4416172774939",
+          "text": "Troubleshooting viewed product tracking"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/7000906101019",
+          "text": "Troubleshooting placed order tracking"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/6998274713371",
+          "text": "Troubleshooting started checkout tracking"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005076767",
+          "text": "Getting started with Klaviyo onsite tracking"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4403927899291",
+          "text": "Troubleshooting your Shopify integration"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115001002272",
+          "text": "Learn how to contact support"
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": ""
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": "Visit Community"
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": ""
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": "Hire a partner"
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/about",
+          "text": "About Klaviyo"
+        },
+        {
+          "href": "https://www.klaviyo.com/newsroom",
+          "text": "Newsroom"
+        },
+        {
+          "href": "https://investors.klaviyo.com/overview/default.aspx",
+          "text": "Investor relations"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Agency and tech partners"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Developers"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/retail",
+          "text": "Retail and ecommerce"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/restaurants",
+          "text": "Restaurant marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/wellness",
+          "text": "Wellness"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform",
+          "text": "B2C CRM overview"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai",
+          "text": "Klaviyo AI (K:AI)"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/marketing-automation",
+          "text": "Klaviyo Marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-service",
+          "text": "Klaviyo Service"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/analytics",
+          "text": "Klaviyo Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-data-platform",
+          "text": "Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare",
+          "text": "Klaviyo vs. Klaviyo alternatives"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-mailchimp",
+          "text": "Klaviyo vs. Mailchimp"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-postscript",
+          "text": "Klaviyo vs. Postscript"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-attentive",
+          "text": "Klaviyo vs. Attentive"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-salesforce-marketing-cloud",
+          "text": "Klaviyo vs. Salesforce"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-listrak",
+          "text": "Klaviyo vs. Listrak"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/omnichannel",
+          "text": "Omnichannel marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/email-marketing",
+          "text": "Email marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing",
+          "text": "SMS marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing/rcs",
+          "text": "RCS for Business"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/mobile-app-marketing",
+          "text": "Mobile app marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/whatsapp",
+          "text": "WhatsApp marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/social",
+          "text": "Social marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources",
+          "text": "Marketing resources"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources/marketing-campaign-calendar",
+          "text": "Marketing campaign calendar"
+        },
+        {
+          "href": "https://www.klaviyo.com/glossary",
+          "text": "Marketing glossary"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/email-subject-line-generator",
+          "text": "Subject line generator"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/roi-calculator",
+          "text": "ROI calculator"
+        },
+        {
+          "href": "https://www.klaviyo.com/customers",
+          "text": "Case studies"
+        },
+        {
+          "href": "https://www.klaviyo.com/composer",
+          "text": "Composer Beta"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/marketing-agent",
+          "text": "Marketing Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/customer-agent",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/customer-experience-hub",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/helpdesk",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/marketing-analytics",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/advanced-cdp",
+          "text": "Advanced Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/web-forms",
+          "text": "Web forms"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/email-templates",
+          "text": "Email templates"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/portfolio",
+          "text": "Portfolio"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform-integrations",
+          "text": "Apps and Integrations"
+        },
+        {
+          "href": "https://www.klaviyo.com/features",
+          "text": "Features"
+        },
+        {
+          "href": "https://www.klaviyo.com/whats-new",
+          "text": "What's new"
+        },
+        {
+          "href": "https://www.klaviyo.com/events",
+          "text": "Events"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help Center"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us",
+          "text": "Academy"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Community"
+        },
+        {
+          "href": "https://www.facebook.com/Klaviyo/",
+          "text": "Facebook"
+        },
+        {
+          "href": "https://twitter.com/klaviyo/",
+          "text": "Twitter"
+        },
+        {
+          "href": "https://www.linkedin.com/company/klaviyo/",
+          "text": "LinkedIn"
+        },
+        {
+          "href": "https://www.instagram.com/klaviyo/",
+          "text": "Instagram"
+        },
+        {
+          "href": "https://www.klaviyo.com/sitemap",
+          "text": "Site Map"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal",
+          "text": "Terms and Privacy"
+        },
+        {
+          "href": "https://www.klaviyo.com/security",
+          "text": "Security"
+        },
+        {
+          "href": "https://www.klaviyo.com/trust",
+          "text": "Trust"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal/intellectual-property-notices",
+          "text": "Intellectual Property Notices"
+        }
+      ],
+      "headings": [
+        {
+          "level": 1,
+          "id": "",
+          "text": "Troubleshooting added to cart tracking"
+        },
+        {
+          "level": 2,
+          "id": "h_01G6W48MBT2PX8MCX7D6RVT14Z",
+          "text": "Before you begin"
+        },
+        {
+          "level": 2,
+          "id": "h_01J6FASZBMDJER345SV8H7GB9K",
+          "text": "Test Added to Cart tracking"
+        },
+        {
+          "level": 2,
+          "id": "h_01J6FASZBM5FH8TYA500CGTT6V",
+          "text": "Troubleshooting scenarios"
+        },
+        {
+          "level": 2,
+          "id": "h_01J6FASZBMYFYTFF0J5FQ6FXMK",
+          "text": "Contact Klaviyo support"
+        },
+        {
+          "level": 2,
+          "id": "additional-resources",
+          "text": "Additional resources"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "Explore more from Klaviyo"
+        }
+      ]
+    }
+  },
+  "rendered_page": {
+    "status": "fetched",
+    "error": ""
+  }
+}

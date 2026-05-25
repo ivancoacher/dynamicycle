@@ -1,0 +1,123 @@
+<blockquote>
+<strong>Beta feature.</strong> Creating fully custom tools from scratch is currently in a closed managed beta. If you don’t see a Tools page in Customer Agent, your account doesn’t have beta access yet.</blockquote>
+<h2 id="41577155458a">You will learn</h2>
+<p>How to connect Customer Agent to any HTTP endpoint using a fully custom tool, write a tool description that Customer Agent will actually use, and test your tool before attaching it to a skill.</p>
+<h2 id="00857c9b1330">Before you begin</h2>
+<p>You’ll need:</p>
+<ul>
+<li>Customer Agent enabled and beta access for creating fully custom tools</li>
+<li>An HTTP endpoint you want Customer Agent to call — <strong>one that does not require secret credentials (API keys, bearer tokens, etc.) to access today</strong> (authenticated endpoints coming soon, see warning below)</li>
+<li>A skill to attach the tool to — either a skill Customer Agent comes with or a fully custom skill you’ve created</li>
+</ul>
+<p>If you haven’t set up a skill yet, create one first. Tools don’t do anything on their own — they have to be attached to a skill.</p>
+<blockquote>
+<strong>Warning:</strong> Secure storage for API keys and other secrets is coming soon. Until it ships, don’t put API keys, bearer tokens, or other sensitive credentials into fully custom tools — tool configuration is not a secure place to store them yet. For now, only use tools with endpoints that are safe to call without secret auth (e.g., internal endpoints behind IP allowlisting, or endpoints that accept non-sensitive identifiers). Support for authenticated endpoints is on the way.</blockquote>
+<h2 id="9331836fa74d">What a fully custom tool is</h2>
+<p>A fully custom tool is an HTTP request Customer Agent can make during a conversation. Creating fully custom tools is in beta and available to a limited set of brands while we expand the feature. Use one when the tools Customer Agent comes with don’t cover what you need — for example, looking up an order in your own order management system instead of Shopify, checking inventory in a custom warehouse system, or creating a ticket in a helpdesk Klaviyo doesn’t natively integrate with.</p>
+<p>For the underlying concept, see the Understanding Customer Agent tools article.</p>
+<h2 id="f3edf353e97e">When to create a fully custom tool</h2>
+<p>Reach for a fully custom tool when:</p>
+<ul>
+<li>
+<strong>You need real-time data</strong> from a system Klaviyo doesn’t already integrate with</li>
+<li>
+<strong>You want Customer Agent to take an action</strong> in an external system (cancel a subscription in your proprietary system, create a ticket, update a record)</li>
+<li>
+<strong>An existing tool doesn’t fit</strong> — for example, you use a custom OMS instead of Shopify for orders</li>
+</ul>
+<p>If the information doesn’t change often and is the same for every customer, add it as content instead. Tools are for dynamic, per-customer data and actions.</p>
+<h2 id="cc7274870c26">Set it up</h2>
+<h3 id="38af54b00827">1. Open the Tools page</h3>
+<p>Navigate to <strong>Customer Agent &gt; Tools</strong>, then click <strong>Create tool</strong>.</p>
+<h3 id="44f5e0d21f74">2. Name and describe the tool</h3>
+<ul>
+<li>
+<strong>Name</strong> — A short identifier like “Get Inventory” or “Create Return Ticket.”</li>
+<li>
+<strong>Description</strong> — Natural language explaining what the tool does and when to use it. Customer Agent reads this description to decide whether to use the tool for a given request. Be specific.</li>
+</ul>
+<p>A good description example:</p>
+<blockquote>Fetches real-time inventory count for a given product SKU from the warehouse system. Use when a shopper asks whether a specific product is in stock.</blockquote>
+<p>A vague description example (avoid):</p>
+<blockquote>Gets product info.</blockquote>
+<h3 id="6b6f377344ea">3. Configure the HTTP request</h3>
+<ul>
+<li>
+<strong>Method</strong> — GET, POST, PUT, DELETE, or PATCH.</li>
+<li>
+<strong>URL</strong> — The full endpoint URL. You can include placeholders for dynamic values (see Step 5).</li>
+<li>
+<strong>Headers</strong> — Any headers your endpoint requires, including <code>Content-Type</code> and authentication headers.</li>
+</ul>
+<h3 id="9748d814a016">4. Configure the request body (for POST, PUT, PATCH)</h3>
+<p>Provide a JSON body. Use placeholders for values Customer Agent should fill in at runtime.</p>
+<p>Example body:</p>
+<p>{
+  "customer_id": "{{profile_id}}",
+  "sku": "{{product_sku}}"
+}</p>
+<h3 id="4bdec5e946e7">5. Use placeholders for dynamic values</h3>
+<p>Customer Agent can fill in values at runtime using placeholders. Common placeholders:</p>
+<ul>
+<li>
+<code>{{profile_id}}</code> — The Klaviyo profile ID of the customer in the conversation</li>
+<li>
+<code>{{conversation_id}}</code> — The current conversation ID</li>
+<li>Any parameter you define in your input schema (e.g., <code>{{product_sku}}</code>, <code>{{order_id}}</code>)</li>
+</ul>
+<p>Placeholders work in the URL, headers, and body.</p>
+<h3 id="9a02cfc57bda">6. Authentication</h3>
+<p>Support for authenticated endpoints is coming soon. Until then, don’t put API keys, bearer tokens, or other secrets into a fully custom tool. Only use endpoints that are safe to call without secret credentials — for example, internal endpoints protected by IP allowlisting, or public endpoints that accept non-sensitive identifiers.</p>
+<p>Secure secret storage is on the way, and will unlock authenticated endpoints.</p>
+<h3 id="eb2f4f44b1e7">7. Test the tool</h3>
+<p>Click <strong>Test tool</strong>. Provide sample values for any input parameters. Check that:</p>
+<ul>
+<li>The response comes back successfully</li>
+<li>The response format is what Customer Agent expects</li>
+<li>Any error cases are handled</li>
+</ul>
+<h3 id="b1c6ad26f597">8. Save and attach to a skill</h3>
+<p>Click <strong>Save</strong>. To make Customer Agent actually use the tool, open the skill you want to use it and add the tool there.</p>
+<h2 id="104810797702">Writing a good tool description</h2>
+<p>The description is the most important field. Customer Agent picks which tool to use based entirely on the description — not the name. Good descriptions:</p>
+<ul>
+<li>Say <strong>what the tool does</strong> in one sentence</li>
+<li>Say <strong>when to use it</strong> in one sentence</li>
+<li>Are specific about the data returned or action taken</li>
+</ul>
+<p>Bad descriptions are vague (“Gets customer info”), too broad (“Handles anything related to orders”), or tell Customer Agent how to behave rather than what the tool does.</p>
+<h2 id="ba3383188628">Security considerations</h2>
+<ul>
+<li>
+<strong>Don’t use fully custom tools for endpoints that require secret credentials yet.</strong> Support for authenticated endpoints is coming soon. Until it ships, only use endpoints that are safe to call without secret auth.</li>
+<li>
+<strong>Use IP allowlisting where possible.</strong> If your endpoint is internal, restrict access to Klaviyo IP ranges rather than relying on secrets.</li>
+<li>
+<strong>Be aware of what data you send.</strong> Customer Agent passes customer data into the tool based on what the skill instructions tell it to. Review what fields your endpoint receives.</li>
+<li>
+<strong>Rate limits.</strong> If your endpoint has rate limits, make sure they’re high enough to handle your expected conversation volume.</li>
+</ul>
+<h2 id="d634d2fcfcda">Troubleshooting</h2>
+<p><strong>Symptom:</strong> Customer Agent never uses the tool.
+<strong>Likely cause:</strong> The description is too vague, or the tool isn’t attached to the skill that would use it.
+<strong>Fix:</strong> Rewrite the description to specifically describe when it should be used. Confirm the tool appears in the skill’s tool list.</p>
+<p><strong>Symptom:</strong> The tool returns an error during testing.
+<strong>Likely cause:</strong> Wrong URL, malformed body, or a payload your endpoint doesn’t accept.
+<strong>Fix:</strong> Use the Test tool feature to check the raw request and response. Verify URL and body format against your endpoint’s expected input.</p>
+<p><strong>Symptom:</strong> Customer Agent uses the tool but passes wrong parameters.
+<strong>Likely cause:</strong> The placeholder names don’t match the schema, or the skill instructions are unclear about what to pass.
+<strong>Fix:</strong> Check placeholder names match exactly. Update skill instructions to be explicit about when to use the tool and what parameters to provide.</p>
+<p><strong>Symptom:</strong> The tool is slow, causing delays in responses.
+<strong>Likely cause:</strong> Endpoint latency.
+<strong>Fix:</strong> Optimize your endpoint. Check whether you can cache results on your side.</p>
+<h2 id="a5692cf11568">FAQ</h2>
+<p><strong>Can one tool be used by multiple skills?</strong>
+Yes. Once created, a tool can be attached to any number of skills.</p>
+<p><strong>What auth methods are supported?</strong>
+Support for authenticated endpoints is coming soon. For now, use endpoints that don’t require secret credentials (internal endpoints with IP allowlisting, or public endpoints with non-sensitive identifiers).</p>
+<p><strong>What happens if my endpoint is down or returns an error?</strong>
+Error handling for fully custom tools isn’t built out yet. If your endpoint fails, Customer Agent may produce a degraded or confusing response. Until error handling ships, only use endpoints you’re confident in — and monitor tool behavior closely.</p>
+<p><strong>Can I edit a tool after creating it?</strong>
+Yes. You can edit the name, description, configuration, and attached skills at any time.</p>
+<p><strong>Can I version a tool?</strong>
+Versioning isn’t supported yet. Edits to a tool take effect immediately across every skill that uses it.</p>

@@ -1,0 +1,138 @@
+<h2 id="h_01HGGJ2KH849ZDMC5Y7CDVJP4Q">You will learn</h2>
+<p>Learn how to migrate from Listrak to Klaviyo. While Klaviyo does not have a built-in integration with Listrak, you can export your data from Listrak and upload it into Klaviyo. Listrak contacts and related data are exported from Listrak in CSV format. CSV files can be easily formatted to ensure successful import to a Klaviyo list. While this is not a complicated process, exporting each individual Listrak list may be a bit tedious depending on your volume of data. With consistency and thoroughness, your migration will be successful.</p>
+<h2 id="h_01HGGJ2KH8M2Y88DY2BZNBW2HH">Before you begin</h2>
+<p>This guide will walk you through migrating your data from Listrak to Klaviyo. As you migrate your Listrak lists, keep in mind that the main objectives for migrating data are to ensure that all relevant contacts and fields are represented in Klaviyo, and that any opted-out contacts are treated as such in Klaviyo.</p>
+<p>Below we provide a recommended approach that will allow you to upload your Listrak contacts to Klaviyo and treat various contacts as unsubscribed based on the contact's status in Listrak. We recommend that you also review <a href="https://help.listrak.com/en/articles/1505969-view-subscribed-or-unsubscribed-contacts" target="_blank" rel="noopener" data-saferedirecturl="https://www.google.com/url?q=https://help.bronto.com/bmp/concept/c_bmp_contacts_manage_overview.html&amp;source=gmail&amp;ust=1576074448783000&amp;usg=AFQjCNECEsqPHA7-gcotS-v04JhBfsKK_w">how Listrak defines these statuses</a> so you can ensure data quality on the Listrak side and also ensure that this approach of uploading contacts aligns with your intended use of Klaviyo.</p>
+<div class="bs-callout bs-callout-default">
+<p>This guide gives you general guidelines for migrating your data from Listrak to Klaviyo. Contact <a href="https://www.listrak.com/company/contact" target="_blank" rel="noopener">Listrak Support</a> for the most up-to-date instructions on exporting your Listrak data.</p>
+</div>
+<h2 id="h_01HGGJ2KH83J6JQV0G3S3X3QYV">Checklist</h2>
+<p>Migrating from Listrak to Klaviyo requires several key steps:</p>
+<ol>
+<li>Export Listrak Subscribed Contacts list</li>
+<li>Format CSV files</li>
+<li>Import CSV files to a list in Klaviyo</li>
+<li>Export Listrak Suppression List</li>
+<li>Import unsubscribes to your Klaviyo suppression list</li>
+<li>Migrate your email templates from Listrak to Klaviyo</li>
+<li>Sunset your Listrak account</li>
+</ol>
+<h2 id="h_01HGGJ2KH8CVHVRMX6BWA2VBMK">Export your Listrak subscribed contacts list</h2>
+<div class="bs-callout bs-callout-default">Each Listrak account is set up uniquely. The following instructions are guidelines for exporting your Listrak data. <a href="https://www.listrak.com/company/contact" target="_blank" rel="noopener">Contact Listrak support</a> and consult their <a href="https://help.listrak.com/en/" target="_blank" rel="noopener">documentation</a> for the most up-to-date export instructions.</div>
+<p>Follow these steps to download each of your Listrak lists.</p>
+<ol>
+<li>From your Listrak <em>Home Menu</em>, navigate to <strong>Contacts</strong>.</li>
+<li>Click <strong>Subscribed Contacts &gt;</strong> <strong>Export List Wizard</strong>.<br><img src="https://klaviyo.zendesk.com/hc/article_attachments/28716352835867" alt="Contacts menu in Listrak with Export List Wizard in white">
+</li>
+<li>Choose <strong>Plain Text .CSV</strong> as your export format, and click <strong>Next</strong>.<br><img src="https://klaviyo.zendesk.com/hc/article_attachments/28716352838555" alt="Select the export format with plain text .CSV selected">
+</li>
+<li>Now choose any segmentation fields and system fields to include with your CSV export. <strong>Email</strong>, <strong>Subscribe Date</strong>, and <strong>Method</strong> are automatically included with each export.</li>
+<li>When you're finished, click <strong>Next</strong>.<br><img src="https://klaviyo.zendesk.com/hc/article_attachments/28716329841435" alt="Select fields to export page with Next with green background">
+</li>
+<li>Choose a delivery method, and then click <strong>Next</strong>. Choosing <strong>Email</strong> as your delivery method is best if you are exporting a large list (over 500K) because uploading a large amount of data into a browser may take some time.
+<ul>
+<li>If you chose the <strong>Web</strong> delivery method, click <strong>Finish</strong>. Your results will display in your browser.If you chose the <strong>Email</strong> delivery method, set email options by selecting recipients. The default email displayed is the email address tied to your Listrak account. Enable the <strong>Attach to Email</strong> checkbox to download the file as an email attachment. Then, click <strong>Finish</strong>.</li>
+<li>
+<p>You'll be notified by email when your CSV file is ready for download.</p>
+</li>
+</ul>
+</li>
+</ol>
+<p>You can view <a href="https://help.listrak.com/en/articles/1509286" target="_blank" rel="noopener">instructions on exporting your entire Listrak list from Listrak</a>.</p>
+<h2 id="h_01HGGJ2KH91X7A8DXJQJRW5V2S">Format CSV files</h2>
+<p>You'll need to format each CSV file before importing it into Klaviyo. To do that, open the CSV file and comb through the list, paying special attention to the column headings:</p>
+<ul>
+<li>Column headings should be in the first row of the CSV file. If Listrak adds additional rows before the column headings, delete these extra rows.</li>
+<li>Your CSV file must include an "Email" or an "Email Address" column.</li>
+<li>You may want to include a "First Name" and "Last Name" column.</li>
+<li>Include any custom profile properties such as "Gender" that you'd like to upload to Klaviyo.</li>
+<li>Listrak exports a <em>Method</em> field, indicating the method of subscription. This field can be left intact on the CSV upload file and later mapped to Klaviyo's <em>Source</em> field when you upload the CSV to Klaviyo.</li>
+<li>Timestamp fields such as "date added," "last opened," and "last clicked" need to be specifically formatted or Klaviyo will not recognize them as timestamp fields. Make sure timestamp data is formatted in one of these formats:<br>YYYY-MM-DD HH:MM:SS<br>MM/DD/YYYY HH:MM:SS<br>MM/DD/YY HH:MM:SS<br>MM/DD/YYYY HH:MM<br>MM/DD/YY HH:MM<br>YYYY-MM-DDTHH:MM:SS</li>
+</ul>
+<p>Below is an example of how your CSV file should be formatted.</p>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/28716352844699" alt="Example CSV with most data blurred out"></p>
+<p>Review your CSV file carefully, editing and deleting column headings and contact entries as appropriate.</p>
+<div class="bs-callout bs-callout-default">
+<p>Remember, it's much easier to parse and edit data within a CSV file before it is uploaded into Klaviyo.</p>
+</div>
+<p>For more detailed instructions on formatting CSV files, head to our article on <a href="https://klaviyo.zendesk.com/hc/en-us/articles/115005078967" target="_blank" rel="noopener">creating and adding contacts to a new list</a>.</p>
+<h2 id="h_15dc314e-1601-4244-9576-0a81bcc012e9">Import CSV files to a Klaviyo list</h2>
+<p>After you've formatted your exported data, you can import it to a list in Klaviyo. Some Klaviyo flows are triggered by an email address being added to a list. Before you begin uploading contacts to a list, make sure these related flows are turned to draft or manual mode.</p>
+<ol>
+<li>Log in to your Klaviyo account, click the <strong>Audience</strong> dropdown, and select <strong>Lists &amp; Segments</strong>.</li>
+<li>Select the list where you would like to add your contacts. For this example, we're going to add subscribers to the Newsletter list.</li>
+<li>On the upper-right hand corner of your list, choose <strong>Import Contact</strong> from the <em>Manage List</em> dropdown.<br><img src="https://klaviyo.zendesk.com/hc/article_attachments/28716352847003" alt="Newsletter list in Klaviyo with Manage List dropdown open">
+</li>
+<li>Drag and drop your CSV file. You will be prompted to review field mapping before Klaviyo begins the import. Click <strong>Subscribe to Email Marketing</strong> in the <em>Email</em> row to denote that all profiles in this upload have explicitly consented to receive email marketing from you.</li>
+<li>Carefully review each import field/corresponding Klaviyo field, and modify as appropriate. By default, all identified fields are included in the import. You can omit a field from import by unchecking the box to the right of the field name.<br><img src="https://klaviyo.zendesk.com/hc/article_attachments/28716329847579" alt="List import page with fully mapped fields and Start Import in upper right" width="607" height="301">
+</li>
+<li>By default, Listrak includes a <em>Method</em> column, denoting the method of subscription. We recommend mapping this field into Klaviyo's <em>Source</em> field.</li>
+<li>Column names that have no corresponding field name in your Klaviyo account are marked "Unmapped." If you try to import an unmapped field, you will receive an error message prompting you to map the field. By default, all identified fields are included in the import. You can omit a field from import by unchecking the box to the right of the field name. From the dropdown, select an existing field name or create a custom field by typing a name into the blank entry field. To the right of the field name, select a data type from these options:<strong> String</strong>,<strong> Boolean</strong>, <strong>Numeric</strong>, <strong>Date</strong>,<strong> List</strong>, or <strong>Consent</strong>. If you're unsure of the data type, head to our article on <a href="https://klaviyo.zendesk.com/hc/en-us/articles/115005237648" target="_blank" rel="noopener">data types</a> in Klaviyo. Below is an example of field mapping for a Listrak contacts import.<br><img src="https://klaviyo.zendesk.com/hc/article_attachments/28716352851995" alt="List import page with unmapped field highlighted in red" width="589" height="292">
+</li>
+<li>When you're finished, click <strong>Start Import</strong> on the upper-right corner of your screen.</li>
+</ol>
+<p>For a deeper dive into importing contacts, head to our article on <a href="https://klaviyo.zendesk.com/hc/en-us/articles/115002053752" target="_blank" rel="noopener">migrating existing subscribers and unsubscribes into Klaviyo</a>.</p>
+<h2 id="h_01HGGJ2KH9H8W5TJVQ3C098K9G">Export Listrak unsubscribes</h2>
+<p>It is important to add your Listrak unsubscribes to Klaviyo's suppression list to ensure compliance with spam laws and keep your deliverability high. These are general guidelines for exporting your Listrak unsubscribe list and suppression list. For the most up-to-date instructions reach out to <a href="https://www.listrak.com/company/contact" target="_blank" rel="noopener">Listrak support</a> and review their <a href="https://help.listrak.com/en/" target="_blank" rel="noopener">documentation.</a></p>
+<ol>
+<li>Go to your Listrak <strong>Home menu &gt; Contacts</strong>.</li>
+<li>Go to <strong>View</strong> and then select <strong>Unsubscribed Contacts &gt; Export List Wizard</strong>. </li>
+<li>Choose <strong>Plain Text .CSV</strong> as your export format, and click <strong>Next</strong>.</li>
+<li>Follow the rest of the Wizard instructions for downloading your unsubscribes.</li>
+</ol>
+<p>In addition to exporting your Unsubscribed Contacts, you may also want to export your Listrak Suppression list. Navigate to your Listrak contacts section and select the <strong>Suppression List Name Here</strong> list. Follow the steps above to export this list in CSV format. </p>
+<p class="wysiwyg-text-align-left"><img src="https://klaviyo.zendesk.com/hc/article_attachments/28716352854555" alt="List of lists in Listrak including suppression list" width="549" height="296"></p>
+<p>Format the suppression list so that it contains a single column of email addresses. </p>
+<h2 id="h_01HGGJ2KH9GC7DR6Q1BHN4GF7N">Load historic unsubscribes into Klaviyo</h2>
+<ol>
+<li>Navigate to the <strong>Profiles</strong> tab in your Klaviyo account (found under<strong> Audience</strong>) and click <strong>Suppressed Profiles</strong> on the upper right.</li>
+<li>Select <strong>Upload File</strong>.</li>
+<li>Click <strong>Choose File</strong> to select the CSV file containing your Listrak suppressions. Then, click <strong>Upload Suppressions</strong>.<br><img src="https://klaviyo.zendesk.com/hc/article_attachments/28716352856859" alt="Upload Suppressions File popup in Klaviyo" width="345" height="137">
+</li>
+<li>Your Klaviyo suppression list will now reflect your import.</li>
+</ol>
+<h2 id="h_01HGGJ2KH9MN35EBZ4MXD7R6AJ">Migrate email templates from Listrak to Klaviyo</h2>
+<p>Klaviyo offers an intuitive drag-and-drop template builder that you can use to recreate your Listrak email templates. We highly recommend using this method to rebuild your templates because it will ensure that they are mobile-optimized, responsive, and easy-to-edit moving forward.</p>
+<div class="bs-callout bs-callout-default">Check out <a href="https://klaviyo.zendesk.com/hc/en-us/articles/4407911841435" target="_blank" rel="noopener">our guide to using Klaviyo's template editor</a>.</div>
+<p>If you don't have time to recreate your Listrak templates, it is possible to export your email templates from Listrak in raw HTML and then upload the updated raw HTML into Klaviyo. If you choose to import raw HTML templates, you can reference our article on <a href="https://klaviyo.zendesk.com/hc/en-us/articles/115005254068" target="_blank" rel="noopener">importing a custom HTML template</a>.</p>
+<h2 id="h_01HGGJ2KH9VX1MGB6A0V7G6Z14">Sunset your Listrak account</h2>
+<p>After you've moved all your data over to Klaviyo, there are three key steps you can take to ensure that you no longer need your Listrak account:</p>
+<div class="article__body markdown">
+<ol>
+<li>Ensure that your sign-up forms and list growth tools point to Klaviyo, not Listrak</li>
+<li>Recreate your Listrak workflows as Klaviyo flows</li>
+<li>Discontinue use of Listrak</li>
+</ol>
+<h3 id="h_01HGGJ2KH9MNR0DP1Y5GBQ0M09">Sign-up forms and list growth tools</h3>
+<p>Recreate any Listrak sign-up forms in Klaviyo so that your list continues to grow in Klaviyo, rather than in Listrak. You can:</p>
+<ol>
+<li>Use the Klaviyo <a href="https://help.klaviyo.com/hc/en-us/articles/360026474752" target="_blank" rel="noopener">sign-up form builder</a> to re-create your forms from scratch</li>
+<li>Use a third-party list growth tool that integrates with Klaviyo</li>
+<li>Integrate your custom form through your ecommerce platform</li>
+</ol>
+<p>If you are using third-party list growth tools, make sure that these sync to Klaviyo. Klaviyo integrates with a number of tools for list growth and landing pages. <a href="https://marketplace.klaviyo.com/en-us/" target="_blank" rel="noopener noreferrer">Check out our app marketplace</a> to find the tool that you're using. If you don't see it listed, consider using Klaviyo's native Sign-up Form Builder to create your forms, or try switching to a different third-party tool.</p>
+<div class="bs-callout bs-callout-default">
+<p>Please note that all Klaviyo lists are double opt-in by default. To change a list to single opt-in, head to that section of our <a href="https://klaviyo.zendesk.com/hc/en-us/articles/115005251108" target="_blank" rel="noopener">guide to the double opt-in process</a>.</p>
+</div>
+<p>If you’re using a custom-coded form, ensure your contacts sync to Klaviyo by having your custom form sync new subscribers directly to your ecommerce platform, and make sure your ecommerce platform is integrated with your Klaviyo account.</p>
+<p>After switching or syncing all your sign-up forms to Klaviyo, wait a few days and watch your lists in Listrak. If you notice subscribers are still being added to these lists, there's probably at least one form that still needs to be swapped out.</p>
+<p>Next, you'll want to turn off your Listrak sign-up forms. <a href="https://www.listrak.com/contact" target="_blank" rel="noopener">Contact Listrak support</a> for information on how to turn off your Listrak sign-up forms.</p>
+<h3 id="h_01HGGJ2KH9AZT7N4ABR9XQMK9Q">Flows</h3>
+<p>Klaviyo refers to automated workflows as "flows," which allow for more advanced and targeted sequences. It is important to recreate these in Klaviyo so that you don't need to continue to use Listrak to send triggered emails.</p>
+<p>As you move from Listrak, it may be a good time to refresh and update your automated messaging. We recommend that you turn on your welcome series and abandoned cart flows as soon as possible. A welcome series is particularly important to engage new subscribers, and abandoned cart flows have the highest ROI of any other type of flow.</p>
+<p>Once your Klaviyo flows are live, you'll want to turn off all of your workflows in Listrak to ensure that you're not double-emailing people. <a href="https://www.listrak.com/contact" target="_blank" rel="noopener">Contact Listrak support</a> for more information about turning off your Listrak workflows.</p>
+<h3 id="h_01HGGJ2KH9Q18N3JFPMT8EZECT">Discontinue Listrak use</h3>
+<p>Once you’ve pointed all of your list growth tools to your Klaviyo account, paused your Listrak workflows, and turned your Klaviyo flows live, you can discontinue using Listrak. Before you close your Listrak account, double-check that everything is working as expected. Enter a test email into your sign-up form and other list growth tools, abandon a cart, and sign up for your newsletter to trigger a welcome series. Go to the <strong>Profiles</strong> tab in your Klaviyo account (found under <strong>Audience</strong>) to make sure that the information in the profile reflects all of the correct communication. If the list you sign up to is double opt-in, be sure to confirm your email first.</p>
+<p>After you've taken these steps and are fully migrated to Klaviyo, you can close your Listrak account.</p>
+<h2 id="h_01HGGJ2KH9GTHQJN01EJQSENWZ">Next steps with Klaviyo</h2>
+<p>Once your Klaviyo account is integrated with your store and all of your data is ported over from Listrak, you can work toward your first Klaviyo send by following our <a href="https://academy.klaviyo.com/getting-started-with-klaviyo" target="_blank" rel="noopener">Getting started with Klaviyo course</a>.</p>
+<p>If you have questions about transitioning from Listrak or getting started with Klaviyo, please <a href="https://klaviyo.zendesk.com/hc/en-us/articles/115001002272" target="_blank" rel="noopener">reach out to our Support Team</a>.</p>
+</div>
+<h2 id="h_01HGGJ2KH9VAJQRMWBT6373N3S">Outcome</h2>
+<p>You've now migrated from Listrak to Klaviyo and have learned best practices for migrating email providers.</p>
+<h2 id="h_01HGGJ2KH93FBN7V0NJ7M87D7S">Additional resources</h2>
+<ul>
+<li><a href="https://help.klaviyo.com/hc/en-us/articles/115005078807" target="_blank" rel="noopener">How to troubleshoot list imports</a></li>
+<li><a href="https://help.klaviyo.com/hc/en-us/articles/115005247008" target="_blank" rel="noopener">Understanding email deliverability</a></li>
+<li><a href="https://help.klaviyo.com/hc/en-us/articles/115005074627" target="_blank" rel="noopener">Profile properties reference</a></li>
+</ul>

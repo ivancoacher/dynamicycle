@@ -1,0 +1,897 @@
+{
+  "captured_at": "2026-05-23T16:14:12Z",
+  "article": {
+    "id": 45085617755931,
+    "url": "https://klaviyo.zendesk.com/api/v2/help_center/en-us/articles/45085617755931.json",
+    "html_url": "https://klaviyo.zendesk.com/hc/en-us/articles/45085617755931-How-to-manage-translations-in-bulk-with-CSV",
+    "author_id": 45074200470811,
+    "comments_disabled": true,
+    "draft": false,
+    "promoted": false,
+    "position": 0,
+    "vote_sum": 0,
+    "vote_count": 0,
+    "section_id": 49375559270427,
+    "created_at": "2026-01-05T15:43:14Z",
+    "updated_at": "2026-05-11T12:54:35Z",
+    "name": "How to manage translations in bulk with CSV",
+    "title": "How to manage translations in bulk with CSV",
+    "source_locale": "en-us",
+    "locale": "en-us",
+    "outdated": false,
+    "outdated_locales": [],
+    "edited_at": "2026-04-17T01:02:04Z",
+    "user_segment_id": null,
+    "permission_group_id": 16078892307227,
+    "content_tag_ids": [],
+    "label_names": [],
+    "body": "<div class=\"bs-callout bs-callout-requirements\">\n<p>You must have a paid Klaviyo account and Smart Translations enabled to use this feature.</p>\n</div>\n<p>Manage translations outside Klaviyo by exporting and editing a CSV file, then importing it back to update translations in bulk or collaborate with others.</p>\n<h2 id=\"h_01KE6YFQ8HJV4F4XJVA58XKQCV\">\n<br>\nExport a CSV of your translations</h2>\n<p>Follow these steps to export the current translations for a single message:</p>\n<ol>\n<li>Open the message you want to update (campaign email, flow email, SMS, WhatsApp message, etc.).</li>\n<li>Click <strong>Translate</strong> to open the translation editor.</li>\n<li>In the translation editor, open the actions menu and click <strong>Export CSV</strong>. <br>\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/45177653196699\" alt=\"Translation editor with the Export CSV option highlighted in the actions menu\" width=\"916\" height=\"199\">\n</li>\n<li>In the export modal, you have the option to select between a <strong>Smarting CSV</strong> or a <strong>CSV</strong><br>\n</li>\n</ol>\n<p><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/45987097006619\" alt=\"\" width=\"1214\" height=\"500\"></p>\n<h3 id=\"h_01KG2T5MJCSP742TFP898N0SWS\">Exporting Smartling CSV</h3>\n<ol>\n<li>Your browser downloads a CSV file that includes:\n<ol>\n<li>The following default Smartling directives:<strong># smartling.first_row_header=TRUE</strong><br>\n<strong># smartling.paths=2</strong><br>\n<strong># smartling.source_key_paths=1</strong><br>\n<strong># smartling.translations_in_columns=TRUE</strong>\n</li>\n<li>\n<strong>block_id</strong> – the unique identifier for each translatable string in this message.</li>\n<li>\n<strong>Source language code</strong> (e.g., en) – the original source text for that string.</li>\n</ol>\n<br>\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/45987074722971\" alt=\"Sample translation CSV in Google sheets showing smartling directives, block_id, source language column code, for one row.\" width=\"1245\" height=\"253\">\n</li>\n</ol>\n<p><br>\nYou can use this file as-is to import your strings to Smartling. Smartling automatically parses the CSV, extracts the strings, and lets you trigger translation jobs.</p>\n<p>After the job finishes, download the resulting CSV and import it back using the <strong>import</strong> button.</p>\n<h3 id=\"h_01KG2T5MJCQY5H7QKGPK2WWSCM\">Exporting a Simple CS</h3>\n<ol>\n<li>Your browser downloads a CSV file that includes:\n<ol>\n<li>\n<strong>block_id</strong> – the unique identifier for each translatable string in this message.</li>\n<li>\n<strong>source</strong> – the original source text for that string.</li>\n<li>\n<strong>Language columns</strong> – one column per language, named with its language code (for example, en, fr, es-MX).</li>\n</ol>\n<br>\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/45177659814683\" alt=\"Sample translation CSV in Google sheets showing block_id, source, and language column for multiple rows.\" width=\"1245\" height=\"253\">\n</li>\n</ol>\n<p>You can now open this file in Excel, Google Sheets, or another spreadsheet editor.</p>\n<h2 id=\"h_01KE6YFQ8P0M9V0YEVJ8CEATZP\">\n<br>\nUpdate the CSV</h2>\n<p>When you edit the CSV, you only need to work in the language columns.</p>\n<p>Do not edit, add, or delete any values in the block_id column. If a row has an invalid or missing block_id, that row is ignored during import and its translations are not updated.</p>\n<h3 id=\"h_01KE6YFQ8Q6S9M51VGVA27XXFW\">What you can safely change</h3>\n<p>In the CSV:</p>\n<ul>\n<li>Update existing translations by editing the appropriate language column.</li>\n<li>Add missing translations by filling in empty cells for a language column.</li>\n<li>Leave a language’s values unchanged if you do not want to update that language.</li>\n<li>Add one or more <strong>new language columns</strong>:\n<ul>\n<li>Use a valid BCP‐47 language code (for example, fr-CA, de, ca).</li>\n<li>On import, these languages are added to the translation editor for this message if they are supported.</li>\n</ul>\n</li>\n</ul>\n<h3 id=\"h_01KE6YFQ9443VH4ZB56DMV26FE\">What you should not change</h3>\n<p>Avoid the following:</p>\n<ul>\n<li><strong>Do not edit or delete block_id values.</strong></li>\n<li>\n<strong>Do not add rows.</strong> Each row must continue to map to an existing translatable string in the message.</li>\n<li>\n<strong>Do not change the source values</strong> in the CSV:\n<ul>\n<li>To change the source content, edit the message directly in the Klaviyo editor, then export a new CSV.</li>\n</ul>\n</li>\n<li>\n<strong>Do not rename the required columns</strong> (block_id, source, and the language columns).</li>\n<li>\n<strong>Do not change the file format</strong>:\n<ul>\n<li>Keep the file as a .csv file.</li>\n<li>Save in <strong>UTF‐8</strong> encoding.</li>\n</ul>\n</li>\n</ul>\n<h3 id=\"h_01KE6YFQ97DMEWCDS60NPW19QA\">Handling empty cells</h3>\n<p>If you clear out a translation cell in the CSV and leave it empty:</p>\n<ul>\n<li>The import treats that empty string as a value.</li>\n<li>The existing translation for that cell is overwritten with an empty value. This can effectively remove a translation.</li>\n</ul>\n<p>If you want to <strong>avoid changing a translation</strong>, leave its existing value in the CSV or remove that language column entirely before importing.</p>\n<p>When you are done editing, save the file as a UTF‐8 encoded .csv.</p>\n<h2 id=\"h_01KE6YFQ98N73BG28A685XKRJG\">\n<br>\nImport the CSV</h2>\n<p>After you have updated and saved your CSV:</p>\n<ol>\n<li>Return to the translation editor for the same message.</li>\n<li>Click <strong>Import CSV</strong>.</li>\n<li>In the import modal, either:<br>\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/45177653207835\" alt=\"Import CSV modal in the translation editor with Select file and drag-and-drop options.\" width=\"807\" height=\"450\">\n<ul>\n<ul>\n<li>Click <strong>Select file</strong> and choose your CSV, or</li>\n<li>Drag and drop your CSV into the upload area.</li>\n</ul>\n</ul>\n</li>\n<li>Klaviyo runs a <strong>validation “dry run”</strong> and shows:<br>\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/45177653210779\" alt=\"Import summary dialog showing counts of updated, unchanged, and ignored rows, with warnings listed above the Import button.\" width=\"808\" height=\"380\">\n<ul>\n<ul>\n<li>A <strong>summary</strong> of how many rows will be updated, unchanged, or ignored</li>\n<li>Any <strong>warnings or errors</strong> it detected</li>\n</ul>\n</ul>\n</li>\n<li>Review the summary and warnings carefully.</li>\n<li>If everything looks correct, click <strong>Import</strong> to apply the changes.</li>\n</ol>\n<p>During validation, Klaviyo also checks for:</p>\n<ul>\n<li>File size and row limits (for example, files larger than 10MB will be rejected).</li>\n<li>Required columns (such as block_id, source, and at least one language column).</li>\n<li>Language codes that are not recognized or not supported by the channel.</li>\n<li>Empty translation values and other potential issues.</li>\n</ul>\n<p>If validation fails, you see an error message and can select a new file without making any changes to your translations.</p>\n<h2 id=\"h_01KE6YFQ9CHHYH0C85PYVZP5JE\">\n<br>\nUnderstand import results</h2>\n<p>After validation, the import summary shows what will happen if you proceed.</p>\n<h3 id=\"h_01KE6YFQ9DM1F85ZTQJ96ZTVHT\">Summary counts</h3>\n<p>The summary can include counts like:</p>\n<ul>\n<li>\n<strong>Updated</strong> – the number of rows where at least one translation value will change.</li>\n<li>\n<strong>Unchanged</strong> – rows that are present in the CSV but where all values match what is already stored.</li>\n<li>\n<strong>Ignored / skipped</strong> – rows that will not be imported (for example, because the block_id does not exist in this message or required data is missing).</li>\n</ul>\n<div class=\"bs-callout bs-callout-default\">\n<p>Counts are calculated per row, not per language. For example, if a CSV has two rows and two language columns:</p>\n<ul>\n<li>If one row updates in one language, the <strong>Updated</strong> count is 1.</li>\n<li>If one row updates in both languages, the <strong>Updated</strong> count is still 1.</li>\n<li>If both rows update in one or all languages, the <strong>Updated</strong> count is 2.</li>\n</ul>\n</div>\n<h2 id=\"h_01KECM02QN3EJSGAN0Y5DYNGNN\">\n<br>\nBest practices</h2>\n<p>To keep your translation data accurate and easy to manage:</p>\n<ol>\n<li>\n<strong>Start from the latest export.</strong> Avoid reusing older CSVs, especially after you change content or languages in the message.</li>\n<li>\n<strong>Keep a backup of each export.</strong> Save a copy of the CSV before making changes so you can roll back if needed.</li>\n<li>\n<strong>Coordinate with translators.</strong> Explain which columns they can edit (language columns only) and which columns they must not change (<em>block_id</em>, <em>source</em>).</li>\n<li>\n<strong>Work in smaller batches if needed.</strong> If your file is very large, consider splitting work across multiple messages or running several smaller imports.</li>\n<li>\n<strong>Use supported language codes.</strong> When adding new language columns, use supported BCP-47 codes from the <em>Smart Translations</em> article to avoid “unprocessable” languages.</li>\n</ol>\n<h2 id=\"resolve-validation-warnings\">\n<br>\nResolve validation warnings and import errors</h2>\n<p>If you see warnings or errors during import validation, review the sections below to understand what they mean and how to fix them.</p>\n<div class=\"accordion accordion--default\">\n<div class=\"accordion__item\">\n<div class=\"accordion__item-title\"><strong>\"Required columns are missing.\"</strong></div>\n<div class=\"accordion__item-content\">\n<p><strong>What it means:</strong> One or more required columns (<em>block_id</em> or <em>source</em>) are missing or renamed.</p>\n<p><strong>What to do:</strong> Make sure the CSV includes <em>block_id</em> and <em>source</em> columns. If you copied data into a new sheet, confirm that the header row matches the original export.</p>\n</div>\n</div>\n<div class=\"accordion__item\">\n<div class=\"accordion__item-title\"><strong>\"You have empty translation values. Empty strings will be treated as values.\"</strong></div>\n<div class=\"accordion__item-content\">\n<p><strong>What it means:</strong> Your CSV has empty translation values, and empty strings will be treated as values.</p>\n<p><strong>What to do:</strong> If you proceed, those empty cells overwrite any existing translations for that key and language. If you want to leave those translations unchanged, restore the previous values or remove that language column and re-import the file.</p>\n</div>\n</div>\n<div class=\"accordion__item\">\n<div class=\"accordion__item-title\"><strong>\"&lt;count&gt; key(s) does not exist in your project and will not be included in the import.\"</strong></div>\n<div class=\"accordion__item-content\">\n<p><strong>What it means:</strong> Some <em>block_id</em> values in your CSV don’t exist for this template (for example, if <em>block_id</em> values were edited manually).</p>\n<p><strong>What to do:</strong> Those rows are ignored, and translations for those keys don’t change. To resolve this, remove those rows from the CSV or export a fresh file if needed.</p>\n</div>\n</div>\n<div class=\"accordion__item\">\n<div class=\"accordion__item-title\"><strong>\"Your file contains duplicate keys with conflicting values. The first value will be used.\"</strong></div>\n<div class=\"accordion__item-content\">\n<p><strong>What it means:</strong> Two or more rows in your CSV have the same <em>block_id</em> values (for example, if rows were duplicated by mistake).</p>\n<p><strong>What to do:</strong> The values of the first row are used and the remaining duplicate rows are ignored. To resolve this, remove the duplicate rows from the CSV or export a fresh file if needed.</p>\n</div>\n</div>\n<div class=\"accordion__item\">\n<div class=\"accordion__item-title\"><strong>\"Multiple columns resolve to the same language. Only the last column will be used and the others will be ignored.\"</strong></div>\n<div class=\"accordion__item-content\">\n<p><strong>What it means:</strong> Two or more columns in your CSV have the same language code or resolve to the same language (for example, if a language column was duplicated by mistake).</p>\n<p><strong>What to do:</strong> The values of the last duplicate column are used and the remaining duplicate columns are ignored. To resolve this, remove the duplicate columns from the CSV or export a fresh file if needed.</p>\n</div>\n</div>\n<div class=\"accordion__item\">\n<div class=\"accordion__item-title\"><strong>\"Your file contains columns with language codes that are not supported by this channel: &lt;invalid language code&gt;. These will be ignored but valid locales will be imported.\"</strong></div>\n<div class=\"accordion__item-content\">\n<p><strong>What it means:</strong> A column header in your CSV uses a language code that isn’t supported or recognized.</p>\n<p><strong>What to do:</strong> To add a new language, use one of the supported BCP-47 codes from the <em>Smart Translations</em> documentation. Columns with unsupported codes are ignored.</p>\n</div>\n</div>\n<div class=\"accordion__item\">\n<div class=\"accordion__item-title\"><strong>\"You have languages in your file that are not in your project. The following languages will be added to your translation editor: &lt;language detected&gt;.\"</strong></div>\n<div class=\"accordion__item-content\">\n<p><strong>What it means:</strong> Your CSV includes language columns that are not currently part of this template.</p>\n<p><strong>What to do:</strong></p>\n<ul>\n<li>If you want to add those languages, review the list and click <strong>Import</strong> to add them to the translation editor.</li>\n<li>If you don’t want to add them, remove those columns and re-import the file.</li>\n</ul>\n</div>\n</div>\n<div class=\"accordion__item\">\n<div class=\"accordion__item-title\"><strong>\"No locale columns found.\"</strong></div>\n<div class=\"accordion__item-content\">\n<p><strong>What it means:</strong> The CSV includes <em>block_id</em> and <em>source</em> columns but no other column header was detected.</p>\n<p><strong>What to do:</strong> Add at least one supported language column and try again.</p>\n</div>\n</div>\n<div class=\"accordion__item\">\n<div class=\"accordion__item-title\"><strong>\"No valid locale columns found.\"</strong></div>\n<div class=\"accordion__item-content\">\n<p><strong>What it means:</strong> The CSV includes <em>block_id</em> and <em>source</em> columns but no valid language columns.</p>\n<p><strong>What to do:</strong> Add at least one supported language column and try again.</p>\n</div>\n</div>\n</div>\n<div class=\"bs-callout bs-callout-default\">\n<p>If you see only warnings and understand their impact, you can proceed with the import. If you see an error, you must correct the CSV and re-upload it before continuing. If you continue to see errors, export a fresh CSV from the translation editor, make minimal changes, and try another import to isolate the issue.</p>\n</div>\n<div class=\"bs-callout bs-callout-default\">\n<p>If you continue to see errors after checking these items, export a fresh CSV from the translation editor, make minimal changes, and try another import to isolate which change is causing the problem.</p>\n</div>",
+    "user_segment_ids": []
+  },
+  "normalized": {
+    "id": "45085617755931",
+    "title": "How to manage translations in bulk with CSV",
+    "source_url": "https://help.klaviyo.com/hc/en-us/articles/45085617755931-How-to-manage-translations-in-bulk-with-CSV",
+    "section_id": 49375559270427,
+    "section": "Build and use templates",
+    "category_id": 4414879524891,
+    "category": "Content",
+    "category_slug": "content",
+    "klaviyo_updated": "2026-05-11T12:54:35Z",
+    "created_at": "2026-01-05T15:43:14Z",
+    "draft": false,
+    "promoted": false,
+    "position": 0,
+    "label_names": []
+  },
+  "files": {
+    "body_html": "_source/articles/45085617755931.body.html",
+    "rendered_html": "_source/rendered/45085617755931.html"
+  },
+  "assets": {
+    "api_body": {
+      "images": [
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/45177653196699",
+          "alt": "Translation editor with the Export CSV option highlighted in the actions menu",
+          "width": "916",
+          "height": "199"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/45987097006619",
+          "alt": "",
+          "width": "1214",
+          "height": "500"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/45987074722971",
+          "alt": "Sample translation CSV in Google sheets showing smartling directives, block_id, source language column code, for one row.",
+          "width": "1245",
+          "height": "253"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/45177659814683",
+          "alt": "Sample translation CSV in Google sheets showing block_id, source, and language column for multiple rows.",
+          "width": "1245",
+          "height": "253"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/45177653207835",
+          "alt": "Import CSV modal in the translation editor with Select file and drag-and-drop options.",
+          "width": "807",
+          "height": "450"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/45177653210779",
+          "alt": "Import summary dialog showing counts of updated, unchanged, and ignored rows, with warnings listed above the Import button.",
+          "width": "808",
+          "height": "380"
+        }
+      ],
+      "links": [],
+      "headings": [
+        {
+          "level": 2,
+          "id": "h_01KE6YFQ8HJV4F4XJVA58XKQCV",
+          "text": "Export a CSV of your translations"
+        },
+        {
+          "level": 3,
+          "id": "h_01KG2T5MJCSP742TFP898N0SWS",
+          "text": "Exporting Smartling CSV"
+        },
+        {
+          "level": 3,
+          "id": "h_01KG2T5MJCQY5H7QKGPK2WWSCM",
+          "text": "Exporting a Simple CS"
+        },
+        {
+          "level": 2,
+          "id": "h_01KE6YFQ8P0M9V0YEVJ8CEATZP",
+          "text": "Update the CSV"
+        },
+        {
+          "level": 3,
+          "id": "h_01KE6YFQ8Q6S9M51VGVA27XXFW",
+          "text": "What you can safely change"
+        },
+        {
+          "level": 3,
+          "id": "h_01KE6YFQ9443VH4ZB56DMV26FE",
+          "text": "What you should not change"
+        },
+        {
+          "level": 3,
+          "id": "h_01KE6YFQ97DMEWCDS60NPW19QA",
+          "text": "Handling empty cells"
+        },
+        {
+          "level": 2,
+          "id": "h_01KE6YFQ98N73BG28A685XKRJG",
+          "text": "Import the CSV"
+        },
+        {
+          "level": 2,
+          "id": "h_01KE6YFQ9CHHYH0C85PYVZP5JE",
+          "text": "Understand import results"
+        },
+        {
+          "level": 3,
+          "id": "h_01KE6YFQ9DM1F85ZTQJ96ZTVHT",
+          "text": "Summary counts"
+        },
+        {
+          "level": 2,
+          "id": "h_01KECM02QN3EJSGAN0Y5DYNGNN",
+          "text": "Best practices"
+        },
+        {
+          "level": 2,
+          "id": "resolve-validation-warnings",
+          "text": "Resolve validation warnings and import errors"
+        }
+      ]
+    },
+    "rendered_page": {
+      "images": [
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/7ff492c2b417b7ecfe572f839a8a81398693c1f7-1920x1080.webp",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/7c0cba030d29bfd508ee25afb48e604c3b7c4041-916x199.png?w=916",
+          "alt": "Translation editor with the Export CSV option highlighted in the actions menu",
+          "width": "916",
+          "height": "199"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/8b571039f2f0df65130e212b643d6dc9f276d4cd-1214x500.png?w=1214",
+          "alt": "",
+          "width": "1214",
+          "height": "500"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/fa09a4803f3c2ca1c30e69f71f20aa1378b457c3-2464x588.png?w=1245",
+          "alt": "Sample translation CSV in Google sheets showing smartling directives, block_id, source language column code, for one row.",
+          "width": "1245",
+          "height": "253"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/4c58e11473ff0421467cbe1f4d3bafe4ba0b6553-1245x253.png?w=1245",
+          "alt": "Sample translation CSV in Google sheets showing block_id, source, and language column for multiple rows.",
+          "width": "1245",
+          "height": "253"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/842cec23ce84eda39ef3050b1db266d42e4138ed-807x450.png?w=807",
+          "alt": "Import CSV modal in the translation editor with Select file and drag-and-drop options.",
+          "width": "807",
+          "height": "450"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/742644cd4b0c3e48b341f4f7b5825ef54af2b75b-808x380.png?w=808",
+          "alt": "Import summary dialog showing counts of updated, unchanged, and ignored rows, with warnings listed above the Import button.",
+          "width": "808",
+          "height": "380"
+        }
+      ],
+      "links": [
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/45085617755931-How-to-manage-translations-in-bulk-with-CSV#site-content",
+          "text": "Skip to main content"
+        },
+        {
+          "href": "https://www.klaviyo.com",
+          "text": "Home"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center"
+        },
+        {
+          "href": "https://www.klaviyo.com/enterprise",
+          "text": "Enterprise"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Partners"
+        },
+        {
+          "href": "https://www.klaviyo.com/careers",
+          "text": "Careers"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": "Log in"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": ""
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center Find step-by-step instructions and troubleshooting solutions in our knowledge base."
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000032731",
+          "text": "Integrations"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000312411",
+          "text": "Flows"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867867",
+          "text": "Audience"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867667",
+          "text": "Campaigns"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/360000190711",
+          "text": "Sign-up forms"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000873988",
+          "text": "Deliverability & compliance"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/29173800271259",
+          "text": "SMS"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/16638219724187",
+          "text": "Reviews"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/18073014919195",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/34141283979931",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/37659126754075",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/33948021740315",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/39746685522331",
+          "text": "WhatsApp"
+        },
+        {
+          "href": "https://academy.klaviyo.com",
+          "text": "Klaviyo Academy Expert training and education to help you succeed with Klaviyo, and beyond."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Quick+guide&resource=academy_courses",
+          "text": "Quick guides Learn marketing strategies and concepts in 15 minutes or less."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Course&resource=academy_courses",
+          "text": "Courses Master key marketing topics through structured lessons and exams."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/best-practices",
+          "text": "Best practices Discover top product and marketing strategies for your business."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/learning-paths",
+          "text": "Learning paths Complete curated learning journeys tailored to your marketing goals."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses",
+          "text": "Explore all resources"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Live+training&resource=academy_courses",
+          "text": "Live trainings Build confidence through hands-on interactive workshops and thought-provoking strategy sessions."
+        },
+        {
+          "href": "https://www.bigmarker.com/klaviyo-customer-education/Office-hours-Getting-started-with-Klaviyo",
+          "text": "Live office hours Join a strategic discussion where you can ask questions and get answers in real-time."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/private-live-training",
+          "text": "1:1 Live training Book a private training session with an expert to jumpstart your platform knowledge and confidence."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/credentials",
+          "text": "Klaviyo credentials Dig deeper into select topics and showcase your expertise with a final exam to earn a certificate and digital badge."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/certificates/klaviyo-practitioner-certificate",
+          "text": "Klaviyo practitioner certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/deliverability-certificate",
+          "text": "Deliverability certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/developer-certificate",
+          "text": "Klaviyo developer certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses&select=Certificate",
+          "text": "See all certificates"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Klaviyo Community Join our thriving community network to connect with brands like yours—online and in person."
+        },
+        {
+          "href": "https://community.klaviyo.com/topic/new",
+          "text": "Ask a question Post a question and get thoughtful answers from Klaviyo powerusers."
+        },
+        {
+          "href": "https://community.klaviyo.com/p/roadmap",
+          "text": "Product roadmap"
+        },
+        {
+          "href": "https://community.klaviyo.com/search/activity/recent",
+          "text": "Recent threads"
+        },
+        {
+          "href": "https://community.klaviyo.com/p/champions",
+          "text": "Meet the Champions"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups",
+          "text": "Browse all groups Your people are waiting. New ideas and connections are a click away."
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/developer-group-64",
+          "text": "Developer group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/entrepreneur-user-group-118",
+          "text": "Entrepreneur group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/woo-user-group-87",
+          "text": "WooCommerce group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/new-york-meetup-chapter-82",
+          "text": "New York City"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/los-angeles-meetup-chapter-83",
+          "text": "Los Angeles"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/austin-meetup-chapter-85",
+          "text": "Austin"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/san-diego-meetup-chapter-86",
+          "text": "San Diego"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/amsterdam-meetup-chapter-84",
+          "text": "Amsterdam"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Klaviyo Developers Access API documentation and developer guides to help you build with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/get_started",
+          "text": "Get started Access key resources and a step-by-step checklist for how to start developing with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/build_your_integration",
+          "text": "Grow your app's reach Learn how to join our ecosystem and get your app listed on our marketplace."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/developer-tools",
+          "text": "Developer tools Generate sample data, monitor your API usage, and access our Postman collections."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/reference/api_overview",
+          "text": "API reference Browse our full catalog of API docs."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/changelog_",
+          "text": "Changelog"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/api_versioning_and_deprecation_policy",
+          "text": "Versioning & deprecation policy"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/rate_limits_and_error_handling",
+          "text": "Rate limits & error handling"
+        },
+        {
+          "href": "https://youtube.com/playlist?list=PLHkNfHgtxcUanrkMnKPdkRzuWU7MGv_xM&si=pkG-KH7IT_TUHOGC",
+          "text": "API tutorials on YouTube Subscribe to our Klaviyo API Tutorials playlist for easy access to step-by-step developer walkthroughs."
+        },
+        {
+          "href": "https://www.klaviyo.com/contact-us",
+          "text": "Contact us"
+        },
+        {
+          "href": "https://www.klaviyo.com/sign-up",
+          "text": "Sign up"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": "Search"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/45085617755931",
+          "text": "United States - EN"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/de-de/articles/45085617755931",
+          "text": "Deutschland - DE"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-es/articles/45085617755931",
+          "text": "España - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-mx/articles/45085617755931",
+          "text": "México - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/fr-fr/articles/45085617755931",
+          "text": "France - FR"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/it-it/articles/45085617755931",
+          "text": "Italia - IT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/ko-kr/articles/45085617755931",
+          "text": "한국 - KO"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/nl-nl/articles/45085617755931",
+          "text": "Nederland - NL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pl-pl/articles/45085617755931",
+          "text": "Polska - PL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pt-br/articles/45085617755931",
+          "text": "Brasil - PT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/sv-se/articles/45085617755931",
+          "text": "Sverige - SV"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/4414879524891",
+          "text": "Content"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/14543554717467",
+          "text": "Templates"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/49375559270427",
+          "text": "Build and use templates"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/45085617755931-How-to-manage-translations-in-bulk-with-CSV#h_01KE6YFQ8HJV4F4XJVA58XKQCV",
+          "text": "Export a CSV of your translations"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/45085617755931-How-to-manage-translations-in-bulk-with-CSV#h_01KE6YFQ8P0M9V0YEVJ8CEATZP",
+          "text": "Update the CSV"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/45085617755931-How-to-manage-translations-in-bulk-with-CSV#h_01KE6YFQ98N73BG28A685XKRJG",
+          "text": "Import the CSV"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/45085617755931-How-to-manage-translations-in-bulk-with-CSV#h_01KE6YFQ9CHHYH0C85PYVZP5JE",
+          "text": "Understand import results"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/45085617755931-How-to-manage-translations-in-bulk-with-CSV#h_01KECM02QN3EJSGAN0Y5DYNGNN",
+          "text": "Best practices"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/45085617755931-How-to-manage-translations-in-bulk-with-CSV#resolve-validation-warnings",
+          "text": "Resolve validation warnings and import errors"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/45085617755931-How-to-manage-translations-in-bulk-with-CSV#additional-resources",
+          "text": "Additional resources"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/38068161225243",
+          "text": "How to enable Smart Translations"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/38069585109787",
+          "text": "How to create a multilingual email campaign using Smart Translations"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/39896599432347",
+          "text": "How to create a multilingual SMS campaign using Smart Translations"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005239028",
+          "text": "How to customize content based on language"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115001002272",
+          "text": "Learn how to contact support"
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": ""
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": "Visit Community"
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": ""
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": "Hire a partner"
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/about",
+          "text": "About Klaviyo"
+        },
+        {
+          "href": "https://www.klaviyo.com/newsroom",
+          "text": "Newsroom"
+        },
+        {
+          "href": "https://investors.klaviyo.com/overview/default.aspx",
+          "text": "Investor relations"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Agency and tech partners"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Developers"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/retail",
+          "text": "Retail and ecommerce"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/restaurants",
+          "text": "Restaurant marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/wellness",
+          "text": "Wellness"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform",
+          "text": "B2C CRM overview"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai",
+          "text": "Klaviyo AI (K:AI)"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/marketing-automation",
+          "text": "Klaviyo Marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-service",
+          "text": "Klaviyo Service"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/analytics",
+          "text": "Klaviyo Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-data-platform",
+          "text": "Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare",
+          "text": "Klaviyo vs. Klaviyo alternatives"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-mailchimp",
+          "text": "Klaviyo vs. Mailchimp"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-postscript",
+          "text": "Klaviyo vs. Postscript"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-attentive",
+          "text": "Klaviyo vs. Attentive"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-salesforce-marketing-cloud",
+          "text": "Klaviyo vs. Salesforce"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-listrak",
+          "text": "Klaviyo vs. Listrak"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/omnichannel",
+          "text": "Omnichannel marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/email-marketing",
+          "text": "Email marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing",
+          "text": "SMS marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing/rcs",
+          "text": "RCS for Business"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/mobile-app-marketing",
+          "text": "Mobile app marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/whatsapp",
+          "text": "WhatsApp marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/social",
+          "text": "Social marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources",
+          "text": "Marketing resources"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources/marketing-campaign-calendar",
+          "text": "Marketing campaign calendar"
+        },
+        {
+          "href": "https://www.klaviyo.com/glossary",
+          "text": "Marketing glossary"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/email-subject-line-generator",
+          "text": "Subject line generator"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/roi-calculator",
+          "text": "ROI calculator"
+        },
+        {
+          "href": "https://www.klaviyo.com/customers",
+          "text": "Case studies"
+        },
+        {
+          "href": "https://www.klaviyo.com/composer",
+          "text": "Composer Beta"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/marketing-agent",
+          "text": "Marketing Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/customer-agent",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/customer-experience-hub",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/helpdesk",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/marketing-analytics",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/advanced-cdp",
+          "text": "Advanced Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/web-forms",
+          "text": "Web forms"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/email-templates",
+          "text": "Email templates"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/portfolio",
+          "text": "Portfolio"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform-integrations",
+          "text": "Apps and Integrations"
+        },
+        {
+          "href": "https://www.klaviyo.com/features",
+          "text": "Features"
+        },
+        {
+          "href": "https://www.klaviyo.com/whats-new",
+          "text": "What's new"
+        },
+        {
+          "href": "https://www.klaviyo.com/events",
+          "text": "Events"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help Center"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us",
+          "text": "Academy"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Community"
+        },
+        {
+          "href": "https://www.facebook.com/Klaviyo/",
+          "text": "Facebook"
+        },
+        {
+          "href": "https://twitter.com/klaviyo/",
+          "text": "Twitter"
+        },
+        {
+          "href": "https://www.linkedin.com/company/klaviyo/",
+          "text": "LinkedIn"
+        },
+        {
+          "href": "https://www.instagram.com/klaviyo/",
+          "text": "Instagram"
+        },
+        {
+          "href": "https://www.klaviyo.com/sitemap",
+          "text": "Site Map"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal",
+          "text": "Terms and Privacy"
+        },
+        {
+          "href": "https://www.klaviyo.com/security",
+          "text": "Security"
+        },
+        {
+          "href": "https://www.klaviyo.com/trust",
+          "text": "Trust"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal/intellectual-property-notices",
+          "text": "Intellectual Property Notices"
+        }
+      ],
+      "headings": [
+        {
+          "level": 1,
+          "id": "",
+          "text": "How to manage translations in bulk with CSV"
+        },
+        {
+          "level": 2,
+          "id": "h_01KE6YFQ8HJV4F4XJVA58XKQCV",
+          "text": "Export a CSV of your translations"
+        },
+        {
+          "level": 3,
+          "id": "h_01KG2T5MJCSP742TFP898N0SWS",
+          "text": "Exporting Smartling CSV"
+        },
+        {
+          "level": 3,
+          "id": "h_01KG2T5MJCQY5H7QKGPK2WWSCM",
+          "text": "Exporting a Simple CS"
+        },
+        {
+          "level": 2,
+          "id": "h_01KE6YFQ8P0M9V0YEVJ8CEATZP",
+          "text": "Update the CSV"
+        },
+        {
+          "level": 3,
+          "id": "h_01KE6YFQ8Q6S9M51VGVA27XXFW",
+          "text": "What you can safely change"
+        },
+        {
+          "level": 3,
+          "id": "h_01KE6YFQ9443VH4ZB56DMV26FE",
+          "text": "What you should not change"
+        },
+        {
+          "level": 3,
+          "id": "h_01KE6YFQ97DMEWCDS60NPW19QA",
+          "text": "Handling empty cells"
+        },
+        {
+          "level": 2,
+          "id": "h_01KE6YFQ98N73BG28A685XKRJG",
+          "text": "Import the CSV"
+        },
+        {
+          "level": 2,
+          "id": "h_01KE6YFQ9CHHYH0C85PYVZP5JE",
+          "text": "Understand import results"
+        },
+        {
+          "level": 3,
+          "id": "h_01KE6YFQ9DM1F85ZTQJ96ZTVHT",
+          "text": "Summary counts"
+        },
+        {
+          "level": 2,
+          "id": "h_01KECM02QN3EJSGAN0Y5DYNGNN",
+          "text": "Best practices"
+        },
+        {
+          "level": 2,
+          "id": "resolve-validation-warnings",
+          "text": "Resolve validation warnings and import errors"
+        },
+        {
+          "level": 2,
+          "id": "additional-resources",
+          "text": "Additional resources"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "Explore more from Klaviyo"
+        }
+      ]
+    }
+  },
+  "rendered_page": {
+    "status": "fetched",
+    "error": ""
+  }
+}

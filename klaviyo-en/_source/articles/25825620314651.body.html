@@ -1,0 +1,177 @@
+<h2 id="h_01HY3CPMXGK4CWDZX0F7XZFM9R">You will learn</h2>
+<p>Learn how to skip rows (e.g., items) in a dynamic table block. The most common use case for this is hiding irrelevant items, like shipping insurance or free gift items, from an abandoned cart email. However, you can follow these steps for any email that uses a dynamic table block. </p>
+<div class="bs-callout bs-callout-default">
+<p>This process involves directly editing your email’s code. This is only recommended for technically savvy marketers or those who have access to a developer. Our support team cannot help you write custom code beyond the general guidance covered in this documentation. To maintain the security of your data, Klaviyo's support team is not able to open HTML files.</p>
+</div>
+<h2 id="h_01HY3CPMXG679HCJP9V0ZM3XZM">Before you begin</h2>
+<p>This article covers how to hide items from existing dynamic table blocks. If you have not yet created a working dynamic table block (e.g., the products in an abandoned cart or order confirmation email), learn how to <a href="https://klaviyo.zendesk.com/hc/en-us/articles/4408802597659" target="_blank" rel="noopener noreferrer">create one from scratch</a> or start with a message in our <a href="https://klaviyo.zendesk.com/hc/en-us/articles/115002779411" target="_blank" rel="noopener noreferrer">flow library</a>. </p>
+<h2 id="h_01HY3CPMXG09T29MNA10VKB11T">Write your <em>if</em> statements</h2>
+<p>Before making changes to your template, create 2 code snippets using a text or code editor (somewhere you can copy and paste the snippets from later). Each code snippet will consist of 3 parts: </p>
+<ol>
+<li>
+<a href="#h_01HY3CPMXG09XHJQTMZP0VJV82">An opening <em>if</em> tag</a>, <code class="language-django">{% if … %}</code>, indicating which items should appear in your table block. </li>
+<li>
+<a href="#h_01HY3CPMXGEPNZ4B9JC9SS91F2">Content</a>, like an image tag or text about the product.</li>
+<li>
+<a href="#h_01HY3CPMXGHQ358JG8EH463SGG">A closing tag</a>, <code class="language-django">{% endif %}</code>.</li>
+</ol>
+<h3 id="h_01HY3CPMXG09XHJQTMZP0VJV82">
+<span style="color: #434343;" data-darkreader-inline-color="">Create the opening </span><em><span style="color: #434343;" data-darkreader-inline-color="">if </span></em><span style="color: #434343;" data-darkreader-inline-color="">tag</span>
+</h3>
+<p>Here are some examples of opening <em>if</em> tags: </p>
+<div>
+<table style="width: 100%;">
+<tbody>
+<tr>
+<td><strong>Tag</strong></td>
+<td><strong>Meaning</strong></td>
+</tr>
+<tr>
+<td>{% if item.price != 0 %}</td>
+<td>If the item price (<em>item.price</em>) is anything other than 0. </td>
+</tr>
+<tr>
+<td>{% if item.product.name != "Route Shipping Insurance" %}</td>
+<td>If the item name (<em>item.product.name</em>) is anything other than “Route Shipping Insurance.” </td>
+</tr>
+<tr>
+<td>{% if not "T-Shirt" in item.product.title %}</td>
+<td>If the item’s title (<em>item.product.title</em>) does not contain “T-Shirt.” </td>
+</tr>
+<tr>
+<td>{% if item.title %}</td>
+<td>If the item’s title (<em>item.title</em>) is set (i.e., has any value).</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="bs-callout bs-callout-default">
+<p>These tags are case sensitive and must match your data exactly. For example, if the variable for your item’s price is something other than <em>item.price</em> (e.g., <em>item.Price</em> or <em>item.details.line_price</em>), update the code to match your data source. </p>
+</div>
+<h3 id="h_01HY3CPMXGEPNZ4B9JC9SS91F2"><span style="color: #434343;" data-darkreader-inline-color="">Create the content for the if statement</span></h3>
+<p>For content, follow these steps to use the existing content from your dynamic table block. Write this code snippet in a code or text editor; you’ll add it to your template in the next section. </p>
+<ol>
+<li>Under <em>Cell Content</em> for the table block’s image, click <strong>Replace</strong> to view the image placeholder.<br><img src="https://klaviyo.zendesk.com/hc/article_attachments/28717391398811" alt="Replace cell content button.jpg" width="342" height="187">
+</li>
+<li>Copy the entire code from the <em>Dynamic variable or dynamic URL</em> field. Note that this may be a simple dynamic variable, or it may be a longer code snippet; copy all of it, regardless of length.<br><img src="https://klaviyo.zendesk.com/hc/article_attachments/28717418658971" alt="Abandoned cart product image variable.jpg" width="678" height="243">
+</li>
+<li>Replace the placeholder in this code snippet with the code you copied from the <em>Dynamic variable or dynamic URL</em> field.<br>
+<pre><code class="language-django">&lt;img src="PLACEHOLDER" style="width: 200px; height: auto;" width="200"&gt;</code></pre>
+</li>
+</ol>
+<p>If your existing table block has a simple dynamic variable for the image, the resulting content will look something like this: </p>
+<pre><code class="language-django">&lt;img src="{{item.product.variant.images.0.src}}" style="width: 200px; height: auto;" width="200"&gt;  </code></pre>
+<p>If your existing table block contains a longer code snippet, the resulting content might look like this: </p>
+<pre><code class="language-django">&lt;img src="{% if item.product.variant.images.0.src %}{{item.product.variant.images.0.src}}{%else%}{{item.product.images.0.src|missing_product_image}}{%endif%}" style="width: 200px; height: auto;" width="200"&gt;
+</code></pre>
+<h3 id="h_01HY3CPMXGHQ358JG8EH463SGG"><span style="color: #434343;" data-darkreader-inline-color="">Add your ending tag</span></h3>
+<p>Then, put all the content together: your opening if statement, then your content, and finally a closing <code class="language-django">{% endif %}</code> tag. </p>
+<h3 id="h_01HY3CPMXGWC1AJMW0M201K7S4"><span style="color: #434343;" data-darkreader-inline-color="">Repeat for the text content</span></h3>
+<p>Then, repeat this process with the content from the right side of your table block (e.g., the text content). Click <strong>&lt;/&gt;</strong> to open the code editor and copy all of the HTML content, then wrap this content in the same if statement (steps 1 and 3) you used for the image content. </p>
+<p>Here’s what everything looks like together: </p>
+<div>
+<table style="width: 100%;">
+<tbody>
+<tr>
+<td><strong>Code snippet 1 (product image)</strong></td>
+<td><strong>Code snippet 2 (product details) </strong></td>
+</tr>
+<tr>
+<td style="width: 46.0332%;">
+<pre><code class="language-django">{% if item.product.name != "Route Shipping Insurance" %}
+&lt;img src="{% if item.product.variant.images.0.src %}
+{{item.product.variant.images.0.src}}{%else%}
+{{item.product.images.0.src|missing_product_image}}
+{%endif%}"style="width: 200px; height: auto;" width="200"&gt;
+{% endif %}</code></pre>
+</td>
+<td style="width: 53.922%;">
+<pre><code class="language-django">{% if item.product.name != "Route Shipping Insurance" %}
+&lt;h3&gt;&lt;a href="{{ organization.url }}products/{{ item.product.url }}"&gt;
+   {{ item.product.name }}
+&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;
+   Quantity: {{ item.quantity|floatformat:0 }} — 
+   Total: {% currency_format item.line_price|floatformat:2 %}
+&lt;/p&gt;
+{% endif %}</code></pre>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>And here’s a breakdown of those code snippets: </p>
+<div>
+<table style="width: 100%;">
+<colgroup> <col> <col> </colgroup>
+<tbody>
+<tr>
+<td><strong>Code snippet 1 (product image)</strong></td>
+<td><strong>Code snippet 2 (product details) </strong></td>
+</tr>
+<tr>
+<td>
+<pre><code class="language-django">{% if CRITERIA %}
+   IMAGE PLACEHOLDER CONTENT
+{% endif %}</code></pre>
+</td>
+<td>
+<pre><code class="language-django">{% if CRITERIA %}
+   PRODUCT DESCRIPTION
+{% endif %}</code></pre>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="bs-callout bs-callout-default">
+<p>When using these code snippets, make sure to use straight quotes (") rather than curly quotes (“) to ensure the code renders correctly. </p>
+</div>
+<p>Once you’ve written both code snippets, continue in the template editor following the steps below. </p>
+<h2 id="h_01HY3CPMXGJGQHPZSVA8EE0W6W">Skip rows in a dynamic table block</h2>
+<div class="bs-callout bs-callout-default">
+<p>Before editing your dynamic table block, consider saving the original block as universal content in case you need to reference it in future messages. Then unlink the block and edit it separately, so your edits aren’t saved to the universal content block. </p>
+</div>
+<ol>
+<li>If your email is part of a flow, set it to <em>Draft</em> or <em>Manual</em> so messages don’t send while you edit the flow message. </li>
+<li>Make sure the <em>Cell Content</em> for both columns of the new table block are set to <em>Text</em>.<br><img src="https://klaviyo.zendesk.com/hc/article_attachments/28717418651163" width="336" height="338">
+</li>
+<li>Click <strong>&lt;/&gt;</strong> to open the HTML editor for the left side of the table block. </li>
+<li>Copy the product image code snippet you created in the previous section and paste it into the HTML field.<br><img src="https://klaviyo.zendesk.com/hc/article_attachments/28717418647579" width="333" height="470">
+</li>
+<li>Click <strong>Done </strong>in the upper left. </li>
+<li>Navigate to the editor for the right side of the table block. </li>
+<li>Click <strong>&lt;/&gt;</strong> to open the HTML editor for the right side of the table block. </li>
+<li>Copy the product details code snippet you created in the previous section and paste it into the HTML field, replacing all previous content. </li>
+<li>Click <strong>Done</strong>. </li>
+<li>Preview the email to ensure it appears as expected: the skipped item should not appear, but all other items will appear normally. Make sure to preview with an event that contains the item you’re trying to hide, so you can ensure it is hidden. </li>
+</ol>
+<h3 id="h_01J8JFW0C92YQZ7C477DEAFV4N">Conditional statements and the inline text editor</h3>
+<p>When you add certain conditional statements to a text block, they may disappear from the inline text editor. The code is still present; it is just hidden. To view and edit conditional statements, open the text block's <em>Source code</em> field. </p>
+<p>The following tags are only visible in a text block's <em>Source code</em> field: </p>
+<ul>
+<li>{% for ... %}</li>
+<li>{% endfor %}</li>
+<li>{% if ... %}</li>
+<li>{% elif ... %}</li>
+<li>{% else %}</li>
+<li>{% endif %}</li>
+<li>{% with ... %}</li>
+<li>{% endwith %}</li>
+</ul>
+
+<h2 id="h_01HY3CPMXGWM8MVT9ES07AY1H7">Troubleshooting</h2>
+<p><strong>No items appear in the preview</strong></p>
+<ol>
+<li>Make sure you are previewing with an event that matches the data source you used (e.g., <em>Started checkout</em> for an abandoned cart message). </li>
+<li>Confirm the <em>Repeat for</em> and <em>Row alias</em> exactly match the <em>Row collection</em> and <em>Row alias</em> from the original block. </li>
+</ol>
+<p><strong>The item that should be skipped is still appearing</strong></p>
+<p>Check the spelling and capitalization of your if statement. If the product is still appearing, that means it meets the criteria in your if statement, so your if statement is not configured correctly. Learn more about <a href="https://help.klaviyo.com/hc/en-us/articles/7655926841499" target="_blank" rel="noopener noreferrer">conditional logic in templates</a>. </p>
+<h2 id="h_01HY3CPMXG2ZRD6ST5FW8H873R">Outcome</h2>
+<p>After following these steps, any items that don’t meet the criteria in your if statement will not appear in messages like abandoned cart or order confirmation emails.  </p>
+<h2 id="h_01HY3CPMXG4V8Q1XNE6N59HC4R">Additional resources</h2>
+<ul>
+<li><a href="https://klaviyo.zendesk.com/hc/en-us/articles/4408802648731" target="_blank" rel="noopener noreferrer">Message personalization reference</a></li>
+<li><a href="https://klaviyo.zendesk.com/hc/en-us/articles/115005254068" target="_blank" rel="noopener noreferrer">How to import a custom HTML template</a></li>
+</ul>

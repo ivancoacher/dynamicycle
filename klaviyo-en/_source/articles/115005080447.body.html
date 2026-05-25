@@ -1,0 +1,584 @@
+<h2 id="01H8CEA9BVHGJAQYPMY8HAB44V">You will learn</h2>
+<p>Learn what data syncs from Shopify to Klaviyo and where to view it. This includes both order data (such as <em>Placed Order</em>, <em>Ordered Product</em>, etc.), delivery data, onsite tracking data, and customer data. If you have not already, read our guide on <a href="https://help.klaviyo.com/hc/en-us/articles/115005080407-How-to-Integrate-with-Shopify">getting started with Shopify</a> for step-by-step instructions on integrating, before continuing with this article.</p>
+<h2 id="h_01HSKSF3JC583G0ZW3MB2143P6">About the initial data sync</h2>
+<p>When you first integrate with Shopify, Klaviyo will sync the last 90 days of your Shopify data so you can start engaging your most recent customers. After the sync of the last 90 days of data, Klaviyo will begin your complete historical data sync. Depending on how many orders, customers, and products your store has, it can take anywhere from a few minutes to several days to sync all of your data, and a green progress bar will show the progress of your sync.</p>
+<p>Once this historical sync is complete, new data will sync to Klaviyo in real time.</p>
+<h2 id="01H8CEA9BVQ8VE41XN5M69SN08">How to view your data</h2>
+<p>Click the <strong>Analytics</strong> dropdown in the left-hand navigation sidebar and select <strong>Metrics</strong>. Here, you can view all of the metrics in your account. The metrics with a Shopify icon represent all of the metrics synced from your Shopify integration. You can filter this view to see only Shopify metrics by using the filter selector in the upper right-hand corner. The metrics synced from Shopify are:</p>
+<ul>
+<li>Checkout Started</li>
+<li>Placed Order</li>
+<li>Ordered Product</li>
+<li>Fulfilled Order</li>
+<li>Fulfilled Partial Order</li>
+<li>Cancelled Order</li>
+<li>Refunded Order</li>
+<li>Confirmed Shipment</li>
+<li>Delivered Shipment</li>
+<li>Marked Out for Delivery</li>
+<li>Active on Site</li>
+<li>Viewed Product</li>
+<li>Viewed Collection</li>
+<li>Submitted Search</li>
+<li>Added to Cart</li>
+</ul>
+<p>All of the events above are branded with the Shopify icon when they sync to Klaviyo, with the exception of <em>Active on Site</em> and <em>Viewed Product</em>, which have a gear icon. These events are tracked by Klaviyo via an installed snippet, while Shopify-branded events are natively tracked by Shopify. </p>
+<div class="bs-callout bs-callout-default">
+<p><em>Confirmed Shipment</em>, <em>Delivered Shipment</em>, and <em>Confirmed Out for Delivery</em> events will only sync to Klaviyo if they are available in Shopify. Please note that Shopify only provides these notifications for <a href="https://help.shopify.com/en/manual/shipping/understanding-shipping/shipping-carriers">certain shipping carriers</a>.</p>
+</div>
+<h2 id="01H8CEA9BV1F40P6KMS72KWP2K">Checkout Started</h2>
+<div class="bs-callout bs-callout-default">
+<p>Klaviyo's Shopify integration is fully compatible with Shopify One-page Checkout. Whether you're using one-page checkout or multi-page checkout, the <em>Checkout Started</em> event is triggered after the customer fills out their email. If you've customized your checkout, customers may still need to progress to the next step in the checkout process for the <em>Checkout Started</em> event to be triggered. Additional customer information will be updated in Klaviyo once the customer is created in Shopify.</p>
+</div>
+<p>The event that Klaviyo tracks includes all of the product information about the items in someone's cart including product names, images, and variant information so you can use this information in your abandoned cart emails.</p>
+<p>This event syncs with a checkout URL property, which links back to each customer’s unique cart. If someone opens an abandoned cart email from a new device, this link will rebuild the person's cart when clicked through. You can filter and target <em>Checkout Started</em> events based on the following criteria:</p>
+<ul>
+<li>
+<strong>$value</strong><br>
+The total value of the cart at time of started checkout. This may include any line prices, taxes, shipping costs, tips, and discounts.</li>
+<li>
+<strong>Items</strong><br>
+The names of the products in someone's order, e.g., <em>t-shirt </em>or <em>pants</em>.</li>
+<li>
+<strong>Collections</strong><br>
+The complete set of the collections of the products in someone's order, e.g., <em>t-shirts, men's, pants</em> and<em> sale</em>.</li>
+<li>
+<strong>Item Count</strong><br>
+The count of line items in the order, e.g., <em>2. </em>Note that this does not account for the quantity of items. Additionally, it is possible to add the same item to a cart multiple times and have it counted as multiple line items in Shopify; Klaviyo does not check for uniqueness or merge these for Item Count.</li>
+<li>
+<strong>Discount Codes</strong><br>
+Any discount or coupon codes someone used towards the order, e.g., <em>SPRING2015</em>.</li>
+<li>
+<strong>Total Discounts</strong><br>
+The total amount of any coupons or discounts if someone used  code, e.g., <em>10.00</em>.</li>
+<li>
+<strong>Customer Locale</strong><br>
+The customer’s locale when placing the order, e.g., <em>en-US</em>.</li>
+<li>
+<strong>$extra</strong><br>
+Additional data including localized product information.</li>
+</ul>
+<p>If there is billing address information available, we will also capture all relevant address details. If there is a referring site captured by Shopify, we will sync this as well.</p>
+<h3 id="01H8CEA9BVDS1KHEF42SK89ZVB">Checkout Started vs Abandoned Checkout</h3>
+<p>Shopify's<em>Abandoned Checkout</em>metric is different from its <em>Checkout Started</em>metric. Klaviyo's Abandoned Cart flow is triggered by the<em>Checkout Started</em>metric, while Shopify's Abandoned Cart flow is triggered by the<em>Abandoned Cart</em>metric.</p>
+<h3 id="01H8CEA9BVHKY18N9J9HGF6WAD">Do I need to disable the Abandoned Checkout notification in Shopify or will Klaviyo do this automatically? </h3>
+<p>You will need to do this manually. To turn off Shopify’s Abandoned Cart Recovery head over to <strong>Settings &gt; Checkout</strong> and then scroll down until you see <strong>Abandoned checkouts</strong>, under the <em>Email Marketing</em> section. You will need to uncheck the box that says "Automatically send abandoned checkout emails." </p>
+<h2 id="01H8CEA9BVT4JA6QMF3Q3SDH40">Placed Order</h2>
+<p>This event is tracked when a customer completes the checkout process and creates an order in your Shopify store. The event Klaviyo tracks includes all of the product information about the items someone purchased including product names, images and variant information so you can use that information in purchase follow up emails. You can filter and target <em>Placed Order</em> events based on the following criteria:</p>
+<ul>
+<li>
+<strong>$value</strong><br>
+The total value of the placed order, inclusive of shipping and any applied discounts.</li>
+<li>
+<strong>Items</strong><br>
+The names of the products in someone's order, e.g., <em>t-shirt </em>or <em>pants</em>.</li>
+<li>
+<strong>Collections</strong><br>
+The complete set of the collections of the products in someone's order, e.g., <em>t-shirts, mens, pants,</em> and<em> sale.</em>
+</li>
+<li>
+<strong>Item Count</strong><br>
+The count of line items in the order, e.g., <em>2. </em>Note that this does not account for the quantity of items. Additionally, it is possible to add the same item to a cart multiple times and have it counted as multiple line items in Shopify; Klaviyo does not check for uniqueness or merge these for Item Count.</li>
+<li>
+<strong>Discount Codes</strong><br>
+Any discount or coupon codes someone used towards the order, e.g., <em>SPRING2015; </em>while this isn't synced as a specific metric, there will be a <em>Discount Codes</em> property for each order that will allow you to see who purchased using particular codes.</li>
+<li>
+<strong>Total Discounts</strong><br>
+The total amount of any coupons or discounts if someone used a code, e.g., <em>10.00.</em>
+</li>
+<li>
+<strong>Customer Locale</strong><br>
+The customer’s locale when placing the order, e.g., <em>en-US</em>.</li>
+<li>
+<strong>$extra</strong><br>
+Additional data including localized product information.</li>
+<li>
+<strong>Source Name</strong><br>
+POS, Mobile etc.</li>
+<li>
+<strong>OptedInToSmsOrderUpdates</strong><br>
+This value (True or False) indicates that the shopper has provided their phone number with their shipping information during checkout.</li>
+</ul>
+<h3 id="h_01J56FFKH586BTR7T105CNB0R9">Triggering off of Placed Order events</h3>
+<p><em>Placed Order</em> and <em>Ordered Product</em> events are synced to Klaviyo seconds apart. For this reason, it is important to be consistent with the metric you use to trigger and filter your flows and segments. For example, if your flow is triggered by the <em>Placed Order</em> event and you add a filter to exclude anyone who <em>Ordered Product</em> since starting the flow, all recipients will be skipped because the two events are separate, but sync seconds apart. As a best practice, use the <em>Placed Order</em> event to trigger and filter flows and segments.</p>
+<h2 id="h_01JADBRNBQ8JYRZ8GGY30EZ05K">Ordered Product</h2>
+<p>This event is also tracked when a customer places an order, but a separate event is tracked for each item someone purchases. For example, if someone buys a t-shirt and a pair of pants, one <em>Placed Order</em> event will be tracked along with two <em>Ordered Product</em> events; one <em>Placed Order</em> event for the purchase as a whole, and then one <em>Ordered Product</em> event for the t-shirt and one <em>Ordered Product</em> event for the pants.</p>
+<p>The events Klaviyo tracks includes detailed information about each product someone purchases. This is useful when creating behavioral segments based on product variant options and other detailed information that's not available in the <em>Placed Order</em> event. You can filter and target <em>Ordered Product</em> events based on the following criteria:</p>
+<ul>
+<li>
+<strong>$value</strong><br>
+The total value of the item purchased; no shipping costs or discounts included.</li>
+<li>
+<strong>Name</strong><br>
+The name or title of the ordered product in Shopify, e.g., <em>t-shirt</em>.</li>
+<li>
+<strong>Variant Name</strong><br>
+The name or title of the product variant in Shopify, e.g., <em>red, size medium t-shirt</em>.</li>
+<li>
+<strong>SKU</strong><br>
+The SKU of the product variant, e.g., <em>REDMEDIUMTSHIRT</em>.</li>
+<li>
+<strong>ProductID</strong><br>
+The ID associated with the product in your store.</li>
+<li>
+<strong>Quantity</strong><br>
+The quantity will always be 1, since we track an <em>Ordered Product</em> event for each individual item in the order, including multiples of the same item.</li>
+<li>
+<strong>Collections</strong><br>
+The complete set of collections or categories applied to the product, e.g., <em>t-shirts, men's</em> and<em> sale</em>.</li>
+<li>
+<strong>Tags</strong><br>
+Any tags applied to the product in your store.</li>
+<li>
+<strong>Variant Option: &lt;OptionName&gt;</strong><br>
+The name and value of any variant options for the variant ordered, e.g., <em>Variant Option: Size </em>would be <em>Medium</em> and <em>Variant Option: Color </em>would be<em> Red</em>.</li>
+<li>
+<strong>Attribute: &lt;AttributeName&gt;</strong><br>
+The name and value of any product attributes for the product ordered, e.g., <em>Attribute: Season</em> would be <em>Spring</em>.</li>
+<li>
+<strong>Variant ID: &lt;Variant ID&gt;</strong><br>
+The ID associated with the product variant on your store. </li>
+<li>
+<strong>Customer Locale</strong><br>
+The customer’s locale when placing the order, e.g., <em>en-US</em>.</li>
+<li>
+<strong>$extra</strong><br>
+Additional data including localized product information.</li>
+</ul>
+<h2 id="01H8CEA9BVAVP3S5XW6HQ6JQ3F">Fulfilled Order</h2>
+<p>This event is tracked when an order is marked as "fulfilled" in your Shopify store. Klaviyo will track a <em>Fulfilled Order</em> event specifically when we sync an order with a <code>Fulfillment Status</code> of "fulfilled."</p>
+<p>The event Klaviyo tracks includes all product information regarding the items someone purchased including product names and images so you can use that information in purchase follow up emails. You can filter and target <em>Fulfilled Order</em> events based on the following criteria:</p>
+<ul>
+<li>
+<strong>$value</strong><br>
+The total value of the fulfilled order.</li>
+<li>
+<strong>Items</strong><br>
+The names of the products in someone's order, e.g., <em>t-shirt </em>or <em>pants</em>.</li>
+<li>
+<strong>Collections</strong><br>
+The complete set of the collections of the products in someone's order, e.g., <em>t-shirts, men's, pants,</em> and<em> sale</em>.</li>
+<li>
+<strong>Item Count</strong><br>
+The count of line items in the order, e.g., <em>2. </em>Note that this does not account for the quantity of items. Additionally, it is possible to add the same item to a cart multiple times and have it counted as multiple line items in Shopify; Klaviyo does not check for uniqueness or merge these for Item Count.</li>
+<li>
+<strong>Discount Codes</strong><br>
+Any discount or coupon codes someone used towards the order, e.g., <em>SPRING2015</em>.</li>
+<li>
+<strong>Total Discounts</strong><br>
+The total amount of any coupons or discounts if someone used a code, e.g., <em>10.00</em>.</li>
+<li>
+<strong>Customer Locale</strong><br>
+The customer’s locale when placing the order, e.g., <em>en-US</em>.</li>
+<li>
+<strong>$extra</strong><br>
+Additional data including localized product information.</li>
+<li>
+<strong>OptedInToSmsOrderUpdates</strong><br>
+This value (True or False) indicates that the shopper has provided their phone number with their shipping information during checkout.</li>
+</ul>
+<h2 id="01H8CEA9BVFVYZB7Z01W6WJRM0">Fulfilled Partial Order</h2>
+<p>This event is tracked when an order that has been placed is partially fulfilled. For example, if you opt to ship order items in multiple shipments and want to send transactional emails for each stage in the fulfillment of an order, <em>Fulfilled Partial Order</em> events can be leveraged such that customers are notified when their items will be delivered. View our guide for more information on <a href="https://help.klaviyo.com/hc/en-us/articles/4401771131419">setting up flows based on </a><a href="https://help.klaviyo.com/hc/en-us/articles/4401771131419"><em>Fulfilled Partial Order</em></a><a href="https://help.klaviyo.com/hc/en-us/articles/4401771131419"> events</a>.</p>
+<h2 id="01H8CEA9BVKNRRX1JQ0PCYE4ZE">Cancelled Order</h2>
+<p>This event is tracked when a customer creates an order in your Shopify store but then cancels the order before fulfillment. The event Klaviyo tracks includes all of the product information about the items someone purchased including product names and images. You can filter and target <em>Cancelled Order</em> events based on the following criteria:</p>
+<ul>
+<li>
+<strong>$value</strong><br>
+The total value of the canceled order.</li>
+<li>
+<strong>Items</strong><br>
+The names of the products in someone's order, e.g., <em>t-shirt </em>or <em>pants</em>.</li>
+<li>
+<strong>Collections</strong><br>
+The complete set of the collections of the products in someone's order, e.g., <em>t-shirts, men's, pants</em> and<em> sale</em>.</li>
+<li>
+<strong>Item Count</strong><br>
+The count of line items in the order, e.g., <em>2. </em>Note that this does not account for the quantity of items. Additionally, it is possible to add the same item to a cart multiple times and have it counted as multiple line items in Shopify; Klaviyo does not check for uniqueness or merge these for Item Count.</li>
+<li>
+<strong>Discount Codes</strong><br>
+Any discount or coupon codes someone used towards the order, e.g., <em>SPRING2015</em>.</li>
+<li>
+<strong>Total Discounts</strong><br>
+The total amount of any coupons or discounts if someone used a code, e.g., <em>10.00</em>.</li>
+<li>
+<strong>Customer Locale</strong><br>
+The customer’s locale when placing the order, e.g., <em>en-US</em>.</li>
+<li>
+<strong>$extra</strong><br>
+Additional data including localized product information.</li>
+<li>
+<strong>OptedInToSmsOrderUpdates</strong><br>
+This value (True or False) indicates that the shopper has provided their phone number with their shipping information during checkout.</li>
+</ul>
+<h2 id="01H8CEA9BV5EHENFETE0JB8YW0">Refunded Order</h2>
+<p>This event is tracked when a customer completes the checkout process in your Shopify store and a payment is made, but the customer requests the payment to be returned. Klaviyo only receives events from fully refunded orders (not partially refunded orders). The event Klaviyo tracks includes all of the product information about the items someone purchased including product names, images, and variant information. You can filter and target <em>Refunded Order</em> events based on the following criteria:</p>
+<ul>
+<li>
+<strong>$value</strong><br>
+The total value of the refunded order.</li>
+<li>
+<strong>Items</strong><br>
+The names of the products in someone's order, e.g., <em>t-shirt </em>or <em>pants</em>.</li>
+<li>
+<strong>Collections</strong><br>
+The complete set of the collections of the products in someone's order, e.g., <em>t-shirts, men's, pants</em> and<em> sale</em>.</li>
+<li>
+<strong>Item Count</strong><br>
+The count of line items in the order, e.g., <em>2. </em>Note that this does not account for the quantity of items. Additionally, it is possible to add the same item to a cart multiple times and have it counted as multiple line items in Shopify; Klaviyo does not check for uniqueness or merge these for Item Count.</li>
+<li>
+<strong>Discount Codes</strong><br>
+Any discount or coupon codes someone used towards the order, e.g., <em>SPRING2015</em>.</li>
+<li>
+<strong>Total Discounts</strong><br>
+The total amount of any coupons or discounts if someone used a code, e.g., <em>10.00</em>.</li>
+<li>
+<strong>Customer Locale</strong><br>
+The customer’s locale when placing the order, e.g., <em>en-US</em>.</li>
+<li>
+<strong>$extra</strong><br>
+Additional data including localized product information.</li>
+<li>
+<strong>OptedInToSmsOrderUpdates</strong><br>
+This value (True or False) indicates that the shopper has provided their phone number with their shipping information during checkout.</li>
+</ul>
+<h2 id="01H8CEA9BV9N92HJCXSH2K84DN">Confirmed Shipment</h2>
+<p>This event is tracked when the carrier is made aware of the shipment but hasn't received it yet. You can filter and target <em>Confirmed Shipment </em>events based on the following criteria:</p>
+<ul>
+<li>
+<strong>$value</strong><br>
+The sum of product prices, including discounts, for item(s) in the shipment.</li>
+<li>
+<strong>Collections</strong><br>
+The product collections for product(s) in the shipment.</li>
+<li>
+<strong>Customer Locale</strong><br>
+The customer’s locale when placing the order, e.g., <em>en-US</em>.</li>
+<li>
+<strong>Estimated Delivery</strong><br>
+The estimated delivery date for the shipment.</li>
+<li>
+<strong>Fulfillment Service</strong><br>
+The fulfillment service associated with the shipment, e.g., <em>manual</em>.</li>
+<li>
+<strong>Items</strong><br>
+An array of the product(s) in the shipment.</li>
+<li>
+<strong>Item Count</strong><br>
+The total number of items in the shipment.</li>
+<li>
+<strong>Shipment Status</strong><br>
+The status of the shipment, e.g., <em>confirmed</em>.</li>
+<li>
+<strong>Source Name</strong><br>
+The source of the order, e.g., <em>web</em>.</li>
+<li>
+<strong>Tracking Company </strong><br>
+The name of the tracking company.</li>
+<li>
+<strong>Tracking Numbers</strong><br>
+The tracking number(s) of the shipment.</li>
+<li>
+<strong>OptedInToSmsOrderUpdates</strong><br>
+This value (True or False) indicates that the shopper has provided their phone number with their shipping information during checkout.</li>
+</ul>
+<h2 id="01H8CEA9BWCYQH0NXXGTCW2MFX">Delivered Shipment</h2>
+<p>This event is tracked when a fulfillment’s shipping status is marked as <em>delivered </em>on your Shopify store. You can filter and target <em>Delivered Shipment </em>events based on the following criteria:</p>
+<ul>
+<li>
+<strong>$value</strong><br>
+The sum of product prices, including discounts, for item(s) in the shipment.</li>
+<li>
+<strong>Collections</strong><br>
+The product collections for product(s) in the shipment.</li>
+<li>
+<strong>Customer Locale</strong><br>
+The customer’s locale when placing the order, e.g., <em>en-US</em>.</li>
+<li>
+<strong>Delivery Hours</strong><br>
+The number of hours the shipment took to be delivered after it was created.</li>
+<li>
+<strong>Estimated Delivery</strong><br>
+The estimated delivery date for the shipment.</li>
+<li>
+<strong>Fulfillment Service</strong><br>
+The fulfillment service associated with the shipment, e.g., <em>manual</em>.</li>
+<li>
+<strong>Items</strong><br>
+An array of the product(s) in the shipment.</li>
+<li>
+<strong>Item Count</strong><br>
+The total number of items in the shipment.</li>
+<li>
+<strong>Transit Hours</strong><br>
+The number of hours the shipment has been in transit.</li>
+<li>
+<strong>Shipment Status</strong><br>
+The status of the shipment, which is <em>delivered</em>.</li>
+<li>
+<strong>Source Name</strong><br>
+The source of the order, e.g., <em>web</em>.</li>
+<li>
+<strong>Tracking Company </strong><br>
+The name of the tracking company.</li>
+<li>
+<strong>Tracking Numbers</strong><br>
+The tracking number(s) of the shipment.</li>
+<li>
+<strong>OptedInToSmsOrderUpdates</strong><br>
+This value (True or False) indicates that the shopper has provided their phone number with their shipping information during checkout.</li>
+</ul>
+<h2 id="01H8CEA9BW40BDG52YW0HHSA0V">Marked Out for Delivery</h2>
+<p>This event is tracked when a fulfillment’s shipping status is marked as <em>out_for_delivery </em>on your Shopify store. You can filter and target <em>Marked Out for Delivery </em>events based on the following criteria:</p>
+<ul>
+<li>
+<strong>$value</strong><br>
+The sum of product prices, including discounts, for item(s) in the shipment.</li>
+<li>
+<strong>Collections</strong><br>
+The product collections for product(s) in the shipment.</li>
+<li>
+<strong>Customer Locale</strong><br>
+The customer’s locale when placing the order, e.g., <em>en-US</em>.</li>
+<li>
+<strong>Estimated Delivery</strong><br>
+The estimated delivery date for the shipment.</li>
+<li>
+<strong>Fulfillment Service</strong><br>
+The fulfillment service associated with the shipment, e.g., <em>manual</em>.</li>
+<li>
+<strong>Items</strong><br>
+An array of the product(s) in the shipment.</li>
+<li>
+<strong>Item Count</strong><br>
+The total number of items in the shipment.</li>
+<li>
+<strong>Transit Hours</strong><br>
+The number of hours the shipment has been in transit.</li>
+<li>
+<strong>Shipment Status</strong><br>
+The status of the shipment, which is <em>out_for_delivery</em>.</li>
+<li>
+<strong>Source Name</strong><br>
+The source of the order, e.g., <em>web</em>.</li>
+<li>
+<strong>Tracking Company </strong><br>
+The name of the tracking company.</li>
+<li>
+<strong>Tracking Numbers</strong><br>
+The tracking number(s) of the shipment.</li>
+<li>
+<strong>OptedInToSmsOrderUpdates</strong><br>
+This value (True or False) indicates that the shopper has provided their phone number with their shipping information during checkout.</li>
+</ul>
+<h2 id="h_01J6F8BS3BAQWSHXG199774JR0">Active on Site</h2>
+<p>This event tracks when an identified user is active on your site. The top-level properties are:</p>
+<ul>
+<li>
+<strong>Browser</strong><br>
+User agent for the originating browser (e.g., “Chrome”).</li>
+<li>
+<strong>Os</strong><br>
+User agent for the originating operating system (e.g., “Mac”).</li>
+<li>
+<strong>Page </strong><br>
+The URL of the visited page.</li>
+<li>
+<strong>utm_medium</strong><br>
+The marketing channel the user comes from to the website.</li>
+<li>
+<strong>utm_source</strong><br>
+The source of traffic to the website.</li>
+<li>
+<strong>utm_campaign</strong><br>
+The name of the marketing campaign associated with the traffic.</li>
+<li>
+<strong>utm_id</strong><br>
+The unique identifier for the marketing campaign associated with the traffic.</li>
+<li>
+<strong>utm_term</strong><br>
+This is an optional UTM parameter that marketers can set to track paid search terms.</li>
+<li>
+<strong>Fragments</strong><br>
+Any other items in the URL, like an anchor tag that indicates where the user would have landed on the page. If there are no fragments on the URL, no values are set. </li>
+<li>
+<strong>Identity_source</strong><br>
+The event that triggered Klaviyo to receive the on-site event. </li>
+<li>
+<strong>Parameters</strong><br>
+Each of the first 10 parameters present in the URL as their own piece of event data, except for <em>_kx</em> and UTMs. If there are no parameters on the URL, no values are set. Parameters beyond the first 10 are not captured. </li>
+<li>
+<strong>First_page_path</strong><br>
+The path of the first page a customer lands on. If there is no path on the first page view, no value is set.</li>
+<li>
+<strong>Kx_present</strong><br>
+If _kx is present on the URL, <em>true</em> is returned for the dimension. If not, <em>false</em> is returned. This highlights whether or not the session could be associated with a click on a link in a Klaviyo message.</li>
+</ul>
+<div class="bs-callout bs-callout-default">
+<p>For each of the <a href="https://help.klaviyo.com/hc/en-us/articles/115005247808">UTM parameters</a>, Klaviyo will return the first value in the URL’s query parameters. If the UTM parameter is not present on a URL, then no values are provided in the event.</p>
+</div>
+<h2 id="h_01J6F8CB8ERSJFDA87R4BNZSSK">Viewed Product</h2>
+<p>This event tracks when an identified user views a product on your site. The top-level properties are:</p>
+<ul>
+<li>
+<strong>URL</strong><br>
+URL of the product.</li>
+<li>
+<strong>Activity ID</strong><br>
+Activity ID for the event.</li>
+<li>
+<strong>Product </strong><br>
+Name of the product.</li>
+<li>
+<strong>ProductID</strong><br>
+ID of the product.</li>
+<li>
+<strong>ImageURL</strong><br>
+URL for the product image.</li>
+<li>
+<strong>Brand</strong><br>
+Product’s vendor name.</li>
+<li>
+<strong>Categories</strong><br>
+The categories that the product belongs to.</li>
+<li>
+<strong>Price</strong><br>
+Product variant’s price.</li>
+<li>
+<strong>CompareAtPrice</strong><br>
+Price before discounts.</li>
+</ul>
+<h2 id="h_01J6F8CQA7NGJTR97G3C62M4SJ">Viewed Collection</h2>
+<p>This event tracks when an identified user views a collection your site. The top-level properties are:</p>
+<ul>
+<li>
+<strong>URL</strong><br>
+Collection URL.</li>
+<li>
+<strong>Activity ID</strong><br>
+Activity ID for the event.</li>
+<li>
+<strong>CollectionName</strong><br>
+Name of the collection.</li>
+<li>
+<strong>CollectionID</strong><br>
+ID for the collection.</li>
+<li>
+<strong>_ip_country_code</strong><br>
+ISO 3166-1 alpha-2 (two-letter) country code (e.g., “US”).</li>
+<li>
+<strong>_ip_region_code</strong><br>
+ISO 3166-2 region code (e.g. province, state such as “MA”).</li>
+</ul>
+<h2 id="h_01J6F8F7BVY6YKBQ9J6CP5CP2K">Submitted Search</h2>
+<p>This event tracks when an identified user submits a search on your site. The top-level properties are:</p>
+<ul>
+<li>
+<strong>URL</strong><br>
+URL for the search query.</li>
+<li>
+<strong>Activity ID</strong><br>
+Activity ID for the event.</li>
+<li>
+<strong>SearchQuery</strong><br>
+Contents of search query (e.g., “Mens Large Tshirts”).</li>
+<li>
+<strong>SearchQueryParts</strong><br>
+List including contents of search query (e.g., "Mens \"Large\" Tshirts”).</li>
+<li>
+<strong>_ip_country_code</strong><br>
+ISO 3166-1 alpha-2 (two-letter) country code (e.g., “US”).</li>
+<li>
+<strong>_ip_region_code</strong><br>
+ISO 3166-2 region code (e.g. province, state such as “MA”).</li>
+</ul>
+<h2 id="h_01J6F8FWMEH250MPETV9FSDWF3">Added to Cart</h2>
+<p>This event tracks when an identified user adds an item to their cart. This event tracks 1 product at a time within its top-level properties. The top-level properties are:</p>
+<ul>
+<li>
+<strong>URL</strong><br>
+URL of the item added to the Cart.</li>
+<li>
+<strong>Browser</strong><br>
+User agent for originating browser (e.g., “Chrome”).</li>
+<li>
+<strong>OS </strong><br>
+User agent for the originating operating system (e.g., “Mac”).</li>
+<li>
+<strong>$value</strong><br>
+Total value of product variant added to the cart.</li>
+<li>
+<strong>Product Name</strong><br>
+Name of the product.</li>
+<li>
+<strong>ProductID</strong><br>
+ID of the product.</li>
+<li>
+<strong>VariantID</strong><br>
+ID for the product variant.</li>
+<li>
+<strong>Variant Name</strong><br>
+Name of the product variant.</li>
+<li>
+<strong>Categories</strong><br>
+Categories applied to the product.</li>
+<li>
+<strong>ImageURL</strong><br>
+URL for the product image, or the product variant image if available.</li>
+<li>
+<strong>Brand</strong><br>
+Product’s vendor name.</li>
+<li>
+<strong>Price</strong><br>
+Product variant’s price.</li>
+<li>
+<strong>CompareAtPrice</strong><br>
+Price before discounts.</li>
+<li>
+<strong>$currency</strong><br>
+Currency code for the price.</li>
+<li>
+<strong>Product Type</strong><br>
+Product type specified by the merchant.</li>
+<li>
+<strong>Variant SKU</strong><br>
+SKU associated with the variant.</li>
+<li>
+<strong>Quantity</strong><br>
+Quantity for the product.</li>
+<li>
+<strong>_ip_country_code</strong><br>
+ISO 3166-1 alpha-2 (two-letter) country code (e.g., “US”).</li>
+<li>
+<strong>_ip_region_code</strong><br>
+ISO 3166-2 region code (e.g. province, state such as “MA”).</li>
+</ul>
+<h2 id="section2">Synced customer data</h2>
+<p>In addition to the metrics Klaviyo syncs from Shopify, Klaviyo will also create a unique profile for every customer that we sync. When we sync contact information, there are also certain custom properties that may get added to each Klaviyo profile. You can use these properties in segments and in flows. Here are the properties that are automatically synced from Shopify:</p>
+<ul>
+<li>
+<strong>Email, First and Last Name, City, State/Region, Zip Code, Country, Phone Number</strong><br>
+These built-in Klaviyo fields are automatically populated with all available data from Shopify.</li>
+<li>
+<strong>Locale information</strong><br>
+The <em>Locale</em> property includes the profile’s locale synced from Shopify (e.g., “en-US”). The <em>Locale: Language</em> and <em>Locale: Country</em> properties are derived from <em>Locale</em> and contain the language and country information, respectively.</li>
+<li>
+<strong>Marketing consent</strong><br>
+Whether or not a customer has opted-in to receive email and/or SMS marketing.</li>
+<li>
+<strong>Shopify Tags</strong><br>
+Any custom tags assigned to that customer in Shopify, e.g., <em>Wholesale</em> or <em>VIP</em>.</li>
+</ul>
+<p>Please note that profiles deleted in Shopify are not correspondingly deleted in Klaviyo.</p>
+<h2 id="section3">Frequency of the Shopify sync</h2>
+<p>Metrics and profile properties from Shopify are synced in real-time. You should see event data appear in your Klaviyo account within a few seconds of when the event is tracked in your Shopify store.</p>
+<p>Because we sync all metrics in real-time, any tags - such as Order Tags - that might be added to an order after it is processed will not sync into Klaviyo. Klaviyo does not re-sync metrics after the initial event takes place, so no tags or adjustments made to an order after-the-fact will be updated in Klaviyo.</p>
+<h2 id="h_01J56FHFAQK6CQW4JN6F7MNX0S">How we calculate revenue</h2>
+<p><em>Revenue</em>, or <em>Placed Order value</em>, is calculated as follows: (sub-total + shipping) - any discounts.</p>
+<p>You may see that the <em>Revenue</em> value on your Klaviyo dashboard does not always match up with the revenue value you see in Shopify; this is because Shopify subtracts canceled and refunded orders from their revenue calculation, while Klaviyo does not.</p>
+<p>Note that if you're looking to create a condition (like in a segment or flow) based on revenue for a customer over a certain period, you should use the <em>Revenue</em> metric and not the <em>Placed Order</em> metric. <br>
+</p>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/28704476411675" alt="Segment definition in Klaviyo for what someone has done (or not done) has revenue is greater than 50 over all time" width="629" height="160"></p>
+<h2 id="h_01JEEXDZ0SS0Z21J2A192AQ0N7">Segmenting based on value</h2>
+<p>If you want to segment customers based on the value of products they've ordered, checkouts they've started, etc., there's a specific way to do this in Klaviyo. In our segment builder, select <em>What someone has done (or not done) &gt; Person has &gt; [Event] Value</em>, then set your desired value and conditions. In the example below, we use <em>Ordered Product Value</em>.</p>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/31625849320219" alt=""></p>
+<p>Note that you should not use the $value event property to segment customers in this way. </p>

@@ -1,0 +1,43 @@
+<h2 id="h_01J06XJ016N7BX2Y10KP12NG1Y">You will learn</h2>
+<p>Learn how to create a flow in Klaviyo to create a customer service ticket whenever someone submits a negative review. Notifying your customer service team allows them to proactively reach out and amend any negative experiences your customers may have. </p>
+<h2 id="h_01J06XJ017WK8DSEZZE3AJ56G0">Create a negative review flow </h2>
+<p>First, create a flow: </p>
+<ol>
+<li>Click <strong>Flows</strong> in the left-side navigation in Klaviyo. </li>
+<li>Click <strong>Create flow</strong>. </li>
+<li>Click <strong>Create From Scratch</strong>.<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28715972707483" alt="Create a flow from scratch">
+</li>
+<li>Name your flow something descriptive and click <strong>Create Flow</strong>. </li>
+<li>Under <em>What will trigger this flow?</em>, choose <strong>Metric</strong>.</li>
+<li>From the <em>What action will trigger this flow?</em> menu, choose <strong>Submitted review</strong>. </li>
+<li>Click <strong>Trigger Filters &gt; Add a Trigger Filter</strong>. </li>
+<li>Set the following trigger filter:<br>
+<strong>review_rating &gt; is at most &gt; 3</strong><br>
+<br>
+This will identify customers who submitted a 1-, 2-, or 3-star review. If desired, you can use a different number.</li>
+</ol>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/28715966169499" alt="Review rating trigger filter" width="626" height="181"></p>
+<h2 id="h_01J06XJ017QWNE1A2A17Y4HCBA">Add an email notification action </h2>
+<p>Next, add an action to notify your customer service team about the negative review. </p>
+<ol>
+<li>Add a <strong>Notification</strong> action to the flow directly under the trigger.<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28715972713627" alt="A Notification action" width="267" height="309">
+</li>
+<li>In the notification’s <em>Send to</em> field, add your customer support email address. </li>
+<li>Set a subject like “{{ event.review_author|default:'Someone' }} submitted a {{ event.review_rating }}-star review”.<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28715972705051" alt="Notification action subject line" width="397" height="446">
+</li>
+<li>Add a body message that includes review details, like:<br>
+Rating: {{ event.review_rating }}<br>
+Review body: {{ event.review_content }}<br>
+Customer name: {{ event.review_author }}<br>
+Customer email: {{ event.review_email }}</li>
+<li>Click <strong>Save</strong>. </li>
+</ol>
+<h2 id="h_01J06XJ0175ND8D2A6R5ZE64VA">Set the flow live </h2>
+<p>Once you’ve customized the notification action, click <strong>Review and set live</strong> to set the flow live. Any future negative reviews will be automatically sent to your customer service team, who can then proactively contact the customer. </p>
+<p>If your customer service team is able to resolve a complaint, they can direct the reviewer to return to the original review request email within 30 days of submission and edit their review, if desired.</p>

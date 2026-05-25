@@ -1,0 +1,113 @@
+{
+  "captured_at": "2026-05-23T16:18:49Z",
+  "article": {
+    "id": 360007119971,
+    "url": "https://klaviyo.zendesk.com/api/v2/help_center/en-us/articles/360007119971.json",
+    "html_url": "https://klaviyo.zendesk.com/hc/en-us/articles/360007119971-JavaScript-API-Server-Side-API",
+    "author_id": 114161977131,
+    "comments_disabled": true,
+    "draft": false,
+    "promoted": false,
+    "position": 8,
+    "vote_sum": 0,
+    "vote_count": 0,
+    "section_id": 49375213829275,
+    "created_at": "2018-07-09T16:18:45Z",
+    "updated_at": "2026-04-21T13:56:50Z",
+    "name": "JavaScript API & Server-Side API",
+    "title": "JavaScript API & Server-Side API",
+    "source_locale": "en-us",
+    "locale": "en-us",
+    "outdated": false,
+    "outdated_locales": [],
+    "edited_at": "2026-04-17T20:30:09Z",
+    "user_segment_id": null,
+    "permission_group_id": 146372,
+    "content_tag_ids": [],
+    "label_names": [],
+    "body": "<p> </p>\n<h2>JavaScript API</h2>\n<p>The following guide will walk you through setting up and using the JavaScript API. If you are planning on a full ecommerce integration, please see <a href=\"https://help.klaviyo.com/hc/en-us/articles/115005082927\">this guide</a>.</p>\n<div class=\"bs-callout bs-callout-primary\">\n<h4>Note</h4>\n<p>To use the Klaviyo snippets provided below, you will need to update the placeholder for API_KEY with <a href=\"https://www.klaviyo.com/account#api-keys-tab\">your public API key, which can be found here</a>.</p>\n</div>\n<h3>Adding the Klaviyo snippet</h3>\n<p>To start tracking people, add the below snippet to the right in your website's main template so it will automatically be added to every page on your website. If you have a developer that will add this script to your website, you can send them a link to this guide.</p>\n<pre><code class=\"language-js\">\n<script>// <![CDATA[\nvar _learnq = _learnq || [];\n\n  _learnq.push(['account', 'tA6M6U']);\n\n  _learnq.push(['identify', {\n    // Change the line below to dynamically print the user's email.\n    '$email' : '{{ email }}'\n  }]);\n\n  (function () {\n  var b = document.createElement('script'); b.type = 'text/javascript'; b.async = true;\n  b.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'a.klaviyo.com/media/js/analytics/analytics.js';\n  var a = document.getElementsByTagName('script')[0]; a.parentNode.insertBefore(b, a);\n  })();\n// ]]></script>\n</code></pre>\n<p><strong>You need to make one change to the snippet</strong>. If you're an eCommerce business, remove the four lines with the \"identify\" call. If you're a website or web app people log into, replace the <code>{{ email }}</code> placeholder email with the appropriate template variable that has the logged in user's email address.</p>\n<p>We suggest putting the Klaviyo code at or near the bottom of your site template. If you use Google Analytics or other third party services, you can place the Klaviyo code directly above or below that.</p>\n<p>You might be wondering, \"How does using Klaviyo affect my site's performance?\" The answer is Klaviyo doesn't affect your website's performance at all. Our code only loads once the rest of your website has finished loading. In addition, Klaviyo tells browsers to cache our JavaScript so your visitors often don't even need to download our JavaScript every time switch pages.</p>\n<div id=\"verify_javascript\" class=\"split_section\">\n<div class=\"split_description\">\n<h3>Check Your Script</h3>\n<p>Once you've added the JavaScript to your website, you can check that it's set up properly by entering the URL of your website to the right.</p>\n<p>Once the script is on your website, Klaviyo will start tracking visits and session on your website in real-time.</p>\n</div>\n<div class=\"split_example\"><form id=\"check-javascript-install\" action=\"/setup/check\" method=\"GET\">\n<input name=\"csrfmiddlewaretoken\" type=\"hidden\" value=\"hVcmzrAKVWlWFfKlOz6G8bxRcEBLJjB9\">\n<div class=\"inputs\">\n<input name=\"url\" type=\"text\" placeholder=\"Enter the URL of your website\"> <input class=\"btn btn-primary btn-large\" type=\"submit\" value=\"Check »\">\n</div>\n<div class=\"status-message hide alert alert-block\"> </div>\n</form></div>\n</div>\n<h3>API Basics</h3>\n<p>To make calls to the Klaviyo API and store information about people, you'll use the <code>_learnq</code> object that's automatically added by the Klaviyo script.</p>\n<p>To make an API call, Klaviyo uses a special syntax that allows your API calls to work even when our script hasn't loaded on the page yet. You'll create an array where the first value is the name of the method you want to call and any subsequent values are arguments to pass to that method.</p>\n<h3>Identifying People</h3>\n<p>The <em>identify</em> method allows you to identify and set properties on an individual. This method accepts a dictionary or hash of properties. When you identify someone, you must include either their email address, with the $email key, or a unique identifier such as their user ID, with the $id key.</p>\n<p>Once you've included at least one of those identifiers, you're free to add any custom properties you want. Custom properties are useful for tracking facts about individuals. In Klaviyo, you can then create segments of people based on those properties. For instance, you might want to track an individual's plan type or sign up date. Klaviyo will also understand different data types you use, so feel free to use numbers, booleans and dates.</p>\n<p>Klaviyo has a few special properties that are used to display information about people. These are: $first_name, $last_name, $phone_number, $title and $organization.</p>\n<p>In addition to properties you track, Klaviyo will automatically determine what website each person was first referred from for attribution tracking and a person's location based on where they access your website.</p>\n<p><strong>Example Code: </strong></p>\n<pre><code class=\"language-js\">\n<script>// <![CDATA[\nvar _learnq = _learnq || [];\n\n  // Identifying a person and tracking special Klaviyo properties.\n  _learnq.push(['identify', {\n    '$email' : 'thomas.jefferson@example.com',\n    '$first_name' : 'Thomas',\n    '$last_name' : 'Jefferson'\n  }]);\n\n  // Adding custom properties. Note that Klaviyo understands different data types.\n  _learnq.push(['identify', {\n    'Plan' : 'Free Trial',\n    'SignUpDate' : '2016-01-27 12:10:05',\n    'HasFilledOutProfile' : false\n  }]);\n// ]]></script>\n</code></pre>\n<h3>Tracking Events and Actions</h3>\n<p>The <em>track</em> method allows you to record events and actions people take on your website. This method accepts a string which is the name you give to that event. This method also accepts an optional dictionary or hash of properties associated with that event.</p>\n<p>For example, you could track when someone purchases an item and include information on the purchase price and what items they bought. If you have an application where people have profiles you could track when someone fills out their profile. If you are planning on a full ecommerce integration, please see this guide.</p>\n<p>Klaviyo's event tracking and analytics are very flexible, so you can customize them to keep track of what's important to your business. Our track method also understands different data types, so you can use numbers, booleans and dates and we'll create intelligent charts and graphs based on the data you send.</p>\n<p><strong>Example Code: </strong></p>\n<pre><code class=\"language-js\">\n<script>// <![CDATA[\nvar _learnq = _learnq || [];\n\n  // Track presidential elections\n  _learnq.push(['track', 'Elected President', {\n    'PreviouslyVicePresident' : true,\n    'YearElected' : 1801,\n    'VicePresidents' : ['Aaron Burr', 'George Clinton']\n  }]);\n\n  // Track a simpler version.\n  _learnq.push(['track', 'Elected President']);\n// ]]></script>\n</code></pre>\n<h2>Server-Side API</h2>",
+    "user_segment_ids": []
+  },
+  "normalized": {
+    "id": "360007119971",
+    "title": "JavaScript API & Server-Side API",
+    "source_url": "https://help.klaviyo.com/hc/en-us/articles/360007119971-JavaScript-API-Server-Side-API",
+    "section_id": 49375213829275,
+    "section": "Custom integrations",
+    "category_id": 115000032731,
+    "category": "Integrations",
+    "category_slug": "integrations",
+    "klaviyo_updated": "2026-04-21T13:56:50Z",
+    "created_at": "2018-07-09T16:18:45Z",
+    "draft": false,
+    "promoted": false,
+    "position": 8,
+    "label_names": []
+  },
+  "files": {
+    "body_html": "_source/articles/360007119971.body.html",
+    "rendered_html": ""
+  },
+  "assets": {
+    "api_body": {
+      "images": [],
+      "links": [
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005082927",
+          "text": "this guide"
+        },
+        {
+          "href": "https://www.klaviyo.com/account#api-keys-tab",
+          "text": "your public API key, which can be found here"
+        }
+      ],
+      "headings": [
+        {
+          "level": 2,
+          "id": "",
+          "text": "JavaScript API"
+        },
+        {
+          "level": 4,
+          "id": "",
+          "text": "Note"
+        },
+        {
+          "level": 3,
+          "id": "",
+          "text": "Adding the Klaviyo snippet"
+        },
+        {
+          "level": 3,
+          "id": "",
+          "text": "Check Your Script"
+        },
+        {
+          "level": 3,
+          "id": "",
+          "text": "API Basics"
+        },
+        {
+          "level": 3,
+          "id": "",
+          "text": "Identifying People"
+        },
+        {
+          "level": 3,
+          "id": "",
+          "text": "Tracking Events and Actions"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "Server-Side API"
+        }
+      ]
+    },
+    "rendered_page": {}
+  },
+  "rendered_page": {
+    "status": "failed",
+    "error": "404 Client Error: Not Found for url: https://help.klaviyo.com/hc/en-us/articles/360007119971"
+  }
+}

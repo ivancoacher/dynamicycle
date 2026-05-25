@@ -1,0 +1,761 @@
+{
+  "captured_at": "2026-05-23T16:17:33Z",
+  "article": {
+    "id": 9674090873883,
+    "url": "https://klaviyo.zendesk.com/api/v2/help_center/en-us/articles/9674090873883.json",
+    "html_url": "https://klaviyo.zendesk.com/hc/en-us/articles/9674090873883-Troubleshoot-SSO-and-SCIM-errors",
+    "author_id": 388325929192,
+    "comments_disabled": true,
+    "draft": false,
+    "promoted": false,
+    "position": 3,
+    "vote_sum": -3,
+    "vote_count": 3,
+    "section_id": 49375482397083,
+    "created_at": "2022-10-16T19:24:10Z",
+    "updated_at": "2026-04-21T13:55:06Z",
+    "name": "Troubleshoot SSO and SCIM errors",
+    "title": "Troubleshoot SSO and SCIM errors",
+    "source_locale": "en-us",
+    "locale": "en-us",
+    "outdated": false,
+    "outdated_locales": [],
+    "edited_at": "2026-04-17T01:04:03Z",
+    "user_segment_id": null,
+    "permission_group_id": 146372,
+    "content_tag_ids": [],
+    "label_names": [],
+    "body": "<h2 id=\"h_01HWB7FCYQ1K05R97TMXK1WAJ0\">You will learn</h2>\n<p>Learn how to troubleshoot errors for single sign-on (SSO) with Klaviyo. This article is meant for those familiar with SSO, such as IT professionals. </p>\n<p>For more information, please see this article on <a href=\"https://help.klaviyo.com/hc/en-us/articles/9353860331035\">how to set up single sign-on</a>.</p>\n<h2 id=\"h_01HWB7FCYQC3NZXDX2WPJNHJHM\">List of errors and how to fix them</h2>\n<p>We break down all the potential errors you can experience when setting up SSO. Errors tend to happen when there’s missing or incorrect information. </p>\n<p>The table below shows all potential errors, where to go to fix them, and how to fix them. </p>\n<table>\n<tbody>\n<tr>\n<td><strong>Error</strong></td>\n<td><strong>How to fix it</strong></td>\n</tr>\n<tr>\n<td>Missing SSO configuration for {email} ({company_id})</td>\n<td>Make sure the SSO configuration settings are saved in Klaviyo.</td>\n</tr>\n<tr>\n<td>SSO disabled for {email} ({company_id})</td>\n<td>Enable SSO in the SSO configuration panel in Klaviyo.</td>\n</tr>\n<tr>\n<td>Missing SSO configuration for ({company_id})</td>\n<td>Make sure the SSO configuration settings are saved.</td>\n</tr>\n<tr>\n<td>SSO disabled for ({company_id})</td>\n<td>Enable SSO in the SSO configuration panel in Klaviyo.</td>\n</tr>\n<tr>\n<td>Cannot provision new SSO user for {email} in account ({company_id}) (Just-in-Time provisioning not enabled)</td>\n<td>If you would like to use Just-in-Time user provisioning, turn it on in the SSO configuration panel for your IdP SSO provider. </td>\n</tr>\n<tr>\n<td>IdP-Initiated SSO is disabled for {email} ({company_id})</td>\n<td>If you would like to use IdP-initiated SSO, you can enable it in the SSO configuration panel. </td>\n</tr>\n<tr>\n<td><em>Missing SSO configuration for ({company_id})</em></td>\n<td>Make sure your SSO configuration is set up and saved. </td>\n</tr>\n<tr>\n<td>This user is part of more than 1 company in Klaviyo. Their first or last name in Klaviyo is different from the value you have provided. Please contact this user and update their name in your IdP to match the value in Klaviyo</td>\n<td>The admin should ask the user to update their name if it does not match what is in their IdP.</td>\n</tr>\n</tbody>\n</table>\n<h3 id=\"h_01HWB7FCYRYSVR147170MG5BEB\">SSO configuration errors</h3>\n<table style=\"width: 100%; height: 190px\">\n<tbody>\n<tr>\n<td style=\"width: 33.3333%; height: 14px\"><strong>Error</strong></td>\n<td colspan=\"2\" style=\"width: 66.6666%; height: 14px\"><strong>How to fix it</strong></td>\n<td style=\"width: 1.57143%\"></td>\n</tr>\n<tr>\n<td style=\"width: 33.3333%; height: 22px\">Unsupported SAML version</td>\n<td colspan=\"2\" style=\"width: 66.6666%; height: 22px\">Go to your IdP SSO provider and update to SAML 2.0. </td>\n<td style=\"width: 1.57143%\"></td>\n</tr>\n<tr>\n<td style=\"width: 33.3333%; height: 22px\">Missing ID attribute on SAML Response</td>\n<td colspan=\"2\" style=\"width: 66.6666%; height: 22px\">Check that you have the correct ID in your IdP setting and that it’s in the correct format.</td>\n<td style=\"width: 1.57143%\"></td>\n</tr>\n<tr>\n<td rowspan=\"2\" style=\"width: 33.3333%\">Missing role attribute</td>\n<td colspan=\"2\" style=\"width: 66.6666%\">Navigate to your SSO provider and make sure to include the role attribute in the SAML assertion. Role value must be one of the following. </td>\n<td style=\"width: 1.57143%\"></td>\n</tr>\n<tr>\n<td style=\"width: 33.3333%; height: 22px\">\n<p><a href=\"https://help.klaviyo.com/hc/en-us/articles/115005231648\">Account user roles</a>:<br>\n</p>\n<ul>\n<li>owner</li>\n<li>admin</li>\n<li>manager</li>\n<li>analyst</li>\n<li>campaign_coordinator</li>\n<li>content_creator</li>\n<li>support</li>\n</ul>\n</td>\n<td style=\"width: 33.3333%; height: 22px\">\n<p><a href=\"https://help.klaviyo.com/hc/en-us/articles/25181702319643\">Portfolio user roles</a>:</p>\n<ul>\n<li>portfolio_owner</li>\n<li>portfolio_admin</li>\n<li>portfolio_manager</li>\n<li>portfolio_analyst</li>\n</ul>\n</td>\n<td style=\"width: 1.57143%\"></td>\n</tr>\n<tr>\n<td style=\"width: 33.3333%; height: 22px\">SAML Response must contain 1 assertion</td>\n<td colspan=\"2\" style=\"width: 66.6666%; height: 22px\">Navigate to your SSO provider and make sure to include the role attribute in the SAML assertion. </td>\n<td style=\"width: 1.57143%\"></td>\n</tr>\n<tr>\n<td style=\"width: 33.3333%; height: 22px\">Invalid SAML Response. Not match the saml-schema-protocol-2.0.xsd</td>\n<td colspan=\"2\" style=\"width: 66.6666%; height: 22px\">Make sure your SAML response adheres schema protocol for SAML 2.0. </td>\n<td style=\"width: 1.57143%\"></td>\n</tr>\n<tr>\n<td style=\"width: 33.3333%; height: 67px\">The assertion of the Response is not encrypted and the SP require it </td>\n<td colspan=\"2\" style=\"width: 66.6666%; height: 22px\">Klaviyo requires the assertion to be encrypted. Make sure you’re using an assertion that is encrypted. </td>\n<td style=\"width: 1.57143%\"></td>\n</tr>\n<tr>\n<td style=\"width: 33.3333%; height: 44px\">The Assertion must include a Conditions element</td>\n<td colspan=\"2\" style=\"width: 66.6666%; height: 22px\">Ensure that the SAML response assertion for your IdP includes a conditions element. </td>\n<td style=\"width: 1.57143%\"></td>\n</tr>\n<tr>\n<td style=\"width: 33.3333%; height: 44px\">The Assertion must include an AuthnStatement element</td>\n<td colspan=\"2\" style=\"width: 66.6666%; height: 22px\">Ensure that the SAML response assertion for your IdP includes an AuthnStatement element. </td>\n<td style=\"width: 1.57143%\"></td>\n</tr>\n<tr>\n<td style=\"width: 33.3333%; height: 44px\">There is no AttributeStatement on the Response</td>\n<td colspan=\"2\" style=\"width: 66.6666%; height: 22px\">Ensure that the SAML response assertion for your IdP includes an AttributeStatement element. </td>\n<td style=\"width: 1.57143%\"></td>\n</tr>\n<tr>\n<td style=\"width: 33.3333%; height: 67px\">There is an EncryptedAttribute in the Response and this SP not support them</td>\n<td colspan=\"2\" style=\"width: 66.6666%; height: 22px\">Klaviyo does not support when an attribute is encrypted. Check the settings for your IdP and make sure no attribute is encrypted. </td>\n<td style=\"width: 1.57143%\"></td>\n</tr>\n<tr>\n<td style=\"width: 33.3333%; height: 134px\">The response has an empty Destination value</td>\n<td colspan=\"2\" style=\"width: 66.6666%; height: 22px\">Go to your IdP and fill in the destination. Note that the name for this value may not be “destination,” as it varies. If you don’t see “destination,” look for other common names for this value: “Reply URL,” “ACS URL,” “Assertion Consumer Service URL,” “Trusted URL,” and “Endpoint URL.” </td>\n<td style=\"width: 1.57143%\"></td>\n</tr>\n<tr>\n<td style=\"width: 33.3333%; height: 89px\">%s is not a valid audience for this Response</td>\n<td colspan=\"2\" style=\"width: 66.6666%; height: 22px\">Make sure that the audience Id in your IdP matches exactly with the Audience URI (Service Provider Entity ID) provided in your SSO configuration panel, including the https:// prefix.</td>\n<td style=\"width: 1.57143%\"></td>\n</tr>\n<tr>\n<td style=\"width: 33.3333%; height: 67px\">Invalid issuer in the Assertion/Response (expected %(idpEntityId)s, got %(issuer)s)</td>\n<td colspan=\"2\" style=\"width: 66.6666%; height: 22px\">Make sure the IdP SSO URL field in the SSO admin panel matches with the SSO URL provided by your identity provider</td>\n<td style=\"width: 1.57143%\"></td>\n</tr>\n<tr>\n<td style=\"width: 33.3333%; height: 111px\">The attributes have expired, based on the SessionNotOnOrAfter of the AttributeStatement of this Response</td>\n<td colspan=\"2\" style=\"width: 66.6666%; height: 22px\">Retry logging in. If that doesn’t work, extend the expiration window for your SAML response in your IdP, as it may be too short. </td>\n<td style=\"width: 1.57143%\"></td>\n</tr>\n<tr>\n<td style=\"width: 33.3333%; height: 44px\">A valid SubjectConfirmation was not found on this Response</td>\n<td colspan=\"2\" style=\"width: 66.6666%; height: 22px\">Check the settings for your IdP and look for the subject confirmation method. Make sure it’s formatted correctly. </td>\n<td style=\"width: 1.57143%\"></td>\n</tr>\n<tr>\n<td style=\"width: 33.3333%; height: 193px\">The Assertion of the Response is not signed and the SP require it</td>\n<td colspan=\"2\" style=\"width: 66.6666%; height: 22px\">\n<p>Either </p>\n<ul>\n<li>Go to the SSO page for workspace and uncheck the box for Assertions Signed<br>\nOr</li>\n<li>Go to your IdP settings and turn on signing assertions of responses </li>\n</ul>\n<p>Contact your IdP if you need help. </p>\n</td>\n<td style=\"width: 1.57143%\"></td>\n</tr>\n<tr>\n<td style=\"width: 33.3333%; height: 170px\">The Message of the Response is not signed and the SP require it</td>\n<td colspan=\"2\" style=\"width: 66.6666%; height: 22px\">\n<p>Either:</p>\n<ul>\n<li>Go to the SSO page for workspace and uncheck the box for Responses Signed<br>\nOr</li>\n<li>Go to your IdP settings and turn on signing responses</li>\n</ul>\n<p>Contact your IdP if you need help. </p>\n<p> </p>\n</td>\n<td style=\"width: 1.57143%\"></td>\n</tr>\n<tr>\n<td style=\"width: 33.3333%; height: 44px\">No Signature found. SAML Response rejected</td>\n<td colspan=\"2\" style=\"width: 66.6666%; height: 22px\">Check that the SAML message from your IdP is properly signed. </td>\n<td style=\"width: 1.57143%\"></td>\n</tr>\n<tr>\n<td style=\"width: 33.3333%; height: 44px\">Signature validation failed. SAML Response rejected</td>\n<td colspan=\"2\" style=\"width: 66.6666%; height: 22px\">Go to your workspace’s SSO page and make sure the certificate matches the certificate sent from your IdP.  </td>\n<td style=\"width: 1.57143%\"></td>\n</tr>\n<tr>\n<td style=\"width: 33.3333%; height: 44px\">SAML Response not found, Only supported HTTP_POST Binding</td>\n<td colspan=\"2\" style=\"width: 66.6666%; height: 22px\">Check that your IdP is sending a HTTP_POST request. </td>\n<td style=\"width: 1.57143%\"></td>\n</tr>\n</tbody>\n</table>\n<h2 id=\"h_01HWB7FCYRQRGCSX8W1210EA1A\">Other troubleshooting tips</h2>\n<p>Open the dropdown that best matches the issue you're having for information on how to solve it. </p>\n<div class=\"accordion accordion--default\">\n<div class=\"accordion__item\">\n<div class=\"accordion__item-title\"><strong>I can't edit a user's role in Klaviyo</strong></div>\n<div class=\"accordion__item-content\">\n<p>The most likely cause of this is if you're using just-in-time (JIT) provisioning. When JIT is turned on, you are not able to edit a user's role in Klaviyo. </p>\n<p>To do so, the best option is to:</p>\n<ol>\n<li>Temporarily turn off JIT provisioning.</li>\n<li>Update the user's role in Klaviyo. </li>\n<li>Turn JIT back on. </li>\n</ol>\n</div>\n</div>\n<div class=\"accordion__item\">\n<div class=\"accordion__item-title\"><strong>I can't view the exemption list</strong></div>\n<div class=\"accordion__item-content\">\n<p>You need to have SSO set up in order to see the exemption list. For instructions, see our <a href=\"https://help.klaviyo.com/hc/en-us/articles/9353860331035\">article on how to enable SSO in Klaviyo</a>. </p>\n</div>\n</div>\n</div>",
+    "user_segment_ids": []
+  },
+  "normalized": {
+    "id": "9674090873883",
+    "title": "Troubleshoot SSO and SCIM errors",
+    "source_url": "https://help.klaviyo.com/hc/en-us/articles/9674090873883-Troubleshoot-SSO-and-SCIM-errors",
+    "section_id": 49375482397083,
+    "section": "Security",
+    "category_id": 115000867647,
+    "category": "Account & billing",
+    "category_slug": "account-billing",
+    "klaviyo_updated": "2026-04-21T13:55:06Z",
+    "created_at": "2022-10-16T19:24:10Z",
+    "draft": false,
+    "promoted": false,
+    "position": 3,
+    "label_names": []
+  },
+  "files": {
+    "body_html": "_source/articles/9674090873883.body.html",
+    "rendered_html": "_source/rendered/9674090873883.html"
+  },
+  "assets": {
+    "api_body": {
+      "images": [],
+      "links": [
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/9353860331035",
+          "text": "how to set up single sign-on"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005231648",
+          "text": "Account user roles"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/25181702319643",
+          "text": "Portfolio user roles"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/9353860331035",
+          "text": "article on how to enable SSO in Klaviyo"
+        }
+      ],
+      "headings": [
+        {
+          "level": 2,
+          "id": "h_01HWB7FCYQ1K05R97TMXK1WAJ0",
+          "text": "You will learn"
+        },
+        {
+          "level": 2,
+          "id": "h_01HWB7FCYQC3NZXDX2WPJNHJHM",
+          "text": "List of errors and how to fix them"
+        },
+        {
+          "level": 3,
+          "id": "h_01HWB7FCYRYSVR147170MG5BEB",
+          "text": "SSO configuration errors"
+        },
+        {
+          "level": 2,
+          "id": "h_01HWB7FCYRQRGCSX8W1210EA1A",
+          "text": "Other troubleshooting tips"
+        }
+      ]
+    },
+    "rendered_page": {
+      "images": [
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/7ff492c2b417b7ecfe572f839a8a81398693c1f7-1920x1080.webp",
+          "alt": "",
+          "width": "",
+          "height": ""
+        }
+      ],
+      "links": [
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/9674090873883-Troubleshoot-SSO-and-SCIM-errors#site-content",
+          "text": "Skip to main content"
+        },
+        {
+          "href": "https://www.klaviyo.com",
+          "text": "Home"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center"
+        },
+        {
+          "href": "https://www.klaviyo.com/enterprise",
+          "text": "Enterprise"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Partners"
+        },
+        {
+          "href": "https://www.klaviyo.com/careers",
+          "text": "Careers"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": "Log in"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": ""
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center Find step-by-step instructions and troubleshooting solutions in our knowledge base."
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000032731",
+          "text": "Integrations"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000312411",
+          "text": "Flows"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867867",
+          "text": "Audience"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867667",
+          "text": "Campaigns"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/360000190711",
+          "text": "Sign-up forms"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000873988",
+          "text": "Deliverability & compliance"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/29173800271259",
+          "text": "SMS"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/16638219724187",
+          "text": "Reviews"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/18073014919195",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/34141283979931",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/37659126754075",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/33948021740315",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/39746685522331",
+          "text": "WhatsApp"
+        },
+        {
+          "href": "https://academy.klaviyo.com",
+          "text": "Klaviyo Academy Expert training and education to help you succeed with Klaviyo, and beyond."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Quick+guide&resource=academy_courses",
+          "text": "Quick guides Learn marketing strategies and concepts in 15 minutes or less."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Course&resource=academy_courses",
+          "text": "Courses Master key marketing topics through structured lessons and exams."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/best-practices",
+          "text": "Best practices Discover top product and marketing strategies for your business."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/learning-paths",
+          "text": "Learning paths Complete curated learning journeys tailored to your marketing goals."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses",
+          "text": "Explore all resources"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Live+training&resource=academy_courses",
+          "text": "Live trainings Build confidence through hands-on interactive workshops and thought-provoking strategy sessions."
+        },
+        {
+          "href": "https://www.bigmarker.com/klaviyo-customer-education/Office-hours-Getting-started-with-Klaviyo",
+          "text": "Live office hours Join a strategic discussion where you can ask questions and get answers in real-time."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/private-live-training",
+          "text": "1:1 Live training Book a private training session with an expert to jumpstart your platform knowledge and confidence."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/credentials",
+          "text": "Klaviyo credentials Dig deeper into select topics and showcase your expertise with a final exam to earn a certificate and digital badge."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/certificates/klaviyo-practitioner-certificate",
+          "text": "Klaviyo practitioner certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/deliverability-certificate",
+          "text": "Deliverability certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/developer-certificate",
+          "text": "Klaviyo developer certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses&select=Certificate",
+          "text": "See all certificates"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Klaviyo Community Join our thriving community network to connect with brands like yours—online and in person."
+        },
+        {
+          "href": "https://community.klaviyo.com/topic/new",
+          "text": "Ask a question Post a question and get thoughtful answers from Klaviyo powerusers."
+        },
+        {
+          "href": "https://community.klaviyo.com/p/roadmap",
+          "text": "Product roadmap"
+        },
+        {
+          "href": "https://community.klaviyo.com/search/activity/recent",
+          "text": "Recent threads"
+        },
+        {
+          "href": "https://community.klaviyo.com/p/champions",
+          "text": "Meet the Champions"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups",
+          "text": "Browse all groups Your people are waiting. New ideas and connections are a click away."
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/developer-group-64",
+          "text": "Developer group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/entrepreneur-user-group-118",
+          "text": "Entrepreneur group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/woo-user-group-87",
+          "text": "WooCommerce group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/new-york-meetup-chapter-82",
+          "text": "New York City"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/los-angeles-meetup-chapter-83",
+          "text": "Los Angeles"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/austin-meetup-chapter-85",
+          "text": "Austin"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/san-diego-meetup-chapter-86",
+          "text": "San Diego"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/amsterdam-meetup-chapter-84",
+          "text": "Amsterdam"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Klaviyo Developers Access API documentation and developer guides to help you build with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/get_started",
+          "text": "Get started Access key resources and a step-by-step checklist for how to start developing with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/build_your_integration",
+          "text": "Grow your app's reach Learn how to join our ecosystem and get your app listed on our marketplace."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/developer-tools",
+          "text": "Developer tools Generate sample data, monitor your API usage, and access our Postman collections."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/reference/api_overview",
+          "text": "API reference Browse our full catalog of API docs."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/changelog_",
+          "text": "Changelog"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/api_versioning_and_deprecation_policy",
+          "text": "Versioning & deprecation policy"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/rate_limits_and_error_handling",
+          "text": "Rate limits & error handling"
+        },
+        {
+          "href": "https://youtube.com/playlist?list=PLHkNfHgtxcUanrkMnKPdkRzuWU7MGv_xM&si=pkG-KH7IT_TUHOGC",
+          "text": "API tutorials on YouTube Subscribe to our Klaviyo API Tutorials playlist for easy access to step-by-step developer walkthroughs."
+        },
+        {
+          "href": "https://www.klaviyo.com/contact-us",
+          "text": "Contact us"
+        },
+        {
+          "href": "https://www.klaviyo.com/sign-up",
+          "text": "Sign up"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": "Search"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/9674090873883",
+          "text": "United States - EN"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/de-de/articles/9674090873883",
+          "text": "Deutschland - DE"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-es/articles/9674090873883",
+          "text": "España - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-mx/articles/9674090873883",
+          "text": "México - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/fr-fr/articles/9674090873883",
+          "text": "France - FR"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/it-it/articles/9674090873883",
+          "text": "Italia - IT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/ko-kr/articles/9674090873883",
+          "text": "한국 - KO"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/nl-nl/articles/9674090873883",
+          "text": "Nederland - NL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pl-pl/articles/9674090873883",
+          "text": "Polska - PL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pt-br/articles/9674090873883",
+          "text": "Brasil - PT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/sv-se/articles/9674090873883",
+          "text": "Sverige - SV"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867647",
+          "text": "Account & billing"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/14542887837083",
+          "text": "Account"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/49375482397083",
+          "text": "Security"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/9674090873883-Troubleshoot-SSO-and-SCIM-errors#h_01HWB7FCYQ1K05R97TMXK1WAJ0",
+          "text": "You will learn"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/9674090873883-Troubleshoot-SSO-and-SCIM-errors#h_01HWB7FCYQC3NZXDX2WPJNHJHM",
+          "text": "List of errors and how to fix them"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/9674090873883-Troubleshoot-SSO-and-SCIM-errors#h_01HWB7FCYRQRGCSX8W1210EA1A",
+          "text": "Other troubleshooting tips"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/9674090873883-Troubleshoot-SSO-and-SCIM-errors#additional-resources",
+          "text": "Additional resources"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/9353860331035",
+          "text": "how to set up single sign-on"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005231648",
+          "text": "Account user roles"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/25181702319643",
+          "text": "Portfolio user roles"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/9353860331035",
+          "text": "article on how to enable SSO in Klaviyo"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/9353860331035",
+          "text": "How to set up single sign-on (SSO)"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360026617692",
+          "text": "How to set up multi-factor authentication (MFA)"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/10952782535579",
+          "text": "How to set up SCIM user provisioning"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115001002272",
+          "text": "Learn how to contact support"
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": ""
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": "Visit Community"
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": ""
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": "Hire a partner"
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/about",
+          "text": "About Klaviyo"
+        },
+        {
+          "href": "https://www.klaviyo.com/newsroom",
+          "text": "Newsroom"
+        },
+        {
+          "href": "https://investors.klaviyo.com/overview/default.aspx",
+          "text": "Investor relations"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Agency and tech partners"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Developers"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/retail",
+          "text": "Retail and ecommerce"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/restaurants",
+          "text": "Restaurant marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/wellness",
+          "text": "Wellness"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform",
+          "text": "B2C CRM overview"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai",
+          "text": "Klaviyo AI (K:AI)"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/marketing-automation",
+          "text": "Klaviyo Marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-service",
+          "text": "Klaviyo Service"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/analytics",
+          "text": "Klaviyo Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-data-platform",
+          "text": "Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare",
+          "text": "Klaviyo vs. Klaviyo alternatives"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-mailchimp",
+          "text": "Klaviyo vs. Mailchimp"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-postscript",
+          "text": "Klaviyo vs. Postscript"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-attentive",
+          "text": "Klaviyo vs. Attentive"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-salesforce-marketing-cloud",
+          "text": "Klaviyo vs. Salesforce"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-listrak",
+          "text": "Klaviyo vs. Listrak"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/omnichannel",
+          "text": "Omnichannel marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/email-marketing",
+          "text": "Email marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing",
+          "text": "SMS marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing/rcs",
+          "text": "RCS for Business"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/mobile-app-marketing",
+          "text": "Mobile app marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/whatsapp",
+          "text": "WhatsApp marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/social",
+          "text": "Social marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources",
+          "text": "Marketing resources"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources/marketing-campaign-calendar",
+          "text": "Marketing campaign calendar"
+        },
+        {
+          "href": "https://www.klaviyo.com/glossary",
+          "text": "Marketing glossary"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/email-subject-line-generator",
+          "text": "Subject line generator"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/roi-calculator",
+          "text": "ROI calculator"
+        },
+        {
+          "href": "https://www.klaviyo.com/customers",
+          "text": "Case studies"
+        },
+        {
+          "href": "https://www.klaviyo.com/composer",
+          "text": "Composer Beta"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/marketing-agent",
+          "text": "Marketing Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/customer-agent",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/customer-experience-hub",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/helpdesk",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/marketing-analytics",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/advanced-cdp",
+          "text": "Advanced Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/web-forms",
+          "text": "Web forms"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/email-templates",
+          "text": "Email templates"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/portfolio",
+          "text": "Portfolio"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform-integrations",
+          "text": "Apps and Integrations"
+        },
+        {
+          "href": "https://www.klaviyo.com/features",
+          "text": "Features"
+        },
+        {
+          "href": "https://www.klaviyo.com/whats-new",
+          "text": "What's new"
+        },
+        {
+          "href": "https://www.klaviyo.com/events",
+          "text": "Events"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help Center"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us",
+          "text": "Academy"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Community"
+        },
+        {
+          "href": "https://www.facebook.com/Klaviyo/",
+          "text": "Facebook"
+        },
+        {
+          "href": "https://twitter.com/klaviyo/",
+          "text": "Twitter"
+        },
+        {
+          "href": "https://www.linkedin.com/company/klaviyo/",
+          "text": "LinkedIn"
+        },
+        {
+          "href": "https://www.instagram.com/klaviyo/",
+          "text": "Instagram"
+        },
+        {
+          "href": "https://www.klaviyo.com/sitemap",
+          "text": "Site Map"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal",
+          "text": "Terms and Privacy"
+        },
+        {
+          "href": "https://www.klaviyo.com/security",
+          "text": "Security"
+        },
+        {
+          "href": "https://www.klaviyo.com/trust",
+          "text": "Trust"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal/intellectual-property-notices",
+          "text": "Intellectual Property Notices"
+        }
+      ],
+      "headings": [
+        {
+          "level": 1,
+          "id": "",
+          "text": "Troubleshoot SSO and SCIM errors"
+        },
+        {
+          "level": 2,
+          "id": "h_01HWB7FCYQ1K05R97TMXK1WAJ0",
+          "text": "You will learn"
+        },
+        {
+          "level": 2,
+          "id": "h_01HWB7FCYQC3NZXDX2WPJNHJHM",
+          "text": "List of errors and how to fix them"
+        },
+        {
+          "level": 3,
+          "id": "h_01HWB7FCYRYSVR147170MG5BEB",
+          "text": "SSO configuration errors"
+        },
+        {
+          "level": 2,
+          "id": "h_01HWB7FCYRQRGCSX8W1210EA1A",
+          "text": "Other troubleshooting tips"
+        },
+        {
+          "level": 2,
+          "id": "additional-resources",
+          "text": "Additional resources"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "Explore more from Klaviyo"
+        }
+      ]
+    }
+  },
+  "rendered_page": {
+    "status": "fetched",
+    "error": ""
+  }
+}

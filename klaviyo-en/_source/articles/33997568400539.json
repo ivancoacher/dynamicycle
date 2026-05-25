@@ -1,0 +1,832 @@
+{
+  "captured_at": "2026-05-23T16:14:43Z",
+  "article": {
+    "id": 33997568400539,
+    "url": "https://klaviyo.zendesk.com/api/v2/help_center/en-us/articles/33997568400539.json",
+    "html_url": "https://klaviyo.zendesk.com/hc/en-us/articles/33997568400539-How-enable-multi-brand-support-for-Gorgias",
+    "author_id": 409167690492,
+    "comments_disabled": true,
+    "draft": false,
+    "promoted": false,
+    "position": 0,
+    "vote_sum": 0,
+    "vote_count": 0,
+    "section_id": 49375230792219,
+    "created_at": "2025-02-13T17:44:19Z",
+    "updated_at": "2026-04-21T13:56:49Z",
+    "name": "How enable multi-brand support for Gorgias",
+    "title": "How enable multi-brand support for Gorgias",
+    "source_locale": "en-us",
+    "locale": "en-us",
+    "outdated": false,
+    "outdated_locales": [],
+    "edited_at": "2026-04-17T00:55:55Z",
+    "user_segment_id": null,
+    "permission_group_id": 146372,
+    "content_tag_ids": [],
+    "label_names": [],
+    "body": "<p>Learn how enable multi-brand support for Klaviyo's Gorgias integration, if you integrated Klaviyo and Gorgias before Klaviyo introduced support for multiple Gorgias brands. </p>\n<p>Tickets, SMS messages, WhatsApp messages and reviews can now be synced on a per-brand basis. If you manage multiple brands within one Gorgias account, syncing one Gorgias brand per Klaviyo account makes it easy to use your ticket data and organize your SMS and WhatsApp conversations. </p>\n<p>Enabling multi-brand support requires 4 steps:</p>\n<ol>\n<li>(Optional) Remove existing “incorrect” Gorgias profiles from Klaviyo</li>\n<li>Create rules in Gorgias to tag tickets by brand</li>\n<li>(Optional) Create views in Gorgias based on the brand tag </li>\n<li>Update your Gorgias integration settings</li>\n</ol>\n<p>Looking to integrate for the first time? Head to <a href=\"https://help.klaviyo.com/hc/en-us/articles/4408023789083\">Getting started with Gorgias</a>.</p>\n<h2 id=\"h_01JX0K6WW7EBQ1Z295WYXHJHY5\">Before you begin</h2>\n<p>Please note that when you update your Gorgias integration to enable multi-brand support, historical data previously synced through the integration will remain in your account, unless you choose to manually remove Klaviyo profiles. </p>\n<h2 id=\"h_01JX0K6WW82W17FT0E4BKQKN04\">(Optional) Remove Gorgias profiles from Klaviyo</h2>\n<p>If you want to now associate your Klaviyo account with a specific Gorgias brand, you may want to remove Gorgias profiles previously synced through the integration. </p>\n<p>Since there is no brand associated with these older profiles, profiles from specific brands cannot be precisely deleted. Instead, we recommend deleting profiles that synced through your Gorgias integration but did not have any interactions with the ecommerce site associated with your Klaviyo account. These profiles are likely to have been synced from the “wrong” brand(s). </p>\n<p>To do this, we recommend creating a segment of these profiles and then deleting it. This should be done before you update your Gorgias integration.</p>\n<p>To create the segment:</p>\n<ol>\n<ol>\n<li>What someone has done or not done &gt; Opened Ticket (Gorgias) &gt; at least once &gt; over all time AND</li>\n<li>What someone has done or or not done &gt; Viewed Product &gt; zero times &gt; over all time AND</li>\n<li>What someone has done or or not done &gt; Checkout Started &gt; zero times &gt; over all time AND</li>\n<li>What someone has done or or not done &gt; Placed Order &gt; zero times &gt; over all time AND</li>\n<li>What someone has done or or not done &gt; Subscribed to List (Klaviyo) &gt; zero times &gt; over all time</li>\n</ol>\n<li>In Klaviyo, navigate to <strong>Audience &gt; Lists &amp; segments</strong>. </li>\n<li>Select <strong>Create New &gt; Create segment</strong>.</li>\n<li>Name your segment and select any tags. </li>\n<li>Add the following segment conditions, using events synced from your ecommerce platform:</li>\n<li>You can also add conditions for any other applicable events in your account, specifying that a profile has not tracked them.</li>\n<li>Click <strong>Create segment</strong>.</li>\n<li>Then, delete the segment you created above by following our <a href=\"https://help.klaviyo.com/hc/en-us/articles/24312135764251#h_01HT5F82SYT68E2X2Z68DC78RR\">bulk deleting instructions</a>. </li>\n</ol>\n<h2 id=\"h_01JX0K6WW8T7Y96VQACADDYX2S\">Create rules in Gorgias to tag tickets by brand</h2>\n<p>In Gorgias, for each brand, you’ll need to create a rule that looks at the email the user is writing in to, and then tags the ticket with the appropriate brand:</p>\n<ol>\n<ol>\n<li>WHEN &gt; TICKET CREATED &gt; THEN</li>\n<li>IF &gt; message integration &gt; IS &gt; [Brand-specific email address]</li>\n<li>THEN &gt; ADD TAGS &gt; [Brand-specific tag]<br>\n\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/37720714482587\" alt=\"\">\n</li>\n</ol>\n<li>In your Gorgias settings, select <strong>Rules </strong>(found under <em>Productivity</em>). </li>\n<li>Add a new rule.</li>\n<li>Name your rule something descriptive.</li>\n<li>Add the following rule conditions:</li>\n<li>Make sure <em>Enable rule</em> is set to <strong>On</strong>.</li>\n<li>Click <strong>Create Rule</strong>.</li>\n</ol>\n<p>Repeat this process for each brand that you want to integrate with a separate Klaviyo account. </p>\n<h2 id=\"h_01JX0K94JPG8BSQSJNCQMMMBK3\">(Optional) Create views in Gorgias based on the brand tag</h2>\n<p>After setting up rules to auto-tag tickets, we recommend creating a view in Gorgias for each brand, containing all of the tickets tagged with the brand name:</p>\n<ol>\n<li>In Gorgias, create a new view.</li>\n<li>Add the following filter: Tags &gt; Contains all of &gt; [Brand tag]<br>\n</li>\n</ol>\n<p><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/37720796406427\" alt=\"\"></p>\n<p>Repeat this process for each brand that you want to integrate with a separate Klaviyo account. </p>\n<h2 id=\"h_01JX0K6WW8J56ZVWYPV42X3EZS\">Update your Gorgias integration settings</h2>\n<p>To update your Gorgias integration settings and enable multi-brand support in a given Klaviyo account:</p>\n<ol>\n<li>In Klaviyo, select the <strong>Integrations</strong> tab.</li>\n<li>Select <em>Gorgias</em> from the list of enabled integrations.</li>\n<li>We recommend connecting one Gorgias brand per Klaviyo account. Under <em>Tickets</em>, select the tag corresponding to the Gorgias brand that you want to use with this Klaviyo account and sync new tickets to Klaviyo for.<br>\n\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/37720914786459\" alt=\"\" width=\"595\" height=\"152\">\n</li>\n<li>If you’re using SMS conversations: Under <em>Conversations</em>, we recommend adding a tag corresponding to the Gorgias brand you want to use with this Klaviyo account.<br>\n\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/37720900025883\" alt=\"\" width=\"599\" height=\"174\">\n</li>\n<li>Check the box to <em>Sync WhatsApp conversations</em> to use WhatsApp integration functionality.\n<ol>\n<li>Support agents can also use <a href=\"https://help.klaviyo.com/hc/en-us/articles/40116778911259\">a template to extend the WhatsApp conversation</a>, ensuring they can continue engaging with the recipient beyond the 24-hour service window.<br>\n\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/41259966180635\" alt=\"Conversations box showing the option to sync WhatsApp conversations\" width=\"1598\" height=\"366\">\n</li>\n</ol>\n</li>\n<li>If you’re using reviews: Under <em>Reviews</em>, we recommend adding a tag corresponding to the Gorgias brand you want to use with this Klaviyo account.<br>\n\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/37720900027291\" alt=\"\" width=\"601\" height=\"202\">\n</li>\n<li>When you’re done, click <strong>Update settings</strong>.</li>\n</ol>\n<p>You’ll need to integrate with Gorgias and configure the above brand-related settings for each Klaviyo account that you want to connect with a Gorgias brand. </p>",
+    "user_segment_ids": []
+  },
+  "normalized": {
+    "id": "33997568400539",
+    "title": "How enable multi-brand support for Gorgias",
+    "source_url": "https://help.klaviyo.com/hc/en-us/articles/33997568400539-How-enable-multi-brand-support-for-Gorgias",
+    "section_id": 49375230792219,
+    "section": "Gorgias",
+    "category_id": 115000032731,
+    "category": "Integrations",
+    "category_slug": "integrations",
+    "klaviyo_updated": "2026-04-21T13:56:49Z",
+    "created_at": "2025-02-13T17:44:19Z",
+    "draft": false,
+    "promoted": false,
+    "position": 0,
+    "label_names": []
+  },
+  "files": {
+    "body_html": "_source/articles/33997568400539.body.html",
+    "rendered_html": "_source/rendered/33997568400539.html"
+  },
+  "assets": {
+    "api_body": {
+      "images": [
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/37720714482587",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/37720796406427",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/37720914786459",
+          "alt": "",
+          "width": "595",
+          "height": "152"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/37720900025883",
+          "alt": "",
+          "width": "599",
+          "height": "174"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/41259966180635",
+          "alt": "Conversations box showing the option to sync WhatsApp conversations",
+          "width": "1598",
+          "height": "366"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/37720900027291",
+          "alt": "",
+          "width": "601",
+          "height": "202"
+        }
+      ],
+      "links": [
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4408023789083",
+          "text": "Getting started with Gorgias"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/24312135764251#h_01HT5F82SYT68E2X2Z68DC78RR",
+          "text": "bulk deleting instructions"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/40116778911259",
+          "text": "a template to extend the WhatsApp conversation"
+        }
+      ],
+      "headings": [
+        {
+          "level": 2,
+          "id": "h_01JX0K6WW7EBQ1Z295WYXHJHY5",
+          "text": "Before you begin"
+        },
+        {
+          "level": 2,
+          "id": "h_01JX0K6WW82W17FT0E4BKQKN04",
+          "text": "(Optional) Remove Gorgias profiles from Klaviyo"
+        },
+        {
+          "level": 2,
+          "id": "h_01JX0K6WW8T7Y96VQACADDYX2S",
+          "text": "Create rules in Gorgias to tag tickets by brand"
+        },
+        {
+          "level": 2,
+          "id": "h_01JX0K94JPG8BSQSJNCQMMMBK3",
+          "text": "(Optional) Create views in Gorgias based on the brand tag"
+        },
+        {
+          "level": 2,
+          "id": "h_01JX0K6WW8J56ZVWYPV42X3EZS",
+          "text": "Update your Gorgias integration settings"
+        }
+      ]
+    },
+    "rendered_page": {
+      "images": [
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/7ff492c2b417b7ecfe572f839a8a81398693c1f7-1920x1080.webp",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/a8c5a6613079f35bb0f98bf4a6998ffbd93a34cb-1522x1070.png",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/2fbaccefdea6c567c600f24891f5a31b8482531c-2468x1050.png",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/863141648b5c705ddaf625bff916aff3903d2d13-1522x390.png?w=595",
+          "alt": "",
+          "width": "595",
+          "height": "152"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/2b4c86f36916cf98abd0926ddab9706bd64675f7-1522x442.png?w=599",
+          "alt": "",
+          "width": "599",
+          "height": "174"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/f5d9532ad316723426fada1eab5ed4058294eaea-1598x366.png?w=1598",
+          "alt": "Conversations box showing the option to sync WhatsApp conversations",
+          "width": "1598",
+          "height": "366"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/38e45860f39cc4a7c94b3b569f2eff2098644cd5-1320x444.png?w=601",
+          "alt": "",
+          "width": "601",
+          "height": "202"
+        }
+      ],
+      "links": [
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/33997568400539-How-enable-multi-brand-support-for-Gorgias#site-content",
+          "text": "Skip to main content"
+        },
+        {
+          "href": "https://www.klaviyo.com",
+          "text": "Home"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center"
+        },
+        {
+          "href": "https://www.klaviyo.com/enterprise",
+          "text": "Enterprise"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Partners"
+        },
+        {
+          "href": "https://www.klaviyo.com/careers",
+          "text": "Careers"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": "Log in"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": ""
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center Find step-by-step instructions and troubleshooting solutions in our knowledge base."
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000032731",
+          "text": "Integrations"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000312411",
+          "text": "Flows"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867867",
+          "text": "Audience"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867667",
+          "text": "Campaigns"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/360000190711",
+          "text": "Sign-up forms"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000873988",
+          "text": "Deliverability & compliance"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/29173800271259",
+          "text": "SMS"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/16638219724187",
+          "text": "Reviews"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/18073014919195",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/34141283979931",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/37659126754075",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/33948021740315",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/39746685522331",
+          "text": "WhatsApp"
+        },
+        {
+          "href": "https://academy.klaviyo.com",
+          "text": "Klaviyo Academy Expert training and education to help you succeed with Klaviyo, and beyond."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Quick+guide&resource=academy_courses",
+          "text": "Quick guides Learn marketing strategies and concepts in 15 minutes or less."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Course&resource=academy_courses",
+          "text": "Courses Master key marketing topics through structured lessons and exams."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/best-practices",
+          "text": "Best practices Discover top product and marketing strategies for your business."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/learning-paths",
+          "text": "Learning paths Complete curated learning journeys tailored to your marketing goals."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses",
+          "text": "Explore all resources"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Live+training&resource=academy_courses",
+          "text": "Live trainings Build confidence through hands-on interactive workshops and thought-provoking strategy sessions."
+        },
+        {
+          "href": "https://www.bigmarker.com/klaviyo-customer-education/Office-hours-Getting-started-with-Klaviyo",
+          "text": "Live office hours Join a strategic discussion where you can ask questions and get answers in real-time."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/private-live-training",
+          "text": "1:1 Live training Book a private training session with an expert to jumpstart your platform knowledge and confidence."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/credentials",
+          "text": "Klaviyo credentials Dig deeper into select topics and showcase your expertise with a final exam to earn a certificate and digital badge."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/certificates/klaviyo-practitioner-certificate",
+          "text": "Klaviyo practitioner certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/deliverability-certificate",
+          "text": "Deliverability certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/developer-certificate",
+          "text": "Klaviyo developer certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses&select=Certificate",
+          "text": "See all certificates"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Klaviyo Community Join our thriving community network to connect with brands like yours—online and in person."
+        },
+        {
+          "href": "https://community.klaviyo.com/topic/new",
+          "text": "Ask a question Post a question and get thoughtful answers from Klaviyo powerusers."
+        },
+        {
+          "href": "https://community.klaviyo.com/p/roadmap",
+          "text": "Product roadmap"
+        },
+        {
+          "href": "https://community.klaviyo.com/search/activity/recent",
+          "text": "Recent threads"
+        },
+        {
+          "href": "https://community.klaviyo.com/p/champions",
+          "text": "Meet the Champions"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups",
+          "text": "Browse all groups Your people are waiting. New ideas and connections are a click away."
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/developer-group-64",
+          "text": "Developer group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/entrepreneur-user-group-118",
+          "text": "Entrepreneur group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/woo-user-group-87",
+          "text": "WooCommerce group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/new-york-meetup-chapter-82",
+          "text": "New York City"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/los-angeles-meetup-chapter-83",
+          "text": "Los Angeles"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/austin-meetup-chapter-85",
+          "text": "Austin"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/san-diego-meetup-chapter-86",
+          "text": "San Diego"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/amsterdam-meetup-chapter-84",
+          "text": "Amsterdam"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Klaviyo Developers Access API documentation and developer guides to help you build with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/get_started",
+          "text": "Get started Access key resources and a step-by-step checklist for how to start developing with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/build_your_integration",
+          "text": "Grow your app's reach Learn how to join our ecosystem and get your app listed on our marketplace."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/developer-tools",
+          "text": "Developer tools Generate sample data, monitor your API usage, and access our Postman collections."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/reference/api_overview",
+          "text": "API reference Browse our full catalog of API docs."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/changelog_",
+          "text": "Changelog"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/api_versioning_and_deprecation_policy",
+          "text": "Versioning & deprecation policy"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/rate_limits_and_error_handling",
+          "text": "Rate limits & error handling"
+        },
+        {
+          "href": "https://youtube.com/playlist?list=PLHkNfHgtxcUanrkMnKPdkRzuWU7MGv_xM&si=pkG-KH7IT_TUHOGC",
+          "text": "API tutorials on YouTube Subscribe to our Klaviyo API Tutorials playlist for easy access to step-by-step developer walkthroughs."
+        },
+        {
+          "href": "https://www.klaviyo.com/contact-us",
+          "text": "Contact us"
+        },
+        {
+          "href": "https://www.klaviyo.com/sign-up",
+          "text": "Sign up"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": "Search"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/33997568400539",
+          "text": "United States - EN"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/de-de/articles/33997568400539",
+          "text": "Deutschland - DE"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-es/articles/33997568400539",
+          "text": "España - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-mx/articles/33997568400539",
+          "text": "México - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/fr-fr/articles/33997568400539",
+          "text": "France - FR"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/it-it/articles/33997568400539",
+          "text": "Italia - IT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/ko-kr/articles/33997568400539",
+          "text": "한국 - KO"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/nl-nl/articles/33997568400539",
+          "text": "Nederland - NL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pl-pl/articles/33997568400539",
+          "text": "Polska - PL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pt-br/articles/33997568400539",
+          "text": "Brasil - PT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/sv-se/articles/33997568400539",
+          "text": "Sverige - SV"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/14515594814619",
+          "text": "Support and help desk"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/49375230792219",
+          "text": "Gorgias"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/33997568400539-How-enable-multi-brand-support-for-Gorgias#h_01JX0K6WW7EBQ1Z295WYXHJHY5",
+          "text": "Before you begin"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/33997568400539-How-enable-multi-brand-support-for-Gorgias#h_01JX0K6WW82W17FT0E4BKQKN04",
+          "text": "(Optional) Remove Gorgias profiles from Klaviyo"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/33997568400539-How-enable-multi-brand-support-for-Gorgias#h_01JX0K6WW8T7Y96VQACADDYX2S",
+          "text": "Create rules in Gorgias to tag tickets by brand"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/33997568400539-How-enable-multi-brand-support-for-Gorgias#h_01JX0K94JPG8BSQSJNCQMMMBK3",
+          "text": "(Optional) Create views in Gorgias based on the brand tag"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/33997568400539-How-enable-multi-brand-support-for-Gorgias#h_01JX0K6WW8J56ZVWYPV42X3EZS",
+          "text": "Update your Gorgias integration settings"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/33997568400539-How-enable-multi-brand-support-for-Gorgias#additional-resources",
+          "text": "Additional resources"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4408023789083",
+          "text": "Getting started with Gorgias"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/24312135764251#h_01HT5F82SYT68E2X2Z68DC78RR",
+          "text": "bulk deleting instructions"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/40116778911259",
+          "text": "a template to extend the WhatsApp conversation"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360059002271",
+          "text": "Guide to Klaviyo Helpdesk"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115001002272",
+          "text": "Learn how to contact support"
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": ""
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": "Visit Community"
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": ""
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": "Hire a partner"
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/about",
+          "text": "About Klaviyo"
+        },
+        {
+          "href": "https://www.klaviyo.com/newsroom",
+          "text": "Newsroom"
+        },
+        {
+          "href": "https://investors.klaviyo.com/overview/default.aspx",
+          "text": "Investor relations"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Agency and tech partners"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Developers"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/retail",
+          "text": "Retail and ecommerce"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/restaurants",
+          "text": "Restaurant marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/wellness",
+          "text": "Wellness"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform",
+          "text": "B2C CRM overview"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai",
+          "text": "Klaviyo AI (K:AI)"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/marketing-automation",
+          "text": "Klaviyo Marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-service",
+          "text": "Klaviyo Service"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/analytics",
+          "text": "Klaviyo Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-data-platform",
+          "text": "Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare",
+          "text": "Klaviyo vs. Klaviyo alternatives"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-mailchimp",
+          "text": "Klaviyo vs. Mailchimp"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-postscript",
+          "text": "Klaviyo vs. Postscript"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-attentive",
+          "text": "Klaviyo vs. Attentive"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-salesforce-marketing-cloud",
+          "text": "Klaviyo vs. Salesforce"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-listrak",
+          "text": "Klaviyo vs. Listrak"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/omnichannel",
+          "text": "Omnichannel marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/email-marketing",
+          "text": "Email marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing",
+          "text": "SMS marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing/rcs",
+          "text": "RCS for Business"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/mobile-app-marketing",
+          "text": "Mobile app marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/whatsapp",
+          "text": "WhatsApp marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/social",
+          "text": "Social marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources",
+          "text": "Marketing resources"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources/marketing-campaign-calendar",
+          "text": "Marketing campaign calendar"
+        },
+        {
+          "href": "https://www.klaviyo.com/glossary",
+          "text": "Marketing glossary"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/email-subject-line-generator",
+          "text": "Subject line generator"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/roi-calculator",
+          "text": "ROI calculator"
+        },
+        {
+          "href": "https://www.klaviyo.com/customers",
+          "text": "Case studies"
+        },
+        {
+          "href": "https://www.klaviyo.com/composer",
+          "text": "Composer Beta"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/marketing-agent",
+          "text": "Marketing Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/customer-agent",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/customer-experience-hub",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/helpdesk",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/marketing-analytics",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/advanced-cdp",
+          "text": "Advanced Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/web-forms",
+          "text": "Web forms"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/email-templates",
+          "text": "Email templates"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/portfolio",
+          "text": "Portfolio"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform-integrations",
+          "text": "Apps and Integrations"
+        },
+        {
+          "href": "https://www.klaviyo.com/features",
+          "text": "Features"
+        },
+        {
+          "href": "https://www.klaviyo.com/whats-new",
+          "text": "What's new"
+        },
+        {
+          "href": "https://www.klaviyo.com/events",
+          "text": "Events"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help Center"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us",
+          "text": "Academy"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Community"
+        },
+        {
+          "href": "https://www.facebook.com/Klaviyo/",
+          "text": "Facebook"
+        },
+        {
+          "href": "https://twitter.com/klaviyo/",
+          "text": "Twitter"
+        },
+        {
+          "href": "https://www.linkedin.com/company/klaviyo/",
+          "text": "LinkedIn"
+        },
+        {
+          "href": "https://www.instagram.com/klaviyo/",
+          "text": "Instagram"
+        },
+        {
+          "href": "https://www.klaviyo.com/sitemap",
+          "text": "Site Map"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal",
+          "text": "Terms and Privacy"
+        },
+        {
+          "href": "https://www.klaviyo.com/security",
+          "text": "Security"
+        },
+        {
+          "href": "https://www.klaviyo.com/trust",
+          "text": "Trust"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal/intellectual-property-notices",
+          "text": "Intellectual Property Notices"
+        }
+      ],
+      "headings": [
+        {
+          "level": 1,
+          "id": "",
+          "text": "How enable multi-brand support for Gorgias"
+        },
+        {
+          "level": 2,
+          "id": "h_01JX0K6WW7EBQ1Z295WYXHJHY5",
+          "text": "Before you begin"
+        },
+        {
+          "level": 2,
+          "id": "h_01JX0K6WW82W17FT0E4BKQKN04",
+          "text": "(Optional) Remove Gorgias profiles from Klaviyo"
+        },
+        {
+          "level": 2,
+          "id": "h_01JX0K6WW8T7Y96VQACADDYX2S",
+          "text": "Create rules in Gorgias to tag tickets by brand"
+        },
+        {
+          "level": 2,
+          "id": "h_01JX0K94JPG8BSQSJNCQMMMBK3",
+          "text": "(Optional) Create views in Gorgias based on the brand tag"
+        },
+        {
+          "level": 2,
+          "id": "h_01JX0K6WW8J56ZVWYPV42X3EZS",
+          "text": "Update your Gorgias integration settings"
+        },
+        {
+          "level": 2,
+          "id": "additional-resources",
+          "text": "Additional resources"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "Explore more from Klaviyo"
+        }
+      ]
+    }
+  },
+  "rendered_page": {
+    "status": "fetched",
+    "error": ""
+  }
+}

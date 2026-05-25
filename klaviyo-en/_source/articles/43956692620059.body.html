@@ -1,0 +1,82 @@
+<p>Adding a specific "Favorites" icon to your site's navigation bar ("header") drives more engagement by reducing friction for your customers to find their favorites within Customer Hub. By giving shoppers a dedicated launch point for their saved items, you encourage them to build bigger baskets and return to your store more often.</p>
+<p>You can implement this as an <strong>icon</strong> (e.g., a heart), a simple <strong>text link</strong> (e.g., "Favorites"), or a <strong>button</strong>. This guide covers how to insert the necessary code into your site's header using Shopify's Liquid code.</p>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/43956692602011" alt="" width="1042" height="362"></p>
+<p>This guide covers how to upload a heart icon to your theme assets and insert the code link into your site's header using Shopify's Liquid code.</p>
+<blockquote>
+<strong>Notice</strong> This process involves editing your Shopify theme code. If you are not comfortable writing code or do not have a developer on your team, we recommend reaching out to a <a href="https://www.google.com/search?q=https://connect.klaviyo.com/directory">Klaviyo Partner</a> for assistance. Klaviyo support is unable to troubleshoot custom code implementations.</blockquote>
+<h2 id="h_01KBGBE11TW3NDEB8NY8QT68WF">Before you begin</h2>
+<p>We strongly recommend duplicating your live theme before making changes. This allows you to test the new icon in a safe environment without affecting your live store.</p>
+<ol>
+<li>In Shopify, go to <strong>Online Store &gt; Themes</strong>.</li>
+<li>Click the <strong>three dots menu (...)</strong> next to your live theme.</li>
+<li>Select <strong>Duplicate</strong>.</li>
+</ol>
+<h2 id="h_01KBGBE11W7E0G56NZ1FPHF5M5">Step 1: Prepare your assets (if you want to use an icon)</h2>
+<p>First, upload the icon file that will serve as the button. Using an SVG file is best because it scales to any screen size without losing quality and can inherit your theme's colors.</p>
+<ol>
+<li>You need to find an icon you want to use. This can be any icon, but we recommend using an SVG to avoid pixelation. You can download a standard (MIT licensed) version here: <a href="https://raw.githubusercontent.com/tailwindlabs/heroicons/refs/heads/master/src/24/outline/heart.svg"><strong>Heroicons heart.svg</strong></a>.</li>
+<li>In your Shopify Admin, navigate to <strong>Online Store &gt; Themes</strong>.</li>
+<li>Find your theme and click the <strong>three dots menu (...) &gt; Edit code</strong>.</li>
+<li>In the left sidebar, scroll down to the <strong>Assets</strong> folder and click <strong>Add a new asset</strong>.</li>
+<li>Upload your icon file.</li>
+</ol>
+<h2 id="h_01KBGBE11Z54TAQCSTQG501Q7J">Step 2: Insert the header (top navigation bar) link</h2>
+<p>Next, add the code snippet that displays the icon and links it to the Customer Hub.</p>
+<ol>
+<li>In the theme code editor, locate the file that controls your header.<br>
+<ul>
+<ul>
+<li>
+<strong>Online Store 2.0 themes (e.g., Dawn):</strong> Search for <code>sections/header.liquid</code>.</li>
+<li>
+<strong>Vintage themes:</strong> Search for <code>snippets/header-icons.liquid</code> or <code>header-bar.liquid</code>.</li>
+</ul>
+</ul>
+</li>
+<li>
+<strong>Find the insertion point:</strong> Press <code>Ctrl+F</code> (or <code>Cmd+F</code> on Mac) and search for the word <code>cart</code> or <code>account</code>. You want to paste your new code inside the same container (usually a <code>&lt;div&gt;</code> or <code>&lt;ul&gt;</code>) that holds these existing icons.</li>
+<li>Paste <strong>one</strong> of the code options below where you want the link to appear (e.g., right before the Cart icon).</li>
+</ol>
+<h3 id="h_01KBGBXT83GK6JG8T073RKN4JC"></h3>
+<h3 id="h_01KBGBXYGA33J6CFV5FDPK78R0">Option A: The Icon Link</h3>
+<p>Use this code if you completed Step 1 and want to display a heart icon, assuming it's named icon-heart.svg in our example: </p>
+<pre><code class="language-text">&lt;a href="#k-hub/favorites"
+   id="favorites-icon-bubble"
+   aria-label="Open Favorites"
+   title="Favorites"
+   style="display:flex;align-items:center;justify-content:center;height:4.4rem;width:4.4rem;"&gt;
+  &lt;span style="height:20px;width:20px"&gt;
+    {{ 'icon-heart.svg' | inline_asset_content }}
+  &lt;/span&gt;
+&lt;/a&gt;
+</code></pre>
+<h3 id="h_01KBGBXT8637HJ1AWHF8ZYPTB8">Option B: Text Link or Button</h3>
+<p>Use this code if you prefer a text link or a button. You do not need to upload any assets for this.</p>
+<p><strong>For a simple text link:</strong></p>
+<pre><code class="language-text">&lt;a href="#k-hub/favorites" class="header__menu-item header__menu-item--list" style="text-decoration: none;"&gt;
+  Favorites
+&lt;/a&gt;
+</code></pre>
+<p><strong>For a button:</strong></p>
+<pre><code class="language-text">&lt;a href="#k-hub/favorites" class="button button--primary"&gt;
+  Favorites
+&lt;/a&gt;
+</code></pre>
+<ol>
+<li>Click <strong>Save</strong>.</li>
+</ol>
+<blockquote>
+<strong>Tip: Matching your Theme's Style</strong> If your theme uses a specific CSS class for header icons (e.g., <code>header__icon</code> or <code>icon-link</code>), you can replace the inline <code>style=</code> attribute in the code above with that class (e.g., <code>class="header__icon"</code>). This ensures the spacing and hover effects match your other buttons perfectly.</blockquote>
+<h2 id="h_01KBGBE124ZKA4F8PF4PJKMVH8">Outcome</h2>
+<p>Once saved, open your store in a <strong>new Incognito/Private window</strong> to bypass any browser caching. You should see the heart icon in your navigation bar. Clicking this icon will now open the <strong>Favorites</strong> tab within the Customer Hub.</p>
+<p></p>
+<h2 id="h_01KBGBE1256YFY97FS3DH7S9VV">Troubleshooting</h2>
+<p>If the icon does not appear or looks incorrect:</p>
+<ul>
+<li>
+<strong>Icon is a broken image:</strong> Ensure you uploaded the file to the <strong>Assets</strong> folder and named it exactly <code>icon-heart.svg</code>. The filenames are case-sensitive.</li>
+<li>
+<strong>Icon is misaligned:</strong> You may need to adjust the <code>height</code> and <code>width</code> values in the code snippet's <code>style</code> attribute to match your theme's navigation bar height.</li>
+<li>
+<strong>Changes not showing:</strong> Shopify themes cache aggressively. Try previewing the theme in an Incognito window or appending <code>?preview_theme_id=</code> to your URL if working on a draft theme.</li>
+</ul>

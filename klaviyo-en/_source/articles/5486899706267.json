@@ -1,0 +1,811 @@
+{
+  "captured_at": "2026-05-23T16:17:55Z",
+  "article": {
+    "id": 5486899706267,
+    "url": "https://klaviyo.zendesk.com/api/v2/help_center/en-us/articles/5486899706267.json",
+    "html_url": "https://klaviyo.zendesk.com/hc/en-us/articles/5486899706267-How-to-integrate-a-headless-Magento-2-setup",
+    "author_id": 396946107652,
+    "comments_disabled": true,
+    "draft": false,
+    "promoted": false,
+    "position": 4,
+    "vote_sum": 1,
+    "vote_count": 13,
+    "section_id": 49375848540187,
+    "created_at": "2022-04-20T14:45:18Z",
+    "updated_at": "2026-04-21T13:55:03Z",
+    "name": "How to integrate a headless Magento 2 setup",
+    "title": "How to integrate a headless Magento 2 setup",
+    "source_locale": "en-us",
+    "locale": "en-us",
+    "outdated": false,
+    "outdated_locales": [],
+    "edited_at": "2026-04-17T01:03:04Z",
+    "user_segment_id": null,
+    "permission_group_id": 146372,
+    "content_tag_ids": [],
+    "label_names": [],
+    "body": "<h2 id=\"h_01HT083VS6VHVVF4FF0ZYRNBY3\">You will learn</h2>\n<p>Learn about how to integrate Klaviyo with a headless Magento 2 setup. If you are using Magento 2 to power your ecommerce store’s backend, but a different framework for the frontend (such as React.js, Angular, etc.), then the following information is relevant for you.</p>\n<p>This integration requires 3 steps:</p>\n<ol>\n<li>Connect your Magento 2 store via Klaviyo’s native integration to sync order, catalog, and subscriber data.</li>\n<li>Manually add code snippets to your site to enable onsite tracking functionality.</li>\n<li>(If you are using a custom URL structure for your product catalog) Add rewrite rules for product URLS.</li>\n</ol>\n<h2 id=\"h_01HT09V281Z6ZSRENRPW62RR9E\">Connect Klaviyo's native integration</h2>\n<p>First, connect your Magento 2 store via Klaviyo’s native integration to sync order, catalog, and subscriber data by <a href=\"https://help.klaviyo.com/hc/en-us/articles/115005254348\">following the steps in Getting started with Magento 2</a>.</p>\n<p>A large part of Klaviyo’s Magento 2 integration relies on fetching data via Magento's server side API. Typically, this isn’t affected by using a decoupled frontend, and the native integration will track the following events without further setup:</p>\n<ul>\n<li>Placed Order</li>\n<li>Fulfilled Order</li>\n<li>Fulfilled Shipment</li>\n<li>Canceled Order</li>\n<li>Refunded Order</li>\n<li>Started Checkout<br>\n<p>Additionally, please note that:</p>\n</li>\n<li>\n<em>Started Checkout</em> events will sync provided you are still creating quotes and assigning an email address to them when the user checks out.</li>\n<li>If you’ve enabled syncing customers subscribed to the Magento 2 newsletter table, the sync should work as anticipated.</li>\n</ul>\n<h2 id=\"h_01HT083VS6Z1QJCS28VBS4CZ71\">Manually add code snippets</h2>\n<p>If you are using a headless setup, you must manually add Klaviyo’s “Active on Site” JavaScript (also known as <em>Klaviyo.js</em>) to your site. Klaviyo.js tracks when users are active on your site and enables Klaviyo forms. </p>\n<p>We also provide snippets that allow you to do the following:</p>\n<ul>\n<li>\n<strong>Viewed Product tracking</strong><br>\nTrack when a user views specific products on your site (which can be leveraged in a <a href=\"https://help.klaviyo.com/hc/en-us/articles/115002775252-Create-a-Browse-Abandonment-Flow\">browse abandonment flow</a>).</li>\n<li>\n<strong>Recently Viewed Items tracking</strong><br>\nTrack recently viewed items on a user's profile.</li>\n<li>\n<strong>Added to Cart tracking</strong><br>\nTrack when a user adds an item to their cart.</li>\n<li>\n<strong>Logged in User tracking</strong><br>\nIf you have account creation functionality, track when a user logs in.</li>\n</ul>\n<h3 id=\"h_01HT083VS66XJZFNJGBSSNPYWF\">Active on Site </h3>\n<p>Add the following Klaviyo.js snippet so that it appears on every page on your website. This will enable<em> Active on Site</em> tracking and Klaviyo forms. Make sure to replace PUBLIC_API_KEY with your <a href=\"https://help.klaviyo.com/hc/en-us/articles/115005062267-How-to-Manage-Your-Account-s-API-Keys\">Klaviyo public API key</a>.</p>\n<pre><code class=\"language-text\">&lt;script type=\"text/javascript\" async=\"\" src=\"https://static.klaviyo.com/onsite/js/PUBLIC_API_KEY/klaviyo.js\"&gt;&lt;/script&gt;</code></pre>\n<p>After adding Klaviyo.js, you'll need to load the <a href=\"https://developers.klaviyo.com/en/docs/introduction_to_the_klaviyo_object\">Klaviyo object</a> on any page where you want to add one of the following snippets (such as <em>Viewed Product</em>, <em>Added to Cart</em>, etc). The<em>klaviyo</em>object only needs to be loaded once per page.</p>\n<p>To load the <em>klaviyo</em> object, manually install the following snippet on the necessary pages:</p>\n<pre><code class=\"language-text\">&lt;script type=\"text/javascript\"&gt; !function(){if(!window.klaviyo){window._klOnsite=window._klOnsite||[];try{window.klaviyo=new Proxy({},{get:function(n,i){return\"push\"===i?function(){var n;(n=window._klOnsite).push.apply(n,arguments)}:function(){for(var n=arguments.length,o=new Array(n),w=0;w&lt;n;w++)o[w]=arguments[w];var t=\"function\"==typeof o[o.length-1]?o.pop():void 0,e=new Promise((function(n){window._klOnsite.push([i].concat(o,[function(i){t&amp;&amp;t(i),n(i)}]))}));return e}}})}catch(n){window.klaviyo=window.klaviyo||[],window.klaviyo.push=function(){var n;(n=window._klOnsite).push.apply(n,arguments)}}}}(); &lt;/script&gt;\n</code></pre>\n<h3 id=\"h_01HT083VS6E6FP84880ZT9QNB2\">Viewed Product </h3>\n<p>If you'd like to set up a <a href=\"https://help.klaviyo.com/hc/en-us/articles/115002775252-Create-a-Browse-Abandonment-Flow\">browse abandonment flow</a> or build segments based on product browsing activity, you'll need to add JavaScript event tracking for the <em>Viewed Product</em> metric. All <em>Viewed Product</em> metrics are tied to user profiles. On your product page template, add the following snippet.</p>\n<pre><code class=\"language-text\">&lt;script type=\"text/javascript\"&gt;\nvar klaviyo = window.klaviyo || [];\nvar item = {\n     \"ProductName\": item.ProductName,\n     \"ProductID\": item.ProductID,\n     \"SKU\": item.SKU,\n     \"Categories\": item.Categories,\n     \"ImageURL\": item.ImageURL,\n     \"URL\": item.URL,\n     \"Brand\": item.Brand,\n     \"Price\": item.Price,\n     \"CompareAtPrice\": item.CompareAtPrice\n };\n klaviyo.track(\"Viewed Product\", item);\n &lt;/script&gt;</code></pre>\n<p>Make sure to update the values of the JSON properties in the snippet so that they dynamically pull from the relevant information needed for that property.</p>\n<h3 id=\"h_01HT0AF57VTTJ6WJAN0Q09NPKY\">Recent Viewed Items</h3>\n<p>Additionally, there is another snippet that allows entries to be added to a visual “Recently Viewed Items” feed on the user’s profile. The following snippet can be added directly below the <em>Viewed Product</em> snippet. </p>\n<p>Make sure to replace item.___ in the snippet with whatever item object your platform uses for product properties.</p>\n<pre><code class=\"language-text\">&lt;script type=\"text/javascript\"&gt;\nvar klaviyo = window.klaviyo || [];\nklaviyo.trackViewedItem({\n     \"Title\": item.ProductName,\n     \"ItemId\": item.ProductID,\n     \"Categories\": item.Categories,\n     \"ImageUrl\": item.ImageURL,\n     \"Url\": item.URL,\n     \"Metadata\": {\n       \"Brand\": item.Brand,\n       \"Price\": item.Price,\n       \"CompareAtPrice\": item.CompareAtPrice\n     }\n   });\n &lt;/script&gt;</code></pre>\n<h3 id=\"h_01HT0B9JEYH4CRYKJ0D3Q9G4WR\">Added to Cart</h3>\n<p>If you’d like to send abandoned cart emails to visitors who add items to their cart, but don’t make it to the checkout page, you’ll want to track an <em>Added to Cart</em> metric. A customer must be identified (i.e., cookied) to track this event. Here's an example request where the cart already contained one item (Winnie the Pooh) and another item was just added to the cart (A Tale of Two Cities): </p>\n<pre><code class=\"language-text\">&lt;script type=\"text/javascript\"&gt;\nklaviyo.track(\"Added to Cart\", {\n     \"$value\": 29.98,\n     \"AddedItemProductName\": \"A Tale of Two Cities\",\n     \"AddedItemProductID\": \"1112\",\n     \"AddedItemSKU\": \"TALEOFTWO\",\n     \"AddedItemCategories\": [\"Fiction\", \"Classics\", \"Children\"],\n     \"AddedItemImageURL\": \"http://www.example.com/path/to/product/image2.png\",\n     \"AddedItemURL\": \"http://www.example.com/path/to/product2\",\n     \"AddedItemPrice\": 19.99,\n     \"AddedItemQuantity\": 1,\n     \"ItemNames\": [\"Winnie the Pooh\", \"A Tale of Two Cities\"],\n     \"CheckoutURL\": \"http://www.example.com/path/to/checkout\",\n     \"Items\": [{\n         \"ProductID\": \"1111\",\n         \"SKU\": \"WINNIEPOOH\",\n         \"ProductName\": \"Winnie the Pooh\",\n         \"Quantity\": 1,\n         \"ItemPrice\": 9.99,\n         \"RowTotal\": 9.99,\n         \"ProductURL\": \"http://www.example.com/path/to/product\",\n         \"ImageURL\": \"http://www.example.com/path/to/product/image.png\",\n         \"ProductCategories\": [\"Fiction\", \"Children\"]\n       },\n       {\n         \"ProductID\": \"1112\",\n         \"SKU\": \"TALEOFTWO\",\n         \"ProductName\": \"A Tale of Two Cities\",\n         \"Quantity\": 1,\n         \"ItemPrice\": 19.99,\n         \"RowTotal\": 19.99,\n         \"ProductURL\": \"http://www.example.com/path/to/product2\",\n         \"ImageURL\": \"http://www.example.com/path/to/product/image2.png\",\n         \"ProductCategories\": [\"Fiction\", \"Classics\"]\n       }\n     ]\n   });\n &lt;/script&gt;</code></pre>\n<h3 id=\"h_01HT083VS6TZ5T4B0XG34VDA1E\">Logged in users</h3>\n<p>If customers can create accounts on your website, you may want to add additional code to identify and track logged-in users. This code should be executed once the user has logged in.</p>\n<p>Here is an example script to get you started:</p>\n<pre><code class=\"language-text\">klaviyo.identify({\n  \"$email\" : customer.email,\n  \"$first_name\" : customer.first_name,\n  \"$last_name\" : customer.last_name\n});\n</code></pre>\n<h2 id=\"h_01HT09V281WY9GW20WFQTMPXEJ\">Add rewrite rules for product URLs</h2>\n<p>Your Magento 2 product catalog should sync normally with Klaviyo via our native integration, though if you are using a custom URL structure you will need to add some rewrite rules to your codebase.</p>\n<p>The default Magento 2 product URL follows the below structure:</p>\n<pre><code class=\"language-text\">https://[YOUR STORE]/catalog/product/view/id/[PRODUCT ID]</code></pre>\n<p>If your store is using a URL structure like:</p>\n<pre><code class=\"language-text\">https://[YOUR STORE]/products/[Product Name]</code></pre>\n<p>Then you will need to add some rewrite rules to your codebase to redirect the standard Magento 2 product links to your custom URL structure</p>",
+    "user_segment_ids": []
+  },
+  "normalized": {
+    "id": "5486899706267",
+    "title": "How to integrate a headless Magento 2 setup",
+    "source_url": "https://help.klaviyo.com/hc/en-us/articles/5486899706267-How-to-integrate-a-headless-Magento-2-setup",
+    "section_id": 49375848540187,
+    "section": "Magento 2",
+    "category_id": 115000032731,
+    "category": "Integrations",
+    "category_slug": "integrations",
+    "klaviyo_updated": "2026-04-21T13:55:03Z",
+    "created_at": "2022-04-20T14:45:18Z",
+    "draft": false,
+    "promoted": false,
+    "position": 4,
+    "label_names": []
+  },
+  "files": {
+    "body_html": "_source/articles/5486899706267.body.html",
+    "rendered_html": "_source/rendered/5486899706267.html"
+  },
+  "assets": {
+    "api_body": {
+      "images": [],
+      "links": [
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005254348",
+          "text": "following the steps in Getting started with Magento 2"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115002775252-Create-a-Browse-Abandonment-Flow",
+          "text": "browse abandonment flow"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005062267-How-to-Manage-Your-Account-s-API-Keys",
+          "text": "Klaviyo public API key"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/introduction_to_the_klaviyo_object",
+          "text": "Klaviyo object"
+        }
+      ],
+      "headings": [
+        {
+          "level": 2,
+          "id": "h_01HT083VS6VHVVF4FF0ZYRNBY3",
+          "text": "You will learn"
+        },
+        {
+          "level": 2,
+          "id": "h_01HT09V281Z6ZSRENRPW62RR9E",
+          "text": "Connect Klaviyo's native integration"
+        },
+        {
+          "level": 2,
+          "id": "h_01HT083VS6Z1QJCS28VBS4CZ71",
+          "text": "Manually add code snippets"
+        },
+        {
+          "level": 3,
+          "id": "h_01HT083VS66XJZFNJGBSSNPYWF",
+          "text": "Active on Site"
+        },
+        {
+          "level": 3,
+          "id": "h_01HT083VS6E6FP84880ZT9QNB2",
+          "text": "Viewed Product"
+        },
+        {
+          "level": 3,
+          "id": "h_01HT0AF57VTTJ6WJAN0Q09NPKY",
+          "text": "Recent Viewed Items"
+        },
+        {
+          "level": 3,
+          "id": "h_01HT0B9JEYH4CRYKJ0D3Q9G4WR",
+          "text": "Added to Cart"
+        },
+        {
+          "level": 3,
+          "id": "h_01HT083VS6TZ5T4B0XG34VDA1E",
+          "text": "Logged in users"
+        },
+        {
+          "level": 2,
+          "id": "h_01HT09V281WY9GW20WFQTMPXEJ",
+          "text": "Add rewrite rules for product URLs"
+        }
+      ]
+    },
+    "rendered_page": {
+      "images": [
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/7ff492c2b417b7ecfe572f839a8a81398693c1f7-1920x1080.webp",
+          "alt": "",
+          "width": "",
+          "height": ""
+        }
+      ],
+      "links": [
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/5486899706267-How-to-integrate-a-headless-Magento-2-setup#site-content",
+          "text": "Skip to main content"
+        },
+        {
+          "href": "https://www.klaviyo.com",
+          "text": "Home"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center"
+        },
+        {
+          "href": "https://www.klaviyo.com/enterprise",
+          "text": "Enterprise"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Partners"
+        },
+        {
+          "href": "https://www.klaviyo.com/careers",
+          "text": "Careers"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": "Log in"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": ""
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center Find step-by-step instructions and troubleshooting solutions in our knowledge base."
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000032731",
+          "text": "Integrations"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000312411",
+          "text": "Flows"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867867",
+          "text": "Audience"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867667",
+          "text": "Campaigns"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/360000190711",
+          "text": "Sign-up forms"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000873988",
+          "text": "Deliverability & compliance"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/29173800271259",
+          "text": "SMS"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/16638219724187",
+          "text": "Reviews"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/18073014919195",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/34141283979931",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/37659126754075",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/33948021740315",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/39746685522331",
+          "text": "WhatsApp"
+        },
+        {
+          "href": "https://academy.klaviyo.com",
+          "text": "Klaviyo Academy Expert training and education to help you succeed with Klaviyo, and beyond."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Quick+guide&resource=academy_courses",
+          "text": "Quick guides Learn marketing strategies and concepts in 15 minutes or less."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Course&resource=academy_courses",
+          "text": "Courses Master key marketing topics through structured lessons and exams."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/best-practices",
+          "text": "Best practices Discover top product and marketing strategies for your business."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/learning-paths",
+          "text": "Learning paths Complete curated learning journeys tailored to your marketing goals."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses",
+          "text": "Explore all resources"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Live+training&resource=academy_courses",
+          "text": "Live trainings Build confidence through hands-on interactive workshops and thought-provoking strategy sessions."
+        },
+        {
+          "href": "https://www.bigmarker.com/klaviyo-customer-education/Office-hours-Getting-started-with-Klaviyo",
+          "text": "Live office hours Join a strategic discussion where you can ask questions and get answers in real-time."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/private-live-training",
+          "text": "1:1 Live training Book a private training session with an expert to jumpstart your platform knowledge and confidence."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/credentials",
+          "text": "Klaviyo credentials Dig deeper into select topics and showcase your expertise with a final exam to earn a certificate and digital badge."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/certificates/klaviyo-practitioner-certificate",
+          "text": "Klaviyo practitioner certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/deliverability-certificate",
+          "text": "Deliverability certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/developer-certificate",
+          "text": "Klaviyo developer certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses&select=Certificate",
+          "text": "See all certificates"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Klaviyo Community Join our thriving community network to connect with brands like yours—online and in person."
+        },
+        {
+          "href": "https://community.klaviyo.com/topic/new",
+          "text": "Ask a question Post a question and get thoughtful answers from Klaviyo powerusers."
+        },
+        {
+          "href": "https://community.klaviyo.com/p/roadmap",
+          "text": "Product roadmap"
+        },
+        {
+          "href": "https://community.klaviyo.com/search/activity/recent",
+          "text": "Recent threads"
+        },
+        {
+          "href": "https://community.klaviyo.com/p/champions",
+          "text": "Meet the Champions"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups",
+          "text": "Browse all groups Your people are waiting. New ideas and connections are a click away."
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/developer-group-64",
+          "text": "Developer group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/entrepreneur-user-group-118",
+          "text": "Entrepreneur group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/woo-user-group-87",
+          "text": "WooCommerce group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/new-york-meetup-chapter-82",
+          "text": "New York City"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/los-angeles-meetup-chapter-83",
+          "text": "Los Angeles"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/austin-meetup-chapter-85",
+          "text": "Austin"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/san-diego-meetup-chapter-86",
+          "text": "San Diego"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/amsterdam-meetup-chapter-84",
+          "text": "Amsterdam"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Klaviyo Developers Access API documentation and developer guides to help you build with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/get_started",
+          "text": "Get started Access key resources and a step-by-step checklist for how to start developing with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/build_your_integration",
+          "text": "Grow your app's reach Learn how to join our ecosystem and get your app listed on our marketplace."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/developer-tools",
+          "text": "Developer tools Generate sample data, monitor your API usage, and access our Postman collections."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/reference/api_overview",
+          "text": "API reference Browse our full catalog of API docs."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/changelog_",
+          "text": "Changelog"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/api_versioning_and_deprecation_policy",
+          "text": "Versioning & deprecation policy"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/rate_limits_and_error_handling",
+          "text": "Rate limits & error handling"
+        },
+        {
+          "href": "https://youtube.com/playlist?list=PLHkNfHgtxcUanrkMnKPdkRzuWU7MGv_xM&si=pkG-KH7IT_TUHOGC",
+          "text": "API tutorials on YouTube Subscribe to our Klaviyo API Tutorials playlist for easy access to step-by-step developer walkthroughs."
+        },
+        {
+          "href": "https://www.klaviyo.com/contact-us",
+          "text": "Contact us"
+        },
+        {
+          "href": "https://www.klaviyo.com/sign-up",
+          "text": "Sign up"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": "Search"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/5486899706267",
+          "text": "United States - EN"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/de-de/articles/5486899706267",
+          "text": "Deutschland - DE"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-es/articles/5486899706267",
+          "text": "España - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-mx/articles/5486899706267",
+          "text": "México - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/fr-fr/articles/5486899706267",
+          "text": "France - FR"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/it-it/articles/5486899706267",
+          "text": "Italia - IT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/ko-kr/articles/5486899706267",
+          "text": "한국 - KO"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/nl-nl/articles/5486899706267",
+          "text": "Nederland - NL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pl-pl/articles/5486899706267",
+          "text": "Polska - PL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pt-br/articles/5486899706267",
+          "text": "Brasil - PT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/sv-se/articles/5486899706267",
+          "text": "Sverige - SV"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/14521703806363",
+          "text": "Adobe Commerce (Magento)"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/49375848540187",
+          "text": "Magento 2"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/5486899706267-How-to-integrate-a-headless-Magento-2-setup#h_01HT083VS6VHVVF4FF0ZYRNBY3",
+          "text": "You will learn"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/5486899706267-How-to-integrate-a-headless-Magento-2-setup#h_01HT09V281Z6ZSRENRPW62RR9E",
+          "text": "Connect Klaviyo's native integration"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/5486899706267-How-to-integrate-a-headless-Magento-2-setup#h_01HT083VS6Z1QJCS28VBS4CZ71",
+          "text": "Manually add code snippets"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/5486899706267-How-to-integrate-a-headless-Magento-2-setup#h_01HT09V281WY9GW20WFQTMPXEJ",
+          "text": "Add rewrite rules for product URLs"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/5486899706267-How-to-integrate-a-headless-Magento-2-setup#additional-resources",
+          "text": "Additional resources"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005254348",
+          "text": "following the steps in Getting started with Magento 2"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115002775252-Create-a-Browse-Abandonment-Flow",
+          "text": "browse abandonment flow"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005062267-How-to-Manage-Your-Account-s-API-Keys",
+          "text": "Klaviyo public API key"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/introduction_to_the_klaviyo_object",
+          "text": "Klaviyo object"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005254348",
+          "text": "Getting started with Magento 2.x (CE and EE)"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360048730411",
+          "text": "Magento integration system requirements reference"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115003458852",
+          "text": "Magento 2 data reference"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115001002272",
+          "text": "Learn how to contact support"
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": ""
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": "Visit Community"
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": ""
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": "Hire a partner"
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/about",
+          "text": "About Klaviyo"
+        },
+        {
+          "href": "https://www.klaviyo.com/newsroom",
+          "text": "Newsroom"
+        },
+        {
+          "href": "https://investors.klaviyo.com/overview/default.aspx",
+          "text": "Investor relations"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Agency and tech partners"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Developers"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/retail",
+          "text": "Retail and ecommerce"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/restaurants",
+          "text": "Restaurant marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/wellness",
+          "text": "Wellness"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform",
+          "text": "B2C CRM overview"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai",
+          "text": "Klaviyo AI (K:AI)"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/marketing-automation",
+          "text": "Klaviyo Marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-service",
+          "text": "Klaviyo Service"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/analytics",
+          "text": "Klaviyo Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-data-platform",
+          "text": "Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare",
+          "text": "Klaviyo vs. Klaviyo alternatives"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-mailchimp",
+          "text": "Klaviyo vs. Mailchimp"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-postscript",
+          "text": "Klaviyo vs. Postscript"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-attentive",
+          "text": "Klaviyo vs. Attentive"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-salesforce-marketing-cloud",
+          "text": "Klaviyo vs. Salesforce"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-listrak",
+          "text": "Klaviyo vs. Listrak"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/omnichannel",
+          "text": "Omnichannel marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/email-marketing",
+          "text": "Email marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing",
+          "text": "SMS marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing/rcs",
+          "text": "RCS for Business"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/mobile-app-marketing",
+          "text": "Mobile app marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/whatsapp",
+          "text": "WhatsApp marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/social",
+          "text": "Social marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources",
+          "text": "Marketing resources"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources/marketing-campaign-calendar",
+          "text": "Marketing campaign calendar"
+        },
+        {
+          "href": "https://www.klaviyo.com/glossary",
+          "text": "Marketing glossary"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/email-subject-line-generator",
+          "text": "Subject line generator"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/roi-calculator",
+          "text": "ROI calculator"
+        },
+        {
+          "href": "https://www.klaviyo.com/customers",
+          "text": "Case studies"
+        },
+        {
+          "href": "https://www.klaviyo.com/composer",
+          "text": "Composer Beta"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/marketing-agent",
+          "text": "Marketing Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/customer-agent",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/customer-experience-hub",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/helpdesk",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/marketing-analytics",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/advanced-cdp",
+          "text": "Advanced Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/web-forms",
+          "text": "Web forms"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/email-templates",
+          "text": "Email templates"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/portfolio",
+          "text": "Portfolio"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform-integrations",
+          "text": "Apps and Integrations"
+        },
+        {
+          "href": "https://www.klaviyo.com/features",
+          "text": "Features"
+        },
+        {
+          "href": "https://www.klaviyo.com/whats-new",
+          "text": "What's new"
+        },
+        {
+          "href": "https://www.klaviyo.com/events",
+          "text": "Events"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help Center"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us",
+          "text": "Academy"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Community"
+        },
+        {
+          "href": "https://www.facebook.com/Klaviyo/",
+          "text": "Facebook"
+        },
+        {
+          "href": "https://twitter.com/klaviyo/",
+          "text": "Twitter"
+        },
+        {
+          "href": "https://www.linkedin.com/company/klaviyo/",
+          "text": "LinkedIn"
+        },
+        {
+          "href": "https://www.instagram.com/klaviyo/",
+          "text": "Instagram"
+        },
+        {
+          "href": "https://www.klaviyo.com/sitemap",
+          "text": "Site Map"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal",
+          "text": "Terms and Privacy"
+        },
+        {
+          "href": "https://www.klaviyo.com/security",
+          "text": "Security"
+        },
+        {
+          "href": "https://www.klaviyo.com/trust",
+          "text": "Trust"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal/intellectual-property-notices",
+          "text": "Intellectual Property Notices"
+        }
+      ],
+      "headings": [
+        {
+          "level": 1,
+          "id": "",
+          "text": "How to integrate a headless Magento 2 setup"
+        },
+        {
+          "level": 2,
+          "id": "h_01HT083VS6VHVVF4FF0ZYRNBY3",
+          "text": "You will learn"
+        },
+        {
+          "level": 2,
+          "id": "h_01HT09V281Z6ZSRENRPW62RR9E",
+          "text": "Connect Klaviyo's native integration"
+        },
+        {
+          "level": 2,
+          "id": "h_01HT083VS6Z1QJCS28VBS4CZ71",
+          "text": "Manually add code snippets"
+        },
+        {
+          "level": 3,
+          "id": "h_01HT083VS66XJZFNJGBSSNPYWF",
+          "text": "Active on Site"
+        },
+        {
+          "level": 3,
+          "id": "h_01HT083VS6E6FP84880ZT9QNB2",
+          "text": "Viewed Product"
+        },
+        {
+          "level": 3,
+          "id": "h_01HT0AF57VTTJ6WJAN0Q09NPKY",
+          "text": "Recent Viewed Items"
+        },
+        {
+          "level": 3,
+          "id": "h_01HT0B9JEYH4CRYKJ0D3Q9G4WR",
+          "text": "Added to Cart"
+        },
+        {
+          "level": 3,
+          "id": "h_01HT083VS6TZ5T4B0XG34VDA1E",
+          "text": "Logged in users"
+        },
+        {
+          "level": 2,
+          "id": "h_01HT09V281WY9GW20WFQTMPXEJ",
+          "text": "Add rewrite rules for product URLs"
+        },
+        {
+          "level": 2,
+          "id": "additional-resources",
+          "text": "Additional resources"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "Explore more from Klaviyo"
+        }
+      ]
+    }
+  },
+  "rendered_page": {
+    "status": "fetched",
+    "error": ""
+  }
+}

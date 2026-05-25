@@ -1,0 +1,254 @@
+<h2 id="h_01KKC2ZE49D721QHMYQFWAPEYM">You will learn</h2>
+<p>In this article, you will learn how the Subscriptions skill works for Customer Agent and what you need to get it running. This skill lets your customers pause, cancel, or update their subscription delivery preferences through self-service -- reducing support ticket volume, improving resolution rates, and helping you retain subscribers by making account management frictionless.</p>
+<h2 id="h_01KKC2ZE4AH9CK0K6NZ6TDXR5T">Before you begin</h2>
+<p>Before you set up the Subscriptions skill, confirm the following:</p>
+<ul>
+<li>
+<strong>Customer Agent</strong> is enabled on your account.</li>
+<li>
+<strong>Customer Hub</strong> is active and configured for your storefront.</li>
+<li>A <strong>subscription provider</strong> is connected (e.g., Recharge, Skio). Ordergroove support is planned as a follow-up.</li>
+<li>You have uploaded <strong>knowledge base content</strong> about your subscription policies (cancellation rules, modification options, FAQs) in Customer Agent content settings.</li>
+<li>
+<strong>Availability:</strong> The Subscriptions skill works on <strong>webchat</strong>, <strong>text messaging</strong>, <strong>email</strong>, and <strong>WhatsApp</strong> channels. All roles can view the skill; <strong>Admins</strong> and <strong>Owners</strong> can configure it.</li>
+<li>
+<strong>Time to complete:</strong> ~5-10 minutes if prerequisites are in place.</li>
+</ul>
+<p><strong>Important:</strong> The agent does not directly modify subscriptions. It guides customers to your subscription portal with the right context and links. Without Customer Hub or a connected subscription provider, the agent will perform a soft handoff to a human agent.</p>
+<p><strong>Note:</strong> The subscription data visible to the agent depends on your provider. Recharge returns active, paused, and canceled subscriptions. Skio returns <strong>active subscriptions only</strong> — paused and canceled subscriptions are not available through Skio's API. See <a href="#subscription-visibility-by-provider">Subscription visibility by provider</a> for details.</p>
+<h2 id="h_01KKC2ZE4E4PEBK3G8MKQJ4959">Overview</h2>
+<p>The Subscriptions skill enables Customer Agent to handle subscription-related inquiries end to end -- from answering policy questions to surfacing authenticated self-service links. Instead of waiting for a human agent, customers can get immediate guidance on how to pause, cancel, change frequency, swap products, or update payment and shipping details.</p>
+<h3 id="h_01KKC2ZE4ETBE7RN26KS31ZVKN">When to use this skill</h3>
+<p>Customer Agent will use the Subscriptions skill when your customers ask questions like:</p>
+<ul>
+<li>"How do I cancel my subscription?"</li>
+<li>"I want to update my delivery frequency."</li>
+<li>"Is my subscription still active?"</li>
+<li>"Can I change the products in my subscription?"</li>
+<li>"How do I update my payment info?"</li>
+</ul>
+<h3 id="h_01KKC2ZE4FM6H407653N1FFR6Q">How it differs from adjacent skills</h3>
+<ul>
+<li>
+<strong>Returns and Exchanges skill</strong> -- Handles post-purchase return and exchange requests for one-time orders. The Subscriptions skill focuses specifically on recurring subscription management.</li>
+<li>
+<strong>Order Editing skill</strong> -- Handles changes to one-time orders before fulfillment. The Subscriptions skill covers ongoing subscription modifications.</li>
+<li>
+<strong>General Q&amp;A skill</strong> -- Answers general brand questions from your knowledge base without requiring authentication. The Subscriptions skill combines knowledge base answers with authenticated, account-specific subscription data.</li>
+</ul>
+<h3 id="h_01KKC2ZE4GDJFXTYWGD0B08ESX">Subscription visibility by provider</h3>
+<p>The agent surfaces all subscription statuses it receives from your provider. However, each provider's API returns different data:</p>
+<table>
+<tbody>
+<tr>
+<th>Provider</th>
+<th>Active</th>
+<th>Paused</th>
+<th>Canceled</th>
+</tr>
+<tr>
+<td><strong>Recharge</strong></td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td><strong>Skio</strong></td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+</tr>
+<tr>
+<td><strong>Ordergroove</strong></td>
+<td>Planned</td>
+<td>Planned</td>
+<td>Planned</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>
+<strong>Recharge</strong> returns active, paused, and canceled subscriptions. The agent can answer questions about all subscription states and display cards for each.</li>
+<li>
+<strong>Skio</strong> returns <strong>active subscriptions only</strong>. If a customer asks about a paused or canceled subscription, the agent cannot retrieve it and may report that no subscription was found. Consider adding knowledge base content that explains how customers can contact support for questions about non-active Skio subscriptions.</li>
+<li>
+<strong>Ordergroove</strong> integration is planned as a follow-up.</li>
+</ul>
+<h3 id="h_01KKC2ZE4QT916DTV8GXQA3TV5">How the agent handles a subscription inquiry</h3>
+<ol>
+<li>A customer asks about subscriptions (e.g., "How do I pause my subscription?").</li>
+<li>The agent searches your knowledge base for subscription policies using <strong>Klaviyo - Search content</strong>.</li>
+<li>If the question is account-specific, the agent checks whether the customer is signed in. If not, it prompts the customer to log in.</li>
+<li>Once signed in, the agent retrieves the customer's profile using <strong>Klaviyo - Get profile</strong>.</li>
+<li>The agent makes a read-only tool call to check subscription status, confirming enrollment and current plan details. This prevents the agent from rendering empty subscription cards for customers without active subscriptions.</li>
+<li>The agent presents a direct link or button to manage the subscription:<br>
+<ul>
+<ul>
+<li>
+<strong>On webchat:</strong> A subscription card or carousel displaying subscription details and a link to the subscription portal.</li>
+<li>
+<strong>On text messaging and WhatsApp:</strong> A link to the Customer Hub "For You" page where the customer can manage their subscription.</li>
+<li>
+<strong>On email:</strong> A link to the Customer Hub "For You" page with a brief response.</li>
+</ul>
+</ul>
+</li>
+<li>The agent clearly communicates the available actions (pause, cancel, update frequency, change products, edit payment or shipping details).</li>
+</ol>
+<h2 id="h_01KKC2ZE4T0E55D7R2SD9KQNNZ">Set it up</h2>
+<h3 id="h_01KKC2ZE4TAKNZG73GDEKFAQ2H">Step 1: Connect your subscription provider</h3>
+<ol>
+<li>From <em>Settings Integrations</em>, confirm that your subscription provider (e.g., Recharge or Skio) is connected and active. Expected result: The integration status shows <strong>Connected</strong>.</li>
+</ol>
+<p><strong>Note:</strong> If you do not have a subscription provider connected, the Subscriptions skill will not be available. The agent will instead perform a soft handoff to a human agent for subscription inquiries.</p>
+<h3 id="h_01KKC2ZE4VQ6S8N0R5GR6DM6BW">Step 2: Verify Customer Hub is active</h3>
+<ol>
+<li>From <em>Customer Hub Settings</em>, confirm that Customer Hub is enabled and your storefront is connected. Expected result: Customer Hub status shows <strong>Active</strong>.</li>
+</ol>
+<p>[Screenshot: Customer Hub settings page showing active status]</p>
+<h3 id="h_01KKC2ZE4VYG1FHXCBN1XBSY3C">Step 3: Upload subscription knowledge base content</h3>
+<ol>
+<li>Navigate to <em>Customer Agent Content</em>.</li>
+<li>Upload or verify that your subscription policy documents are included. These should cover:</li>
+</ol>
+<ul>
+<ul>
+<li>Cancellation policies and any required notice periods</li>
+<li>Pause and skip options</li>
+<li>Frequency change rules</li>
+<li>Product swap or add-on policies</li>
+<li>Payment and shipping update procedures</li>
+</ul>
+</ul>
+<p>Expected result: Your subscription-related content appears in the content library and is available for the agent to search.</p>
+<p><strong>Tip:</strong> The more specific and complete your subscription policy content is, the better the agent can answer questions before needing to route customers to the portal.</p>
+<h3 id="h_01KKC2ZE4X1C4VXBTD2X4QET81">Step 4: Confirm the skill is active</h3>
+<ol>
+<li>Navigate to <em>Customer Agent Skills</em>.</li>
+<li>Locate the <strong>Subscriptions</strong> skill in the skills list. It is active by default when your prerequisites are met.</li>
+<li>Confirm the status shows <strong>Live</strong>. If it shows <strong>Unavailable</strong>, check that Customer Hub is active and a subscription provider is connected.</li>
+</ol>
+<p>Expected result: The Subscriptions skill shows <strong>Live</strong> status in your skills overview.</p>
+<p>[Screenshot: Skills overview page showing Subscriptions skill with Live status]</p>
+<h3 id="h_01KKC2ZE4YKDRP2PEENYQ20HWJ">Step 5: Test the skill</h3>
+<ol>
+<li>Open a test conversation on your webchat, text messaging, email, or WhatsApp channel.</li>
+<li>Ask a subscription-related question (e.g., "How do I cancel my subscription?").</li>
+<li>Verify that the agent responds with policy information and, after sign-in, presents a subscription card (webchat) or a link to Customer Hub (text messaging, WhatsApp, email).</li>
+</ol>
+<p>Expected result: The agent provides accurate policy information and a working link to manage subscriptions.</p>
+<p>[Screenshot: Webchat showing subscription card with subscription details and manage link]</p>
+<h2 id="h_01KKC2ZE4ZA9R35THEVD8NQXAQ">Best practices</h2>
+<ul>
+<li>
+<strong>Keep subscription policy content up to date</strong> -- Review and refresh your knowledge base content whenever you change subscription terms. Outdated policies lead to incorrect agent responses and customer frustration. Impact: resolution rate, customer satisfaction.</li>
+<li>
+<strong>Cover all common scenarios in your knowledge base</strong> -- Include content for pausing, canceling, frequency changes, product swaps, and payment updates. The more scenarios the agent can answer from content alone, the fewer escalations to human agents. Impact: ticket deflection, resolution rate.</li>
+<li>
+<strong>Configure handoff messaging for edge cases</strong> -- Set clear handoff instructions so that when the agent cannot resolve a subscription issue (e.g., no subscription provider connected), the customer receives a helpful message and a smooth transition to a human agent. Impact: customer satisfaction.</li>
+<li>
+<strong>Use the skill alongside Returns and Exchanges</strong> -- Customers who want to cancel a subscription may actually prefer a pause or product swap. Both skills activate automatically when their prerequisites are met, so the agent can suggest alternatives. Impact: subscription retention.</li>
+<li>
+<strong>Promote self-service in proactive messaging</strong> -- Let subscribers know they can manage their subscription through any of your Customer Agent channels (webchat, text messaging, email, or WhatsApp). Include a note in subscription confirmation emails or renewal reminders. Impact: ticket deflection, customer satisfaction.</li>
+</ul>
+<h2 id="h_01KKC2ZE50CYXCVYQP1AZ6GDTT">Measure success</h2>
+<h3 id="h_01KKC2ZE502CD8YK6Z9X23KWGQ">Where to view results</h3>
+<ul>
+<li>Navigate to <em>Customer Agent Performance</em> to see conversation volume, resolution rate, and handoff rate for subscription-related inquiries.</li>
+<li>Review ticket deflection trends in your helpdesk or support platform by comparing subscription-related ticket volume before and after enabling the skill.</li>
+</ul>
+<h3 id="h_01KKC2ZE50T04C6YEG4PP3ARVM">Key metrics to watch</h3>
+<table>
+<tbody>
+<tr>
+<th>Metric</th>
+<th>What it tells you</th>
+</tr>
+<tr>
+<td><strong>Resolution rate</strong></td>
+<td>Percentage of subscription inquiries the agent resolves without human handoff</td>
+</tr>
+<tr>
+<td><strong>Ticket deflection</strong></td>
+<td>Reduction in subscription-related support tickets</td>
+</tr>
+<tr>
+<td><strong>Subscription retention</strong></td>
+<td>Whether self-service management reduces churn vs. increases cancellations</td>
+</tr>
+<tr>
+<td><strong>Handoff rate</strong></td>
+<td>How often the agent escalates to a human agent -- lower is better</td>
+</tr>
+</tbody>
+</table>
+<h3 id="h_01KKC2ZE539M9GVRXVQFZWAXN9">If metrics are low, try these fixes</h3>
+<ul>
+<li>
+<strong>Low resolution rate</strong> -- Add more detailed subscription policy content to your knowledge base. Check that your subscription provider integration is active and returning data correctly.</li>
+<li>
+<strong>High handoff rate</strong> -- Review handoff triggers. Ensure Customer Hub and your subscription provider are properly connected so the agent can serve self-service links.</li>
+<li>
+<strong>No change in ticket deflection</strong> -- Promote the self-service channel to existing subscribers. Check that your webchat, text messaging, email, or WhatsApp channels are accessible from the pages where customers typically seek subscription help.</li>
+</ul>
+<h2 id="h_01KKC2ZE54PJFCG1958X3CGH91">Troubleshooting</h2>
+<p><strong>Symptom:</strong> The agent does not display subscription details and hands off to a human agent immediately.<br>
+<strong>Likely cause:</strong> Customer Hub is not active, or no subscription provider is connected.<br>
+<strong>Fix:</strong> Navigate to <em>Customer Hub Settings</em> and confirm Customer Hub is enabled. Then check <em>Settings Integrations</em> to verify your subscription provider (e.g., Recharge) shows a <strong>Connected</strong> status. Once both are active, the Subscriptions skill will automatically become available.</p>
+<hr>
+<p><strong>Symptom:</strong> The agent says "No active subscription found" even though the customer has a subscription.<br>
+<strong>Likely cause:</strong> The customer is not signed in, or the customer's email in Klaviyo does not match the email associated with the subscription provider account.<br>
+<strong>Fix:</strong> Ensure the customer completes the sign-in flow. Verify that the email address on the Klaviyo profile matches the subscription provider account. If there is a mismatch, the customer may need to update their email in one of the systems, or a human agent can assist.</p>
+<hr>
+<p><strong>Symptom:</strong> A customer asks about a paused or canceled subscription, but the agent says no subscription was found.<br>
+<strong>Likely cause:</strong> Your account uses Skio as a subscription provider. Skio's API only returns active subscriptions — paused and canceled subscriptions are not available to the agent.<br>
+<strong>Fix:</strong> This is a known limitation of Skio's API. Add knowledge base content that instructs the agent to direct customers with paused or canceled Skio subscriptions to contact your support team or visit the subscription portal directly. If you need full visibility into all subscription states, Recharge provides active, paused, and canceled subscription data.</p>
+<hr>
+<p><strong>Symptom:</strong> The subscription portal link in the agent response leads to a broken page or 404 error.<br>
+<strong>Likely cause:</strong> The subscription portal URL configured in Customer Hub is incorrect or outdated.<br>
+<strong>Fix:</strong> Navigate to <em>Customer Hub Settings</em> and verify the subscription portal URL. Test the link directly in a browser to confirm it resolves. Update the URL if your subscription provider has changed their portal path.</p>
+<hr>
+<p><strong>Symptom:</strong> The agent answers subscription policy questions but never prompts the customer to sign in or shows a subscription card.<br>
+<strong>Likely cause:</strong> The agent is treating the inquiry as a general knowledge base question rather than an account-specific subscription request.<br>
+<strong>Fix:</strong> Review the customer's message phrasing. The agent distinguishes between general policy questions ("What is your cancellation policy?") and account-specific requests ("I want to cancel my subscription"). For account-specific requests, the agent should prompt sign-in. If it does not, check that the Subscriptions skill shows <strong>Live</strong> status in <em>Customer Agent Skills</em> and that your subscription provider is connected.</p>
+<hr>
+<p><strong>Symptom:</strong> On text messaging or WhatsApp, the customer receives a text-only response with no link to Customer Hub.<br>
+<strong>Likely cause:</strong> The customer is not signed in, or Customer Hub is not configured for your account.<br>
+<strong>Fix:</strong> Confirm that Customer Hub is active and supports your subscription provider. Ensure the customer completes authentication before the agent attempts to retrieve subscription data. On text messaging and WhatsApp, the agent links to the Customer Hub "For You" page when subscriptions are found.</p>
+<h2 id="h_01KKC2ZE577Z9D4AJJ928F13BZ">FAQ</h2>
+<p><strong>Q: Can the agent directly cancel or pause a subscription on behalf of the customer?</strong><br>
+<strong>A:</strong> No. The agent provides read-only access to subscription data and guides customers to the subscription portal where they can take action themselves. This design ensures that subscription modifications go through the provider's standard workflow, preserving any confirmation steps or retention offers you have configured.</p>
+<p><strong>Q: Which subscription providers are supported?</strong><br>
+<strong>A:</strong> Recharge and Skio are supported at launch. Ordergroove integration is planned as a follow-up. Your subscription provider must be connected through Klaviyo's integrations and linked to Customer Hub.</p>
+<p><strong>Q: Can the agent see paused and canceled subscriptions?</strong><br>
+<strong>A:</strong> It depends on your provider. Recharge returns active, paused, and canceled subscriptions, so the agent can surface all of them. Skio only returns active subscriptions through its API — the agent cannot retrieve paused or canceled Skio subscriptions. If you use Skio, add knowledge base content to help the agent guide customers with non-active subscriptions to your support team or portal.</p>
+<p><strong>Q: Does the customer need to be signed in for the agent to help with subscriptions?</strong><br>
+<strong>A:</strong> For general policy questions (e.g., "What is your cancellation policy?"), no sign-in is required -- the agent answers from your knowledge base. For account-specific requests (e.g., "I want to pause my subscription"), the agent prompts the customer to sign in so it can retrieve their subscription details and provide a personalized self-service link.</p>
+<p><strong>Q: What happens if a customer asks about subscriptions but does not have one?</strong><br>
+<strong>A:</strong> After the customer signs in, the agent checks for active subscriptions. If none are found, the agent informs the customer that no active subscription is associated with their account and offers to help with other questions.</p>
+<p><strong>Q: Is the Subscriptions skill available on all channels?</strong><br>
+<strong>A:</strong> The Subscriptions skill is available on <strong>webchat</strong>, <strong>text messaging</strong>, <strong>email</strong>, and <strong>WhatsApp</strong>. On webchat, the agent displays a subscription card or carousel with details and a manage link. On text messaging and WhatsApp, the agent provides a link to the Customer Hub "For You" page. On email, the agent sends a brief response with a link to Customer Hub.</p>
+<p><strong>Q: What data does the agent access when checking subscriptions?</strong><br>
+<strong>A:</strong> The agent makes a read-only API call to retrieve subscription status, plan details, and enrollment information. It does not have write access and cannot modify any subscription data. The customer must authenticate before any account-specific data is accessed.</p>
+<h2 id="h_01KKC2ZE5ASNXWYB6SK16V6NW4">Next steps</h2>
+<ul>
+<li>
+<strong>Set up Customer Hub</strong> to ensure your customers have a self-service portal for managing subscriptions, orders, and account details.</li>
+<li>
+<strong>Connect your returns provider</strong> so the Returns and Exchanges skill activates and the agent can handle a broader range of post-purchase inquiries alongside subscriptions.</li>
+<li>
+<strong>Upload comprehensive knowledge base content</strong> covering all subscription scenarios to maximize the agent's resolution rate.</li>
+<li>
+<strong>Configure Customer Agent handoffs</strong> to define how and when subscription inquiries escalate to human agents.</li>
+<li>
+<strong>Review your subscription analytics</strong> after one to two weeks to identify gaps in content or configuration.</li>
+</ul>
+<h2 id="h_01KKC2ZE5BFAN6X6ZM2NTVX78K">Additional resources</h2>
+<ul>
+<li>Understanding Customer Agent skills</li>
+<li>How to set up Customer Hub</li>
+<li>How to manage Customer Agent content</li>
+<li>How to use the Returns and Exchanges skill</li>
+<li>How to configure Customer Agent handoffs</li>
+<li>Getting started with Customer Agent</li>
+</ul>

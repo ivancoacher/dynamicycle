@@ -1,0 +1,66 @@
+<h2 id="h_01HVRNFRJVW9V6EEVW2GVYX54P">You will learn</h2>
+<p>Learn how to set up a custom web feed with your Instagram account using an RSS feed generator, and how to display the feed in your emails. With a custom web feed, you can connect your Instagram content to your emails and dynamically display your latest Instagram photos, captions, and more. </p>
+<div class="bs-callout bs-callout-default">
+<p>This process requires setting up an XML feed and inserting custom code into your email template. If you aren’t comfortable editing your email’s code, reach out to a <a href="https://connect.klaviyo.com/">Klaviyo Partner</a> for help. </p>
+</div>
+<h2 id="h_01HVRNFRJWKAE2GPZD0A74VPN6">Set up an Instagram web feed</h2>
+<p>To set up an Instagram web feed without the help of a developer or Klaviyo Partner, use an RSS feed generator. </p>
+<div class="bs-callout bs-callout-default">
+<p>Note that this RSS feed generator app requires a paid plan in order to host an Instagram RSS feed. You can use any RSS feed generator, but if you use a different app, you may need to customize the sample code in the section below. </p>
+</div>
+<ol>
+<li>Create an account with an <a href="https://rss.app/">RSS feed generator tool</a>.</li>
+<li>Navigate to <a href="https://rss.app/myfeeds">My Feeds</a>.</li>
+<li>In the upper right, click <strong>New Feed</strong>.</li>
+<li>In the <em>Enter Webpage URL </em>field, add your Instagram URL, following the format https://www.instagram.com/YOUR_USERNAME.</li>
+<li>Click <strong>Generate</strong>.</li>
+<li>Click <strong>Save to My Feeds</strong>.</li>
+</ol>
+<p>Once the feed is saved, navigate to the feed page and locate the feed URL. It should follow this format: <a href="https://rss.app/feeds/UNIQUE_FEED_ID.xml">https://rss.app/feeds/UNIQUE_FEED_ID.xml</a>. </p>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/28720656477851" alt="A feed URL"></p>
+<p>As an alternative to this method, you can set up an Instagram web feed using their Basic Display API, or by using a third-party app. Certain <a href="https://connect.klaviyo.com/">Klaviyo Partners</a> offer this as a service, like<a href="https://connect.klaviyo.com/integrations/foursixty"> FourSixty</a>. </p>
+<h2 id="h_01HVRNFRJWCT7Q2F51T8D1WS3S">Set up your feed in Klaviyo </h2>
+<p>Once you’ve set up your RSS feed:</p>
+<ol>
+<li>Click your account name in the bottom left corner of Klaviyo. </li>
+<li>Select <strong>Settings</strong>. </li>
+<li>Select <strong>Other</strong>.</li>
+<li>Open the <strong>Web feeds</strong> tab. </li>
+<li>Click <strong>Add Web Feed</strong>.<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28720668265883" alt="Add a web feed" width="625" height="157">
+</li>
+<li>Name your feed and enter the RSS feed URL you just generated as the <em>Feed URL</em> in the section above.</li>
+<li>Set the <em>Request Method</em> to <strong>GET</strong> and the <em>Content Type </em>to <strong>XML</strong>.<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28720668267931" alt="The feed settings" width="398" height="391">
+</li>
+<li>Click <strong>Add web feed</strong>. </li>
+</ol>
+<h2 id="h_01HVRNFRJWNVY84SC1TCQPE3ZJ">Pull Instagram content into your emails</h2>
+<p>If you are using a third-party platform or Instagram’s Basic Display API to generate your feed, follow our <a href="https://help.klaviyo.com/hc/en-us/articles/115005258768-Guide-to-Adding-a-Custom-Web-Feed-in-an-Email">guide on adding a custom web feed to an email</a>. If you’ve used the RSS feed app recommended above, use the code below to display the 3 most recent items from your Instagram feed in an email. </p>
+<ol>
+<li>Add a new HTML block to your template.</li>
+<li>Copy the following code into the HTML block, and make sure to replace FEED_NAME with your feed name (e.g., <em>Instagram_Feed</em> in the example above). </li>
+</ol>
+<pre><code class="language-text">&lt;div&gt;{% for item in feeds.FEED_NAME.rss.channel.item|slice:":3" %}
+    &lt;table style="display:inline-block; margin-left:auto; margin-right:auto"&gt;
+	&lt;tbody&gt;
+	    &lt;tr&gt;
+		&lt;td style="width:150px; text-align: center;"&gt;&lt;a href="{{ item.link }}"&gt;
+		  &lt;img style="max-width: 150px; height: auto;" src="{% if item|lookup:'media:content'|lookup:'0'|lookup:'@url' %}{{ item|lookup:'media:content'|lookup:'0'|lookup:'@url' }}{% else %}{{ item|lookup:'media:content'|lookup:'@url' }}{% endif %}" style="margin: 1px; max-width: 150px; height: auto;" /&gt;&lt;/a&gt;
+		&lt;/td&gt;
+	    &lt;/tr&gt;
+	&lt;/tbody&gt;
+    &lt;/table&gt;
+{% endfor %}&lt;/div&gt;
+</code></pre>
+<div class="bs-callout bs-callout-default">
+<p>Your Instagram feed will not load when previewing the message in Klaviyo. Send a preview email to your own inbox to make sure it appears correctly.</p>
+</div>
+<p>If you’d like to show more than 3 recent posts, adjust the filter, <em>|slice:":3"</em>, to include the number of posts you’d like to display (e.g., |slice:":6" to show 6 posts). </p>
+<p>If you’d like to add additional fields to your table (e.g., captions or the date an image was posted), follow our guides on<a href="https://help.klaviyo.com/hc/en-us/articles/115005258768-Guide-to-Adding-a-Custom-Web-Feed-in-an-Email"> adding custom web feeds to emails</a> to adjust the code above as needed. </p>
+<div class="bs-callout bs-callout-default">
+<p>We only recommend using custom HTML for technically savvy marketers, or for anyone who has access to a developer. While our product does support custom HTML, our support team is unable to help you build out your custom templates beyond offering the general guidance covered in this documentation. To maintain the security of your data, Klaviyo's support team is not able to open your HTML files.</p>
+<p>If you need developer assistance to set this up, reach out to one of <a href="https://klaviyo.partnerpage.io/">Klaviyo’s Partners</a>. </p>
+</div>

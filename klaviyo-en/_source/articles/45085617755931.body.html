@@ -1,0 +1,256 @@
+<div class="bs-callout bs-callout-requirements">
+<p>You must have a paid Klaviyo account and Smart Translations enabled to use this feature.</p>
+</div>
+<p>Manage translations outside Klaviyo by exporting and editing a CSV file, then importing it back to update translations in bulk or collaborate with others.</p>
+<h2 id="h_01KE6YFQ8HJV4F4XJVA58XKQCV">
+<br>
+Export a CSV of your translations</h2>
+<p>Follow these steps to export the current translations for a single message:</p>
+<ol>
+<li>Open the message you want to update (campaign email, flow email, SMS, WhatsApp message, etc.).</li>
+<li>Click <strong>Translate</strong> to open the translation editor.</li>
+<li>In the translation editor, open the actions menu and click <strong>Export CSV</strong>. <br>
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/45177653196699" alt="Translation editor with the Export CSV option highlighted in the actions menu" width="916" height="199">
+</li>
+<li>In the export modal, you have the option to select between a <strong>Smarting CSV</strong> or a <strong>CSV</strong><br>
+</li>
+</ol>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/45987097006619" alt="" width="1214" height="500"></p>
+<h3 id="h_01KG2T5MJCSP742TFP898N0SWS">Exporting Smartling CSV</h3>
+<ol>
+<li>Your browser downloads a CSV file that includes:
+<ol>
+<li>The following default Smartling directives:<strong># smartling.first_row_header=TRUE</strong><br>
+<strong># smartling.paths=2</strong><br>
+<strong># smartling.source_key_paths=1</strong><br>
+<strong># smartling.translations_in_columns=TRUE</strong>
+</li>
+<li>
+<strong>block_id</strong> – the unique identifier for each translatable string in this message.</li>
+<li>
+<strong>Source language code</strong> (e.g., en) – the original source text for that string.</li>
+</ol>
+<br>
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/45987074722971" alt="Sample translation CSV in Google sheets showing smartling directives, block_id, source language column code, for one row." width="1245" height="253">
+</li>
+</ol>
+<p><br>
+You can use this file as-is to import your strings to Smartling. Smartling automatically parses the CSV, extracts the strings, and lets you trigger translation jobs.</p>
+<p>After the job finishes, download the resulting CSV and import it back using the <strong>import</strong> button.</p>
+<h3 id="h_01KG2T5MJCQY5H7QKGPK2WWSCM">Exporting a Simple CS</h3>
+<ol>
+<li>Your browser downloads a CSV file that includes:
+<ol>
+<li>
+<strong>block_id</strong> – the unique identifier for each translatable string in this message.</li>
+<li>
+<strong>source</strong> – the original source text for that string.</li>
+<li>
+<strong>Language columns</strong> – one column per language, named with its language code (for example, en, fr, es-MX).</li>
+</ol>
+<br>
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/45177659814683" alt="Sample translation CSV in Google sheets showing block_id, source, and language column for multiple rows." width="1245" height="253">
+</li>
+</ol>
+<p>You can now open this file in Excel, Google Sheets, or another spreadsheet editor.</p>
+<h2 id="h_01KE6YFQ8P0M9V0YEVJ8CEATZP">
+<br>
+Update the CSV</h2>
+<p>When you edit the CSV, you only need to work in the language columns.</p>
+<p>Do not edit, add, or delete any values in the block_id column. If a row has an invalid or missing block_id, that row is ignored during import and its translations are not updated.</p>
+<h3 id="h_01KE6YFQ8Q6S9M51VGVA27XXFW">What you can safely change</h3>
+<p>In the CSV:</p>
+<ul>
+<li>Update existing translations by editing the appropriate language column.</li>
+<li>Add missing translations by filling in empty cells for a language column.</li>
+<li>Leave a language’s values unchanged if you do not want to update that language.</li>
+<li>Add one or more <strong>new language columns</strong>:
+<ul>
+<li>Use a valid BCP‐47 language code (for example, fr-CA, de, ca).</li>
+<li>On import, these languages are added to the translation editor for this message if they are supported.</li>
+</ul>
+</li>
+</ul>
+<h3 id="h_01KE6YFQ9443VH4ZB56DMV26FE">What you should not change</h3>
+<p>Avoid the following:</p>
+<ul>
+<li><strong>Do not edit or delete block_id values.</strong></li>
+<li>
+<strong>Do not add rows.</strong> Each row must continue to map to an existing translatable string in the message.</li>
+<li>
+<strong>Do not change the source values</strong> in the CSV:
+<ul>
+<li>To change the source content, edit the message directly in the Klaviyo editor, then export a new CSV.</li>
+</ul>
+</li>
+<li>
+<strong>Do not rename the required columns</strong> (block_id, source, and the language columns).</li>
+<li>
+<strong>Do not change the file format</strong>:
+<ul>
+<li>Keep the file as a .csv file.</li>
+<li>Save in <strong>UTF‐8</strong> encoding.</li>
+</ul>
+</li>
+</ul>
+<h3 id="h_01KE6YFQ97DMEWCDS60NPW19QA">Handling empty cells</h3>
+<p>If you clear out a translation cell in the CSV and leave it empty:</p>
+<ul>
+<li>The import treats that empty string as a value.</li>
+<li>The existing translation for that cell is overwritten with an empty value. This can effectively remove a translation.</li>
+</ul>
+<p>If you want to <strong>avoid changing a translation</strong>, leave its existing value in the CSV or remove that language column entirely before importing.</p>
+<p>When you are done editing, save the file as a UTF‐8 encoded .csv.</p>
+<h2 id="h_01KE6YFQ98N73BG28A685XKRJG">
+<br>
+Import the CSV</h2>
+<p>After you have updated and saved your CSV:</p>
+<ol>
+<li>Return to the translation editor for the same message.</li>
+<li>Click <strong>Import CSV</strong>.</li>
+<li>In the import modal, either:<br>
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/45177653207835" alt="Import CSV modal in the translation editor with Select file and drag-and-drop options." width="807" height="450">
+<ul>
+<ul>
+<li>Click <strong>Select file</strong> and choose your CSV, or</li>
+<li>Drag and drop your CSV into the upload area.</li>
+</ul>
+</ul>
+</li>
+<li>Klaviyo runs a <strong>validation “dry run”</strong> and shows:<br>
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/45177653210779" alt="Import summary dialog showing counts of updated, unchanged, and ignored rows, with warnings listed above the Import button." width="808" height="380">
+<ul>
+<ul>
+<li>A <strong>summary</strong> of how many rows will be updated, unchanged, or ignored</li>
+<li>Any <strong>warnings or errors</strong> it detected</li>
+</ul>
+</ul>
+</li>
+<li>Review the summary and warnings carefully.</li>
+<li>If everything looks correct, click <strong>Import</strong> to apply the changes.</li>
+</ol>
+<p>During validation, Klaviyo also checks for:</p>
+<ul>
+<li>File size and row limits (for example, files larger than 10MB will be rejected).</li>
+<li>Required columns (such as block_id, source, and at least one language column).</li>
+<li>Language codes that are not recognized or not supported by the channel.</li>
+<li>Empty translation values and other potential issues.</li>
+</ul>
+<p>If validation fails, you see an error message and can select a new file without making any changes to your translations.</p>
+<h2 id="h_01KE6YFQ9CHHYH0C85PYVZP5JE">
+<br>
+Understand import results</h2>
+<p>After validation, the import summary shows what will happen if you proceed.</p>
+<h3 id="h_01KE6YFQ9DM1F85ZTQJ96ZTVHT">Summary counts</h3>
+<p>The summary can include counts like:</p>
+<ul>
+<li>
+<strong>Updated</strong> – the number of rows where at least one translation value will change.</li>
+<li>
+<strong>Unchanged</strong> – rows that are present in the CSV but where all values match what is already stored.</li>
+<li>
+<strong>Ignored / skipped</strong> – rows that will not be imported (for example, because the block_id does not exist in this message or required data is missing).</li>
+</ul>
+<div class="bs-callout bs-callout-default">
+<p>Counts are calculated per row, not per language. For example, if a CSV has two rows and two language columns:</p>
+<ul>
+<li>If one row updates in one language, the <strong>Updated</strong> count is 1.</li>
+<li>If one row updates in both languages, the <strong>Updated</strong> count is still 1.</li>
+<li>If both rows update in one or all languages, the <strong>Updated</strong> count is 2.</li>
+</ul>
+</div>
+<h2 id="h_01KECM02QN3EJSGAN0Y5DYNGNN">
+<br>
+Best practices</h2>
+<p>To keep your translation data accurate and easy to manage:</p>
+<ol>
+<li>
+<strong>Start from the latest export.</strong> Avoid reusing older CSVs, especially after you change content or languages in the message.</li>
+<li>
+<strong>Keep a backup of each export.</strong> Save a copy of the CSV before making changes so you can roll back if needed.</li>
+<li>
+<strong>Coordinate with translators.</strong> Explain which columns they can edit (language columns only) and which columns they must not change (<em>block_id</em>, <em>source</em>).</li>
+<li>
+<strong>Work in smaller batches if needed.</strong> If your file is very large, consider splitting work across multiple messages or running several smaller imports.</li>
+<li>
+<strong>Use supported language codes.</strong> When adding new language columns, use supported BCP-47 codes from the <em>Smart Translations</em> article to avoid “unprocessable” languages.</li>
+</ol>
+<h2 id="resolve-validation-warnings">
+<br>
+Resolve validation warnings and import errors</h2>
+<p>If you see warnings or errors during import validation, review the sections below to understand what they mean and how to fix them.</p>
+<div class="accordion accordion--default">
+<div class="accordion__item">
+<div class="accordion__item-title"><strong>"Required columns are missing."</strong></div>
+<div class="accordion__item-content">
+<p><strong>What it means:</strong> One or more required columns (<em>block_id</em> or <em>source</em>) are missing or renamed.</p>
+<p><strong>What to do:</strong> Make sure the CSV includes <em>block_id</em> and <em>source</em> columns. If you copied data into a new sheet, confirm that the header row matches the original export.</p>
+</div>
+</div>
+<div class="accordion__item">
+<div class="accordion__item-title"><strong>"You have empty translation values. Empty strings will be treated as values."</strong></div>
+<div class="accordion__item-content">
+<p><strong>What it means:</strong> Your CSV has empty translation values, and empty strings will be treated as values.</p>
+<p><strong>What to do:</strong> If you proceed, those empty cells overwrite any existing translations for that key and language. If you want to leave those translations unchanged, restore the previous values or remove that language column and re-import the file.</p>
+</div>
+</div>
+<div class="accordion__item">
+<div class="accordion__item-title"><strong>"&lt;count&gt; key(s) does not exist in your project and will not be included in the import."</strong></div>
+<div class="accordion__item-content">
+<p><strong>What it means:</strong> Some <em>block_id</em> values in your CSV don’t exist for this template (for example, if <em>block_id</em> values were edited manually).</p>
+<p><strong>What to do:</strong> Those rows are ignored, and translations for those keys don’t change. To resolve this, remove those rows from the CSV or export a fresh file if needed.</p>
+</div>
+</div>
+<div class="accordion__item">
+<div class="accordion__item-title"><strong>"Your file contains duplicate keys with conflicting values. The first value will be used."</strong></div>
+<div class="accordion__item-content">
+<p><strong>What it means:</strong> Two or more rows in your CSV have the same <em>block_id</em> values (for example, if rows were duplicated by mistake).</p>
+<p><strong>What to do:</strong> The values of the first row are used and the remaining duplicate rows are ignored. To resolve this, remove the duplicate rows from the CSV or export a fresh file if needed.</p>
+</div>
+</div>
+<div class="accordion__item">
+<div class="accordion__item-title"><strong>"Multiple columns resolve to the same language. Only the last column will be used and the others will be ignored."</strong></div>
+<div class="accordion__item-content">
+<p><strong>What it means:</strong> Two or more columns in your CSV have the same language code or resolve to the same language (for example, if a language column was duplicated by mistake).</p>
+<p><strong>What to do:</strong> The values of the last duplicate column are used and the remaining duplicate columns are ignored. To resolve this, remove the duplicate columns from the CSV or export a fresh file if needed.</p>
+</div>
+</div>
+<div class="accordion__item">
+<div class="accordion__item-title"><strong>"Your file contains columns with language codes that are not supported by this channel: &lt;invalid language code&gt;. These will be ignored but valid locales will be imported."</strong></div>
+<div class="accordion__item-content">
+<p><strong>What it means:</strong> A column header in your CSV uses a language code that isn’t supported or recognized.</p>
+<p><strong>What to do:</strong> To add a new language, use one of the supported BCP-47 codes from the <em>Smart Translations</em> documentation. Columns with unsupported codes are ignored.</p>
+</div>
+</div>
+<div class="accordion__item">
+<div class="accordion__item-title"><strong>"You have languages in your file that are not in your project. The following languages will be added to your translation editor: &lt;language detected&gt;."</strong></div>
+<div class="accordion__item-content">
+<p><strong>What it means:</strong> Your CSV includes language columns that are not currently part of this template.</p>
+<p><strong>What to do:</strong></p>
+<ul>
+<li>If you want to add those languages, review the list and click <strong>Import</strong> to add them to the translation editor.</li>
+<li>If you don’t want to add them, remove those columns and re-import the file.</li>
+</ul>
+</div>
+</div>
+<div class="accordion__item">
+<div class="accordion__item-title"><strong>"No locale columns found."</strong></div>
+<div class="accordion__item-content">
+<p><strong>What it means:</strong> The CSV includes <em>block_id</em> and <em>source</em> columns but no other column header was detected.</p>
+<p><strong>What to do:</strong> Add at least one supported language column and try again.</p>
+</div>
+</div>
+<div class="accordion__item">
+<div class="accordion__item-title"><strong>"No valid locale columns found."</strong></div>
+<div class="accordion__item-content">
+<p><strong>What it means:</strong> The CSV includes <em>block_id</em> and <em>source</em> columns but no valid language columns.</p>
+<p><strong>What to do:</strong> Add at least one supported language column and try again.</p>
+</div>
+</div>
+</div>
+<div class="bs-callout bs-callout-default">
+<p>If you see only warnings and understand their impact, you can proceed with the import. If you see an error, you must correct the CSV and re-upload it before continuing. If you continue to see errors, export a fresh CSV from the translation editor, make minimal changes, and try another import to isolate the issue.</p>
+</div>
+<div class="bs-callout bs-callout-default">
+<p>If you continue to see errors after checking these items, export a fresh CSV from the translation editor, make minimal changes, and try another import to isolate which change is causing the problem.</p>
+</div>

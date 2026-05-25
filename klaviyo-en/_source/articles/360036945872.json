@@ -1,0 +1,1329 @@
+{
+  "captured_at": "2026-05-23T16:18:49Z",
+  "article": {
+    "id": 360036945872,
+    "url": "https://klaviyo.zendesk.com/api/v2/help_center/en-us/articles/360036945872.json",
+    "html_url": "https://klaviyo.zendesk.com/hc/en-us/articles/360036945872-How-to-migrate-from-Sailthru",
+    "author_id": 20350272227,
+    "comments_disabled": true,
+    "draft": false,
+    "promoted": false,
+    "position": 8,
+    "vote_sum": 4,
+    "vote_count": 6,
+    "section_id": 49375544319515,
+    "created_at": "2019-11-28T17:55:20Z",
+    "updated_at": "2026-05-11T10:57:26Z",
+    "name": "How to migrate from Sailthru",
+    "title": "How to migrate from Sailthru",
+    "source_locale": "en-us",
+    "locale": "en-us",
+    "outdated": false,
+    "outdated_locales": [],
+    "edited_at": "2023-04-28T14:00:02Z",
+    "user_segment_id": null,
+    "permission_group_id": 146372,
+    "content_tag_ids": [],
+    "label_names": [],
+    "body": "<h2>You will learn</h2>\n<p>Learn how to migrate from Sailthru to Klaviyo. While Klaviyo does not have a built-in integration with Sailthru, you can migrate your data over by exporting it from Sailthru and importing it into Klaviyo. Additionally, when you integrate your ecommerce store with Klaviyo, you will be able to trigger emails based on a browser's on site activities.</p>\n<h2>Before you begin</h2>\n<p>This guide will walk you through migrating your data from Sailthru to Klaviyo. As you migrate your Sailthru lists, keep in mind that the main objectives for migrating data are to ensure that all relevant contacts and fields are represented in Klaviyo and that any opted-out contacts are treated as such in Klaviyo.</p>\n<p>Below we provide a recommended approach that will allow you to upload opt-in contacts to Klaviyo and treat various contacts as unsubscribed based on the contact's opt-out status in Sailthru. We recommend that you review <a href=\"https://getstarted.sailthru.com/audience/managing-users/user-optout-levels/\" target=\"_blank\" rel=\"noopener\">how Sailthru defines your contacts' status</a> so you can ensure data quality on the Sailthru side and ensure that this approach of uploading contacts aligns with your intended use of Klaviyo.</p>\n<div class=\"bs-callout bs-callout-default\">\n<p>This guide give you general guidelines for migrating your data from Sailthru to Klaviyo. Contact <a href=\"https://getstarted.sailthru.com/contact/\" target=\"_blank\" rel=\"noopener\">Sailthru support</a> for the most up-to-date instructions on exporting your Sailthru data.</p>\n</div>\n<h2>Checklist</h2>\n<p>Migrating from Sailthru to Klaviyo requires several key steps:</p>\n<ol>\n<li>Export all Sailthru Opt-ins</li>\n<li>Format CSV file</li>\n<li>Import CSV files to a Klaviyo list</li>\n<li>Export Sailthru Opt-outs</li>\n<li>Add Opt-outs to your Klaviyo Suppression list</li>\n<li>Migrate email templates</li>\n<li>Export additional Sailthru data</li>\n<li>Set key Klaviyo flows live</li>\n<li>Sunset your Sailthru account</li>\n<li>Send your first Klaviyo campaign</li>\n</ol>\n<h2>Export Sailthru opt-ins</h2>\n<p>First, you’ll want to export your Sailthru opt-in contact list.</p>\n<div class=\"bs-callout bs-callout-default\">For enhanced security, only Sailthru seats (admins) that have been assigned PII (Personally Identifiable Information) permissions by their administrator are able to download raw email addresses. As such, be sure that you have the necessary permissions before you begin your Sailthru data export. Sailthru seats who do not have PII permissions are only able to download “hashed” email addresses which cannot be used in Klaviyo.</div>\n<p>To isolate your opt-in contacts, you’ll need to use <a href=\"https://getstarted.sailthru.com/audience/audience-builder/using-audience-builder/\" target=\"_blank\" rel=\"noopener\">Sailthru’s audience builder</a> to create a Smart List containing contacts who have opted in. For example, set up your Audience Builder filters to exclude users who have opted out. Also include filters for specific fields and VARS (custom fields/variables) in your export.</p>\n<p><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28717811443739\" alt=\"Custom field definition outlined in orange\" width=\"593\" height=\"323\"></p>\n<p>Once you’ve created your opt-in list, export your list in CSV format. Follow these Sailthru instructions for exporting your list:</p>\n<ol>\n<li>In My Sailthru, go to <strong>Users</strong> <strong>&gt;</strong> <strong>Lists</strong>.</li>\n<li>Locate the list you want to export, and in the rightmost column, click the <em>Excel icon</em>.</li>\n<li>Select <strong>All Emails</strong>, and click <strong>Export</strong>.</li>\n<li>When your file is ready, the download begins automatically. Or, while your export is processing, you can navigate away from the page, and return later to the <a href=\"https://my.sailthru.com/reports/jobs\" target=\"_blank\" rel=\"noopener\">Jobs</a> page:\n<ul>\n<li>At the top of My Sailthru, click the <em>Menu icon</em>.</li>\n<li>Find your job in the table. If it is complete, at the end of its row, click to download the file.</li>\n</ul>\n</li>\n<li>Contact <a href=\"https://getstarted.sailthru.com/account/management/support/\" target=\"_blank\" rel=\"noopener\">Sailthru support</a> if you need assistance creating and exporting your opt-in list.</li>\n</ol>\n<h2>Format CSV files</h2>\n<p>You'll need to format each CSV file before importing it into Klaviyo. To do that, open the CSV file and comb through the list, paying special attention to the column headings.</p>\n<ul>\n<li>Column headings should be in the first row of the CSV file. If Sailthru adds additional rows before the column headings, delete these extra rows.</li>\n<li>Your CSV file must include an \"Email\" or an \"Email Address\" column.</li>\n<li>You may want to include a \"First Name\" and \"Last Name\" column.</li>\n<li>Include any VARS (custom profile properties), such as \"Gender,\" that you'd like to upload to Klaviyo.</li>\n<li>Timestamp fields such as \"date added,\" \"last opened,\" and \"last clicked\" need to be specifically formatted or Klaviyo will not recognize them as timestamp fields. Make sure timestamp data is formatted in one of these formats:<br>YYYY-MM-DD HH:MM:SS<br>MM/DD/YYYY HH:MM:SS<br>MM/DD/YY HH:MM:SS<br>MM/DD/YYYY HH:MM<br>MM/DD/YY HH:MM<br>YYYY-MM-DDTHH:MM:SS</li>\n</ul>\n<p>Below is an example of how your CSV file should be formatted.</p>\n<p><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28717851116955\" alt=\"Example CSV of contacts containing fields such as first and last name\" width=\"633\" height=\"256\"></p>\n<p>Review your CSV file carefully, editing and deleting column headings and contact entries as appropriate.</p>\n<p>Remember, it's much easier to parse and edit data within a CSV file before it is uploaded into Klaviyo.</p>\n<p>For more detailed instructions on formatting CSV files, head to our article on<a href=\"https://klaviyo.zendesk.com/hc/en-us/articles/115005078967\" target=\"_blank\" rel=\"noopener\"> creating and adding contacts to a new list</a>.</p>\n<h2>Import CSV files to a Klaviyo list</h2>\n<p>After you've formatted your exported data, you can import it to a list in Klaviyo. Some Klaviyo flows are triggered by an email address being added to a list. Before you begin uploading contacts to a list, make sure these related flows are turned to draft or manual mode.</p>\n<ol>\n<li>Log in to your Klaviyo account, select the <strong>Audience</strong> dropdown, then click <strong>Lists &amp; Segments</strong>.</li>\n<li>Select the list where you would like to add your contacts. For this example, we're going to add subscribers to the Newsletter list.</li>\n<li>On the upper right-hand corner of your list, choose <strong>Import Contact</strong> from the <em>Manage List</em> dropdown.<br><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28717811450779\" alt=\"Klaviyo Newsletter list with manage list dropdown open\">\n</li>\n<li>Drag and drop your CSV file. You will be prompted to review field mapping before Klaviyo begins the import. Click <strong>Subscribe to Email Marketing</strong> in the <em>Email</em> row to denote that all profiles in this upload have explicitly consented to receive email marketing from you.</li>\n<li>Carefully review each import field/corresponding Klaviyo field, and modify as appropriate. By default, all identified fields are included in the import. You can omit a field from import by unchecking the box to the right of the field name.</li>\n<li>Column names that have no corresponding field name in your Klaviyo account are marked as \"Unmapped.\" If you try to import an unmapped field, you will receive an error message prompting you to map the field. By default, all identified fields are included in the import. You can omit a field from import by unchecking the box to the right of the field name. From the dropdown, select an existing field name or create a custom field by typing a name into the blank entry field. To the right of the field name, select a data type from these options: <strong>String</strong>, <strong>Boolean</strong>, <strong>Numeric</strong>, <strong>Date</strong>, <strong>List</strong>, or <strong>Consent</strong>. If you're unsure of the data type, head to our article on <a href=\"https://help.klaviyo.com/hc/en-us/articles/115005237648\" target=\"_blank\" rel=\"noopener\">Data Types</a>. Please note that timestamp fields, like last opened or last clicked, must be mapped as a date. Below is an example of field mapping for a Sailthru contacts import.<br><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28717851128731\" alt=\"Import review page with all fields mapped\">\n</li>\n<li>When you're finished, click <strong>Start Import</strong> on the upper right corner of your screen. For a deeper dive into importing contacts, head to our article on <a href=\"https://help.klaviyo.com/hc/en-us/articles/115002053752\" target=\"_blank\" rel=\"noopener\">migrating existing subscribers and unsubscribes into Klaviyo</a>.</li>\n</ol>\n<h2>Export Sailthru opt-outs</h2>\n<p>You’ll want to download customers who have opted out of email communications and then upload these to your Klaviyo Suppression list. First export your opt-out list.</p>\n<p>Follow these Sailthru’s <a href=\"https://getstarted.sailthru.com/audience/export/export-user-data/\" target=\"_blank\" rel=\"noopener\">instructions for exporting your opt-out data</a>:</p>\n<ol>\n<li>In My Sailthru, go to <strong>Users &gt;</strong> <strong>Lists</strong>.</li>\n<li>Locate the list you want to export, and in the rightmost column, click the <em>Excel icon</em><em>.</em>\n</li>\n<li>Select <strong>Optouts</strong>, and click <strong>Export</strong>.</li>\n<li>When your file is ready, the download begins automatically. Or, while your export is processing, you can navigate away from the page, and return later to the <a href=\"https://my.sailthru.com/reports/jobs\" target=\"_blank\" rel=\"noopener\">Jobs</a> page:\n<ul>\n<li>At the top of My Sailthru, click the <em>Menu icon</em>.</li>\n<li>Find your job in the table. If it is complete, at the end of its row, click to download the file.</li>\n</ul>\n</li>\n<li>Format the opt-out list so that it contains a single column of email addresses. There can be an \"Email\" column heading, but this is not necessary for the import into Klaviyo.</li>\n<li>This is an example of how your Suppression list CSV file should be formatted:<br><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28717851121947\" alt=\"Spreadsheet of sample email addresses\" width=\"430\" height=\"375\">\n</li>\n</ol>\n<h2>Add opt-outs to your Klaviyo suppression list</h2>\n<ol>\n<li>Navigate to the <strong>Profiles</strong> tab in your Klaviyo account (found under <strong>Audience</strong>), and click <strong>Suppressed Profiles</strong> on the upper right.</li>\n<li>Select <strong>Upload File</strong>.</li>\n<li>Click <strong>Choose File</strong> to select the CSV file containing your Sailthru Optouts. Then, click <strong>Upload Suppressions</strong>.</li>\n<li>Your Klaviyo suppression list will now reflect your import.</li>\n</ol>\n<h2>Migrate your email templates from Sailthru to Klaviyo</h2>\n<p>Klaviyo has an intuitive drag-and-drop template builder that you can use to recreate your Sailthru email templates. We highly recommend using this method to rebuild your templates because it will ensure that they are mobile-optimized, responsive, and easy-to-edit moving forward.</p>\n<p>Check out <a href=\"https://klaviyo.zendesk.com/hc/en-us/articles/4407911841435\" target=\"_blank\" rel=\"noopener\">our guide to using Klaviyo's template editor</a>.</p>\n<p>If you don't have time to recreate your Sailthru templates using Klaviyo's template builder, it is possible to export your email templates from Sailthru in raw HTML and then upload the updated raw HTML into Klaviyo.</p>\n<h3>Export your entire template HTML from Sailthru</h3>\n<p>To find the code for your Sailthru templates:</p>\n<ol>\n<li>Click on the template and then click the <strong>Code</strong> tab.</li>\n<li>Here, you will have access to the HTML of a given template.<br><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28717811462939\" alt=\"HTML for an email template in Sailthru\">\n</li>\n<li>You can copy the template code in its entirety and save it as an HTML file.</li>\n<li>Remember to swap out any Sailthru-specific tags with the applicable <a href=\"https://help.klaviyo.com/hc/en-us/articles/115005084927-Template-Tags-and-Variable-Syntax\" target=\"_blank\" rel=\"noopener\">Klaviyo tags</a> (e.g., first name tags, the unsubscribe link, etc.).</li>\n<li>To upload your file to Klaviyo, click the <strong>Content</strong> dropdown in Klaviyo and select the <strong>Templates</strong> tab, then select <strong>Create Template</strong>.</li>\n<li>Then, select <strong>Import your Template</strong>. Here, you will be prompted to select the HTML file from your computer and you can upload the file you just saved.</li>\n<li>You can see a preview of what your email template will look like in the <strong>Preview</strong> tab. Please note that, going forward, you will have to directly edit the HTML in order to change the template.</li>\n</ol>\n<p>For more information about importing raw HTML templates, you can reference our article on <a href=\"https://klaviyo.zendesk.com/hc/en-us/articles/115005254068\" target=\"_blank\" rel=\"noopener\">importing a custom HTML template</a>.</p>\n<h3>Copy Sailthru template HTML in batches</h3>\n<p>Alternatively, you can export chunks of code from your Sailthru templates, and then import them into text blocks in Klaviyo's drag-and-drop editor. To do this:</p>\n<ol>\n<li>In your Sailthru account, find the code of a particular template in the <strong>Code </strong>tab.</li>\n<li>In Klaviyo, create a new drag-and-drop template by going to the <strong>Templates</strong> tab (under <strong>Content</strong>) and clicking <strong>Create Template</strong>. Then, select <strong>Basic</strong>. Here, you can choose an unstyled template as a starting point that you will overwrite with the code from your Sailthru template.<br><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28717811456667\" alt=\"Basic email templates tab in Klaviyo\">\n</li>\n<li>Click the text block in the template, then click <strong>Source code.<br><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28717811459099\" alt=\"Text block in Klaviyo template builder with source button higlighted\" width=\"389\" height=\"274\"><br></strong>\n</li>\n<li>Replace the existing text with the HTML from your Sailthru template, and repeat this process for the parts of the code you would like to migrate directly to Klaviyo. You can then fill in any blanks using Klaviyo's drag-and-drop editor.</li>\n<li>Remember to swap out any Sailthru-specific tags with the applicable <a href=\"https://help.klaviyo.com/hc/en-us/articles/115005084927-Template-Tags-and-Variable-Syntax\" target=\"_blank\" rel=\"noopener\">Klaviyo tags</a> (e.g., first name tags, the unsubscribe link, etc.).</li>\n</ol>\n<h2>Export additional Sailthru data</h2>\n<p>Instructions in this article help you extract the data you’ll need to get up and running in Klaviyo. If you need to export additional data from Sailthru that is not included in these exports, you may want to consider using Sailthru’s paid <a href=\"https://getstarted.sailthru.com/analytics/exports/data-exporter/\" target=\"_blank\" rel=\"noopener\">Data Exporter</a> service.</p>\n<h2>Set key flows live</h2>\n<p>Setting flows live is a key step in ensuring that you properly warm your sending infrastructure. Flows are action-based automations that allow you to trigger messages based on customers' activity on your storefront. Because of this, emails sent through flows typically have much higher engagement rates than campaign emails, which are sent in bulk.</p>\n<p>To start, turn the following flows live:</p>\n<ul>\n<li><a href=\"https://help.klaviyo.com/hc/en-us/articles/115002779411-Guide-to-Creating-an-Abandoned-Cart-Flow\" target=\"_blank\" rel=\"noopener\">Abandoned cart</a></li>\n<li><a href=\"https://help.klaviyo.com/hc/en-us/articles/115002775172-Guide-to-Creating-a-Welcome-Series\" target=\"_blank\" rel=\"noopener\">Welcome series</a></li>\n<li><a href=\"https://help.klaviyo.com/hc/en-us/articles/360028872611-Guide-to-Creating-a-Post-Purchase-Flow\" target=\"_blank\" rel=\"noopener\">Post-purchase</a></li>\n</ul>\n<h2>Sunset your Sailthru account</h2>\n<p>After you've moved all your data over to Klaviyo, there are three key steps you can take to ensure that you no longer need your Sailthru account:</p>\n<ol>\n<li>Ensure that your sign-up forms and list growth tools point to Klaviyo, not Sailthru</li>\n<li>Recreate your Sailthru workflows as Klaviyo flows</li>\n<li>Discontinue use of Sailthru</li>\n</ol>\n<h3>Sign-up forms and list growth tools</h3>\n<p>Recreate any Sailthru sign-up forms in Klaviyo so that your list continues to grow in Klaviyo rather than in Sailthru. You can:</p>\n<ol>\n<li>Use the Klaviyo <a href=\"https://help.klaviyo.com/hc/en-us/articles/360026474752\" target=\"_blank\" rel=\"noopener\">sign-up form builder</a> to re-create your forms from scratch</li>\n<li>Use a third-party list growth tool that integrates with Klaviyo</li>\n<li>Integrate your custom form through your ecommerce platform</li>\n</ol>\n<p>If you are using third-party list growth tools, make sure that these sync to Klaviyo. Klaviyo integrates with a number of tools for list growth and landing pages. <a href=\"https://help.klaviyo.com/hc/en-us/categories/115000874028-App-Integrations\" target=\"_blank\" rel=\"noopener\">Scan our list of app integrations</a> to find the tool that you're using. If you don't see it listed, consider using Klaviyo's native Sign-up Form Builder to create your forms, or try switching to a different third-party tool.</p>\n<p>Please note that all Klaviyo lists are double opt-in by default. To change a list to single opt-in, head to that section of our <a href=\"https://klaviyo.zendesk.com/hc/en-us/articles/115005251108\" target=\"_blank\" rel=\"noopener\">guide to the double opt-in process</a>.</p>\n<p>If you’re using a custom-coded form, sync these contacts to Klaviyo by ensuring that your custom form syncs new subscribers directly to your ecommerce platform, and that your ecommerce platform is integrated with your Klaviyo account. </p>\n<p>After switching or syncing all your sign-up forms to Klaviyo, wait a few days and watch your lists in Sailthru. If you notice subscribers are still being added to these lists, there's probably at least one form that still needs to be swapped out.</p>\n<p>Next, you'll want to turn off your Sailthru sign-up forms. <a href=\"https://getstarted.sailthru.com/account/management/support/\" target=\"_blank\" rel=\"noopener\">Contact Sailthru support</a> for information on how to turn off your Sailthru sign-up forms.</p>\n<h3>Triggered messages</h3>\n<p>You may have a sequence of triggered messages running in Sailthru that you will want to recreate in Klaviyo. In Klaviyo, these types of messages are referred to as flows. As you move from Sailthru, it’s a good time to refresh and update your automated messaging. We recommend that you turn on your welcome series and abandoned cart flows as soon as possible (see above). A welcome series is particularly important to engage new subscribers, and abandoned cart flows have the highest ROI of any other type of flow.</p>\n<p>Once your Klaviyo flows are live, you'll want to turn off all of your triggered messages in Sailthru to ensure that you're not double-emailing people. Contact <a href=\"https://getstarted.sailthru.com/contact/\" target=\"_blank\" rel=\"noopener\">Sailthru support</a> for more information.</p>\n<h3>Sunset your Sailthru account</h3>\n<p>Once you’ve pointed all of your list growth tools to your Klaviyo account, paused your Sailthru triggered messages, and turned your Klaviyo flows live, you can discontinue using Sailthru. Before you close your Sailthru account, double-check that everything is working as expected. Enter a test email into your sign-up form and other list growth tools, abandon a cart, and sign up for your newsletter to trigger a welcome series. Go to the <strong>Profiles</strong> tab in your Klaviyo account (found under <strong>Audience</strong>) to make sure that the information in the profile reflects all of the correct communication. If the list you sign up to is double opt-in, be sure to confirm your email first.</p>\n<p>After you've taken these steps and are fully migrated to Klaviyo you can close your Sailthru account.</p>\n<h2>Send your first Klaviyo campaign</h2>\n<p>Once your Klaviyo account is integrated with your store and all of your data is ported over from Sailthru, you can send your first campaign with Klaviyo.</p>\n<h3>Create and send to a 30-day engaged subscriber segment</h3>\n<p>In Klaviyo, build a segment of your 30-day engaged subscribers.</p>\n<ol>\n<li>Navigate to the <strong>Lists &amp; Segments</strong> tab (found under<strong> Audience</strong>) and select <strong>Create List/Segment &gt; Segment</strong>.</li>\n<li>Build a segment with the following criteria:<br><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28717811465243\" alt=\"Sailthru 30 day engaged segment in Klaviyo segment builder\">\n</li>\n<li>Take note of how many people are in your 30-day engaged segment.\n<ul>\n<li>If there are between 0-50,000 people in your segment, you can send immediately and don't need to use batch sending</li>\n<li>If there are between 50,000-100,000 people in your segment, use batch sending and select the option to deliver to 20% over the course of 5 hours</li>\n<li>If there are 100,000+ people in your segment, use batch sending and select the option to deliver to 10% over the course of 10 hours</li>\n</ul>\n</li>\n<li>Navigate to the <strong>Campaigns</strong> tab and select <strong>Create Campaign</strong>. Select your 30-day engaged segment as the target audience.<br><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28717851146779\" alt=\"Setting to send campaign to 30-day engaged segment\" width=\"496\" height=\"141\">\n</li>\n<li>Fill in the content of this campaign using one of the templates you migrated over from Sailthru, or create a new one from scratch. </li>\n<li>When you are finished editing the content of the campaign, select <strong>Review &amp; Send Campaign</strong>. Review the campaign settings to ensure that everything is correct. Then, click <strong>Schedule</strong> or <strong>Send</strong>.</li>\n<li>If you need to use batch sending, from the scheduling dropdown, select <strong>Send gradually over several hours</strong> and then select the appropriate strategy for the number of people in your 30-day engaged segment as outlined above.<br><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28717851153819\" alt=\"Ready to send? page in Klaviyo with Schedule and Send now options\" width=\"529\" height=\"326\">\n</li>\n</ol>\n<p>For more information, check out our <a href=\"https://academy.klaviyo.com/getting-started-with-klaviyo\" target=\"_blank\" rel=\"noopener\">Getting started with Klaviyo course</a>.</p>\n<h3>Monitor performance</h3>\n<p>After sending your first campaign, it's incredibly important to <a href=\"https://help.klaviyo.com/hc/en-us/articles/115000201131\" target=\"_blank\" rel=\"noopener\">monitor the performance</a> to ensure strong deliverability thresholds. Refer to the table below to benchmark your performance.</p>\n<table>\n<tbody>\n<tr>\n<td> </td>\n<td>\n<p>Unique Open Rate</p>\n</td>\n<td>\n<p>Unique Click Rate</p>\n</td>\n<td>\n<p>Bounce Rate</p>\n</td>\n<td>\n<p>Unsubscribe Rate</p>\n</td>\n<td>\n<p>Spam Rate</p>\n</td>\n</tr>\n<tr>\n<td>\n<p>Great</p>\n</td>\n<td>\n<p>20% or more</p>\n</td>\n<td>\n<p>4% or more</p>\n</td>\n<td>\n<p>Less than 0.5%</p>\n</td>\n<td>\n<p>Less than 0.3%</p>\n</td>\n<td>\n<p>0.0%</p>\n</td>\n</tr>\n<tr>\n<td>\n<p>Proficient</p>\n</td>\n<td>\n<p>15-19%</p>\n</td>\n<td>\n<p>2-3.9%</p>\n</td>\n<td>\n<p>0.5-0.9%</p>\n</td>\n<td>\n<p>0.3-0.5%</p>\n</td>\n<td>\n<p>0.0%</p>\n</td>\n</tr>\n<tr>\n<td>\n<p>Room for Improvement</p>\n</td>\n<td>\n<p>10-14%</p>\n</td>\n<td>\n<p>1-1.9%</p>\n</td>\n<td>\n<p>1-1.9%</p>\n</td>\n<td>\n<p>0.6-0.9%</p>\n</td>\n<td>\n<p>0.1%</p>\n</td>\n</tr>\n<tr>\n<td>\n<p>Critical</p>\n</td>\n<td>\n<p>Less than 10%</p>\n</td>\n<td>\n<p>Less than 1%</p>\n</td>\n<td>\n<p>2% or more</p>\n</td>\n<td>\n<p>1% or more</p>\n</td>\n<td>\n<p>0.2% or more</p>\n</td>\n</tr>\n</tbody>\n</table>\n<p>If your performance falls into either the \"great\" or \"proficient\" thresholds, you may proceed to sending to a broader subset of customers. Otherwise, continue sending to your 30-day engaged segment until your performance is proficient or great.</p>\n<h2>Next steps</h2>\n<h3>Build an excellent sender reputation with Klaviyo</h3>\n<p>Once you begin sending to your most engaged segment of customers, you can gradually send to more of your customers. This gradual sending process enhances your sender reputation and is known as warming your IP address.</p>\n<p>Head over to our <a href=\"https://help.klaviyo.com/hc/en-us/categories/115000873988-Email-Deliverability\" target=\"_blank\" rel=\"noopener\">articles on deliverability</a> to read more about warming your sending infrastructure.</p>\n<h3>Use advanced segmentation to reach your customers</h3>\n<p>After you've engaged your most interested subscribers for the first month or so, you can begin reaching out to the rest of your customer base. Create additional segments to ensure you're reaching each corner of your customer base.</p>\n<ul>\n<li>Duplicate your Engaged (3 Months) segment and tweak the settings, decreasing the timeframe from 3 months to 30 days</li>\n<li>Create and send to a 90-day engaged subscriber segment</li>\n<li>Use historical Sailthru data to refine and build out your segments</li>\n</ul>\n<h3>Create and send to a 90-day engaged subscriber segment</h3>\n<p>To create a broader segment of engaged subscribers:</p>\n<ol>\n<li>Navigate to your <strong>Lists &amp; Segments</strong> tab (found under <strong>Audience</strong>) and select <strong>Create List/Segment &gt; Segment</strong>.</li>\n<li>Your segment should have the following conditions:<br><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28717851149979\" alt=\"sail12.jpg\" width=\"617\" height=\"140\">\n</li>\n<li>Next, create and schedule your campaigns to send to this group as outlined above for the 30-day engaged segment.</li>\n<li>Be sure to closely monitor your deliverability to ensure that your performance remains strong.</li>\n</ol>\n<h2>Outcome</h2>\n<p>You've now migrated from Sailthru to Klaviyo and have learned best practices for migrating email providers.</p>\n<h2>Additional resources</h2>\n<ul>\n<li><a href=\"https://help.klaviyo.com/hc/en-us/articles/115005078807\" target=\"_blank\" rel=\"noopener\">How to troubleshoot list imports</a></li>\n<li><a href=\"https://help.klaviyo.com/hc/en-us/articles/115005247008\" target=\"_blank\" rel=\"noopener\">Understanding email deliverability</a></li>\n<li><a href=\"https://help.klaviyo.com/hc/en-us/articles/115005074627\" target=\"_blank\" rel=\"noopener\">Profile properties reference</a></li>\n</ul>",
+    "user_segment_ids": []
+  },
+  "normalized": {
+    "id": "360036945872",
+    "title": "How to migrate from Sailthru",
+    "source_url": "https://help.klaviyo.com/hc/en-us/articles/360036945872-How-to-migrate-from-Sailthru",
+    "section_id": 49375544319515,
+    "section": "Migrate from an email service provider",
+    "category_id": 115000032731,
+    "category": "Integrations",
+    "category_slug": "integrations",
+    "klaviyo_updated": "2026-05-11T10:57:26Z",
+    "created_at": "2019-11-28T17:55:20Z",
+    "draft": false,
+    "promoted": false,
+    "position": 8,
+    "label_names": []
+  },
+  "files": {
+    "body_html": "_source/articles/360036945872.body.html",
+    "rendered_html": "_source/rendered/360036945872.html"
+  },
+  "assets": {
+    "api_body": {
+      "images": [
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28717811443739",
+          "alt": "Custom field definition outlined in orange",
+          "width": "593",
+          "height": "323"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28717851116955",
+          "alt": "Example CSV of contacts containing fields such as first and last name",
+          "width": "633",
+          "height": "256"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28717811450779",
+          "alt": "Klaviyo Newsletter list with manage list dropdown open",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28717851128731",
+          "alt": "Import review page with all fields mapped",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28717851121947",
+          "alt": "Spreadsheet of sample email addresses",
+          "width": "430",
+          "height": "375"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28717811462939",
+          "alt": "HTML for an email template in Sailthru",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28717811456667",
+          "alt": "Basic email templates tab in Klaviyo",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28717811459099",
+          "alt": "Text block in Klaviyo template builder with source button higlighted",
+          "width": "389",
+          "height": "274"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28717811465243",
+          "alt": "Sailthru 30 day engaged segment in Klaviyo segment builder",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28717851146779",
+          "alt": "Setting to send campaign to 30-day engaged segment",
+          "width": "496",
+          "height": "141"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28717851153819",
+          "alt": "Ready to send? page in Klaviyo with Schedule and Send now options",
+          "width": "529",
+          "height": "326"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28717851149979",
+          "alt": "sail12.jpg",
+          "width": "617",
+          "height": "140"
+        }
+      ],
+      "links": [
+        {
+          "href": "https://getstarted.sailthru.com/audience/managing-users/user-optout-levels/",
+          "text": "how Sailthru defines your contacts' status"
+        },
+        {
+          "href": "https://getstarted.sailthru.com/contact/",
+          "text": "Sailthru support"
+        },
+        {
+          "href": "https://getstarted.sailthru.com/audience/audience-builder/using-audience-builder/",
+          "text": "Sailthru’s audience builder"
+        },
+        {
+          "href": "https://my.sailthru.com/reports/jobs",
+          "text": "Jobs"
+        },
+        {
+          "href": "https://getstarted.sailthru.com/account/management/support/",
+          "text": "Sailthru support"
+        },
+        {
+          "href": "https://klaviyo.zendesk.com/hc/en-us/articles/115005078967",
+          "text": "creating and adding contacts to a new list"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005237648",
+          "text": "Data Types"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115002053752",
+          "text": "migrating existing subscribers and unsubscribes into Klaviyo"
+        },
+        {
+          "href": "https://getstarted.sailthru.com/audience/export/export-user-data/",
+          "text": "instructions for exporting your opt-out data"
+        },
+        {
+          "href": "https://klaviyo.zendesk.com/hc/en-us/articles/4407911841435",
+          "text": "our guide to using Klaviyo's template editor"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005084927-Template-Tags-and-Variable-Syntax",
+          "text": "Klaviyo tags"
+        },
+        {
+          "href": "https://klaviyo.zendesk.com/hc/en-us/articles/115005254068",
+          "text": "importing a custom HTML template"
+        },
+        {
+          "href": "https://getstarted.sailthru.com/analytics/exports/data-exporter/",
+          "text": "Data Exporter"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115002779411-Guide-to-Creating-an-Abandoned-Cart-Flow",
+          "text": "Abandoned cart"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115002775172-Guide-to-Creating-a-Welcome-Series",
+          "text": "Welcome series"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360028872611-Guide-to-Creating-a-Post-Purchase-Flow",
+          "text": "Post-purchase"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360026474752",
+          "text": "sign-up form builder"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000874028-App-Integrations",
+          "text": "Scan our list of app integrations"
+        },
+        {
+          "href": "https://klaviyo.zendesk.com/hc/en-us/articles/115005251108",
+          "text": "guide to the double opt-in process"
+        },
+        {
+          "href": "https://getstarted.sailthru.com/account/management/support/",
+          "text": "Contact Sailthru support"
+        },
+        {
+          "href": "https://academy.klaviyo.com/getting-started-with-klaviyo",
+          "text": "Getting started with Klaviyo course"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115000201131",
+          "text": "monitor the performance"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000873988-Email-Deliverability",
+          "text": "articles on deliverability"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005078807",
+          "text": "How to troubleshoot list imports"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005247008",
+          "text": "Understanding email deliverability"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005074627",
+          "text": "Profile properties reference"
+        }
+      ],
+      "headings": [
+        {
+          "level": 2,
+          "id": "",
+          "text": "You will learn"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "Before you begin"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "Checklist"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "Export Sailthru opt-ins"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "Format CSV files"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "Import CSV files to a Klaviyo list"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "Export Sailthru opt-outs"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "Add opt-outs to your Klaviyo suppression list"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "Migrate your email templates from Sailthru to Klaviyo"
+        },
+        {
+          "level": 3,
+          "id": "",
+          "text": "Export your entire template HTML from Sailthru"
+        },
+        {
+          "level": 3,
+          "id": "",
+          "text": "Copy Sailthru template HTML in batches"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "Export additional Sailthru data"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "Set key flows live"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "Sunset your Sailthru account"
+        },
+        {
+          "level": 3,
+          "id": "",
+          "text": "Sign-up forms and list growth tools"
+        },
+        {
+          "level": 3,
+          "id": "",
+          "text": "Triggered messages"
+        },
+        {
+          "level": 3,
+          "id": "",
+          "text": "Sunset your Sailthru account"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "Send your first Klaviyo campaign"
+        },
+        {
+          "level": 3,
+          "id": "",
+          "text": "Create and send to a 30-day engaged subscriber segment"
+        },
+        {
+          "level": 3,
+          "id": "",
+          "text": "Monitor performance"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "Next steps"
+        },
+        {
+          "level": 3,
+          "id": "",
+          "text": "Build an excellent sender reputation with Klaviyo"
+        },
+        {
+          "level": 3,
+          "id": "",
+          "text": "Use advanced segmentation to reach your customers"
+        },
+        {
+          "level": 3,
+          "id": "",
+          "text": "Create and send to a 90-day engaged subscriber segment"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "Outcome"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "Additional resources"
+        }
+      ]
+    },
+    "rendered_page": {
+      "images": [
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/7ff492c2b417b7ecfe572f839a8a81398693c1f7-1920x1080.webp",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/7b4329b63f2c5bc80ef9213087be8032bc3f1c65-1862x1014.jpg?w=593",
+          "alt": "Custom field definition outlined in orange",
+          "width": "593",
+          "height": "323"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/1c23b10c3b4450b9e41eaea3c69c3b215f3800aa-1452x588.jpg?w=633",
+          "alt": "Example CSV of contacts containing fields such as first and last name",
+          "width": "633",
+          "height": "256"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/a84e306c51ec86679dc5523b4c55c96506bd9ee6-1696x396.jpg",
+          "alt": "Klaviyo Newsletter list with manage list dropdown open",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/417c73075138c8f44667eab345cb23af4fe082b0-2510x950.jpg",
+          "alt": "Import review page with all fields mapped",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/4ed9e7b2c65be3a4fd2b2eb9714892f066bf29fb-614x536.jpg?w=430",
+          "alt": "Spreadsheet of sample email addresses",
+          "width": "430",
+          "height": "375"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/62ad656c240af369a3b09fedd0747d7f613b4494-1402x592.jpg",
+          "alt": "HTML for an email template in Sailthru",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/33fb49eca99aec5dff01da9c4d680668a3dd41c4-1750x860.jpg",
+          "alt": "Basic email templates tab in Klaviyo",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/473a91ee47c8ee51997ee5f587a92cb4d62a56c1-1098x774.jpg?w=389",
+          "alt": "Text block in Klaviyo template builder with source button higlighted",
+          "width": "389",
+          "height": "274"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/1015339084781be33d26229a17adeea2595e2e88-1169x358.jpg",
+          "alt": "Sailthru 30 day engaged segment in Klaviyo segment builder",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/979b398a86a19c2e749ef044646c430c1bda8873-588x167.jpg?w=496",
+          "alt": "Setting to send campaign to 30-day engaged segment",
+          "width": "496",
+          "height": "141"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/18a40e3177a16ada396cc2d7c080be9f82d1983d-695x428.jpg?w=529",
+          "alt": "Ready to send? page in Klaviyo with Schedule and Send now options",
+          "width": "529",
+          "height": "326"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/09cf3986c5356038bf778b3ec1525242c8ebe783-1166x265.jpg?w=617",
+          "alt": "sail12.jpg",
+          "width": "617",
+          "height": "140"
+        }
+      ],
+      "links": [
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360036945872-How-to-migrate-from-Sailthru#site-content",
+          "text": "Skip to main content"
+        },
+        {
+          "href": "https://www.klaviyo.com",
+          "text": "Home"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center"
+        },
+        {
+          "href": "https://www.klaviyo.com/enterprise",
+          "text": "Enterprise"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Partners"
+        },
+        {
+          "href": "https://www.klaviyo.com/careers",
+          "text": "Careers"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": "Log in"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": ""
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center Find step-by-step instructions and troubleshooting solutions in our knowledge base."
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000032731",
+          "text": "Integrations"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000312411",
+          "text": "Flows"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867867",
+          "text": "Audience"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867667",
+          "text": "Campaigns"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/360000190711",
+          "text": "Sign-up forms"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000873988",
+          "text": "Deliverability & compliance"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/29173800271259",
+          "text": "SMS"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/16638219724187",
+          "text": "Reviews"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/18073014919195",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/34141283979931",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/37659126754075",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/33948021740315",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/39746685522331",
+          "text": "WhatsApp"
+        },
+        {
+          "href": "https://academy.klaviyo.com",
+          "text": "Klaviyo Academy Expert training and education to help you succeed with Klaviyo, and beyond."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Quick+guide&resource=academy_courses",
+          "text": "Quick guides Learn marketing strategies and concepts in 15 minutes or less."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Course&resource=academy_courses",
+          "text": "Courses Master key marketing topics through structured lessons and exams."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/best-practices",
+          "text": "Best practices Discover top product and marketing strategies for your business."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/learning-paths",
+          "text": "Learning paths Complete curated learning journeys tailored to your marketing goals."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses",
+          "text": "Explore all resources"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Live+training&resource=academy_courses",
+          "text": "Live trainings Build confidence through hands-on interactive workshops and thought-provoking strategy sessions."
+        },
+        {
+          "href": "https://www.bigmarker.com/klaviyo-customer-education/Office-hours-Getting-started-with-Klaviyo",
+          "text": "Live office hours Join a strategic discussion where you can ask questions and get answers in real-time."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/private-live-training",
+          "text": "1:1 Live training Book a private training session with an expert to jumpstart your platform knowledge and confidence."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/credentials",
+          "text": "Klaviyo credentials Dig deeper into select topics and showcase your expertise with a final exam to earn a certificate and digital badge."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/certificates/klaviyo-practitioner-certificate",
+          "text": "Klaviyo practitioner certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/deliverability-certificate",
+          "text": "Deliverability certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/developer-certificate",
+          "text": "Klaviyo developer certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses&select=Certificate",
+          "text": "See all certificates"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Klaviyo Community Join our thriving community network to connect with brands like yours—online and in person."
+        },
+        {
+          "href": "https://community.klaviyo.com/topic/new",
+          "text": "Ask a question Post a question and get thoughtful answers from Klaviyo powerusers."
+        },
+        {
+          "href": "https://community.klaviyo.com/p/roadmap",
+          "text": "Product roadmap"
+        },
+        {
+          "href": "https://community.klaviyo.com/search/activity/recent",
+          "text": "Recent threads"
+        },
+        {
+          "href": "https://community.klaviyo.com/p/champions",
+          "text": "Meet the Champions"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups",
+          "text": "Browse all groups Your people are waiting. New ideas and connections are a click away."
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/developer-group-64",
+          "text": "Developer group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/entrepreneur-user-group-118",
+          "text": "Entrepreneur group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/woo-user-group-87",
+          "text": "WooCommerce group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/new-york-meetup-chapter-82",
+          "text": "New York City"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/los-angeles-meetup-chapter-83",
+          "text": "Los Angeles"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/austin-meetup-chapter-85",
+          "text": "Austin"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/san-diego-meetup-chapter-86",
+          "text": "San Diego"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/amsterdam-meetup-chapter-84",
+          "text": "Amsterdam"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Klaviyo Developers Access API documentation and developer guides to help you build with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/get_started",
+          "text": "Get started Access key resources and a step-by-step checklist for how to start developing with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/build_your_integration",
+          "text": "Grow your app's reach Learn how to join our ecosystem and get your app listed on our marketplace."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/developer-tools",
+          "text": "Developer tools Generate sample data, monitor your API usage, and access our Postman collections."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/reference/api_overview",
+          "text": "API reference Browse our full catalog of API docs."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/changelog_",
+          "text": "Changelog"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/api_versioning_and_deprecation_policy",
+          "text": "Versioning & deprecation policy"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/rate_limits_and_error_handling",
+          "text": "Rate limits & error handling"
+        },
+        {
+          "href": "https://youtube.com/playlist?list=PLHkNfHgtxcUanrkMnKPdkRzuWU7MGv_xM&si=pkG-KH7IT_TUHOGC",
+          "text": "API tutorials on YouTube Subscribe to our Klaviyo API Tutorials playlist for easy access to step-by-step developer walkthroughs."
+        },
+        {
+          "href": "https://www.klaviyo.com/contact-us",
+          "text": "Contact us"
+        },
+        {
+          "href": "https://www.klaviyo.com/sign-up",
+          "text": "Sign up"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": "Search"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360036945872",
+          "text": "United States - EN"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/de-de/articles/360036945872",
+          "text": "Deutschland - DE"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-es/articles/360036945872",
+          "text": "España - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-mx/articles/360036945872",
+          "text": "México - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/fr-fr/articles/360036945872",
+          "text": "France - FR"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/it-it/articles/360036945872",
+          "text": "Italia - IT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/ko-kr/articles/360036945872",
+          "text": "한국 - KO"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/nl-nl/articles/360036945872",
+          "text": "Nederland - NL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pl-pl/articles/360036945872",
+          "text": "Polska - PL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pt-br/articles/360036945872",
+          "text": "Brasil - PT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/sv-se/articles/360036945872",
+          "text": "Sverige - SV"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/49375918518171",
+          "text": "Migrate to Klaviyo"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/49375544319515",
+          "text": "Migrate from an email service provider"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360036945872-How-to-migrate-from-Sailthru#you-will-learn",
+          "text": "You will learn"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360036945872-How-to-migrate-from-Sailthru#before-you-begin",
+          "text": "Before you begin"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360036945872-How-to-migrate-from-Sailthru#checklist",
+          "text": "Checklist"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360036945872-How-to-migrate-from-Sailthru#export-sailthru-opt-ins",
+          "text": "Export Sailthru opt-ins"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360036945872-How-to-migrate-from-Sailthru#format-csv-files",
+          "text": "Format CSV files"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360036945872-How-to-migrate-from-Sailthru#import-csv-files-to-a-klaviyo-list",
+          "text": "Import CSV files to a Klaviyo list"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360036945872-How-to-migrate-from-Sailthru#export-sailthru-opt-outs",
+          "text": "Export Sailthru opt-outs"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360036945872-How-to-migrate-from-Sailthru#add-opt-outs-to-your-klaviyo-suppression-list",
+          "text": "Add opt-outs to your Klaviyo suppression list"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360036945872-How-to-migrate-from-Sailthru#migrate-your-email-templates-from-sailthru-to-klaviyo",
+          "text": "Migrate your email templates from Sailthru to Klaviyo"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360036945872-How-to-migrate-from-Sailthru#export-additional-sailthru-data",
+          "text": "Export additional Sailthru data"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360036945872-How-to-migrate-from-Sailthru#set-key-flows-live",
+          "text": "Set key flows live"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360036945872-How-to-migrate-from-Sailthru#sunset-your-sailthru-account",
+          "text": "Sunset your Sailthru account"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360036945872-How-to-migrate-from-Sailthru#send-your-first-klaviyo-campaign",
+          "text": "Send your first Klaviyo campaign"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360036945872-How-to-migrate-from-Sailthru#next-steps",
+          "text": "Next steps"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360036945872-How-to-migrate-from-Sailthru#outcome",
+          "text": "Outcome"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360036945872-How-to-migrate-from-Sailthru#additional-resources",
+          "text": "Additional resources"
+        },
+        {
+          "href": "https://getstarted.sailthru.com/audience/managing-users/user-optout-levels/",
+          "text": "how Sailthru defines your contacts' status"
+        },
+        {
+          "href": "https://getstarted.sailthru.com/contact/",
+          "text": "Sailthru support"
+        },
+        {
+          "href": "https://getstarted.sailthru.com/audience/audience-builder/using-audience-builder/",
+          "text": "Sailthru’s audience builder"
+        },
+        {
+          "href": "https://my.sailthru.com/reports/jobs",
+          "text": "Jobs"
+        },
+        {
+          "href": "https://getstarted.sailthru.com/account/management/support/",
+          "text": "Sailthru support"
+        },
+        {
+          "href": "https://klaviyo.zendesk.com/hc/en-us/articles/115005078967",
+          "text": "creating and adding contacts to a new list"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005237648",
+          "text": "Data Types"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115002053752",
+          "text": "migrating existing subscribers and unsubscribes into Klaviyo"
+        },
+        {
+          "href": "https://getstarted.sailthru.com/audience/export/export-user-data/",
+          "text": "instructions for exporting your opt-out data"
+        },
+        {
+          "href": "https://klaviyo.zendesk.com/hc/en-us/articles/4407911841435",
+          "text": "our guide to using Klaviyo's template editor"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005084927-Template-Tags-and-Variable-Syntax",
+          "text": "Klaviyo tags"
+        },
+        {
+          "href": "https://klaviyo.zendesk.com/hc/en-us/articles/115005254068",
+          "text": "importing a custom HTML template"
+        },
+        {
+          "href": "https://getstarted.sailthru.com/analytics/exports/data-exporter/",
+          "text": "Data Exporter"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115002779411-Guide-to-Creating-an-Abandoned-Cart-Flow",
+          "text": "Abandoned cart"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115002775172-Guide-to-Creating-a-Welcome-Series",
+          "text": "Welcome series"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360028872611-Guide-to-Creating-a-Post-Purchase-Flow",
+          "text": "Post-purchase"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360026474752",
+          "text": "sign-up form builder"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000874028-App-Integrations",
+          "text": "Scan our list of app integrations"
+        },
+        {
+          "href": "https://klaviyo.zendesk.com/hc/en-us/articles/115005251108",
+          "text": "guide to the double opt-in process"
+        },
+        {
+          "href": "https://getstarted.sailthru.com/account/management/support/",
+          "text": "Contact Sailthru support"
+        },
+        {
+          "href": "https://academy.klaviyo.com/getting-started-with-klaviyo",
+          "text": "Getting started with Klaviyo course"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115000201131",
+          "text": "monitor the performance"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000873988-Email-Deliverability",
+          "text": "articles on deliverability"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005078807",
+          "text": "Troubleshooting list imports"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005247008",
+          "text": "Understanding email deliverability"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005074627",
+          "text": "Profile properties reference"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115001002272",
+          "text": "Learn how to contact support"
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": ""
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": "Visit Community"
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": ""
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": "Hire a partner"
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/about",
+          "text": "About Klaviyo"
+        },
+        {
+          "href": "https://www.klaviyo.com/newsroom",
+          "text": "Newsroom"
+        },
+        {
+          "href": "https://investors.klaviyo.com/overview/default.aspx",
+          "text": "Investor relations"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Agency and tech partners"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Developers"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/retail",
+          "text": "Retail and ecommerce"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/restaurants",
+          "text": "Restaurant marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/wellness",
+          "text": "Wellness"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform",
+          "text": "B2C CRM overview"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai",
+          "text": "Klaviyo AI (K:AI)"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/marketing-automation",
+          "text": "Klaviyo Marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-service",
+          "text": "Klaviyo Service"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/analytics",
+          "text": "Klaviyo Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-data-platform",
+          "text": "Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare",
+          "text": "Klaviyo vs. Klaviyo alternatives"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-mailchimp",
+          "text": "Klaviyo vs. Mailchimp"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-postscript",
+          "text": "Klaviyo vs. Postscript"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-attentive",
+          "text": "Klaviyo vs. Attentive"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-salesforce-marketing-cloud",
+          "text": "Klaviyo vs. Salesforce"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-listrak",
+          "text": "Klaviyo vs. Listrak"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/omnichannel",
+          "text": "Omnichannel marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/email-marketing",
+          "text": "Email marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing",
+          "text": "SMS marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing/rcs",
+          "text": "RCS for Business"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/mobile-app-marketing",
+          "text": "Mobile app marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/whatsapp",
+          "text": "WhatsApp marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/social",
+          "text": "Social marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources",
+          "text": "Marketing resources"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources/marketing-campaign-calendar",
+          "text": "Marketing campaign calendar"
+        },
+        {
+          "href": "https://www.klaviyo.com/glossary",
+          "text": "Marketing glossary"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/email-subject-line-generator",
+          "text": "Subject line generator"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/roi-calculator",
+          "text": "ROI calculator"
+        },
+        {
+          "href": "https://www.klaviyo.com/customers",
+          "text": "Case studies"
+        },
+        {
+          "href": "https://www.klaviyo.com/composer",
+          "text": "Composer Beta"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/marketing-agent",
+          "text": "Marketing Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/customer-agent",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/customer-experience-hub",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/helpdesk",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/marketing-analytics",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/advanced-cdp",
+          "text": "Advanced Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/web-forms",
+          "text": "Web forms"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/email-templates",
+          "text": "Email templates"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/portfolio",
+          "text": "Portfolio"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform-integrations",
+          "text": "Apps and Integrations"
+        },
+        {
+          "href": "https://www.klaviyo.com/features",
+          "text": "Features"
+        },
+        {
+          "href": "https://www.klaviyo.com/whats-new",
+          "text": "What's new"
+        },
+        {
+          "href": "https://www.klaviyo.com/events",
+          "text": "Events"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help Center"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us",
+          "text": "Academy"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Community"
+        },
+        {
+          "href": "https://www.facebook.com/Klaviyo/",
+          "text": "Facebook"
+        },
+        {
+          "href": "https://twitter.com/klaviyo/",
+          "text": "Twitter"
+        },
+        {
+          "href": "https://www.linkedin.com/company/klaviyo/",
+          "text": "LinkedIn"
+        },
+        {
+          "href": "https://www.instagram.com/klaviyo/",
+          "text": "Instagram"
+        },
+        {
+          "href": "https://www.klaviyo.com/sitemap",
+          "text": "Site Map"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal",
+          "text": "Terms and Privacy"
+        },
+        {
+          "href": "https://www.klaviyo.com/security",
+          "text": "Security"
+        },
+        {
+          "href": "https://www.klaviyo.com/trust",
+          "text": "Trust"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal/intellectual-property-notices",
+          "text": "Intellectual Property Notices"
+        }
+      ],
+      "headings": [
+        {
+          "level": 1,
+          "id": "",
+          "text": "How to migrate from Sailthru"
+        },
+        {
+          "level": 2,
+          "id": "you-will-learn",
+          "text": "You will learn"
+        },
+        {
+          "level": 2,
+          "id": "before-you-begin",
+          "text": "Before you begin"
+        },
+        {
+          "level": 2,
+          "id": "checklist",
+          "text": "Checklist"
+        },
+        {
+          "level": 2,
+          "id": "export-sailthru-opt-ins",
+          "text": "Export Sailthru opt-ins"
+        },
+        {
+          "level": 2,
+          "id": "format-csv-files",
+          "text": "Format CSV files"
+        },
+        {
+          "level": 2,
+          "id": "import-csv-files-to-a-klaviyo-list",
+          "text": "Import CSV files to a Klaviyo list"
+        },
+        {
+          "level": 2,
+          "id": "export-sailthru-opt-outs",
+          "text": "Export Sailthru opt-outs"
+        },
+        {
+          "level": 2,
+          "id": "add-opt-outs-to-your-klaviyo-suppression-list",
+          "text": "Add opt-outs to your Klaviyo suppression list"
+        },
+        {
+          "level": 2,
+          "id": "migrate-your-email-templates-from-sailthru-to-klaviyo",
+          "text": "Migrate your email templates from Sailthru to Klaviyo"
+        },
+        {
+          "level": 3,
+          "id": "export-your-entire-template-html-from-sailthru",
+          "text": "Export your entire template HTML from Sailthru"
+        },
+        {
+          "level": 3,
+          "id": "copy-sailthru-template-html-in-batches",
+          "text": "Copy Sailthru template HTML in batches"
+        },
+        {
+          "level": 2,
+          "id": "export-additional-sailthru-data",
+          "text": "Export additional Sailthru data"
+        },
+        {
+          "level": 2,
+          "id": "set-key-flows-live",
+          "text": "Set key flows live"
+        },
+        {
+          "level": 2,
+          "id": "sunset-your-sailthru-account",
+          "text": "Sunset your Sailthru account"
+        },
+        {
+          "level": 3,
+          "id": "sign-up-forms-and-list-growth-tools",
+          "text": "Sign-up forms and list growth tools"
+        },
+        {
+          "level": 3,
+          "id": "triggered-messages",
+          "text": "Triggered messages"
+        },
+        {
+          "level": 3,
+          "id": "sunset-your-sailthru-account",
+          "text": "Sunset your Sailthru account"
+        },
+        {
+          "level": 2,
+          "id": "send-your-first-klaviyo-campaign",
+          "text": "Send your first Klaviyo campaign"
+        },
+        {
+          "level": 3,
+          "id": "create-and-send-to-a-30-day-engaged-subscriber-segment",
+          "text": "Create and send to a 30-day engaged subscriber segment"
+        },
+        {
+          "level": 3,
+          "id": "monitor-performance",
+          "text": "Monitor performance"
+        },
+        {
+          "level": 2,
+          "id": "next-steps",
+          "text": "Next steps"
+        },
+        {
+          "level": 3,
+          "id": "build-an-excellent-sender-reputation-with-klaviyo",
+          "text": "Build an excellent sender reputation with Klaviyo"
+        },
+        {
+          "level": 3,
+          "id": "use-advanced-segmentation-to-reach-your-customers",
+          "text": "Use advanced segmentation to reach your customers"
+        },
+        {
+          "level": 3,
+          "id": "create-and-send-to-a-90-day-engaged-subscriber-segment",
+          "text": "Create and send to a 90-day engaged subscriber segment"
+        },
+        {
+          "level": 2,
+          "id": "outcome",
+          "text": "Outcome"
+        },
+        {
+          "level": 2,
+          "id": "additional-resources",
+          "text": "Additional resources"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "Explore more from Klaviyo"
+        }
+      ]
+    }
+  },
+  "rendered_page": {
+    "status": "fetched",
+    "error": ""
+  }
+}

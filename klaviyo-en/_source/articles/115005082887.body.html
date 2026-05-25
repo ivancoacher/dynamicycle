@@ -1,0 +1,170 @@
+<h2 id="h_01HH35C7VZRR6AWH5T92BC12EG">You will learn</h2>
+<p>Learn how to integrate NeonCRM with Klaviyo in order to personalize and target emails based on each Contributor's donation and event registration activity. Data synced from NeonCRM to Klaviyo includes:</p>
+<ul>
+<li>When a donation occurs, with details about the contribution</li>
+<li>Contact information, including first and last name, location, and custom fields</li>
+<li>When someone registers for an event, with details about the registration</li>
+</ul>
+<h2 id="h_01HH35C7VZYZCVB390AJFGEYXZ">Integrate NeonCRM with Klaviyo</h2>
+<ol>
+<li>In Klaviyo, select the <strong>Integrations</strong> tab.</li>
+<li>Click <strong>Explore apps</strong>, search for <em>NeonCRM</em>, and click the card. Then, click <strong>Install</strong>.</li>
+<li>You will need your NeonCRM API key and Organization ID. To generate your NeonCRM API key, open a new tab and log in to your NeonCRM system.</li>
+<li>Navigate to <strong>System Settings &gt; System Users</strong>.</li>
+<li>Click<strong> New User</strong>; you can name this user anything you like, but we recommend naming the user something that distinguishes its use, such as <em>Klaviyo</em> <em>API User</em>.</li>
+<li>Specify a user name and password.</li>
+<li>Enable API access for this user account by clicking the checkbox.</li>
+<li>Type in an email address; this address will receive alerts and updates from the NeonCRM team related to the API.</li>
+<li> Click <strong>Generate</strong> to create your API key; you will want to copy this API key to paste into Klaviyo.</li>
+<li> Click <strong>Next</strong> to complete the process of creating this user.</li>
+<li> Switch back to Klaviyo and paste your API key .<br><img src="https://klaviyo.zendesk.com/hc/article_attachments/28722594435995" width="619" height="495">
+</li>
+<li> To find your Organization ID, navigate to the login screen for your NeonCRM system.</li>
+<li> Look at the URL in your web browser; the text after /clients/ and before /login.jsp is your Organization ID.</li>
+<li> Copy and paste your Organization ID in Klaviyo.</li>
+<li> Click <strong>Connect to NeonCRM</strong>.</li>
+<li> If you want to add NeonCRM accounts to a list in Klaviyo, check this setting and select a list.</li>
+<li>Click<strong> Complete setup</strong>.</li>
+</ol>
+<h2 id="h_01HH35C7VZTBSJW4SQS57GTX0W">Add Klaviyo onsite tracking</h2>
+<p>The final step is to add Klaviyo's A<em>ctive on Site</em> tracking code to your website footer. This code snippet will enable Klaviyo to track an <em>Active on Site</em> metric so that you can leverage data related to the site visits and behavior of known browsers. </p>
+<p>For example, you can use the <em>Active on Site</em> metric to create segments of people who have visited your site (while logged in), but haven't yet made a donation. </p>
+<ol>
+<li>Copy the <em>Active on Site </em>tracking code snippet below:<br>
+<pre><code class="language-js">&lt;script type="application/javascript" async src="https://static.klaviyo.com/onsite/js/klaviyo.js?company_id=Public API Key"&gt;&lt;/script&gt;</code></pre>
+</li>
+<li>Paste the snippet into the main template of your app before the &lt;/body&gt; tag.</li>
+<li>Replace ‘Public API Key’ in the snippet with your own Klaviyo public API key, which can be found under <strong>Account name &gt; Settings &gt; API keys</strong>.</li>
+<li>In Klaviyo, select the <strong>Integrations</strong> tab.</li>
+<li>In the upper right, click<strong> Manage data &gt; Setup web tracking</strong>.</li>
+<li>A success page with a green checkmark will appear if it’s working successfully.<br><img src="https://klaviyo.zendesk.com/hc/article_attachments/34274027896859" alt="neon.jpg">
+</li>
+</ol>
+<h2 id="h_01HH35C7VZBESR5HSJXFEKKNFM">Monitor the Klaviyo sync </h2>
+<p>To check on the data syncing through your NeonCRM integration: </p>
+<ol>
+<li>Click the <strong>Analytics</strong> dropdown in Klaviyo, then select <strong>Metrics</strong>.</li>
+<li>Click on the <em>Made Contribution</em> metric to verify that there is data populated for this metric; note that your initial NeonCRM integration sync may take up to a couple hours depending on how much data you have in your account.</li>
+<li>Klaviyo will import all of your historic NeonCRM data; to verify this, you can compare the number of contributions on a particular day in Klaviyo with what's in your NeonCRM account and confirm they match.</li>
+<li>If they don't match, the issue is most likely that your Klaviyo account's timezone doesn't match your NeonCRM timezone.</li>
+<li>To check your timezone setting in Klaviyo:
+<ul>
+<li>Click your account name in the lower left.</li>
+<li>Select then clicking <strong>Settings</strong><strong> &gt; Organization</strong>.</li>
+<li>Scroll down to <em>Timezone</em>.</li>
+</ul>
+</li>
+</ol>
+<h2 id="h_01HH35C7VZ7NEWNAXBB7240PK2">Data synced from NeonCRM</h2>
+<p>There are two major metrics synced from NeonCRM to Klaviyo: <em>Made Contribution </em>and<em> Registered for</em> <em>Event</em>.</p>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/28722594432027" alt="Metrics page in Klaviyo showing NeonCRM metrics Made Contribution and Registered for Event"></p>
+<p>Metrics and profile properties from NeonCRM are synced every 30 minutes.</p>
+<h3 id="h_01HH35C7VZE63CS9XPB02DCMBS">Made Contribution</h3>
+<p>This event is tracked when a supporter makes a contribution in NeonCRM. The event Klaviyo tracks includes all of the information NeonCRM collects, and you can filter and target <em>Made Contribution </em>events based on the following criteria:</p>
+<ul>
+<li>
+<strong>Anonymous Donation</strong><br>Indicates whether or not this donor wishes to remain anonymous (Yes/No)</li>
+<li>
+<strong>Campaign End Date</strong><br>End date of campaign (if available)</li>
+<li>
+<strong>Campaign Goal</strong><br>Goal of campaign (if available)</li>
+<li>
+<strong>Campaign Name</strong><br>Name of campaign</li>
+<li>
+<strong>Campaign Start Date</strong><br>Start date of campaign (if available)</li>
+<li>
+<strong>Donation amount</strong><br>Value of donation</li>
+<li>
+<strong>Donation Date</strong><br>Timestamp of donation event</li>
+<li>
+<strong>Donation ID</strong><strong><br></strong>ID associated with donation event</li>
+<li>
+<strong>Donation Solicitation Method</strong><br>How the donation was solicited</li>
+<li>
+<strong>Donation Solicitor</strong><br>The solicitor who assisted with this donation</li>
+<li>
+<strong>Donation Status</strong><br>Transaction status of donation</li>
+<li>
+<strong>Donation Type</strong><strong><br></strong>Type of donation (donation, pledge, pledge payment, match pledge)</li>
+<li>
+<strong>Donor Name</strong><br>Typically used to indicate how the donor would like to be acknowledged publicly (if available)</li>
+<li>
+<strong>Donor Note</strong><br>Note filled in by constituent when making donation (if any)</li>
+<li>
+<strong>Fund</strong><strong><br></strong>To which fund (if any) the donation should be attributed</li>
+<li>
+<strong>Honor/Memory Full Name</strong><br>Honoree for this donation (if any)</li>
+<li>
+<strong>Pledge Amount</strong><br>Amount of donor pledge</li>
+<li>
+<strong>Pledge Status</strong><br>Status of donor pledge</li>
+<li>
+<strong>Transaction ID</strong><br>Transaction ID</li>
+</ul>
+<h3 id="h_01HH35C7W05C6KY5PDHSVCXEFH">Registered for Event</h3>
+<p>This event is tracked when a supporter registers for an event in NeonCRM. The event Klaviyo tracks includes all of the information NeonCRM collects, and you can filter and target these events based on the following criteria:</p>
+<ul>
+<li>
+<strong>Campaign Code</strong><br>Campaign code</li>
+<li>
+<strong>Campaign End Date</strong><br>End date of campaign (if available)</li>
+<li>
+<strong>Campaign Goal</strong><br>Goal of campaign (if available)</li>
+<li>
+<strong>Campaign Name</strong><br>Name of campaign</li>
+<li>
+<strong>Campaign Start Date</strong><br>Start date of campaign (if available)</li>
+<li>
+<strong>Event Admission Fee</strong><strong><br></strong>Event admission fee</li>
+<li>
+<strong>Event Category Name</strong><br>Event category name</li>
+<li>
+<strong>Event Code</strong><br>Event code</li>
+<li>
+<strong>Event End Date</strong><br>Event end date</li>
+<li>
+<strong>Event ID</strong><br>Event ID</li>
+<li>
+<strong>Event Name</strong><br>Event name</li>
+<li>
+<strong>Event Start Date</strong><br>Event start date</li>
+<li>
+<strong>Fund</strong><strong><br></strong>To which fund (if any) the event fee should be attributed</li>
+</ul>
+<div class="bs-callout bs-callout-default">
+<p>Klaviyo does not currently receive a "registered at" timestamp for each registered event. The timestamp shown for the event is when it is synced to Klaviyo.</p>
+</div>
+<h3 id="h_01HH35C7W04QMHN78FNZ4G1V0F">Customer Data</h3>
+<p>In addition to the 2 key event metrics Klaviyo syncs from NeonCRM, Klaviyo also syncs information about each contact/account you have in NeonCRM, both Individual Accounts and Organization Accounts. The default account properties that are automatically synced from NeonCRM are:</p>
+<ul>
+<li>Account Created Date/Time</li>
+<li>Account Type</li>
+<li>Address Line 1</li>
+<li>Address Line 2</li>
+<li>City</li>
+<li>Company Name</li>
+<li>Country</li>
+<li>Deceased</li>
+<li>Do Not Contact</li>
+<li>Email 1</li>
+<li>Email Opt-Out</li>
+<li>First Name</li>
+<li>Full Zip Code</li>
+<li>Individual Type</li>
+<li>Job Title</li>
+<li>Last Name</li>
+<li>Organization Type</li>
+<li>Phone 1</li>
+<li>Source</li>
+<li>Province</li>
+<li>State</li>
+</ul>
+<p>Klaviyo also syncs all Custom Fields in NeonCRM surrounding a contact; these Custom Fields will appear as Custom Properties attached to a contact's Klaviyo profile.</p>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/28722556008347" alt="Profile information in Klaviyo showing associated NeonCRM contributions, contact information, and custom properties synced from NeonCRM such as account type and job title" width="594" height="558"></p>
+<h2 id="h_01HH35C7W0AZFY33FNY7KQ55KZ">Outcome</h2>
+<p>You’ve finished integrating NeonCRM with Klaviyo, added Klaviyo web tracking to NeonCRM, and verified your synced data. Now, you can personalize and target emails based on each Contributor's donation and event registration activity.</p>
+<h2 id="h_01HH35C7W0BEN01H9RNVWJXYAZ">Additional resources</h2>
+<ul>
+<li><a href="https://help.klaviyo.com/hc/en-us/articles/115005253208">Integration FAQ reference</a></li>
+<li><a href="https://help.klaviyo.com/hc/en-us/articles/115005253208">How often integrations sync reference</a></li>
+</ul>

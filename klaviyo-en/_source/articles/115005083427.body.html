@@ -1,0 +1,224 @@
+<h2 id="h_01HCDNC29K40YB4JKQ2685M5FB">You will learn</h2>
+<p>Learn how to integrate Volusion with Klaviyo. After completing these steps, you'll be able to personalize and target emails based on synced order data and customer properties.</p>
+<p>From Volusion, Klaviyo tracks <em>Ordered Product</em>and<em> Placed Order</em>metrics; with the addition of some extra code we can track<em> Abandoned Cart</em>information as well.</p>
+<h2 id="h_01HCDNC29KZGF48KW96QN8V1HJ">Before you begin</h2>
+<p>Volusion requires an <a href="http://helpcenter.volusion.com/extend-your-site/more-integrations/the-volusion-api" target="_blank" rel="noopener">update to your Volusion store's administrator account password every 90 days</a>. When making this update your Volusion account, you must also make this update to your Volusion integration in your Klaviyo account. You can also create a permanent API Key by following the steps in the corresponding section of this article.</p>
+<h2 id="h_01HCDNC29KZDF6825YDD2EKKYD">Add the Volusion integration in Klaviyo</h2>
+<ol>
+<li>In Klaviyo, select the <strong>Integrations</strong> tab.</li>
+<li>Select <strong>Explore apps</strong>.</li>
+<li>Search for <em>Volusion</em> and click the card, then click <strong>Install</strong>.</li>
+<li>On the next page, enter your Store URL, login email, and API key/encrypted password. Then, click <strong>Connect to Volusion</strong>.<br><img src="https://klaviyo.zendesk.com/hc/article_attachments/28711662648859">
+</li>
+<li>On the next page, you will see a checkbox for <em>Add new Volusion customers to a Klaviyo list</em><strong>. </strong>If you check this box, you can pick one of your lists in Klaviyo to which future customers will be added when they place an order.</li>
+<li>Finally, click <strong>Complete setup</strong>.</li>
+</ol>
+<h2 id="h_01HCDNC29KK7YEVR48CQBAVM7B">Disable email to web tracking in Klaviyo</h2>
+<ol>
+<li>The "email to web tracking" feature in Klaviyo uses click tracking to identify a user who arrives at your website through a Klaviyo email before we would originally be able to identify them (such as when they make a purchase or subscribe to your email list).</li>
+<li>Volusion does not support the URL format that our click tracking uses and produces an error when a user tries to visit your store through one of these links, so this feature will have to be disabled in Klaviyo to make sure links in your email follow through to your Volusion store correctly.</li>
+<li>You can disable this tracking in your account settings under <strong>Account name &gt; Settings &gt; Email &gt; Attribution</strong>.</li>
+<li>The only functionality lost with disabling this feature is the ability to track a new profile on your website through an email they clicked. As long as you have the Klaviyo onsite tracking analytics on your website (which we'll add in the next section), we will still be able to track users as soon as we get their email address through either a purchase in your store or when they sign up for an email list.</li>
+</ol>
+<h2 id="h_01HCDNC29K22N0VB3KY118HM9E">Add onsite tracking to your Volusion store</h2>
+<p>Klaviyo provides two onsite tracking snippets to help you collect valuable information about your customers:</p>
+<ul>
+<li>
+<strong>Active on Site<br></strong>This snippet tracks when your customers visit your site. This snippet must be added to the site in order for other snippets such as <em>Viewed Product</em> to work.</li>
+<li>
+<strong>Viewed Product<br></strong>This snippet tracks when your customers view specific products. You can track this event by adding the <em>Viewed Product</em> code snippet to your store.</li>
+</ul>
+<h3 id="h_01HCDNC29KYVC1HR9DV61N9N1T">Add Active on Site tracking</h3>
+<p>Add the following Klaviyo.js snippet so that it appears on every page on your website. This will enable<em> Active on Site</em> tracking and Klaviyo forms. Make sure to replace PUBLIC_API_KEY with your <a href="https://help.klaviyo.com/hc/en-us/articles/115005062267-How-to-Manage-Your-Account-s-API-Keys" target="_blank" rel="noopener noreferrer">Klaviyo public API key</a>.</p>
+<pre><code class="language-js">&lt;script type="application/javascript" async="" src="https://static.klaviyo.com/onsite/js/PUBLIC_API_KEY/klaviyo.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript"&gt; 
+//Script to initialize Klaviyo object on page load
+!function(){if(!window.klaviyo){window._klOnsite=window._klOnsite||[];try{window.klaviyo=new Proxy({},{get:function(n,i){return"push"===i?function(){var n;(n=window._klOnsite).push.apply(n,arguments)}:function(){for(var n=arguments.length,o=new Array(n),w=0;w&lt;n;w++)o[w]=arguments[w];var t="function"==typeof o[o.length-1]?o.pop():void 0,e=new Promise((function(n){window._klOnsite.push([i].concat(o,[function(i){t&amp;&amp;t(i),n(i)}]))}));return e}}})}catch(n){window.klaviyo=window.klaviyo||[],window.klaviyo.push=function(){var n;(n=window._klOnsite).push.apply(n,arguments)}}}}(); &lt;/script&gt;</code></pre>
+<h3 id="h_01HCDNC29K507X1VF7ZDJYCFGM">Add Viewed Product tracking</h3>
+<p>To enable <em>Viewed Product</em> tracking, you will need to add the snippet of code below to your store's template page in Volusion's File Editor, which you can find by clicking <strong>Design &gt; File Editor</strong>.</p>
+<pre><code class="language-javascript">&lt;script type="text/javascript"&gt;
+// Check to see if the customer is on the product page before executing code.
+    if ($("meta[property='og:type']").attr("content") == "product") {
+        var klaviyo = window.klaviyo || [];
+        // Function to track when a product is viewed
+        var trackViewedProduct = function(item) {
+            klaviyo.track("Viewed Product", item);
+            klaviyo.trackViewedItem({
+                "Title": item.ProductName,
+                "ItemId": item.ProductID,
+                "ImageUrl": item.ImageURL,
+                "Url": item.URL,
+                "Metadata": {
+                    "Price": item.Price,
+                    "Description": item.Description,
+                    "CompareAtPrice": item.CompareAtPrice,
+                    "YouSave": item.YouSave
+                }
+            });
+        };
+        var item = {}
+        $.get(`/ProductDetails.asp?ProductCode=${global_Current_ProductCode}`, function(data) {
+            var product_saleprice = $("table.colors_pricebox div.product_saleprice").length ?
+                Number(`${$("table.colors_pricebox div.product_saleprice").text().trim().split("$")[1].split(".")[0]}.${$("table.colors_pricebox div.product_saleprice").text().trim().split("$")[1].split(".")[1].substring(0,2)}`) : null;
+            var product_listprice = $("table.colors_pricebox div.product_listprice").length ?
+                Number(`${$("table.colors_pricebox div.product_listprice").text().trim().split("$")[1].split(".")[0]}.${$("table.colors_pricebox div.product_listprice").text().trim().split("$")[1].split(".")[1].substring(0,2)}`) : null;
+            var product_productprice = $("table.colors_pricebox div.product_productprice").length ?
+                Number(`${$("table.colors_pricebox div.product_productprice").text().trim().split("$")[1].split(".")[0]}.${$("table.colors_pricebox div.product_productprice").text().trim().split("$")[1].split(".")[1].substring(0,2)}`) : null;
+            var product_yousave = $("table.colors_pricebox div.product_yousave").length ?
+                Number(`${$("table.colors_pricebox div.product_yousave").text().trim().split("$")[1].split(".")[0]}.${$("table.colors_pricebox div.product_yousave").text().trim().split("$")[1].split(".")[1].substring(0,2)}`) : 0;
+            item = {
+                "ProductName": $("meta[property='og:title']").attr("content"),
+                "ProductID": global_Current_ProductCode,
+                "Description": $("meta[property='og:description']").attr("content"),
+                "ImageURL": $("meta[property='og:image']").attr("content"),
+                "URL": $("meta[property='og:url']").attr("content"),
+                "Price": product_saleprice ? product_saleprice : product_productprice,
+                "CompareAtPrice": product_listprice ? product_listprice : product_productprice,
+                "YouSave": product_yousave
+            };
+            trackViewedProduct(item);
+        });
+    } 
+&lt;/script&gt;</code></pre>
+<h3 id="h_01HCDNC29KG6YKJ5DPFZSZN7KT">Add abandoned cart reminders</h3>
+<p>Volusion does not provide an out-of-the-box way to track abandoned carts through our integration, but we have created a custom script you can add to your Volusion store which will allow you to use this feature in Klaviyo. This will require some knowledge of adding code to your shop's template so if you have a developer, you can send them this doc to walk through adding the code.</p>
+<div class="bs-callout bs-callout-default">
+<p>The abandoned cart feature will only work for Volusion stores using the one page checkout feature, and stores that do not require a user to have an account before making a purchase.</p>
+</div>
+<ol>
+<li>You will need to add the snippet of code below to your store's template page in Volusion's File Editor, which you can find by clicking <strong>Design &gt; File Editor</strong>.
+<pre><code class="language-javascript">&lt;script type="text/javascript"&gt;
+    // Check to see if the customer is on the checkout page before executing code.
+    if (window.location.pathname == "/one-page-checkout.asp") {
+        var klaviyo = window.klaviyo || [];
+        // Function to track when a checkout is started.
+        var trackStartedCheckout = function() {
+            $.post('/AjaxCart.asp', function(data) {
+                if (!data || !data.Products || !data.Products.length) {
+                    return;
+                }
+                var items = [],
+                    names = [],
+                    skus = [];
+                // Grab each product and its SKU/Name/Quantity/Price/Total price/Image url
+                $.each(data.Products, function(i, record) {
+                    var item_price = +(record.ProductPrice.replace(/[\$,]+/g, '')) / record.Quantity;
+                    items.push({
+                        SKU: record.ProductCode,
+                        Name: record.ProductName,
+                        Quantity: +record.Quantity,
+                        ItemPrice: item_price,
+                        RowTotal: item_price * record.Quantity,
+                        ImageURL: record.ImageSource
+                    });
+                    names.push(record.ProductName);
+                    skus.push(record.ProductCode);
+                });
+                // Push Started Checkout metric to Klaviyo with the customers data.
+                klaviyo.track("Started Checkout", {
+                    $value: +(data.Totals[0].CartTotal.replace(/[\$,]+/g, "")),
+                    Items: items,
+                    ProductNames: names,
+                    SKUs: skus
+                });
+            }, 'json');
+        };
+        $(function() {
+            // Grab the email form to get your customers email and tie the event to that email in Klaviyo.
+            $('[name="OnePageCheckoutForm"] [name="Email"]').change(function(e) {
+                var email = $(this).val();
+                // Do some light validation. Klaviyo will do more validation when the data is received.
+                if (email &amp;&amp; /@/.test(email)) {
+                    klaviyo.identify({
+                        $email: email
+                    });
+                    trackStartedCheckout();
+                }
+            });
+        });
+} <br>&lt;/script&gt;</code></pre>
+</li>
+<li>This code will only be able to track checkout events going forward; you will not be able to back-populate abandoned cart flows inside Klaviyo. </li>
+<li>After saving this code to your store, Klaviyo will automatically begin tracking a <em>Started Checkout</em> metric from which you can trigger an abandoned cart flow.</li>
+</ol>
+<h2 id="h_01HCDNC29KV58DRE9KTYFZR4SE">Monitor the Klaviyo sync</h2>
+<ol>
+<li>Once integrated with Volusion, Klaviyo will need time to sync your data before it is ready to be used. You can check the status of this sync by navigating back to the <strong>Integrations </strong>tab and looking for your Volusion integration on the list of <em>Enabled Integrations</em>.</li>
+<li>If there is a gray outline, this means the integration is still syncing. The bigger your store, the longer a sync can take. When your integration is shown with a green border, you're ready to go.</li>
+<li>Klaviyo imports all of your historic Volusion data when you first enable the integration. To verify this, you can compare the number of orders on a particular day with what's in the Volusion interface and confirm they match. For example, when exploring the <em>Placed Order</em> metric (under <strong>Analytics &gt; Metrics</strong> in Klaviyo) you can mouse over yesterday's data point or look at the table of data below the chart to see how many orders were reported yesterday.</li>
+<li>Compare that number to what's stored in Volusion from yesterday and you should see they match exactly. If they don't, the issue is most likely that your Klaviyo account's timezone doesn't match your Volusion timezone.</li>
+<li>To check or update your account's timezone: 
+<ul>
+<li>Click your account name in the lower left.</li>
+<li>Select then clicking <strong>Settings</strong><strong> &gt; Organization</strong>.</li>
+<li>Scroll down to <em>Timezone</em>.</li>
+</ul>
+</li>
+</ol>
+<h2 id="h_01HCDNC29KT2XXVA9DACMWTW4T">Data synced from Volusion</h2>
+<p>Navigate to <strong>Analytics &gt; Metrics</strong> to find all of the metrics in your account. The metrics with a Volusion icon are synced from your Volusion integration. Metrics and profile properties from Volusion are synced within the hour of someone placing an order.<br><img src="https://klaviyo.zendesk.com/hc/article_attachments/28711674775067" alt="Metrics tab in Klaviyo filtered by Volusion showing metrics Placed Order and Ordered Product" width="673" height="174"></p>
+<h3 id="h_01HCDNC29KYXAHNQFMHPX18WM8">Placed Order</h3>
+<p>This event is tracked when a customer completes the checkout process and creates an order in your Volusion store. The <em>Placed Order</em> event includes all relevant information about the items someone purchased including product names, product codes, images, and price information so you can use that information in purchase follow up emails.</p>
+<h3 id="h_01HCDNC29K1Q69GTDG5NHP80XX">Ordered Product</h3>
+<p>This event is also tracked when a customer places an order, but one event is tracked for each item in the order. For example, if someone buys a t-shirt and a pair of pants, one <em>Placed Order</em> event is tracked and two <em>Ordered Product</em> events - one event for the t-shirt and one event for the pants.</p>
+<p>The <em>Ordered Product</em> event includes detailed information about each product purchased. This is useful when creating behavioral segments based on product variant options and other detailed information that's not available in the <em>Placed Order</em> event. You can filter and target <em>Ordered Product</em> events based on the following criteria:</p>
+<ul>
+<li>
+<strong>Name<br></strong>The name or title of the product in Volusion, e.g., <em>t-shirt</em>.</li>
+<li>
+<strong>Product Code<br></strong>The product code for your product inside of Volusion.</li>
+<li>
+<strong>Quantity<br></strong>The quantity of the item purchased in an order.</li>
+</ul>
+<h3 id="h_01HCDNC29K0GZEQMTTSR13009D">Customer data synced from Volusion</h3>
+<p>In addition to the above metrics Klaviyo syncs from Volusion, there are also customer properties that are added to each Klaviyo profile. You can use these properties in segments and flows. Here are the properties that are automatically synched from Volusion:</p>
+<ul>
+<li>Email</li>
+<li>First Name</li>
+<li>Last Name</li>
+<li>City</li>
+<li>State/Region</li>
+<li>Zip Code</li>
+<li>Country</li>
+<li>Phone Number</li>
+<li>Source (Klaviyo will track customers from Volusion with a Source property on their profile set to "Volusion")</li>
+</ul>
+<h2 id="h_01HCDNC29KASB8YRM4E70FC1J0">Troubleshooting</h2>
+<h3 id="h_01HCDNC29K3RD7RDFXEHP2BP4G">Volusion Placed Order data isn’t reporting in Klaviyo</h3>
+<p dir="ltr">This may be an issue with your Volusion API settings that allow data to be exported.</p>
+<ol>
+<li dir="ltr">To fix this, navigate to the <em>Inventory</em> tab of your Volusion admin panel. Select <em>Import/Export </em>from the dropdown menu.<br><img src="https://klaviyo.zendesk.com/hc/article_attachments/28711662634139" alt="Inventory dropdown in Volusion with Import/Export in blue" width="620" height="365">
+</li>
+<li dir="ltr">Click on <em>Volusion API</em> to access the main API page.</li>
+<li dir="ltr">In the <em>Generic</em> section, you will find the option to <strong>Run</strong> the export of your store’s Generic/Orders. Once the export is run, the page will refresh.<br><img src="https://klaviyo.zendesk.com/hc/article_attachments/28711662626331" alt="Import/Export page in Volusion with mouse over Run for Generic\Orders">
+</li>
+<li dir="ltr">Select all columns by clicking the checkbox in the column named <strong>*</strong> and click <strong>Run</strong>.<br><img src="https://klaviyo.zendesk.com/hc/article_attachments/28711662644763" alt="Volusion API: Run Generic\Orders page with asterisk column checked" width="595" height="270">
+</li>
+<li dir="ltr">After clicking <em>Run</em> to export your Generic Orders, an API URL is generated at the top of the page. For example, the URL would appear as: <code class="'language-html&quot;">https://storename.com/net/WebService.aspx?Login=user@storename.com&amp;EncryptedPassword=<strong>ABCDEFGHIJKLMNOPQRSTUVWXYZ123456789</strong>&amp;EDI_Name=GenericOrder</code>.<br><img src="https://klaviyo.zendesk.com/hc/article_attachments/28711674788251" alt="API key highlighted within link on page Volusion API: Run Generic\Orders">
+</li>
+<li dir="ltr">The value that appears between "EncryptedPassword=" and "&amp;EDI_Name=GenericOrders" (highlighted in the screenshot above) serves as your API Key. Use this to re-establish your integration settings from the Integrations tab of your Klaviyo dashboard. </li>
+<li dir="ltr">Upon completion, test by clicking into <strong>Analytics &gt; Metrics</strong>. View recent activity for the Volusion <em>Placed Order</em> metric to see if any new data has synced in Klaviyo. If you see new data for the <em>Placed Order</em> metric, <a href="https://klaviyo.zendesk.com/hc/en-us/articles/115001002272" target="_blank" rel="noopener">contact our Support team</a> to run a gap fill for missing orders in Klaviyo or for any further assistance.</li>
+<li dir="ltr">For additional information on exporting data using the Volusion API, please refer to <a href="https://support.volusion.com/hc/en-us/articles/208837888-Exports-Orders-Export-Developer-" target="_blank" rel="noopener">Volusion support</a>.</li>
+</ol>
+<h3 id="h_01HCDNC29M0P130MBHPCRSEBQC">People see an "Invalid Input" error when clicking my email links</h3>
+<p>The "email to web tracking" feature in Klaviyo uses click tracking to tie activity to a user who arrives at your website through a Klaviyo email before we would originally be able to identify them (such as when they make a purchase or subscribe to your email list).</p>
+<p>Volusion does not support the URL format that our click tracking uses and produces an error when a user tries to visit your store through one of these links, so this feature will have to be disabled in Klaviyo to make sure links in your email follow through to your Volusion store correctly.</p>
+<p>To fix this issue, make sure to disable email to web tracking in Klaviyo as described at the beginning of this article.</p>
+<h2 id="h_01HCDNC29MY6ZVZYFQ0MEYVPD9">How to create a permanent API key in Volusion</h2>
+<p>Normally Volusion will require you to reset your API key every 90 days when you reset the password on your account, causing you to need to re-configure your Voluision integration in Klaviyo. The following steps will allow you to create a non-expiring API key instead; it involved generating API credentials for an admin account you never log in to:</p>
+<ol>
+<li>From your Volusion admin panel, go to <strong>Customers &gt; Administrators</strong> and create a new administrator account.</li>
+<li>Navigate to <strong>Inventory &gt; Import/Export</strong> and select the <strong>Volusion API</strong> tab.</li>
+<li>Under the Generic section, click the link for <strong>Volusion API Integration Help</strong>.</li>
+<li>Select <strong>Export</strong> and select the new admin you created from the dropdown.</li>
+<li>Expand the "URL with Query String..." box to find your permanent URL, login, and encrypted password (API Key).</li>
+</ol>
+<p>Do not log in with this account, it will be used for API access only. Logging in with this account will cause the password to expire after 90 days and you will need to redo these steps to generate a new permanent API key.</p>
+<h2 id="h_01HCDNC29M67D5XCMWH5YDAYZH">Outcome</h2>
+<p>You've now integrated Klaviyo with Volusion, added onsite tracking, reviewed your synced data, and learned how to create a permanent API key.</p>
+<h2 id="h_01HCDNC29MMRMP7VP02TQ6XX5A">Additional resources</h2>
+<ul>
+<li><a href="https://klaviyo.zendesk.com/hc/en-us/articles/115005253208" target="_blank" rel="noopener">How often integrations sync reference</a></li>
+<li>Need more help integrating with Klaviyo? Check out <a href="https://klaviyo.partnerpage.io/?utm_source=helpcenter&amp;utm_medium=integrations" target="_blank" rel="noopener">Klaviyo's Agency Partners</a>
+</li>
+</ul>

@@ -1,0 +1,993 @@
+{
+  "captured_at": "2026-05-23T16:18:39Z",
+  "article": {
+    "id": 360037501212,
+    "url": "https://klaviyo.zendesk.com/api/v2/help_center/en-us/articles/360037501212.json",
+    "html_url": "https://klaviyo.zendesk.com/hc/en-us/articles/360037501212-Understanding-Magento-1-data-in-flows",
+    "author_id": 381290088531,
+    "comments_disabled": true,
+    "draft": false,
+    "promoted": false,
+    "position": 7,
+    "vote_sum": 0,
+    "vote_count": 16,
+    "section_id": 49375230225051,
+    "created_at": "2019-12-12T22:22:37Z",
+    "updated_at": "2026-04-21T13:54:46Z",
+    "name": "Understanding Magento 1 data in flows",
+    "title": "Understanding Magento 1 data in flows",
+    "source_locale": "en-us",
+    "locale": "en-us",
+    "outdated": false,
+    "outdated_locales": [],
+    "edited_at": "2025-08-27T15:16:08Z",
+    "user_segment_id": null,
+    "permission_group_id": 146372,
+    "content_tag_ids": [],
+    "label_names": [],
+    "body": "<div class=\"bs-callout bs-callout-default\">\n<p>Klaviyo's Magento 1 integration is no longer accepting new installations and will reach full end-of-support in late 2027. Klaviyo Support is no longer able to assist with Magento 1–related requests.</p>\n</div>\n<h2 id=\"h_01HH57YA4J78DQG1F86SKS1RWV\">You will learn</h2>\n<p>Learn about what Magento 1 data is synced into Klaviyo, along with examples of how you can use that data in flows. When you integrate your Magento 1 account with Klaviyo, you'll have access to both historic and dynamic Magento 1 data that you can use in Klaviyo to personalize your customers' experience. There are many excellent ways to do this through the use of Klaviyo flows.</p>\n<div class=\"bs-callout bs-callout-default\">\n<p>For a deep dive into your Magento 1 data: <a href=\"https://help.klaviyo.com/hc/en-us/articles/115005254528-Review-and-Understand-your-Magento-1-Data\" target=\"_blank\" rel=\"noopener\">Review and Understand your Magento 1 Data</a>.</p>\n</div>\n<p>Magento 1 data can be used to trigger flows and populate flow emails. </p>\n<h2 id=\"h_01HH57YA4JQBHKZKAXWCH8RNQ6\">Flow timing</h2>\n<p>Flow delays are carefully timed to ensure that your content is relevant to your customers’ experience. When you set up your flows, keep in mind the general timing of your Magento 1 sync.</p>\n<div class=\"bs-callout bs-callout-default\">\n<p>Magento 1 syncs with Klaviyo every 30 minutes.</p>\n</div>\n<p>For example, if you set your first abandoned cart email to send 15 minutes after someone abandons their cart, your customer may receive this even if they did complete their purchase, since the Placed Order data may not have been synced into Klaviyo before the email was sent. To prevent this from happening, it would be safest to set your delay for a minimum of 45 to accommodate for the Magento general time sync of 30 minutes.</p>\n<h2 id=\"h_01HH57YA4J4KKJJ1888F352H0T\">Abandoned cart flow</h2>\n<p>Abandoned cart flows are often the highest-revenue flows in a Klaviyo account. Klaviyo provides a pre-built abandoned cart flow which appears in your Flows Library when you integrate with Magento 1.</p>\n<p><em>Integration requirements:</em> Magento 1 plugin installs website tracking</p>\n<p><em>Data you'll use: </em><a href=\"https://help.klaviyo.com/hc/en-us/articles/115005254528-Review-and-Understand-your-Magento-1-Data#checkout-started4\" target=\"_blank\" rel=\"noopener\">Checkout Started</a> (Magento 1 metric), dynamic product data</p>\n<p>Notice that the <em>Checkout Started</em> metric is associated with metadata describing the products added to the cart. You can choose to display or collapse metadata on the event timeline.</p>\n<p><em>What the metric means: </em><a href=\"https://help.klaviyo.com/hc/en-us/articles/115005254528-Review-and-Understand-your-Magento-1-Data#checkout-started4\" target=\"_blank\" rel=\"noopener\">Checkout Started</a> in Magento 1 means that a customer enters their contact and shipping information on the first page of the Magento checkout process and then clicks continue.</p>\n<p><em>How the metric is triggered: </em><em>Checkout Started</em> in Magento 1 is triggered when someone lands on the checkout page and the customer types into the checkout field; Klaviyo captures the C<em>heckout Started</em> event when the email field is changed.  When the Magento cron job runs, the event is synced to Klaviyo. </p>\n<p><em>Flow name:</em> Abandoned Cart</p>\n<p><em>Flow trigger:</em> Event-based; this flow is triggered by the <em>Checkout Started </em>metric</p>\n<p>This is an Abandoned Cart flow for a Magento 1 store:<br><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28715963355035\"></p>\n<p>You can create personalized flow emails that feature items left in a customer’s cart by pulling Magento 1 product data using <a href=\"https://klaviyo.zendesk.com/hc/en-us/articles/115000096232\" target=\"_blank\" rel=\"noopener\">dynamic template variables</a> into an email <a href=\"https://help.klaviyo.com/hc/en-us/articles/115005082447-The-Email-Template-Editor#text-blocks4\" target=\"_blank\" rel=\"noopener\">text block</a>.</p>\n<p><em>Learn more: </em><a href=\"https://klaviyo.zendesk.com/hc/en-us/articles/115002779411\" target=\"_blank\" rel=\"noopener\">How to create an abandoned cart flow</a></p>\n<h2 id=\"h_01HH57YA4KD2ZZ0H9SMTFWEBGJ\">Browse abandonment flow</h2>\n<p>Browse Abandonment flow is a powerful flow that captures client interest when they view specific products on your website.</p>\n<p>Klaviyo only tracks the browsing activity of \"known browsers,\" which are browsers who have visited and engaged with your site at least once before. There are 2 key ways we are able to identify a site visitor:</p>\n<ol>\n<li>If someone clicks through a Klaviyo email to your website.</li>\n<li>If someone subscribes or opts in through a Klaviyo form. Anonymous browsers are not tracked.</li>\n</ol>\n<p>Klaviyo provides a pre-built Browse Abandonment flow in your Flows section, but you can <a href=\"https://klaviyo.zendesk.com/hc/en-us/articles/115002775252\" target=\"_blank\" rel=\"noopener\">easily create your own.  </a></p>\n<p><em>Integration requirement:</em> the Magento 1 plugin automatically installs the Viewed Product code snippet. If you have not yet implemented Viewed Product tracking in Magento 1, head over to <a href=\"https://help.klaviyo.com/hc/en-us/articles/115005082187-Integrate-with-Magento-1-x-CE-and-EE-#install-the-klaviyo-extension-in-magento4\" target=\"_blank\" rel=\"noopener\">Integrate with Magento 1</a></p>\n<p><em>Data you'll use: Viewed Product</em> (Klaviyo metric), dynamic product data</p>\n<p><em>What the metric means: </em><a href=\"https://help.klaviyo.com/hc/en-us/articles/360030732832-Review-and-Understand-Your-WooCommerce-Data#viewed-product5\"><em>Viewed Product</em></a> is tracked when a customer views a product.</p>\n<p><em>Flow name:</em> Browse Abandonment</p>\n<p><em>Flow trigger:</em> Metric-based; this flow is triggered by the <em>Viewed Product</em> metric</p>\n<p>This is a Browse Abandonment flow for a Magento 1 store:<br><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28715969966491\" width=\"611\" height=\"502\"></p>\n<p><em>Learn more: </em><a href=\"https://help.klaviyo.com/hc/en-us/articles/115002775252-Create-a-Browse-Abandonment-Flow\">Guide to Creating a Browse Abandonment flow</a></p>\n<h2 id=\"h_01HH57YA4KHXR12ZMWTB57HS3S\">Cross-sell and product review flow</h2>\n<p>Cross-sell flows allow you to target a group of people that have all purchased a particular item, but have not also purchased one or more related items. For example, if someone purchases a video game console, you might consider sending them an email about the most popular video games for that console that they haven't yet purchased.</p>\n<p>Product review flows also allow you to target a group of people who purchase a particular item. You may want to filter your cross-sell/product review flow by category or collection so you can provide more relevant recommendations in the content of your emails.</p>\n<p>Klaviyo offers a pre-built Product Review/Cross-Sell flow which can be found in your <a href=\"https://klaviyo.zendesk.com/hc/en-us/articles/115002774932\" target=\"_blank\" rel=\"noopener\">Klaviyo Flow Library</a>.</p>\n<p><em>Integration requirement:</em> an active Magento 1 integration</p>\n<p><em>Data you'll use:</em> either the <em>Fulfilled Order</em> metric or the <em>Ordered Product</em> metric (both Magento 1 metrics)</p>\n<p><em>What the metrics mean:</em></p>\n<ul>\n<li>\n<em>Fulfilled Order</em> (Magento 1 metric) tracks when you mark an order in your Magento store as shipped.</li>\n<li>\n<em>Ordered Product</em> (Magento 1 metric) tracks when a customer places their order. One Ordered Product event is tracked for each item someone purchases.</li>\n</ul>\n<p><em>Flow name:</em> Product Review/Cross Sell</p>\n<p><em>Flow trigger:</em> Event-based; <em>Fulfilled Order</em> metric</p>\n<p>This is a Product Review/Cross-Sell flow for a Magento 1 store:<br><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28715969958811\" width=\"663\" height=\"614\"></p>\n<p>You can personalize your cross-sell emails with catalog or product feeds. For more information <a href=\"https://klaviyo.zendesk.com/hc/en-us/articles/115005082787\" target=\"_blank\" rel=\"noopener\">learn how to us product feeds and recommendations</a>.</p>\n<p><em>Learn more:</em> <a href=\"https://help.klaviyo.com/hc/en-us/articles/115002779391-Create-a-Product-Review-Flow\" target=\"_blank\" rel=\"noopener\">Create a product review flow</a> or <a href=\"https://help.klaviyo.com/hc/en-us/articles/115002775212-Create-an-Upsell-or-Cross-Sell-Flow\" target=\"_blank\" rel=\"noopener\">create an upsell or cross sell flow</a></p>\n<h2 id=\"h_01HH57YA4K8KW5WTWA6G9WCJDR\">Customer winback flow</h2>\n<p>Winback flows are used to re-engage inactive customers before they completely disengage with your brand. <span>Consider </span><a href=\"https://help.klaviyo.com/hc/en-us/articles/115002779231-Back-Populate-a-Flow\" target=\"_blank\" rel=\"noopener noreferrer\">adding past profiles</a><span> to your winback flow after setting it up to ensure that anyone who purchased a long time ago but hasn't purchased since can receive your winback series in a timely manner. Let's say, for example, your first winback email is set to send out 6 months after someone makes a purchase. Rather than wait 6 months until someone qualifies to receive this email, you can add past profiles to the flow so that everyone who placed an order 6 months ago but hasn't purchased since will receive the email right away.</span></p>\n<p>Klaviyo provides a pre-built Customer Winback flow in your Flows section, but you can also easily <a href=\"https://klaviyo.zendesk.com/hc/en-us/articles/115002775192\" target=\"_blank\" rel=\"noopener\">build your own</a>.</p>\n<p><em>Integration requirement:</em> an active Magento 1 integration</p>\n<p><em>Data you'll use:</em> <em>Placed Order </em>(Magento 1 metric)</p>\n<p><em>What the metric means:</em> <a href=\"https://help.klaviyo.com/hc/en-us/articles/115005254528-Review-and-Understand-your-Magento-1-Data#placed-order7\" target=\"_blank\" rel=\"noopener\">Placed Order</a> is <span>tracked when a customer completes the checkout process and creates an order in your Magento 1 store.</span></p>\n<p><em>Flow name:</em> Customer Winback Flow</p>\n<p><em>Flow trigger:</em> Metric-based; this flow is triggered by the <em>Placed Order</em> metric</p>\n<p>Flow filter: <em>Placed Order</em> zero times since starting this flow</p>\n<p>This is a Customer Winback flow for a Magento 1 store:<br><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28715969973915\" width=\"639\" height=\"673\"></p>\n<p>You can personalize your winback emails with catalog or product feeds. For more information review <a href=\"https://klaviyo.zendesk.com/hc/en-us/articles/115005082787\" target=\"_blank\" rel=\"noopener\">product feeds and recommendations</a>.</p>\n<p><em>Learn more:</em> <a href=\"https://klaviyo.zendesk.com/hc/en-us/articles/115002775192\" target=\"_blank\" rel=\"noopener\">Create a winback flow</a></p>\n<h2 id=\"are-you-using-amazon-buy-with-prime-2\">Are you using Amazon Buy with Prime?</h2>\n<p>If you're using Buy with Prime to power payment and fulfillment for any of the products on your store, you'll need to make some additions to your flows, and create some new flows. First:</p>\n<ul>\n<li>\n<a href=\"https://help.klaviyo.com/hc/en-us/articles/14708088221467\">Integrate Buy with Prime with Klaviyo</a><span> </span>to bring Buy with Prime data into your Klaviyo account.</li>\n</ul>\n<p>For your abandoned cart flow:</p>\n<ul>\n<li>Create 2 separate abandoned cart flows: 1 triggered by Magento's checkout event (as described above), and 1 triggered by Buy with Prime's checkout event. For your Buy with Prime flow, read<span> </span><a href=\"https://help.klaviyo.com/hc/en-us/articles/14985388418331\" target=\"_blank\" rel=\"noopener\">How to create an abandoned cart flow for Amazon Buy with Prime</a>.</li>\n<li>For your Magento abandoned cart flow, add the following flow filter to exclude customers who made purchases via Buy with Prime from receiving incorrect messaging:<br>\n<ul>\n<li>\n<em>Placed Order</em><span> </span>(Buy with Prime)<span> </span><em>zero times since starting this flow.</em>\n</li>\n</ul>\n</li>\n</ul>\n<p>For your browse abandonment flow:</p>\n<ul>\n<li>When you create your browse abandonment flow (you only need to create one flow, since it's triggered by the <em>Viewed Product</em> event) add the following flow filters to incorporate Buy with Prime data into your flow:\n<ul>\n<li>\n<em>Checkout Started</em><span> </span>(Buy with Prime)<span> </span><em>zero times since starting this flow<span> </span></em>AND</li>\n<li>\n<em>Placed Order<span> </span></em>(Buy with Prime)<em><span> </span>zero times since starting this flow</em>.</li>\n</ul>\n</li>\n</ul>\n<p>For your customer winback flow:</p>\n<ul>\n<li>Create two separate winback flows: one triggered by Magento's<span> </span><em>Placed Order</em><span> </span>event (as detailed above) and one triggered by Buy with Prime's<span> </span><em>Placed Order</em><span> </span>event to account for customers who placed their original order with Buy with Prime. For your Buy with Prime winback flow, read<span> </span><a href=\"https://help.klaviyo.com/hc/en-us/articles/15156331062171\" target=\"_blank\" rel=\"noopener\">How to create a winback flow for Amazon Buy with Prime</a>.</li>\n<li>When you create your Magento winback flow, add the following flow filter to exclude customers who made purchases via Buy with Prime from receiving incorrect messaging:<br>\n<ul>\n<li>\n<em>Placed Order</em><span> </span>(Buy with Prime)<span> </span><em>zero times since starting this flow.</em>\n</li>\n</ul>\n</li>\n</ul>\n<h2 id=\"h_01HH57YA4MZBK3YXJRP94JTFHV\">Additional resources</h2>\n<ul>\n<li><a href=\"https://klaviyo.zendesk.com/hc/en-us/articles/115005082187\" target=\"_blank\" rel=\"noopener\">How to integrate with Magento 1.x (CE and EE)</a></li>\n<li><a href=\"https://klaviyo.zendesk.com/hc/en-us/articles/115005254528\" target=\"_blank\" rel=\"noopener\">Magento 1 data reference</a></li>\n</ul>",
+    "user_segment_ids": []
+  },
+  "normalized": {
+    "id": "360037501212",
+    "title": "Understanding Magento 1 data in flows",
+    "source_url": "https://help.klaviyo.com/hc/en-us/articles/360037501212-Understanding-Magento-1-data-in-flows",
+    "section_id": 49375230225051,
+    "section": "Magento 1",
+    "category_id": 115000032731,
+    "category": "Integrations",
+    "category_slug": "integrations",
+    "klaviyo_updated": "2026-04-21T13:54:46Z",
+    "created_at": "2019-12-12T22:22:37Z",
+    "draft": false,
+    "promoted": false,
+    "position": 7,
+    "label_names": []
+  },
+  "files": {
+    "body_html": "_source/articles/360037501212.body.html",
+    "rendered_html": "_source/rendered/360037501212.html"
+  },
+  "assets": {
+    "api_body": {
+      "images": [
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28715963355035",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28715969966491",
+          "alt": "",
+          "width": "611",
+          "height": "502"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28715969958811",
+          "alt": "",
+          "width": "663",
+          "height": "614"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28715969973915",
+          "alt": "",
+          "width": "639",
+          "height": "673"
+        }
+      ],
+      "links": [
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005254528-Review-and-Understand-your-Magento-1-Data",
+          "text": "Review and Understand your Magento 1 Data"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005254528-Review-and-Understand-your-Magento-1-Data#checkout-started4",
+          "text": "Checkout Started"
+        },
+        {
+          "href": "https://klaviyo.zendesk.com/hc/en-us/articles/115000096232",
+          "text": "dynamic template variables"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005082447-The-Email-Template-Editor#text-blocks4",
+          "text": "text block"
+        },
+        {
+          "href": "https://klaviyo.zendesk.com/hc/en-us/articles/115002779411",
+          "text": "How to create an abandoned cart flow"
+        },
+        {
+          "href": "https://klaviyo.zendesk.com/hc/en-us/articles/115002775252",
+          "text": "easily create your own."
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005082187-Integrate-with-Magento-1-x-CE-and-EE-#install-the-klaviyo-extension-in-magento4",
+          "text": "Integrate with Magento 1"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360030732832-Review-and-Understand-Your-WooCommerce-Data#viewed-product5",
+          "text": "Viewed Product"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115002775252-Create-a-Browse-Abandonment-Flow",
+          "text": "Guide to Creating a Browse Abandonment flow"
+        },
+        {
+          "href": "https://klaviyo.zendesk.com/hc/en-us/articles/115002774932",
+          "text": "Klaviyo Flow Library"
+        },
+        {
+          "href": "https://klaviyo.zendesk.com/hc/en-us/articles/115005082787",
+          "text": "learn how to us product feeds and recommendations"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115002779391-Create-a-Product-Review-Flow",
+          "text": "Create a product review flow"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115002775212-Create-an-Upsell-or-Cross-Sell-Flow",
+          "text": "create an upsell or cross sell flow"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115002779231-Back-Populate-a-Flow",
+          "text": "adding past profiles"
+        },
+        {
+          "href": "https://klaviyo.zendesk.com/hc/en-us/articles/115002775192",
+          "text": "build your own"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005254528-Review-and-Understand-your-Magento-1-Data#placed-order7",
+          "text": "Placed Order"
+        },
+        {
+          "href": "https://klaviyo.zendesk.com/hc/en-us/articles/115005082787",
+          "text": "product feeds and recommendations"
+        },
+        {
+          "href": "https://klaviyo.zendesk.com/hc/en-us/articles/115002775192",
+          "text": "Create a winback flow"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/14708088221467",
+          "text": "Integrate Buy with Prime with Klaviyo"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/14985388418331",
+          "text": "How to create an abandoned cart flow for Amazon Buy with Prime"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/15156331062171",
+          "text": "How to create a winback flow for Amazon Buy with Prime"
+        },
+        {
+          "href": "https://klaviyo.zendesk.com/hc/en-us/articles/115005082187",
+          "text": "How to integrate with Magento 1.x (CE and EE)"
+        },
+        {
+          "href": "https://klaviyo.zendesk.com/hc/en-us/articles/115005254528",
+          "text": "Magento 1 data reference"
+        }
+      ],
+      "headings": [
+        {
+          "level": 2,
+          "id": "h_01HH57YA4J78DQG1F86SKS1RWV",
+          "text": "You will learn"
+        },
+        {
+          "level": 2,
+          "id": "h_01HH57YA4JQBHKZKAXWCH8RNQ6",
+          "text": "Flow timing"
+        },
+        {
+          "level": 2,
+          "id": "h_01HH57YA4J4KKJJ1888F352H0T",
+          "text": "Abandoned cart flow"
+        },
+        {
+          "level": 2,
+          "id": "h_01HH57YA4KD2ZZ0H9SMTFWEBGJ",
+          "text": "Browse abandonment flow"
+        },
+        {
+          "level": 2,
+          "id": "h_01HH57YA4KHXR12ZMWTB57HS3S",
+          "text": "Cross-sell and product review flow"
+        },
+        {
+          "level": 2,
+          "id": "h_01HH57YA4K8KW5WTWA6G9WCJDR",
+          "text": "Customer winback flow"
+        },
+        {
+          "level": 2,
+          "id": "are-you-using-amazon-buy-with-prime-2",
+          "text": "Are you using Amazon Buy with Prime?"
+        },
+        {
+          "level": 2,
+          "id": "h_01HH57YA4MZBK3YXJRP94JTFHV",
+          "text": "Additional resources"
+        }
+      ]
+    },
+    "rendered_page": {
+      "images": [
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/7ff492c2b417b7ecfe572f839a8a81398693c1f7-1920x1080.webp",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/b73f8fcd14598c337fe9f8cb17e76200fdb90696-1682x1260.png",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/bc7d3d92383668949cbc8845b4f2f1fc17471e73-1224x1006.png?w=611",
+          "alt": "",
+          "width": "611",
+          "height": "502"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/98557cffce70bd32ddd525036338c770fe539d5f-1182x1094.png?w=663",
+          "alt": "",
+          "width": "663",
+          "height": "614"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/b9d36f8016702e44123c15012d0ea2e67848fd0f-1170x1232.png?w=639",
+          "alt": "",
+          "width": "639",
+          "height": "673"
+        }
+      ],
+      "links": [
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360037501212-Understanding-Magento-1-data-in-flows#site-content",
+          "text": "Skip to main content"
+        },
+        {
+          "href": "https://www.klaviyo.com",
+          "text": "Home"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center"
+        },
+        {
+          "href": "https://www.klaviyo.com/enterprise",
+          "text": "Enterprise"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Partners"
+        },
+        {
+          "href": "https://www.klaviyo.com/careers",
+          "text": "Careers"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": "Log in"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": ""
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center Find step-by-step instructions and troubleshooting solutions in our knowledge base."
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000032731",
+          "text": "Integrations"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000312411",
+          "text": "Flows"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867867",
+          "text": "Audience"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867667",
+          "text": "Campaigns"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/360000190711",
+          "text": "Sign-up forms"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000873988",
+          "text": "Deliverability & compliance"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/29173800271259",
+          "text": "SMS"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/16638219724187",
+          "text": "Reviews"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/18073014919195",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/34141283979931",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/37659126754075",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/33948021740315",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/39746685522331",
+          "text": "WhatsApp"
+        },
+        {
+          "href": "https://academy.klaviyo.com",
+          "text": "Klaviyo Academy Expert training and education to help you succeed with Klaviyo, and beyond."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Quick+guide&resource=academy_courses",
+          "text": "Quick guides Learn marketing strategies and concepts in 15 minutes or less."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Course&resource=academy_courses",
+          "text": "Courses Master key marketing topics through structured lessons and exams."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/best-practices",
+          "text": "Best practices Discover top product and marketing strategies for your business."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/learning-paths",
+          "text": "Learning paths Complete curated learning journeys tailored to your marketing goals."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses",
+          "text": "Explore all resources"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Live+training&resource=academy_courses",
+          "text": "Live trainings Build confidence through hands-on interactive workshops and thought-provoking strategy sessions."
+        },
+        {
+          "href": "https://www.bigmarker.com/klaviyo-customer-education/Office-hours-Getting-started-with-Klaviyo",
+          "text": "Live office hours Join a strategic discussion where you can ask questions and get answers in real-time."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/private-live-training",
+          "text": "1:1 Live training Book a private training session with an expert to jumpstart your platform knowledge and confidence."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/credentials",
+          "text": "Klaviyo credentials Dig deeper into select topics and showcase your expertise with a final exam to earn a certificate and digital badge."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/certificates/klaviyo-practitioner-certificate",
+          "text": "Klaviyo practitioner certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/deliverability-certificate",
+          "text": "Deliverability certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/developer-certificate",
+          "text": "Klaviyo developer certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses&select=Certificate",
+          "text": "See all certificates"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Klaviyo Community Join our thriving community network to connect with brands like yours—online and in person."
+        },
+        {
+          "href": "https://community.klaviyo.com/topic/new",
+          "text": "Ask a question Post a question and get thoughtful answers from Klaviyo powerusers."
+        },
+        {
+          "href": "https://community.klaviyo.com/p/roadmap",
+          "text": "Product roadmap"
+        },
+        {
+          "href": "https://community.klaviyo.com/search/activity/recent",
+          "text": "Recent threads"
+        },
+        {
+          "href": "https://community.klaviyo.com/p/champions",
+          "text": "Meet the Champions"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups",
+          "text": "Browse all groups Your people are waiting. New ideas and connections are a click away."
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/developer-group-64",
+          "text": "Developer group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/entrepreneur-user-group-118",
+          "text": "Entrepreneur group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/woo-user-group-87",
+          "text": "WooCommerce group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/new-york-meetup-chapter-82",
+          "text": "New York City"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/los-angeles-meetup-chapter-83",
+          "text": "Los Angeles"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/austin-meetup-chapter-85",
+          "text": "Austin"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/san-diego-meetup-chapter-86",
+          "text": "San Diego"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/amsterdam-meetup-chapter-84",
+          "text": "Amsterdam"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Klaviyo Developers Access API documentation and developer guides to help you build with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/get_started",
+          "text": "Get started Access key resources and a step-by-step checklist for how to start developing with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/build_your_integration",
+          "text": "Grow your app's reach Learn how to join our ecosystem and get your app listed on our marketplace."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/developer-tools",
+          "text": "Developer tools Generate sample data, monitor your API usage, and access our Postman collections."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/reference/api_overview",
+          "text": "API reference Browse our full catalog of API docs."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/changelog_",
+          "text": "Changelog"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/api_versioning_and_deprecation_policy",
+          "text": "Versioning & deprecation policy"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/rate_limits_and_error_handling",
+          "text": "Rate limits & error handling"
+        },
+        {
+          "href": "https://youtube.com/playlist?list=PLHkNfHgtxcUanrkMnKPdkRzuWU7MGv_xM&si=pkG-KH7IT_TUHOGC",
+          "text": "API tutorials on YouTube Subscribe to our Klaviyo API Tutorials playlist for easy access to step-by-step developer walkthroughs."
+        },
+        {
+          "href": "https://www.klaviyo.com/contact-us",
+          "text": "Contact us"
+        },
+        {
+          "href": "https://www.klaviyo.com/sign-up",
+          "text": "Sign up"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": "Search"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360037501212",
+          "text": "United States - EN"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/de-de/articles/360037501212",
+          "text": "Deutschland - DE"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-es/articles/360037501212",
+          "text": "España - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-mx/articles/360037501212",
+          "text": "México - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/fr-fr/articles/360037501212",
+          "text": "France - FR"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/it-it/articles/360037501212",
+          "text": "Italia - IT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/ko-kr/articles/360037501212",
+          "text": "한국 - KO"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/nl-nl/articles/360037501212",
+          "text": "Nederland - NL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pl-pl/articles/360037501212",
+          "text": "Polska - PL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pt-br/articles/360037501212",
+          "text": "Brasil - PT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/sv-se/articles/360037501212",
+          "text": "Sverige - SV"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/14521703806363",
+          "text": "Adobe Commerce (Magento)"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/49375230225051",
+          "text": "Magento 1"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360037501212-Understanding-Magento-1-data-in-flows#h_01HH57YA4J78DQG1F86SKS1RWV",
+          "text": "You will learn"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360037501212-Understanding-Magento-1-data-in-flows#h_01HH57YA4JQBHKZKAXWCH8RNQ6",
+          "text": "Flow timing"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360037501212-Understanding-Magento-1-data-in-flows#h_01HH57YA4J4KKJJ1888F352H0T",
+          "text": "Abandoned cart flow"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360037501212-Understanding-Magento-1-data-in-flows#h_01HH57YA4KD2ZZ0H9SMTFWEBGJ",
+          "text": "Browse abandonment flow"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360037501212-Understanding-Magento-1-data-in-flows#h_01HH57YA4KHXR12ZMWTB57HS3S",
+          "text": "Cross-sell and product review flow"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360037501212-Understanding-Magento-1-data-in-flows#h_01HH57YA4K8KW5WTWA6G9WCJDR",
+          "text": "Customer winback flow"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360037501212-Understanding-Magento-1-data-in-flows#are-you-using-amazon-buy-with-prime-2",
+          "text": "Are you using Amazon Buy with Prime?"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360037501212-Understanding-Magento-1-data-in-flows#additional-resources",
+          "text": "Additional resources"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005254528-Review-and-Understand-your-Magento-1-Data",
+          "text": "Review and Understand your Magento 1 Data"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005254528-Review-and-Understand-your-Magento-1-Data#checkout-started4",
+          "text": "Checkout Started"
+        },
+        {
+          "href": "https://klaviyo.zendesk.com/hc/en-us/articles/115000096232",
+          "text": "dynamic template variables"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005082447-The-Email-Template-Editor#text-blocks4",
+          "text": "text block"
+        },
+        {
+          "href": "https://klaviyo.zendesk.com/hc/en-us/articles/115002779411",
+          "text": "How to create an abandoned cart flow"
+        },
+        {
+          "href": "https://klaviyo.zendesk.com/hc/en-us/articles/115002775252",
+          "text": "easily create your own."
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005082187-Integrate-with-Magento-1-x-CE-and-EE-#install-the-klaviyo-extension-in-magento4",
+          "text": "Integrate with Magento 1"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360030732832-Review-and-Understand-Your-WooCommerce-Data#viewed-product5",
+          "text": "Viewed Product"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115002775252-Create-a-Browse-Abandonment-Flow",
+          "text": "Guide to Creating a Browse Abandonment flow"
+        },
+        {
+          "href": "https://klaviyo.zendesk.com/hc/en-us/articles/115002774932",
+          "text": "Klaviyo Flow Library"
+        },
+        {
+          "href": "https://klaviyo.zendesk.com/hc/en-us/articles/115005082787",
+          "text": "learn how to us product feeds and recommendations"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115002779391-Create-a-Product-Review-Flow",
+          "text": "Create a product review flow"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115002775212-Create-an-Upsell-or-Cross-Sell-Flow",
+          "text": "create an upsell or cross sell flow"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115002779231-Back-Populate-a-Flow",
+          "text": "adding past profiles"
+        },
+        {
+          "href": "https://klaviyo.zendesk.com/hc/en-us/articles/115002775192",
+          "text": "build your own"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005254528-Review-and-Understand-your-Magento-1-Data#placed-order7",
+          "text": "Placed Order"
+        },
+        {
+          "href": "https://klaviyo.zendesk.com/hc/en-us/articles/115005082787",
+          "text": "product feeds and recommendations"
+        },
+        {
+          "href": "https://klaviyo.zendesk.com/hc/en-us/articles/115002775192",
+          "text": "Create a winback flow"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/14708088221467",
+          "text": "Integrate Buy with Prime with Klaviyo"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/14985388418331",
+          "text": "How to create an abandoned cart flow for Amazon Buy with Prime"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/15156331062171",
+          "text": "How to create a winback flow for Amazon Buy with Prime"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005254528",
+          "text": "Magento 1 data reference"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115001002272",
+          "text": "Learn how to contact support"
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": ""
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": "Visit Community"
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": ""
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": "Hire a partner"
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/about",
+          "text": "About Klaviyo"
+        },
+        {
+          "href": "https://www.klaviyo.com/newsroom",
+          "text": "Newsroom"
+        },
+        {
+          "href": "https://investors.klaviyo.com/overview/default.aspx",
+          "text": "Investor relations"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Agency and tech partners"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Developers"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/retail",
+          "text": "Retail and ecommerce"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/restaurants",
+          "text": "Restaurant marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/wellness",
+          "text": "Wellness"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform",
+          "text": "B2C CRM overview"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai",
+          "text": "Klaviyo AI (K:AI)"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/marketing-automation",
+          "text": "Klaviyo Marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-service",
+          "text": "Klaviyo Service"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/analytics",
+          "text": "Klaviyo Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-data-platform",
+          "text": "Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare",
+          "text": "Klaviyo vs. Klaviyo alternatives"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-mailchimp",
+          "text": "Klaviyo vs. Mailchimp"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-postscript",
+          "text": "Klaviyo vs. Postscript"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-attentive",
+          "text": "Klaviyo vs. Attentive"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-salesforce-marketing-cloud",
+          "text": "Klaviyo vs. Salesforce"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-listrak",
+          "text": "Klaviyo vs. Listrak"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/omnichannel",
+          "text": "Omnichannel marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/email-marketing",
+          "text": "Email marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing",
+          "text": "SMS marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing/rcs",
+          "text": "RCS for Business"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/mobile-app-marketing",
+          "text": "Mobile app marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/whatsapp",
+          "text": "WhatsApp marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/social",
+          "text": "Social marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources",
+          "text": "Marketing resources"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources/marketing-campaign-calendar",
+          "text": "Marketing campaign calendar"
+        },
+        {
+          "href": "https://www.klaviyo.com/glossary",
+          "text": "Marketing glossary"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/email-subject-line-generator",
+          "text": "Subject line generator"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/roi-calculator",
+          "text": "ROI calculator"
+        },
+        {
+          "href": "https://www.klaviyo.com/customers",
+          "text": "Case studies"
+        },
+        {
+          "href": "https://www.klaviyo.com/composer",
+          "text": "Composer Beta"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/marketing-agent",
+          "text": "Marketing Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/customer-agent",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/customer-experience-hub",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/helpdesk",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/marketing-analytics",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/advanced-cdp",
+          "text": "Advanced Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/web-forms",
+          "text": "Web forms"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/email-templates",
+          "text": "Email templates"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/portfolio",
+          "text": "Portfolio"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform-integrations",
+          "text": "Apps and Integrations"
+        },
+        {
+          "href": "https://www.klaviyo.com/features",
+          "text": "Features"
+        },
+        {
+          "href": "https://www.klaviyo.com/whats-new",
+          "text": "What's new"
+        },
+        {
+          "href": "https://www.klaviyo.com/events",
+          "text": "Events"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help Center"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us",
+          "text": "Academy"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Community"
+        },
+        {
+          "href": "https://www.facebook.com/Klaviyo/",
+          "text": "Facebook"
+        },
+        {
+          "href": "https://twitter.com/klaviyo/",
+          "text": "Twitter"
+        },
+        {
+          "href": "https://www.linkedin.com/company/klaviyo/",
+          "text": "LinkedIn"
+        },
+        {
+          "href": "https://www.instagram.com/klaviyo/",
+          "text": "Instagram"
+        },
+        {
+          "href": "https://www.klaviyo.com/sitemap",
+          "text": "Site Map"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal",
+          "text": "Terms and Privacy"
+        },
+        {
+          "href": "https://www.klaviyo.com/security",
+          "text": "Security"
+        },
+        {
+          "href": "https://www.klaviyo.com/trust",
+          "text": "Trust"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal/intellectual-property-notices",
+          "text": "Intellectual Property Notices"
+        }
+      ],
+      "headings": [
+        {
+          "level": 1,
+          "id": "",
+          "text": "Understanding Magento 1 data in flows"
+        },
+        {
+          "level": 2,
+          "id": "h_01HH57YA4J78DQG1F86SKS1RWV",
+          "text": "You will learn"
+        },
+        {
+          "level": 2,
+          "id": "h_01HH57YA4JQBHKZKAXWCH8RNQ6",
+          "text": "Flow timing"
+        },
+        {
+          "level": 2,
+          "id": "h_01HH57YA4J4KKJJ1888F352H0T",
+          "text": "Abandoned cart flow"
+        },
+        {
+          "level": 2,
+          "id": "h_01HH57YA4KD2ZZ0H9SMTFWEBGJ",
+          "text": "Browse abandonment flow"
+        },
+        {
+          "level": 2,
+          "id": "h_01HH57YA4KHXR12ZMWTB57HS3S",
+          "text": "Cross-sell and product review flow"
+        },
+        {
+          "level": 2,
+          "id": "h_01HH57YA4K8KW5WTWA6G9WCJDR",
+          "text": "Customer winback flow"
+        },
+        {
+          "level": 2,
+          "id": "are-you-using-amazon-buy-with-prime-2",
+          "text": "Are you using Amazon Buy with Prime?"
+        },
+        {
+          "level": 2,
+          "id": "additional-resources",
+          "text": "Additional resources"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "Explore more from Klaviyo"
+        }
+      ]
+    }
+  },
+  "rendered_page": {
+    "status": "fetched",
+    "error": ""
+  }
+}

@@ -1,0 +1,148 @@
+<p>Learn how to create a segment- or list-triggered flow and about their re-entry setting. </p>
+<p>Segment- and list-triggered flows start whenever someone newly joins a segment or list, respectively. With Klaviyo’s updated flow entry settings, you now have more control over whether (and how often) profiles can enter or re-enter these flows. This makes it easier to support lifecycle messaging, behavior-based automations, and recurring engagement campaigns.</p>
+<h2 id="h_01KCSCGDHT469GA0P0JZGA0HNC">How segment- and list-triggered flows work</h2>
+<p>A profile triggers a segment or list-based flow when they newly qualify for the segment or list. For segments, this means:</p>
+<ul>
+<li>The profile was previously not in the segment<br>
+AND</li>
+<li>A data change (such as profile properties or events) causes them to enter the segment organically.</li>
+</ul>
+<p>For lists, it's when they first join the list, such as when they join via a form. </p>
+<h3 id="h_01KCSDYQTG33C6XAFP7145SDQT">List-specific details</h3>
+<p>Keep in mind that if you import profiles to a list, it will trigger any list-triggered flows. This means that if you set up a welcome series, and import a list of existing subscribers, those subscribers will enter the welcome series. </p>
+<p>To avoid this, turn off any list-triggered flows before importing. </p>
+<h3 id="h_01KCSE6ZB27FFEQJBR2GMWTKX3">Segment-specific details</h3>
+<p>For segments, there are a few important things to keep in mind: </p>
+<ul>
+<li>Manual edits to a segment’s definition do not trigger flows.
+<ul>
+<li>If you want to push all members of a segment into a connected flow after manually updating the definition, you will need to <a href="https://help.klaviyo.com/hc/en-us/articles/115002779231">add past profiles to the flow</a>. </li>
+</ul>
+</li>
+<li>A flow triggers only when a profile’s data causes them to organically enter the segment.</li>
+<li>Duplicate activity (e.g., repeated events) will not re-trigger the flow unless segment membership actually changes.</li>
+<li>Recipients will only receive messages within a flow if they are still a member of the connected segment at send time.</li>
+</ul>
+<h2 id="h_01KCSCGDJ2RFEW7S3AB5PF84MT">Create a segment- or list-triggered flow</h2>
+<ol>
+<li>Navigate to the <strong>Flows</strong> tab in Klaviyo.</li>
+<li>Click <strong>Create flow</strong> and select <strong>Build your own</strong>.</li>
+<li>Name your flow and click <strong>Create flow</strong>.</li>
+<li>In the Flow Builder, choose <strong>Added to segment</strong> or <strong>Added to list </strong>as the trigger.</li>
+<li>Select the segment or list that should initiate the flow.</li>
+<li>Configure <strong>Re-entry criteria</strong> in the trigger settings panel.</li>
+</ol>
+<h2 id="h_01KCSCGDJ87DQP0XM8P3A2BT0K">Re-entry settings</h2>
+<div class="bs-callout bs-callout-default">
+<p>If you don't see this setting in your account, stay tuned! This setting will be available for everyone soon.</p>
+</div>
+<p>A segment- or list-triggered flow begins when a profile meets the definition of a segment or joins a list. Profiles can now enter these flows:</p>
+<ul>
+<li>One time only</li>
+<li>Whenever they re-qualify</li>
+<li>After a minimum time period has passed</li>
+</ul>
+<p>These options are controlled by a new <strong>Re-entry criteria</strong> setting in the flow trigger.</p>
+<p class="wysiwyg-text-align-center"><img src="https://klaviyo.zendesk.com/hc/article_attachments/44565688213659" alt="Re-entry settings for a flow" width="398" height="483"></p>
+<p>You can control how often profiles can enter the flow by adjusting the <strong>Re-entry criteria</strong> in the trigger panel. Your options include:</p>
+<table>
+<tbody>
+<tr>
+<td>Setting</td>
+<td>Description</td>
+<td>Use case</td>
+</tr>
+<tr>
+<td>No re-entry</td>
+<td>Profiles will enter the flow only once.</td>
+<td>
+<p>Welcome series</p>
+<p>Legal or compliance notifications</p>
+</td>
+</tr>
+<tr>
+<td>Allow re-entry</td>
+<td>Profiles will re-enter the flow whenever they newly qualify for the list or segment.</td>
+<td>
+<p>Lifecycle flows</p>
+<p>Behavior-based-segment flows where messaging should repeat over time.</p>
+</td>
+</tr>
+<tr>
+<td>Allow re-entry after a time period</td>
+<td>Profiles will re-trigger the flow when they newly qualify <em>and</em> the selected time period has elapsed since their last entry.</td>
+<td>
+<p>Retention flows</p>
+<p>Winback flows.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="bs-callout bs-callout-default">
+<p>Re-entry criteria now serves as the single source of truth for flow entry behavior. You no longer need to add “has not been in flow” filters to control frequency.</p>
+</div>
+<h3 id="h_01KCSDJKTE91CAKQ0M1WVE92C2">Default settings for new flows</h3>
+<p>When you create a new flow, Klaviyo applies default re-entry settings based on the trigger type:</p>
+<table>
+<tbody>
+<tr>
+<td style="text-align: center"><strong>Trigger type</strong></td>
+<td style="text-align: center"><strong>Default re-entry setting</strong></td>
+<td style="text-align: center"><strong>Notes</strong></td>
+</tr>
+<tr>
+<td style="text-align: center">Segment</td>
+<td style="text-align: center">No re-entry</td>
+<td style="text-align: center">Customer can change to allow re-entry or time-based re-entry</td>
+</tr>
+<tr>
+<td style="text-align: center">List</td>
+<td style="text-align: center">No re-entry</td>
+<td style="text-align: center">Same defaults as segment</td>
+</tr>
+<tr>
+<td style="text-align: center">Metric (e.g., <em>Order Placed,</em> <em>Viewed Product</em>, <em>Price Drop</em>, L<em>ow Inventory</em>)</td>
+<td style="text-align: center">Allow re-entry</td>
+<td style="text-align: center">Includes Price Drop and Low Inventory</td>
+</tr>
+<tr>
+<td style="text-align: center">Date Property</td>
+<td style="text-align: center">Allow re-entry</td>
+<td style="text-align: center">Behavior unchanged; repeats when date updates or repeats annually</td>
+</tr>
+</tbody>
+</table>
+<p>You can adjust these defaults at any time.</p>
+<h3 id="h_01KCSDJKTE9HZ5B9SXKS4158EN">Paths that do not trigger re-entry</h3>
+<p>Re-entry only happens when a profile’s data causes segment or list membership to change. The following do not trigger a flow:</p>
+<ul>
+<li>Manual edits to segment rules</li>
+<li>Manually adding profiles to a list or segment </li>
+<li>Merging profiles or lists </li>
+<li>Duplicate subscription or event activity where the profile was already in the segment </li>
+<li>Integrations that intentionally add profiles without triggering flows</li>
+</ul>
+<h3 id="h_01KCSDJKTFDE5C5MSY50G9KX9M">FAQs </h3>
+<h4 id="h_01KCSDJKTFJF9V6ENPKASAJ9DF">Does "Add Past Profiles: re-trigger the flow?</h4>
+<p>No. Adding past profiles does not count as new qualification and does not re-trigger the flow. Profiles must organically meet the segment conditions for the flow to run again.</p>
+<h4 id="h_01KCSDJKTG08AR80C4V2SQ5807">Previously I could not re-trigger my flows. What happens with my existing Flows?</h4>
+<p>Existing flows retain behavior consistent with how they functioned before the new settings were introduced. Their configurations are automatically translated into the new system.</p>
+<h4 id="h_01KCSDJKTHC3BS343AM3B2KXJS">Existing behavior → New re-entry setting</h4>
+<ul>
+<li>List or segment flow with no re-entry filters → <strong>No re-entry</strong>
+</li>
+<li>Event (metric) flow with no re-entry filters → <strong>Allow re-entry</strong>
+</li>
+<li>Metric flow with a “has not been in flow in all time” filter → <strong>No re-entry</strong>
+</li>
+<li>Metric flow with a “has not been in flow in X days” filter → <strong>Allow re-entry after a time period (X days)</strong>
+</li>
+</ul>
+<h4 id="h_01KCSDJKTHNP2PFSRBGASNWWBQ">Will this change how often my flow sends?</h4>
+<p>No, unless you adjust the re-entry criteria.</p>
+<h4 id="h_01KCSDJKTHB7T3XG46WNQ8FRHM">Can I restrict profiles to entering only once?</h4>
+<p>Yes. Set the re-entry criteria to <strong>No re-entry</strong>.</p>
+<h4 id="h_01KCSDJKTJPH1WSYH6WZK8N0ZX">Can I control re-entry for metric-triggered flows?</h4>
+<p>Yes. Re-entry is now managed the same way for all flow types directly in the trigger settings.<br>
+</p>
+<p>Learn about other flow types:</p>

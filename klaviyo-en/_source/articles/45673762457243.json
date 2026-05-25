@@ -1,0 +1,913 @@
+{
+  "captured_at": "2026-05-23T16:19:01Z",
+  "article": {
+    "id": 45673762457243,
+    "url": "https://klaviyo.zendesk.com/api/v2/help_center/en-us/articles/45673762457243.json",
+    "html_url": "https://klaviyo.zendesk.com/hc/en-us/articles/45673762457243-Using-RegEx-matching-in-Segmentation",
+    "author_id": 1903142930824,
+    "comments_disabled": true,
+    "draft": false,
+    "promoted": false,
+    "position": 10,
+    "vote_sum": 0,
+    "vote_count": 0,
+    "section_id": 49375416013339,
+    "created_at": "2026-01-20T19:31:49Z",
+    "updated_at": "2026-05-11T13:41:02Z",
+    "name": "Using RegEx matching in Segmentation",
+    "title": "Using RegEx matching in Segmentation",
+    "source_locale": "en-us",
+    "locale": "en-us",
+    "outdated": false,
+    "outdated_locales": [],
+    "edited_at": "2026-04-17T01:02:20Z",
+    "user_segment_id": null,
+    "permission_group_id": 146372,
+    "content_tag_ids": [
+      "01JRGG58ZGMGS167V29NA2B6MG"
+    ],
+    "label_names": [],
+    "body": "<h2 id=\"h_01KFHXS82R1811TD4XJHGPDBPS\"><strong>What is Regex Matching?</strong></h2>\n<p>Regex matching lets you filter profiles based on text patterns instead of exact values. This is useful for finding profiles that follow a specific format, like email addresses from certain domains or phone numbers in a particular format.</p>\n<p><strong>⚠️ Important: </strong>Regex always matches the complete value from beginning to end.</p>\n<p></p>\n<h2 id=\"h_01KFED7VGEFCH1D5QGZD0EGMBY\"><strong>How to Use Regex</strong></h2>\n<p>When building a segment, you can use two regex operators:</p>\n<ul>\n<li>Matches regex - Includes profiles where the value matches your regex</li>\n<li>Does not match regex - Includes profiles where the value does NOT match your regex</li>\n</ul>\n<p>It can be used in the following segment conditions:</p>\n<ol>\n<li>Properties about someone (including custom objects)</li>\n</ol>\n<p><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/45728065801627\" alt=\"\" width=\"2254\" height=\"794\"></p>\n<p><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/45728020929051\" alt=\"\" width=\"2426\" height=\"680\"></p>\n<p></p>\n<p>2. Filters on \"What someone has done or not done\" and \"Steps someone has taken in a specific order\"</p>\n<p><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/45728020931227\" alt=\"\" width=\"2266\" height=\"924\"></p>\n<h3 id=\"h_01KFED7VGHYMW3ZF7G6GGKG8SZ\"></h3>\n<h2 id=\"h_01KFH9DXSPH9B2EWD76J9M6A5W\"><strong>Regex Basics</strong></h2>\n<h4 id=\"h_01KFED7VGH0THMZ66R7VM52ND2\"><strong>Matching Characters</strong></h4>\n<ul>\n<li>Letters and numbers - Type normally: hello matches \"hello\"</li>\n<li>Any digit - Use \\d to match any number 0-9</li>\n<li>Any letter - Use [a-z] for lowercase, [A-Z] for uppercase, or [a-zA-Z] for both</li>\n<li>Either/or - Use | to match options: gmail|yahoo matches either \"gmail\" or \"yahoo\"</li>\n<li>Anything - Use .* to match any characters</li>\n</ul>\n<h4 id=\"h_01KFED7VGK0ZYZP9D8DP5VWGR6\"><strong>Special Characters</strong></h4>\n<p>Add a backslash \\ before these to match them literally:</p>\n<ul>\n<li>Period: \\. matches a period</li>\n<li>Plus sign: \\+ matches a plus sign</li>\n<li>Parentheses: \\( and \\) match parentheses</li>\n</ul>\n<h4 id=\"h_01KFED7VGMWN40CQN09SGH9321\"><strong>Repeating Patterns</strong></h4>\n<ul>\n<li>{5} - Exactly 5 times (e.g., \\d{5} matches 5 digits)</li>\n<li>{2,4} - Between 2 and 4 times</li>\n<li>? - Optional (0 or 1 time)</li>\n</ul>\n<p><strong>Note: we limit repeating patterns at Maximum 1,000 repetitions</strong></p>\n<h3 id=\"h_01KFED7VGP6WRE6G00RBBY9RH5\"></h3>\n<h2 id=\"h_01KFKYM07QKMZHAQ6KDC70BV14\"><strong>Common Examples</strong></h2>\n<h4 id=\"h_01KFED7VGPGGVTGZXB6F70D8MJ\"><strong>Email Addresses</strong></h4>\n<ul>\n<li>Specific domain:\n<ul>\n<li>.*@example\\.com</li>\n<li>Matches: john@example.com, support@example.com</li>\n</ul>\n</li>\n<li>Multiple domains:\n<ul>\n<li>.*@(gmail|yahoo|hotmail)\\.com</li>\n<li>Matches: user@gmail.com, user@yahoo.com, <a href=\"mailto:user@hotmail.com\">user@hotmail.com</a>\n</li>\n</ul>\n</li>\n<li>Any .com email:\n<ul>\n<li>.*@.*\\.com</li>\n</ul>\n</li>\n</ul>\n<h4 id=\"h_01KFED7VGS202MC1B4V7WZCF4K\"><strong>Phone Numbers</strong></h4>\n<ul>\n<li>10-digit US number\n<ul>\n<li>\\d{10}</li>\n<li>Matches: 5551234567</li>\n</ul>\n</li>\n<li>Formatted with parentheses:\n<ul>\n<li>\\(\\d{3}\\) \\d{3}-\\d{4}</li>\n<li>Matches: (555) 123-4567</li>\n</ul>\n</li>\n</ul>\n<h4 id=\"h_01KFED7VGVVY40APSS2GNKN0S5\"><strong>Postal Codes</strong></h4>\n<ul>\n<li>5-digit ZIP:\n<ul>\n<li>\\d{5}</li>\n<li>Matches: 12345</li>\n</ul>\n</li>\n<li>ZIP+4:\n<ul>\n<li>\\d{5}-\\d{4}</li>\n<li>Matches: 12345-6789</li>\n</ul>\n</li>\n</ul>\n<p><strong>For advanced references: our implementation uses Google RE2 as our standard. </strong><a href=\"https://github.com/google/re2/wiki/Syntax\"><strong>Learn more here</strong></a><strong>.</strong></p>\n<h3 id=\"h_01KFED7VGX4W7N8E26A02W2GSA\"></h3>\n<h2 id=\"h_01KFKYM788Z4FQ28AA3WD6V0AQ\"><strong>RegEx Limits</strong></h2>\n<table>\n<tbody>\n<tr>\n<td><strong>Limit</strong></td>\n<td><strong>Value</strong></td>\n<td><strong>Example</strong></td>\n</tr>\n<tr>\n<td>Regex length</td>\n<td>max 1,000 characters</td>\n<td>-</td>\n</tr>\n<tr>\n<td>Regex lines</td>\n<td>max 100 lines </td>\n<td>-</td>\n</tr>\n<tr>\n<td>Repetitions</td>\n<td>max 1,000 repetitions</td>\n<td>\\d{1000} allowed<br>\n\\d{1001} not allowed</td>\n</tr>\n<tr>\n<td>Options (|)</td>\n<td>5 max at main level</td>\n<td>a|b|c|d|e|f exceeds limit (6 options)</td>\n</tr>\n<tr>\n<td>Nesting depth</td>\n<td>5 levels max</td>\n<td>((((a)))) is 4 levels, allowed</td>\n</tr>\n</tbody>\n</table>\n<p><strong>Additionally, the following features are not supported at this time.</strong></p>\n<table>\n<tbody>\n<tr>\n<td><strong>Feature</strong></td>\n<td><strong>Example</strong></td>\n</tr>\n<tr>\n<td>Lookahead/Lookbehind</td>\n<td>(?=...), (?!...), (?&lt;=...), (?&lt;!...)</td>\n</tr>\n<tr>\n<td>Backreferences</td>\n<td>\\1, \\2, (\\w+)\\s+\\1</td>\n</tr>\n<tr>\n<td>Unicode escapes</td>\n<td>\\uXXXX, \\u00A0</td>\n</tr>\n<tr>\n<td>Nested quantifiers</td>\n<td>(a+)+, (x*)*, (a{2,5})+</td>\n</tr>\n</tbody>\n</table>\n<h3 id=\"h_01KFED7VH7XJNZNK9SBCSVMAR7\"></h3>\n<h2 id=\"h_01KFEDAJ069K97CYCD37QV50MC\"><strong>Tips for Success</strong></h2>\n<p><strong>1. Regex matches the complete value</strong></p>\n<p>Your regex must describe the entire value, not just part of it.</p>\n<p>Wrong: gmail\\.com (only matches the text \"gmail.com\")</p>\n<p>Right: .*@gmail\\.com (matches complete emails like john@gmail.com)</p>\n<p></p>\n<p><strong>2. Always escape periods</strong></p>\n<p>When matching .com, .net, etc., write it as \\.com with a backslash.</p>\n<p>Wrong: @gmail.com (period matches any character)</p>\n<p>Right: @gmail\\.com (matches literal period)</p>\n<p></p>\n<p><strong>3. Use .* for \"Anything\"</strong></p>\n<p>Match any characters with .*</p>\n<ul>\n<li>.*@company\\.com - Any email at <a href=\"http://company.com\">company.com</a>\n</li>\n<li>\\+.* - Anything starting with +</li>\n<li>.*urgent.* - Text containing \"urgent\"<br>\n<p></p>\n<p><strong>4. Start simple, then refine</strong></p>\n<p>Begin with a basic regex and add details gradually.</p>\n</li>\n<li>Example: .*@gmail\\.com → [a-z]+\\.[a-z]+@gmail\\.com<br>\n<p>Split complex logic into multiple simple filters when possible.</p>\n</li>\n<li>Example for \"Gmail or Yahoo emails from California\":\n<ul>\n<li>Filter 1: Email matches regex .*@(gmail|yahoo)\\.com</li>\n<li>Filter 2: State equals California<br>\n<p><strong>5. RegEx is case sensitive by default</strong></p>\n<p>If you want to make a statement case insensitive, you can add <code>(?i)</code> as a prefix.</p>\n</li>\n</ul>\n</li>\n<li>Product matches (?i)^iphone$</li>\n</ul>\n<p></p>\n<h2 id=\"h_01KFED7VHA85P8AWB5KVGZYNGX\"><strong>When to use RegEx vs Standard Operators</strong></h2>\n<p>Use regex when you need to match specific formats or patterns. For simpler needs, we strongly recommend using standard operators instead:</p>\n<ul>\n<li>Contains - Text appears anywhere</li>\n<li>Starts with - Matches the beginning</li>\n<li>Ends with - Matches the ending</li>\n<li>Equals - Exact match</li>\n</ul>",
+    "user_segment_ids": []
+  },
+  "normalized": {
+    "id": "45673762457243",
+    "title": "Using RegEx matching in Segmentation",
+    "source_url": "https://help.klaviyo.com/hc/en-us/articles/45673762457243-Using-RegEx-matching-in-Segmentation",
+    "section_id": 49375416013339,
+    "section": "Build and use segments",
+    "category_id": 115000867867,
+    "category": "Audience",
+    "category_slug": "analytics-audience",
+    "klaviyo_updated": "2026-05-11T13:41:02Z",
+    "created_at": "2026-01-20T19:31:49Z",
+    "draft": false,
+    "promoted": false,
+    "position": 10,
+    "label_names": []
+  },
+  "files": {
+    "body_html": "_source/articles/45673762457243.body.html",
+    "rendered_html": "_source/rendered/45673762457243.html"
+  },
+  "assets": {
+    "api_body": {
+      "images": [
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/45728065801627",
+          "alt": "",
+          "width": "2254",
+          "height": "794"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/45728020929051",
+          "alt": "",
+          "width": "2426",
+          "height": "680"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/45728020931227",
+          "alt": "",
+          "width": "2266",
+          "height": "924"
+        }
+      ],
+      "links": [
+        {
+          "href": "mailto:user@hotmail.com",
+          "text": "user@hotmail.com"
+        },
+        {
+          "href": "https://github.com/google/re2/wiki/Syntax",
+          "text": "Learn more here"
+        },
+        {
+          "href": "http://company.com",
+          "text": "company.com"
+        }
+      ],
+      "headings": [
+        {
+          "level": 2,
+          "id": "h_01KFHXS82R1811TD4XJHGPDBPS",
+          "text": "What is Regex Matching?"
+        },
+        {
+          "level": 2,
+          "id": "h_01KFED7VGEFCH1D5QGZD0EGMBY",
+          "text": "How to Use Regex"
+        },
+        {
+          "level": 3,
+          "id": "h_01KFED7VGHYMW3ZF7G6GGKG8SZ",
+          "text": ""
+        },
+        {
+          "level": 2,
+          "id": "h_01KFH9DXSPH9B2EWD76J9M6A5W",
+          "text": "Regex Basics"
+        },
+        {
+          "level": 4,
+          "id": "h_01KFED7VGH0THMZ66R7VM52ND2",
+          "text": "Matching Characters"
+        },
+        {
+          "level": 4,
+          "id": "h_01KFED7VGK0ZYZP9D8DP5VWGR6",
+          "text": "Special Characters"
+        },
+        {
+          "level": 4,
+          "id": "h_01KFED7VGMWN40CQN09SGH9321",
+          "text": "Repeating Patterns"
+        },
+        {
+          "level": 3,
+          "id": "h_01KFED7VGP6WRE6G00RBBY9RH5",
+          "text": ""
+        },
+        {
+          "level": 2,
+          "id": "h_01KFKYM07QKMZHAQ6KDC70BV14",
+          "text": "Common Examples"
+        },
+        {
+          "level": 4,
+          "id": "h_01KFED7VGPGGVTGZXB6F70D8MJ",
+          "text": "Email Addresses"
+        },
+        {
+          "level": 4,
+          "id": "h_01KFED7VGS202MC1B4V7WZCF4K",
+          "text": "Phone Numbers"
+        },
+        {
+          "level": 4,
+          "id": "h_01KFED7VGVVY40APSS2GNKN0S5",
+          "text": "Postal Codes"
+        },
+        {
+          "level": 3,
+          "id": "h_01KFED7VGX4W7N8E26A02W2GSA",
+          "text": ""
+        },
+        {
+          "level": 2,
+          "id": "h_01KFKYM788Z4FQ28AA3WD6V0AQ",
+          "text": "RegEx Limits"
+        },
+        {
+          "level": 3,
+          "id": "h_01KFED7VH7XJNZNK9SBCSVMAR7",
+          "text": ""
+        },
+        {
+          "level": 2,
+          "id": "h_01KFEDAJ069K97CYCD37QV50MC",
+          "text": "Tips for Success"
+        },
+        {
+          "level": 2,
+          "id": "h_01KFED7VHA85P8AWB5KVGZYNGX",
+          "text": "When to use RegEx vs Standard Operators"
+        }
+      ]
+    },
+    "rendered_page": {
+      "images": [
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/7ff492c2b417b7ecfe572f839a8a81398693c1f7-1920x1080.webp",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/aa4f04ce209a39879488232597aa3b4bebb998b8-2254x794.png?w=2254",
+          "alt": "",
+          "width": "2254",
+          "height": "794"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/0fbfcb17d2f0e5f3140e2da6c79358c95746a87a-2426x680.png?w=2426",
+          "alt": "",
+          "width": "2426",
+          "height": "680"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/142437d6aaabd29e1532ddb37d02c40f506a14ce-2266x924.png?w=2266",
+          "alt": "",
+          "width": "2266",
+          "height": "924"
+        }
+      ],
+      "links": [
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/45673762457243-Using-RegEx-matching-in-Segmentation#site-content",
+          "text": "Skip to main content"
+        },
+        {
+          "href": "https://www.klaviyo.com",
+          "text": "Home"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center"
+        },
+        {
+          "href": "https://www.klaviyo.com/enterprise",
+          "text": "Enterprise"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Partners"
+        },
+        {
+          "href": "https://www.klaviyo.com/careers",
+          "text": "Careers"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": "Log in"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": ""
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center Find step-by-step instructions and troubleshooting solutions in our knowledge base."
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000032731",
+          "text": "Integrations"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000312411",
+          "text": "Flows"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867867",
+          "text": "Audience"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867667",
+          "text": "Campaigns"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/360000190711",
+          "text": "Sign-up forms"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000873988",
+          "text": "Deliverability & compliance"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/29173800271259",
+          "text": "SMS"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/16638219724187",
+          "text": "Reviews"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/18073014919195",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/34141283979931",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/37659126754075",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/33948021740315",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/39746685522331",
+          "text": "WhatsApp"
+        },
+        {
+          "href": "https://academy.klaviyo.com",
+          "text": "Klaviyo Academy Expert training and education to help you succeed with Klaviyo, and beyond."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Quick+guide&resource=academy_courses",
+          "text": "Quick guides Learn marketing strategies and concepts in 15 minutes or less."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Course&resource=academy_courses",
+          "text": "Courses Master key marketing topics through structured lessons and exams."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/best-practices",
+          "text": "Best practices Discover top product and marketing strategies for your business."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/learning-paths",
+          "text": "Learning paths Complete curated learning journeys tailored to your marketing goals."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses",
+          "text": "Explore all resources"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Live+training&resource=academy_courses",
+          "text": "Live trainings Build confidence through hands-on interactive workshops and thought-provoking strategy sessions."
+        },
+        {
+          "href": "https://www.bigmarker.com/klaviyo-customer-education/Office-hours-Getting-started-with-Klaviyo",
+          "text": "Live office hours Join a strategic discussion where you can ask questions and get answers in real-time."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/private-live-training",
+          "text": "1:1 Live training Book a private training session with an expert to jumpstart your platform knowledge and confidence."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/credentials",
+          "text": "Klaviyo credentials Dig deeper into select topics and showcase your expertise with a final exam to earn a certificate and digital badge."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/certificates/klaviyo-practitioner-certificate",
+          "text": "Klaviyo practitioner certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/deliverability-certificate",
+          "text": "Deliverability certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/developer-certificate",
+          "text": "Klaviyo developer certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses&select=Certificate",
+          "text": "See all certificates"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Klaviyo Community Join our thriving community network to connect with brands like yours—online and in person."
+        },
+        {
+          "href": "https://community.klaviyo.com/topic/new",
+          "text": "Ask a question Post a question and get thoughtful answers from Klaviyo powerusers."
+        },
+        {
+          "href": "https://community.klaviyo.com/p/roadmap",
+          "text": "Product roadmap"
+        },
+        {
+          "href": "https://community.klaviyo.com/search/activity/recent",
+          "text": "Recent threads"
+        },
+        {
+          "href": "https://community.klaviyo.com/p/champions",
+          "text": "Meet the Champions"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups",
+          "text": "Browse all groups Your people are waiting. New ideas and connections are a click away."
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/developer-group-64",
+          "text": "Developer group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/entrepreneur-user-group-118",
+          "text": "Entrepreneur group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/woo-user-group-87",
+          "text": "WooCommerce group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/new-york-meetup-chapter-82",
+          "text": "New York City"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/los-angeles-meetup-chapter-83",
+          "text": "Los Angeles"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/austin-meetup-chapter-85",
+          "text": "Austin"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/san-diego-meetup-chapter-86",
+          "text": "San Diego"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/amsterdam-meetup-chapter-84",
+          "text": "Amsterdam"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Klaviyo Developers Access API documentation and developer guides to help you build with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/get_started",
+          "text": "Get started Access key resources and a step-by-step checklist for how to start developing with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/build_your_integration",
+          "text": "Grow your app's reach Learn how to join our ecosystem and get your app listed on our marketplace."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/developer-tools",
+          "text": "Developer tools Generate sample data, monitor your API usage, and access our Postman collections."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/reference/api_overview",
+          "text": "API reference Browse our full catalog of API docs."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/changelog_",
+          "text": "Changelog"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/api_versioning_and_deprecation_policy",
+          "text": "Versioning & deprecation policy"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/rate_limits_and_error_handling",
+          "text": "Rate limits & error handling"
+        },
+        {
+          "href": "https://youtube.com/playlist?list=PLHkNfHgtxcUanrkMnKPdkRzuWU7MGv_xM&si=pkG-KH7IT_TUHOGC",
+          "text": "API tutorials on YouTube Subscribe to our Klaviyo API Tutorials playlist for easy access to step-by-step developer walkthroughs."
+        },
+        {
+          "href": "https://www.klaviyo.com/contact-us",
+          "text": "Contact us"
+        },
+        {
+          "href": "https://www.klaviyo.com/sign-up",
+          "text": "Sign up"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": "Search"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/45673762457243",
+          "text": "United States - EN"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/de-de/articles/45673762457243",
+          "text": "Deutschland - DE"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-es/articles/45673762457243",
+          "text": "España - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-mx/articles/45673762457243",
+          "text": "México - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/fr-fr/articles/45673762457243",
+          "text": "France - FR"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/it-it/articles/45673762457243",
+          "text": "Italia - IT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/ko-kr/articles/45673762457243",
+          "text": "한국 - KO"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/nl-nl/articles/45673762457243",
+          "text": "Nederland - NL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pl-pl/articles/45673762457243",
+          "text": "Polska - PL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pt-br/articles/45673762457243",
+          "text": "Brasil - PT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/sv-se/articles/45673762457243",
+          "text": "Sverige - SV"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/14512077651099",
+          "text": "Lists and segments"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/49375416013339",
+          "text": "Build and use segments"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/45673762457243-Using-RegEx-matching-in-Segmentation#h_01KFHXS82R1811TD4XJHGPDBPS",
+          "text": "What is Regex Matching?"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/45673762457243-Using-RegEx-matching-in-Segmentation#h_01KFED7VGEFCH1D5QGZD0EGMBY",
+          "text": "How to Use Regex"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/45673762457243-Using-RegEx-matching-in-Segmentation#h_01KFH9DXSPH9B2EWD76J9M6A5W",
+          "text": "Regex Basics"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/45673762457243-Using-RegEx-matching-in-Segmentation#h_01KFKYM07QKMZHAQ6KDC70BV14",
+          "text": "Common Examples"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/45673762457243-Using-RegEx-matching-in-Segmentation#h_01KFKYM788Z4FQ28AA3WD6V0AQ",
+          "text": "RegEx Limits"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/45673762457243-Using-RegEx-matching-in-Segmentation#h_01KFEDAJ069K97CYCD37QV50MC",
+          "text": "Tips for Success"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/45673762457243-Using-RegEx-matching-in-Segmentation#h_01KFED7VHA85P8AWB5KVGZYNGX",
+          "text": "When to use RegEx vs Standard Operators"
+        },
+        {
+          "href": "mailto:user@hotmail.com",
+          "text": "user@hotmail.com"
+        },
+        {
+          "href": "https://github.com/google/re2/wiki/Syntax",
+          "text": "Learn more here"
+        },
+        {
+          "href": "http://company.com",
+          "text": "company.com"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115001002272",
+          "text": "Learn how to contact support"
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": ""
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": "Visit Community"
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": ""
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": "Hire a partner"
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/about",
+          "text": "About Klaviyo"
+        },
+        {
+          "href": "https://www.klaviyo.com/newsroom",
+          "text": "Newsroom"
+        },
+        {
+          "href": "https://investors.klaviyo.com/overview/default.aspx",
+          "text": "Investor relations"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Agency and tech partners"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Developers"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/retail",
+          "text": "Retail and ecommerce"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/restaurants",
+          "text": "Restaurant marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/wellness",
+          "text": "Wellness"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform",
+          "text": "B2C CRM overview"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai",
+          "text": "Klaviyo AI (K:AI)"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/marketing-automation",
+          "text": "Klaviyo Marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-service",
+          "text": "Klaviyo Service"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/analytics",
+          "text": "Klaviyo Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-data-platform",
+          "text": "Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare",
+          "text": "Klaviyo vs. Klaviyo alternatives"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-mailchimp",
+          "text": "Klaviyo vs. Mailchimp"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-postscript",
+          "text": "Klaviyo vs. Postscript"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-attentive",
+          "text": "Klaviyo vs. Attentive"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-salesforce-marketing-cloud",
+          "text": "Klaviyo vs. Salesforce"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-listrak",
+          "text": "Klaviyo vs. Listrak"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/omnichannel",
+          "text": "Omnichannel marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/email-marketing",
+          "text": "Email marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing",
+          "text": "SMS marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing/rcs",
+          "text": "RCS for Business"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/mobile-app-marketing",
+          "text": "Mobile app marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/whatsapp",
+          "text": "WhatsApp marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/social",
+          "text": "Social marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources",
+          "text": "Marketing resources"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources/marketing-campaign-calendar",
+          "text": "Marketing campaign calendar"
+        },
+        {
+          "href": "https://www.klaviyo.com/glossary",
+          "text": "Marketing glossary"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/email-subject-line-generator",
+          "text": "Subject line generator"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/roi-calculator",
+          "text": "ROI calculator"
+        },
+        {
+          "href": "https://www.klaviyo.com/customers",
+          "text": "Case studies"
+        },
+        {
+          "href": "https://www.klaviyo.com/composer",
+          "text": "Composer Beta"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/marketing-agent",
+          "text": "Marketing Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/customer-agent",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/customer-experience-hub",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/helpdesk",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/marketing-analytics",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/advanced-cdp",
+          "text": "Advanced Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/web-forms",
+          "text": "Web forms"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/email-templates",
+          "text": "Email templates"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/portfolio",
+          "text": "Portfolio"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform-integrations",
+          "text": "Apps and Integrations"
+        },
+        {
+          "href": "https://www.klaviyo.com/features",
+          "text": "Features"
+        },
+        {
+          "href": "https://www.klaviyo.com/whats-new",
+          "text": "What's new"
+        },
+        {
+          "href": "https://www.klaviyo.com/events",
+          "text": "Events"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help Center"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us",
+          "text": "Academy"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Community"
+        },
+        {
+          "href": "https://www.facebook.com/Klaviyo/",
+          "text": "Facebook"
+        },
+        {
+          "href": "https://twitter.com/klaviyo/",
+          "text": "Twitter"
+        },
+        {
+          "href": "https://www.linkedin.com/company/klaviyo/",
+          "text": "LinkedIn"
+        },
+        {
+          "href": "https://www.instagram.com/klaviyo/",
+          "text": "Instagram"
+        },
+        {
+          "href": "https://www.klaviyo.com/sitemap",
+          "text": "Site Map"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal",
+          "text": "Terms and Privacy"
+        },
+        {
+          "href": "https://www.klaviyo.com/security",
+          "text": "Security"
+        },
+        {
+          "href": "https://www.klaviyo.com/trust",
+          "text": "Trust"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal/intellectual-property-notices",
+          "text": "Intellectual Property Notices"
+        }
+      ],
+      "headings": [
+        {
+          "level": 1,
+          "id": "",
+          "text": "Using RegEx matching in Segmentation"
+        },
+        {
+          "level": 2,
+          "id": "h_01KFHXS82R1811TD4XJHGPDBPS",
+          "text": "What is Regex Matching?"
+        },
+        {
+          "level": 2,
+          "id": "h_01KFED7VGEFCH1D5QGZD0EGMBY",
+          "text": "How to Use Regex"
+        },
+        {
+          "level": 3,
+          "id": "h_01KFED7VGHYMW3ZF7G6GGKG8SZ",
+          "text": ""
+        },
+        {
+          "level": 2,
+          "id": "h_01KFH9DXSPH9B2EWD76J9M6A5W",
+          "text": "Regex Basics"
+        },
+        {
+          "level": 4,
+          "id": "",
+          "text": "Matching Characters"
+        },
+        {
+          "level": 4,
+          "id": "",
+          "text": "Special Characters"
+        },
+        {
+          "level": 4,
+          "id": "",
+          "text": "Repeating Patterns"
+        },
+        {
+          "level": 3,
+          "id": "h_01KFED7VGP6WRE6G00RBBY9RH5",
+          "text": ""
+        },
+        {
+          "level": 2,
+          "id": "h_01KFKYM07QKMZHAQ6KDC70BV14",
+          "text": "Common Examples"
+        },
+        {
+          "level": 4,
+          "id": "",
+          "text": "Email Addresses"
+        },
+        {
+          "level": 4,
+          "id": "",
+          "text": "Phone Numbers"
+        },
+        {
+          "level": 4,
+          "id": "",
+          "text": "Postal Codes"
+        },
+        {
+          "level": 3,
+          "id": "h_01KFED7VGX4W7N8E26A02W2GSA",
+          "text": ""
+        },
+        {
+          "level": 2,
+          "id": "h_01KFKYM788Z4FQ28AA3WD6V0AQ",
+          "text": "RegEx Limits"
+        },
+        {
+          "level": 3,
+          "id": "h_01KFED7VH7XJNZNK9SBCSVMAR7",
+          "text": ""
+        },
+        {
+          "level": 2,
+          "id": "h_01KFEDAJ069K97CYCD37QV50MC",
+          "text": "Tips for Success"
+        },
+        {
+          "level": 2,
+          "id": "h_01KFED7VHA85P8AWB5KVGZYNGX",
+          "text": "When to use RegEx vs Standard Operators"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "Explore more from Klaviyo"
+        }
+      ]
+    }
+  },
+  "rendered_page": {
+    "status": "fetched",
+    "error": ""
+  }
+}

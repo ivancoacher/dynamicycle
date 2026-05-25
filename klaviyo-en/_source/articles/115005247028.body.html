@@ -1,0 +1,98 @@
+<p>Learn about the information section of a profile in Klaviyo, which contains details such as when and how the profile found you and the last time they were active. </p>
+<h2 id="h_01JMYKDVFRPV3YXR2NTC39CQM6">What information is available </h2>
+<p>The <em>Information</em> section of a Klaviyo profile contains the following information:</p>
+<ul>
+<li>The Klaviyo-assigned <em>First Active</em> and <em>Last Active</em> dates</li>
+<li>How they found you</li>
+<li>Custom properties</li>
+<li>The date and time the profile was created</li>
+<li>The date and time the profile was updated</li>
+</ul>
+<p class="wysiwyg-text-align-center"><img src="https://klaviyo.zendesk.com/hc/article_attachments/28711676186395" alt="Information section on profile" width="448" height="755"></p>
+<h2 id="h_01EEBECY7Q4P4H2G6FZY4WYV76">First active and last active</h2>
+<p><em>First Active</em> and <em>Last Active</em> are dynamic properties that reflect when a profile interacted with your brand through a tracked active event.</p>
+<p>The calculation provides consistent and reliable data for flows, segments, and the public APIs. The calculated values are refreshed frequently for all profiles that have an active event during that time window.</p>
+<ul>
+<li>First active: This is the timestamp of the earliest recorded active event for a profile.</li>
+<li>Last active: This is the timestamp of the most recent recorded active event for a profile.</li>
+</ul>
+<h3 id="h_01K77B3PYZQZSTS90R000XD6M2">Active vs. passive events</h3>
+<p>The system distinguishes between events that represent direct customer engagement ("active") and those that reflect a system action or passive delivery ("passive").</p>
+<h4 id="h_01K77B3YBCEV4WMVDMH7EXK452">Active events</h4>
+<p>Active events are used to calculate the first and last active dates. These include:</p>
+<ul>
+<li>All customer-defined event types.</li>
+<li>Klaviyo-defined events that represent a direct action (e.g., viewed product, added to cart, placed order).</li>
+</ul>
+<h4 id="h_01K77B3T89PPHVMJ3KJ4BQVMW7">Passive events (excluded)</h4>
+<p>Events that do not update the first active or last active properties include system-level and passive delivery events such as:</p>
+<ul>
+<li>Email delivery events (e.g., email delivered, email bounce).</li>
+<li>Messaging relay or receipt events (e.g., $received_push, $received_sms, $received_whatsapp, $relayed_sms, sent message).</li>
+<li>Bounce and failure notices (e.g., $bounced_push_send, $bounced_silent_push_send, $received_automated_response_sms).<br>
+<p>A few things to note: If someone is manually uploaded to a list, this does not set the first active date. Even if this person receives a message, this property is not created. This property is only set if the person either:</p>
+</li>
+<li>Opens or clicks a message.</li>
+<li>Takes an action that is tracked by Klaviyo.</li>
+</ul>
+<p>The first active date can be before their profile created date. This happens when someone first engaged with your organization before you created your Klaviyo account, but Klaviyo was able to sync historical activity through an integration (with your previous esp, for example). In this case, the first active date is set as the contact's earliest recorded activity.</p>
+<h2 id="h_01HAWN398J1RBDDRSBSK8MXDNJ">How they found you</h2>
+<p>Klaviyo only populates a profile with <em>How They Found You</em> information if <a href="https://klaviyo.zendesk.com/hc/en-us/articles/115005076767">web tracking</a> is set up on your website. </p>
+<p>The <em>Source</em> value represents how the contact ended up on your website when Klaviyo's web tracking JavaScript first saw them. The possible values are:</p>
+<ul>
+<li>
+<strong>Direct</strong><br>
+The person either entered your site URL directly in their browser or, more likely, Klaviyo doesn't know where the person came from.</li>
+<li>
+<strong>Referral</strong><br>
+The person came from another website by clicking a link on that site.</li>
+<li>
+<strong>Organic</strong><br>
+The person either came to your site from a search engine or you'll see a custom value here if there was a "utm_campaign" set in the URL the person landed on.<br>
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28711697647771" alt="How they found you section" width="452" height="241">
+<p>In the example above, this particular contact was referred from Google, meaning they landed on the website after clicking through a Google search.</p>
+<p><em>Campaign</em>, <em>Medium</em>, <em>Content</em>, and <em>Term</em> fields are populated if an individual landed on your website after clicking through a campaign where Google Analytics tracking was added to links within the email:</p>
+</li>
+<li>
+<strong>Campaign, utm_campaign</strong><br>
+This is the name of the campaign.</li>
+<li>
+<strong>Medium, utm_medium</strong><br>
+The channel through which you sent this content; e.g., email or SMS.</li>
+<li>
+<strong>Term, utm_term</strong><br>
+This is an optional UTM parameter that marketers can set to track paid search terms.</li>
+<li>
+<strong>Content, utm_content</strong><br>
+This is an optional UTM parameter that marketers can set to differentiate between ads.<br>
+<p>Say you use Klaviyo to automatically add Google Analytics tracking to links within a campaign or flow, and someone clicks through one of these messages and lands on your website for the first time. In this case, Klaviyo also tracks <em>Source</em>, <em>Campaign</em>, and <em>Medium</em>:</p>
+</li>
+<li>
+<strong>utm_source</strong><br>
+The name of the list or segment the campaign was sent to</li>
+<li>
+<strong>utm_medium</strong><br>
+The channel through which you sent the campaign or flow (e.g., email)</li>
+<li>
+<strong>utm_campaign</strong><br>
+The campaign name (campaign ID)</li>
+</ul>
+<div class="bs-callout bs-callout-default">
+<p>UTM values are not set on profiles if the campaign value is referral, direct, or organic.</p>
+</div>
+<p>The <em>First Page</em> property will contain the URL of the first page the contact visited after navigating to your website.</p>
+<div class="bs-callout bs-callout-default">
+<p>If you want to segment on <em>Source</em> within the <em>How they found you </em>section, use the <em>UTM Source</em> property in the segment builder. If you want to segment by <em>Campaign</em>, use <em>Initial Source</em> in the segment builder.</p>
+</div>
+<h2 id="h_01HAWN398JC63AK8PEQWFN6H5P">Profile updated and profile created</h2>
+<p>The <em>Profile Created</em> date represents the date a profile was created. As explained <a href="#h_01EEBECY7Q4P4H2G6FZY4WYV76">above</a>, this date may or may not align with the <em>First Active</em> date:</p>
+<ul>
+<li>If someone engages with your organization for the very first time and this activity is synced in real time to Klaviyo, the <em>First Active</em> and <em>Profile Created</em> dates can be identical.</li>
+<li>The <em>Profile Created</em> date reflects the date this person's profile was created by Klaviyo.
+<ul>
+<li>However, if someone engages with your organization for the first time before you start using Klaviyo but  you sync or import historic data, Klaviyo backdates a contact's <em>First Active</em> date (if this date is available).</li>
+</ul>
+</li>
+<li>If someone is imported into Klaviyo but there's no tracked activity, there can be a <em>Profile Created</em> date but no <em>First Active</em> date.</li>
+</ul>
+<p>The <em>Profile Updated</em> date and time indicates the last time the profile itself was updated, and the <em>Last Active</em> date and time matches the time of the latest event on the profile.</p>

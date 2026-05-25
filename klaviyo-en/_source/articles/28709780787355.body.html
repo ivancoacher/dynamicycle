@@ -1,0 +1,128 @@
+<div class="bs-callout bs-callout-default">
+<p>Are you new to Klaviyo? You can track Shopify <em>Added to Cart</em> events in Klaviyo automatically by <a href="https://help.klaviyo.com/hc/en-us/articles/4425956184731">enabling onsite tracking</a>.</p>
+</div>
+<p>Learn how to migrate from Klaviyo’s existing <em>Added to Cart</em> event for Shopify (enabled via a code snippet) to the automatically tracked <em>Added to Cart</em> event, which syncs via a Shopify Server Pixel. When migrating, you can also enable new tracking events for identified users such as <em>Viewed Collection</em> and <em>Submitted Search</em>.</p>
+<p>These new Shopify Pixel events are branded with a Shopify icon in Klaviyo, while events enabled by a Klaviyo snippet have a gear icon.</p>
+<h2 id="h_01J6F9W69XJRSRZQJD027VH02H">Before you begin</h2>
+<p><em>Added to Cart</em> event data synced via Server Side Pixel cannot be customized. To learn what data is included with the new event, consult our <a href="https://help.klaviyo.com/hc/en-us/articles/115005080447#h_01J6F8FWMEH250MPETV9FSDWF3">Shopify data reference</a>.</p>
+<div class="bs-callout bs-callout-default">
+<p>Based on your Customer Privacy settings in Shopify, Klaviyo may not track onsite events for visitors to your Shopify store in the EU, EEA, UK and Switzerland, unless they have provided consent.</p>
+</div>
+<h2 id="h_01J6F9WBJTAMYVT8NDJ9Q8CWNG">Why migrate?</h2>
+<p>There are many reasons to migrate, including:</p>
+<ul>
+<li>The new Shopify-branded event syncs server-side, meaning site visitors are more likely to be identified and track events.</li>
+<li>The new event includes more top-level metadata than the snippet event, including variant info, SKUs, item quantity, and links to the variant added to the cart. </li>
+<li>The new event will be actively maintained by Klaviyo going forward, with future enhancements added directly. </li>
+<li>Enabling the new event does not require a code snippet.</li>
+</ul>
+<p>We recommend migrating in the following order (as detailed in this article):</p>
+<ol>
+<li>Enable our new <em>Added to Cart</em> tracking.</li>
+<li>Update segments, flows, and more in Klaviyo.</li>
+<li>Remove your old <em>Added to Cart </em>snippet.</li>
+</ol>
+<p>Please note that we are not currently deprecating our <em>Added to Cart</em> snippet.</p>
+<h2 id="h_01J6F9WJKPEAH01T1ETRDFMEJX">Enable new Added to Cart tracking</h2>
+<ol>
+<li>In Klaviyo, select the <strong>Integrations</strong> tab.</li>
+<li>Select <strong>Shopify</strong> from the list to be brought to the integration settings page.</li>
+<li>Under <em>Additional tracking features </em>in the <em>Onsite tracking box</em>, check <strong>Track behavioral events</strong>.<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/35512021815579" alt="" width="601" height="120">
+</li>
+<li>Click <strong>Update Settings</strong>.</li>
+<li>If prompted: Log in to Shopify.</li>
+<li>If prompted: Review the permissions and click <strong>Update app</strong>.<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28710027741211" alt="" width="490" height="388">
+</li>
+<li>In the confirmation modal, select <strong>Update integration</strong>.<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28710027744667" alt="" width="463" height="169">
+</li>
+<li>You’ll be brought back to Klaviyo and should see a green success callout.<br>
+</li>
+</ol>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/28710022489755" alt="" width="488" height="264"></p>
+<p>You should now start seeing Shopify-branded <em>Added to Cart</em> events tracked in your account.</p>
+<h2 id="h_01J6F9WPMVJVQPWK6JYFD4FT4B">Update segments, flows, and more in Klaviyo</h2>
+<p>You should now replace all existing usage of the unbranded <em>Added to Cart</em> metric in your Klaviyo account with the new branded event. </p>
+<h3 id="h_01J6F9WT5P48E225VMCG0WKMZ1">Segments</h3>
+<ol>
+<li>In the <strong>Lists &amp; segments</strong> tab, look for segments where you’ve used the unbranded <em>Added to Cart</em> metric. </li>
+<li>Edit each segment, adding an OR clause mirroring your original but using the Shopify-branded <em>Added to Cart</em> metric. For example, the segment below includes those who added to cart at least once in the last 30 days, tracked by either metric. If your conditions are entirely negative, use an AND clause.<br>
+</li>
+</ol>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/28710022493467" alt="" width="627" height="220"></p>
+<h3 id="h_01J6F9WXDJYP3745B4X8ES8TKM">Flows</h3>
+<p>Are you using the unbranded <em>Added to Cart</em> metric in an abandoned cart or other flow? To replace them:</p>
+<ol>
+<li>Find the flows where you’re using <em>Added to Cart</em>.</li>
+<li>
+<a href="https://help.klaviyo.com/hc/en-us/articles/24898429283739">Clone these flows</a> and name them something descriptive.</li>
+<li>In the new flows, replace the flow trigger with the Shopify-branded <em>Added to Cart </em>event.</li>
+<li>Update any variables needed. </li>
+<li>Send a test email for each new flow to make sure that everything looks good and that no variables need to be updated. If you were using our default snippet, all existing variables should be the same, except that the price is now a numeric value instead of a string (e.g., 4 vs. $4.00). You can add currency formatting like this:<br>
+<code>{% currency_format event|lookup:'Price'|floatformat:2 %}</code><br>
+Additionally, please note that the new <em>Added to Cart </em>event does not currently include other items already in the cart; it just tracks a single item.</li>
+<li>Turn off the old flows and set the new flows live.</li>
+</ol>
+<h3 id="h_01J6F9X1ENY2GJ3PC9G2JD4K5C">Analytics</h3>
+<p>If you’re using the unbranded <em>Added to Cart </em>metric in any analytics, such as custom reports, you should <a href="https://help.klaviyo.com/hc/en-us/articles/360047725651">build new custom reports</a>. If you're using the unbranded <em>Added to Cart</em> metric in metric mapping, you should <a href="https://help.klaviyo.com/hc/en-us/articles/25829057055899">update the mapping</a>.</p>
+<p></p>
+<h2 id="h_01J6F9X50SANWW6NHVXBTERYBJ">Remove your Added to Cart snippet</h2>
+<p>Are you using your existing <em>Added to Cart </em>event in a Klaviyo product feed? This means that you selected <em>Products a customer has added to cart </em>in the feed builder.</p>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/35512021818267" alt="" width="406" height="308"></p>
+<p>If so, you should not remove your snippet. This is because we currently recommend using the old event with product feeds. You can use the new event for flows, segments, etc. If you are not using the event in a product feed, continue on.</p>
+<p>You may have added your snippet in one of 2 ways:</p>
+<ul>
+<li>If your store has custom liquid blocks, your snippet will be in a custom liquid block.</li>
+<li>If your store does not have custom liquid blocks, your snippet will be in your theme file. </li>
+</ul>
+<p>To remove your snippet:</p>
+<ol>
+<ol>
+<li>At the top of the page, click the Home page dropdown.</li>
+<li>Select <strong>Products &gt; Default product </strong>to be brought to your default product page.</li>
+<li>Find the custom liquid block you used for your <em>Added to Cart </em>snippet. There are multiple code snippets you may have used; look for the line <code>_learnq.push(['track', 'Added to Cart', cart]);</code> if you aren’t sure.</li>
+<li>When you have the block selected, click <strong>Remove section</strong>.<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28710027774107" alt="" width="249" height="453">
+</li>
+<li>Click <strong>Save</strong>.</li>
+<li>Click the three dots at the top and select <strong>Edit code</strong>.</li>
+<li>Open the <em>theme.liquid</em> file.</li>
+<li>Find your <em>Added to Cart</em> snippet code. </li>
+<li>There are multiple code snippets you may have used; look for the line <code>_learnq.push(['track', 'Added to Cart', cart]);</code> if you aren’t sure.</li>
+<li>Delete the snippet, starting with the opening &lt;script&gt; tag and ending with the closing &lt;/script&gt; tag.<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28710022515099" alt="">
+</li>
+<li>Click <strong>Save</strong>.</li>
+</ol>
+<li>In Shopify, navigate to <strong>Online Store &gt; Themes</strong>.</li>
+<li>Find your theme and click <strong>Customize</strong>.</li>
+<li>If your store has custom liquid blocks:</li>
+<li>If your store does not have custom liquid blocks:</li>
+</ol>
+<p>You have now removed your <em>Added to Cart </em>snippet.</p>
+<h2 id="h_01J9236790CK2WW8WMZFD8QS17">Troubleshooting</h2>
+<p>Are you not seeing new <em>Added to Cart</em> events appear in your account?</p>
+<p>It may take some time for profiles previously cookied by Klaviyo via the old method to be identified by Shopify.</p>
+<p>With the new <em>Added to Cart</em> tracking (as well as with Shopify <em>Viewed Collection</em> and <em>Submitted Search</em> events), profiles will be identified if they do one of the following:</p>
+<ul>
+<li>Submit a Klaviyo form.
+<ul>
+<li>You must have enabled syncing profiles from Klaviyo to Shopify for this to work.</li>
+</ul>
+</li>
+<li>Submit a Shopify form.</li>
+<li>Enter their information on the checkout page.</li>
+<li>Log in to their Shop account on checkout page.</li>
+<li>Log in to their customer account on the store.</li>
+</ul>
+<p>You can complete one of the items above, and then add an item to your cart, in order to test your <em>Added to Cart</em> tracking.</p>
+<p>We are working to expand functionality to include other Klaviyo identification methods (such as tracking from clicking on an email) to the new Shopify <em>Added to Cart</em> event.</p>
+<h2 id="h_01J6F9XCC25QKK84Z0FFNVF3Z1">Outcome</h2>
+<p>You’ve now migrated from Klaviyo’s manually-enabled <em>Added to Cart</em> tracking to our new, server-side <em>Added to Cart </em>tracking in Shopify.</p>

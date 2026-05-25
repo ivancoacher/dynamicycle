@@ -1,0 +1,897 @@
+{
+  "captured_at": "2026-05-23T16:16:43Z",
+  "article": {
+    "id": 9352115400219,
+    "url": "https://klaviyo.zendesk.com/api/v2/help_center/en-us/articles/9352115400219.json",
+    "html_url": "https://klaviyo.zendesk.com/hc/en-us/articles/9352115400219-How-to-add-SMS-to-your-abandoned-cart-flow",
+    "author_id": 388325929192,
+    "comments_disabled": true,
+    "draft": false,
+    "promoted": false,
+    "position": 1,
+    "vote_sum": 7,
+    "vote_count": 17,
+    "section_id": 49375825807515,
+    "created_at": "2022-10-04T19:23:36Z",
+    "updated_at": "2026-04-21T13:55:06Z",
+    "name": "How to add SMS to your abandoned cart flow",
+    "title": "How to add SMS to your abandoned cart flow",
+    "source_locale": "en-us",
+    "locale": "en-us",
+    "outdated": false,
+    "outdated_locales": [],
+    "edited_at": "2026-04-17T01:03:58Z",
+    "user_segment_id": null,
+    "permission_group_id": 146372,
+    "content_tag_ids": [],
+    "label_names": [],
+    "body": "<h2 id=\"h_01HEQAVA2B99G92243HJZ88ZQN\">You will learn</h2>\n<p>Learn how to add SMS to your abandoned cart flow as well as compliance requirements and best practices.</p>\n<h2 id=\"h_01HEQAVA2BWBE0E70RZTAW1RYG\">Before you begin</h2>\n<p>Note that using quiet hours is highly encouraged for SMS abandoned cart reminders. This is on by default in Klaviyo for SMS, and we do not recommend turning it off. </p>\n<p>The US has certain requirements for anyone sending SMS messages in abandoned cart flows. If you are sending to US recipients, the following are all required: </p>\n<ul>\n<li>Use double opt-in when collecting SMS consent.</li>\n<li>Only send 1 SMS per recipient. </li>\n<li>Send within 48 hours of someone abandoning a cart.</li>\n</ul>\n<h2 id=\"h_01HEQAVA2B8X363SRFXWT3YPR8\">Create an SMS abandoned cart flow</h2>\n<p>Here, we walk you through how to add SMS to your existing abandoned cart flow. </p>\n<div class=\"bs-callout bs-callout-default\">\n<p>Please read the Before you begin section before setting up your SMS abandoned cart flow, as it contains critical information on SMS compliance and best practices. </p>\n</div>\n<div class=\"accordion accordion--default\">\n<div class=\"accordion__item\">\n<div class=\"accordion__item-title\"><strong>Don’t already have an abandoned cart flow? Open this section.</strong></div>\n<div class=\"accordion__item-content\">\n<ol>\n<li>Navigate to <strong>Flows</strong>.</li>\n<li>Click <strong>Browse Ideas </strong>in the upper right corner.</li>\n<li>Search for “abandoned cart” and click the icon for email and SMS.<br>\n\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28722597618843\" alt=\"Searching for an abandoned cart template with both email          and SMS\">\n</li>\n<li>Pick an abandoned cart flow template.\n<ol>\n<li>Here, we choose the template named “Standard (Email &amp; SMS).”</li>\n</ol>\n</li>\n<li>Name the flow (e.g., “Abandoned Cart Reminder”).<br>\n\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28722559225499\" alt=\"Preview of an abandoned cart flow template where you can          name the flow\" width=\"532\" height=\"534\">\n</li>\n<li>Click <strong>Create Flow</strong>.</li>\n<li>If you're using <a href=\"https://klaviyo.zendesk.com/hc/en-us/articles/14708088221467\">Amazon Buy with Prime and have integrated it with Klaviyo</a>, add the following flow filter to exclude customers who made purchases via Buy with Prime from receiving incorrect messaging:<br>\n<ul>\n<ul>\n<li>\n<em>Placed Order</em> (Buy with Prime) <em>zero times since starting this flow.</em>\n</li>\n</ul>\n</ul>\n</li>\n<li>Go into each message and edit the text \n<ol>\n<ol>\n<li>Dynamic variables must be formatted exactly right or they won’t work.</li>\n<li>Copying the block allows you to make changes without the risk of breaking them.</li>\n</ol>\n</ol>\n<br>\n<ul>\n<ul>\n<li>Note: Before changing anything about the dynamic variables, copy the variable or block of variables.</li>\n</ul>\n</ul>\n</li>\n<li>Save your changes.</li>\n<li>Do not turn off quiet hours for the SMS message.</li>\n<li>Click <strong>Update Action Statuses </strong>in the upper right.</li>\n<li>Open the dropdown menu and select <strong>Live</strong>.</li>\n<li>Click <strong>Update Statuses</strong>.</li>\n</ol>\n</div>\n</div>\n</div>\n<h3 id=\"h_01HEQAVA2B80M62BYG2JKMHXYY\">Add SMS to an abandoned cart flow</h3>\n<ol>\n<li>Navigate to <strong>Flows</strong>.</li>\n<li>Find the abandoned cart flow where you want to include SMS.</li>\n<li>In the flow, place a conditional split after the first time delay.\n<ol>\n<li>Note: the time delay must be within 48 hours of when the flow triggers.</li>\n</ol>\n</li>\n<li>Use the following condition.<br>\n<em>If someone can or cannot receive marketing &gt;</em> Person<em> cannot receive &gt; sms marketing.</em><br>\n\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28722597626011\" alt=\"Placing a conditional split after the first time delay in an abandoned cart    flow\" width=\"454\" height=\"548\">\n</li>\n<li>On the No path, add an SMS message.<br>\n\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28722559236763\" alt=\"Adding an SMS to the No path for a conditional split\" width=\"500\" height=\"334\">\n</li>\n<li>Click on the SMS message card.</li>\n<li>Click <strong>Edit </strong>in the details panel.</li>\n<li>Add in your message.<br>\n“Hey {{ person|lookup:\"first_name\"|default:'there' }}, your cart is about to expire! Did you want to check it out? [LINK]” </li>\n<li>Recommended: Include a discount to encourage people to buy.<br>\n“Hey {{ person|lookup:\"first_name\"|default:'there' }}, your cart is about to expire! Get 10% off now with code {% coupon_code 'YOUR_COUPON' %} [LINK]”<br>\n\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28722597622811\" alt=\"Example of an abandoned cart flow message that includes a 10% coupon\" width=\"401\" height=\"301\">\n</li>\n<li>Rejoin the split after the SMS to after the first email.<br>\n\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28722597634331\" alt=\"Rejoining the split after the first email and SMS in an abandoned cart    flow\" width=\"510\" height=\"444\">\n</li>\n<li>Set the SMS message to live.<br>\n</li>\n</ol>\n<p><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28722559231515\" alt=\"Changing an SMS message from draft to live\" width=\"328\" height=\"251\"></p>\n<h2 id=\"h_01HEQAVA2BTJ9GQQY555599QWC\">Improve your SMS abandoned cart flow</h2>\n<p>Above we detail a basic SMS and email abandoned cart flow. However, there are ways you can customize this flow. </p>\n<p>While you cannot send more than 1 SMS per recipient as an abandoned cart reminder, you can have more than 1 SMS in this flow by further targeting your audience.</p>\n<p>See examples below. </p>\n<div class=\"accordion accordion--default\">\n<div class=\"accordion__item\">\n<div class=\"accordion__item-title\"><strong>Skip SMS if product isn't available</strong></div>\n<div class=\"accordion__item-content\">\n<ul>\n<li>It keeps the SMS short and concise.</li>\n<li>Unlike with email, an SMS doesn't have a way to dynamically populate the exact number of items someone abandoned.</li>\n</ul>\n<p>For that reason, SMS abandonment messages should only show the first item from someone's cart. But what if that product is out of stock?</p>\n<table>\n<tbody>\n<tr>\n<td style=\"width: 50%\"><strong>Format</strong></td>\n<td style=\"width: 50%\"><strong>Example </strong></td>\n</tr>\n<tr>\n<td style=\"width: 50%\">\n<code>{% catalog event.ProductID unpublished=\"cancel\" %}</code><br>\nYour message reminding someone of their abandoned cart...<br>\n[Link to product]<br>\n<code>{% endcatalog %}</code>\n</td>\n<td style=\"width: 50%\">\n<code>{% catalog event.ProductID unpublished=\"cancel\" %}</code><br>\nHi Friend!<br>\nDid you still want this? Click to shop now: <br>\n<code>{{ event.URL }}</code><br>\n<code>{% endcatalog %}</code>\n</td>\n</tr>\n</tbody>\n</table>\n</div>\n</div>\n<div class=\"accordion__item\">\n<div class=\"accordion__item-title\"><strong>Value split</strong></div>\n<div class=\"accordion__item-content\">\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28722559248027\" alt=\"Using a trigger split to send different SMS message to those with carts  below $100\">\n</div>\n</div>\n<div class=\"accordion__item\">\n<div class=\"accordion__item-title\"><strong>Product collection split</strong></div>\n<div class=\"accordion__item-content\">\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28722597641115\" alt=\"Using a trigger split to send different SMS message to those purchasing  from a certain collection\">\n</div>\n</div>\n<div class=\"accordion__item\">\n<div class=\"accordion__item-title\"><strong>New purchaser vs. returning customer split</strong></div>\n<div class=\"accordion__item-content\">\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28722597631899\" alt=\"Using a conditional split to send different SMS message to new purchasers  versus returning customers\">\n</div>\n</div>\n<div class=\"accordion__item\">\n<div class=\"accordion__item-title\"><strong>Frequent purchaser split</strong></div>\n<div class=\"accordion__item-content\">\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28722597655707\" alt=\"Using a conditional split to send different SMS message to more frequent  purchasers\">\n</div>\n</div>\n</div>\n<h2 id=\"h_01HEQAVA2BHXYKQ9Z3H0YEQYZM\">Additional resources</h2>\n<ul>\n<li>Learn more about <a href=\"https://help.klaviyo.com/hc/en-us/articles/115002779411-\">abandoned cart flows</a>\n</li>\n<li>See how to create other SMS flows: \n<ul>\n<li><a href=\"https://help.klaviyo.com/hc/en-us/articles/15806802249883\">Add SMS to your browse abandonment flow</a></li>\n<li><a href=\"https://help.klaviyo.com/hc/en-us/articles/15800790306715\">Add SMS to your thank you flow</a></li>\n</ul>\n</li>\n</ul>\n<p></p>",
+    "user_segment_ids": []
+  },
+  "normalized": {
+    "id": "9352115400219",
+    "title": "How to add SMS to your abandoned cart flow",
+    "source_url": "https://help.klaviyo.com/hc/en-us/articles/9352115400219-How-to-add-SMS-to-your-abandoned-cart-flow",
+    "section_id": 49375825807515,
+    "section": "Set up your first SMS flows ",
+    "category_id": 29173800271259,
+    "category": "SMS",
+    "category_slug": "sms-whatsapp",
+    "klaviyo_updated": "2026-04-21T13:55:06Z",
+    "created_at": "2022-10-04T19:23:36Z",
+    "draft": false,
+    "promoted": false,
+    "position": 1,
+    "label_names": []
+  },
+  "files": {
+    "body_html": "_source/articles/9352115400219.body.html",
+    "rendered_html": "_source/rendered/9352115400219.html"
+  },
+  "assets": {
+    "api_body": {
+      "images": [
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28722597618843",
+          "alt": "Searching for an abandoned cart template with both email          and SMS",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28722559225499",
+          "alt": "Preview of an abandoned cart flow template where you can          name the flow",
+          "width": "532",
+          "height": "534"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28722597626011",
+          "alt": "Placing a conditional split after the first time delay in an abandoned cart    flow",
+          "width": "454",
+          "height": "548"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28722559236763",
+          "alt": "Adding an SMS to the No path for a conditional split",
+          "width": "500",
+          "height": "334"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28722597622811",
+          "alt": "Example of an abandoned cart flow message that includes a 10% coupon",
+          "width": "401",
+          "height": "301"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28722597634331",
+          "alt": "Rejoining the split after the first email and SMS in an abandoned cart    flow",
+          "width": "510",
+          "height": "444"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28722559231515",
+          "alt": "Changing an SMS message from draft to live",
+          "width": "328",
+          "height": "251"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28722559248027",
+          "alt": "Using a trigger split to send different SMS message to those with carts  below $100",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28722597641115",
+          "alt": "Using a trigger split to send different SMS message to those purchasing  from a certain collection",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28722597631899",
+          "alt": "Using a conditional split to send different SMS message to new purchasers  versus returning customers",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28722597655707",
+          "alt": "Using a conditional split to send different SMS message to more frequent  purchasers",
+          "width": "",
+          "height": ""
+        }
+      ],
+      "links": [
+        {
+          "href": "https://klaviyo.zendesk.com/hc/en-us/articles/14708088221467",
+          "text": "Amazon Buy with Prime and have integrated it with Klaviyo"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115002779411-",
+          "text": "abandoned cart flows"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/15806802249883",
+          "text": "Add SMS to your browse abandonment flow"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/15800790306715",
+          "text": "Add SMS to your thank you flow"
+        }
+      ],
+      "headings": [
+        {
+          "level": 2,
+          "id": "h_01HEQAVA2B99G92243HJZ88ZQN",
+          "text": "You will learn"
+        },
+        {
+          "level": 2,
+          "id": "h_01HEQAVA2BWBE0E70RZTAW1RYG",
+          "text": "Before you begin"
+        },
+        {
+          "level": 2,
+          "id": "h_01HEQAVA2B8X363SRFXWT3YPR8",
+          "text": "Create an SMS abandoned cart flow"
+        },
+        {
+          "level": 3,
+          "id": "h_01HEQAVA2B80M62BYG2JKMHXYY",
+          "text": "Add SMS to an abandoned cart flow"
+        },
+        {
+          "level": 2,
+          "id": "h_01HEQAVA2BTJ9GQQY555599QWC",
+          "text": "Improve your SMS abandoned cart flow"
+        },
+        {
+          "level": 2,
+          "id": "h_01HEQAVA2BHXYKQ9Z3H0YEQYZM",
+          "text": "Additional resources"
+        }
+      ]
+    },
+    "rendered_page": {
+      "images": [
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/7ff492c2b417b7ecfe572f839a8a81398693c1f7-1920x1080.webp",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/5179e6b546865e6ef46c3e8d1bf3e02e65bcc467-1999x187.png",
+          "alt": "Searching for an abandoned cart template with both email          and SMS",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/411f9f01561646c46c537dd19bf69867a2e608e1-1378x1384.jpg?w=532",
+          "alt": "Preview of an abandoned cart flow template where you can          name the flow",
+          "width": "532",
+          "height": "534"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/e0f525863f3c8705fab69c290e0f00ca4847c836-598x722.jpg?w=454",
+          "alt": "Placing a conditional split after the first time delay in an abandoned cart    flow",
+          "width": "454",
+          "height": "548"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/76da2a6dd6103d32f7389c5fe87dc1fccf78b73c-596x398.jpg?w=500",
+          "alt": "Adding an SMS to the No path for a conditional split",
+          "width": "500",
+          "height": "334"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/a47b316bc0f8df7d7dbeac52396dbeb2a47997c0-640x480.png?w=401",
+          "alt": "Example of an abandoned cart flow message that includes a 10% coupon",
+          "width": "401",
+          "height": "301"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/4e35ed470162bce150f1ffa21a80a663257cf7f6-600x522.jpg?w=510",
+          "alt": "Rejoining the split after the first email and SMS in an abandoned cart    flow",
+          "width": "510",
+          "height": "444"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/0867e7fc11c7d05301e5cbbab59bd51b9543b9ef-546x418.jpg?w=328",
+          "alt": "Changing an SMS message from draft to live",
+          "width": "328",
+          "height": "251"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/c2f2bbd59c3f8db4b72b15211c19e6513c574ac5-1000x862.jpg",
+          "alt": "Using a trigger split to send different SMS message to those with carts  below $100",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/8c6dca853bbe0d27b450c7e36c56399c9a7f3ec3-1000x856.jpg",
+          "alt": "Using a trigger split to send different SMS message to those purchasing  from a certain collection",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/909644799564d093c8acc9c1bee1854911af0c80-1000x870.jpg",
+          "alt": "Using a conditional split to send different SMS message to new purchasers  versus returning customers",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/b4d5c3241fd5aeaf5b397bb7a7914a22a1344995-1000x862.jpg",
+          "alt": "Using a conditional split to send different SMS message to more frequent  purchasers",
+          "width": "",
+          "height": ""
+        }
+      ],
+      "links": [
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/9352115400219-How-to-add-SMS-to-your-abandoned-cart-flow#site-content",
+          "text": "Skip to main content"
+        },
+        {
+          "href": "https://www.klaviyo.com",
+          "text": "Home"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center"
+        },
+        {
+          "href": "https://www.klaviyo.com/enterprise",
+          "text": "Enterprise"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Partners"
+        },
+        {
+          "href": "https://www.klaviyo.com/careers",
+          "text": "Careers"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": "Log in"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": ""
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center Find step-by-step instructions and troubleshooting solutions in our knowledge base."
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000032731",
+          "text": "Integrations"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000312411",
+          "text": "Flows"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867867",
+          "text": "Audience"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867667",
+          "text": "Campaigns"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/360000190711",
+          "text": "Sign-up forms"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000873988",
+          "text": "Deliverability & compliance"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/29173800271259",
+          "text": "SMS"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/16638219724187",
+          "text": "Reviews"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/18073014919195",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/34141283979931",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/37659126754075",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/33948021740315",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/39746685522331",
+          "text": "WhatsApp"
+        },
+        {
+          "href": "https://academy.klaviyo.com",
+          "text": "Klaviyo Academy Expert training and education to help you succeed with Klaviyo, and beyond."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Quick+guide&resource=academy_courses",
+          "text": "Quick guides Learn marketing strategies and concepts in 15 minutes or less."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Course&resource=academy_courses",
+          "text": "Courses Master key marketing topics through structured lessons and exams."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/best-practices",
+          "text": "Best practices Discover top product and marketing strategies for your business."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/learning-paths",
+          "text": "Learning paths Complete curated learning journeys tailored to your marketing goals."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses",
+          "text": "Explore all resources"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Live+training&resource=academy_courses",
+          "text": "Live trainings Build confidence through hands-on interactive workshops and thought-provoking strategy sessions."
+        },
+        {
+          "href": "https://www.bigmarker.com/klaviyo-customer-education/Office-hours-Getting-started-with-Klaviyo",
+          "text": "Live office hours Join a strategic discussion where you can ask questions and get answers in real-time."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/private-live-training",
+          "text": "1:1 Live training Book a private training session with an expert to jumpstart your platform knowledge and confidence."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/credentials",
+          "text": "Klaviyo credentials Dig deeper into select topics and showcase your expertise with a final exam to earn a certificate and digital badge."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/certificates/klaviyo-practitioner-certificate",
+          "text": "Klaviyo practitioner certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/deliverability-certificate",
+          "text": "Deliverability certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/developer-certificate",
+          "text": "Klaviyo developer certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses&select=Certificate",
+          "text": "See all certificates"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Klaviyo Community Join our thriving community network to connect with brands like yours—online and in person."
+        },
+        {
+          "href": "https://community.klaviyo.com/topic/new",
+          "text": "Ask a question Post a question and get thoughtful answers from Klaviyo powerusers."
+        },
+        {
+          "href": "https://community.klaviyo.com/p/roadmap",
+          "text": "Product roadmap"
+        },
+        {
+          "href": "https://community.klaviyo.com/search/activity/recent",
+          "text": "Recent threads"
+        },
+        {
+          "href": "https://community.klaviyo.com/p/champions",
+          "text": "Meet the Champions"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups",
+          "text": "Browse all groups Your people are waiting. New ideas and connections are a click away."
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/developer-group-64",
+          "text": "Developer group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/entrepreneur-user-group-118",
+          "text": "Entrepreneur group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/woo-user-group-87",
+          "text": "WooCommerce group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/new-york-meetup-chapter-82",
+          "text": "New York City"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/los-angeles-meetup-chapter-83",
+          "text": "Los Angeles"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/austin-meetup-chapter-85",
+          "text": "Austin"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/san-diego-meetup-chapter-86",
+          "text": "San Diego"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/amsterdam-meetup-chapter-84",
+          "text": "Amsterdam"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Klaviyo Developers Access API documentation and developer guides to help you build with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/get_started",
+          "text": "Get started Access key resources and a step-by-step checklist for how to start developing with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/build_your_integration",
+          "text": "Grow your app's reach Learn how to join our ecosystem and get your app listed on our marketplace."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/developer-tools",
+          "text": "Developer tools Generate sample data, monitor your API usage, and access our Postman collections."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/reference/api_overview",
+          "text": "API reference Browse our full catalog of API docs."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/changelog_",
+          "text": "Changelog"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/api_versioning_and_deprecation_policy",
+          "text": "Versioning & deprecation policy"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/rate_limits_and_error_handling",
+          "text": "Rate limits & error handling"
+        },
+        {
+          "href": "https://youtube.com/playlist?list=PLHkNfHgtxcUanrkMnKPdkRzuWU7MGv_xM&si=pkG-KH7IT_TUHOGC",
+          "text": "API tutorials on YouTube Subscribe to our Klaviyo API Tutorials playlist for easy access to step-by-step developer walkthroughs."
+        },
+        {
+          "href": "https://www.klaviyo.com/contact-us",
+          "text": "Contact us"
+        },
+        {
+          "href": "https://www.klaviyo.com/sign-up",
+          "text": "Sign up"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": "Search"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/9352115400219",
+          "text": "United States - EN"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/de-de/articles/9352115400219",
+          "text": "Deutschland - DE"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-es/articles/9352115400219",
+          "text": "España - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-mx/articles/9352115400219",
+          "text": "México - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/fr-fr/articles/9352115400219",
+          "text": "France - FR"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/it-it/articles/9352115400219",
+          "text": "Italia - IT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/ko-kr/articles/9352115400219",
+          "text": "한국 - KO"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/nl-nl/articles/9352115400219",
+          "text": "Nederland - NL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pl-pl/articles/9352115400219",
+          "text": "Polska - PL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pt-br/articles/9352115400219",
+          "text": "Brasil - PT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/sv-se/articles/9352115400219",
+          "text": "Sverige - SV"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/29515002720027",
+          "text": "Send SMS from flows"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/49375825807515",
+          "text": "Set up your first SMS flows"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/9352115400219-How-to-add-SMS-to-your-abandoned-cart-flow#h_01HEQAVA2B99G92243HJZ88ZQN",
+          "text": "You will learn"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/9352115400219-How-to-add-SMS-to-your-abandoned-cart-flow#h_01HEQAVA2BWBE0E70RZTAW1RYG",
+          "text": "Before you begin"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/9352115400219-How-to-add-SMS-to-your-abandoned-cart-flow#h_01HEQAVA2B8X363SRFXWT3YPR8",
+          "text": "Create an SMS abandoned cart flow"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/9352115400219-How-to-add-SMS-to-your-abandoned-cart-flow#h_01HEQAVA2BTJ9GQQY555599QWC",
+          "text": "Improve your SMS abandoned cart flow"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/9352115400219-How-to-add-SMS-to-your-abandoned-cart-flow#h_01HEQAVA2BHXYKQ9Z3H0YEQYZM",
+          "text": "Additional resources"
+        },
+        {
+          "href": "https://klaviyo.zendesk.com/hc/en-us/articles/14708088221467",
+          "text": "Amazon Buy with Prime and have integrated it with Klaviyo"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115002779411-",
+          "text": "abandoned cart flows"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/15806802249883",
+          "text": "Add SMS to your browse abandonment flow"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/15800790306715",
+          "text": "Add SMS to your thank you flow"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115001002272",
+          "text": "Learn how to contact support"
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": ""
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": "Visit Community"
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": ""
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": "Hire a partner"
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/about",
+          "text": "About Klaviyo"
+        },
+        {
+          "href": "https://www.klaviyo.com/newsroom",
+          "text": "Newsroom"
+        },
+        {
+          "href": "https://investors.klaviyo.com/overview/default.aspx",
+          "text": "Investor relations"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Agency and tech partners"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Developers"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/retail",
+          "text": "Retail and ecommerce"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/restaurants",
+          "text": "Restaurant marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/wellness",
+          "text": "Wellness"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform",
+          "text": "B2C CRM overview"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai",
+          "text": "Klaviyo AI (K:AI)"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/marketing-automation",
+          "text": "Klaviyo Marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-service",
+          "text": "Klaviyo Service"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/analytics",
+          "text": "Klaviyo Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-data-platform",
+          "text": "Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare",
+          "text": "Klaviyo vs. Klaviyo alternatives"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-mailchimp",
+          "text": "Klaviyo vs. Mailchimp"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-postscript",
+          "text": "Klaviyo vs. Postscript"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-attentive",
+          "text": "Klaviyo vs. Attentive"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-salesforce-marketing-cloud",
+          "text": "Klaviyo vs. Salesforce"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-listrak",
+          "text": "Klaviyo vs. Listrak"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/omnichannel",
+          "text": "Omnichannel marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/email-marketing",
+          "text": "Email marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing",
+          "text": "SMS marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing/rcs",
+          "text": "RCS for Business"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/mobile-app-marketing",
+          "text": "Mobile app marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/whatsapp",
+          "text": "WhatsApp marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/social",
+          "text": "Social marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources",
+          "text": "Marketing resources"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources/marketing-campaign-calendar",
+          "text": "Marketing campaign calendar"
+        },
+        {
+          "href": "https://www.klaviyo.com/glossary",
+          "text": "Marketing glossary"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/email-subject-line-generator",
+          "text": "Subject line generator"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/roi-calculator",
+          "text": "ROI calculator"
+        },
+        {
+          "href": "https://www.klaviyo.com/customers",
+          "text": "Case studies"
+        },
+        {
+          "href": "https://www.klaviyo.com/composer",
+          "text": "Composer Beta"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/marketing-agent",
+          "text": "Marketing Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/customer-agent",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/customer-experience-hub",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/helpdesk",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/marketing-analytics",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/advanced-cdp",
+          "text": "Advanced Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/web-forms",
+          "text": "Web forms"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/email-templates",
+          "text": "Email templates"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/portfolio",
+          "text": "Portfolio"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform-integrations",
+          "text": "Apps and Integrations"
+        },
+        {
+          "href": "https://www.klaviyo.com/features",
+          "text": "Features"
+        },
+        {
+          "href": "https://www.klaviyo.com/whats-new",
+          "text": "What's new"
+        },
+        {
+          "href": "https://www.klaviyo.com/events",
+          "text": "Events"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help Center"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us",
+          "text": "Academy"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Community"
+        },
+        {
+          "href": "https://www.facebook.com/Klaviyo/",
+          "text": "Facebook"
+        },
+        {
+          "href": "https://twitter.com/klaviyo/",
+          "text": "Twitter"
+        },
+        {
+          "href": "https://www.linkedin.com/company/klaviyo/",
+          "text": "LinkedIn"
+        },
+        {
+          "href": "https://www.instagram.com/klaviyo/",
+          "text": "Instagram"
+        },
+        {
+          "href": "https://www.klaviyo.com/sitemap",
+          "text": "Site Map"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal",
+          "text": "Terms and Privacy"
+        },
+        {
+          "href": "https://www.klaviyo.com/security",
+          "text": "Security"
+        },
+        {
+          "href": "https://www.klaviyo.com/trust",
+          "text": "Trust"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal/intellectual-property-notices",
+          "text": "Intellectual Property Notices"
+        }
+      ],
+      "headings": [
+        {
+          "level": 1,
+          "id": "",
+          "text": "How to add SMS to your abandoned cart flow"
+        },
+        {
+          "level": 2,
+          "id": "h_01HEQAVA2B99G92243HJZ88ZQN",
+          "text": "You will learn"
+        },
+        {
+          "level": 2,
+          "id": "h_01HEQAVA2BWBE0E70RZTAW1RYG",
+          "text": "Before you begin"
+        },
+        {
+          "level": 2,
+          "id": "h_01HEQAVA2B8X363SRFXWT3YPR8",
+          "text": "Create an SMS abandoned cart flow"
+        },
+        {
+          "level": 3,
+          "id": "h_01HEQAVA2B80M62BYG2JKMHXYY",
+          "text": "Add SMS to an abandoned cart flow"
+        },
+        {
+          "level": 2,
+          "id": "h_01HEQAVA2BTJ9GQQY555599QWC",
+          "text": "Improve your SMS abandoned cart flow"
+        },
+        {
+          "level": 2,
+          "id": "h_01HEQAVA2BHXYKQ9Z3H0YEQYZM",
+          "text": "Additional resources"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "Explore more from Klaviyo"
+        }
+      ]
+    }
+  },
+  "rendered_page": {
+    "status": "fetched",
+    "error": ""
+  }
+}

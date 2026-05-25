@@ -1,0 +1,897 @@
+{
+  "captured_at": "2026-05-23T16:16:41Z",
+  "article": {
+    "id": 13006716790299,
+    "url": "https://klaviyo.zendesk.com/api/v2/help_center/en-us/articles/13006716790299.json",
+    "html_url": "https://klaviyo.zendesk.com/hc/en-us/articles/13006716790299-Shopware-data-reference",
+    "author_id": 409167690492,
+    "comments_disabled": true,
+    "draft": false,
+    "promoted": false,
+    "position": 1,
+    "vote_sum": 0,
+    "vote_count": 0,
+    "section_id": 49375225542683,
+    "created_at": "2023-02-17T21:36:21Z",
+    "updated_at": "2026-04-21T13:54:27Z",
+    "name": "Shopware data reference",
+    "title": "Shopware data reference",
+    "source_locale": "en-us",
+    "locale": "en-us",
+    "outdated": false,
+    "outdated_locales": [],
+    "edited_at": "2023-04-13T21:53:00Z",
+    "user_segment_id": null,
+    "permission_group_id": 146392,
+    "content_tag_ids": [],
+    "label_names": [],
+    "body": "<h2>You will learn</h2>\n<p>Learn what data is synced from Shopware 6 to Klaviyo, how to view this data, and what properties Shopware events contain. </p>\n<h2>Before you begin</h2>\n<p>Read our article on <a href=\"https://help.klaviyo.com/hc/en-us/articles/13001662470939\" target=\"_blank\" rel=\"noopener\">getting started with Shopware</a> for step-by-step instructions on how to integrate your store before continuing with this article. </p>\n<h2>How to view your data</h2>\n<p>To view the data synced from Shopware to Klaviyo:</p>\n<ol>\n<li>In your Klaviyo account, click <strong>Analytics</strong> in the left navigation.</li>\n<li>Select <strong>Metrics</strong>.</li>\n<li>Filter the list of metrics by <strong>API</strong>. Since the Shopware integration was not built directly by Klaviyo, events will sync with the API label and have a gear icon. Filtering by API will also show any custom metrics you’ve synced via API. </li>\n<li>Click on an individual metric, such as <em>Placed Order</em>, to see a chart of activity over time. You can also view an Activity Feed, Cohorts, Best People, and Activity Map by selecting a tab along the top for an individual metric.</li>\n<li>Click <strong>Activity Feed</strong>, and click on the timestamp of an individual event. Here, you can view the properties associated with that event. </li>\n</ol>\n<h2>Data synced from Shopware</h2>\n<p>The following types of data are synced from Shopware to Klaviyo, if you configured them within your integration settings:</p>\n<ul>\n<li>Email subscribers (subscribed via a Shopware or Klaviyo form)</li>\n<li>Product catalog (if you set up a custom catalog feed sync)</li>\n<li>Onsite events</li>\n<ul>\n<li>Active on Site </li>\n<li>Viewed Product/Recently Viewed Items</li>\n<li>Started Checkout</li>\n</ul>\n<li>Transactional events</li>\n<ul>\n<li>Added to Cart</li>\n<li>Placed Order</li>\n<li>Ordered Product</li>\n<li>Fulfilled Order</li>\n<li>Cancelled Order</li>\n<li>Refunded Order</li>\n<li>Paid Order</li>\n<li>Subscribed to Back in Stock</li>\n</ul>\n</ul>\n<h2>How email subscription syncs</h2>\n<p>Email subscribers signing up via a Shopware form will be synced as subscribers in Klaviyo if you’ve selected a Klaviyo list in your Shopware extension settings. <br><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28716066677531\" alt=\"Klaviyo list name for subscriber sync setting with Newsletter in box\" width=\"588\" height=\"137\"></p>\n<p>If a subscriber unsubscribes in Klaviyo, they will also be unsubscribed in Shopware. In your Shopware newsletter list, those who have unsubscribed in Klaviyo will be marked with the status <em>Awaiting deletion</em>. If someone unsubscribes from an email you send from Shopware, they will not be unsubscribed in Klaviyo.</p>\n<h2>Synced events and their top-level properties</h2>\n<h3>Active on Site</h3>\n<p>This default event Klaviyo tracks when a cookied user is active on your site. This event does not contain other properties to use in segmentation.</p>\n<h3>Viewed Product</h3>\n<p>The <em>Viewed Product</em> event is tracked when a cookied user views a product page on your site. Recently viewed items are added to their profile. This event contains the following top-level properties:</p>\n<ul>\n<li>ProductName</li>\n<li>ProductID</li>\n<li>SKU</li>\n<li>Categories (array)</li>\n<li>ImageURL</li>\n<li>URL</li>\n<li>Brand</li>\n<li>Price</li>\n<li>CompareAtPrice</li>\n</ul>\n<h3>Added to Cart</h3>\n<p>This event is tracked whenever a logged in user adds an item to their cart. Within this event, the <em>Items</em> array will list all other items currently in the cart at the time this event was created. The <em>CheckoutURL</em> in this event can be used to rebuild the current cart.</p>\n<p>The <em>Added to Cart</em> event contains the following top-level properties:</p>\n<ul>\n<li>AddedItemProductName</li>\n<li>AddedItemProductID</li>\n<li>AddedItemSKU</li>\n<li>AddedItemCategories</li>\n<li>AddedItemImageURL</li>\n<li>AddedItemURL</li>\n<li>AddedItemPrice</li>\n<li>AddedItemQuantity</li>\n<li>ItemNames</li>\n<li>CheckoutURL</li>\n<li>Items</li>\n<li>$value</li>\n</ul>\n<h3>Started Checkout</h3>\n<p>This event tracks when a cookied user is brought to the second checkout page after entering their email on the first checkout page. The <em>Started Checkout</em> event contains the following top-level properties:</p>\n<ul>\n<li>CheckoutURL</li>\n<li>ItemNames (array)</li>\n<li>Categories</li>\n<li>Items (array)</li>\n<li>$value\": 19.99</li>\n</ul>\n<h3>Placed Order</h3>\n<p><em>Placed Order</em> is tracked when an order is placed, and includes an <em>Items</em> array containing all items in the order. <em>Placed Order</em> differs from <em>Ordered Product </em>in the way that an <em>Ordered Product</em> event is tracked for each item in an order, while <em>Placed Order</em> is tracked once for the entire order, and includes information such as the shipping address. The <em>Placed Order</em> event contains the following top-level properties:</p>\n<ul>\n<li>OrderId</li>\n<li>Categories</li>\n<li>ItemNames</li>\n<li>Brands</li>\n<li>DiscountCode</li>\n<li>DiscountValue</li>\n<li>Items</li>\n<li>BillingAddress</li>\n<li>ShippingAddress</li>\n<li>$value</li>\n</ul>\n<h3>Ordered Product</h3>\n<p>The <em>Ordered Product</em> event, which is tracked for each item in an order, contains the following top-level properties:</p>\n<ul>\n<li>ProductName</li>\n<li>OrderId</li>\n<li>ProductID</li>\n<li>SKU</li>\n<li>Quantity</li>\n<li>ProductURL</li>\n<li>ImageURL</li>\n<li>Categories</li>\n<li>ProductBrand</li>\n<li>$value</li>\n</ul>\n<h3>Fulfilled Order</h3>\n<p>The <em>Fulfilled Order</em> event contains the following top-level properties:</p>\n<ul>\n<li>OrderID</li>\n<li>Categories</li>\n<li>ItemNames</li>\n<li>Brands</li>\n<li>DiscountCode</li>\n<li>DiscountValue</li>\n<li>Items</li>\n<li>BillingAddress</li>\n<li>ShippingAddress</li>\n</ul>\n<h3>Cancelled Order</h3>\n<p>The <em>Cancelled Order</em> event contains the following top-level properties:</p>\n<ul>\n<li>OrderID</li>\n<li>Categories</li>\n<li>ItemNames</li>\n<li>Brands</li>\n<li>DiscountCode</li>\n<li>DiscountValue</li>\n<li>Items</li>\n<li>BillingAddress</li>\n<li>ShippingAddress</li>\n<li>Reason</li>\n<li>$value</li>\n</ul>\n<h3>Refunded Order</h3>\n<p>The <em>Refunded Order</em> event contains the following top-level properties:</p>\n<ul>\n<li>OrderID</li>\n<li>Categories</li>\n<li>ItemNames</li>\n<li>Brands</li>\n<li>DiscountCode</li>\n<li>DiscountValue</li>\n<li>Items</li>\n<li>BillingAddress</li>\n<li>ShippingAddress</li>\n<li>Reason</li>\n<li>$value</li>\n</ul>\n<h3>Paid Order</h3>\n<p>The <em>Paid Order </em>event is triggered when an order is set to <em>Paid</em> in Shopware. It contains the following top-level properties:</p>\n<ul>\n<li>OrderID</li>\n<li>Categories</li>\n<li>ItemNames</li>\n<li>Brands</li>\n<li>DiscountCode</li>\n<li>DiscountValue</li>\n<li>Items</li>\n<li>BillingAddress</li>\n<li>ShippingAddress</li>\n<li>Reason</li>\n<li>$value</li>\n</ul>\n<h3>Subscribed to Back in Stock</h3>\n<p>This event is tracked when someone subscribes to Back in Stock alerts, but does not contain other top-level properties.</p>\n<h2>Additional resources</h2>\n<ul>\n<li><a href=\"https://help.klaviyo.com/hc/en-us/articles/115005237908-Guide-to-Creating-Segments\" target=\"_blank\" rel=\"noopener\">Getting started with segments</a></li>\n<li><a href=\"https://help.klaviyo.com/hc/en-us/articles/115002774932-Getting-started-with-flows\" target=\"_blank\" rel=\"noopener\">Getting started with flows</a></li>\n</ul>",
+    "user_segment_ids": []
+  },
+  "normalized": {
+    "id": "13006716790299",
+    "title": "Shopware data reference",
+    "source_url": "https://help.klaviyo.com/hc/en-us/articles/13006716790299-Shopware-data-reference",
+    "section_id": 49375225542683,
+    "section": "Shopware",
+    "category_id": 115000032731,
+    "category": "Integrations",
+    "category_slug": "integrations",
+    "klaviyo_updated": "2026-04-21T13:54:27Z",
+    "created_at": "2023-02-17T21:36:21Z",
+    "draft": false,
+    "promoted": false,
+    "position": 1,
+    "label_names": []
+  },
+  "files": {
+    "body_html": "_source/articles/13006716790299.body.html",
+    "rendered_html": "_source/rendered/13006716790299.html"
+  },
+  "assets": {
+    "api_body": {
+      "images": [
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28716066677531",
+          "alt": "Klaviyo list name for subscriber sync setting with Newsletter in box",
+          "width": "588",
+          "height": "137"
+        }
+      ],
+      "links": [
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/13001662470939",
+          "text": "getting started with Shopware"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005237908-Guide-to-Creating-Segments",
+          "text": "Getting started with segments"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115002774932-Getting-started-with-flows",
+          "text": "Getting started with flows"
+        }
+      ],
+      "headings": [
+        {
+          "level": 2,
+          "id": "",
+          "text": "You will learn"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "Before you begin"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "How to view your data"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "Data synced from Shopware"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "How email subscription syncs"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "Synced events and their top-level properties"
+        },
+        {
+          "level": 3,
+          "id": "",
+          "text": "Active on Site"
+        },
+        {
+          "level": 3,
+          "id": "",
+          "text": "Viewed Product"
+        },
+        {
+          "level": 3,
+          "id": "",
+          "text": "Added to Cart"
+        },
+        {
+          "level": 3,
+          "id": "",
+          "text": "Started Checkout"
+        },
+        {
+          "level": 3,
+          "id": "",
+          "text": "Placed Order"
+        },
+        {
+          "level": 3,
+          "id": "",
+          "text": "Ordered Product"
+        },
+        {
+          "level": 3,
+          "id": "",
+          "text": "Fulfilled Order"
+        },
+        {
+          "level": 3,
+          "id": "",
+          "text": "Cancelled Order"
+        },
+        {
+          "level": 3,
+          "id": "",
+          "text": "Refunded Order"
+        },
+        {
+          "level": 3,
+          "id": "",
+          "text": "Paid Order"
+        },
+        {
+          "level": 3,
+          "id": "",
+          "text": "Subscribed to Back in Stock"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "Additional resources"
+        }
+      ]
+    },
+    "rendered_page": {
+      "images": [
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/7ff492c2b417b7ecfe572f839a8a81398693c1f7-1920x1080.webp",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/596003c2f35d474d6e50a91e417a69588a079f0a-1234x288.png?w=588",
+          "alt": "Klaviyo list name for subscriber sync setting with Newsletter in box",
+          "width": "588",
+          "height": "137"
+        }
+      ],
+      "links": [
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/13006716790299-Shopware-data-reference#site-content",
+          "text": "Skip to main content"
+        },
+        {
+          "href": "https://www.klaviyo.com",
+          "text": "Home"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center"
+        },
+        {
+          "href": "https://www.klaviyo.com/enterprise",
+          "text": "Enterprise"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Partners"
+        },
+        {
+          "href": "https://www.klaviyo.com/careers",
+          "text": "Careers"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": "Log in"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": ""
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center Find step-by-step instructions and troubleshooting solutions in our knowledge base."
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000032731",
+          "text": "Integrations"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000312411",
+          "text": "Flows"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867867",
+          "text": "Audience"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867667",
+          "text": "Campaigns"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/360000190711",
+          "text": "Sign-up forms"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000873988",
+          "text": "Deliverability & compliance"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/29173800271259",
+          "text": "SMS"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/16638219724187",
+          "text": "Reviews"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/18073014919195",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/34141283979931",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/37659126754075",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/33948021740315",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/39746685522331",
+          "text": "WhatsApp"
+        },
+        {
+          "href": "https://academy.klaviyo.com",
+          "text": "Klaviyo Academy Expert training and education to help you succeed with Klaviyo, and beyond."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Quick+guide&resource=academy_courses",
+          "text": "Quick guides Learn marketing strategies and concepts in 15 minutes or less."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Course&resource=academy_courses",
+          "text": "Courses Master key marketing topics through structured lessons and exams."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/best-practices",
+          "text": "Best practices Discover top product and marketing strategies for your business."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/learning-paths",
+          "text": "Learning paths Complete curated learning journeys tailored to your marketing goals."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses",
+          "text": "Explore all resources"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Live+training&resource=academy_courses",
+          "text": "Live trainings Build confidence through hands-on interactive workshops and thought-provoking strategy sessions."
+        },
+        {
+          "href": "https://www.bigmarker.com/klaviyo-customer-education/Office-hours-Getting-started-with-Klaviyo",
+          "text": "Live office hours Join a strategic discussion where you can ask questions and get answers in real-time."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/private-live-training",
+          "text": "1:1 Live training Book a private training session with an expert to jumpstart your platform knowledge and confidence."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/credentials",
+          "text": "Klaviyo credentials Dig deeper into select topics and showcase your expertise with a final exam to earn a certificate and digital badge."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/certificates/klaviyo-practitioner-certificate",
+          "text": "Klaviyo practitioner certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/deliverability-certificate",
+          "text": "Deliverability certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/developer-certificate",
+          "text": "Klaviyo developer certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses&select=Certificate",
+          "text": "See all certificates"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Klaviyo Community Join our thriving community network to connect with brands like yours—online and in person."
+        },
+        {
+          "href": "https://community.klaviyo.com/topic/new",
+          "text": "Ask a question Post a question and get thoughtful answers from Klaviyo powerusers."
+        },
+        {
+          "href": "https://community.klaviyo.com/p/roadmap",
+          "text": "Product roadmap"
+        },
+        {
+          "href": "https://community.klaviyo.com/search/activity/recent",
+          "text": "Recent threads"
+        },
+        {
+          "href": "https://community.klaviyo.com/p/champions",
+          "text": "Meet the Champions"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups",
+          "text": "Browse all groups Your people are waiting. New ideas and connections are a click away."
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/developer-group-64",
+          "text": "Developer group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/entrepreneur-user-group-118",
+          "text": "Entrepreneur group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/woo-user-group-87",
+          "text": "WooCommerce group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/new-york-meetup-chapter-82",
+          "text": "New York City"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/los-angeles-meetup-chapter-83",
+          "text": "Los Angeles"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/austin-meetup-chapter-85",
+          "text": "Austin"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/san-diego-meetup-chapter-86",
+          "text": "San Diego"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/amsterdam-meetup-chapter-84",
+          "text": "Amsterdam"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Klaviyo Developers Access API documentation and developer guides to help you build with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/get_started",
+          "text": "Get started Access key resources and a step-by-step checklist for how to start developing with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/build_your_integration",
+          "text": "Grow your app's reach Learn how to join our ecosystem and get your app listed on our marketplace."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/developer-tools",
+          "text": "Developer tools Generate sample data, monitor your API usage, and access our Postman collections."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/reference/api_overview",
+          "text": "API reference Browse our full catalog of API docs."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/changelog_",
+          "text": "Changelog"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/api_versioning_and_deprecation_policy",
+          "text": "Versioning & deprecation policy"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/rate_limits_and_error_handling",
+          "text": "Rate limits & error handling"
+        },
+        {
+          "href": "https://youtube.com/playlist?list=PLHkNfHgtxcUanrkMnKPdkRzuWU7MGv_xM&si=pkG-KH7IT_TUHOGC",
+          "text": "API tutorials on YouTube Subscribe to our Klaviyo API Tutorials playlist for easy access to step-by-step developer walkthroughs."
+        },
+        {
+          "href": "https://www.klaviyo.com/contact-us",
+          "text": "Contact us"
+        },
+        {
+          "href": "https://www.klaviyo.com/sign-up",
+          "text": "Sign up"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": "Search"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/13006716790299",
+          "text": "United States - EN"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/de-de/articles/13006716790299",
+          "text": "Deutschland - DE"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-es/articles/13006716790299",
+          "text": "España - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-mx/articles/13006716790299",
+          "text": "México - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/fr-fr/articles/13006716790299",
+          "text": "France - FR"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/it-it/articles/13006716790299",
+          "text": "Italia - IT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/ko-kr/articles/13006716790299",
+          "text": "한국 - KO"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/nl-nl/articles/13006716790299",
+          "text": "Nederland - NL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pl-pl/articles/13006716790299",
+          "text": "Polska - PL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pt-br/articles/13006716790299",
+          "text": "Brasil - PT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/sv-se/articles/13006716790299",
+          "text": "Sverige - SV"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/14508660690203",
+          "text": "More integrations"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/49375225542683",
+          "text": "Shopware"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/13006716790299-Shopware-data-reference#you-will-learn",
+          "text": "You will learn"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/13006716790299-Shopware-data-reference#before-you-begin",
+          "text": "Before you begin"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/13006716790299-Shopware-data-reference#how-to-view-your-data",
+          "text": "How to view your data"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/13006716790299-Shopware-data-reference#data-synced-from-shopware",
+          "text": "Data synced from Shopware"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/13006716790299-Shopware-data-reference#how-email-subscription-syncs",
+          "text": "How email subscription syncs"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/13006716790299-Shopware-data-reference#synced-events-and-their-top-level-properties",
+          "text": "Synced events and their top-level properties"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/13006716790299-Shopware-data-reference#additional-resources",
+          "text": "Additional resources"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/13001662470939",
+          "text": "getting started with Shopware"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005237908",
+          "text": "Getting started with segments"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115002774932",
+          "text": "Getting started with flows"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115001002272",
+          "text": "Learn how to contact support"
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": ""
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": "Visit Community"
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": ""
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": "Hire a partner"
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/about",
+          "text": "About Klaviyo"
+        },
+        {
+          "href": "https://www.klaviyo.com/newsroom",
+          "text": "Newsroom"
+        },
+        {
+          "href": "https://investors.klaviyo.com/overview/default.aspx",
+          "text": "Investor relations"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Agency and tech partners"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Developers"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/retail",
+          "text": "Retail and ecommerce"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/restaurants",
+          "text": "Restaurant marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/wellness",
+          "text": "Wellness"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform",
+          "text": "B2C CRM overview"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai",
+          "text": "Klaviyo AI (K:AI)"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/marketing-automation",
+          "text": "Klaviyo Marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-service",
+          "text": "Klaviyo Service"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/analytics",
+          "text": "Klaviyo Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-data-platform",
+          "text": "Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare",
+          "text": "Klaviyo vs. Klaviyo alternatives"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-mailchimp",
+          "text": "Klaviyo vs. Mailchimp"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-postscript",
+          "text": "Klaviyo vs. Postscript"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-attentive",
+          "text": "Klaviyo vs. Attentive"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-salesforce-marketing-cloud",
+          "text": "Klaviyo vs. Salesforce"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-listrak",
+          "text": "Klaviyo vs. Listrak"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/omnichannel",
+          "text": "Omnichannel marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/email-marketing",
+          "text": "Email marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing",
+          "text": "SMS marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing/rcs",
+          "text": "RCS for Business"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/mobile-app-marketing",
+          "text": "Mobile app marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/whatsapp",
+          "text": "WhatsApp marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/social",
+          "text": "Social marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources",
+          "text": "Marketing resources"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources/marketing-campaign-calendar",
+          "text": "Marketing campaign calendar"
+        },
+        {
+          "href": "https://www.klaviyo.com/glossary",
+          "text": "Marketing glossary"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/email-subject-line-generator",
+          "text": "Subject line generator"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/roi-calculator",
+          "text": "ROI calculator"
+        },
+        {
+          "href": "https://www.klaviyo.com/customers",
+          "text": "Case studies"
+        },
+        {
+          "href": "https://www.klaviyo.com/composer",
+          "text": "Composer Beta"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/marketing-agent",
+          "text": "Marketing Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/customer-agent",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/customer-experience-hub",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/helpdesk",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/marketing-analytics",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/advanced-cdp",
+          "text": "Advanced Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/web-forms",
+          "text": "Web forms"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/email-templates",
+          "text": "Email templates"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/portfolio",
+          "text": "Portfolio"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform-integrations",
+          "text": "Apps and Integrations"
+        },
+        {
+          "href": "https://www.klaviyo.com/features",
+          "text": "Features"
+        },
+        {
+          "href": "https://www.klaviyo.com/whats-new",
+          "text": "What's new"
+        },
+        {
+          "href": "https://www.klaviyo.com/events",
+          "text": "Events"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help Center"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us",
+          "text": "Academy"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Community"
+        },
+        {
+          "href": "https://www.facebook.com/Klaviyo/",
+          "text": "Facebook"
+        },
+        {
+          "href": "https://twitter.com/klaviyo/",
+          "text": "Twitter"
+        },
+        {
+          "href": "https://www.linkedin.com/company/klaviyo/",
+          "text": "LinkedIn"
+        },
+        {
+          "href": "https://www.instagram.com/klaviyo/",
+          "text": "Instagram"
+        },
+        {
+          "href": "https://www.klaviyo.com/sitemap",
+          "text": "Site Map"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal",
+          "text": "Terms and Privacy"
+        },
+        {
+          "href": "https://www.klaviyo.com/security",
+          "text": "Security"
+        },
+        {
+          "href": "https://www.klaviyo.com/trust",
+          "text": "Trust"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal/intellectual-property-notices",
+          "text": "Intellectual Property Notices"
+        }
+      ],
+      "headings": [
+        {
+          "level": 1,
+          "id": "",
+          "text": "Shopware data reference"
+        },
+        {
+          "level": 2,
+          "id": "you-will-learn",
+          "text": "You will learn"
+        },
+        {
+          "level": 2,
+          "id": "before-you-begin",
+          "text": "Before you begin"
+        },
+        {
+          "level": 2,
+          "id": "how-to-view-your-data",
+          "text": "How to view your data"
+        },
+        {
+          "level": 2,
+          "id": "data-synced-from-shopware",
+          "text": "Data synced from Shopware"
+        },
+        {
+          "level": 2,
+          "id": "how-email-subscription-syncs",
+          "text": "How email subscription syncs"
+        },
+        {
+          "level": 2,
+          "id": "synced-events-and-their-top-level-properties",
+          "text": "Synced events and their top-level properties"
+        },
+        {
+          "level": 3,
+          "id": "active-on-site",
+          "text": "Active on Site"
+        },
+        {
+          "level": 3,
+          "id": "viewed-product",
+          "text": "Viewed Product"
+        },
+        {
+          "level": 3,
+          "id": "added-to-cart",
+          "text": "Added to Cart"
+        },
+        {
+          "level": 3,
+          "id": "started-checkout",
+          "text": "Started Checkout"
+        },
+        {
+          "level": 3,
+          "id": "placed-order",
+          "text": "Placed Order"
+        },
+        {
+          "level": 3,
+          "id": "ordered-product",
+          "text": "Ordered Product"
+        },
+        {
+          "level": 3,
+          "id": "fulfilled-order",
+          "text": "Fulfilled Order"
+        },
+        {
+          "level": 3,
+          "id": "cancelled-order",
+          "text": "Cancelled Order"
+        },
+        {
+          "level": 3,
+          "id": "refunded-order",
+          "text": "Refunded Order"
+        },
+        {
+          "level": 3,
+          "id": "paid-order",
+          "text": "Paid Order"
+        },
+        {
+          "level": 3,
+          "id": "subscribed-to-back-in-stock",
+          "text": "Subscribed to Back in Stock"
+        },
+        {
+          "level": 2,
+          "id": "additional-resources",
+          "text": "Additional resources"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "Explore more from Klaviyo"
+        }
+      ]
+    }
+  },
+  "rendered_page": {
+    "status": "fetched",
+    "error": ""
+  }
+}

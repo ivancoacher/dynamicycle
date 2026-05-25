@@ -1,0 +1,115 @@
+<h2 id="h_01HWAPG4BQ10ZT30B53JVBZY9P">You will learn</h2>
+<p>Learn how to add a link in your email or SMS that applies a coupon code directly to a shopper's Shopify cart. Having the coupon already applied to the cart makes it easier for them to take advantage of the discount and buy quickly. To set this up: </p>
+<ol>
+<li>Create a coupon code. This can be inserted as a parameter into a link.</li>
+<li>Add the link to a button in your email or paste the link into an SMS.</li>
+</ol>
+<p>When the subscriber clicks the SMS link or button in your email it will redirect them to the link and automatically apply the discount to their next cart.</p>
+<h2 id="h_01HWAPG4BQNN9GE35YZ82ZCZ2G">Create a coupon code</h2>
+<ol>
+<li>Navigate to <strong>Content &gt; Coupon</strong>s to create your coupon code. You can create either a <a href="https://help.klaviyo.com/hc/en-us/articles/115005084727#unique-vs--static-coupon-codes2%20">static code or unique codes. </a><br>
+<ul>
+<ul>
+<li>To create a static code, head to Shopify and create a percentage discount code or a monetary discount code according to the type of promotion you want to offer.<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28717810963099" alt="Discounts page in Shopify for SPRINGSALE store showing Discount Code, Discount Type and Value, and Summary." width="592" height="285">
+</li>
+<li>To create unique (also called "dynamic") codes, follow the instructions outlined in <a href="https://help.klaviyo.com/hc/en-us/articles/115006155388">how to create unique coupon codes for Shopify</a>.<br>
+</li>
+</ul>
+</ul>
+<div class="bs-callout bs-callout-default">
+<p>Note that unique coupons must be either imported or created in Klaviyo, while static coupons must be created in Shopify. </p>
+</div>
+</li>
+<li>Once you've created the code, copy it so that you can later paste it in your message.</li>
+<li>Choose whether you want to send the coupon within a flow or campaign email or SMS, found via the <strong>Flows</strong> or <strong>Campaigns</strong> tab in Klaviyo, respectively.</li>
+<li>Open the message editor editor. </li>
+<li>For email: <br>
+<ul>
+<ul>
+<li>Drag and drop a button block into your email template for your link, if there is not one already.</li>
+<li>Paste the link In the button's <em>Link address</em> field (with the code as a parameter). For help formatting your link, read the <a href="#link-formats-for-coupon-codes3">next section</a>.
+<ul>
+<li>Example of a button with a link:<br>
+<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/34361517003931" alt="">
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28717810971803" alt="SHOPcart1.jpg" width="307" height="283">
+</li>
+</ul>
+</li>
+<li>Customize your button text to alert shoppers about your coupon.</li>
+<li>Click <strong>Next</strong>. </li>
+</ul>
+</ul>
+</li>
+<li>For SMS, simply paste in the link, then click <strong>Next</strong>. </li>
+</ol>
+<h2 id="h_01HWAPG4BQXY2FY86PTBC6HNV8">Link formats for coupon codes</h2>
+<div class="bs-callout bs-callout-default">
+<p>Klaviyo cannot ensure that a coupon will be auto-applied at checkout if you initially link customers to a non-checkout page; your Shopify site may end up stripping the coupon from the site URL. If you link to a non-checkout page and experience this issue, you should contact your theme developer. </p>
+</div>
+<h3 id="h_01HWAPG4BQC8Z495QB9S9ZSEE4">Apply a discount code and link to checkout </h3>
+<p>Shopify syncs the <em>Checkout Started</em> event to Klaviyo with a <em>Checkout URL</em> property, which links back to each customer's unique cart. If you are sending abandoned cart messages (triggered by the <em>Checkout Started</em> event) and would like to link a customer to their abandoned cart with a discount code added, add the following snippet:</p>
+<p><strong>Static Shopify coupon link structure:</strong></p>
+<p><code>{{ event.extra.checkout_url }}&amp;discount=CouponName</code></p>
+<p><strong>Klaviyo-generated coupon link structure:</strong></p>
+<p><code>{{ event.extra.checkout_url }}&amp;discount={% coupon_code 'CouponName' %}</code></p>
+<h3 id="01JAT6J9HYQE9AYTX333GXCX9V">Apply a discount code to an event URL </h3>
+<p>For browse abandonment or added to cart flows, using <code>{{ event.extra.checkout_url }}</code> will not work. This represents the URL associated with a checkout, but browse abandonment and added to cart events are captured before a checkout is started. Instead, you can redirect recipients to a product page with the coupon applied using the following, based on <code>{{ event.URL }}:</code></p>
+<p><code>{{ organization.url|trim_slash }}/discount/CouponName?redirect={{ event.URL|cut:"https://YourSite.com" }}</code></p>
+<p>Make sure to replace <em>CouponName</em> with the name of your coupon, and YourSite with your website (e.g., klaviyo.com).</p>
+<h3 id="h_01HWAPG4BQZJAKJNZPKN1XDFRE">Apply a discount code and link to your homepage</h3>
+<p>You can add a link that points back to your homepage and automatically applies the discount to your customer's cart. There are multiple formats you can use:</p>
+<ol>
+<li><code>    mysite.com/discount/CouponName</code></li>
+<li>
+<code>mysite.com/?discount=CouponName</code><br>
+For unique coupon codes, you can use: </li>
+<li><code>mysite.com/discount/{% coupon_code 'CouponName' %}</code></li>
+</ol>
+<div class="bs-callout bs-callout-default">
+<p>With any of these options, you should replace mysite.com with your website, and where you see <em>CouponName</em>, make sure to replace with the discount code you created in Shopify.</p>
+<p>For example, if your brand's website is <a href="http://www.klaviyo.com,">klaviyo.com </a>and you are using a coupon called WELCOME, the full URL would be<code>klaviyo.com/discount/WELCOME</code>or <code>klaviyo.com/discount/{% coupon_code 'WELCOME' %}</code>.</p>
+</div>
+<h3 id="h_01HWAPG4BQBX72M9PPCA6THEPP">Apply a discount code and link to another page on your site</h3>
+<p>You may want to apply a discount code to a shopping session, such as a collection page or another page on your site, rather than link the customer directly back to your homepage or rebuild the customer's abandoned cart.</p>
+<p>In this case, you can use one of the following URL structures based on whether you are using a static or unique coupon:</p>
+<ol>
+<li><code>mysite.com/discount/CouponName?redirect=/new-path</code></li>
+<li><code>mysite.com/discount/{% coupon_code 'CouponName' %}?redirect=/new-path</code></li>
+</ol>
+<p>With either structure, replace:</p>
+<ul>
+<li>
+<em>mysite.com</em> with your website</li>
+<li>
+<em>CouponName</em> with the name of your coupon</li>
+<li>
+<em>new-path</em> with the desired URL extension. For example, if you would like to link someone to a specific collection page, you would use <code>?redirect=/collections/mycollection</code>
+</li>
+</ul>
+<div class="bs-callout bs-callout-default">
+<p>For example, if your brand's website is <a href="http://www.klaviyo.com,">klaviyo.com </a>and you are using a coupon called WELCOME, the full URL would be<code>klaviyo.com/discount/WELCOME?redirect=/pricing</code>or <code>klaviyo.com/discount/{% coupon_code 'WELCOME' %}?redirect=/pricing</code></p>
+</div>
+<h2 id="h_01HWAPG4BQZ91JMQP2EGS55CN8">Troubleshooting</h2>
+<p>Here are some quick troubleshooting tips:  </p>
+<ol>
+<li>When previewing the message, note that it won't show a live coupon. Instead, you’ll see the name of your coupon, followed by -PREVIEW.</li>
+<li>If you trigger a live send and your coupon code isn't auto-applying to your cart, ask yourself the following questions:<br>
+<ul>
+<ul>
+<li>Is the item in the cart already discounted? If it is, Shopify won't allow an additional discount on top of the existing discount. </li>
+<li>In the coupon definition, are there specific products or collections that the coupon applies to, and does the product in the cart match the configuration? If the product doesn't match the coupon rules, this could be the issue.</li>
+</ul>
+</ul>
+</li>
+<li>If you test your link in a live send and it does not properly apply your discount code, you likely need to adjust the added parameter so that it starts with "&amp;" instead of "?".</li>
+</ol>
+<ul>
+<ul>
+<li>This is because "?" only works when your discount is the only parameter you're adding to your link, and if you're adding multiple parameters, you'll need to use "&amp;".  Change your link format to the following and it should work:</li>
+</ul>
+</ul>
+<p><code>mysite.com/discount/{% coupon_code 'your_code' %}&amp;redirect=/new-path</code></p>

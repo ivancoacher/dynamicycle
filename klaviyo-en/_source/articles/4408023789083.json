@@ -1,0 +1,1082 @@
+{
+  "captured_at": "2026-05-23T16:15:46Z",
+  "article": {
+    "id": 4408023789083,
+    "url": "https://klaviyo.zendesk.com/api/v2/help_center/en-us/articles/4408023789083.json",
+    "html_url": "https://klaviyo.zendesk.com/hc/en-us/articles/4408023789083-Getting-started-with-Gorgias",
+    "author_id": 1263759681109,
+    "comments_disabled": true,
+    "draft": false,
+    "promoted": false,
+    "position": 0,
+    "vote_sum": 14,
+    "vote_count": 50,
+    "section_id": 49375230792219,
+    "created_at": "2021-10-07T15:52:15Z",
+    "updated_at": "2026-04-21T13:54:59Z",
+    "name": "Getting started with Gorgias",
+    "title": "Getting started with Gorgias",
+    "source_locale": "en-us",
+    "locale": "en-us",
+    "outdated": false,
+    "outdated_locales": [],
+    "edited_at": "2026-04-17T01:01:16Z",
+    "user_segment_id": null,
+    "permission_group_id": 146372,
+    "content_tag_ids": [],
+    "label_names": [],
+    "body": "<div class=\"bs-callout bs-callout-requirements\">\n<p>You must be an Owner or Admin to set up this integration. </p>\n</div>\n<p>Learn how to integrate with Gorgias Helpdesk to sync support ticket information between Gorgias and Klaviyo. With this integration, you can: </p>\n<ul>\n<li>Sync information about open tickets from Gorgias to Klaviyo.</li>\n<li>Respond to incoming SMS and WhatsApp messages with Gorgias.</li>\n<li>Create support tickets for negative reviews if you are using <a href=\"https://help.klaviyo.com/hc/en-us/articles/15937542819355\">Klaviyo Reviews</a>.</li>\n</ul>\n<p>If you manage multiple brands in Gorgias, tickets, SMS messages, WhatsApp messages and reviews can be synced on a per-brand basis, given that you’ve set up proper tagging in Gorgias. We recommend syncing one Gorgias brand per Klaviyo account to make it easy to use your ticket data and organize your SMS conversations. We detail how to implement Gorgias tagging with a multi-brand setup below.</p>\n<h2 id=\"h_01JX0KV8Q8M7NYM17F4DB4SAJ8\">Before you begin</h2>\n<p>Please note that this integration does not automatically create Gorgias tickets when a customer responds to emails sent from Klaviyo. That being said, Gorgias will create tickets for any incoming emails to your support email address. Thus, if your sender email address in Klaviyo is the same as your support email address in Gorgias, tickets will be created for responses to any marketing emails you send. </p>\n<h3 id=\"h_01JX0KV8Q8DKQF8WSF7975QSJE\">SMS prerequisites</h3>\n<p>Using the SMS-related features of the Gorgias integration is only supported for accounts that have SMS set up:</p>\n<ul>\n<li>The SMS integration only works in countries where you have a toll-free number, long code, or short code. \n<ul>\n<li>Branded sender IDs (also called alphanumeric sender IDs) cannot receive text messages, so you cannot use this integration for subscribers in countries where you're using a branded sender ID. Learn more <a href=\"https://help.klaviyo.com/hc/en-us/articles/6637671573403\">about SMS sending numbers</a>.</li>\n</ul>\n</li>\n<li>If you plan to use Gorgias to respond to SMS, you must have previously <a href=\"https://help.klaviyo.com/hc/en-us/articles/4404274419355\">set up SMS in Klaviyo</a>.</li>\n<li>Make sure that you’ve <a href=\"https://help.klaviyo.com/hc/en-us/articles/360059002271#h_01JMFEZW49YCGTZ5TPZ35ZYMZN\">reviewed key Inbox settings</a> including your auto-responder.</li>\n<li>Make sure that your <a href=\"https://www.klaviyo.com/inbox/settings/inbound-messages\">Inbox email notification address</a> is different from your Gorgias contact email address. If not, notifications in Gorgias will not appear properly. </li>\n</ul>\n<h3 id=\"01K5HS3V0PJFDBMRV87VBC0DNZ\">WhatsApp prerequisites</h3>\n<p>You’ll need to <a href=\"https://help.klaviyo.com/hc/en-us/articles/40111819732635\">set up WhatsApp in Klaviyo</a>. This involves connecting your WhatsApp Business account to Klaviyo, getting a phone number, and verifying your account.</p>\n<h3 id=\"h_01JX0KV8Q88JKAE6S5R7FTGWQ8\">Reviews prerequisites</h3>\n<p>To use the reviews portion of the integration, you must collect reviews using Klaviyo Reviews. Learn how to <a href=\"https://help.klaviyo.com/hc/en-us/articles/15937542819355\">get started with Klaviyo Reviews</a>.</p>\n<div class=\"accordion accordion--default\">\n<div class=\"accordion__item\">\n<div class=\"accordion__item-title\"><strong>Multi-brand account guidance</strong></div>\n<div class=\"accordion__item-content\">\n<p>If you manage multiple brands within one Gorgias account, syncing one Gorgias brand per Klaviyo account makes it easy to use your ticket data and organize your SMS and WhatsApp conversations. </p>\n<p>Before integrating Klaviyo with Gorgias, you’ll need to create a rule for each brand to tag tickets, and optionally create a view based on brand tags, to enable brand-specific syncing to and from Klaviyo.</p>\n<h4 id=\"h_01JX0KV8Q8BNMXH97PJK514G4N\">Create rules in Gorgias to tag tickets by brand</h4>\n<p>In Gorgias, for each brand, you’ll need to create a rule that looks at the email the user is writing in to, and then tags the ticket with the appropriate brand:</p>\n<ol>\n<li>In your Gorgias settings, select <strong>Rules </strong>(found under <em>Productivity</em>). </li>\n<li>Add a new rule.</li>\n<li>Name your rule something descriptive.</li>\n<li>Add the following rule conditions:\n<ol>\n<li>WHEN &gt; TICKET CREATED &gt; THEN</li>\n<li>IF &gt; message integration &gt; IS &gt; [Brand-specific email address]</li>\n<li>THEN &gt; ADD TAGS &gt; [Brand-specific tag]<br>\n\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/37721807239707\" alt=\"\" width=\"581\" height=\"408\">\n</li>\n</ol>\n</li>\n<li>Make sure <em>Enable rule</em> is set to <strong>On</strong>.</li>\n<li>Click <strong>Create Rule</strong>.</li>\n</ol>\n<p>Repeat this process for each brand that you want to integrate with a separate Klaviyo account. </p>\n<h4 id=\"h_01JX0M8QRW7W86T0N65B8GNCR2\">(Optional) Create views in Gorgias based on brand tags</h4>\n<p>After setting up rules to auto-tag tickets, we recommend creating a view in Gorgias for each brand, containing all of the tickets tagged with the brand name:</p>\n<ol>\n<li>In Gorgias, create a new view.</li>\n<li>Add the following filter: Tags &gt; Contains all of &gt; [Brand tag]<br>\n</li>\n</ol>\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/37721807244699\" alt=\"\" width=\"635\" height=\"270\">\n<p>Repeat this process for each brand that you want to integrate with a separate Klaviyo account. </p>\n</div>\n</div>\n</div>\n<h2 id=\"h_01JX0KV8Q8SEPXNGQCPKNYV210\">Integrate with Gorgias</h2>\n<p>Follow the steps outlined below to integrate Gorgias with Klaviyo: </p>\n<ol>\n<li>Log in to your Klaviyo account.</li>\n<li>Select the <strong>Integrations</strong> tab.</li>\n<li>Select <strong>Explore apps</strong>, search for <em>Gorgias</em>, and click the card. Then, click <strong>Install</strong>.</li>\n<li>Enter your Gorgias helpdesk URL and click <strong>Connect to Gorgias</strong>.<br>\n\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/37721809907099\" alt=\"\" width=\"579\" height=\"422\">\n</li>\n<li>Log in to Gorgias, if prompted. </li>\n<li>Allow Klaviyo access to all resources by clicking <strong>Authorize</strong>.<br>\n\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/37721809908635\" alt=\"\" width=\"518\" height=\"527\">\n</li>\n<li>Select whether you want to sync all new Gorgias tickets to Klaviyo, or only specific tickets containing certain tags. \n<ol>\n<li>Klaviyo’s integration with Gorgias allows for syncing tickets on a per-brand basis through the use of tags. </li>\n<li>If you manage more than one brand within one Gorgias account, we recommend syncing one brand per Klaviyo account in order to avoid duplicate profiles across accounts. In the section above, we explained how to add tags and set up views for each brand in Gorgias.<br>\n\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/37721807261339\" alt=\"\">\n</li>\n</ol>\n</li>\n<li>Check the <em>Sync SMS conversations</em> box to use SMS integration functionality. \n<ol>\n<li>For multi-brand accounts, we recommend adding a tag corresponding to the Gorgias brand you want to use with this Klaviyo account.<br>\n\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/37721809916827\" alt=\"\">\n</li>\n</ol>\n</li>\n<li>Check the box to <em>Sync WhatsApp conversations</em> to use WhatsApp integration functionality.\n<ol>\n<li>Support agents can also use <a href=\"https://help.klaviyo.com/hc/en-us/articles/40116778911259\">a template to extend the WhatsApp conversation</a>, ensuring they can continue engaging with the recipient beyond the 24-hour service window.<br>\n\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/41259951528475\" alt=\"Conversations box showing the option to sync WhatsApp conversations\" width=\"1598\" height=\"366\">\n</li>\n</ol>\n</li>\n<li>If you want to use the integration’s reviews functionality, check the <em>Sync reviews </em>box and select a threshold. \n<ol>\n<li>The default threshold is 3, which means any reviews submitted with a rating of 3 or lower will automatically create a Gorgias ticket for your team to follow up on. </li>\n<li>For multi-brand accounts, we recommend adding a tag corresponding to the Gorgias brand you want to use with this Klaviyo account. <br>\n\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/37721809920411\" alt=\"\">\n</li>\n</ol>\n</li>\n<li>RECOMMENDED: Check <em>Sync customer profile information from Klaviyo to Gorgias</em> to send contacts’ email addresses, phone numbers, profile properties, and more into Gorgias. This data will only sync if you have SMS or reviews enabled.<br>\n\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/37721807279643\" alt=\"\">\n</li>\n<li>If you're using <a href=\"https://help.klaviyo.com/hc/en-us/articles/33660324811675\">Customer Hub</a> and AI Agent: You can hand off customer queries the AI Service Agent can't answer to your team in Gorgias. Click <strong>Manage setting</strong> to go to the AI Agent settings and elect Gorgias as your <a href=\"https://klaviyo.zendesk.com/hc/en-us/articles/37659474656027\">agent handoff.</a><br>\n\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/38074454281243\" alt=\"\">\n</li>\n<li>Click <strong>Complete setup</strong>. </li>\n</ol>\n<h2 id=\"h_01JX0KV8Q8VEJ6RJM1K82DE3PA\">Metrics synced between Gorgias and Klaviyo</h2>\n<p>The following metrics are synced in real time from Gorgias to Klaviyo. The metrics will appear on an individual’s profile page and can be used in segments and flows. </p>\n<ul>\n<li><em>Opened Ticket</em></li>\n<li><em>Resolved Ticket</em></li>\n<li>Satisfaction survey responded (e.g., <em>Completed Survey</em>)<br>\n<p>Each metric is stored with an associated profile. If a profile doesn't exist, one will be created in Klaviyo. </p>\n<p>If you are in a specific profile and view the activity for a metric, you’ll be able to see information such as:</p>\n</li>\n<li>Who the ticket was assigned to</li>\n<li>Ticket ID and URL</li>\n<li>Channel (SMS or email)</li>\n<li>Message content</li>\n<li>Brand<br>\n<p>If you checked <em>Sync customer profile information from Klaviyo to Gorgias</em>, and have enabled SMS or reviews functionality, the following fields will sync from Klaviyo to Gorgias and appear in the right sidebar:</p>\n</li>\n<li>Email address</li>\n<li>Phone number </li>\n<li>Location</li>\n<li>Consent </li>\n<li>Custom properties</li>\n<li>Activity</li>\n</ul>\n<div class=\"bs-callout bs-callout-default\">\n<p>Note that if a profile doesn’t have a phone number or email address on their profile, Klaviyo will sync a placeholder (i.e., <em>555-555-5555</em> or <em>sms-integrations+kl{customer phone number})@klaviyo.com</em>). Do not use these placeholders to send support messages, as they will not be received.</p>\n</div>\n<h2 id=\"h_01JX0KV8Q9C1PWX1RJBYZBDE1D\">How the Gorgias SMS integration works</h2>\n<p>After the integration is set up, Klaviyo will automatically create a ticket in Gorgias whenever: </p>\n<ul>\n<li>A consented SMS subscriber texts a phone number associated with your account. </li>\n<li>The text message does not contain a keyword (i.e., one of the <a href=\"https://help.klaviyo.com/hc/en-us/articles/360050384091\">subscribe words</a> listed in your SMS Settings page in Klaviyo). The 2 exceptions to this are HELP and INFO, which will both create a ticket. </li>\n</ul>\n<p>Branded sender IDs (also called alphanumeric sender IDs) cannot receive text messages, so you cannot use this integration for subscribers in countries where you're using a branded sender ID. Learn more <a href=\"https://help.klaviyo.com/hc/en-us/articles/6637671573403\">about SMS sending numbers</a>. </p>\n<p>If a customer sends an image or GIF with a text message, the image will not be displayed in Gorgias. Similarly, you cannot send MMS messages from Gorgias. </p>\n<p>Any subsequent messages are automatically added to the ticket.</p>\n<p>Responses from within Gorgias will also appear in Klaviyo, but responses sent within the <a href=\"https://help.klaviyo.com/hc/en-us/articles/360059002271\">Klaviyo Inbox</a> will not appear in Gorgias. For this reason, we recommend that you only reply to customers from 1 platform. Additionally, flow, campaign, and auto-response messages sent via Klaviyo will not appear in Gorgias. </p>\n<p>Replies from Gorgias are sent using the same channel as the latest inbound message, and sent via a phone number associated with your Klaviyo account. If a subscriber texts you, the reply will be an SMS sent via the toll-free number, long code, or short code in your account. </p>\n<p>Messages from Gorgias count toward your <a href=\"https://help.klaviyo.com/hc/en-us/articles/115000976672\">SMS billing</a> plan like any other message. We recommend creating a template in Gorgias for SMS responses that fall under 153 characters if possible. Learn more about <a href=\"https://help.klaviyo.com/hc/en-us/articles/360035661191#h_01HCJKFZS852ZMJJF6SXW2SJ55\">SMS best practices</a>.</p>\n<h2 id=\"h_01JX0KV8Q9CBKJY5DSY5D4NN2E\">How the Gorgias WhatsApp integration works</h2>\n<p>After the integration is set up, Klaviyo will automatically create a ticket in Gorgias whenever: </p>\n<ul>\n<li>A customer sends an inbound message to your business on WhatsApp.</li>\n<li>If the message doesn’t match compliance, subscribe, or automated conversation keywords, Klaviyo will prompt the creation of a support ticket in Gorgias.</li>\n</ul>\n<p>Your support agent can answer the customer in Gorgias, and the response will send via your WhatsApp business number.</p>\n<p>Please note that the agent response type will appear in Gorgias as <em>Email</em>, but it will be sent via WhatsApp.<br>\n</p>\n<p><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/41259964479003\" alt=\"Agent response type in Gorgias\" width=\"1458\" height=\"382\"></p>\n<p class=\"wysiwyg-text-align-center\">In the <em>Klaviyo channel</em> side panel, you’ll be able to see information about the message, including the channel (WhatsApp or SMS) and the consent status.<br>\n</p>\n<p class=\"wysiwyg-text-align-center\"><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/41259964480155\" alt=\"Message details, showing consent for WhatsApp\" width=\"522\" height=\"418\"></p>\n<p>If the WhatsApp consent status is <em>Expired</em>, and you’ve enabled the follow-up setting referenced in the previous section, your agent can click <strong>WhatsApp Follow Up</strong> to send the template to the customer. If the customer responds, the 24 hours window resets and the conversation can continue.</p>\n<p>If a customer sends an image or other media with a WhatsApp, the image will not be displayed in Gorgias. Similarly, you cannot send images or other media messages from Gorgias. </p>\n<h2 id=\"01K5HSJ7X8W9KP2VHVH67WC5BT\">How the Gorgias reviews integration works</h2>\n<p>After the integration is set up, Klaviyo will automatically create a new ticket whenever someone submits a review that meets the criteria you set (i.e., has a star rating at or below your selection). </p>\n<p>The contact details available within the ticket depend on whether or not you enable the <em>Sync customer profile information from Klaviyo</em> option in your Gorgias integration settings. </p>\n<ul>\n<li>If the setting is disabled:<br>\nKlaviyo will only sync the reviewer’s phone number, if available. If the reviewer does not have a phone number in Klaviyo, we will use a spoof phone number (555-555-5555) to create the ticket, and you may not see any real contact information for the ticket in Gorgias.</li>\n<li>If the setting is enabled:<br>\nKlaviyo will sync their profile information into Gorgias, including email and phone number. If a profile doesn’t have an email address, Klaviyo will sync a spoof email address instead: sms-integrations+kl{customer phone number})@klaviyo.com. If a profile doesn’t have a phone number, we will sync a spoof phone number (555-555-5555). Every profile will have at least 1 valid form of contact information. <br>\n<p>Regardless of the profile information setting selected, the following review details will be available in the ticket sidebar: </p>\n</li>\n<li>Review attributes:\n<ul>\n<li>Star rating</li>\n<li>Author</li>\n<li>Review date</li>\n<li>Verified status</li>\n<li>Publish status</li>\n</ul>\n</li>\n<li>Product information:\n<ul>\n<li>Product name</li>\n<li>Product URL</li>\n<li>Product image URL<br>\n<p>Additionally, the ticket contains the following information:</p>\n</li>\n</ul>\n</li>\n<li>Product name</li>\n<li>Customer rating</li>\n<li>Review body</li>\n</ul>\n<h2 id=\"h_01JX0KV8Q94HJBX0YTSH0WHWEY\">When the integration syncs </h2>\n<p>The integration syncs in real time. As soon as an SMS subscriber texts you or a customer submits a review, that message will appear in Gorgias. </p>\n<p>Note that there is no historic sync. SMS tickets in Klaviyo and past reviews won’t appear in Gorgias if a subscriber texted you or left a review before you set up this integration. However, all further messages will sync. If a subscriber texts you or submits a review once before you enable the integration and once after, the message that comes in after you set up the integration will show in Gorgias, but the one sent before will not. </p>",
+    "user_segment_ids": []
+  },
+  "normalized": {
+    "id": "4408023789083",
+    "title": "Getting started with Gorgias",
+    "source_url": "https://help.klaviyo.com/hc/en-us/articles/4408023789083-Getting-started-with-Gorgias",
+    "section_id": 49375230792219,
+    "section": "Gorgias",
+    "category_id": 115000032731,
+    "category": "Integrations",
+    "category_slug": "integrations",
+    "klaviyo_updated": "2026-04-21T13:54:59Z",
+    "created_at": "2021-10-07T15:52:15Z",
+    "draft": false,
+    "promoted": false,
+    "position": 0,
+    "label_names": []
+  },
+  "files": {
+    "body_html": "_source/articles/4408023789083.body.html",
+    "rendered_html": "_source/rendered/4408023789083.html"
+  },
+  "assets": {
+    "api_body": {
+      "images": [
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/37721807239707",
+          "alt": "",
+          "width": "581",
+          "height": "408"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/37721807244699",
+          "alt": "",
+          "width": "635",
+          "height": "270"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/37721809907099",
+          "alt": "",
+          "width": "579",
+          "height": "422"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/37721809908635",
+          "alt": "",
+          "width": "518",
+          "height": "527"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/37721807261339",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/37721809916827",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/41259951528475",
+          "alt": "Conversations box showing the option to sync WhatsApp conversations",
+          "width": "1598",
+          "height": "366"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/37721809920411",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/37721807279643",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/38074454281243",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/41259964479003",
+          "alt": "Agent response type in Gorgias",
+          "width": "1458",
+          "height": "382"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/41259964480155",
+          "alt": "Message details, showing consent for WhatsApp",
+          "width": "522",
+          "height": "418"
+        }
+      ],
+      "links": [
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/15937542819355",
+          "text": "Klaviyo Reviews"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/6637671573403",
+          "text": "about SMS sending numbers"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4404274419355",
+          "text": "set up SMS in Klaviyo"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360059002271#h_01JMFEZW49YCGTZ5TPZ35ZYMZN",
+          "text": "reviewed key Inbox settings"
+        },
+        {
+          "href": "https://www.klaviyo.com/inbox/settings/inbound-messages",
+          "text": "Inbox email notification address"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/40111819732635",
+          "text": "set up WhatsApp in Klaviyo"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/15937542819355",
+          "text": "get started with Klaviyo Reviews"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/40116778911259",
+          "text": "a template to extend the WhatsApp conversation"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/33660324811675",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://klaviyo.zendesk.com/hc/en-us/articles/37659474656027",
+          "text": "agent handoff."
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360050384091",
+          "text": "subscribe words"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360059002271",
+          "text": "Klaviyo Inbox"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115000976672",
+          "text": "SMS billing"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360035661191#h_01HCJKFZS852ZMJJF6SXW2SJ55",
+          "text": "SMS best practices"
+        }
+      ],
+      "headings": [
+        {
+          "level": 2,
+          "id": "h_01JX0KV8Q8M7NYM17F4DB4SAJ8",
+          "text": "Before you begin"
+        },
+        {
+          "level": 3,
+          "id": "h_01JX0KV8Q8DKQF8WSF7975QSJE",
+          "text": "SMS prerequisites"
+        },
+        {
+          "level": 3,
+          "id": "01K5HS3V0PJFDBMRV87VBC0DNZ",
+          "text": "WhatsApp prerequisites"
+        },
+        {
+          "level": 3,
+          "id": "h_01JX0KV8Q88JKAE6S5R7FTGWQ8",
+          "text": "Reviews prerequisites"
+        },
+        {
+          "level": 4,
+          "id": "h_01JX0KV8Q8BNMXH97PJK514G4N",
+          "text": "Create rules in Gorgias to tag tickets by brand"
+        },
+        {
+          "level": 4,
+          "id": "h_01JX0M8QRW7W86T0N65B8GNCR2",
+          "text": "(Optional) Create views in Gorgias based on brand tags"
+        },
+        {
+          "level": 2,
+          "id": "h_01JX0KV8Q8SEPXNGQCPKNYV210",
+          "text": "Integrate with Gorgias"
+        },
+        {
+          "level": 2,
+          "id": "h_01JX0KV8Q8VEJ6RJM1K82DE3PA",
+          "text": "Metrics synced between Gorgias and Klaviyo"
+        },
+        {
+          "level": 2,
+          "id": "h_01JX0KV8Q9C1PWX1RJBYZBDE1D",
+          "text": "How the Gorgias SMS integration works"
+        },
+        {
+          "level": 2,
+          "id": "h_01JX0KV8Q9CBKJY5DSY5D4NN2E",
+          "text": "How the Gorgias WhatsApp integration works"
+        },
+        {
+          "level": 2,
+          "id": "01K5HSJ7X8W9KP2VHVH67WC5BT",
+          "text": "How the Gorgias reviews integration works"
+        },
+        {
+          "level": 2,
+          "id": "h_01JX0KV8Q94HJBX0YTSH0WHWEY",
+          "text": "When the integration syncs"
+        }
+      ]
+    },
+    "rendered_page": {
+      "images": [
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/7ff492c2b417b7ecfe572f839a8a81398693c1f7-1920x1080.webp",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/a8c5a6613079f35bb0f98bf4a6998ffbd93a34cb-1522x1070.png?w=581",
+          "alt": "",
+          "width": "581",
+          "height": "408"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/2fbaccefdea6c567c600f24891f5a31b8482531c-2468x1050.png?w=635",
+          "alt": "",
+          "width": "635",
+          "height": "270"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/b91e216d74a445b371d0c27191bbf8aac542345a-1220x890.png?w=579",
+          "alt": "",
+          "width": "579",
+          "height": "422"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/8e11093d8a28356bce04107f6835bb5546046656-866x880.png?w=518",
+          "alt": "",
+          "width": "518",
+          "height": "527"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/863141648b5c705ddaf625bff916aff3903d2d13-1522x390.png",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/2b4c86f36916cf98abd0926ddab9706bd64675f7-1522x442.png",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/f5d9532ad316723426fada1eab5ed4058294eaea-1598x366.png?w=1598",
+          "alt": "Conversations box showing the option to sync WhatsApp conversations",
+          "width": "1598",
+          "height": "366"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/38e45860f39cc4a7c94b3b569f2eff2098644cd5-1320x444.png",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/e5fac06b7fc24f6c795172e31bfb07cc1693995b-1642x340.png",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/0bda000ed0c4e0a4937b1beb50427d377e35b9d7-1596x280.png",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/c543cdec52dfaaa4fea3bcd207f5b12498b06f64-1458x382.png?w=1458",
+          "alt": "Agent response type in Gorgias",
+          "width": "1458",
+          "height": "382"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/e2a0631da113b3b3e965fe1ef55547446b2e7f9a-522x724.png?w=522",
+          "alt": "Message details, showing consent for WhatsApp",
+          "width": "522",
+          "height": "418"
+        }
+      ],
+      "links": [
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4408023789083-Getting-started-with-Gorgias#site-content",
+          "text": "Skip to main content"
+        },
+        {
+          "href": "https://www.klaviyo.com",
+          "text": "Home"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center"
+        },
+        {
+          "href": "https://www.klaviyo.com/enterprise",
+          "text": "Enterprise"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Partners"
+        },
+        {
+          "href": "https://www.klaviyo.com/careers",
+          "text": "Careers"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": "Log in"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": ""
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center Find step-by-step instructions and troubleshooting solutions in our knowledge base."
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000032731",
+          "text": "Integrations"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000312411",
+          "text": "Flows"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867867",
+          "text": "Audience"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867667",
+          "text": "Campaigns"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/360000190711",
+          "text": "Sign-up forms"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000873988",
+          "text": "Deliverability & compliance"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/29173800271259",
+          "text": "SMS"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/16638219724187",
+          "text": "Reviews"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/18073014919195",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/34141283979931",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/37659126754075",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/33948021740315",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/39746685522331",
+          "text": "WhatsApp"
+        },
+        {
+          "href": "https://academy.klaviyo.com",
+          "text": "Klaviyo Academy Expert training and education to help you succeed with Klaviyo, and beyond."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Quick+guide&resource=academy_courses",
+          "text": "Quick guides Learn marketing strategies and concepts in 15 minutes or less."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Course&resource=academy_courses",
+          "text": "Courses Master key marketing topics through structured lessons and exams."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/best-practices",
+          "text": "Best practices Discover top product and marketing strategies for your business."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/learning-paths",
+          "text": "Learning paths Complete curated learning journeys tailored to your marketing goals."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses",
+          "text": "Explore all resources"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Live+training&resource=academy_courses",
+          "text": "Live trainings Build confidence through hands-on interactive workshops and thought-provoking strategy sessions."
+        },
+        {
+          "href": "https://www.bigmarker.com/klaviyo-customer-education/Office-hours-Getting-started-with-Klaviyo",
+          "text": "Live office hours Join a strategic discussion where you can ask questions and get answers in real-time."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/private-live-training",
+          "text": "1:1 Live training Book a private training session with an expert to jumpstart your platform knowledge and confidence."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/credentials",
+          "text": "Klaviyo credentials Dig deeper into select topics and showcase your expertise with a final exam to earn a certificate and digital badge."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/certificates/klaviyo-practitioner-certificate",
+          "text": "Klaviyo practitioner certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/deliverability-certificate",
+          "text": "Deliverability certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/developer-certificate",
+          "text": "Klaviyo developer certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses&select=Certificate",
+          "text": "See all certificates"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Klaviyo Community Join our thriving community network to connect with brands like yours—online and in person."
+        },
+        {
+          "href": "https://community.klaviyo.com/topic/new",
+          "text": "Ask a question Post a question and get thoughtful answers from Klaviyo powerusers."
+        },
+        {
+          "href": "https://community.klaviyo.com/p/roadmap",
+          "text": "Product roadmap"
+        },
+        {
+          "href": "https://community.klaviyo.com/search/activity/recent",
+          "text": "Recent threads"
+        },
+        {
+          "href": "https://community.klaviyo.com/p/champions",
+          "text": "Meet the Champions"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups",
+          "text": "Browse all groups Your people are waiting. New ideas and connections are a click away."
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/developer-group-64",
+          "text": "Developer group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/entrepreneur-user-group-118",
+          "text": "Entrepreneur group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/woo-user-group-87",
+          "text": "WooCommerce group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/new-york-meetup-chapter-82",
+          "text": "New York City"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/los-angeles-meetup-chapter-83",
+          "text": "Los Angeles"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/austin-meetup-chapter-85",
+          "text": "Austin"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/san-diego-meetup-chapter-86",
+          "text": "San Diego"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/amsterdam-meetup-chapter-84",
+          "text": "Amsterdam"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Klaviyo Developers Access API documentation and developer guides to help you build with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/get_started",
+          "text": "Get started Access key resources and a step-by-step checklist for how to start developing with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/build_your_integration",
+          "text": "Grow your app's reach Learn how to join our ecosystem and get your app listed on our marketplace."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/developer-tools",
+          "text": "Developer tools Generate sample data, monitor your API usage, and access our Postman collections."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/reference/api_overview",
+          "text": "API reference Browse our full catalog of API docs."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/changelog_",
+          "text": "Changelog"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/api_versioning_and_deprecation_policy",
+          "text": "Versioning & deprecation policy"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/rate_limits_and_error_handling",
+          "text": "Rate limits & error handling"
+        },
+        {
+          "href": "https://youtube.com/playlist?list=PLHkNfHgtxcUanrkMnKPdkRzuWU7MGv_xM&si=pkG-KH7IT_TUHOGC",
+          "text": "API tutorials on YouTube Subscribe to our Klaviyo API Tutorials playlist for easy access to step-by-step developer walkthroughs."
+        },
+        {
+          "href": "https://www.klaviyo.com/contact-us",
+          "text": "Contact us"
+        },
+        {
+          "href": "https://www.klaviyo.com/sign-up",
+          "text": "Sign up"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": "Search"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4408023789083",
+          "text": "United States - EN"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/de-de/articles/4408023789083",
+          "text": "Deutschland - DE"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-es/articles/4408023789083",
+          "text": "España - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-mx/articles/4408023789083",
+          "text": "México - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/fr-fr/articles/4408023789083",
+          "text": "France - FR"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/it-it/articles/4408023789083",
+          "text": "Italia - IT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/ko-kr/articles/4408023789083",
+          "text": "한국 - KO"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/nl-nl/articles/4408023789083",
+          "text": "Nederland - NL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pl-pl/articles/4408023789083",
+          "text": "Polska - PL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pt-br/articles/4408023789083",
+          "text": "Brasil - PT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/sv-se/articles/4408023789083",
+          "text": "Sverige - SV"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/14515594814619",
+          "text": "Support and help desk"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/49375230792219",
+          "text": "Gorgias"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4408023789083-Getting-started-with-Gorgias#h_01JX0KV8Q8M7NYM17F4DB4SAJ8",
+          "text": "Before you begin"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4408023789083-Getting-started-with-Gorgias#h_01JX0KV8Q8SEPXNGQCPKNYV210",
+          "text": "Integrate with Gorgias"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4408023789083-Getting-started-with-Gorgias#h_01JX0KV8Q8VEJ6RJM1K82DE3PA",
+          "text": "Metrics synced between Gorgias and Klaviyo"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4408023789083-Getting-started-with-Gorgias#h_01JX0KV8Q9C1PWX1RJBYZBDE1D",
+          "text": "How the Gorgias SMS integration works"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4408023789083-Getting-started-with-Gorgias#h_01JX0KV8Q9CBKJY5DSY5D4NN2E",
+          "text": "How the Gorgias WhatsApp integration works"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4408023789083-Getting-started-with-Gorgias#01K5HSJ7X8W9KP2VHVH67WC5BT",
+          "text": "How the Gorgias reviews integration works"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4408023789083-Getting-started-with-Gorgias#h_01JX0KV8Q94HJBX0YTSH0WHWEY",
+          "text": "When the integration syncs"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4408023789083-Getting-started-with-Gorgias#additional-resources",
+          "text": "Additional resources"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/15937542819355",
+          "text": "Klaviyo Reviews"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/6637671573403",
+          "text": "about SMS sending numbers"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4404274419355",
+          "text": "set up SMS in Klaviyo"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360059002271#h_01JMFEZW49YCGTZ5TPZ35ZYMZN",
+          "text": "reviewed key Inbox settings"
+        },
+        {
+          "href": "https://www.klaviyo.com/inbox/settings/inbound-messages",
+          "text": "Inbox email notification address"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/40111819732635",
+          "text": "set up WhatsApp in Klaviyo"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/15937542819355",
+          "text": "get started with Klaviyo Reviews"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/40116778911259",
+          "text": "a template to extend the WhatsApp conversation"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/33660324811675",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://klaviyo.zendesk.com/hc/en-us/articles/37659474656027",
+          "text": "agent handoff."
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360050384091",
+          "text": "subscribe words"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360059002271",
+          "text": "Klaviyo Inbox"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115000976672",
+          "text": "SMS billing"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360035661191#h_01HCJKFZS852ZMJJF6SXW2SJ55",
+          "text": "SMS best practices"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115000976672",
+          "text": "How Klaviyo billing works"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360056849631",
+          "text": "How to use Klaviyo email and SMS together"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/15937542819355",
+          "text": "Getting started with Klaviyo Reviews"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/33660687711771",
+          "text": "How to connect Gorgias to Customer Hub"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115001002272",
+          "text": "Learn how to contact support"
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": ""
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": "Visit Community"
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": ""
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": "Hire a partner"
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/about",
+          "text": "About Klaviyo"
+        },
+        {
+          "href": "https://www.klaviyo.com/newsroom",
+          "text": "Newsroom"
+        },
+        {
+          "href": "https://investors.klaviyo.com/overview/default.aspx",
+          "text": "Investor relations"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Agency and tech partners"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Developers"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/retail",
+          "text": "Retail and ecommerce"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/restaurants",
+          "text": "Restaurant marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/wellness",
+          "text": "Wellness"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform",
+          "text": "B2C CRM overview"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai",
+          "text": "Klaviyo AI (K:AI)"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/marketing-automation",
+          "text": "Klaviyo Marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-service",
+          "text": "Klaviyo Service"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/analytics",
+          "text": "Klaviyo Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-data-platform",
+          "text": "Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare",
+          "text": "Klaviyo vs. Klaviyo alternatives"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-mailchimp",
+          "text": "Klaviyo vs. Mailchimp"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-postscript",
+          "text": "Klaviyo vs. Postscript"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-attentive",
+          "text": "Klaviyo vs. Attentive"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-salesforce-marketing-cloud",
+          "text": "Klaviyo vs. Salesforce"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-listrak",
+          "text": "Klaviyo vs. Listrak"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/omnichannel",
+          "text": "Omnichannel marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/email-marketing",
+          "text": "Email marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing",
+          "text": "SMS marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing/rcs",
+          "text": "RCS for Business"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/mobile-app-marketing",
+          "text": "Mobile app marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/whatsapp",
+          "text": "WhatsApp marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/social",
+          "text": "Social marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources",
+          "text": "Marketing resources"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources/marketing-campaign-calendar",
+          "text": "Marketing campaign calendar"
+        },
+        {
+          "href": "https://www.klaviyo.com/glossary",
+          "text": "Marketing glossary"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/email-subject-line-generator",
+          "text": "Subject line generator"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/roi-calculator",
+          "text": "ROI calculator"
+        },
+        {
+          "href": "https://www.klaviyo.com/customers",
+          "text": "Case studies"
+        },
+        {
+          "href": "https://www.klaviyo.com/composer",
+          "text": "Composer Beta"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/marketing-agent",
+          "text": "Marketing Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/customer-agent",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/customer-experience-hub",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/helpdesk",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/marketing-analytics",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/advanced-cdp",
+          "text": "Advanced Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/web-forms",
+          "text": "Web forms"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/email-templates",
+          "text": "Email templates"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/portfolio",
+          "text": "Portfolio"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform-integrations",
+          "text": "Apps and Integrations"
+        },
+        {
+          "href": "https://www.klaviyo.com/features",
+          "text": "Features"
+        },
+        {
+          "href": "https://www.klaviyo.com/whats-new",
+          "text": "What's new"
+        },
+        {
+          "href": "https://www.klaviyo.com/events",
+          "text": "Events"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help Center"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us",
+          "text": "Academy"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Community"
+        },
+        {
+          "href": "https://www.facebook.com/Klaviyo/",
+          "text": "Facebook"
+        },
+        {
+          "href": "https://twitter.com/klaviyo/",
+          "text": "Twitter"
+        },
+        {
+          "href": "https://www.linkedin.com/company/klaviyo/",
+          "text": "LinkedIn"
+        },
+        {
+          "href": "https://www.instagram.com/klaviyo/",
+          "text": "Instagram"
+        },
+        {
+          "href": "https://www.klaviyo.com/sitemap",
+          "text": "Site Map"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal",
+          "text": "Terms and Privacy"
+        },
+        {
+          "href": "https://www.klaviyo.com/security",
+          "text": "Security"
+        },
+        {
+          "href": "https://www.klaviyo.com/trust",
+          "text": "Trust"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal/intellectual-property-notices",
+          "text": "Intellectual Property Notices"
+        }
+      ],
+      "headings": [
+        {
+          "level": 1,
+          "id": "",
+          "text": "Getting started with Gorgias"
+        },
+        {
+          "level": 2,
+          "id": "h_01JX0KV8Q8M7NYM17F4DB4SAJ8",
+          "text": "Before you begin"
+        },
+        {
+          "level": 3,
+          "id": "h_01JX0KV8Q8DKQF8WSF7975QSJE",
+          "text": "SMS prerequisites"
+        },
+        {
+          "level": 3,
+          "id": "01K5HS3V0PJFDBMRV87VBC0DNZ",
+          "text": "WhatsApp prerequisites"
+        },
+        {
+          "level": 3,
+          "id": "h_01JX0KV8Q88JKAE6S5R7FTGWQ8",
+          "text": "Reviews prerequisites"
+        },
+        {
+          "level": 4,
+          "id": "",
+          "text": "Create rules in Gorgias to tag tickets by brand"
+        },
+        {
+          "level": 4,
+          "id": "",
+          "text": "(Optional) Create views in Gorgias based on brand tags"
+        },
+        {
+          "level": 2,
+          "id": "h_01JX0KV8Q8SEPXNGQCPKNYV210",
+          "text": "Integrate with Gorgias"
+        },
+        {
+          "level": 2,
+          "id": "h_01JX0KV8Q8VEJ6RJM1K82DE3PA",
+          "text": "Metrics synced between Gorgias and Klaviyo"
+        },
+        {
+          "level": 2,
+          "id": "h_01JX0KV8Q9C1PWX1RJBYZBDE1D",
+          "text": "How the Gorgias SMS integration works"
+        },
+        {
+          "level": 2,
+          "id": "h_01JX0KV8Q9CBKJY5DSY5D4NN2E",
+          "text": "How the Gorgias WhatsApp integration works"
+        },
+        {
+          "level": 2,
+          "id": "01K5HSJ7X8W9KP2VHVH67WC5BT",
+          "text": "How the Gorgias reviews integration works"
+        },
+        {
+          "level": 2,
+          "id": "h_01JX0KV8Q94HJBX0YTSH0WHWEY",
+          "text": "When the integration syncs"
+        },
+        {
+          "level": 2,
+          "id": "additional-resources",
+          "text": "Additional resources"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "Explore more from Klaviyo"
+        }
+      ]
+    }
+  },
+  "rendered_page": {
+    "status": "fetched",
+    "error": ""
+  }
+}

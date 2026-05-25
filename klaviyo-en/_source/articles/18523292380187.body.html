@@ -1,0 +1,114 @@
+<h2 id="h_01H9JWHDA5RZ0GCXYNJN0BMBS9">You will learn</h2>
+<p>Learn about AT&amp;T spam traps, how Klaviyo notifies you if it detects that you may have been caught in the spam trap, and the steps you can take to rebuild your reputation with AT&amp;T.</p>
+<h2 id="h_01H9JWHDA61PM8QHXYW2H03MHK">AT&amp;T spam traps</h2>
+<p>Carriers such as AT&amp;T in the US may place SMS senders into a 30 day probationary period when they identify the sender is not following SMS messaging best practices. During this time, senders may see less than 5% deliverability on this particular network with all errors being returned as <em>Device Unreachable - Vendor code 30003</em>.</p>
+<p>If a sender continues to send to devices on the network during the probationary period, this results in the accumulation of errors that can lead to indefinite delivery issues on the network.</p>
+<h2 id="h_01H9JWHDA63W1SQVEXMMGRNTNW">AT&amp;T spam trap alerts in Klaviyo</h2>
+<p>If Klaviyo detects that your account may be potentially caught in the AT&amp;T’s 30 day spam trap, you’ll receive notifications alerting you of the issue in:</p>
+<ul>
+<li>Your email inbox</li>
+<li>An in-app notification on the home page</li>
+<li>An in-app notification on the campaigns list-view page</li>
+</ul>
+<h2 id="h_01H9JWHDA62EQTTPTG248C59FT">Exclude delivery failures from sends</h2>
+<p>To prevent the accumulation of errors during the probationary period, Klaviyo recommends excluding profiles that experienced a send failure from your future sends during this time.</p>
+<p>To exclude customers that experienced failures, use the following segment:</p>
+<ul>
+<li><em>If someone can or cannot receive marketing &gt; Person can receive SMS marketing</em></li>
+</ul>
+<p>AND</p>
+<ul>
+<li>
+<p><em>What someone has done (or not done) &gt;</em></p>
+<p><em>Failed to Deliver SMS at least once in the last 30 days</em></p>
+<p>WHERE <em>Failure Type equals Device disconnected</em></p>
+</li>
+</ul>
+<p>OR</p>
+<ul>
+<li>
+<p><em>What someone has done (or not done) &gt; Failed to Deliver SMS at least once in the last 30 days</em></p>
+<p>WHERE <em>Failure Type equals Device unreachable</em></p>
+</li>
+</ul>
+<p>OR</p>
+<ul>
+<li>
+<p><em>What someone has done (or not done) &gt; Failed to Deliver SMS at least once over all time</em></p>
+<p>WHERE <em>Failure Type equals Message blocked</em></p>
+</li>
+</ul>
+<p>OR</p>
+<ul>
+<li>
+<p><em>What someone has done (or not done) &gt; Failed to Deliver SMS is at least once over all time</em></p>
+<p>WHERE <em>Failure Type equals Device incapable of receiving SMS</em></p>
+</li>
+</ul>
+<p>OR</p>
+<ul>
+<li>
+<p><em>What someone has done (or not done) &gt; Failed to Deliver SMS is at least once over all time</em></p>
+<p>WHERE <em>Failure Type equals Invalid mobile number</em></p>
+</li>
+</ul>
+<p>OR</p>
+<ul>
+<li>
+<p><em>What someone has done (or not done) &gt; Failed to Deliver SMS at least 2 over all time</em></p>
+<p>WHERE <em>Failure Type equals Device disconnected</em></p>
+</li>
+</ul>
+<p>OR</p>
+<ul>
+<li>
+<p><em>What someone has done (or not done) &gt; Failed to Deliver SMS at least 6 over all time</em></p>
+<p>WHERE <em>Failure Type equals Device unreachable</em></p>
+</li>
+</ul>
+<p>OR</p>
+<ul>
+<li>
+<p><em>What someone has done (or not done) &gt; Failed to Deliver SMS is at least 5 over all time</em></p>
+<p>WHERE <em>Failure Type equals Unknown error</em></p>
+</li>
+</ul>
+<p class="wysiwyg-text-align-center"><img src="https://klaviyo.zendesk.com/hc/article_attachments/28705699337371" alt="ATT spam trap segment"></p>
+<h2 id="h_01H9JWHDA664FR9H9PZEX8EPZ4">What if my sending list is too small following the implementation of the recommended SMS error segment?</h2>
+<p>The SMS error segment is designed to eliminate profiles with recurring delivery errors from your SMS send lists. If the segment is too strict and too many of your subscribers are being filtered out, consider updating the criteria below to a higher number and monitor deliverability based on the send results:</p>
+<ul>
+<li>
+<p><em>What someone has done (or not done) &gt;</em></p>
+<p><em>Failed to Deliver SMS is at least X over all time</em></p>
+<p>WHERE <em>Failure Type equals Device disconnected</em></p>
+</li>
+</ul>
+<p>OR</p>
+<ul>
+<li>
+<p><em>What someone has done (or not done) &gt;</em></p>
+<p><em>Failed to Deliver SMS is at least X over all time</em></p>
+<p>WHERE <em>Failure Type equals Device unreachable</em></p>
+</li>
+</ul>
+<p>With an effective SMS error segment, you should see about 95% or more of SMS messages delivered successfully.</p>
+<h2 id="h_01H9JWHDA67QX5S3YGRBNDED2J">Follow SMS best practices</h2>
+<p>In addition to capturing failed sends in an error segment, you should follow SMS best practices to maintain strong SMS deliverability.</p>
+<ul>
+<li>Check that the call to action <a href="https://help.klaviyo.com/hc/en-us/articles/4412878737051">disclosures</a> are clear and accurately describe the SMS program users are signing up to. This helps keep opt-out rates down and ensures people are aware of the program they are subscribing to.</li>
+<li>Consider implementing <a href="https://help.klaviyo.com/hc/en-us/articles/115005251108">double opt-in</a>. This helps minimize failures like erroneous number sign ups, landlines, and devices incapable of receiving SMS.</li>
+<li>
+<a href="https://help.klaviyo.com/hc/en-us/articles/360047879512">Segment your subscribers</a> to ensure content is personalized to their interests. This increases deliverability and reduces opt-out rates.</li>
+<li>Aim for opt-out rates of less than 1% per campaign.</li>
+<li>Ensure that opt-out information is available on campaigns.</li>
+</ul>
+<div class="bs-callout bs-callout-default">
+<p>See more <a href="https://help.klaviyo.com/hc/en-us/articles/13288640663579">SMS best practices</a>.</p>
+</div>
+<h2 id="h_01H9JWHDA6NZ3YQDWQDR2N9J7Y">Outcome</h2>
+<p>After 30 days without issues, the SMS subscribers who experienced errors will no longer meet the criteria for your exclusion segment and exit. At this point, you can send them SMS messages and expect successful deliveries</p>
+<p>During this recalibration period, the expected SMS delivery rate is 85% - 90%. Outside of the recalibration period, the expected delivery rate is 95% and above.</p>
+<h2 id="h_01H9JWHDA64X4TAVTTCPAMWD58">Additional resources</h2>
+<p><a href="https://help.klaviyo.com/hc/en-us/articles/13288640663579">Basics: SMS best practices</a></p>
+<p><a href="https://help.klaviyo.com/hc/en-us/articles/1260806260849">Understanding and reviewing your SMS deliverability</a></p>
+<p><a href="https://help.klaviyo.com/hc/en-us/articles/360040039971">How to create and send an SMS campaign</a></p>

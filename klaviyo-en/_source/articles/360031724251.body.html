@@ -1,0 +1,69 @@
+<h2 id="h_01JAG5WG9KZRH7M1CVRDX9ANXQ">You will learn</h2>
+<p>Learn how to embed a sign-up form on your BigCommerce confirmation page to collect additional information from customers after they finish the checkout process. These recent customers are already interested in your brand, so the confirmation presents a great opportunity to further engage with them.</p>
+<h2 id="h_01JAG5WG9M8NYTJ5XPERJ3RBAX">Before you begin</h2>
+<p>Make sure that you've <a href="https://help.klaviyo.com/hc/en-us/articles/115005082547" target="_blank" rel="noopener noreferrer">integrated with BigCommerce</a> and checked the setting <em>Automatically add Klaviyo onsite JavaScript</em>.</p>
+<h2 id="h_01JAG5WG9M76A5PPZEKSDAZQZK">Build your form</h2>
+<p>You can create a sign-up form and embed it on your confirmation page to ask relevent questions of your customers after they checkout. For example, you could ask questions to learn more about how often a customer uses your products, or what potential new products they might be interested in buying.</p>
+<p>To build your sign-up form:</p>
+<ol>
+<li>In Klaviyo, navigate to <strong>Sign-up forms &gt; Create Sign-up form &gt; Build from scratch</strong>.</li>
+<li>In the menu that appears, name your form and select a list for new subscribers to submit to. </li>
+<li>Select <strong>Embed</strong> as the form type.<br><img src="https://klaviyo.zendesk.com/hc/article_attachments/34409763651355" alt="embed form .jpg" width="428" height="584">
+</li>
+<li>Click <strong>Save and  design</strong>. </li>
+<li>This will bring you into the form editor where you can edit the following styles:
+<ul>
+<li>
+<em>Styles</em>: Edit the appearance of your form to match your brand, such as form or input field styles and font type. You can also edit any text by clicking on it and replacing the default language with your own. </li>
+<li>
+<em>Add blocks</em>: Here you can add content to your form in order to collect information, such as a text box for a question or a date field for a birthday. Make sure to set a <a href="https://help.klaviyo.com/hc/en-us/articles/115005074627-Profile-properties-reference" target="_blank" rel="noopener">profile property</a> with each field you add, and to not overwhelm customers with too many questions.</li>
+<li>
+<em>Targeting and behavior</em>: Choose whether you want the form to appear on desktop, mobile, or both. Keep your form set to either <strong>Show to all visitors</strong> or<strong> Don't show to existing Klaviyo profiles. </strong> </li>
+</ul>
+</li>
+<li>In the menu bar, select <strong>Success</strong> to edit the page that displays after someone submits your form.</li>
+<li>When you're satisfied with your form's design, click <strong>Publish</strong>.</li>
+<li>From the modal that appears, copy your embed code so that you have it ready to paste. <br><img src="https://klaviyo.zendesk.com/hc/article_attachments/34409763654299" width="370" height="306">
+</li>
+<li>Click <strong>Publish</strong>.</li>
+</ol>
+<p>Your form will not appear on your site until you've pasted the embed code in your site code.</p>
+<p>Verify the <a href="https://help.klaviyo.com/hc/en-us/articles/115005251108-The-Double-Opt-In-Process" target="_blank" rel="noopener">opt-in settings</a> for that list so that the customer experience is seamless. If the list is double opt-in, you will want to edit the confirmation pages. All Klaviyo lists are set to double opt-in by default.</p>
+<h2 id="h_01JAG5WG9MRAEJZZK1PCHPZVR4">Add the embed to your BigCommerce site</h2>
+<ol>
+<li>Navigate to your BigCommerce admin.</li>
+<li>Go to <strong>Storefront &gt; Script Manager</strong> and click <strong>Create a Script. </strong>
+</li>
+<li>Name the script and configure it with the following:
+<ul>
+<li>Location: Head</li>
+<li>Description (optional): Describe the purpose of the script</li>
+<li>Pages where the script will be added: Order confirmation</li>
+<li>Script type: Script<br><img src="https://klaviyo.zendesk.com/hc/article_attachments/28704485135131" alt="The Create a Script page in BigCommerce where you can fill in the location, description, pages where the script will be added, and script type." width="625" height="480">
+</li>
+</ul>
+</li>
+<li>Delete the script contents and instead paste the following code to add klaviyo.js to your confirmation page. Note that you need to do this even if you previously installed klaviyo.js on your website:<br>
+<pre><code class="language-js">  &lt;script src="https://static.klaviyo.com/onsite/js/PUBLIC_API_KEY/klaviyo.js" async=""&gt;&lt;/script&gt;
+  &lt;script&gt;
+     document.addEventListener("DOMContentLoaded", function() {<br>       var elem = document.createElement('div');
+     elem.className = 'klaviyo-form-FORM_ID'
+     document.body.appendChild(elem);
+     });&lt;/script&gt;</code></pre>
+</li>
+<li>In the snippet above, replace <code style="font-size: 15px;">PUBLIC_API_KEY</code><span style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;"> with </span><a style="background-color: #ffffff; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;" href="https://klaviyo.zendesk.com/hc/en-us/articles/115005062267" target="_blank" rel="noopener">your site's public API key. </a>
+</li>
+<li>
+<span style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;">In the snippet above, replace </span><code style="font-size: 15px;">FORM_ID</code><span style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;"> with your form's ID. To find your form ID, navigate to the embedded form in your Klaviyo account. The form ID is the 6 letter code at the end of the URL.<br><img src="https://klaviyo.zendesk.com/hc/article_attachments/28704477015963" alt="Confirms3.jpg" width="339" height="148"></span>
+</li>
+<li><span style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;">When you have filled in all the details for the script, click <strong style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;">Save</strong><span style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;">. </span></span></li>
+</ol>
+<p><span style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;"><span style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;">Your embed form will now display at the bottom of the page after someone places an order. Depending on your theme, you may want to edit the border, padding, or size of your form in the </span><em>Styles </em><span style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;">section to ensure that it matches the look and feel of your order confirmation page; publish any changes you make to see them reflected.</span><br></span></p>
+<h2 id="h_01JAG5WG9MA1NZ3G92BQWF54N2">Next steps</h2>
+<p>After you start collecting responses with your embedded form, each submission will be stored on the customer's profile as a <a href="https://help.klaviyo.com/hc/en-us/articles/115005074627-Add-Custom-Properties-to-a-Contact-Profile#how-to-use-custom-properties5" target="_blank" rel="noopener">custom property</a>, available to use in segments, flows, and email templates.</p>
+<p>Based on the responses, you can branch the <a href="https://help.klaviyo.com/hc/en-us/articles/360028872611-Guide-to-Creating-a-Post-Purchase-Flow" target="_blank" rel="noopener">post-purchase</a> experience. You may also want to branch your <a href="https://help.klaviyo.com/hc/en-us/articles/115002775172-Guide-to-Creating-a-Welcome-Series" target="_blank" rel="noopener">welcome series</a> based on this data or <a href="https://help.klaviyo.com/hc/en-us/articles/115005237908-Guide-to-Creating-Segments#segment-conditions2" target="_blank" rel="noopener">create relevant segments</a> to send campaigns to. For example, let's say we decide to release a new mascara. Since we're collecting product interest data on this embedded form, we can notify anyone who told us they were interested in mascara in the product release.</p>
+<h2 id="h_01JAG5WG9M72T6APV55E2RC111">Additional resources</h2>
+<ul>
+<li><a href="https://help.klaviyo.com/hc/en-us/articles/360026474752" target="_self" rel="undefined">Getting started with sign-up forms</a></li>
+<li><a href="https://help.klaviyo.com/hc/en-us/articles/360006897412" target="_self" rel="undefined">How to embed a sign-up form on your website</a></li>
+</ul>

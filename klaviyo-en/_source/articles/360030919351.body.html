@@ -1,0 +1,76 @@
+<h2 id="h_01HGK64RFVQWKEXVSEW5KHKW8B">You will learn</h2>
+<p>Learn how to sync customer information such as profile information, custom properties, email and SMS subscription statuses, and events from Klaviyo to Shopify. You’ll make these changes from your Shopify integration settings page in Klaviyo. You can choose whether to sync updates for either all existing and new Klaviyo profiles, or only for Shopify-known profiles. </p>
+<h2 id="h_01HGK64RFVARDS1C9H72Y3920J">Before you begin</h2>
+<ul>
+<li>If you have not already, read our article on <a href="https://help.klaviyo.com/hc/en-us/articles/115005080407-How-to-Integrate-with-Shopify" target="_blank" rel="noopener">getting started with Shopify</a> for step-by-step instructions on integrating, before continuing with this article.</li>
+<li>Deleting a profile in Klaviyo will not cause it to be deleted in Shopify, and vice versa.</li>
+</ul>
+<h2 id="h_01HGK64RFVA0Y2R4YVSZREDZFR">Synchronizable data </h2>
+<p>You can customize which data you want to sync via the integration settings page. Once you configure these settings, the following fields will only sync if they were previously empty for an existing customer in Shopify: </p>
+<ul>
+<li>First name</li>
+<li>Last name</li>
+<li>Email</li>
+<li>Phone number</li>
+</ul>
+<p>The fields from Klaviyo that will update pre-existing fields in Shopify are: </p>
+<ul>
+<li>Email subscription status</li>
+<li>SMS subscription status</li>
+</ul>
+<p>New fields that will be created in Shopify are:</p>
+<ul>
+<li>Custom profile properties.</li>
+<ul>
+<li>You have the option to sync any custom profile properties that exist in Klaviyo, including those ingested from other platforms. These properties will be created as metafield definitions in Shopify and their values will be updated on the corresponding customer in Shopify.</li>
+<li>The number of metafield definitions per object is limited to 250 in Shopify, so you may only sync custom properties up to that limit. </li>
+<li><span>If you try to sync a custom property from Klaviyo back to Shopify, using a different data type than the one that was originally used to create the metafield definition in Shopify (e.g., string instead of array), the metafield will not update in Shopify. </span></li>
+</ul>
+<li>Email received (received by a Klaviyo profile, i.e., sent by a Klaviyo customer), opened, and clicked events.</li>
+<li>SMS message received (received by a Klaviyo profile, i.e., sent by a Klaviyo customer) and clicked events.</li>
+</ul>
+<p>Please note that Klaviyo email received, opened, and clicked events, along with SMS message received and clicked events, are not individually viewable in Shopify but <a href="https://help.shopify.com/en/manual/promoting-marketing/analyze-marketing/app-data-sharing" target="_blank" rel="noopener noreferrer">are included in marketing attribution reports</a>. </p>
+<p>We recommend syncing all profiles and all possible fields for greater data alignment between the platforms. Klaviyo data can be used to drive more value within Shopify, including via enhanced attribution reporting and business automation.</p>
+<h2 id="h_01HGK64RFVRENS52W53SMSC9NC">Sync fields from Klaviyo to Shopify</h2>
+<ol>
+<li>In Klaviyo, head to your <a href="https://www.klaviyo.com/integration/shopify" target="_blank" rel="noopener noreferrer">Shopify integration settings page</a>.</li>
+<li>Scroll to the <em>Sync settings</em> section and click the <em>To Shopify</em> tab. </li>
+<li>Check the setting: <strong>Sync profiles, profile data, and custom properties</strong> <strong>from Klaviyo to Shopify</strong>. </li>
+<li>Choose whether to sync updates for either all Klaviyo profiles or only for profiles that already exist in Shopify.<br>
+<div class="bs-callout bs-callout-default">If you choose all profiles, Klaviyo will create new customers in Shopify for all profiles (existing and new) created in Klaviyo. This includes profiles synced from other Klaviyo integrations, or added through list imports, even if they have not interacted with your Shopify store.</div>
+</li>
+<li>Next, you can choose which updates to sync to Shopify: 
+<ul>
+<li>
+<strong>Name, email address, and phone number</strong><strong><br></strong>If you choose this option (and you choose to sync all profiles), a backfill of all in-scope profiles will occur after you integrate (or update your integration) to ensure Klaviyo and Shopify are in sync. Going forward, new profiles will be created in Shopify with this data as they are created in Klaviyo (if they do not already exist in Shopify). </li>
+<li>
+<strong>Email subscription status</strong><br>Selecting this setting will not prompt a backfill of email subscription statuses. Going forward, email consent status updates in Klaviyo (i.e., subscribes and unsubscribes) will trigger updates in Shopify. Note that suppression status in Klaviyo does not sync to Shopify and does not affect consent status in Shopify.</li>
+<li>
+<strong>SMS subscription status (if you have SMS enabled)</strong><br>If you choose this option (and you choose to sync all profiles), a backfill of all SMS subscription statuses and associated phone numbers will occur after you integrate (or update your integration) to ensure Klaviyo and Shopify are in sync. Going forward, SMS consent status updates in Klaviyo will trigger updates in Shopify. </li>
+<li>
+<strong>Email received, opened, and clicked events</strong><br>Selecting this option will not prompt a backfill of this data.</li>
+<li>
+<strong>SMS message received and clicked events (if you have SMS enabled)</strong><strong><br></strong>Selecting this option will not prompt a backfill of this data.</li>
+<li>
+<strong>Custom properties</strong><strong><br></strong>Click <strong>Select Properties</strong> to choose which properties you want to sync to Klaviyo. Then, you can search for properties and click the plus sign to add them, or click <strong>Add all</strong> to add all properties. When you are done selecting properties, click <strong>Save</strong>. You can edit, add, or remove these properties at any time. Selecting custom properties will prompt a backfill for those properties.<br><img src="https://klaviyo.zendesk.com/hc/article_attachments/28717381154843" width="587" height="430">
+</li>
+</ul>
+</li>
+<li>Click <strong>Save</strong>.</li>
+</ol>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/28717387436699"></p>
+<p>Once you've updated your settings, Klaviyo will begin syncing any necessary backfill to Shopify. </p>
+<h2 id="h_01HGK64RFVPDYC1P7DEHFHKZQY">Sync frequency</h2>
+<p><strong>Name, email address, phone number, subscription statuses, and custom properties</strong>: When new changes are made to your specified profiles (after any initial backfill), these will be reflected in Shopify within 30 minutes of a change being made in Klaviyo, though most changes should reflect within a minute. </p>
+<p><strong>Email received, opened, and clicked events, and SMS message received and clicked events</strong>: These changes sync to Shopify within 24 hours.</p>
+<h2 id="h_01HGK64RFVTRHJGXYEHE24X0R7">Outcome</h2>
+<p>Shopify profiles will now be updated with Klaviyo data according to the settings you selected. </p>
+<h2 id="h_01HGK64RFV8KY88YR75YP0B98Z">Additional resources</h2>
+<ul>
+<li>
+<a href="https://help.klaviyo.com/hc/en-us/articles/115005080407" target="_blank" rel="noopener">Getting started with Shopify</a> </li>
+<li>
+<a href="https://help.klaviyo.com/hc/en-us/articles/115005080667" target="_blank" rel="noopener">How to sync Shopify email subscribers to a Klaviyo list</a> </li>
+<li><a href="https://help.klaviyo.com/hc/en-us/articles/360056824732" target="_blank" rel="noopener">How to collect SMS consent at checkout on Shopify</a></li>
+</ul>
+<p><br><br></p>

@@ -1,0 +1,49 @@
+<div class="article-content">
+<h2 id="section0">
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28715968140699" alt="680827">The Flow Trigger</h2>
+<p>A flow can be triggered when someone takes an action that is tracked by Klaviyo, or when someone is added to a list or segment. When a user meets the trigger you set, they will enter your flow at that time. </p>
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28715968145563" alt="636305"><br>
+<p>Here is a list of the three different types of triggers and when they might be used:</p>
+<ul>
+<li>
+<strong>Subscribes to a list:</strong> If you have a sign up form(s) or a subscribe page on your website, you likely have all new subscribers getting added to a specific list in Klaviyo. Using this "Subscribes to a list" trigger, you can ensure every new subscriber gets queued up for a specific flow. For example, you can use a Welcome Series flow to send a thank you email to someone once they sign up for your Newsletter list.</li>
+<li>
+<strong>Added to a segment:</strong> Segments are defined by a set of conditions, and will thus grow as new people meet the conditions and shrink when certain people no longer do; triggering a flow based on when someone new is added to a segment will allow you to ensure everyone meeting a certain set of conditions will get queued up for this flow. This can be useful for when you want to use multiple actions to trigger a flow. Keep in mind, however, that even if someone exits a segment when they don't meet the condition anymore and then enters the segment again a later date - segment-triggered flows cannot be sent to the same person more than once. So segment-triggered flows cannot be used to automate order-related follow up emails or any other emails you might want someone to receive more than once.</li>
+<li>
+<strong>Takes an action:</strong> This trigger option allows you to cue up people for a flow based on an action they have taken; this action can be any activity captured through an integration (i.e. started a checkout, placed an order, filled out a form). For example, an Abandoned Cart flow would trigger off the action "Checkout Started", with an added trigger filter to restrict the flow only to those that have also not yet completed this checkout.</li>
+</ul>
+<p>After selecting <em>Subscribed to List</em> or <em>Added to a Segment</em>, you will be prompted to select a list/segment name and then see options to restrict further who gets emails from your flow.</p>
+<p>After electing <em>Takes an Action</em>, you will be prompted to select an action metric to trigger the flow. You will then have the opportunity to add one or more filters to that action. </p>
+<h2 id="section1">Setting Trigger Filters</h2>
+<p>A trigger filter is useful for grabbing only certain events for your trigger metric. If you want to create an "Customer Thank You" flow that is targeted only to customers that have purchased a specific product, you can specify "Only certain events should trigger this flow" and establish that the flow should only trigger when the order placed includes this specific product.</p>
+<p>This allows you to tailor different flows to send different emails to people who - for example - buy a red t-shirt versus those who buy a blue t-shirt, or to people whose orders are a certain size or value. There are many different Trigger Filters for each event metric in Klaviyo. The Trigger Filter will only get applied as someone enters a flow - as it applies directly to the trigger itself.</p>
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28715968149147" alt="636306"><br>
+<h2 id="section2">Setting Flow Filters</h2>
+<p>Flow filters are useful when you'd like to target specific behaviors with your flows.</p>
+<p>Abandoned Carts flows, for example, are built on the action metric Checkout Started. The behavior we want to target, however, is when a customer starts a checkout and then abandons the process. This means we have to add a flow filter to target this specific behavior. The flow filter we need here is: has placed order zero times since starting this flow. This will make sure that people only receive a flow email after they started a checkout but did not go on to place an order. You can use multiple filters here if you'd like - the example below features a flow that would only send to people that have not placed an order since starting the flow and live in the United States.</p>
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28715968151323" alt="636308"><br>
+<p>Here are a few examples of how Flow Filters can help you "level up" your automated emails to get highly targeted and personalized:</p>
+<ul>
+<li>For a Welcome Series, have Email #1 only send to subscribers that opted-in through a certain pop up on your website</li>
+<li>For an Abandoned Cart flow, create separate flows for products that are particularly popular, or for certain categories of products - this way, you can customize these emails to maximize their conversion potential</li>
+<li>For a Winback flow, you can send a "big spender" version of your winback series to customers that placed an order above a certain amount, or customize winback flows based on the category of products purchased</li>
+<li>For a New Customer Thank You flow, this is a great opportunity to "thank" your customers in different ways based on what they bought/how much they spent - you can create different Thank You flows based on any information you know about your customers, such as their gender, location etc.</li>
+</ul>
+<h2 id="section3">Should I use AND or OR when adding filter conditions?</h2>
+<p>Using the <strong>OR</strong> connector between a sequence of flow filter conditions will make a filter more <strong>inclusive</strong>. We will check each condition in the sequence individually - if Joe meets one condition in the sequence but does not meet another, Joe will still be included in your flow.</p>
+<p>In the following example, anyone that placed an order in the last 30 days OR was active on site in the last 30 days will get included:</p>
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28715961548315" alt="636310"><br>
+<p>Using the <strong>AND</strong> connector between conditions will make a flow filter more <strong>exclusive</strong>. We will check each condition separated by AND individually, but each condition must evaluate to true in order for someone to get included. If Joe meets one condition but doesn't meet another, Joe will be excluded from your flow.</p>
+<p>In the following example, only those that placed an order in the last 30 days AND were active on site in the last 30 days will get included:</p>
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28715968155035" alt="636312"><br>
+<h2 id="section4">When are Flow Filters Applied?</h2>
+<p>The way a flow works, everyone captured by the initial trigger (i.e. Checkout Started) will get queued up to enter the flow. All trigger filters AND flow filters will be applied at this time as well, however:</p>
+<ul>
+<li>If someone fails the trigger and/or flow filters at this time, they will get filtered out and will not get queued up for any flow emails</li>
+<li>Everyone that passed the trigger and flow filters (initially) will enter the flow and get queued up for all emails at this time</li>
+</ul>
+<p>When each email is scheduled to send, however, Klaviyo will apply your flow filters again (i.e. has Placed Order zero times since starting this flow) and skip anyone that fails your filters. This is why you may see people queued up for your flow in "Waiting" that you know shouldn't receive the flow's emails. Flow filters will always get applied again right before each email sends.</p>
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28715961565467" alt="636313"><br>
+<p>If you explore the Recipient Activity for a flow email, by clicking on <em>Analytics (Last 30 Days) &gt; Recipient Activity,</em> you will see the number of total recipients. If you click on the 'Other' dropdown, you will see the number of individuals falling into the "Skipped: Fails Flow Filters" bucket. This shows you those that entered the flow but failed the flow filters at email send time.</p>
+</div>
+<div id="rate_article_container"> </div>

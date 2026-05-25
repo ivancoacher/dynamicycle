@@ -1,0 +1,993 @@
+{
+  "captured_at": "2026-05-23T16:14:22Z",
+  "article": {
+    "id": 41413854379291,
+    "url": "https://klaviyo.zendesk.com/api/v2/help_center/en-us/articles/41413854379291.json",
+    "html_url": "https://klaviyo.zendesk.com/hc/en-us/articles/41413854379291-How-to-set-up-Customer-Hub-with-Headless-Shopify",
+    "author_id": 385657195011,
+    "comments_disabled": true,
+    "draft": false,
+    "promoted": false,
+    "position": 0,
+    "vote_sum": 0,
+    "vote_count": 0,
+    "section_id": 49375871281947,
+    "created_at": "2025-09-24T19:37:57Z",
+    "updated_at": "2026-04-21T13:54:56Z",
+    "name": "How to set up Customer Hub with Headless Shopify",
+    "title": "How to set up Customer Hub with Headless Shopify",
+    "source_locale": "en-us",
+    "locale": "en-us",
+    "outdated": false,
+    "outdated_locales": [],
+    "edited_at": "2026-04-17T00:59:45Z",
+    "user_segment_id": null,
+    "permission_group_id": 146372,
+    "content_tag_ids": [],
+    "label_names": [
+      "integrate with shopify",
+      "Shopify",
+      "all integrations",
+      "Customer Hub"
+    ],
+    "body": "<h2 id=\"h_01K5YK86P3B0HQEB37S4KYP3QV\">You will learn</h2>\n<p>You’ll connect Customer Hub to a headless Shopify storefront, choose a login method, and publish the Hub so shoppers can access it site‐wide.</p>\n<div class=\"bs-callout bs-callout-requirements\">\n<p>Customer Hub currently supports Shopify storefronts, including Shopify Headless. Additional eCommerce platform support is planned.</p>\n<p>For feedback about Customer Hub functionality, email customerhub@klaviyo.com.</p>\n</div>\n<h2 id=\"h_01K5YK8R7MBNQJVCA5MHRNT07B\">Before you begin</h2>\n<h3 id=\"h_01K5YK8X0DCR6GHGY4FTE17XK7\">Prerequisites </h3>\n<ol>\n<li>A headless Shopify storefront with access to the Storefront API (Public access token / Storefront API public key in Shopify’s Headless Admin).</li>\n<li>Your <strong>Klaviyo company ID</strong> (used by the onsite JavaScript loader).</li>\n<li>Decision on shopper login: Shopify Customer Account API <em>or</em> Klaviyo One Time Password (OTP).\n<ol>\n<li>If using existing accounts, have your storefront’s Login, Logout, and (optional) Manage account and Manage addresses routes ready.</li>\n</ol>\n</li>\n<li>Ability to edit your storefront code and deploy changes.</li>\n<li>\n<strong>Who can set this up:</strong> You need an account role that can edit <strong>Customer Hub</strong> settings and publish widgets (Owner, Admin, or a custom role that has write access to Content and API keys). </li>\n</ol>\n<p></p>\n<h2 id=\"h_01K5YKC1QBQNFN2X7B5MK1NCC6\">Overview</h2>\n<p>Customer Hub is a site‐wide overlay that gives shoppers faster access to account actions and helpful shopping tools. For headless Shopify, you connect Klaviyo’s onsite script, choose a login method (Customer Accounts API or Klaviyo OTP), and optionally add:</p>\n<ol>\n<li>\n<strong>Active Product</strong>: shows the product a shopper is viewing inside the Hub.</li>\n<li>\n<strong>Recently Viewed</strong>: lists recently viewed products using Klaviyo’s tracking.</li>\n<li>\n<strong>Favorites</strong> and <strong>FAQs</strong> widgets: render on PDPs and inside the Hub.  </li>\n</ol>\n<p>Use Customer Hub when you want an on‐page assistance layer that drives product discovery and faster checkout, improving conversion and lifetime value.</p>\n<p></p>\n<h2 id=\"h_01K5YKPYGKG6C850DDKZG6ZNNB\">Setup</h2>\n<h3 id=\"h_01K5YKDETEPAM65NZ4HCNJFQCE\">1 - Configure Customer Hub Settings</h3>\n<p>First, follow <a href=\"https://klaviyo.zendesk.com/hc/en-us/articles/33660324811675\">Getting started with Customer Hub </a>and complete the onboarding wizard, just like with any other setup. Once this is complete, go to <strong>Customer Hub &gt; Settings</strong>. You'll see the Headless Shopify configuration section. </p>\n<p><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/42187682618011\" alt=\"\" width=\"1908\" height=\"296\"></p>\n<p>Toggle on <strong>Headless Shopify configuration</strong> and then paste your Storefront API public key from Shopify’s Headless Admin (Public access token). </p>\n<p>Under <strong>Shopper login</strong>, select Shopify Customer Account API (recommended so that all of your storefront apps can share Shopify's login) <em>or</em> Klaviyo One Time Password (OTP, only works with Klaviyo and won't log shoppers into any other apps). </p>\n<p><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/42187686797083\" alt=\"\" width=\"1912\" height=\"694\"></p>\n<p>If you select <strong>Shopify Customer Account API</strong>, also enter your storefront <strong>Login</strong>, <strong>Logout</strong>, and optional <strong>Manage account</strong>/<strong>Manage addresses</strong> routes (used for redirects between the Hub and your site). </p>\n<p><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/42187682622363\" alt=\"\" width=\"1908\" height=\"1024\"></p>\n<p>Publish visibility: set <strong>Customer Hub</strong> to <strong>Live</strong>. </p>\n<p><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/42187682624283\" alt=\"\" width=\"1906\" height=\"724\"></p>\n<p></p>\n<h3 id=\"h_01K5YKQ8W20T35YRK1MA922N71\">2 - Load the Customer Hub JavaScript (Developer instructions)</h3>\n<p><strong>Tip:</strong> If you already run Klaviyo onsite features, you may have a loader in place. Confirm before adding a second script. </p>\n<p>Create /public/customerHub.js (or equivalent) with the following loader (replace COMPANY_ID with your Klaviyo <a href=\"https://klaviyo.zendesk.com/hc/en-us/articles/115005062267\">public API key</a>, also known as your Company ID):</p>\n<pre><code class=\"language-auto\">// customerHub.js\n// TODO: Configuration\nconst COMPANY_ID = '';\nconst script = document.createElement('script');\nscript.src = `https://static.klaviyo.com/onsite/js/${COMPANY_ID}/klaviyo.js`;\nscript.async = true;\nscript.onload = () =&gt; { console.log('Klaviyo JS script loaded successfully'); };\nscript.onerror = () =&gt; { console.error('Failed to load Klaviyo JS script'); };\ndocument.body.appendChild(script);</code></pre>\n<p>The onsite script loads on every page. Look for the console message: “Klaviyo JS script loaded successfully.”  In your root layout (e.g., root.tsx), include the loader:</p>\n<pre><code class=\"language-auto\">// root.tsx\nreturn (\n  &lt;html&gt;\n    &lt;body&gt;\n      &lt;script src=\"/customerHub.js\" defer&gt;&lt;/script&gt;\n    &lt;/body&gt;\n  &lt;/html&gt;\n)</code></pre>\n<p>After this step, window.customerHubApi becomes available on pages where the Hub runs. </p>\n<p></p>\n<h3 id=\"h_01K5YKX6PBWF59XZN1CY5EMA4T\">3 - Show the active product in Customer Hub</h3>\n<p>Add the hydrate call on your <strong>product detail page (PDP)</strong> so the current product appears in the Hub:</p>\n<p><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/41414430637979\" alt=\"\" width=\"2686\" height=\"2090\"></p>\n<pre><code class=\"language-auto\">&lt;!-- products.tsx --&gt;\n&lt;script type=\"text/javascript\"&gt;\n  (function() {\n    function waitForCustomerHubApi() {\n      return new Promise((resolve) =&gt; {\n        const check = () =&gt; {\n          if (window.customerHubApi &amp;&amp; window.customerHubApi.hydrateProduct) {\n            resolve();\n          } else {\n            requestAnimationFrame(check);\n          }\n        };\n        check();\n      });\n    }\n    waitForCustomerHubApi().then(() =&gt; {\n      window.customerHubApi.hydrateProduct(\"your-product-handle\");\n    });\n  })();\n&lt;/script&gt;</code></pre>\n<p><strong>T</strong>he Hub should now display an additional product card for the PDP the shopper is viewing on the \"Chat\" tab if you have it enabled. </p>\n<p></p>\n<h3 id=\"h_01K5YM0XQJD89BBYPF95N66PBK\">4 - Enable recently viewed products in Customer Hub</h3>\n<p>Implement <strong>Viewed Product</strong> tracking so the Hub can populate <strong>Recently viewed</strong> items and you can use the metric elsewhere in Klaviyo. The following tracking snippets can also be directly added to your storefront, instructions can be found here in our Klaviyo Developers documentation: <a href=\"https://developers.klaviyo.com/en/docs/guide_to_integrating_a_platform_without_a_pre_built_klaviyo_integration#viewed-product-tracking-snippet\">Integrate an ecommerce platform without a pre-built Klaviyo integration</a>.</p>\n<p><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/41414422348059\" alt=\"\" width=\"1312\" height=\"702\"></p>\n<p></p>\n<h3 id=\"h_01K5YM4DFKVQTFXE64JQ1J1S7Q\">5 - Enable account link takeover</h3>\n<p>In order for Klaviyo’s Customer Hub to open by clicking the account icon in your storefront’s header, you need to already have an existing a-tag that references a link with /account (in which case we will automatically replace it for you). Or you can also manually define the icon link to point to #k-hub in order to open the drawer.</p>\n<p><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/41414422348699\" alt=\"\" width=\"928\" height=\"187\"></p>\n<h3 id=\"h_01K5YM9MAVZ2WN4W53VXV107AH\">6 - Set up Customer Hub with Customer Accounts API authentication (recommended)</h3>\n<p>In order to use your existing storefront’s customer accounts and authentication setup, Customer Hub will require you to add a new API route to your storefront that will handle securely passing a logged in shopper’s access token to our services. What’s important is that the new API route is named and can be reached with ‘/api/authenticateCustomerHub’.<br>\n<br>\nNote: the following code snippet example is for Shopify’s Hydrogen framework, more customized storefronts may require some additional workaround, however the general approach will be outlined here.</p>\n<pre><code class=\"language-text\">// ./app/routes/api.authenticateCustomerHub.js\n// TODO: Configuration\nconst COMPANY_ID = '';\nexport async function action({context}) {\n  // Pull the Customer Account API Client from your storefront's context\n  const {customerAccount} = context;\n  try {\n    // Get the access token for the current customer\n    const accessToken = await customerAccount.getAccessToken();\n    if (!accessToken) {\n      return new Response(JSON.stringify({message: 'User not logged in'}), {\n        status: 200,\n      });\n    }\n    // Send the access token to the Customer Hub API\n    const response = await fetch(\n      'https://atlas-app.services.klaviyo.com/api/onsite/headless-shopify-login',\n      {\n        method: 'POST',\n        headers: {\n          'Content-Type': 'application/json',\n        },\n        body: JSON.stringify({\n          access_token: accessToken,\n          company_id: COMPANY_ID,\n        }),\n      },\n    );\n    const responseData = await response.text();\n    // Return the actual response from Customer Hub with the same status code\n    return new Response(responseData, {\n      status: response.status,\n      headers: {\n        'Content-Type':\n          response.headers.get('content-type') || 'application/json',\n      },\n    });\n  } catch (error) {\n    return new Response(null, {status: 500});\n  }\n}</code></pre>\n<p>Once this is configured, as well as the storefront routes defined in Klaviyo’s settings, Customer Hub will be able link into your existing authentication setup and provide a seamless entry point into your existing customer accounts.</p>\n<h3 id=\"h_01K5YM9H7FR8JTQ827ZR29RWPN\">7 - Add the Favorites widget (recommended)</h3>\n<p>Both Favorites and FAQs will work within the Customer Hub drawer. However, you can add these widgets too on PDPs for additional engagement.</p>\n<p>To add a Favorites entry point on PDPs and inside the Hub:</p>\n<pre><code class=\"language-auto\">// products.tsx\n// Example identifiers:\n//   id: gid://shopify/Product/12345\n//   data-product-id: 12345\nconst gid = \"gid://shopify/Product/12345\";\nconst productId = gid.split('/').pop();\n\nreturn (\n  &lt;div\n    className=\"kl-hub-favorites-slot\"\n    data-product-id={productId}\n  /&gt;\n)</code></pre>\n<p>Shoppers can now click <strong>Add to favorites</strong> on PDPs; the item appears in the Hub’s <strong>Favorite items</strong>. </p>\n<p><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/41414422349723\" alt=\"\" width=\"988\" height=\"596\"></p>\n<p></p>\n<h3 id=\"h_01K5YM6SQ1BFWP52N2DHFDE4YQ\">8 - Add FAQ blocks (recommended)</h3>\n<p>Similar to adding Favorites, adding <a href=\"https://klaviyo.zendesk.com/hc/en-us/articles/36400427885979\">FAQ blocks</a> is as simple as adding a div on your product page with its product ID passed in to render FAQ’s that you can edit and design in Klaviyo.</p>\n<p>Add a product‐specific FAQs block that you design in Klaviyo:</p>\n<pre><code class=\"language-auto\">// products.tsx\n// Example:\nconst gid = \"gid://shopify/Product/12345\";\nconst productId = gid.split('/').pop();\n\nreturn (\n  &lt;div className=\"klaviyo-faqs-slot\" data-product-id={productId} /&gt;\n)</code></pre>\n<p>FAQ chips/buttons should now render on PDPs if they are set up, and are editable in Klaviyo</p>\n<p></p>\n<h2 id=\"h_01K5YMG0HKHWYRK1TC9153FY2A\">Best practices</h2>\n<ol>\n<li>\n<strong>Publish to production only after verification</strong> — keep staging hidden until QA is complete; then set <strong>Live</strong> to expose the Hub. Impact: fewer support issues, faster time‐to‐value.</li>\n<li>\n<strong>Always hydrate the Active Product on PDPs</strong> — keeps product context visible in the Hub and nudges add‐to‐cart. Impact: conversion rate, RPR.</li>\n<li>\n<strong>Implement Viewed Product tracking early</strong> — populates Recently viewed and unlocks browse‐based flows. Impact: engagement and revenue from browse recovery.</li>\n<li>\n<strong>Add Favorites</strong> — creates a low‐friction save action and a persistent shortlist. Impact: repeat visits, add‐to‐cart.</li>\n<li>\n<strong>Use FAQs for objections</strong> — answer shipping, materials, or returns questions inline to reduce drop‐off. Impact: conversion rate.</li>\n<li>\n<strong>Prefer server‐side auth with Customer Accounts API</strong> when available — improves continuity for logged‐in shoppers. Impact: experience quality, support deflection.  </li>\n</ol>\n<p></p>\n<h2 id=\"h_01K5YMGR8D975NY23TMXGV996K\">Measuring success</h2>\n<p><strong>Where to view results:</strong> Use <strong>Analytics &gt; Metrics</strong> to monitor <strong>Viewed Product</strong> activity and downstream flow/campaign performance. Use your ecommerce revenue dashboards to track conversion and AOV changes after enabling Customer Hub. <strong>Key metrics to watch:</strong> conversion rate from PDP, add‐to‐cart rate, sessions with Hub opens (if instrumented), revenue per recipient (RPR), and browse‐driven revenue tied to Viewed Product events. Quick fixes checklist: <strong>Low Recently viewed activity?</strong> Verify the <strong>Viewed Product</strong> tracking snippet is firing and events are attributed to profiles. <strong>Low add‐to‐cart from Hub?</strong> Ensure <strong>Active Product</strong> hydration runs on every PDP and that variants/prices are correct. <strong>Few Favorites adds?</strong> Move the Favorites slot near core PDP CTAs and confirm the data-product-id matches the product.  </p>\n<p></p>\n<h2 id=\"h_01K5YMGXQ5311WED8AFFAD3MVK\">Troubleshooting</h2>\n<p><strong>Symptom:</strong> Customer Hub does not appear on the site.</p>\n<p><strong>Likely cause:</strong> Script not loading or Hub is <strong>Hidden</strong>.</p>\n<p><strong>Fix:</strong> Confirm customerHub.js loads (check console), the <strong>company ID</strong> is set, and <strong>Customer Hub</strong> visibility is <strong>Live</strong> in <strong>Customer Hub &gt; Settings</strong>. </p>\n<p></p>\n<p><strong>Symptom:</strong> Console shows “Failed to load Klaviyo JS script.”</p>\n<p><strong>Likely cause:</strong> Incorrect script URL or missing <strong>company ID</strong>.</p>\n<p><strong>Fix:</strong> Verify https://static.klaviyo.com/onsite/js/&lt;COMPANY_ID&gt;/klaviyo.js and that COMPANY_ID is populated. </p>\n<p></p>\n<p><strong>Symptom:</strong> Active Product card does not show in the Hub on PDPs.</p>\n<p><strong>Likely cause:</strong> hydrateProduct not called or wrong product handle.</p>\n<p><strong>Fix:</strong> Ensure the wait loop runs and call window.customerHubApi.hydrateProduct(\"&lt;handle&gt;\") with the correct product handle. </p>\n<p></p>\n<p><strong>Symptom:</strong> Recently viewed section is empty.</p>\n<p><strong>Likely cause:</strong> Viewed Product tracking not implemented.</p>\n<p><strong>Fix:</strong> Add the <strong>Viewed Product</strong> tracking snippet from the developer guide and verify events in Klaviyo. </p>\n<p></p>\n<p><strong>Symptom:</strong> Favorites or FAQ widgets don’t render on PDP.</p>\n<p><strong>Likely cause:</strong> Missing container or wrong attribute.</p>\n<p><strong>Fix:</strong> Add &lt;div class=\"kl-hub-favorites-slot\" data-product-id=\"...\"&gt; and/or &lt;div class=\"klaviyo-faqs-slot\" data-product-id=\"...\"&gt; with the correct product ID. </p>\n<p></p>\n<p><strong>Symptom:</strong> Clicking the account icon doesn’t open the Hub.</p>\n<p><strong>Likely cause:</strong> Header link not pointing to /account or #k-hub.</p>\n<p><strong>Fix:</strong> Ensure the account anchor uses /account (auto‐takeover) or set href=\"#k-hub\". </p>\n<p></p>\n<p><strong>Symptom:</strong> Shoppers are not recognized as logged in inside the Hub.</p>\n<p><strong>Likely cause:</strong> Missing /api/authenticateCustomerHub route or failing API request.</p>\n<p><strong>Fix:</strong> Implement the Hydrogen example (or your framework equivalent), send access_token and company_id to Klaviyo’s login endpoint, and return the response. </p>\n<p></p>\n<h2 id=\"h_01K5YMHCTYG2HRWRCP9SN8Y31W\">FAQ</h2>\n<p><strong>Q:</strong> Do I have to use Shopify Customer Accounts API for login?</p>\n<p><strong>A:</strong> No. You can use <strong>Klaviyo One Time Password (OTP)</strong> instead. If you already use Shopify accounts, connect via the Customer Accounts API for a seamless experience. </p>\n<p></p>\n<p><strong>Q:</strong> Which storefront routes do I need to provide?</p>\n<p><strong>A:</strong> If using your existing accounts, provide <strong>Login</strong> and <strong>Logout</strong> routes; <strong>Manage account</strong> and <strong>Manage addresses</strong> are optional for deeper linking. </p>\n<p></p>\n<p><strong>Q:</strong> Where do I find the Storefront API public key?</p>\n<p><strong>A:</strong> In Shopify’s Headless Admin under <strong>Storefront API &gt; Public access token</strong> (also called <strong>Storefront API public key</strong>). </p>\n<p></p>\n<p><strong>Q:</strong> Can Customer Hub take over my account icon?</p>\n<p><strong>A:</strong> Yes. If your header’s account link uses /account, Customer Hub can automatically open; you can also point it to #k-hub. </p>\n<p></p>\n<p><strong>Q:</strong> Is Shopify Hydrogen required?</p>\n<p><strong>A:</strong> No. The authentication example uses Hydrogen, but any framework can implement a server route at /api/authenticateCustomerHub that posts the access token and company_id to Klaviyo. </p>\n<p></p>\n<p><strong>Q:</strong> Can Favorites and FAQs live on PDPs and inside the Hub?</p>\n<p><strong>A:</strong> Yes. Add the respective container divs on PDPs; they will also surface in the Hub drawer. </p>\n<p></p>\n<p></p>\n<p></p>",
+    "user_segment_ids": []
+  },
+  "normalized": {
+    "id": "41413854379291",
+    "title": "How to set up Customer Hub with Headless Shopify",
+    "source_url": "https://help.klaviyo.com/hc/en-us/articles/41413854379291-How-to-set-up-Customer-Hub-with-Headless-Shopify",
+    "section_id": 49375871281947,
+    "section": "Getting started with Customer Hub",
+    "category_id": 34141283979931,
+    "category": "Customer Hub",
+    "category_slug": "customer-hub",
+    "klaviyo_updated": "2026-04-21T13:54:56Z",
+    "created_at": "2025-09-24T19:37:57Z",
+    "draft": false,
+    "promoted": false,
+    "position": 0,
+    "label_names": [
+      "integrate with shopify",
+      "Shopify",
+      "all integrations",
+      "Customer Hub"
+    ]
+  },
+  "files": {
+    "body_html": "_source/articles/41413854379291.body.html",
+    "rendered_html": "_source/rendered/41413854379291.html"
+  },
+  "assets": {
+    "api_body": {
+      "images": [
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/42187682618011",
+          "alt": "",
+          "width": "1908",
+          "height": "296"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/42187686797083",
+          "alt": "",
+          "width": "1912",
+          "height": "694"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/42187682622363",
+          "alt": "",
+          "width": "1908",
+          "height": "1024"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/42187682624283",
+          "alt": "",
+          "width": "1906",
+          "height": "724"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/41414430637979",
+          "alt": "",
+          "width": "2686",
+          "height": "2090"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/41414422348059",
+          "alt": "",
+          "width": "1312",
+          "height": "702"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/41414422348699",
+          "alt": "",
+          "width": "928",
+          "height": "187"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/41414422349723",
+          "alt": "",
+          "width": "988",
+          "height": "596"
+        }
+      ],
+      "links": [
+        {
+          "href": "https://klaviyo.zendesk.com/hc/en-us/articles/33660324811675",
+          "text": "Getting started with Customer Hub"
+        },
+        {
+          "href": "https://klaviyo.zendesk.com/hc/en-us/articles/115005062267",
+          "text": "public API key"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/guide_to_integrating_a_platform_without_a_pre_built_klaviyo_integration#viewed-product-tracking-snippet",
+          "text": "Integrate an ecommerce platform without a pre-built Klaviyo integration"
+        },
+        {
+          "href": "https://klaviyo.zendesk.com/hc/en-us/articles/36400427885979",
+          "text": "FAQ blocks"
+        }
+      ],
+      "headings": [
+        {
+          "level": 2,
+          "id": "h_01K5YK86P3B0HQEB37S4KYP3QV",
+          "text": "You will learn"
+        },
+        {
+          "level": 2,
+          "id": "h_01K5YK8R7MBNQJVCA5MHRNT07B",
+          "text": "Before you begin"
+        },
+        {
+          "level": 3,
+          "id": "h_01K5YK8X0DCR6GHGY4FTE17XK7",
+          "text": "Prerequisites"
+        },
+        {
+          "level": 2,
+          "id": "h_01K5YKC1QBQNFN2X7B5MK1NCC6",
+          "text": "Overview"
+        },
+        {
+          "level": 2,
+          "id": "h_01K5YKPYGKG6C850DDKZG6ZNNB",
+          "text": "Setup"
+        },
+        {
+          "level": 3,
+          "id": "h_01K5YKDETEPAM65NZ4HCNJFQCE",
+          "text": "1 - Configure Customer Hub Settings"
+        },
+        {
+          "level": 3,
+          "id": "h_01K5YKQ8W20T35YRK1MA922N71",
+          "text": "2 - Load the Customer Hub JavaScript (Developer instructions)"
+        },
+        {
+          "level": 3,
+          "id": "h_01K5YKX6PBWF59XZN1CY5EMA4T",
+          "text": "3 - Show the active product in Customer Hub"
+        },
+        {
+          "level": 3,
+          "id": "h_01K5YM0XQJD89BBYPF95N66PBK",
+          "text": "4 - Enable recently viewed products in Customer Hub"
+        },
+        {
+          "level": 3,
+          "id": "h_01K5YM4DFKVQTFXE64JQ1J1S7Q",
+          "text": "5 - Enable account link takeover"
+        },
+        {
+          "level": 3,
+          "id": "h_01K5YM9MAVZ2WN4W53VXV107AH",
+          "text": "6 - Set up Customer Hub with Customer Accounts API authentication (recommended)"
+        },
+        {
+          "level": 3,
+          "id": "h_01K5YM9H7FR8JTQ827ZR29RWPN",
+          "text": "7 - Add the Favorites widget (recommended)"
+        },
+        {
+          "level": 3,
+          "id": "h_01K5YM6SQ1BFWP52N2DHFDE4YQ",
+          "text": "8 - Add FAQ blocks (recommended)"
+        },
+        {
+          "level": 2,
+          "id": "h_01K5YMG0HKHWYRK1TC9153FY2A",
+          "text": "Best practices"
+        },
+        {
+          "level": 2,
+          "id": "h_01K5YMGR8D975NY23TMXGV996K",
+          "text": "Measuring success"
+        },
+        {
+          "level": 2,
+          "id": "h_01K5YMGXQ5311WED8AFFAD3MVK",
+          "text": "Troubleshooting"
+        },
+        {
+          "level": 2,
+          "id": "h_01K5YMHCTYG2HRWRCP9SN8Y31W",
+          "text": "FAQ"
+        }
+      ]
+    },
+    "rendered_page": {
+      "images": [
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/7ff492c2b417b7ecfe572f839a8a81398693c1f7-1920x1080.webp",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/6e8a6abf406318edb1497cbdd67c1ff12a152145-1908x296.png?w=1908",
+          "alt": "",
+          "width": "1908",
+          "height": "296"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/2afcc3128b973189eea964958edb685cc3b9c8ad-1912x694.png?w=1912",
+          "alt": "",
+          "width": "1912",
+          "height": "694"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/afff794aad20ffe10cd88c837abcc59bb5b18d71-1908x1024.png?w=1908",
+          "alt": "",
+          "width": "1908",
+          "height": "1024"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/bde71e1446e115f6c4b1ef23751b57f7af861874-1906x724.png?w=1906",
+          "alt": "",
+          "width": "1906",
+          "height": "724"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/1da73a70e5fac9ae172bab5d1acc91494129d2f0-2686x2090.png?w=2686",
+          "alt": "",
+          "width": "2686",
+          "height": "2090"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/0e1d689a258eb5711c8f548063131c9b21c6b200-1312x702.png?w=1312",
+          "alt": "",
+          "width": "1312",
+          "height": "702"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/3e8bc8e4ea931e12daac8083eaa0039df9bad827-1600x325.png?w=928",
+          "alt": "",
+          "width": "928",
+          "height": "187"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/fbde8809f7217ee8bbb2c6b7d39ba28737f4fe25-988x596.png?w=988",
+          "alt": "",
+          "width": "988",
+          "height": "596"
+        }
+      ],
+      "links": [
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/41413854379291-How-to-set-up-Customer-Hub-with-Headless-Shopify#site-content",
+          "text": "Skip to main content"
+        },
+        {
+          "href": "https://www.klaviyo.com",
+          "text": "Home"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center"
+        },
+        {
+          "href": "https://www.klaviyo.com/enterprise",
+          "text": "Enterprise"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Partners"
+        },
+        {
+          "href": "https://www.klaviyo.com/careers",
+          "text": "Careers"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": "Log in"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": ""
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center Find step-by-step instructions and troubleshooting solutions in our knowledge base."
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000032731",
+          "text": "Integrations"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000312411",
+          "text": "Flows"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867867",
+          "text": "Audience"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867667",
+          "text": "Campaigns"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/360000190711",
+          "text": "Sign-up forms"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000873988",
+          "text": "Deliverability & compliance"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/29173800271259",
+          "text": "SMS"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/16638219724187",
+          "text": "Reviews"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/18073014919195",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/34141283979931",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/37659126754075",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/33948021740315",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/39746685522331",
+          "text": "WhatsApp"
+        },
+        {
+          "href": "https://academy.klaviyo.com",
+          "text": "Klaviyo Academy Expert training and education to help you succeed with Klaviyo, and beyond."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Quick+guide&resource=academy_courses",
+          "text": "Quick guides Learn marketing strategies and concepts in 15 minutes or less."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Course&resource=academy_courses",
+          "text": "Courses Master key marketing topics through structured lessons and exams."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/best-practices",
+          "text": "Best practices Discover top product and marketing strategies for your business."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/learning-paths",
+          "text": "Learning paths Complete curated learning journeys tailored to your marketing goals."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses",
+          "text": "Explore all resources"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Live+training&resource=academy_courses",
+          "text": "Live trainings Build confidence through hands-on interactive workshops and thought-provoking strategy sessions."
+        },
+        {
+          "href": "https://www.bigmarker.com/klaviyo-customer-education/Office-hours-Getting-started-with-Klaviyo",
+          "text": "Live office hours Join a strategic discussion where you can ask questions and get answers in real-time."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/private-live-training",
+          "text": "1:1 Live training Book a private training session with an expert to jumpstart your platform knowledge and confidence."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/credentials",
+          "text": "Klaviyo credentials Dig deeper into select topics and showcase your expertise with a final exam to earn a certificate and digital badge."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/certificates/klaviyo-practitioner-certificate",
+          "text": "Klaviyo practitioner certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/deliverability-certificate",
+          "text": "Deliverability certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/developer-certificate",
+          "text": "Klaviyo developer certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses&select=Certificate",
+          "text": "See all certificates"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Klaviyo Community Join our thriving community network to connect with brands like yours—online and in person."
+        },
+        {
+          "href": "https://community.klaviyo.com/topic/new",
+          "text": "Ask a question Post a question and get thoughtful answers from Klaviyo powerusers."
+        },
+        {
+          "href": "https://community.klaviyo.com/p/roadmap",
+          "text": "Product roadmap"
+        },
+        {
+          "href": "https://community.klaviyo.com/search/activity/recent",
+          "text": "Recent threads"
+        },
+        {
+          "href": "https://community.klaviyo.com/p/champions",
+          "text": "Meet the Champions"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups",
+          "text": "Browse all groups Your people are waiting. New ideas and connections are a click away."
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/developer-group-64",
+          "text": "Developer group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/entrepreneur-user-group-118",
+          "text": "Entrepreneur group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/woo-user-group-87",
+          "text": "WooCommerce group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/new-york-meetup-chapter-82",
+          "text": "New York City"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/los-angeles-meetup-chapter-83",
+          "text": "Los Angeles"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/austin-meetup-chapter-85",
+          "text": "Austin"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/san-diego-meetup-chapter-86",
+          "text": "San Diego"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/amsterdam-meetup-chapter-84",
+          "text": "Amsterdam"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Klaviyo Developers Access API documentation and developer guides to help you build with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/get_started",
+          "text": "Get started Access key resources and a step-by-step checklist for how to start developing with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/build_your_integration",
+          "text": "Grow your app's reach Learn how to join our ecosystem and get your app listed on our marketplace."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/developer-tools",
+          "text": "Developer tools Generate sample data, monitor your API usage, and access our Postman collections."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/reference/api_overview",
+          "text": "API reference Browse our full catalog of API docs."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/changelog_",
+          "text": "Changelog"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/api_versioning_and_deprecation_policy",
+          "text": "Versioning & deprecation policy"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/rate_limits_and_error_handling",
+          "text": "Rate limits & error handling"
+        },
+        {
+          "href": "https://youtube.com/playlist?list=PLHkNfHgtxcUanrkMnKPdkRzuWU7MGv_xM&si=pkG-KH7IT_TUHOGC",
+          "text": "API tutorials on YouTube Subscribe to our Klaviyo API Tutorials playlist for easy access to step-by-step developer walkthroughs."
+        },
+        {
+          "href": "https://www.klaviyo.com/contact-us",
+          "text": "Contact us"
+        },
+        {
+          "href": "https://www.klaviyo.com/sign-up",
+          "text": "Sign up"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": "Search"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/41413854379291",
+          "text": "United States - EN"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/de-de/articles/41413854379291",
+          "text": "Deutschland - DE"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-es/articles/41413854379291",
+          "text": "España - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-mx/articles/41413854379291",
+          "text": "México - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/fr-fr/articles/41413854379291",
+          "text": "France - FR"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/it-it/articles/41413854379291",
+          "text": "Italia - IT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/ko-kr/articles/41413854379291",
+          "text": "한국 - KO"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/nl-nl/articles/41413854379291",
+          "text": "Nederland - NL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pl-pl/articles/41413854379291",
+          "text": "Polska - PL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pt-br/articles/41413854379291",
+          "text": "Brasil - PT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/sv-se/articles/41413854379291",
+          "text": "Sverige - SV"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/34141442538139",
+          "text": "Set up Customer Hub"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/49375871281947",
+          "text": "Getting started with Customer Hub"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/41413854379291-How-to-set-up-Customer-Hub-with-Headless-Shopify#h_01K5YK86P3B0HQEB37S4KYP3QV",
+          "text": "You will learn"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/41413854379291-How-to-set-up-Customer-Hub-with-Headless-Shopify#h_01K5YK8R7MBNQJVCA5MHRNT07B",
+          "text": "Before you begin"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/41413854379291-How-to-set-up-Customer-Hub-with-Headless-Shopify#h_01K5YKC1QBQNFN2X7B5MK1NCC6",
+          "text": "Overview"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/41413854379291-How-to-set-up-Customer-Hub-with-Headless-Shopify#h_01K5YKPYGKG6C850DDKZG6ZNNB",
+          "text": "Setup"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/41413854379291-How-to-set-up-Customer-Hub-with-Headless-Shopify#h_01K5YMG0HKHWYRK1TC9153FY2A",
+          "text": "Best practices"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/41413854379291-How-to-set-up-Customer-Hub-with-Headless-Shopify#h_01K5YMGR8D975NY23TMXGV996K",
+          "text": "Measuring success"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/41413854379291-How-to-set-up-Customer-Hub-with-Headless-Shopify#h_01K5YMGXQ5311WED8AFFAD3MVK",
+          "text": "Troubleshooting"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/41413854379291-How-to-set-up-Customer-Hub-with-Headless-Shopify#h_01K5YMHCTYG2HRWRCP9SN8Y31W",
+          "text": "FAQ"
+        },
+        {
+          "href": "https://klaviyo.zendesk.com/hc/en-us/articles/33660324811675",
+          "text": "Getting started with Customer Hub"
+        },
+        {
+          "href": "https://klaviyo.zendesk.com/hc/en-us/articles/115005062267",
+          "text": "public API key"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/guide_to_integrating_a_platform_without_a_pre_built_klaviyo_integration#viewed-product-tracking-snippet",
+          "text": "Integrate an ecommerce platform without a pre-built Klaviyo integration"
+        },
+        {
+          "href": "https://klaviyo.zendesk.com/hc/en-us/articles/36400427885979",
+          "text": "FAQ blocks"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115001002272",
+          "text": "Learn how to contact support"
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": ""
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": "Visit Community"
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": ""
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": "Hire a partner"
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/about",
+          "text": "About Klaviyo"
+        },
+        {
+          "href": "https://www.klaviyo.com/newsroom",
+          "text": "Newsroom"
+        },
+        {
+          "href": "https://investors.klaviyo.com/overview/default.aspx",
+          "text": "Investor relations"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Agency and tech partners"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Developers"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/retail",
+          "text": "Retail and ecommerce"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/restaurants",
+          "text": "Restaurant marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/wellness",
+          "text": "Wellness"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform",
+          "text": "B2C CRM overview"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai",
+          "text": "Klaviyo AI (K:AI)"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/marketing-automation",
+          "text": "Klaviyo Marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-service",
+          "text": "Klaviyo Service"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/analytics",
+          "text": "Klaviyo Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-data-platform",
+          "text": "Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare",
+          "text": "Klaviyo vs. Klaviyo alternatives"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-mailchimp",
+          "text": "Klaviyo vs. Mailchimp"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-postscript",
+          "text": "Klaviyo vs. Postscript"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-attentive",
+          "text": "Klaviyo vs. Attentive"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-salesforce-marketing-cloud",
+          "text": "Klaviyo vs. Salesforce"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-listrak",
+          "text": "Klaviyo vs. Listrak"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/omnichannel",
+          "text": "Omnichannel marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/email-marketing",
+          "text": "Email marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing",
+          "text": "SMS marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing/rcs",
+          "text": "RCS for Business"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/mobile-app-marketing",
+          "text": "Mobile app marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/whatsapp",
+          "text": "WhatsApp marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/social",
+          "text": "Social marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources",
+          "text": "Marketing resources"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources/marketing-campaign-calendar",
+          "text": "Marketing campaign calendar"
+        },
+        {
+          "href": "https://www.klaviyo.com/glossary",
+          "text": "Marketing glossary"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/email-subject-line-generator",
+          "text": "Subject line generator"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/roi-calculator",
+          "text": "ROI calculator"
+        },
+        {
+          "href": "https://www.klaviyo.com/customers",
+          "text": "Case studies"
+        },
+        {
+          "href": "https://www.klaviyo.com/composer",
+          "text": "Composer Beta"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/marketing-agent",
+          "text": "Marketing Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/customer-agent",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/customer-experience-hub",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/helpdesk",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/marketing-analytics",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/advanced-cdp",
+          "text": "Advanced Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/web-forms",
+          "text": "Web forms"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/email-templates",
+          "text": "Email templates"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/portfolio",
+          "text": "Portfolio"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform-integrations",
+          "text": "Apps and Integrations"
+        },
+        {
+          "href": "https://www.klaviyo.com/features",
+          "text": "Features"
+        },
+        {
+          "href": "https://www.klaviyo.com/whats-new",
+          "text": "What's new"
+        },
+        {
+          "href": "https://www.klaviyo.com/events",
+          "text": "Events"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help Center"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us",
+          "text": "Academy"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Community"
+        },
+        {
+          "href": "https://www.facebook.com/Klaviyo/",
+          "text": "Facebook"
+        },
+        {
+          "href": "https://twitter.com/klaviyo/",
+          "text": "Twitter"
+        },
+        {
+          "href": "https://www.linkedin.com/company/klaviyo/",
+          "text": "LinkedIn"
+        },
+        {
+          "href": "https://www.instagram.com/klaviyo/",
+          "text": "Instagram"
+        },
+        {
+          "href": "https://www.klaviyo.com/sitemap",
+          "text": "Site Map"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal",
+          "text": "Terms and Privacy"
+        },
+        {
+          "href": "https://www.klaviyo.com/security",
+          "text": "Security"
+        },
+        {
+          "href": "https://www.klaviyo.com/trust",
+          "text": "Trust"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal/intellectual-property-notices",
+          "text": "Intellectual Property Notices"
+        }
+      ],
+      "headings": [
+        {
+          "level": 1,
+          "id": "",
+          "text": "How to set up Customer Hub with Headless Shopify"
+        },
+        {
+          "level": 2,
+          "id": "h_01K5YK86P3B0HQEB37S4KYP3QV",
+          "text": "You will learn"
+        },
+        {
+          "level": 2,
+          "id": "h_01K5YK8R7MBNQJVCA5MHRNT07B",
+          "text": "Before you begin"
+        },
+        {
+          "level": 3,
+          "id": "h_01K5YK8X0DCR6GHGY4FTE17XK7",
+          "text": "Prerequisites"
+        },
+        {
+          "level": 2,
+          "id": "h_01K5YKC1QBQNFN2X7B5MK1NCC6",
+          "text": "Overview"
+        },
+        {
+          "level": 2,
+          "id": "h_01K5YKPYGKG6C850DDKZG6ZNNB",
+          "text": "Setup"
+        },
+        {
+          "level": 3,
+          "id": "h_01K5YKDETEPAM65NZ4HCNJFQCE",
+          "text": "1 - Configure Customer Hub Settings"
+        },
+        {
+          "level": 3,
+          "id": "h_01K5YKQ8W20T35YRK1MA922N71",
+          "text": "2 - Load the Customer Hub JavaScript (Developer instructions)"
+        },
+        {
+          "level": 3,
+          "id": "h_01K5YKX6PBWF59XZN1CY5EMA4T",
+          "text": "3 - Show the active product in Customer Hub"
+        },
+        {
+          "level": 3,
+          "id": "h_01K5YM0XQJD89BBYPF95N66PBK",
+          "text": "4 - Enable recently viewed products in Customer Hub"
+        },
+        {
+          "level": 3,
+          "id": "h_01K5YM4DFKVQTFXE64JQ1J1S7Q",
+          "text": "5 - Enable account link takeover"
+        },
+        {
+          "level": 3,
+          "id": "h_01K5YM9MAVZ2WN4W53VXV107AH",
+          "text": "6 - Set up Customer Hub with Customer Accounts API authentication (recommended)"
+        },
+        {
+          "level": 3,
+          "id": "h_01K5YM9H7FR8JTQ827ZR29RWPN",
+          "text": "7 - Add the Favorites widget (recommended)"
+        },
+        {
+          "level": 3,
+          "id": "h_01K5YM6SQ1BFWP52N2DHFDE4YQ",
+          "text": "8 - Add FAQ blocks (recommended)"
+        },
+        {
+          "level": 2,
+          "id": "h_01K5YMG0HKHWYRK1TC9153FY2A",
+          "text": "Best practices"
+        },
+        {
+          "level": 2,
+          "id": "h_01K5YMGR8D975NY23TMXGV996K",
+          "text": "Measuring success"
+        },
+        {
+          "level": 2,
+          "id": "h_01K5YMGXQ5311WED8AFFAD3MVK",
+          "text": "Troubleshooting"
+        },
+        {
+          "level": 2,
+          "id": "h_01K5YMHCTYG2HRWRCP9SN8Y31W",
+          "text": "FAQ"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "Explore more from Klaviyo"
+        }
+      ]
+    }
+  },
+  "rendered_page": {
+    "status": "fetched",
+    "error": ""
+  }
+}

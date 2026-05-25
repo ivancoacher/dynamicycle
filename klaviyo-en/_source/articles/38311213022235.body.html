@@ -1,0 +1,179 @@
+<p>Learn what data syncs from Mews to Klaviyo and where to view it. This data includes reservation, guest, and email subscriber information. If you have not already, read our guide on <a href="https://help.klaviyo.com/hc/en-us/articles/38311148860955">getting started with Mews</a> for step-by-step instructions on integrating, before continuing with this article. </p>
+<h2 id="h_01K0YHVJP09ADTR006JNJTQ343">Sync frequency</h2>
+<p>When you integrate with Mews, Klaviyo will sync historic guests and reservations from the last 2 years. Going forward, reservation, guest, and email subscriber data sync in real time. </p>
+<h2 id="h_01K0YHVJP0NQ5RW838MJDETT7V">How to view your Mews data</h2>
+<p>To view your Mews data:</p>
+<ol>
+<li>Navigate to <strong>Analytics &gt; Metrics</strong>.</li>
+<li>Here, you can view all of the metrics in your account. The metrics with a Mews icon represent all of the metrics synced from your Mews integration.</li>
+<li>Use the <em>All integrations</em> dropdown and select <em>Mews</em> to view only Mews metrics.</li>
+</ol>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/46891024971291" alt="mews.png" width="892" height="996"></p>
+<h2 id="h_01K45A368Q03V7W6X9XCHQRAEM">Room Night metrics</h2>
+<p>The following room night metrics, related to reservations, are synced from Mews:</p>
+<ul>
+<li>
+<strong>Confirmed Room Night</strong>
+When a guest confirms a reservation in Mews, we create 1 <strong>Confirmed Room Night </strong>event per room night (e.g., a reservation with 2 rooms for 2 nights will have 4 events).</li>
+<li>
+<strong>Completed Room Night</strong>
+When a guest checks out in Mews, we create 1 <strong>Completed Room Night </strong>event per room night (e.g., a reservation with 2 rooms for 2 nights will have 4 events).<br>
+<p>For each of these metrics, the following top-level properties are synced to Klaviyo:</p>
+</li>
+<li>
+<strong>Value</strong>
+The total value of the room (i.e. room revenue) for a given night.</li>
+<li>
+<strong>Id</strong>
+The ID associated with the <code>OrderItem</code> in Mews.</li>
+<li>
+<strong>ReservationID</strong>
+The ID associated with the Reservation in the PMS.</li>
+<li>
+<strong>StartDate</strong>
+The date a night begins.</li>
+<li>
+<strong>EndDate</strong>
+The date a night ends.</li>
+<li>
+<strong>DayOfWeek</strong>
+The day of the week (e.g. Monday) when the night begins.</li>
+<li>
+<strong>AdultCounts</strong>
+Number of adults in a room.</li>
+<li>
+<strong>ChildCounts</strong>
+Number of children in a room.</li>
+<li>
+<strong>PersonCounts</strong>
+Number of people in a room (i.e. sum of adults and children).</li>
+<li>
+<strong>BillingName</strong>
+The billing name as it is stored in the PMS (e.g. “Night - 1/10/26”).</li>
+<li>
+<strong>ResourceName</strong>
+The name of the room as stored in the PMS.</li>
+<li>
+<strong>PropertyID</strong>
+ID corresponding to the hotel.</li>
+<li>
+<strong>PropertyName</strong>
+Name corresponding to the hotel property.</li>
+<li>
+<strong>Origin</strong>
+Shows where the reservation came from (e.g. direct, channel manager, etc.).</li>
+<li>
+<strong>TravelAgency</strong>
+Shows the travel agency (often an OTA) that drove the reservation.</li>
+<li>
+<strong>Notes</strong>
+Additional notes.</li>
+</ul>
+<h2 id="h_01K0YHVJP027BJQ2MJ8X3V0HZW">Reservation metrics</h2>
+<p>The following reservation metrics are synced from Mews:</p>
+<ul>
+<li>
+<strong>Requested Reservation</strong>
+When a guest requests a reservation but it has yet to be confirmed by your business.</li>
+<li>
+<strong>Inquired about Reservation</strong>
+When a guest inquires about a reservation but it has yet to be confirmed.</li>
+<li>
+<strong>Confirmed Reservation</strong>
+When a reservation is confirmed by both the customer and your business.</li>
+<li>
+<strong>Checked In to Reservation</strong>
+When a guest checks in to a reservation.</li>
+<li>
+<strong>Checked Out of Reservation</strong>
+When a guest checks out of a reservation.</li>
+<li>
+<strong>Cancelled Reservation</strong>
+When a reservation is cancelled.<br>
+<p>For each of these metrics, the following top-level properties are synced to Klaviyo:</p>
+</li>
+<li>Value</li>
+<li>Value Currency</li>
+<li>Reservation ID</li>
+<li>Reservation Number</li>
+<li>Service Name</li>
+<li>Account Type</li>
+<li>Service Sender Origin</li>
+<li>Commander Origin</li>
+<li>Used Voucher</li>
+<li>Check In Status</li>
+<li>Reservation Group Name</li>
+<li>Partner Company Name</li>
+<li>Voucher Names</li>
+<li>Cancellation Reason</li>
+<li>Release Date</li>
+<li>Scheduled Start Time</li>
+<li>Scheduled End Time</li>
+<li>Actual Start Time</li>
+<li>Actual End Time</li>
+<li>Reservation Purpose</li>
+<li>Reservation Person Counts</li>
+<li>Reservation Adult Counts</li>
+<li>Reservation Child Counts</li>
+</ul>
+<h2 id="h_01KG3E1KDVY6ARFQR57V8J9Q2B">Reservation objects</h2>
+<p>For each Reservation object, the following top-level properties are synced to Klaviyo:</p>
+<ul>
+<li>Value</li>
+<li>ValueCurrency</li>
+<li>ReservationID (used as the ID of the object)</li>
+<li>ReservationNumber</li>
+<li>ResourceName</li>
+<li>ResourceDescription</li>
+<li>PropertyName</li>
+<li>ServiceName</li>
+<li>AccountType</li>
+<li>ServiceOrderOrigin</li>
+<li>CommanderOrigin</li>
+<li>UsedVoucher</li>
+<li>CheckInStatus</li>
+<li>ReservationGroupName</li>
+<li>PartnerCompanyName</li>
+<li>CancellationReason</li>
+<li>ReleaseDate</li>
+<li>ScheduledStartTime</li>
+<li>ScheduledEndTime</li>
+<li>ActualStartTime</li>
+<li>ActualEndTime</li>
+<li>ReservationPurpose</li>
+<li>ReservationPersonCounts</li>
+<li>ReservationAdultCounts</li>
+<li>ReservationChildCounts</li>
+<li>ReservationNights</li>
+</ul>
+<h2 id="h_01K0YHVJP1WTV1YR956BBB6E5B">Guest data</h2>
+<p>Klaviyo syncs guest data from Mews. Please note that we do not sync any profiles associated with an online travel agency (OTA). </p>
+<p>We sync the following guest data to Klaviyo profiles:</p>
+<ul>
+<li>Mews Customer ID</li>
+<li>Mews Title</li>
+<li>Mews Sex</li>
+<li>First Name</li>
+<li>Last Name</li>
+<li>Locale</li>
+<li>Mews Birthday</li>
+<li>Title</li>
+<li>Email</li>
+<li>Email consent</li>
+<li>Phone Number</li>
+<li>Mews Notes</li>
+<li>Mews Dietary Requirements</li>
+<li>Address1</li>
+<li>Address2</li>
+<li>City</li>
+<li>Country</li>
+<li>ZIP</li>
+<li>Mews Classifications</li>
+<li>Mews Company ID</li>
+<li>Mews Is Active</li>
+<li>Mews Preferred Space Features</li>
+<li>Organization</li>
+</ul>
+<div class="bs-callout bs-callout-default">
+<p>Please note that SMS consent is not synced from Mews.</p>
+</div>

@@ -1,0 +1,918 @@
+{
+  "captured_at": "2026-05-23T16:14:23Z",
+  "article": {
+    "id": 41066240307483,
+    "url": "https://klaviyo.zendesk.com/api/v2/help_center/en-us/articles/41066240307483.json",
+    "html_url": "https://klaviyo.zendesk.com/hc/en-us/articles/41066240307483-Getting-started-with-RCS",
+    "author_id": 14930878624155,
+    "comments_disabled": true,
+    "draft": false,
+    "promoted": false,
+    "position": 0,
+    "vote_sum": 0,
+    "vote_count": 0,
+    "section_id": 49375970807323,
+    "created_at": "2025-09-15T12:17:17Z",
+    "updated_at": "2026-04-21T13:56:56Z",
+    "name": "Getting started with RCS",
+    "title": "Getting started with RCS",
+    "source_locale": "en-us",
+    "locale": "en-us",
+    "outdated": false,
+    "outdated_locales": [],
+    "edited_at": "2026-04-17T00:59:34Z",
+    "user_segment_id": null,
+    "permission_group_id": 146372,
+    "content_tag_ids": [],
+    "label_names": [],
+    "body": "<p>Once an <strong>RCS agent</strong> is activated in your Klaviyo account, RCS becomes the <strong>default message format</strong> for all text messages in the countries where you have an active agent.</p>\n<p>This means that any text messages sent via <strong>campaigns, flows, or conversations</strong> will automatically be delivered over RCS to RCS-capable devices. Recipients who are not RCS-capable will instead receive the SMS fallback.</p>\n<h2 id=\"h_01K56NA3GT2MDFMCBVYPVM3JXW\"><strong>Why we make RCS the default</strong></h2>\n<p>RCS delivers a better messaging experience for both brands and customers; and in most countries, you can send text only messages over RCS at the same rate as SMS while gaining the advantages of a richer and more reliable channel.</p>\n<p>Benefits of RCS over SMS include:</p>\n<ul>\n<li>\n<strong>Verified branded sender ID (SID):</strong> Messages are sent from your verified brand name, building trust and improving recognition with customers.</li>\n<li>\n<strong>Modern data networks:</strong> RCS is delivered over IP-based networks, which improves deliverability and throughput compared with legacy SMS channels.</li>\n<li>\n<strong>Open receipts:</strong> You gain visibility into when messages are opened, something not possible with SMS.</li>\n<li>\n<strong>Single-threaded communication:</strong> All customer conversations are maintained in one branded thread, instead of fragmented across multiple threads.</li>\n<li>\n<strong>Special character support</strong>: RCS supports special characters without reducing your character limit, allowing you to use emojis, symbols, and accented characters without impacting your character count.</li>\n<li>\n<strong>No message add-ons</strong>: RCS messages don’t require an organisation prefix or opt-out instructions within the message body, giving you more room for your actual message.</li>\n</ul>\n<p>Additionally, if you use both RCS and SMS, messages will appear in separate threads; and any SMS messages sent from unbranded numeric senders may be mistaken for spam, as customers will recognise your verified RCS agent as the legitimate source.</p>\n<h2 id=\"h_01K56JYKPHTM1JXWW29CGJWFZE\"><strong>Why we don’t include message add-ons in RCS</strong></h2>\n<h4 id=\"h_01K71S2B27SPZN6W711DVXDA76\"><strong>Org-Prefix</strong></h4>\n<p>RCS messages are sent from a verified branded sender ID, which displays your brand name and logo to recipients. This makes org-prefixes unnecessary.</p>\n<h4 id=\"h_01K71S3CQ272EZYNGBW4WH3CWY\"><strong>Opt-out Instructions</strong></h4>\n<p>RCS messages do not require opt-out instructions to be appended to every message. This is because RCS includes native opt-out functionality via the agent information page, where recipients can click 'block sender' to stop receiving messages.</p>\n<p>Brands may choose to append opt-out instructions manually, but Klaviyo will not automatically append this to every RCS message.</p>\n<p><strong>Note</strong>. If a recipient replies STOP or other equivalents, Klaviyo will always process the opt-out across both RCS and SMS.</p>\n<h4 id=\"h_01K71S6ZVRYXK0D4CYJK375DCG\">Best practice:</h4>\n<p>Include a short instruction in your initial welcome message, such as “<em>Opt out at any time by replying STOP</em>”, and remind recipients occasionally. Because RCS provides built-in opt-out options, and we will always process STOP and other equivalents, there’s no need to include instructions in every message.</p>\n<h2 id=\"h_01K5RWH0J98PC2MG5ZHJSE5555\"><strong>Supported SMS Functionality</strong></h2>\n<p>All features available for SMS in Klaviyo also apply to RCS. For details, see our <a href=\"https://help.klaviyo.com/hc/en-us/categories/29173800271259\">SMS Help Center articles</a>.</p>\n<h2 id=\"h_01K56JYKPGZDZMYRWKEPHVVQST\"><strong>SMS fallback</strong></h2>\n<p>Because not all carriers and devices support RCS, every RCS message includes an <strong>SMS fallback</strong>. This ensures:</p>\n<ul>\n<li>RCS-capable recipients get the RCS version</li>\n<li>Everyone else still receives your message as an SMS</li>\n</ul>\n<p>You can customise your SMS fallback separately to optimize for SMS and reduce costs (e.g. by removing special characters or media.</p>\n<h2 id=\"h_01K71SJPJ6FF1WWVPFB08WNADT\"><strong>Compliance and consent</strong></h2>\n<p>All <strong>SMS regulations also apply to RCS</strong> since both channels are delivered via carrier-managed networks and appear in the same inbox on a mobile device.</p>\n<p>This means:</p>\n<ul>\n<li>\n<strong>SMS consent applies to RCS, and vice versa.</strong> You can send RCS messages to your existing SMS list without re-obtaining consent.</li>\n<li>\n<strong>Opt-outs apply across both channels.</strong> If a recipient opts out of RCS, you cannot revert to sending them SMS. They have opted out of <em>all</em> text messaging.</li>\n</ul>\n<p>Always follow local SMS compliance requirements (e.g. opt-in rules, prohibited content etc.) when sending RCS.</p>\n<h2 id=\"h_01K56JYKPKBM46MTTDN8RT3S33\"><strong>Plain text URLs</strong></h2>\n<p>Plain text URLs are not clickable in RCS rich cards. This affects both scheduled campaigns and existing flows with images.</p>\n<h4 id=\"h_01K80GFJP7G6VQCGWBS7CBESH8\"><strong>Scheduled campaigns</strong></h4>\n<p>For scheduled campaigns, Klaviyo copies the SMS content into the RCS version. If the message includes an image, it will be formatted as a rich card, and any plain text URLs in the message will not be clickable. Before sending campaigns with images, move any URLs behind a button to ensure your links remain interactive.</p>\n<h4 id=\"h_01K80GHQFGGYV4N22V1NFQG5RR\"><strong>Existing flows</strong></h4>\n<p>When RCS is activated, Klaviyo copies your existing SMS copy into the RCS version of each flow message so your messages continue to reach all recipients.</p>\n<p>However, if a flow message includes an image, we will <strong>not copy the image across to the RCS version</strong> until you edit that flow. This is because images in RCS must be sent using rich cards, and rich cards do not support plain text URLs. We do this to avoid sending messages with links that do not work and to ensure you can choose the right label for the button containing your link.</p>\n<p>Once RCS is activated, review any flow messages with images, and move any URLs behind a button if you wish to include the image in the RCS version.</p>\n<h2 id=\"h_01K80H1Z7G6YG5ASC5206SMRP6\"><strong>Contact Cards</strong></h2>\n<p>Contact cards are a specific MMS message type and therefore not supported in RCS. Instead of a contact card message, RCS supports a robust contact page which is commonly referred to as your RCS agent \"contact card\". When a subscriber received an RCS message and taps on the contact profile picture they are directed to your contact page within their messaging app. </p>\n<p>Ability to save an RCS contact depends on a users mobile device and messaging app. </p>\n<p>For more information on how to ensure your messages stay in the primary inbox, see <a href=\"https://klaviyo.zendesk.com/hc/en-us/articles/42318061895579\">Understanding Unknown Senders filtering on iOS and how it affects RCS</a>.</p>\n<h4 id=\"h_01K80H1Z7GVQQJT6BWGY4A5TYZ\"><strong>Existing flows</strong></h4>\n<p>Review any existing flows that include contact cards and update the RCS version to remove mention of the contact card or use a <a href=\"https://klaviyo.zendesk.com/hc/en-us/articles/41072989967515\">conditional split</a> to avoid sending the message to RCS-capable devices.</p>\n<h2 id=\"h_01K80H1Z7G1QR2HY4M7TR51548\"><strong>Pausing RCS</strong></h2>\n<p>If you want to stop sending RCS messages, you can <strong>deactivate your RCS agents</strong>. Once deactivated, all text messages will revert back to SMS delivery.</p>\n<ul>\n<li>In the future, you’ll be able to do this directly in <strong>Klaviyo settings</strong>.</li>\n<li>For now, if you want to pause RCS in a specific country, please <strong>reach out to Klaviyo Support</strong>.</li>\n</ul>\n<p><strong>Note</strong>. When you pause RCS sending, RCS features such as the RCS editor and historical open event data will remain visible in your account.</p>\n<h2 id=\"h_01K56JYKPNBY0QYYT6XS6ACKRS\"><strong>Best practices when getting started</strong></h2>\n<ul>\n<li>\n<strong>Review scheduled campaigns: </strong>If your campaign includes an image, move any URLs behind a button to ensure links remain clickable in the RCS version.</li>\n<li>\n<strong>Review existing flows:</strong>\n<ul>\n<li>For any flow messages with images, edit the message to copy the image across and move any URLs behind a button to ensure links remain clickable in the RCS version.</li>\n<li>For any flow messages with contact cards, update the RCS version to remove mention of the contact card or use a conditional split to avoid sending the message to RCS-capable devices.</li>\n</ul>\n</li>\n<li>\n<strong>Monitor performance:</strong> Use open receipts to track engagement, but note that read receipts are off by default on iOS and on by default on Android. This means read receipts are not a fully accurate measure of who has viewed your message, since most iOS devices will not return read data.</li>\n<li>\n<strong>Segment if needed:</strong> If you prefer to send only to RCS-capable recipients, use the <a href=\"https://klaviyo.zendesk.com/hc/en-us/articles/41072989967515\">RCS capability property</a> in segmentation.</li>\n<li>\n<strong>Check billing forecasts:</strong> While text-only RCS usually matches SMS pricing, adding rich content (images, buttons, carousels) will increase credit usage. Always review your billing forecast before sending.</li>\n</ul>\n<h2 id=\"h_01KBQ8R1M8TMTWBFGNA6V95M69\"><strong>Known iOS rendering issues</strong></h2>\n<p>When sending rich RCS messages, please note that iOS devices do not always render content consistently. Known issues include:</p>\n<ul>\n<li>Images in rich cards may be cropped more aggressively on iOS than on Android, especially when card titles or descriptions are long (refer to <a href=\"https://klaviyo.zendesk.com/hc/en-us/articles/41072788661531\">How to create rich interactive RCS messages in Klaviyo</a> for more details).</li>\n<li>GIFs will display as static images on iOS (no animation).<br>\n<p><strong>Recommendations:</strong></p>\n</li>\n<li>Keep card titles and descriptions roughly the same length across cards to improve layout consistency on iOS.</li>\n<li>Avoid embedding critical content or text at the edges of your images, since cropping is more aggressive on iOS.</li>\n<li>Preview messages on both Android and iOS before sending to confirm acceptable rendering across devices.</li>\n</ul>\n<h2 id=\"h_01K56JYKPQ9NTZJGPK23E5P0YB\"><strong>FAQs</strong></h2>\n<p><strong>Do I need to enable RCS manually in each campaign or flow?</strong></p>\n<p>No. Once your RCS agent is activated, RCS automatically becomes the default text message format. All text message campaigns, flows, and conversations will use RCS for RCS-capable recipients.</p>\n<p><strong>What happens if a recipient’s carrier or device doesn’t support RCS?</strong></p>\n<p>They will automatically receive the SMS fallback. You don’t need to take any action to ensure message delivery.</p>\n<p><strong>Can I choose to send messages only through RCS or only through SMS?</strong></p>\n<p>Yes. While RCS will always deliver to RCS-capable devices by default, you can choose to target only RCS-capable or only SMS-capable recipients using the <a href=\"https://klaviyo.zendesk.com/hc/en-us/articles/41072989967515\">RCS capability property</a>:</p>\n<ul>\n<li>\n<strong>Segmentation</strong>: Build an audience of either RCS-capable or non-RCS-capable contacts and send your campaign to just that group.</li>\n<li>\n<strong>Conditional splits in flows</strong>: Use the RCS capability property to create a conditional split in a flow.</li>\n</ul>\n<p>This lets you run RCS-only or SMS-only campaigns and flows when you want to separate your strategy for each audience.</p>\n<p><strong>Does RCS cost more than SMS?</strong></p>\n<p>For basic text-only messages, RCS generally costs the same as SMS in most countries. However, for rich messages (e.g. rich cards), costs are usually higher</p>\n<p>For pricing, please contact our <a href=\"mailto:sales@klaviyo.com\">Sales team</a>.</p>\n<p><strong>Can I stop using RCS after it’s been enabled?</strong></p>\n<p>Yes. You can deactivate your RCS agent and all messages will revert back to SMS. For now, this requires contacting Klaviyo Support, but in future you’ll be able to manage this in settings.</p>\n<p><strong>Are contact cards supported in RCS?</strong></p>\n<p>No. Contact cards cannot be sent via RCS since you cannot save an RCS agent as a contact. If any of your existing messages include them, update the RCS version to remove mention of the contact card or use a conditional split to avoid sending the message to RCS-capable devices.</p>\n<p>For more information on how to ensure your messages stay in the primary inbox, see <a href=\"https://klaviyo.zendesk.com/hc/en-us/articles/42318061895579\">Understanding the Unknown Senders inbox on iOS and how it affects RCS</a>.</p>\n<p><strong>Do I need separate consent for RCS?</strong></p>\n<p>No. SMS and RCS share the same consent requirements. If you have already obtained SMS consent, you can send RCS to that profile. However, if someone opts out of RCS, that opt-out applies to all text messaging, and you cannot switch back to sending them SMS.</p>",
+    "user_segment_ids": []
+  },
+  "normalized": {
+    "id": "41066240307483",
+    "title": "Getting started with RCS",
+    "source_url": "https://help.klaviyo.com/hc/en-us/articles/41066240307483-Getting-started-with-RCS",
+    "section_id": 49375970807323,
+    "section": "RCS",
+    "category_id": 29173800271259,
+    "category": "SMS",
+    "category_slug": "sms-whatsapp",
+    "klaviyo_updated": "2026-04-21T13:56:56Z",
+    "created_at": "2025-09-15T12:17:17Z",
+    "draft": false,
+    "promoted": false,
+    "position": 0,
+    "label_names": []
+  },
+  "files": {
+    "body_html": "_source/articles/41066240307483.body.html",
+    "rendered_html": "_source/rendered/41066240307483.html"
+  },
+  "assets": {
+    "api_body": {
+      "images": [],
+      "links": [
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/29173800271259",
+          "text": "SMS Help Center articles"
+        },
+        {
+          "href": "https://klaviyo.zendesk.com/hc/en-us/articles/42318061895579",
+          "text": "Understanding Unknown Senders filtering on iOS and how it affects RCS"
+        },
+        {
+          "href": "https://klaviyo.zendesk.com/hc/en-us/articles/41072989967515",
+          "text": "conditional split"
+        },
+        {
+          "href": "https://klaviyo.zendesk.com/hc/en-us/articles/41072989967515",
+          "text": "RCS capability property"
+        },
+        {
+          "href": "https://klaviyo.zendesk.com/hc/en-us/articles/41072788661531",
+          "text": "How to create rich interactive RCS messages in Klaviyo"
+        },
+        {
+          "href": "mailto:sales@klaviyo.com",
+          "text": "Sales team"
+        },
+        {
+          "href": "https://klaviyo.zendesk.com/hc/en-us/articles/42318061895579",
+          "text": "Understanding the Unknown Senders inbox on iOS and how it affects RCS"
+        }
+      ],
+      "headings": [
+        {
+          "level": 2,
+          "id": "h_01K56NA3GT2MDFMCBVYPVM3JXW",
+          "text": "Why we make RCS the default"
+        },
+        {
+          "level": 2,
+          "id": "h_01K56JYKPHTM1JXWW29CGJWFZE",
+          "text": "Why we don’t include message add-ons in RCS"
+        },
+        {
+          "level": 4,
+          "id": "h_01K71S2B27SPZN6W711DVXDA76",
+          "text": "Org-Prefix"
+        },
+        {
+          "level": 4,
+          "id": "h_01K71S3CQ272EZYNGBW4WH3CWY",
+          "text": "Opt-out Instructions"
+        },
+        {
+          "level": 4,
+          "id": "h_01K71S6ZVRYXK0D4CYJK375DCG",
+          "text": "Best practice:"
+        },
+        {
+          "level": 2,
+          "id": "h_01K5RWH0J98PC2MG5ZHJSE5555",
+          "text": "Supported SMS Functionality"
+        },
+        {
+          "level": 2,
+          "id": "h_01K56JYKPGZDZMYRWKEPHVVQST",
+          "text": "SMS fallback"
+        },
+        {
+          "level": 2,
+          "id": "h_01K71SJPJ6FF1WWVPFB08WNADT",
+          "text": "Compliance and consent"
+        },
+        {
+          "level": 2,
+          "id": "h_01K56JYKPKBM46MTTDN8RT3S33",
+          "text": "Plain text URLs"
+        },
+        {
+          "level": 4,
+          "id": "h_01K80GFJP7G6VQCGWBS7CBESH8",
+          "text": "Scheduled campaigns"
+        },
+        {
+          "level": 4,
+          "id": "h_01K80GHQFGGYV4N22V1NFQG5RR",
+          "text": "Existing flows"
+        },
+        {
+          "level": 2,
+          "id": "h_01K80H1Z7G6YG5ASC5206SMRP6",
+          "text": "Contact Cards"
+        },
+        {
+          "level": 4,
+          "id": "h_01K80H1Z7GVQQJT6BWGY4A5TYZ",
+          "text": "Existing flows"
+        },
+        {
+          "level": 2,
+          "id": "h_01K80H1Z7G1QR2HY4M7TR51548",
+          "text": "Pausing RCS"
+        },
+        {
+          "level": 2,
+          "id": "h_01K56JYKPNBY0QYYT6XS6ACKRS",
+          "text": "Best practices when getting started"
+        },
+        {
+          "level": 2,
+          "id": "h_01KBQ8R1M8TMTWBFGNA6V95M69",
+          "text": "Known iOS rendering issues"
+        },
+        {
+          "level": 2,
+          "id": "h_01K56JYKPQ9NTZJGPK23E5P0YB",
+          "text": "FAQs"
+        }
+      ]
+    },
+    "rendered_page": {
+      "images": [
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/7ff492c2b417b7ecfe572f839a8a81398693c1f7-1920x1080.webp",
+          "alt": "",
+          "width": "",
+          "height": ""
+        }
+      ],
+      "links": [
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/41066240307483-Getting-started-with-RCS#site-content",
+          "text": "Skip to main content"
+        },
+        {
+          "href": "https://www.klaviyo.com",
+          "text": "Home"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center"
+        },
+        {
+          "href": "https://www.klaviyo.com/enterprise",
+          "text": "Enterprise"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Partners"
+        },
+        {
+          "href": "https://www.klaviyo.com/careers",
+          "text": "Careers"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": "Log in"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": ""
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center Find step-by-step instructions and troubleshooting solutions in our knowledge base."
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000032731",
+          "text": "Integrations"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000312411",
+          "text": "Flows"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867867",
+          "text": "Audience"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867667",
+          "text": "Campaigns"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/360000190711",
+          "text": "Sign-up forms"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000873988",
+          "text": "Deliverability & compliance"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/29173800271259",
+          "text": "SMS"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/16638219724187",
+          "text": "Reviews"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/18073014919195",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/34141283979931",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/37659126754075",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/33948021740315",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/39746685522331",
+          "text": "WhatsApp"
+        },
+        {
+          "href": "https://academy.klaviyo.com",
+          "text": "Klaviyo Academy Expert training and education to help you succeed with Klaviyo, and beyond."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Quick+guide&resource=academy_courses",
+          "text": "Quick guides Learn marketing strategies and concepts in 15 minutes or less."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Course&resource=academy_courses",
+          "text": "Courses Master key marketing topics through structured lessons and exams."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/best-practices",
+          "text": "Best practices Discover top product and marketing strategies for your business."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/learning-paths",
+          "text": "Learning paths Complete curated learning journeys tailored to your marketing goals."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses",
+          "text": "Explore all resources"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Live+training&resource=academy_courses",
+          "text": "Live trainings Build confidence through hands-on interactive workshops and thought-provoking strategy sessions."
+        },
+        {
+          "href": "https://www.bigmarker.com/klaviyo-customer-education/Office-hours-Getting-started-with-Klaviyo",
+          "text": "Live office hours Join a strategic discussion where you can ask questions and get answers in real-time."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/private-live-training",
+          "text": "1:1 Live training Book a private training session with an expert to jumpstart your platform knowledge and confidence."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/credentials",
+          "text": "Klaviyo credentials Dig deeper into select topics and showcase your expertise with a final exam to earn a certificate and digital badge."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/certificates/klaviyo-practitioner-certificate",
+          "text": "Klaviyo practitioner certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/deliverability-certificate",
+          "text": "Deliverability certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/developer-certificate",
+          "text": "Klaviyo developer certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses&select=Certificate",
+          "text": "See all certificates"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Klaviyo Community Join our thriving community network to connect with brands like yours—online and in person."
+        },
+        {
+          "href": "https://community.klaviyo.com/topic/new",
+          "text": "Ask a question Post a question and get thoughtful answers from Klaviyo powerusers."
+        },
+        {
+          "href": "https://community.klaviyo.com/p/roadmap",
+          "text": "Product roadmap"
+        },
+        {
+          "href": "https://community.klaviyo.com/search/activity/recent",
+          "text": "Recent threads"
+        },
+        {
+          "href": "https://community.klaviyo.com/p/champions",
+          "text": "Meet the Champions"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups",
+          "text": "Browse all groups Your people are waiting. New ideas and connections are a click away."
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/developer-group-64",
+          "text": "Developer group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/entrepreneur-user-group-118",
+          "text": "Entrepreneur group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/woo-user-group-87",
+          "text": "WooCommerce group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/new-york-meetup-chapter-82",
+          "text": "New York City"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/los-angeles-meetup-chapter-83",
+          "text": "Los Angeles"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/austin-meetup-chapter-85",
+          "text": "Austin"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/san-diego-meetup-chapter-86",
+          "text": "San Diego"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/amsterdam-meetup-chapter-84",
+          "text": "Amsterdam"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Klaviyo Developers Access API documentation and developer guides to help you build with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/get_started",
+          "text": "Get started Access key resources and a step-by-step checklist for how to start developing with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/build_your_integration",
+          "text": "Grow your app's reach Learn how to join our ecosystem and get your app listed on our marketplace."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/developer-tools",
+          "text": "Developer tools Generate sample data, monitor your API usage, and access our Postman collections."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/reference/api_overview",
+          "text": "API reference Browse our full catalog of API docs."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/changelog_",
+          "text": "Changelog"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/api_versioning_and_deprecation_policy",
+          "text": "Versioning & deprecation policy"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/rate_limits_and_error_handling",
+          "text": "Rate limits & error handling"
+        },
+        {
+          "href": "https://youtube.com/playlist?list=PLHkNfHgtxcUanrkMnKPdkRzuWU7MGv_xM&si=pkG-KH7IT_TUHOGC",
+          "text": "API tutorials on YouTube Subscribe to our Klaviyo API Tutorials playlist for easy access to step-by-step developer walkthroughs."
+        },
+        {
+          "href": "https://www.klaviyo.com/contact-us",
+          "text": "Contact us"
+        },
+        {
+          "href": "https://www.klaviyo.com/sign-up",
+          "text": "Sign up"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": "Search"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/41066240307483",
+          "text": "United States - EN"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/de-de/articles/41066240307483",
+          "text": "Deutschland - DE"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-es/articles/41066240307483",
+          "text": "España - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-mx/articles/41066240307483",
+          "text": "México - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/fr-fr/articles/41066240307483",
+          "text": "France - FR"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/it-it/articles/41066240307483",
+          "text": "Italia - IT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/ko-kr/articles/41066240307483",
+          "text": "한국 - KO"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/nl-nl/articles/41066240307483",
+          "text": "Nederland - NL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pl-pl/articles/41066240307483",
+          "text": "Polska - PL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pt-br/articles/41066240307483",
+          "text": "Brasil - PT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/sv-se/articles/41066240307483",
+          "text": "Sverige - SV"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/49375970807323",
+          "text": "RCS"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/41066240307483-Getting-started-with-RCS#h_01K56NA3GT2MDFMCBVYPVM3JXW",
+          "text": "Why we make RCS the default"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/41066240307483-Getting-started-with-RCS#h_01K56JYKPHTM1JXWW29CGJWFZE",
+          "text": "Why we don’t include message add-ons in RCS"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/41066240307483-Getting-started-with-RCS#h_01K5RWH0J98PC2MG5ZHJSE5555",
+          "text": "Supported SMS Functionality"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/41066240307483-Getting-started-with-RCS#h_01K56JYKPGZDZMYRWKEPHVVQST",
+          "text": "SMS fallback"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/41066240307483-Getting-started-with-RCS#h_01K71SJPJ6FF1WWVPFB08WNADT",
+          "text": "Compliance and consent"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/41066240307483-Getting-started-with-RCS#h_01K56JYKPKBM46MTTDN8RT3S33",
+          "text": "Plain text URLs"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/41066240307483-Getting-started-with-RCS#h_01K80H1Z7G6YG5ASC5206SMRP6",
+          "text": "Contact Cards"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/41066240307483-Getting-started-with-RCS#h_01K80H1Z7G1QR2HY4M7TR51548",
+          "text": "Pausing RCS"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/41066240307483-Getting-started-with-RCS#h_01K56JYKPNBY0QYYT6XS6ACKRS",
+          "text": "Best practices when getting started"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/41066240307483-Getting-started-with-RCS#h_01KBQ8R1M8TMTWBFGNA6V95M69",
+          "text": "Known iOS rendering issues"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/41066240307483-Getting-started-with-RCS#h_01K56JYKPQ9NTZJGPK23E5P0YB",
+          "text": "FAQs"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/29173800271259",
+          "text": "SMS Help Center articles"
+        },
+        {
+          "href": "https://klaviyo.zendesk.com/hc/en-us/articles/42318061895579",
+          "text": "Understanding Unknown Senders filtering on iOS and how it affects RCS"
+        },
+        {
+          "href": "https://klaviyo.zendesk.com/hc/en-us/articles/41072989967515",
+          "text": "conditional split"
+        },
+        {
+          "href": "https://klaviyo.zendesk.com/hc/en-us/articles/41072989967515",
+          "text": "RCS capability property"
+        },
+        {
+          "href": "https://klaviyo.zendesk.com/hc/en-us/articles/41072788661531",
+          "text": "How to create rich interactive RCS messages in Klaviyo"
+        },
+        {
+          "href": "mailto:sales@klaviyo.com",
+          "text": "Sales team"
+        },
+        {
+          "href": "https://klaviyo.zendesk.com/hc/en-us/articles/42318061895579",
+          "text": "Understanding the Unknown Senders inbox on iOS and how it affects RCS"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115001002272",
+          "text": "Learn how to contact support"
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": ""
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": "Visit Community"
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": ""
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": "Hire a partner"
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/about",
+          "text": "About Klaviyo"
+        },
+        {
+          "href": "https://www.klaviyo.com/newsroom",
+          "text": "Newsroom"
+        },
+        {
+          "href": "https://investors.klaviyo.com/overview/default.aspx",
+          "text": "Investor relations"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Agency and tech partners"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Developers"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/retail",
+          "text": "Retail and ecommerce"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/restaurants",
+          "text": "Restaurant marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/wellness",
+          "text": "Wellness"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform",
+          "text": "B2C CRM overview"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai",
+          "text": "Klaviyo AI (K:AI)"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/marketing-automation",
+          "text": "Klaviyo Marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-service",
+          "text": "Klaviyo Service"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/analytics",
+          "text": "Klaviyo Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-data-platform",
+          "text": "Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare",
+          "text": "Klaviyo vs. Klaviyo alternatives"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-mailchimp",
+          "text": "Klaviyo vs. Mailchimp"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-postscript",
+          "text": "Klaviyo vs. Postscript"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-attentive",
+          "text": "Klaviyo vs. Attentive"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-salesforce-marketing-cloud",
+          "text": "Klaviyo vs. Salesforce"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-listrak",
+          "text": "Klaviyo vs. Listrak"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/omnichannel",
+          "text": "Omnichannel marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/email-marketing",
+          "text": "Email marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing",
+          "text": "SMS marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing/rcs",
+          "text": "RCS for Business"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/mobile-app-marketing",
+          "text": "Mobile app marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/whatsapp",
+          "text": "WhatsApp marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/social",
+          "text": "Social marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources",
+          "text": "Marketing resources"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources/marketing-campaign-calendar",
+          "text": "Marketing campaign calendar"
+        },
+        {
+          "href": "https://www.klaviyo.com/glossary",
+          "text": "Marketing glossary"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/email-subject-line-generator",
+          "text": "Subject line generator"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/roi-calculator",
+          "text": "ROI calculator"
+        },
+        {
+          "href": "https://www.klaviyo.com/customers",
+          "text": "Case studies"
+        },
+        {
+          "href": "https://www.klaviyo.com/composer",
+          "text": "Composer Beta"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/marketing-agent",
+          "text": "Marketing Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/customer-agent",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/customer-experience-hub",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/helpdesk",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/marketing-analytics",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/advanced-cdp",
+          "text": "Advanced Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/web-forms",
+          "text": "Web forms"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/email-templates",
+          "text": "Email templates"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/portfolio",
+          "text": "Portfolio"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform-integrations",
+          "text": "Apps and Integrations"
+        },
+        {
+          "href": "https://www.klaviyo.com/features",
+          "text": "Features"
+        },
+        {
+          "href": "https://www.klaviyo.com/whats-new",
+          "text": "What's new"
+        },
+        {
+          "href": "https://www.klaviyo.com/events",
+          "text": "Events"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help Center"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us",
+          "text": "Academy"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Community"
+        },
+        {
+          "href": "https://www.facebook.com/Klaviyo/",
+          "text": "Facebook"
+        },
+        {
+          "href": "https://twitter.com/klaviyo/",
+          "text": "Twitter"
+        },
+        {
+          "href": "https://www.linkedin.com/company/klaviyo/",
+          "text": "LinkedIn"
+        },
+        {
+          "href": "https://www.instagram.com/klaviyo/",
+          "text": "Instagram"
+        },
+        {
+          "href": "https://www.klaviyo.com/sitemap",
+          "text": "Site Map"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal",
+          "text": "Terms and Privacy"
+        },
+        {
+          "href": "https://www.klaviyo.com/security",
+          "text": "Security"
+        },
+        {
+          "href": "https://www.klaviyo.com/trust",
+          "text": "Trust"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal/intellectual-property-notices",
+          "text": "Intellectual Property Notices"
+        }
+      ],
+      "headings": [
+        {
+          "level": 1,
+          "id": "",
+          "text": "Getting started with RCS"
+        },
+        {
+          "level": 2,
+          "id": "h_01K56NA3GT2MDFMCBVYPVM3JXW",
+          "text": "Why we make RCS the default"
+        },
+        {
+          "level": 2,
+          "id": "h_01K56JYKPHTM1JXWW29CGJWFZE",
+          "text": "Why we don’t include message add-ons in RCS"
+        },
+        {
+          "level": 4,
+          "id": "",
+          "text": "Org-Prefix"
+        },
+        {
+          "level": 4,
+          "id": "",
+          "text": "Opt-out Instructions"
+        },
+        {
+          "level": 4,
+          "id": "",
+          "text": "Best practice:"
+        },
+        {
+          "level": 2,
+          "id": "h_01K5RWH0J98PC2MG5ZHJSE5555",
+          "text": "Supported SMS Functionality"
+        },
+        {
+          "level": 2,
+          "id": "h_01K56JYKPGZDZMYRWKEPHVVQST",
+          "text": "SMS fallback"
+        },
+        {
+          "level": 2,
+          "id": "h_01K71SJPJ6FF1WWVPFB08WNADT",
+          "text": "Compliance and consent"
+        },
+        {
+          "level": 2,
+          "id": "h_01K56JYKPKBM46MTTDN8RT3S33",
+          "text": "Plain text URLs"
+        },
+        {
+          "level": 4,
+          "id": "",
+          "text": "Scheduled campaigns"
+        },
+        {
+          "level": 4,
+          "id": "",
+          "text": "Existing flows"
+        },
+        {
+          "level": 2,
+          "id": "h_01K80H1Z7G6YG5ASC5206SMRP6",
+          "text": "Contact Cards"
+        },
+        {
+          "level": 4,
+          "id": "",
+          "text": "Existing flows"
+        },
+        {
+          "level": 2,
+          "id": "h_01K80H1Z7G1QR2HY4M7TR51548",
+          "text": "Pausing RCS"
+        },
+        {
+          "level": 2,
+          "id": "h_01K56JYKPNBY0QYYT6XS6ACKRS",
+          "text": "Best practices when getting started"
+        },
+        {
+          "level": 2,
+          "id": "h_01KBQ8R1M8TMTWBFGNA6V95M69",
+          "text": "Known iOS rendering issues"
+        },
+        {
+          "level": 2,
+          "id": "h_01K56JYKPQ9NTZJGPK23E5P0YB",
+          "text": "FAQs"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "Explore more from Klaviyo"
+        }
+      ]
+    }
+  },
+  "rendered_page": {
+    "status": "fetched",
+    "error": ""
+  }
+}

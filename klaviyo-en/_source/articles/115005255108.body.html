@@ -1,0 +1,80 @@
+<h2 id="h_01HH34QG2X8SGSYQTNCTHQNDKW">You will learn</h2>
+<p>Learn how to integrate Funraise with Klaviyo in order to personalize and target emails based on each contributor's donation and website activity. The data synced from Funraise to Klaviyo includes:</p>
+<ul>
+<li>When a contribution is made</li>
+<li>Contribution amount</li>
+<li>Customer information including first and last name, location, and how they found your site</li>
+<li>Whether the donation is recurring and if so, how often it will occur</li>
+<li>Whether the contributor wants to be anonymous</li>
+</ul>
+<h2 id="h_01HH34QG2YW18GN9STS8VQDBXV">Add the Funraise integration</h2>
+<ol>
+<li>In Klaviyo, select the <strong>Integrations</strong> tab.</li>
+<li>Click <strong>Explore apps</strong>, search for <em>Funraise</em>, and click the card. Then, click <strong>Install</strong>.</li>
+<li>Enter your username and password, then click <strong>Connect to Funraise</strong>. Note that the Email and Password must have admin access, otherwise, Klaviyo will not pull in all of your fundraising and campaign data.<br><img src="https://klaviyo.zendesk.com/hc/article_attachments/28723629819803" width="607" height="448">
+</li>
+<li>On the next page, you will have the option to automatically add new supporters to a Klaviyo list, and select a list from the dropdown.</li>
+<li>Click <strong>Complete setup</strong>.</li>
+</ol>
+<h2 id="h_01HH34QG2YJ7MN0QBN4PY6AGWA">Add Klaviyo onsite tracking</h2>
+<p>Klaviyo provides different types of onsite tracking, one of which tracks when known users are active on your site. This type of tracking is known as <em>Active on Site</em> tracking, and you can enable it for your Funraise site. To enable it, you must add a code snippet to your site footer. </p>
+<p>With <em>Active on Site</em> tracking, you’ll be able to see and leverage data related to website visits and visitor behavior. For example, you can use the <em>Active on Site</em> metric to create segments of people who have visited your site (while logged in), but haven't yet made a donation. </p>
+<ol>
+<li>Copy the<em> Active on Site</em> code snippet below:
+<pre><code class="language-js">&lt;script type="application/javascript" async 
+ src="https://static.klaviyo.com/onsite/js/klaviyo.js?company_id=Public API Key"&gt;&lt;/script&gt;</code></pre>
+</li>
+<li>Navigate to your Funraise site and paste the snippet into the main template of your app before the &lt;/body&gt; tag.</li>
+<li>Replace the ‘Public API Key’ text in the snippet with your Klaviyo public API key, found in your Klaviyo account under <strong style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;">Account name &gt; Settings &gt; API keys</strong><span style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;">.</span>
+</li>
+<li>Save your changes.</li>
+<li>In your Klaviyo account, navigate to <strong style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;">Integrations &gt; Manage data &gt; Setup web tracking </strong><span style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;">in the upper right, and enter your site URL on the second step.</span>
+</li>
+<li>Click <strong style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;">Next</strong><span style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;"> to test your tracking setup.<br><img src="https://klaviyo.zendesk.com/hc/article_attachments/28723624474651" alt="URL text box for Klaviyo web tracking setup test with Next with blue background" width="581" height="83"><br></span>
+</li>
+<li>     If your tracking was set up correctly, you will receive a success message.</li>
+</ol>
+<h2 id="h_01HH34QG2YSEJWNXMK7BEQXZX6">Monitor the Klaviyo sync &amp; verify donation data</h2>
+<p>To monitor and verify your Funraise integration data sync:</p>
+<ol>
+<li>Click the <strong>Analytics</strong> dropdown in Klaviyo and select <strong>Metrics</strong>.</li>
+<li>Search for and click on the<em> Made Contribution</em> metric to verify that there is data populated for the metric.</li>
+<li>If there is data, all you need to do is wait until your initial Funraise integration sync has completed; this process can take up to a couple hours depending on how much data you have in your account.</li>
+<li>Klaviyo will import all of your historic Funraise data; to verify this, you can compare the number of contributions on a particular day in Klaviyo with what's in your Funraise interface and confirm they match.</li>
+<li>If they don't match, the issue is most likely that your Klaviyo account's timezone doesn't match your Funraise timezone.</li>
+<li>To check your timezone setting in Klaviyo, click your account name in the lower left, select <strong>Settings</strong><strong> &gt; Organization</strong>.</li>
+<li>Locate the <em>Time zone</em> section.</li>
+</ol>
+<h2 id="h_01HH34QG2Y5T4SVDV9GPR45AQG">Data synced from Funraise</h2>
+<p>There is one major metric that is captured by Funraise and synced Klaviyo: <em>Made Contribution</em>.</p>
+<p>This event is tracked when a supporter makes a contribution in Funraise. The event Klaviyo tracks includes all of the information Funraise collects including the contribution amount, whether the donation is recurring, and if so, how often the donation will recur. You can filter and target <em>Made Contribution</em> events based on the following key criteria:</p>
+<ul>
+<li>Donation Type</li>
+<li>Form Name</li>
+<li>Form URL</li>
+<li>Is Anonymous (True or False)</li>
+<li>Is Dedication (True or False)</li>
+<li>Is Recurring (True of False)</li>
+<li>Page URL</li>
+</ul>
+<p>Here is an example of all the data Klaviyo receives along with a Made Contribution event:</p>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/28723629805851" alt="Activity details for Made Contribution metric in Klaviyo showing fields such as value and donation type" width="445" height="320"></p>
+<p>In addition to this core metric Klaviyo syncs from Funraise, Klaviyo also creates a Klaviyo profile for every contributor. Along with basic contact information, Klaviyo will also sync any additional details you might have stored in Funraise about a given person. These details will sync as custom properties that get added to each Klaviyo profile. You can use these properties in segments and flows.</p>
+<p>Here are the default properties that are automatically synced from Funraise:</p>
+<ul>
+<li>Email</li>
+<li>First Name</li>
+<li>Last Name</li>
+<li>City</li>
+<li>State/Region</li>
+<li>Zip Code, Country</li>
+<li>Phone Number</li>
+</ul>
+<h2 id="h_01HH34QG2YDWD0WTQP69H4QRTV">Outcome</h2>
+<p>You have completed integrating with Funraise, set up web tracking, and have verified your Funraise data in Klaviyo. Now, you'll be able to personalize and target emails based on each contributor's donation and website activity. </p>
+<h2 id="h_01HH34QG2YPCB5Z6H795TF4SF9">Additional resources</h2>
+<ul>
+<li>
+<a href="https://help.klaviyo.com/hc/en-us/articles/115005081007" target="_blank" rel="noopener">Integration FAQ reference</a> </li>
+<li><a href="https://help.klaviyo.com/hc/en-us/articles/115005253208" target="_blank" rel="noopener">How often integrations sync reference</a></li>
+</ul>

@@ -1,0 +1,887 @@
+{
+  "captured_at": "2026-05-23T16:18:47Z",
+  "article": {
+    "id": 4408802445339,
+    "url": "https://klaviyo.zendesk.com/api/v2/help_center/en-us/articles/4408802445339.json",
+    "html_url": "https://klaviyo.zendesk.com/hc/en-us/articles/4408802445339-How-to-use-the-content-repeat-feature",
+    "author_id": 390819509472,
+    "comments_disabled": true,
+    "draft": false,
+    "promoted": false,
+    "position": 8,
+    "vote_sum": 8,
+    "vote_count": 18,
+    "section_id": 49375559270427,
+    "created_at": "2021-10-22T14:27:58Z",
+    "updated_at": "2026-04-21T13:55:00Z",
+    "name": "How to use the content repeat feature",
+    "title": "How to use the content repeat feature",
+    "source_locale": "en-us",
+    "locale": "en-us",
+    "outdated": false,
+    "outdated_locales": [],
+    "edited_at": "2026-04-17T01:01:23Z",
+    "user_segment_id": null,
+    "permission_group_id": 146372,
+    "content_tag_ids": [],
+    "label_names": [],
+    "body": "<h2 id=\"01FK124H736A7QX0206YX2HCG8\">You will learn</h2>\n<p>Learn how to use the block repeat feature for a section or a block in a Klaviyo email template. This feature allows you to repeat the content of a block or section for each entry in an array (i.e., list) of data from a recipient’s event or profile data, or from a data feed.</p>\n<h2 id=\"01FK124H73GGQ963D0W157RCFN\">Before you begin</h2>\n<p>If you are unfamiliar with using event, profile, or catalog data in emails, check out our <a href=\"https://help.klaviyo.com/hc/en-us/articles/4408802648731\">message personalization reference</a> as a first step. </p>\n<p>It will also be helpful to understand <a href=\"https://help.klaviyo.com/hc/en-us/articles/115005237648-About-Data-Types\">data types in Klaviyo</a>, particularly lists (i.e., arrays). An array stores multiple pieces of data that are structured the same way. For example, a customer’s purchased items are stored as an array within a Placed Order event. The items array contains 1 entry per item ordered, and each entry contains the details for 1 item (e.g., item name, image URL, quantity, size, color, etc.). </p>\n<h2 id=\"01FK124H73AAHZW0TZ0550D9HT\">Content repeat feature use cases</h2>\n<p>To use the content repeat feature, you’ll need an array or list of data. The table below lists some examples of arrays of data that may exist in your Klaviyo account, along with sample use cases. </p>\n<table>\n<tbody>\n<tr>\n<td style=\"text-align: center; background-color: #eee\"><strong>Data source</strong></td>\n<td style=\"text-align: center; background-color: #eee\"><strong>Sample use case</strong></td>\n</tr>\n<tr>\n<td>The array of ordered items in a Placed Order event</td>\n<td>Display a customer’s purchased items (including a product image, price, title, and variant information) in their order confirmation email. </td>\n</tr>\n<tr>\n<td>A list of existing subscriptions for someone subscribed to recurring orders </td>\n<td>Show a customer a list of their active subscriptions in a campaign.</td>\n</tr>\n<tr>\n<td>A list of recent blog entries from a custom web feed</td>\n<td>Provide an up-to-date list of your most recent blog posts in your welcome flow, including a link to the blog post and a preview of its content.</td>\n</tr>\n</tbody>\n</table>\n<p>You can use the content repeat feature with any array, whether it’s stored in a subscriber’s profile or event data, or in one of your <a href=\"https://klaviyo.zendesk.com/hc/en-us/articles/115005258768\">web feeds</a>. The examples above are just a small sample of how this feature can be used.</p>\n<h2 id=\"01FK124H73S5R4ES1X5Z6N3K4Z\">How to use the content repeat feature</h2>\n<p>To enable the content repeat feature, navigate to the section or block you’d like to repeat, then click <strong>Display Options</strong>. In the <em>Content Repeat</em> section, click <strong>Create Content Repeat</strong>. </p>\n<p>You’ll see two fields appear: <em>Repeat for</em> and <em>Item alias</em>. To fill out these fields and set up your repeating content, follow the steps below: </p>\n<ol>\n<li><a href=\"#01FK124H745446BNHM34CE4J1Q\">Identify your “repeat for”</a></li>\n<li><a href=\"#01FK124H74R7GZSHJPWCR0QHQX\">Choose your “item alias” </a></li>\n<li><a href=\"#01FK124H748C3S30TTNGD7EMWY\">Build your repeating content</a></li>\n<li><a href=\"#01FK124H749B4585QNE6R6AP9T\">Preview your email</a></li>\n</ol>\n<h3 id=\"01FK124H745446BNHM34CE4J1Q\">Identify your “repeat for” </h3>\n<p>Add the name of the array you plan to iterate over to the <em>Repeat for</em> field.</p>\n<p>To find the name of your array, view the data from your data source (i.e., profile data, event data, or a data feed). In this example, we’ll walk through finding the array from event data: </p>\n<ol>\n<li>In your email template, click <strong>Preview and test</strong>.</li>\n<li>Click <strong>Event</strong>.</li>\n<li>Select the event that will trigger this flow email (e.g., Started Checkout).</li>\n<li>Scroll through the preview data for your event until you find an array that contains the information you need. You can use the arrow icons on the left of the data to collapse sections you don’t need and make it easier to navigate.<br>\nIn this example, there are two arrays that store item information: In this case, you’d want to use the more detailed array, <em>line_items</em>, since it contains the detailed information needed to display in the repeating block. To find the appropriate variable to set in the <em>Repeat for</em> field, find two variables within the first section of the array and copy them. In this example, we’ll copy the variables for <em>variant_price</em> and <em>title</em>. Here are the two tags we copied: <code>{{ event.extra.line_items.0.variant_price }}{{ event.extra.line_items.0.title }}</code><br>\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28717812130459\" alt=\"navigate event data\" width=\"329\" height=\"473\">\n<ul>\n<ul>\n<li>\n<em>Items</em><br>\nA top-level array and contains a simple list of each item’s name, but no other information</li>\n<li>\n<em>Line_items</em><br>\nNested within the <em>extra</em> array, and contains more detail including each item’s title, price, SKU, and image URL <br>\n</li>\n</ul>\n</ul>\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28717851792667\" alt=\"Two items subsections in event data\" width=\"391\" height=\"623\">\n</li>\n<li>Ignore the curly brackets and look at the variables within them. Note that the beginning of both variables are the same: <code>event.extra.line_items.0</code>. Use everything up to (but excluding) the dot and the number at the end of this portion of the variable as your <em>Repeat for</em>. In this example, the appropriate setting for the <em>Repeat for</em> field is <code>event.extra.line_items</code>.</li>\n</ol>\n<p class=\"wysiwyg-text-align-center\"><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28717851791131\" alt=\"repeat for options\" width=\"415\" height=\"358\"></p>\n<h3 id=\"01FK124H74R7GZSHJPWCR0QHQX\">Choose your item alias</h3>\n<p>Your item alias can be any text you’d like to use (with no special characters or spaces). You’ll use this alias within your repeating block to identify variables that should be pulled from the array you selected above. Choose a simple but descriptive alias, so it’s easy to remember. </p>\n<p>For example, if your block is repeating over a list of items in an abandoned cart, <em>item</em> is a good alias to use. If your block is repeating over a list of blog posts, then you could use <em>post</em> as your alias.</p>\n<p>You can use any alias you’d like; just make sure to consistently use that alias in variables from your array (as outlined in the following steps). </p>\n<p class=\"wysiwyg-text-align-center\"><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28717851789595\" alt=\"item alias\" width=\"394\" height=\"341\"></p>\n<p>Once you’ve filled out the <em>Repeat for</em> and <em>Item alias</em> fields, click <strong>Save Changes</strong> and start building your content. </p>\n<h3 id=\"01FK124H748C3S30TTNGD7EMWY\">Build your repeating block/section</h3>\n<p>Once you’ve set your <em>Repeat for</em> and <em>Item alias</em> settings, add in personalization tags to the content block to iterate over. You can add any type of variable to this block, including profile and event data, but any tags that are pulled from your array (e.g., the list of items someone ordered) must be adjusted slightly. </p>\n<p>The full title and variant price variables used in the example above were: </p>\n<p><code>{{ event.extra.line_items.0.variant_price }}</code></p>\n<p><code>{{ event.extra.line_items.0.title }}</code></p>\n<p>If you add the variables above to the block, it will repeat the block once per item in your array, but every repetition will show the title and price of the <strong>first</strong> item in the array. </p>\n<p>To show the title and price for each item, replace the text from the <em>Repeat for</em> setting (<code>event.extra.line_items</code>), plus the subsequent dot and number (<code>.0</code>) with your <em>Item alias</em> (<code>item</code>). The resulting variables for this example are: </p>\n<p><code>{{ item.variant_price }}</code></p>\n<p><code>{{ item.title }}</code></p>\n<p>Repeat the process with any other variables you’d like to include from the array. </p>\n<div class=\"bs-callout bs-callout-default\">\n<p>Everything in the block or section with the block repeat feature enabled will be repeated once per item in the array. If you have any content you’d like to appear just once, add it in a different block or section. </p>\n<p>Additionally, the custom variables created through this process (e.g., <code>{{ item.title  }}</code>) only work inside the block or section where the block repeat section is enabled. If you add these custom variables elsewhere, they will not render. </p>\n</div>\n<h3 id=\"01FK124H749B4585QNE6R6AP9T\">Preview your email and troubleshoot</h3>\n<p>Once you’ve built your repeating block, preview your email. If the email references event data, select the same event you used to build the block (i.e., the event that will trigger this flow). If your block references profile data, select a profile that has the correct variables. </p>\n<p>If the repeating block in your preview email appears blank or doesn’t contain all the content you expected, return to the steps above. Make sure your <em>Repeat for</em>, <em>Item alias</em>, and all custom variables are correctly configured following the steps above. Then, review the preview data you’re using: ensure that you’ve selected the correct event, and that the sample event you’ve chosen contains the data you need. </p>\n<h2 id=\"01FK124H74PRT8SBJMWVTQJ38T\">Additional resources</h2>\n<ul>\n<li><a href=\"https://klaviyo.zendesk.com/hc/en-us/articles/4408802648731\">Message personalization reference</a></li>\n<li><a href=\"https://klaviyo.zendesk.com/hc/en-us/articles/4407911841435\">Guide to the email template editor</a></li>\n</ul>\n<p></p>",
+    "user_segment_ids": []
+  },
+  "normalized": {
+    "id": "4408802445339",
+    "title": "How to use the content repeat feature",
+    "source_url": "https://help.klaviyo.com/hc/en-us/articles/4408802445339-How-to-use-the-content-repeat-feature",
+    "section_id": 49375559270427,
+    "section": "Build and use templates",
+    "category_id": 4414879524891,
+    "category": "Content",
+    "category_slug": "content",
+    "klaviyo_updated": "2026-04-21T13:55:00Z",
+    "created_at": "2021-10-22T14:27:58Z",
+    "draft": false,
+    "promoted": false,
+    "position": 8,
+    "label_names": []
+  },
+  "files": {
+    "body_html": "_source/articles/4408802445339.body.html",
+    "rendered_html": "_source/rendered/4408802445339.html"
+  },
+  "assets": {
+    "api_body": {
+      "images": [
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28717812130459",
+          "alt": "navigate event data",
+          "width": "329",
+          "height": "473"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28717851792667",
+          "alt": "Two items subsections in event data",
+          "width": "391",
+          "height": "623"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28717851791131",
+          "alt": "repeat for options",
+          "width": "415",
+          "height": "358"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28717851789595",
+          "alt": "item alias",
+          "width": "394",
+          "height": "341"
+        }
+      ],
+      "links": [
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4408802648731",
+          "text": "message personalization reference"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005237648-About-Data-Types",
+          "text": "data types in Klaviyo"
+        },
+        {
+          "href": "https://klaviyo.zendesk.com/hc/en-us/articles/115005258768",
+          "text": "web feeds"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4408802445339-How-to-use-the-content-repeat-feature#01FK124H745446BNHM34CE4J1Q",
+          "text": "Identify your “repeat for”"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4408802445339-How-to-use-the-content-repeat-feature#01FK124H74R7GZSHJPWCR0QHQX",
+          "text": "Choose your “item alias”"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4408802445339-How-to-use-the-content-repeat-feature#01FK124H748C3S30TTNGD7EMWY",
+          "text": "Build your repeating content"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4408802445339-How-to-use-the-content-repeat-feature#01FK124H749B4585QNE6R6AP9T",
+          "text": "Preview your email"
+        },
+        {
+          "href": "https://klaviyo.zendesk.com/hc/en-us/articles/4408802648731",
+          "text": "Message personalization reference"
+        },
+        {
+          "href": "https://klaviyo.zendesk.com/hc/en-us/articles/4407911841435",
+          "text": "Guide to the email template editor"
+        }
+      ],
+      "headings": [
+        {
+          "level": 2,
+          "id": "01FK124H736A7QX0206YX2HCG8",
+          "text": "You will learn"
+        },
+        {
+          "level": 2,
+          "id": "01FK124H73GGQ963D0W157RCFN",
+          "text": "Before you begin"
+        },
+        {
+          "level": 2,
+          "id": "01FK124H73AAHZW0TZ0550D9HT",
+          "text": "Content repeat feature use cases"
+        },
+        {
+          "level": 2,
+          "id": "01FK124H73S5R4ES1X5Z6N3K4Z",
+          "text": "How to use the content repeat feature"
+        },
+        {
+          "level": 3,
+          "id": "01FK124H745446BNHM34CE4J1Q",
+          "text": "Identify your “repeat for”"
+        },
+        {
+          "level": 3,
+          "id": "01FK124H74R7GZSHJPWCR0QHQX",
+          "text": "Choose your item alias"
+        },
+        {
+          "level": 3,
+          "id": "01FK124H748C3S30TTNGD7EMWY",
+          "text": "Build your repeating block/section"
+        },
+        {
+          "level": 3,
+          "id": "01FK124H749B4585QNE6R6AP9T",
+          "text": "Preview your email and troubleshoot"
+        },
+        {
+          "level": 2,
+          "id": "01FK124H74PRT8SBJMWVTQJ38T",
+          "text": "Additional resources"
+        }
+      ]
+    },
+    "rendered_page": {
+      "images": [
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/7ff492c2b417b7ecfe572f839a8a81398693c1f7-1920x1080.webp",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/a68fce8de12ce79a4bfb3d708f705f75587b74eb-400x575.gif?w=329",
+          "alt": "navigate event data",
+          "width": "329",
+          "height": "473"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/7b1c9e81bd852b3368847c66743078336c023246-804x1282.jpg?w=391",
+          "alt": "Two items subsections in event data",
+          "width": "391",
+          "height": "623"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/768c6d1bc466883e1a1f6bf0af0d8c54b5f52c04-790x682.jpg?w=415",
+          "alt": "repeat for options",
+          "width": "415",
+          "height": "358"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/e6108d77db59fe166fe6fcacb8632be91f29ae92-794x688.jpg?w=394",
+          "alt": "item alias",
+          "width": "394",
+          "height": "341"
+        }
+      ],
+      "links": [
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4408802445339-How-to-use-the-content-repeat-feature#site-content",
+          "text": "Skip to main content"
+        },
+        {
+          "href": "https://www.klaviyo.com",
+          "text": "Home"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center"
+        },
+        {
+          "href": "https://www.klaviyo.com/enterprise",
+          "text": "Enterprise"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Partners"
+        },
+        {
+          "href": "https://www.klaviyo.com/careers",
+          "text": "Careers"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": "Log in"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": ""
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center Find step-by-step instructions and troubleshooting solutions in our knowledge base."
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000032731",
+          "text": "Integrations"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000312411",
+          "text": "Flows"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867867",
+          "text": "Audience"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867667",
+          "text": "Campaigns"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/360000190711",
+          "text": "Sign-up forms"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000873988",
+          "text": "Deliverability & compliance"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/29173800271259",
+          "text": "SMS"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/16638219724187",
+          "text": "Reviews"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/18073014919195",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/34141283979931",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/37659126754075",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/33948021740315",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/39746685522331",
+          "text": "WhatsApp"
+        },
+        {
+          "href": "https://academy.klaviyo.com",
+          "text": "Klaviyo Academy Expert training and education to help you succeed with Klaviyo, and beyond."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Quick+guide&resource=academy_courses",
+          "text": "Quick guides Learn marketing strategies and concepts in 15 minutes or less."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Course&resource=academy_courses",
+          "text": "Courses Master key marketing topics through structured lessons and exams."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/best-practices",
+          "text": "Best practices Discover top product and marketing strategies for your business."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/learning-paths",
+          "text": "Learning paths Complete curated learning journeys tailored to your marketing goals."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses",
+          "text": "Explore all resources"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Live+training&resource=academy_courses",
+          "text": "Live trainings Build confidence through hands-on interactive workshops and thought-provoking strategy sessions."
+        },
+        {
+          "href": "https://www.bigmarker.com/klaviyo-customer-education/Office-hours-Getting-started-with-Klaviyo",
+          "text": "Live office hours Join a strategic discussion where you can ask questions and get answers in real-time."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/private-live-training",
+          "text": "1:1 Live training Book a private training session with an expert to jumpstart your platform knowledge and confidence."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/credentials",
+          "text": "Klaviyo credentials Dig deeper into select topics and showcase your expertise with a final exam to earn a certificate and digital badge."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/certificates/klaviyo-practitioner-certificate",
+          "text": "Klaviyo practitioner certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/deliverability-certificate",
+          "text": "Deliverability certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/developer-certificate",
+          "text": "Klaviyo developer certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses&select=Certificate",
+          "text": "See all certificates"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Klaviyo Community Join our thriving community network to connect with brands like yours—online and in person."
+        },
+        {
+          "href": "https://community.klaviyo.com/topic/new",
+          "text": "Ask a question Post a question and get thoughtful answers from Klaviyo powerusers."
+        },
+        {
+          "href": "https://community.klaviyo.com/p/roadmap",
+          "text": "Product roadmap"
+        },
+        {
+          "href": "https://community.klaviyo.com/search/activity/recent",
+          "text": "Recent threads"
+        },
+        {
+          "href": "https://community.klaviyo.com/p/champions",
+          "text": "Meet the Champions"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups",
+          "text": "Browse all groups Your people are waiting. New ideas and connections are a click away."
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/developer-group-64",
+          "text": "Developer group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/entrepreneur-user-group-118",
+          "text": "Entrepreneur group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/woo-user-group-87",
+          "text": "WooCommerce group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/new-york-meetup-chapter-82",
+          "text": "New York City"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/los-angeles-meetup-chapter-83",
+          "text": "Los Angeles"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/austin-meetup-chapter-85",
+          "text": "Austin"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/san-diego-meetup-chapter-86",
+          "text": "San Diego"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/amsterdam-meetup-chapter-84",
+          "text": "Amsterdam"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Klaviyo Developers Access API documentation and developer guides to help you build with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/get_started",
+          "text": "Get started Access key resources and a step-by-step checklist for how to start developing with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/build_your_integration",
+          "text": "Grow your app's reach Learn how to join our ecosystem and get your app listed on our marketplace."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/developer-tools",
+          "text": "Developer tools Generate sample data, monitor your API usage, and access our Postman collections."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/reference/api_overview",
+          "text": "API reference Browse our full catalog of API docs."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/changelog_",
+          "text": "Changelog"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/api_versioning_and_deprecation_policy",
+          "text": "Versioning & deprecation policy"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/rate_limits_and_error_handling",
+          "text": "Rate limits & error handling"
+        },
+        {
+          "href": "https://youtube.com/playlist?list=PLHkNfHgtxcUanrkMnKPdkRzuWU7MGv_xM&si=pkG-KH7IT_TUHOGC",
+          "text": "API tutorials on YouTube Subscribe to our Klaviyo API Tutorials playlist for easy access to step-by-step developer walkthroughs."
+        },
+        {
+          "href": "https://www.klaviyo.com/contact-us",
+          "text": "Contact us"
+        },
+        {
+          "href": "https://www.klaviyo.com/sign-up",
+          "text": "Sign up"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": "Search"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4408802445339",
+          "text": "United States - EN"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/de-de/articles/4408802445339",
+          "text": "Deutschland - DE"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-es/articles/4408802445339",
+          "text": "España - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-mx/articles/4408802445339",
+          "text": "México - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/fr-fr/articles/4408802445339",
+          "text": "France - FR"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/it-it/articles/4408802445339",
+          "text": "Italia - IT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/ko-kr/articles/4408802445339",
+          "text": "한국 - KO"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/nl-nl/articles/4408802445339",
+          "text": "Nederland - NL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pl-pl/articles/4408802445339",
+          "text": "Polska - PL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pt-br/articles/4408802445339",
+          "text": "Brasil - PT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/sv-se/articles/4408802445339",
+          "text": "Sverige - SV"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/4414879524891",
+          "text": "Content"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/14543554717467",
+          "text": "Templates"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/49375559270427",
+          "text": "Build and use templates"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4408802445339-How-to-use-the-content-repeat-feature#01FK124H736A7QX0206YX2HCG8",
+          "text": "You will learn"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4408802445339-How-to-use-the-content-repeat-feature#01FK124H73GGQ963D0W157RCFN",
+          "text": "Before you begin"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4408802445339-How-to-use-the-content-repeat-feature#01FK124H73AAHZW0TZ0550D9HT",
+          "text": "Content repeat feature use cases"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4408802445339-How-to-use-the-content-repeat-feature#01FK124H73S5R4ES1X5Z6N3K4Z",
+          "text": "How to use the content repeat feature"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4408802445339-How-to-use-the-content-repeat-feature#01FK124H74PRT8SBJMWVTQJ38T",
+          "text": "Additional resources"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4408802648731",
+          "text": "message personalization reference"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005237648-About-Data-Types",
+          "text": "data types in Klaviyo"
+        },
+        {
+          "href": "https://klaviyo.zendesk.com/hc/en-us/articles/115005258768",
+          "text": "web feeds"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4408802445339-How-to-use-the-content-repeat-feature#01FK124H745446BNHM34CE4J1Q",
+          "text": "Identify your “repeat for”"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4408802445339-How-to-use-the-content-repeat-feature#01FK124H74R7GZSHJPWCR0QHQX",
+          "text": "Choose your “item alias”"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4408802445339-How-to-use-the-content-repeat-feature#01FK124H748C3S30TTNGD7EMWY",
+          "text": "Build your repeating content"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4408802445339-How-to-use-the-content-repeat-feature#01FK124H749B4585QNE6R6AP9T",
+          "text": "Preview your email"
+        },
+        {
+          "href": "https://klaviyo.zendesk.com/hc/en-us/articles/4408802648731",
+          "text": "Message personalization reference"
+        },
+        {
+          "href": "https://klaviyo.zendesk.com/hc/en-us/articles/4407911841435",
+          "text": "Guide to the email template editor"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115001002272",
+          "text": "Learn how to contact support"
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": ""
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": "Visit Community"
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": ""
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": "Hire a partner"
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/about",
+          "text": "About Klaviyo"
+        },
+        {
+          "href": "https://www.klaviyo.com/newsroom",
+          "text": "Newsroom"
+        },
+        {
+          "href": "https://investors.klaviyo.com/overview/default.aspx",
+          "text": "Investor relations"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Agency and tech partners"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Developers"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/retail",
+          "text": "Retail and ecommerce"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/restaurants",
+          "text": "Restaurant marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/wellness",
+          "text": "Wellness"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform",
+          "text": "B2C CRM overview"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai",
+          "text": "Klaviyo AI (K:AI)"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/marketing-automation",
+          "text": "Klaviyo Marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-service",
+          "text": "Klaviyo Service"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/analytics",
+          "text": "Klaviyo Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-data-platform",
+          "text": "Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare",
+          "text": "Klaviyo vs. Klaviyo alternatives"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-mailchimp",
+          "text": "Klaviyo vs. Mailchimp"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-postscript",
+          "text": "Klaviyo vs. Postscript"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-attentive",
+          "text": "Klaviyo vs. Attentive"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-salesforce-marketing-cloud",
+          "text": "Klaviyo vs. Salesforce"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-listrak",
+          "text": "Klaviyo vs. Listrak"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/omnichannel",
+          "text": "Omnichannel marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/email-marketing",
+          "text": "Email marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing",
+          "text": "SMS marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing/rcs",
+          "text": "RCS for Business"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/mobile-app-marketing",
+          "text": "Mobile app marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/whatsapp",
+          "text": "WhatsApp marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/social",
+          "text": "Social marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources",
+          "text": "Marketing resources"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources/marketing-campaign-calendar",
+          "text": "Marketing campaign calendar"
+        },
+        {
+          "href": "https://www.klaviyo.com/glossary",
+          "text": "Marketing glossary"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/email-subject-line-generator",
+          "text": "Subject line generator"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/roi-calculator",
+          "text": "ROI calculator"
+        },
+        {
+          "href": "https://www.klaviyo.com/customers",
+          "text": "Case studies"
+        },
+        {
+          "href": "https://www.klaviyo.com/composer",
+          "text": "Composer Beta"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/marketing-agent",
+          "text": "Marketing Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/customer-agent",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/customer-experience-hub",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/helpdesk",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/marketing-analytics",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/advanced-cdp",
+          "text": "Advanced Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/web-forms",
+          "text": "Web forms"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/email-templates",
+          "text": "Email templates"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/portfolio",
+          "text": "Portfolio"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform-integrations",
+          "text": "Apps and Integrations"
+        },
+        {
+          "href": "https://www.klaviyo.com/features",
+          "text": "Features"
+        },
+        {
+          "href": "https://www.klaviyo.com/whats-new",
+          "text": "What's new"
+        },
+        {
+          "href": "https://www.klaviyo.com/events",
+          "text": "Events"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help Center"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us",
+          "text": "Academy"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Community"
+        },
+        {
+          "href": "https://www.facebook.com/Klaviyo/",
+          "text": "Facebook"
+        },
+        {
+          "href": "https://twitter.com/klaviyo/",
+          "text": "Twitter"
+        },
+        {
+          "href": "https://www.linkedin.com/company/klaviyo/",
+          "text": "LinkedIn"
+        },
+        {
+          "href": "https://www.instagram.com/klaviyo/",
+          "text": "Instagram"
+        },
+        {
+          "href": "https://www.klaviyo.com/sitemap",
+          "text": "Site Map"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal",
+          "text": "Terms and Privacy"
+        },
+        {
+          "href": "https://www.klaviyo.com/security",
+          "text": "Security"
+        },
+        {
+          "href": "https://www.klaviyo.com/trust",
+          "text": "Trust"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal/intellectual-property-notices",
+          "text": "Intellectual Property Notices"
+        }
+      ],
+      "headings": [
+        {
+          "level": 1,
+          "id": "",
+          "text": "How to use the content repeat feature"
+        },
+        {
+          "level": 2,
+          "id": "01FK124H736A7QX0206YX2HCG8",
+          "text": "You will learn"
+        },
+        {
+          "level": 2,
+          "id": "01FK124H73GGQ963D0W157RCFN",
+          "text": "Before you begin"
+        },
+        {
+          "level": 2,
+          "id": "01FK124H73AAHZW0TZ0550D9HT",
+          "text": "Content repeat feature use cases"
+        },
+        {
+          "level": 2,
+          "id": "01FK124H73S5R4ES1X5Z6N3K4Z",
+          "text": "How to use the content repeat feature"
+        },
+        {
+          "level": 3,
+          "id": "01FK124H745446BNHM34CE4J1Q",
+          "text": "Identify your “repeat for”"
+        },
+        {
+          "level": 3,
+          "id": "01FK124H74R7GZSHJPWCR0QHQX",
+          "text": "Choose your item alias"
+        },
+        {
+          "level": 3,
+          "id": "01FK124H748C3S30TTNGD7EMWY",
+          "text": "Build your repeating block/section"
+        },
+        {
+          "level": 3,
+          "id": "01FK124H749B4585QNE6R6AP9T",
+          "text": "Preview your email and troubleshoot"
+        },
+        {
+          "level": 2,
+          "id": "01FK124H74PRT8SBJMWVTQJ38T",
+          "text": "Additional resources"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "Explore more from Klaviyo"
+        }
+      ]
+    }
+  },
+  "rendered_page": {
+    "status": "fetched",
+    "error": ""
+  }
+}

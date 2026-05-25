@@ -1,0 +1,187 @@
+<h2 id="h_01HADAYAABGN95V4Q8V8EWW6CR">You will learn</h2>
+<p>Learn about the different ways that Klaviyo can support onsite tracking on your ecommerce site. There are 2 key types of onsite tracking:</p>
+<ul>
+<li>
+<strong><em>Active on Site</em></strong><strong> tracking</strong><br>
+This metric is tracked whenever an identifiable browser visits your website.</li>
+<li>
+<strong><em>Viewed Product </em></strong><strong>tracking</strong><br>
+This metric is tracked whenever an identifiable browser views a product page on your website (for ecommerce stores).</li>
+</ul>
+<p><em>Active on Site</em> tracking can help segment your contacts based on engagement level, while <em>Viewed Product</em> tracking can enable you to send product reminders in a <a href="https://help.klaviyo.com/hc/en-us/articles/115002775252">browse abandonment flow</a>. </p>
+<p>For Shopify, we also offer <a href="https://help.klaviyo.com/hc/en-us/articles/4425956184731#h_01J6F7TREZAJM7M3R3DFVZSDGT">additional types of onsite tracking</a>.</p>
+<h2 id="h_01HADAYAABB803T7AGQ6G3HM6B">Before you begin</h2>
+<p>Enabling onsite tracking is different for each ecommerce integration. In this article, you will learn how to do this and who Klaviyo tracks. </p>
+<p>The code snippet for onsite tracking is known as Klaviyo’s onsite JavaScript or “Klaviyo.js." You do not need to add Klaviyo.js separately if you enabled active onsite tracking through one of the ecommerce integrations below:</p>
+<ul>
+<li>
+<a href="https://help.klaviyo.com/hc/en-us/articles/115005080407"><strong>Shopify</strong></a><br>
+<em>Active on Site</em> tracking is added automatically through the integration or through the <a href="https://help.klaviyo.com/hc/en-us/articles/4425956184731">Klaviyo app embed</a> if it's toggled on.</li>
+<li>
+<a href="https://help.klaviyo.com/hc/en-us/articles/115005082547"><strong>BigCommerce</strong></a><br>
+<em>Active on Site</em> tracking is added when you integrate if you also check the setting <em>Automatically add Klaviyo onsite javascript.</em>
+</li>
+<li>
+<a href="https://help.klaviyo.com/hc/en-us/articles/115005255808"><strong>WooCommerce</strong></a><br>
+<em>Active on Site</em> tracking is added automatically when you integrate.</li>
+<li>
+<a href="https://help.klaviyo.com/hc/en-us/articles/115005254348"><strong>Magento</strong></a><br>
+<em>Active on Site</em> tracking is added automatically when you integrate.</li>
+<li>
+<a href="https://help.klaviyo.com/hc/en-us/articles/6202669053723"><strong>Wix</strong></a><br>
+<em>Active on Site</em> tracking is added when you integrate if you check the setting <em>Automatically add Klaviyo onsite javascript</em>.</li>
+<li>
+<a href="https://help.klaviyo.com/hc/en-us/articles/360054551492"><strong>PrestaShop</strong></a><br>
+<em>Active on Site</em> tracking is added automatically when you integrate.</li>
+<li>
+<a href="https://help.klaviyo.com/hc/en-us/articles/360033744951"><strong>Salesforce Commerce Cloud</strong></a><br>
+<em>Active on Site</em> tracking is added automatically when you integrate.</li>
+<li>
+<a href="https://help.klaviyo.com/hc/en-us/articles/11117215837211"><strong>Square Online</strong></a><br>
+<em>Active on Site</em> tracking is added when you integrate if you check the setting <em>Automatically add Klaviyo onsite javascript.</em>
+</li>
+<li>
+<a href="https://help.klaviyo.com/hc/en-us/articles/13001662470939"><strong>Shopware</strong></a><br>
+<em>Active on Site</em> tracking is added automatically when you integrate.</li>
+</ul>
+<p>If you are using another ecommerce platform, or a custom platform, you can <a href="#h_01GMEAQZXKADF4FR7P1FMNC7EB">install Klaviyo.js manually.</a></p>
+<p>Because pasting this code requires access to your site's HTML and ecommerce platform, our support team cannot offer hands-on assistance. If you don't have a developer resource on your team and aren't comfortable adding the code, consider <a href="https://klaviyo.partnerpage.io/">reaching out to a Klaviyo partner for assistance</a>.</p>
+<h2 id="h_01JFB7AF3VKXQSQXTWB3ZS5KZ0">Active on site event data</h2>
+<p>The <em>Active on site </em>event captures the following information about identified visitors, and is represented in the event data.</p>
+<div class="bs-callout bs-callout-default">
+<p>Event data beyond <em>Browser</em>, <em>OS</em>, and <em>Page </em>is only available on <em>Active on Site </em>events captured after 1/3/2025.</p>
+</div>
+<ul>
+<li>
+<strong>Browser</strong><br>
+User agent for the originating browser (e.g., “Chrome”).</li>
+<li>
+<strong>Os</strong><br>
+User agent for the originating operating system (e.g., “Mac”).</li>
+<li>
+<strong>Page</strong><br>
+The URL of the visited page.</li>
+<li>
+<strong>utm_medium</strong><br>
+The marketing channel the user comes from to the website.</li>
+<li>
+<strong>utm_source</strong><br>
+The source of traffic to the website.</li>
+<li>
+<strong>utm_campaign</strong><br>
+The name of the marketing campaign associated with the traffic.</li>
+<li>
+<strong>utm_id</strong><br>
+The unique identifier for the marketing campaign associated with the traffic.</li>
+<li>
+<strong>utm_term</strong><br>
+This is an optional UTM parameter that marketers can set to track paid search terms.<br>
+<div class="bs-callout bs-callout-default">
+<p>For each of the <a href="https://help.klaviyo.com/hc/en-us/articles/115005247808">UTM parameters</a>, Klaviyo will return the first value in the URL’s query parameters. If the UTM parameter is not present on a URL, then no values are provided in the event.</p>
+</div>
+</li>
+<li>
+<strong>Fragments</strong><br>
+Any other items in the URL, like an anchor tag that indicates where the user would have landed on the page. If there are no fragments on the URL, no values are set. </li>
+<li>
+<strong>Identity_source</strong><br>
+The event that triggered Klaviyo to receive the on-site event. </li>
+<li>
+<strong>Parameters</strong><br>
+Each of the first 10 parameters present in the URL has their own piece of event data, except for <em>_kx</em> and UTMs. If there are no parameters on the URL, no values are set. Parameters beyond the first 10 are not captured. </li>
+<li>
+<strong>First_page_path</strong><br>
+The path of the first page a customer lands on. If there is no path on the first page view, no value is set.</li>
+<li>
+<strong>Kx_present</strong><br>
+If _kx is present on the URL, <em>true</em> is returned for the dimension. If not, <em>false</em> is returned. This highlights whether or not the session could be associated with a click on a link in a Klaviyo message.</li>
+</ul>
+<h2 id="h_01GMEAQZXKADF4FR7P1FMNC7EB">Add onsite tracking manually</h2>
+<ol>
+<li>Copy the following <em>Active on Site</em> code snippet, also known as Klaviyo.js:<br>
+<pre><code class="language-text">&lt;script type="text/javascript" async="" src="https://static.klaviyo.com/onsite/js/PUBLIC_API_KEY/klaviyo.js"&gt;&lt;/script&gt;</code></pre>
+</li>
+<li>In Klaviyo, click your account name in the lower left corner and navigate to<strong> Settings &gt; Account &gt; API Keys</strong>, then note your Public API Key.</li>
+<li>Paste the code snippet in the main template of your site. Where you see PUBLIC_API_KEY in the snippet, replace this with your key.</li>
+<li>Save and publish your site template. </li>
+</ol>
+<p>Now that you've installed <em>Active on Site</em> tracking, Klaviyo will track whenever an identifiable person visits your website.</p>
+<h2 id="h_01HADAYAAC3079D44928A58MTY">Understanding <em>Viewed Product</em> tracking</h2>
+<p><em>Viewed Product</em> tracking in Klaviyo is specifically designed for ecommerce stores, and can enable you to send product reminders in a <a href="https://help.klaviyo.com/hc/en-us/articles/115002775252">browse abandonment flow</a>. Once <em>Viewed Product</em> is installed, it will record a metric whenever an identifiable person views a product page on your website.</p>
+<p>Enabling <em>Viewed Product</em> tracking is different for each ecommerce platform. If you are not seeing data captured from this metric, double-check that it's installed correctly.</p>
+<p>Learn how to enable <em>Viewed Product</em> tracking for these ecommerce platforms:</p>
+<ul>
+<li>
+<strong>Shopify</strong><br>
+Enable <em>V</em><em>iewed Product </em>tracking through the <a href="https://help.klaviyo.com/hc/en-us/articles/4425956184731">Klaviyo app embed in Shopify</a>.</li>
+<li>
+<strong>BigCommerce</strong><br>
+<a href="https://help.klaviyo.com/hc/en-us/articles/115005082547#add-viewed-product-tracking4">Learn how to add viewed product tracking</a> to your BigCommerce store.<br>
+<p><em>Viewed Product</em> tracking is automatically installed through these ecommerce integrations:</p>
+</li>
+<li><a href="https://help.klaviyo.com/hc/en-us/articles/115005082187">Magento 1 Integration</a></li>
+<li><a href="https://help.klaviyo.com/hc/en-us/articles/115005254348">Magento 2 Integration</a></li>
+<li><a href="https://help.klaviyo.com/hc/en-us/articles/115005255808">WooCommerce Integration</a></li>
+<li><a href="https://help.klaviyo.com/hc/en-us/articles/360054551492">PrestaShop integration</a></li>
+<li><a href="https://help.klaviyo.com/hc/en-us/articles/360033744951">Salesforce Commerce Cloud integration</a></li>
+<li><a href="https://help.klaviyo.com/hc/en-us/articles/13001662470939">Shopware integration</a></li>
+</ul>
+<p><em>Viewed Product</em> tracking can also be added to other ecommerce platforms and custom carts. For instructions on how to do this, head to our <a href="https://developers.klaviyo.com/en/docs/guide_to_integrating_a_platform_without_a_pre_built_klaviyo_integration#viewed-product-tracking-snippet">guide detailing how to add Viewed Product tracking for custom ecommerce stores</a>.</p>
+<h2 id="h_01HADAYAACFYSN7F22XPPCGT6B">Test your onsite tracking</h2>
+<p>After enabling tracking on your site, you can test that tracking is set up properly by following these steps:</p>
+<ol>
+<li>Navigate to your website.</li>
+<li>Add the following to the end of your store url, replacing example@gmail.com with your email address:<br>
+<strong>?utm_email=example@gmail.com</strong>
+</li>
+<li>After you reload the page, search in Klaviyo for your email address.</li>
+<li>You should see that a Klaviyo profile has been created for you (if one didn't exist already) and that this site visit has been tracked on your activity feed.</li>
+<li>To see a feed of all tracked activity for the <em>Active on Site</em> and <em>Viewed Product </em>metrics, navigate to <strong>Analytics &gt; Metrics</strong>. You can click on each metric to analyze tracked data through an activity feed, activity map, charts, best people, and cohort reports. You can also filter by source. Filter by<strong> API</strong> to see active on site and viewed product events (these events have a gear icon).<br>
+</li>
+</ol>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/28723623317403" alt="Metrics tab in Klaviyo filtered by API showing Active on Site and Viewed Product in list with gear icons" width="429" height="333"></p>
+<h2 id="h_01HADAYAACVVC4BXQ0ES5Y50TC">Who Klaviyo tracks</h2>
+<p>By enabling basic onsite tracking on your website, you can collect helpful information around browsing activity that can be leveraged for your marketing strategies.</p>
+<p>When you add Klaviyo's onsite tracking to your site, it only tracks the browsing activity of "known browsers" (i.e. browsers that have visited or engaged on your site, submitted a form through a certain action, reached the success step of a form, reached the final reachable step for tap-to-text for SMS, or have been identified or "cookied"). </p>
+<div class="bs-callout bs-callout-default">
+<p>If an email is forwarded and then opened and clicked on by a subsequent person, this will result in that device being linked to an open/click. It could also update and overwrite the profile information of the person who originally received that email.</p>
+</div>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/28723623315867" alt="An example subscriber profile named Johan with Logged In and Active on Site events on timeline"></p>
+<p>There are multiple ways Klaviyo will identify a site visitor for onsite tracking:</p>
+<ul>
+<li>If someone has, at some point, clicked through a Klaviyo email or SMS to your website.</li>
+<li>If someone has, at some point, subscribed/opted-in through a Klaviyo form.</li>
+<li>If someone has, submitted a Klaviyo form through a certain action.<br>
+<div class="bs-callout bs-callout-default">
+<p>In order for a submitted form to be tracked, the visitor must submit a form step that has a submit action tied to it (e.g., <em>Submit and Go to next step</em>, <em>Submit opt-in code</em>, <em>Submit form and Go to UR</em>L); it won't count if the form step's submit action is only <em>Go to URL</em> or <em>Close form</em>. If a form has both a <em>Submit Form</em> and <em>Go to URL</em> actions, it will only count the event when someone submits the form.</p>
+</div>
+</li>
+<li>If someone has reached the success step of a form, or reached the final reachable step for tap-to-text (<em>Subscribe via SMS</em>) forms.</li>
+<li>If someone has, at some point, logged in to your site (and you have installed <a href="https://developers.klaviyo.com/en/docs/javascript_api#identify-people">custom tracking for logged in users</a>, which is not included with Klaviyo's native ecommerce integrations). </li>
+</ul>
+<p>As a result, until you send emails or messages with Klaviyo and grow your lists, you probably won't see a lot of tracked onsite activity. Over time, Klaviyo will identify more and more of your contact-base and your onsite tracking data will become more comprehensive.</p>
+<div class="bs-callout bs-callout-default">
+<p>For Shopify stores, based on your Customer Privacy settings in Shopify, Klaviyo may not track onsite events for visitors to your Shopify store in the EU, EEA, UK and Switzerland, unless they have provided consent.</p>
+</div>
+<h2 id="h_01HADAYAACJM70JNBYG6H6QQ96">Examples of how to use onsite tracking</h2>
+<p>Ways to use onsite tracking include:</p>
+<ul>
+<li>
+<strong>Segment your contacts based on engagement level.</strong><br>
+By gaining insight into which contacts interact with your website and how often, you can build a more personal communication strategy that drives deeper engagement.</li>
+<li>
+<strong>Trigger an automated flow email or SMS to those that browse several times without purchasing.</strong><br>
+While you don't want to send someone an email or SMS every time they visit your website, you might want to send a light touchpoint to those who visit several times in a short period of time, but don't engage further. For example, you can trigger a flow to those who have been <em>Active on Site</em> at least 4 times in the last 30 days, but haven't started or completed a checkout.</li>
+</ul>
+<div class="bs-callout bs-callout-default">
+<p>It's important to note that for <em>Active on Site</em> events in particular, while you can segment on the event itself, the data inside of it cannot be used for segmentation or flow filtering. </p>
+</div>
+<h2 id="h_01HADAYAACCVC5TX5932PQ2AZA">The _kx parameter</h2>
+<p>When you have <em>Email to Website</em> tracking enabled and have Klaviyo.js on your website, Klaviyo will identify individuals who click through a Klaviyo email and then end up browsing your website. This is one of the fundamental ways Klaviyo can identify new site visitors and cookie them so they get identified during all future visits to your page.</p>
+<div class="bs-callout bs-callout-default">
+<p>SMS messages click and conversion tracking is dependent on having a link, and this link must use the Klaviyo link shortener. When setting up your SMS messages, it’s important to have the option checked for <strong>Automatically shorten links</strong> to ensure you are using the default tracking.</p>
+</div>
+<p>Klaviyo's email website tracking works by adding an additional parameter to all the URLs you send (i.e., the <em>_kx</em> parameter). The unique encrypted value is then decrypted by the <em>Active on Site</em> snippet and allows us to identify the user that clicked through the URL. See the example link below for an idea of how this will look in the URL:</p>
+<p><code>http://example.com/?<strong>_kx=J8fjcn003Wy6b-3ILNlOyZXabW6dcFwTyeuxrowMers%3D.McN66</strong></code></p>
+<p>This parameter is automatically appended when live emails are sent and should not affect the load times of your links or break any links based on its placement. Note that when previewing emails, the value set for the _kx parameter will just be a placeholder to prevent being cookied as the recipient.</p>
+<p>However, if you use URLs that contain query parameters to inform your server to automatically download a file, the _kx parameter could cause your link to break. In order for the download to function properly, either toggle off email to website tracking in your account email settings or configure your server to ignore this parameter. As of now, you can only toggle this off across your account; you cannot turn it off for individual campaigns.</p>

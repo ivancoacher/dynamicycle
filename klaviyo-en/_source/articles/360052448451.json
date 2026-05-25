@@ -1,0 +1,867 @@
+{
+  "captured_at": "2026-05-23T16:16:49Z",
+  "article": {
+    "id": 360052448451,
+    "url": "https://klaviyo.zendesk.com/api/v2/help_center/en-us/articles/360052448451.json",
+    "html_url": "https://klaviyo.zendesk.com/hc/en-us/articles/360052448451-How-to-keep-your-account-secure",
+    "author_id": 386982900592,
+    "comments_disabled": true,
+    "draft": false,
+    "promoted": false,
+    "position": 1,
+    "vote_sum": -3,
+    "vote_count": 23,
+    "section_id": 49375463241883,
+    "created_at": "2020-11-11T19:15:09Z",
+    "updated_at": "2026-04-21T13:54:51Z",
+    "name": "How to keep your account secure",
+    "title": "How to keep your account secure",
+    "source_locale": "en-us",
+    "locale": "en-us",
+    "outdated": false,
+    "outdated_locales": [],
+    "edited_at": "2025-04-18T12:09:32Z",
+    "user_segment_id": null,
+    "permission_group_id": 146372,
+    "content_tag_ids": [],
+    "label_names": [],
+    "body": "<h2 id=\"h_01HTFJ2JCBBKQWSS8SZBR7KEV8\">You will learn</h2>\n<p>Learn how to make sure your Klaviyo account and data are as secure as possible.</p>\n<p>Configuring your communication and assigning roles correctly is critical, especially when there's increased traffic to your site and messaging from your brand.</p>\n<h2 id=\"h_01HTFJ2JCBJQH5R5PQKE0Q2WG5\">Before you begin</h2>\n<p>There are 2 crucial security checkups to review:</p>\n<ol>\n<li><a href=\"#h_01GJ33R2BZ1HEWB9DT772KX8J5\" target=\"_self\">Public versus private API key security checkup</a></li>\n<li><a href=\"#h_01GJ33R9C41E21390FTKJW9VJ5\" target=\"_self\">User review and access checkup</a></li>\n</ol>\n<h2 id=\"h_01GJ33R2BZ1HEWB9DT772KX8J5\">Public vs. private API key security checkup</h2>\n<p>To access your account’s API keys:</p>\n<ol>\n<li>Click your organization name in the bottom left corner.</li>\n<li>Select <strong>Settings &gt; API Keys</strong>. </li>\n</ol>\n<p>Your public key, also called your site ID, is in the table in the first section of this page, whereas your private keys are listed in the second table labeled <em>Private API Keys</em>.</p>\n<ul>\n<li>\n<strong>Public API key</strong><br>An API you can share with others so that they can get certain information from your API. Your public API key is your account identifier. Use your public API key, and not your private API key, when configuring and using the Klaviyo JavaScript library.</li>\n<li>\n<strong>Private API key</strong><br>An API key that reads data and manipulates sensitive objects (e.g., lists in Klaviyo). It’s important to keep private API keys private. Treat them like passwords, kept in a safe place and never exposed to the public., <br>In Klaviyo, private API keys all start with the prefix “pk_” and are followed by 34 alphanumeric characters. For example, a private key will look something like: <em>pk_abc123def456ghi789jkl0mno123pqrst4</em>.<br>\n<div class=\"bs-callout bs-callout-default\">\n<p>You will not be able view any private API key after creating it.</p>\n</div>\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28717388789659\">\n</li>\n</ul>\n<div class=\"accordion accordion--default\">\n<div class=\"accordion__item\">\n<div class=\"accordion__item-title\"><strong>Why can't you use private API keys in place of public API keys?</strong></div>\n<div class=\"accordion__item-content\">\n<p>Accidentally using a private API key instead of a public one can lead to abuse of your account if a malicious actor finds the private key. If you use the wrong API key within your JavaScript, you will also not be able to successfully collect or utilize the applicable data.</p>\n</div>\n</div>\n</div>\n<h3 id=\"h_01HTFJ2JCBKD7XX4YTJ30KDP13\">Verify that all client-side code uses your public API key</h3>\n<p>Have you written any custom code using the <a href=\"https://developers.klaviyo.com/en/docs/introduction_to_the_klaviyo_object\" target=\"_blank\" rel=\"noopener noreferrer\">Learnq, klOnsite, or Klaviyo objects</a>, code that calls our <a href=\"https://developers.klaviyo.com/en/reference/create_client_subscription\" target=\"_blank\" rel=\"noopener noreferrer\">client-side API endpoints</a>, or did you <a href=\"https://help.klaviyo.com/hc/en-us/articles/360020342232\" target=\"_blank\" rel=\"noopener noreferrer\">install Klaviyo.js manually</a>? If yes to any of the above, it's important to verify that you're only using your public API key in these instances. </p>\n<p>You'll want to check each page on your site with custom code. You can start with your homepage:</p>\n<ol>\n<li>Open your website.</li>\n<li>Right click and select <strong>View Page Source</strong>.</li>\n<li>When the new page opens, select <strong>Edit &gt; Find &gt; Find...</strong> and search for \"pk_\".</li>\n<li>\n<p>Make sure that no private keys are used as a company_id, \"token\" value, or, in rare cases, account value.</p>\n</li>\n<li>\n<p>If you find any private API keys (value starts with “pk_”), review the section <a href=\"#h_01EPWC58AT8C1BEP4HZGXNNCG6\" target=\"_self\">below</a> on what to do when your private API key is exposed.</p>\n</li>\n</ol>\n<h3 id=\"h_01EPWC58AT8C1BEP4HZGXNNCG6\">What to do if your private API key was exposed</h3>\n<p>If your private API key was used instead of your public API key:</p>\n<ol>\n<li>Record the private API key (you will need that later) and replace it with your public API key. This will allow your code to work as expected within the Klaviyo platform.</li>\n<li>Delete and replace the exposed key in order to protect your company and customer data from unauthorized exposure.</li>\n<li>Identify all private key integrations and applications you may have, including custom code.</li>\n<li>For each integration and application that uses an exposed private API key, create a new key in your <a style=\"background-color: #ffffff; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;\" href=\"https://www.klaviyo.com/account#api-keys-tab\" target=\"_blank\" rel=\"noopener\">account settings</a> by selecting <strong style=\"font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;\">Create private API Key</strong>.</li>\n<li>Give the key a meaningful label for quick identification as well as a specific scope. </li>\n<li>After you create a unique private API key for each integration, update the integration(s) with the new private API key.</li>\n<li>Once all integrations that used the exposed key have been updated, hover over the exposed key and then click <strong>Delete</strong>.\n<ul>\n<li>Be careful to select the correct key to delete, as there is no verification when the delete button is selected.</li>\n</ul>\n</li>\n</ol>\n<p>Once deleted, you will have protected your data from unauthorized access via the exposed private key.</p>\n<p>For more information on API key security, head to <a href=\"https://help.klaviyo.com/hc/en-us/articles/115005062267\" target=\"_blank\" rel=\"noopener\">Manage Your Accounts API Keys</a>.</p>\n<h2 id=\"h_01GJ33R9C41E21390FTKJW9VJ5\">User management and data access checkup</h2>\n<p>It is important to understand who has access to different features and information in your account. To see all users who have access to your account:</p>\n<ol>\n<li>Head to your organization name in lower left corner.</li>\n<li>Select <strong>Settings</strong>.<br><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28717388785563\" alt=\"Users tab in account settings\">\n</li>\n</ol>\n<p>Periodically reviewing the users within your account and their access level is an important security activity. There are three activities that will help secure your account:</p>\n<ul>\n<li>\n<strong>User review</strong><br>Review all users in your account and identify any who longer requires access. Delete any users that should no longer be active by selecting the <strong>X</strong> next to their email. Common reasons for removing access include:\n<ul>\n<li>Role change within the company</li>\n<li>Termination of an employee</li>\n<li>Contract expiration of a third-party vendor.</li>\n</ul>\n</li>\n<li>\n<strong>Role review</strong><br>Ensure that each user has appropriate permissions and can only access the data and functionality that is required to execute their job. For information around what user roles have access to, head to <a href=\"https://help.klaviyo.com/hc/en-us/articles/115005231648\" target=\"_blank\" rel=\"noopener\">User management and privileges</a>.</li>\n<li>\n<strong>Multi-factor authentication</strong><br><a href=\"https://help.klaviyo.com/hc/en-us/articles/360026617692\" target=\"_blank\" rel=\"noopener\">Multi-factor authentication</a> adds an additional layer of security for your account by requiring a one-time password in addition to your standard username and password. This protects against password guessing and phishing attacks, and is a general security best practice. In the <em>Users</em> tab (<strong>Settings &gt; Users</strong>), toggle on the option to <em>Require two-step authentication for all users</em>. Users will then be required to configure multi-factor authentication for their account if they have not done so already.</li>\n</ul>\n<h2 id=\"h_01HTFJ2JCBXZHR7YRRFDC47767\">Additional resources</h2>\n<ul>\n<li><a href=\"https://help.klaviyo.com/hc/en-us/articles/115005062267\" target=\"_blank\" rel=\"noopener\">How to manage your account’s API keys</a></li>\n<li><a href=\"https://help.klaviyo.com/hc/en-us/articles/115005231648\" target=\"_blank\" rel=\"noopener\">Understand user management and privileges</a></li>\n</ul>",
+    "user_segment_ids": []
+  },
+  "normalized": {
+    "id": "360052448451",
+    "title": "How to keep your account secure",
+    "source_url": "https://help.klaviyo.com/hc/en-us/articles/360052448451-How-to-keep-your-account-secure",
+    "section_id": 49375463241883,
+    "section": "API keys",
+    "category_id": 115000867647,
+    "category": "Account & billing",
+    "category_slug": "account-billing",
+    "klaviyo_updated": "2026-04-21T13:54:51Z",
+    "created_at": "2020-11-11T19:15:09Z",
+    "draft": false,
+    "promoted": false,
+    "position": 1,
+    "label_names": []
+  },
+  "files": {
+    "body_html": "_source/articles/360052448451.body.html",
+    "rendered_html": "_source/rendered/360052448451.html"
+  },
+  "assets": {
+    "api_body": {
+      "images": [
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28717388789659",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28717388785563",
+          "alt": "Users tab in account settings",
+          "width": "",
+          "height": ""
+        }
+      ],
+      "links": [
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360052448451-How-to-keep-your-account-secure#h_01GJ33R2BZ1HEWB9DT772KX8J5",
+          "text": "Public versus private API key security checkup"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360052448451-How-to-keep-your-account-secure#h_01GJ33R9C41E21390FTKJW9VJ5",
+          "text": "User review and access checkup"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/introduction_to_the_klaviyo_object",
+          "text": "Learnq, klOnsite, or Klaviyo objects"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/reference/create_client_subscription",
+          "text": "client-side API endpoints"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360020342232",
+          "text": "install Klaviyo.js manually"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360052448451-How-to-keep-your-account-secure#h_01EPWC58AT8C1BEP4HZGXNNCG6",
+          "text": "below"
+        },
+        {
+          "href": "https://www.klaviyo.com/account#api-keys-tab",
+          "text": "account settings"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005062267",
+          "text": "Manage Your Accounts API Keys"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005231648",
+          "text": "User management and privileges"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360026617692",
+          "text": "Multi-factor authentication"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005062267",
+          "text": "How to manage your account’s API keys"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005231648",
+          "text": "Understand user management and privileges"
+        }
+      ],
+      "headings": [
+        {
+          "level": 2,
+          "id": "h_01HTFJ2JCBBKQWSS8SZBR7KEV8",
+          "text": "You will learn"
+        },
+        {
+          "level": 2,
+          "id": "h_01HTFJ2JCBJQH5R5PQKE0Q2WG5",
+          "text": "Before you begin"
+        },
+        {
+          "level": 2,
+          "id": "h_01GJ33R2BZ1HEWB9DT772KX8J5",
+          "text": "Public vs. private API key security checkup"
+        },
+        {
+          "level": 3,
+          "id": "h_01HTFJ2JCBKD7XX4YTJ30KDP13",
+          "text": "Verify that all client-side code uses your public API key"
+        },
+        {
+          "level": 3,
+          "id": "h_01EPWC58AT8C1BEP4HZGXNNCG6",
+          "text": "What to do if your private API key was exposed"
+        },
+        {
+          "level": 2,
+          "id": "h_01GJ33R9C41E21390FTKJW9VJ5",
+          "text": "User management and data access checkup"
+        },
+        {
+          "level": 2,
+          "id": "h_01HTFJ2JCBXZHR7YRRFDC47767",
+          "text": "Additional resources"
+        }
+      ]
+    },
+    "rendered_page": {
+      "images": [
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/7ff492c2b417b7ecfe572f839a8a81398693c1f7-1920x1080.webp",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/4b4d39253502f354dd6401b03dfc8d02e5ea8f9c-1398x834.png",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/200961b36f778a109f08603481a19c103f61af3d-1840x548.jpg",
+          "alt": "Users tab in account settings",
+          "width": "",
+          "height": ""
+        }
+      ],
+      "links": [
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360052448451-How-to-keep-your-account-secure#site-content",
+          "text": "Skip to main content"
+        },
+        {
+          "href": "https://www.klaviyo.com",
+          "text": "Home"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center"
+        },
+        {
+          "href": "https://www.klaviyo.com/enterprise",
+          "text": "Enterprise"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Partners"
+        },
+        {
+          "href": "https://www.klaviyo.com/careers",
+          "text": "Careers"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": "Log in"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": ""
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center Find step-by-step instructions and troubleshooting solutions in our knowledge base."
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000032731",
+          "text": "Integrations"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000312411",
+          "text": "Flows"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867867",
+          "text": "Audience"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867667",
+          "text": "Campaigns"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/360000190711",
+          "text": "Sign-up forms"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000873988",
+          "text": "Deliverability & compliance"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/29173800271259",
+          "text": "SMS"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/16638219724187",
+          "text": "Reviews"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/18073014919195",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/34141283979931",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/37659126754075",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/33948021740315",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/39746685522331",
+          "text": "WhatsApp"
+        },
+        {
+          "href": "https://academy.klaviyo.com",
+          "text": "Klaviyo Academy Expert training and education to help you succeed with Klaviyo, and beyond."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Quick+guide&resource=academy_courses",
+          "text": "Quick guides Learn marketing strategies and concepts in 15 minutes or less."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Course&resource=academy_courses",
+          "text": "Courses Master key marketing topics through structured lessons and exams."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/best-practices",
+          "text": "Best practices Discover top product and marketing strategies for your business."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/learning-paths",
+          "text": "Learning paths Complete curated learning journeys tailored to your marketing goals."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses",
+          "text": "Explore all resources"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Live+training&resource=academy_courses",
+          "text": "Live trainings Build confidence through hands-on interactive workshops and thought-provoking strategy sessions."
+        },
+        {
+          "href": "https://www.bigmarker.com/klaviyo-customer-education/Office-hours-Getting-started-with-Klaviyo",
+          "text": "Live office hours Join a strategic discussion where you can ask questions and get answers in real-time."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/private-live-training",
+          "text": "1:1 Live training Book a private training session with an expert to jumpstart your platform knowledge and confidence."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/credentials",
+          "text": "Klaviyo credentials Dig deeper into select topics and showcase your expertise with a final exam to earn a certificate and digital badge."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/certificates/klaviyo-practitioner-certificate",
+          "text": "Klaviyo practitioner certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/deliverability-certificate",
+          "text": "Deliverability certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/developer-certificate",
+          "text": "Klaviyo developer certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses&select=Certificate",
+          "text": "See all certificates"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Klaviyo Community Join our thriving community network to connect with brands like yours—online and in person."
+        },
+        {
+          "href": "https://community.klaviyo.com/topic/new",
+          "text": "Ask a question Post a question and get thoughtful answers from Klaviyo powerusers."
+        },
+        {
+          "href": "https://community.klaviyo.com/p/roadmap",
+          "text": "Product roadmap"
+        },
+        {
+          "href": "https://community.klaviyo.com/search/activity/recent",
+          "text": "Recent threads"
+        },
+        {
+          "href": "https://community.klaviyo.com/p/champions",
+          "text": "Meet the Champions"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups",
+          "text": "Browse all groups Your people are waiting. New ideas and connections are a click away."
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/developer-group-64",
+          "text": "Developer group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/entrepreneur-user-group-118",
+          "text": "Entrepreneur group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/woo-user-group-87",
+          "text": "WooCommerce group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/new-york-meetup-chapter-82",
+          "text": "New York City"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/los-angeles-meetup-chapter-83",
+          "text": "Los Angeles"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/austin-meetup-chapter-85",
+          "text": "Austin"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/san-diego-meetup-chapter-86",
+          "text": "San Diego"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/amsterdam-meetup-chapter-84",
+          "text": "Amsterdam"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Klaviyo Developers Access API documentation and developer guides to help you build with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/get_started",
+          "text": "Get started Access key resources and a step-by-step checklist for how to start developing with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/build_your_integration",
+          "text": "Grow your app's reach Learn how to join our ecosystem and get your app listed on our marketplace."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/developer-tools",
+          "text": "Developer tools Generate sample data, monitor your API usage, and access our Postman collections."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/reference/api_overview",
+          "text": "API reference Browse our full catalog of API docs."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/changelog_",
+          "text": "Changelog"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/api_versioning_and_deprecation_policy",
+          "text": "Versioning & deprecation policy"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/rate_limits_and_error_handling",
+          "text": "Rate limits & error handling"
+        },
+        {
+          "href": "https://youtube.com/playlist?list=PLHkNfHgtxcUanrkMnKPdkRzuWU7MGv_xM&si=pkG-KH7IT_TUHOGC",
+          "text": "API tutorials on YouTube Subscribe to our Klaviyo API Tutorials playlist for easy access to step-by-step developer walkthroughs."
+        },
+        {
+          "href": "https://www.klaviyo.com/contact-us",
+          "text": "Contact us"
+        },
+        {
+          "href": "https://www.klaviyo.com/sign-up",
+          "text": "Sign up"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": "Search"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360052448451",
+          "text": "United States - EN"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/de-de/articles/360052448451",
+          "text": "Deutschland - DE"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-es/articles/360052448451",
+          "text": "España - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-mx/articles/360052448451",
+          "text": "México - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/fr-fr/articles/360052448451",
+          "text": "France - FR"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/it-it/articles/360052448451",
+          "text": "Italia - IT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/ko-kr/articles/360052448451",
+          "text": "한국 - KO"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/nl-nl/articles/360052448451",
+          "text": "Nederland - NL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pl-pl/articles/360052448451",
+          "text": "Polska - PL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pt-br/articles/360052448451",
+          "text": "Brasil - PT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/sv-se/articles/360052448451",
+          "text": "Sverige - SV"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867647",
+          "text": "Account & billing"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/14542887837083",
+          "text": "Account"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/49375463241883",
+          "text": "API keys"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360052448451-How-to-keep-your-account-secure#h_01HTFJ2JCBBKQWSS8SZBR7KEV8",
+          "text": "You will learn"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360052448451-How-to-keep-your-account-secure#h_01HTFJ2JCBJQH5R5PQKE0Q2WG5",
+          "text": "Before you begin"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360052448451-How-to-keep-your-account-secure#h_01GJ33R2BZ1HEWB9DT772KX8J5",
+          "text": "Public vs. private API key security checkup"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360052448451-How-to-keep-your-account-secure#h_01GJ33R9C41E21390FTKJW9VJ5",
+          "text": "User management and data access checkup"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360052448451-How-to-keep-your-account-secure#additional-resources",
+          "text": "Additional resources"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360052448451-How-to-keep-your-account-secure#h_01GJ33R2BZ1HEWB9DT772KX8J5",
+          "text": "Public versus private API key security checkup"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360052448451-How-to-keep-your-account-secure#h_01GJ33R9C41E21390FTKJW9VJ5",
+          "text": "User review and access checkup"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/introduction_to_the_klaviyo_object",
+          "text": "Learnq, klOnsite, or Klaviyo objects"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/reference/create_client_subscription",
+          "text": "client-side API endpoints"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360020342232",
+          "text": "install Klaviyo.js manually"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360052448451-How-to-keep-your-account-secure#h_01EPWC58AT8C1BEP4HZGXNNCG6",
+          "text": "below"
+        },
+        {
+          "href": "https://www.klaviyo.com/account#api-keys-tab",
+          "text": "account settings"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005062267",
+          "text": "Manage Your Accounts API Keys"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005231648",
+          "text": "User management and privileges"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360026617692",
+          "text": "Multi-factor authentication"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005062267",
+          "text": "How to manage your account's API keys"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005231648",
+          "text": "User management and privileges reference for Static User Roles"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115001002272",
+          "text": "Learn how to contact support"
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": ""
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": "Visit Community"
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": ""
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": "Hire a partner"
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/about",
+          "text": "About Klaviyo"
+        },
+        {
+          "href": "https://www.klaviyo.com/newsroom",
+          "text": "Newsroom"
+        },
+        {
+          "href": "https://investors.klaviyo.com/overview/default.aspx",
+          "text": "Investor relations"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Agency and tech partners"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Developers"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/retail",
+          "text": "Retail and ecommerce"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/restaurants",
+          "text": "Restaurant marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/wellness",
+          "text": "Wellness"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform",
+          "text": "B2C CRM overview"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai",
+          "text": "Klaviyo AI (K:AI)"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/marketing-automation",
+          "text": "Klaviyo Marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-service",
+          "text": "Klaviyo Service"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/analytics",
+          "text": "Klaviyo Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-data-platform",
+          "text": "Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare",
+          "text": "Klaviyo vs. Klaviyo alternatives"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-mailchimp",
+          "text": "Klaviyo vs. Mailchimp"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-postscript",
+          "text": "Klaviyo vs. Postscript"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-attentive",
+          "text": "Klaviyo vs. Attentive"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-salesforce-marketing-cloud",
+          "text": "Klaviyo vs. Salesforce"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-listrak",
+          "text": "Klaviyo vs. Listrak"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/omnichannel",
+          "text": "Omnichannel marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/email-marketing",
+          "text": "Email marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing",
+          "text": "SMS marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing/rcs",
+          "text": "RCS for Business"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/mobile-app-marketing",
+          "text": "Mobile app marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/whatsapp",
+          "text": "WhatsApp marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/social",
+          "text": "Social marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources",
+          "text": "Marketing resources"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources/marketing-campaign-calendar",
+          "text": "Marketing campaign calendar"
+        },
+        {
+          "href": "https://www.klaviyo.com/glossary",
+          "text": "Marketing glossary"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/email-subject-line-generator",
+          "text": "Subject line generator"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/roi-calculator",
+          "text": "ROI calculator"
+        },
+        {
+          "href": "https://www.klaviyo.com/customers",
+          "text": "Case studies"
+        },
+        {
+          "href": "https://www.klaviyo.com/composer",
+          "text": "Composer Beta"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/marketing-agent",
+          "text": "Marketing Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/customer-agent",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/customer-experience-hub",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/helpdesk",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/marketing-analytics",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/advanced-cdp",
+          "text": "Advanced Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/web-forms",
+          "text": "Web forms"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/email-templates",
+          "text": "Email templates"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/portfolio",
+          "text": "Portfolio"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform-integrations",
+          "text": "Apps and Integrations"
+        },
+        {
+          "href": "https://www.klaviyo.com/features",
+          "text": "Features"
+        },
+        {
+          "href": "https://www.klaviyo.com/whats-new",
+          "text": "What's new"
+        },
+        {
+          "href": "https://www.klaviyo.com/events",
+          "text": "Events"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help Center"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us",
+          "text": "Academy"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Community"
+        },
+        {
+          "href": "https://www.facebook.com/Klaviyo/",
+          "text": "Facebook"
+        },
+        {
+          "href": "https://twitter.com/klaviyo/",
+          "text": "Twitter"
+        },
+        {
+          "href": "https://www.linkedin.com/company/klaviyo/",
+          "text": "LinkedIn"
+        },
+        {
+          "href": "https://www.instagram.com/klaviyo/",
+          "text": "Instagram"
+        },
+        {
+          "href": "https://www.klaviyo.com/sitemap",
+          "text": "Site Map"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal",
+          "text": "Terms and Privacy"
+        },
+        {
+          "href": "https://www.klaviyo.com/security",
+          "text": "Security"
+        },
+        {
+          "href": "https://www.klaviyo.com/trust",
+          "text": "Trust"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal/intellectual-property-notices",
+          "text": "Intellectual Property Notices"
+        }
+      ],
+      "headings": [
+        {
+          "level": 1,
+          "id": "",
+          "text": "How to keep your account secure"
+        },
+        {
+          "level": 2,
+          "id": "h_01HTFJ2JCBBKQWSS8SZBR7KEV8",
+          "text": "You will learn"
+        },
+        {
+          "level": 2,
+          "id": "h_01HTFJ2JCBJQH5R5PQKE0Q2WG5",
+          "text": "Before you begin"
+        },
+        {
+          "level": 2,
+          "id": "h_01GJ33R2BZ1HEWB9DT772KX8J5",
+          "text": "Public vs. private API key security checkup"
+        },
+        {
+          "level": 3,
+          "id": "h_01HTFJ2JCBKD7XX4YTJ30KDP13",
+          "text": "Verify that all client-side code uses your public API key"
+        },
+        {
+          "level": 3,
+          "id": "h_01EPWC58AT8C1BEP4HZGXNNCG6",
+          "text": "What to do if your private API key was exposed"
+        },
+        {
+          "level": 2,
+          "id": "h_01GJ33R9C41E21390FTKJW9VJ5",
+          "text": "User management and data access checkup"
+        },
+        {
+          "level": 2,
+          "id": "additional-resources",
+          "text": "Additional resources"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "Explore more from Klaviyo"
+        }
+      ]
+    }
+  },
+  "rendered_page": {
+    "status": "fetched",
+    "error": ""
+  }
+}

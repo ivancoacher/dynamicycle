@@ -1,0 +1,236 @@
+<p>Learn how to create a product feed in Klaviyo in order to use product recommendations in your messaging. Product feeds take in data from your product catalog and customer behavior (e.g., the products they’ve viewed or purchased in the past) and use this information to provide custom product recommendations for your subscribers.</p>
+<p>Product blocks are only supported in Klaviyo's drag-and-drop and hybrid email editors. To add a product block to a custom HTML email, <a href="https://klaviyo.zendesk.com/hc/en-us/articles/115005254188">create a hybrid email</a>. </p>
+<p>
+<script src="https://fast.wistia.com/embed/medias/k77fbjpjog.jsonp" async="async"></script>
+<script src="https://fast.wistia.com/assets/external/E-v1.js" async="async"></script>
+</p>
+<div class="wistia_responsive_padding" style="padding: 56.25% 0 0 0; position: relative;">
+<div class="wistia_responsive_wrapper" style="height: 100%; left: 0; position: absolute; top: 0; width: 100%;">
+<div class="wistia_embed wistia_async_k77fbjpjog seo=false videoFoam=true" style="height: 100%; position: relative; width: 100%;">
+<div class="wistia_swatch" style="height: 100%; left: 0; opacity: 0; overflow: hidden; position: absolute; top: 0; transition: opacity 200ms; width: 100%;"><img style="filter: blur(5px); height: 100%; object-fit: contain; width: 100%;" src="https://fast.wistia.com/embed/medias/k77fbjpjog/swatch" alt="" aria-hidden="true"></div>
+</div>
+</div>
+</div>
+<p></p>
+<h2 id="h_01HA7KGGHD9JBBEE8ZX00532XK">Key terms</h2>
+<ul>
+<li>
+<strong>Catalog</strong><br>
+A catalog is a list of your products synced from your ecommerce integration into Klaviyo. View your catalog by clicking <strong>Content &gt; Products</strong> in the Klaviyo sidebar. </li>
+</ul>
+<div class="accordion accordion--default">
+<div class="accordion__item">
+<div class="accordion__item-title"><strong>Product catalog limits</strong></div>
+<div class="accordion__item-content">
+<ul>
+<li>Item limit: 250000</li>
+<li>Product variant limit: 500000</li>
+<li>Category limit: 2500</li>
+</ul>
+<p>To request a limit raise, reach out to the <a href="https://help.klaviyo.com/hc/en-us/articles/115001002272">Klaviyo support team</a>.</p>
+</div>
+</div>
+</div>
+<ul>
+<li>
+<strong>Custom catalog</strong><br>
+A custom catalog is any catalog synced to Klaviyo through the <a href="https://developers.klaviyo.com/en/docs/guide_to_syncing_a_custom_catalog_feed_to_klaviyo">custom catalog process</a> or via API, rather than through a built-in Klaviyo ecommerce integration. </li>
+<li>
+<strong>Product feed</strong><br>
+Product feeds are sets of products selected based on rules you set in Klaviyo. You can choose to include or exclude products from a feed based on category, price, stock level, and how your customers have engaged with your products. </li>
+<li>
+<strong>Product block</strong><br>
+A product block is a type of block used in a Klaviyo email template. When you add a product block to a template, you can choose which product feed it should display products from, or manually select specific products. </li>
+</ul>
+<h2 id="h_01HA7KGGHDTP8QZ2SKRS9YTAMP">Before you begin</h2>
+<div class="bs-callout bs-callout-default">
+<p>Product feeds do not support OAuth authentication.</p>
+</div>
+<p>Product feeds are available by default for the following ecommerce integrations:</p>
+<ul>
+<li><a href="https://help.klaviyo.com/hc/en-us/articles/115005080407-Guide-to-Integrating-with-Shopify">Shopify</a></li>
+<li><a href="https://help.klaviyo.com/hc/en-us/articles/115005255808-How-to-Integrate-with-WooCommerce">WooCommerce</a></li>
+<li><a href="https://help.klaviyo.com/hc/en-us/articles/115005082547-How-to-Integrate-with-BigCommerce">BigCommerce</a></li>
+<li>Magento <a href="https://help.klaviyo.com/hc/en-us/articles/115005082187-How-to-Integrate-with-Magento-1-x-CE-and-EE-">1</a> and <a href="https://help.klaviyo.com/hc/en-us/articles/115005254348-How-to-Integrate-with-Magento-2-x-CE-and-EE-">2</a>
+</li>
+<li><a href="https://help.klaviyo.com/hc/en-us/articles/360054551492-How-to-Integrate-with-PrestaShop">PrestaShop</a></li>
+<li>For all PrestaShop integrations created after January 25, 2023, product prices synced to your Klaviyo product catalog via the PrestaShop integration include VAT.</li>
+<li><a href="https://help.klaviyo.com/hc/en-us/articles/360033744951-How-to-Integrate-with-Salesforce-Commerce-Cloud">Salesforce Commerce Cloud</a></li>
+<li><a href="https://help.klaviyo.com/hc/en-us/articles/115005255448-How-to-Integrate-with-Spree">Spree</a></li>
+<li><a href="https://help.klaviyo.com/hc/en-us/articles/11117215837211">Square</a></li>
+<li><a href="https://klaviyo.zendesk.com/hc/en-us/articles/6202669053723">Wix</a></li>
+<li><a href="https://klaviyo.zendesk.com/hc/en-us/articles/360020156011">Mi9</a></li>
+<li><a href="https://help.klaviyo.com/hc/en-us/articles/360033744951">Salesforce Commerce Cloud</a></li>
+<li>
+<a href="https://help.klaviyo.com/hc/en-us/articles/115005083107">Shift4Shop</a><br>
+<p>If you use an ecommerce platform that is not listed above, sync your product catalog into Klaviyo by following our guide on <a href="https://developers.klaviyo.com/en/docs/guide_to_syncing_a_custom_catalog_feed_to_klaviyo">how to sync a custom catalog feed to Klaviyo</a>, or via <a href="https://developers.klaviyo.com/en/reference/create_catalog_item">API</a>. </p>
+<p>The following will not appear in product recommendations:</p>
+</li>
+<li>Items without associated images</li>
+<li>Items that have already been purchased by the recipient</li>
+<li>Out of stock items</li>
+<li>Items in the flow trigger event for a given email</li>
+</ul>
+<div class="bs-callout bs-callout-default">
+<p>Recommendations based on viewed products are not available if you have not yet set up <em>Viewed Product</em> tracking. Learn <a href="https://help.klaviyo.com/hc/en-us/articles/115005076767-Guide-to-Klaviyo-Onsite-Tracking#viewed-product-tracking3">how to set up Viewed Product tracking for your ecommerce store</a>. </p>
+</div>
+<p>The option to base recommendations on “Products customer has added to cart” is informed by either the <em>Added to Cart</em> or <em>Checkout Started </em>metric in your account. If you have not set up <em>Added to Cart </em>tracking (which is tracked automatically for most ecommerce platforms, but must be manually enabled for <a href="https://help.klaviyo.com/hc/en-us/articles/115001396711-How-to-create-an-Added-to-Cart-event-for-Shopify">Shopify</a> and <a href="https://help.klaviyo.com/hc/en-us/articles/360024310292-Guide-to-Creating-an-Added-to-Cart-Event-for-BigCommerce">BigCommerce</a>) those recommendations will only rely on <em>Checkout Started</em>.</p>
+<h2 id="h_01HA7KGGHDCQ4196N1S3PTDRMN">Configure a product feed</h2>
+<ol>
+<ol>
+<li>In Klaviyo, select <strong>Content</strong> in the left hand menu.</li>
+<li>In the dropdown, click <strong>Products</strong>. </li>
+<li>Select the <strong>Product feed</strong> tab, then click <strong>Create Product Feed</strong>.</li>
+<li>Name your feed.</li>
+<li>If you have more than one catalog in your Klaviyo account, select the catalog you intend to use. If you only have one catalog, you will not see this option.</li>
+<li>Under <em>What products should the customers view first?</em>, select an option from the dropdown. You can choose an option that is <em>Classic</em> or <em>Personalized for each customer</em>. Note that <em>Products a customer has recently viewed</em> and <em>Products a customer has added to cart</em> will look at the last 90 days.<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/25803026546459" alt="Personalized product feeds" width="545" height="405">
+</li>
+<li>Depending on what option you select, you may be prompted to choose an additional filter. For instance, <em>Product customers may also like</em> can be informed by a number of metrics, such as a customer’s view or purchase history. For some other options (such as <em>Best-selling products</em>) you can choose the timeframe to be over the last 3 days or over the last 90 days. </li>
+<li>If you selected an option under <em>Personalized for each customer</em>, you’ll be prompted with an additional question: If the customer has limited history, what should they view instead? Choose an option from the dropdown for this default. Note that these defaults are across all customers and are not personalized.<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/9038637974683" alt="Dropdown labeled If the customer has limited history, what should they view instead? with Classic options such as Best-selling items" width="366" height="205">
+</li>
+<li>Optionally, select filters under <em>What additional filters would you like to apply?</em><br>
+<ul>
+<ul>
+<li>You can filter based on <em>category includes</em> or <em>category excludes</em>. When selecting <em>category includes</em> or <em>category excludes</em>, you can select one or multiple categories for the input. When selecting either option, you can also choose whether to match <em>any of </em>or <em>all of </em>the selected categories.
+<ul>
+<li>
+<em>Any of </em>means items that match <em>at least one</em> of the selected categories will be included or excluded (an <em>OR </em>condition).</li>
+<li>
+<em>All of </em>means items that match <em>every</em> selected category will be included or excluded (an <em>AND </em>condition).</li>
+</ul>
+</li>
+<li>You can select one or multiple categories for each filter input. When multiple categories are selected and <em>any of </em>is chosen, any item belonging to at least one of the selected categories will be included. When <em>all of </em>is selected, only items that belong to all selected categories will be included.<br>
+In the <em>includes</em> and <em>all of</em> example below, any item in both the Tshirts and Grey category will be included.<br>
+<br>
+In the <em>excludes</em> and <em>any of</em> example below, if an item is either a Tshirt or Grey, it will be excluded. For example, both grey pants and red tshirts would be excluded, but red pants would be included.<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/41949116242843" alt="Screenshot 2025-10-09 at 2.35.18 PM.png">
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/41949116246299" alt="Screenshot 2025-10-09 at 2.41.04 PM.png">
+</li>
+<li>You can filter based on <em>stock level </em>and set a minimum and maximum. For both <em>stock level</em> and <em>price </em>you can leave either the minimum or the maximum blank (indicating a minimum of 0 or no maximum, respectively) but you must set either the minimum or maximum. </li>
+<li>You can filter based on <em>price</em> and set a minimum and maximum.</li>
+<li>You can add multiple filters by clicking <strong>Add filter</strong> and making another selection. </li>
+</ul>
+</ul>
+</li>
+<li>When you’re finished configuring your feed, click <strong>Save Product Feed</strong>. </li>
+<li>You will be prompted to name your feed. Use a name that is descriptive, contains no spaces or special characters, and does not begin with an underscore (_).</li>
+<li>Click <strong>Save Product Feed</strong>. </li>
+</ol>
+</ol>
+<h2 id="h_01HA7KGGHD1DAK840A6BRS38Z1">Use a product feed in an email </h2>
+<ol>
+<li>Open an email in Klaviyo (i.e., an email template, unsent campaign, or flow email). </li>
+<li>Drag a <em>Product</em> block into your email. <br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/16744753461019" alt="A product block" width="360" height="611">
+</li>
+<li>Leave the content type set to <em>Dynamic</em> (which is the default setting).</li>
+<li>From the <em>Product feed</em> menu, choose a product feed.<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/12125647454491" alt="A product block with a product feed selected in the email template editor" width="363" height="416">
+</li>
+<li>Choose which product details to display. Options include the item’s title, item’s price, and a customizable button. If all of these options are toggled off, each product’s image will appear without accompanying text. For more details on all available settings, check out our article <a href="https://help.klaviyo.com/hc/en-us/articles/115000219092-How-to-insert-a-product-block">How to insert a product block.</a>
+</li>
+<li>Choose how many products should appear under <em>Layout</em> by selecting a number of rows and a number of items per row. Multiply the number of rows by the number of items per row to calculate how many products will appear (e.g., 2 rows with 3 items per row will display 6 items, 1 row with 1 item per row will display 1 item).</li>
+<li>Adjust any other color, font, and style settings as desired, then click <strong>Done</strong>. </li>
+<li>Click <strong>Preview and Test</strong> to see a preview of your message with products from your catalog. If you aren’t seeing the results you expect, head to the FAQs section below for troubleshooting help. </li>
+</ol>
+<div class="bs-callout bs-callout-default">
+<p>You can select any existing product feed or create a new one from within the template editor. To make edits to an existing product feed, navigate to <strong>Content &gt; Products &gt; Manage Product Feeds</strong>, then select a feed and edit it. </p>
+</div>
+<h2 id="h_01HA7KGGHDCZR8K26CBMZQ7X2G">Product feed use cases </h2>
+<p>Below are examples of how you can use a product feed in your emails. </p>
+<h3 id="h_01HA7KGGHDXYXPFPP9PP401PEE">Product feed above footer</h3>
+<p>Consider including a small product feed (e.g., 1 row with 3 items) at the end of your email content. These recommendations can serve as a final opportunity for a recipient to click through to your website if they’ve read to the bottom of your email and still haven’t converted. Use a feed based on products a customer may also like, or a feed of your most popular products. </p>
+<p class="wysiwyg-text-align-center"><img src="https://klaviyo.zendesk.com/hc/article_attachments/12041842908699" alt="Product recommendations in an email footer" width="545" height="333"></p>
+<h3 id="h_01HA7KGGHDJEJ37TWJQ1ZAX03K">Browse abandonment flow email</h3>
+<p>Use a product feed based on the items someone has recently viewed in your browse abandonment flow. This can encourage casual site visitors to return and complete an order they were considering previously. Learn how to <a href="https://help.klaviyo.com/hc/en-us/articles/360019921772-How-to-insert-recently-viewed-items-into-an-email">insert recently viewed items into an email</a>. </p>
+<h3 id="h_01HA7KGGHDE36JTBC42T1E7VY1">Welcome email featuring bestsellers</h3>
+<p>Consider adding a product feed with your best-selling products to your welcome flow. This can help introduce new subscribers to the products your customers love the most. Because you’re using a dynamic feed (rather than manually inserting products), the items shown will automatically update throughout the year based on stock levels and customer trends.</p>
+<h2 id="h_01HA7KGGHEDAPZQZSZJJFMCX5H">FAQs</h2>
+<div class="accordion accordion--default">
+<div class="accordion__item">
+<div class="accordion__item-title"><strong>My feed is set to be personalized for each customer. Why is my product block showing the same product to all recipients?</strong></div>
+<div class="accordion__item-content">
+<p>When dynamic recommendations aren’t available, Klaviyo falls back to the secondary recommender you’ve selected (i.e., best-selling or most viewed products). This can happen when: </p>
+<ul>
+<li>An email recipient doesn’t have enough data for us to provide personalized recommendations.</li>
+<li>The feed was created recently, and hasn’t yet been fully trained. It typically takes 2 days to a week for Klaviyo’s systems to train the model.</li>
+<li>Your <em>Viewed product</em> or <em>Ordered product</em> events are very recent. Your product feed recommendation models are generally trained once every 2-7 days, depending on use. It may take a few days for the recommendation model to consider brand-new events.</li>
+</ul>
+</div>
+</div>
+<div class="accordion__item">
+<div class="accordion__item-title"><strong>What integrations support the price and inventory filters?</strong></div>
+<div class="accordion__item-content">
+<p>We support price and inventory filters for the following integrations:</p>
+<ul>
+<li>Shopify</li>
+<li>BigCommerce</li>
+<li>Magento 2</li>
+</ul>
+<p>Price and inventory filters are available for variants in custom catalogs as well.<br>
+</p>
+</div>
+</div>
+<div class="accordion__item">
+<div class="accordion__item-title"><strong>How does the “Newest products” recommender work? What date does it use to sort products?</strong></div>
+<div class="accordion__item-content">
+<p>We use a “created_at” timestamp that is specific to Klaviyo. This means that when you first sync your catalog, every product in the catalog will have the same “created_at” value, so the newest products recommender will not be useful at first. Once you’ve added some new items to your catalog after the initial sync, you should start to see the expected behavior.</p>
+<p>This also means that items will not be prioritized by the recommender just because they’ve been “updated” or have recently come back in stock. This recommender will only prioritize net new products added to your catalog.</p>
+</div>
+</div>
+<div class="accordion__item">
+<div class="accordion__item-title"><strong>I applied a price or inventory filter, but I see an item in the product block that is outside the range I specified. Why is this?</strong></div>
+<div class="accordion__item-content">
+<p>Filters apply to variants, but product blocks render items. If the sum of the inventory for all variants of a product is above the threshold of the filter, it is eligible to show within a product block. Items have default images and prices, so it’s possible an item will show an image and price of a variant that doesn’t exactly match the price or inventory filter.</p>
+</div>
+</div>
+<div class="accordion__item">
+<div class="accordion__item-title"><strong>What currency do the price filters use?</strong></div>
+<div class="accordion__item-content">
+<p>It depends on how the item was configured in your ecommerce platform. Klaviyo will use whatever currency value the catalog uses.</p>
+</div>
+</div>
+<div class="accordion__item">
+<div class="accordion__item-title"><strong>Where are web feeds?</strong></div>
+<div class="accordion__item-content">
+<p>If you are looking to set up a web feed (instead of a product feed), click your account name in the lower left corner, then navigate to <strong>Settings &gt; Other &gt;</strong><strong>Web Feeds</strong>. From here, you can add a new web feed. </p>
+</div>
+</div>
+<div class="accordion__item">
+<div class="accordion__item-title"><strong>What happened to “trending?”</strong></div>
+<div class="accordion__item-content">
+<p>The "trending" option is now expressed as a look back window of "3 days." Any option that uses "over the past 3 days" will be a version of the old "Trending" order.</p>
+</div>
+</div>
+<div class="accordion__item">
+<div class="accordion__item-title"><strong>I’m using some custom statistics to power product recommendations. Will these be compatible with the new experience?</strong></div>
+<div class="accordion__item-content">
+<p>Yes. For details, please refer to our developer portal article, <a href="https://developers.klaviyo.com/en/docs/guide_to_syncing_a_custom_catalog_feed_to_klaviyo">Sync a custom catalog feed to Klaviyo</a>.</p>
+</div>
+</div>
+<div class="accordion__item">
+<div class="accordion__item-title"><strong>How does the “Recently viewed” recommender work?</strong></div>
+<div class="accordion__item-content">
+<p>We use a model that weighs both recency and frequency of views to order the products. This means that if a customer viewed a product 5 times yesterday, and a different product once today, we may still prioritize the product they viewed 5 times because we take view frequency into account.</p>
+</div>
+</div>
+<div class="accordion__item">
+<div class="accordion__item-title"><strong>How is "Best-selling" calculated?</strong></div>
+<div class="accordion__item-content">
+<p>Best-selling products are identified based on the number sold, with more weight given to more recent purchases. An item's purchase price is not taken into consideration when identifying best-selling products.</p>
+</div>
+</div>
+<div class="accordion__item">
+<div class="accordion__item-title"><strong>How are "Products a customer may also like" determined?</strong></div>
+<div class="accordion__item-content">
+<p>"Products a customer may also like" uses AI to recommend exactly the right product in your emails. Klaviyo uses collaborative filtering to predict what a recipient is likely to buy next, based on what they have ordered in the past and how they're similar to other customers. While the model may include products someone has viewed, it doesn't exclusively show these products. The model takes a look at the behavior of other customers in your account - for instance, if Klaviyo sees customers have commonly viewed products A, B, and C together, and a given customer has only viewed A and B, then we'll show them product C.</p>
+</div>
+</div>
+</div>

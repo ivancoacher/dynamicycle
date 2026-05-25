@@ -1,0 +1,115 @@
+<h2 id="h_01HMH917NWDJ9FKRBTKWBBGJ7W">You will learn</h2>
+<p>Learn about custom CSS for Klaviyo Reviews, including how to implement some basic use cases. For more advanced use cases, head to our <a href="https://developers.klaviyo.com/en/docs/klaviyo_reviews_css_class_reference">developer resource on custom CSS for Klaviyo Reviews</a>. Most widget customization can be implemented using <a href="https://help.klaviyo.com/hc/en-us/articles/16691401577883">drag and drop editors</a>; CSS is only required for advanced use cases. </p>
+<div class="bs-callout bs-callout-default">
+<p>Implementing custom CSS for your reviews widgets involves editing your site’s code. This is only recommended for technically savvy marketers or those who have access to a developer. While our product does support custom CSS, our support team cannot help you customize your widgets beyond the general guidance covered in this documentation. To maintain the security of your data, Klaviyo's support team is not able to open your HTML files.</p>
+</div>
+<h2 id="h_01HMH917NWXQWWSKPJCM7FQNXS">About custom CSS for Klaviyo Reviews </h2>
+<p>Klaviyo Reviews provides a wide range of CSS class selectors, which can be used to write custom CSS and apply advanced styling options to your reviews widgets. For more information, head to our <a href="https://developers.klaviyo.com/en/docs/klaviyo_reviews_css_class_reference">complete dictionary of Klaviyo Reviews CSS classes</a>. </p>
+<h2 id="h_01HMH917NWR67NKZNWGQXVB1Q5">How to apply custom CSS </h2>
+<p>You can apply custom CSS to Klaviyo Reviews in the same manner you’d apply any other custom CSS: </p>
+<ul>
+<li>Add custom CSS to your site’s main CSS stylesheet.</li>
+<li>Insert &lt;style&gt; tags within a single page’s code to apply CSS to that page.</li>
+<li>Embed CSS in a single HTML element (e.g., a div) to apply it just to that element.</li>
+<li>Add custom CSS to your entire site in <strong>Theme Settings &gt; Custom CSS</strong> (Shopify) or <strong>Styles &gt; CSS</strong> (WooCommerce). </li>
+</ul>
+<p>We’ll focus on the last option here, because it is the simplest to implement. </p>
+<p>Note that Klaviyo Reviews, including the default styles, generally load after CSS from from your ecommerce platform. This means it’s important to use precise selectors, so your custom CSS isn’t overwritten by the defaults. </p>
+<h3 id="h_01J18FCDMB589JBXHF4ZD3YF8D">Apply custom CSS for Shopify</h3>
+<ol>
+<li>In your Shopify admin, navigate to <strong>Online Store &gt; Themes</strong>. </li>
+<li>From the additional options menu (3 dots) for your current theme, click <strong>Duplicate.</strong><br>
+<br>
+It’s not recommended to make edits to your current theme while it is live, as these edits may appear to site visitors before you can review the changes and troubleshoot any issues. <br>
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28717854192283" alt="duplicate your theme" width="690" height="285">
+</li>
+<li>Click <strong>Customize</strong> next to the new copy of your theme. </li>
+<li>Click the Theme settings icon.<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28717881714203" alt="theme settings button" width="287" height="212">
+</li>
+<li>Select <strong>Custom CSS</strong> from the menu.<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28717854198427" alt="custom css field" width="312" height="572">
+</li>
+<li>Add your custom CSS.<br>
+
+<div class="bs-callout bs-callout-default">
+<p>Sample CSS snippets are available in the section below to copy. </p>
+</div>
+</li>
+<li>Navigate to a page in the editor where your reviews widgets appear (e.g., <strong>Default product</strong>). </li>
+<li>Review the edits, then click <strong>Publish</strong>. </li>
+</ol>
+<h3 id="h_01J18FEFE4N94VC7B2EAKMGA6D">Add custom CSS for WooCommerce</h3>
+<p>You must use a page ID selector,<code>.page-id-YOUR_PAGE_ID</code> , to apply CSS to a specific page or pages. Learn how to <a href="https://wordpress.com/support/pages/#find-the-page-id">find a page ID</a>.</p>
+<ol>
+<li>In your Wordpress admin, navigate to <strong>Appearance &gt; Editor</strong>. </li>
+<li>Select <strong>Styles</strong>. <br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28717854201883" alt="The Styles option" width="311" height="349">
+</li>
+<li>Open the three dots (<em>More</em>) menu. </li>
+<li>Select <strong>Additional CSS</strong>. <br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28717881720347" alt="The Additional CSS option" width="321" height="267">
+</li>
+<li>Add your custom CSS.<br>
+
+<div class="bs-callout bs-callout-default">
+<p>Sample CSS snippets are available in the section below to copy. </p>
+</div>
+</li>
+<li>Review the edits, then click <strong>Publish</strong>. </li>
+</ol>
+<h2 id="h_01HMH917NWR333MKYZS00J63MJ">Custom CSS use cases </h2>
+<p>The CSS snippets below cover some basic use cases. More advanced customization requires developer support. If you don't have a developer on your team and are not comfortable writing code yourself, consider reaching out to a <a href="https://connect.klaviyo.com/">Klaviyo Partner</a> for assistance.</p>
+<div class="accordion accordion--default">
+<div class="accordion__item">
+<div class="accordion__item-title"><strong>Rating icon (star) appearance</strong></div>
+<div class="accordion__item-content">
+<p>Replace the URLs below with image URLs representing your preferred full star, partial star, and empty star, respectively. Note that for Shopify stores, your URLs must reference images stored in Shopify, due to their rules.  </p>
+<pre><code class="language-text">
+#klaviyo-product-reviews-wrapper {
+  .kl_reviews__star {
+    display: none;
+  }
+  .kl_reviews__full_star {
+    background-image: url("https://cdn.shopify.com/s/files/1/0284/3128/6351/files/full-moon.png?v=1705073898"); 
+    background-size: cover;
+  }
+  .kl_reviews__partial_star {
+    background-image: url("https://cdn.shopify.com/s/files/1/0284/3128/6351/files/last-quarter-moon.png?v=1705073898");
+    background-size: cover;
+  }
+  .kl_reviews__empty_star {
+    background-image: url("https://cdn.shopify.com/s/files/1/0284/3128/6351/files/new-moon.png?v=1705073898");
+    background-size: cover; 
+  }
+}
+</code></pre>
+</div>
+</div>
+<div class="accordion__item">
+<div class="accordion__item-title"><strong>Image thumbnail size</strong></div>
+<div class="accordion__item-content">
+<p>Set a specific width for the customer-submitted images in your review list.</p>
+<p><code>  #klaviyo-product-reviews-wrapper .kl_reviews__review__image { width: 225px; }</code></p>
+</div>
+</div>
+<div class="accordion__item">
+<div class="accordion__item-title"><strong>Button colors and styles</strong></div>
+<div class="accordion__item-content">
+<p>Apply styles to just the <strong>Write a review</strong> button.</p>
+<pre><code class="language-text">#klaviyo-product-reviews-wrapper .kl_reviews__button:nth-child(1) {
+   color: blue;
+   box-shadow: 0 0 15px #9ecaed;
+}  </code></pre>
+<p>Apply styles to just the <strong>Ask a question</strong> button.</p>
+<pre><code class="language-text">#klaviyo-product-reviews-wrapper .kl_reviews__button:nth-child(2) {
+   color: blue;
+   box-shadow: 0 0 15px #9ecaed;
+}</code></pre>
+</div>
+</div>
+</div>

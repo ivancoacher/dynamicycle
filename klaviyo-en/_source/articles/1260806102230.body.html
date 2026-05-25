@@ -1,0 +1,77 @@
+<h2 id="h_01HH32VXM71QMM7X4BRBK24132">You will learn</h2>
+<p>Learn how to add a dynamic image to an MMS message in Klaviyo. </p>
+<p>Including a dynamic image allows you to personalize your text messages. For instance, you can show someone the exact product they viewed, started a checkout with, or bought.</p>
+<h2 id="h_01HH32VXM7VE65WTAG6B60WY8P">Before you begin</h2>
+<p>Depending on your use case, you may not always be able to add a dynamic image. </p>
+<ul>
+<li>Only metric-triggered flows can use dynamic images based on event data (e.g., items from a checkout or placed order) or on catalog tags for an event. </li>
+<li>Campaigns and list- and segment-triggered flows can have dynamic images only when the image URL exists as a custom property on the recipient’s profile.</li>
+</ul>
+<p>Also, it's important note the following regarding dynamic images: </p>
+<ul>
+<li>Only 1 dynamic image is allowed per MMS.</li>
+<li>Images should be under 600 KB; otherwise carriers will compress it, which may make the image look distorted.</li>
+<li>If you try to send a dynamic image with a sending number that doesn't allow for MMS, the message will send, but the image will be removed.</li>
+<li>You can use conditional statements with dynamic images.</li>
+<li>Mobile carriers don't support WebP files, and attaching this type of image may cause the message to fail. </li>
+</ul>
+<h2 id="h_01HH32VXM7E8ARZZF040G21JBG">How to add a dynamic image</h2>
+<ol>
+<li>Select the flow message where you want to include your dynamic image.</li>
+<li>In the right sidebar, click <strong>Edit</strong>.<img src="https://klaviyo.zendesk.com/hc/article_attachments/28720670835355" alt="Sidebar for a new SMS message in a flow">
+</li>
+<li>Click the <strong>Preview &amp; text</strong> in the upper right corner.<br><img src="https://klaviyo.zendesk.com/hc/article_attachments/33627732347035">
+</li>
+<li>Find the data source for the image you want to include.</li>
+<li>Click the data source for an image's first variable, which will typically end in 0.<br><img src="https://klaviyo.zendesk.com/hc/article_attachments/33627695663259" width="503" height="194">
+</li>
+<li>Click <strong>Done</strong>. </li>
+<li>On the left, click the <em>Add image</em> icon (an image icon) in the <em>Message</em> box.<br><img src="https://klaviyo.zendesk.com/hc/article_attachments/33627695670299" width="507" height="264">
+</li>
+<li>Go to the <strong>Dynamic Image</strong> tab.</li>
+<li>Paste the dynamic variable or dynamic URL for the image.<br><img src="https://klaviyo.zendesk.com/hc/article_attachments/33627695672731" width="614" height="168">
+</li>
+<li>Click <strong>Save</strong>.</li>
+<li>Check that the dynamic image was added correctly by making sure one appears in the preview screen.</li>
+</ol>
+<div class="accordion accordion--default">
+<div class="accordion__item">
+<div class="accordion__item-title"><strong>Use catalog tags </strong></div>
+<div class="accordion__item-content">
+<p>You can also use <a href="https://help.klaviyo.com/hc/en-us/articles/360004785571" target="_blank" rel="noopener">catalog tags</a> to add dynamic images in the MMS. To do so: </p>
+<ol>
+<li>From the SMS preview modal, locate the product ID or SKU for the first listed product. </li>
+<li>Copy this variable. <br><img src="https://klaviyo.zendesk.com/hc/article_attachments/33627732367771" width="360" height="134">
+</li>
+<li>Click <strong>Done</strong> to return to the SMS editor. </li>
+<li>On the left, click the <em>Add image</em> icon (an image icon) in the message box.<br><img src="https://klaviyo.zendesk.com/hc/article_attachments/33627732370587" width="423" height="220">
+</li>
+<li>Go to the <strong>Dynamic Image</strong> tab.</li>
+<li>Paste in the following catalog tag:<br><em>{% catalog event.id %} {{catalog_item.featured_image.thumbnail.src}} {% endcatalog %}</em>
+</li>
+<li>Replace <em>event.id</em> in <em>{% catalog event.id %}</em> with the variable from the tag you previously copied. Remove the brackets and any filters from the variable (so <em>{{ event.extra.line_items.0.product_id|default:'' }}</em> becomes <em>event.extra.line_items.0.product_id</em>).<br>Example: <em>{% catalog event.extra.line_items.0.product_id %} {{catalog_item.featured_image.thumbnail.src}} {% endcatalog %}</em>
+</li>
+<li>Click <strong>Save</strong>. </li>
+</ol>
+</div>
+</div>
+<div class="accordion__item">
+<div class="accordion__item-title"><strong>Example of using conditional statements</strong></div>
+<div class="accordion__item-content">
+<p>Dynamic images can use conditional statements. </p>
+<p>Below is an example of an if/else statement to say that if there's a variant image, show that to recipients; else, use the default image:<br>{% if event.extra.line_items.0.product.variant.images.0.src %}{{ event.extra.line_items.0.product.variant.images.0.src }}{% else %}{{ event.extra.line_items.0.product.images.0.src }}{% endif %}</p>
+<p>Note that exact format for these statements depends on your integration, and you should not copy them from email templates.</p>
+</div>
+</div>
+</div>
+<h2 id="h_01HH32VXM7PVDXAD4P1TEC9NNC">Additional resources</h2>
+<ul>
+<li>Find more<a href="https://help.klaviyo.com/hc/en-us/articles/360041074911" target="_blank" rel="noopener"> MMS image and GIF best practices</a>
+</li>
+<li>Learn more about event variables in Klaviyo:
+<ul>
+<li><a href="https://help.klaviyo.com/hc/en-us/articles/115002779071" target="_blank" rel="noopener">About using event variables to personalize flows</a></li>
+<li><a href="https://help.klaviyo.com/hc/en-us/articles/115000104431" target="_blank" rel="noopener">How to insert a dynamic image in an event-based flow email</a></li>
+</ul>
+</li>
+</ul>

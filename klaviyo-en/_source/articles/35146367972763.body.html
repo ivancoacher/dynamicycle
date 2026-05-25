@@ -1,0 +1,141 @@
+<div class="bs-callout bs-callout-requirements ignore-for-search"><p>You must have access to <a href="https://help.klaviyo.com/hc/en-us/articles/35105337172123" target="_blank" rel="noopener noreferrer">custom objects</a> to use this functionality. </p></div><h2 id="h_01JPTH5R88S33HCKM283J5XBX4">You will learn</h2><p>Learn how to use custom objects in templates, so you can use object data in flow and campaign sends.</p><p>You must <a href="https://help.klaviyo.com/hc/en-us/articles/35105337172123" target="_blank" rel="noopener noreferrer">create an object</a> first before you can use custom object data in templates.</p><h2 id="h_01JPTH5R88ZG3QXWK7AT8F34QM">Accessing object data through the personalization menu </h2><p>You can personalize text blocks in template editor using properties from a custom object, or the count of records for an object.</p><p>Learn <a href="https://help.klaviyo.com/hc/en-us/articles/4407911841435" target="_blank" rel="noopener noreferrer">how to use Klaviyo's template editor</a>. </p><p>To get started with adding object data into your templates:</p><ol>
+<li data-list-item-id="e41f7f40b1c98fa518dccf9382c0a608a">Add a new text block or select an existing text block.</li>
+<li data-list-item-id="ef11aeaa6c66df212d1ec4e22d9835610">Double click in to the text block and then position your cursor where you want to insert your dynamic property. </li>
+<li data-list-item-id="ed7bdda6c28af2613491b69f0b6e20fcb">Select the <strong>Personalization </strong>button in the top right. </li>
+</ol><p class="wysiwyg-text-align-center"><img src="https://klaviyo.zendesk.com/hc/article_attachments/35160309938075" width="624" height="177"></p><ol start="3"><li data-list-item-id="e1c3668e47edbfe17eff44e631bdc7554">In the personalization modal, select <strong>Objects </strong>from the <em>All types </em>dropdown.</li></ol><p class="wysiwyg-text-align-center"><img src="https://klaviyo.zendesk.com/hc/article_attachments/35160309944475" width="241" height="387"></p><ol start="4">
+<li data-list-item-id="e8a304fc753d548a5da02998ee41345ef">Within <em>Objects</em>, you’ll see all the objects on your account that you can use to pull data into the template. Select the object that contains the data you’d like to use in the template. </li>
+<li data-list-item-id="eb7b5cb7562f31e40946705de7cbd67c1">Select the specific object property or<a href="#h_01JPTH5R8840K0Q3XWH2CFYWRY" target="_blank" rel="noopener noreferrer"> object filter</a> to include in the template. You can also create a new object filter here.</li>
+<li data-list-item-id="e20d1362b975459cd87f1280b1be488af">Set the default text and any styles for your text.</li>
+</ol><p>To specify the capitalization rules for object data, you'll need to manually set the rule in the personalization tag. For example: </p><ul>
+<li data-list-item-id="ef870a26632b4c148ee8e438ab7aef473">
+<strong>{{ object.full_name|title|default:'value' }}</strong><br>John Doe </li>
+<li data-list-item-id="e0c4bbd519c30ddc4eb19cd0593d3d56d">
+<strong>{{ object.full_name|upper|default:'value' }}</strong><br>JOHN DOE</li>
+<li data-list-item-id="e7fe9152185d27ce5a2d5ed4495fc65cf">
+<strong>{{ object.full_name|lower|default:'value' }}</strong><br>john doe </li>
+</ul><p>Learn more about <a href="https://developers.klaviyo.com/en/docs/glossary_of_variable_filters" target="_blank" rel="noopener noreferrer">modifying values with Django filters. </a></p><h2 id="h_01JPTH5R889GMM7XPNS3FSB4SE">Accessing object data with personalization tags</h2><p>You can use personalization tags in emails (including the email’s subject line), SMS/MMS messages, push notifications, and Customer Hub to display object data.</p><p>Learn <a href="https://help.klaviyo.com/hc/en-us/articles/18986347580827" target="_blank" rel="noopener noreferrer">how to use personalization tags in Klaviyo</a>.</p><h3 id="h_01JY7ERDFJDZWR1VM4KZJZ5ET7">Object personalization tag reference</h3><p>You can use the following personalization tags with objects.</p><p><strong>Using the object that triggered a flow</strong></p><div class="bs-callout bs-callout-default"><p>{{ object }} is only available when an object has triggered a flow. The {{ object }} template tag is only available in date triggered flows based on an object. This is similar to the {{ event }} template tag for event triggered flows.</p></div><p>These examples use the following:</p><ul>
+<li data-list-item-id="e7c84474f65d246ad98fe2ee54cb94624">Object called <em>Pet </em>which is referenced with the <em>object </em>tag in the template.  </li>
+<li data-list-item-id="e5131202140f47703de3546b1fd932c28">Object property called <em>Name</em>
+</li>
+</ul><div><figure class="wysiwyg-table wysiwyg-table-align-left" style="width: 100%;"><table class="wysiwyg-table-resized">
+<colgroup>
+<col style="width: NaN%;">
+<col style="width: NaN%;">
+</colgroup>
+<tbody>
+<tr>
+<td><strong>Structure</strong></td>
+<td><strong>Example</strong></td>
+</tr>
+<tr>
+<td>{{ object.object_property }}</td>
+<td>{{ object.Name }}</td>
+</tr>
+<tr>
+<td>{{ object | lookup:'object_property' }}</td>
+<td>{{ object | lookup:'Name' }}</td>
+</tr>
+</tbody>
+</table></figure></div><p><strong>Getting an object by ID</strong></p><p>These examples use the following:</p><ul>
+<li data-list-item-id="e66d1cc60967e4f82eee46c20c6a68251">Object called <em>Pet</em>
+</li>
+<li data-list-item-id="ee2b080323e2feceea6bd268ce7bce4c1">Object property called <em>Name</em>
+</li>
+<li data-list-item-id="ef312e8182020646a586437cbac53994f">Event that triggered the flow with an object property called <em>pet_id</em>. This field is the same as the object ID for the <em>Pet</em> object.</li>
+</ul><div><figure class="wysiwyg-table wysiwyg-table-align-left" style="width: 100%;"><table class="wysiwyg-table-resized">
+<colgroup>
+<col style="width: NaN%;">
+<col style="width: NaN%;">
+</colgroup>
+<tbody>
+<tr>
+<td><strong>Structure </strong></td>
+<td><strong>Example</strong></td>
+</tr>
+<tr>
+<td>{% customobject event.object_id  object_type_title="Title" as alias %}<br>{{ alias.object_property }}<br>{% endcustomobject %}</td>
+<td>{% customobject event.pet_id  object_type_title="Pet" as pet %}<br>{{ pet.Name }}<br>{% endcustomobject %}</td>
+</tr>
+<tr>
+<td>{% customobject event.object_id  object_type_title="Title" as alias %}<br>{{ alias | lookup:'object_property' }}<br>{% endcustomobject %}</td>
+<td>{% customobject event.pet_id  object_type_title="Pet" as pet %}<br>{{ pet | lookup:'Name' }}<br>{% endcustomobject %}</td>
+</tr>
+</tbody>
+</table></figure></div><p><strong>Return a single object from an object filter </strong></p><p>These examples use the following:</p><ul>
+<li data-list-item-id="e4450b2128a0cc7965ce2d602cc385414">An additional object filter called <em>oldest_dog</em>
+</li>
+<li data-list-item-id="e18ef28c25b71433245f805fb2f803c74">Object property called <em>Name</em>
+</li>
+</ul><div><figure class="wysiwyg-table wysiwyg-table-align-left" style="width: 100%;"><table class="wysiwyg-table-resized">
+<colgroup>
+<col style="width: NaN%;">
+<col style="width: NaN%;">
+</colgroup>
+<tbody>
+<tr>
+<td><strong>Structure</strong></td>
+<td><strong>Example</strong></td>
+</tr>
+<tr>
+<td>{{ object_filter.object_filter_name.object_property}}</td>
+<td>{{ object_filter.oldest_dog.Name }}</td>
+</tr>
+<tr>
+<td>{{ object_filter.object_filter_name | lookup: 'object_property' }}</td>
+<td>{{ object_filter.oldest_dog | lookup: 'Name' }}</td>
+</tr>
+</tbody>
+</table></figure></div><p><strong>Return an integer from an object filter </strong></p><p>These examples use the following:</p><ul><li data-list-item-id="eac45b7c1d0b03cf94c127849583b8ed8">An additional object filter called <em>count_of_dogs</em>
+</li></ul><div><figure class="wysiwyg-table wysiwyg-table-align-left" style="width: 100%;"><table class="wysiwyg-table-resized">
+<colgroup>
+<col style="width: NaN%;">
+<col style="width: NaN%;">
+</colgroup>
+<tbody>
+<tr>
+<td><strong>Structure</strong></td>
+<td><strong>Example</strong></td>
+</tr>
+<tr>
+<td>{{ object_filter.object_filter_name }}</td>
+<td>{{ object_filter.count_of_dogs }}</td>
+</tr>
+</tbody>
+</table></figure></div><p><span style="color: #000000;"><strong>Retrieve object records</strong></span></p><p>To retrieve the most recent object records for an object, you’ll need to loop through all the object records. This example uses the following:</p><ul><li data-list-item-id="e8caac7a315f2c0af29175b305347d287">Object called <em>Pets</em>
+</li></ul><div><figure class="wysiwyg-table wysiwyg-table-align-left" style="width: 100%;"><table class="wysiwyg-table-resized">
+<colgroup>
+<col style="width: NaN%;">
+<col style="width: NaN%;">
+</colgroup>
+<tbody>
+<tr>
+<td><span style="color: #000000;"><strong>Structure</strong></span></td>
+<td><span style="color: #000000;"><strong>Example</strong></span></td>
+</tr>
+<tr>
+<td>{% customobjects object_type_title="Title" as alias %}<br>{% for object_instance in alias %}<br>{{ object_instance.record }}<br>{% endfor %}<br>{% endcustomobjects %}</td>
+<td>
+<span style="color: #232121;">{% customobjects object_type_title="Pet Profile" as pets %}</span><br><span style="color: #232121;">{% for pet in pets %}</span><br><span style="color: #232121;">{{ pet.name }}</span><br><span style="color: #232121;">{% endfor %}</span><br><span style="color: #232121;">{% endcustomobjects %}</span>
+</td>
+</tr>
+</tbody>
+</table></figure></div><h2 id="01JY7EPHSMAS2C0SP2T9CC0V0V">Object data in subject lines</h2><p>You can personalize your subject lines with any of the custom object tags:</p><ul>
+<li data-list-item-id="e303d151cea6417a3838abda14726077c">{% object_filter %}</li>
+<li data-list-item-id="eccc44cb0e3a5ce38bfd87a93b3c561f3">{% object %}</li>
+<li data-list-item-id="edf66f4393856eb105c6f49df31bad04c">{% customobject %}</li>
+</ul><p>For example, you can use the {% object %} tag in the subject line of your message to display the name of a customers pet directly. </p><p>Draft view:</p><p><img src="https://klaviyo.zendesk.com/hc/article_attachments/37963491682331" width="585" height="71"></p><p>Email preview:</p><p><img src="https://klaviyo.zendesk.com/hc/article_attachments/37963491688475" width="441" height="45"></p><h2 id="h_01JPTH5R88GVH1XY8Y4MVYVJ3B">Object data in show/hide logic</h2><p>You can also configure whether to show or hide block in a template based on object data. Dynamically showing or hiding a block based on object data uses the same tags as the template builder. You can reference objects by ID, properties from object filters, or aggregates from object filters.</p><div class="bs-callout bs-callout-requirements ignore-for-search"><p>You must create object filters before you can reference them in show/hide logic.</p></div><p>For example, if you have a <em>Pet</em> object with a property called <em>Breed</em>, you can choose to only show a block to pet owners with a certain breed of dog using the <em>object.Breed </em>condition. </p><p>To set show/hide logic, click on the block you’d like to set the rules for and select <strong>Use code</strong> on the <em>Display</em> tab. </p><p>Enter the condition directly in the code editor. You can use object filters and the object template tag if it’s a message for a date-triggered flow based on object data.</p><p class="wysiwyg-text-align-center"><img src="https://klaviyo.zendesk.com/hc/article_attachments/37963491690267" width="460" height="325"></p><p>For more flexibility (e.g., making some information conditional on information returned by {% customobject %} or {% customobjects %}) then consider using <a href="https://help.klaviyo.com/hc/en-us/articles/7655926841499" target="_blank" rel="noopener noreferrer">advanced conditional logic</a> with {% if … %} logic directly in a text block.</p><h2 id="h_01JPTH5R8840K0Q3XWH2CFYWRY">Object filters</h2><h3 id="h_01JPTM3Z6RZ1EZW12GDFZH9WXC"><span style="color: #434343;">What is an object filter?</span></h3><p>Object filters enable you to limit the returned object records based on specific criteria you set so you can display records of a certain type. </p><h3 id="h_01JPTH5R88V7ZKMSMK5DCNWVZG"><span style="color: #434343;">Create a new object filter</span></h3><p>To get started with creating an object filter:</p><ol>
+<li data-list-item-id="e72eecb54e5829cd30b1f4bca00ddb3b9">Add a new text block or edit the text in an existing text block in your template. </li>
+<li data-list-item-id="e5729ac7df53d8a1696168a6afbd71743">Select the <strong>Personalization </strong>button. </li>
+</ol><p class="wysiwyg-text-align-center"><img src="https://klaviyo.zendesk.com/hc/article_attachments/35160309938075" width="624" height="177"></p><ol start="3">
+<li data-list-item-id="e77ab90212e9dd1728de66a118b10ab23">Within the personalization model, select <strong>Objects </strong>from the <em>All types </em>dropdown. </li>
+<li data-list-item-id="e7d03165cf637039b246b467c5dcab342">Select the object that contains the data you’d like to set a filter for. </li>
+<li data-list-item-id="ea08341194ac38bb5844ef882db6cd51c">Select the object property you’d like to set a filter for. </li>
+<li data-list-item-id="e48c443f97b6d0a0232b0380df7879af2">Select <strong>Create new filter</strong>. </li>
+</ol><p>On the <em>Create object filter</em> modal, set the following information: </p><ul>
+<li data-list-item-id="ed59b7484d201125e58798a25a533a54f">
+<strong>Name</strong><br>Create a name for your object filter.</li>
+<li data-list-item-id="e737181f2d57aa760bbd604cf2d5b81c1">
+<strong>Filter conditions </strong><br>Define the rules an object must meet to be included in the text block. </li>
+<li data-list-item-id="e0bc56b460c9bc520e5db05d689230c9a">
+<strong>Behavior when multiple records meet the conditions</strong><br>Define the behavior for cases where multiple records meet the conditions.</li>
+</ul><p class="wysiwyg-text-align-center"><img src="https://klaviyo.zendesk.com/hc/article_attachments/35305347554715" width="500" height="426"></p><p>Once your object filter is created, you can use it in show/hide logic and personalization tags to display specific object records based on the criteria you set. </p><h2 id="h_01JXDHNVXSBXTW94RXD9NAFNJ3">Additional resources </h2><p><a href="https://help.klaviyo.com/hc/en-us/articles/35105337172123">Getting started with objects</a></p><p><a href="https://help.klaviyo.com/hc/en-us/articles/4408802648731">Message personalization reference</a></p><p><a href="https://help.klaviyo.com/hc/en-us/articles/27843522951707">How to use the preview panel for message personalization</a></p>

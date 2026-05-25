@@ -1,0 +1,992 @@
+{
+  "captured_at": "2026-05-23T16:15:34Z",
+  "article": {
+    "id": 13756180653851,
+    "url": "https://klaviyo.zendesk.com/api/v2/help_center/en-us/articles/13756180653851.json",
+    "html_url": "https://klaviyo.zendesk.com/hc/en-us/articles/13756180653851-Frequently-asked-questions-about-identity-resolution-in-Klaviyo",
+    "author_id": 397882329931,
+    "comments_disabled": false,
+    "draft": false,
+    "promoted": false,
+    "position": 0,
+    "vote_sum": 0,
+    "vote_count": 0,
+    "section_id": 49375415469339,
+    "created_at": "2023-03-17T15:27:11Z",
+    "updated_at": "2026-04-21T13:54:27Z",
+    "name": "Frequently asked questions about identity resolution in Klaviyo",
+    "title": "Frequently asked questions about identity resolution in Klaviyo",
+    "source_locale": "en-us",
+    "locale": "en-us",
+    "outdated": false,
+    "outdated_locales": [],
+    "edited_at": "2025-02-21T13:32:11Z",
+    "user_segment_id": null,
+    "permission_group_id": 146372,
+    "content_tag_ids": [],
+    "label_names": [],
+    "body": "<h2 id=\"h_01JMJG676V95MQE1G3B76WH19C\">You will learn </h2>\n<p>Learn about frequently asked questions related to identity resolution in Klaviyo. If you don’t see your question in the resource below, please reach out on our <a href=\"https://community.klaviyo.com/\">Community</a> forum.</p>\n<h2 id=\"h_01JMJG676V64HFW3GFPB9CH0XQ\">What is identity resolution? </h2>\n<p>Identity resolution refers to the ability to maintain a single customer record, even when a customer uses different combinations of identifiers and channels over time. This provides a unified view of your customers regardless of how they interact with your brand. </p>\n<p>A common example of this is when a customer that has an email profile in your Klaviyo account later subscribes to SMS through a method that is not associated with their email, like a <a href=\"https://help.klaviyo.com/hc/en-us/articles/360050384091\">keyword opt-in</a>. This customer action results in a separate profile for receiving SMS messages and a separate profile for receiving emails. However, if this customer later takes an action (like making a purchase) where they submit both their phone and email; Klaviyo recognizes that both the phone and email belong to the same customer and merges the profiles.</p>\n<p>Klaviyo’s identity resolution functionality has 2 key components: </p>\n<ul>\n<li>\n<strong>Identity capture</strong><br>Klaviyo’s identity capture functionality automatically cookies and identifies users that click through your email or submit a Klaviyo form, allowing you to capture your customer’s activity on your website.</li>\n<li>\n<strong>Deterministic profile merge</strong><br>Klaviyo resolves customer identities through a proactive check that merges 2 separate profiles when an <a href=\"#h_01GVZT1MQTSY5TWF22SA9D1GAX\" target=\"_self\">action</a> occurs linking an email address, phone number, or device ID (currently, iOS) together. This allows you to manage omnichannel customer data effectively. </li>\n</ul>\n<h2 id=\"h_01JMJG676V584Q5XKW3TWK64G3\">How profiles are merged</h2>\n<h3 id=\"h_01JMJG676VHKPYN0R1R8J3GGJX\">What is deterministic merging and how is it different from probabilistic merging? </h3>\n<p>Probabilistic merging is another type of profile merging that ties engagements made by a single user across multiple devices to a unified customer profile. Probabilistic merging uses predictive algorithms to link information, such as IP address, operating system, location, Wi-Fi network, and behavioral data to an individual. This type of merging is often applicable to one-to-many communications and marketing. </p>\n<p>Meanwhile, deterministic merging leverages first-party data that customers have provided and unifies their engagements. Engagements are only linked based on information that your customers provide to you directly, prioritizing the accuracy of your customer profiles. This type of merging is critical for one-to-one communication and personalization. </p>\n<h3 id=\"h_01GVZT1MQTSY5TWF22SA9D1GAX\">What triggers a profile merge?</h3>\n<p>For Klaviyo to identify that multiple profiles belong to the same customer and merge them, the identifiers associated with each profile need to be recognized together. Often, this information comes in the form of an event, where the event data includes multiple identifiers like email and phone number.</p>\n<p>A common example is a <em>Started checkout </em>event, where the customer provides both their email address and phone number. If there is a separate phone-only profile from a previous action the customer took (e.g., submitting a phone-only form or texting a keyword), Klaviyo will recognize these belong to the same customer and merge them under the profile with the stronger identifier. For more information on identifier precedence, see our guide to <a href=\"https://help.klaviyo.com/hc/en-us/articles/12902308138011\">understanding identity resolution in Klaviyo</a>.</p>\n<p>In addition to merging based on event data, Klaviyo checks if there is an opportunity to merge when customers provide their information through an opt-in method, like a form with phone number and email fields.</p>\n<p>Klaviyo also checks for opportunities to merge profiles based on information submitted implicitly through <a href=\"https://help.klaviyo.com/hc/en-us/articles/360034666712\">cookie tracking</a>, which associates an activity to an email profile. For example, if an email profile submits a phone-only form with their cookie present, then the phone number they provided will be appended to their pre-existing profile. </p>\n<p>Additional examples that would result in a profile merge: </p>\n<ul>\n<li>A phone-only profile provides an email address which matches an existing profile.</li>\n<li>An email-only profile provides a phone number which matches an existing phone-only profile.</li>\n<li>A customer with a separate email-only profile and phone-only profile clicks on a button in an email that directs to a form embedded on your store’s website, and submits their phone number there.</li>\n<li>An email-only profile being tracked through the Klaviyo cookie clicks on an SMS shortened link on the same device and browser. </li>\n<li>A customer with an email-only profile is targeted with an SMS consent form or emailed a link to an SMS consent form. Their form submission can be then traced to their email via cookie, and the phone number will be appended to the pre-existing profile. </li>\n</ul>\n<h3 id=\"h_01JMJG676V229BDM5DHVEGEAMA\">What types of events will not trigger a profile merge?</h3>\n<p>Actions related to tap-to-text (e.g., a <a href=\"https://help.klaviyo.com/hc/en-us/articles/8185730542235\">tap-to-text banner in an email</a> or <a href=\"https://help.klaviyo.com/hc/en-us/articles/9351341171995\">form</a>) and <a href=\"https://help.klaviyo.com/hc/en-us/articles/360050384091\">keywords</a> will generally not result in a merge based on cookie tracking. This is because the cookie trail is lost across applications (web to SMS) and Klaviyo cannot be certain that the 2 actions were taken by the same person. </p>\n<p>Examples of cases where profiles would not merge : </p>\n<ul>\n<li>A customer with an email-only profile and phone-only profile clicks-to-text from an email or targeted form.</li>\n<li>A customer with an email-only profile and phone-only profile sees a keyword call-to-action on an email or targeted banner and texts the keyword.</li>\n</ul>\n<h3 id=\"h_01JMJG676V37Y7F8GRVE91JMB8\">If separate profiles take cookied actions on the same device and browser, will the profiles be merged?</h3>\n<p>If a customer with an email-only and a phone-only profile meets both of the following conditions, the profiles will be merged: </p>\n<ul>\n<li>Has a browser session open from a link in an SMS message</li>\n<li>Clicks a link in an email in the same browser and device</li>\n</ul>\n<h3 id=\"h_01JMJG676W3AT3TWC1THGY6CP7\">Is it possible the source profile will get re-created if both email addresses are still present in an ecommerce integration?</h3>\n<p>When a pair of profiles are merged, the source profile is essentially deleted. If a source profile is merged into a destination profile, and Klaviyo then receives another event with the email address from the original source profile, a new profile is created with that email address. </p>\n<h3 id=\"h_01JMJG676W3KXCHS1DS4X58FZ1\">What is a destination vs. source profile?</h3>\n<p>During the merge process, there are 2 profiles that are consolidated together. One profile is preserved and the other is merged. These profiles are called the “destination” and “source profiles.”</p>\n<ul>\n<li>\n<strong>Destination profile</strong><br>The profile that is preserved during a merge is the destination profile. This profile has the <a href=\"https://help.klaviyo.com/hc/en-us/articles/12902308138011\">higher-ranking identifier</a> of the pair of profiles involved in a merge.</li>\n<li>\n<strong>Source profile</strong><br>The profile that has its data merged into the destination profile is the source profile. This source profile has the <a href=\"https://help.klaviyo.com/hc/en-us/articles/12902308138011\">lower-ranking identifier</a> of the pair of profiles involved in a merge.</li>\n</ul>\n<h2 id=\"h_01JMJG676WNJ2ED2KAM3QF3CNX\">Profile data </h2>\n<h3 id=\"h_01JMJG676W2Q4MANRJZAKYPZSX\">What happens to the data on the source profile when it is part of a merge?</h3>\n<p>When a source profile has merged into a destination profile, a <em>Merged profile</em> event is added to the destination profile. All events from the source profile will migrate into the destination profile as well.</p>\n<p>Events appear in the timeline with the original timestamp and are attributed to the destination profile. The destination profile also inherits the list memberships of the merged profile. Note that the destination profile may not meet the same segment criteria as the source profile. </p>\n<h3 id=\"h_01JMJG676WS7140Y5NDJ74B3GS\">How are profile properties handled when a profile is merged?</h3>\n<p>Profile properties are added to the destination profile unless each profile has the same property but with different values. In that case, the destination profile’s properties take higher precedence. </p>\n<p>There are 2 exceptions:</p>\n<ol>\n<li>Timezone: Klaviyo uses the timezone from the source profile only.</li>\n<li>Location: Klaviyo will use the location of the source profile if it has more location data (address, city, country, etc.).</li>\n</ol>\n<h3 id=\"h_01JMJG676W5KB6K5PJ1FQ0WSMG\">Will a profile’s skipped messages be merged as well?</h3>\n<p>A profile’s <a href=\"https://help.klaviyo.com/hc/en-us/articles/1260805003210\">skipped messages</a> will merge for both flow and campaign messages and be visible in the <em>Messages </em>tab of the destination profile.</p>\n<h3 id=\"h_01JMJG676W6YWGVE9DQD0VQADK\">How are consent and exclusion records treated during a profile merge?</h3>\n<p>For exclusion records (i.e., hard bounces, unsubscribes, or spam complaints):</p>\n<ul>\n<li>If the destination profile has no exclusion record and the source profile does, Klaviyo uses the record from the source profile. </li>\n<li>If both the destination profile and source profiles have exclusion records:</li>\n<ul>\n<li>If they have the same exclusion record, Klaviyo uses whichever date is older.</li>\n<li>If they have different exclusion records, Klaviyo uses the record from the source profile for the destination profile.</li>\n</ul>\n</ul>\n<p>For <a href=\"https://help.klaviyo.com/hc/en-us/articles/360037101072\">consent records</a>:</p>\n<ul>\n<li>If the destination profile has no consent record and the source profile does, Klaviyo uses the record from the source profile. </li>\n<li>If both profiles have consent records, updates happen in the following ways: </li>\n<ul>\n<li>If the 2 profiles have the same consent status and the source consent record is older than the destination consent record, the source profile’s record is used on the destination profile. </li>\n<li>If the records do not have the same consent status and the destination record is older than or the same age as the source record, the source profile’s consent record is used. </li>\n</ul>\n</ul>\n<p>Here are some examples that illustrate these cases:</p>\n<table style=\"border-collapse: collapse; width: 100%;\" border=\"1\">\n<tbody>\n<tr style=\"background-color: #eeeeee; height: 42px;\">\n<td class=\"wysiwyg-text-align-center\" style=\"height: 10px; width: 33.2857%;\"><strong>Source profile </strong></td>\n<td class=\"wysiwyg-text-align-center\" style=\"height: 10px; width: 33.2857%;\"><strong>Destination profile</strong></td>\n<td style=\"height: 10px; width: 33.2857%;\">\n<p class=\"wysiwyg-text-align-center\"><strong>Final merged profile</strong> </p>\n</td>\n</tr>\n<tr style=\"height: 89px;\">\n<td class=\"wysiwyg-text-align-center\" style=\"height: 10px; width: 33.2857%;\">\n<p>Shows as \"subscribed\" for email marketing, dated 05/01/2021</p>\n</td>\n<td class=\"wysiwyg-text-align-center\" style=\"height: 10px; width: 33.2857%;\">\n<p>Shows as \"subscribed\" for email marketing, dated 06/01/2021</p>\n</td>\n<td class=\"wysiwyg-text-align-center\" style=\"height: 10px; width: 33.2857%;\">\n<p>Destination profile updates subscribed date to 05/01/2021</p>\n</td>\n</tr>\n<tr style=\"height: 134px;\">\n<td class=\"wysiwyg-text-align-center\" style=\"height: 10px; width: 33.2857%;\">\n<p>Shows as \"subscribed\" for email marketing, dated 05/01/2021</p>\n</td>\n<td class=\"wysiwyg-text-align-center\" style=\"height: 10px; width: 33.2857%;\">\n<p>Shows as \"unsubscribed\" for email marketing, dated 06/01/2021</p>\n</td>\n<td class=\"wysiwyg-text-align-center\" style=\"height: 10px; width: 33.2857%;\">\n<p>Klaviyo does not update the destination profile record. It would stay as \"unsubscribed\" dated 06/01/2021.</p>\n</td>\n</tr>\n<tr style=\"height: 89px;\">\n<td class=\"wysiwyg-text-align-center\" style=\"height: 10px; width: 33.2857%;\">\n<p>Shows as \"subscribed\" for email marketing, dated 05/01/2021</p>\n</td>\n<td class=\"wysiwyg-text-align-center\" style=\"height: 10px; width: 33.2857%;\">\n<p>Shows as \"unsubscribed\" for email marketing, dated 04/01/2021</p>\n</td>\n<td class=\"wysiwyg-text-align-center\" style=\"height: 10px; width: 33.2857%;\">\n<p>Destination profile updated to \"subscribed,\" dated 05/01/2021</p>\n</td>\n</tr>\n<tr style=\"height: 67px;\">\n<td class=\"wysiwyg-text-align-center\" style=\"height: 10px; width: 33.2857%;\">\n<p>Shows as \"unsubscribed\" for email marketing, dated 05/01/2021</p>\n</td>\n<td class=\"wysiwyg-text-align-center\" style=\"height: 10px; width: 33.2857%;\">\n<p>Shows as \"subscribed\" for email marketing, dated 05/01/2021</p>\n</td>\n<td class=\"wysiwyg-text-align-center\" style=\"height: 10px; width: 33.2857%;\">\n<p>Destination profile updated to \"unsubscribed,\" dated 05/01/2021</p>\n</td>\n</tr>\n</tbody>\n</table>\n<div class=\"bs-callout bs-callout-default\">\n<p>Consent is never added to a phone number without explicit consent from that specific phone number.</p>\n</div>\n<h3 id=\"h_01JMJG676WMTXWRE8AGSPC9PXK\">Would active coupons under the source profile merge over to the destination profile?</h3>\n<p>The assignment of coupon codes to customer profiles is not altered during a profile merge, so active coupons on the source profile would not be valid codes for the destination profile. </p>\n<h2 id=\"h_01JMJG676W2K382X2FPT7MFZTZ\"><strong>Flows</strong></h2>\n<h3 id=\"h_01JMJG676W8CV2AM5JYCK69Y8K\">How does profile merging impact flows?</h3>\n<p>If either the source or destination profile has already completed or canceled the flow, the remaining flow messages are canceled. If both sources are still pending, the source profile’s flow is canceled, and the destination profile continues uninterrupted in the flow.</p>\n<p>If the source profile is in a flow that the destination profile is not in, the destination profile takes the place of the source profile in the flow. </p>\n<h3 id=\"h_01JMJG676WQV2Q7YMM5Q1587RC\">How are date-triggered flows affected?</h3>\n<p>The source profile is merged into the destination profile and the date value that exists on the destination profile would remain. The destination profile then continues to move through the date-triggered flow like normal.</p>\n<h3 id=\"h_01JMJG676W4FEME3RRFY99A1C1\">Can a profile still qualify for a list-triggered flow if the merged profile already went through that flow?</h3>\n<p>When merging profiles, Klaviyo copies flow evaluations from the source profile to the destination profile, which prevents this from happening.</p>\n<p>The full logic for this step is:</p>\n<ol>\n<li>If the source profile is in the flow, but the destination profile is not, the destination profile takes the place of the source profile in the flow.</li>\n<li>If the destination profile is in the flow, but the source profile is not, the destination profile continues through the flow uninterrupted.</li>\n<li>If both profiles are in the flow:</li>\n<ul>\n<li>Klaviyo cancels the flow for the source profile. The source profile record is deleted on merge and the destination profile continues in the flow uninterrupted.</li>\n<li>If the source profile is in a flow and the destination profile has completed or been skipped for the flow, the flow is canceled for the source profile.</li>\n<li>If the source profile has completed a flow and the destination profile is in the flow at the time of merge, the flow is canceled for the destination profile.</li>\n</ul>\n</ol>\n<h2 id=\"h_01JMJG676WHCM4W2AXK558048Y\">Additional resources</h2>\n<ul>\n<li><a href=\"https://help.klaviyo.com/hc/en-us/articles/115005247088\">Understanding profiles in Klaviyo</a></li>\n<li><a href=\"https://help.klaviyo.com/hc/en-us/articles/360035588012\">Understanding when SMS profiles merge</a></li>\n<li><a href=\"https://help.klaviyo.com/hc/en-us/articles/12902308138011\">Understanding identity resolution in Klaviyo</a></li>\n</ul>",
+    "user_segment_ids": []
+  },
+  "normalized": {
+    "id": "13756180653851",
+    "title": "Frequently asked questions about identity resolution in Klaviyo",
+    "source_url": "https://help.klaviyo.com/hc/en-us/articles/13756180653851-Frequently-asked-questions-about-identity-resolution-in-Klaviyo",
+    "section_id": 49375415469339,
+    "section": "Understand profiles",
+    "category_id": 115000867867,
+    "category": "Audience",
+    "category_slug": "analytics-audience",
+    "klaviyo_updated": "2026-04-21T13:54:27Z",
+    "created_at": "2023-03-17T15:27:11Z",
+    "draft": false,
+    "promoted": false,
+    "position": 0,
+    "label_names": []
+  },
+  "files": {
+    "body_html": "_source/articles/13756180653851.body.html",
+    "rendered_html": "_source/rendered/13756180653851.html"
+  },
+  "assets": {
+    "api_body": {
+      "images": [],
+      "links": [
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Community"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360050384091",
+          "text": "keyword opt-in"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/13756180653851-Frequently-asked-questions-about-identity-resolution-in-Klaviyo#h_01GVZT1MQTSY5TWF22SA9D1GAX",
+          "text": "action"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/12902308138011",
+          "text": "understanding identity resolution in Klaviyo"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360034666712",
+          "text": "cookie tracking"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/8185730542235",
+          "text": "tap-to-text banner in an email"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/9351341171995",
+          "text": "form"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360050384091",
+          "text": "keywords"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/12902308138011",
+          "text": "higher-ranking identifier"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/12902308138011",
+          "text": "lower-ranking identifier"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/1260805003210",
+          "text": "skipped messages"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360037101072",
+          "text": "consent records"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005247088",
+          "text": "Understanding profiles in Klaviyo"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360035588012",
+          "text": "Understanding when SMS profiles merge"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/12902308138011",
+          "text": "Understanding identity resolution in Klaviyo"
+        }
+      ],
+      "headings": [
+        {
+          "level": 2,
+          "id": "h_01JMJG676V95MQE1G3B76WH19C",
+          "text": "You will learn"
+        },
+        {
+          "level": 2,
+          "id": "h_01JMJG676V64HFW3GFPB9CH0XQ",
+          "text": "What is identity resolution?"
+        },
+        {
+          "level": 2,
+          "id": "h_01JMJG676V584Q5XKW3TWK64G3",
+          "text": "How profiles are merged"
+        },
+        {
+          "level": 3,
+          "id": "h_01JMJG676VHKPYN0R1R8J3GGJX",
+          "text": "What is deterministic merging and how is it different from probabilistic merging?"
+        },
+        {
+          "level": 3,
+          "id": "h_01GVZT1MQTSY5TWF22SA9D1GAX",
+          "text": "What triggers a profile merge?"
+        },
+        {
+          "level": 3,
+          "id": "h_01JMJG676V229BDM5DHVEGEAMA",
+          "text": "What types of events will not trigger a profile merge?"
+        },
+        {
+          "level": 3,
+          "id": "h_01JMJG676V37Y7F8GRVE91JMB8",
+          "text": "If separate profiles take cookied actions on the same device and browser, will the profiles be merged?"
+        },
+        {
+          "level": 3,
+          "id": "h_01JMJG676W3AT3TWC1THGY6CP7",
+          "text": "Is it possible the source profile will get re-created if both email addresses are still present in an ecommerce integration?"
+        },
+        {
+          "level": 3,
+          "id": "h_01JMJG676W3KXCHS1DS4X58FZ1",
+          "text": "What is a destination vs. source profile?"
+        },
+        {
+          "level": 2,
+          "id": "h_01JMJG676WNJ2ED2KAM3QF3CNX",
+          "text": "Profile data"
+        },
+        {
+          "level": 3,
+          "id": "h_01JMJG676W2Q4MANRJZAKYPZSX",
+          "text": "What happens to the data on the source profile when it is part of a merge?"
+        },
+        {
+          "level": 3,
+          "id": "h_01JMJG676WS7140Y5NDJ74B3GS",
+          "text": "How are profile properties handled when a profile is merged?"
+        },
+        {
+          "level": 3,
+          "id": "h_01JMJG676W5KB6K5PJ1FQ0WSMG",
+          "text": "Will a profile’s skipped messages be merged as well?"
+        },
+        {
+          "level": 3,
+          "id": "h_01JMJG676W6YWGVE9DQD0VQADK",
+          "text": "How are consent and exclusion records treated during a profile merge?"
+        },
+        {
+          "level": 3,
+          "id": "h_01JMJG676WMTXWRE8AGSPC9PXK",
+          "text": "Would active coupons under the source profile merge over to the destination profile?"
+        },
+        {
+          "level": 2,
+          "id": "h_01JMJG676W2K382X2FPT7MFZTZ",
+          "text": "Flows"
+        },
+        {
+          "level": 3,
+          "id": "h_01JMJG676W8CV2AM5JYCK69Y8K",
+          "text": "How does profile merging impact flows?"
+        },
+        {
+          "level": 3,
+          "id": "h_01JMJG676WQV2Q7YMM5Q1587RC",
+          "text": "How are date-triggered flows affected?"
+        },
+        {
+          "level": 3,
+          "id": "h_01JMJG676W4FEME3RRFY99A1C1",
+          "text": "Can a profile still qualify for a list-triggered flow if the merged profile already went through that flow?"
+        },
+        {
+          "level": 2,
+          "id": "h_01JMJG676WHCM4W2AXK558048Y",
+          "text": "Additional resources"
+        }
+      ]
+    },
+    "rendered_page": {
+      "images": [
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/7ff492c2b417b7ecfe572f839a8a81398693c1f7-1920x1080.webp",
+          "alt": "",
+          "width": "",
+          "height": ""
+        }
+      ],
+      "links": [
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/13756180653851-Frequently-asked-questions-about-identity-resolution-in-Klaviyo#site-content",
+          "text": "Skip to main content"
+        },
+        {
+          "href": "https://www.klaviyo.com",
+          "text": "Home"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center"
+        },
+        {
+          "href": "https://www.klaviyo.com/enterprise",
+          "text": "Enterprise"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Partners"
+        },
+        {
+          "href": "https://www.klaviyo.com/careers",
+          "text": "Careers"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": "Log in"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": ""
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center Find step-by-step instructions and troubleshooting solutions in our knowledge base."
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000032731",
+          "text": "Integrations"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000312411",
+          "text": "Flows"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867867",
+          "text": "Audience"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867667",
+          "text": "Campaigns"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/360000190711",
+          "text": "Sign-up forms"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000873988",
+          "text": "Deliverability & compliance"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/29173800271259",
+          "text": "SMS"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/16638219724187",
+          "text": "Reviews"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/18073014919195",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/34141283979931",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/37659126754075",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/33948021740315",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/39746685522331",
+          "text": "WhatsApp"
+        },
+        {
+          "href": "https://academy.klaviyo.com",
+          "text": "Klaviyo Academy Expert training and education to help you succeed with Klaviyo, and beyond."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Quick+guide&resource=academy_courses",
+          "text": "Quick guides Learn marketing strategies and concepts in 15 minutes or less."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Course&resource=academy_courses",
+          "text": "Courses Master key marketing topics through structured lessons and exams."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/best-practices",
+          "text": "Best practices Discover top product and marketing strategies for your business."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/learning-paths",
+          "text": "Learning paths Complete curated learning journeys tailored to your marketing goals."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses",
+          "text": "Explore all resources"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Live+training&resource=academy_courses",
+          "text": "Live trainings Build confidence through hands-on interactive workshops and thought-provoking strategy sessions."
+        },
+        {
+          "href": "https://www.bigmarker.com/klaviyo-customer-education/Office-hours-Getting-started-with-Klaviyo",
+          "text": "Live office hours Join a strategic discussion where you can ask questions and get answers in real-time."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/private-live-training",
+          "text": "1:1 Live training Book a private training session with an expert to jumpstart your platform knowledge and confidence."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/credentials",
+          "text": "Klaviyo credentials Dig deeper into select topics and showcase your expertise with a final exam to earn a certificate and digital badge."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/certificates/klaviyo-practitioner-certificate",
+          "text": "Klaviyo practitioner certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/deliverability-certificate",
+          "text": "Deliverability certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/developer-certificate",
+          "text": "Klaviyo developer certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses&select=Certificate",
+          "text": "See all certificates"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Klaviyo Community Join our thriving community network to connect with brands like yours—online and in person."
+        },
+        {
+          "href": "https://community.klaviyo.com/topic/new",
+          "text": "Ask a question Post a question and get thoughtful answers from Klaviyo powerusers."
+        },
+        {
+          "href": "https://community.klaviyo.com/p/roadmap",
+          "text": "Product roadmap"
+        },
+        {
+          "href": "https://community.klaviyo.com/search/activity/recent",
+          "text": "Recent threads"
+        },
+        {
+          "href": "https://community.klaviyo.com/p/champions",
+          "text": "Meet the Champions"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups",
+          "text": "Browse all groups Your people are waiting. New ideas and connections are a click away."
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/developer-group-64",
+          "text": "Developer group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/entrepreneur-user-group-118",
+          "text": "Entrepreneur group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/woo-user-group-87",
+          "text": "WooCommerce group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/new-york-meetup-chapter-82",
+          "text": "New York City"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/los-angeles-meetup-chapter-83",
+          "text": "Los Angeles"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/austin-meetup-chapter-85",
+          "text": "Austin"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/san-diego-meetup-chapter-86",
+          "text": "San Diego"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/amsterdam-meetup-chapter-84",
+          "text": "Amsterdam"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Klaviyo Developers Access API documentation and developer guides to help you build with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/get_started",
+          "text": "Get started Access key resources and a step-by-step checklist for how to start developing with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/build_your_integration",
+          "text": "Grow your app's reach Learn how to join our ecosystem and get your app listed on our marketplace."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/developer-tools",
+          "text": "Developer tools Generate sample data, monitor your API usage, and access our Postman collections."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/reference/api_overview",
+          "text": "API reference Browse our full catalog of API docs."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/changelog_",
+          "text": "Changelog"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/api_versioning_and_deprecation_policy",
+          "text": "Versioning & deprecation policy"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/rate_limits_and_error_handling",
+          "text": "Rate limits & error handling"
+        },
+        {
+          "href": "https://youtube.com/playlist?list=PLHkNfHgtxcUanrkMnKPdkRzuWU7MGv_xM&si=pkG-KH7IT_TUHOGC",
+          "text": "API tutorials on YouTube Subscribe to our Klaviyo API Tutorials playlist for easy access to step-by-step developer walkthroughs."
+        },
+        {
+          "href": "https://www.klaviyo.com/contact-us",
+          "text": "Contact us"
+        },
+        {
+          "href": "https://www.klaviyo.com/sign-up",
+          "text": "Sign up"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": "Search"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/13756180653851",
+          "text": "United States - EN"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/de-de/articles/13756180653851",
+          "text": "Deutschland - DE"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-es/articles/13756180653851",
+          "text": "España - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-mx/articles/13756180653851",
+          "text": "México - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/fr-fr/articles/13756180653851",
+          "text": "France - FR"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/it-it/articles/13756180653851",
+          "text": "Italia - IT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/ko-kr/articles/13756180653851",
+          "text": "한국 - KO"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/nl-nl/articles/13756180653851",
+          "text": "Nederland - NL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pl-pl/articles/13756180653851",
+          "text": "Polska - PL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pt-br/articles/13756180653851",
+          "text": "Brasil - PT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/sv-se/articles/13756180653851",
+          "text": "Sverige - SV"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/14508656438555",
+          "text": "Profiles"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/49375415469339",
+          "text": "Understand profiles"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/13756180653851-Frequently-asked-questions-about-identity-resolution-in-Klaviyo#h_01JMJG676V95MQE1G3B76WH19C",
+          "text": "You will learn"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/13756180653851-Frequently-asked-questions-about-identity-resolution-in-Klaviyo#h_01JMJG676V64HFW3GFPB9CH0XQ",
+          "text": "What is identity resolution?"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/13756180653851-Frequently-asked-questions-about-identity-resolution-in-Klaviyo#h_01JMJG676V584Q5XKW3TWK64G3",
+          "text": "How profiles are merged"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/13756180653851-Frequently-asked-questions-about-identity-resolution-in-Klaviyo#h_01JMJG676WNJ2ED2KAM3QF3CNX",
+          "text": "Profile data"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/13756180653851-Frequently-asked-questions-about-identity-resolution-in-Klaviyo#h_01JMJG676W2K382X2FPT7MFZTZ",
+          "text": "Flows"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/13756180653851-Frequently-asked-questions-about-identity-resolution-in-Klaviyo#additional-resources",
+          "text": "Additional resources"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Community"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360050384091",
+          "text": "keyword opt-in"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/13756180653851-Frequently-asked-questions-about-identity-resolution-in-Klaviyo#h_01GVZT1MQTSY5TWF22SA9D1GAX",
+          "text": "action"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/12902308138011",
+          "text": "understanding identity resolution in Klaviyo"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360034666712",
+          "text": "cookie tracking"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/8185730542235",
+          "text": "tap-to-text banner in an email"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/9351341171995",
+          "text": "form"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360050384091",
+          "text": "keywords"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/12902308138011",
+          "text": "higher-ranking identifier"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/12902308138011",
+          "text": "lower-ranking identifier"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/1260805003210",
+          "text": "skipped messages"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360037101072",
+          "text": "consent records"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005247088",
+          "text": "Understanding profiles in Klaviyo"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360035588012",
+          "text": "Understanding when SMS profiles merge"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/12902308138011",
+          "text": "Understanding identity resolution in Klaviyo"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115001002272",
+          "text": "Learn how to contact support"
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": ""
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": "Visit Community"
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": ""
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": "Hire a partner"
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/about",
+          "text": "About Klaviyo"
+        },
+        {
+          "href": "https://www.klaviyo.com/newsroom",
+          "text": "Newsroom"
+        },
+        {
+          "href": "https://investors.klaviyo.com/overview/default.aspx",
+          "text": "Investor relations"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Agency and tech partners"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Developers"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/retail",
+          "text": "Retail and ecommerce"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/restaurants",
+          "text": "Restaurant marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/wellness",
+          "text": "Wellness"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform",
+          "text": "B2C CRM overview"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai",
+          "text": "Klaviyo AI (K:AI)"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/marketing-automation",
+          "text": "Klaviyo Marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-service",
+          "text": "Klaviyo Service"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/analytics",
+          "text": "Klaviyo Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-data-platform",
+          "text": "Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare",
+          "text": "Klaviyo vs. Klaviyo alternatives"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-mailchimp",
+          "text": "Klaviyo vs. Mailchimp"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-postscript",
+          "text": "Klaviyo vs. Postscript"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-attentive",
+          "text": "Klaviyo vs. Attentive"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-salesforce-marketing-cloud",
+          "text": "Klaviyo vs. Salesforce"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-listrak",
+          "text": "Klaviyo vs. Listrak"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/omnichannel",
+          "text": "Omnichannel marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/email-marketing",
+          "text": "Email marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing",
+          "text": "SMS marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing/rcs",
+          "text": "RCS for Business"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/mobile-app-marketing",
+          "text": "Mobile app marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/whatsapp",
+          "text": "WhatsApp marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/social",
+          "text": "Social marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources",
+          "text": "Marketing resources"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources/marketing-campaign-calendar",
+          "text": "Marketing campaign calendar"
+        },
+        {
+          "href": "https://www.klaviyo.com/glossary",
+          "text": "Marketing glossary"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/email-subject-line-generator",
+          "text": "Subject line generator"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/roi-calculator",
+          "text": "ROI calculator"
+        },
+        {
+          "href": "https://www.klaviyo.com/customers",
+          "text": "Case studies"
+        },
+        {
+          "href": "https://www.klaviyo.com/composer",
+          "text": "Composer Beta"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/marketing-agent",
+          "text": "Marketing Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/customer-agent",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/customer-experience-hub",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/helpdesk",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/marketing-analytics",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/advanced-cdp",
+          "text": "Advanced Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/web-forms",
+          "text": "Web forms"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/email-templates",
+          "text": "Email templates"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/portfolio",
+          "text": "Portfolio"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform-integrations",
+          "text": "Apps and Integrations"
+        },
+        {
+          "href": "https://www.klaviyo.com/features",
+          "text": "Features"
+        },
+        {
+          "href": "https://www.klaviyo.com/whats-new",
+          "text": "What's new"
+        },
+        {
+          "href": "https://www.klaviyo.com/events",
+          "text": "Events"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help Center"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us",
+          "text": "Academy"
+        },
+        {
+          "href": "https://www.facebook.com/Klaviyo/",
+          "text": "Facebook"
+        },
+        {
+          "href": "https://twitter.com/klaviyo/",
+          "text": "Twitter"
+        },
+        {
+          "href": "https://www.linkedin.com/company/klaviyo/",
+          "text": "LinkedIn"
+        },
+        {
+          "href": "https://www.instagram.com/klaviyo/",
+          "text": "Instagram"
+        },
+        {
+          "href": "https://www.klaviyo.com/sitemap",
+          "text": "Site Map"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal",
+          "text": "Terms and Privacy"
+        },
+        {
+          "href": "https://www.klaviyo.com/security",
+          "text": "Security"
+        },
+        {
+          "href": "https://www.klaviyo.com/trust",
+          "text": "Trust"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal/intellectual-property-notices",
+          "text": "Intellectual Property Notices"
+        }
+      ],
+      "headings": [
+        {
+          "level": 1,
+          "id": "",
+          "text": "Frequently asked questions about identity resolution in Klaviyo"
+        },
+        {
+          "level": 2,
+          "id": "h_01JMJG676V95MQE1G3B76WH19C",
+          "text": "You will learn"
+        },
+        {
+          "level": 2,
+          "id": "h_01JMJG676V64HFW3GFPB9CH0XQ",
+          "text": "What is identity resolution?"
+        },
+        {
+          "level": 2,
+          "id": "h_01JMJG676V584Q5XKW3TWK64G3",
+          "text": "How profiles are merged"
+        },
+        {
+          "level": 3,
+          "id": "h_01JMJG676VHKPYN0R1R8J3GGJX",
+          "text": "What is deterministic merging and how is it different from probabilistic merging?"
+        },
+        {
+          "level": 3,
+          "id": "h_01GVZT1MQTSY5TWF22SA9D1GAX",
+          "text": "What triggers a profile merge?"
+        },
+        {
+          "level": 3,
+          "id": "h_01JMJG676V229BDM5DHVEGEAMA",
+          "text": "What types of events will not trigger a profile merge?"
+        },
+        {
+          "level": 3,
+          "id": "h_01JMJG676V37Y7F8GRVE91JMB8",
+          "text": "If separate profiles take cookied actions on the same device and browser, will the profiles be merged?"
+        },
+        {
+          "level": 3,
+          "id": "h_01JMJG676W3AT3TWC1THGY6CP7",
+          "text": "Is it possible the source profile will get re-created if both email addresses are still present in an ecommerce integration?"
+        },
+        {
+          "level": 3,
+          "id": "h_01JMJG676W3KXCHS1DS4X58FZ1",
+          "text": "What is a destination vs. source profile?"
+        },
+        {
+          "level": 2,
+          "id": "h_01JMJG676WNJ2ED2KAM3QF3CNX",
+          "text": "Profile data"
+        },
+        {
+          "level": 3,
+          "id": "h_01JMJG676W2Q4MANRJZAKYPZSX",
+          "text": "What happens to the data on the source profile when it is part of a merge?"
+        },
+        {
+          "level": 3,
+          "id": "h_01JMJG676WS7140Y5NDJ74B3GS",
+          "text": "How are profile properties handled when a profile is merged?"
+        },
+        {
+          "level": 3,
+          "id": "h_01JMJG676W5KB6K5PJ1FQ0WSMG",
+          "text": "Will a profile’s skipped messages be merged as well?"
+        },
+        {
+          "level": 3,
+          "id": "h_01JMJG676W6YWGVE9DQD0VQADK",
+          "text": "How are consent and exclusion records treated during a profile merge?"
+        },
+        {
+          "level": 3,
+          "id": "h_01JMJG676WMTXWRE8AGSPC9PXK",
+          "text": "Would active coupons under the source profile merge over to the destination profile?"
+        },
+        {
+          "level": 2,
+          "id": "h_01JMJG676W2K382X2FPT7MFZTZ",
+          "text": "Flows"
+        },
+        {
+          "level": 3,
+          "id": "h_01JMJG676W8CV2AM5JYCK69Y8K",
+          "text": "How does profile merging impact flows?"
+        },
+        {
+          "level": 3,
+          "id": "h_01JMJG676WQV2Q7YMM5Q1587RC",
+          "text": "How are date-triggered flows affected?"
+        },
+        {
+          "level": 3,
+          "id": "h_01JMJG676W4FEME3RRFY99A1C1",
+          "text": "Can a profile still qualify for a list-triggered flow if the merged profile already went through that flow?"
+        },
+        {
+          "level": 2,
+          "id": "additional-resources",
+          "text": "Additional resources"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "Explore more from Klaviyo"
+        }
+      ]
+    }
+  },
+  "rendered_page": {
+    "status": "fetched",
+    "error": ""
+  }
+}

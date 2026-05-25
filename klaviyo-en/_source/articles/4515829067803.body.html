@@ -1,0 +1,72 @@
+<h2 id="h_01HSV9R1DRB5A4EDH6N315VRJV">You will learn</h2>
+<p>Learn how to solve issues with your WooCommerce integration setup by following the relevant troubleshooting scenario described below. If you are encountering issues not on this list, please reach out on the <a href="https://community.klaviyo.com/got-a-question-1">Community</a> or to our <a href="https://help.klaviyo.com/hc/en-us/articles/115001002272-How-to-Contact-Support">Support Team</a>.</p>
+<h2 id="h_01HSV9R5XAH467P007R8P5WSDC">Before you begin</h2>
+<p>If you have not already, read our guide on <a href="https://help.klaviyo.com/hc/en-us/articles/115005255808">getting started with WooCommerce</a> for step-by-step instructions on integrating. If you are looking to upgrade your plugin, check out our article on <a href="https://help.klaviyo.com/hc/en-us/articles/4418005597723">how to upgrade your WooCommerce plugin</a>.</p>
+<h2 id="h_01HQBY35G0CCEXJ44GSF0VFYMH">Troubleshooting scenarios</h2>
+<p>Consult the following scenarios based on the error message received in-app to resolve your issue.</p>
+<div class="bs-callout bs-callout-default">
+<p>Please note that if you choose to remove your integration and then re-integrate, your WooCommerce data will not be deleted from Klaviyo.</p>
+</div>
+<h3 id="h_01HSV9VZNMW282DJ8TH8FE0NRT">"To avoid functionality disruptions, you may need to disable the following plugins: <em>Plugin Name(s)</em>"</h3>
+<p>If you have active caching plugins or redirect plugins in WordPress, these can interfere with Klaviyo’s integration and cause connection issues. We recommend disabling these plugins during the integration setup process. <br>
+</p>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/28716055944091" alt="" width="515" height="92"></p>
+<h3 id="h_01HQBY3NPX35ADNSNWMS4FY8G8">“We can’t complete your setup”</h3>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/28716066411035" alt="" width="534" height="183"></p>
+<p>This message means that either your firewall is blocking Klaviyo’s requests, that you have Bot Fight Mode enabled in Cloudflare, or both. </p>
+<p>To resolve, we recommend both allowlisting Klaviyo integration traffic and disabling Bot Fight Mode (if you have it enabled).</p>
+<ol>
+<li>Learn how to <a href="https://help.klaviyo.com/hc/en-us/articles/19143781289115">allowlist Klaviyo integration traffic IP addresses</a>. </li>
+<li>To disable Bot Fight Mode in Cloudflare:
+<ol>
+<li>Log in to the <a href="https://dash.cloudflare.com/login">Cloudflare dashboard</a>. </li>
+<li>Select your account and domain.</li>
+<li>Go to <strong>Security &gt; Bots</strong>.</li>
+<li>For Bot Fight Mode, select<em> Off</em>.</li>
+</ol>
+</li>
+</ol>
+<h3 id="h_01HQBY3VJZHKRFK4MF12HQZBF0">“Ensure your WooCommerce store has https and SSL enabled”</h3>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/28716055952027" alt="" width="523" height="89"></p>
+<p>Klaviyo expects your store URL to adhere to HTTPS protocols, meaning that the website has a valid SSL certificate. If your website is in HTTP rather than HTTPS, you may run into issues.</p>
+<p>You can check if your SSL certificate is valid at <a href="https://www.ssllabs.com/ssltest/analyze.html">SSL Server Test (Powered by Qualys SSL Labs)</a>. </p>
+<p>Klaviyo requires that the tests pass with A gradings. </p>
+<h3 id="h_01HSVA2MV3Z18T12GMDGKJP0AJ">“Unable to access API with provided credentials”</h3>
+<p>You may receive this error if you have customizations in place to prevent API access for non-logged-in users. Typically, this is a function in the<em> functions.php</em> WordPress file, which triggers a 401 status code response. </p>
+<p>If you have a customization like this, delete it or comment it out to eliminate the error. For more information on this error, check out <a href="https://developer.wordpress.org/rest-api/frequently-asked-questions/#require-authentication-for-all-requests">the WooCommerce REST API FAQ</a>.</p>
+<h3 id="h_01HSVA2HZDF1EFM13V6Z831K46">"Unable to access the orders API, please check connection settings and try again"</h3>
+<p>This error means that when Klaviyo tries to validate the WooCommerce integration and get an order count, their API doesn’t return a value Klaviyo expects or it returns nothing at all. </p>
+<p>Since the integration hasn't officially connected to Klaviyo yet, this means that it needs to be resolved within WooCommerce.</p>
+<p>To get more information about this error, you need to make an API call to the order count endpoint, which will provide more insight into what is being passed to Klaviyo. Here is an example cURL request. To use it, fill in your store URL, consumer key, and consumer secret: </p>
+<pre><code class="language-text">curl https://STORE_URL/wp-json/wc/v3/orders \
+-u CONSUMER_KEY:CONSUMER_SECRET
+</code></pre>
+<h3 id="h_01HSVA2955MYWSSWTGXV83K1PM">“Your Klaviyo plugin is out of date”</h3>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/33638394936859" alt="" width="645" height="257"></p>
+<p>Occasionally, the webhook will be delayed in reaching Klaviyo, temporarily causing you to see the old settings page. This should resolve itself after a few minutes.</p>
+<h3 id="h_01HSVA26KSH5AQVFSM9ZBDWM2P">404 when connecting to Klaviyo from WordPress</h3>
+<p>To resolve this, you should confirm that you have Permalinks enabled for your WordPress site. WooCommerce authentication will not work unless Permalinks are enabled. </p>
+<ol>
+<li>Navigate to your WordPress site and go to <strong>Settings</strong> &gt; <strong>Permalinks</strong>.</li>
+<li>Under <em>Common Settings</em>, choose any link structure other than <em>Plain</em>. </li>
+<li>Confirm by clicking <strong>Save Changes</strong>.<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28716055953819" alt="" width="425" height="305">
+</li>
+<li>When you’re done, re-integrate with Klaviyo.</li>
+</ol>
+<h3 id="h_01HSVA20N345C98EBJGFRS9E55">Installation Failed - We were unable to install your extension</h3>
+<p>You may encounter an "Installation Failed" error when attempting to install the integration via the <a href="https://woocommerce.com/products/klaviyo-for-woocommerce/?utm_source=extensionsscreen&amp;utm_medium=product&amp;utm_campaign=wcaddons&amp;in_app_label=promoted&amp;wccom-site=https%3A%2F%2Fvoluntary-platypus.jurassic.ninja&amp;wccom-back=%252Fwp-admin%252Fadmin.php%253Fpage%253Dwc-admin%2526path%253D%25252Fextensions&amp;wccom-woo-version=10.3.5&amp;wccom-connect-nonce=48111ee6ce&amp;utm_group=discover-our-favorites">WooCommerce Marketplace</a>. </p>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/43279509814939" alt="image (1).png" width="486" height="401"></p>
+<p>In the event you are unable to successfully install from the WooCommerce Marketplace, you can also install the plugin from your Wordpress plugin admin. </p>
+<ol>
+<li>Navigate to your WordPress admin and go to <strong>Plugins</strong>. </li>
+<li>Select <strong>Add Plugin</strong>. </li>
+<li>Search for <em>Klaviyo</em>in <strong>Search Plugins</strong>.</li>
+<li>Select <strong>Install Now</strong>. </li>
+<li>Select <strong>Activate. </strong>
+</li>
+<li>Select <strong>Marketing</strong> from the lefthand navigation, then click <strong>Klaviyo</strong>.</li>
+<li>Click <strong>Connect Account </strong>to begin, then proceed to <a href="https://help.klaviyo.com/hc/en-us/articles/115005255808#h_01FV97DEKASQ117J7HBFCVHBKA">Enable the WooCommerce integration</a> in the <a href="https://help.klaviyo.com/hc/en-us/articles/115005255808">Getting started with WooCommerce</a> article. <br>
+</li>
+</ol>

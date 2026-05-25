@@ -1,0 +1,1146 @@
+{
+  "captured_at": "2026-05-23T16:15:44Z",
+  "article": {
+    "id": 4764571493275,
+    "url": "https://klaviyo.zendesk.com/api/v2/help_center/en-us/articles/4764571493275.json",
+    "html_url": "https://klaviyo.zendesk.com/hc/en-us/articles/4764571493275-How-to-configure-OneTrust-with-Klaviyo-s-cookies",
+    "author_id": 1265141506249,
+    "comments_disabled": false,
+    "draft": false,
+    "promoted": false,
+    "position": 0,
+    "vote_sum": 2,
+    "vote_count": 10,
+    "section_id": 49375243224859,
+    "created_at": "2022-03-17T17:10:46Z",
+    "updated_at": "2026-04-21T13:55:03Z",
+    "name": "How to configure OneTrust with Klaviyo's cookies",
+    "title": "How to configure OneTrust with Klaviyo's cookies",
+    "source_locale": "en-us",
+    "locale": "en-us",
+    "outdated": false,
+    "outdated_locales": [],
+    "edited_at": "2026-04-17T01:02:57Z",
+    "user_segment_id": null,
+    "permission_group_id": 146372,
+    "content_tag_ids": [],
+    "label_names": [],
+    "body": "<h2 id=\"block-0\">You Will Learn</h2>\n<p>Learn how to configure OneTrust cookie management tools (including their Auto-BlockingTM functionality and Cookie Pro product) tools to work with Klaviyo’s tracking and onsite functionality.<br>\n<br>\nKlaviyo.js is Klaviyo's JavaScript snippet that enables Active on Site tracking and signup forms. You have the option to enable this tracking through your ecommerce integration or by pasting the code in your site's theme. Typically when Klaviyo’s JavaScript is enabled, the __kla_id cookie can track and identify site visitors. When not blocked, this cookie temporarily holds personally identifiable information, and once the visitor is identified (e.g., clicking a link through a Klaviyo-sent email), this cookied information is passed to Klaviyo. However, OneTrust requires additional setup steps to ensure this information is captured and then compliantly sent to Klaviyo.<br>\n<br>\nIn this article we will walk through the steps to ensure OneTrust is capturing visitor information appropriately and sending it to Klaviyo. Please note that you will need to complete all cookie setup steps in this guide and in the order outlined below.</p>\n<h2 id=\"block-2\">Prerequisites</h2>\n<p>We suggest visiting our <a href=\"https://help.klaviyo.com/hc/en-us/articles/115005076767\">Guide to Klaviyo Web Tracking </a>for more information on how our cookies capture known visitor information in different ways.<br>\n<br>\nAdditionally, it is important that you have already enabled Klaviyo.js, either directly through your <a href=\"https://help.klaviyo.com/hc/en-us/categories/115000032731-Ecommerce-Integrations\">ecommerce integration</a> or <a href=\"https://developers.klaviyo.com/en/docs/guide-to-integrating-a-platform-without-a-pre-built-klaviyo-integration#javascript-track-api-for-on-site-metrics\">manually</a>.</p>\n<h2 id=\"block-4\">Configuring Klaviyo and OneTrust’s Tools</h2>\n<p>OneTrust’s tools will automatically block cookies unless visitors have already explicitly consented via OneTrust. These tools can block cookies but also cause Klaviyo forms to stop working altogether, even forms that do not require tracking.<br>\n<br>\nIn order to adhere to this compliance protocol and allow certain forms to function, Klaviyo needs to be configured with OneTrust in a way that does not track events without consent. Klaviyo’s tracking includes:</p>\n<ul>\n<li>if a visitor is active on site, the site referrer URL</li>\n<li>if a visitor views or adds to a product to their cart (if you’ve enabled this separately)</li>\n</ul>\n<p>To make consent-based tracking compatible across OneTrust and Klaviyo, as well as some sign-up form functionality continue to work, you will need to follow the steps below inside OneTrust’s CookiePro tool.</p>\n<h2 id=\"block-9\">Add Your Website to CookiePro</h2>\n<p>If you haven’t already, you will need to add your website to your CookiePro account.<br>\n<br>\n1. Log into your <a href=\"http://app.cookiepro.com/\">CookiePro account</a> and click the <strong>Cookie Compliance</strong> section under My Apps.</p>\n<p class=\"wysiwyg-text-align-center\"><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28717390181531\" alt=\"View of the CookiePro dashboard with Cookie Compliance section highlighted\" width=\"576\" height=\"307\"></p>\n<p>2. Click <strong>Add Website</strong> in the upper right-hand corner.</p>\n<p class=\"wysiwyg-text-align-center\"><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28717390183579\" alt=\"The Add Website button in the upper right corner of the CookiePro dashboard page\"></p>\n<p>3. From here, you will see a section to set up and add your website and scanning details. Fill in your website URL and name of your organization in the first two fields.</p>\n<p class=\"wysiwyg-text-align-center\"><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28717383884059\" alt=\"Scan Website modal with fields to fill website URL and Organization information\"></p>\n<p class=\"wysiwyg-text-align-left\">Note that if you already have an organization associated with your CookiePro account, it will appear in the dropdown as an option.<br>\n<br>\n4. Under the <strong>Advanced Options</strong> section, you can choose to adjust or add your scanning settings.<br>\n<br>\n5. You can adjust the number of website pages that CookiePro will scan by changing the number in the <em>Limit scan</em> to field. By default, CookiePro will recommend scanning the first 1,000 pages.</p>\n<p class=\"wysiwyg-text-align-center\"><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28717390188315\" alt=\"Inside Scanning Settings page, the ability to input scanned page numbers in field and toggle option on\"></p>\n<p>6. You can also limit the CookiePro scan to one area of your site. To do this, toggle on the option next to <em>Limit to this path</em><em>within site.</em> Make sure that your Website URL above reflects this URL path (e.g., retail.com/signups).</p>\n<p class=\"wysiwyg-text-align-center\"><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28717383946907\" alt=\"Inside the Scanning Settings page, the toggle option to only scan pages within one area of your website\"></p>\n<p>7. Finally, if there are certain pages or types of pages that you want CookiePro to scan, you can add these in the next few fields. Add page IDs separated by commas to the <em>Scan Pages with Query</em><em>Parameters</em> field to scan pages by ID number.<br>\n<br>\nYou can also scan pages by URL by adding these URLs in the <em>Target Pages to Scan</em> field.<br>\n<br>\nIf you have a longer list of URLs or a sitemap, you can copy and paste those into the <em>Sitemap URLs</em> field. These URLs will be scanned first in the scan queue.</p>\n<p class=\"wysiwyg-text-align-center\"><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28717383893403\" alt=\"In the Scanning Settings page, fields to add additional information on certain pages or areas of your website to scan \"></p>\n<p>8. Once you have all settings completed, click <strong>Scan &amp; Configure</strong> in the lower right corner.</p>\n<h2 id=\"block-23\">Configuring the Static-Tracking Cookie</h2>\n<p>In the section below we will walk through setting up your static-tracking cookie to ensure you are able to gather third-party cookies and pass these to Klaviyo.<br>\n<br>\n1. Once your website has been added, navigate to <strong>Cookiepedia</strong> &gt; <strong>Categorizations</strong> in the left hand navigation.<br>\n<br>\n2. Look for the Klaviyo static-tracking __kla_id cookie either by searching for it in the field above or by scrolling through the list below. It should be the option labeled as “Persistent” with the <em>static-tracking.klaviyo.com</em> hostname.<br>\n<br>\n3. Click the <strong>__kla_id</strong> cookie option.<br>\n</p>\n<p><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28717390192411\" alt=\"Inside the Categorizations page, a highlighted view of the __kla_id cookie in a list\"></p>\n<p class=\"wysiwyg-text-align-left\">4. Once on the <em>Cookie Details</em> page, navigate to the <strong>Categorization</strong> tab.<br>\n<br>\n5. If you have not run a scan with Klaviyo and OneTrust yet, make sure to choose <strong>Targeting Cookies</strong> from the <em>Select a category</em> dropdown. Make sure that <em>Third-Party Cookie</em> is already populated in the <em>Select a party</em> dropdown.</p>\n<p class=\"wysiwyg-text-align-center\"><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28717390194715\" alt=\"On the Categorization tab, a modal showing dropdowns for selecting a cookie category and cookie party\"></p>\n<p>6. Once you have made these updates, click <strong>Save</strong> in the lower right corner.<br>\n<br>\n7. In this same area, navigate to the <strong>Source</strong> tab. You should see your website URL appear in the list, as shown in the example below.</p>\n<p class=\"wysiwyg-text-align-center\"><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28717383898267\" alt=\"Inside the Sources page, a view of your website URL displayed\"></p>\n<p>8. Click on your <strong>website URL</strong>.<br>\n<br>\n9. A dropdown will appear with a new URL; click on the pencil icon to the right.</p>\n<p class=\"wysiwyg-text-align-center\"><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28717383900315\" alt=\"A highligted view of the pencil editing icon to the right of your website URL\" width=\"552\" height=\"67\"></p>\n<p>10. In the modal, remove your current URL and replace it with: <em>https://static-tracking.klaviyo.com</em>.<br>\n<br>\n11. Click <strong>Confirm</strong> once you have updated the URL.</p>\n<p class=\"wysiwyg-text-align-center\"><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28717383943067\" alt=\"A modal view of your Resource URL with a confirm butotn in the lower right\"></p>\n<p class=\"wysiwyg-text-align-left\">12. To confirm that the Klaviyo cookie has been updated, navigate to <strong>Cookpedia</strong><strong>&gt; Categorizations</strong> in the left-hand navigation. 1<br>\n<br>\n3. Click on the <strong>Cookies</strong> tab.<br>\n<br>\n14. From here, your __kla_id cookie should show a “1” listed under both the <em>Domain Category Overrides</em> and <em>Domains</em> columns.</p>\n<p class=\"wysiwyg-text-align-center\"><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28717390203035\" alt=\"On the confirmation screen, a list view showing your __kla_id cookie with domain category overrides and domain as a numeric one\" width=\"335\" height=\"95\"></p>\n<h2 id=\"block-36\">Configuring the Static.Klaviyo Cookie</h2>\n<p>In the section below, we will walk through setting up your static.Klaviyo cookie to ensure you are able to gather third-party cookies and pass these to Klaviyo.<br>\n<br>\n1. Navigate to <strong>Cookiepedia &gt; Categorizations</strong> in the left hand navigation.<br>\n<br>\n2. Look for the static.Klaviyo __kla_id cookie either by searching for it in the field above or by scrolling through the list below. It should be the option labeled as “Persistent” with the <em>static.klaviyo.com</em> hostname.<br>\n<br>\n3. Click this <strong>__kla_id</strong> cookie option.<br>\n</p>\n<p><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28717383910299\" alt=\"On the Categorizations page, the __kla_id cookie option highlighted in a list view\" width=\"856\" height=\"132\"></p>\n<p class=\"wysiwyg-text-align-left\">4. Once on the <em>Cookie Details</em> page, navigate to the <strong>Categorization</strong> tab.<br>\n<br>\n5. Choose <strong>Targeting Cookies</strong> from the <em>Select a Category</em> dropdown. Make sure that <em>Third-Party Cookie</em> is already populated in the <em>Select a party</em> dropdown.</p>\n<p class=\"wysiwyg-text-align-center\"><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28717390194715\" alt=\"On the Categorization tab, a modal showing dropdowns for selecting a cookie category and cookie party\"></p>\n<p>6. Once you have made these updates, click <strong>Save</strong> in the lower right corner.<br>\n<br>\n7. In this same area, navigate to the <strong>Source</strong> tab. You should see your website URL appear in the list below.</p>\n<p class=\"wysiwyg-text-align-center\"><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28717383898267\" alt=\"A modal view of your website URL\"></p>\n<p>8. Click on your <strong>website URL</strong>.<br>\n<br>\n9. A dropdown will appear with a new URL; click on the pencil icon that appears to the right of this.</p>\n<p class=\"wysiwyg-text-align-center\"><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28717383900315\" alt=\"A highligted view of the pencil editing icon to the right of your website URL\" width=\"519\" height=\"63\"></p>\n<p class=\"wysiwyg-text-align-left\">10. In the modal remove your current URL and replace with: <em>https://static-tracking.klaviyo.com</em><a href=\"https://static-tracking.klaviyo.com.\">. </a><br>\n<br>\n11. Click <strong>Confirm</strong> once you have updated the URL.</p>\n<p class=\"wysiwyg-text-align-center\"><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28717383943067\" alt=\"A modal of your website URL with a confirm button in the lower right\"></p>\n<p>12. To confirm that the Klaviyo cookie has been updated, navigate to <strong>Cookiepedia &gt; Categorizations</strong> in the left hand navigation.<br>\n<br>\n13. From here, your __kla_id cookie should show a “1” listed under both the <em>Domain Category Overrides</em> and <em>Domains</em> columns.</p>\n<p class=\"wysiwyg-text-align-center\"><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28717390203035\" alt=\"On the confirmation screen, a list view showing your __kla_id cookie with domain category overrides and domain as a numeric one\" width=\"335\" height=\"95\"></p>\n<h2 id=\"block-49\">Configuring Your Website First-Party Cookie</h2>\n<p>In the section below we will walk through how to set up your websites or first-party cookies directly to capture the events on your ecommerce site.<br>\n<br>\n1. Navigate to <strong>Cookiepedia &gt; Categorizations</strong> in the left hand navigation.<br>\n<br>\n2. Look for your website specific __kla_id cookie either by searching for it in the field above or by scrolling through the list below. It should be the option labeled as “Persistent” with your website URL as the hostname.<br>\n<br>\n3. Click this <strong>__kla_id</strong> cookie option.</p>\n<p><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28717383916315\" alt=\"On the Categorization page, your __kla_id cookie highlighted in a list view\"></p>\n<p>4. Once on the <em>Cookie Details</em> page, navigate to the <strong>Categorization</strong> tab.<br>\n<br>\n5. Choose <strong>Targeting Cookies</strong> from the <em>Select a Category</em> dropdown. Make sure that <em>First-Party Cookie</em> is already populated in the <em>Select a party</em> dropdown.</p>\n<p class=\"wysiwyg-text-align-center\"><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28717390209819\" alt=\"On the Categorization tab, a modal showing dropdowns for selecting a cookie category and cookie party\"></p>\n<p>6. Once you have made these updates, click <strong>Save</strong> in the lower right corner.<br>\n<br>\n7. In this same area, navigate to the <strong>Source</strong> tab. You should see your website URL appear in the list below.</p>\n<p class=\"wysiwyg-text-align-center\"><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28717383898267\" alt=\"A modal view of your website URL\"></p>\n<p>8. Click on your <strong>website URL</strong>.<br>\n<br>\n9. A dropdown will appear with a new URL; click on the pencil icon that appears to the right of this.</p>\n<p class=\"wysiwyg-text-align-center\"><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28717383900315\" alt=\"A highligted view of the pencil editing icon to the right of your website URL\" width=\"535\" height=\"65\"></p>\n<p>10. In the modal remove your current URL and replace with: <em>https://static-tracking.klaviyo.com</em>. <br>\n<br>\n11. Click <strong>Confirm</strong> once you have updated the URL.</p>\n<p class=\"wysiwyg-text-align-center\"><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28717383943067\" alt=\"A modal showing your website URL with a Confirm button in the lower right corner\"></p>\n<h2 id=\"block-60\">Previewing Your Updated Cookies</h2>\n<p class=\"wysiwyg-text-align-left\">1. Navigate to <strong>Scripts</strong> in the left-hand navigation.<br>\n<br>\n2. On the Scripts page, click on your <strong>website URL</strong> that appears below.</p>\n<p class=\"wysiwyg-text-align-center\"><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28717383922971\" alt=\"On the Scripts page, your website URL will appear in the list below to click\"></p>\n<p class=\"wysiwyg-text-align-left\">3. Then, click <strong>Publish Production</strong> in the upper right-hand corner.</p>\n<p class=\"wysiwyg-text-align-center\"><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28717383924507\" alt=\"View of the Publish Production button to click in the upper right corner of the Scripts page\" width=\"384\" height=\"120\"></p>\n<p>4. In the right sidebar that appears, click <strong>Confirm</strong>.<br>\n<br>\n5. Once on the <em>Review</em> tab, scroll down and click <strong>Continue</strong>.<br>\n<br>\n6. Finally, on the <em>Confirm</em><em>and Publish</em> tab, click <strong>Publish Test &amp; Preview</strong>. Your preview may take a few seconds to load, but you will see a green check appear below once it’s ready.</p>\n<p></p>\n<p></p>\n<p>\n<script src=\"https://fast.wistia.com/embed/medias/2b9o3tsibi.jsonp\" async=\"async\"></script>\n<script src=\"https://fast.wistia.com/assets/external/E-v1.js\" async=\"async\"></script>\n</p>\n<div class=\"wistia_responsive_padding\" style=\"padding: 56.25% 0 0 0; position: relative;\">\n<div class=\"wistia_responsive_wrapper\" style=\"height: 100%; left: 0; position: absolute; top: 0; width: 100%;\">\n<div class=\"wistia_embed wistia_async_2b9o3tsibi seo=false videoFoam=true\" style=\"height: 100%; position: relative; width: 100%;\">\n<div class=\"wistia_swatch\" style=\"height: 100%; left: 0; opacity: 0; overflow: hidden; position: absolute; top: 0; transition: opacity 200ms; width: 100%;\"><img style=\"filter: blur(5px); height: 100%; object-fit: contain; width: 100%;\" src=\"https://fast.wistia.com/embed/medias/2b9o3tsibi/swatch\" alt=\"\" aria-hidden=\"true\"></div>\n</div>\n</div>\n</div>\n<p><br>\n7. Once this success message appears, click <strong>Confirm</strong> below.</p>\n<h2 id=\"block-70\">Publishing Your Updated Cookies</h2>\n<div class=\"bs-callout bs-callout-default\">\n<p>Before you publish your cookies, it’s important to note that production scripts can take up to four hours to take effect on your website. Once you follow the directions below, please wait up to four hours to see these updates.</p>\n</div>\n<p>1. Navigate to <strong>Websites</strong> in the left-hand navigation.<br>\n<br>\n2. On the <em>Websites</em> page, click on your <strong>website URL</strong> from the list below.</p>\n<p class=\"wysiwyg-text-align-center\"><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28717390222491\" alt=\"On the Websites page, your website URL will appear in the list below to click\"></p>\n<p class=\"wysiwyg-text-align-left\">3. From here, click <strong>Publish</strong> in the upper right corner.<br>\n<br>\n4. A sidebar modal will appear confirming your version to publish. Click <strong>Confirm</strong> in the lower right corner.</p>\n<p class=\"wysiwyg-text-align-center\"><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28717390226715\" alt=\"A modal that will appear from the right sidebar to publish your website cookies with confirm button in lower right corner\" width=\"498\" height=\"577\"></p>\n<p>5. In this same modal, you will move onto the <em>Review and Publish</em> screen. Click the toggle on <strong>Enable Automatic Blocking of Cookies</strong>.<br>\n<br>\nYou can read more about CookiePro’s Auto-Blocking feature in their <a href=\"https://community.cookiepro.com/s/article/UUID-5b03e81d-8b3b-5da8-eed5-b3b015730f3c?language=en_US\">guide</a>.</p>\n<p class=\"wysiwyg-text-align-center\"><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28717383934235\" alt=\"On the Review and Publish screen, a highlighted area to toggle on Automatic Blocking of Cookies\" width=\"498\" height=\"577\"></p>\n<p>6. Click <strong>Publish</strong> in the lower right corner.<br>\n<br>\n7. A popup will appear with your Production Scripts. Click <strong>Copy Scripts</strong>.</p>\n<p class=\"wysiwyg-text-align-center\"><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28717390232603\" alt=\"A popup window showing your production scripts to copy and paste to your website\" width=\"362\" height=\"485\"></p>\n<p>8. Place these scripts within the html of your ecommerce website. Read more about placing these scripts into your ecommerce website in CookiePro’s step-by-step <a href=\"https://community.cookiepro.com/s/article/UUID-7478d3b4-18eb-3ac0-a6fd-fb7ebff9f8dc?language=en_US\">guide</a>.</p>\n<h2 id=\"block-81\">Outcome</h2>\n<p>You have successfully set up your OneTrust cookie tracking software to ensure that your visitor information is captured and then compliantly sent to Klaviyo.</p>",
+    "user_segment_ids": []
+  },
+  "normalized": {
+    "id": "4764571493275",
+    "title": "How to configure OneTrust with Klaviyo's cookies",
+    "source_url": "https://help.klaviyo.com/hc/en-us/articles/4764571493275-How-to-configure-OneTrust-with-Klaviyo-s-cookies",
+    "section_id": 49375243224859,
+    "section": "About cookies in Klaviyo",
+    "category_id": 115000874048,
+    "category": "Analytics",
+    "category_slug": "analytics-audience",
+    "klaviyo_updated": "2026-04-21T13:55:03Z",
+    "created_at": "2022-03-17T17:10:46Z",
+    "draft": false,
+    "promoted": false,
+    "position": 0,
+    "label_names": []
+  },
+  "files": {
+    "body_html": "_source/articles/4764571493275.body.html",
+    "rendered_html": "_source/rendered/4764571493275.html"
+  },
+  "assets": {
+    "api_body": {
+      "images": [
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28717390181531",
+          "alt": "View of the CookiePro dashboard with Cookie Compliance section highlighted",
+          "width": "576",
+          "height": "307"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28717390183579",
+          "alt": "The Add Website button in the upper right corner of the CookiePro dashboard page",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28717383884059",
+          "alt": "Scan Website modal with fields to fill website URL and Organization information",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28717390188315",
+          "alt": "Inside Scanning Settings page, the ability to input scanned page numbers in field and toggle option on",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28717383946907",
+          "alt": "Inside the Scanning Settings page, the toggle option to only scan pages within one area of your website",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28717383893403",
+          "alt": "In the Scanning Settings page, fields to add additional information on certain pages or areas of your website to scan ",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28717390192411",
+          "alt": "Inside the Categorizations page, a highlighted view of the __kla_id cookie in a list",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28717390194715",
+          "alt": "On the Categorization tab, a modal showing dropdowns for selecting a cookie category and cookie party",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28717383898267",
+          "alt": "Inside the Sources page, a view of your website URL displayed",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28717383900315",
+          "alt": "A highligted view of the pencil editing icon to the right of your website URL",
+          "width": "552",
+          "height": "67"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28717383943067",
+          "alt": "A modal view of your Resource URL with a confirm butotn in the lower right",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28717390203035",
+          "alt": "On the confirmation screen, a list view showing your __kla_id cookie with domain category overrides and domain as a numeric one",
+          "width": "335",
+          "height": "95"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28717383910299",
+          "alt": "On the Categorizations page, the __kla_id cookie option highlighted in a list view",
+          "width": "856",
+          "height": "132"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28717383916315",
+          "alt": "On the Categorization page, your __kla_id cookie highlighted in a list view",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28717390209819",
+          "alt": "On the Categorization tab, a modal showing dropdowns for selecting a cookie category and cookie party",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28717383922971",
+          "alt": "On the Scripts page, your website URL will appear in the list below to click",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28717383924507",
+          "alt": "View of the Publish Production button to click in the upper right corner of the Scripts page",
+          "width": "384",
+          "height": "120"
+        },
+        {
+          "src": "https://fast.wistia.com/embed/medias/2b9o3tsibi/swatch",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28717390222491",
+          "alt": "On the Websites page, your website URL will appear in the list below to click",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28717390226715",
+          "alt": "A modal that will appear from the right sidebar to publish your website cookies with confirm button in lower right corner",
+          "width": "498",
+          "height": "577"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28717383934235",
+          "alt": "On the Review and Publish screen, a highlighted area to toggle on Automatic Blocking of Cookies",
+          "width": "498",
+          "height": "577"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28717390232603",
+          "alt": "A popup window showing your production scripts to copy and paste to your website",
+          "width": "362",
+          "height": "485"
+        }
+      ],
+      "links": [
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005076767",
+          "text": "Guide to Klaviyo Web Tracking"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000032731-Ecommerce-Integrations",
+          "text": "ecommerce integration"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/guide-to-integrating-a-platform-without-a-pre-built-klaviyo-integration#javascript-track-api-for-on-site-metrics",
+          "text": "manually"
+        },
+        {
+          "href": "http://app.cookiepro.com/",
+          "text": "CookiePro account"
+        },
+        {
+          "href": "https://static-tracking.klaviyo.com.",
+          "text": "."
+        },
+        {
+          "href": "https://community.cookiepro.com/s/article/UUID-5b03e81d-8b3b-5da8-eed5-b3b015730f3c?language=en_US",
+          "text": "guide"
+        },
+        {
+          "href": "https://community.cookiepro.com/s/article/UUID-7478d3b4-18eb-3ac0-a6fd-fb7ebff9f8dc?language=en_US",
+          "text": "guide"
+        }
+      ],
+      "headings": [
+        {
+          "level": 2,
+          "id": "block-0",
+          "text": "You Will Learn"
+        },
+        {
+          "level": 2,
+          "id": "block-2",
+          "text": "Prerequisites"
+        },
+        {
+          "level": 2,
+          "id": "block-4",
+          "text": "Configuring Klaviyo and OneTrust’s Tools"
+        },
+        {
+          "level": 2,
+          "id": "block-9",
+          "text": "Add Your Website to CookiePro"
+        },
+        {
+          "level": 2,
+          "id": "block-23",
+          "text": "Configuring the Static-Tracking Cookie"
+        },
+        {
+          "level": 2,
+          "id": "block-36",
+          "text": "Configuring the Static.Klaviyo Cookie"
+        },
+        {
+          "level": 2,
+          "id": "block-49",
+          "text": "Configuring Your Website First-Party Cookie"
+        },
+        {
+          "level": 2,
+          "id": "block-60",
+          "text": "Previewing Your Updated Cookies"
+        },
+        {
+          "level": 2,
+          "id": "block-70",
+          "text": "Publishing Your Updated Cookies"
+        },
+        {
+          "level": 2,
+          "id": "block-81",
+          "text": "Outcome"
+        }
+      ]
+    },
+    "rendered_page": {
+      "images": [
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/7ff492c2b417b7ecfe572f839a8a81398693c1f7-1920x1080.webp",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/aa7053586e63f854bc6caea92f2827ffb347a1f4-1130x602.jpg?w=576",
+          "alt": "View of the CookiePro dashboard with Cookie Compliance section highlighted",
+          "width": "576",
+          "height": "307"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/9744068536ed89a1501c6514e991f5df86569973-512x129.jpg",
+          "alt": "The Add Website button in the upper right corner of the CookiePro dashboard page",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/03e1c1f8f242a13fbcb55389a0ccf4c935ade93a-512x260.png",
+          "alt": "Scan Website modal with fields to fill website URL and Organization information",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/616b7b12194e66fdc19ef77986c18e26ab251d62-512x113.png",
+          "alt": "Inside Scanning Settings page, the ability to input scanned page numbers in field and toggle option on",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/0a7d29d33c6d7caeb45b09f05ef43daecd70be4f-512x105.png",
+          "alt": "Inside the Scanning Settings page, the toggle option to only scan pages within one area of your website",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/edeeeaf0132fb566109b08a7d943f28c1a69d359-512x354.png",
+          "alt": "In the Scanning Settings page, fields to add additional information on certain pages or areas of your website to scan ",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/aaa7f360c6221a575bb8856e8e2e57e27a16cc8d-1918x312.jpg",
+          "alt": "Inside the Categorizations page, a highlighted view of the __kla_id cookie in a list",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/5cccb2439abc1ba174492f083ac0b162b8e59192-512x236.png",
+          "alt": "On the Categorization tab, a modal showing dropdowns for selecting a cookie category and cookie party",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/83a1f4369cc2df7afaf582a7f9f1333c9602f2f2-512x240.png",
+          "alt": "Inside the Sources page, a view of your website URL displayed",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/41864d5385820e8c6cf52020f8f0c6cfdf1a581b-858x104.jpg?w=552",
+          "alt": "A highligted view of the pencil editing icon to the right of your website URL",
+          "width": "552",
+          "height": "67"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/23743fa4692a18292bd1c310955dcac9ff83dcbc-492x278.jpg",
+          "alt": "A modal view of your Resource URL with a confirm butotn in the lower right",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/2c92dbffd39940ad6fe48eec9c76befbefdf7502-550x156.jpg?w=335",
+          "alt": "On the confirmation screen, a list view showing your __kla_id cookie with domain category overrides and domain as a numeric one",
+          "width": "335",
+          "height": "95"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/4cb95c5c38c73a556e7760441c28eab7838ee517-2004x308.jpg?w=856",
+          "alt": "On the Categorizations page, the __kla_id cookie option highlighted in a list view",
+          "width": "856",
+          "height": "132"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/41864d5385820e8c6cf52020f8f0c6cfdf1a581b-858x104.jpg?w=519",
+          "alt": "A highligted view of the pencil editing icon to the right of your website URL",
+          "width": "519",
+          "height": "63"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/153ac93d5dbb7842d7b35974f0c4d9040daeb288-1996x308.jpg",
+          "alt": "On the Categorization page, your __kla_id cookie highlighted in a list view",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/fb96dec4666c79e6424287f287ae3097b432d693-448x194.jpg",
+          "alt": "On the Categorization tab, a modal showing dropdowns for selecting a cookie category and cookie party",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/41864d5385820e8c6cf52020f8f0c6cfdf1a581b-858x104.jpg?w=535",
+          "alt": "A highligted view of the pencil editing icon to the right of your website URL",
+          "width": "535",
+          "height": "65"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/10a497b0969212c16d67e9287ff5c34be454c0a9-512x78.png",
+          "alt": "On the Scripts page, your website URL will appear in the list below to click",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/82bb597f778423086efc2feebb805154059fa7e9-512x160.png?w=384",
+          "alt": "View of the Publish Production button to click in the upper right corner of the Scripts page",
+          "width": "384",
+          "height": "120"
+        },
+        {
+          "src": "https://fast.wistia.com/embed/medias/2b9o3tsibi/swatch",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/249e7966cc79ada99ff94d6d8a3fc8285767537b-920x196.jpg",
+          "alt": "On the Websites page, your website URL will appear in the list below to click",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/9091f4cd9dc10079b50fc0832b626b391d1686d1-1066x1234.jpg?w=498",
+          "alt": "A modal that will appear from the right sidebar to publish your website cookies with confirm button in lower right corner",
+          "width": "498",
+          "height": "577"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/531ec69eb65091676029c80fa54b3cb7a11a283a-1068x1236.jpg?w=498",
+          "alt": "On the Review and Publish screen, a highlighted area to toggle on Automatic Blocking of Cookies",
+          "width": "498",
+          "height": "577"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/0a3e5e474284309d066c543ef97f85e0cfe8854e-602x806.jpg?w=362",
+          "alt": "A popup window showing your production scripts to copy and paste to your website",
+          "width": "362",
+          "height": "485"
+        }
+      ],
+      "links": [
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4764571493275-How-to-configure-OneTrust-with-Klaviyo-s-cookies#site-content",
+          "text": "Skip to main content"
+        },
+        {
+          "href": "https://www.klaviyo.com",
+          "text": "Home"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center"
+        },
+        {
+          "href": "https://www.klaviyo.com/enterprise",
+          "text": "Enterprise"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Partners"
+        },
+        {
+          "href": "https://www.klaviyo.com/careers",
+          "text": "Careers"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": "Log in"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": ""
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center Find step-by-step instructions and troubleshooting solutions in our knowledge base."
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000032731",
+          "text": "Integrations"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000312411",
+          "text": "Flows"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867867",
+          "text": "Audience"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867667",
+          "text": "Campaigns"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/360000190711",
+          "text": "Sign-up forms"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000873988",
+          "text": "Deliverability & compliance"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/29173800271259",
+          "text": "SMS"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/16638219724187",
+          "text": "Reviews"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/18073014919195",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/34141283979931",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/37659126754075",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/33948021740315",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/39746685522331",
+          "text": "WhatsApp"
+        },
+        {
+          "href": "https://academy.klaviyo.com",
+          "text": "Klaviyo Academy Expert training and education to help you succeed with Klaviyo, and beyond."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Quick+guide&resource=academy_courses",
+          "text": "Quick guides Learn marketing strategies and concepts in 15 minutes or less."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Course&resource=academy_courses",
+          "text": "Courses Master key marketing topics through structured lessons and exams."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/best-practices",
+          "text": "Best practices Discover top product and marketing strategies for your business."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/learning-paths",
+          "text": "Learning paths Complete curated learning journeys tailored to your marketing goals."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses",
+          "text": "Explore all resources"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Live+training&resource=academy_courses",
+          "text": "Live trainings Build confidence through hands-on interactive workshops and thought-provoking strategy sessions."
+        },
+        {
+          "href": "https://www.bigmarker.com/klaviyo-customer-education/Office-hours-Getting-started-with-Klaviyo",
+          "text": "Live office hours Join a strategic discussion where you can ask questions and get answers in real-time."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/private-live-training",
+          "text": "1:1 Live training Book a private training session with an expert to jumpstart your platform knowledge and confidence."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/credentials",
+          "text": "Klaviyo credentials Dig deeper into select topics and showcase your expertise with a final exam to earn a certificate and digital badge."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/certificates/klaviyo-practitioner-certificate",
+          "text": "Klaviyo practitioner certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/deliverability-certificate",
+          "text": "Deliverability certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/developer-certificate",
+          "text": "Klaviyo developer certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses&select=Certificate",
+          "text": "See all certificates"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Klaviyo Community Join our thriving community network to connect with brands like yours—online and in person."
+        },
+        {
+          "href": "https://community.klaviyo.com/topic/new",
+          "text": "Ask a question Post a question and get thoughtful answers from Klaviyo powerusers."
+        },
+        {
+          "href": "https://community.klaviyo.com/p/roadmap",
+          "text": "Product roadmap"
+        },
+        {
+          "href": "https://community.klaviyo.com/search/activity/recent",
+          "text": "Recent threads"
+        },
+        {
+          "href": "https://community.klaviyo.com/p/champions",
+          "text": "Meet the Champions"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups",
+          "text": "Browse all groups Your people are waiting. New ideas and connections are a click away."
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/developer-group-64",
+          "text": "Developer group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/entrepreneur-user-group-118",
+          "text": "Entrepreneur group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/woo-user-group-87",
+          "text": "WooCommerce group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/new-york-meetup-chapter-82",
+          "text": "New York City"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/los-angeles-meetup-chapter-83",
+          "text": "Los Angeles"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/austin-meetup-chapter-85",
+          "text": "Austin"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/san-diego-meetup-chapter-86",
+          "text": "San Diego"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/amsterdam-meetup-chapter-84",
+          "text": "Amsterdam"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Klaviyo Developers Access API documentation and developer guides to help you build with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/get_started",
+          "text": "Get started Access key resources and a step-by-step checklist for how to start developing with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/build_your_integration",
+          "text": "Grow your app's reach Learn how to join our ecosystem and get your app listed on our marketplace."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/developer-tools",
+          "text": "Developer tools Generate sample data, monitor your API usage, and access our Postman collections."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/reference/api_overview",
+          "text": "API reference Browse our full catalog of API docs."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/changelog_",
+          "text": "Changelog"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/api_versioning_and_deprecation_policy",
+          "text": "Versioning & deprecation policy"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/rate_limits_and_error_handling",
+          "text": "Rate limits & error handling"
+        },
+        {
+          "href": "https://youtube.com/playlist?list=PLHkNfHgtxcUanrkMnKPdkRzuWU7MGv_xM&si=pkG-KH7IT_TUHOGC",
+          "text": "API tutorials on YouTube Subscribe to our Klaviyo API Tutorials playlist for easy access to step-by-step developer walkthroughs."
+        },
+        {
+          "href": "https://www.klaviyo.com/contact-us",
+          "text": "Contact us"
+        },
+        {
+          "href": "https://www.klaviyo.com/sign-up",
+          "text": "Sign up"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": "Search"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4764571493275",
+          "text": "United States - EN"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/de-de/articles/4764571493275",
+          "text": "Deutschland - DE"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-es/articles/4764571493275",
+          "text": "España - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-mx/articles/4764571493275",
+          "text": "México - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/fr-fr/articles/4764571493275",
+          "text": "France - FR"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/it-it/articles/4764571493275",
+          "text": "Italia - IT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/ko-kr/articles/4764571493275",
+          "text": "한국 - KO"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/nl-nl/articles/4764571493275",
+          "text": "Nederland - NL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pl-pl/articles/4764571493275",
+          "text": "Polska - PL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pt-br/articles/4764571493275",
+          "text": "Brasil - PT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/sv-se/articles/4764571493275",
+          "text": "Sverige - SV"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000874048",
+          "text": "Analytics"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/14268485813403",
+          "text": "Getting started with analytics"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/49375243224859",
+          "text": "About cookies in Klaviyo"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4764571493275-How-to-configure-OneTrust-with-Klaviyo-s-cookies#you-will-learn",
+          "text": "You Will Learn"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4764571493275-How-to-configure-OneTrust-with-Klaviyo-s-cookies#prerequisites",
+          "text": "Prerequisites"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4764571493275-How-to-configure-OneTrust-with-Klaviyo-s-cookies#configuring-klaviyo-and-onetrusts-tools",
+          "text": "Configuring Klaviyo and OneTrust’s Tools"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4764571493275-How-to-configure-OneTrust-with-Klaviyo-s-cookies#add-your-website-to-cookiepro",
+          "text": "Add Your Website to CookiePro"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4764571493275-How-to-configure-OneTrust-with-Klaviyo-s-cookies#configuring-the-static-tracking-cookie",
+          "text": "Configuring the Static-Tracking Cookie"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4764571493275-How-to-configure-OneTrust-with-Klaviyo-s-cookies#configuring-the-staticklaviyo-cookie",
+          "text": "Configuring the Static.Klaviyo Cookie"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4764571493275-How-to-configure-OneTrust-with-Klaviyo-s-cookies#configuring-your-website-first-party-cookie",
+          "text": "Configuring Your Website First-Party Cookie"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4764571493275-How-to-configure-OneTrust-with-Klaviyo-s-cookies#previewing-your-updated-cookies",
+          "text": "Previewing Your Updated Cookies"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4764571493275-How-to-configure-OneTrust-with-Klaviyo-s-cookies#publishing-your-updated-cookies",
+          "text": "Publishing Your Updated Cookies"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4764571493275-How-to-configure-OneTrust-with-Klaviyo-s-cookies#outcome",
+          "text": "Outcome"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4764571493275-How-to-configure-OneTrust-with-Klaviyo-s-cookies#additional-resources",
+          "text": "Additional Resources"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005076767",
+          "text": "Guide to Klaviyo Web Tracking"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000032731-Ecommerce-Integrations",
+          "text": "ecommerce integration"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/guide-to-integrating-a-platform-without-a-pre-built-klaviyo-integration#javascript-track-api-for-on-site-metrics",
+          "text": "manually"
+        },
+        {
+          "href": "https://app.cookiepro.com/",
+          "text": "CookiePro account"
+        },
+        {
+          "href": "https://static-tracking.klaviyo.com.",
+          "text": "."
+        },
+        {
+          "href": "https://community.cookiepro.com/s/article/UUID-5b03e81d-8b3b-5da8-eed5-b3b015730f3c?language=en_US",
+          "text": "guide"
+        },
+        {
+          "href": "https://community.cookiepro.com/s/article/UUID-7478d3b4-18eb-3ac0-a6fd-fb7ebff9f8dc?language=en_US",
+          "text": "guide"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360034666712",
+          "text": "Understanding cookies in Klaviyo"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005076767",
+          "text": "Getting started with Klaviyo onsite tracking"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115001002272",
+          "text": "Learn how to contact support"
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": ""
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": "Visit Community"
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": ""
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": "Hire a partner"
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/about",
+          "text": "About Klaviyo"
+        },
+        {
+          "href": "https://www.klaviyo.com/newsroom",
+          "text": "Newsroom"
+        },
+        {
+          "href": "https://investors.klaviyo.com/overview/default.aspx",
+          "text": "Investor relations"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Agency and tech partners"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Developers"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/retail",
+          "text": "Retail and ecommerce"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/restaurants",
+          "text": "Restaurant marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/wellness",
+          "text": "Wellness"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform",
+          "text": "B2C CRM overview"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai",
+          "text": "Klaviyo AI (K:AI)"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/marketing-automation",
+          "text": "Klaviyo Marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-service",
+          "text": "Klaviyo Service"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/analytics",
+          "text": "Klaviyo Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-data-platform",
+          "text": "Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare",
+          "text": "Klaviyo vs. Klaviyo alternatives"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-mailchimp",
+          "text": "Klaviyo vs. Mailchimp"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-postscript",
+          "text": "Klaviyo vs. Postscript"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-attentive",
+          "text": "Klaviyo vs. Attentive"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-salesforce-marketing-cloud",
+          "text": "Klaviyo vs. Salesforce"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-listrak",
+          "text": "Klaviyo vs. Listrak"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/omnichannel",
+          "text": "Omnichannel marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/email-marketing",
+          "text": "Email marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing",
+          "text": "SMS marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing/rcs",
+          "text": "RCS for Business"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/mobile-app-marketing",
+          "text": "Mobile app marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/whatsapp",
+          "text": "WhatsApp marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/social",
+          "text": "Social marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources",
+          "text": "Marketing resources"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources/marketing-campaign-calendar",
+          "text": "Marketing campaign calendar"
+        },
+        {
+          "href": "https://www.klaviyo.com/glossary",
+          "text": "Marketing glossary"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/email-subject-line-generator",
+          "text": "Subject line generator"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/roi-calculator",
+          "text": "ROI calculator"
+        },
+        {
+          "href": "https://www.klaviyo.com/customers",
+          "text": "Case studies"
+        },
+        {
+          "href": "https://www.klaviyo.com/composer",
+          "text": "Composer Beta"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/marketing-agent",
+          "text": "Marketing Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/customer-agent",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/customer-experience-hub",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/helpdesk",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/marketing-analytics",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/advanced-cdp",
+          "text": "Advanced Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/web-forms",
+          "text": "Web forms"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/email-templates",
+          "text": "Email templates"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/portfolio",
+          "text": "Portfolio"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform-integrations",
+          "text": "Apps and Integrations"
+        },
+        {
+          "href": "https://www.klaviyo.com/features",
+          "text": "Features"
+        },
+        {
+          "href": "https://www.klaviyo.com/whats-new",
+          "text": "What's new"
+        },
+        {
+          "href": "https://www.klaviyo.com/events",
+          "text": "Events"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help Center"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us",
+          "text": "Academy"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Community"
+        },
+        {
+          "href": "https://www.facebook.com/Klaviyo/",
+          "text": "Facebook"
+        },
+        {
+          "href": "https://twitter.com/klaviyo/",
+          "text": "Twitter"
+        },
+        {
+          "href": "https://www.linkedin.com/company/klaviyo/",
+          "text": "LinkedIn"
+        },
+        {
+          "href": "https://www.instagram.com/klaviyo/",
+          "text": "Instagram"
+        },
+        {
+          "href": "https://www.klaviyo.com/sitemap",
+          "text": "Site Map"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal",
+          "text": "Terms and Privacy"
+        },
+        {
+          "href": "https://www.klaviyo.com/security",
+          "text": "Security"
+        },
+        {
+          "href": "https://www.klaviyo.com/trust",
+          "text": "Trust"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal/intellectual-property-notices",
+          "text": "Intellectual Property Notices"
+        }
+      ],
+      "headings": [
+        {
+          "level": 1,
+          "id": "",
+          "text": "How to configure OneTrust with Klaviyo's cookies"
+        },
+        {
+          "level": 2,
+          "id": "you-will-learn",
+          "text": "You Will Learn"
+        },
+        {
+          "level": 2,
+          "id": "prerequisites",
+          "text": "Prerequisites"
+        },
+        {
+          "level": 2,
+          "id": "configuring-klaviyo-and-onetrusts-tools",
+          "text": "Configuring Klaviyo and OneTrust’s Tools"
+        },
+        {
+          "level": 2,
+          "id": "add-your-website-to-cookiepro",
+          "text": "Add Your Website to CookiePro"
+        },
+        {
+          "level": 2,
+          "id": "configuring-the-static-tracking-cookie",
+          "text": "Configuring the Static-Tracking Cookie"
+        },
+        {
+          "level": 2,
+          "id": "configuring-the-staticklaviyo-cookie",
+          "text": "Configuring the Static.Klaviyo Cookie"
+        },
+        {
+          "level": 2,
+          "id": "configuring-your-website-first-party-cookie",
+          "text": "Configuring Your Website First-Party Cookie"
+        },
+        {
+          "level": 2,
+          "id": "previewing-your-updated-cookies",
+          "text": "Previewing Your Updated Cookies"
+        },
+        {
+          "level": 2,
+          "id": "publishing-your-updated-cookies",
+          "text": "Publishing Your Updated Cookies"
+        },
+        {
+          "level": 2,
+          "id": "outcome",
+          "text": "Outcome"
+        },
+        {
+          "level": 2,
+          "id": "additional-resources",
+          "text": "Additional Resources"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "Explore more from Klaviyo"
+        }
+      ]
+    }
+  },
+  "rendered_page": {
+    "status": "fetched",
+    "error": ""
+  }
+}

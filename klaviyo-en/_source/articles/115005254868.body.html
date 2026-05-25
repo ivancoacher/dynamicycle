@@ -1,0 +1,82 @@
+<h2 id="h_01HH06GV9HJ0Q7XW47A5JJ4MJ3">You will learn</h2>
+<p>Learn how to integrate Wufoo with Klaviyo in order to create automated flow messages, personalize campaigns, and segment your lists based on data from Wufoo. Wufoo allows you to quickly create surveys, invitations, and contact forms to collect the data you need from your customers. Klaviyo syncs the following data from Wufoo:</p>
+<ul>
+<li>When someone filled out a form</li>
+<li>The name of the form the user filled out</li>
+<li>Data collected from the form's fields</li>
+</ul>
+<h2 id="h_01HH06GV9HGSM7FPPHNYD7CBFG">Before you begin</h2>
+<p>It is important to note the following before integrating with Wufoo:</p>
+<ul>
+<li>All forms must have a single field to collect a customer’s email address for Klaviyo to track form submissions. If there is no email field in the form, or if there are multiple email fields, Klaviyo may not sync the form results. </li>
+<li>Wufoo only supports the ability to pull in information from their forms if you have a paid subscription to their services. Make sure to resolve any issues in payment before attempting to sync with Klaviyo.</li>
+<li>Klaviyo cannot identify the Last Name field when you have the form configured as sub-fields. Instead, use 1 the following approaches to record your customer’s last names:
+<ul>
+<li>Create a single Name field (to include a subscriber's first and last name): Klaviyo will automatically split on the first space to create a first and last name for the subscriber.</li>
+<li>Create 2 separate fields: If you create a First Name field and a Last Name field, Klaviyo will sync both separately.</li>
+</ul>
+</li>
+</ul>
+<h2 id="h_01HH06GV9HJBJ0121G13M5HP0D">Integrate Wufoo with Klaviyo</h2>
+<p>You'll need your Wufoo site URL and your Wufoo API key to integrate with Klaviyo</p>
+<ol>
+<li>Navigate to the <em>Forms</em> tab in Wufoo.</li>
+<li>Click the 3-dot menu on the right-hand side of the form you’d like to connect to Klaviyo.<br><img src="https://klaviyo.zendesk.com/hc/article_attachments/28705636351771" alt="The Forms tab in Wufoo showing Flowers Order Form and Create new form with blue background">
+</li>
+<li>Select <strong>API information</strong> from the dropdown.<br><img src="https://klaviyo.zendesk.com/hc/article_attachments/28705663083803" alt="Wufoo dropdown showing Form rules, Notifications, Integrations, Analytics, and API Information highlighted in gray" width="286" height="337">
+</li>
+<li>Copy the API key from the <em>API Information</em> page.<br><img src="https://klaviyo.zendesk.com/hc/article_attachments/28705636355483" alt="API Information Wufoo with API Key blurred out and Reset button in red" width="479" height="158"><br>
+<div class="bs-callout bs-callout-default">This API key is a private API key. Treat private API keys like passwords; keep them in a safe place and never expose them to the public.</div>
+</li>
+<li>Log in to Klaviyo, select the <strong>Integrations</strong> tab.</li>
+<li>Click <strong>Explore apps</strong>, search for <em>Wufoo</em>, and click the card. </li>
+<li>Then, click <strong>Install</strong>.</li>
+<li>Enter your full store URL, including “.wufoo.com”, “.wufoo.co.uk”, “.wufoo.eu”, etc.<br><img src="https://klaviyo.zendesk.com/hc/article_attachments/28705636370459">
+</li>
+<li>Enter the API key you copied earlier.</li>
+<li>Click <strong>Connect to Wufoo</strong>.</li>
+<li>On the next page, you can specify advanced criteria:<br>
+<ul>
+<li>
+<em>Only sync specific forms</em>: choose this if you only want to sync some of your Wufoo forms.</li>
+<li>
+<em>Specify forms that should include checkbox fields</em>: if you have forms with checkboxes, make sure the data is imported into Klaviyo correctly with this option.</li>
+</ul>
+</li>
+<li>If you checked the corresponding boxes, you’ll need to provide a comma separated list of form hashes you would like to sync with Klaviyo; you can find a form's hash code on the <strong>Code</strong> page for that form.<br><img src="https://klaviyo.zendesk.com/hc/article_attachments/28705636364699" alt="Wufoo integration settings page in Klaviyo showing checked settings Only sync specific forms and Specify forms that should include checkbox fields" width="603" height="268">
+</li>
+<li>You can also check <em>Add Wufoo respondents to a Klaviyo list</em> and then specify which Klaviyo list your Wufoo form data will sync to by providing the <em>Form Code</em> and the 6-character Klaviyo list ID.<br><img src="https://klaviyo.zendesk.com/hc/article_attachments/28705636361755" alt="Wufoo integration settings page in Klaviyo showing setting for Form Code, Email Field, and Add to Klaviyo list with Delete in blue">
+<ul>
+<li>To find the form code, go back into the form’s <strong>API Information</strong> and copy the form <em>Hash.<br></em><img src="https://klaviyo.zendesk.com/hc/article_attachments/28705636367643" alt="API information for form in Wufoo showing multiple API ID fields and their respective titles, including Hash blurred out surrounded with red box" width="561" height="502">
+</li>
+<li>To find the Klaviyo list ID, click the <strong>Audience</strong> dropdown in Klaviyo and select the <strong>Lists &amp; Segments</strong> tab, click the list you’d like to add the Wufoo data to, and then click <strong>Settings</strong>. Then, copy the list ID from the <em>List ID &amp; name</em> section.</li>
+</ul>
+</li>
+<li>Once you’ve added any specific integration settings you need, click <strong>Complete setup</strong>.</li>
+</ol>
+<h2 id="h_01HH06GV9JH6JMC0TN38WYSSXX">Monitor the Wufoo sync</h2>
+<p>When you integrate with Wufoo, all available historic data will start syncing to Klaviyo within a few minutes. To check your integration:</p>
+<ol>
+<li>Navigate to <strong>Analytics &gt; Metrics</strong>.</li>
+<li>Filter by <em>Wufoo.</em>
+</li>
+<li>Select the <em>Filled Out Form</em> metric and click on the <strong>Activity feed</strong> to view the data as it syncs.</li>
+<li>If your integration has begun syncing data, you will start to see <em>Filled Out Form</em> events, with the Wufoo icon, added to this activity feed.</li>
+</ol>
+<p>Klaviyo then syncs data from Wufoo once an hour going forward. Once your sync is complete, you'll see a green border around your Wufoo integration in the <strong>Integrations</strong> tab.</p>
+<p>Currently, Klaviyo only syncs 1 metric from Wufoo: <em>Filled Out Form</em>.</p>
+<p>This metric records all of the following information:</p>
+<ul>
+<li>Who filled out the form</li>
+<li>When this person filled it out</li>
+<li>The name of the form filled out</li>
+</ul>
+<p>All data collected through the form's fields will be appended to each subscriber's profile in Klaviyo, under <em>Custom Properties</em>.</p>
+<h2 id="h_01HH06GV9JS26QYY714GRP9DQR">Outcome</h2>
+<p>You’ve finished integrating Wufoo with Klaviyo and verified your synced data. Now, you can create automated flow messages, personalize campaigns, and segment your lists based on data synced from Wufoo. You can even create a <a href="https://help.klaviyo.com/hc/en-us/articles/115002775172" target="_blank" rel="noopener">series of welcome messages</a> that are triggered when someone submits a form.</p>
+<h2 id="h_01HH06GV9J5HMFFXV25MXH10KB">Additional resources</h2>
+<ul>
+<li><a href="https://help.klaviyo.com/hc/en-us/articles/115002774932" target="_blank" rel="noopener">Getting started with flows</a></li>
+<li><a href="https://help.klaviyo.com/hc/en-us/articles/115005250368" target="_blank" rel="noopener">How to strengthen your sending reputation</a></li>
+<li><a href="https://help.klaviyo.com/hc/en-us/articles/360030696012" target="_blank" rel="noopener">Types of information exchanged between Klaviyo and apps reference</a></li>
+</ul>

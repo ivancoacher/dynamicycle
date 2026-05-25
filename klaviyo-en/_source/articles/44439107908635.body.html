@@ -1,0 +1,108 @@
+<p></p>
+<p><strong>Advanced Routing Rules</strong> allow you to automatically distribute incoming tickets to the right team or view based on all the customer data you already have in Klaviyo.</p>
+<p>In this article, you will learn how to move beyond basic routing (based on tags) and leverage the full Klaviyo Data Platform—including predictive analytics, purchase history, and real-time events—to prioritize your support queue.</p>
+<h2 id="h_01KCJ1DXAVVZM2EST0NNAC2X7Y">Before you begin</h2>
+<ul>
+<li>
+<strong>User Permissions:</strong> You must be an <strong>Owner</strong>, <strong>Admin</strong>, or <strong>Manager</strong> to create or edit routing rules.</li>
+<li>
+<strong>Team Setup:</strong> Ensure your Teams (e.g., "VIP Support", "Returns") are already created in Helpdesk settings before setting up rules to route to them.</li>
+<li>
+<strong>Data Availability:</strong> Routing rules can use any data currently available in a customer's profile, including custom properties from third-party integrations (like Recharge) and predictive analytics (like Churn Risk).</li>
+</ul>
+<hr>
+<h2 id="h_01KCJ1DXAZFSRFCJQP7MA6ERGX">Step 1: Access the Routing Rule Builder</h2>
+<p>The routing configuration is located within your Helpdesk settings.</p>
+<ol>
+<li>Log in to Klaviyo and select your account.</li>
+<li>Navigate to <strong>Helpdesk</strong>
+</li>
+<li>Select <strong>Routing</strong> from the sidebar</li>
+<li>Click the <strong>Add Rule</strong> button to open the builder.</li>
+</ol>
+<hr>
+<h2 id="h_01KCJ1DXB1D73NXAXC0NSB157S">Step 2: Define Your Logic Conditions</h2>
+<p>The Rule Builder uses the same logic interface as the Klaviyo Segment Builder. You can define rules using any combination of the three main categories of data.</p>
+<h3 id="h_01KCJ1DXB25WEMGWPQ2935CHS2">Customer Behavior (Events)</h3>
+<p>This is best for catching urgent issues like "Where is my order?" or cancellations.</p>
+<ul>
+<li>
+<strong>Example:</strong> Route customers who placed an order in the last 2 hours to an "Urgent Modifications" queue.</li>
+<li>
+<strong>How to set it:</strong>
+<ul>
+<li>Select <strong>What someone has done (or not done)</strong>.</li>
+<li>Choose an event (e.g., <code>Placed Order</code>).</li>
+<li>Add a time constraint (e.g., <code>in the last 2 hours</code>).</li>
+</ul>
+</li>
+</ul>
+<h3 id="h_01KCJ1DXB44YHS5ZV7MKRWH998">Route by Profile Properties</h3>
+<p>Use this for static attributes like location, language, or custom data points.</p>
+<ul>
+<li>
+<strong>Example:</strong> Route French-speaking customers to the "France Support Team."</li>
+<li>
+<strong>How to set it:</strong>
+<ul>
+<li>Select <strong>Properties about someone</strong>.</li>
+<li>Choose a property (e.g., <code>$country</code>).</li>
+<li>Set the value (e.g., <code>equals France</code>).6</li>
+</ul>
+</li>
+</ul>
+<h3 id="h_01KCJ1DXB73RYET6CAJGPRYVCP">Route by Ticket Properties</h3>
+<p>Leverage the topics and channel of the ticket to help the customer get to the right person or team.</p>
+<ul>
+<li>
+<strong>Example:</strong> Route SMS order issues to Team A</li>
+<li>
+<strong>How to set it:</strong>
+<ul>
+<li>Select if ticket_channel = SMS AND ticket_tags contains Order.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="h_01KCJ1DXB90B2M5D42D8P3J887">Step 3: Select a Destination</h2>
+<p>Once a ticket matches your condition, you must decide where it goes. You have two options:</p>
+<h3 id="h_01KCJ1DXB95HC952KW5RRQKE5A">1. Assign to Team</h3>
+<p>This action transfers ownership of the ticket to a specific group of agents.</p>
+<ul>
+<li>
+<strong>Best for:</strong> Specialized workflows where a specific skill set is required (e.g., Returns, B2B, VIP).</li>
+<li>
+<strong>Result:</strong> The ticket is removed from the general "Unassigned" queue and placed directly in the Team's inbox.</li>
+</ul>
+<h3 id="h_01KCJ1DXBAW7GB90TTEFQQAZV0">2. Save as View</h3>
+<p>This action tags the ticket into a filterable list but does <em>not</em> assign it to a specific team immediately.</p>
+<ul>
+<li>
+<strong>Best for:</strong> Monitoring high-risk issues or creating "Watch Lists" (e.g., Potential Fraud, Negative Sentiment) that supervisors can review.</li>
+<li>
+<strong>Result:</strong> The ticket remains available for any agent to pick up, but appears in a specific filtered view for easy visibility.</li>
+</ul>
+<hr>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/44439107899675" alt="" width="1932" height="989"></p>
+<h2 id="h_01KCJ1DXBBRNDSCA2F23YRR5R1">Common Use Cases </h2>
+<p>Here are two standard configurations to help you get started:</p>
+<p></p>
+<h3 id="h_01KCJ1DXBC67YE4ZZX07MMH37C">The "Churn Defense" (High Risk)</h3>
+<p>Intercept dissatisfied customers before they leave.</p>
+<ul>
+<li>
+<strong>Condition:</strong><code>Properties about someone</code> &gt; <code>Churn Risk</code> &gt; <code>equals High</code>
+</li>
+<li>
+<strong>Action:</strong> Assign to Team: <strong>Retention Specialists</strong>1</li>
+</ul>
+<h3 id="h_01KCJ1DXBE50TTWNEXKZJV4KJD">The "Urgent Order Mod" (Fast Track)</h3>
+<p>Prioritize customers who just purchased to prevent shipping errors.</p>
+<ul>
+<li>
+<strong>Condition:</strong><code>What someone has done</code> &gt; <code>Placed Order</code> &gt; <code>at least once</code> in the <code>last 2 hours</code>
+</li>
+<li>
+<strong>Action:</strong> Save as View: <strong>Urgent Modifications</strong>
+</li>
+</ul>

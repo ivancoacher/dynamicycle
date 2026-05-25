@@ -1,0 +1,777 @@
+{
+  "captured_at": "2026-05-23T16:18:35Z",
+  "article": {
+    "id": 19143781289115,
+    "url": "https://klaviyo.zendesk.com/api/v2/help_center/en-us/articles/19143781289115.json",
+    "html_url": "https://klaviyo.zendesk.com/hc/en-us/articles/19143781289115-How-to-allowlist-Klaviyo-integration-traffic-IP-addresses",
+    "author_id": 409167690492,
+    "comments_disabled": true,
+    "draft": false,
+    "promoted": false,
+    "position": 7,
+    "vote_sum": -1,
+    "vote_count": 1,
+    "section_id": 49375437778587,
+    "created_at": "2023-09-27T20:59:56Z",
+    "updated_at": "2026-04-21T13:54:32Z",
+    "name": "How to allowlist Klaviyo integration traffic IP addresses",
+    "title": "How to allowlist Klaviyo integration traffic IP addresses",
+    "source_locale": "en-us",
+    "locale": "en-us",
+    "outdated": false,
+    "outdated_locales": [],
+    "edited_at": "2026-04-17T00:55:52Z",
+    "user_segment_id": null,
+    "permission_group_id": 146372,
+    "content_tag_ids": [],
+    "label_names": [],
+    "body": "<h2 id=\"h_01HBC720AND71W4PKJ3F7XEDGJ\">You will learn</h2>\n<p>Learn how to allowlist IP addresses for outbound Klaviyo integration traffic to ensure that your firewall is not blocking Klaviyo’s requests. All outbound Klaviyo integration traffic is behind a set of predictable, static IP addresses so that you can have a high level of confidence that this traffic is coming from Klaviyo. This is especially applicable to customers using self-hosted ecommerce integrations such as Magento 2 and WooCommerce. </p>\n<p>Please note that integration traffic does not include flow-triggered webhook traffic, which uses different IP addresses. </p>\n<h2 id=\"h_01HBC720ANTVRRQ1EFWDZXF4KF\">What IP addresses does Klaviyo use for integration traffic?</h2>\n<p>The IP address range used by Klaviyo for integration traffic is 207.211.192.0 - 207.211.207.255. This is the range that you should allowlist. This range can be represented as the CIDR address <code>207.211.192.0/20</code>.</p>\n<p>If you are restricted from allowlisting /20 ranges, our range can be represented as 16 /24 ranges. Thus, you would need to allowlist:</p>\n<p><code>207.211.192.0/24</code></p>\n<p><code>207.211.193.0/24</code></p>\n<p><code>207.211.194.0/24</code></p>\n<p><code>207.211.195.0/24</code></p>\n<p><code>207.211.196.0/24</code></p>\n<p><code>207.211.197.0/24</code></p>\n<p><code>207.211.198.0/24</code></p>\n<p><code>207.211.199.0/24</code></p>\n<p><code>207.211.200.0/24</code></p>\n<p><code>207.211.201.0/24</code></p>\n<p><code>207.211.202.0/24</code></p>\n<p><code>207.211.203.0/24</code></p>\n<p><code>207.211.204.0/24</code></p>\n<p><code>207.211.205.0/24</code></p>\n<p><code>207.211.206.0/24</code></p>\n<p><code>207.211.207.0/24</code></p>\n<h2 id=\"h_01HBC720ANG7VCR7KQH9E5AK1C\">How-to examples</h2>\n<h3 id=\"h_01HBC720ANWGN79940APHPMK7F\">How to allowlist in Cloudflare</h3>\n<p>Cloudflare does not accept allowlisting /20 ranges, so you'll need to allowlist all 16 of the /24 ranges given above.</p>\n<ol>\n<li>Log in to your <a href=\"https://dash.cloudflare.com/\">Cloudflare dashboard</a> and select your account and domain.</li>\n<li>Go to<strong> Security &gt; WAF &gt; Tools</strong>.</li>\n<li>Under <em>IP Access Rule</em>s, enter the following details:\n<ol>\n<li>For <em>Value</em>, enter the first range: <code>207.211.192.0/24</code>.</li>\n<li>Select the <strong>Allow</strong> action.</li>\n<li>For<em> Zone</em>, select whether the rule applies to the current website only or to all websites in the account.</li>\n<li>Enter a note for the rule (optional).</li>\n</ol>\n</li>\n<li>Select <strong>Add</strong>.</li>\n<li>Repeat this process for each of the 16 /24 ranges given in the section above.</li>\n</ol>\n<p>You can learn more about IP access rules in <a href=\"https://developers.cloudflare.com/waf/tools/ip-access-rules/\">Cloudflare’s documentation</a>.</p>\n<h3 id=\"h_01HBC720ANWQSTJ3F9CSH1AJ8C\">How to allowlist in Akamai</h3>\n<ol>\n<li>In the <a href=\"https://console.janrain.com/#/login\">Console</a>, from the Edit page, click <strong>Add New IP Address</strong>.</li>\n<li>In the <em>Whitelist an IP network</em> field, type <code>207.211.192.0/20</code>. </li>\n<li>When you are finished, click the <em>Save changes</em> icon.</li>\n</ol>\n<p>You can learn more about managing IP allowlists in <a href=\"https://techdocs.akamai.com/identity-cloud/docs/manage-property-ip-allow-lists\">Akamai’s documentation</a>.</p>\n<h2 id=\"h_01HBC720ANN7NXZ1EGXB7TMM2D\">Outcome</h2>\n<p>You’ve successfully allowlisted Klaviyo’s static IP addresses for outbound integration traffic. Your firewall or security provider will now safely let that traffic through, knowing that it originates from Klaviyo.</p>",
+    "user_segment_ids": []
+  },
+  "normalized": {
+    "id": "19143781289115",
+    "title": "How to allowlist Klaviyo integration traffic IP addresses",
+    "source_url": "https://help.klaviyo.com/hc/en-us/articles/19143781289115-How-to-allowlist-Klaviyo-integration-traffic-IP-addresses",
+    "section_id": 49375437778587,
+    "section": "All integrations",
+    "category_id": 115000032731,
+    "category": "Integrations",
+    "category_slug": "integrations",
+    "klaviyo_updated": "2026-04-21T13:54:32Z",
+    "created_at": "2023-09-27T20:59:56Z",
+    "draft": false,
+    "promoted": false,
+    "position": 7,
+    "label_names": []
+  },
+  "files": {
+    "body_html": "_source/articles/19143781289115.body.html",
+    "rendered_html": "_source/rendered/19143781289115.html"
+  },
+  "assets": {
+    "api_body": {
+      "images": [],
+      "links": [
+        {
+          "href": "https://dash.cloudflare.com/",
+          "text": "Cloudflare dashboard"
+        },
+        {
+          "href": "https://developers.cloudflare.com/waf/tools/ip-access-rules/",
+          "text": "Cloudflare’s documentation"
+        },
+        {
+          "href": "https://console.janrain.com/#/login",
+          "text": "Console"
+        },
+        {
+          "href": "https://techdocs.akamai.com/identity-cloud/docs/manage-property-ip-allow-lists",
+          "text": "Akamai’s documentation"
+        }
+      ],
+      "headings": [
+        {
+          "level": 2,
+          "id": "h_01HBC720AND71W4PKJ3F7XEDGJ",
+          "text": "You will learn"
+        },
+        {
+          "level": 2,
+          "id": "h_01HBC720ANTVRRQ1EFWDZXF4KF",
+          "text": "What IP addresses does Klaviyo use for integration traffic?"
+        },
+        {
+          "level": 2,
+          "id": "h_01HBC720ANG7VCR7KQH9E5AK1C",
+          "text": "How-to examples"
+        },
+        {
+          "level": 3,
+          "id": "h_01HBC720ANWGN79940APHPMK7F",
+          "text": "How to allowlist in Cloudflare"
+        },
+        {
+          "level": 3,
+          "id": "h_01HBC720ANWQSTJ3F9CSH1AJ8C",
+          "text": "How to allowlist in Akamai"
+        },
+        {
+          "level": 2,
+          "id": "h_01HBC720ANN7NXZ1EGXB7TMM2D",
+          "text": "Outcome"
+        }
+      ]
+    },
+    "rendered_page": {
+      "images": [
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/7ff492c2b417b7ecfe572f839a8a81398693c1f7-1920x1080.webp",
+          "alt": "",
+          "width": "",
+          "height": ""
+        }
+      ],
+      "links": [
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/19143781289115-How-to-allowlist-Klaviyo-integration-traffic-IP-addresses#site-content",
+          "text": "Skip to main content"
+        },
+        {
+          "href": "https://www.klaviyo.com",
+          "text": "Home"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center"
+        },
+        {
+          "href": "https://www.klaviyo.com/enterprise",
+          "text": "Enterprise"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Partners"
+        },
+        {
+          "href": "https://www.klaviyo.com/careers",
+          "text": "Careers"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": "Log in"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": ""
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center Find step-by-step instructions and troubleshooting solutions in our knowledge base."
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000032731",
+          "text": "Integrations"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000312411",
+          "text": "Flows"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867867",
+          "text": "Audience"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867667",
+          "text": "Campaigns"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/360000190711",
+          "text": "Sign-up forms"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000873988",
+          "text": "Deliverability & compliance"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/29173800271259",
+          "text": "SMS"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/16638219724187",
+          "text": "Reviews"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/18073014919195",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/34141283979931",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/37659126754075",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/33948021740315",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/39746685522331",
+          "text": "WhatsApp"
+        },
+        {
+          "href": "https://academy.klaviyo.com",
+          "text": "Klaviyo Academy Expert training and education to help you succeed with Klaviyo, and beyond."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Quick+guide&resource=academy_courses",
+          "text": "Quick guides Learn marketing strategies and concepts in 15 minutes or less."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Course&resource=academy_courses",
+          "text": "Courses Master key marketing topics through structured lessons and exams."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/best-practices",
+          "text": "Best practices Discover top product and marketing strategies for your business."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/learning-paths",
+          "text": "Learning paths Complete curated learning journeys tailored to your marketing goals."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses",
+          "text": "Explore all resources"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Live+training&resource=academy_courses",
+          "text": "Live trainings Build confidence through hands-on interactive workshops and thought-provoking strategy sessions."
+        },
+        {
+          "href": "https://www.bigmarker.com/klaviyo-customer-education/Office-hours-Getting-started-with-Klaviyo",
+          "text": "Live office hours Join a strategic discussion where you can ask questions and get answers in real-time."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/private-live-training",
+          "text": "1:1 Live training Book a private training session with an expert to jumpstart your platform knowledge and confidence."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/credentials",
+          "text": "Klaviyo credentials Dig deeper into select topics and showcase your expertise with a final exam to earn a certificate and digital badge."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/certificates/klaviyo-practitioner-certificate",
+          "text": "Klaviyo practitioner certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/deliverability-certificate",
+          "text": "Deliverability certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/developer-certificate",
+          "text": "Klaviyo developer certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses&select=Certificate",
+          "text": "See all certificates"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Klaviyo Community Join our thriving community network to connect with brands like yours—online and in person."
+        },
+        {
+          "href": "https://community.klaviyo.com/topic/new",
+          "text": "Ask a question Post a question and get thoughtful answers from Klaviyo powerusers."
+        },
+        {
+          "href": "https://community.klaviyo.com/p/roadmap",
+          "text": "Product roadmap"
+        },
+        {
+          "href": "https://community.klaviyo.com/search/activity/recent",
+          "text": "Recent threads"
+        },
+        {
+          "href": "https://community.klaviyo.com/p/champions",
+          "text": "Meet the Champions"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups",
+          "text": "Browse all groups Your people are waiting. New ideas and connections are a click away."
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/developer-group-64",
+          "text": "Developer group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/entrepreneur-user-group-118",
+          "text": "Entrepreneur group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/woo-user-group-87",
+          "text": "WooCommerce group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/new-york-meetup-chapter-82",
+          "text": "New York City"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/los-angeles-meetup-chapter-83",
+          "text": "Los Angeles"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/austin-meetup-chapter-85",
+          "text": "Austin"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/san-diego-meetup-chapter-86",
+          "text": "San Diego"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/amsterdam-meetup-chapter-84",
+          "text": "Amsterdam"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Klaviyo Developers Access API documentation and developer guides to help you build with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/get_started",
+          "text": "Get started Access key resources and a step-by-step checklist for how to start developing with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/build_your_integration",
+          "text": "Grow your app's reach Learn how to join our ecosystem and get your app listed on our marketplace."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/developer-tools",
+          "text": "Developer tools Generate sample data, monitor your API usage, and access our Postman collections."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/reference/api_overview",
+          "text": "API reference Browse our full catalog of API docs."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/changelog_",
+          "text": "Changelog"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/api_versioning_and_deprecation_policy",
+          "text": "Versioning & deprecation policy"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/rate_limits_and_error_handling",
+          "text": "Rate limits & error handling"
+        },
+        {
+          "href": "https://youtube.com/playlist?list=PLHkNfHgtxcUanrkMnKPdkRzuWU7MGv_xM&si=pkG-KH7IT_TUHOGC",
+          "text": "API tutorials on YouTube Subscribe to our Klaviyo API Tutorials playlist for easy access to step-by-step developer walkthroughs."
+        },
+        {
+          "href": "https://www.klaviyo.com/contact-us",
+          "text": "Contact us"
+        },
+        {
+          "href": "https://www.klaviyo.com/sign-up",
+          "text": "Sign up"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": "Search"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/19143781289115",
+          "text": "United States - EN"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/de-de/articles/19143781289115",
+          "text": "Deutschland - DE"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-es/articles/19143781289115",
+          "text": "España - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-mx/articles/19143781289115",
+          "text": "México - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/fr-fr/articles/19143781289115",
+          "text": "France - FR"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/it-it/articles/19143781289115",
+          "text": "Italia - IT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/ko-kr/articles/19143781289115",
+          "text": "한국 - KO"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/nl-nl/articles/19143781289115",
+          "text": "Nederland - NL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pl-pl/articles/19143781289115",
+          "text": "Polska - PL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pt-br/articles/19143781289115",
+          "text": "Brasil - PT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/sv-se/articles/19143781289115",
+          "text": "Sverige - SV"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/49375885989787",
+          "text": "How integrations work"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/49375437778587",
+          "text": "All integrations"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/19143781289115-How-to-allowlist-Klaviyo-integration-traffic-IP-addresses#h_01HBC720AND71W4PKJ3F7XEDGJ",
+          "text": "You will learn"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/19143781289115-How-to-allowlist-Klaviyo-integration-traffic-IP-addresses#h_01HBC720ANTVRRQ1EFWDZXF4KF",
+          "text": "What IP addresses does Klaviyo use for integration traffic?"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/19143781289115-How-to-allowlist-Klaviyo-integration-traffic-IP-addresses#h_01HBC720ANG7VCR7KQH9E5AK1C",
+          "text": "How-to examples"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/19143781289115-How-to-allowlist-Klaviyo-integration-traffic-IP-addresses#h_01HBC720ANN7NXZ1EGXB7TMM2D",
+          "text": "Outcome"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/19143781289115-How-to-allowlist-Klaviyo-integration-traffic-IP-addresses#additional-resources",
+          "text": "Additional resources"
+        },
+        {
+          "href": "https://dash.cloudflare.com/",
+          "text": "Cloudflare dashboard"
+        },
+        {
+          "href": "https://developers.cloudflare.com/waf/tools/ip-access-rules/",
+          "text": "Cloudflare’s documentation"
+        },
+        {
+          "href": "https://console.janrain.com/#/login",
+          "text": "Console"
+        },
+        {
+          "href": "https://techdocs.akamai.com/identity-cloud/docs/manage-property-ip-allow-lists",
+          "text": "Akamai’s documentation"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/5510750923035",
+          "text": "Troubleshooting your Magento 2 integration"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4515829067803",
+          "text": "Troubleshooting your WooCommerce integration"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115001002272",
+          "text": "Learn how to contact support"
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": ""
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": "Visit Community"
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": ""
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": "Hire a partner"
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/about",
+          "text": "About Klaviyo"
+        },
+        {
+          "href": "https://www.klaviyo.com/newsroom",
+          "text": "Newsroom"
+        },
+        {
+          "href": "https://investors.klaviyo.com/overview/default.aspx",
+          "text": "Investor relations"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Agency and tech partners"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Developers"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/retail",
+          "text": "Retail and ecommerce"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/restaurants",
+          "text": "Restaurant marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/wellness",
+          "text": "Wellness"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform",
+          "text": "B2C CRM overview"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai",
+          "text": "Klaviyo AI (K:AI)"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/marketing-automation",
+          "text": "Klaviyo Marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-service",
+          "text": "Klaviyo Service"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/analytics",
+          "text": "Klaviyo Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-data-platform",
+          "text": "Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare",
+          "text": "Klaviyo vs. Klaviyo alternatives"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-mailchimp",
+          "text": "Klaviyo vs. Mailchimp"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-postscript",
+          "text": "Klaviyo vs. Postscript"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-attentive",
+          "text": "Klaviyo vs. Attentive"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-salesforce-marketing-cloud",
+          "text": "Klaviyo vs. Salesforce"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-listrak",
+          "text": "Klaviyo vs. Listrak"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/omnichannel",
+          "text": "Omnichannel marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/email-marketing",
+          "text": "Email marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing",
+          "text": "SMS marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing/rcs",
+          "text": "RCS for Business"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/mobile-app-marketing",
+          "text": "Mobile app marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/whatsapp",
+          "text": "WhatsApp marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/social",
+          "text": "Social marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources",
+          "text": "Marketing resources"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources/marketing-campaign-calendar",
+          "text": "Marketing campaign calendar"
+        },
+        {
+          "href": "https://www.klaviyo.com/glossary",
+          "text": "Marketing glossary"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/email-subject-line-generator",
+          "text": "Subject line generator"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/roi-calculator",
+          "text": "ROI calculator"
+        },
+        {
+          "href": "https://www.klaviyo.com/customers",
+          "text": "Case studies"
+        },
+        {
+          "href": "https://www.klaviyo.com/composer",
+          "text": "Composer Beta"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/marketing-agent",
+          "text": "Marketing Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/customer-agent",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/customer-experience-hub",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/helpdesk",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/marketing-analytics",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/advanced-cdp",
+          "text": "Advanced Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/web-forms",
+          "text": "Web forms"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/email-templates",
+          "text": "Email templates"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/portfolio",
+          "text": "Portfolio"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform-integrations",
+          "text": "Apps and Integrations"
+        },
+        {
+          "href": "https://www.klaviyo.com/features",
+          "text": "Features"
+        },
+        {
+          "href": "https://www.klaviyo.com/whats-new",
+          "text": "What's new"
+        },
+        {
+          "href": "https://www.klaviyo.com/events",
+          "text": "Events"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help Center"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us",
+          "text": "Academy"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Community"
+        },
+        {
+          "href": "https://www.facebook.com/Klaviyo/",
+          "text": "Facebook"
+        },
+        {
+          "href": "https://twitter.com/klaviyo/",
+          "text": "Twitter"
+        },
+        {
+          "href": "https://www.linkedin.com/company/klaviyo/",
+          "text": "LinkedIn"
+        },
+        {
+          "href": "https://www.instagram.com/klaviyo/",
+          "text": "Instagram"
+        },
+        {
+          "href": "https://www.klaviyo.com/sitemap",
+          "text": "Site Map"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal",
+          "text": "Terms and Privacy"
+        },
+        {
+          "href": "https://www.klaviyo.com/security",
+          "text": "Security"
+        },
+        {
+          "href": "https://www.klaviyo.com/trust",
+          "text": "Trust"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal/intellectual-property-notices",
+          "text": "Intellectual Property Notices"
+        }
+      ],
+      "headings": [
+        {
+          "level": 1,
+          "id": "",
+          "text": "How to allowlist Klaviyo integration traffic IP addresses"
+        },
+        {
+          "level": 2,
+          "id": "h_01HBC720AND71W4PKJ3F7XEDGJ",
+          "text": "You will learn"
+        },
+        {
+          "level": 2,
+          "id": "h_01HBC720ANTVRRQ1EFWDZXF4KF",
+          "text": "What IP addresses does Klaviyo use for integration traffic?"
+        },
+        {
+          "level": 2,
+          "id": "h_01HBC720ANG7VCR7KQH9E5AK1C",
+          "text": "How-to examples"
+        },
+        {
+          "level": 3,
+          "id": "h_01HBC720ANWGN79940APHPMK7F",
+          "text": "How to allowlist in Cloudflare"
+        },
+        {
+          "level": 3,
+          "id": "h_01HBC720ANWQSTJ3F9CSH1AJ8C",
+          "text": "How to allowlist in Akamai"
+        },
+        {
+          "level": 2,
+          "id": "h_01HBC720ANN7NXZ1EGXB7TMM2D",
+          "text": "Outcome"
+        },
+        {
+          "level": 2,
+          "id": "additional-resources",
+          "text": "Additional resources"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "Explore more from Klaviyo"
+        }
+      ]
+    }
+  },
+  "rendered_page": {
+    "status": "fetched",
+    "error": ""
+  }
+}

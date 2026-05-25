@@ -1,0 +1,823 @@
+{
+  "captured_at": "2026-05-23T16:16:37Z",
+  "article": {
+    "id": 17797937793179,
+    "url": "https://klaviyo.zendesk.com/api/v2/help_center/en-us/articles/17797937793179.json",
+    "html_url": "https://klaviyo.zendesk.com/hc/en-us/articles/17797937793179-Understanding-scoring-and-customer-groups-in-the-recency-frequency-and-monetary-analysis-RFM-report",
+    "author_id": 1265141506249,
+    "comments_disabled": true,
+    "draft": false,
+    "promoted": false,
+    "position": 1,
+    "vote_sum": 0,
+    "vote_count": 0,
+    "section_id": 49375758051483,
+    "created_at": "2023-08-09T16:39:43Z",
+    "updated_at": "2026-04-21T13:56:44Z",
+    "name": "Understanding scoring and customer groups in the recency, frequency, and monetary analysis (RFM) report",
+    "title": "Understanding scoring and customer groups in the recency, frequency, and monetary analysis (RFM) report",
+    "source_locale": "en-us",
+    "locale": "en-us",
+    "outdated": false,
+    "outdated_locales": [],
+    "edited_at": "2025-06-25T19:28:39Z",
+    "user_segment_id": null,
+    "permission_group_id": 146372,
+    "content_tag_ids": [],
+    "label_names": [],
+    "body": "<h2 id=\"01H8B6GRTTWAGGGT5TVP8R4DCS\">You will learn</h2>\n<p>Learn how to understand the recency, frequency, and monetary scores and customer groups are derived in the RFM report. </p>\n<div class=\"bs-callout bs-callout-default\"><p><a href=\"https://help.klaviyo.com/hc/en-us/articles/17655007276059\">Advanced KDP</a> and <a href=\"https://help.klaviyo.com/hc/en-us/articles/33789259613595\">Marketing Analytics</a> are not included in Klaviyo’s standard marketing application, and a subscription is required to access the associated functionality.<em> </em>Head to our <a href=\"https://help.klaviyo.com/hc/en-us/articles/115000976672\" target=\"_blank\" rel=\"noopener noreferrer\">billing guide</a> to learn about how to purchase these plans.</p></div>\n<p>For more information about building and customizing your report, head to our guide on <a href=\"https://help.klaviyo.com/hc/en-us/articles/17797889315355\" target=\"_blank\" rel=\"noopener noreferrer\">getting started with the RFM report</a>.</p>\n<h2 id=\"01H8B6GRTVPQ7TP23S1YACY9AT\">Before you begin</h2>\n<p>To qualify for this report, your account must: </p>\n<ul>\n<li>Have at least 500 customers who have placed an order.\n<div class=\"bs-callout bf-callout-default\">This does not refer to total profiles, but rather the number of people who have actually made an order with your business. Note that if this section is on a profile but is blank, Klaviyo doesn’t have enough data on that individual to make a prediction.</div>\n</li>\n<li>Have an ecommerce integration (e.g., Shopify, BigCommerce, Magento, etc.) or use the Klaviyo API to send placed orders.</li>\n<li>Have at least 180 days of order history and have orders within the last 30 days.</li>\n<li>Have at least some customers who have placed 3 or more orders.</li>\n</ul>\n<div class=\"bs-callout bf-callout-default\">Only Owners, Admins, Managers, and Analysts can access this report. Additionally, if you have created a <a href=\"https://help.klaviyo.com/hc/en-us/articles/22311085738395/\" target=\"_blank\" rel=\"noopener noreferrer\">new custom metric</a> to use in your RFM report, it may take up to 48 hours for this change to be reflected in your data.</div>\n<h2 id=\"01H8B6Q6KSKCFSPWW02RNXTE78\">RFM definitions</h2>\n<p>RFM metrics are common terms used in marketing and data strategies. Within Klaviyo, they are defined and calculated as the following:</p>\n<ul>\n<li>\n<p><strong>Recency</strong><br>How long ago a customer purchased from your company. Recency is expressed as the elapsed time (measured in the number of days) since a last purchase within your report’s time frame.</p>\n</li>\n<li>\n<p><strong>Frequency</strong><br>How often a customer purchases from your company within your report’s time frame.</p>\n</li>\n<li>\n<p><strong>Monetary value</strong><br>How much a customer has spent in your account (past purchases). </p>\n</li>\n</ul>\n<p>If you need to refer back to these definitions, you can find them in the RFM report's advanced settings by navigating to <strong>Advanced settings &gt; About RFM </strong>from the RFM report. </p>\n<h2 id=\"01H8B7E63VZ71F38A090AV3WKQ\">Understanding percentiles, scoring, and customer groups</h2>\n<h3 id=\"01H8B7E63VRFBW59AG1XSRK476\">Percentiles and scoring</h3>\n<p>For a given customer, Klaviyo will determine their percentile among all customers for recency, frequency, and monetary value. Once those percentiles are determined, Klaviyo then assigns the customer a score of 1-3 for each (recency, frequency, and monetary).</p>\n<p>Note that only Klaviyo only looks at orders with a positive value. If an order is free (e.g., has 100% discount), it is not considered in the RFM analysis.  </p>\n<p>By default, scores will be assigned using thresholds that are unique to your account. These include:</p>\n<ul>\n<li>\n<strong>Recency scoring</strong>\n<ul>\n<li>Customer’s most recent purchase was within the last 180 days: 3 score assigned</li>\n<li>Customer’s most recent purchase was within the last 365 days: 2 score assigned</li>\n<li>Customer’s most recent purchase was outside of the last 365 days and indicates that they are unlikely to ever purchase again: 1 score assigned</li>\n</ul>\n</li>\n<li>\n<strong>Frequency scoring</strong>\n<ul>\n<li>Top 33% (usually 3 or more purchases): 3 score assigned</li>\n<li>Middle 33%, but less than the 66 percentile (usually 2 purchases): 2 score assigned</li>\n<li>Bottom 33% of users (usually a single purchase): 1 score assigned</li>\n</ul>\n</li>\n<li>\n<strong>Monetary scoring</strong>\n<ul>\n<li>Top 33%: 3 score assigned</li>\n<li>Middle 33%: 2 score assigned</li>\n<li>Bottom 33%: 1 score assigned</li>\n</ul>\n</li>\n</ul>\n<h3 id=\"01H8B7M0PM7A8252HCNN51QB87\">Customer groups</h3>\n<p>Once a score is determined for each RFM metric, these scores are brought together to determine the customer group.</p>\n<p>The model below visualizes how these 3 scores are blended together to determine your potential customer buying group. All RFM metrics and their scores (1-3) can be visualized on this cube and where they fall within each of its sides or quadrants. For example, the top green corner of the model illustrates a customer who has earned the top score of 3 for all RFM metrics.</p>\n<p class=\"wysiwyg-text-align-center\"><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28716057240219\" alt=\"rfm cube.jpg\" width=\"267\" height=\"264\"></p>\n<p>Once Klaviyo brings these 3 scores together, they are then categorized and lined up to a customer group. This customer group describes their present buying habits and is a helpful way to understand which customers are repeat buyers, who may need a nudge for future purchases, who is potentially a churn-risk, etc. The chart below illustrates this logic including:</p>\n<ul>\n<li>Customer group name</li>\n<li>Groups split (i.e., what individual RFM scores contribute to this group)</li>\n<li>General description of the customers in this group</li>\n<li>Suggested actions for this customer group</li>\n</ul>\n<div class=\"bs-callout bf-callout-default\">If you ever need to refer to these customer groups and definitions, you can find them within the RFM report itself. Click <strong>Advanced settings </strong>&gt;<strong> About RFM</strong> for more information.</div>\n<table style=\"border-collapse: collapse; height: 1619px; width: 100.429%; margin-left: 0px; margin-right: auto;\" border=\".5\">\n<tbody>\n<tr style=\"height: 89px;\">\n<td class=\"wysiwyg-text-align-center\" style=\"width: 1.42248%; height: 89px;\"><strong>Group name</strong></td>\n<td class=\"wysiwyg-text-align-center\" style=\"width: 22.5095%; height: 89px;\"><strong>Possible score breakouts (listed from left to right in RFM order)</strong></td>\n<td class=\"wysiwyg-text-align-center\" style=\"width: 22.777%; height: 89px;\"><strong>Description</strong></td>\n<td class=\"wysiwyg-text-align-center\" style=\"width: 136.006%; height: 89px;\"><strong>Examples of potential actions/strategies for this group</strong></td>\n</tr>\n<tr style=\"height: 201px;\">\n<td style=\"width: 1.42248%; height: 201px;\"><strong>Champions</strong></td>\n<td style=\"width: 22.5095%; height: 201px;\">333, 332, 323</td>\n<td style=\"width: 22.777%; height: 201px;\">\n<p><strong>Your best customers<br></strong>They purchased recently. They also purchase often, and spend the most.</p>\n</td>\n<td style=\"width: 136.006%; height: 201px;\">\n<ul>\n<li>Invite them to a customer advisory board.</li>\n<li>Send them rewards or coupons for their loyalty.</li>\n<li>Get reviews from them.</li>\n<li>Make sure they are in your “VIP” or similar segment.</li>\n<li>Invite them first to sales, promotions, etc.</li>\n</ul>\n</td>\n</tr>\n<tr style=\"height: 313px;\">\n<td style=\"width: 1.42248%; height: 313px;\"><strong>Loyal</strong></td>\n<td style=\"width: 22.5095%; height: 313px;\">321, 322, 331, 232, 233</td>\n<td style=\"width: 22.777%; height: 313px;\">\n<p><strong>Valuable customers that are engaged</strong></p>\nThey purchased somewhat recently or purchase often. but they spend less than their <em>Champion</em> counterparts.</td>\n<td style=\"width: 136.006%; height: 313px;\">\n<ul>\n<li>Send them rewards or coupons for their loyalty.</li>\n<li>Use cross-selling or up-selling of similar past purchases or popular products.</li>\n<li>Get reviews from them.</li>\n<li>Invite them to sales, promotions, etc. right after your <em>Champions</em>.</li>\n<li>Encourage or remind them to restock items or past purchases.</li>\n<li>Make sure they are signed up for SMS/MMS.</li>\n</ul>\n</td>\n</tr>\n<tr style=\"height: 313px;\">\n<td style=\"width: 1.42248%; height: 313px;\"><strong>Recent</strong></td>\n<td style=\"width: 22.5095%; height: 313px;\">312, 313, 311, 222, 223</td>\n<td style=\"width: 22.777%; height: 313px;\">\n<p><strong>Recent customers<br></strong>They may have purchased recently, but they do not tend to purchase frequently.</p>\n</td>\n<td style=\"width: 136.006%; height: 313px;\">\n<ul>\n<li>Convert them to a subscription so that they become a <em>Champion</em> or <em>Loyalist</em>.</li>\n<li>Offer them a promotion to order and try to convert them.</li>\n<li>Encourage or remind them to restock items or past purchases.</li>\n<li>Use cross-selling or up-selling of similar past purchases.</li>\n<li>Provide testimonials or reviews from your <em>Champions</em> or <em>Loyal </em>to encourage purchases.</li>\n</ul>\n</td>\n</tr>\n<tr style=\"height: 335px;\">\n<td style=\"width: 1.42248%; height: 335px;\"><strong>Needs attention</strong></td>\n<td style=\"width: 22.5095%; height: 335px;\">213, 221, 123, 132, 133</td>\n<td style=\"width: 22.777%; height: 335px;\">\n<strong><strong>A valuable customer that has not </strong></strong><strong>purchased recently</strong>\n<p>They may have spent a lot or bought frequently in the past, but have not purchased recently.</p>\n</td>\n<td style=\"width: 136.006%; height: 335px;\">\n<ul>\n<li>Let them know about new product releases.</li>\n<li>Try a winback campaign to re-engage them.</li>\n<li>Offer them an exclusive promotion or coupon (especially time-limited promotions).</li>\n<li>Personalize product recommendations based on what they purchased in the past.</li>\n<li>Encourage or remind them to restock items or past purchases.</li>\n</ul>\n</td>\n</tr>\n<tr style=\"height: 358px;\">\n<td style=\"width: 1.42248%; height: 358px;\"><strong>At risk</strong></td>\n<td style=\"width: 22.5095%; height: 358px;\">231, 212, 122, 131, 211</td>\n<td style=\"width: 22.777%; height: 358px;\">\n<p><strong>A customer that has not purchased recently and/or tend to spend less overall<br></strong>They may have purchased in the past, but have not purchased recently. They spent less than their <em>Needs attention </em>counterparts.</p>\n</td>\n<td style=\"width: 136.006%; height: 358px;\">\n<ul>\n<li>Try a winback campaign to re-engage them.</li>\n<li>Offer them an exclusive promotion or coupon (especially time-limited promotions).</li>\n<li>Personalize product recommendations based on what they purchased in the past.</li>\n<li>They may be more price sensitive than the <em>Needs attention </em>group<em>, </em>so target with more affordable products.</li>\n<li>Try not to over-message as they are a churn-risk.</li>\n</ul>\n</td>\n</tr>\n<tr style=\"height: 10px;\">\n<td style=\"width: 1.42248%; height: 10px;\"><strong>Inactive</strong></td>\n<td style=\"width: 22.5095%; height: 10px;\">111, 112, 113, 121</td>\n<td style=\"width: 22.777%; height: 10px;\">\n<p><strong>A lapsed customer<br></strong>An infrequent customer who hasn’t purchased in a long time.</p>\n</td>\n<td style=\"width: 136.006%; height: 10px;\">\n<div>\n<ul>\n<li>Try a winback campaign to re-engage them.</li>\n<li>Offer them an exclusive promotion or coupon (especially time-limited promotions). </li>\n<li>If they are unengaged (especially if they do not interact with your winback or promotional emails), consider list-cleaning and removing them before they harm your deliverability.</li>\n</ul>\n</div>\n</td>\n</tr>\n</tbody>\n</table>\n<h2 id=\"01H8BGN9HHKBKSD7SVPQDQWA3H\">Additional resources</h2>\n<p><a href=\"https://help.klaviyo.com/hc/en-us/articles/17797889315355\" target=\"_blank\" rel=\"noopener noreferrer\">Getting started with the recency, frequency, and monetary (RFM) analysis report</a></p>\n<p><a href=\"https://help.klaviyo.com/hc/en-us/articles/18193920339483\" target=\"_blank\" rel=\"noopener noreferrer\">How to build a segment using RFM properties</a></p>\n<p><a href=\"https://help.klaviyo.com/hc/en-us/articles/18194102384539\" target=\"_blank\" rel=\"noopener noreferrer\">How to strategically use RFM properties in campaigns and flows</a></p>",
+    "user_segment_ids": []
+  },
+  "normalized": {
+    "id": "17797937793179",
+    "title": "Understanding scoring and customer groups in the recency, frequency, and monetary analysis (RFM) report",
+    "source_url": "https://help.klaviyo.com/hc/en-us/articles/17797937793179-Understanding-scoring-and-customer-groups-in-the-recency-frequency-and-monetary-analysis-RFM-report",
+    "section_id": 49375758051483,
+    "section": "Customer insights",
+    "category_id": 18073014919195,
+    "category": "Advanced KDP & Marketing Analytics",
+    "category_slug": "advanced-kdp-marketing-analytics",
+    "klaviyo_updated": "2026-04-21T13:56:44Z",
+    "created_at": "2023-08-09T16:39:43Z",
+    "draft": false,
+    "promoted": false,
+    "position": 1,
+    "label_names": []
+  },
+  "files": {
+    "body_html": "_source/articles/17797937793179.body.html",
+    "rendered_html": "_source/rendered/17797937793179.html"
+  },
+  "assets": {
+    "api_body": {
+      "images": [
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28716057240219",
+          "alt": "rfm cube.jpg",
+          "width": "267",
+          "height": "264"
+        }
+      ],
+      "links": [
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/17655007276059",
+          "text": "Advanced KDP"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/33789259613595",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115000976672",
+          "text": "billing guide"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/17797889315355",
+          "text": "getting started with the RFM report"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/22311085738395/",
+          "text": "new custom metric"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/17797889315355",
+          "text": "Getting started with the recency, frequency, and monetary (RFM) analysis report"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/18193920339483",
+          "text": "How to build a segment using RFM properties"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/18194102384539",
+          "text": "How to strategically use RFM properties in campaigns and flows"
+        }
+      ],
+      "headings": [
+        {
+          "level": 2,
+          "id": "01H8B6GRTTWAGGGT5TVP8R4DCS",
+          "text": "You will learn"
+        },
+        {
+          "level": 2,
+          "id": "01H8B6GRTVPQ7TP23S1YACY9AT",
+          "text": "Before you begin"
+        },
+        {
+          "level": 2,
+          "id": "01H8B6Q6KSKCFSPWW02RNXTE78",
+          "text": "RFM definitions"
+        },
+        {
+          "level": 2,
+          "id": "01H8B7E63VZ71F38A090AV3WKQ",
+          "text": "Understanding percentiles, scoring, and customer groups"
+        },
+        {
+          "level": 3,
+          "id": "01H8B7E63VRFBW59AG1XSRK476",
+          "text": "Percentiles and scoring"
+        },
+        {
+          "level": 3,
+          "id": "01H8B7M0PM7A8252HCNN51QB87",
+          "text": "Customer groups"
+        },
+        {
+          "level": 2,
+          "id": "01H8BGN9HHKBKSD7SVPQDQWA3H",
+          "text": "Additional resources"
+        }
+      ]
+    },
+    "rendered_page": {
+      "images": [
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/7ff492c2b417b7ecfe572f839a8a81398693c1f7-1920x1080.webp",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/c8f0acb3289f29d82bf75f939bf1c191c9a32823-580x572.jpg?w=267",
+          "alt": "rfm cube.jpg",
+          "width": "267",
+          "height": "264"
+        }
+      ],
+      "links": [
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/17797937793179-Understanding-scoring-and-customer-groups-in-the-recency-frequency-and-monetary-analysis-RFM-report#site-content",
+          "text": "Skip to main content"
+        },
+        {
+          "href": "https://www.klaviyo.com",
+          "text": "Home"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center"
+        },
+        {
+          "href": "https://www.klaviyo.com/enterprise",
+          "text": "Enterprise"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Partners"
+        },
+        {
+          "href": "https://www.klaviyo.com/careers",
+          "text": "Careers"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": "Log in"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": ""
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center Find step-by-step instructions and troubleshooting solutions in our knowledge base."
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000032731",
+          "text": "Integrations"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000312411",
+          "text": "Flows"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867867",
+          "text": "Audience"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867667",
+          "text": "Campaigns"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/360000190711",
+          "text": "Sign-up forms"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000873988",
+          "text": "Deliverability & compliance"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/29173800271259",
+          "text": "SMS"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/16638219724187",
+          "text": "Reviews"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/18073014919195",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/34141283979931",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/37659126754075",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/33948021740315",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/39746685522331",
+          "text": "WhatsApp"
+        },
+        {
+          "href": "https://academy.klaviyo.com",
+          "text": "Klaviyo Academy Expert training and education to help you succeed with Klaviyo, and beyond."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Quick+guide&resource=academy_courses",
+          "text": "Quick guides Learn marketing strategies and concepts in 15 minutes or less."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Course&resource=academy_courses",
+          "text": "Courses Master key marketing topics through structured lessons and exams."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/best-practices",
+          "text": "Best practices Discover top product and marketing strategies for your business."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/learning-paths",
+          "text": "Learning paths Complete curated learning journeys tailored to your marketing goals."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses",
+          "text": "Explore all resources"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Live+training&resource=academy_courses",
+          "text": "Live trainings Build confidence through hands-on interactive workshops and thought-provoking strategy sessions."
+        },
+        {
+          "href": "https://www.bigmarker.com/klaviyo-customer-education/Office-hours-Getting-started-with-Klaviyo",
+          "text": "Live office hours Join a strategic discussion where you can ask questions and get answers in real-time."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/private-live-training",
+          "text": "1:1 Live training Book a private training session with an expert to jumpstart your platform knowledge and confidence."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/credentials",
+          "text": "Klaviyo credentials Dig deeper into select topics and showcase your expertise with a final exam to earn a certificate and digital badge."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/certificates/klaviyo-practitioner-certificate",
+          "text": "Klaviyo practitioner certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/deliverability-certificate",
+          "text": "Deliverability certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/developer-certificate",
+          "text": "Klaviyo developer certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses&select=Certificate",
+          "text": "See all certificates"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Klaviyo Community Join our thriving community network to connect with brands like yours—online and in person."
+        },
+        {
+          "href": "https://community.klaviyo.com/topic/new",
+          "text": "Ask a question Post a question and get thoughtful answers from Klaviyo powerusers."
+        },
+        {
+          "href": "https://community.klaviyo.com/p/roadmap",
+          "text": "Product roadmap"
+        },
+        {
+          "href": "https://community.klaviyo.com/search/activity/recent",
+          "text": "Recent threads"
+        },
+        {
+          "href": "https://community.klaviyo.com/p/champions",
+          "text": "Meet the Champions"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups",
+          "text": "Browse all groups Your people are waiting. New ideas and connections are a click away."
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/developer-group-64",
+          "text": "Developer group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/entrepreneur-user-group-118",
+          "text": "Entrepreneur group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/woo-user-group-87",
+          "text": "WooCommerce group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/new-york-meetup-chapter-82",
+          "text": "New York City"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/los-angeles-meetup-chapter-83",
+          "text": "Los Angeles"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/austin-meetup-chapter-85",
+          "text": "Austin"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/san-diego-meetup-chapter-86",
+          "text": "San Diego"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/amsterdam-meetup-chapter-84",
+          "text": "Amsterdam"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Klaviyo Developers Access API documentation and developer guides to help you build with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/get_started",
+          "text": "Get started Access key resources and a step-by-step checklist for how to start developing with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/build_your_integration",
+          "text": "Grow your app's reach Learn how to join our ecosystem and get your app listed on our marketplace."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/developer-tools",
+          "text": "Developer tools Generate sample data, monitor your API usage, and access our Postman collections."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/reference/api_overview",
+          "text": "API reference Browse our full catalog of API docs."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/changelog_",
+          "text": "Changelog"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/api_versioning_and_deprecation_policy",
+          "text": "Versioning & deprecation policy"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/rate_limits_and_error_handling",
+          "text": "Rate limits & error handling"
+        },
+        {
+          "href": "https://youtube.com/playlist?list=PLHkNfHgtxcUanrkMnKPdkRzuWU7MGv_xM&si=pkG-KH7IT_TUHOGC",
+          "text": "API tutorials on YouTube Subscribe to our Klaviyo API Tutorials playlist for easy access to step-by-step developer walkthroughs."
+        },
+        {
+          "href": "https://www.klaviyo.com/contact-us",
+          "text": "Contact us"
+        },
+        {
+          "href": "https://www.klaviyo.com/sign-up",
+          "text": "Sign up"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": "Search"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/17797937793179",
+          "text": "United States - EN"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/de-de/articles/17797937793179",
+          "text": "Deutschland - DE"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-es/articles/17797937793179",
+          "text": "España - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-mx/articles/17797937793179",
+          "text": "México - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/fr-fr/articles/17797937793179",
+          "text": "France - FR"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/it-it/articles/17797937793179",
+          "text": "Italia - IT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/ko-kr/articles/17797937793179",
+          "text": "한국 - KO"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/nl-nl/articles/17797937793179",
+          "text": "Nederland - NL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pl-pl/articles/17797937793179",
+          "text": "Polska - PL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pt-br/articles/17797937793179",
+          "text": "Brasil - PT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/sv-se/articles/17797937793179",
+          "text": "Sverige - SV"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/18073014919195",
+          "text": "Advanced KDP & Marketing Analytics"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/18073047240091",
+          "text": "Intelligence (Advanced KDP & Marketing Analytics)"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/49375758051483",
+          "text": "Customer insights"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/17797937793179-Understanding-scoring-and-customer-groups-in-the-recency-frequency-and-monetary-analysis-RFM-report#01H8B6GRTTWAGGGT5TVP8R4DCS",
+          "text": "You will learn"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/17797937793179-Understanding-scoring-and-customer-groups-in-the-recency-frequency-and-monetary-analysis-RFM-report#01H8B6GRTVPQ7TP23S1YACY9AT",
+          "text": "Before you begin"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/17797937793179-Understanding-scoring-and-customer-groups-in-the-recency-frequency-and-monetary-analysis-RFM-report#01H8B6Q6KSKCFSPWW02RNXTE78",
+          "text": "RFM definitions"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/17797937793179-Understanding-scoring-and-customer-groups-in-the-recency-frequency-and-monetary-analysis-RFM-report#01H8B7E63VZ71F38A090AV3WKQ",
+          "text": "Understanding percentiles, scoring, and customer groups"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/17797937793179-Understanding-scoring-and-customer-groups-in-the-recency-frequency-and-monetary-analysis-RFM-report#additional-resources",
+          "text": "Additional resources"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/17655007276059",
+          "text": "Advanced KDP"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/33789259613595",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115000976672",
+          "text": "billing guide"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/17797889315355",
+          "text": "getting started with the RFM report"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/22311085738395/",
+          "text": "new custom metric"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/17797889315355",
+          "text": "Getting started with the recency, frequency, and monetary (RFM) analysis report"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/18193920339483",
+          "text": "How to build a segment using RFM properties"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/18194102384539",
+          "text": "How to strategically use RFM properties in campaigns and flows"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115001002272",
+          "text": "Learn how to contact support"
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": ""
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": "Visit Community"
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": ""
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": "Hire a partner"
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/about",
+          "text": "About Klaviyo"
+        },
+        {
+          "href": "https://www.klaviyo.com/newsroom",
+          "text": "Newsroom"
+        },
+        {
+          "href": "https://investors.klaviyo.com/overview/default.aspx",
+          "text": "Investor relations"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Agency and tech partners"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Developers"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/retail",
+          "text": "Retail and ecommerce"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/restaurants",
+          "text": "Restaurant marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/wellness",
+          "text": "Wellness"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform",
+          "text": "B2C CRM overview"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai",
+          "text": "Klaviyo AI (K:AI)"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/marketing-automation",
+          "text": "Klaviyo Marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-service",
+          "text": "Klaviyo Service"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/analytics",
+          "text": "Klaviyo Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-data-platform",
+          "text": "Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare",
+          "text": "Klaviyo vs. Klaviyo alternatives"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-mailchimp",
+          "text": "Klaviyo vs. Mailchimp"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-postscript",
+          "text": "Klaviyo vs. Postscript"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-attentive",
+          "text": "Klaviyo vs. Attentive"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-salesforce-marketing-cloud",
+          "text": "Klaviyo vs. Salesforce"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-listrak",
+          "text": "Klaviyo vs. Listrak"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/omnichannel",
+          "text": "Omnichannel marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/email-marketing",
+          "text": "Email marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing",
+          "text": "SMS marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing/rcs",
+          "text": "RCS for Business"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/mobile-app-marketing",
+          "text": "Mobile app marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/whatsapp",
+          "text": "WhatsApp marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/social",
+          "text": "Social marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources",
+          "text": "Marketing resources"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources/marketing-campaign-calendar",
+          "text": "Marketing campaign calendar"
+        },
+        {
+          "href": "https://www.klaviyo.com/glossary",
+          "text": "Marketing glossary"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/email-subject-line-generator",
+          "text": "Subject line generator"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/roi-calculator",
+          "text": "ROI calculator"
+        },
+        {
+          "href": "https://www.klaviyo.com/customers",
+          "text": "Case studies"
+        },
+        {
+          "href": "https://www.klaviyo.com/composer",
+          "text": "Composer Beta"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/marketing-agent",
+          "text": "Marketing Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/customer-agent",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/customer-experience-hub",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/helpdesk",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/marketing-analytics",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/advanced-cdp",
+          "text": "Advanced Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/web-forms",
+          "text": "Web forms"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/email-templates",
+          "text": "Email templates"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/portfolio",
+          "text": "Portfolio"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform-integrations",
+          "text": "Apps and Integrations"
+        },
+        {
+          "href": "https://www.klaviyo.com/features",
+          "text": "Features"
+        },
+        {
+          "href": "https://www.klaviyo.com/whats-new",
+          "text": "What's new"
+        },
+        {
+          "href": "https://www.klaviyo.com/events",
+          "text": "Events"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help Center"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us",
+          "text": "Academy"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Community"
+        },
+        {
+          "href": "https://www.facebook.com/Klaviyo/",
+          "text": "Facebook"
+        },
+        {
+          "href": "https://twitter.com/klaviyo/",
+          "text": "Twitter"
+        },
+        {
+          "href": "https://www.linkedin.com/company/klaviyo/",
+          "text": "LinkedIn"
+        },
+        {
+          "href": "https://www.instagram.com/klaviyo/",
+          "text": "Instagram"
+        },
+        {
+          "href": "https://www.klaviyo.com/sitemap",
+          "text": "Site Map"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal",
+          "text": "Terms and Privacy"
+        },
+        {
+          "href": "https://www.klaviyo.com/security",
+          "text": "Security"
+        },
+        {
+          "href": "https://www.klaviyo.com/trust",
+          "text": "Trust"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal/intellectual-property-notices",
+          "text": "Intellectual Property Notices"
+        }
+      ],
+      "headings": [
+        {
+          "level": 1,
+          "id": "",
+          "text": "Understanding scoring and customer groups in the recency, frequency, and monetary analysis (RFM) report"
+        },
+        {
+          "level": 2,
+          "id": "01H8B6GRTTWAGGGT5TVP8R4DCS",
+          "text": "You will learn"
+        },
+        {
+          "level": 2,
+          "id": "01H8B6GRTVPQ7TP23S1YACY9AT",
+          "text": "Before you begin"
+        },
+        {
+          "level": 2,
+          "id": "01H8B6Q6KSKCFSPWW02RNXTE78",
+          "text": "RFM definitions"
+        },
+        {
+          "level": 2,
+          "id": "01H8B7E63VZ71F38A090AV3WKQ",
+          "text": "Understanding percentiles, scoring, and customer groups"
+        },
+        {
+          "level": 3,
+          "id": "01H8B7E63VRFBW59AG1XSRK476",
+          "text": "Percentiles and scoring"
+        },
+        {
+          "level": 3,
+          "id": "01H8B7M0PM7A8252HCNN51QB87",
+          "text": "Customer groups"
+        },
+        {
+          "level": 2,
+          "id": "additional-resources",
+          "text": "Additional resources"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "Explore more from Klaviyo"
+        }
+      ]
+    }
+  },
+  "rendered_page": {
+    "status": "fetched",
+    "error": ""
+  }
+}

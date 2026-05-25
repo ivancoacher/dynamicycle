@@ -1,0 +1,116 @@
+{
+  "captured_at": "2026-05-23T16:18:03Z",
+  "article": {
+    "id": 115005080787,
+    "url": "https://klaviyo.zendesk.com/api/v2/help_center/en-us/articles/115005080787.json",
+    "html_url": "https://klaviyo.zendesk.com/hc/en-us/articles/115005080787-Shopify-and-the-Browse-Abandonment-Flow",
+    "author_id": 20345311467,
+    "comments_disabled": true,
+    "draft": false,
+    "promoted": false,
+    "position": 4,
+    "vote_sum": 0,
+    "vote_count": 0,
+    "section_id": 49375337479451,
+    "created_at": "2017-03-30T18:08:16Z",
+    "updated_at": "2026-04-21T13:54:19Z",
+    "name": "Shopify and the Browse Abandonment Flow",
+    "title": "Shopify and the Browse Abandonment Flow",
+    "source_locale": "en-us",
+    "locale": "en-us",
+    "outdated": false,
+    "outdated_locales": [],
+    "edited_at": "2018-01-30T20:25:22Z",
+    "user_segment_id": null,
+    "permission_group_id": 146372,
+    "content_tag_ids": [],
+    "label_names": [],
+    "body": "<div class=\"article-content\">\n<h2 id=\"section0\">Overview</h2>\n<p>Browse abandonment emails are similar to abandoned carts, but are triggered when an identifiable browser visits a product page — a visitor doesn't have to add an item to his/her cart to trigger this flow, all a site visitor has to do is view the item.</p>\n<p>Because visiting a product page doesn’t quite indicate the same level of interest as adding an item to a shopping cart, we recommend including related or similar products in your browse abandonment emails to broaden your net. Adding a discount code into a browse abandonment email can also help turn a casual browser into an enthusiastic customer.</p>\n<p>The following guide will walk you through how to get a new Browse Abandonment flow up and running.</p>\n<h2 id=\"section1\">Add the Viewed Product Tracking Code</h2>\n<p>First, you'll need to add a snippet of code to your Shopify store's backend. This code will get added to your store's product.liquid template.</p>\n<table width=\"100%\">\n<tbody>\n<tr>\n<td>Note: If you have already added code to your product.liquid template to enable product page tracking, you may need to replace this previously added snippet of code with the new updated code shared in this guide.</td>\n</tr>\n</tbody>\n</table>\n<p>Find your store's product.liquid template by navigating to <em>Online Store</em> --&gt; <em>Themes</em> --&gt; <em>Edit HTML/CSS</em>--&gt; <em>product.liquid </em>in your Shopify Admin portal.</p>\n<p>Click into your product.liquid template and scroll down to the very bottom. This is where you will place the following code:</p>\n<pre>&lt;script text=\"text/javascript\"&gt;\n var _learnq = _learnq || [];\n var item = {\n   Name: {{ product.title|json }},\n   ProductID: {{ product.id|json }},\n   Categories: {{ product.collections|map:'title'|json }},\n   ImageURL: \"https:{{ product.featured_image.src|img_url:'grande' }}\",\n   URL: \"{{ shop.secure_url }}{{ product.url }}\",\n   Brand: {{ product.vendor|json }},\n   Price: {{ product.price|money|json }},\n   CompareAtPrice: {{ product.compare_at_price_max|money|json }}\n };\n\n _learnq.push(['track', 'Viewed Product', item]);\n\n _learnq.push(['trackViewedItem', {\n   Title: item.Name,\n   ItemId: item.ProductID,\n   Categories: item.Categories,\n   ImageUrl: item.ImageURL,\n   Url: item.URL,\n   Metadata: {\n     Brand: item.Brand,\n     Price: item.Price,\n     CompareAtPrice: item.CompareAtPrice\n   }\n }]);\n&lt;/script&gt;\n</pre>\n<p>Once this code has been pasted at the bottom of your product.liquid template, click <em>Save</em>.</p>\n<p>Remember: If you previously added a very short snippet of code to your product.liquid template to enable product page tracking, you may need to replace it with the above snippet. The updated code will look this this in your product.liquid template:</p>\n<p><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28717849944987\" alt=\"647553\"></p>\n<h2 id=\"section2\">Monitor the \"Viewed Product\" Metric</h2>\n<table>\n<tbody>\n<tr>\n<td>Note: When you add the Klaviyo tracking snippet above to your site, we will not track the <em>Viewed Product </em>event for all site visitors. We are only able to track this event for \"known browsers\". There are a two key ways we will be able to identify a site visitor for web tracking purposes:\n<ul>\n<li>When someone clicks through a Klaviyo email to your website</li>\n<li>When someone has, at some point, subscribed/opted-in through a Klaviyo form</li>\n</ul>\n</td>\n</tr>\n</tbody>\n</table>\n<p>After this code snippet has been pasted and saved into your store's product.liquid template, \"Viewed Product\" data should begin populating in your Klaviyo account as known visitors browse your product pages.</p>\n<p>To check on this metric, click into your account's <em><a href=\"https://www.klaviyo.com/dashboard\" target=\"_blank\" rel=\"nofollow noopener\">Dashboard</a> </em>and navigate to the <em>Activity Feed </em>tab. Here, you will see a dropdown labeled \"Showing Feed for\". Adjust this dropdown to filter for the metric \"Viewed Product\".</p>\n<p><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28717849946139\" alt=\"647543\"></p>\n<p>If there is no data available, test the metric out yourself by browsing your own website and clicking around to view different products. You should see this data begin to flow into Klaviyo. After you send your first campaign, or begin to grow your subscriber list, this browsing data will grow as Klaviyo is able to identify more and more people engaging with your site. If you are concerned this code snippet is not functioning properly, <a href=\"https://help.klaviyo.com/hc/en-us/requests/new\">contact our Success Team</a> and we'll help troubleshoot!</p>\n<h2 id=\"section3\">Set Up the Browse Abandonment Flow</h2>\n<p>If Klaviyo's best-practice Browse Abandonment flow was not pre-populated in your account, you can grab this flow now from the <em>Browse I</em><em>deas </em>section of your <em>Flows</em> tab.</p>\n<p><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28717810315675\" alt=\"647541\"></p>\n<table>\n<tbody>\n<tr>\n<td>\n<a href=\"https://docs.klaviyo.com/customer/portal/articles/2475177#section4\" target=\"_blank\" rel=\"noopener\">Reference this guide</a> for information on how to customize Klaviyo's Browse Abandonment flow or build your own!</td>\n</tr>\n</tbody>\n</table>\n</div>\n<div id=\"rate_article_container\"> </div>",
+    "user_segment_ids": []
+  },
+  "normalized": {
+    "id": "115005080787",
+    "title": "Shopify and the Browse Abandonment Flow",
+    "source_url": "https://help.klaviyo.com/hc/en-us/articles/115005080787-Shopify-and-the-Browse-Abandonment-Flow",
+    "section_id": 49375337479451,
+    "section": "Shopify best practices",
+    "category_id": 115000032731,
+    "category": "Integrations",
+    "category_slug": "integrations",
+    "klaviyo_updated": "2026-04-21T13:54:19Z",
+    "created_at": "2017-03-30T18:08:16Z",
+    "draft": false,
+    "promoted": false,
+    "position": 4,
+    "label_names": []
+  },
+  "files": {
+    "body_html": "_source/articles/115005080787.body.html",
+    "rendered_html": ""
+  },
+  "assets": {
+    "api_body": {
+      "images": [
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28717849944987",
+          "alt": "647553",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28717849946139",
+          "alt": "647543",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28717810315675",
+          "alt": "647541",
+          "width": "",
+          "height": ""
+        }
+      ],
+      "links": [
+        {
+          "href": "https://www.klaviyo.com/dashboard",
+          "text": "Dashboard"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/requests/new",
+          "text": "contact our Success Team"
+        },
+        {
+          "href": "https://docs.klaviyo.com/customer/portal/articles/2475177#section4",
+          "text": "Reference this guide"
+        }
+      ],
+      "headings": [
+        {
+          "level": 2,
+          "id": "section0",
+          "text": "Overview"
+        },
+        {
+          "level": 2,
+          "id": "section1",
+          "text": "Add the Viewed Product Tracking Code"
+        },
+        {
+          "level": 2,
+          "id": "section2",
+          "text": "Monitor the \"Viewed Product\" Metric"
+        },
+        {
+          "level": 2,
+          "id": "section3",
+          "text": "Set Up the Browse Abandonment Flow"
+        }
+      ]
+    },
+    "rendered_page": {}
+  },
+  "rendered_page": {
+    "status": "failed",
+    "error": "404 Client Error: Not Found for url: https://help.klaviyo.com/hc/en-us/articles/115005080787"
+  }
+}

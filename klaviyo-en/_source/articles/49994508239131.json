@@ -1,0 +1,777 @@
+{
+  "captured_at": "2026-05-23T16:09:32Z",
+  "article": {
+    "id": 49994508239131,
+    "url": "https://klaviyo.zendesk.com/api/v2/help_center/en-us/articles/49994508239131.json",
+    "html_url": "https://klaviyo.zendesk.com/hc/en-us/articles/49994508239131-Understanding-Tools",
+    "author_id": 32458090987419,
+    "comments_disabled": false,
+    "draft": false,
+    "promoted": false,
+    "position": 0,
+    "vote_sum": 0,
+    "vote_count": 0,
+    "section_id": 49994543708315,
+    "created_at": "2026-05-05T20:40:57Z",
+    "updated_at": "2026-05-05T20:40:57Z",
+    "name": "Understanding Tools",
+    "title": "Understanding Tools",
+    "source_locale": "en-us",
+    "locale": "en-us",
+    "outdated": false,
+    "outdated_locales": [],
+    "edited_at": "2026-05-05T20:40:57Z",
+    "user_segment_id": null,
+    "permission_group_id": 146372,
+    "content_tag_ids": [],
+    "label_names": [],
+    "body": "<h2 id=\"a752cd68f89c\">You will learn</h2>\n<p>What tools are, what they do, and how they fit alongside skills and content. By the end, you’ll know when a tool is the right building block and when to reach for something else.</p>\n<p><strong>Note:</strong> Customer Agent comes with tools out of the box. Creating fully custom tools from scratch is currently in closed beta. If you’re not in the beta, you won’t see a dedicated Tools page — but the tools that come with Customer Agent still run behind the scenes when skills use them. You can see the tools a skill uses by clicking into the skill’s details.</p>\n<h2 id=\"e7507a535d8b\">What a tool is</h2>\n<p>A <strong>tool</strong> is a specific capability Customer Agent can use during a conversation to fetch data or take an action. If skills are what Customer Agent knows how to <em>handle</em>, tools are the concrete things it can <em>do</em>.</p>\n<p>For example, when a shopper asks “Where is my order?”, Customer Agent uses the Get Customer Orders tool to pull that shopper’s order data from Shopify, then responds with the tracking info.</p>\n<h2 id=\"ceea7e0b134c\">What tools do</h2>\n<p>Tools fall into three categories:</p>\n<ul>\n<li>\n<strong>Fetch data</strong> — Look up an order, search your product catalog, pull a customer’s subscriptions or coupons</li>\n<li>\n<strong>Take action</strong> — Cancel a subscription, apply a discount, create a support ticket (via fully custom tools)</li>\n<li>\n<strong>Integrate with external systems</strong> — Call your OMS, CRM, loyalty platform, or any HTTP endpoint (via fully custom tools)</li>\n</ul>\n<h2 id=\"ffe19762c957\">Tools vs. content</h2>\n<p>Content is <strong>static knowledge</strong> Customer Agent uses to answer questions — your shipping policy, product descriptions, FAQs. Tools are <strong>dynamic actions</strong> that fetch real-time data or change something.</p>\n<p>A good test: if the answer is the same for every customer, it belongs in content. If the answer depends on <em>who</em> is asking or <em>what</em> they’ve done, it needs a tool.</p>\n<h2 id=\"391dc8237ef7\">Tools vs. skills</h2>\n<p>Skills define <strong>what Customer Agent handles</strong>. Tools define <strong>how it acts</strong> during that handling.</p>\n<p>A single skill can use multiple tools. A single tool can be used by multiple skills. For example, <code>Get Customer Orders</code> is used by Order Tracking, Order Editing, and Returns &amp; Exchanges.</p>\n<p>For a deeper decision framework, see [[Understanding skills vs. tools]].</p>\n<h2 id=\"ca80341ae0e6\">Tools that come with Customer Agent</h2>\n<p>Customer Agent comes with a set of tools out of the box that skills use. You don’t set them up — they run when a skill needs them. Examples:</p>\n<table>\n<tbody>\n<tr>\n<td><strong>Tool</strong></td>\n<td><strong>What it does</strong></td>\n</tr>\n<tr>\n<td>Get Customer Orders</td>\n<td>Fetches recent customer orders from Shopify.</td>\n</tr>\n<tr>\n<td>Search Shop Catalog</td>\n<td>Searches for products from the online store, hosted on Shopify.</td>\n</tr>\n<tr>\n<td>Search Company Knowledge</td>\n<td>Looks up company knowledge across indexed webpages, uploaded files, and snippets of text.</td>\n</tr>\n<tr>\n<td>Get Customer Coupons</td>\n<td>Fetches customer coupons for the provided profile ID.</td>\n</tr>\n<tr>\n<td>Get Customer Subscriptions</td>\n<td>Fetches subscriptions for the provided profile ID.</td>\n</tr>\n<tr>\n<td>Get Product Recommendations</td>\n<td>Fetches personalized product recommendations based on customer preferences and interests.</td>\n</tr>\n<tr>\n<td>Get Profile</td>\n<td>Fetches customer profile data.</td>\n</tr>\n</tbody>\n</table>\n<p>If you’re in the beta for creating fully custom tools, you can see the full list on the Tools page. If you’re not, you can view which tools a skill uses by clicking into that skill’s details.</p>\n<h2 id=\"247a8845aca1\">Fully custom tools 🏷️ BETA</h2>\n<p>Creating fully custom tools from scratch lets you connect Customer Agent to any HTTP endpoint — your OMS, CRM, loyalty platform, or anything else with an API. Use a fully custom tool when the tools Customer Agent comes with don’t cover what you need.</p>\n<p>Access is limited to brands in the managed beta. See [[How to create a tool]] to build one.</p>\n<h2 id=\"9d85d449372e\">How tools get used</h2>\n<p>Tools are attached to skills. A skill’s instructions tell Customer Agent which tools are available and when to use them.</p>\n<p>The flow inside a single conversation:</p>\n<ol>\n<li>Shopper sends a message</li>\n<li>Router picks a skill based on intent</li>\n<li>Skill’s instructions decide whether a tool is needed</li>\n<li>Customer Agent uses the tool to fetch data or take an action</li>\n<li>Customer Agent generates a response using what the tool returned</li>\n</ol>\n<h2 id=\"f793d5c1a98a\">Anatomy of a tool</h2>\n<p>Every tool has these parts:</p>\n<ul>\n<li>\n<strong>Name</strong> — Short identifier (e.g., <code>Get Customer Orders</code>)</li>\n<li>\n<strong>Description</strong> — Natural-language explanation of what the tool does. This matters: it drives whether Customer Agent decides to use the tool for a given request.</li>\n<li>\n<strong>Input schema</strong> — The parameters the tool takes (e.g., <code>profile_id</code>, <code>order_id</code>)</li>\n<li>\n<strong>HTTP config</strong> <em>(fully custom tools only)</em> — The method, URL, headers, and body</li>\n</ul>\n<p>A good tool description is specific and unambiguous. Vague descriptions cause Customer Agent to skip a tool when it shouldn’t use one, or use a tool when it shouldn’t.</p>",
+    "user_segment_ids": []
+  },
+  "normalized": {
+    "id": "49994508239131",
+    "title": "Understanding Tools",
+    "source_url": "https://help.klaviyo.com/hc/en-us/articles/49994508239131-Understanding-Tools",
+    "section_id": 49994543708315,
+    "section": "Tools",
+    "category_id": 48274996158235,
+    "category": "Customer Agent",
+    "category_slug": "customer-agent",
+    "klaviyo_updated": "2026-05-05T20:40:57Z",
+    "created_at": "2026-05-05T20:40:57Z",
+    "draft": false,
+    "promoted": false,
+    "position": 0,
+    "label_names": []
+  },
+  "files": {
+    "body_html": "_source/articles/49994508239131.body.html",
+    "rendered_html": "_source/rendered/49994508239131.html"
+  },
+  "assets": {
+    "api_body": {
+      "images": [],
+      "links": [],
+      "headings": [
+        {
+          "level": 2,
+          "id": "a752cd68f89c",
+          "text": "You will learn"
+        },
+        {
+          "level": 2,
+          "id": "e7507a535d8b",
+          "text": "What a tool is"
+        },
+        {
+          "level": 2,
+          "id": "ceea7e0b134c",
+          "text": "What tools do"
+        },
+        {
+          "level": 2,
+          "id": "ffe19762c957",
+          "text": "Tools vs. content"
+        },
+        {
+          "level": 2,
+          "id": "391dc8237ef7",
+          "text": "Tools vs. skills"
+        },
+        {
+          "level": 2,
+          "id": "ca80341ae0e6",
+          "text": "Tools that come with Customer Agent"
+        },
+        {
+          "level": 2,
+          "id": "247a8845aca1",
+          "text": "Fully custom tools 🏷️ BETA"
+        },
+        {
+          "level": 2,
+          "id": "9d85d449372e",
+          "text": "How tools get used"
+        },
+        {
+          "level": 2,
+          "id": "f793d5c1a98a",
+          "text": "Anatomy of a tool"
+        }
+      ]
+    },
+    "rendered_page": {
+      "images": [
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/7ff492c2b417b7ecfe572f839a8a81398693c1f7-1920x1080.webp",
+          "alt": "",
+          "width": "",
+          "height": ""
+        }
+      ],
+      "links": [
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/49994508239131-Understanding-Tools#site-content",
+          "text": "Skip to main content"
+        },
+        {
+          "href": "https://www.klaviyo.com",
+          "text": "Home"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center"
+        },
+        {
+          "href": "https://www.klaviyo.com/enterprise",
+          "text": "Enterprise"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Partners"
+        },
+        {
+          "href": "https://www.klaviyo.com/careers",
+          "text": "Careers"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": "Log in"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": ""
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center Find step-by-step instructions and troubleshooting solutions in our knowledge base."
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000032731",
+          "text": "Integrations"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000312411",
+          "text": "Flows"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867867",
+          "text": "Audience"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867667",
+          "text": "Campaigns"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/360000190711",
+          "text": "Sign-up forms"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000873988",
+          "text": "Deliverability & compliance"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/29173800271259",
+          "text": "SMS"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/16638219724187",
+          "text": "Reviews"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/18073014919195",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/34141283979931",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/37659126754075",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/33948021740315",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/39746685522331",
+          "text": "WhatsApp"
+        },
+        {
+          "href": "https://academy.klaviyo.com",
+          "text": "Klaviyo Academy Expert training and education to help you succeed with Klaviyo, and beyond."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Quick+guide&resource=academy_courses",
+          "text": "Quick guides Learn marketing strategies and concepts in 15 minutes or less."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Course&resource=academy_courses",
+          "text": "Courses Master key marketing topics through structured lessons and exams."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/best-practices",
+          "text": "Best practices Discover top product and marketing strategies for your business."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/learning-paths",
+          "text": "Learning paths Complete curated learning journeys tailored to your marketing goals."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses",
+          "text": "Explore all resources"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Live+training&resource=academy_courses",
+          "text": "Live trainings Build confidence through hands-on interactive workshops and thought-provoking strategy sessions."
+        },
+        {
+          "href": "https://www.bigmarker.com/klaviyo-customer-education/Office-hours-Getting-started-with-Klaviyo",
+          "text": "Live office hours Join a strategic discussion where you can ask questions and get answers in real-time."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/private-live-training",
+          "text": "1:1 Live training Book a private training session with an expert to jumpstart your platform knowledge and confidence."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/credentials",
+          "text": "Klaviyo credentials Dig deeper into select topics and showcase your expertise with a final exam to earn a certificate and digital badge."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/certificates/klaviyo-practitioner-certificate",
+          "text": "Klaviyo practitioner certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/deliverability-certificate",
+          "text": "Deliverability certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/developer-certificate",
+          "text": "Klaviyo developer certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses&select=Certificate",
+          "text": "See all certificates"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Klaviyo Community Join our thriving community network to connect with brands like yours—online and in person."
+        },
+        {
+          "href": "https://community.klaviyo.com/topic/new",
+          "text": "Ask a question Post a question and get thoughtful answers from Klaviyo powerusers."
+        },
+        {
+          "href": "https://community.klaviyo.com/p/roadmap",
+          "text": "Product roadmap"
+        },
+        {
+          "href": "https://community.klaviyo.com/search/activity/recent",
+          "text": "Recent threads"
+        },
+        {
+          "href": "https://community.klaviyo.com/p/champions",
+          "text": "Meet the Champions"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups",
+          "text": "Browse all groups Your people are waiting. New ideas and connections are a click away."
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/developer-group-64",
+          "text": "Developer group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/entrepreneur-user-group-118",
+          "text": "Entrepreneur group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/woo-user-group-87",
+          "text": "WooCommerce group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/new-york-meetup-chapter-82",
+          "text": "New York City"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/los-angeles-meetup-chapter-83",
+          "text": "Los Angeles"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/austin-meetup-chapter-85",
+          "text": "Austin"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/san-diego-meetup-chapter-86",
+          "text": "San Diego"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/amsterdam-meetup-chapter-84",
+          "text": "Amsterdam"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Klaviyo Developers Access API documentation and developer guides to help you build with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/get_started",
+          "text": "Get started Access key resources and a step-by-step checklist for how to start developing with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/build_your_integration",
+          "text": "Grow your app's reach Learn how to join our ecosystem and get your app listed on our marketplace."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/developer-tools",
+          "text": "Developer tools Generate sample data, monitor your API usage, and access our Postman collections."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/reference/api_overview",
+          "text": "API reference Browse our full catalog of API docs."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/changelog_",
+          "text": "Changelog"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/api_versioning_and_deprecation_policy",
+          "text": "Versioning & deprecation policy"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/rate_limits_and_error_handling",
+          "text": "Rate limits & error handling"
+        },
+        {
+          "href": "https://youtube.com/playlist?list=PLHkNfHgtxcUanrkMnKPdkRzuWU7MGv_xM&si=pkG-KH7IT_TUHOGC",
+          "text": "API tutorials on YouTube Subscribe to our Klaviyo API Tutorials playlist for easy access to step-by-step developer walkthroughs."
+        },
+        {
+          "href": "https://www.klaviyo.com/contact-us",
+          "text": "Contact us"
+        },
+        {
+          "href": "https://www.klaviyo.com/sign-up",
+          "text": "Sign up"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": "Search"
+        },
+        {
+          "href": "https://help.klaviyo.com/en-us",
+          "text": "United States - EN"
+        },
+        {
+          "href": "https://help.klaviyo.com/de-de",
+          "text": "Deutschland - DE"
+        },
+        {
+          "href": "https://help.klaviyo.com/es-es",
+          "text": "España - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/es-mx",
+          "text": "México - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/fr-fr",
+          "text": "France - FR"
+        },
+        {
+          "href": "https://help.klaviyo.com/it-it",
+          "text": "Italia - IT"
+        },
+        {
+          "href": "https://help.klaviyo.com/ko-kr",
+          "text": "한국 - KO"
+        },
+        {
+          "href": "https://help.klaviyo.com/nl-nl",
+          "text": "Nederland - NL"
+        },
+        {
+          "href": "https://help.klaviyo.com/pl-pl",
+          "text": "Polska - PL"
+        },
+        {
+          "href": "https://help.klaviyo.com/pt-br",
+          "text": "Brasil - PT"
+        },
+        {
+          "href": "https://help.klaviyo.com/sv-se",
+          "text": "Sverige - SV"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/48274996158235",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/49994543708315",
+          "text": "Tools"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/49994508239131-Understanding-Tools#you-will-learn",
+          "text": "You will learn"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/49994508239131-Understanding-Tools#what-a-tool-is",
+          "text": "What a tool is"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/49994508239131-Understanding-Tools#what-tools-do",
+          "text": "What tools do"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/49994508239131-Understanding-Tools#tools-vs-content",
+          "text": "Tools vs. content"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/49994508239131-Understanding-Tools#tools-vs-skills",
+          "text": "Tools vs. skills"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/49994508239131-Understanding-Tools#tools-that-come-with-customer-agent",
+          "text": "Tools that come with Customer Agent"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/49994508239131-Understanding-Tools#fully-custom-tools-beta",
+          "text": "Fully custom tools 🏷️ BETA"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/49994508239131-Understanding-Tools#how-tools-get-used",
+          "text": "How tools get used"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/49994508239131-Understanding-Tools#anatomy-of-a-tool",
+          "text": "Anatomy of a tool"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115001002272",
+          "text": "Learn how to contact support"
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": ""
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": "Visit Community"
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": ""
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": "Hire a partner"
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/about",
+          "text": "About Klaviyo"
+        },
+        {
+          "href": "https://www.klaviyo.com/newsroom",
+          "text": "Newsroom"
+        },
+        {
+          "href": "https://investors.klaviyo.com/overview/default.aspx",
+          "text": "Investor relations"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Agency and tech partners"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Developers"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/retail",
+          "text": "Retail and ecommerce"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/restaurants",
+          "text": "Restaurant marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/wellness",
+          "text": "Wellness"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform",
+          "text": "B2C CRM overview"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai",
+          "text": "Klaviyo AI (K:AI)"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/marketing-automation",
+          "text": "Klaviyo Marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-service",
+          "text": "Klaviyo Service"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/analytics",
+          "text": "Klaviyo Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-data-platform",
+          "text": "Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare",
+          "text": "Klaviyo vs. Klaviyo alternatives"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-mailchimp",
+          "text": "Klaviyo vs. Mailchimp"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-postscript",
+          "text": "Klaviyo vs. Postscript"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-attentive",
+          "text": "Klaviyo vs. Attentive"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-salesforce-marketing-cloud",
+          "text": "Klaviyo vs. Salesforce"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-listrak",
+          "text": "Klaviyo vs. Listrak"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/omnichannel",
+          "text": "Omnichannel marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/email-marketing",
+          "text": "Email marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing",
+          "text": "SMS marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing/rcs",
+          "text": "RCS for Business"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/mobile-app-marketing",
+          "text": "Mobile app marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/whatsapp",
+          "text": "WhatsApp marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/social",
+          "text": "Social marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources",
+          "text": "Marketing resources"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources/marketing-campaign-calendar",
+          "text": "Marketing campaign calendar"
+        },
+        {
+          "href": "https://www.klaviyo.com/glossary",
+          "text": "Marketing glossary"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/email-subject-line-generator",
+          "text": "Subject line generator"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/roi-calculator",
+          "text": "ROI calculator"
+        },
+        {
+          "href": "https://www.klaviyo.com/customers",
+          "text": "Case studies"
+        },
+        {
+          "href": "https://www.klaviyo.com/composer",
+          "text": "Composer Beta"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/marketing-agent",
+          "text": "Marketing Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/customer-agent",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/customer-experience-hub",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/helpdesk",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/marketing-analytics",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/advanced-cdp",
+          "text": "Advanced Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/web-forms",
+          "text": "Web forms"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/email-templates",
+          "text": "Email templates"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/portfolio",
+          "text": "Portfolio"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform-integrations",
+          "text": "Apps and Integrations"
+        },
+        {
+          "href": "https://www.klaviyo.com/features",
+          "text": "Features"
+        },
+        {
+          "href": "https://www.klaviyo.com/whats-new",
+          "text": "What's new"
+        },
+        {
+          "href": "https://www.klaviyo.com/events",
+          "text": "Events"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help Center"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us",
+          "text": "Academy"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Community"
+        },
+        {
+          "href": "https://www.facebook.com/Klaviyo/",
+          "text": "Facebook"
+        },
+        {
+          "href": "https://twitter.com/klaviyo/",
+          "text": "Twitter"
+        },
+        {
+          "href": "https://www.linkedin.com/company/klaviyo/",
+          "text": "LinkedIn"
+        },
+        {
+          "href": "https://www.instagram.com/klaviyo/",
+          "text": "Instagram"
+        },
+        {
+          "href": "https://www.klaviyo.com/sitemap",
+          "text": "Site Map"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal",
+          "text": "Terms and Privacy"
+        },
+        {
+          "href": "https://www.klaviyo.com/security",
+          "text": "Security"
+        },
+        {
+          "href": "https://www.klaviyo.com/trust",
+          "text": "Trust"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal/intellectual-property-notices",
+          "text": "Intellectual Property Notices"
+        }
+      ],
+      "headings": [
+        {
+          "level": 1,
+          "id": "",
+          "text": "Understanding Tools"
+        },
+        {
+          "level": 2,
+          "id": "you-will-learn",
+          "text": "You will learn"
+        },
+        {
+          "level": 2,
+          "id": "what-a-tool-is",
+          "text": "What a tool is"
+        },
+        {
+          "level": 2,
+          "id": "what-tools-do",
+          "text": "What tools do"
+        },
+        {
+          "level": 2,
+          "id": "tools-vs-content",
+          "text": "Tools vs. content"
+        },
+        {
+          "level": 2,
+          "id": "tools-vs-skills",
+          "text": "Tools vs. skills"
+        },
+        {
+          "level": 2,
+          "id": "tools-that-come-with-customer-agent",
+          "text": "Tools that come with Customer Agent"
+        },
+        {
+          "level": 2,
+          "id": "fully-custom-tools-beta",
+          "text": "Fully custom tools 🏷️ BETA"
+        },
+        {
+          "level": 2,
+          "id": "how-tools-get-used",
+          "text": "How tools get used"
+        },
+        {
+          "level": 2,
+          "id": "anatomy-of-a-tool",
+          "text": "Anatomy of a tool"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "Explore more from Klaviyo"
+        }
+      ]
+    }
+  },
+  "rendered_page": {
+    "status": "fetched",
+    "error": ""
+  }
+}

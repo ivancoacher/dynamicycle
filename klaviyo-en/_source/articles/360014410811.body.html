@@ -1,0 +1,96 @@
+<p>Learn how to use the Klaviyo Connector with Shopify Flow to track events (to send data from your workflow to Klaviyo).</p>
+<h2 id="h_01HCFKXSHCEN1NVFC3VDH50R54">Before you begin</h2>
+<p>If you have not already, read our guide on <a href="https://help.klaviyo.com/hc/en-us/articles/115005080407-How-to-Integrate-with-Shopify" target="_blank" rel="noopener">getting started with Shopify</a> for step-by-step instructions on integrating, before continuing with this article.</p>
+<h2 id="h_01HCFKXSHCAED6N3FA4Y0YK2B5">What is Shopify Flow?</h2>
+<p>Shopify Flow is an ecommerce automation platform that Shopify stores can use to automate common tasks, such as:</p>
+<ul>
+<li>Tagging high-value customers</li>
+<li>Flagging and cancelling high-risk orders</li>
+<li>Sending reordering requests when your inventory levels become low</li>
+<li>Identifying and adding tags to products based on their title or SKU</li>
+</ul>
+<p>Shopify Flow is an app offered by Shopify in their App Store and is available for those on the Shopify plan and up (it is not available for those on the Basic plan). You can access the app <a href="https://apps.shopify.com/flow" target="_blank" rel="noopener">in Shopify's app store </a>and should install it before following the steps in this article. </p>
+<p>For Shopify merchants using Flow, there are a number of resources available for understanding what's possible with Flow, and workflows you can download and import into your store:</p>
+<ol>
+<li><a href="https://help.shopify.com/en/manual/shopify-plus/flow2/reference/examples" target="_blank" rel="noopener">Workflow examples from Shopify Help Center doc</a></li>
+<li><a href="https://www.shopify.com/enterprise/ecommerce-automation-software-shopify-flow" target="_blank" rel="noopener">14 top workflows blog post</a></li>
+</ol>
+<h2 id="h_01HCFKXSHCY8BXXKYJXZXDMPHX">What can I do with Klaviyo Connector for Shopify Flow?</h2>
+<p>Shopify Connectors is a feature that allows Shopify stores to create app triggers and actions that third-party partners have built. </p>
+<p>The Klaviyo Connector supports the Track an event action:</p>
+<ul>
+<li>This action sends data from your workflow to Klaviyo for it to track.
+<ul>
+<li>
+<strong>Example workflow<br></strong>When a customer's loyalty tier changes, you can track this change in Klaviyo.</li>
+<li>
+<strong>How it works</strong>
+<ol>
+<li>This workflow is triggered by LoyaltyLion when a customer moves up a loyalty tier. LoyaltyLion send the tier information to Shopify Flow.</li>
+<li>Shopify Flow sends data about the customer to Klaviyo, to track the event, and to LoyaltyLion, to add bonus points the customer's loyalty account.</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="h_01HCFKXSHC1TPE0B682P2WVHWB">How to use the Klaviyo Connector</h2>
+<p>In a Shopify Flow, you can add actions into a workflow.</p>
+<ol>
+<li>When in the <strong>Select an action</strong> menu, you can choose from <em>Standard Actions</em> developed by Shopify or additional actions developed by third-party apps. This is where you'll find the Klaviyo Connector if it's installed.</li>
+<li>The action available in the Klaviyo Connector is <strong>Track an event</strong><strong>.</strong><strong><img src="https://klaviyo.zendesk.com/hc/article_attachments/42182674738075" alt="Screenshot 2025-10-16 at 9.17.20 AM.png"></strong>
+</li>
+</ol>
+<h3 id="h_01HCFKXSHCSG8M2RN0EESGVTVY">Track an event</h3>
+<p>Once you choose the <strong>Track an Event</strong> action, you'll need to fill out the following fields:</p>
+<ul>
+<li>
+<strong>Klaviyo Public API Key<br></strong>Learn how to <a href="https://help.klaviyo.com/hc/en-us/articles/115005062267-How-to-manage-your-account-s-API-keys#find-your-api-keys2" target="_blank" rel="noopener">locate your public API key in Klaviyo</a>.</li>
+<li>
+<strong>Event Name<br></strong>Name of the event you want to track. This will appear on the customer profile's event timeline.</li>
+<li>
+<strong>Customer Email Address<br></strong>Email of the person going through the Flow whose activity will be tracked in Klaviyo.</li>
+<li>
+<strong>Customer First Name<br></strong>First name of the person going through the Flow whose activity will be tracked in Klaviyo.</li>
+<li>
+<strong>Customer Last Name<br></strong>Last name of the person going through the Flow whose activity will be tracked in Klaviyo.</li>
+<li>
+<strong>Customer Properties<br></strong>Hash dictionary of customer properties to be included in their Klaviyo profile as a custom field. <br><img src="https://klaviyo.zendesk.com/hc/article_attachments/28717992039707" alt="Customer properties box with first name and Has Account, and Event properties box with value, item count, and total discount" width="615" height="214">
+</li>
+<li>
+<strong>Event Properties<br></strong>Hash dictionary of custom information about this event.</li>
+</ul>
+<div class="bs-callout bs-callout-default">
+<p>It is important to note that anything sent as a list, such as customer or event properties, will need to be formatted as a JSON list to appear properly in Klaviyo. For example, you could format customer tags in the following way: <br><code>{"tags": [{% for tags_item in customer.tags %}{% if forloop.first != true %},{% endif %}{{ tags_item | json}}{% endfor %}]}</code></p>
+</div>
+<p>These events will be tracked in Klaviyo as Shopify events, as indicated by the Shopify icon alongside each event. To view your Shopify Flow event data:</p>
+<ol>
+<li>Click the <strong>Analytics</strong> dropdown in Klaviyo and select <strong>Metrics</strong>
+</li>
+<li>Select <strong>Shopify</strong> from the dropdown menu. The tab will display only the events synced from Shopify.<br><img src="https://klaviyo.zendesk.com/hc/article_attachments/28717992047899" alt="Timeline of Shopify metrics in Klaviyo with metrics such as VIP status cancelled and credit card fraud detected" width="630" height="124">
+</li>
+</ol>
+<h3 id="h_01HCFKXSHCBSBZ5MQH3WNFGQFD">Create a campaign</h3>
+<div class="bs-callout bs-callout-gold">
+<p id="01K7PKF29V3BK3XNJW015EWHAE" class="bs-callout-gold h4">The Create a campaign action has been retired as of October 16th, 2025. </p>
+</div>
+<h4 id="h_01K7PKMCMYF1R73JR1GVTBZ5JM">How can I replicate the “Create a campaign” functionality?</h4>
+<p>We recommend updating your workflows to use the "<a href="https://help.klaviyo.com/hc/en-us/articles/360014410811#h_01HCFKXSHCSG8M2RN0EESGVTVY">Track an event</a>" action. This action allows you to create data from Shopify to Klaviyo, which can then be used to trigger a flow or build a segment for a campaign.</p>
+<ol>
+<li>In your Shopify Flow, remove the "Create a campaign" action.</li>
+<li>In its place, add the "Track an event" action to create the relevant customer data to Klaviyo.</li>
+<li>In Klaviyo, you can then use this new event as a trigger for a flow or create a segment based on it to create a campaign to the right audience.</li>
+</ol>
+<h2 id="h_01HEB01WTQ5XSA8MTTH9AGXKFS">Troubleshooting</h2>
+<h3 id="h_01HEB0336RN74YGK578A5MGZYY">Is your data not showing in Klaviyo as expected?</h3>
+<p>Make sure that the Customer Properties box and the Event Properties box are valid JSON. If the input is not valid JSON, the Track an Event step will not pass data into Klaviyo as expected. For example, your data variables may include for-loop statements. When the for-loop statements are evaluated, they might leave trailing spaces due to the new line that the variables exist on within the for-loop syntax:</p>
+<pre><code>"{% for lineItems_item in order.lineItems %} <br>{{lineItems_item.name}} <br>{% endfor %}"</code></pre>
+<p>This will not be ingested by Klaviyo due to it being invalid JSON. To resolve, remove the line breaks in between the syntax of the for-loop like this:</p>
+<pre><code>"{% for lineItems_item in order.lineItems %}{{lineItems_item.name}}{% endfor %}"</code></pre>
+<h2 id="h_01HCFKXSHC5TFW1A255SZPN36C">Outcome</h2>
+<p>You've now learned how to use the Klaviyo Connector with Shopify Flow to track events. </p>
+<h2 id="h_01HCFKXSHC44X7WFDB3731D4MA">Additional resources</h2>
+<ul>
+<li><a href="https://klaviyo.zendesk.com/hc/en-us/articles/115005080407" target="_blank" rel="noopener">Getting started with Shopify</a></li>
+<li>Learn more about <a href="https://help.shopify.com/en/manual/shopify-flow/reference/connectors" target="_blank" rel="noopener">Connectors on the Shopify Help Center</a>
+</li>
+</ul>

@@ -1,0 +1,174 @@
+<h2>You will learn</h2>
+<p>Learn what data is synced from Shopware 6 to Klaviyo, how to view this data, and what properties Shopware events contain. </p>
+<h2>Before you begin</h2>
+<p>Read our article on <a href="https://help.klaviyo.com/hc/en-us/articles/13001662470939" target="_blank" rel="noopener">getting started with Shopware</a> for step-by-step instructions on how to integrate your store before continuing with this article. </p>
+<h2>How to view your data</h2>
+<p>To view the data synced from Shopware to Klaviyo:</p>
+<ol>
+<li>In your Klaviyo account, click <strong>Analytics</strong> in the left navigation.</li>
+<li>Select <strong>Metrics</strong>.</li>
+<li>Filter the list of metrics by <strong>API</strong>. Since the Shopware integration was not built directly by Klaviyo, events will sync with the API label and have a gear icon. Filtering by API will also show any custom metrics you’ve synced via API. </li>
+<li>Click on an individual metric, such as <em>Placed Order</em>, to see a chart of activity over time. You can also view an Activity Feed, Cohorts, Best People, and Activity Map by selecting a tab along the top for an individual metric.</li>
+<li>Click <strong>Activity Feed</strong>, and click on the timestamp of an individual event. Here, you can view the properties associated with that event. </li>
+</ol>
+<h2>Data synced from Shopware</h2>
+<p>The following types of data are synced from Shopware to Klaviyo, if you configured them within your integration settings:</p>
+<ul>
+<li>Email subscribers (subscribed via a Shopware or Klaviyo form)</li>
+<li>Product catalog (if you set up a custom catalog feed sync)</li>
+<li>Onsite events</li>
+<ul>
+<li>Active on Site </li>
+<li>Viewed Product/Recently Viewed Items</li>
+<li>Started Checkout</li>
+</ul>
+<li>Transactional events</li>
+<ul>
+<li>Added to Cart</li>
+<li>Placed Order</li>
+<li>Ordered Product</li>
+<li>Fulfilled Order</li>
+<li>Cancelled Order</li>
+<li>Refunded Order</li>
+<li>Paid Order</li>
+<li>Subscribed to Back in Stock</li>
+</ul>
+</ul>
+<h2>How email subscription syncs</h2>
+<p>Email subscribers signing up via a Shopware form will be synced as subscribers in Klaviyo if you’ve selected a Klaviyo list in your Shopware extension settings. <br><img src="https://klaviyo.zendesk.com/hc/article_attachments/28716066677531" alt="Klaviyo list name for subscriber sync setting with Newsletter in box" width="588" height="137"></p>
+<p>If a subscriber unsubscribes in Klaviyo, they will also be unsubscribed in Shopware. In your Shopware newsletter list, those who have unsubscribed in Klaviyo will be marked with the status <em>Awaiting deletion</em>. If someone unsubscribes from an email you send from Shopware, they will not be unsubscribed in Klaviyo.</p>
+<h2>Synced events and their top-level properties</h2>
+<h3>Active on Site</h3>
+<p>This default event Klaviyo tracks when a cookied user is active on your site. This event does not contain other properties to use in segmentation.</p>
+<h3>Viewed Product</h3>
+<p>The <em>Viewed Product</em> event is tracked when a cookied user views a product page on your site. Recently viewed items are added to their profile. This event contains the following top-level properties:</p>
+<ul>
+<li>ProductName</li>
+<li>ProductID</li>
+<li>SKU</li>
+<li>Categories (array)</li>
+<li>ImageURL</li>
+<li>URL</li>
+<li>Brand</li>
+<li>Price</li>
+<li>CompareAtPrice</li>
+</ul>
+<h3>Added to Cart</h3>
+<p>This event is tracked whenever a logged in user adds an item to their cart. Within this event, the <em>Items</em> array will list all other items currently in the cart at the time this event was created. The <em>CheckoutURL</em> in this event can be used to rebuild the current cart.</p>
+<p>The <em>Added to Cart</em> event contains the following top-level properties:</p>
+<ul>
+<li>AddedItemProductName</li>
+<li>AddedItemProductID</li>
+<li>AddedItemSKU</li>
+<li>AddedItemCategories</li>
+<li>AddedItemImageURL</li>
+<li>AddedItemURL</li>
+<li>AddedItemPrice</li>
+<li>AddedItemQuantity</li>
+<li>ItemNames</li>
+<li>CheckoutURL</li>
+<li>Items</li>
+<li>$value</li>
+</ul>
+<h3>Started Checkout</h3>
+<p>This event tracks when a cookied user is brought to the second checkout page after entering their email on the first checkout page. The <em>Started Checkout</em> event contains the following top-level properties:</p>
+<ul>
+<li>CheckoutURL</li>
+<li>ItemNames (array)</li>
+<li>Categories</li>
+<li>Items (array)</li>
+<li>$value": 19.99</li>
+</ul>
+<h3>Placed Order</h3>
+<p><em>Placed Order</em> is tracked when an order is placed, and includes an <em>Items</em> array containing all items in the order. <em>Placed Order</em> differs from <em>Ordered Product </em>in the way that an <em>Ordered Product</em> event is tracked for each item in an order, while <em>Placed Order</em> is tracked once for the entire order, and includes information such as the shipping address. The <em>Placed Order</em> event contains the following top-level properties:</p>
+<ul>
+<li>OrderId</li>
+<li>Categories</li>
+<li>ItemNames</li>
+<li>Brands</li>
+<li>DiscountCode</li>
+<li>DiscountValue</li>
+<li>Items</li>
+<li>BillingAddress</li>
+<li>ShippingAddress</li>
+<li>$value</li>
+</ul>
+<h3>Ordered Product</h3>
+<p>The <em>Ordered Product</em> event, which is tracked for each item in an order, contains the following top-level properties:</p>
+<ul>
+<li>ProductName</li>
+<li>OrderId</li>
+<li>ProductID</li>
+<li>SKU</li>
+<li>Quantity</li>
+<li>ProductURL</li>
+<li>ImageURL</li>
+<li>Categories</li>
+<li>ProductBrand</li>
+<li>$value</li>
+</ul>
+<h3>Fulfilled Order</h3>
+<p>The <em>Fulfilled Order</em> event contains the following top-level properties:</p>
+<ul>
+<li>OrderID</li>
+<li>Categories</li>
+<li>ItemNames</li>
+<li>Brands</li>
+<li>DiscountCode</li>
+<li>DiscountValue</li>
+<li>Items</li>
+<li>BillingAddress</li>
+<li>ShippingAddress</li>
+</ul>
+<h3>Cancelled Order</h3>
+<p>The <em>Cancelled Order</em> event contains the following top-level properties:</p>
+<ul>
+<li>OrderID</li>
+<li>Categories</li>
+<li>ItemNames</li>
+<li>Brands</li>
+<li>DiscountCode</li>
+<li>DiscountValue</li>
+<li>Items</li>
+<li>BillingAddress</li>
+<li>ShippingAddress</li>
+<li>Reason</li>
+<li>$value</li>
+</ul>
+<h3>Refunded Order</h3>
+<p>The <em>Refunded Order</em> event contains the following top-level properties:</p>
+<ul>
+<li>OrderID</li>
+<li>Categories</li>
+<li>ItemNames</li>
+<li>Brands</li>
+<li>DiscountCode</li>
+<li>DiscountValue</li>
+<li>Items</li>
+<li>BillingAddress</li>
+<li>ShippingAddress</li>
+<li>Reason</li>
+<li>$value</li>
+</ul>
+<h3>Paid Order</h3>
+<p>The <em>Paid Order </em>event is triggered when an order is set to <em>Paid</em> in Shopware. It contains the following top-level properties:</p>
+<ul>
+<li>OrderID</li>
+<li>Categories</li>
+<li>ItemNames</li>
+<li>Brands</li>
+<li>DiscountCode</li>
+<li>DiscountValue</li>
+<li>Items</li>
+<li>BillingAddress</li>
+<li>ShippingAddress</li>
+<li>Reason</li>
+<li>$value</li>
+</ul>
+<h3>Subscribed to Back in Stock</h3>
+<p>This event is tracked when someone subscribes to Back in Stock alerts, but does not contain other top-level properties.</p>
+<h2>Additional resources</h2>
+<ul>
+<li><a href="https://help.klaviyo.com/hc/en-us/articles/115005237908-Guide-to-Creating-Segments" target="_blank" rel="noopener">Getting started with segments</a></li>
+<li><a href="https://help.klaviyo.com/hc/en-us/articles/115002774932-Getting-started-with-flows" target="_blank" rel="noopener">Getting started with flows</a></li>
+</ul>

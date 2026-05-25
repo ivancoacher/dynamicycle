@@ -1,0 +1,922 @@
+{
+  "captured_at": "2026-05-23T16:10:18Z",
+  "article": {
+    "id": 48971655463067,
+    "url": "https://klaviyo.zendesk.com/api/v2/help_center/en-us/articles/48971655463067.json",
+    "html_url": "https://klaviyo.zendesk.com/hc/en-us/articles/48971655463067-How-to-add-barcodes-to-your-messages",
+    "author_id": 32458090987419,
+    "comments_disabled": false,
+    "draft": false,
+    "promoted": false,
+    "position": 0,
+    "vote_sum": 0,
+    "vote_count": 0,
+    "section_id": 49375545220123,
+    "created_at": "2026-04-10T15:45:02Z",
+    "updated_at": "2026-04-21T13:56:35Z",
+    "name": "How to add barcodes to your messages",
+    "title": "How to add barcodes to your messages",
+    "source_locale": "en-us",
+    "locale": "en-us",
+    "outdated": false,
+    "outdated_locales": [],
+    "edited_at": "2026-04-17T15:43:40Z",
+    "user_segment_id": null,
+    "permission_group_id": 146372,
+    "content_tag_ids": [],
+    "label_names": [],
+    "body": "<h2 id=\"9q4e5iu9yw3i\">You will learn</h2>\n<p>Learn how to use the <code>{% barcode %}</code> tag to generate <a href=\"https://en.wikipedia.org/wiki/Code_128\" target=\"_blank\" rel=\"noopener noreferrer\">Code 128</a> barcodes in your email, MMS, RCS, and WhatsApp messages. The barcode value can be a static string, a profile property, an event variable, or a Klaviyo coupon code.</p>\n<h3 id=\"dxc9mulub8z4\">Quick reference</h3>\n<table>\n<tbody>\n<tr>\n<th>Channel</th>\n<th>Mode</th>\n<th>Where to add the tag</th>\n</tr>\n<tr>\n<td>Email</td>\n<td>\n<code>html</code> or <code>url</code>\n</td>\n<td>Text block, HTML block, or image block URL field</td>\n</tr>\n<tr>\n<td>MMS</td>\n<td>\n<code>url</code> (default)</td>\n<td>Dynamic Image section</td>\n</tr>\n<tr>\n<td>RCS</td>\n<td><code>rcs</code></td>\n<td>Dynamic Image section</td>\n</tr>\n<tr>\n<td>WhatsApp</td>\n<td>\n<code>url</code> (default)</td>\n<td>Dynamic Image section</td>\n</tr>\n</tbody>\n</table>\n<h2 id=\"28zyjwnysh5h\">Before you begin</h2>\n<p>The <code>{% barcode %}</code> tag works by generating a URL. When that URL is loaded (in a preview, an inbox, or a mobile device), it renders a PNG image of the barcode. This means the barcode image isn't created until the URL is actually fetched.</p>\n<p>The <code>{% barcode %}</code> tag is supported in:</p>\n<ul>\n<li>Email</li>\n<li>MMS</li>\n<li>RCS</li>\n<li>WhatsApp</li>\n</ul>\n<div class=\"bs-callout bs-callout-default\">\n<p>If you're currently using <code>{% barcode_code %}</code> from the <a href=\"https://help.klaviyo.com/hc/en-us/articles/115005084727\" target=\"_blank\" rel=\"noopener noreferrer\">Getting started with coupon codes</a> article, the <code>{% barcode %}</code> tag is the recommended replacement. It supports all channels (not just email) and works with any value, not only Klaviyo coupon codes. The <code>{% barcode_code %}</code> tag still works for existing implementations, but new barcodes should use <code>{% barcode %}</code>.</p>\n</div>\n<h2 id=\"wstschg9eofu\">Basic usage</h2>\n<p>The simplest way to use the barcode tag is:</p>\n<pre><code class=\"language-text\">{% barcode 'MyCode' %}</code></pre>\n<p>This produces a URL that returns a PNG image of a barcode. When scanned, the barcode contains the value <code>MyCode</code>.</p>\n<div class=\"bs-callout bs-callout-warning\">\n<p>The barcode value is required. The tag must always include a value — either a static string in quotes or a variable. A tag with no value (or a variable that resolves to empty) will produce an invalid URL.</p>\n</div>\n<p>You can customize the barcode by passing arguments to the tag. For example:</p>\n<pre><code class=\"language-text\">{% barcode 'MyCode' width=200 height=100 %}</code></pre>\n<p>See the arguments reference section below for all available options.</p>\n<h2 id=\"pzx9a2bj9k3j\">Using barcodes with different channels</h2>\n<h3 id=\"qltuwpyopipp\">Email</h3>\n<p>For email, you have two options for how the barcode renders:</p>\n<p><strong>Option 1: HTML mode (recommended for email)</strong></p>\n<p>Set <code>mode=html</code> to have the tag output an HTML <code>&lt;img&gt;</code> element directly. This is the simplest approach for including a barcode in an email.</p>\n<pre><code class=\"language-text\">{% barcode 'MyCode' mode=html %}</code></pre>\n<p>Place this tag in a text block or HTML block in the email template editor.</p>\n<p><strong>Option 2: URL mode</strong></p>\n<p>Leave the mode unset (or set <code>mode=url</code>) to get a URL, then place that URL in an image block's image URL field. This gives you more control over the image styling.</p>\n<pre><code class=\"language-text\">{% barcode 'MyCode' %}</code></pre>\n<div class=\"bs-callout bs-callout-default\">\n<p>If the barcode doesn't appear in a text block, check whether the block has show/hide logic applied that may be hiding it.</p>\n</div>\n<h3 id=\"zjs1fl9kgsqy\">MMS</h3>\n<p>For MMS messages, add the barcode tag in the <strong>Dynamic Image</strong> section of the SMS/MMS editor, not in the text body.</p>\n<ol>\n<li>Open your MMS message in the editor.</li>\n<li>Click the <strong>Add image</strong> icon in the message box.</li>\n<li>Go to the <strong>Dynamic Image</strong> tab.</li>\n<li>Paste your barcode tag, for example:<br>\n<pre><code class=\"language-text\">{% barcode person.LoyaltyId %}</code></pre>\n</li>\n<li>Click <strong>Save</strong>.</li>\n</ol>\n<p>This follows the same process as adding any dynamic image to an MMS. For more details, see <a href=\"https://help.klaviyo.com/hc/en-us/articles/1260806102230\" target=\"_blank\" rel=\"noopener noreferrer\">How to add a dynamic image to a text message</a>.</p>\n<h3 id=\"rkrb5nunm1tk\">RCS</h3>\n<p>For RCS messages, use <code>mode=rcs</code> to format the barcode for RCS image requirements. This mode automatically sets dimensions that display correctly on both Android and iOS.</p>\n<pre><code class=\"language-text\">{% barcode 'MyCode' mode=rcs %}</code></pre>\n<p>Add the barcode tag in the Dynamic Image section of the RCS message editor, the same way you would for MMS.</p>\n<p><strong>RCS defaults:</strong></p>\n<ul>\n<li>Width: 600px</li>\n<li>Height: 300px</li>\n<li>Padded to: 1440x720px</li>\n</ul>\n<p>These defaults follow Klaviyo's RCS image formatting recommendations. You can override them with custom <code>width</code>, <code>height</code>, <code>padded_width</code>, and <code>padded_height</code> values if needed.</p>\n<div class=\"bs-callout bs-callout-default\">\n<p>If your custom barcode dimensions exceed 1440x720px, the default padding will not be applied because the image won't fit in the standard canvas. In this case, provide your own <code>padded_width</code> and <code>padded_height</code> values.</p>\n</div>\n<h3 id=\"tpoz3jgpmysp\">WhatsApp</h3>\n<p>For WhatsApp messages, add the barcode tag in the Dynamic Image section of the message editor, the same way you would for MMS.</p>\n<pre><code class=\"language-text\">{% barcode person.MembershipId %}</code></pre>\n<p>No special configuration or mode is needed for WhatsApp. The default <code>mode=url</code> works correctly.</p>\n<h2 id=\"t9r3pz5lkuor\">Barcode tag arguments reference</h2>\n<table>\n<tbody>\n<tr>\n<th>Argument</th>\n<th>Usage</th>\n<th>Values</th>\n<th>Default</th>\n</tr>\n<tr>\n<td><code>width</code></td>\n<td>Sets the width of the barcode</td>\n<td>A number (rendered size must not exceed 4096px; see Scaling and sizing)</td>\n<td>100</td>\n</tr>\n<tr>\n<td><code>height</code></td>\n<td>Sets the height of the barcode</td>\n<td>A number (rendered size must not exceed 4096px; see Scaling and sizing)</td>\n<td>50</td>\n</tr>\n<tr>\n<td><code>mode</code></td>\n<td>Sets the output format</td>\n<td>\n<code>url</code>, <code>html</code>, or <code>rcs</code>\n</td>\n<td><code>url</code></td>\n</tr>\n<tr>\n<td><code>coupon</code></td>\n<td>Specifies that the value is a Klaviyo-managed coupon code</td>\n<td>\n<code>True</code> or <code>False</code>\n</td>\n<td><code>False</code></td>\n</tr>\n<tr>\n<td><code>padded_width</code></td>\n<td>Width of the padded image area in pixels. Must be provided with <code>padded_height</code>. Not scaled.</td>\n<td>A number less than 4096</td>\n<td>None (1440 for <code>mode=rcs</code>)</td>\n</tr>\n<tr>\n<td><code>padded_height</code></td>\n<td>Height of the padded image area in pixels. Must be provided with <code>padded_width</code>. Not scaled.</td>\n<td>A number less than 4096</td>\n<td>None (720 for <code>mode=rcs</code>)</td>\n</tr>\n</tbody>\n</table>\n<h2 id=\"cq3kyoos8f6b\">Using barcodes with profile properties and event data</h2>\n<p>You can use profile properties or event variables as the barcode value, so each recipient gets a unique barcode.</p>\n<p><strong>Profile property examples:</strong></p>\n<pre><code class=\"language-text\">{% barcode person.LoyaltyId %}\n{% barcode person.email %}\n{% barcode person.MembershipNumber %}</code></pre>\n<p><strong>Event variable examples (for metric-triggered flows):</strong></p>\n<pre><code class=\"language-text\">{% barcode event.Code %}\n{% barcode event.OrderId %}</code></pre>\n<p><strong>Handling missing values:</strong></p>\n<p>If a recipient doesn't have the property set, the barcode URL will be invalid and the image won't load. You have two options:</p>\n<p>Option 1: Use a <code>default</code><strong> filter</strong> to set a meaningful fallback value:</p>\n<pre><code class=\"language-text\">{% barcode person.BarcodeCode|default:'STORE-MEMBER' %}</code></pre>\n<p>Make sure the default is a value that makes sense if scanned. A generic placeholder like \"fallback\" would produce a scannable but useless barcode.</p>\n<p><strong>Option 2: Use a conditional statement</strong> to hide the barcode entirely when the value is missing:</p>\n<pre><code class=\"language-text\">{% if person.BarcodeCode %}\n  {% barcode person.BarcodeCode mode=html %}\n{% endif %}</code></pre>\n<div class=\"bs-callout bs-callout-warning\">\n<p>Always handle the missing-value case when the barcode value comes from a profile property or event variable. Without a default or conditional, recipients missing that property will see a broken image.</p>\n</div>\n<p><strong>Combined example for email:</strong></p>\n<pre><code class=\"language-text\">{% barcode person.LoyaltyId width=200 height=75 mode=html %}</code></pre>\n<h2 id=\"p5pwnklfj7k5\">Using barcodes with Klaviyo coupon codes</h2>\n<p>If you use Klaviyo-managed coupon codes and want to render them as barcodes, set <code>coupon=True</code>. This tells the system to assign a coupon code to the recipient and use that code as the barcode value.</p>\n<pre><code class=\"language-text\">{% barcode 'ShopifyCoupon' coupon=True %}</code></pre>\n<p>This works across all channels. For example, to send a coupon barcode via RCS:</p>\n<pre><code class=\"language-text\">{% barcode 'ShopifyCoupon' coupon=True mode=rcs %}</code></pre>\n<div class=\"bs-callout bs-callout-default\">\n<p>Only set <code>coupon=True</code> when using Klaviyo-managed coupon codes. If you manage your own coupon codes and store them as a profile property, reference the property directly without <code>coupon=True</code>:</p>\n<pre><code class=\"language-text\">{% barcode person.CouponCode %}</code></pre>\n</div>\n<h2 id=\"5kouowrblhul\">Scaling and sizing</h2>\n<p>By default, the barcode's width and height are scaled by a factor of <strong>3x</strong>. This means:</p>\n<ul>\n<li>A <code>width</code> of 100 renders at <strong>300px</strong> actual width</li>\n<li>A <code>height</code> of 50 renders at <strong>150px</strong> actual height<br>\n<p><strong>Exception:</strong> When <code>mode=rcs</code>, the scaling factor is <strong>1x</strong>. This allows more precise control over the barcode dimensions to fit RCS image formatting requirements.</p>\n<p><strong>Padding values are not scaled.</strong> The <code>padded_width</code> and <code>padded_height</code> arguments always represent actual pixel values. Because the inner barcode is scaled by 3x, your padding values must be larger than 3 times the width and height. For example:</p>\n<pre><code class=\"language-text\">{% barcode 'Code' width=200 height=100 padded_width=700 padded_height=400 %}</code></pre>\n<p>Here, the barcode renders at 600x300px (200×3, 100×3) within a 700x400px padded canvas.</p>\n<p><strong>Maximum image size:</strong> The barcode service will not generate images larger than <strong>4096x4096 pixels</strong>. This limit applies to the <em>rendered</em> size after scaling. For non-RCS barcodes (3x scaling), that means the maximum <code>width</code> argument is approximately 1365 (1365 × 3 = 4095px). For RCS barcodes (1x scaling), the maximum is 4096.</p>\n<p><strong>Width guidelines for long codes:</strong></p>\n</li>\n<li>For non-RCS barcodes: if your code exceeds <strong>15 characters</strong>, increase the width beyond the default of 100 (which renders at 300px).</li>\n<li>For RCS barcodes: if your code exceeds <strong>30 characters</strong>, increase the width beyond the default of 600px.</li>\n</ul>\n<p>If the width is too narrow to encode the data, the barcode image will fail to generate.</p>\n<h2 id=\"wvu4rg9y0tbo\">Troubleshooting</h2>\n<h3 id=\"pqgc014102hq\">Always preview before sending</h3>\n<p>Because the <code>{% barcode %}</code> tag produces a URL at render time and the image isn't generated until that URL is fetched, failures may not be apparent until you preview or send the message. Follow these steps to catch issues early:</p>\n<ol>\n<li>\n<strong>Preview the message.</strong> If the barcode doesn't load in the preview, it won't load when sent.</li>\n<li>\n<strong>Scan the barcode.</strong> Use a barcode scanning tool (such as <a href=\"https://www.imagetotext.info/barcode-scanner\" target=\"_blank\" rel=\"noopener noreferrer\">imagetotext.info/barcode-scanner</a>) to verify the barcode encodes the expected value.</li>\n<li>\n<strong>Send a test message to yourself</strong> before sending to your audience.</li>\n</ol>\n<h3 id=\"kbcx13ri4061\">Common issues</h3>\n<p><strong>The barcode image doesn't load</strong></p>\n<p>The most common cause is an empty barcode value. This happens when the tag references a profile property or event variable that the recipient doesn't have. For example:</p>\n<pre><code class=\"language-text\">{% barcode person.BarcodeCode %}</code></pre>\n<p>If the recipient has no <code>BarcodeCode</code> value, the generated URL will be missing the code, and the image won't render. To fix this, add a <code>default</code> filter:</p>\n<pre><code class=\"language-text\">{% barcode person.BarcodeCode|default:'defaultCode' %}</code></pre>\n<p><strong>The barcode image fails to generate but the URL looks correct</strong></p>\n<p>The barcode width is likely too narrow to encode all the data in your code. Try increasing the <code>width</code> value. As a rule of thumb:</p>\n<ul>\n<li>Codes over 15 characters need a width larger than the default 100 (300px rendered).</li>\n<li>RCS codes over 30 characters need a width larger than the default 600px.</li>\n</ul>\n<p><strong>The barcode doesn't appear in a text block (email)</strong></p>\n<p>Check whether the text block has show/hide logic applied. If a condition is hiding the block, the barcode won't render even if the tag is correct. Open the block's settings to verify.</p>\n<h2 id=\"or1w55vddyav\">Additional resources</h2>\n<ul>\n<li>\n<a href=\"https://help.klaviyo.com/hc/en-us/articles/115005084727\" target=\"_blank\" rel=\"noopener noreferrer\">Getting started with coupon codes in Klaviyo</a> — Learn how to create and manage coupon codes, including how to use the older <code>{% barcode_code %}</code> tag for coupon barcodes in email.</li>\n<li>\n<a href=\"https://help.klaviyo.com/hc/en-us/articles/1260806102230\" target=\"_blank\" rel=\"noopener noreferrer\">How to add a dynamic image to a text message</a> — Learn how to add dynamic images to MMS messages, including where to find the Dynamic Image section in the editor.</li>\n<li>\n<a href=\"https://help.klaviyo.com/hc/en-us/articles/4408802648731\" target=\"_blank\" rel=\"noopener noreferrer\">Message personalization reference</a> — Reference for all personalization tags available in Klaviyo, including profile properties, event variables, and filters.</li>\n<li>\n<a href=\"https://help.klaviyo.com/hc/en-us/articles/360041074911\" target=\"_blank\" rel=\"noopener noreferrer\">Understanding MMS image and GIF best practices</a> — Best practices for image sizing and formatting in MMS messages.</li>\n</ul>",
+    "user_segment_ids": []
+  },
+  "normalized": {
+    "id": "48971655463067",
+    "title": "How to add barcodes to your messages",
+    "source_url": "https://help.klaviyo.com/hc/en-us/articles/48971655463067-How-to-add-barcodes-to-your-messages",
+    "section_id": 49375545220123,
+    "section": "Use variable syntax and tags",
+    "category_id": 4414879524891,
+    "category": "Content",
+    "category_slug": "content",
+    "klaviyo_updated": "2026-04-21T13:56:35Z",
+    "created_at": "2026-04-10T15:45:02Z",
+    "draft": false,
+    "promoted": false,
+    "position": 0,
+    "label_names": []
+  },
+  "files": {
+    "body_html": "_source/articles/48971655463067.body.html",
+    "rendered_html": "_source/rendered/48971655463067.html"
+  },
+  "assets": {
+    "api_body": {
+      "images": [],
+      "links": [
+        {
+          "href": "https://en.wikipedia.org/wiki/Code_128",
+          "text": "Code 128"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005084727",
+          "text": "Getting started with coupon codes"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/1260806102230",
+          "text": "How to add a dynamic image to a text message"
+        },
+        {
+          "href": "https://www.imagetotext.info/barcode-scanner",
+          "text": "imagetotext.info/barcode-scanner"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005084727",
+          "text": "Getting started with coupon codes in Klaviyo"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4408802648731",
+          "text": "Message personalization reference"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360041074911",
+          "text": "Understanding MMS image and GIF best practices"
+        }
+      ],
+      "headings": [
+        {
+          "level": 2,
+          "id": "9q4e5iu9yw3i",
+          "text": "You will learn"
+        },
+        {
+          "level": 3,
+          "id": "dxc9mulub8z4",
+          "text": "Quick reference"
+        },
+        {
+          "level": 2,
+          "id": "28zyjwnysh5h",
+          "text": "Before you begin"
+        },
+        {
+          "level": 2,
+          "id": "wstschg9eofu",
+          "text": "Basic usage"
+        },
+        {
+          "level": 2,
+          "id": "pzx9a2bj9k3j",
+          "text": "Using barcodes with different channels"
+        },
+        {
+          "level": 3,
+          "id": "qltuwpyopipp",
+          "text": "Email"
+        },
+        {
+          "level": 3,
+          "id": "zjs1fl9kgsqy",
+          "text": "MMS"
+        },
+        {
+          "level": 3,
+          "id": "rkrb5nunm1tk",
+          "text": "RCS"
+        },
+        {
+          "level": 3,
+          "id": "tpoz3jgpmysp",
+          "text": "WhatsApp"
+        },
+        {
+          "level": 2,
+          "id": "t9r3pz5lkuor",
+          "text": "Barcode tag arguments reference"
+        },
+        {
+          "level": 2,
+          "id": "cq3kyoos8f6b",
+          "text": "Using barcodes with profile properties and event data"
+        },
+        {
+          "level": 2,
+          "id": "p5pwnklfj7k5",
+          "text": "Using barcodes with Klaviyo coupon codes"
+        },
+        {
+          "level": 2,
+          "id": "5kouowrblhul",
+          "text": "Scaling and sizing"
+        },
+        {
+          "level": 2,
+          "id": "wvu4rg9y0tbo",
+          "text": "Troubleshooting"
+        },
+        {
+          "level": 3,
+          "id": "pqgc014102hq",
+          "text": "Always preview before sending"
+        },
+        {
+          "level": 3,
+          "id": "kbcx13ri4061",
+          "text": "Common issues"
+        },
+        {
+          "level": 2,
+          "id": "or1w55vddyav",
+          "text": "Additional resources"
+        }
+      ]
+    },
+    "rendered_page": {
+      "images": [
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/7ff492c2b417b7ecfe572f839a8a81398693c1f7-1920x1080.webp",
+          "alt": "",
+          "width": "",
+          "height": ""
+        }
+      ],
+      "links": [
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/48971655463067-How-to-add-barcodes-to-your-messages#site-content",
+          "text": "Skip to main content"
+        },
+        {
+          "href": "https://www.klaviyo.com",
+          "text": "Home"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center"
+        },
+        {
+          "href": "https://www.klaviyo.com/enterprise",
+          "text": "Enterprise"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Partners"
+        },
+        {
+          "href": "https://www.klaviyo.com/careers",
+          "text": "Careers"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": "Log in"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": ""
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center Find step-by-step instructions and troubleshooting solutions in our knowledge base."
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000032731",
+          "text": "Integrations"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000312411",
+          "text": "Flows"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867867",
+          "text": "Audience"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867667",
+          "text": "Campaigns"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/360000190711",
+          "text": "Sign-up forms"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000873988",
+          "text": "Deliverability & compliance"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/29173800271259",
+          "text": "SMS"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/16638219724187",
+          "text": "Reviews"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/18073014919195",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/34141283979931",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/37659126754075",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/33948021740315",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/39746685522331",
+          "text": "WhatsApp"
+        },
+        {
+          "href": "https://academy.klaviyo.com",
+          "text": "Klaviyo Academy Expert training and education to help you succeed with Klaviyo, and beyond."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Quick+guide&resource=academy_courses",
+          "text": "Quick guides Learn marketing strategies and concepts in 15 minutes or less."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Course&resource=academy_courses",
+          "text": "Courses Master key marketing topics through structured lessons and exams."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/best-practices",
+          "text": "Best practices Discover top product and marketing strategies for your business."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/learning-paths",
+          "text": "Learning paths Complete curated learning journeys tailored to your marketing goals."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses",
+          "text": "Explore all resources"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Live+training&resource=academy_courses",
+          "text": "Live trainings Build confidence through hands-on interactive workshops and thought-provoking strategy sessions."
+        },
+        {
+          "href": "https://www.bigmarker.com/klaviyo-customer-education/Office-hours-Getting-started-with-Klaviyo",
+          "text": "Live office hours Join a strategic discussion where you can ask questions and get answers in real-time."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/private-live-training",
+          "text": "1:1 Live training Book a private training session with an expert to jumpstart your platform knowledge and confidence."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/credentials",
+          "text": "Klaviyo credentials Dig deeper into select topics and showcase your expertise with a final exam to earn a certificate and digital badge."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/certificates/klaviyo-practitioner-certificate",
+          "text": "Klaviyo practitioner certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/deliverability-certificate",
+          "text": "Deliverability certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/developer-certificate",
+          "text": "Klaviyo developer certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses&select=Certificate",
+          "text": "See all certificates"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Klaviyo Community Join our thriving community network to connect with brands like yours—online and in person."
+        },
+        {
+          "href": "https://community.klaviyo.com/topic/new",
+          "text": "Ask a question Post a question and get thoughtful answers from Klaviyo powerusers."
+        },
+        {
+          "href": "https://community.klaviyo.com/p/roadmap",
+          "text": "Product roadmap"
+        },
+        {
+          "href": "https://community.klaviyo.com/search/activity/recent",
+          "text": "Recent threads"
+        },
+        {
+          "href": "https://community.klaviyo.com/p/champions",
+          "text": "Meet the Champions"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups",
+          "text": "Browse all groups Your people are waiting. New ideas and connections are a click away."
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/developer-group-64",
+          "text": "Developer group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/entrepreneur-user-group-118",
+          "text": "Entrepreneur group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/woo-user-group-87",
+          "text": "WooCommerce group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/new-york-meetup-chapter-82",
+          "text": "New York City"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/los-angeles-meetup-chapter-83",
+          "text": "Los Angeles"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/austin-meetup-chapter-85",
+          "text": "Austin"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/san-diego-meetup-chapter-86",
+          "text": "San Diego"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/amsterdam-meetup-chapter-84",
+          "text": "Amsterdam"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Klaviyo Developers Access API documentation and developer guides to help you build with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/get_started",
+          "text": "Get started Access key resources and a step-by-step checklist for how to start developing with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/build_your_integration",
+          "text": "Grow your app's reach Learn how to join our ecosystem and get your app listed on our marketplace."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/developer-tools",
+          "text": "Developer tools Generate sample data, monitor your API usage, and access our Postman collections."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/reference/api_overview",
+          "text": "API reference Browse our full catalog of API docs."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/changelog_",
+          "text": "Changelog"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/api_versioning_and_deprecation_policy",
+          "text": "Versioning & deprecation policy"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/rate_limits_and_error_handling",
+          "text": "Rate limits & error handling"
+        },
+        {
+          "href": "https://youtube.com/playlist?list=PLHkNfHgtxcUanrkMnKPdkRzuWU7MGv_xM&si=pkG-KH7IT_TUHOGC",
+          "text": "API tutorials on YouTube Subscribe to our Klaviyo API Tutorials playlist for easy access to step-by-step developer walkthroughs."
+        },
+        {
+          "href": "https://www.klaviyo.com/contact-us",
+          "text": "Contact us"
+        },
+        {
+          "href": "https://www.klaviyo.com/sign-up",
+          "text": "Sign up"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": "Search"
+        },
+        {
+          "href": "https://help.klaviyo.com/en-us",
+          "text": "United States - EN"
+        },
+        {
+          "href": "https://help.klaviyo.com/de-de",
+          "text": "Deutschland - DE"
+        },
+        {
+          "href": "https://help.klaviyo.com/es-es",
+          "text": "España - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/es-mx",
+          "text": "México - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/fr-fr",
+          "text": "France - FR"
+        },
+        {
+          "href": "https://help.klaviyo.com/it-it",
+          "text": "Italia - IT"
+        },
+        {
+          "href": "https://help.klaviyo.com/ko-kr",
+          "text": "한국 - KO"
+        },
+        {
+          "href": "https://help.klaviyo.com/nl-nl",
+          "text": "Nederland - NL"
+        },
+        {
+          "href": "https://help.klaviyo.com/pl-pl",
+          "text": "Polska - PL"
+        },
+        {
+          "href": "https://help.klaviyo.com/pt-br",
+          "text": "Brasil - PT"
+        },
+        {
+          "href": "https://help.klaviyo.com/sv-se",
+          "text": "Sverige - SV"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/4414879524891",
+          "text": "Content"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/14543554717467",
+          "text": "Templates"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/49375545220123",
+          "text": "Use variable syntax and tags"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/48971655463067-How-to-add-barcodes-to-your-messages#you-will-learn",
+          "text": "You will learn"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/48971655463067-How-to-add-barcodes-to-your-messages#before-you-begin",
+          "text": "Before you begin"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/48971655463067-How-to-add-barcodes-to-your-messages#basic-usage",
+          "text": "Basic usage"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/48971655463067-How-to-add-barcodes-to-your-messages#using-barcodes-with-different-channels",
+          "text": "Using barcodes with different channels"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/48971655463067-How-to-add-barcodes-to-your-messages#barcode-tag-arguments-reference",
+          "text": "Barcode tag arguments reference"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/48971655463067-How-to-add-barcodes-to-your-messages#using-barcodes-with-profile-properties-and-event-data",
+          "text": "Using barcodes with profile properties and event data"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/48971655463067-How-to-add-barcodes-to-your-messages#using-barcodes-with-klaviyo-coupon-codes",
+          "text": "Using barcodes with Klaviyo coupon codes"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/48971655463067-How-to-add-barcodes-to-your-messages#scaling-and-sizing",
+          "text": "Scaling and sizing"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/48971655463067-How-to-add-barcodes-to-your-messages#troubleshooting",
+          "text": "Troubleshooting"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/48971655463067-How-to-add-barcodes-to-your-messages#additional-resources",
+          "text": "Additional resources"
+        },
+        {
+          "href": "https://en.wikipedia.org/wiki/Code_128",
+          "text": "Code 128"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005084727",
+          "text": "Getting started with coupon codes"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/1260806102230",
+          "text": "How to add a dynamic image to a text message"
+        },
+        {
+          "href": "https://www.imagetotext.info/barcode-scanner",
+          "text": "imagetotext.info/barcode-scanner"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005084727",
+          "text": "Getting started with coupon codes in Klaviyo"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4408802648731",
+          "text": "Message personalization reference"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360041074911",
+          "text": "Understanding MMS image and GIF best practices"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115001002272",
+          "text": "Learn how to contact support"
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": ""
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": "Visit Community"
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": ""
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": "Hire a partner"
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/about",
+          "text": "About Klaviyo"
+        },
+        {
+          "href": "https://www.klaviyo.com/newsroom",
+          "text": "Newsroom"
+        },
+        {
+          "href": "https://investors.klaviyo.com/overview/default.aspx",
+          "text": "Investor relations"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Agency and tech partners"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Developers"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/retail",
+          "text": "Retail and ecommerce"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/restaurants",
+          "text": "Restaurant marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/wellness",
+          "text": "Wellness"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform",
+          "text": "B2C CRM overview"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai",
+          "text": "Klaviyo AI (K:AI)"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/marketing-automation",
+          "text": "Klaviyo Marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-service",
+          "text": "Klaviyo Service"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/analytics",
+          "text": "Klaviyo Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-data-platform",
+          "text": "Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare",
+          "text": "Klaviyo vs. Klaviyo alternatives"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-mailchimp",
+          "text": "Klaviyo vs. Mailchimp"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-postscript",
+          "text": "Klaviyo vs. Postscript"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-attentive",
+          "text": "Klaviyo vs. Attentive"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-salesforce-marketing-cloud",
+          "text": "Klaviyo vs. Salesforce"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-listrak",
+          "text": "Klaviyo vs. Listrak"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/omnichannel",
+          "text": "Omnichannel marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/email-marketing",
+          "text": "Email marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing",
+          "text": "SMS marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing/rcs",
+          "text": "RCS for Business"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/mobile-app-marketing",
+          "text": "Mobile app marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/whatsapp",
+          "text": "WhatsApp marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/social",
+          "text": "Social marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources",
+          "text": "Marketing resources"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources/marketing-campaign-calendar",
+          "text": "Marketing campaign calendar"
+        },
+        {
+          "href": "https://www.klaviyo.com/glossary",
+          "text": "Marketing glossary"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/email-subject-line-generator",
+          "text": "Subject line generator"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/roi-calculator",
+          "text": "ROI calculator"
+        },
+        {
+          "href": "https://www.klaviyo.com/customers",
+          "text": "Case studies"
+        },
+        {
+          "href": "https://www.klaviyo.com/composer",
+          "text": "Composer Beta"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/marketing-agent",
+          "text": "Marketing Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/customer-agent",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/customer-experience-hub",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/helpdesk",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/marketing-analytics",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/advanced-cdp",
+          "text": "Advanced Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/web-forms",
+          "text": "Web forms"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/email-templates",
+          "text": "Email templates"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/portfolio",
+          "text": "Portfolio"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform-integrations",
+          "text": "Apps and Integrations"
+        },
+        {
+          "href": "https://www.klaviyo.com/features",
+          "text": "Features"
+        },
+        {
+          "href": "https://www.klaviyo.com/whats-new",
+          "text": "What's new"
+        },
+        {
+          "href": "https://www.klaviyo.com/events",
+          "text": "Events"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help Center"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us",
+          "text": "Academy"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Community"
+        },
+        {
+          "href": "https://www.facebook.com/Klaviyo/",
+          "text": "Facebook"
+        },
+        {
+          "href": "https://twitter.com/klaviyo/",
+          "text": "Twitter"
+        },
+        {
+          "href": "https://www.linkedin.com/company/klaviyo/",
+          "text": "LinkedIn"
+        },
+        {
+          "href": "https://www.instagram.com/klaviyo/",
+          "text": "Instagram"
+        },
+        {
+          "href": "https://www.klaviyo.com/sitemap",
+          "text": "Site Map"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal",
+          "text": "Terms and Privacy"
+        },
+        {
+          "href": "https://www.klaviyo.com/security",
+          "text": "Security"
+        },
+        {
+          "href": "https://www.klaviyo.com/trust",
+          "text": "Trust"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal/intellectual-property-notices",
+          "text": "Intellectual Property Notices"
+        }
+      ],
+      "headings": [
+        {
+          "level": 1,
+          "id": "",
+          "text": "How to add barcodes to your messages"
+        },
+        {
+          "level": 2,
+          "id": "you-will-learn",
+          "text": "You will learn"
+        },
+        {
+          "level": 3,
+          "id": "quick-reference",
+          "text": "Quick reference"
+        },
+        {
+          "level": 2,
+          "id": "before-you-begin",
+          "text": "Before you begin"
+        },
+        {
+          "level": 2,
+          "id": "basic-usage",
+          "text": "Basic usage"
+        },
+        {
+          "level": 2,
+          "id": "using-barcodes-with-different-channels",
+          "text": "Using barcodes with different channels"
+        },
+        {
+          "level": 3,
+          "id": "email",
+          "text": "Email"
+        },
+        {
+          "level": 3,
+          "id": "mms",
+          "text": "MMS"
+        },
+        {
+          "level": 3,
+          "id": "rcs",
+          "text": "RCS"
+        },
+        {
+          "level": 3,
+          "id": "whatsapp",
+          "text": "WhatsApp"
+        },
+        {
+          "level": 2,
+          "id": "barcode-tag-arguments-reference",
+          "text": "Barcode tag arguments reference"
+        },
+        {
+          "level": 2,
+          "id": "using-barcodes-with-profile-properties-and-event-data",
+          "text": "Using barcodes with profile properties and event data"
+        },
+        {
+          "level": 2,
+          "id": "using-barcodes-with-klaviyo-coupon-codes",
+          "text": "Using barcodes with Klaviyo coupon codes"
+        },
+        {
+          "level": 2,
+          "id": "scaling-and-sizing",
+          "text": "Scaling and sizing"
+        },
+        {
+          "level": 2,
+          "id": "troubleshooting",
+          "text": "Troubleshooting"
+        },
+        {
+          "level": 3,
+          "id": "always-preview-before-sending",
+          "text": "Always preview before sending"
+        },
+        {
+          "level": 3,
+          "id": "common-issues",
+          "text": "Common issues"
+        },
+        {
+          "level": 2,
+          "id": "additional-resources",
+          "text": "Additional resources"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "Explore more from Klaviyo"
+        }
+      ]
+    }
+  },
+  "rendered_page": {
+    "status": "fetched",
+    "error": ""
+  }
+}

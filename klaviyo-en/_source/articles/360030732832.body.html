@@ -1,0 +1,184 @@
+<h2 id="h_01HX9ME7T77ADSQRMTVSMKF3MQ">Data Synced with the WooCommerce Integration</h2>
+<p>This article covers the data that is synced when you integrate your WooCommerce store with your Klaviyo account.</p>
+<div class="bs-callout bs-callout-default">
+<p>Klaviyo syncs with WooCommerce in real time.</p>
+</div>
+<p><span>In your Klaviyo account, navigate to your <a href="https://www.klaviyo.com/analytics/metrics" target="_blank" rel="noopener">Analytics</a> tab and select Metrics to see all of the metrics in your account. </span><span>All WooCommerce metrics will have a WooCommerce icon, with the exception of the Added to Cart metric, which will have a gear icon. Each metric is covered individually below.<br></span> <img src="https://klaviyo.zendesk.com/hc/article_attachments/33638284951835" width="594" height="592"><img src="https://klaviyo.zendesk.com/hc/article_attachments/28716329763867" alt="mceclip0.png" width="593" height="323"></p>
+<div class="bs-callout bs-callout-default">Klaviyo limits the number of unique metrics you can create to 200. When you approach this threshold, you will be alerted via a warning in your account, along with an email to the account owner.</div>
+<h2 id="h_01HX9ME7T77603A2GMZR8FH87V">Started Checkout</h2>
+<p>This event tracks when one of the following occurs:</p>
+<ul>
+<li>A customer is logged into their account, has added something to their cart, then views the checkout page</li>
+<li>A customer adds something to their cart, views the checkout page, enters a billing email address</li>
+</ul>
+<p>You can filter and target Started Checkout metrics based on the following criteria:</p>
+<ul>
+<li>
+<strong>$value</strong>: The value of the cart</li>
+<li>
+<strong>Categories</strong>: The categories of the items in the cart</li>
+<li>
+<strong>Currency</strong>: The currency type for the cart</li>
+<li>
+<strong>CurrencySymbol</strong>: The currency symbol for the cart</li>
+<li>
+<strong>ItemNames</strong>: An array containing the names of the items in the cart</li>
+</ul>
+<p>Klaviyo captures the value of a cart at time of checkout, as well as other pertinent details of a customer's cart that you can leverage for personalized Abandoned Cart emails. There are two possible Abandoned Cart flows for WooCommerce: a flow triggered by the Started Checkout metric, or the Added to Cart metric. Both metrics allow you to leverage the cart rebuild key, a key that allows you to create a link that rebuilds the customer's cart in case they return to their cart via an email triggered by this event on another device. This key can be found within the 'extra' property array. You can create this link using the following URL:</p>
+<p><code>{{ organization.url|trim_slash }}/cart?wck_rebuild_cart={{ event.extra.CartRebuildKey }}</code></p>
+<h2 id="h_01HX9ME7T77KEA6NT72AZS1AR2">Added to Cart</h2>
+<p>This metric is tracked whenever a customer who has been cookied by Klaviyo adds an item to their cart.</p>
+<p>It includes detailed information about the item that was added. This is useful when creating segments based on what products users have added to their carts, or when building an abandoned cart flow. You can filter and target Added to Cart metrics based on the following criteria:</p>
+<ul>
+<li>
+<strong>$value</strong>: Value of the item</li>
+<li>
+<strong>AddedItemCategories</strong>: The categories to which the item belongs</li>
+<li>
+<strong>AddedItemDescription</strong>: The description of the item</li>
+<li>
+<strong>AddedItemImageURL</strong>: The URL of the image of the item</li>
+<li>
+<strong>AddedItemPrice</strong>: The price of the item</li>
+<li>
+<strong>AddedItemProductID</strong>The custom ID in your WooCommerce store of the product, e.g., <em>1234</em>
+</li>
+<li>
+<strong>AddedItemProductName</strong>: The name of the product in your store, e.g., <em>Red T-shirt</em>
+</li>
+<li>
+<strong>AddedItemQuantity</strong><span style="font-weight: 400;">: The quantity of the item</span>
+</li>
+<li>
+<strong>AddedItemSKU</strong>: The SKU of the item in your store, e.g., <em>REDMEDIUMTSHIRT</em>
+</li>
+<li>
+<strong>AddedItemTags</strong>: Any tags associated with the item</li>
+<li>
+<strong>AddedItemURL</strong>: The URL of the item</li>
+<li>
+<strong>Categories</strong><span style="font-weight: 400;">: The categories of all the items in the cart</span>
+</li>
+<li>
+<strong>ItemCount</strong><span style="font-weight: 400;">: The count of the total items in the cart</span>
+</li>
+<li>
+<strong>ItemNames</strong><span style="font-weight: 400;">: The names of all the items in the cart</span>
+</li>
+<li>
+<strong>Tags</strong><span style="font-weight: 400;">: The tags of all the items in the cart </span>
+</li>
+</ul>
+<p>Klaviyo generates a key, the cart rebuild key, that allows you to create a link that rebuilds the customer's cart in case they return to their cart via an email triggered by this event on another device. This key can be found within the ‘extra’ property array. You can create this link using the following URL:</p>
+<p><code>{{ organization.url|trim_slash }}/cart?wck_rebuild_cart={{ event.extra.CartRebuildKey}}</code></p>
+<p>The ‘extra’ property array, while not segmentable, contains useful information in addition to the cart rebuild key, such as: line items for the cart, the cart’s grand total, the cart’s subtotal, and the cart’s tax total.</p>
+<h2 id="h_01HX9ME7T80XCYPR564H5CNBMN">Placed Order</h2>
+<p>This event tracks when a customer completes the checkout process and creates an order in your WooCommerce store. Klaviyo records a Placed Order event when we sync an order with the status of processing.</p>
+<p>The event Klaviyo tracks includes all product information captured by WooCommerce so that you can use this detailed data in purchase follow up emails. You can filter and target Placed Order events based on the following criteria:</p>
+<ul>
+<li>
+<strong>$value: </strong>The value of the order</li>
+<li>
+<strong>ItemNames</strong>: The names of the products in someone's order, e.g., <em>t-shirt</em> or <em>pants</em>
+</li>
+<li>
+<strong>IsDiscounted</strong>: Order has been discounted; <em>true</em> or <em>false</em>
+</li>
+<li>
+<strong>UsedCoupon</strong>: A coupon was used on the order, e.g., <em>true</em> or <em>false</em>
+</li>
+<li>
+<strong>ItemCategories:</strong> The categories to which the items in the cart belong</li>
+<li><strong>ShippingMethods (if any)</strong></li>
+<li><strong>Coupons (if any)</strong></li>
+</ul>
+<p>Revenue, or <em>Placed Order</em> value, is calculated as follows: (sub-total + shipping) - any discounts.</p>
+<p>You may see that the <em>Revenue</em> value on your Klaviyo dashboard does not always match up with the revenue value you see in WooCommerce; this is because WooCommerce subtracts refunded orders from their revenue calculation, while Klaviyo does not.</p>
+<h2 id="h_01HX9ME7T8K4SJ6CJGZWMCT4PN">Fulfilled Order</h2>
+<p>This event tracks when an order moves to "Complete" in your WooCommerce store. </p>
+<p>The event Klaviyo tracks includes all of the product information about the items someone purchased including product names, images, and variable product information so you can use that information in purchase follow up emails. You can filter and target <em>Fulfilled Order</em> events based on the following criteria:</p>
+<ul>
+<li>
+<strong>$value: </strong>The value of the order</li>
+<li>
+<strong>ItemNames</strong>: The names of the products in someone's order, e.g., <em>t-shirt</em> or <em>pants</em>
+</li>
+<li>
+<strong>IsDiscounted</strong>: Order has been discounted; <em>true</em> or <em>false</em>
+</li>
+<li>
+<strong>UsedCoupon</strong>: A coupon was used on the order, e.g., <em>true</em> or <em>false</em>
+</li>
+<li>
+<strong>ItemCategories:</strong> The categories to which the items in the cart belong</li>
+<li><strong>ShippingMethods (if any)</strong></li>
+<li><strong>Coupons (if any)</strong></li>
+</ul>
+<h2 id="h_01HX9ME7T828AV227HJNN8KHFE">Ordered Product</h2>
+<p>This event is tracked when a customer places an order, but one event is tracked for each item someone purchases. For example, if someone buys a t-shirt and a pair of pants, one Placed Order event is tracked and two Ordered Product events -- one event for the t-shirt and one event for the pants.</p>
+<p>The event Klaviyo tracks includes detailed information about each product someone purchases. This is useful when creating behavioral segments based on product options and other detailed information that's not available in the Placed Order event. You can filter and target Ordered Product events based on the following criteria:</p>
+<ul>
+<li>
+<strong>$value: </strong>Value of the item</li>
+<li>
+<strong>ProductId</strong>: The custom ID of a product in your WooCommerce store, e.g., <em>1321</em>
+</li>
+<li>
+<strong>SKU</strong>: The SKU of the product in your store, e.g., <em>REDMEDIUMTSHIRT</em>
+</li>
+<li>
+<strong>Name</strong>: The name of a product in your store, e.g., <em>Red T-shirt</em>
+</li>
+<li>
+<strong>Quantity: </strong>The quantity of the item ordered</li>
+<li>
+<strong>Categories</strong>: List of categories</li>
+</ul>
+<h2 id="h_01HX9ME7T8XT2G2V4Y3JGB48KW">Cancelled Order</h2>
+<p>This event is tracked when a customer creates an order in your WooCommerce store but then cancels the order before fulfillment. You can filter and target<span> </span><em>Cancelled Order</em><span> </span>events based on the following criteria:</p>
+<ul>
+<li>
+<strong>$value: </strong>The total value of the cancelled order</li>
+<li>
+<strong>IsDiscounted: </strong>Order has been discounted; <em>true</em> or <em>false</em>
+</li>
+<li>
+<strong>ProductNames: </strong>The names of the different products in the order</li>
+<li>
+<strong>UsedCoupon: </strong>A coupon was used on the order, e.g., <em>true</em> or <em>false</em>
+</li>
+<li>
+<strong>ItemCategories: </strong>The categories to which the items in the cart belong</li>
+<li>
+<strong>ItemNames: </strong>The names of the products in someone's order, e.g., <em>t-shirt</em> or <em>pants</em>
+</li>
+<li><strong>Coupons (if any)</strong></li>
+<li><strong>ShippingMethods (if any)</strong></li>
+</ul>
+<h2 id="h_01HX9ME7T84Z0ZE4HR56ZRS2H4">Refunded Order</h2>
+<p>This event is tracked when a customer refunds their order. You can filter and target<span> </span><em>Refunded Order</em><span> </span>events based on the following criteria:</p>
+<ul>
+<li>
+<strong>$value: </strong>The total value of the refunded order</li>
+<li>
+<strong>IsDiscounted: </strong>Order has been discounted; <em>true</em> or <em>false</em>
+</li>
+<li>
+<strong>ProductNames:</strong> The names of the different products in the order</li>
+<li>
+<strong>UsedCoupon: </strong>A coupon was used on the order, e.g., <em>true</em> or <em>false</em>
+</li>
+<li>
+<strong>ItemCategories: </strong>The categories to which the items in the cart belong</li>
+<li>
+<strong>ItemNames: </strong>The names of the products in someone's order, e.g., <em>t-shirt</em> or <em>pants</em>
+</li>
+<li><strong>Coupons (if any)</strong></li>
+<li><strong>ShippingMethods (if any)</strong></li>
+</ul>
+<h2 id="h_01HX9ME7T850X88NK6XECEBR0R">Viewed Product</h2>
+<p>This event is tracked when a customer (previously cookied by Klaviyo) views a product. This is useful if you'd like to set up a <a href="https://help.klaviyo.com/hc/en-us/articles/115002775252-Create-a-Browse-Abandonment-Flow">Browse Abandonment flow</a> or build segments based on product browsing data.</p>
+<h2 id="h_01HX9ME7T8HRA5WE8T2E1E3EEB">Active on Site</h2>
+<p>This event is tracked when a customer (previously cookied by Klaviyo) is active on your site. </p>
+<h2 id="h_01HX9ME7T8GXNZ69FBA8XG05MN">Customer Data</h2>
+<p>For each customer in your WooCommerce account, a profile is created in your Klaviyo account. Customer information including first name, last name, and location is added to this profile.</p>

@@ -1,0 +1,162 @@
+<h2 id="h_01HQ6P8JEFBNH16AJFYBR6H86W">You will learn</h2>
+<p>Learn about email annotations, which enable you to display key information in the list view for Gmail inboxes (i.e., before someone opens the email). Email annotations allow you to highlight a deal or offer (e.g., a coupon code), or display product images directly in the inbox. </p>
+<div class="bs-callout bs-callout-requirements">
+<p>The code required to implement Gmail annotations is only supported in custom HTML or hybrid emails. It is not possible to use this code with Klaviyo’s drag-and-drop email editor.</p>
+<p>We only recommend using email annotations for technically savvy marketers, or for anyone who has access to a developer. While our product does support this feature, our support team cannot help you build out your custom templates beyond offering the general guidance covered in this documentation. To maintain the security of your data, Klaviyo's support team is not able to open your HTML files. </p>
+</div>
+<h2 id="h_01HQ6P8JEFW08TC9PA40YGYRJH">About email annotations</h2>
+<p>Email annotations are supported in Gmail mobile inboxes for users with the <em>Promotions</em> tab enabled. These annotations only appear in the <em>Promotions</em> tab, not the primary inbox. </p>
+<p>There are 3 types of annotations: </p>
+<ul>
+<li>
+<strong>Deal/offer </strong><br>Highlight a deal or offer, like a coupon code or free shipping, including the deal expiration date.<br><img src="https://klaviyo.zendesk.com/hc/article_attachments/28718022989339" alt="Bolas baked goods deal annotation" width="364" height="66">
+</li>
+<li>
+<strong>Product carousel</strong><br>Display a carousel of product images, optionally including product details like name and price.<br><img src="https://klaviyo.zendesk.com/hc/article_attachments/28718022991771" alt="Product carousel annotations" width="371" height="241">
+</li>
+<li>
+<strong>Single image</strong><br>Show a single image, along with optional additional text.<br><img src="https://klaviyo.zendesk.com/hc/article_attachments/28718022993947" alt="Single image annotations" width="392" height="190">
+</li>
+</ul>
+<div class="bs-callout bs-callout-default">
+<p>Adding this code provides Gmail with the option to display annotations for your email. Even if an email contains the code for annotations, they may not be displayed to every recipient. Gmail chooses when and how to display annotations based on recipient settings and inbox density. .</p>
+</div>
+<h2 id="h_01HQ6P8JEFJ8HXDR85SCV96C66">Before you begin</h2>
+<p>Google maintains an allowlist of senders who can use annotations. Before using annotations, you must request that your brand be added to this allowlist. </p>
+<p>To request that Google add you to their annotations allowlist, <a href="mailto:p-Promo-Outreach@google.com?subject=Allowlisting%20for%20email%20annotations&amp;body=REPLACE%20ALL%20PLACEHOLDERS%20WITH%20YOUR%20COMPANY%20INFORMATION%20BEFORE%20SENDING%0AHello%20team%2C%20%0AI'm%20a%20Klaviyo%20customer%20writing%20to%20request%20that%20www.example.com%20be%20added%20to%20your%20email%20annotations%20allowlist.%20%0AMy%20sending%20domain%20is%20www.example.com%0AWe%20use%20the%20following%20subdomains%3A%20%0A-%20send.example.com%0A-%20marketing-messages.example.com%0AOur%20landing%20page%20URL%20is%20www.example.com%0AThanks%2C%0AYOUR%20NAME" target="_blank" rel="noopener noreferrer">send an email to p-Promo-Outreach@google.com</a> with the following information: </p>
+<ul>
+<li>All domains (e.g., example.com)</li>
+<li>All subdomains (e.g., send.example.com, blog.example.com, marketing-messages.example.com) </li>
+<li>Your landing page URL(s) (e.g., your homepage) </li>
+</ul>
+<p>Any annotations code added to your messages will be ignored until you are added to the Google allowlist, which can take 7-10 business days or more. </p>
+<div class="bs-callout bs-callout-default">
+<p>Klaviyo does not have visibility into the allowlisting process and cannot expedite your request. If you have questions about the whitelisting process or the status of your request, reach out to <a href="mailto:p-Promo-Outreach@google.com" target="_blank" rel="noopener noreferrer">p-Promo-Outreach@google.com</a>. </p>
+</div>
+<h2 id="h_01HQ6P8JEGS5N00JMDPYV5W1C1">Add annotations to your emails</h2>
+<p>Add the following code within the body section of your HTML email template to add email annotations. There are 3 types of annotations available: </p>
+<ul>
+<li><a href="#h_01HQ6P8JEGEDJR27ZSC5YYHXTX">Deal annotations</a></li>
+<li><a href="#h_01HQ6P8JEG583BSXQXXMHHGPQN">Product carousel annotations</a></li>
+<li><a href="#h_01HQ6P8JEGERCMEAT35S9P4CV2">Single image annotations </a></li>
+</ul>
+<h4 id="h_01HQ6P8JEGEDJR27ZSC5YYHXTX">Deal</h4>
+<pre><code class="language-js">  &lt;div itemscope itemtype="http://schema.org/DiscountOffer"&gt;
+    &lt;meta itemprop="description" content="DESCRIPTION"/&gt;
+    &lt;meta itemprop="discountCode" content="DISCOUNT_CODE"/&gt;
+    &lt;meta itemprop="availabilityStarts" content="START_DATE_TIME"/&gt;
+    &lt;meta itemprop="availabilityEnds" content="END_DATE_TIME"/&gt;
+  &lt;/div&gt;
+</code></pre>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/28718022989339" alt="Bolas baked goods deal annotation" width="386" height="70"></p>
+<p>Replace the following placeholders in the code: </p>
+<ul>
+<li>
+<strong>DESCRIPTION</strong><br>A brief (1-2 line) text description of the offer</li>
+<li>
+<strong>DISCOUNT_CODE</strong><br>The code a recipient can enter at checkout to receive the offer</li>
+<li>
+<strong>START_DATE_TIME</strong><strong><br></strong>The offer start date/time, using <a href="https://support.google.com/merchants/answer/12756212?visit_id=638424907272835479-1199962788&amp;rd=1" target="_blank" rel="noopener noreferrer">ISO 8601 format</a>
+</li>
+<li>
+<strong>END_DATE_TIME</strong><br>The offer end date/time, using <a href="https://support.google.com/merchants/answer/12756212?visit_id=638424907272835479-1199962788&amp;rd=1" target="_blank" rel="noopener noreferrer">ISO 8601 format</a>
+</li>
+</ul>
+<h4 id="h_01HQ6P8JEG583BSXQXXMHHGPQN">Product carousel</h4>
+<pre><code class="language-js">  &lt;div itemscope itemtype="http://schema.org/PromotionCard"&gt;
+    &lt;meta itemprop="image" content="IMAGE_URL1"/&gt;
+    &lt;meta itemprop="url" content="PROMO_URL1"/&gt;
+    // Optionally, include the following PromotionCard properties:
+    &lt;meta itemprop="headline" content="HEADLINE1"/&gt;
+    &lt;meta itemprop="price" content="PRICE1"/&gt;
+    &lt;meta itemprop="priceCurrency" content="PRICE_CURRENCY1"/&gt;
+    &lt;meta itemprop="discountValue" content="DISCOUNT_VALUE1"/&gt;
+    &lt;meta itemprop="position" content="POSITION"/&gt;
+  &lt;/div&gt;
+  // Build the second image preview in your product carousel:
+  &lt;div itemscope itemtype="http://schema.org/PromotionCard"&gt;
+    &lt;meta itemprop="image" content="IMAGE_URL2"/&gt;
+    &lt;meta itemprop="url" content="PROMO_URL2"/&gt;
+    // Optionally, include the following PromotionCard properties:
+    &lt;meta itemprop="headline" content="HEADLINE2"/&gt;
+    &lt;meta itemprop="price" content="PRICE2"/&gt;
+    &lt;meta itemprop="priceCurrency" content="PRICE_CURRENCY2"/&gt;
+    &lt;meta itemprop="discountValue" content="DISCOUNT_VALUE2"/&gt;
+    &lt;meta itemprop="position" content="POSITION"/&gt;
+  &lt;/div&gt;
+  // To include more image previews, add additional PromotionCard objects.
+  // You can include up to 10 image previews in a product carousel.
+</code></pre>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/28718022991771" alt="Product carousel annotations" width="468" height="303"></p>
+<p>Replace the following placeholders in the code: </p>
+<ul>
+<li>
+<strong>IMAGE_URL1</strong>, <strong>IMAGE_URL2</strong>, etc.<br>The URL of a product image to display in the carousel. Supported aspect ratios are 4:5, 1:1, and 1.91:1. The aspect ratio for every image must be the same. </li>
+<li>
+<strong>PROMO_URL1</strong>, <strong>PROMO_URL2</strong>, etc.<br>The URL to a landing page for recipients who click the product image.</li>
+<li>
+<strong>HEADLINE1, HEADLINE2, etc.</strong><br>A short, 1-2 line description of the product. </li>
+<li>
+<strong>PRICE1</strong>, <strong>PRICE2</strong>, etc.<br>The base price of the product (number only, no currency). </li>
+<li>
+<strong>PRICE_CURRENCY1</strong>, <strong>PRICE_CURRENCY2</strong>, etc.<br>The 3-letter currency code (e.g., USD) for the item’s price.</li>
+<li>
+<strong>DISCOUNT_VALUE1</strong>, <strong>DISCOUNT_VALUE2</strong>, etc.<br>If applicable, the amount an item is discounted (number only, no currency). </li>
+<li>
+<strong>POSITION</strong><br>(Optional) a number indicating this item’s position in the carousel.</li>
+</ul>
+<h4 id="h_01HQ6P8JEGERCMEAT35S9P4CV2">Single image</h4>
+<pre><code class="language-js">  &lt;div itemscope itemtype="http://schema.org/PromotionCard"&gt;
+    &lt;meta itemprop="image" content="IMAGE_URL1"/&gt;
+    &lt;meta itemprop="url" content="PROMO_URL1"/&gt;
+  &lt;/div&gt;
+</code></pre>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/28718022993947" alt="Single image annotations" width="402" height="195"></p>
+<p>Replace the following placeholders in the code: </p>
+<ul>
+<li>
+<strong>IMAGE_URL1</strong><br>The URL of a product image to display in the carousel. Supported aspect ratios are 4:5, 1:1, and 1.91:1. </li>
+<li>
+<strong>PROMO_URL1</strong><br>The URL to a landing page for recipients who click the product image.</li>
+</ul>
+<h2 id="h_01HQ6P8JEGGKP9NGDV8FYF7HX9">About automatic annotation extraction</h2>
+<p>Sometimes, Google automatically extracts email data to add annotations, even when a sender hasn’t added the code outlined above. This is done at Google’s discretion, and cannot be controlled by the sender. </p>
+<h2 id="h_01HQ6P8JEG721N8AKB8CTAC1V1">Troubleshooting your annotations</h2>
+<p>Google enforces strict requirements for annotations, and they may not display for multiple reasons. If your annotations are not appearing after following this article's setup instructions outlined above, try the troubleshooting steps below: </p>
+<h3 id="h_01HQ6P8JEG9J5RZV0Q6AMNQCY9">Ensure your brand is allowlisted </h3>
+<p>Google maintains a limited allowlist of approved brands that can use email annotations in order to prevent spam and abuse. If you don't have access, you may need to request it from Google:</p>
+<ol>
+<li>
+<a href="#h_01HQ6P8JEFJ8HXDR85SCV96C66">Reach out to Google</a> using the steps outlined above.</li>
+<li>Allow 7-10 business days for a response.</li>
+</ol>
+<p>There is no guarantee that your brand will be added to the allowlist once you request it, as this is managed at Google’s sole discretion. </p>
+<h3 id="h_01HQ6P8JEHXH5VRETCCXBS0KYN">Check your image quality</h3>
+<p>All images used for email annotations must pass Google's quality filter. Images that don't meet the requirements will not display in the inbox. Make sure your images meet these criteria: </p>
+<ul>
+<li>High quality (i.e., greater than 500 KB)</li>
+<li>Have very little, if any, text </li>
+<li>Are rectangular (don’t use a mask to make the image round, or another shape) </li>
+<li>Are at least 256x256 pixels in size</li>
+</ul>
+<h3 id="h_01HQ6P8JEHQ32N5681RY14QF04">Don’t use unique images per recipient</h3>
+<p>The same image must be used for all recipients. You may add unique tracking parameters to the promo url, but not the image URL. </p>
+<p>Avoid using tools that generate CID images (i.e., images that are unique per recipient), as annotations will not show if used.</p>
+<h3 id="h_01HQ6P8JEHKKA8TGHEREFDDCQD">Consider Gmail’s density cap</h3>
+<p>Google limits the number of annotation images a user can see in their inbox at one time (i.e., a "density cap"). If a recipient’s inbox already has several recent emails with annotations, yours may not appear to prevent clutter. This cap is implemented at Google’s sole discretion and cannot be controlled by the sender. </p>
+<h3 id="h_01HQ6P8JEHZM1YH2P9PZ3P752N">Note that annotations may not appear in preview email sends</h3>
+<p>Annotations typically will not appear in the inbox for test emails sent to only a few recipients. The annotations feature is designed for bulk sends, so annotations are likely to only appear when a message is sent to &gt;100 recipients. </p>
+<h3 id="h_01HQ6P8JEHYVF01NFR465JA3V2">Ensure you're looking in the supported Gmail tab</h3>
+<p>Annotations are supported to display only in the Gmail mobile app in the <em>Promotions</em> tab.</p>
+<p>Annotations are not supported to display in: </p>
+<ul>
+<li>Any other tabs in the Gmail app, besides <em>Promotions</em>
+</li>
+<li>Gmail viewed in any web browser (e.g., the mobile or desktop site) </li>
+<li>Inboxes for users who do not have the <em>Promotions</em> tab enabled in their Gmail settings </li>
+</ul>
+<h2 id="h_01HQ6P8JEH3MZZKWV5VGKT6MV3">Additional resources</h2>
+<ul>
+<li><a href="https://klaviyo.zendesk.com/hc/en-us/articles/5051278887835" target="_blank" rel="noopener noreferrer">How to use Klaviyo’s subject line assistant</a></li>
+<li><a href="https://klaviyo.zendesk.com/hc/en-us/articles/115005078307" target="_blank" rel="noopener noreferrer">Understanding Gmail's tabbed inbox</a></li>
+</ul>

@@ -1,0 +1,806 @@
+{
+  "captured_at": "2026-05-23T16:16:35Z",
+  "article": {
+    "id": 24302613403931,
+    "url": "https://klaviyo.zendesk.com/api/v2/help_center/en-us/articles/24302613403931.json",
+    "html_url": "https://klaviyo.zendesk.com/hc/en-us/articles/24302613403931-Toast-data-reference",
+    "author_id": 403684872812,
+    "comments_disabled": true,
+    "draft": false,
+    "promoted": false,
+    "position": 1,
+    "vote_sum": 0,
+    "vote_count": 0,
+    "section_id": 49375688471707,
+    "created_at": "2024-03-29T11:04:45Z",
+    "updated_at": "2026-05-08T13:47:06Z",
+    "name": "Toast data reference",
+    "title": "Toast data reference",
+    "source_locale": "en-us",
+    "locale": "en-us",
+    "outdated": false,
+    "outdated_locales": [],
+    "edited_at": "2026-05-08T13:47:06Z",
+    "user_segment_id": null,
+    "permission_group_id": 146372,
+    "content_tag_ids": [],
+    "label_names": [],
+    "body": "<h2 id=\"h_01HV7D2YADJT2R4PEH5N2QYDM8\">You will learn</h2>\n<p>Learn what data syncs from Toast to Klaviyo and where to view it. This includes both order data (such as Placed Order, Ordered Product, etc.) and customer data. If you have not already, read our guide on <a href=\"https://help.klaviyo.com/hc/en-us/articles/24302505547163\">getting started with Toast</a> for step-by-step instructions on integrating, before continuing with this article. </p>\n<div class=\"bs-callout bs-callout-default\">\n<p>Toast does not sync email and SMS consent with Klaviyo, but the Toast integration can add data to profiles that have already provided consent through other sources. It is generally advised to <a href=\"https://help.klaviyo.com/hc/en-us/articles/360043841811\">import consent manually via CSV upload</a>.</p>\n</div>\n<h2 id=\"h_01HV7D2YADWDJFKWES4DNM82CY\">How to view your Toast data</h2>\n<p>Klaviyo syncs many different events from Toast related to order placement and fulfillment. Klaviyo syncs online orders from Toast and offline orders when guest identifiers are provided, including waitlisted guest orders when “Start Order on POS” is enabled for Toast Tables.</p>\n<p>To view your Toast data:</p>\n<ol>\n<li>Click the <strong>Analytics</strong> dropdown in the left-hand navigation sidebar.</li>\n<li>Select <strong>Metrics</strong>. Here, you can view all of the metrics in your account. The metrics with a Toast icon represent all of the metrics synced from your Toast integration.</li>\n<li>Filter this view to see only Toast metrics by using the filter selector next to the search bar.</li>\n</ol>\n<p class=\"wysiwyg-text-align-none\"><img src=\"https://cdn.sanity.io/images/6ct6b26e/help-center-prod/3ca74e49bf07b000f15b96481b8fd6f90e4f4838-437x453.png\" alt=\"Metrics screen showing a search bar, a 'Toast' filter, and a list of order-related metrics.\" width=\"full\"></p>\n<h2 id=\"h_01HV7D2YAE9WW1DM35JJJ50MWE\">Placed Order</h2>\n<p>This event is tracked when an order was placed (submitted) to Toast and includes all of the product information about the items purchased, store information, and order details that can be used in follow up emails and SMS. You can filter and target <em>Placed</em> <em>Order</em> events based on the following criteria:</p>\n<ul>\n<li>$<strong>value</strong>\nThe total value of the placed order, inclusive of any applied discounts.</li>\n<li>\n<strong>Items</strong>\nThe names of the products in someone's order (e.g., tea or coffee).</li>\n<li>\n<strong>Item</strong> <strong>Count</strong>\nThe count of line items in the order (e.g., <em>2</em>)</li>\n<li>\n<strong>Fulfillment Method</strong>\nThe behavior of the dining option.</li>\n<li>\n<strong>Fulfillment Method Name</strong>\nThe name of the dining option.</li>\n<li>\n<strong>Order ID</strong>\nThe unique ID associated with the order in the form of a string of letters and numbers.</li>\n<li>\n<strong>Discount Applied</strong>\nWhether or not a discount was used for the order. (true/false)</li>\n<li>\n<strong>Source</strong>\nThe source of the order (e.g., <em>Online, Toast Local, Toast Pickup App</em>).</li>\n<li>\n<strong>Restaurant Name</strong>\nThe name of the restaurant associated with the order.</li>\n<li>\n<strong>Revenue Center</strong>\nThe name of the revenue center the order is associated with.</li>\n<li>\n<strong>Restaurant Service</strong>\nThe name of the meal service the order is associated with.</li>\n<li>\n<strong>Modifiers</strong>\nModifiers associated with the order.</li>\n<li>\n<strong>Menu Group Names</strong>\nThe name(s) of the menu group(s) associated with the order.</li>\n</ul>\n<h2 id=\"h_01HV7D2YAESD4T8ABPG04E54TB\">Ordered Product</h2>\n<p>This event is also tracked when a customer places an order, but a separate event is tracked for each item someone purchases. For example, if someone buys a coffee and two sandwiches, 1 <em>Placed Order</em> event will be tracked along with 3 <em>Ordered</em> <em>Product</em> events; 1 <em>Placed</em> <em>Order</em> event for the purchase as a whole, and then 1 <em>Ordered</em> <em>Product</em> event for the coffee and 1 <em>Ordered</em> <em>Product</em> event for each of the sandwiches.</p>\n<p>The events Klaviyo tracks include detailed information about each product someone purchases. This is useful when creating behavioral segments based on product variant options and other detailed information that's not available in the Placed Order event. You can filter and target Ordered Product events based on the following criteria:</p>\n<ul>\n<li>$<strong>value</strong>\nThe total value of the placed order, inclusive of any applied discounts.</li>\n<li>\n<strong>Name</strong>\nThe name of the ordered product in Toast (e.g., <em>HAMBURGER PLATE</em>).</li>\n<li>\n<strong>Product ID</strong>\nThe ID associated with the product in your restaurant.</li>\n<li>\n<strong>Restaurant Name</strong>\nThe name of the restaurant associated with the order.</li>\n<li>\n<strong>Revenue Center</strong>\nThe name of the revenue center the order is associated with.</li>\n<li>\n<strong>Restaurant Service</strong>\nThe name of the meal service the order is associated with.</li>\n<li>\n<strong>Modifiers</strong>\nModifiers associated with the item.</li>\n<li>\n<strong>Menu Group Names</strong>\nThe name of the menu group associated with the item.</li>\n</ul>\n<h2 id=\"h_01HV7D2YAECWWG3S251F7YBM2N\">Fulfilled Order</h2>\n<p>This event is tracked when an order is closed in your restaurant.</p>\n<p>The event Klaviyo tracks includes all product information regarding the items someone purchased including product names and images so you can use that information in purchase follow up emails. You can filter and target <em>Fulfilled</em> <em>Order</em> events based on the following criteria:</p>\n<ul>\n<li>$<strong>value</strong>\nThe total value of the fulfilled order, inclusive of any applied discounts.</li>\n<li>\n<strong>Items</strong>\nThe names of the products in someone's order (e.g., tea or coffee).</li>\n<li>\n<strong>Item</strong> <strong>Count</strong>\nThe count of line items in the order (e.g., <em>2</em>).</li>\n<li>\n<strong>Fulfillment Method</strong>\nThe behavior of the dining option.option used to fulfill the order.</li>\n<li>\n<strong>Fulfillment Method Name</strong>\nThe name of the dining option.</li>\n<li>\n<strong>Order ID</strong>\nThe unique ID associated with the order in the form of a string of letters and numbers.</li>\n<li>\n<strong>Discount Applied</strong>\nWhether or not a discount was used for the order. (true/false)</li>\n<li>\n<strong>Source</strong>\nThe source of the order (e.g., <em>Online, Toast Local, Toast Pickup App</em>).</li>\n<li>\n<strong>Restaurant Name</strong>\nThe name of the restaurant associated with the order.</li>\n<li>\n<strong>Revenue Center</strong>\nThe name of the revenue center the order is associated with.</li>\n<li>\n<strong>Restaurant Service</strong>\nThe name of the meal service the order is associated with.</li>\n<li>\n<strong>Modifiers</strong>\nModifiers associated with the order.</li>\n<li>\n<strong>Menu Group Names</strong>\nThe name(s) of the menu group(s) associated with the order.</li>\n</ul>\n<h2 id=\"h_01HV7D2YAE1NX7TQGC0YKY68DG\">Refunded Order</h2>\n<p>This event is tracked when a customer completes the checkout process in your restaurant and a payment is made, but the customer requests the payment to be returned. The event Klaviyo tracks includes all of the product information about the items someone purchased including product names, images, and variant information. You can filter and target <em>Refunded</em> <em>Order</em> events based on the following criteria:</p>\n<ul>\n<li>$<strong>value</strong>\nThe total value of the placed order, inclusive of any applied discounts.</li>\n<li>\n<strong>Items</strong>\nThe names of the products in someone's order (e.g., tea or coffee).</li>\n<li>\n<strong>Item</strong> <strong>Count</strong>\nThe count of line items in the order (e.g., <em>2</em>). Note that this does not account for the quantity of items).</li>\n<li>\n<strong>Fulfillment Method</strong>\nThe behavior of the dining option.option used to fulfill the order.</li>\n<li>\n<strong>Fulfillment Method Name</strong>\nThe name of the dining option.</li>\n<li>\n<strong>Order ID</strong>\nThe unique ID associated with the order in the form of a string of letters and numbers.</li>\n<li>\n<strong>Discount Applied</strong>\nWhether or not a discount was used for the order. (true/false)</li>\n<li>\n<strong>Source</strong>\nThe source of the order (e.g., <em>Online, Toast Local, Toast Pickup App</em>).</li>\n<li>\n<strong>Restaurant Name</strong>\nThe name of the restaurant associated with the order.</li>\n<li>\n<strong>Revenue Center</strong>\nThe name of the revenue center the order is associated with.</li>\n<li>\n<strong>Restaurant Service</strong>\nThe name of the meal service the order is associated with.</li>\n<li>\n<strong>Modifiers</strong>\nModifiers associated with the order.</li>\n<li>\n<strong>Menu Group Names</strong>\nThe name(s) of the menu group(s) associated with the order.</li>\n<li>\n<strong>Refund Amount</strong>\nThe amount refunded for the order in the restaurant's default currency.</li>\n</ul>\n<h2 id=\"ec5d05e49be3\">Prepared Order</h2>\n<p>This event is tracked when all selections in an order are Ready. This event will only be captured if you are using Toast KDS. This event includes all of the product information about the items purchased, store information, and order details that can be used in follow up emails and SMS. You can filter and target <em>Prepared</em> <em>Order</em> events based on the following criteria:</p>\n<ul>\n<li>$<strong>value</strong>\nThe total value of the placed order, inclusive of any applied discounts.</li>\n<li>\n<strong>Items</strong>\nThe names of the products in someone's order (e.g., tea or coffee).</li>\n<li>\n<strong>Item</strong> <strong>Count</strong>\nThe count of line items in the order (e.g., <em>2</em>)</li>\n<li>\n<strong>Fulfillment Method</strong>\nThe behavior of the dining option.</li>\n<li>\n<strong>Fulfillment Method Name</strong>\nThe name of the dining option.</li>\n<li>\n<strong>Order ID</strong>\nThe unique ID associated with the order in the form of a string of letters and numbers.</li>\n<li>\n<strong>Discount Applied</strong>\nWhether or not a discount was used for the order. (true/false)</li>\n<li>\n<strong>Source</strong>\nThe source of the order (e.g., <em>Online, Toast Local, Toast Pickup App</em>).</li>\n<li>\n<strong>Restaurant Name</strong>\nThe name of the restaurant associated with the order.</li>\n<li>\n<strong>Revenue Center</strong>\nThe name of the revenue center the order is associated with.</li>\n<li>\n<strong>Restaurant Service</strong>\nThe name of the meal service the order is associated with.</li>\n<li>\n<strong>Modifiers</strong>\nModifiers associated with the order.</li>\n<li>\n<strong>Menu Group Names</strong>\nThe name(s) of the menu group(s) associated with the order.</li>\n</ul>\n<h2 id=\"h_01K45B4FA38N7FNVJ5HN91TS1M\">Synced guest data</h2>\n<p>In addition to the metrics Klaviyo syncs from Toast, Klaviyo will also create a unique profile for every customer that we sync. Here are the properties that are automatically synced from Toast:</p>\n<ul>\n<li>Email</li>\n<li>Phone Number</li>\n<li>First Name</li>\n<li>Last Name</li>\n<li>Toast Guest ID</li>\n</ul>",
+    "user_segment_ids": []
+  },
+  "normalized": {
+    "id": "24302613403931",
+    "title": "Toast data reference",
+    "source_url": "https://help.klaviyo.com/hc/en-us/articles/24302613403931-Toast-data-reference",
+    "section_id": 49375688471707,
+    "section": "Toast",
+    "category_id": 115000032731,
+    "category": "Integrations",
+    "category_slug": "integrations",
+    "klaviyo_updated": "2026-05-08T13:47:06Z",
+    "created_at": "2024-03-29T11:04:45Z",
+    "draft": false,
+    "promoted": false,
+    "position": 1,
+    "label_names": []
+  },
+  "files": {
+    "body_html": "_source/articles/24302613403931.body.html",
+    "rendered_html": "_source/rendered/24302613403931.html"
+  },
+  "assets": {
+    "api_body": {
+      "images": [
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/3ca74e49bf07b000f15b96481b8fd6f90e4f4838-437x453.png",
+          "alt": "Metrics screen showing a search bar, a 'Toast' filter, and a list of order-related metrics.",
+          "width": "full",
+          "height": ""
+        }
+      ],
+      "links": [
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/24302505547163",
+          "text": "getting started with Toast"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360043841811",
+          "text": "import consent manually via CSV upload"
+        }
+      ],
+      "headings": [
+        {
+          "level": 2,
+          "id": "h_01HV7D2YADJT2R4PEH5N2QYDM8",
+          "text": "You will learn"
+        },
+        {
+          "level": 2,
+          "id": "h_01HV7D2YADWDJFKWES4DNM82CY",
+          "text": "How to view your Toast data"
+        },
+        {
+          "level": 2,
+          "id": "h_01HV7D2YAE9WW1DM35JJJ50MWE",
+          "text": "Placed Order"
+        },
+        {
+          "level": 2,
+          "id": "h_01HV7D2YAESD4T8ABPG04E54TB",
+          "text": "Ordered Product"
+        },
+        {
+          "level": 2,
+          "id": "h_01HV7D2YAECWWG3S251F7YBM2N",
+          "text": "Fulfilled Order"
+        },
+        {
+          "level": 2,
+          "id": "h_01HV7D2YAE1NX7TQGC0YKY68DG",
+          "text": "Refunded Order"
+        },
+        {
+          "level": 2,
+          "id": "ec5d05e49be3",
+          "text": "Prepared Order"
+        },
+        {
+          "level": 2,
+          "id": "h_01K45B4FA38N7FNVJ5HN91TS1M",
+          "text": "Synced guest data"
+        }
+      ]
+    },
+    "rendered_page": {
+      "images": [
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/7ff492c2b417b7ecfe572f839a8a81398693c1f7-1920x1080.webp",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/3ca74e49bf07b000f15b96481b8fd6f90e4f4838-437x453.png",
+          "alt": "Metrics screen showing a search bar, a 'Toast' filter, and a list of order-related metrics.",
+          "width": "",
+          "height": ""
+        }
+      ],
+      "links": [
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/24302613403931-Toast-data-reference#site-content",
+          "text": "Skip to main content"
+        },
+        {
+          "href": "https://www.klaviyo.com",
+          "text": "Home"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center"
+        },
+        {
+          "href": "https://www.klaviyo.com/enterprise",
+          "text": "Enterprise"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Partners"
+        },
+        {
+          "href": "https://www.klaviyo.com/careers",
+          "text": "Careers"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": "Log in"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": ""
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center Find step-by-step instructions and troubleshooting solutions in our knowledge base."
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000032731",
+          "text": "Integrations"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000312411",
+          "text": "Flows"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867867",
+          "text": "Audience"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867667",
+          "text": "Campaigns"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/360000190711",
+          "text": "Sign-up forms"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000873988",
+          "text": "Deliverability & compliance"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/29173800271259",
+          "text": "SMS"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/16638219724187",
+          "text": "Reviews"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/18073014919195",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/34141283979931",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/37659126754075",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/33948021740315",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/39746685522331",
+          "text": "WhatsApp"
+        },
+        {
+          "href": "https://academy.klaviyo.com",
+          "text": "Klaviyo Academy Expert training and education to help you succeed with Klaviyo, and beyond."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Quick+guide&resource=academy_courses",
+          "text": "Quick guides Learn marketing strategies and concepts in 15 minutes or less."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Course&resource=academy_courses",
+          "text": "Courses Master key marketing topics through structured lessons and exams."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/best-practices",
+          "text": "Best practices Discover top product and marketing strategies for your business."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/learning-paths",
+          "text": "Learning paths Complete curated learning journeys tailored to your marketing goals."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses",
+          "text": "Explore all resources"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Live+training&resource=academy_courses",
+          "text": "Live trainings Build confidence through hands-on interactive workshops and thought-provoking strategy sessions."
+        },
+        {
+          "href": "https://www.bigmarker.com/klaviyo-customer-education/Office-hours-Getting-started-with-Klaviyo",
+          "text": "Live office hours Join a strategic discussion where you can ask questions and get answers in real-time."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/private-live-training",
+          "text": "1:1 Live training Book a private training session with an expert to jumpstart your platform knowledge and confidence."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/credentials",
+          "text": "Klaviyo credentials Dig deeper into select topics and showcase your expertise with a final exam to earn a certificate and digital badge."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/certificates/klaviyo-practitioner-certificate",
+          "text": "Klaviyo practitioner certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/deliverability-certificate",
+          "text": "Deliverability certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/developer-certificate",
+          "text": "Klaviyo developer certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses&select=Certificate",
+          "text": "See all certificates"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Klaviyo Community Join our thriving community network to connect with brands like yours—online and in person."
+        },
+        {
+          "href": "https://community.klaviyo.com/topic/new",
+          "text": "Ask a question Post a question and get thoughtful answers from Klaviyo powerusers."
+        },
+        {
+          "href": "https://community.klaviyo.com/p/roadmap",
+          "text": "Product roadmap"
+        },
+        {
+          "href": "https://community.klaviyo.com/search/activity/recent",
+          "text": "Recent threads"
+        },
+        {
+          "href": "https://community.klaviyo.com/p/champions",
+          "text": "Meet the Champions"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups",
+          "text": "Browse all groups Your people are waiting. New ideas and connections are a click away."
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/developer-group-64",
+          "text": "Developer group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/entrepreneur-user-group-118",
+          "text": "Entrepreneur group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/woo-user-group-87",
+          "text": "WooCommerce group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/new-york-meetup-chapter-82",
+          "text": "New York City"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/los-angeles-meetup-chapter-83",
+          "text": "Los Angeles"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/austin-meetup-chapter-85",
+          "text": "Austin"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/san-diego-meetup-chapter-86",
+          "text": "San Diego"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/amsterdam-meetup-chapter-84",
+          "text": "Amsterdam"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Klaviyo Developers Access API documentation and developer guides to help you build with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/get_started",
+          "text": "Get started Access key resources and a step-by-step checklist for how to start developing with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/build_your_integration",
+          "text": "Grow your app's reach Learn how to join our ecosystem and get your app listed on our marketplace."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/developer-tools",
+          "text": "Developer tools Generate sample data, monitor your API usage, and access our Postman collections."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/reference/api_overview",
+          "text": "API reference Browse our full catalog of API docs."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/changelog_",
+          "text": "Changelog"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/api_versioning_and_deprecation_policy",
+          "text": "Versioning & deprecation policy"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/rate_limits_and_error_handling",
+          "text": "Rate limits & error handling"
+        },
+        {
+          "href": "https://youtube.com/playlist?list=PLHkNfHgtxcUanrkMnKPdkRzuWU7MGv_xM&si=pkG-KH7IT_TUHOGC",
+          "text": "API tutorials on YouTube Subscribe to our Klaviyo API Tutorials playlist for easy access to step-by-step developer walkthroughs."
+        },
+        {
+          "href": "https://www.klaviyo.com/contact-us",
+          "text": "Contact us"
+        },
+        {
+          "href": "https://www.klaviyo.com/sign-up",
+          "text": "Sign up"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": "Search"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/24302613403931",
+          "text": "United States - EN"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/de-de/articles/24302613403931",
+          "text": "Deutschland - DE"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-es/articles/24302613403931",
+          "text": "España - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-mx/articles/24302613403931",
+          "text": "México - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/fr-fr/articles/24302613403931",
+          "text": "France - FR"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/it-it/articles/24302613403931",
+          "text": "Italia - IT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/ko-kr/articles/24302613403931",
+          "text": "한국 - KO"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/nl-nl/articles/24302613403931",
+          "text": "Nederland - NL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pl-pl/articles/24302613403931",
+          "text": "Polska - PL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pt-br/articles/24302613403931",
+          "text": "Brasil - PT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/sv-se/articles/24302613403931",
+          "text": "Sverige - SV"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/49375842536731",
+          "text": "Restaurants"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/49375688471707",
+          "text": "Toast"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/24302613403931-Toast-data-reference#h_01HV7D2YADJT2R4PEH5N2QYDM8",
+          "text": "You will learn"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/24302613403931-Toast-data-reference#h_01HV7D2YADWDJFKWES4DNM82CY",
+          "text": "How to view your Toast data"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/24302613403931-Toast-data-reference#h_01HV7D2YAE9WW1DM35JJJ50MWE",
+          "text": "Placed Order"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/24302613403931-Toast-data-reference#h_01HV7D2YAESD4T8ABPG04E54TB",
+          "text": "Ordered Product"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/24302613403931-Toast-data-reference#h_01HV7D2YAECWWG3S251F7YBM2N",
+          "text": "Fulfilled Order"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/24302613403931-Toast-data-reference#h_01HV7D2YAE1NX7TQGC0YKY68DG",
+          "text": "Refunded Order"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/24302613403931-Toast-data-reference#prepared-order",
+          "text": "Prepared Order"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/24302613403931-Toast-data-reference#h_01K45B4FA38N7FNVJ5HN91TS1M",
+          "text": "Synced guest data"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/24302613403931-Toast-data-reference#additional-resources",
+          "text": "Additional resources"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/24302505547163",
+          "text": "getting started with Toast"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360043841811",
+          "text": "import consent manually via CSV upload"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/24302505547163",
+          "text": "Getting started with Toast"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115001002272",
+          "text": "Learn how to contact support"
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": ""
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": "Visit Community"
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": ""
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": "Hire a partner"
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/about",
+          "text": "About Klaviyo"
+        },
+        {
+          "href": "https://www.klaviyo.com/newsroom",
+          "text": "Newsroom"
+        },
+        {
+          "href": "https://investors.klaviyo.com/overview/default.aspx",
+          "text": "Investor relations"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Agency and tech partners"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Developers"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/retail",
+          "text": "Retail and ecommerce"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/restaurants",
+          "text": "Restaurant marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/wellness",
+          "text": "Wellness"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform",
+          "text": "B2C CRM overview"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai",
+          "text": "Klaviyo AI (K:AI)"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/marketing-automation",
+          "text": "Klaviyo Marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-service",
+          "text": "Klaviyo Service"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/analytics",
+          "text": "Klaviyo Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-data-platform",
+          "text": "Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare",
+          "text": "Klaviyo vs. Klaviyo alternatives"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-mailchimp",
+          "text": "Klaviyo vs. Mailchimp"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-postscript",
+          "text": "Klaviyo vs. Postscript"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-attentive",
+          "text": "Klaviyo vs. Attentive"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-salesforce-marketing-cloud",
+          "text": "Klaviyo vs. Salesforce"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-listrak",
+          "text": "Klaviyo vs. Listrak"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/omnichannel",
+          "text": "Omnichannel marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/email-marketing",
+          "text": "Email marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing",
+          "text": "SMS marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing/rcs",
+          "text": "RCS for Business"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/mobile-app-marketing",
+          "text": "Mobile app marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/whatsapp",
+          "text": "WhatsApp marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/social",
+          "text": "Social marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources",
+          "text": "Marketing resources"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources/marketing-campaign-calendar",
+          "text": "Marketing campaign calendar"
+        },
+        {
+          "href": "https://www.klaviyo.com/glossary",
+          "text": "Marketing glossary"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/email-subject-line-generator",
+          "text": "Subject line generator"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/roi-calculator",
+          "text": "ROI calculator"
+        },
+        {
+          "href": "https://www.klaviyo.com/customers",
+          "text": "Case studies"
+        },
+        {
+          "href": "https://www.klaviyo.com/composer",
+          "text": "Composer Beta"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/marketing-agent",
+          "text": "Marketing Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/customer-agent",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/customer-experience-hub",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/helpdesk",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/marketing-analytics",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/advanced-cdp",
+          "text": "Advanced Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/web-forms",
+          "text": "Web forms"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/email-templates",
+          "text": "Email templates"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/portfolio",
+          "text": "Portfolio"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform-integrations",
+          "text": "Apps and Integrations"
+        },
+        {
+          "href": "https://www.klaviyo.com/features",
+          "text": "Features"
+        },
+        {
+          "href": "https://www.klaviyo.com/whats-new",
+          "text": "What's new"
+        },
+        {
+          "href": "https://www.klaviyo.com/events",
+          "text": "Events"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help Center"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us",
+          "text": "Academy"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Community"
+        },
+        {
+          "href": "https://www.facebook.com/Klaviyo/",
+          "text": "Facebook"
+        },
+        {
+          "href": "https://twitter.com/klaviyo/",
+          "text": "Twitter"
+        },
+        {
+          "href": "https://www.linkedin.com/company/klaviyo/",
+          "text": "LinkedIn"
+        },
+        {
+          "href": "https://www.instagram.com/klaviyo/",
+          "text": "Instagram"
+        },
+        {
+          "href": "https://www.klaviyo.com/sitemap",
+          "text": "Site Map"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal",
+          "text": "Terms and Privacy"
+        },
+        {
+          "href": "https://www.klaviyo.com/security",
+          "text": "Security"
+        },
+        {
+          "href": "https://www.klaviyo.com/trust",
+          "text": "Trust"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal/intellectual-property-notices",
+          "text": "Intellectual Property Notices"
+        }
+      ],
+      "headings": [
+        {
+          "level": 1,
+          "id": "",
+          "text": "Toast data reference"
+        },
+        {
+          "level": 2,
+          "id": "h_01HV7D2YADJT2R4PEH5N2QYDM8",
+          "text": "You will learn"
+        },
+        {
+          "level": 2,
+          "id": "h_01HV7D2YADWDJFKWES4DNM82CY",
+          "text": "How to view your Toast data"
+        },
+        {
+          "level": 2,
+          "id": "h_01HV7D2YAE9WW1DM35JJJ50MWE",
+          "text": "Placed Order"
+        },
+        {
+          "level": 2,
+          "id": "h_01HV7D2YAESD4T8ABPG04E54TB",
+          "text": "Ordered Product"
+        },
+        {
+          "level": 2,
+          "id": "h_01HV7D2YAECWWG3S251F7YBM2N",
+          "text": "Fulfilled Order"
+        },
+        {
+          "level": 2,
+          "id": "h_01HV7D2YAE1NX7TQGC0YKY68DG",
+          "text": "Refunded Order"
+        },
+        {
+          "level": 2,
+          "id": "prepared-order",
+          "text": "Prepared Order"
+        },
+        {
+          "level": 2,
+          "id": "h_01K45B4FA38N7FNVJ5HN91TS1M",
+          "text": "Synced guest data"
+        },
+        {
+          "level": 2,
+          "id": "additional-resources",
+          "text": "Additional resources"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "Explore more from Klaviyo"
+        }
+      ]
+    }
+  },
+  "rendered_page": {
+    "status": "fetched",
+    "error": ""
+  }
+}

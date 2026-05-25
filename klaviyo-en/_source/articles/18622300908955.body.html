@@ -1,0 +1,74 @@
+<h2 id="h_01H9V3CP0T41WPNJ4S05TPJ487">You will learn </h2>
+<p>Learn about the differences between webhook solutions available in Klaviyo, and when you should use each one. </p>
+<h2 id="h_01H9V3CP0TDA4VQQ12T4E2NKVK">Before you begin</h2>
+<div class="bs-callout bs-callout-default">
+<p><a href="https://help.klaviyo.com/hc/en-us/articles/17655007276059">Advanced KDP</a> is not included in Klaviyo’s standard marketing application, and a subscription is required to access the associated functionality. Head to our <a href="https://help.klaviyo.com/hc/en-us/articles/115000976672" target="_blank" rel="noopener noreferrer">billing guide</a> to learn how to purchase this plan.</p>
+</div>
+<h2 id="h_01H9V3CP0VW8P8ER25VFC4M4N2">What are webhooks?</h2>
+<p>Webhooks allow Klaviyo to pass information or “call” other applications, tools, and servers via HTTP requests. They can send information about an event that has happened (e.g. an order placed, a new customer subscribed, etc) or notify your external systems that the event has occurred.</p>
+<p>Webhooks are made of a few key components:</p>
+<ul>
+<li>
+<strong>Topic<strong><br></strong></strong>The event that causes a webhook to fire.</li>
+<li>
+<strong>Body</strong> (or “the payload”)<br>The data that the webhook sends.</li>
+<li>
+<strong>Headers</strong><br>A place to pass additional information (such as authentication).</li>
+</ul>
+<h2 id="h_01H9V3CP0VS0VXES7M91VVGYYF">Flow webhooks</h2>
+<p>You can add <a href="https://help.klaviyo.com/hc/en-us/articles/4534329515931">webhooks in flows</a> as an action that occurs when the flow reaches a certain stage or step. Once a flow reaches the webhook action, a POST request is sent with data about the event or the recipient that triggered the flow, based on how you construct the payload. </p>
+<p>Flow webhooks can only send based on flow-triggered events (i.e., events that can be used as a flow trigger). Additionally, flow webhooks do not support message-related events (e.g., <em>Received email</em>, <em>Clicked email</em>, <em>Marked email as spam</em>) as flows typically end in message receipt. </p>
+<div class="bs-callout bs-callout-default">
+<p>Unsubscribed from Email Marketing can be used as a flow trigger and the topic for a flow webhook. </p>
+</div>
+<h3 id="h_01H9V3CP0VZ2Q10JKVQ5AQM4MV">Example use cases for flow webhooks</h3>
+<p>Some example uses case where flow webhooks would be most effective include:</p>
+<ul>
+<li>Send a message or POST request that triggers based on a subscriber being added to a segment or list.</li>
+<li>Automate suppressions when a profile enters an unengaged segment. </li>
+<li>Send a personalized thank you message through a service like Whatsapp or Facebook messenger when customers purchase. </li>
+</ul>
+<h2 id="h_01H9V3CP0VQQ9EJ2TTAQG7M7AA">Webhooks in Advanced KDP </h2>
+<div class="bs-callout bs-callout-default">
+<p>Advanced KDP is not included in Klaviyo’s standard marketing application, and a subscription is required to access the associated functionality. Head to our billing guide to learn more about adding this functionality to your plan or get started if you are a new customer.</p>
+</div>
+<p>Webhooks in Advanced KDP allow you to notify external systems in response to events, without depending on a series of steps leading up the webhook action. Advanced KDP webhooks do not require you to manually construct or specify the body of the webhook request. If you want to notify your external systems that an event has occurred without any custom development, webhooks in Advanced KDP are most effective. </p>
+<p>Advanced KDP webhooks also support a wider range of topics to trigger the request, and allow you to send information in response to any event that can be queried for via the <a href="https://developers.klaviyo.com/en/reference/get_events">Get Events API</a>.<br><br>These include:</p>
+<ul>
+<li>Email events (e.g., Received email, Clicked email, Marked email as spam)</li>
+<li>SMS events (e.g., Sent SMS, Received SMS)</li>
+<li>Push notification events (e.g., Received push, Bounced push)</li>
+<li>Events from integrations ( i.e., events from first-party integrations created by Klaviyo)</li>
+<li>API events (e.g., events synced through Klaviyo’s APIs)</li>
+</ul>
+<p>This includes message-related events like <em>Unsubscribed</em>, <em>Received email</em>, or <em>Clicked email</em> that are not supported by flow webhooks.</p>
+<p>Additionally, Advanced KDP webhooks allow you to subscribe to multiple triggers at once, unlike flow webhooks, which depend on single-trigger flows.</p>
+<div class="bs-callout bs-callout-default">
+<p>Destination URLs must be publicly accessible HTTP endpoints. </p>
+</div>
+<h3 id="h_01H9V3CP0V0GDK1J1R3HTYPBVS">Example use cases for Advanced KDP webhooks</h3>
+<ul>
+<li>Sync customers’ <em>Unsubscribed </em>events to external systems.</li>
+<li>Report <em>Received Email</em> events to help desk software so agents can see email history to better serve customers.</li>
+<li>Sync all email sends, opens, and clicks into a data warehouse that is not supported by Klaviyo's <a href="https://help.klaviyo.com/hc/en-us/articles/17759932376475">data warehouse sync</a>.</li>
+</ul>
+<h2 id="h_01H9V3CP0VPBB1VM7JBC1E1DKM">Code </h2>
+<p>Code is a feature included in Klaviyo Advanced KDP. It is not included in Klaviyo’s standard marketing application, and a Advanced KDP subscription is required to access the associated functionality. Head to our billing guide to learn more about adding this functionality to your plan or get started if you are a new customer.</p>
+<p>Code leverages webhooks to enable the execution of custom functions in response to an event trigger. You can write code directly in Klaviyo’s editor, and Klaviyo manages the code execution, monitoring, and logging.</p>
+<p>If you want to send requests to your external systems without hosting a public HTTP endpoint, you can use Code. Additionally, if you want to execute custom functions in response to an event occurring, you should use Code rather than the other webhook solutions available in Klaviyo. </p>
+<p>Code also supports more granularity with event triggers over webhooks in Advanced KDP. You can select individual metrics to act as the topic rather than all integration or API events.</p>
+<div class="bs-callout bs-callout-default">
+<p>Note that Code does not support the following events as topics: </p>
+<ul>
+<li>Email opened</li>
+<li>Email received</li>
+</ul>
+</div>
+<h3 id="h_01H9V3CP0VATJA8CJJ94YGZ2SN">Example Code use cases </h3>
+<ul>
+<li>Import Python JSON libraries to parse event payloads and extract something.</li>
+<li>Set custom profile properties based on event metadata using <a href="https://developers.klaviyo.com/en/reference/api_overview">Klaviyo’s APIs</a>.</li>
+<li>Import chatGPT libraries and create a custom message for each abandoned cart based on the profile and items in the cart.</li>
+</ul>
+<h2 id="h_01H9V3CP0VKVY7F3AGFNN617ME">Additional resources </h2>
+<p><a href="https://help.klaviyo.com/hc/en-us/articles/4534329515931">Understand webhooks in flows</a><br><a href="https://help.klaviyo.com/hc/en-us/articles/17760478970907">Understand webhooks in Advanced KDP </a><br><a href="https://help.klaviyo.com/hc/en-us/articles/18620644491035">Getting started with Code</a></p>

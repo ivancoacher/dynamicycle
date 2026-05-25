@@ -1,0 +1,829 @@
+{
+  "captured_at": "2026-05-23T16:15:45Z",
+  "article": {
+    "id": 4534329515931,
+    "url": "https://klaviyo.zendesk.com/api/v2/help_center/en-us/articles/4534329515931.json",
+    "html_url": "https://klaviyo.zendesk.com/hc/en-us/articles/4534329515931-Understanding-webhooks-in-flows",
+    "author_id": 1265141506249,
+    "comments_disabled": false,
+    "draft": false,
+    "promoted": false,
+    "position": 0,
+    "vote_sum": 43,
+    "vote_count": 101,
+    "section_id": 49375527980059,
+    "created_at": "2022-03-04T17:18:30Z",
+    "updated_at": "2026-04-21T13:55:01Z",
+    "name": "Understanding webhooks in flows",
+    "title": "Understanding webhooks in flows",
+    "source_locale": "en-us",
+    "locale": "en-us",
+    "outdated": false,
+    "outdated_locales": [],
+    "edited_at": "2026-04-17T01:02:11Z",
+    "user_segment_id": null,
+    "permission_group_id": 146372,
+    "content_tag_ids": [],
+    "label_names": [],
+    "body": "<h2 id=\"h_01HERAPJ9KGZKW3JYS9E9K1AAP\">You will learn</h2>\n<p>Learn about webhooks in flows and how they send information from Klaviyo to your third-party tools and applications. It’s important to note that setting up webhooks can be complex. It’s advised to have development knowledge or development resources to correctly complete this setup. If you are looking for these development directions, learn <a href=\"https://developers.klaviyo.com/en/docs/how_to_add_a_webhook_action_to_a_flow\">how to add a webhook action to a flow</a>.</p>\n<h2 id=\"h_01HERAPJ9K1AQK20YS6QP8BMAE\">What are webhooks?</h2>\n<p>Simply put, webhooks create a comprehensive way for all your marketing and data tools to talk to one another. As an example, let’s imagine how online banking and fraud protection on your credit card work. If someone fraudulently uses your card, that transaction logs at the retailer and then sends to your bank, who then analyzes it and alerts you via phone or email when there is an issue with your card. This purchase prompted a series of systems to communicate, move this data, and ultimately alert you. These systems are most likely using webhooks to pass this data along. Webhooks:</p>\n<ul>\n<li>Allow your application to pass information or “call” other applications, tools, and servers via HTTP request.</li>\n<li>Send information about an event that has occurred (e.g. an order placed, a new customer subscribed, etc.).</li>\n<li>Can tell your system that an event has happened or notify you of that event.</li>\n</ul>\n<p>This event information will then deliver in the manner and place of your choosing. In other words, webhooks provide valuable ways to share data and information from within Klaviyo, out to your other marketing and tools in the manner that you see fit.</p>\n<div class=\"bs-callout bs-callout-default\">\n<p>You should not use webhooks to subscribe profiles to new lists.</p>\n</div>\n<h3 id=\"h_01HERAPJ9KWQE33ZBF1VN7BEME\">Key components of webhooks</h3>\n<p>Webhooks are made of a few pieces:</p>\n<ul>\n<li>\n<strong>Trigger</strong><br>\nThe event that causes a webhook to fire</li>\n<li>\n<strong>Message (or “the payload”)</strong><br>\nWhat the webhook sends, such as key details about the triggering event URL where the message is sent or the URL of the system receiving the message</li>\n<li>\n<strong>Headers</strong><br>\nA place to pass additional information (such as authentication)</li>\n</ul>\n<h2 id=\"h_01HERAPJ9KFHN7WFF4KA7CHPEM\">Webhooks in flows</h2>\n<p>Webhooks are currently only available within flows, and send when a flow reaches a certain stage or step. The webhook will then send a POST request with data about the event or recipient that triggered the flow.</p>\n<p>It’s important to note that only one event can initiate the webhook to send. When a subscriber meets the trigger criteria, the webhook will fire, sending the message to the designated URL. Additionally, you can only send webhooks off of flow triggered events, meaning events that can be used as a flow trigger. For example, you can't send a webhook off a profile property changing, as a flow cannot trigger directly from profile changes.<br>\nExamples of events in Klaviyo include:</p>\n<ul>\n<li>Placed Order</li>\n<li>Started Checkout</li>\n<li>Subscribed to List</li>\n</ul>\n<div class=\"bs-callout bs-callout-default\">\n<p>Klaviyo cannot assist with any data issues outside of our system, should the failure be caused by your application or the data not being sent correctly. We suggest reviewing our <a href=\"https://developers.klaviyo.com/en/docs/how_to_add_a_webhook_action_to_a_flow\">How to add a webhook action to a flow</a> guide to make sure you have correctly set up the action.</p>\n</div>\n<h2 id=\"h_01HERAPJ9KZ3T9Y4NMSF7X0PQV\">Webhook use cases</h2>\n<p>It is key to understand the flow triggers that can generate webhooks, as well as some practical use cases on how to implement these with your other applications.</p>\n<p>Examples include:</p>\n<ul>\n<li>Sending a message to re-engage lapsed customers.</li>\n<li>Sending a message on your customers’ birthday, and giving them a gift in the form of loyalty points.</li>\n<li>Sending the webhook any time a new subscriber joins your lists. You can send their profile data to another platform.</li>\n<li>Sending a customer an NPS survey to learn more about your subscribers.</li>\n<li>Sending a message or POST request that triggers based on a subscriber being added to a segment or list. However, note that we do not support the “Received Email\" event as a flow trigger.</li>\n</ul>\n<h3 id=\"h_01HERAPJ9KAXPEJ8Q5HDXSW4RK\">Real-world example</h3>\n<p>You decide to connect Klaviyo to your direct mailing tool so you can communicate with customers online and by mail. Your new customer Shah went to your website and bought a few items from your ecommerce store. You want to send Shah a print catalog of your full collection in the future.</p>\n<p>Here is where the webhook can tie these experiences together. You would already have your ecommerce store integrated into Klaviyo. In Klaviyo, you set up a flow to trigger based on the <em>Placed Order</em> event. You would then provide us with the webhook of the direct mail tool and include details like the customer’s name, address, and what they ordered in the message (i.e., the payload).</p>\n<p>Now, every time someone (like Shah) places an order, an event could initiate a print catalog to be sent to their address. The webhook purchase event will prompt info to be sent to your direct mailing tool in potential real-time right from Klaviyo (i.e., the message or payload).</p>\n<h2 id=\"h_01HERAPJ9KKKS5XYCX3M57M0X6\">What can Klaviyo webhooks not do?</h2>\n<p>Webhooks are not meant to be a bidirectional sync of data. This means that although you can connect other platforms to Klaviyo to send data from us to them, you cannot pass data back to Klaviyo. Information will flow from Klaviyo into the designated systems or applications that you have connected to but cannot flow the other way. Webhooks, unlike API’s, will only work in this one-direction manner.</p>\n<p>It’s also important to consider the events that you choose to prompt your information, how often this will happen, and where that data ultimately goes in your system. Klaviyo will provide the framework for connecting your flows data to a platform, but the ultimate value depends on where that information goes after leaving Klaviyo, and what it potentially prompts. Therefore, Klaviyo can only monitor if the webhook is working and not where the data is going or what it is doing after it leaves our system.</p>\n<p>Finally, it’s important to consider the data that Klaviyo can and cannot send via a webhook. Klaviyo cannot send certain data points through a webhook based on the way that our flow triggers function. For example, we cannot send email open engagement data for every time that a subscriber opens an email, as you cannot trigger a flow based on opens.</p>\n<p>Similarly, while you can use event-based dynamic variables in your webhook payload in an event-triggered flow, the available variables are connected to the original event that triggered the flow (i.e., just like with flow emails). For example, if you have an Abandoned Cart flow triggered by the <em>Started Checkout</em> event, you can use dynamic variables from that event in the webhooks payload. But, if in the same flow you’re also using a flow filter or split using an <em>Added to Cart</em> metric, you cannot include this additional data in the webhook payload.</p>\n<p>Thus, when setting up your webhooks, it’s important to consider what flows can support for data points and what you are looking to achieve in your webhook setup.</p>\n<p>Currently, coupon codes, web feeds, and product feeds are not supported in flow webhooks.</p>\n<h2 id=\"h_01HERAPJ9K8FR1QFEQZAH6QQTK\">Who should set up webhooks?</h2>\n<p>As noted above, the systems that you connect to Klaviyo, the manner in which the information or data is packaged, and what data or info you choose to grab, are completely at your discretion.</p>\n<p>With this in mind, we strongly recommend a development resource to set up webhooks to ensure that the right events are sent from Klaviyo and post correctly in your application. Klaviyo will also provide you with errors if any webhook fails. However, we may not be able to diagnose any deeper issues with the webhook setup, or how the data is ultimately posting to your application. </p>\n<h3 id=\"h_01HERAPJ9KEBV8F2ZMSQKPEHY9\">Requirements and considerations</h3>\n<p>In addition to making sure you have a developer resource to properly set up your webhook and test it on your accompanying system, Klaviyo has some key requirements for using this functionality:</p>\n<ul>\n<li>Only user roles who have <a href=\"https://help.klaviyo.com/hc/en-us/articles/115005231648-Guide-to-User-Management-and-Privileges\">access to create flows</a> can set up webhooks in Klaviyo. This includes the roles of Manager, Admin, and Owner.</li>\n<li>For added security, <a href=\"https://help.klaviyo.com/hc/en-us/articles/360026617692\">two-step authentication </a>must be enabled within your account in order to use webhooks or add new webhook actions within an existing flow.</li>\n</ul>\n<h2 id=\"h_01HERAPJ9KRBQ55FEY45QJDDEW\">Ready to set up?</h2>\n<p>Webooks provide powerful mechanisms for communicating data from Klaviyo to your other outside systems or applications. If you are ready to set up your webhooks, you can read our developer documentation guide on <a href=\"https://developers.klaviyo.com/en/docs/how_to_add_a_webhook_action_to_a_flow\">How to add a webhook action to a flow</a>.</p>",
+    "user_segment_ids": []
+  },
+  "normalized": {
+    "id": "4534329515931",
+    "title": "Understanding webhooks in flows",
+    "source_url": "https://help.klaviyo.com/hc/en-us/articles/4534329515931-Understanding-webhooks-in-flows",
+    "section_id": 49375527980059,
+    "section": "Add steps or actions to flows",
+    "category_id": 115000312411,
+    "category": "Flows",
+    "category_slug": "flows",
+    "klaviyo_updated": "2026-04-21T13:55:01Z",
+    "created_at": "2022-03-04T17:18:30Z",
+    "draft": false,
+    "promoted": false,
+    "position": 0,
+    "label_names": []
+  },
+  "files": {
+    "body_html": "_source/articles/4534329515931.body.html",
+    "rendered_html": "_source/rendered/4534329515931.html"
+  },
+  "assets": {
+    "api_body": {
+      "images": [],
+      "links": [
+        {
+          "href": "https://developers.klaviyo.com/en/docs/how_to_add_a_webhook_action_to_a_flow",
+          "text": "how to add a webhook action to a flow"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/how_to_add_a_webhook_action_to_a_flow",
+          "text": "How to add a webhook action to a flow"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005231648-Guide-to-User-Management-and-Privileges",
+          "text": "access to create flows"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360026617692",
+          "text": "two-step authentication"
+        }
+      ],
+      "headings": [
+        {
+          "level": 2,
+          "id": "h_01HERAPJ9KGZKW3JYS9E9K1AAP",
+          "text": "You will learn"
+        },
+        {
+          "level": 2,
+          "id": "h_01HERAPJ9K1AQK20YS6QP8BMAE",
+          "text": "What are webhooks?"
+        },
+        {
+          "level": 3,
+          "id": "h_01HERAPJ9KWQE33ZBF1VN7BEME",
+          "text": "Key components of webhooks"
+        },
+        {
+          "level": 2,
+          "id": "h_01HERAPJ9KFHN7WFF4KA7CHPEM",
+          "text": "Webhooks in flows"
+        },
+        {
+          "level": 2,
+          "id": "h_01HERAPJ9KZ3T9Y4NMSF7X0PQV",
+          "text": "Webhook use cases"
+        },
+        {
+          "level": 3,
+          "id": "h_01HERAPJ9KAXPEJ8Q5HDXSW4RK",
+          "text": "Real-world example"
+        },
+        {
+          "level": 2,
+          "id": "h_01HERAPJ9KKKS5XYCX3M57M0X6",
+          "text": "What can Klaviyo webhooks not do?"
+        },
+        {
+          "level": 2,
+          "id": "h_01HERAPJ9K8FR1QFEQZAH6QQTK",
+          "text": "Who should set up webhooks?"
+        },
+        {
+          "level": 3,
+          "id": "h_01HERAPJ9KEBV8F2ZMSQKPEHY9",
+          "text": "Requirements and considerations"
+        },
+        {
+          "level": 2,
+          "id": "h_01HERAPJ9KRBQ55FEY45QJDDEW",
+          "text": "Ready to set up?"
+        }
+      ]
+    },
+    "rendered_page": {
+      "images": [
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/7ff492c2b417b7ecfe572f839a8a81398693c1f7-1920x1080.webp",
+          "alt": "",
+          "width": "",
+          "height": ""
+        }
+      ],
+      "links": [
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4534329515931-Understanding-webhooks-in-flows#site-content",
+          "text": "Skip to main content"
+        },
+        {
+          "href": "https://www.klaviyo.com",
+          "text": "Home"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center"
+        },
+        {
+          "href": "https://www.klaviyo.com/enterprise",
+          "text": "Enterprise"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Partners"
+        },
+        {
+          "href": "https://www.klaviyo.com/careers",
+          "text": "Careers"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": "Log in"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": ""
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center Find step-by-step instructions and troubleshooting solutions in our knowledge base."
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000032731",
+          "text": "Integrations"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000312411",
+          "text": "Flows"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867867",
+          "text": "Audience"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867667",
+          "text": "Campaigns"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/360000190711",
+          "text": "Sign-up forms"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000873988",
+          "text": "Deliverability & compliance"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/29173800271259",
+          "text": "SMS"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/16638219724187",
+          "text": "Reviews"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/18073014919195",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/34141283979931",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/37659126754075",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/33948021740315",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/39746685522331",
+          "text": "WhatsApp"
+        },
+        {
+          "href": "https://academy.klaviyo.com",
+          "text": "Klaviyo Academy Expert training and education to help you succeed with Klaviyo, and beyond."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Quick+guide&resource=academy_courses",
+          "text": "Quick guides Learn marketing strategies and concepts in 15 minutes or less."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Course&resource=academy_courses",
+          "text": "Courses Master key marketing topics through structured lessons and exams."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/best-practices",
+          "text": "Best practices Discover top product and marketing strategies for your business."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/learning-paths",
+          "text": "Learning paths Complete curated learning journeys tailored to your marketing goals."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses",
+          "text": "Explore all resources"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Live+training&resource=academy_courses",
+          "text": "Live trainings Build confidence through hands-on interactive workshops and thought-provoking strategy sessions."
+        },
+        {
+          "href": "https://www.bigmarker.com/klaviyo-customer-education/Office-hours-Getting-started-with-Klaviyo",
+          "text": "Live office hours Join a strategic discussion where you can ask questions and get answers in real-time."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/private-live-training",
+          "text": "1:1 Live training Book a private training session with an expert to jumpstart your platform knowledge and confidence."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/credentials",
+          "text": "Klaviyo credentials Dig deeper into select topics and showcase your expertise with a final exam to earn a certificate and digital badge."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/certificates/klaviyo-practitioner-certificate",
+          "text": "Klaviyo practitioner certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/deliverability-certificate",
+          "text": "Deliverability certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/developer-certificate",
+          "text": "Klaviyo developer certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses&select=Certificate",
+          "text": "See all certificates"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Klaviyo Community Join our thriving community network to connect with brands like yours—online and in person."
+        },
+        {
+          "href": "https://community.klaviyo.com/topic/new",
+          "text": "Ask a question Post a question and get thoughtful answers from Klaviyo powerusers."
+        },
+        {
+          "href": "https://community.klaviyo.com/p/roadmap",
+          "text": "Product roadmap"
+        },
+        {
+          "href": "https://community.klaviyo.com/search/activity/recent",
+          "text": "Recent threads"
+        },
+        {
+          "href": "https://community.klaviyo.com/p/champions",
+          "text": "Meet the Champions"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups",
+          "text": "Browse all groups Your people are waiting. New ideas and connections are a click away."
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/developer-group-64",
+          "text": "Developer group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/entrepreneur-user-group-118",
+          "text": "Entrepreneur group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/woo-user-group-87",
+          "text": "WooCommerce group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/new-york-meetup-chapter-82",
+          "text": "New York City"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/los-angeles-meetup-chapter-83",
+          "text": "Los Angeles"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/austin-meetup-chapter-85",
+          "text": "Austin"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/san-diego-meetup-chapter-86",
+          "text": "San Diego"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/amsterdam-meetup-chapter-84",
+          "text": "Amsterdam"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Klaviyo Developers Access API documentation and developer guides to help you build with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/get_started",
+          "text": "Get started Access key resources and a step-by-step checklist for how to start developing with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/build_your_integration",
+          "text": "Grow your app's reach Learn how to join our ecosystem and get your app listed on our marketplace."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/developer-tools",
+          "text": "Developer tools Generate sample data, monitor your API usage, and access our Postman collections."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/reference/api_overview",
+          "text": "API reference Browse our full catalog of API docs."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/changelog_",
+          "text": "Changelog"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/api_versioning_and_deprecation_policy",
+          "text": "Versioning & deprecation policy"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/rate_limits_and_error_handling",
+          "text": "Rate limits & error handling"
+        },
+        {
+          "href": "https://youtube.com/playlist?list=PLHkNfHgtxcUanrkMnKPdkRzuWU7MGv_xM&si=pkG-KH7IT_TUHOGC",
+          "text": "API tutorials on YouTube Subscribe to our Klaviyo API Tutorials playlist for easy access to step-by-step developer walkthroughs."
+        },
+        {
+          "href": "https://www.klaviyo.com/contact-us",
+          "text": "Contact us"
+        },
+        {
+          "href": "https://www.klaviyo.com/sign-up",
+          "text": "Sign up"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": "Search"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4534329515931",
+          "text": "United States - EN"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/de-de/articles/4534329515931",
+          "text": "Deutschland - DE"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-es/articles/4534329515931",
+          "text": "España - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-mx/articles/4534329515931",
+          "text": "México - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/fr-fr/articles/4534329515931",
+          "text": "France - FR"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/it-it/articles/4534329515931",
+          "text": "Italia - IT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/ko-kr/articles/4534329515931",
+          "text": "한국 - KO"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/nl-nl/articles/4534329515931",
+          "text": "Nederland - NL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pl-pl/articles/4534329515931",
+          "text": "Polska - PL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pt-br/articles/4534329515931",
+          "text": "Brasil - PT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/sv-se/articles/4534329515931",
+          "text": "Sverige - SV"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/49375535264795",
+          "text": "Build and use flows"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/49375527980059",
+          "text": "Add steps or actions to flows"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4534329515931-Understanding-webhooks-in-flows#h_01HERAPJ9KGZKW3JYS9E9K1AAP",
+          "text": "You will learn"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4534329515931-Understanding-webhooks-in-flows#h_01HERAPJ9K1AQK20YS6QP8BMAE",
+          "text": "What are webhooks?"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4534329515931-Understanding-webhooks-in-flows#h_01HERAPJ9KFHN7WFF4KA7CHPEM",
+          "text": "Webhooks in flows"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4534329515931-Understanding-webhooks-in-flows#h_01HERAPJ9KZ3T9Y4NMSF7X0PQV",
+          "text": "Webhook use cases"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4534329515931-Understanding-webhooks-in-flows#h_01HERAPJ9KKKS5XYCX3M57M0X6",
+          "text": "What can Klaviyo webhooks not do?"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4534329515931-Understanding-webhooks-in-flows#h_01HERAPJ9K8FR1QFEQZAH6QQTK",
+          "text": "Who should set up webhooks?"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4534329515931-Understanding-webhooks-in-flows#h_01HERAPJ9KRBQ55FEY45QJDDEW",
+          "text": "Ready to set up?"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4534329515931-Understanding-webhooks-in-flows#additional-resources",
+          "text": "Additional resources"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/how_to_add_a_webhook_action_to_a_flow",
+          "text": "how to add a webhook action to a flow"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/how_to_add_a_webhook_action_to_a_flow",
+          "text": "How to add a webhook action to a flow"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005231648-Guide-to-User-Management-and-Privileges",
+          "text": "access to create flows"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360026617692",
+          "text": "two-step authentication"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115002779051",
+          "text": "Understanding flow triggers and filters"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360028374111",
+          "text": "How to preview a flow trigger setup"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115001002272",
+          "text": "Learn how to contact support"
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": ""
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": "Visit Community"
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": ""
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": "Hire a partner"
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/about",
+          "text": "About Klaviyo"
+        },
+        {
+          "href": "https://www.klaviyo.com/newsroom",
+          "text": "Newsroom"
+        },
+        {
+          "href": "https://investors.klaviyo.com/overview/default.aspx",
+          "text": "Investor relations"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Agency and tech partners"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Developers"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/retail",
+          "text": "Retail and ecommerce"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/restaurants",
+          "text": "Restaurant marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/wellness",
+          "text": "Wellness"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform",
+          "text": "B2C CRM overview"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai",
+          "text": "Klaviyo AI (K:AI)"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/marketing-automation",
+          "text": "Klaviyo Marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-service",
+          "text": "Klaviyo Service"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/analytics",
+          "text": "Klaviyo Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-data-platform",
+          "text": "Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare",
+          "text": "Klaviyo vs. Klaviyo alternatives"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-mailchimp",
+          "text": "Klaviyo vs. Mailchimp"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-postscript",
+          "text": "Klaviyo vs. Postscript"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-attentive",
+          "text": "Klaviyo vs. Attentive"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-salesforce-marketing-cloud",
+          "text": "Klaviyo vs. Salesforce"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-listrak",
+          "text": "Klaviyo vs. Listrak"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/omnichannel",
+          "text": "Omnichannel marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/email-marketing",
+          "text": "Email marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing",
+          "text": "SMS marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing/rcs",
+          "text": "RCS for Business"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/mobile-app-marketing",
+          "text": "Mobile app marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/whatsapp",
+          "text": "WhatsApp marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/social",
+          "text": "Social marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources",
+          "text": "Marketing resources"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources/marketing-campaign-calendar",
+          "text": "Marketing campaign calendar"
+        },
+        {
+          "href": "https://www.klaviyo.com/glossary",
+          "text": "Marketing glossary"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/email-subject-line-generator",
+          "text": "Subject line generator"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/roi-calculator",
+          "text": "ROI calculator"
+        },
+        {
+          "href": "https://www.klaviyo.com/customers",
+          "text": "Case studies"
+        },
+        {
+          "href": "https://www.klaviyo.com/composer",
+          "text": "Composer Beta"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/marketing-agent",
+          "text": "Marketing Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/customer-agent",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/customer-experience-hub",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/helpdesk",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/marketing-analytics",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/advanced-cdp",
+          "text": "Advanced Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/web-forms",
+          "text": "Web forms"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/email-templates",
+          "text": "Email templates"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/portfolio",
+          "text": "Portfolio"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform-integrations",
+          "text": "Apps and Integrations"
+        },
+        {
+          "href": "https://www.klaviyo.com/features",
+          "text": "Features"
+        },
+        {
+          "href": "https://www.klaviyo.com/whats-new",
+          "text": "What's new"
+        },
+        {
+          "href": "https://www.klaviyo.com/events",
+          "text": "Events"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help Center"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us",
+          "text": "Academy"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Community"
+        },
+        {
+          "href": "https://www.facebook.com/Klaviyo/",
+          "text": "Facebook"
+        },
+        {
+          "href": "https://twitter.com/klaviyo/",
+          "text": "Twitter"
+        },
+        {
+          "href": "https://www.linkedin.com/company/klaviyo/",
+          "text": "LinkedIn"
+        },
+        {
+          "href": "https://www.instagram.com/klaviyo/",
+          "text": "Instagram"
+        },
+        {
+          "href": "https://www.klaviyo.com/sitemap",
+          "text": "Site Map"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal",
+          "text": "Terms and Privacy"
+        },
+        {
+          "href": "https://www.klaviyo.com/security",
+          "text": "Security"
+        },
+        {
+          "href": "https://www.klaviyo.com/trust",
+          "text": "Trust"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal/intellectual-property-notices",
+          "text": "Intellectual Property Notices"
+        }
+      ],
+      "headings": [
+        {
+          "level": 1,
+          "id": "",
+          "text": "Understanding webhooks in flows"
+        },
+        {
+          "level": 2,
+          "id": "h_01HERAPJ9KGZKW3JYS9E9K1AAP",
+          "text": "You will learn"
+        },
+        {
+          "level": 2,
+          "id": "h_01HERAPJ9K1AQK20YS6QP8BMAE",
+          "text": "What are webhooks?"
+        },
+        {
+          "level": 3,
+          "id": "h_01HERAPJ9KWQE33ZBF1VN7BEME",
+          "text": "Key components of webhooks"
+        },
+        {
+          "level": 2,
+          "id": "h_01HERAPJ9KFHN7WFF4KA7CHPEM",
+          "text": "Webhooks in flows"
+        },
+        {
+          "level": 2,
+          "id": "h_01HERAPJ9KZ3T9Y4NMSF7X0PQV",
+          "text": "Webhook use cases"
+        },
+        {
+          "level": 3,
+          "id": "h_01HERAPJ9KAXPEJ8Q5HDXSW4RK",
+          "text": "Real-world example"
+        },
+        {
+          "level": 2,
+          "id": "h_01HERAPJ9KKKS5XYCX3M57M0X6",
+          "text": "What can Klaviyo webhooks not do?"
+        },
+        {
+          "level": 2,
+          "id": "h_01HERAPJ9K8FR1QFEQZAH6QQTK",
+          "text": "Who should set up webhooks?"
+        },
+        {
+          "level": 3,
+          "id": "h_01HERAPJ9KEBV8F2ZMSQKPEHY9",
+          "text": "Requirements and considerations"
+        },
+        {
+          "level": 2,
+          "id": "h_01HERAPJ9KRBQ55FEY45QJDDEW",
+          "text": "Ready to set up?"
+        },
+        {
+          "level": 2,
+          "id": "additional-resources",
+          "text": "Additional resources"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "Explore more from Klaviyo"
+        }
+      ]
+    }
+  },
+  "rendered_page": {
+    "status": "fetched",
+    "error": ""
+  }
+}

@@ -1,0 +1,904 @@
+{
+  "captured_at": "2026-05-23T16:14:51Z",
+  "article": {
+    "id": 30880678063899,
+    "url": "https://klaviyo.zendesk.com/api/v2/help_center/en-us/articles/30880678063899.json",
+    "html_url": "https://klaviyo.zendesk.com/hc/en-us/articles/30880678063899-How-to-message-BigCommerce-customers-by-storefront",
+    "author_id": 409167690492,
+    "comments_disabled": true,
+    "draft": false,
+    "promoted": false,
+    "position": 0,
+    "vote_sum": 0,
+    "vote_count": 0,
+    "section_id": 49375361359643,
+    "created_at": "2024-11-12T21:26:52Z",
+    "updated_at": "2026-04-21T13:54:38Z",
+    "name": "How to message BigCommerce customers by storefront",
+    "title": "How to message BigCommerce customers by storefront",
+    "source_locale": "en-us",
+    "locale": "en-us",
+    "outdated": false,
+    "outdated_locales": [],
+    "edited_at": "2026-04-17T00:55:53Z",
+    "user_segment_id": null,
+    "permission_group_id": 146372,
+    "content_tag_ids": [],
+    "label_names": [],
+    "body": "<h2 id=\"h_01JCH3X25X8T1Z5M4E6GJ7H701\">You will learn</h2>\n<p>Learn how to message BigCommerce customers by storefront. If you are using BigCommerce Multi-Storefront (MSF), Klaviyo syncs a property called Channel ID with each order event that tells you which storefront a customer interacted with. This information is added to Klaviyo profiles, and can be used to segment customers in Klaviyo and send them targeted messaging. </p>\n<h2 id=\"h_01JCH3X4YNRWB7NXM40NRM749Y\">Before you begin</h2>\n<p>Make sure you’ve <a href=\"https://help.klaviyo.com/hc/en-us/articles/115005082547\">integrated your BigCommerce store with Klaviyo</a> before continuing with this article.</p>\n<div class=\"bs-callout bs-callout-default\">\n<p>Please note that not all aspects of Klaviyo’s BigCommerce integration are natively compatible with BigCommerce Multi-Storefront, including onsite tracking and sign-up forms. Klaviyo’s storefront-specific messaging capabilities are limited to profiles that have logged events with Channel ID, which are listed below. </p>\n</div>\n<h2 id=\"h_01JCH3X8A5TCJ53JYJDVSMFBX4\">Data synced from BigCommerce</h2>\n<p>The Channel ID property indicates which BigCommerce storefront the customer interacted with.</p>\n<p>Klaviyo syncs the Channel ID property from BigCommerce for the following events:</p>\n<ul>\n<li>Started Checkout</li>\n<li>Placed Order</li>\n<li>Ordered Product </li>\n<li>Fulfilled Order </li>\n<li>Canceled Order</li>\n<li>Refunded Order<br>\n<p>Any customer that has tracked one of the above events will have 2 Channel ID-related properties added to their Klaviyo profile:</p>\n</li>\n<li>\n<strong>BigCommerce Original Channel ID</strong><br>\nThis property lists the ID of the first storefront visited by the profile.</li>\n<li>\n<strong>BigCommerce Channel IDs</strong><br>\nAn array of IDs that includes the ID of each storefront visited by the profile.</li>\n</ul>\n<p>To determine which storefront corresponds to which Channel ID: </p>\n<ol>\n<li>Place a test order on each of your storefronts.</li>\n<li>In Klaviyo, navigate to <strong>Analytics &gt; Metrics</strong>.</li>\n<li>Filter by <em>BigCommerce</em>.</li>\n<li>Select the <strong>Placed Order</strong> event, then select <strong>Activity feed</strong>.<br>\n\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/30880829241499\" alt=\"\" width=\"498\" height=\"137\">\n</li>\n<li>For each of your test orders, click the 3-dot menu and select <strong>Activity details</strong>. You’ll be able to see the Channel ID for the order.<br>\n\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/30880829243419\" alt=\"\">\n</li>\n<li>Make note of which test order/storefront corresponded to which Channel ID.</li>\n</ol>\n<h2 id=\"h_01JCH3XDVNWPD6MKA2024GNQYA\">Segment customers by storefront</h2>\n<p>You can create a segment for each of your storefronts by doing the following:</p>\n<ol>\n<li>In Klaviyo, navigate to <strong>Audience &gt;</strong><strong>Lists &amp; segments</strong>.</li>\n<li>Select <strong>Create new &gt; Create segment</strong>.</li>\n<li>Name your segment something descriptive (e.g., “[Storefront Name] Customers”).</li>\n<li>For your first segment condition, select <strong>Properties about someone &gt; BigCommerce Origin Channel Name &gt; equals &gt; [Channel ID of storefront]</strong>. <em>Type</em> should be set to <em>Number</em>.</li>\n<li>Add a second segment condition using <em>AND</em>. If you are looking to email these customers, this condition should be<strong> If someone can or cannot receive marketing &gt; can receive &gt; email marketing</strong>. This ensures that customers in your segment can receive marketing emails.<br>\n\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/30880829246875\" alt=\"\" width=\"619\" height=\"474\">\n</li>\n<li>When you’re done, click <strong>Create segment</strong>.</li>\n</ol>\n<p>Please note that this segment looks at the first storefront that a customer visits. </p>\n<h3 id=\"h_01JCH3WYQ8JBJ7MRF67CRN8V0D\">Customers without Channel ID tracked</h3>\n<p>You can also create another segment for BigCommerce customers where a Channel ID has not been tracked. This can happen if someone fills out a Klaviyo form on your BigCommerce site but has not started checkout, placed an order, etc. Your segment conditions will be <strong>Properties about someone &gt; BigCommerce Origin Channel &gt; is not set</strong><strong>AND</strong><strong>If someone can or cannot receive marketing &gt; can receive &gt; email marketing</strong>. Make sure to set <em>Type</em> to <em>Text</em> for the first condition.<br>\n</p>\n<p><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/30880785555227\" alt=\"\" width=\"621\" height=\"447\"></p>\n<h2 id=\"h_01JCH3XWJHVS6H6QC26FSBP3WG\">Message customers by storefront</h2>\n<p>If you want to only message subscribers for a specific storefront, you can create a <a href=\"https://help.klaviyo.com/hc/en-us/articles/360003040052\">segment-triggered flow</a> for one of the segments you created above, or <a href=\"https://help.klaviyo.com/hc/en-us/articles/115005054847\">send a campaign</a> to that segment. </p>\n<p>You can also message all of your subscribers, and customize that messaging by storefront. Below, learn how to create a set of welcome messaging by storefront, and how to create an abandoned cart flow personalized by storefront.</p>\n<h3 id=\"h_01JCH3Y04ZV532Q4N59SP3Q822\">Welcome series by storefront</h3>\n<p>To create a welcome series flow by storefront, you’ll want to adapt a <a href=\"https://help.klaviyo.com/hc/en-us/articles/115002775172\">traditional welcome series</a>. First, you will need to create separate <a href=\"https://help.klaviyo.com/hc/en-us/articles/360003040052\">segment-triggered flows</a> welcoming customers, each triggered by one of your storefront segments above. Then, you can personalize each flow message to the specific storefront. </p>\n<p>For customers who have subscribed to marketing but Channel ID has not been tracked, make sure to create an extra welcome series flow that is not specific to any storefront. This can happen if someone fills out a Klaviyo form on your BigCommerce site but has not started checkout, placed an order, etc.</p>\n<h3 id=\"h_01JCH3Y4DYJGAZX30A7MK9F42Q\">Abandoned cart by storefront</h3>\n<p>You can send personalized abandoned cart reminders to customers based on their associated storefront. </p>\n<ol>\n<li>To create the flow, start with an <a href=\"https://www.klaviyo.com/library/flows?object_id=JmMG2t\">Abandoned Cart Reminder template</a>. You’ll edit this template with conditional splits for each storefront. </li>\n<li>After the 4 hour split, add a conditional split for the first storefront. Set the condition to <strong>BigCommerce Origin Channel &gt; equals &gt; [First Channel ID]</strong>. Set <em>Type</em> to <em>Number</em>.<br>\n\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/30880785557787\" alt=\"\" width=\"280\" height=\"310\">\n</li>\n<li>The <em>Yes</em> path for this split should be the rest of the blocks from the original template. Customize the flow messages in this path to your first storefront. For the <em>No</em> path, you should add another conditional split with the same conditions, except it should be set to your second storefront. </li>\n<li>The second <em>Yes </em>path should be a copy of the first <em>Yes</em> path’s content, except you should customize the message content to your second storefront. </li>\n<li>Keep adding conditional splits in this manner for each storefront. When you get to the last one, the <em>No</em> path should end the flow with no further content. This is because each profile that tracks a <em>Started Checkout</em> event should have a Channel ID and be directed down one of the <em>Yes</em> paths. </li>\n</ol>\n<p><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/30882230895387\" alt=\"\"></p>\n<h2 id=\"h_01JCH3Y84VSKAA8EC8S0TCK4KJ\">Outcome</h2>\n<p>You’ve now learned how to segment your BigCommerce customers by storefront and send them targeted messaging. </p>",
+    "user_segment_ids": []
+  },
+  "normalized": {
+    "id": "30880678063899",
+    "title": "How to message BigCommerce customers by storefront",
+    "source_url": "https://help.klaviyo.com/hc/en-us/articles/30880678063899-How-to-message-BigCommerce-customers-by-storefront",
+    "section_id": 49375361359643,
+    "section": "BigCommerce best practices",
+    "category_id": 115000032731,
+    "category": "Integrations",
+    "category_slug": "integrations",
+    "klaviyo_updated": "2026-04-21T13:54:38Z",
+    "created_at": "2024-11-12T21:26:52Z",
+    "draft": false,
+    "promoted": false,
+    "position": 0,
+    "label_names": []
+  },
+  "files": {
+    "body_html": "_source/articles/30880678063899.body.html",
+    "rendered_html": "_source/rendered/30880678063899.html"
+  },
+  "assets": {
+    "api_body": {
+      "images": [
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/30880829241499",
+          "alt": "",
+          "width": "498",
+          "height": "137"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/30880829243419",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/30880829246875",
+          "alt": "",
+          "width": "619",
+          "height": "474"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/30880785555227",
+          "alt": "",
+          "width": "621",
+          "height": "447"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/30880785557787",
+          "alt": "",
+          "width": "280",
+          "height": "310"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/30882230895387",
+          "alt": "",
+          "width": "",
+          "height": ""
+        }
+      ],
+      "links": [
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005082547",
+          "text": "integrated your BigCommerce store with Klaviyo"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360003040052",
+          "text": "segment-triggered flow"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005054847",
+          "text": "send a campaign"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115002775172",
+          "text": "traditional welcome series"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360003040052",
+          "text": "segment-triggered flows"
+        },
+        {
+          "href": "https://www.klaviyo.com/library/flows?object_id=JmMG2t",
+          "text": "Abandoned Cart Reminder template"
+        }
+      ],
+      "headings": [
+        {
+          "level": 2,
+          "id": "h_01JCH3X25X8T1Z5M4E6GJ7H701",
+          "text": "You will learn"
+        },
+        {
+          "level": 2,
+          "id": "h_01JCH3X4YNRWB7NXM40NRM749Y",
+          "text": "Before you begin"
+        },
+        {
+          "level": 2,
+          "id": "h_01JCH3X8A5TCJ53JYJDVSMFBX4",
+          "text": "Data synced from BigCommerce"
+        },
+        {
+          "level": 2,
+          "id": "h_01JCH3XDVNWPD6MKA2024GNQYA",
+          "text": "Segment customers by storefront"
+        },
+        {
+          "level": 3,
+          "id": "h_01JCH3WYQ8JBJ7MRF67CRN8V0D",
+          "text": "Customers without Channel ID tracked"
+        },
+        {
+          "level": 2,
+          "id": "h_01JCH3XWJHVS6H6QC26FSBP3WG",
+          "text": "Message customers by storefront"
+        },
+        {
+          "level": 3,
+          "id": "h_01JCH3Y04ZV532Q4N59SP3Q822",
+          "text": "Welcome series by storefront"
+        },
+        {
+          "level": 3,
+          "id": "h_01JCH3Y4DYJGAZX30A7MK9F42Q",
+          "text": "Abandoned cart by storefront"
+        },
+        {
+          "level": 2,
+          "id": "h_01JCH3Y84VSKAA8EC8S0TCK4KJ",
+          "text": "Outcome"
+        }
+      ]
+    },
+    "rendered_page": {
+      "images": [
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/7ff492c2b417b7ecfe572f839a8a81398693c1f7-1920x1080.webp",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/c950fb97c669c127339322cae62fc7993c259221-1254x346.png?w=498",
+          "alt": "",
+          "width": "498",
+          "height": "137"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/7cb8ab54feca628caeb2076cbb64b94c4cfdf6c1-1612x840.png",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/00cd65f7a17dea052a7ee4267417c2b4970616cd-1352x1034.png?w=619",
+          "alt": "",
+          "width": "619",
+          "height": "474"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/dd093af41c09f82eeddf3016c8c285e443f51703-1354x974.png?w=621",
+          "alt": "",
+          "width": "621",
+          "height": "447"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/b3f7e88620f5b45234f1862a2c6a3418edfcc691-680x754.png?w=280",
+          "alt": "",
+          "width": "280",
+          "height": "310"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/30d52658a1502b4c785b12f38f63a7c9f3d7ce9a-1314x1212.png",
+          "alt": "",
+          "width": "",
+          "height": ""
+        }
+      ],
+      "links": [
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/30880678063899-How-to-message-BigCommerce-customers-by-storefront#site-content",
+          "text": "Skip to main content"
+        },
+        {
+          "href": "https://www.klaviyo.com",
+          "text": "Home"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center"
+        },
+        {
+          "href": "https://www.klaviyo.com/enterprise",
+          "text": "Enterprise"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Partners"
+        },
+        {
+          "href": "https://www.klaviyo.com/careers",
+          "text": "Careers"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": "Log in"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": ""
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center Find step-by-step instructions and troubleshooting solutions in our knowledge base."
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000032731",
+          "text": "Integrations"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000312411",
+          "text": "Flows"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867867",
+          "text": "Audience"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867667",
+          "text": "Campaigns"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/360000190711",
+          "text": "Sign-up forms"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000873988",
+          "text": "Deliverability & compliance"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/29173800271259",
+          "text": "SMS"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/16638219724187",
+          "text": "Reviews"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/18073014919195",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/34141283979931",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/37659126754075",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/33948021740315",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/39746685522331",
+          "text": "WhatsApp"
+        },
+        {
+          "href": "https://academy.klaviyo.com",
+          "text": "Klaviyo Academy Expert training and education to help you succeed with Klaviyo, and beyond."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Quick+guide&resource=academy_courses",
+          "text": "Quick guides Learn marketing strategies and concepts in 15 minutes or less."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Course&resource=academy_courses",
+          "text": "Courses Master key marketing topics through structured lessons and exams."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/best-practices",
+          "text": "Best practices Discover top product and marketing strategies for your business."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/learning-paths",
+          "text": "Learning paths Complete curated learning journeys tailored to your marketing goals."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses",
+          "text": "Explore all resources"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Live+training&resource=academy_courses",
+          "text": "Live trainings Build confidence through hands-on interactive workshops and thought-provoking strategy sessions."
+        },
+        {
+          "href": "https://www.bigmarker.com/klaviyo-customer-education/Office-hours-Getting-started-with-Klaviyo",
+          "text": "Live office hours Join a strategic discussion where you can ask questions and get answers in real-time."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/private-live-training",
+          "text": "1:1 Live training Book a private training session with an expert to jumpstart your platform knowledge and confidence."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/credentials",
+          "text": "Klaviyo credentials Dig deeper into select topics and showcase your expertise with a final exam to earn a certificate and digital badge."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/certificates/klaviyo-practitioner-certificate",
+          "text": "Klaviyo practitioner certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/deliverability-certificate",
+          "text": "Deliverability certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/developer-certificate",
+          "text": "Klaviyo developer certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses&select=Certificate",
+          "text": "See all certificates"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Klaviyo Community Join our thriving community network to connect with brands like yours—online and in person."
+        },
+        {
+          "href": "https://community.klaviyo.com/topic/new",
+          "text": "Ask a question Post a question and get thoughtful answers from Klaviyo powerusers."
+        },
+        {
+          "href": "https://community.klaviyo.com/p/roadmap",
+          "text": "Product roadmap"
+        },
+        {
+          "href": "https://community.klaviyo.com/search/activity/recent",
+          "text": "Recent threads"
+        },
+        {
+          "href": "https://community.klaviyo.com/p/champions",
+          "text": "Meet the Champions"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups",
+          "text": "Browse all groups Your people are waiting. New ideas and connections are a click away."
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/developer-group-64",
+          "text": "Developer group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/entrepreneur-user-group-118",
+          "text": "Entrepreneur group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/woo-user-group-87",
+          "text": "WooCommerce group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/new-york-meetup-chapter-82",
+          "text": "New York City"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/los-angeles-meetup-chapter-83",
+          "text": "Los Angeles"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/austin-meetup-chapter-85",
+          "text": "Austin"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/san-diego-meetup-chapter-86",
+          "text": "San Diego"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/amsterdam-meetup-chapter-84",
+          "text": "Amsterdam"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Klaviyo Developers Access API documentation and developer guides to help you build with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/get_started",
+          "text": "Get started Access key resources and a step-by-step checklist for how to start developing with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/build_your_integration",
+          "text": "Grow your app's reach Learn how to join our ecosystem and get your app listed on our marketplace."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/developer-tools",
+          "text": "Developer tools Generate sample data, monitor your API usage, and access our Postman collections."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/reference/api_overview",
+          "text": "API reference Browse our full catalog of API docs."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/changelog_",
+          "text": "Changelog"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/api_versioning_and_deprecation_policy",
+          "text": "Versioning & deprecation policy"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/rate_limits_and_error_handling",
+          "text": "Rate limits & error handling"
+        },
+        {
+          "href": "https://youtube.com/playlist?list=PLHkNfHgtxcUanrkMnKPdkRzuWU7MGv_xM&si=pkG-KH7IT_TUHOGC",
+          "text": "API tutorials on YouTube Subscribe to our Klaviyo API Tutorials playlist for easy access to step-by-step developer walkthroughs."
+        },
+        {
+          "href": "https://www.klaviyo.com/contact-us",
+          "text": "Contact us"
+        },
+        {
+          "href": "https://www.klaviyo.com/sign-up",
+          "text": "Sign up"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": "Search"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/30880678063899",
+          "text": "United States - EN"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/de-de/articles/30880678063899",
+          "text": "Deutschland - DE"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-es/articles/30880678063899",
+          "text": "España - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-mx/articles/30880678063899",
+          "text": "México - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/fr-fr/articles/30880678063899",
+          "text": "France - FR"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/it-it/articles/30880678063899",
+          "text": "Italia - IT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/ko-kr/articles/30880678063899",
+          "text": "한국 - KO"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/nl-nl/articles/30880678063899",
+          "text": "Nederland - NL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pl-pl/articles/30880678063899",
+          "text": "Polska - PL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pt-br/articles/30880678063899",
+          "text": "Brasil - PT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/sv-se/articles/30880678063899",
+          "text": "Sverige - SV"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/115001509808",
+          "text": "BigCommerce"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/49375361359643",
+          "text": "BigCommerce best practices"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/30880678063899-How-to-message-BigCommerce-customers-by-storefront#h_01JCH3X25X8T1Z5M4E6GJ7H701",
+          "text": "You will learn"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/30880678063899-How-to-message-BigCommerce-customers-by-storefront#h_01JCH3X4YNRWB7NXM40NRM749Y",
+          "text": "Before you begin"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/30880678063899-How-to-message-BigCommerce-customers-by-storefront#h_01JCH3X8A5TCJ53JYJDVSMFBX4",
+          "text": "Data synced from BigCommerce"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/30880678063899-How-to-message-BigCommerce-customers-by-storefront#h_01JCH3XDVNWPD6MKA2024GNQYA",
+          "text": "Segment customers by storefront"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/30880678063899-How-to-message-BigCommerce-customers-by-storefront#h_01JCH3XWJHVS6H6QC26FSBP3WG",
+          "text": "Message customers by storefront"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/30880678063899-How-to-message-BigCommerce-customers-by-storefront#h_01JCH3Y84VSKAA8EC8S0TCK4KJ",
+          "text": "Outcome"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/30880678063899-How-to-message-BigCommerce-customers-by-storefront#additional-resources",
+          "text": "Additional resources"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005082547",
+          "text": "integrated your BigCommerce store with Klaviyo"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360003040052",
+          "text": "segment-triggered flow"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005054847",
+          "text": "send a campaign"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115002775172",
+          "text": "traditional welcome series"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360003040052",
+          "text": "segment-triggered flows"
+        },
+        {
+          "href": "https://www.klaviyo.com/library/flows?object_id=JmMG2t",
+          "text": "Abandoned Cart Reminder template"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005082547",
+          "text": "Getting started with BigCommerce"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005082587",
+          "text": "BigCommerce data reference"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115001002272",
+          "text": "Learn how to contact support"
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": ""
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": "Visit Community"
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": ""
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": "Hire a partner"
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/about",
+          "text": "About Klaviyo"
+        },
+        {
+          "href": "https://www.klaviyo.com/newsroom",
+          "text": "Newsroom"
+        },
+        {
+          "href": "https://investors.klaviyo.com/overview/default.aspx",
+          "text": "Investor relations"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Agency and tech partners"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Developers"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/retail",
+          "text": "Retail and ecommerce"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/restaurants",
+          "text": "Restaurant marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/wellness",
+          "text": "Wellness"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform",
+          "text": "B2C CRM overview"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai",
+          "text": "Klaviyo AI (K:AI)"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/marketing-automation",
+          "text": "Klaviyo Marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-service",
+          "text": "Klaviyo Service"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/analytics",
+          "text": "Klaviyo Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-data-platform",
+          "text": "Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare",
+          "text": "Klaviyo vs. Klaviyo alternatives"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-mailchimp",
+          "text": "Klaviyo vs. Mailchimp"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-postscript",
+          "text": "Klaviyo vs. Postscript"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-attentive",
+          "text": "Klaviyo vs. Attentive"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-salesforce-marketing-cloud",
+          "text": "Klaviyo vs. Salesforce"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-listrak",
+          "text": "Klaviyo vs. Listrak"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/omnichannel",
+          "text": "Omnichannel marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/email-marketing",
+          "text": "Email marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing",
+          "text": "SMS marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing/rcs",
+          "text": "RCS for Business"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/mobile-app-marketing",
+          "text": "Mobile app marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/whatsapp",
+          "text": "WhatsApp marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/social",
+          "text": "Social marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources",
+          "text": "Marketing resources"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources/marketing-campaign-calendar",
+          "text": "Marketing campaign calendar"
+        },
+        {
+          "href": "https://www.klaviyo.com/glossary",
+          "text": "Marketing glossary"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/email-subject-line-generator",
+          "text": "Subject line generator"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/roi-calculator",
+          "text": "ROI calculator"
+        },
+        {
+          "href": "https://www.klaviyo.com/customers",
+          "text": "Case studies"
+        },
+        {
+          "href": "https://www.klaviyo.com/composer",
+          "text": "Composer Beta"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/marketing-agent",
+          "text": "Marketing Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/customer-agent",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/customer-experience-hub",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/helpdesk",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/marketing-analytics",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/advanced-cdp",
+          "text": "Advanced Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/web-forms",
+          "text": "Web forms"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/email-templates",
+          "text": "Email templates"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/portfolio",
+          "text": "Portfolio"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform-integrations",
+          "text": "Apps and Integrations"
+        },
+        {
+          "href": "https://www.klaviyo.com/features",
+          "text": "Features"
+        },
+        {
+          "href": "https://www.klaviyo.com/whats-new",
+          "text": "What's new"
+        },
+        {
+          "href": "https://www.klaviyo.com/events",
+          "text": "Events"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help Center"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us",
+          "text": "Academy"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Community"
+        },
+        {
+          "href": "https://www.facebook.com/Klaviyo/",
+          "text": "Facebook"
+        },
+        {
+          "href": "https://twitter.com/klaviyo/",
+          "text": "Twitter"
+        },
+        {
+          "href": "https://www.linkedin.com/company/klaviyo/",
+          "text": "LinkedIn"
+        },
+        {
+          "href": "https://www.instagram.com/klaviyo/",
+          "text": "Instagram"
+        },
+        {
+          "href": "https://www.klaviyo.com/sitemap",
+          "text": "Site Map"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal",
+          "text": "Terms and Privacy"
+        },
+        {
+          "href": "https://www.klaviyo.com/security",
+          "text": "Security"
+        },
+        {
+          "href": "https://www.klaviyo.com/trust",
+          "text": "Trust"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal/intellectual-property-notices",
+          "text": "Intellectual Property Notices"
+        }
+      ],
+      "headings": [
+        {
+          "level": 1,
+          "id": "",
+          "text": "How to message BigCommerce customers by storefront"
+        },
+        {
+          "level": 2,
+          "id": "h_01JCH3X25X8T1Z5M4E6GJ7H701",
+          "text": "You will learn"
+        },
+        {
+          "level": 2,
+          "id": "h_01JCH3X4YNRWB7NXM40NRM749Y",
+          "text": "Before you begin"
+        },
+        {
+          "level": 2,
+          "id": "h_01JCH3X8A5TCJ53JYJDVSMFBX4",
+          "text": "Data synced from BigCommerce"
+        },
+        {
+          "level": 2,
+          "id": "h_01JCH3XDVNWPD6MKA2024GNQYA",
+          "text": "Segment customers by storefront"
+        },
+        {
+          "level": 3,
+          "id": "h_01JCH3WYQ8JBJ7MRF67CRN8V0D",
+          "text": "Customers without Channel ID tracked"
+        },
+        {
+          "level": 2,
+          "id": "h_01JCH3XWJHVS6H6QC26FSBP3WG",
+          "text": "Message customers by storefront"
+        },
+        {
+          "level": 3,
+          "id": "h_01JCH3Y04ZV532Q4N59SP3Q822",
+          "text": "Welcome series by storefront"
+        },
+        {
+          "level": 3,
+          "id": "h_01JCH3Y4DYJGAZX30A7MK9F42Q",
+          "text": "Abandoned cart by storefront"
+        },
+        {
+          "level": 2,
+          "id": "h_01JCH3Y84VSKAA8EC8S0TCK4KJ",
+          "text": "Outcome"
+        },
+        {
+          "level": 2,
+          "id": "additional-resources",
+          "text": "Additional resources"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "Explore more from Klaviyo"
+        }
+      ]
+    }
+  },
+  "rendered_page": {
+    "status": "fetched",
+    "error": ""
+  }
+}

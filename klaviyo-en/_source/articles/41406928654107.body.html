@@ -1,0 +1,132 @@
+<div class="bs-callout bs-callout-default">
+<p><a href="https://help.klaviyo.com/hc/en-us/articles/17655007276059">Advanced KDP</a> is not included in Klaviyo’s standard marketing application, and a subscription is required to access the associated functionality. Head to our <a href="https://help.klaviyo.com/hc/en-us/articles/115000976672">billing guide</a> to learn about how to purchase this plan.</p>
+</div>
+<h1 id="h_01K8VYGVD0VFTJGH85G5S67NKS">Environment Setup and Connection</h1>
+<p><strong>Overview:</strong> Follow these steps to prepare BigQuery for Klaviyo. You’ll create required schemas (in a dataset/project), set up a dedicated service account and key, assign the minimum required privileges, verify the configuration, and connect BigQuery to Klaviyo.</p>
+<p>For details on how data warehouse import works in Klaviyo—including schema structure, required tables, and field mappings—see <a href="https://help.klaviyo.com/hc/en-us/articles/40939206649627">How Data Warehouse Imports Work in Klaviyo</a>.</p>
+<hr>
+<h2 id="h_01K8VYGVD0D1AJQJT3GZG8V5KY">1) Create Required Schemas / Datasets</h2>
+<p>In BigQuery, create two datasets in the project you’ll use for Klaviyo.</p>
+<pre><code class="language-sql">CREATE SCHEMA `KLAVIYO_IMPORT_FROM_DWH`;
+CREATE SCHEMA `KLAVIYO_TMP`;</code></pre>
+<ul>
+<li>
+<code>KLAVIYO_IMPORT_FROM_DWH</code>: Tables and views created in this dataset will be available for Klaviyo to read/write.</li>
+<li>
+<code>KLAVIYO_TMP</code>: Temporary or staging data used during sync operations.</li>
+</ul>
+<hr>
+<h2 id="h_01K8VYGVD1JDTD4F0TTMK9967A">2) Create the Klaviyo Service Account and Key</h2>
+<p>Create a Google service account (e.g. KLAVIYO_DATA_TRANSFER_USER) that Klaviyo will use exclusively for this integration. Download a JSON key for this account and store it securely.</p>
+<ul>
+<li>Go to <strong>IAM &amp; Admin → Service accounts</strong> in the GCP Console.</li>
+<li>Create a new service account (or select an existing one dedicated to Klaviyo).</li>
+<li>In the Keys tab, create a new key of type JSON. Keep this key file safe — you’ll need it when configuring the connection in Klaviyo.</li>
+</ul>
+<hr>
+<h2 id="h_01K8VYGVD1TXK73HJESWAAENXV">3) Assign Required Permissions</h2>
+<p>Grant the service account the following roles, scoped to the two datasets you created:</p>
+<table>
+<tbody>
+<tr>
+<th style="text-align: center">Dataset</th>
+<th style="text-align: center">Minimum Required Roles</th>
+<th style="text-align: center">Description</th>
+</tr>
+<tr>
+<td><code>KLAVIYO_TMP</code></td>
+<td>
+<code>BigQuery Data Editor</code> + <code>BigQuery Job User</code>
+</td>
+<td>Allows Klaviyo to create and manage temporary tables, jobs, etc.</td>
+</tr>
+<tr>
+<td><code>KLAVIYO_IMPORT_FROM_DWH</code></td>
+<td>
+<code>BigQuery Data Viewer</code> + <code>BigQuery Job User</code>
+</td>
+<td>Allows Klaviyo to read from your tables.</td>
+</tr>
+</tbody>
+</table>
+<pre><code class="language-sql">-- Example commands in GCP CLI (replace placeholders):
+gcloud projects add-iam-policy-binding YOUR_PROJECT_ID \
+  --member="serviceAccount:KLAVIYO_DATA_TRANSFER_USER@YOUR_PROJECT_ID.iam.gserviceaccount.com" \
+  --role="roles/bigquery.dataEditor" \
+  --condition=None \
+  --dataset="KLAVIYO_TMP"
+
+gcloud projects add-iam-policy-binding YOUR_PROJECT_ID \
+  --member="serviceAccount:KLAVIYO_DATA_TRANSFER_USER@YOUR_PROJECT_ID.iam.gserviceaccount.com" \
+  --role="roles/bigquery.dataViewer" \
+  --condition=None \
+  --dataset="KLAVIYO_IMPORT_FROM_DWH"
+</code></pre>
+<hr>
+<h2 id="h_01K8VYGVD17W2R3W5T6ZN6JX3V">4) Verify Your Setup (Optional)</h2>
+<h3 id="h_01K8VYGVD1MC5RM2X9XMH5966S">4.1 Confirm the datasets exist</h3>
+<pre><code class="language-sql">SELECT schema_name 
+FROM `YOUR_PROJECT_ID.INFORMATION_SCHEMA.SCHEMATA`
+WHERE schema_name IN ('KLAVIYO_IMPORT_FROM_DWH','KLAVIYO_TMP');
+</code></pre>
+<h3 id="h_01K8VYGVD1FQT2PMDPK6AD812Y">4.2 Confirm service account access</h3>
+<p>Use the service account key to authenticate with the BigQuery CLI or API and run a simple query:</p>
+<pre><code class="language-bash">bq --project_id=YOUR_PROJECT_ID \
+   --dataset_id=KLAVIYO_IMPORT_FROM_DWH \
+   query --use_legacy_sql=false \
+   'SELECT COUNT(*) FROM `YOUR_PROJECT_ID.KLAVIYO_IMPORT_FROM_DWH.some_table` LIMIT 1'
+</code></pre>
+<h3 id="h_01K8VYGVD1KQ1PDD8DB1BHF3AW">4.3 Check permissions on each dataset</h3>
+<pre><code class="language-sql">SELECT * 
+FROM `YOUR_PROJECT_ID.KLAVIYO_IMPORT_FROM_DWH.INFORMATION_SCHEMA.OBJECT_PRIVILEGES`
+WHERE grantee = 'KLAVIYO_DATA_TRANSFER_USER@YOUR_PROJECT_ID.iam.gserviceaccount.com';
+</code></pre>
+<h3 id="h_01K8VYGVD1425MWR105X8YHZQG">4.4 Optional: Validate create/read operations</h3>
+<pre><code class="language-sql">-- Test create in KLAVIYO_TMP
+CREATE TABLE `YOUR_PROJECT_ID.KLAVIYO_TMP.test_permissions` (id INT64);
+DROP TABLE `YOUR_PROJECT_ID.KLAVIYO_TMP.test_permissions`;
+
+-- Test select in KLAVIYO_IMPORT_FROM_DWH
+SELECT * FROM `YOUR_PROJECT_ID.KLAVIYO_IMPORT_FROM_DWH.some_existing_table` LIMIT 1;
+</code></pre>
+<p><strong>Tip:</strong> Run these checks using the same service account and key that you will provide to Klaviyo. Keep a copy of the results for auditing.</p>
+<hr>
+<h2 id="h_01K8VYGVD1R81EKVKS4PH3X7V3">5) Connect Klaviyo to BigQuery</h2>
+<p>Once your BigQuery environment is configured, complete the connection in Klaviyo.</p>
+<ol>
+<li>In Klaviyo, navigate to <strong>Advanced → Syncing</strong> in the left sidebar.</li>
+<li>Click <strong>Create sync</strong>.</li>
+<li>Select <strong>Import or export data to your data warehouse</strong>.</li>
+<li>Choose <strong>BigQuery</strong> as your data warehouse.</li>
+<li>Click <strong>Connect to BigQuery</strong>.</li>
+</ol>
+<p>When prompted, provide the following connection configuration details:</p>
+<table>
+<tbody>
+<tr>
+<th style="text-align: center">Field</th>
+<th style="text-align: center">Description</th>
+<th style="text-align: center">Where to Find It</th>
+</tr>
+<tr>
+<td><strong>Project ID</strong></td>
+<td>Your Google Cloud Project ID.</td>
+<td>Found in the GCP console at the top of the project page.</td>
+</tr>
+<tr>
+<td><strong>Dataset</strong></td>
+<td>The dataset (schema) containing your Klaviyo tables (e.g., <code>KLAVIYO_IMPORT_FROM_DWH</code>).</td>
+<td>Use the dataset you created in Step 1. Select that dataset when configuring the connection.</td>
+</tr>
+<tr>
+<td><strong>Service Account Key (JSON)</strong></td>
+<td>The JSON key file you downloaded for the service account.</td>
+<td>Upload or paste the contents of the JSON key file you created in Step 2.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>After you connect:</strong> Klaviyo will validate the connection, test access to your datasets, and then allow you to configure syncs — for both importing data into Klaviyo and exporting Klaviyo data into BigQuery.</p>
+<hr>
+<p><em>Next step:</em> After connecting successfully, create your first import or export sync in Klaviyo and begin moving data to or from BigQuery.</p>
+<p><br>
+</p>

@@ -1,0 +1,1238 @@
+{
+  "captured_at": "2026-05-23T16:17:44Z",
+  "article": {
+    "id": 115000357752,
+    "url": "https://klaviyo.zendesk.com/api/v2/help_center/en-us/articles/115000357752.json",
+    "html_url": "https://klaviyo.zendesk.com/hc/en-us/articles/115000357752-How-to-set-up-a-branded-sending-domain",
+    "author_id": 386982900592,
+    "comments_disabled": true,
+    "draft": false,
+    "promoted": false,
+    "position": 3,
+    "vote_sum": 287,
+    "vote_count": 2235,
+    "section_id": 49375370518555,
+    "created_at": "2017-06-15T19:13:30Z",
+    "updated_at": "2026-05-15T09:38:12Z",
+    "name": "How to set up a branded sending domain",
+    "title": "How to set up a branded sending domain",
+    "source_locale": "en-us",
+    "locale": "en-us",
+    "outdated": false,
+    "outdated_locales": [],
+    "edited_at": "2026-04-17T00:55:47Z",
+    "user_segment_id": null,
+    "permission_group_id": 146372,
+    "content_tag_ids": [],
+    "label_names": [],
+    "body": "<h2 id=\"h_01HCMT58PNZ5897T4GM5X9C8BQ\">You will learn</h2>\n<p>Learn how to set up a branded sending domain (also known as a dedicated sending domain) so that when emails reach inbox providers, they will appear to come from your brand instead of Klaviyo.</p>\n<div class=\"bs-callout bs-callout-default\">\n<p>If you are bringing over an existing branded sending domain from a prior email service provider (ESP), head to our detailed <a href=\"https://help.klaviyo.com/hc/en-us/articles/9042531198747\">migration guide</a>. </p>\n</div>\n<p></p>\n<p>\n<script src=\"https://fast.wistia.com/embed/medias/yuhwp4mwi2.jsonp\" async=\"async\"></script>\n<script src=\"https://fast.wistia.com/assets/external/E-v1.js\" async=\"async\"></script>\n</p>\n<div class=\"wistia_responsive_padding\" style=\"padding: 56.25% 0 0 0; position: relative;\">\n<div class=\"wistia_responsive_wrapper\" style=\"height: 100%; left: 0; position: absolute; top: 0; width: 100%;\">\n<div class=\"wistia_embed wistia_async_yuhwp4mwi2 qualityMin=720 seo=false videoFoam=true\" style=\"height: 100%; position: relative; width: 100%;\">\n<div class=\"wistia_swatch\" style=\"height: 100%; left: 0; opacity: 0; overflow: hidden; position: absolute; top: 0; transition: opacity 200ms; width: 100%;\"><img style=\"filter: blur(5px); height: 100%; object-fit: contain; width: 100%;\" src=\"https://fast.wistia.com/embed/medias/yuhwp4mwi2/swatch\" alt=\"\" aria-hidden=\"true\"></div>\n</div>\n</div>\n</div>\n<h2 id=\"h_01HCMT58PNKA2WEZ30451JVDGW\">What is a branded sending domain?</h2>\n<p>A branded sending domain allows you to send emails that appear to be coming from your brand and allows you to have better overall control of your sender reputation. Any company is eligible to create a branded sending domain.</p>\n<p>By default, most users will start out sending from a shared IP and Klaviyo domain. This domain will appear in the sender information at the top of an email message as shown below (i.e., “sent on behalf of '' or “via klaviyomail.com”).</p>\n<p>In the example below from Gmail, your recipients see that your sender email address includes \"via klaviyomail.com” because you are using a shared sending domain.</p>\n<p class=\"wysiwyg-text-align-center\"><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28723622866075\" alt=\"An example of an email with klaviyomail.com domain before it has been updated\"></p>\n<p>By moving to a branded sending domain, you will remove the \"via klaviyomail.com\" message that is displayed beside your sender email address. This also means that your emails will no longer be sent by a shared domain, allowing inbox providers to more easily verify your identity and pass <a href=\"https://help.klaviyo.com/hc/en-us/articles/4402601857307\">email authentication protocols like DMARC</a>. </p>\n<div class=\"bs-callout bs-callout-default\">\n<p>Google and Yahoo have announced new sender requirements that they are planning to start enforcing in February of 2024. While already best practice, setting up a branded sending domain will be a requirement for bulk senders to land in Gmail inboxes.</p>\n<p>Google considers those who send 5000 or more emails to Google accounts per day to be \"bulk senders.\" All traffic from a sender counts towards that 5000 email threshold, including transactional emails. </p>\n<p>Learn more about <a href=\"https://www.klaviyo.com/blog/gmail-update\">Gmail and Yahoo’s upcoming sender requirements.</a></p>\n</div>\n<h2 id=\"h_01HCMT58PNW2A4VPKP41Z1BV26\">About generating domain name systems (DNS) with Klaviyo</h2>\n<p>A key part of connecting a branded sending domain is generating the required DNS records. To generate your records, you'll need to enter the information below when setting up your branded sending domain in Klaviyo.</p>\n<ul>\n<li>\n<strong>Root domain</strong><br>\nThis is the domain that you purchased or registered with a domain registrar, and it reflects your brand's website domain. You may also have email addresses that reflect this domain. For example, if your company is called <em>Hello World</em>, your brand's root domain may be <em>helloworld.com</em> and your friendly from-address may be <em>name@helloworld.com</em>.</li>\n<li>\n<strong>Branded sending domain</strong><br>\nThis is the domain that will be used to send emails from Klaviyo and will appear in your email headers. It's important to note that the branded sending domain must have a unique, unused subdomain so as not to interfere with any external email configurations on your root domain. The most commonly used subdomain name at Klaviyo is \"send.\" Using the example above, Hello World's branded sending domain could be <em>send.helloworld.com</em>. However, you can use any subdomain that is not already in use.</li>\n</ul>\n<div class=\"bs-callout bs-callout-default\">\n<p>Multiple companies, and thus multiple Klaviyo accounts, can use a given sending domain as long as all relevant DNS records are in place. If your company has multiple child brands with separate Klaviyo accounts, you can use the same branded sending domain in each account. In order to do this, you will need to connect the branded sending domain to each account and generate the unique DNS records required for each one.</p>\n</div>\n<h2 id=\"h_01HCMVG59HRH4JK31ES0H9K3S3\">Dynamic vs. static routing </h2>\n<p>When setting up your branded sending domain, you can select whether you’d like to delegate your subdomain to Klaviyo so it can dynamically select the best sending provider option. </p>\n<p>By delegating your subdomain, you are providing Klaviyo authorization to manage your brand's subdomain and create DNS records. These permissions are only used for tasks related to your sending, and subdomain delegation does not impact your brand's root domain or any other subdomains.</p>\n<p>You can revoke the subdomain delegation at any point by removing the associated DNS records added during the branded sending domain setup process. </p>\n<p>In Klaviyo, you can select the following routing options when setting up your branded domain: </p>\n<ul>\n<li>\n<strong>Dynamic</strong><br>\nDelegate your subdomain to Klaviyo to dynamically select an email sending provider for optimal performance, reputation, and stability.</li>\n<li>\n<strong>Static</strong><br>\nAllow Klaviyo to send email through a single, static email sending provider.</li>\n</ul>\n<p>When generating DNS records, Klaviyo will create NS records for the <em>Dynamic</em> routing option, and CNAME records for the <em>Static</em> routing option.</p>\n<div class=\"bs-callout bs-callout-default\">\n<p>Some DNS providers do not support NS records. If your DNS provider does not support NS records, you must use the <em>Static</em> routing option. </p>\n</div>\n<p>Klaviyo recommends selecting the <em>Dynamic </em>routing option to best optimize your sending performance. </p>\n<p>If you are on a branded sending domain created prior to this feature, or decide you'd like to move from <em>Static</em> to <em>Dynamic</em>, remove your domain in Klaviyo and delete the existing CNAME records for the subdomain in your DNS provider. Once complete, go through the setup process with the <em>Dynamic</em> option. Note that record propagation can take up to 48 hours. </p>\n<h2 id=\"h_01HCMT58PN7S90JCFTVCTCQ0BD\">Requirements for creating a branded sending domain</h2>\n<h3 id=\"h_01HCMT58PNYW55PDR6TDCR3PBP\">Before you begin </h3>\n<p>Before starting this process, new Klaviyo accounts should make sure that you'll have time to <a href=\"https://help.klaviyo.com/hc/en-us/articles/360025945671\">warm your infrastructure</a>.</p>\n<p>Additionally, it is important that you own the domain you are using to send email, and you, or someone on your team, has access to the DNS host to create the required records.</p>\n<div class=\"bs-callout bs-callout-default\">\n<p>Existing Klaviyo customers moving to a branded sending domain do not have to warm infrastructure again, as long as you have:</p>\n<ul>\n<li>A domain that has been registered for at least 30 days AND</li>\n<li>You’ve used the domain to send email already (e.g., you used this domain in the past with a prior email service provider or with Klaviyo in your from address).</li>\n</ul>\n</div>\n<p>Before applying any domain changes to your account, pause all sending. Once you have applied the change and tested, you can then resume flows and schedule any future campaigns.</p>\n<h3 id=\"h_01HCMT58PN59ZBM7HZVS06Q0M4\">Checklist</h3>\n<ol>\n<li>Connect branded sending domain and generate DNS records.</li>\n<li>Update DNS records with your DNS provider (note that this is not done within Klaviyo).</li>\n<li>Verify and apply your domain.</li>\n<li>New Klaviyo accounts can then warm their sending infrastructure. For existing Klaviyo accounts with at least a 30 day sending history, they can return to normal sending and do not have to warm their infrastructure again.</li>\n</ol>\n<h2 id=\"h_01HCMT58PN23FZWBGHTNDDRY3K\">Generate DNS records in Klaviyo</h2>\n<p>Klaviyo requires 3 CNAME or 4 NS records for email authentication, and one TXT record for domain ownership verification. The Dynamic routing option uses NS records, while the Static routing option uses CNAME records.</p>\n<div class=\"bs-callout bs-callout-default\">\n<p>Only those with <em>Owner</em>, <em>Admin</em>, <em>Manager</em>, and <em>Campaign Coordinator</em><a href=\"https://help.klaviyo.com/hc/en-us/articles/115005231648\">user roles</a> can set up a branded sending domain.</p>\n</div>\n<ol>\n<li>Click on your company name in the bottom left corner of your account.</li>\n<li>Select <strong>Settings</strong>.<br>\n\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28723628194843\" alt=\"Klaviyo account menu in bottom left corner\" width=\"375\" height=\"458\">\n</li>\n<li>Choose <strong>Domains </strong>from the main tab.</li>\n<li>Select<strong> Add Domain.</strong>\n</li>\n<li>Verify your brand's root domain is correct. Klaviyo automatically pulls the domain from your account. <br>\n\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28723622878235\" alt=\"root domain.jpg\" width=\"400\" height=\"331\">\n</li>\n<li>Click <strong>Next</strong>.</li>\n<li>Specify an arbitrary and unused subdomain (i.e., one that you do not currently have in use elsewhere in your marketing) under <em>Sending domain</em> (e.g., \"send\").<br>\n\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/38091860756891\" alt=\"\">\n</li>\n<li>Select your desired <em>Routing</em> type (i.e., <em>Dynamic</em> or <em>Static</em>).<br>\n\n<div class=\"bs-callout bs-callout-default\">\n<p>The <em>Dynamic</em> option is only available for domains that support a dynamic configuration.</p>\n</div>\n</li>\n<li>Select whether you’d like to add a DMARC record to your domain (this is recommended to meet Gmail and Yahoo sender requirements). Only domains currently missing a DMARC record will see this option.</li>\n<li>Select whether you want to connect a domain with Entri, or set it up manually.<br>\n</li>\n</ol>\n<p><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/38092031975067\" alt=\"\"></p>\n<div class=\"bs-callout bs-callout-default\">\n<p>Only domains eligible for an integration with Entri will see the automatic setup option. </p>\n</div>\n<p>If you choose to manually set up your domain, the generated DNS records will be presented to you so you can manually add them to your DNS. With automatic configuration through Entri, the records will be added automatically on your behalf.</p>\n<div class=\"bs-callout bs-callout-default\">\n<p>At this time it is not possible to use a static branded sending domain with dedicated click tracking on Sendgrid infrastructure. If you are using dedicated click tracking with Sendgrid, update your CNAME records to use Klaviyo infrastructure or set up a dynamic branded sending domain.</p>\n</div>\n<h3 id=\"h_01J3DR7QMBA9Y5SC6W620FPWSA\">DNS records</h3>\n<p class=\"wysiwyg-text-align-left\">In an example where the intended sending domain is <em>send.helloworld.com</em>, with “send” as the subdomain and “helloworld.com” as the root domain, the generated DNS records will have the following structure.</p>\n<div class=\"bs-callout bs-callout-default\">\n<p class=\"wysiwyg-text-align-left\">These are just examples and the actual CNAME record values for your account will be different. Make sure to use the values generated in your account. </p>\n</div>\n<table style=\"width: 650px; height: 267px\">\n<tbody>\n<tr>\n<td style=\"width: 233.906px; height: 10px\"><strong>Host</strong></td>\n<td style=\"width: 315.903px; height: 10px\"><strong>Value</strong></td>\n<td style=\"width: 65.7465px; height: 10px\"><strong>Record Type</strong></td>\n</tr>\n<tr>\n<td style=\"width: 233.906px; height: 42px\">send.helloworld.com</td>\n<td style=\"width: 315.903px; height: 42px\">ns1.klaviyo.com</td>\n<td style=\"width: 65.7465px; height: 42px\">NS</td>\n</tr>\n<tr>\n<td style=\"width: 233.906px; height: 22px\">send.helloworld.com</td>\n<td style=\"width: 315.903px; height: 22px\">ns2.klaviyo.com</td>\n<td style=\"width: 65.7465px; height: 22px\">NS</td>\n</tr>\n<tr>\n<td style=\"width: 233.906px; height: 22px\">send.helloworld.com</td>\n<td style=\"width: 315.903px; height: 22px\">ns3.klaviyo.com</td>\n<td style=\"width: 65.7465px; height: 22px\">NS</td>\n</tr>\n<tr>\n<td style=\"width: 233.906px; height: 24px\">send.helloworld.com</td>\n<td style=\"width: 315.903px; height: 24px\">ns4.klaviyo.com</td>\n<td style=\"width: 65.7465px; height: 24px\">NS</td>\n</tr>\n<tr>\n<td style=\"width: 233.906px; height: 24px\">helloworld.com</td>\n<td style=\"width: 315.903px; height: 24px\">klaviyo-site-verification=public_API_key</td>\n<td style=\"width: 65.7465px; height: 24px\">TXT</td>\n</tr>\n</tbody>\n</table>\n<p>With the <em>Static </em>routing option that uses CNAME records, the records will look like: </p>\n<table style=\"width: 651px; height: 215px\">\n<tbody>\n<tr>\n<td style=\"width: 230.781px; height: 10px\"><strong>Host</strong></td>\n<td style=\"width: 321.319px; height: 10px\"><strong>Value</strong></td>\n<td style=\"width: 64.4444px; height: 10px\"><strong>Record Type</strong></td>\n</tr>\n<tr>\n<td style=\"width: 230.781px; height: 42px\">send.helloworld.com</td>\n<td style=\"width: 321.319px; height: 42px\">1.klaviyodns.com</td>\n<td style=\"width: 64.4444px; height: 42px\">CNAME</td>\n</tr>\n<tr>\n<td style=\"width: 230.781px; height: 22px\">kl._domainkey.helloworld.com</td>\n<td style=\"width: 321.319px; height: 22px\">kl1.domainkey.1.klaviyodns.com</td>\n<td style=\"width: 64.4444px; height: 22px\">CNAME</td>\n</tr>\n<tr>\n<td style=\"width: 230.781px; height: 22px\">kl2._domainkey.helloworld.com</td>\n<td style=\"width: 321.319px; height: 22px\">kl2.domainkey.1.klaviyodns.com</td>\n<td style=\"width: 64.4444px; height: 22px\">CNAME</td>\n</tr>\n<tr>\n<td style=\"width: 230.781px; height: 22px\">helloworld.com</td>\n<td style=\"width: 321.319px; height: 22px\">klaviyo-site-verification=public_API_key</td>\n<td style=\"width: 64.4444px; height: 22px\">TXT</td>\n</tr>\n</tbody>\n</table>\n<p>If your brand's intended sending domain has two subdomains, such as <em>send.mail.helloworld.com,</em> “send” would be used for the subdomain and “mail.helloworld.com” for the root domain. The expected DNS records would be the following:</p>\n<table style=\"width: 651px; height: 260px\">\n<tbody>\n<tr>\n<td style=\"width: 234.167px; height: 10px\"><strong>Host</strong></td>\n<td style=\"width: 316.233px; height: 10px\"><strong>Value</strong></td>\n<td style=\"width: 66.1458px; height: 10px\"><strong>Record Type</strong></td>\n</tr>\n<tr>\n<td style=\"width: 234.167px; height: 42px\">send.mail.helloworld.com</td>\n<td style=\"width: 316.233px; height: 42px\">ns1.klaviyo.com</td>\n<td style=\"width: 66.1458px; height: 42px\">NS</td>\n</tr>\n<tr>\n<td style=\"width: 234.167px; height: 22px\">send.mail.helloworld.com</td>\n<td style=\"width: 316.233px; height: 22px\">ns2.klaviyo.com</td>\n<td style=\"width: 66.1458px; height: 22px\">NS</td>\n</tr>\n<tr>\n<td style=\"width: 234.167px; height: 22px\">send.mail.helloworld.com</td>\n<td style=\"width: 316.233px; height: 22px\">ns3.klaviyo.com</td>\n<td style=\"width: 66.1458px; height: 22px\">NS</td>\n</tr>\n<tr>\n<td style=\"width: 234.167px; height: 24px\">send.mail.helloworld.com</td>\n<td style=\"width: 316.233px; height: 24px\">ns4.klaviyo.com</td>\n<td style=\"width: 66.1458px; height: 24px\">NS</td>\n</tr>\n<tr>\n<td style=\"width: 234.167px; height: 24px\">helloworld.com</td>\n<td style=\"width: 316.233px; height: 24px\">klaviyo-site-verification=public_API_key</td>\n<td style=\"width: 66.1458px; height: 24px\">TXT</td>\n</tr>\n</tbody>\n</table>\n<p>With the <em>Static </em>routing option that uses CNAME records, the records will look like: </p>\n<table style=\"width: 650px; height: 211px\">\n<tbody>\n<tr>\n<td style=\"width: 256.719px; height: 10px\"><strong>Host</strong></td>\n<td style=\"width: 309.375px; height: 10px\"><strong>Value</strong></td>\n<td style=\"width: 54.8611px; height: 10px\"><strong>Record Type</strong></td>\n</tr>\n<tr>\n<td style=\"width: 256.719px; height: 42px\">send.mail.helloworld.com</td>\n<td style=\"width: 309.375px; height: 42px\">1.klaviyodns.com</td>\n<td style=\"width: 54.8611px; height: 42px\">CNAME</td>\n</tr>\n<tr>\n<td style=\"width: 256.719px; height: 22px\">kl._domainkey.mail.helloworld.com</td>\n<td style=\"width: 309.375px; height: 22px\">kl1.domainkey.1.klaviyodns.com</td>\n<td style=\"width: 54.8611px; height: 22px\">CNAME</td>\n</tr>\n<tr>\n<td style=\"width: 256.719px; height: 22px\">kl2._domainkey.mail.helloworld.com</td>\n<td style=\"width: 309.375px; height: 22px\">kl2.domainkey.1.klaviyodns.com</td>\n<td style=\"width: 54.8611px; height: 22px\">CNAME</td>\n</tr>\n<tr>\n<td style=\"width: 256.719px; height: 22px\">helloworld.com</td>\n<td style=\"width: 309.375px; height: 22px\">klaviyo-site-verification=public_API_key</td>\n<td style=\"width: 54.8611px; height: 22px\">TXT</td>\n</tr>\n</tbody>\n</table>\n<h2 id=\"h_01J3DJFR28JWVF1T25D8M5DDKE\">DMARC</h2>\n<p>DMARC is an <a href=\"https://help.klaviyo.com/hc/en-us/articles/4402601857307\">email authentication</a> policy that allows inbox providers to verify the authenticity of an email, giving domain owners the ability to protect their domain from unauthorized use. A DMARC policy is also a <a href=\"https://www.klaviyo.com/blog/gmail-update\">sender requirement</a> established by Gmail and Yahoo to successfully land in inboxes.</p>\n<p>If you’d like Klaviyo to generate a DMARC record, toggle on the Add DMARC record option when setting up your branded sending domain.</p>\n<p><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28723622880923\" alt=\"Inner Wrapper.jpg\" width=\"401\" height=\"291\"></p>\n<div class=\"bs-callout bs-callout-default\">\n<p>Klaviyo will generate the following DMARC record, which will not impact the delivery of your emails but satisfy Gmail and Yahoo sender requirements:</p>\n<p>v=DMARC1; p=none;</p>\n</div>\n<h2 id=\"h_01HCMT58PNVM37BM628JXP3GJJ\">Update your DNS records</h2>\n<h3 id=\"h_01J3DJJ0JDYS6072A3QBN3T0VN\">Automatically publish records with Entri</h3>\n<p>To have Klaviyo automatically publish DNS records on your behalf, select the Connect with Entri option during the branded sending domain set up process.</p>\n<p>When proceeding with this option, Klaviyo will analyze your domain to detect the DNS provider it is hosted with. Once identified, you will be prompted to login to your DNS provider with the appropriate credentials, giving Klaviyo access to publish records on your behalf.</p>\n<div class=\"bs-callout bs-callout-default\">\n<p>If Klaviyo is not able to detect your DNS provider, you’ll need to manually set up your branded sending domain.</p>\n</div>\n<p><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28723622903195\" alt=\"login.jpg\" width=\"400\" height=\"394\"></p>\n<p>If another member of your team manages your DNS settings, you can forward the login by selecting <em>Or forward login to someone else</em>. Additionally, you can view the records being added by selecting <em>Show added DNS</em> records.</p>\n<p>Once signed in, Klaviyo will set the necessary records and your domain will be successfully configured for sending. You’ll see a confirmation once the configuration is complete.</p>\n<p><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28723628222363\" alt=\"Entri Modal.jpg\" width=\"400\" height=\"408\"></p>\n<h3 id=\"h_01J3DJN13JC00VJKARZ0T1YM6Q\">Set up your domain manually</h3>\n<p>If you choose to manually set up your branded sending domain, this step of the process requires you to complete tasks outside of Klaviyo. You will need to apply your new DNS records, which were generated in Klaviyo, to your domain. Note that you will need to go to your company’s DNS provider’s platform to make these changes. You may also need to consult your IT team on the below next steps.</p>\n<div class=\"bs-callout bs-callout-default\">\n<p>You do not need to create your subdomain within your DNS settings. CNAME and NS records should be added to your brand's root domain, and automatically redirect the subdomain specified during the branded domain setup process to Klaviyo infrastructure via the records.</p>\n<p>Not all domain registration services allow you to directly edit all DNS records. If you cannot update the records, contact your DNS provider for information on how to update them.</p>\n</div>\n<ol>\n<li>After selecting <em>Set up manually</em>, select your domain provider on the <em>Find your DNS zone file</em> page. Based on your domain provider, Klaviyo will show the steps to find the zone file in your DNS provider’s platform. The zone file is where you’ll add the generated DNS records to.</li>\n<li>Select <strong>Next</strong>.</li>\n<li>Hover over and click the text to copy the generated DNS records to your clipboard so you can add them to your DNS zone file.</li>\n<li>Add the records to your zone file in your DNS provider’s platform.</li>\n</ol>\n<p><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28723628225307\" alt=\"Records.jpg\" width=\"600\" height=\"538\"></p>\n<p>Some common DNS providers include: </p>\n<ul>\n<li><a href=\"https://www.godaddy.com/help/manage-dns-zone-files-680\">GoDaddy</a></li>\n<li><a href=\"https://support.google.com/a/answer/48090?hl=en\">Google Domains</a></li>\n<li><a href=\"https://www.hostgator.com/help/article/manage-dns-records-with-hostgatorenom\">Hostgator</a></li>\n<li><a href=\"https://help.hover.com/hc/en-us/articles/217282457-How-to-Edit-DNS-records-A-CNAME-MX-TXT-and-SRV-Updated-Aug-2015-\">Hover</a></li>\n<li><a href=\"https://www.namecheap.com/support/knowledgebase/article.aspx/9214/31/cpanel-email-deliverability-tool--spf-and-dkim-records/\">Namecheap</a></li>\n<li><a href=\"https://support.squarespace.com/hc/en-us/articles/205812348-Opening-Advanced-DNS-settings\">Squarespace</a></li>\n<li><a href=\"https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/resource-record-sets-editing.html\">AWS</a></li>\n<li><a href=\"https://developers.cloudflare.com/dns/manage-dns-records/how-to/create-dns-records/\">Cloudflare</a></li>\n</ul>\n<div class=\"accordion accordion--default\">\n<div class=\"accordion__item\">\n<div class=\"accordion__item-title\"><strong>For BigCommerce Domains</strong></div>\n<div class=\"accordion__item-content\">\n<p>If you are a merchant using BigCommerce Domains as your DNS provider, the host values for your DNS records are slightly different from what you’ll see provided in Klaviyo. </p>\n<div class=\"bs-callout bs-callout-default\">\n<p>You must use the <em>Static</em> routing option when setting up a branded sending domain as the NS records associated with the <em>Dynamic</em> option are not supported.</p>\n</div>\n<p>For the <em>Host</em> of the 3 CNAME records, you must append a period followed by your root domain name to the <em>Host</em> of the records provided in Klaviyo. For example, if your brand’s root domain is <em>helloworld.com</em>, the <em>Host </em>values you must enter into BigCommerce look like this:</p>\n<div class=\"bs-callout bs-callout-default\">\n<p>These are just examples and the actual CNAME record values for your account will be different. Make sure to use the values generated in your account. </p>\n</div>\n<table style=\"width: 651px; height: 215px\">\n<tbody>\n<tr>\n<td style=\"width: 230.781px; height: 10px\"><strong>Host</strong></td>\n<td style=\"width: 321.319px; height: 10px\"><strong>Value</strong></td>\n<td style=\"width: 64.4444px; height: 10px\"><strong>Record Type</strong></td>\n</tr>\n<tr>\n<td style=\"width: 230.781px; height: 42px\">send.helloworld.com</td>\n<td style=\"width: 321.319px; height: 42px\">1.klaviyodns.com</td>\n<td style=\"width: 64.4444px; height: 42px\">CNAME</td>\n</tr>\n<tr>\n<td style=\"width: 230.781px; height: 22px\">kl._domainkey.helloworld.com</td>\n<td style=\"width: 321.319px; height: 22px\">kl1.domainkey.1.klaviyodns.com</td>\n<td style=\"width: 64.4444px; height: 22px\">CNAME</td>\n</tr>\n<tr>\n<td style=\"width: 230.781px; height: 22px\">kl2._domainkey.helloworld.com</td>\n<td style=\"width: 321.319px; height: 22px\">kl2.domainkey.1.klaviyodns.com</td>\n<td style=\"width: 64.4444px; height: 22px\">CNAME</td>\n</tr>\n<tr>\n<td style=\"width: 230.781px; height: 22px\">helloworld.com</td>\n<td style=\"width: 321.319px; height: 22px\">klaviyo-site-verification=public_API_key</td>\n<td style=\"width: 64.4444px; height: 22px\">TXT</td>\n</tr>\n</tbody>\n</table>\n</div>\n</div>\n</div>\n<div class=\"bs-callout bs-callout-default\">\n<p>If you use Google Domains as your DNS provider and are connecting a branded sending domain with the <em>Dynamic</em> routing option, add all the NS records <a href=\"https://community.klaviyo.com/analytics-and-deliverability-72/help-dns-record-for-google-domains-10653\">into a single record</a> with the \"Add more to this record option.\"</p>\n</div>\n<div class=\"bs-callout bs-callout-default\">\n<p>If your DNS provider does not accept the \"@\" symbol during this process, then your TXT record will need to be added with your root domain as the hostname. The “@” symbol is just the shorthand method to achieve the same result (i.e., placement of a TXT record on the root domain). For example, the record will simply be:</p>\n<p><code>Type: TXT<br>\nHostname: YOURWEBSITE.COM<br>\nValue: klaviyo-site-verification=YOUR_PUBLIC_API_KEY</code></p>\n</div>\n<h2 id=\"h_01HCMT58PP4MWX06XR3PFJ5R5D\">Verify and apply your domain</h2>\n<p>You should only begin the steps below if you are ready to start sending with your domain. If you are connecting a new branded sending domain with no emailing history, you will need to first <a href=\"https://help.klaviyo.com/hc/en-us/articles/360025945671\">warm this domain.</a></p>\n<div class=\"bs-callout bs-callout-default\">\n<p>If you are an existing account who has at least a 30-day sending history with Klaviyo, you do not have to re-warm.</p>\n</div>\n<p>Select the Verify button to begin the verification process once you have added the generated records to your DNS. When first accessing the verify records step, it is expected to see the records have not been verified yet.</p>\n<p><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28723622898203\" alt=\"verify.jpg\" width=\"601\" height=\"339\"></p>\n<p>Review any message that appears. You will see one of the following messages:</p>\n<ul>\n<li>If a campaign is conflicting, you will see a notification that the deliverability may be impacted. To avoid any conflicting errors, a best practice is to make sure there are no campaigns actively sending or scheduled to go out soon. It is also best practice (but is not required) to pause flows and campaigns until after you apply and test your changes.</li>\n<li>If your records are valid, you will see a success message. This success message may indicate that you need to warm your infrastructure again. Note that this only applies to brand new Klaviyo accounts or newly registered domains (within the last 30 days). If you are an existing account who has at least a 30-day sending history with Klaviyo, you do not have to re-warm.</li>\n<li>If your records are not valid, you will see an error indicating what has not been set up correctly.</li>\n</ul>\n<p>Once the records have been verified, select <strong>Apply Domain</strong> when you are ready to begin sending on your branded domain.</p>\n<div class=\"bs-callout bs-callout-default\">\n<p>It can take up to 48 hours for DNS records to update after they are published in your DNS settings.</p>\n</div>\n<p>Klaviyo will now apply your branded sending domain to your account, and produce a success message when completed. </p>\n<p>You should exclude the subdomain in your from-address that you use to send emails (e.g. <em>@send.yourbusiness.com</em>). If it is included in your from-address, you will not be able to receive responses from recipients to emails from your Klaviyo account. Instead, it is advised to just use the root domain alone for your from-address (e.g. <em>@yourbusiness.com</em>).</p>\n<h3 id=\"h_01HCMT58PPNCVPAXY6KVDEX74S\">Troubleshooting error messages</h3>\n<p>If for some reason the domain cannot be applied, an error message will appear instead, directing you to try again. We recommend that you first use a free, online DNS record checker to review your branded sending domain and attempt to diagnose the issue. The following services provide this quick check:</p>\n<ul>\n<li><a href=\"https://dmarcian.com/dkim-inspector/\">https://dmarcian.com/dkim-inspector/</a></li>\n<li><a href=\"https://www.whatsmydns.net/\">https://www.whatsmydns.net/</a></li>\n<li><a href=\"https://dnschecker.org/\">https://dnschecker.org/</a></li>\n</ul>\n<div class=\"bs-callout bs-callout-default\">\n<p><a href=\"https://help.klaviyo.com/hc/en-us/articles/4417768780827\">Discover additional guidance and tips on branded sending domain troubleshooting</a>.</p>\n</div>\n<p>If the problem cannot be resolved using one of the above tools, please contact our Support Team for further assistance. After you have set up your domain, when you return to the <em>Domains</em> page, you will see these changes in place. You will also see the date on which these changes took place and instructions on how to warm your sending infrastructure in the next 2 to 4 weeks.</p>\n<h2 id=\"h_01HCMT58PPSD5N1XRPWM25WTEA\">Warm your sending infrastructure</h2>\n<p>If you are a new, qualifying Klaviyo account starting on a branded sending domain or using a newly registered domain (registered within the last 30 days), it is essential to <a href=\"https://help.klaviyo.com/hc/en-us/articles/360025945671\">warm your sending infrastructure</a> in the first 2 to 4 weeks after setting up your branded sending domain. Warming your domain strengthens your sender reputation. Depending on what data you are bringing over to Klaviyo and the use cases you have, you will need to follow the <a href=\"https://help.klaviyo.com/hc/en-us/articles/360025945671-How-to-warm-your-sending-infrastructure\">warming or platform introduction process</a> applicable to you.</p>\n<div class=\"bs-callout bs-callout-default\">\n<p>Existing Klaviyo customers moving to a branded sending domain do not have to warm infrastructure again, as long as you have:</p>\n<ul>\n<li>A domain that has been registered for at least 30 days AND</li>\n<li>You’ve used the domain to send email already (e.g., you used this domain in the past with a prior email service provider or with Klaviyo in your from address).</li>\n</ul>\n</div>\n<h2 id=\"h_01JQ4QJTZ6JSEMR53HWV3BG29G\">Disconnected sending domain alert</h2>\n<p>Branded sending domains become disconnected when the required DNS records are removed. In these cases, Klaviyo will notify you so that you can fix the necessary DNS records.</p>\n<p>You'll receive the alert in your notification inbox in Klaviyo.</p>\n<p><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/35380098109339\" alt=\"\"></p>\n<p>Only users with the necessary <a href=\"https://help.klaviyo.com/hc/en-us/articles/115005231648\">permissions</a> to configure a branded sending domain will receive the alert. </p>\n<h2 id=\"h_01JT44V2AG302YSHET054AP880\">Outcome</h2>\n<p>Once you configure your branded sending domains, all your emails (i.e., marketing and transactional emails) will be sent through your brand's domain rather than Klaviyo's shared sending domain.</p>",
+    "user_segment_ids": []
+  },
+  "normalized": {
+    "id": "115000357752",
+    "title": "How to set up a branded sending domain",
+    "source_url": "https://help.klaviyo.com/hc/en-us/articles/115000357752-How-to-set-up-a-branded-sending-domain",
+    "section_id": 49375370518555,
+    "section": "Warm and ramp your domain",
+    "category_id": 115000873988,
+    "category": "Deliverability & compliance",
+    "category_slug": "deliverability-compliance",
+    "klaviyo_updated": "2026-05-15T09:38:12Z",
+    "created_at": "2017-06-15T19:13:30Z",
+    "draft": false,
+    "promoted": false,
+    "position": 3,
+    "label_names": []
+  },
+  "files": {
+    "body_html": "_source/articles/115000357752.body.html",
+    "rendered_html": "_source/rendered/115000357752.html"
+  },
+  "assets": {
+    "api_body": {
+      "images": [
+        {
+          "src": "https://fast.wistia.com/embed/medias/yuhwp4mwi2/swatch",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28723622866075",
+          "alt": "An example of an email with klaviyomail.com domain before it has been updated",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28723628194843",
+          "alt": "Klaviyo account menu in bottom left corner",
+          "width": "375",
+          "height": "458"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28723622878235",
+          "alt": "root domain.jpg",
+          "width": "400",
+          "height": "331"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/38091860756891",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/38092031975067",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28723622880923",
+          "alt": "Inner Wrapper.jpg",
+          "width": "401",
+          "height": "291"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28723622903195",
+          "alt": "login.jpg",
+          "width": "400",
+          "height": "394"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28723628222363",
+          "alt": "Entri Modal.jpg",
+          "width": "400",
+          "height": "408"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28723628225307",
+          "alt": "Records.jpg",
+          "width": "600",
+          "height": "538"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28723622898203",
+          "alt": "verify.jpg",
+          "width": "601",
+          "height": "339"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/35380098109339",
+          "alt": "",
+          "width": "",
+          "height": ""
+        }
+      ],
+      "links": [
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/9042531198747",
+          "text": "migration guide"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4402601857307",
+          "text": "email authentication protocols like DMARC"
+        },
+        {
+          "href": "https://www.klaviyo.com/blog/gmail-update",
+          "text": "Gmail and Yahoo’s upcoming sender requirements."
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360025945671",
+          "text": "warm your infrastructure"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005231648",
+          "text": "user roles"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4402601857307",
+          "text": "email authentication"
+        },
+        {
+          "href": "https://www.klaviyo.com/blog/gmail-update",
+          "text": "sender requirement"
+        },
+        {
+          "href": "https://www.godaddy.com/help/manage-dns-zone-files-680",
+          "text": "GoDaddy"
+        },
+        {
+          "href": "https://support.google.com/a/answer/48090?hl=en",
+          "text": "Google Domains"
+        },
+        {
+          "href": "https://www.hostgator.com/help/article/manage-dns-records-with-hostgatorenom",
+          "text": "Hostgator"
+        },
+        {
+          "href": "https://help.hover.com/hc/en-us/articles/217282457-How-to-Edit-DNS-records-A-CNAME-MX-TXT-and-SRV-Updated-Aug-2015-",
+          "text": "Hover"
+        },
+        {
+          "href": "https://www.namecheap.com/support/knowledgebase/article.aspx/9214/31/cpanel-email-deliverability-tool--spf-and-dkim-records/",
+          "text": "Namecheap"
+        },
+        {
+          "href": "https://support.squarespace.com/hc/en-us/articles/205812348-Opening-Advanced-DNS-settings",
+          "text": "Squarespace"
+        },
+        {
+          "href": "https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/resource-record-sets-editing.html",
+          "text": "AWS"
+        },
+        {
+          "href": "https://developers.cloudflare.com/dns/manage-dns-records/how-to/create-dns-records/",
+          "text": "Cloudflare"
+        },
+        {
+          "href": "https://community.klaviyo.com/analytics-and-deliverability-72/help-dns-record-for-google-domains-10653",
+          "text": "into a single record"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360025945671",
+          "text": "warm this domain."
+        },
+        {
+          "href": "https://dmarcian.com/dkim-inspector/",
+          "text": "https://dmarcian.com/dkim-inspector/"
+        },
+        {
+          "href": "https://www.whatsmydns.net/",
+          "text": "https://www.whatsmydns.net/"
+        },
+        {
+          "href": "https://dnschecker.org/",
+          "text": "https://dnschecker.org/"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4417768780827",
+          "text": "Discover additional guidance and tips on branded sending domain troubleshooting"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360025945671",
+          "text": "warm your sending infrastructure"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360025945671-How-to-warm-your-sending-infrastructure",
+          "text": "warming or platform introduction process"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005231648",
+          "text": "permissions"
+        }
+      ],
+      "headings": [
+        {
+          "level": 2,
+          "id": "h_01HCMT58PNZ5897T4GM5X9C8BQ",
+          "text": "You will learn"
+        },
+        {
+          "level": 2,
+          "id": "h_01HCMT58PNKA2WEZ30451JVDGW",
+          "text": "What is a branded sending domain?"
+        },
+        {
+          "level": 2,
+          "id": "h_01HCMT58PNW2A4VPKP41Z1BV26",
+          "text": "About generating domain name systems (DNS) with Klaviyo"
+        },
+        {
+          "level": 2,
+          "id": "h_01HCMVG59HRH4JK31ES0H9K3S3",
+          "text": "Dynamic vs. static routing"
+        },
+        {
+          "level": 2,
+          "id": "h_01HCMT58PN7S90JCFTVCTCQ0BD",
+          "text": "Requirements for creating a branded sending domain"
+        },
+        {
+          "level": 3,
+          "id": "h_01HCMT58PNYW55PDR6TDCR3PBP",
+          "text": "Before you begin"
+        },
+        {
+          "level": 3,
+          "id": "h_01HCMT58PN59ZBM7HZVS06Q0M4",
+          "text": "Checklist"
+        },
+        {
+          "level": 2,
+          "id": "h_01HCMT58PN23FZWBGHTNDDRY3K",
+          "text": "Generate DNS records in Klaviyo"
+        },
+        {
+          "level": 3,
+          "id": "h_01J3DR7QMBA9Y5SC6W620FPWSA",
+          "text": "DNS records"
+        },
+        {
+          "level": 2,
+          "id": "h_01J3DJFR28JWVF1T25D8M5DDKE",
+          "text": "DMARC"
+        },
+        {
+          "level": 2,
+          "id": "h_01HCMT58PNVM37BM628JXP3GJJ",
+          "text": "Update your DNS records"
+        },
+        {
+          "level": 3,
+          "id": "h_01J3DJJ0JDYS6072A3QBN3T0VN",
+          "text": "Automatically publish records with Entri"
+        },
+        {
+          "level": 3,
+          "id": "h_01J3DJN13JC00VJKARZ0T1YM6Q",
+          "text": "Set up your domain manually"
+        },
+        {
+          "level": 2,
+          "id": "h_01HCMT58PP4MWX06XR3PFJ5R5D",
+          "text": "Verify and apply your domain"
+        },
+        {
+          "level": 3,
+          "id": "h_01HCMT58PPNCVPAXY6KVDEX74S",
+          "text": "Troubleshooting error messages"
+        },
+        {
+          "level": 2,
+          "id": "h_01HCMT58PPSD5N1XRPWM25WTEA",
+          "text": "Warm your sending infrastructure"
+        },
+        {
+          "level": 2,
+          "id": "h_01JQ4QJTZ6JSEMR53HWV3BG29G",
+          "text": "Disconnected sending domain alert"
+        },
+        {
+          "level": 2,
+          "id": "h_01JT44V2AG302YSHET054AP880",
+          "text": "Outcome"
+        }
+      ]
+    },
+    "rendered_page": {
+      "images": [
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/7ff492c2b417b7ecfe572f839a8a81398693c1f7-1920x1080.webp",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://fast.wistia.com/embed/medias/yuhwp4mwi2/swatch",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/c1790b10b302db18c25d83041f7cd444f177937e-951x200.jpg",
+          "alt": "An example of an email with klaviyomail.com domain before it has been updated",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/37e02a44ad5cc3b2032d30848752a733e9381e0d-452x552.png?w=375",
+          "alt": "Klaviyo account menu in bottom left corner",
+          "width": "375",
+          "height": "458"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/09022c34426108967f7ff669f1024bbd796f892c-548x454.jpg?w=400",
+          "alt": "root domain.jpg",
+          "width": "400",
+          "height": "331"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/d660234601b65ae3495220715d19283189ed45f5-1008x842.png",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/6f99fbf51d9175046614ae62c33ded796fdd76cb-1414x592.png",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/836d446beb1c489f3d35eb21df7b68d99cff095b-540x392.jpg?w=401",
+          "alt": "Inner Wrapper.jpg",
+          "width": "401",
+          "height": "291"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/0492ac68e330feadb87ec2be082177641552aca1-660x650.jpg?w=400",
+          "alt": "login.jpg",
+          "width": "400",
+          "height": "394"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/b6b8b6cad4ef14d93d3522a17e60f282e549762a-660x674.jpg?w=400",
+          "alt": "Entri Modal.jpg",
+          "width": "400",
+          "height": "408"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/d8552ba5b73de28ac204f7b4ddcc02296e547af6-850x762.jpg?w=600",
+          "alt": "Records.jpg",
+          "width": "600",
+          "height": "538"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/89a8176b2b56a56730dfce701866cc3a5e845a8e-1426x805.jpg?w=601",
+          "alt": "verify.jpg",
+          "width": "601",
+          "height": "339"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/eeb7ff1a28184ebc3d927c3aecd56b43b667ac3e-498x146.png",
+          "alt": "",
+          "width": "",
+          "height": ""
+        }
+      ],
+      "links": [
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115000357752-How-to-set-up-a-branded-sending-domain#site-content",
+          "text": "Skip to main content"
+        },
+        {
+          "href": "https://www.klaviyo.com",
+          "text": "Home"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center"
+        },
+        {
+          "href": "https://www.klaviyo.com/enterprise",
+          "text": "Enterprise"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Partners"
+        },
+        {
+          "href": "https://www.klaviyo.com/careers",
+          "text": "Careers"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": "Log in"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": ""
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center Find step-by-step instructions and troubleshooting solutions in our knowledge base."
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000032731",
+          "text": "Integrations"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000312411",
+          "text": "Flows"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867867",
+          "text": "Audience"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867667",
+          "text": "Campaigns"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/360000190711",
+          "text": "Sign-up forms"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000873988",
+          "text": "Deliverability & compliance"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/29173800271259",
+          "text": "SMS"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/16638219724187",
+          "text": "Reviews"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/18073014919195",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/34141283979931",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/37659126754075",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/33948021740315",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/39746685522331",
+          "text": "WhatsApp"
+        },
+        {
+          "href": "https://academy.klaviyo.com",
+          "text": "Klaviyo Academy Expert training and education to help you succeed with Klaviyo, and beyond."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Quick+guide&resource=academy_courses",
+          "text": "Quick guides Learn marketing strategies and concepts in 15 minutes or less."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Course&resource=academy_courses",
+          "text": "Courses Master key marketing topics through structured lessons and exams."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/best-practices",
+          "text": "Best practices Discover top product and marketing strategies for your business."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/learning-paths",
+          "text": "Learning paths Complete curated learning journeys tailored to your marketing goals."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses",
+          "text": "Explore all resources"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Live+training&resource=academy_courses",
+          "text": "Live trainings Build confidence through hands-on interactive workshops and thought-provoking strategy sessions."
+        },
+        {
+          "href": "https://www.bigmarker.com/klaviyo-customer-education/Office-hours-Getting-started-with-Klaviyo",
+          "text": "Live office hours Join a strategic discussion where you can ask questions and get answers in real-time."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/private-live-training",
+          "text": "1:1 Live training Book a private training session with an expert to jumpstart your platform knowledge and confidence."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/credentials",
+          "text": "Klaviyo credentials Dig deeper into select topics and showcase your expertise with a final exam to earn a certificate and digital badge."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/certificates/klaviyo-practitioner-certificate",
+          "text": "Klaviyo practitioner certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/deliverability-certificate",
+          "text": "Deliverability certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/developer-certificate",
+          "text": "Klaviyo developer certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses&select=Certificate",
+          "text": "See all certificates"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Klaviyo Community Join our thriving community network to connect with brands like yours—online and in person."
+        },
+        {
+          "href": "https://community.klaviyo.com/topic/new",
+          "text": "Ask a question Post a question and get thoughtful answers from Klaviyo powerusers."
+        },
+        {
+          "href": "https://community.klaviyo.com/p/roadmap",
+          "text": "Product roadmap"
+        },
+        {
+          "href": "https://community.klaviyo.com/search/activity/recent",
+          "text": "Recent threads"
+        },
+        {
+          "href": "https://community.klaviyo.com/p/champions",
+          "text": "Meet the Champions"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups",
+          "text": "Browse all groups Your people are waiting. New ideas and connections are a click away."
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/developer-group-64",
+          "text": "Developer group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/entrepreneur-user-group-118",
+          "text": "Entrepreneur group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/woo-user-group-87",
+          "text": "WooCommerce group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/new-york-meetup-chapter-82",
+          "text": "New York City"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/los-angeles-meetup-chapter-83",
+          "text": "Los Angeles"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/austin-meetup-chapter-85",
+          "text": "Austin"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/san-diego-meetup-chapter-86",
+          "text": "San Diego"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/amsterdam-meetup-chapter-84",
+          "text": "Amsterdam"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Klaviyo Developers Access API documentation and developer guides to help you build with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/get_started",
+          "text": "Get started Access key resources and a step-by-step checklist for how to start developing with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/build_your_integration",
+          "text": "Grow your app's reach Learn how to join our ecosystem and get your app listed on our marketplace."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/developer-tools",
+          "text": "Developer tools Generate sample data, monitor your API usage, and access our Postman collections."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/reference/api_overview",
+          "text": "API reference Browse our full catalog of API docs."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/changelog_",
+          "text": "Changelog"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/api_versioning_and_deprecation_policy",
+          "text": "Versioning & deprecation policy"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/rate_limits_and_error_handling",
+          "text": "Rate limits & error handling"
+        },
+        {
+          "href": "https://youtube.com/playlist?list=PLHkNfHgtxcUanrkMnKPdkRzuWU7MGv_xM&si=pkG-KH7IT_TUHOGC",
+          "text": "API tutorials on YouTube Subscribe to our Klaviyo API Tutorials playlist for easy access to step-by-step developer walkthroughs."
+        },
+        {
+          "href": "https://www.klaviyo.com/contact-us",
+          "text": "Contact us"
+        },
+        {
+          "href": "https://www.klaviyo.com/sign-up",
+          "text": "Sign up"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": "Search"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115000357752",
+          "text": "United States - EN"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/de-de/articles/115000357752",
+          "text": "Deutschland - DE"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-es/articles/115000357752",
+          "text": "España - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-mx/articles/115000357752",
+          "text": "México - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/fr-fr/articles/115000357752",
+          "text": "France - FR"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/it-it/articles/115000357752",
+          "text": "Italia - IT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/ko-kr/articles/115000357752",
+          "text": "한국 - KO"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/nl-nl/articles/115000357752",
+          "text": "Nederland - NL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pl-pl/articles/115000357752",
+          "text": "Polska - PL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pt-br/articles/115000357752",
+          "text": "Brasil - PT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/sv-se/articles/115000357752",
+          "text": "Sverige - SV"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/14416651431323",
+          "text": "Email deliverability"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/49375370518555",
+          "text": "Warm and ramp your domain"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115000357752-How-to-set-up-a-branded-sending-domain#h_01HCMT58PNZ5897T4GM5X9C8BQ",
+          "text": "You will learn"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115000357752-How-to-set-up-a-branded-sending-domain#h_01HCMT58PNKA2WEZ30451JVDGW",
+          "text": "What is a branded sending domain?"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115000357752-How-to-set-up-a-branded-sending-domain#h_01HCMT58PNW2A4VPKP41Z1BV26",
+          "text": "About generating domain name systems (DNS) with Klaviyo"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115000357752-How-to-set-up-a-branded-sending-domain#h_01HCMVG59HRH4JK31ES0H9K3S3",
+          "text": "Dynamic vs. static routing"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115000357752-How-to-set-up-a-branded-sending-domain#h_01HCMT58PN7S90JCFTVCTCQ0BD",
+          "text": "Requirements for creating a branded sending domain"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115000357752-How-to-set-up-a-branded-sending-domain#h_01HCMT58PN23FZWBGHTNDDRY3K",
+          "text": "Generate DNS records in Klaviyo"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115000357752-How-to-set-up-a-branded-sending-domain#h_01J3DJFR28JWVF1T25D8M5DDKE",
+          "text": "DMARC"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115000357752-How-to-set-up-a-branded-sending-domain#h_01HCMT58PNVM37BM628JXP3GJJ",
+          "text": "Update your DNS records"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115000357752-How-to-set-up-a-branded-sending-domain#h_01HCMT58PP4MWX06XR3PFJ5R5D",
+          "text": "Verify and apply your domain"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115000357752-How-to-set-up-a-branded-sending-domain#h_01HCMT58PPSD5N1XRPWM25WTEA",
+          "text": "Warm your sending infrastructure"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115000357752-How-to-set-up-a-branded-sending-domain#h_01JQ4QJTZ6JSEMR53HWV3BG29G",
+          "text": "Disconnected sending domain alert"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115000357752-How-to-set-up-a-branded-sending-domain#h_01JT44V2AG302YSHET054AP880",
+          "text": "Outcome"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115000357752-How-to-set-up-a-branded-sending-domain#additional-resources",
+          "text": "Additional resources"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/9042531198747",
+          "text": "migration guide"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4402601857307",
+          "text": "email authentication protocols like DMARC"
+        },
+        {
+          "href": "https://www.klaviyo.com/blog/gmail-update",
+          "text": "Gmail and Yahoo’s upcoming sender requirements."
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360025945671",
+          "text": "warm your infrastructure"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005231648",
+          "text": "user roles"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4402601857307",
+          "text": "email authentication"
+        },
+        {
+          "href": "https://www.klaviyo.com/blog/gmail-update",
+          "text": "sender requirement"
+        },
+        {
+          "href": "https://www.godaddy.com/help/manage-dns-zone-files-680",
+          "text": "GoDaddy"
+        },
+        {
+          "href": "https://support.google.com/a/answer/48090?hl=en",
+          "text": "Google Domains"
+        },
+        {
+          "href": "https://www.hostgator.com/help/article/manage-dns-records-with-hostgatorenom",
+          "text": "Hostgator"
+        },
+        {
+          "href": "https://help.hover.com/hc/en-us/articles/217282457-How-to-Edit-DNS-records-A-CNAME-MX-TXT-and-SRV-Updated-Aug-2015-",
+          "text": "Hover"
+        },
+        {
+          "href": "https://www.namecheap.com/support/knowledgebase/article.aspx/9214/31/cpanel-email-deliverability-tool--spf-and-dkim-records/",
+          "text": "Namecheap"
+        },
+        {
+          "href": "https://support.squarespace.com/hc/en-us/articles/205812348-Opening-Advanced-DNS-settings",
+          "text": "Squarespace"
+        },
+        {
+          "href": "https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/resource-record-sets-editing.html",
+          "text": "AWS"
+        },
+        {
+          "href": "https://developers.cloudflare.com/dns/manage-dns-records/how-to/create-dns-records/",
+          "text": "Cloudflare"
+        },
+        {
+          "href": "https://community.klaviyo.com/analytics-and-deliverability-72/help-dns-record-for-google-domains-10653",
+          "text": "into a single record"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360025945671",
+          "text": "warm this domain."
+        },
+        {
+          "href": "https://dmarcian.com/dkim-inspector/",
+          "text": "https://dmarcian.com/dkim-inspector/"
+        },
+        {
+          "href": "https://www.whatsmydns.net/",
+          "text": "https://www.whatsmydns.net/"
+        },
+        {
+          "href": "https://dnschecker.org/",
+          "text": "https://dnschecker.org/"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4417768780827",
+          "text": "Discover additional guidance and tips on branded sending domain troubleshooting"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360025945671",
+          "text": "warm your sending infrastructure"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360025945671-How-to-warm-your-sending-infrastructure",
+          "text": "warming or platform introduction process"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005231648",
+          "text": "permissions"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360025945671",
+          "text": "Understanding which warming process to use in Klaviyo"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/7674941873947",
+          "text": "Understanding branded vs. shared sending domains"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4402601857307",
+          "text": "Understanding email authentication"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115001002272",
+          "text": "Learn how to contact support"
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": ""
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": "Visit Community"
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": ""
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": "Hire a partner"
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/about",
+          "text": "About Klaviyo"
+        },
+        {
+          "href": "https://www.klaviyo.com/newsroom",
+          "text": "Newsroom"
+        },
+        {
+          "href": "https://investors.klaviyo.com/overview/default.aspx",
+          "text": "Investor relations"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Agency and tech partners"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Developers"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/retail",
+          "text": "Retail and ecommerce"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/restaurants",
+          "text": "Restaurant marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/wellness",
+          "text": "Wellness"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform",
+          "text": "B2C CRM overview"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai",
+          "text": "Klaviyo AI (K:AI)"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/marketing-automation",
+          "text": "Klaviyo Marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-service",
+          "text": "Klaviyo Service"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/analytics",
+          "text": "Klaviyo Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-data-platform",
+          "text": "Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare",
+          "text": "Klaviyo vs. Klaviyo alternatives"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-mailchimp",
+          "text": "Klaviyo vs. Mailchimp"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-postscript",
+          "text": "Klaviyo vs. Postscript"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-attentive",
+          "text": "Klaviyo vs. Attentive"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-salesforce-marketing-cloud",
+          "text": "Klaviyo vs. Salesforce"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-listrak",
+          "text": "Klaviyo vs. Listrak"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/omnichannel",
+          "text": "Omnichannel marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/email-marketing",
+          "text": "Email marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing",
+          "text": "SMS marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing/rcs",
+          "text": "RCS for Business"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/mobile-app-marketing",
+          "text": "Mobile app marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/whatsapp",
+          "text": "WhatsApp marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/social",
+          "text": "Social marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources",
+          "text": "Marketing resources"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources/marketing-campaign-calendar",
+          "text": "Marketing campaign calendar"
+        },
+        {
+          "href": "https://www.klaviyo.com/glossary",
+          "text": "Marketing glossary"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/email-subject-line-generator",
+          "text": "Subject line generator"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/roi-calculator",
+          "text": "ROI calculator"
+        },
+        {
+          "href": "https://www.klaviyo.com/customers",
+          "text": "Case studies"
+        },
+        {
+          "href": "https://www.klaviyo.com/composer",
+          "text": "Composer Beta"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/marketing-agent",
+          "text": "Marketing Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/customer-agent",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/customer-experience-hub",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/helpdesk",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/marketing-analytics",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/advanced-cdp",
+          "text": "Advanced Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/web-forms",
+          "text": "Web forms"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/email-templates",
+          "text": "Email templates"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/portfolio",
+          "text": "Portfolio"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform-integrations",
+          "text": "Apps and Integrations"
+        },
+        {
+          "href": "https://www.klaviyo.com/features",
+          "text": "Features"
+        },
+        {
+          "href": "https://www.klaviyo.com/whats-new",
+          "text": "What's new"
+        },
+        {
+          "href": "https://www.klaviyo.com/events",
+          "text": "Events"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help Center"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us",
+          "text": "Academy"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Community"
+        },
+        {
+          "href": "https://www.facebook.com/Klaviyo/",
+          "text": "Facebook"
+        },
+        {
+          "href": "https://twitter.com/klaviyo/",
+          "text": "Twitter"
+        },
+        {
+          "href": "https://www.linkedin.com/company/klaviyo/",
+          "text": "LinkedIn"
+        },
+        {
+          "href": "https://www.instagram.com/klaviyo/",
+          "text": "Instagram"
+        },
+        {
+          "href": "https://www.klaviyo.com/sitemap",
+          "text": "Site Map"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal",
+          "text": "Terms and Privacy"
+        },
+        {
+          "href": "https://www.klaviyo.com/security",
+          "text": "Security"
+        },
+        {
+          "href": "https://www.klaviyo.com/trust",
+          "text": "Trust"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal/intellectual-property-notices",
+          "text": "Intellectual Property Notices"
+        }
+      ],
+      "headings": [
+        {
+          "level": 1,
+          "id": "",
+          "text": "How to set up a branded sending domain"
+        },
+        {
+          "level": 2,
+          "id": "h_01HCMT58PNZ5897T4GM5X9C8BQ",
+          "text": "You will learn"
+        },
+        {
+          "level": 2,
+          "id": "h_01HCMT58PNKA2WEZ30451JVDGW",
+          "text": "What is a branded sending domain?"
+        },
+        {
+          "level": 2,
+          "id": "h_01HCMT58PNW2A4VPKP41Z1BV26",
+          "text": "About generating domain name systems (DNS) with Klaviyo"
+        },
+        {
+          "level": 2,
+          "id": "h_01HCMVG59HRH4JK31ES0H9K3S3",
+          "text": "Dynamic vs. static routing"
+        },
+        {
+          "level": 2,
+          "id": "h_01HCMT58PN7S90JCFTVCTCQ0BD",
+          "text": "Requirements for creating a branded sending domain"
+        },
+        {
+          "level": 3,
+          "id": "h_01HCMT58PNYW55PDR6TDCR3PBP",
+          "text": "Before you begin"
+        },
+        {
+          "level": 3,
+          "id": "h_01HCMT58PN59ZBM7HZVS06Q0M4",
+          "text": "Checklist"
+        },
+        {
+          "level": 2,
+          "id": "h_01HCMT58PN23FZWBGHTNDDRY3K",
+          "text": "Generate DNS records in Klaviyo"
+        },
+        {
+          "level": 3,
+          "id": "h_01J3DR7QMBA9Y5SC6W620FPWSA",
+          "text": "DNS records"
+        },
+        {
+          "level": 2,
+          "id": "h_01J3DJFR28JWVF1T25D8M5DDKE",
+          "text": "DMARC"
+        },
+        {
+          "level": 2,
+          "id": "h_01HCMT58PNVM37BM628JXP3GJJ",
+          "text": "Update your DNS records"
+        },
+        {
+          "level": 3,
+          "id": "h_01J3DJJ0JDYS6072A3QBN3T0VN",
+          "text": "Automatically publish records with Entri"
+        },
+        {
+          "level": 3,
+          "id": "h_01J3DJN13JC00VJKARZ0T1YM6Q",
+          "text": "Set up your domain manually"
+        },
+        {
+          "level": 2,
+          "id": "h_01HCMT58PP4MWX06XR3PFJ5R5D",
+          "text": "Verify and apply your domain"
+        },
+        {
+          "level": 3,
+          "id": "h_01HCMT58PPNCVPAXY6KVDEX74S",
+          "text": "Troubleshooting error messages"
+        },
+        {
+          "level": 2,
+          "id": "h_01HCMT58PPSD5N1XRPWM25WTEA",
+          "text": "Warm your sending infrastructure"
+        },
+        {
+          "level": 2,
+          "id": "h_01JQ4QJTZ6JSEMR53HWV3BG29G",
+          "text": "Disconnected sending domain alert"
+        },
+        {
+          "level": 2,
+          "id": "h_01JT44V2AG302YSHET054AP880",
+          "text": "Outcome"
+        },
+        {
+          "level": 2,
+          "id": "additional-resources",
+          "text": "Additional resources"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "Explore more from Klaviyo"
+        }
+      ]
+    }
+  },
+  "rendered_page": {
+    "status": "fetched",
+    "error": ""
+  }
+}

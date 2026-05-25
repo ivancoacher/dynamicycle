@@ -1,0 +1,215 @@
+<h2 id="h_01HMXX8XY24GKTM7YEG0HADR3Y">You will learn</h2>
+<p>Get familiar with mobile push notifications, including what they are, what they look like, and what information you need to start sending. </p>
+<h2 id="h_01HMXX8XY35VCWTNP5NDZVKPQ2">What are push notifications? </h2>
+<p>First, let’s clarify what we mean by push notifications, as there are actually 2 types: </p>
+<ol>
+<li>
+<strong>Mobile push notifications</strong> are messages that are sent by a mobile app to users and that typically appear on the lock screen of a mobile device.</li>
+<li>
+<strong>Web push notifications</strong>, also called “browser notifications.” These are sent by a website to a browser and can appear even when that website is not open. Web push notifications are available on desktop and mobile devices. Klaviyo does not support web push at this time, although you can <a href="https://medium.com/klaviyo-developers/solution-recipe-25-how-to-trigger-web-push-notifications-through-klaviyo-14a8361eb9f4">trigger web notifications via API calls</a>.</li>
+</ol>
+<p>In both cases, the notifications appear as clickable messages that take the user directly to an app or website. </p>
+<p>These 2 types are often talked about together; however, they are actually quite different from each other in terms of setup, requirements, and even how they look. </p>
+<p>Here, we only focus on 1 type of push notification: mobile. </p>
+<h3 id="h_01HMXX8XY3JAH8AQMH097HZPZG">How are mobile push notifications used?</h3>
+<p>Mobile push notifications are highly effective at driving people into your app. Just like with SMS, app users almost always see push notifications. The difference is that push notifications are:</p>
+<ul>
+<li>Often seen as less sales-driven by recipients</li>
+<li>Helpful in a wider range of use cases</li>
+<li>Usually less expensive to send<br>
+<p>Mobile push notifications are great for:</p>
+</li>
+<li>Reminders (e.g., to exercise, practice a language, watch a show)</li>
+<li>App-only deals or collections</li>
+<li>Time-sensitive alerts</li>
+<li>Product alerts </li>
+<li>Asks for information (e.g. “fill out your profile”)</li>
+</ul>
+<div class="bs-callout bs-callout-default">
+<p>Someone must have app notifications turned on in order to receive push notifications. </p>
+</div>
+<p class="wysiwyg-text-align-center"><img src="https://klaviyo.zendesk.com/hc/article_attachments/28720762464795" alt="Example of a opt-in message for an app" width="388" height="345"></p>
+<h3 id="h_01HMXX8XY3F7VQXZK2X3J4VY3A">How often should I send mobile push notifications? </h3>
+<p>The answer depends on how often your app users want notifications. Here are a few examples:</p>
+<ul>
+<li>Health, wellness, or educational brands might send daily reminders (e.g., to take medicine, work out, study, etc.).</li>
+<li>For apparel and accessory companies, it can depend on how often customers are likely to shop:
+<ul>
+<li>Weekly or bi-weekly for frequent and high-value shoppers.</li>
+<li>Monthly to all other customers.</li>
+<li>Most might send weekly or bi-weekly.</li>
+<li>Luxury brands may split their sending by audience.</li>
+</ul>
+</li>
+<li>Furniture stores may send out push notifications less frequently: for new product launches or the holidays, for example. </li>
+</ul>
+<p>Generally, though, don’t send more than 3–5 push notifications per week unless you see high engagement from customers. Sending more than that can overload subscribers and cause them to unsubscribe.</p>
+<h2 id="h_01HMXX8XY38BZN99CSHK05GZAF">Structure of a push notification</h2>
+<p>Let’s examine the anatomy of a push notification when it is delivered. Below is an example Android push notification, although iOS notifications will look similar.</p>
+<p>From left to right: </p>
+<ol>
+<li>App logo</li>
+<li>Title </li>
+<li>Timestamp</li>
+<li>Message body</li>
+<li>
+<a href="https://help.klaviyo.com/hc/en-us/articles/16917302437275">Rich media</a><br>
+<ul>
+<ul>
+<li>Android: image only</li>
+<li>iOS: image or GIF</li>
+</ul>
+</ul>
+</li>
+<li>Arrow to expand</li>
+</ol>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/28720762467739" alt="Example of a push notification as it appears on an Android device's lock screen"></p>
+<p>Note that the look of notification changes based on whether there’s an image or GIF attached, how long the message is, and the recipient’s device. </p>
+<h3 id="h_01J0VHEX5NCHRW1QNS2TK9N3RR">Character limit</h3>
+<p>As a general rule, you want to keep your push notifications clear and concise. </p>
+<p>If you exceed the character limit, your mobile push notification may get cut off, and the recipient won't see the full message.</p>
+<p>To avoid this, you want to adhere to the following character limits. However, keep in mind that the limits may vary by:</p>
+<ul>
+<li>The phone's software version (e.g., older versions may allow for more characters than newer ones, or vice versa).</li>
+<li>The message content:
+<ul>
+<li>Emojis take up more space than regular characters</li>
+<li>When you include rich media, push notifications tend to display fewer characters.</li>
+</ul>
+</li>
+</ul>
+<table style="width: 100%">
+<tbody>
+<tr>
+<td style="width: 33.3333%"></td>
+<td style="width: 33.3333%"><strong>Title</strong></td>
+<td style="width: 33.3333%"><strong>Description</strong></td>
+</tr>
+<tr>
+<td style="width: 33.3333%">Android</td>
+<td style="width: 33.3333%">65</td>
+<td style="width: 33.3333%">240</td>
+</tr>
+<tr>
+<td style="width: 33.3333%">iOS</td>
+<td colspan="2" style="width: 33.3333%">178</td>
+</tr>
+</tbody>
+</table>
+<h2 id="h_01HMXX8XY31A74EEZT2ZQMQC11">What you need to send push notifications</h2>
+<p>The first thing you need for push notification marketing is an app. </p>
+<p>If you don’t have an app yet, we recommend <a href="https://connect.klaviyo.com/">contacting a developer</a> or other third party to create one for you. </p>
+<div class="bs-callout bs-callout-default">
+<p>A developer is usually required to set up push notifications as well as your app. To connect your app with a push provider, someone must use an SDK (recommended) or create a custom integration. </p>
+</div>
+<div class="accordion accordion--default">
+<div class="accordion__item">
+<div class="accordion__item-title"><strong>What’s an SDK?</strong></div>
+<div class="accordion__item-content">
+<p>SDK stands for a software development kit, and it is a set of tools, libraries, and programs used to develop apps for a specific platform or service. Basically, it’s a developer’s toolkit for connecting an app with any other platform (e.g., Klaviyo). </p>
+</div>
+</div>
+</div>
+<h3 id="h_01HMXX8XY3JV8WA5780S92CZBV">Decide what features you want</h3>
+<p>An app must be able to actually send out a push notification. The most basic requirement is the title and message body of the push. However, there are other, optional features that you may need to work with your app developer to include:</p>
+<ul>
+<li>
+<strong>Rich media</strong><br>
+Allows you to include images and (for iOS) GIFs in your push notifications.</li>
+<li>
+<strong>Deep linking</strong><br>
+Deep linking is the ability to link directly to a page in your app. Without a deep link, all your push notifications will take recipients to the app’s home screen.<br>
+<div class="bs-callout bs-callout-default">
+<p>For deep linking, your developer needs to give you the URI scheme for your app. This is custom to your app, but your developer can help you get these links. </p>
+</div>
+<p>Further, you may want to consider what information you want to use in your push notifications. Your developer will need to include these when setting up the connection between your app and push provider. For instance, some helpful custom metrics are: </p>
+</li>
+<li><em>Opened app </em></li>
+<li><em>Completed profile</em></li>
+<li><em>Set store location</em></li>
+</ul>
+<h3 id="h_01HMXX8XY4D5F79CCX21NZGTJ4">Provide key information to your push provider</h3>
+<p>After everything is set up in your app, you’ll have to connect it to your push provider. </p>
+<p>To do this, you must provide certain information about your app. While the requirements may slightly change depending on the provider, the table below shows what you need in Klaviyo, and other providers should be similar. </p>
+<div class="bs-callout bs-callout-default">
+<p>You may need to work with your app developer to get this information. </p>
+</div>
+<table>
+<tbody>
+<tr>
+<td><strong>Platform</strong></td>
+<td><strong>Required information</strong></td>
+</tr>
+<tr>
+<td><a href="https://help.klaviyo.com/hc/en-us/articles/14750928993307">Android</a></td>
+<td>Package name, Google service authentication key (JSON private key file)</td>
+</tr>
+<tr>
+<td><a href="https://help.klaviyo.com/hc/en-us/articles/360023213971">iOS</a></td>
+<td>APNs authentication key (via a .p8 certificate), key ID, team ID, bundle ID</td>
+</tr>
+</tbody>
+</table>
+<p>Note that if your app is listed in both the Apple App and Google Play stores, you’ll have to set each up individually. </p>
+<h3 id="h_01HMXX8XY48V1Z963KYTKQKPEX">Test via your push token</h3>
+<div class="accordion accordion--default">
+<div class="accordion__item">
+<div class="accordion__item-title"><strong>What’s a push token?</strong></div>
+<div class="accordion__item-content">
+<p>A push token is a unique anonymous ID to identify a certain app on a certain device, and it’s generated by the Apple Push Notification Service (iOS) or Firebase Cloud Messaging (Android). Your token for that app and device combination will be the same no matter which push platform you use. </p>
+</div>
+</div>
+</div>
+<p>Once you connect your app and push platform, it’s important to test that:</p>
+<ul>
+<li>Your app can send push notifications.</li>
+<li>A push notification can deep link or include media (if you intend to use these features). </li>
+<li>Your push provider is properly receiving information from your app.</li>
+</ul>
+<p>See the sections below for details on what to do. </p>
+<h4 id="h_01HMXX8XY4DPZ16D41RVJPD6FC">Opt in to push</h4>
+<ol>
+<li>Open your app from your personal device. </li>
+<li>Opt in to push notifications.<br>
+If you’re not automatically prompted to enable push, go into your app settings and turn notifications on. </li>
+</ol>
+<h4 id="h_01HMXX8XY412M445RC0T90X9DK">Create a list to test your push notifications</h4>
+<ol>
+<li>Go to your push provider. Here, we use Klaviyo as an example. </li>
+<li>Create a list to preview your push notifications by:<br>
+<ul>
+<ul>
+<li>Navigate to <strong>Audience &gt; Lists &amp; segments &gt; Create new &gt; Create list</strong>. </li>
+<li>Name the list (e.g., “Push preview”) and select <strong>Create list</strong>. </li>
+</ul>
+</ul>
+</li>
+<li>Find your push token. In Klaviyo, navigate to <strong>Audience &gt; Profiles </strong>and either search for your profile, or review the recently updated profiles.<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28720762463259" alt="Searching for recent push profiles in an accpimt">
+</li>
+<li>Click into that profile. </li>
+<li>Go to the <strong>Lists and segments </strong>tab within the profile and click <strong>Add to list</strong>.<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28720762474395" alt="List and segments tab within a profile, showing the option to add that profile to a list">
+</li>
+<li>Find the list you created and then select <strong>Add to list</strong>. </li>
+</ol>
+<div class="bs-callout bs-callout-default">
+<p>If you have both an Android and iOS app, we recommend adding a push token for each type of device to the preview list. This will allow you to see how your push notifications appear on both systems, as they tend to look slightly different from each other. </p>
+</div>
+<h4 id="h_01HMXX8XY4E42V93MK9PPGJX8T">Perform your tests and checks</h4>
+<p>We recommend <a href="https://help.klaviyo.com/hc/en-us/articles/18011985278875">performing several separate tests</a>: </p>
+<ol>
+<li>Send a simple push notification (i.e., content only).</li>
+<li>Add an image to test rich push. </li>
+<li>Include a deep link. </li>
+</ol>
+<p>Also, go into your app and click around to test your custom metrics (e.g., if you added a custom metric for <em>Completed profile</em>, fill out your profile in your app). Then, go back to your push provider to see if these metrics and events are being logged properly. </p>
+<h2 id="h_01HMXX8XY4F2B66VJE4VC9CQ7G">Additional resources</h2>
+<ul>
+<li><a href="https://help.klaviyo.com/hc/en-us/articles/21997060301979">Push notification glossary</a></li>
+<li><a href="https://help.klaviyo.com/hc/en-us/articles/16853367294747">Basics: push notification best practices</a></li>
+<li>Getting set up with mobile push on <a href="https://help.klaviyo.com/hc/en-us/articles/14750928993307">Android</a> or <a href="https://help.klaviyo.com/hc/en-us/articles/360023213971">iOS</a>. </li>
+</ul>
+<p></p>

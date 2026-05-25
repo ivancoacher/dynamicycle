@@ -1,0 +1,73 @@
+<p>Add profile, custom, and event variables to personalize WhatsApp templates. Dynamic content lets you tailor each message with customer data, such as a first name, loyalty tier, product name, or checkout link.</p>
+<p>Because WhatsApp templates require approval from Meta before sending, you must follow specific formatting rules when adding variables.</p>
+<h2 id="h_01KJR1JDFVA9ZZZNC1YCZZHBCR">Before you begin</h2>
+<p>Keep the following in mind before adding dynamic content:</p>
+<ul>
+<li>Always include a default value for every variable.</li>
+<li>Preview your template with real data before submitting it for approval.</li>
+<li>If you include links, add a fallback URL.</li>
+<li>Make sure the profile property or event field exists in your account.</li>
+</ul>
+<p>If a variable does not have a default value, Meta may reject the template or the message may fail to send.</p>
+<h2 id="h_01KJR1JDFVJW3XBV5R5BRDWQK2">Add profile and custom profile variables</h2>
+<p>Profile variables pull information stored on a customer’s profile, such as first name or email address. You can also use custom profile properties you have created, such as loyalty tier or preferred store location.</p>
+<p>Use the <em>Personalization</em> feature in the editor to insert these variables instead of typing them manually.</p>
+<p>To add a profile or custom property variable:</p>
+<ol>
+<li>Navigate to <em>Content</em> &gt; <em>Templates</em>.</li>
+<li>Click <em>Create template</em>.</li>
+<li>Select <em>WhatsApp</em> as the channel.</li>
+<li>Choose your message intent: <em>Marketing</em> or <em>Transactional</em>.</li>
+<li>In the body, click <em>Personalization</em>.</li>
+<li>Search for and select the profile property or custom property you want to insert.</li>
+<li>Add a default value using the <code>|default:'value'</code> filter.</li>
+</ol>
+<p>Example:</p>
+<pre><code class="language-auto">Hi {{ person.first_name|default:'there' }},</code></pre>
+<p>Example with a custom property:</p>
+<pre><code class="language-auto">Your current loyalty tier is {{ person.loyalty_tier|default:'Valued customer' }}.</code></pre>
+<p>Meta requires a default value for all variables. The default ensures the message can send even if the profile property is empty.</p>
+<h2 id="h_01KJR1JDFV89YBY1TA7J2FZ94S">Add event variables</h2>
+<p>Event variables pull data from a specific event, such as <em>Viewed Product</em> or <em>Started Checkout</em>. Use event variables to reference a product name, cart value, or checkout URL.</p>
+<p>To insert event variables:</p>
+<ol>
+<li>In the template editor, click <em>Preview &amp; test</em>.</li>
+<li>Search for and select a profile associated with the relevant event.</li>
+<li>Select the specific event instance you want to preview.</li>
+<li>Click <em>All properties</em> to view available event variables.</li>
+<li>Copy the variable tag for the property you want to use.</li>
+<li>Paste the variable into your template.</li>
+<li>Add a default value using the <code>|default:'value'</code> filter.</li>
+</ol>
+<p>Example:</p>
+<pre><code class="language-auto">You recently viewed {{ event.Name|default:'an item on our site' }}.</code></pre>
+<p>If you are including a link, always provide a fallback URL:</p>
+<pre><code class="language-auto">Complete your purchase here: {{ event.URL|default:'https://yourwebsite.com' }}</code></pre>
+<p>Including a fallback URL ensures the message can still send if event data is unavailable.</p>
+<p></p>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/47295543261595" alt="Add event variable" width="624" height="212"></p>
+<h2 id="h_01KKFA8Y6J413K08XPV4YA3S4F">Referencing custom profile properties with <code>lookup</code>
+</h2>
+<p>If a profile property contains spaces or special characters (such as <code>/</code>), reference it using the <code>lookup</code> filter.</p>
+<p>For example:</p>
+<pre><code class="language-text">{{ person|lookup:'Birthday' }}</code></pre>
+<h3 id="h_01KKFA8Y6NK2JY8JBW2YK40J6F">Add a fallback value</h3>
+<p>If the profile property may be missing, add a fallback value using the <code>default</code> filter.</p>
+<pre><code class="language-text">{{ person|lookup:'Birthday'|default:'your birthday' }}</code></pre>
+<p>This ensures the message still renders if the profile does not contain that property.</p>
+<h2 id="h_01KJR1JDFVQH8C0G0GAB44TM07">Best practices for Meta approval</h2>
+<p>Follow these guidelines to reduce the risk of template rejection:</p>
+<ul>
+<li>Include a default value for every variable.</li>
+<li>Ensure fallback links use a valid, branded URL.</li>
+<li>Preview the template with real profile and event data.</li>
+<li>Confirm that your variables match existing profile properties or event fields exactly.</li>
+</ul>
+<p>If you do not follow Meta’s formatting requirements, your template may be rejected or messages may be skipped.</p>
+<h2 id="h_01KJR1JDFVHPE0Q0F03C41Y5H1">Next steps</h2>
+<p>Now that you’ve added dynamic content to your WhatsApp template:</p>
+<ol>
+<li>Submit your template for Meta approval.</li>
+<li>Create a campaign or flow that uses your approved WhatsApp template.</li>
+<li>Test your message with internal profiles before sending to customers.</li>
+</ol>

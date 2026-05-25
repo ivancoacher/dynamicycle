@@ -1,0 +1,113 @@
+<h2 id="h_01HQ469CK9C1GMQBT6AN9VG6TP">You will learn</h2>
+<p>Learn how to integrate with OpenTable, a real-time online reservation network for fine dining restaurants.</p>
+<h2 id="h_01HQ469CK9PP1MVGASP18PKWMP">Before you begin</h2>
+<p>To integrate with OpenTable, you need to name Klaviyo as a third party processor in order to gain access to the Sync API, which is OpenTable's API that will allow us to pull data directly into Klaviyo.</p>
+<ol>
+<li>Contact your OpenTable account manager about naming Klaviyo as a third party processor.</li>
+<li>Once OpenTable creates a DocuSign for your restaurant, provide the following info:<br>
+<br>
+<strong>API(s) to be Access by Recipient</strong>: Sync API<br>
+<strong>Recipient Name</strong>: Klaviyo, Inc.<br>
+<strong>Relationship to Client</strong>: Vendor/Service Provider<br>
+<br>
+<strong>Recipient Address</strong><br>
+125 Summer St. Floor 10<br>
+Boston, MA 02110<br>
+<br>
+<strong>Contact Information</strong><br>
+Klaviyo Team<br>
+<a href="mailto:restaurants@klaviyo.com">restaurants@klaviyo.com</a><br>
++1 800-338-1744<br>
+(no fax)<br>
+<p>You must also create a list in Klaviyo for anyone who has opted in via OpenTable.</p>
+</li>
+<li>Navigate to <strong>Audience</strong> &gt; <strong>Lists</strong><strong>&amp;</strong><strong>Segments</strong>.</li>
+<li>Click <strong>Create new </strong>&gt; <strong>Create list</strong> in the top right corner.</li>
+<li>Name the list something that will make its purpose obvious such as “OpenTable Subscribers Ongoing”.</li>
+<li>Click <strong>Create list</strong>.</li>
+<li>While viewing the new list, select the <strong>Settings</strong> tab.<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28723524398491" alt="">
+</li>
+<li>Copy the list ID of this list. You will need this later.</li>
+<li>Navigate to the <strong>Consent</strong> tab on the left and set the list to <strong>Single opt-in</strong>.<br>
+It’s important that this list is single opt-in to prevent subscribers from all receiving a confirmation email once the integration is installed.</li>
+</ol>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/28723524413083" alt=""></p>
+<h2 id="h_01HQ469CK93D5BC3HR3AQ8RNHY">Integrate OpenTable with Klaviyo</h2>
+<p>To integrate with OpenTable:</p>
+<ol>
+<ol>
+<li>OpenTable Client ID (can be found <a href="https://dev.opentable.com/partner-portal/profile/credentials">here</a>)</li>
+<li>OpenTable Secret ID (can be found <a href="https://dev.opentable.com/partner-portal/profile/credentials">here</a>)</li>
+<li>Klaviyo List ID (as mentioned in the <em>Before you begin</em> section of this article)</li>
+<li>OpenTable Restaurant ID and Restaurant Name</li>
+</ol>
+<li>Log into your OpenTable account to make sure some of the links below will work.</li>
+<li>In Klaviyo, click <strong>Integrations &gt; Explore apps</strong>.</li>
+<li>Search for <em>OpenTable</em>, and click on the card. Then, click <strong>Install</strong>.</li>
+<li>On the setups page, enter the following information:
+<ol>
+<li>Whatever the name is will be what you can filter by later, so if you have multiple locations, you should put that in the name.</li>
+</ol>
+</li>
+<li>Click the <strong>Complete setup </strong>to begin the integration. This will start a 2 year historical sync of OpenTable guest and reservation data. Going forward, there’ll be a periodic sync every 30 minutes that pulls in guest and reservation data so your account is always up to date.</li>
+</ol>
+<h2 id="h_01HQ469CK9T5B2JQFY7KFXTW6C">Understand your OpenTable data</h2>
+<p>Klaviyo syncs different events from OpenTable related to membership and OpenTable properties. We sync 2 years of historical data from OpenTable. </p>
+<div class="bs-callout bs-callout-default">
+<p>Klaviyo syncs email addresses and email consent from OpenTable. Please note that only subscribes are synced from OpenTable, and unsubscribes are not. </p>
+<p>While phone numbers are synced, SMS consent is not. This means that SMS cannot be sent to phone numbers synced from this integration.</p>
+</div>
+<p>To view your OpenTable data:</p>
+<ol>
+<li>Click the <strong>Analytics</strong> dropdown in the left-hand navigation sidebar.</li>
+<li>Select <strong>Metrics</strong>. Here, you can view all of the metrics in your account. The metrics labeled “OpenTable” represent all of the metrics synced from your OpenTable integration.</li>
+<li>Filter this view to see OpenTable metrics by using the filter selector next to the search bar and select <strong>OpenTable</strong>. <br>
+</li>
+</ol>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/28723524415515" alt="" width="300" height="392"></p>
+<p>Learn more about your <a href="https://help.klaviyo.com/hc/en-us/articles/23113172847259">OpenTable data</a>.</p>
+<h2 id="h_01HQ469CKA8RVEV9H2W6MRQY80">Segment customers using OpenTable data</h2>
+<p>You can use OpenTable’s metrics to segment customers and target them with a campaign. For example, you can create a segment of everyone who has previously completed a reservation.</p>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/28723546329499" alt="" width="636" height="178"></p>
+<p>To create the example segment shown above:</p>
+<ol>
+<li>Click the <strong>Audience</strong> dropdown in the left-hand navigation sidebar.</li>
+<li>Click <strong>Lists &amp; Segments</strong>.</li>
+<li>Click <strong>Create List / Segment</strong> in the top right.</li>
+<li>Select <strong>Segment</strong>.</li>
+<li>Name your segment and select tags if desired.</li>
+<li>Under Definition, select <strong>What someone has done (or not done)</strong> &gt; <strong>Completed Reservation</strong> &gt; <strong>at least once</strong> &gt;<strong> over all time</strong>.</li>
+<li>Click <strong>Create Segment</strong>.</li>
+</ol>
+<h3 id="h_01HV26ZPTX6QS9B3QQYP6QS2SM">Segment by reservation value</h3>
+<p>If you want to segment by the value of a reservation, you'll need to have your POS connected to OpenTable. If your POS is not connected to OpenTable, value amounts will not sync from OpenTable to Klaviyo. </p>
+<p>For example, if you are using both OpenTable and Square and have Square connected to OpenTable, you'll see an OpenTable event called <em>Completed Reservation Value</em>, which you can use in segmentation and filtering. Note that this metric will not appear in the <em>Metrics</em> tab.</p>
+<h2 id="h_01HQ469CKA5GNCKPT4ERHY9MX5">Use OpenTable data in flows</h2>
+<p>You can use OpenTable metrics to trigger flows. For example, you can use the <em>Completed Reservation </em>metric to trigger a flow to send messages to someone immediately when they complete a reservation.</p>
+<p>To create a flow using OpenTable metrics:</p>
+<ol>
+<li>Navigate to the <strong>Flows</strong> tab from the left-hand navigation sidebar.</li>
+<li>Click <strong>Create flow</strong> in the top right.</li>
+<li>Click <strong>Create from scratch</strong> in the top right.</li>
+<li>Name your flow and select tags if desired.</li>
+<li>Click <strong>Create Flow</strong>.</li>
+<li>In the flow builder, choose Metric as the trigger.</li>
+<li>From the sidebar, choose <strong>Your metrics </strong>&gt; <strong>OpenTable</strong> &gt; <strong>Completed Reservation </strong>or <strong>All triggers </strong>&gt; <strong>Metric </strong>&gt; <strong>Completed Reservation</strong>.<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28723524404251" alt="">
+</li>
+<li>Click <strong>Done</strong>.</li>
+<li>Add time delays and messages relevant to the triggering action. Learn more about <a href="https://help.klaviyo.com/hc/en-us/articles/360003057151">how to create a metric-triggered flow</a>.<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28723546333467" alt="" width="380" height="364">
+</li>
+<li>Once your content is ready, click <strong>Update Action Statuses </strong>in the top right of the flow builder to set the flow live.</li>
+</ol>
+<h2 id="h_01HQ469CKA2ZHB06FT6BDBHVAF">Outcome</h2>
+<p>You've now integrated OpenTable with Klaviyo and learned about OpenTable data in Klaviyo, segmenting customers using OpenTable data, and using OpenTable data in flows.</p>
+<h2 id="h_01JD34RFDKVN4SXQ25KF1WW5ZG">Why am I seeing the notification “Your account is calling a retired revision”?</h2>
+<p>Are you seeing a notification in Klaviyo that reads “[ACTION Required] Your account is calling a retired revision”, like the one below? </p>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/31085192132251" alt="" width="339" height="305"></p>
+<p>Please ignore this notification; no action is currently needed on your part. Your OpenTable integration is managed by Klaviyo and will continue to work as expected.</p>

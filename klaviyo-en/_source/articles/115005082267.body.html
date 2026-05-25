@@ -1,0 +1,145 @@
+<h2 id="h_01HH30T8PT4PK0KRCV6ZZ8GAQ1">You will learn</h2>
+<p>Learn how to integrate Stripe with Klaviyo in order to personalize and target emails based on invoice and payment data from your customers.</p>
+<p>You'll set up the Stripe integration in 2 steps. First, you'll connect Stripe by enabling the integration in Klaviyo. Then you set up webhooks in Stripe which will enable a real-time sync of specific Stripe data into Klaviyo.</p>
+<p>Here's an overview of the data we sync from Stripe:</p>
+<ul>
+<li>When an invoice is issued, and the items included in each invoice</li>
+<li>Payment information for when a user fails payment, is refunded, or successfully pays</li>
+</ul>
+<h2 id="h_01HH30T8PTEDGWD76V0T8K98RT">Enable the Stripe integration in Klaviyo</h2>
+<ol>
+<li>In Klaviyo, select the <strong>Integrations</strong> tab.</li>
+<li>Select <strong>Explore apps</strong>, search for <em>Stripe</em>, then click the card. </li>
+<li>Then, click <strong>Install</strong>.</li>
+<li>Click <strong>Connect to Stripe</strong>. This will bring you to Stripe's website - log in if needed.</li>
+<li>Select the Stripe account you'd like to connect to Klaviyo and click <strong>Connect</strong>. <br><img src="https://klaviyo.zendesk.com/hc/article_attachments/28720667423771">
+</li>
+<li>Back in Klaviyo, you can choose to verify Stripe webhooks by entering your signing secret (recommended). This is found in Stripe under <strong>Developers &gt; Webhooks </strong>and will add an extra level of security to your integration.<br><img src="https://klaviyo.zendesk.com/hc/article_attachments/28720667432987" alt="The stripe integration configuration page.">
+</li>
+<li>Copy the webhook URL from this page. This will be pasted into your Stripe account in the next section. </li>
+<li>Click <strong>Complete setup</strong>.</li>
+</ol>
+<h2 id="h_01HH30T8PTMN8Z9G0DKVT3M4QH">Set up Stripe webhooks</h2>
+<p>Now we'll set up your Stripe webhooks, which will enable you to sync your Stripe data in real-time.</p>
+<ol>
+<li>Open Stripe in a new tab, and navigate to the <strong>Developers</strong> tab.</li>
+<li>Select <strong>Webhooks</strong>, and click <strong>Add endpoint</strong>.<br><img src="https://klaviyo.zendesk.com/hc/article_attachments/28720667411867" alt="Webhooks tab in Stripe showing endpoints section with add endpoint button" width="603" height="167">
+</li>
+<li>Fill in the following fields:
+<ul>
+<li>
+<strong>Endpoint URL</strong><br>Paste the URL you just copied from Klaviyo.</li>
+<li>
+<strong>Version</strong><br>Select the latest API version.</li>
+<li>
+<strong>Events to send</strong><br>Klaviyo requires charge and invoice data points. In the <em>Events to send</em> dropdown, select all of the <em>charge</em> and <em>invoice</em> events. You can optionally omit all <em>charge.dispute</em> events. Create endpoints for all of the following events:
+<ul>
+<li>charge.captured</li>
+<li>charge.expired</li>
+<li>charge.failed</li>
+<li>charge.pending</li>
+<li>charge.refunded</li>
+<li>charge.succeeded</li>
+<li>charge.updated</li>
+<li>invoice.created</li>
+<li>invoice.deleted</li>
+<li>invoice.finalized</li>
+<li>invoice.marked_uncollectible</li>
+<li>invoice.payment_action_required</li>
+<li>invoice.payment_failed</li>
+<li>invoice.payment_succeeded</li>
+<li>invoice.sent</li>
+<li>invoice.upcoming</li>
+<li>invoice.updated</li>
+<li>invoice.voided</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>After you've selected all charge and invoice events, select <strong>Add endpoint</strong>.<br><img src="https://klaviyo.zendesk.com/hc/article_attachments/28720667409691" alt="Add a webhook endpoint with full list of events and Add endpoint with purple background" width="390" height="403">
+</li>
+<li>You'll receive confirmation that your webhooks are enabled.<br><img src="https://klaviyo.zendesk.com/hc/article_attachments/28720667414043" alt="Stripe webhook page with status Enabled highlighted in green" width="589" height="423">
+</li>
+<li>Your Stripe integration is now enabled.</li>
+</ol>
+<h2 id="h_01HH30T8PTJH2F3DPV32A29KXD">View data synced from Stripe</h2>
+<p>To check on your enabled integration:</p>
+<ol>
+<li>Click the <strong>Analytics</strong> dropdown in Klaviyo and select <strong>Metrics</strong>.</li>
+<li>Find Stripe's <em>Successfully Paid</em> metric and click on the <strong>Activity feed</strong> icon.<br><img src="https://klaviyo.zendesk.com/hc/article_attachments/34455209929883" alt="Activity feed for Stripe Successfully Paid metric in Klaviyo">
+</li>
+<li>If your integration has started syncing data, you will see invoices issued through Stripe populate here. When your integration is fully synced, the Stripe integration will show a green border next to it in your Klaviyo account. Klaviyo imports all of your Stripe data. To verify this, you can compare the number of successful payments on a particular day with what's in the Stripe interface and confirm they match.</li>
+<li>For instance, click the <strong>Chart</strong> heading for the <em>Successfully Paid</em> metric. This chart shows the last 30 days of data by default. Either mouse over yesterday's data point or look in the table of data below the chart to see how many payments you had yesterday. Compare that number to what's stored in Stripe and you should see they match exactly.</li>
+<li>If the data doesn’t match up, the issue is most likely that the timezone in your Klaviyo account doesn't match the timezone in your Stripe account. To check your timezone setting in Klaviyo:
+<ul>
+<li>Click your account name in the lower left.</li>
+<li>Select then clicking <strong>Settings</strong><strong> &gt; Organization</strong>.</li>
+<li>Scroll down to <em>Time zone</em>.</li>
+</ul>
+</li>
+</ol>
+<h2 id="h_01HH30T8PTKHY713BHKFX577H0">The Stripe metrics</h2>
+<p>Stripe syncs the following metrics to Klaviyo:</p>
+<ul>
+<li>Failed Payment</li>
+<li>Issued Invoice</li>
+<li>Refunded Payment</li>
+<li>Successfully Paid</li>
+</ul>
+<p class="wysiwyg-text-align-left"><img src="https://klaviyo.zendesk.com/hc/article_attachments/28720622067739" alt="Metrics tab in Klaviyo filtered by Stripe with metrics including failed payment and issued invoice" width="625" height="249"></p>
+<h3 id="h_01HH30T8PTH1B3GWN32E5Z6P6C">Failed Payment</h3>
+<p>This metric is recorded every time a payment made through Stripe is marked as failed. Use this metric to target customers with failing payments to let them know they have an overdue balance. You can filter and target Failed Payment events based on the following criteria:</p>
+<ul>
+<li>
+<strong>AttemptCount<br></strong>The number of times this invoice attempted to charge the user.</li>
+<li>
+<strong>Currency<br></strong>The currency of the invoice failed to be paid, e.g., <em>USD</em>, <em>GBP</em>.</li>
+<li>
+<strong>Invoice<br></strong>The invoice this failed payment is tied to in Stripe.</li>
+<li>
+<strong>Reason<br></strong>The reason in Stripe this payment failed, e.g., <em>Your card has expired</em>, <em>Your card was declined</em>.</li>
+</ul>
+<h3 id="h_01HH30T8PTCT38RJT58ZS6KZC5">Issued Invoice</h3>
+<p>This metric is recorded every time an invoice is issued to your customers through Stripe. Use this metric to segment on customers who have been issued an invoice, but either have not paid or had a payment fail. It can also be used to trigger segments to notify customers of an upcoming payment.</p>
+<h3 id="h_01HH30T8PTA3E4NV7V2JV087CR">Refunded Payment</h3>
+<p>This metric records an event when you refund a payment through Stripe. You can filter and target Refunded Payment events based on the following criteria:</p>
+<ul>
+<li>
+<strong>Amount<br></strong>The value of the payment that was refunded.</li>
+</ul>
+<h3 id="h_01HH30T8PTSHAX547MGHJSMV09">Successfully Paid</h3>
+<p>This metric is recorded each time a customer successfully pays an invoice through Stripe. These events include data about your customer, their invoice, and the products in their invoice. Use this metric to send automated invoices to customers after they pay, or in email flows to determine when a customer has been active on your website, but hasn't made payments for your products or services. You can then send those users emails offering discounts to make a purchase on your website.</p>
+<p>You can filter and target Successfully Paid events based on the following criteria:</p>
+<ul>
+<li>
+<strong>Currency<br></strong>The currency of the invoice paid, e.g., <em>USD</em>, <em>GBP</em>.</li>
+<li>
+<strong>Invoice<br></strong>The invoice this payment is tied to in Stripe.</li>
+</ul>
+<h2 id="h_01HH30T8PVYBNXMNS635H0RFK6">Customer data</h2>
+<p>Klaviyo uniquely identifies each individual by their email address. If Stripe syncs over customer data with a new email address, Klaviyo will create a new profile consisting of the customer's email address and associated Stripe metrics. Credit card expiration dates are stored as a custom property in a customer's profile.</p>
+<div class="bs-callout bs-callout-default">
+<p>One of the Stripe events listed above must occur in order for a profile to be created in Klaviyo.</p>
+</div>
+<h2 id="h_01HH30T8PVHWC2KXDG8ZJY5VBV">Use Stripe data in Klaviyo</h2>
+<p>Any Stripe metric or metadata can be used to trigger a flow in Klaviyo.</p>
+<h3 id="h_01HH30T8PV8VFKCZG1R61NYT3F">Automated invoices</h3>
+<p>You can send out invoice receipts to your customers automatically after they make a payment by setting up an invoice flow, triggered by Stripe's <em>Successfully Paid</em> metric.<br><img src="https://klaviyo.zendesk.com/hc/article_attachments/28720622098843" alt="Flow in Klaviyo flow builder triggered by Successfully Paid" width="639" height="326"></p>
+<p>This flow can automatically populate an email that displays dynamic payment details using template tags that reference Stripe payment attributes.</p>
+<p>For more information on embedding dynamic data into an email template, see our article on <a href="https://klaviyo.zendesk.com/hc/en-us/articles/115005084927" target="_blank" rel="noopener">template tags and variable syntax</a>.</p>
+<h3 id="h_01HH30T8PVBK49AH0YMG3FF1JM">Stripe failed payments flow</h3>
+<p>Alert your customers to a failed payment with an automated flow, triggered by the Stripe <em>Failed Payment</em> metric.</p>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/28720622094235" alt="Flow in Klaviyo flow builder triggered by Failed Payment" width="646" height="466"></p>
+<h2 id="h_01HH30T8PVW3KET8M27HMM4VQ3">Troubleshooting</h2>
+<h3 id="h_01HH30T8PVC32RMG242CNWYM2G">I am not seeing all activity in Stripe sync to Klaviyo.</h3>
+<p>The most common reason why a Stripe event won't sync to Klaviyo is because there is no email address associated with the event. Because Klaviyo uses an email address to uniquely identify a person, we can’t create a profile for someone who is not associated with an email address. Likewise, Klaviyo can’t link an event to a profile if it is not associated with an email address.</p>
+<p>Keep in mind that first and last name inputs are not necessarily consistent or unique, so we don’t create profiles based on this information alone. Doing so could lead to duplicates and inaccurate tracking.</p>
+<p>If, even with email addresses associated, you’re still not seeing Stripe data sync to Klaviyo, reach out to <a href="https://help.klaviyo.com/hc/en-us/articles/115001002272" target="_blank" rel="noopener">our support team</a>.</p>
+<h2 id="h_01HH30T8PVZPW6DM6GB1F07TJR">Outcome</h2>
+<p>You've now integrated Stripe with Klaviyo and learned how to use your synced data.</p>
+<h2 id="h_01HH30T8PVMKPAKYMK2E8GKSH9">Additional resources</h2>
+<ul>
+<li><a href="https://help.klaviyo.com/hc/en-us/articles/115002774932" target="_blank" rel="noopener">Getting started with flows</a></li>
+<li><a href="https://help.klaviyo.com/hc/en-us/articles/115005237908" target="_blank" rel="noopener">Getting started with segments</a></li>
+<li><a href="https://help.klaviyo.com/hc/en-us/articles/360030696012" target="_blank" rel="noopener">Understanding types of data exchanged between Klaviyo and apps</a></li>
+</ul>

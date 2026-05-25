@@ -1,0 +1,62 @@
+<h2 id="h_01HE5PXRG1R8S59ZAJG050A5NW">You will learn</h2>
+<p>Learn how to create a custom <em>Viewed Page</em> metric and understand when your customers visit non-product pages on your site. </p>
+<h2 id="h_01HE5PXRG1VPERTEPMMT529KAB">Before you begin</h2>
+<p>Before continuing with this article, make sure you've integrated your ecommerce platform (such as <a href="https://help.klaviyo.com/hc/en-us/articles/115005080407" target="_blank" rel="noopener noreferrer">Shopify</a>) with Klaviyo.</p>
+<p>It's important to add the following JavaScript code snippet to each page of your site that you want to track a <em>Viewed Page</em> metric for. This snippet will work for both landing pages and any other site pages.</p>
+<h2 id="h_01HE5PXRG1NZWKBZKDBF33RQ78">Installing the snippet</h2>
+<ol>
+<li>Copy and paste the complete snippet below into your page files.</li>
+<li>Then save and publish your website files with the updated code.</li>
+</ol>
+<pre><code class="language-javascript">&lt;script type="text/javascript"&gt; 
+//Script to initialize Klaviyo object on page load
+!function(){if(!window.klaviyo){window._klOnsite=window._klOnsite||[];try{window.klaviyo=new Proxy({},{get:function(n,i){return"push"===i?function(){var n;(n=window._klOnsite).push.apply(n,arguments)}:function(){for(var n=arguments.length,o=new Array(n),w=0;w&lt;n;w++)o[w]=arguments[w];var t="function"==typeof o[o.length-1]?o.pop():void 0,e=new Promise((function(n){window._klOnsite.push([i].concat(o,[function(i){t&amp;&amp;t(i),n(i)}]))}));return e}}})}catch(n){window.klaviyo=window.klaviyo||[],window.klaviyo.push=function(){var n;(n=window._klOnsite).push.apply(n,arguments)}}}}(); &lt;/script&gt;
+&lt;script type="text/javascript"&gt; 
+//Script to track viewed page
+klaviyo.track("Viewed Page", {           
+   PageName: "About Us"   
+}); 
+&lt;/script&gt;</code></pre>
+<p>Once the snippet has been added to your site, it will record a custom <em>Viewed Page</em> metric in which the property name <em>PageName</em> equals the value "About Us".</p>
+<h3 id="h_01HE5PXRG1FQE9XGF271NJ15W2">Changing the <em>PageName</em> value</h3>
+<p>You can change the default value above to represent another page name on your site.</p>
+<ol>
+<li>Remove the default "About Us?? value.</li>
+<li>Add your desired text contained within the quotation marks. For example, if you want to track visits to your brand stories page, you could instead use "Customer Stories" as the value.</li>
+</ol>
+<h3 id="h_01HE5PXRG1TKYDTHM6AXX2K5ZG">Changing the <em>Viewed Page</em> value</h3>
+<p>You can change the <em>Viewed Page</em> value to represent another value (e.g., <em>Visited Page</em>, <em>Tracked Page</em>, etc.).</p>
+<ol>
+<li>Remove the default <em>Viewed Page </em>value.</li>
+<li>Add your desired text contained within the quotation marks.</li>
+</ol>
+<h3 id="h_01HQBF9ZFVQQR13Z0TVF73RR7D">Track Viewed Page by URL</h3>
+<p>If you would like to track <em>Viewed Page by URL</em> instead of by page title, you can use the alternate snippet below. Note that <em>page you wish to track</em> should include the quotations and be the URL of the page you want to track.</p>
+<pre><code class="language-javascript">&lt;script type="text/javascript"&gt; 
+//Script to initialize Klaviyo object on page load
+!function(){if(!window.klaviyo){window._klOnsite=window._klOnsite||[];try{window.klaviyo=new Proxy({},{get:function(n,i){return"push"===i?function(){var n;(n=window._klOnsite).push.apply(n,arguments)}:function(){for(var n=arguments.length,o=new Array(n),w=0;w&lt;n;w++)o[w]=arguments[w];var t="function"==typeof o[o.length-1]?o.pop():void 0,e=new Promise((function(n){window._klOnsite.push([i].concat(o,[function(i){t&amp;&amp;t(i),n(i)}]))}));return e}}})}catch(n){window.klaviyo=window.klaviyo||[],window.klaviyo.push=function(){var n;(n=window._klOnsite).push.apply(n,arguments)}}}}(); &lt;/script&gt;
+&lt;script type="text/javascript"&gt; 
+//Script to track viewed page
+klaviyo.track("Viewed Page", {           
+      url: window.location.href   
+}); 
+&lt;/script&gt;</code></pre>
+<h2 id="h_01HE5PXRG1BVZHHH81T0B2MC19">Test your viewed page tracking</h2>
+<p>To test if your <em>Viewed Page</em> tracking is working, make sure that your page has been published and that you’ve amended "?utm_email=youremail@example.com" to your page’s URL to cookie yourself and track your activity.</p>
+<ol>
+<li>After visiting your page, go into your Klaviyo account.</li>
+<li>Navigate to <strong>Analytics &gt; Metrics</strong>.</li>
+<li>Search for <em>Viewed Page</em> (or, whatever alternative name you use for this metric) in the field above.</li>
+</ol>
+<p class="wysiwyg-text-align-center"><img src="https://klaviyo.zendesk.com/hc/article_attachments/28720893682843" alt="metric_search_field.jpg" width="504" height="80"></p>
+<p class="wysiwyg-indent2">4. Click into your <strong><em>Viewed Page</em></strong> metric (or whatever metric you are using).<br>5. Select the <strong>Activity feed</strong> tab. You can then review that your metric is tracking, as shown in the example below.</p>
+<p class="wysiwyg-indent2 wysiwyg-text-align-center"><img src="https://klaviyo.zendesk.com/hc/article_attachments/28720848624795" alt="viewed_metric_example.jpg" width="472" height="229"></p>
+<p class="wysiwyg-text-align-center"> </p>
+<p>If you can view your activity, that means the metric is tracking successfully. If you don’t see your activity, try reloading the page in Klaviyo.</p>
+<div class="bs-callout bs-callout-default">For Shopify stores, based on your Customer Privacy settings in Shopify, Klaviyo may not track onsite events for visitors to your Shopify store in the EU, EEA, UK and Switzerland, unless they have provided consent.</div>
+<h2 id="h_01HE5PXRG1XHM2Q5DC3E0ACYC8">Additional resources</h2>
+<ul>
+<li><a href="https://help.klaviyo.com/hc/en-us/articles/360034666712-About-Cookies-in-Klaviyo" target="_blank" rel="noopener">Understanding cookies in Klaviyo</a></li>
+<li><a href="https://help.klaviyo.com/hc/en-us/articles/115005076767" target="_blank" rel="noopener">Getting started with Klaviyo onsite tracking</a></li>
+<li><a href="https://developers.klaviyo.com/en/v1-2/docs/guide-to-setting-up-api-based-website-activity-events" target="_blank" rel="noopener">Setting Up API-based Website Activity Events</a></li>
+</ul>

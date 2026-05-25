@@ -1,0 +1,934 @@
+{
+  "captured_at": "2026-05-23T16:16:32Z",
+  "article": {
+    "id": 28709780787355,
+    "url": "https://klaviyo.zendesk.com/api/v2/help_center/en-us/articles/28709780787355.json",
+    "html_url": "https://klaviyo.zendesk.com/hc/en-us/articles/28709780787355-How-to-migrate-to-our-automatic-Added-to-Cart-event-for-Shopify",
+    "author_id": 409167690492,
+    "comments_disabled": true,
+    "draft": false,
+    "promoted": false,
+    "position": 1,
+    "vote_sum": 0,
+    "vote_count": 0,
+    "section_id": 49375337479451,
+    "created_at": "2024-08-29T14:54:48Z",
+    "updated_at": "2026-04-21T13:54:37Z",
+    "name": "How to migrate to our automatic Added to Cart event for Shopify",
+    "title": "How to migrate to our automatic Added to Cart event for Shopify",
+    "source_locale": "en-us",
+    "locale": "en-us",
+    "outdated": false,
+    "outdated_locales": [],
+    "edited_at": "2026-04-17T00:55:54Z",
+    "user_segment_id": null,
+    "permission_group_id": 146372,
+    "content_tag_ids": [],
+    "label_names": [],
+    "body": "<div class=\"bs-callout bs-callout-default\">\n<p>Are you new to Klaviyo? You can track Shopify <em>Added to Cart</em> events in Klaviyo automatically by <a href=\"https://help.klaviyo.com/hc/en-us/articles/4425956184731\">enabling onsite tracking</a>.</p>\n</div>\n<p>Learn how to migrate from Klaviyo’s existing <em>Added to Cart</em> event for Shopify (enabled via a code snippet) to the automatically tracked <em>Added to Cart</em> event, which syncs via a Shopify Server Pixel. When migrating, you can also enable new tracking events for identified users such as <em>Viewed Collection</em> and <em>Submitted Search</em>.</p>\n<p>These new Shopify Pixel events are branded with a Shopify icon in Klaviyo, while events enabled by a Klaviyo snippet have a gear icon.</p>\n<h2 id=\"h_01J6F9W69XJRSRZQJD027VH02H\">Before you begin</h2>\n<p><em>Added to Cart</em> event data synced via Server Side Pixel cannot be customized. To learn what data is included with the new event, consult our <a href=\"https://help.klaviyo.com/hc/en-us/articles/115005080447#h_01J6F8FWMEH250MPETV9FSDWF3\">Shopify data reference</a>.</p>\n<div class=\"bs-callout bs-callout-default\">\n<p>Based on your Customer Privacy settings in Shopify, Klaviyo may not track onsite events for visitors to your Shopify store in the EU, EEA, UK and Switzerland, unless they have provided consent.</p>\n</div>\n<h2 id=\"h_01J6F9WBJTAMYVT8NDJ9Q8CWNG\">Why migrate?</h2>\n<p>There are many reasons to migrate, including:</p>\n<ul>\n<li>The new Shopify-branded event syncs server-side, meaning site visitors are more likely to be identified and track events.</li>\n<li>The new event includes more top-level metadata than the snippet event, including variant info, SKUs, item quantity, and links to the variant added to the cart. </li>\n<li>The new event will be actively maintained by Klaviyo going forward, with future enhancements added directly. </li>\n<li>Enabling the new event does not require a code snippet.</li>\n</ul>\n<p>We recommend migrating in the following order (as detailed in this article):</p>\n<ol>\n<li>Enable our new <em>Added to Cart</em> tracking.</li>\n<li>Update segments, flows, and more in Klaviyo.</li>\n<li>Remove your old <em>Added to Cart </em>snippet.</li>\n</ol>\n<p>Please note that we are not currently deprecating our <em>Added to Cart</em> snippet.</p>\n<h2 id=\"h_01J6F9WJKPEAH01T1ETRDFMEJX\">Enable new Added to Cart tracking</h2>\n<ol>\n<li>In Klaviyo, select the <strong>Integrations</strong> tab.</li>\n<li>Select <strong>Shopify</strong> from the list to be brought to the integration settings page.</li>\n<li>Under <em>Additional tracking features </em>in the <em>Onsite tracking box</em>, check <strong>Track behavioral events</strong>.<br>\n\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/35512021815579\" alt=\"\" width=\"601\" height=\"120\">\n</li>\n<li>Click <strong>Update Settings</strong>.</li>\n<li>If prompted: Log in to Shopify.</li>\n<li>If prompted: Review the permissions and click <strong>Update app</strong>.<br>\n\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28710027741211\" alt=\"\" width=\"490\" height=\"388\">\n</li>\n<li>In the confirmation modal, select <strong>Update integration</strong>.<br>\n\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28710027744667\" alt=\"\" width=\"463\" height=\"169\">\n</li>\n<li>You’ll be brought back to Klaviyo and should see a green success callout.<br>\n</li>\n</ol>\n<p><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28710022489755\" alt=\"\" width=\"488\" height=\"264\"></p>\n<p>You should now start seeing Shopify-branded <em>Added to Cart</em> events tracked in your account.</p>\n<h2 id=\"h_01J6F9WPMVJVQPWK6JYFD4FT4B\">Update segments, flows, and more in Klaviyo</h2>\n<p>You should now replace all existing usage of the unbranded <em>Added to Cart</em> metric in your Klaviyo account with the new branded event. </p>\n<h3 id=\"h_01J6F9WT5P48E225VMCG0WKMZ1\">Segments</h3>\n<ol>\n<li>In the <strong>Lists &amp; segments</strong> tab, look for segments where you’ve used the unbranded <em>Added to Cart</em> metric. </li>\n<li>Edit each segment, adding an OR clause mirroring your original but using the Shopify-branded <em>Added to Cart</em> metric. For example, the segment below includes those who added to cart at least once in the last 30 days, tracked by either metric. If your conditions are entirely negative, use an AND clause.<br>\n</li>\n</ol>\n<p><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28710022493467\" alt=\"\" width=\"627\" height=\"220\"></p>\n<h3 id=\"h_01J6F9WXDJYP3745B4X8ES8TKM\">Flows</h3>\n<p>Are you using the unbranded <em>Added to Cart</em> metric in an abandoned cart or other flow? To replace them:</p>\n<ol>\n<li>Find the flows where you’re using <em>Added to Cart</em>.</li>\n<li>\n<a href=\"https://help.klaviyo.com/hc/en-us/articles/24898429283739\">Clone these flows</a> and name them something descriptive.</li>\n<li>In the new flows, replace the flow trigger with the Shopify-branded <em>Added to Cart </em>event.</li>\n<li>Update any variables needed. </li>\n<li>Send a test email for each new flow to make sure that everything looks good and that no variables need to be updated. If you were using our default snippet, all existing variables should be the same, except that the price is now a numeric value instead of a string (e.g., 4 vs. $4.00). You can add currency formatting like this:<br>\n<code>{% currency_format event|lookup:'Price'|floatformat:2 %}</code><br>\nAdditionally, please note that the new <em>Added to Cart </em>event does not currently include other items already in the cart; it just tracks a single item.</li>\n<li>Turn off the old flows and set the new flows live.</li>\n</ol>\n<h3 id=\"h_01J6F9X1ENY2GJ3PC9G2JD4K5C\">Analytics</h3>\n<p>If you’re using the unbranded <em>Added to Cart </em>metric in any analytics, such as custom reports, you should <a href=\"https://help.klaviyo.com/hc/en-us/articles/360047725651\">build new custom reports</a>. If you're using the unbranded <em>Added to Cart</em> metric in metric mapping, you should <a href=\"https://help.klaviyo.com/hc/en-us/articles/25829057055899\">update the mapping</a>.</p>\n<p></p>\n<h2 id=\"h_01J6F9X50SANWW6NHVXBTERYBJ\">Remove your Added to Cart snippet</h2>\n<p>Are you using your existing <em>Added to Cart </em>event in a Klaviyo product feed? This means that you selected <em>Products a customer has added to cart </em>in the feed builder.</p>\n<p><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/35512021818267\" alt=\"\" width=\"406\" height=\"308\"></p>\n<p>If so, you should not remove your snippet. This is because we currently recommend using the old event with product feeds. You can use the new event for flows, segments, etc. If you are not using the event in a product feed, continue on.</p>\n<p>You may have added your snippet in one of 2 ways:</p>\n<ul>\n<li>If your store has custom liquid blocks, your snippet will be in a custom liquid block.</li>\n<li>If your store does not have custom liquid blocks, your snippet will be in your theme file. </li>\n</ul>\n<p>To remove your snippet:</p>\n<ol>\n<ol>\n<li>At the top of the page, click the Home page dropdown.</li>\n<li>Select <strong>Products &gt; Default product </strong>to be brought to your default product page.</li>\n<li>Find the custom liquid block you used for your <em>Added to Cart </em>snippet. There are multiple code snippets you may have used; look for the line <code>_learnq.push(['track', 'Added to Cart', cart]);</code> if you aren’t sure.</li>\n<li>When you have the block selected, click <strong>Remove section</strong>.<br>\n\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28710027774107\" alt=\"\" width=\"249\" height=\"453\">\n</li>\n<li>Click <strong>Save</strong>.</li>\n<li>Click the three dots at the top and select <strong>Edit code</strong>.</li>\n<li>Open the <em>theme.liquid</em> file.</li>\n<li>Find your <em>Added to Cart</em> snippet code. </li>\n<li>There are multiple code snippets you may have used; look for the line <code>_learnq.push(['track', 'Added to Cart', cart]);</code> if you aren’t sure.</li>\n<li>Delete the snippet, starting with the opening &lt;script&gt; tag and ending with the closing &lt;/script&gt; tag.<br>\n\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28710022515099\" alt=\"\">\n</li>\n<li>Click <strong>Save</strong>.</li>\n</ol>\n<li>In Shopify, navigate to <strong>Online Store &gt; Themes</strong>.</li>\n<li>Find your theme and click <strong>Customize</strong>.</li>\n<li>If your store has custom liquid blocks:</li>\n<li>If your store does not have custom liquid blocks:</li>\n</ol>\n<p>You have now removed your <em>Added to Cart </em>snippet.</p>\n<h2 id=\"h_01J9236790CK2WW8WMZFD8QS17\">Troubleshooting</h2>\n<p>Are you not seeing new <em>Added to Cart</em> events appear in your account?</p>\n<p>It may take some time for profiles previously cookied by Klaviyo via the old method to be identified by Shopify.</p>\n<p>With the new <em>Added to Cart</em> tracking (as well as with Shopify <em>Viewed Collection</em> and <em>Submitted Search</em> events), profiles will be identified if they do one of the following:</p>\n<ul>\n<li>Submit a Klaviyo form.\n<ul>\n<li>You must have enabled syncing profiles from Klaviyo to Shopify for this to work.</li>\n</ul>\n</li>\n<li>Submit a Shopify form.</li>\n<li>Enter their information on the checkout page.</li>\n<li>Log in to their Shop account on checkout page.</li>\n<li>Log in to their customer account on the store.</li>\n</ul>\n<p>You can complete one of the items above, and then add an item to your cart, in order to test your <em>Added to Cart</em> tracking.</p>\n<p>We are working to expand functionality to include other Klaviyo identification methods (such as tracking from clicking on an email) to the new Shopify <em>Added to Cart</em> event.</p>\n<h2 id=\"h_01J6F9XCC25QKK84Z0FFNVF3Z1\">Outcome</h2>\n<p>You’ve now migrated from Klaviyo’s manually-enabled <em>Added to Cart</em> tracking to our new, server-side <em>Added to Cart </em>tracking in Shopify.</p>",
+    "user_segment_ids": []
+  },
+  "normalized": {
+    "id": "28709780787355",
+    "title": "How to migrate to our automatic Added to Cart event for Shopify",
+    "source_url": "https://help.klaviyo.com/hc/en-us/articles/28709780787355-How-to-migrate-to-our-automatic-Added-to-Cart-event-for-Shopify",
+    "section_id": 49375337479451,
+    "section": "Shopify best practices",
+    "category_id": 115000032731,
+    "category": "Integrations",
+    "category_slug": "integrations",
+    "klaviyo_updated": "2026-04-21T13:54:37Z",
+    "created_at": "2024-08-29T14:54:48Z",
+    "draft": false,
+    "promoted": false,
+    "position": 1,
+    "label_names": []
+  },
+  "files": {
+    "body_html": "_source/articles/28709780787355.body.html",
+    "rendered_html": "_source/rendered/28709780787355.html"
+  },
+  "assets": {
+    "api_body": {
+      "images": [
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/35512021815579",
+          "alt": "",
+          "width": "601",
+          "height": "120"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28710027741211",
+          "alt": "",
+          "width": "490",
+          "height": "388"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28710027744667",
+          "alt": "",
+          "width": "463",
+          "height": "169"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28710022489755",
+          "alt": "",
+          "width": "488",
+          "height": "264"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28710022493467",
+          "alt": "",
+          "width": "627",
+          "height": "220"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/35512021818267",
+          "alt": "",
+          "width": "406",
+          "height": "308"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28710027774107",
+          "alt": "",
+          "width": "249",
+          "height": "453"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28710022515099",
+          "alt": "",
+          "width": "",
+          "height": ""
+        }
+      ],
+      "links": [
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4425956184731",
+          "text": "enabling onsite tracking"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005080447#h_01J6F8FWMEH250MPETV9FSDWF3",
+          "text": "Shopify data reference"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/24898429283739",
+          "text": "Clone these flows"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360047725651",
+          "text": "build new custom reports"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/25829057055899",
+          "text": "update the mapping"
+        }
+      ],
+      "headings": [
+        {
+          "level": 2,
+          "id": "h_01J6F9W69XJRSRZQJD027VH02H",
+          "text": "Before you begin"
+        },
+        {
+          "level": 2,
+          "id": "h_01J6F9WBJTAMYVT8NDJ9Q8CWNG",
+          "text": "Why migrate?"
+        },
+        {
+          "level": 2,
+          "id": "h_01J6F9WJKPEAH01T1ETRDFMEJX",
+          "text": "Enable new Added to Cart tracking"
+        },
+        {
+          "level": 2,
+          "id": "h_01J6F9WPMVJVQPWK6JYFD4FT4B",
+          "text": "Update segments, flows, and more in Klaviyo"
+        },
+        {
+          "level": 3,
+          "id": "h_01J6F9WT5P48E225VMCG0WKMZ1",
+          "text": "Segments"
+        },
+        {
+          "level": 3,
+          "id": "h_01J6F9WXDJYP3745B4X8ES8TKM",
+          "text": "Flows"
+        },
+        {
+          "level": 3,
+          "id": "h_01J6F9X1ENY2GJ3PC9G2JD4K5C",
+          "text": "Analytics"
+        },
+        {
+          "level": 2,
+          "id": "h_01J6F9X50SANWW6NHVXBTERYBJ",
+          "text": "Remove your Added to Cart snippet"
+        },
+        {
+          "level": 2,
+          "id": "h_01J9236790CK2WW8WMZFD8QS17",
+          "text": "Troubleshooting"
+        },
+        {
+          "level": 2,
+          "id": "h_01J6F9XCC25QKK84Z0FFNVF3Z1",
+          "text": "Outcome"
+        }
+      ]
+    },
+    "rendered_page": {
+      "images": [
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/7ff492c2b417b7ecfe572f839a8a81398693c1f7-1920x1080.webp",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/70c464b26b5cafa6bf669b1c5b457c238df9d1c4-1152x230.png?w=601",
+          "alt": "",
+          "width": "601",
+          "height": "120"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/0b6c5889dafb0cf18e3b9b8289ba1c6536335433-1456x1152.png?w=490",
+          "alt": "",
+          "width": "490",
+          "height": "388"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/dc5a3930270c832b5efc2120138f44fb2207c2eb-1896x690.png?w=463",
+          "alt": "",
+          "width": "463",
+          "height": "169"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/ed804e72794dfb181868d426ab22b7c5ae313d3c-1852x1000.png?w=488",
+          "alt": "",
+          "width": "488",
+          "height": "264"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/61ea297961e6d374266dfbdd8c4735c6d7cd1ef6-2168x762.png?w=627",
+          "alt": "",
+          "width": "627",
+          "height": "220"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/1d627b7ece36c62162fd0fdc237842440cafb1ce-1068x810.png?w=406",
+          "alt": "",
+          "width": "406",
+          "height": "308"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/c46d81e8052eb6c9c4f2b97f3fac90f274e4d855-658x1196.png?w=249",
+          "alt": "",
+          "width": "249",
+          "height": "453"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/b903aba4c3ca3796e1084d11f9918d160c9602a8-1618x940.png",
+          "alt": "",
+          "width": "",
+          "height": ""
+        }
+      ],
+      "links": [
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/28709780787355-How-to-migrate-to-our-automatic-Added-to-Cart-event-for-Shopify#site-content",
+          "text": "Skip to main content"
+        },
+        {
+          "href": "https://www.klaviyo.com",
+          "text": "Home"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center"
+        },
+        {
+          "href": "https://www.klaviyo.com/enterprise",
+          "text": "Enterprise"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Partners"
+        },
+        {
+          "href": "https://www.klaviyo.com/careers",
+          "text": "Careers"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": "Log in"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": ""
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center Find step-by-step instructions and troubleshooting solutions in our knowledge base."
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000032731",
+          "text": "Integrations"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000312411",
+          "text": "Flows"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867867",
+          "text": "Audience"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867667",
+          "text": "Campaigns"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/360000190711",
+          "text": "Sign-up forms"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000873988",
+          "text": "Deliverability & compliance"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/29173800271259",
+          "text": "SMS"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/16638219724187",
+          "text": "Reviews"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/18073014919195",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/34141283979931",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/37659126754075",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/33948021740315",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/39746685522331",
+          "text": "WhatsApp"
+        },
+        {
+          "href": "https://academy.klaviyo.com",
+          "text": "Klaviyo Academy Expert training and education to help you succeed with Klaviyo, and beyond."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Quick+guide&resource=academy_courses",
+          "text": "Quick guides Learn marketing strategies and concepts in 15 minutes or less."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Course&resource=academy_courses",
+          "text": "Courses Master key marketing topics through structured lessons and exams."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/best-practices",
+          "text": "Best practices Discover top product and marketing strategies for your business."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/learning-paths",
+          "text": "Learning paths Complete curated learning journeys tailored to your marketing goals."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses",
+          "text": "Explore all resources"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Live+training&resource=academy_courses",
+          "text": "Live trainings Build confidence through hands-on interactive workshops and thought-provoking strategy sessions."
+        },
+        {
+          "href": "https://www.bigmarker.com/klaviyo-customer-education/Office-hours-Getting-started-with-Klaviyo",
+          "text": "Live office hours Join a strategic discussion where you can ask questions and get answers in real-time."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/private-live-training",
+          "text": "1:1 Live training Book a private training session with an expert to jumpstart your platform knowledge and confidence."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/credentials",
+          "text": "Klaviyo credentials Dig deeper into select topics and showcase your expertise with a final exam to earn a certificate and digital badge."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/certificates/klaviyo-practitioner-certificate",
+          "text": "Klaviyo practitioner certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/deliverability-certificate",
+          "text": "Deliverability certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/developer-certificate",
+          "text": "Klaviyo developer certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses&select=Certificate",
+          "text": "See all certificates"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Klaviyo Community Join our thriving community network to connect with brands like yours—online and in person."
+        },
+        {
+          "href": "https://community.klaviyo.com/topic/new",
+          "text": "Ask a question Post a question and get thoughtful answers from Klaviyo powerusers."
+        },
+        {
+          "href": "https://community.klaviyo.com/p/roadmap",
+          "text": "Product roadmap"
+        },
+        {
+          "href": "https://community.klaviyo.com/search/activity/recent",
+          "text": "Recent threads"
+        },
+        {
+          "href": "https://community.klaviyo.com/p/champions",
+          "text": "Meet the Champions"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups",
+          "text": "Browse all groups Your people are waiting. New ideas and connections are a click away."
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/developer-group-64",
+          "text": "Developer group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/entrepreneur-user-group-118",
+          "text": "Entrepreneur group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/woo-user-group-87",
+          "text": "WooCommerce group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/new-york-meetup-chapter-82",
+          "text": "New York City"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/los-angeles-meetup-chapter-83",
+          "text": "Los Angeles"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/austin-meetup-chapter-85",
+          "text": "Austin"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/san-diego-meetup-chapter-86",
+          "text": "San Diego"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/amsterdam-meetup-chapter-84",
+          "text": "Amsterdam"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Klaviyo Developers Access API documentation and developer guides to help you build with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/get_started",
+          "text": "Get started Access key resources and a step-by-step checklist for how to start developing with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/build_your_integration",
+          "text": "Grow your app's reach Learn how to join our ecosystem and get your app listed on our marketplace."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/developer-tools",
+          "text": "Developer tools Generate sample data, monitor your API usage, and access our Postman collections."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/reference/api_overview",
+          "text": "API reference Browse our full catalog of API docs."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/changelog_",
+          "text": "Changelog"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/api_versioning_and_deprecation_policy",
+          "text": "Versioning & deprecation policy"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/rate_limits_and_error_handling",
+          "text": "Rate limits & error handling"
+        },
+        {
+          "href": "https://youtube.com/playlist?list=PLHkNfHgtxcUanrkMnKPdkRzuWU7MGv_xM&si=pkG-KH7IT_TUHOGC",
+          "text": "API tutorials on YouTube Subscribe to our Klaviyo API Tutorials playlist for easy access to step-by-step developer walkthroughs."
+        },
+        {
+          "href": "https://www.klaviyo.com/contact-us",
+          "text": "Contact us"
+        },
+        {
+          "href": "https://www.klaviyo.com/sign-up",
+          "text": "Sign up"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": "Search"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/28709780787355",
+          "text": "United States - EN"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/de-de/articles/28709780787355",
+          "text": "Deutschland - DE"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-es/articles/28709780787355",
+          "text": "España - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-mx/articles/28709780787355",
+          "text": "México - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/fr-fr/articles/28709780787355",
+          "text": "France - FR"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/it-it/articles/28709780787355",
+          "text": "Italia - IT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/ko-kr/articles/28709780787355",
+          "text": "한국 - KO"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/nl-nl/articles/28709780787355",
+          "text": "Nederland - NL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pl-pl/articles/28709780787355",
+          "text": "Polska - PL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pt-br/articles/28709780787355",
+          "text": "Brasil - PT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/sv-se/articles/28709780787355",
+          "text": "Sverige - SV"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/115001509748",
+          "text": "Shopify"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/49375337479451",
+          "text": "Shopify best practices"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/28709780787355-How-to-migrate-to-our-automatic-Added-to-Cart-event-for-Shopify#h_01J6F9W69XJRSRZQJD027VH02H",
+          "text": "Before you begin"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/28709780787355-How-to-migrate-to-our-automatic-Added-to-Cart-event-for-Shopify#h_01J6F9WBJTAMYVT8NDJ9Q8CWNG",
+          "text": "Why migrate?"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/28709780787355-How-to-migrate-to-our-automatic-Added-to-Cart-event-for-Shopify#h_01J6F9WJKPEAH01T1ETRDFMEJX",
+          "text": "Enable new Added to Cart tracking"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/28709780787355-How-to-migrate-to-our-automatic-Added-to-Cart-event-for-Shopify#h_01J6F9WPMVJVQPWK6JYFD4FT4B",
+          "text": "Update segments, flows, and more in Klaviyo"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/28709780787355-How-to-migrate-to-our-automatic-Added-to-Cart-event-for-Shopify#h_01J6F9X50SANWW6NHVXBTERYBJ",
+          "text": "Remove your Added to Cart snippet"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/28709780787355-How-to-migrate-to-our-automatic-Added-to-Cart-event-for-Shopify#h_01J9236790CK2WW8WMZFD8QS17",
+          "text": "Troubleshooting"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/28709780787355-How-to-migrate-to-our-automatic-Added-to-Cart-event-for-Shopify#h_01J6F9XCC25QKK84Z0FFNVF3Z1",
+          "text": "Outcome"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/28709780787355-How-to-migrate-to-our-automatic-Added-to-Cart-event-for-Shopify#additional-resources",
+          "text": "Additional resources"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4425956184731",
+          "text": "enabling onsite tracking"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005080447#h_01J6F8FWMEH250MPETV9FSDWF3",
+          "text": "Shopify data reference"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/24898429283739",
+          "text": "Clone these flows"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360047725651",
+          "text": "build new custom reports"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/25829057055899",
+          "text": "update the mapping"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4425956184731",
+          "text": "How to enable onsite tracking for Shopify"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005080447",
+          "text": "Shopify data reference"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115001002272",
+          "text": "Learn how to contact support"
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": ""
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": "Visit Community"
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": ""
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": "Hire a partner"
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/about",
+          "text": "About Klaviyo"
+        },
+        {
+          "href": "https://www.klaviyo.com/newsroom",
+          "text": "Newsroom"
+        },
+        {
+          "href": "https://investors.klaviyo.com/overview/default.aspx",
+          "text": "Investor relations"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Agency and tech partners"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Developers"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/retail",
+          "text": "Retail and ecommerce"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/restaurants",
+          "text": "Restaurant marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/wellness",
+          "text": "Wellness"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform",
+          "text": "B2C CRM overview"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai",
+          "text": "Klaviyo AI (K:AI)"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/marketing-automation",
+          "text": "Klaviyo Marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-service",
+          "text": "Klaviyo Service"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/analytics",
+          "text": "Klaviyo Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-data-platform",
+          "text": "Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare",
+          "text": "Klaviyo vs. Klaviyo alternatives"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-mailchimp",
+          "text": "Klaviyo vs. Mailchimp"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-postscript",
+          "text": "Klaviyo vs. Postscript"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-attentive",
+          "text": "Klaviyo vs. Attentive"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-salesforce-marketing-cloud",
+          "text": "Klaviyo vs. Salesforce"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-listrak",
+          "text": "Klaviyo vs. Listrak"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/omnichannel",
+          "text": "Omnichannel marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/email-marketing",
+          "text": "Email marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing",
+          "text": "SMS marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing/rcs",
+          "text": "RCS for Business"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/mobile-app-marketing",
+          "text": "Mobile app marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/whatsapp",
+          "text": "WhatsApp marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/social",
+          "text": "Social marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources",
+          "text": "Marketing resources"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources/marketing-campaign-calendar",
+          "text": "Marketing campaign calendar"
+        },
+        {
+          "href": "https://www.klaviyo.com/glossary",
+          "text": "Marketing glossary"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/email-subject-line-generator",
+          "text": "Subject line generator"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/roi-calculator",
+          "text": "ROI calculator"
+        },
+        {
+          "href": "https://www.klaviyo.com/customers",
+          "text": "Case studies"
+        },
+        {
+          "href": "https://www.klaviyo.com/composer",
+          "text": "Composer Beta"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/marketing-agent",
+          "text": "Marketing Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/customer-agent",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/customer-experience-hub",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/helpdesk",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/marketing-analytics",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/advanced-cdp",
+          "text": "Advanced Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/web-forms",
+          "text": "Web forms"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/email-templates",
+          "text": "Email templates"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/portfolio",
+          "text": "Portfolio"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform-integrations",
+          "text": "Apps and Integrations"
+        },
+        {
+          "href": "https://www.klaviyo.com/features",
+          "text": "Features"
+        },
+        {
+          "href": "https://www.klaviyo.com/whats-new",
+          "text": "What's new"
+        },
+        {
+          "href": "https://www.klaviyo.com/events",
+          "text": "Events"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help Center"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us",
+          "text": "Academy"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Community"
+        },
+        {
+          "href": "https://www.facebook.com/Klaviyo/",
+          "text": "Facebook"
+        },
+        {
+          "href": "https://twitter.com/klaviyo/",
+          "text": "Twitter"
+        },
+        {
+          "href": "https://www.linkedin.com/company/klaviyo/",
+          "text": "LinkedIn"
+        },
+        {
+          "href": "https://www.instagram.com/klaviyo/",
+          "text": "Instagram"
+        },
+        {
+          "href": "https://www.klaviyo.com/sitemap",
+          "text": "Site Map"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal",
+          "text": "Terms and Privacy"
+        },
+        {
+          "href": "https://www.klaviyo.com/security",
+          "text": "Security"
+        },
+        {
+          "href": "https://www.klaviyo.com/trust",
+          "text": "Trust"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal/intellectual-property-notices",
+          "text": "Intellectual Property Notices"
+        }
+      ],
+      "headings": [
+        {
+          "level": 1,
+          "id": "",
+          "text": "How to migrate to our automatic Added to Cart event for Shopify"
+        },
+        {
+          "level": 2,
+          "id": "h_01J6F9W69XJRSRZQJD027VH02H",
+          "text": "Before you begin"
+        },
+        {
+          "level": 2,
+          "id": "h_01J6F9WBJTAMYVT8NDJ9Q8CWNG",
+          "text": "Why migrate?"
+        },
+        {
+          "level": 2,
+          "id": "h_01J6F9WJKPEAH01T1ETRDFMEJX",
+          "text": "Enable new Added to Cart tracking"
+        },
+        {
+          "level": 2,
+          "id": "h_01J6F9WPMVJVQPWK6JYFD4FT4B",
+          "text": "Update segments, flows, and more in Klaviyo"
+        },
+        {
+          "level": 3,
+          "id": "h_01J6F9WT5P48E225VMCG0WKMZ1",
+          "text": "Segments"
+        },
+        {
+          "level": 3,
+          "id": "h_01J6F9WXDJYP3745B4X8ES8TKM",
+          "text": "Flows"
+        },
+        {
+          "level": 3,
+          "id": "h_01J6F9X1ENY2GJ3PC9G2JD4K5C",
+          "text": "Analytics"
+        },
+        {
+          "level": 2,
+          "id": "h_01J6F9X50SANWW6NHVXBTERYBJ",
+          "text": "Remove your Added to Cart snippet"
+        },
+        {
+          "level": 2,
+          "id": "h_01J9236790CK2WW8WMZFD8QS17",
+          "text": "Troubleshooting"
+        },
+        {
+          "level": 2,
+          "id": "h_01J6F9XCC25QKK84Z0FFNVF3Z1",
+          "text": "Outcome"
+        },
+        {
+          "level": 2,
+          "id": "additional-resources",
+          "text": "Additional resources"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "Explore more from Klaviyo"
+        }
+      ]
+    }
+  },
+  "rendered_page": {
+    "status": "fetched",
+    "error": ""
+  }
+}

@@ -1,0 +1,121 @@
+<h2 id="h_01G6W9BDQH54CC3N49MYC0PN22">Before you begin</h2>
+<p><em>Placed Order</em> tracking is included with ecommerce integrations and does not require any additional setup. Before consulting this guide, make sure you have properly set up, configured, and enabled your ecommerce integration.</p>
+<p>For all ecommerce integrations, a <em>Placed Order </em>event tracks when a customer completes the checkout process and creates an order in your store, but for the following integrations, Klaviyo tracks a <em>Placed Order</em> event only when an order reaches a certain state and has a certain status in the eCommerce platform:</p>
+<ul>
+<li>
+<a href="https://help.klaviyo.com/hc/en-us/articles/115005082587">BigCommerce</a><br>
+By default, any order with any of the following statuses will not sync as a <em>Placed Order</em>: <em>Incomplete</em>, <em>Pending</em>, <em>Awaiting Payment</em>
+</li>
+<li>
+<a href="https://help.klaviyo.com/hc/en-us/articles/115003458852">Magento 2</a><br>
+Orders with status <em>pending_payment</em> will be ignored</li>
+<li>
+<a href="https://help.klaviyo.com/hc/en-us/articles/360030732832">WooCommerce</a><br>
+Order must have a status of <em>processing</em> to trigger a <em>Placed Order </em>event</li>
+<li>
+<a href="https://help.klaviyo.com/hc/en-us/articles/360055123191">PrestaShop</a><br>
+Order must have a status of <em>processing </em>to trigger a <em>Placed Order </em>event</li>
+<li>
+<a href="https://help.klaviyo.com/hc/en-us/articles/115005083107">Shift4Shop</a><br>
+Order must have a status of <em>2 </em>or<em> 4 </em>to trigger a <em>Placed Order </em>event</li>
+</ul>
+<p>If you’re using an ecommerce platform without a pre-built Klaviyo integration, or a custom platform, learn <a href="https://developers.klaviyo.com/en/docs/guide-to-integrating-a-platform-without-a-pre-built-klaviyo-integration#placed-order">how to enable Placed Order tracking</a> on our Developer site.</p>
+<h2 id="block-9">Test Placed Order events</h2>
+<div class="bs-callout bs-callout-default">
+<p>The <em>Placed Order </em>event is commonly used to set up post-purchase flows such as a thank you flow. If you have recently set up your account and are attempting to create a post-purchase flow from Klaviyo’s Flows Library, you may encounter the following warning message:</p>
+<p>"We have not received any recent <em>Placed Order</em> events. If you think there might be a problem, contact our Success Team for help."</p>
+<p>This does not necessarily mean that there is a problem with your account or integration, but it may mean that no <em>Placed Order </em>events have triggered yet. This may be because your store is new. You can trigger an event by following the steps below to cause this warning to disappear.</p>
+<p>Because a <em>Placed Order</em> event triggers from a transaction, Klaviyo Support is unable to test <em>Placed Order</em> event tracking for you.</p>
+</div>
+<p>Some ecommerce platforms such as Shopify offer methods for placing test orders. Consult your platform’s help documentation for information on how to place a test order. Otherwise, you can place a real order and refund it to test your integration.</p>
+<p>To test that your <em>Placed Order </em>tracking is set up properly using a real transaction, follow these steps:</p>
+<ol>
+<li>Navigate to your website</li>
+<li>Navigate to a product page on your site for an available product</li>
+<li>Click the “Add to Cart” button on the page</li>
+<li>Proceed to checkout with the item in your cart</li>
+<li>Complete checkout using a real credit card or other payment method</li>
+<li>If you're using a third-party payment provider, log into your payment provider to make sure that the funds were processed</li>
+<li>Cancel and refund the order as soon as possible to refund yourself</li>
+<li>Search in Klaviyo for the email address you used during checkout<br>
+</li>
+</ol>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/28723544866971" alt="The searchbar can be found in the top right of Klaviyo where you can search for profiles by email address."></p>
+<p>You should see that a Klaviyo profile has been created for you (if one didn't exist already) and that a <em>Placed Order </em>event has been tracked on your activity feed.</p>
+<div class="bs-callout bs-callout-default">
+<p>Not all ecommerce integrations sync data in realtime due to limitations with some ecommerce platforms. For some integrations, you may need to wait 30 minutes to an hour before events are tracked. Please see our article on <a href="https://help.klaviyo.com/hc/en-us/articles/115005253208">how often integrations sync</a> for more information.</p>
+</div>
+<h2 id="block-24">Troubleshooting scenarios</h2>
+<p>Review the following questions in order to diagnose the cause of your <em>Placed Order</em> issues. Note that some steps are general, and others depend on what ecommerce platform you are using.</p>
+<div class="accordion accordion--default">
+<div class="accordion__item">
+<div class="accordion__item-title"><strong>Are you having issues triggering other metrics as well?</strong></div>
+<div class="accordion__item-content">
+<p>If you are having issues tracking other metrics as well as <em>Placed Order</em>, there may be an issue with your integration’s setup.</p>
+<p>Follow these steps to check to see if your integration is set up correctly:</p>
+<ol>
+<ol>
+<li>If the keys appear to match on both sides, check to see if there are any blank spaces before or after the keys. Delete any leading or trailing blank spaces because they can cause errors.</li>
+</ol>
+<li>Navigate to the <em>Integrations</em> page of your account</li>
+<li>In the <em>Enabled Integrations</em> tab, make sure that your ecommerce integration is in the list. Otherwise, follow the relevant setup guide linked in the <a href="#h_01G6W9BDQH54CC3N49MYC0PN22">Before you begin section</a> of this article to make sure you have followed all steps correctly for setting up and configuring your ecommerce integration. </li>
+<li>If your ecommerce integration is enabled, click <strong>View Settings</strong> to check for any error messages related to the integration and that all required fields have been filled out.<br>
+<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28723522895515" alt="The integration settings link can be found to the right of each integration in the Enabled Integrations tab.">
+</li>
+<li>If your integration requires use of a public API key, private API key, consumer key, and/or consumer secret, make sure the information in Klaviyo matches what is in your ecommerce platform.</li>
+</ol>
+</div>
+</div>
+<div class="accordion__item">
+<div class="accordion__item-title"><strong>Have you recently switched ecommerce platforms?</strong></div>
+<div class="accordion__item-content">
+<p>When you migrate ecommerce platforms, make sure to switch the metrics used to trigger your flows and within your analytics to the metrics for your new ecommerce platform. For example, if you were to switch from BigCommerce to Shopify, your account’s analytics and flows may still be set to use BigCommerce’s <em>Placed Order </em>metric rather than Shopify’s <em>Placed Order</em> metric. See the guides below for further assistance:</p>
+<ul>
+<li><a href="https://help.klaviyo.com/hc/en-us/articles/360003124151-Updating-Klaviyo-After-Switching-Ecommerce-Platforms">Updating klaviyo after switching ecommerce platforms</a></li>
+<li><a href="https://help.klaviyo.com/hc/en-us/articles/115005199947-How-to-Change-the-Conversion-Metric-for-Flow-and-Campaign-Reports">How to change the conversion metric for flow and campaign reports</a></li>
+<li><a href="https://help.klaviyo.com/hc/en-us/articles/115002775052-How-to-change-a-flow-trigger">How to change a flow trigger</a></li>
+</ul>
+</div>
+</div>
+<div class="accordion__item">
+<div class="accordion__item-title"><strong>Are you using custom order statuses for placed orders?</strong></div>
+<div class="accordion__item-content">
+<p>For some integrations, the <em>Placed Order </em>event triggers in Klaviyo based on specific order statuses. See the <a href="#h_01G6W9BDQH54CC3N49MYC0PN22">Before you begin section</a> of this article for a list of integrations that have order status requirements. </p>
+<p>If you are using non-standard or custom order statuses, please <a href="https://help.klaviyo.com/hc/en-us/articles/115001002272-How-to-Contact-Support">contact Klaviyo support</a> to have your integration configuration changed to allow for other order statuses to be tracked as <em>Placed Order</em> events.</p>
+</div>
+</div>
+<div class="accordion__item">
+<div class="accordion__item-title"><strong>Are you using a firewall or security software on your server?</strong></div>
+<div class="accordion__item-content">
+<p>If you have a firewall or security measures enabled such as Sucuri, Cloudflare, or something similar, this may inadvertently block Klaviyo from communicating with your store or rate limit the speed and amount of data that can be synced.</p>
+<p>Since Klaviyo uses dynamic IPs, we do not provide a range of IPs to whitelist. Instead, we recommend whitelisting our user agent, which is: <strong>Klaviyo/1.0</strong></p>
+<p>If you are unsure how to whitelist Klaviyo, please consult the documentation for your security software on how to whitelist a user agent.</p>
+</div>
+</div>
+<div class="accordion__item">
+<div class="accordion__item-title"><strong>For WooCommerce and Magento users: Are you using the most recent version of your integration plugin?</strong></div>
+<div class="accordion__item-content">
+<p>If you are using WooCommerce or Magento, problems with <em>Placed Order </em>tracking might be related to other issues with your platform’s Klaviyo plugin.</p>
+<ol>
+<li>If <em>Placed Order </em>events aren’t tracking, check to see if the <em>Started Checkout</em> event is tracking by searching for <em>Started Checkout</em> within <strong>Analytics &gt; Metrics</strong> in Klaviyo. </li>
+<li>If both <em>Placed Order </em>and <em>Started Checkout</em> aren’t tracking, there may be an issue with your plugin.</li>
+<li>Check to see if you are using the most up-to-date version of the plugin for your integration. If needed, update to the latest version within WooCommerce or Magento, or you can download the latest version from the relevant platform’s listing.</li>
+</ol>
+<ul>
+<ul>
+<li><a href="https://marketplace.magento.com/klaviyo-magento2-extension.html">Setup Wizard install</a></li>
+<li><a href="https://packagist.org/packages/klaviyo/magento2-extension">Composer install</a></li>
+</ul>
+<li><a href="https://wordpress.org/plugins/klaviyo/">Klaviyo WordPress (WooCommerce) plugin</a></li>
+<li><a href="https://www.klaviyo.com/media/downloads/MagentoKlaviyo-Latest.tgz">Klaviyo Magento 1 extension</a></li>
+<li>Klaviyo Magento 2 extension</li>
+</ul>
+</div>
+</div>
+</div>
+<h2 id="block-27">Contact Klaviyo support</h2>
+<p>If you are still encountering issues after consulting this list and testing your tracking, please reach out in our <a href="https://community.klaviyo.com/got-a-question-1">Community</a> or to our <a href="https://help.klaviyo.com/hc/en-us/articles/115001002272-How-to-Contact-Support">Support Team</a>. </p>
+<p>Learn how to troubleshoot other metrics:</p>
+<p>Other resources:</p>

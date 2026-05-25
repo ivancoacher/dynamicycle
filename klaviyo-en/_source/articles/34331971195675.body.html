@@ -1,0 +1,32 @@
+<h2 id="h_01JS210TV7A4H8155K1SF6N9JQ">You will learn</h2>
+<p>Learn what key-value pairs are and how to use them with both standard and silent push notifications. Key-value pairs are custom data included with push notifications that allow you to trigger app behaviors, tag messages, customize notifications, and more.</p>
+<h2 id="h_01JS2111T5QY89CHY7PNET2WQ6">What are key-value pairs?</h2>
+<p>Key-value pairs are custom data that can be included with push notifications, both standard (those that display to users) and silent (those that are invisible to users). </p>
+<p>With both silent and standard notifications, they can be used to update app content, trigger background tasks, or to tag messages for reporting purposes. </p>
+<p>With standard push, they can also be used to build and populate custom push templates.</p>
+<h2 id="h_01JS213JYTQ32M8EM786J512D5">How to use key-value pairs</h2>
+<p>In order to use key-value pairs, your app must be set up to recognize keys and respond to their values, so be sure to work with your app developer to ensure your app is built to support your use cases. Additionally, make sure you’ve <a href="https://help.klaviyo.com/hc/en-us/articles/360023213971">set up push notifications</a> in your Klaviyo account. </p>
+<p>You can find them in the <em>Behaviors</em> tab when creating a push notification. To use them, toggle on <strong>Custom data</strong>, then add keys and values. You can add up to 10 key-value pairs per push notification.<br>
+</p>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/36082155700123" alt="" width="346" height="162"></p>
+<p>Let’s look at an example for an ecommerce app:</p>
+<ul>
+<li>We want to update a customer’s reward points displayed in our app after they make an online purchase. We’ll do this by sending a silent push with a rewards points profile property as a key-value pair.</li>
+<li>We already have a<em> Thank you</em> flow triggered by a <em>Placed Order</em> event. We add a silent push to the end of this flow to update the rewards points value displayed in our app. </li>
+<li>The silent push includes a key-value pair where the <em>Key </em>equals <em>rewardspoints</em> and the <em>Value</em> is set to <em>{{ person.rewardspoints }}</em>. The name of the Klaviyo profile property where we store these points is called <em>rewardspoints</em>, and our app is configured correctly to update based on this key-value pair.</li>
+<li>In this example, we made sure that the <em>rewardspoints</em> value was updated in Klaviyo before it was sent to our app via this flow, so that it reflects accurately. </li>
+</ul>
+<h2 id="h_01JS2155SE6HWBTMR321ZGV3C7">Use cases</h2>
+<p>There are many use cases for key-value pairs, including to:</p>
+<ul>
+<li>
+<strong>Personalize app content </strong><br>
+You can send a silent push notification to personalize app content based on the recipient’s attributes (like the rewards points example above).</li>
+<li>
+<strong>Create tags for reporting </strong><br>
+You can include key-value pairs in push notifications (standard or silent) to “tag” messages and then pull data for any messages with specific tags to aggregate. For example, these tags could be UTM parameters.</li>
+<li>
+<strong>Build custom push templates</strong> <br>
+You can define the font size and color for your push notification body or set a custom sound that will play when the push notification is delivered. Accounts can also display live data, such as the location of a delivery or a countdown until an offer expires, in their notification.</li>
+</ul>
+<p>We recommend working with your app developer to build support for your specific use cases. </p>

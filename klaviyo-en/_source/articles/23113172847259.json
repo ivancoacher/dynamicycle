@@ -1,0 +1,779 @@
+{
+  "captured_at": "2026-05-23T16:16:35Z",
+  "article": {
+    "id": 23113172847259,
+    "url": "https://klaviyo.zendesk.com/api/v2/help_center/en-us/articles/23113172847259.json",
+    "html_url": "https://klaviyo.zendesk.com/hc/en-us/articles/23113172847259-OpenTable-data-reference",
+    "author_id": 403684872812,
+    "comments_disabled": true,
+    "draft": false,
+    "promoted": false,
+    "position": 1,
+    "vote_sum": 0,
+    "vote_count": 0,
+    "section_id": 49375703042715,
+    "created_at": "2024-02-20T21:38:29Z",
+    "updated_at": "2026-04-21T13:54:34Z",
+    "name": "OpenTable data reference",
+    "title": "OpenTable data reference",
+    "source_locale": "en-us",
+    "locale": "en-us",
+    "outdated": false,
+    "outdated_locales": [],
+    "edited_at": "2026-03-24T15:05:51Z",
+    "user_segment_id": null,
+    "permission_group_id": 146372,
+    "content_tag_ids": [],
+    "label_names": [],
+    "body": "<h2 id=\"h_01HQ471RXH715MBHCXTQSSBZT0\">You will learn</h2><p>Learn what data syncs from OpenTable to Klaviyo and where to view it. This includes data related to reservation creation, confirmation, and cancellation.</p><p>If you have not already, read our guide on <a href=\"https://help.klaviyo.com/hc/en-us/articles/23112971772699\">getting started with OpenTable</a> for step-by-step instructions on integrating, before continuing with this article.</p><div class=\"bs-callout bs-callout-default\">\n<p>OpenTable allows for the import of guests into the restaurant's systems. These guest would not have any reservation dates until one was made to that profile.</p>\n<p>Klaviyo syncs email addresses and email consent from OpenTable. While phone numbers are synced, SMS consent is not. This means that SMS cannot be sent to phone numbers synced from this integration.</p>\n</div><h2 id=\"h_01HQ471RXH9A701KY38695YMSJ\">How to view your data</h2><p>To view your OpenTable data:</p><ol>\n<li data-list-item-id=\"ed94d5bcefc0679c420c46c6b7c0641a2\">Click the <strong>Analytics</strong> dropdown in the left-hand navigation sidebar.</li>\n<li data-list-item-id=\"edeb008339a1bedc985f300c07fe7b06b\">Select <strong>Metrics</strong>. Here, you can view all of the metrics in your account. The metrics labeled “OpenTable” represent all of the metrics synced from your OpenTable integration.</li>\n<li data-list-item-id=\"e24f47ce3bbe0279b8766633d918ddd7a\">Filter this view to see OpenTable metrics by using the filter selector next to the search bar and select <strong>OpenTable</strong>. <br><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28722599679515\" width=\"300\" height=\"392\">\n</li>\n</ol><h2 id=\"h_01HQ471RXHD0RPAJW80HDQJWXQ\">Metrics</h2><div class=\"bs-callout bs-callout-default\"><p>For each metric, a <em>$value</em> property will be added if you are also using a POS system, e.g., Square, Toast, Lightspeed, etc. and have that POS connected to OpenTable. If your POS is not connected to OpenTable, <em>$value</em> will not sync.</p></div><h3 id=\"h_01HQ471RXH7T9GY21WJFQ6F9ZP\">Created Reservation</h3><p>This event occurs when a guest starts the reservation process through OpenTable.</p><ul>\n<li data-list-item-id=\"e0b3e2a0243a91ea10e3bfc48577de5ce\">\n<strong>Created Date</strong><br>The timestamp of when the reservation was created in UTC format, i.e., <em>YYYY-MM-DDThh:mmTZD</em>.</li>\n<li data-list-item-id=\"ed8aa91a958e383bc553bd4e742078460\">\n<strong>Scheduled Time</strong><br>The timestamp of the scheduled reservation date in UTC format, i.e., <em>YYYY-MM-DDThh:mmTZD</em>.</li>\n<li data-list-item-id=\"eb4552b78b96e9654a080d2bd0279e4a2\">\n<strong>Table Number</strong><br>The table number associated with the reservation, assigned by the restaurant in OpenTable.</li>\n<li data-list-item-id=\"e3cc2ff47c6b930094ca36e4669d0200c\">\n<strong>Party Size</strong><br>The party size specified by the guest.</li>\n<li data-list-item-id=\"e30b337fa20e4c6528b70d2273713d83d\">\n<strong>Visit Tags</strong><br>Any tags associated with the visit such as those related to specific types of service or seating, e.g., <em>birthday</em>, <em>anniversary</em>, <em>window</em> <em>seating</em>, etc.</li>\n<li data-list-item-id=\"e403e12adfa6e2159dcf61724f8c915c4\">\n<strong>Reservation Origin</strong><br>The source of the reservation, i.e., <em>Phone, Walk-in, </em>or <em>Web</em>.</li>\n<li data-list-item-id=\"e7713d2761ece810a528f39fac93a2bd6\">\n<strong>Guest Request</strong><br>Any requests specified by the guest during the reservation process. </li>\n<li data-list-item-id=\"e66eb6fa7ea5b3a993040885dcd230639\">\n<strong>Table Category</strong><br>The table category associated with the reservation, assigned by the restaurant in OpenTable, i.e., <em>Bar, Hightop, Outdoor, </em>etc.</li>\n<li data-list-item-id=\"e5d89e94c87296a83c28618c388774b98\">\n<strong>Server</strong><br>The name of the server associated with the reservation.</li>\n<li data-list-item-id=\"e826215df1436d41594538b523986fc5a\">\n<strong>Currency Code</strong><br>The currency code associated with the reservation if the reservation required payment.</li>\n<li data-list-item-id=\"e9cfed541a1846f975a3f4a7924e06f76\">\n<strong>Restaurant ID</strong><br>The ID of the restaurant associated with the reservation.</li>\n<li data-list-item-id=\"e3f08f3f887b85b072e951af4001f686f\">\n<strong>Restaurant Name</strong><br>The name of the restaurant associated with the reservation.</li>\n</ul><h3 id=\"h_01HQ471RXHW7GVVRGAACYHABCK\">Confirmed Reservation</h3><p>This event occurs when a guest confirms the reservation through OpenTable.</p><ul>\n<li data-list-item-id=\"e29708fed3c20087cbc540c061db368af\">\n<strong>Created Date</strong><br>The timestamp of when the reservation was confirmed in UTC format, i.e., <em>YYYY-MM-DDThh:mmTZD</em>.</li>\n<li data-list-item-id=\"e7c32f6e7d093c386740bb0132b064cd0\">\n<strong>Scheduled Time</strong><br>The timestamp of the scheduled reservation date in UTC format, i.e., <em>YYYY-MM-DDThh:mmTZD</em>.</li>\n<li data-list-item-id=\"ee36144c64a5668f39266e64c7cfe267f\">\n<strong>Table Number</strong><br>The table number associated with the reservation, assigned by the restaurant in OpenTable.</li>\n<li data-list-item-id=\"e91eb5274eb582f5220fad0286fc0093b\">\n<strong>Party Size</strong><br>The party size specified by the guest.</li>\n<li data-list-item-id=\"e04100aef853596a319115394d5a9e356\">\n<strong>Visit Tags</strong><br>Any tags associated with the visit such as those related to specific types of service or seating, e.g., <em>birthday</em>, <em>anniversary</em>, <em>window</em> <em>seating</em>, etc.</li>\n<li data-list-item-id=\"ee2624738f232d08740f44261781fd7b5\">\n<strong>Reservation Origin</strong><br>The source of the reservation, i.e., <em>Phone, Walk-in, </em>or <em>Web</em>.</li>\n<li data-list-item-id=\"e2d4b41fb2e3e4ca0e18e24810a6752b1\">\n<strong>Guest Request</strong><br>Any requests specified by the guest during the reservation process. </li>\n<li data-list-item-id=\"ef034d27234207f6b938c4000905eb4c8\">\n<strong>Table Category</strong><br>The table category associated with the reservation, assigned by the restaurant in OpenTable, i.e., <em>Bar, Hightop, Outdoor, </em>etc.</li>\n<li data-list-item-id=\"e0fcf7ebdb243f3719d80ef409422267e\">\n<strong>Server</strong><br>The name of the server associated with the reservation.</li>\n<li data-list-item-id=\"e0317a910cc8df6f11b96042251b20f72\">\n<strong>Currency Code</strong><br>The currency code associated with the reservation if the reservation required payment.</li>\n<li data-list-item-id=\"ea4400f5a8d54ce4bed5744e09f67313f\">\n<strong>Restaurant ID</strong><br>The ID of the restaurant associated with the reservation.</li>\n<li data-list-item-id=\"e1f7fe7f8ed8619f2cfa2ce7c57057568\">\n<strong>Restaurant Name</strong><br>The name of the restaurant associated with the reservation.</li>\n</ul><h3 id=\"h_01HQ471RXJ0R87JRHFGSB20C0V\">Completed Reservation</h3><p>This event occurs when a guest is checked into the restaurant after arriving for their reservation.</p><ul>\n<li data-list-item-id=\"ea572deff588a158dac217b57caa93bfd\">\n<strong>Created Date</strong><br>The timestamp of when the reservation was completed in UTC format, i.e., <em>YYYY-MM-DDThh:mmTZD</em>.</li>\n<li data-list-item-id=\"ea2f351b85345e18361caaa3871230f51\">\n<strong>Scheduled Time</strong><br>The timestamp of the scheduled reservation date in UTC format, i.e., <em>YYYY-MM-DDThh:mmTZD</em>.</li>\n<li data-list-item-id=\"e5e9fd6861e04f43104a4ffa7d0114fc0\">\n<strong>Table Number</strong><br>The table number associated with the reservation, assigned by the restaurant in OpenTable.</li>\n<li data-list-item-id=\"e5446687cb800f0637f30f5ec7fb39afb\">\n<strong>Party Size</strong><br>The party size specified by the guest.</li>\n<li data-list-item-id=\"ef9061123fe7fee35f7d2b2d09d8764e5\">\n<strong>Visit Tags</strong><br>Any tags associated with the visit such as those related to specific types of service or seating, e.g., <em>birthday</em>, <em>anniversary</em>, <em>window</em> <em>seating</em>, etc.</li>\n<li data-list-item-id=\"e9e371a204ea44e11f229b92af8a54ed6\">\n<strong>Reservation Origin</strong><br>The source of the reservation, i.e., <em>Phone, Walk-in, </em>or <em>Web</em>.</li>\n<li data-list-item-id=\"e9a68fb2061e65272c779abe87c939993\">\n<strong>Table Category</strong><br>The table category associated with the reservation, assigned by the restaurant in OpenTable, e.g., <em>Bar, Hightop, Outdoor, </em>etc.</li>\n<li data-list-item-id=\"e199e9f851645a16a72ff9fa3c594e269\">\n<strong>Guest Request</strong><br>Any requests specified by the guest during the reservation process. </li>\n<li data-list-item-id=\"ec2f105f3f10d522e1f6cdcb053f685c1\">\n<strong>Server</strong><br>The name of the server who checked the guest into the restaurant.</li>\n<li data-list-item-id=\"ec426052e6d6fe5f566221011998512ab\">\n<strong>Currency Code</strong><br>The currency code associated with the reservation if the reservation required payment.</li>\n<li data-list-item-id=\"e792aeb04a6d00af93dd44b3a109523ab\">\n<strong>Restaurant ID</strong><br>The ID of the restaurant associated with the reservation.</li>\n<li data-list-item-id=\"e5e18c86f7c3983b18f15cafa5ec7cd71\">\n<strong>Restaurant Name</strong><br>The name of the restaurant associated with the reservation.</li>\n</ul><h3 id=\"h_01HQ471RXJDX96YCW4SGB9T2NH\">Cancelled Reservation</h3><p>This event occurs when a guest cancels a reservation through OpenTable.</p><ul>\n<li data-list-item-id=\"e5ddbb0cf197690e70c5b35e430f7aaa3\">\n<strong>Created Date</strong><br>The timestamp of when the reservation was canceled in UTC format, i.e., <em>YYYY-MM-DDThh:mmTZD</em>.</li>\n<li data-list-item-id=\"e5233f06a921977ea8f9fd6707989221a\">\n<strong>Scheduled Time</strong><br>The timestamp of the scheduled reservation date in UTC format, i.e., <em>YYYY-MM-DDThh:mmTZD</em>.</li>\n<li data-list-item-id=\"eaa75cf494e9c2e623b0a1f67c2926fe4\">\n<strong>Table Number</strong><br>The table number associated with the reservation, assigned by the restaurant in OpenTable.</li>\n<li data-list-item-id=\"e41f9ac005e7040d57de51c7c617c2a28\">\n<strong>Party Size</strong><br>The party size specified by the guest.</li>\n<li data-list-item-id=\"e7743daf9bb1781577370922e5e4917ed\">\n<strong>Visit Tags</strong><br>Any tags associated with the visit such as those related to specific types of service or seating, e.g., <em>birthday</em>, <em>anniversary</em>, <em>window</em> <em>seating</em>, etc.</li>\n<li data-list-item-id=\"e241b280998fa0e6c32ad524820ca4465\">\n<strong>Reservation Origin</strong><br>The source of the reservation, i.e., <em>Phone, Walk-in, </em>or <em>Web</em>.</li>\n<li data-list-item-id=\"ed3f5c6dcde29fa442b7af35e9b83fcd9\">\n<strong>Table Category</strong><br>The table category associated with the reservation, assigned by the restaurant in OpenTable, e.g., <em>Bar, Hightop, Outdoor, </em>etc.</li>\n<li data-list-item-id=\"eed0c38c88e9b7309268ccf45956e77c3\">\n<strong>Guest Request</strong><br>Any requests specified by the guest during the reservation process. </li>\n<li data-list-item-id=\"ee1111c83123ae9918642bdc2f55cc910\">\n<strong>Server</strong><br>The name of the server who checked the guest into the restaurant.</li>\n<li data-list-item-id=\"eb64b8bef7ed7cfbce9420a5ddb98d84f\">\n<strong>Currency Code</strong><br>The currency code associated with the reservation if the reservation required payment.</li>\n<li data-list-item-id=\"eeeb6b11848ec2fcb3841da44f76c1468\">\n<strong>Restaurant ID</strong><br>The ID of the restaurant associated with the reservation.</li>\n<li data-list-item-id=\"eb7bfe3c1f7c69f5a08888e9e765b5fdf\">\n<strong>Restaurant Name</strong><br>The name of the restaurant associated with the reservation.</li>\n</ul><h3 id=\"h_01HQ471RXJVSCBNDJ35EQ13JHK\">No Showed Reservation</h3><p>This event occurs when a guest is not checked in for their reservation at the restaurant after the specified reservation time.</p><ul>\n<li data-list-item-id=\"e274ce780ca3c9d1ea677dc8266c9b803\">\n<strong>Created Date</strong><br>The timestamp of when the no show event occurred in UTC format, i.e., <em>YYYY-MM-DDThh:mmTZD</em>.</li>\n<li data-list-item-id=\"e6332d1a9478d67569341964403127ba6\">\n<strong>Scheduled Time</strong><br>The timestamp of the scheduled reservation date in UTC format, i.e., <em>YYYY-MM-DDThh:mmTZD</em>.</li>\n<li data-list-item-id=\"e6d957413e0f857b9660db417ffb32bf6\">\n<strong>Table Number</strong><br>The table number associated with the reservation, assigned by the restaurant in OpenTable.</li>\n<li data-list-item-id=\"e0a013d186cb18007c00f778f45c6cac1\">\n<strong>Party Size</strong><br>The party size specified by the guest.</li>\n<li data-list-item-id=\"ea89756d59295b9e6708e667ca5169fb7\">\n<strong>Visit Tags</strong><br>Any tags associated with the visit such as those related to specific types of service or seating, e.g., <em>birthday</em>, <em>anniversary</em>, <em>window</em> <em>seating</em>, etc.</li>\n<li data-list-item-id=\"e53c4d57a57400e0cac1a3817a71f1272\">\n<strong>Reservation Origin</strong><br>The source of the reservation, i.e., <em>Phone, Walk-in, </em>or <em>Web</em>.</li>\n<li data-list-item-id=\"e529bd5b210c9750cee912a22a4413867\">\n<strong>Table Category</strong><br>The table category associated with the reservation, assigned by the restaurant in OpenTable, e.g., <em>Bar, Hightop, Outdoor, </em>etc.</li>\n<li data-list-item-id=\"ecfbbe86e336ed7828829885222a98c95\">\n<strong>Guest Request</strong><br>Any requests specified by the guest during the reservation process. </li>\n<li data-list-item-id=\"e4bab9f68af400d3c8c86065ed01bb4cc\">\n<strong>Server</strong><br>The name of the server who checked the guest into the restaurant.</li>\n<li data-list-item-id=\"e8e886c8ad5fcedbe74657959379359c7\">\n<strong>Currency Code</strong><br>The currency code associated with the reservation if the reservation required payment.</li>\n<li data-list-item-id=\"e2f7f33341167c648d7d94cdda729bc68\">\n<strong>Restaurant ID</strong><br>The ID of the restaurant associated with the reservation.</li>\n<li data-list-item-id=\"eff8f8769284eb9d1cb4da6ad50f236bd\">\n<strong>Restaurant Name</strong><br>The name of the restaurant associated with the reservation.</li>\n</ul><h2 id=\"h_01HQ471RXKEQ3TTJNQ8HX3GEFA\">Synced guest data</h2><p>In addition to the metrics Klaviyo syncs from OpenTable, Klaviyo will also create a unique profile for every guest that we sync. When we sync contact information, there are also certain custom properties that may get added to each Klaviyo Profile. You can use these properties in segments and in flows. Here are the properties that are automatically synced from OpenTable:</p><ul>\n<li data-list-item-id=\"ed8d244a46c667aa3f8912b97251cbee9\">Email</li>\n<li data-list-item-id=\"eb124e5254c7b3bed0dae2dfab024c5dc\">Phone Number</li>\n<li data-list-item-id=\"e189cc2199d1039e3d11675bcc365ba01\">First Name</li>\n<li data-list-item-id=\"e091cfac4f098ad94090d5eec3fcde1f0\">Last Name</li>\n<li data-list-item-id=\"ee57cf3d357fabfe1cec1c115a340b643\">Birthday<ul><li data-list-item-id=\"ebf01762f00da6e0502491fd90ea259de\">Note: If OpenTable does not include the year associated with a guest's birthday, the birthday year will default to 1904.</li></ul>\n</li>\n<li data-list-item-id=\"e0e9738bd403c2015d85caf673b03aecc\">OpenTable Birthday Month</li>\n<li data-list-item-id=\"ec180c6a697197f71b30afabecd8e377d\">OpenTable Birthday Day</li>\n<li data-list-item-id=\"ebf92dd6c3f274bd7d4e87f785f851a46\">OpenTable Guest IDs</li>\n<li data-list-item-id=\"eb99e473837559f1239cdceab69bff0ca\">OpenTable Restaurants Visited</li>\n</ul><p>Klaviyo syncs email consent from OpenTable. Please note that only subscribes are synced from OpenTable, and unsubscribes are not. </p><p>While phone numbers are synced, SMS consent is not. This means that SMS cannot be sent to phone numbers synced from this integration.</p>",
+    "user_segment_ids": []
+  },
+  "normalized": {
+    "id": "23113172847259",
+    "title": "OpenTable data reference",
+    "source_url": "https://help.klaviyo.com/hc/en-us/articles/23113172847259-OpenTable-data-reference",
+    "section_id": 49375703042715,
+    "section": "OpenTable",
+    "category_id": 115000032731,
+    "category": "Integrations",
+    "category_slug": "integrations",
+    "klaviyo_updated": "2026-04-21T13:54:34Z",
+    "created_at": "2024-02-20T21:38:29Z",
+    "draft": false,
+    "promoted": false,
+    "position": 1,
+    "label_names": []
+  },
+  "files": {
+    "body_html": "_source/articles/23113172847259.body.html",
+    "rendered_html": "_source/rendered/23113172847259.html"
+  },
+  "assets": {
+    "api_body": {
+      "images": [
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28722599679515",
+          "alt": "",
+          "width": "300",
+          "height": "392"
+        }
+      ],
+      "links": [
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/23112971772699",
+          "text": "getting started with OpenTable"
+        }
+      ],
+      "headings": [
+        {
+          "level": 2,
+          "id": "h_01HQ471RXH715MBHCXTQSSBZT0",
+          "text": "You will learn"
+        },
+        {
+          "level": 2,
+          "id": "h_01HQ471RXH9A701KY38695YMSJ",
+          "text": "How to view your data"
+        },
+        {
+          "level": 2,
+          "id": "h_01HQ471RXHD0RPAJW80HDQJWXQ",
+          "text": "Metrics"
+        },
+        {
+          "level": 3,
+          "id": "h_01HQ471RXH7T9GY21WJFQ6F9ZP",
+          "text": "Created Reservation"
+        },
+        {
+          "level": 3,
+          "id": "h_01HQ471RXHW7GVVRGAACYHABCK",
+          "text": "Confirmed Reservation"
+        },
+        {
+          "level": 3,
+          "id": "h_01HQ471RXJ0R87JRHFGSB20C0V",
+          "text": "Completed Reservation"
+        },
+        {
+          "level": 3,
+          "id": "h_01HQ471RXJDX96YCW4SGB9T2NH",
+          "text": "Cancelled Reservation"
+        },
+        {
+          "level": 3,
+          "id": "h_01HQ471RXJVSCBNDJ35EQ13JHK",
+          "text": "No Showed Reservation"
+        },
+        {
+          "level": 2,
+          "id": "h_01HQ471RXKEQ3TTJNQ8HX3GEFA",
+          "text": "Synced guest data"
+        }
+      ]
+    },
+    "rendered_page": {
+      "images": [
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/7ff492c2b417b7ecfe572f839a8a81398693c1f7-1920x1080.webp",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/b0917e010542ce36d923f90ae55b6542ceb73d51-482x630.jpg?w=300",
+          "alt": "",
+          "width": "300",
+          "height": "392"
+        }
+      ],
+      "links": [
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/23113172847259-OpenTable-data-reference#site-content",
+          "text": "Skip to main content"
+        },
+        {
+          "href": "https://www.klaviyo.com",
+          "text": "Home"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center"
+        },
+        {
+          "href": "https://www.klaviyo.com/enterprise",
+          "text": "Enterprise"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Partners"
+        },
+        {
+          "href": "https://www.klaviyo.com/careers",
+          "text": "Careers"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": "Log in"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": ""
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center Find step-by-step instructions and troubleshooting solutions in our knowledge base."
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000032731",
+          "text": "Integrations"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000312411",
+          "text": "Flows"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867867",
+          "text": "Audience"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867667",
+          "text": "Campaigns"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/360000190711",
+          "text": "Sign-up forms"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000873988",
+          "text": "Deliverability & compliance"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/29173800271259",
+          "text": "SMS"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/16638219724187",
+          "text": "Reviews"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/18073014919195",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/34141283979931",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/37659126754075",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/33948021740315",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/39746685522331",
+          "text": "WhatsApp"
+        },
+        {
+          "href": "https://academy.klaviyo.com",
+          "text": "Klaviyo Academy Expert training and education to help you succeed with Klaviyo, and beyond."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Quick+guide&resource=academy_courses",
+          "text": "Quick guides Learn marketing strategies and concepts in 15 minutes or less."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Course&resource=academy_courses",
+          "text": "Courses Master key marketing topics through structured lessons and exams."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/best-practices",
+          "text": "Best practices Discover top product and marketing strategies for your business."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/learning-paths",
+          "text": "Learning paths Complete curated learning journeys tailored to your marketing goals."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses",
+          "text": "Explore all resources"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Live+training&resource=academy_courses",
+          "text": "Live trainings Build confidence through hands-on interactive workshops and thought-provoking strategy sessions."
+        },
+        {
+          "href": "https://www.bigmarker.com/klaviyo-customer-education/Office-hours-Getting-started-with-Klaviyo",
+          "text": "Live office hours Join a strategic discussion where you can ask questions and get answers in real-time."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/private-live-training",
+          "text": "1:1 Live training Book a private training session with an expert to jumpstart your platform knowledge and confidence."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/credentials",
+          "text": "Klaviyo credentials Dig deeper into select topics and showcase your expertise with a final exam to earn a certificate and digital badge."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/certificates/klaviyo-practitioner-certificate",
+          "text": "Klaviyo practitioner certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/deliverability-certificate",
+          "text": "Deliverability certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/developer-certificate",
+          "text": "Klaviyo developer certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses&select=Certificate",
+          "text": "See all certificates"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Klaviyo Community Join our thriving community network to connect with brands like yours—online and in person."
+        },
+        {
+          "href": "https://community.klaviyo.com/topic/new",
+          "text": "Ask a question Post a question and get thoughtful answers from Klaviyo powerusers."
+        },
+        {
+          "href": "https://community.klaviyo.com/p/roadmap",
+          "text": "Product roadmap"
+        },
+        {
+          "href": "https://community.klaviyo.com/search/activity/recent",
+          "text": "Recent threads"
+        },
+        {
+          "href": "https://community.klaviyo.com/p/champions",
+          "text": "Meet the Champions"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups",
+          "text": "Browse all groups Your people are waiting. New ideas and connections are a click away."
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/developer-group-64",
+          "text": "Developer group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/entrepreneur-user-group-118",
+          "text": "Entrepreneur group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/woo-user-group-87",
+          "text": "WooCommerce group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/new-york-meetup-chapter-82",
+          "text": "New York City"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/los-angeles-meetup-chapter-83",
+          "text": "Los Angeles"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/austin-meetup-chapter-85",
+          "text": "Austin"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/san-diego-meetup-chapter-86",
+          "text": "San Diego"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/amsterdam-meetup-chapter-84",
+          "text": "Amsterdam"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Klaviyo Developers Access API documentation and developer guides to help you build with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/get_started",
+          "text": "Get started Access key resources and a step-by-step checklist for how to start developing with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/build_your_integration",
+          "text": "Grow your app's reach Learn how to join our ecosystem and get your app listed on our marketplace."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/developer-tools",
+          "text": "Developer tools Generate sample data, monitor your API usage, and access our Postman collections."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/reference/api_overview",
+          "text": "API reference Browse our full catalog of API docs."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/changelog_",
+          "text": "Changelog"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/api_versioning_and_deprecation_policy",
+          "text": "Versioning & deprecation policy"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/rate_limits_and_error_handling",
+          "text": "Rate limits & error handling"
+        },
+        {
+          "href": "https://youtube.com/playlist?list=PLHkNfHgtxcUanrkMnKPdkRzuWU7MGv_xM&si=pkG-KH7IT_TUHOGC",
+          "text": "API tutorials on YouTube Subscribe to our Klaviyo API Tutorials playlist for easy access to step-by-step developer walkthroughs."
+        },
+        {
+          "href": "https://www.klaviyo.com/contact-us",
+          "text": "Contact us"
+        },
+        {
+          "href": "https://www.klaviyo.com/sign-up",
+          "text": "Sign up"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": "Search"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/23113172847259",
+          "text": "United States - EN"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/de-de/articles/23113172847259",
+          "text": "Deutschland - DE"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-es/articles/23113172847259",
+          "text": "España - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-mx/articles/23113172847259",
+          "text": "México - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/fr-fr/articles/23113172847259",
+          "text": "France - FR"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/it-it/articles/23113172847259",
+          "text": "Italia - IT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/ko-kr/articles/23113172847259",
+          "text": "한국 - KO"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/nl-nl/articles/23113172847259",
+          "text": "Nederland - NL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pl-pl/articles/23113172847259",
+          "text": "Polska - PL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pt-br/articles/23113172847259",
+          "text": "Brasil - PT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/sv-se/articles/23113172847259",
+          "text": "Sverige - SV"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/49375842536731",
+          "text": "Restaurants"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/49375703042715",
+          "text": "OpenTable"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/23113172847259-OpenTable-data-reference#h_01HQ471RXH715MBHCXTQSSBZT0",
+          "text": "You will learn"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/23113172847259-OpenTable-data-reference#h_01HQ471RXH9A701KY38695YMSJ",
+          "text": "How to view your data"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/23113172847259-OpenTable-data-reference#h_01HQ471RXHD0RPAJW80HDQJWXQ",
+          "text": "Metrics"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/23113172847259-OpenTable-data-reference#h_01HQ471RXKEQ3TTJNQ8HX3GEFA",
+          "text": "Synced guest data"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/23112971772699",
+          "text": "getting started with OpenTable"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115001002272",
+          "text": "Learn how to contact support"
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": ""
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": "Visit Community"
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": ""
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": "Hire a partner"
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/about",
+          "text": "About Klaviyo"
+        },
+        {
+          "href": "https://www.klaviyo.com/newsroom",
+          "text": "Newsroom"
+        },
+        {
+          "href": "https://investors.klaviyo.com/overview/default.aspx",
+          "text": "Investor relations"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Agency and tech partners"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Developers"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/retail",
+          "text": "Retail and ecommerce"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/restaurants",
+          "text": "Restaurant marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/wellness",
+          "text": "Wellness"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform",
+          "text": "B2C CRM overview"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai",
+          "text": "Klaviyo AI (K:AI)"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/marketing-automation",
+          "text": "Klaviyo Marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-service",
+          "text": "Klaviyo Service"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/analytics",
+          "text": "Klaviyo Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-data-platform",
+          "text": "Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare",
+          "text": "Klaviyo vs. Klaviyo alternatives"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-mailchimp",
+          "text": "Klaviyo vs. Mailchimp"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-postscript",
+          "text": "Klaviyo vs. Postscript"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-attentive",
+          "text": "Klaviyo vs. Attentive"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-salesforce-marketing-cloud",
+          "text": "Klaviyo vs. Salesforce"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-listrak",
+          "text": "Klaviyo vs. Listrak"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/omnichannel",
+          "text": "Omnichannel marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/email-marketing",
+          "text": "Email marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing",
+          "text": "SMS marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing/rcs",
+          "text": "RCS for Business"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/mobile-app-marketing",
+          "text": "Mobile app marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/whatsapp",
+          "text": "WhatsApp marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/social",
+          "text": "Social marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources",
+          "text": "Marketing resources"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources/marketing-campaign-calendar",
+          "text": "Marketing campaign calendar"
+        },
+        {
+          "href": "https://www.klaviyo.com/glossary",
+          "text": "Marketing glossary"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/email-subject-line-generator",
+          "text": "Subject line generator"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/roi-calculator",
+          "text": "ROI calculator"
+        },
+        {
+          "href": "https://www.klaviyo.com/customers",
+          "text": "Case studies"
+        },
+        {
+          "href": "https://www.klaviyo.com/composer",
+          "text": "Composer Beta"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/marketing-agent",
+          "text": "Marketing Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/customer-agent",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/customer-experience-hub",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/helpdesk",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/marketing-analytics",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/advanced-cdp",
+          "text": "Advanced Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/web-forms",
+          "text": "Web forms"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/email-templates",
+          "text": "Email templates"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/portfolio",
+          "text": "Portfolio"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform-integrations",
+          "text": "Apps and Integrations"
+        },
+        {
+          "href": "https://www.klaviyo.com/features",
+          "text": "Features"
+        },
+        {
+          "href": "https://www.klaviyo.com/whats-new",
+          "text": "What's new"
+        },
+        {
+          "href": "https://www.klaviyo.com/events",
+          "text": "Events"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help Center"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us",
+          "text": "Academy"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Community"
+        },
+        {
+          "href": "https://www.facebook.com/Klaviyo/",
+          "text": "Facebook"
+        },
+        {
+          "href": "https://twitter.com/klaviyo/",
+          "text": "Twitter"
+        },
+        {
+          "href": "https://www.linkedin.com/company/klaviyo/",
+          "text": "LinkedIn"
+        },
+        {
+          "href": "https://www.instagram.com/klaviyo/",
+          "text": "Instagram"
+        },
+        {
+          "href": "https://www.klaviyo.com/sitemap",
+          "text": "Site Map"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal",
+          "text": "Terms and Privacy"
+        },
+        {
+          "href": "https://www.klaviyo.com/security",
+          "text": "Security"
+        },
+        {
+          "href": "https://www.klaviyo.com/trust",
+          "text": "Trust"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal/intellectual-property-notices",
+          "text": "Intellectual Property Notices"
+        }
+      ],
+      "headings": [
+        {
+          "level": 1,
+          "id": "",
+          "text": "OpenTable data reference"
+        },
+        {
+          "level": 2,
+          "id": "h_01HQ471RXH715MBHCXTQSSBZT0",
+          "text": "You will learn"
+        },
+        {
+          "level": 2,
+          "id": "h_01HQ471RXH9A701KY38695YMSJ",
+          "text": "How to view your data"
+        },
+        {
+          "level": 2,
+          "id": "h_01HQ471RXHD0RPAJW80HDQJWXQ",
+          "text": "Metrics"
+        },
+        {
+          "level": 3,
+          "id": "h_01HQ471RXH7T9GY21WJFQ6F9ZP",
+          "text": "Created Reservation"
+        },
+        {
+          "level": 3,
+          "id": "h_01HQ471RXHW7GVVRGAACYHABCK",
+          "text": "Confirmed Reservation"
+        },
+        {
+          "level": 3,
+          "id": "h_01HQ471RXJ0R87JRHFGSB20C0V",
+          "text": "Completed Reservation"
+        },
+        {
+          "level": 3,
+          "id": "h_01HQ471RXJDX96YCW4SGB9T2NH",
+          "text": "Cancelled Reservation"
+        },
+        {
+          "level": 3,
+          "id": "h_01HQ471RXJVSCBNDJ35EQ13JHK",
+          "text": "No Showed Reservation"
+        },
+        {
+          "level": 2,
+          "id": "h_01HQ471RXKEQ3TTJNQ8HX3GEFA",
+          "text": "Synced guest data"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "Explore more from Klaviyo"
+        }
+      ]
+    }
+  },
+  "rendered_page": {
+    "status": "fetched",
+    "error": ""
+  }
+}

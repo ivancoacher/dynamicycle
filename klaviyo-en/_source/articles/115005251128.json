@@ -1,0 +1,971 @@
+{
+  "captured_at": "2026-05-23T16:17:00Z",
+  "article": {
+    "id": 115005251128,
+    "url": "https://klaviyo.zendesk.com/api/v2/help_center/en-us/articles/115005251128.json",
+    "html_url": "https://klaviyo.zendesk.com/hc/en-us/articles/115005251128-How-to-import-subscribers-to-a-list",
+    "author_id": 20424705848,
+    "comments_disabled": true,
+    "draft": false,
+    "promoted": false,
+    "position": 1,
+    "vote_sum": -100,
+    "vote_count": 856,
+    "section_id": 49375383465243,
+    "created_at": "2017-03-30T17:46:24Z",
+    "updated_at": "2026-04-21T13:54:23Z",
+    "name": "How to import subscribers to a list",
+    "title": "How to import subscribers to a list",
+    "source_locale": "en-us",
+    "locale": "en-us",
+    "outdated": false,
+    "outdated_locales": [],
+    "edited_at": "2025-08-11T20:22:00Z",
+    "user_segment_id": null,
+    "permission_group_id": 146372,
+    "content_tag_ids": [],
+    "label_names": [],
+    "body": "<h2 id=\"h_01JNPKCA13231DM3DGK5JPFD14\">You will learn</h2>\n<p>Learn how to add subscribers to a list in Klaviyo. Uploading contacts is key when getting started with Klaviyo, particularly if you’re migrating from another service provider or pulling in information from a third party. </p>\n<h2 id=\"h_01JNPKCA13NRJ9PQZVQCSH1SHG\">Before you begin</h2>\n<p>Please note the following before starting the import process: </p>\n<ul>\n<li>Your list must abide by <a href=\"https://www.klaviyo.com/legal/terms-of-service\" target=\"_blank\" rel=\"noopener noreferrer\">Klaviyo's Terms of Service</a>. </li>\n<li>Turn off any flows triggered by the list you’re uploading, unless you want the flow to send to all of the imported contacts. </li>\n<li>Uploads do not trigger double opt-in</li>\n<li>Your CSV file must be 50 MB or less. Larger uploads must be split into multiple CSV files. </li>\n</ul>\n<h2 id=\"h_01JNPKCA1338NEQ67DVYBPBRND\">Upload a CSV to a list</h2>\n<h3 id=\"h_01JNPKCA13BP238689TB9JG8K1\">Format your CSV</h3>\n<h4 id=\"h_01JNPKCA13X5D8TKWHS0N8645T\">Place email addresses or phone number in the first column</h4>\n<p>In general, the first column should be your customers’ email addresses (labeled either “Email” or “Email Address) or phone numbers (labeled “Phone Number”). If you are importing SMS subscribers, we recommend reading through our guide on <a href=\"https://help.klaviyo.com/hc/en-us/articles/360035428731\">uploading SMS consent</a>. </p>\n<p><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/34691449774235\" width=\"624\" height=\"207\"></p>\n<div class=\"accordion accordion--default\">\n<div class=\"accordion__item\">\n<div class=\"accordion__item-title\">\n<h4 id=\"h_01JNPKCA13J1AQ2CE0NH6KTKBE\">Optional: indicate consent status</h4>\n</div>\n<div class=\"accordion__item-content\">\n<p>If your list contains a mix of subscribed, suppressed, and unsubscribed contacts, include a column with the type of consent: </p>\n<ul>\n<li>Email Marketing Consent</li>\n<li>SMS Marketing Consent</li>\n<li>SMS Transactional Consent</li>\n</ul>\n<p>Alternatively, if you have a consent timestamp column (e.g., <em>Email Marketing Consent Timestamp</em>), you can indicate whether someone is:</p>\n<ul>\n<li>\n<strong>Subscribed</strong><br>Person is opted in to receive messages. </li>\n<li>\n<strong>Unsubscribed </strong><strong><br></strong>Person used to be subscribed but has since opted out. You cannot send messages if they are unsubscribed for that channel (e.g., you cannot send an SMS to someone who’s unsubscribed from text messaging, but you may be able to send an email, and vice versa). </li>\n<li>\n<strong>Never subscribed  </strong><strong><br></strong>Person never consented to receiving messages. This is also the default value if a cell in a consent column is blank. You cannot send mobile (SMS, push, etc.) messages to people marked as never subscribed; however, you can send emails and these are considered active profiles. </li>\n</ul>\n<p>If you don’t have a consent column, you’ll be asked what type of consent to add and your choices will be applied to all contacts within the CSV (e.g., they will all be marked as subscribed).   </p>\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/39882260008475\">\n<div class=\"bs-callout bs-callout-default\">\n<p>If you are importing a list to <a href=\"https://help.klaviyo.com/hc/en-us/articles/115005078267\">resubscribe profiles</a>, do not include backdated consent timestamps in your CSV as they may be skipped during import. </p>\n</div>\n</div>\n</div>\n<div class=\"accordion__item\">\n<div class=\"accordion__item-title\">\n<h4 id=\"h_01JNPKCA13Q148TKSTCM8S2BPV\">Optional: add other properties</h4>\n</div>\n<div class=\"accordion__item-content\">\n<p>Your CSV can include additional columns if you want to upload more properties for that profile. These properties could be anything, from their name, birthday, date they subscribed, last click, etc.</p>\n<ul>\n<li>If using a Klaviyo property, use the Klaviyo property name as the header for the column. \n<ul>\n<li>This allows that column to be easily mapped to the right property with the correct data type. </li>\n</ul>\n</li>\n<li>Dates must be in an <a href=\"https://developers.klaviyo.com/en/docs/acceptable_date_and_timestamp_formats_for_profile_and_event_properties\">accepted format</a> (e.g., YYYY-mm-dd HH:MM:SS). </li>\n</ul>\n<p>Please also note that when adding properties: </p>\n<ul>\n<li>Any new value/column that you include in a CSV upload that does not already exist on a contact's profile will:\n<ul>\n<li>Create a new custom property</li>\n<li>Not affect existing custom properties</li>\n</ul>\n</li>\n<li>If the value already exists for a profile, the value from the CSV will overwrite the prior value.</li>\n<li>If you're interested in uploading a list of values for a single property (such as “Sizes”), you will need to use JSON syntax. Create an array of your values that looks like this: [\"value1\", \"value2\", \"value 3\"].</li>\n</ul>\n</div>\n</div>\n</div>\n<h3 id=\"h_01JNPKCA13NRD4QFNG6AVE1VZP\">Import contacts with consent</h3>\n<div class=\"bs-callout bs-callout-default\">\n<p>Check if you have any flows triggered by the list you want to select. If flows are triggered by this list, turn the flow to manual mode before continuing. </p>\n</div>\n<ol>\n<li>Navigate to <strong>Audience &gt; Lists &amp; segments</strong>.</li>\n<li>Select the list you want to add your contacts to (e.g., Newsletter).\n<ul>\n<li>If you want to create a new list, instead select <strong>Create New &gt; Create list</strong> and name the new list.<br><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/34691431173915\" width=\"624\" height=\"320\">\n</li>\n</ul>\n</li>\n<li>Open the <strong>Manage List </strong>dropdown in the upper right. </li>\n<li>Choose <strong>Import contacts</strong> from the dropdown.\n<ul>\n<li>If the option to import contacts does not appear, that means you either do not have the correct <a href=\"https://help.klaviyo.com/hc/en-us/articles/115005231648\">user permissions</a> to upload contacts, or this is a segment, not a list.<br><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/34691431179035\">\n</li>\n</ul>\n</li>\n<li>Click <strong>Upload</strong> and select your CSV file of email subscribers.</li>\n<li>Click <strong>Next</strong>. </li>\n<li>Map each column from your CSV to an appropriate property in Klaviyo, then click <strong>Next</strong>.</li>\n<li>If your CSV includes a consent type (e.g., <em>Email Marketing Consent</em>) or timestamp (e.g., <em>Email Marketing Consent Timestamp</em>) column, Klaviyo knows to apply consent, so you can jump to step 10. </li>\n<li>If you have neither a consent timestamp or column indicating consent, you’ll see the following: \n<ul>\n<li>Under <em>Did these contacts subscribe to messaging</em>, select <strong>Yes</strong> to add consent.<br><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/34691449781659\" width=\"624\" height=\"301\">\n</li>\n<li>Check the box for the types of consent to apply (e.g., <strong>Email</strong>).</li>\n</ul>\n</li>\n<li>When ready to proceed, click <strong>Import</strong>. </li>\n</ol>\n<p>The import process can take up to a couple of hours to complete. Please wait a few additional hours before you turn your list-triggered flows back on (if applicable). </p>\n<h2 id=\"h_01JNPKCA13QNEM41XQRY1PV0KS\">Upload via copy/paste</h2>\n<p>As an alternative to uploading a CSV file, you can copy and paste a list of subscribers to upload them. </p>\n<ol>\n<li>Navigate to <strong>Audience &gt; Lists &amp; segments</strong>.</li>\n<li>Select the list that you want to add subscribers to.</li>\n<li>Click the <strong>Manage list</strong> dropdown in the upper right-hand corner. </li>\n<li>Click <strong>Import contacts</strong>. \n<ol>\n<li>If the option to import contacts does not appear, that means you either do not have the correct <a href=\"https://help.klaviyo.com/hc/en-us/articles/115005231648\">user permissions</a> to upload contacts, or this is a segment, not a list. </li>\n</ol>\n</li>\n<li>Click <strong>Switch to copy and paste CSV </strong>beneath the bottom-left corner of the upload tool.<br><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/34691449791643\" width=\"624\" height=\"361\">\n</li>\n<li>Paste contact information in this format:<br>Email,First Name,Last Name<br>someone1@example.com,George,Washington<br><a href=\"mailto:someone2@example.com,Abraham,Lincoln\">someone2@example.com,Abraham,Lincoln</a><br>\n<div class=\"bs-callout bs-callout-default\">\n<p>If you are adding properties with <a href=\"https://help.klaviyo.com/hc/en-us/articles/115005237648\">list values</a> as part of your copy/paste import, use the following structure: <br>Email,Property <br>someone1@example.com,\"[\"\"a\"\",\"\"b\"\"]\"</p>\n</div>\n</li>\n<li>Click <strong>Next</strong>.</li>\n<li>Map each column from your upload to an appropriate property in Klaviyo.</li>\n<li>To add consent (i.e., if you have explicit email consent for every contact): \n<ol>\n<li>Under <em>Did these contacts subscribe to messaging</em>, select <strong>Yes</strong> to add consent.<br><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/34691449781659\" width=\"624\" height=\"301\">\n</li>\n<li>Choose the type of consent (e.g., <strong>Email</strong>). </li>\n</ol>\n</li>\n<li>Click <strong>Import</strong>.</li>\n</ol>\n<p>Add subscribers via Quick Add</p>\n<h2 id=\"h_01JRDEBT676AJMS3M0H6Z5QCZ8\">Add subscribers via Quick Add (email only)</h2>\n<p>If you would like to quickly add a handful of individuals to your list, you can use the Quick Add option instead.</p>\n<ol>\n<li>Navigate to the list you'd like to add the profile to.</li>\n<li>Click <strong>Quick Add</strong>.\n<ol>\n<li>If the Quick Add button does not appear, that means you either do not have the correct <a href=\"https://help.klaviyo.com/hc/en-us/articles/115005231648\">user permissions</a> to upload contacts, or this is a segment, not a list.<br><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/34691431195291\" width=\"566\" height=\"176\">\n</li>\n</ol>\n</li>\n<li>On the following page, fill in the <strong>Email</strong> field.</li>\n<li>If the person has explicitly opted in to receive emails from you, check the box for <em>Profile has granted explicit consent to receive email marketing</em>. <em><br></em><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/34691449803675\" width=\"624\" height=\"1017\">\n</li>\n<li>Optional: add other information about the contact, such as their name or title. </li>\n<li>Click <strong>Add subscriber</strong>.</li>\n</ol>\n<p>Once the CSV finishes importing, Klaviyo will either create a new profile or associate the data to an existing profile.</p>\n<p>With email for instance, Klaviyo looks for any existing profiles with that same email. Then, Klaviyo updates the consent status and any properties you chose to import to that contact. </p>\n<h2 id=\"h_01JNPKCA13TJM61VZ7S0N45YP6\">Bulk remove consent </h2>\n<p>If you want to remove consent for profiles, you can use essentially the same import process. </p>\n<p>The only differences are that you must:</p>\n<ul>\n<li>Have a column for the type of consent (e.g., <em>Email Marketing Consent</em>). </li>\n<li>Add “Unsubscribed” for each profile within that column. \n<ul>\n<li>Note that you cannot reset profiles in bulk to “Never Subscribed.” </li>\n</ul>\n</li>\n</ul>\n<h2 id=\"h_01HDRQY3QK4Q6XXX7DNTS4K4YW\">Additional resources</h2>\n<ul>\n<li><a href=\"https://help.klaviyo.com/hc/en-us/articles/115005078807\" target=\"_blank\" rel=\"noopener\">Troubleshooting list imports</a></li>\n<li><a href=\"https://help.klaviyo.com/hc/en-us/articles/360035428731\">Upload SMS consent</a></li>\n<li><a href=\"https://help.klaviyo.com/hc/en-us/articles/115005078967\" target=\"_blank\" rel=\"noopener\">Create and add subscribers to a new list</a></li>\n<li><a href=\"https://help.klaviyo.com/hc/en-us/articles/115005061447\" target=\"_blank\" rel=\"noopener\">The difference between segments and lists</a></li>\n</ul>",
+    "user_segment_ids": []
+  },
+  "normalized": {
+    "id": "115005251128",
+    "title": "How to import subscribers to a list",
+    "source_url": "https://help.klaviyo.com/hc/en-us/articles/115005251128-How-to-import-subscribers-to-a-list",
+    "section_id": 49375383465243,
+    "section": "Build and use lists",
+    "category_id": 115000867867,
+    "category": "Audience",
+    "category_slug": "analytics-audience",
+    "klaviyo_updated": "2026-04-21T13:54:23Z",
+    "created_at": "2017-03-30T17:46:24Z",
+    "draft": false,
+    "promoted": false,
+    "position": 1,
+    "label_names": []
+  },
+  "files": {
+    "body_html": "_source/articles/115005251128.body.html",
+    "rendered_html": "_source/rendered/115005251128.html"
+  },
+  "assets": {
+    "api_body": {
+      "images": [
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/34691449774235",
+          "alt": "",
+          "width": "624",
+          "height": "207"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/39882260008475",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/34691431173915",
+          "alt": "",
+          "width": "624",
+          "height": "320"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/34691431179035",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/34691449781659",
+          "alt": "",
+          "width": "624",
+          "height": "301"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/34691449791643",
+          "alt": "",
+          "width": "624",
+          "height": "361"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/34691431195291",
+          "alt": "",
+          "width": "566",
+          "height": "176"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/34691449803675",
+          "alt": "",
+          "width": "624",
+          "height": "1017"
+        }
+      ],
+      "links": [
+        {
+          "href": "https://www.klaviyo.com/legal/terms-of-service",
+          "text": "Klaviyo's Terms of Service"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360035428731",
+          "text": "uploading SMS consent"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005078267",
+          "text": "resubscribe profiles"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/acceptable_date_and_timestamp_formats_for_profile_and_event_properties",
+          "text": "accepted format"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005231648",
+          "text": "user permissions"
+        },
+        {
+          "href": "mailto:someone2@example.com,Abraham,Lincoln",
+          "text": "someone2@example.com,Abraham,Lincoln"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005237648",
+          "text": "list values"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005078807",
+          "text": "Troubleshooting list imports"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360035428731",
+          "text": "Upload SMS consent"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005078967",
+          "text": "Create and add subscribers to a new list"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005061447",
+          "text": "The difference between segments and lists"
+        }
+      ],
+      "headings": [
+        {
+          "level": 2,
+          "id": "h_01JNPKCA13231DM3DGK5JPFD14",
+          "text": "You will learn"
+        },
+        {
+          "level": 2,
+          "id": "h_01JNPKCA13NRJ9PQZVQCSH1SHG",
+          "text": "Before you begin"
+        },
+        {
+          "level": 2,
+          "id": "h_01JNPKCA1338NEQ67DVYBPBRND",
+          "text": "Upload a CSV to a list"
+        },
+        {
+          "level": 3,
+          "id": "h_01JNPKCA13BP238689TB9JG8K1",
+          "text": "Format your CSV"
+        },
+        {
+          "level": 4,
+          "id": "h_01JNPKCA13X5D8TKWHS0N8645T",
+          "text": "Place email addresses or phone number in the first column"
+        },
+        {
+          "level": 4,
+          "id": "h_01JNPKCA13J1AQ2CE0NH6KTKBE",
+          "text": "Optional: indicate consent status"
+        },
+        {
+          "level": 4,
+          "id": "h_01JNPKCA13Q148TKSTCM8S2BPV",
+          "text": "Optional: add other properties"
+        },
+        {
+          "level": 3,
+          "id": "h_01JNPKCA13NRD4QFNG6AVE1VZP",
+          "text": "Import contacts with consent"
+        },
+        {
+          "level": 2,
+          "id": "h_01JNPKCA13QNEM41XQRY1PV0KS",
+          "text": "Upload via copy/paste"
+        },
+        {
+          "level": 2,
+          "id": "h_01JRDEBT676AJMS3M0H6Z5QCZ8",
+          "text": "Add subscribers via Quick Add (email only)"
+        },
+        {
+          "level": 2,
+          "id": "h_01JNPKCA13TJM61VZ7S0N45YP6",
+          "text": "Bulk remove consent"
+        },
+        {
+          "level": 2,
+          "id": "h_01HDRQY3QK4Q6XXX7DNTS4K4YW",
+          "text": "Additional resources"
+        }
+      ]
+    },
+    "rendered_page": {
+      "images": [
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/7ff492c2b417b7ecfe572f839a8a81398693c1f7-1920x1080.webp",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/75cec519cb3ebb662ad3b178487febe3a35d3507-650x215.png?w=624",
+          "alt": "",
+          "width": "624",
+          "height": "207"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/ffe5dabad71cd5b9eb48288a47de1ddd91e911e1-2622x218.png",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/ab904f9452fe2c89b5a5c95e186fd1e87d8eb405-694x356.png?w=624",
+          "alt": "",
+          "width": "624",
+          "height": "320"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/68b9eb0cfbbedee2ae4a6a59196bad23736c5370-552x686.png",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/f92c94e3ffec83aa69939fef9901da275cf439ed-1008x486.png?w=624",
+          "alt": "",
+          "width": "624",
+          "height": "301"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/cdc6be8b7f75a7eb667f839216a6c6f617dd2021-1494x866.png?w=624",
+          "alt": "",
+          "width": "624",
+          "height": "361"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/135a75f0be3eb75925403b1eb54211bb5884b76e-566x176.png?w=566",
+          "alt": "",
+          "width": "566",
+          "height": "176"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/eb301afe27017dc07ae75c38211ead94d95fac1e-906x1478.png?w=624",
+          "alt": "",
+          "width": "624",
+          "height": "1017"
+        }
+      ],
+      "links": [
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005251128-How-to-import-subscribers-to-a-list#site-content",
+          "text": "Skip to main content"
+        },
+        {
+          "href": "https://www.klaviyo.com",
+          "text": "Home"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center"
+        },
+        {
+          "href": "https://www.klaviyo.com/enterprise",
+          "text": "Enterprise"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Partners"
+        },
+        {
+          "href": "https://www.klaviyo.com/careers",
+          "text": "Careers"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": "Log in"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": ""
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center Find step-by-step instructions and troubleshooting solutions in our knowledge base."
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000032731",
+          "text": "Integrations"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000312411",
+          "text": "Flows"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867867",
+          "text": "Audience"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867667",
+          "text": "Campaigns"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/360000190711",
+          "text": "Sign-up forms"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000873988",
+          "text": "Deliverability & compliance"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/29173800271259",
+          "text": "SMS"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/16638219724187",
+          "text": "Reviews"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/18073014919195",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/34141283979931",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/37659126754075",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/33948021740315",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/39746685522331",
+          "text": "WhatsApp"
+        },
+        {
+          "href": "https://academy.klaviyo.com",
+          "text": "Klaviyo Academy Expert training and education to help you succeed with Klaviyo, and beyond."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Quick+guide&resource=academy_courses",
+          "text": "Quick guides Learn marketing strategies and concepts in 15 minutes or less."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Course&resource=academy_courses",
+          "text": "Courses Master key marketing topics through structured lessons and exams."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/best-practices",
+          "text": "Best practices Discover top product and marketing strategies for your business."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/learning-paths",
+          "text": "Learning paths Complete curated learning journeys tailored to your marketing goals."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses",
+          "text": "Explore all resources"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Live+training&resource=academy_courses",
+          "text": "Live trainings Build confidence through hands-on interactive workshops and thought-provoking strategy sessions."
+        },
+        {
+          "href": "https://www.bigmarker.com/klaviyo-customer-education/Office-hours-Getting-started-with-Klaviyo",
+          "text": "Live office hours Join a strategic discussion where you can ask questions and get answers in real-time."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/private-live-training",
+          "text": "1:1 Live training Book a private training session with an expert to jumpstart your platform knowledge and confidence."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/credentials",
+          "text": "Klaviyo credentials Dig deeper into select topics and showcase your expertise with a final exam to earn a certificate and digital badge."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/certificates/klaviyo-practitioner-certificate",
+          "text": "Klaviyo practitioner certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/deliverability-certificate",
+          "text": "Deliverability certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/developer-certificate",
+          "text": "Klaviyo developer certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses&select=Certificate",
+          "text": "See all certificates"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Klaviyo Community Join our thriving community network to connect with brands like yours—online and in person."
+        },
+        {
+          "href": "https://community.klaviyo.com/topic/new",
+          "text": "Ask a question Post a question and get thoughtful answers from Klaviyo powerusers."
+        },
+        {
+          "href": "https://community.klaviyo.com/p/roadmap",
+          "text": "Product roadmap"
+        },
+        {
+          "href": "https://community.klaviyo.com/search/activity/recent",
+          "text": "Recent threads"
+        },
+        {
+          "href": "https://community.klaviyo.com/p/champions",
+          "text": "Meet the Champions"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups",
+          "text": "Browse all groups Your people are waiting. New ideas and connections are a click away."
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/developer-group-64",
+          "text": "Developer group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/entrepreneur-user-group-118",
+          "text": "Entrepreneur group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/woo-user-group-87",
+          "text": "WooCommerce group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/new-york-meetup-chapter-82",
+          "text": "New York City"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/los-angeles-meetup-chapter-83",
+          "text": "Los Angeles"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/austin-meetup-chapter-85",
+          "text": "Austin"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/san-diego-meetup-chapter-86",
+          "text": "San Diego"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/amsterdam-meetup-chapter-84",
+          "text": "Amsterdam"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Klaviyo Developers Access API documentation and developer guides to help you build with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/get_started",
+          "text": "Get started Access key resources and a step-by-step checklist for how to start developing with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/build_your_integration",
+          "text": "Grow your app's reach Learn how to join our ecosystem and get your app listed on our marketplace."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/developer-tools",
+          "text": "Developer tools Generate sample data, monitor your API usage, and access our Postman collections."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/reference/api_overview",
+          "text": "API reference Browse our full catalog of API docs."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/changelog_",
+          "text": "Changelog"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/api_versioning_and_deprecation_policy",
+          "text": "Versioning & deprecation policy"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/rate_limits_and_error_handling",
+          "text": "Rate limits & error handling"
+        },
+        {
+          "href": "https://youtube.com/playlist?list=PLHkNfHgtxcUanrkMnKPdkRzuWU7MGv_xM&si=pkG-KH7IT_TUHOGC",
+          "text": "API tutorials on YouTube Subscribe to our Klaviyo API Tutorials playlist for easy access to step-by-step developer walkthroughs."
+        },
+        {
+          "href": "https://www.klaviyo.com/contact-us",
+          "text": "Contact us"
+        },
+        {
+          "href": "https://www.klaviyo.com/sign-up",
+          "text": "Sign up"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": "Search"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005251128",
+          "text": "United States - EN"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/de-de/articles/115005251128",
+          "text": "Deutschland - DE"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-es/articles/115005251128",
+          "text": "España - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-mx/articles/115005251128",
+          "text": "México - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/fr-fr/articles/115005251128",
+          "text": "France - FR"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/it-it/articles/115005251128",
+          "text": "Italia - IT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/ko-kr/articles/115005251128",
+          "text": "한국 - KO"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/nl-nl/articles/115005251128",
+          "text": "Nederland - NL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pl-pl/articles/115005251128",
+          "text": "Polska - PL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pt-br/articles/115005251128",
+          "text": "Brasil - PT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/sv-se/articles/115005251128",
+          "text": "Sverige - SV"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/14512077651099",
+          "text": "Lists and segments"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/49375383465243",
+          "text": "Build and use lists"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005251128-How-to-import-subscribers-to-a-list#h_01JNPKCA13231DM3DGK5JPFD14",
+          "text": "You will learn"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005251128-How-to-import-subscribers-to-a-list#h_01JNPKCA13NRJ9PQZVQCSH1SHG",
+          "text": "Before you begin"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005251128-How-to-import-subscribers-to-a-list#h_01JNPKCA1338NEQ67DVYBPBRND",
+          "text": "Upload a CSV to a list"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005251128-How-to-import-subscribers-to-a-list#h_01JNPKCA13QNEM41XQRY1PV0KS",
+          "text": "Upload via copy/paste"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005251128-How-to-import-subscribers-to-a-list#h_01JRDEBT676AJMS3M0H6Z5QCZ8",
+          "text": "Add subscribers via Quick Add (email only)"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005251128-How-to-import-subscribers-to-a-list#h_01JNPKCA13TJM61VZ7S0N45YP6",
+          "text": "Bulk remove consent"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005251128-How-to-import-subscribers-to-a-list#additional-resources",
+          "text": "Additional resources"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal/terms-of-service",
+          "text": "Klaviyo's Terms of Service"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360035428731",
+          "text": "uploading SMS consent"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005078267",
+          "text": "resubscribe profiles"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/acceptable_date_and_timestamp_formats_for_profile_and_event_properties",
+          "text": "accepted format"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005231648",
+          "text": "user permissions"
+        },
+        {
+          "href": "mailto:someone2@example.com,Abraham,Lincoln",
+          "text": "someone2@example.com,Abraham,Lincoln"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005237648",
+          "text": "list values"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005078807",
+          "text": "Troubleshooting list imports"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360035428731",
+          "text": "How to upload a list of SMS contacts"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005061447",
+          "text": "Understanding the difference between segments and lists"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115001002272",
+          "text": "Learn how to contact support"
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": ""
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": "Visit Community"
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": ""
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": "Hire a partner"
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/about",
+          "text": "About Klaviyo"
+        },
+        {
+          "href": "https://www.klaviyo.com/newsroom",
+          "text": "Newsroom"
+        },
+        {
+          "href": "https://investors.klaviyo.com/overview/default.aspx",
+          "text": "Investor relations"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Agency and tech partners"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Developers"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/retail",
+          "text": "Retail and ecommerce"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/restaurants",
+          "text": "Restaurant marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/wellness",
+          "text": "Wellness"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform",
+          "text": "B2C CRM overview"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai",
+          "text": "Klaviyo AI (K:AI)"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/marketing-automation",
+          "text": "Klaviyo Marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-service",
+          "text": "Klaviyo Service"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/analytics",
+          "text": "Klaviyo Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-data-platform",
+          "text": "Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare",
+          "text": "Klaviyo vs. Klaviyo alternatives"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-mailchimp",
+          "text": "Klaviyo vs. Mailchimp"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-postscript",
+          "text": "Klaviyo vs. Postscript"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-attentive",
+          "text": "Klaviyo vs. Attentive"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-salesforce-marketing-cloud",
+          "text": "Klaviyo vs. Salesforce"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-listrak",
+          "text": "Klaviyo vs. Listrak"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/omnichannel",
+          "text": "Omnichannel marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/email-marketing",
+          "text": "Email marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing",
+          "text": "SMS marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing/rcs",
+          "text": "RCS for Business"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/mobile-app-marketing",
+          "text": "Mobile app marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/whatsapp",
+          "text": "WhatsApp marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/social",
+          "text": "Social marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources",
+          "text": "Marketing resources"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources/marketing-campaign-calendar",
+          "text": "Marketing campaign calendar"
+        },
+        {
+          "href": "https://www.klaviyo.com/glossary",
+          "text": "Marketing glossary"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/email-subject-line-generator",
+          "text": "Subject line generator"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/roi-calculator",
+          "text": "ROI calculator"
+        },
+        {
+          "href": "https://www.klaviyo.com/customers",
+          "text": "Case studies"
+        },
+        {
+          "href": "https://www.klaviyo.com/composer",
+          "text": "Composer Beta"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/marketing-agent",
+          "text": "Marketing Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/customer-agent",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/customer-experience-hub",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/helpdesk",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/marketing-analytics",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/advanced-cdp",
+          "text": "Advanced Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/web-forms",
+          "text": "Web forms"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/email-templates",
+          "text": "Email templates"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/portfolio",
+          "text": "Portfolio"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform-integrations",
+          "text": "Apps and Integrations"
+        },
+        {
+          "href": "https://www.klaviyo.com/features",
+          "text": "Features"
+        },
+        {
+          "href": "https://www.klaviyo.com/whats-new",
+          "text": "What's new"
+        },
+        {
+          "href": "https://www.klaviyo.com/events",
+          "text": "Events"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help Center"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us",
+          "text": "Academy"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Community"
+        },
+        {
+          "href": "https://www.facebook.com/Klaviyo/",
+          "text": "Facebook"
+        },
+        {
+          "href": "https://twitter.com/klaviyo/",
+          "text": "Twitter"
+        },
+        {
+          "href": "https://www.linkedin.com/company/klaviyo/",
+          "text": "LinkedIn"
+        },
+        {
+          "href": "https://www.instagram.com/klaviyo/",
+          "text": "Instagram"
+        },
+        {
+          "href": "https://www.klaviyo.com/sitemap",
+          "text": "Site Map"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal",
+          "text": "Terms and Privacy"
+        },
+        {
+          "href": "https://www.klaviyo.com/security",
+          "text": "Security"
+        },
+        {
+          "href": "https://www.klaviyo.com/trust",
+          "text": "Trust"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal/intellectual-property-notices",
+          "text": "Intellectual Property Notices"
+        }
+      ],
+      "headings": [
+        {
+          "level": 1,
+          "id": "",
+          "text": "How to import subscribers to a list"
+        },
+        {
+          "level": 2,
+          "id": "h_01JNPKCA13231DM3DGK5JPFD14",
+          "text": "You will learn"
+        },
+        {
+          "level": 2,
+          "id": "h_01JNPKCA13NRJ9PQZVQCSH1SHG",
+          "text": "Before you begin"
+        },
+        {
+          "level": 2,
+          "id": "h_01JNPKCA1338NEQ67DVYBPBRND",
+          "text": "Upload a CSV to a list"
+        },
+        {
+          "level": 3,
+          "id": "h_01JNPKCA13BP238689TB9JG8K1",
+          "text": "Format your CSV"
+        },
+        {
+          "level": 4,
+          "id": "",
+          "text": "Place email addresses or phone number in the first column"
+        },
+        {
+          "level": 3,
+          "id": "h_01JNPKCA13NRD4QFNG6AVE1VZP",
+          "text": "Import contacts with consent"
+        },
+        {
+          "level": 2,
+          "id": "h_01JNPKCA13QNEM41XQRY1PV0KS",
+          "text": "Upload via copy/paste"
+        },
+        {
+          "level": 2,
+          "id": "h_01JRDEBT676AJMS3M0H6Z5QCZ8",
+          "text": "Add subscribers via Quick Add (email only)"
+        },
+        {
+          "level": 2,
+          "id": "h_01JNPKCA13TJM61VZ7S0N45YP6",
+          "text": "Bulk remove consent"
+        },
+        {
+          "level": 2,
+          "id": "additional-resources",
+          "text": "Additional resources"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "Explore more from Klaviyo"
+        }
+      ]
+    }
+  },
+  "rendered_page": {
+    "status": "fetched",
+    "error": ""
+  }
+}

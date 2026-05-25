@@ -1,0 +1,943 @@
+{
+  "captured_at": "2026-05-23T16:16:58Z",
+  "article": {
+    "id": 115005252988,
+    "url": "https://klaviyo.zendesk.com/api/v2/help_center/en-us/articles/115005252988.json",
+    "html_url": "https://klaviyo.zendesk.com/hc/en-us/articles/115005252988-How-to-integrate-with-Segment",
+    "author_id": 1263759681109,
+    "comments_disabled": true,
+    "draft": false,
+    "promoted": false,
+    "position": 1,
+    "vote_sum": -3,
+    "vote_count": 49,
+    "section_id": 49375270259227,
+    "created_at": "2017-03-30T18:09:13Z",
+    "updated_at": "2026-04-21T13:54:23Z",
+    "name": "How to integrate with Segment",
+    "title": "How to integrate with Segment",
+    "source_locale": "en-us",
+    "locale": "en-us",
+    "outdated": false,
+    "outdated_locales": [],
+    "edited_at": "2025-07-29T17:38:28Z",
+    "user_segment_id": null,
+    "permission_group_id": 146372,
+    "content_tag_ids": [],
+    "label_names": [],
+    "body": "<h2 id=\"h_01HGTYXCHN2N9X0B5YGYVR3MP1\">You will learn</h2>\n<p>Learn how to integrate Segment with Klaviyo to be able to trigger and filter flows, and define segments using events synced to Klaviyo from your Segment project. Klaviyo is able to sync any <code>track</code> and <code>identify</code> calls you make from Segment to Klaviyo.</p>\n<p>This integration takes two steps: enabling the integration on the Segment side, and enabling the integration on the Klaviyo side. Make sure to also explore Segment's<a href=\"https://segment.com/docs/connections/destinations/catalog/actions-klaviyo/\" target=\"_blank\" rel=\"noopener noreferrer\"> comprehensive guide to integrating with Klaviyo</a>. </p>\n<h2 id=\"h_01HGTYXCHN2K2H720DXTEKVG0R\">Before you begin</h2>\n<div class=\"bs-callout bs-callout-default\">\n<p>This integration now supports the two-way flow of information between Segment and Klaviyo, but you will need to select either Klaviyo or Segment as your primary source of truth for profile creation.</p>\n<p>If you select Klaviyo as your primary source, note the following: profiles generated in Segment contain a unique ID which Klaviyo keeps track of to record where these profiles came from. Klaviyo cannot easily reconcile duplicate profiles from different sources, so there is a chance of pushing duplicated profiles to Segment. See the <em>Enable Integration in Klaviyo</em> section below for more information.</p>\n</div>\n<h2 id=\"h_01HGTYXCHND11N2AWCCM18HNW2\">Connect Segment and Klaviyo</h2>\n<h3 id=\"h_01HGTYXCHN3Q64B6RC8B62VA0D\">Add Klaviyo destination to Segment</h3>\n<ol>\n<li>From your Segment project page, click <strong>Connections </strong>in the left hand navigation bar, then click <strong>Add Destination</strong> on the right side of the page.<br><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28723518315803\" alt=\"Connections tab in Segment with Add Destination button with blue background\" width=\"617\" height=\"237\">\n</li>\n<li>Search for <em>Klaviyo</em> in the Segment catalog. Once it appears, click on the Klaviyo tile, and then click <strong>Configure Klaviyo</strong> on the next page.<br><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28723518312987\" alt=\"Segment catalog with Klaviyo in search bar and Klaviyo card in results\" width=\"585\" height=\"283\">\n</li>\n<li>Select and confirm a source from your Segment project. On the next page, enter all of the following:\n<ul>\n<li>Your public Klaviyo API key. Learn <a href=\"https://help.klaviyo.com/hc/en-us/articles/115005062267\" target=\"_blank\" rel=\"noopener\">how to find your public and private API keys in Klaviyo</a>.</li>\n<li>The list ID of the default Klaviyo list you want to sync with. Learn <a href=\"https://help.klaviyo.com/hc/en-us/articles/115005078647\" target=\"_blank\" rel=\"noopener\">how to find your List ID in Klaviyo</a>.</li>\n<li>A private Klaviyo API key. Treat private API keys like passwords kept in a safe place and never exposed to the public.<br><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28723506665883\" alt=\"Klaviyo setup page in Segment with fields for API key, List ID, and Enter your private API Key\" width=\"549\" height=\"285\">\n</li>\n</ul>\n</li>\n<li>Finally, scroll down to <em>Other Settings</em> to verify that <em>Enforce Email as Primary Identifier</em> is set to <strong>On</strong>. It should be toggled on by default. If not, click into the setting and set it to <strong>On</strong>.<br><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28723506671643\" alt=\"Klaviyo setup page in Segment Other Settings section with Confirm Optin set to On and Enforce Email as Primary Identifier set to On\" width=\"571\" height=\"120\">\n</li>\n<li>To enable the integration on Klaviyo’s side, you’ll first need to get your write key from Segment. In Segment, navigate to <strong>Connections &gt; Sources</strong>, and click on the site you’d like to connect with Klaviyo.<br><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28723518319771\" alt=\"List of sources in Connections tab in Segment showing test website in list\" width=\"574\" height=\"152\">\n</li>\n<li>Click on the <strong>Settings</strong> tab at the top and then select <strong>API Keys</strong>.<br><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28723506684059\" alt=\"Test website source page in Segment with Settings tab selected, with Source ID and Write Key blurred out\" width=\"574\" height=\"337\">\n</li>\n<li>Copy your <em>Write Key</em>. Your write key is another private API key. Treat it like a password; keep it in a safe place and never expose it to the public.</li>\n</ol>\n<h3 id=\"h_01HGTYXCHNDH764DVR3P7NP2Y9\">Enable the integration in Klaviyo</h3>\n<ol>\n<li>In Klaviyo, select the <strong>Integrations</strong> tab.</li>\n<li>Select <strong>Explore apps</strong>, search for <em>Segment</em>, and then click the card. Then, click <strong>Install</strong>.</li>\n<li>Paste the write key you copied earlier into the box, then click <strong>Connect to Segment</strong>.<br><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28723506700315\" width=\"539\" height=\"387\">\n</li>\n<li>On the next page, you'll have the ability to limit the data you pass back to Segment, by checking the box next to <em>Do not sync profiles that are not updated by the Klaviyo Destination</em>.<br><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28723518331035\"><br>\n<ul>\n<li>As noted in the Overview, this integration now supports the ability to pass information back and forth between Segment and Klaviyo, using a unique ID to keep track of which profiles are originally from Segment. If you have multiple integrations enabled in Klaviyo, there is a possibility that the same customer will interact with you from two separate sources, and as a result, this customer will end up with duplicated profiles in Klaviyo.</li>\n<li>To help avoid this duplication of profiles across multiple services, you can check the box above, which will limit the profiles Klaviyo syncs with Segment to only the profiles originally created in Segment.</li>\n</ul>\n</li>\n<li>Once finished, click <strong>Complete setup</strong>.</li>\n</ol>\n<h2 id=\"h_01HGTYXCHNKD3FEVRPKGWSJZC1\">Segment metrics</h2>\n<p>We recommend syncing the most important events to Klaviyo, such as:</p>\n<ul>\n<li>When a customer signs up</li>\n<li>When a customer starts to checkout or expresses interest in paying</li>\n<li>What a customer buys (including pictures of items and descriptions of items)</li>\n</ul>\n<p>For each event you send through Segment, a customer is identified by their email address. For detailed information on how to format these events, see the <a href=\"https://segment.com/docs/connections/destinations/catalog/actions-klaviyo/\" target=\"_blank\" rel=\"noopener noreferrer\">Segment's Klaviyo Integration</a> guide.</p>\n<p>For transactional web businesses and ecommerce platforms, we recommend following our <a href=\"https://developers.klaviyo.com/en/v1-2/docs/guide-to-integrating-a-platform-without-a-pre-built-klaviyo-integration\" target=\"_blank\" rel=\"noopener\">guide to integrating a custom ecommerce cart or platform</a> guide for detailed information on the events that should be sent to Klaviyo through Segment.</p>\n<h2 id=\"h_01HGTYXCHNGJJ63JYECJHG1SGS\">Monitoring the Klaviyo sync</h2>\n<p>Once you activate the Klaviyo integration inside of Segment, your <code>identify</code> and <code>track</code> calls will begin sending data to Klaviyo within 5-10 minutes. To verify Segment is sending data to Klaviyo, click the <strong>Analytics</strong> dropdown in Klaviyo and select the <strong>Metrics</strong> tab. </p>\n<p>As events are triggered in Segment, they will send data to Klaviyo, where the event name from the Segment <code>track</code> call is used to create the metric name. Klaviyo treats Segment metrics as third-party API metrics, so each metric will have a gear icon next to its name in Klaviyo. To view the data as it flows into Klaviyo, navigate to the <em>Activity Feed</em> for each metric.</p>\n<p><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28723506691995\" alt=\"segment9.jpg\"></p>\n<h2 id=\"h_01HGTYXCHNMDWM2Z2SED3EM1SW\">Outcome</h2>\n<p>You've now integrated Segment with Klaviyo and can start using Segment data to trigger and filter flows, and define segments using events synced to Klaviyo from your Segment project. </p>\n<h2 id=\"h_01HGTYXCHNJ7787GX36MM4WVAK\">Additional resources</h2>\n<ul>\n<li><a href=\"https://help.klaviyo.com/hc/en-us/articles/115002774932\" target=\"_blank\" rel=\"noopener\">Getting started with flows</a></li>\n<li><a href=\"https://help.klaviyo.com/hc/en-us/articles/115005237908\" target=\"_blank\" rel=\"noopener\">Getting started with segments</a></li>\n<li><a href=\"https://help.klaviyo.com/hc/en-us/articles/115003872171\" target=\"_blank\" rel=\"noopener\">How to add a conditional split to a flow</a></li>\n</ul>",
+    "user_segment_ids": []
+  },
+  "normalized": {
+    "id": "115005252988",
+    "title": "How to integrate with Segment",
+    "source_url": "https://help.klaviyo.com/hc/en-us/articles/115005252988-How-to-integrate-with-Segment",
+    "section_id": 49375270259227,
+    "section": "Segment",
+    "category_id": 115000032731,
+    "category": "Integrations",
+    "category_slug": "integrations",
+    "klaviyo_updated": "2026-04-21T13:54:23Z",
+    "created_at": "2017-03-30T18:09:13Z",
+    "draft": false,
+    "promoted": false,
+    "position": 1,
+    "label_names": []
+  },
+  "files": {
+    "body_html": "_source/articles/115005252988.body.html",
+    "rendered_html": "_source/rendered/115005252988.html"
+  },
+  "assets": {
+    "api_body": {
+      "images": [
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28723518315803",
+          "alt": "Connections tab in Segment with Add Destination button with blue background",
+          "width": "617",
+          "height": "237"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28723518312987",
+          "alt": "Segment catalog with Klaviyo in search bar and Klaviyo card in results",
+          "width": "585",
+          "height": "283"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28723506665883",
+          "alt": "Klaviyo setup page in Segment with fields for API key, List ID, and Enter your private API Key",
+          "width": "549",
+          "height": "285"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28723506671643",
+          "alt": "Klaviyo setup page in Segment Other Settings section with Confirm Optin set to On and Enforce Email as Primary Identifier set to On",
+          "width": "571",
+          "height": "120"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28723518319771",
+          "alt": "List of sources in Connections tab in Segment showing test website in list",
+          "width": "574",
+          "height": "152"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28723506684059",
+          "alt": "Test website source page in Segment with Settings tab selected, with Source ID and Write Key blurred out",
+          "width": "574",
+          "height": "337"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28723506700315",
+          "alt": "",
+          "width": "539",
+          "height": "387"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28723518331035",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28723506691995",
+          "alt": "segment9.jpg",
+          "width": "",
+          "height": ""
+        }
+      ],
+      "links": [
+        {
+          "href": "https://segment.com/docs/connections/destinations/catalog/actions-klaviyo/",
+          "text": "comprehensive guide to integrating with Klaviyo"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005062267",
+          "text": "how to find your public and private API keys in Klaviyo"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005078647",
+          "text": "how to find your List ID in Klaviyo"
+        },
+        {
+          "href": "https://segment.com/docs/connections/destinations/catalog/actions-klaviyo/",
+          "text": "Segment's Klaviyo Integration"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/v1-2/docs/guide-to-integrating-a-platform-without-a-pre-built-klaviyo-integration",
+          "text": "guide to integrating a custom ecommerce cart or platform"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115002774932",
+          "text": "Getting started with flows"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005237908",
+          "text": "Getting started with segments"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115003872171",
+          "text": "How to add a conditional split to a flow"
+        }
+      ],
+      "headings": [
+        {
+          "level": 2,
+          "id": "h_01HGTYXCHN2N9X0B5YGYVR3MP1",
+          "text": "You will learn"
+        },
+        {
+          "level": 2,
+          "id": "h_01HGTYXCHN2K2H720DXTEKVG0R",
+          "text": "Before you begin"
+        },
+        {
+          "level": 2,
+          "id": "h_01HGTYXCHND11N2AWCCM18HNW2",
+          "text": "Connect Segment and Klaviyo"
+        },
+        {
+          "level": 3,
+          "id": "h_01HGTYXCHN3Q64B6RC8B62VA0D",
+          "text": "Add Klaviyo destination to Segment"
+        },
+        {
+          "level": 3,
+          "id": "h_01HGTYXCHNDH764DVR3P7NP2Y9",
+          "text": "Enable the integration in Klaviyo"
+        },
+        {
+          "level": 2,
+          "id": "h_01HGTYXCHNKD3FEVRPKGWSJZC1",
+          "text": "Segment metrics"
+        },
+        {
+          "level": 2,
+          "id": "h_01HGTYXCHNGJJ63JYECJHG1SGS",
+          "text": "Monitoring the Klaviyo sync"
+        },
+        {
+          "level": 2,
+          "id": "h_01HGTYXCHNMDWM2Z2SED3EM1SW",
+          "text": "Outcome"
+        },
+        {
+          "level": 2,
+          "id": "h_01HGTYXCHNJ7787GX36MM4WVAK",
+          "text": "Additional resources"
+        }
+      ]
+    },
+    "rendered_page": {
+      "images": [
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/7ff492c2b417b7ecfe572f839a8a81398693c1f7-1920x1080.webp",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/d4eb1e363310a6010614239047cfdf70ce9d9220-2852x1096.jpg?w=617",
+          "alt": "Connections tab in Segment with Add Destination button with blue background",
+          "width": "617",
+          "height": "237"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/8bec2ebdebb9cce81c2849daeae260e663a6789a-1396x676.jpg?w=585",
+          "alt": "Segment catalog with Klaviyo in search bar and Klaviyo card in results",
+          "width": "585",
+          "height": "283"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/abd5f6bc984e1eb3732b7705e8c820cd1e2db317-1592x826.jpg?w=549",
+          "alt": "Klaviyo setup page in Segment with fields for API key, List ID, and Enter your private API Key",
+          "width": "549",
+          "height": "285"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/ef42f2741d5bb7d9064610cfa7db155594bb4c86-1534x322.jpg?w=571",
+          "alt": "Klaviyo setup page in Segment Other Settings section with Confirm Optin set to On and Enforce Email as Primary Identifier set to On",
+          "width": "571",
+          "height": "120"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/5f5876cc868103c41dbae173ae81735879da010b-2372x628.jpg?w=574",
+          "alt": "List of sources in Connections tab in Segment showing test website in list",
+          "width": "574",
+          "height": "152"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/2a0d2855d1489daa679fa8227851cf22f0c72636-1554x912.jpg?w=574",
+          "alt": "Test website source page in Segment with Settings tab selected, with Source ID and Write Key blurred out",
+          "width": "574",
+          "height": "337"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/8dfb7522563cd8a251b079e1b4a143875a322fbe-1560x1120.png?w=539",
+          "alt": "",
+          "width": "539",
+          "height": "387"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/27e5027b48edc8522516ec5a8719ed4661402555-1704x300.png",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/8163a711dff1d5d416e65549a887f94be173869b-2304x216.jpg",
+          "alt": "segment9.jpg",
+          "width": "",
+          "height": ""
+        }
+      ],
+      "links": [
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005252988-How-to-integrate-with-Segment#site-content",
+          "text": "Skip to main content"
+        },
+        {
+          "href": "https://www.klaviyo.com",
+          "text": "Home"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center"
+        },
+        {
+          "href": "https://www.klaviyo.com/enterprise",
+          "text": "Enterprise"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Partners"
+        },
+        {
+          "href": "https://www.klaviyo.com/careers",
+          "text": "Careers"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": "Log in"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": ""
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center Find step-by-step instructions and troubleshooting solutions in our knowledge base."
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000032731",
+          "text": "Integrations"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000312411",
+          "text": "Flows"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867867",
+          "text": "Audience"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867667",
+          "text": "Campaigns"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/360000190711",
+          "text": "Sign-up forms"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000873988",
+          "text": "Deliverability & compliance"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/29173800271259",
+          "text": "SMS"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/16638219724187",
+          "text": "Reviews"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/18073014919195",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/34141283979931",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/37659126754075",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/33948021740315",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/39746685522331",
+          "text": "WhatsApp"
+        },
+        {
+          "href": "https://academy.klaviyo.com",
+          "text": "Klaviyo Academy Expert training and education to help you succeed with Klaviyo, and beyond."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Quick+guide&resource=academy_courses",
+          "text": "Quick guides Learn marketing strategies and concepts in 15 minutes or less."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Course&resource=academy_courses",
+          "text": "Courses Master key marketing topics through structured lessons and exams."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/best-practices",
+          "text": "Best practices Discover top product and marketing strategies for your business."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/learning-paths",
+          "text": "Learning paths Complete curated learning journeys tailored to your marketing goals."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses",
+          "text": "Explore all resources"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Live+training&resource=academy_courses",
+          "text": "Live trainings Build confidence through hands-on interactive workshops and thought-provoking strategy sessions."
+        },
+        {
+          "href": "https://www.bigmarker.com/klaviyo-customer-education/Office-hours-Getting-started-with-Klaviyo",
+          "text": "Live office hours Join a strategic discussion where you can ask questions and get answers in real-time."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/private-live-training",
+          "text": "1:1 Live training Book a private training session with an expert to jumpstart your platform knowledge and confidence."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/credentials",
+          "text": "Klaviyo credentials Dig deeper into select topics and showcase your expertise with a final exam to earn a certificate and digital badge."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/certificates/klaviyo-practitioner-certificate",
+          "text": "Klaviyo practitioner certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/deliverability-certificate",
+          "text": "Deliverability certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/developer-certificate",
+          "text": "Klaviyo developer certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses&select=Certificate",
+          "text": "See all certificates"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Klaviyo Community Join our thriving community network to connect with brands like yours—online and in person."
+        },
+        {
+          "href": "https://community.klaviyo.com/topic/new",
+          "text": "Ask a question Post a question and get thoughtful answers from Klaviyo powerusers."
+        },
+        {
+          "href": "https://community.klaviyo.com/p/roadmap",
+          "text": "Product roadmap"
+        },
+        {
+          "href": "https://community.klaviyo.com/search/activity/recent",
+          "text": "Recent threads"
+        },
+        {
+          "href": "https://community.klaviyo.com/p/champions",
+          "text": "Meet the Champions"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups",
+          "text": "Browse all groups Your people are waiting. New ideas and connections are a click away."
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/developer-group-64",
+          "text": "Developer group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/entrepreneur-user-group-118",
+          "text": "Entrepreneur group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/woo-user-group-87",
+          "text": "WooCommerce group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/new-york-meetup-chapter-82",
+          "text": "New York City"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/los-angeles-meetup-chapter-83",
+          "text": "Los Angeles"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/austin-meetup-chapter-85",
+          "text": "Austin"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/san-diego-meetup-chapter-86",
+          "text": "San Diego"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/amsterdam-meetup-chapter-84",
+          "text": "Amsterdam"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Klaviyo Developers Access API documentation and developer guides to help you build with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/get_started",
+          "text": "Get started Access key resources and a step-by-step checklist for how to start developing with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/build_your_integration",
+          "text": "Grow your app's reach Learn how to join our ecosystem and get your app listed on our marketplace."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/developer-tools",
+          "text": "Developer tools Generate sample data, monitor your API usage, and access our Postman collections."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/reference/api_overview",
+          "text": "API reference Browse our full catalog of API docs."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/changelog_",
+          "text": "Changelog"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/api_versioning_and_deprecation_policy",
+          "text": "Versioning & deprecation policy"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/rate_limits_and_error_handling",
+          "text": "Rate limits & error handling"
+        },
+        {
+          "href": "https://youtube.com/playlist?list=PLHkNfHgtxcUanrkMnKPdkRzuWU7MGv_xM&si=pkG-KH7IT_TUHOGC",
+          "text": "API tutorials on YouTube Subscribe to our Klaviyo API Tutorials playlist for easy access to step-by-step developer walkthroughs."
+        },
+        {
+          "href": "https://www.klaviyo.com/contact-us",
+          "text": "Contact us"
+        },
+        {
+          "href": "https://www.klaviyo.com/sign-up",
+          "text": "Sign up"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": "Search"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005252988",
+          "text": "United States - EN"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/de-de/articles/115005252988",
+          "text": "Deutschland - DE"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-es/articles/115005252988",
+          "text": "España - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-mx/articles/115005252988",
+          "text": "México - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/fr-fr/articles/115005252988",
+          "text": "France - FR"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/it-it/articles/115005252988",
+          "text": "Italia - IT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/ko-kr/articles/115005252988",
+          "text": "한국 - KO"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/nl-nl/articles/115005252988",
+          "text": "Nederland - NL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pl-pl/articles/115005252988",
+          "text": "Polska - PL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pt-br/articles/115005252988",
+          "text": "Brasil - PT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/sv-se/articles/115005252988",
+          "text": "Sverige - SV"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/14508660690203",
+          "text": "More integrations"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/49375270259227",
+          "text": "Segment"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005252988-How-to-integrate-with-Segment#h_01HGTYXCHN2N9X0B5YGYVR3MP1",
+          "text": "You will learn"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005252988-How-to-integrate-with-Segment#h_01HGTYXCHN2K2H720DXTEKVG0R",
+          "text": "Before you begin"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005252988-How-to-integrate-with-Segment#h_01HGTYXCHND11N2AWCCM18HNW2",
+          "text": "Connect Segment and Klaviyo"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005252988-How-to-integrate-with-Segment#h_01HGTYXCHNKD3FEVRPKGWSJZC1",
+          "text": "Segment metrics"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005252988-How-to-integrate-with-Segment#h_01HGTYXCHNGJJ63JYECJHG1SGS",
+          "text": "Monitoring the Klaviyo sync"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005252988-How-to-integrate-with-Segment#h_01HGTYXCHNMDWM2Z2SED3EM1SW",
+          "text": "Outcome"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005252988-How-to-integrate-with-Segment#additional-resources",
+          "text": "Additional resources"
+        },
+        {
+          "href": "https://segment.com/docs/connections/destinations/catalog/actions-klaviyo/",
+          "text": "comprehensive guide to integrating with Klaviyo"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005062267",
+          "text": "how to find your public and private API keys in Klaviyo"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005078647",
+          "text": "how to find your List ID in Klaviyo"
+        },
+        {
+          "href": "https://segment.com/docs/connections/destinations/catalog/actions-klaviyo/",
+          "text": "Segment's Klaviyo Integration"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/v1-2/docs/guide-to-integrating-a-platform-without-a-pre-built-klaviyo-integration",
+          "text": "guide to integrating a custom ecommerce cart or platform"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115002774932",
+          "text": "Getting started with flows"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005237908",
+          "text": "Getting started with segments"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115003872171",
+          "text": "How to add a conditional split to a flow"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115001002272",
+          "text": "Learn how to contact support"
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": ""
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": "Visit Community"
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": ""
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": "Hire a partner"
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/about",
+          "text": "About Klaviyo"
+        },
+        {
+          "href": "https://www.klaviyo.com/newsroom",
+          "text": "Newsroom"
+        },
+        {
+          "href": "https://investors.klaviyo.com/overview/default.aspx",
+          "text": "Investor relations"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Agency and tech partners"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Developers"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/retail",
+          "text": "Retail and ecommerce"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/restaurants",
+          "text": "Restaurant marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/wellness",
+          "text": "Wellness"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform",
+          "text": "B2C CRM overview"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai",
+          "text": "Klaviyo AI (K:AI)"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/marketing-automation",
+          "text": "Klaviyo Marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-service",
+          "text": "Klaviyo Service"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/analytics",
+          "text": "Klaviyo Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-data-platform",
+          "text": "Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare",
+          "text": "Klaviyo vs. Klaviyo alternatives"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-mailchimp",
+          "text": "Klaviyo vs. Mailchimp"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-postscript",
+          "text": "Klaviyo vs. Postscript"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-attentive",
+          "text": "Klaviyo vs. Attentive"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-salesforce-marketing-cloud",
+          "text": "Klaviyo vs. Salesforce"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-listrak",
+          "text": "Klaviyo vs. Listrak"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/omnichannel",
+          "text": "Omnichannel marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/email-marketing",
+          "text": "Email marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing",
+          "text": "SMS marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing/rcs",
+          "text": "RCS for Business"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/mobile-app-marketing",
+          "text": "Mobile app marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/whatsapp",
+          "text": "WhatsApp marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/social",
+          "text": "Social marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources",
+          "text": "Marketing resources"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources/marketing-campaign-calendar",
+          "text": "Marketing campaign calendar"
+        },
+        {
+          "href": "https://www.klaviyo.com/glossary",
+          "text": "Marketing glossary"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/email-subject-line-generator",
+          "text": "Subject line generator"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/roi-calculator",
+          "text": "ROI calculator"
+        },
+        {
+          "href": "https://www.klaviyo.com/customers",
+          "text": "Case studies"
+        },
+        {
+          "href": "https://www.klaviyo.com/composer",
+          "text": "Composer Beta"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/marketing-agent",
+          "text": "Marketing Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/customer-agent",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/customer-experience-hub",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/helpdesk",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/marketing-analytics",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/advanced-cdp",
+          "text": "Advanced Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/web-forms",
+          "text": "Web forms"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/email-templates",
+          "text": "Email templates"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/portfolio",
+          "text": "Portfolio"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform-integrations",
+          "text": "Apps and Integrations"
+        },
+        {
+          "href": "https://www.klaviyo.com/features",
+          "text": "Features"
+        },
+        {
+          "href": "https://www.klaviyo.com/whats-new",
+          "text": "What's new"
+        },
+        {
+          "href": "https://www.klaviyo.com/events",
+          "text": "Events"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help Center"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us",
+          "text": "Academy"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Community"
+        },
+        {
+          "href": "https://www.facebook.com/Klaviyo/",
+          "text": "Facebook"
+        },
+        {
+          "href": "https://twitter.com/klaviyo/",
+          "text": "Twitter"
+        },
+        {
+          "href": "https://www.linkedin.com/company/klaviyo/",
+          "text": "LinkedIn"
+        },
+        {
+          "href": "https://www.instagram.com/klaviyo/",
+          "text": "Instagram"
+        },
+        {
+          "href": "https://www.klaviyo.com/sitemap",
+          "text": "Site Map"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal",
+          "text": "Terms and Privacy"
+        },
+        {
+          "href": "https://www.klaviyo.com/security",
+          "text": "Security"
+        },
+        {
+          "href": "https://www.klaviyo.com/trust",
+          "text": "Trust"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal/intellectual-property-notices",
+          "text": "Intellectual Property Notices"
+        }
+      ],
+      "headings": [
+        {
+          "level": 1,
+          "id": "",
+          "text": "How to integrate with Segment"
+        },
+        {
+          "level": 2,
+          "id": "h_01HGTYXCHN2N9X0B5YGYVR3MP1",
+          "text": "You will learn"
+        },
+        {
+          "level": 2,
+          "id": "h_01HGTYXCHN2K2H720DXTEKVG0R",
+          "text": "Before you begin"
+        },
+        {
+          "level": 2,
+          "id": "h_01HGTYXCHND11N2AWCCM18HNW2",
+          "text": "Connect Segment and Klaviyo"
+        },
+        {
+          "level": 3,
+          "id": "h_01HGTYXCHN3Q64B6RC8B62VA0D",
+          "text": "Add Klaviyo destination to Segment"
+        },
+        {
+          "level": 3,
+          "id": "h_01HGTYXCHNDH764DVR3P7NP2Y9",
+          "text": "Enable the integration in Klaviyo"
+        },
+        {
+          "level": 2,
+          "id": "h_01HGTYXCHNKD3FEVRPKGWSJZC1",
+          "text": "Segment metrics"
+        },
+        {
+          "level": 2,
+          "id": "h_01HGTYXCHNGJJ63JYECJHG1SGS",
+          "text": "Monitoring the Klaviyo sync"
+        },
+        {
+          "level": 2,
+          "id": "h_01HGTYXCHNMDWM2Z2SED3EM1SW",
+          "text": "Outcome"
+        },
+        {
+          "level": 2,
+          "id": "additional-resources",
+          "text": "Additional resources"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "Explore more from Klaviyo"
+        }
+      ]
+    }
+  },
+  "rendered_page": {
+    "status": "fetched",
+    "error": ""
+  }
+}

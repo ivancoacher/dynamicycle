@@ -1,0 +1,491 @@
+<p>Learn how to use Klaviyo’s personalization variables, or tags, to customize the experience for your customers.</p>
+<p>Personalization tags can be used in emails (including the email’s subject line), SMS/MMS messages, push notifications, and Customer Hub. This article outlines certain available tags, their structures and forms, and how to customize them. To learn how to add personalization, head to our article on <a href="https://help.klaviyo.com/hc/en-us/articles/18986347580827">adding personalization to your messages</a>. </p>
+<div class="bs-callout bs-callout-default">
+<p>Personalization tags were previously called template tags and variable syntax. </p>
+</div>
+<h2 id="h_01HBRGTJ3GZNG14SY18NA4EA7Z">About personalization tags</h2>
+<p>When you input tags into a text field, they look like the sentence on the left in the table below. Once the message is displayed, the tags are replaced by information from the recipient’s profile or event details, and will look like the sentence on the right.</p>
+<table style="width: 100%">
+<tbody>
+<tr>
+<td>Hi <code>{{ first_name }} {{ last_name }}</code>, your favorite color is <code>{{ person|lookup:'Favorite Color' }}</code>
+</td>
+<td><em>Hi George Washington, your favorite color is Green </em></td>
+</tr>
+</tbody>
+</table>
+<p>Profile personalization generally begins with <code>person</code>, with the exception of a few special tags like <code>first_name</code> and <code>last_name</code>. Event variables, which can be used in metric-triggered flows, begin with <code>event</code>. Organization tags (like your company name and address) begin with <code>organization</code>. </p>
+<div class="bs-callout bs-callout-default">
+<p>All personalization tags are case sensitive and must exactly match the property names they reference. Make sure your tags are spelled correctly and use the same casing that appears on your profiles. </p>
+</div>
+<h2 id="h_01HBRGTJ3G3Q55VQ136Z977SBR">Profile personalization</h2>
+<p>Profile personalization enables you to display special Klaviyo properties in your messages. The list below covers all profile personalization (i.e., built-in Klaviyo properties). Select profile personalization tags are available from the <strong>Personalization</strong> menu in the email editor, or from the preview modal for SMS and push messages. </p>
+<p>If you’d like to add custom properties to your messages, jump ahead to the section on <a href="#h_01HBRGTJ3H2M4N326FXPBSA4AN">custom personalization</a>. </p>
+<table style="width: 100%; height: 643px">
+<tbody>
+<tr>
+<td style="width: 437.438px; height: 22px"><strong>Tag</strong></td>
+<td style="width: 196.68px; height: 22px"><strong>Profile property</strong></td>
+</tr>
+<tr>
+<td style="width: 437.438px; height: 23px"><code>{{ email }}</code></td>
+<td style="width: 196.68px; height: 23px">Email</td>
+</tr>
+<tr>
+<td style="width: 437.438px; height: 23px"><code>{{ first_name }}</code></td>
+<td style="width: 196.68px; height: 23px">First name</td>
+</tr>
+<tr>
+<td style="width: 437.438px; height: 23px"><code>{{ last_name }}</code></td>
+<td style="width: 196.68px; height: 23px">Last name</td>
+</tr>
+<tr>
+<td style="width: 437.438px; height: 23px"><code>{{ person.organization }}</code></td>
+<td style="width: 196.68px; height: 23px">Recipient organization</td>
+</tr>
+<tr>
+<td style="width: 437.438px; height: 23px"><code>{{ person|lookup:"$address1" }}</code></td>
+<td style="width: 196.68px; height: 23px">Address 1</td>
+</tr>
+<tr>
+<td style="width: 437.438px; height: 23px"><code>{{ person.id }}</code></td>
+<td style="width: 196.68px; height: 23px">Unique ID ($id/external ID)</td>
+</tr>
+<tr>
+<td style="width: 437.438px; height: 23px"><code>{{ person|lookup:"$latitude" }}</code></td>
+<td style="width: 196.68px; height: 23px">Latitude</td>
+</tr>
+<tr>
+<td style="width: 437.438px; height: 23px"><code>{{ person|lookup:"$longitude" }}</code></td>
+<td style="width: 196.68px; height: 23px">Longitude</td>
+</tr>
+<tr>
+<td style="width: 437.438px; height: 23px"><code>{{ person.KlaviyoID }}</code></td>
+<td style="width: 196.68px; height: 23px">Klaviyo ID</td>
+</tr>
+<tr>
+<td style="width: 437.438px; height: 23px"><code>{{ person.full_name }}</code></td>
+<td style="width: 196.68px; height: 23px">Full name</td>
+</tr>
+<tr>
+<td style="width: 437.438px; height: 23px"><code>{{ person.title }}</code></td>
+<td style="width: 196.68px; height: 23px">Title</td>
+</tr>
+<tr>
+<td style="width: 437.438px; height: 23px"><code>{{ person.phone_number }}</code></td>
+<td style="width: 196.68px; height: 23px">Phone Number</td>
+</tr>
+<tr>
+<td style="width: 437.438px; height: 23px"><code>{{ person|lookup:'$address2' }}</code></td>
+<td style="width: 196.68px; height: 23px">Address 2</td>
+</tr>
+<tr>
+<td style="width: 437.438px; height: 23px"><code>{{ person.City }}</code></td>
+<td style="width: 196.68px; height: 23px">City</td>
+</tr>
+<tr>
+<td style="width: 437.438px; height: 23px"><code>{{ person.Region }}</code></td>
+<td style="width: 196.68px; height: 23px">State / Region</td>
+</tr>
+<tr>
+<td style="width: 437.438px; height: 23px"><code>{{ person.Country }}</code></td>
+<td style="width: 196.68px; height: 23px">Country</td>
+</tr>
+<tr>
+<td style="width: 437.438px; height: 23px"><code>{{ person.Zipcode }}</code></td>
+<td style="width: 196.68px; height: 23px">Zip Code</td>
+</tr>
+<tr>
+<td style="width: 437.438px; height: 23px"><code>{{ person|lookup:"$source" }}</code></td>
+<td style="width: 196.68px; height: 23px">Source</td>
+</tr>
+<tr>
+<td style="width: 437.438px; height: 23px"><code>{{ person|lookup:"$consent" }}</code></td>
+<td style="width: 196.68px; height: 23px">Consent</td>
+</tr>
+<tr>
+<td style="width: 437.438px; height: 23px"><code>{{ person|lookup:'$consent_form_id' }}</code></td>
+<td style="width: 196.68px; height: 23px">$consent_form_id</td>
+</tr>
+<tr>
+<td style="width: 437.438px; height: 23px"><code>{{ person|lookup:'$consent_form_version' }}</code></td>
+<td style="width: 196.68px; height: 23px">$consent_form_version</td>
+</tr>
+<tr>
+<td style="width: 437.438px; height: 23px"><code>{{ person|lookup:'$consent_method' }}</code></td>
+<td style="width: 196.68px; height: 23px">$consent_method</td>
+</tr>
+<tr>
+<td style="width: 437.438px; height: 23px"><code>{{ person|lookup:"$timezone" }}</code></td>
+<td style="width: 196.68px; height: 23px">Recipient timezone</td>
+</tr>
+<tr>
+<td style="width: 437.438px; height: 23px"><code>{{ person|lookup:'$consent_timestamp' }}</code></td>
+<td style="width: 196.68px; height: 23px">$consent_timestamp</td>
+</tr>
+<tr>
+<td style="width: 437.438px; height: 23px"><code>{{ person|lookup:'$phone_number_region' }}</code></td>
+<td style="width: 196.68px; height: 23px">$phone_number_region</td>
+</tr>
+<tr>
+<td style="width: 437.438px; height: 23px"><code>{{ person.ViewedItems }}</code></td>
+<td style="width: 196.68px; height: 23px">Recently viewed items</td>
+</tr>
+<tr>
+<td style="width: 437.438px; height: 23px"><code>{{ person|lookup:"Expected Date Of Next Order" }} </code></td>
+<td style="width: 196.68px; height: 23px">Expected date of next order</td>
+</tr>
+</tbody>
+</table>
+<h2 id="h_01JVQG3GS5YAH5CNVJNDR35YEA">Custom object tags</h2>
+<p><a href="https://help.klaviyo.com/hc/en-us/articles/35105337172123">Custom object</a> tags enable you to use object data in flow and campaign sends. </p>
+<p>Review <a href="https://help.klaviyo.com/hc/en-us/articles/35146367972763#h_01JPTH5R889GMM7XPNS3FSB4SE">tag references</a> for specific examples of how to use tags to get an object ID or return a count. </p>
+<div class="bs-callout bs-callout-requirements">
+<p>You must create an object first before you can use custom object data in templates. The <code>{{ object }}</code> tag is only available when an object has triggered a flow.</p>
+</div>
+<table style="width: 100%; height: 256px">
+<tbody>
+<tr>
+<td style="width: 68.5715%; height: 22px"><strong>Tag</strong></td>
+<td style="width: 31.2857%; height: 22px"><strong>Outcome</strong></td>
+</tr>
+<tr>
+<td style="width: 68.5715%; height: 23px">
+<code>{{ object.object_property }}</code> </td>
+<td rowspan="2" style="width: 31.2857%; height: 46px">Return the object that triggered a flow </td>
+</tr>
+<tr>
+<td style="width: 68.5715%; height: 23px">
+<code>{{ object | lookup:'object_property' }}</code> </td>
+</tr>
+<tr>
+<td style="width: 68.5715%; height: 44px"><code>{{ object_filter.object_filter_name.object_property}}</code></td>
+<td rowspan="2" style="width: 31.2857%; height: 88px">Return a single object from an <a href="https://help.klaviyo.com/hc/en-us/articles/35146367972763#h_01JPTH5R8840K0Q3XWH2CFYWRY">object filter </a>
+</td>
+</tr>
+<tr>
+<td style="width: 68.5715%; height: 44px"><code>{{ object_filter.object_filter_name | lookup: 'object_property' }}</code></td>
+</tr>
+<tr>
+<td style="width: 68.5715%; height: 22px"><code>{{ object_filter.object_filter_name }}</code></td>
+<td style="width: 31.2857%; height: 22px">Return a count from an <a href="https://help.klaviyo.com/hc/en-us/articles/35146367972763#h_01JPTH5R8840K0Q3XWH2CFYWRY">object filter</a>
+</td>
+</tr>
+<tr>
+<td style="width: 68.5715%; height: 34px"><code>{% customobject id={{ event.object_id }} as alias %}</code></td>
+<td style="width: 31.2857%; height: 34px">Retrieve an object by ID</td>
+</tr>
+<tr>
+<td style="width: 68.5715%; height: 44px">
+<code>{% customobjects object_type_title=“Title” as alias %} </code><br>
+<code>{% for object_instance in alias %} </code><br>
+<code>{{ object_instance.record }} </code><br>
+<code>{% endfor %} </code><br>
+<code>{% endcustomobjects %}</code>
+</td>
+<td style="width: 31.2857%; height: 44px">Retrieve all records for an object from one profile</td>
+</tr>
+</tbody>
+</table>
+<h2 id="h_01HBRGTJ3G98EQ18Y99JYY3QGV">Organization tags</h2>
+<p>Organization tags allow you to include information about your company or organization in your messages. You can manage this information by navigating clicking your organization name in the bottom left corner, then selecting <strong>Settings &gt; Organization &gt; Contact Information</strong>. All organization tags start with <code>organization</code>. See the table below for the list of organization tags.</p>
+<table style="width: 100%">
+<tbody>
+<tr>
+<td><strong>Organization tag</strong></td>
+<td><strong>Description</strong></td>
+</tr>
+<tr>
+<td><code>{{ organization.name }}</code></td>
+<td>Your organization’s name</td>
+</tr>
+<tr>
+<td><code>{{ organization.url }}</code></td>
+<td>Your organization’s website</td>
+</tr>
+<tr>
+<td><code>{{ organization.full_address }}</code></td>
+<td>Your organization’s full address, including city, state/region, and zip code</td>
+</tr>
+<tr>
+<td><code>{{ organization.street_address }}</code></td>
+<td>Your organization’s street address</td>
+</tr>
+<tr>
+<td><code>{{ organization.street_address2 }}</code></td>
+<td>The second part of your organization’s address (e.g., apartment or unit number)</td>
+</tr>
+<tr>
+<td><code>{{ organization.city }}</code></td>
+<td>Your organization’s city</td>
+</tr>
+<tr>
+<td><code>{{ organization.region }}</code></td>
+<td>Your organization’s state, province, or region</td>
+</tr>
+<tr>
+<td><code>{{ organization.zip_code }}</code></td>
+<td>Your organization’s zip code</td>
+</tr>
+</tbody>
+</table>
+<h2 id="h_01HBRGTJ3GAD7APM8T1MMW5Q4W">Link and preview tags</h2>
+<p>Link and preview tags allow recipients to manage their subscription preferences and view your message in their browser. These include: </p>
+<ul>
+<li><a href="#h_01HBRGTJ3G4V514CV5YZSCS6PC">Unsubscribe</a></li>
+<li><a href="#h_01HBRGTJ3HMN8N33EC4XF8M04C">Manage preferences</a></li>
+<li><a href="#h_01HBRGTJ3H39MT5259FW7ENKWA">Web view</a></li>
+<li><a href="#h_01HBRGTJ3H3PCEGB19NW374KDV">Preview text</a></li>
+</ul>
+<p>These tags are only supported for email templates. If you click one of these links from a preview email, you'll be directed to a placeholder page, rather than a live consent page or preview. </p>
+<h3 id="h_01HBRGTJ3G4V514CV5YZSCS6PC">Unsubscribe</h3>
+<p>Klaviyo requires an unsubscribe link in all emails. Use a simple unsubscribe tag for a link that says “Unsubscribe”, or add your own text in quotes. </p>
+<table style="width: 100%">
+<tbody>
+<tr>
+<td><strong>Tag</strong></td>
+<td><strong>Output</strong></td>
+</tr>
+<tr>
+<td><code>{% unsubscribe %}</code></td>
+<td><em>Unsubscribe</em></td>
+</tr>
+<tr>
+<td>If you'd no longer like to receive emails, <code>{% unsubscribe 'click here' %}</code>.</td>
+<td>
+<em>If you'd no longer like to receive emails, </em><em>click here</em><em>.</em>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Alternatively, you can use the <code>{% unsubscribe_link %}</code> tag to generate an unsubscribe URL. Rather than generating a full linked word or phrase, this tag creates just the unsubscribe URL. Use this tag if you’d like to use a different color for your unsubscribe link than the link color set in your template’s styles, or use a linked button or image rather than a text link. </p>
+<table style="width: 100%">
+<tbody>
+<tr>
+<td><strong>Tag</strong></td>
+<td><strong>Output</strong></td>
+</tr>
+<tr>
+<td><code>This is a fancy &lt;a href="{% unsubscribe_link %}" &gt;unsubscribe&lt;/a&gt; link.</code></td>
+<td>
+<em>This is a fancy </em><em>unsubscribe</em><em> link.</em>
+</td>
+</tr>
+</tbody>
+</table>
+<p>When a recipient clicks the unsubscribe link, they're taken to a <a href="https://help.klaviyo.com/hc/en-us/articles/115005251848">customizable confirmation page</a>.</p>
+<h3 id="h_01HBRGTJ3HMN8N33EC4XF8M04C">Manage preferences</h3>
+<p>Preference pages allow recipients to update their preferences, allowing you to segment and target your messaging more effectively. To include a link to this page for each recipient, use the manage preferences tag.</p>
+<p>You can create list-specific and general manage preference pages. List-specific pages are sent when you send a message to just one list. The general manage preferences page is used when you send to a segment, a combination of lists, and in flows that are not list-triggered. Learn more about <a href="https://help.klaviyo.com/hc/en-us/articles/115005251848-Understanding-Opt-in-Related-Pages-for-a-List">manage preferences pages</a>. </p>
+<p>Use a simple manage preferences tag for a link that says “Manage Preferences”, or add your own text in quotes. </p>
+<table style="width: 100%">
+<tbody>
+<tr>
+<td><strong>Tag</strong></td>
+<td><strong>Output</strong></td>
+</tr>
+<tr>
+<td><code>{% manage_preferences %}</code></td>
+<td><em>Manage Preferences</em></td>
+</tr>
+<tr>
+<td>Want to update your preferences? <code>{% manage_preferences 'Click here' %}</code>.</td>
+<td><em>Want to update your preferences? Click here.</em></td>
+</tr>
+</tbody>
+</table>
+<p>Alternatively, you can use the <code>{% manage_preferences_link %}</code> tag to generate a manage preferences URL. Rather than generating a full linked word or phrase, this tag creates just the URL for the recipient’s preference page. Use this tag if you’d like to use a different color for your link than the link color set in your template’s styles, or use a linked button or image rather than a text link. </p>
+<table style="width: 100%">
+<tbody>
+<tr>
+<td><strong>Tag</strong></td>
+<td><strong>Output</strong></td>
+</tr>
+<tr>
+<td><code>This is a fancy &lt;a href="{% manage_preferences_link %}" &gt;manage preferences&lt;/a&gt; link.</code></td>
+<td>
+<em>This is a fancy </em><em>manage preferences</em><em> link.</em>
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="h_01HBRGTJ3H39MT5259FW7ENKWA">Web view</h3>
+<p>To give recipients the option to view an email in their web browser, you can use the web view tag. </p>
+<table style="width: 100%">
+<tbody>
+<tr>
+<td><strong>Tag</strong></td>
+<td><strong>Output</strong></td>
+</tr>
+<tr>
+<td><code>{% web_view %}</code></td>
+<td><em>View in Your Browser</em></td>
+</tr>
+<tr>
+<td>Can't see this email? <code>{% web_view 'Open in your browser' %}</code>.</td>
+<td>
+<em>Can't see this email? </em><em>Open in your browser</em><em>.</em>
+</td>
+</tr>
+<tr>
+<td><code>This is a fancy &lt;a href="{% web_view_link %}"&gt;web view&lt;/a&gt; link.</code></td>
+<td>
+<em>This is a fancy </em><em>web view link</em><em>. </em>
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="h_01HBRGTJ3H3PCEGB19NW374KDV">Preview text</h3>
+<p>In some cases you may want to display your preview text inside the body of your template. You can reference any preview text you set on the email preview/setup screen by using the tag <code>{% render_variable preview_text %}</code>.</p>
+<p>If you update the preview text on the email preview screen, this tag displays your updated preview text.</p>
+<h2 id="h_01HBRGTJ3H2M4N326FXPBSA4AN">Custom personalization and event tags</h2>
+<p>Custom tags reference custom profile properties (i.e., any data you collect about your contacts other than special Klaviyo properties and events), like someone’s birthday or contact preferences. Event tags reference a specific event’s data (e.g., a placed order event) and can only be used in flows triggered by that event. </p>
+<p>To add a custom tag, click <strong>Personalization</strong> in an email text field and locate the tag. To add an event tag, preview your message and copy the event variable tag from the preview data. Alternatively, use the formats outlined below to manually add custom tags to your templates. </p>
+<table style="width: 100%">
+<tbody>
+<tr>
+<td><strong>Tag format</strong></td>
+<td><strong>Description</strong></td>
+<td><strong>Example</strong></td>
+</tr>
+<tr>
+<td><code>{{ person.property_name }}</code></td>
+<td>A simple profile personalization tag</td>
+<td><code>{{ person.Birthday }}</code></td>
+</tr>
+<tr>
+<td><code>{{ person|lookup:'property name' }}</code></td>
+<td>A profile personalization tag, if the property name contains spaces or special characters</td>
+<td><code>{{ person|lookup:'Favorite Color' }}</code></td>
+</tr>
+<tr>
+<td><code>{{ event.property_name }}</code></td>
+<td>A simple event variable tag</td>
+<td><code>{{ event.URL }}</code></td>
+</tr>
+<tr>
+<td><code>{{ event|lookup:'property name' }}</code></td>
+<td>An event variable tag, if the variable name contains spaces or special characters</td>
+<td><code>{{ event|lookup:'$value' }}</code></td>
+</tr>
+<tr>
+<td><code>{{ event.property.nested_variable }}</code></td>
+<td>An event variable tag, if the event variable is nested in the event data </td>
+<td><code>{{ event.extra.checkout_url }}</code></td>
+</tr>
+<tr>
+<td><code>{{ event|lookup:'property name'|lookup:'nested variable name' }}</code></td>
+<td>An event variable tag, if the event variable is nested in another variable with a name containing a space or special character</td>
+<td><code>{{ event|lookup:'Coupon Codes'|lookup:'0' }}</code></td>
+</tr>
+</tbody>
+</table>
+<p>Use dot (.) notation for tags with no spaces or special characters. If your property names contain spaces or special characters (e.g., $), use lookup notation. </p>
+<div class="bs-callout bs-callout-default">
+<p>Note that, with nested properties, if one property name uses lookup notation, all later properties must also use lookup notation. This means that <code>event|lookup:'Collection Names'|lookup:'0'</code> is correct, but <code>event|lookup:'Collection Names'.0</code> is not. </p>
+</div>
+<h2 id="h_01HBRGTJ3HNSPM635W8QNZSYPA">Customizing tags with filters</h2>
+<p>To customize the way your tags appear, apply template filters. Filters can be used to apply title case, set the number of decimal places for a number, and much more. Two of the most common filters are <code>default</code> and <code>title</code>. </p>
+<p>The <code>default</code> filter sets a default value to appear if a message recipient doesn’t have that property set. In the example below, 'friend' and 'tasty treats' are set as the default values in case a recipient’s name or favorite food is not set in their Klaviyo profile. </p>
+<table style="width: 100%">
+<tbody>
+<tr>
+<td><strong>Text with personalization tags</strong></td>
+<td><strong>Output</strong></td>
+</tr>
+<tr>
+<td>Hey <code>{{ first_name|default:'friend' }}</code>, any interest in some <code>{{ person|lookup:'Favorite Food'|default:'tasty treats' }}</code>?</td>
+<td><em>Hey friend, any interest in some tasty treats? </em></td>
+</tr>
+</tbody>
+</table>
+<p>The <code>title</code> filter allows you to apply title casing to any text tag, to ensure it appears consistently once the message is sent. For example, some subscribers may use all capital or all lowercase letters when they fill out your signup form. Without a filter, their first name would use the casing they initially used when filling out your form. However, the title filter corrects the casing so their name appears correctly. </p>
+<table style="width: 100%">
+<tbody>
+<tr>
+<td><strong>Text with personalization tags</strong></td>
+<td><strong>Output</strong></td>
+</tr>
+<tr>
+<td>Hey <code>{{ first_name|title }}</code>, have you seen our latest launch?</td>
+<td><em>Hey Elise, have you seen our latest launch?</em></td>
+</tr>
+</tbody>
+</table>
+<p>There are dozens of other filters available for your messages. Learn more about <a href="https://help.klaviyo.com/hc/en-us/articles/360058907911-Using-Filters-to-Customize-Template-Tags">using filters to customize tags</a>. </p>
+<h2 id="h_01HBRGTJ3HEC5T3C1JWQ7GEEY4">Date tags </h2>
+<p>Date tags give you a quick way to insert date information into an email. The date is in your account’s timezone and reflects the day or time a message was sent. </p>
+<p>The <code>{{ today }}</code> tag is one of the most common date tags, and it populates a timestamp when the message is sent. To use the today tag, paste the following line of code into your template: </p>
+<p><code>{% today "%Y-%m-%d" as today %} {{ today }}</code></p>
+<p>Note that using the <code>{{ today }}</code> tag without the preceding code will not render anything; the full line of code is necessary. </p>
+<p>To learn how to use or customize date tags, head to our article on <a href="https://help.klaviyo.com/hc/en-us/articles/115005257788-How-to-Format-Date-Variables-in-Templates">date tags in templates</a>. </p>
+<h2 id="h_01JAB0VBMAP0P8EPX6XR7ZQTRP">Currency tags </h2>
+<p>Event data like <em>Placed order</em>, <em>Added to cart</em>, and more often have financial value associated with them (e.g., a product’s price or the value of a customer’s cart). Use the {% currency_format ... %} tag to apply your country’s currency formatting to that value.</p>
+<p>For example, consider the $value field in the <em>Started checkout</em> metric below: </p>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/30122495009307" alt="" width="322" height="85"></p>
+<p>Using just the variable {{ event|lookup:"$value" }}, this property will render with just one decimal place and no currency symbol in the email: </p>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/30122450001947" alt="" width="82" height="44"></p>
+<p>However, with the currency format tag, {% currency_format event|lookup:"$value" %}, the number renders with a currency symbol and the correct number of decimal places: </p>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/30122495025051" alt="" width="113" height="53"></p>
+<p>To use the currency format tag, replace the placeholder text in {% currency_format PLACEHOLDER %} with your variable.</p>
+<p>For example, if your variable is {{ event.item.price }}, the complete currency format tag would be {% currency_format event.item.price %}. If your tag includes filters (e.g., a default value in case the property is empty), include those in the tag too: {% currency_format event.item.price|default:”0” %}. </p>
+<h4 id="h_01JAB0VBMA8KJSR8HGRK2771TH">How to select a country </h4>
+<p>There are 2 places you can set the currency format for your messages: </p>
+<ul>
+<li>
+<strong>For your entire account</strong><br>
+Navigate to <strong>Settings &gt; Organization &gt; Organization language and regional format</strong> and select an <em>Organization language</em>.</li>
+<li>
+<strong>For a specific message</strong><br>
+Select a different currency format for a single message from that template’s <strong>Styles</strong> tab in the <em>Currency</em> section. </li>
+</ul>
+<h4 id="h_01JAB0VBMAQE3BXE48HS2J8PYA">Troubleshooting the currency_format tag</h4>
+<p>This tag is only supported for variables that are numbers (e.g., 10, 24.56). Properties with the currency symbol included (e.g., $40, $76.30) are strings, and the currency_format tag cannot alter them. </p>
+<h2 id="h_01HBRGTJ3HGTEC37QBMB353G23">Conditional statements</h2>
+<p>Conditional tags allow you to include content in your messages for recipients who meet certain criteria, and not include it for others. They give you powerful controls for personalizing your messages for each recipient.</p>
+<h3 id="h_01HBRGTJ3HJP5F7V9SBF0Y7MKX">If statements</h3>
+<p>If statements allow you to control the content someone receives based on profile or event data. </p>
+<p>In the example below, a person will be shown the first line of text if they have more than 150 loyalty points. If they have less than 150, but more than 0, they will see the second line. And if they have no loyalty points, they will see the third message. </p>
+<pre><code class="language-text">{% if person|lookup:'Loyalty Points' &gt; 150 %}
+Hey VIP! You’ve always got free shipping &amp; free returns
+{% elif person|lookup:'Loyalty Points' &gt; 0 %}
+You have {{ person|lookup:'Loyalty Points' }} points, and you just need 150 to become a VIP! 
+{% else %}
+Have you heard about our VIP program? Join today on our website to start earning rewards.
+{% endif %}
+</code></pre>
+<p>Within an if statement, an initial <code>{% if ... %}</code> condition is required, as well as the closing <code>{% endif %}</code> tag. All other elements (i.e., <code>{% elif %}</code> and <code>{% else %}</code> tags) are optional. You can use an unlimited number of <code>{% elif %}</code> tags, followed by a maximum of one <code>{% else %}</code> tag. Each email recipient will only see the first message they qualify for. </p>
+<h3 id="h_01HBRGTJ3HRQ81DQ156ZSDW625">For statements</h3>
+<p>"For" blocks allow you to iterate over each item in a variable that's storing a list and render them individually. Below is an example statement: </p>
+<table style="width: 100%">
+<tbody>
+<tr>
+<td><code>{% for item in event.shopping_cart_items %}{{ item.name }} × {{ item.quantity }} {% endfor %}</code></td>
+<td>
+<p><em>Oversized Beach Blanket × 1 </em></p>
+<p><em>Beach Chairs × 4 </em></p>
+<p><em>SPF Sunscreen × 2 </em></p>
+<p><em>Plastic Cooler × 1 </em></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Each <em>For</em> statement must contain the following: </p>
+<ul>
+<li>An opening <code>{% for ... %}</code> tag, containing a row alias (<em>item</em> in the example above) and row collection (<em>event.shopping_cart_items</em> in the example above)</li>
+<li>A closing <code>{% endfor %}</code> tag</li>
+</ul>
+<p>Between the two required tags, you can include any text you’d like. To include variables nested within the row collection, replace the beginning of the variable name (the row collection plus the number following the row collection) with your row alias. For example, the variable <code>{{ event.shopping_cart_items.0.name }}</code> would become <code>{{ item.name }}</code>. </p>
+<h3 id="h_01J8JFW0C92YQZ7C477DEAFV4N">Conditional statements and the inline text editor</h3>
+<p>When you add certain conditional statements to a text block, they may disappear from the inline text editor. The code is still present; it is just hidden. To view and edit conditional statements, open the text block's <em>Source code</em> field. </p>
+<p>The following tags are only visible in a text block's <em>Source code</em> field: </p>
+<ul>
+<li>{% for ... %}</li>
+<li>{% endfor %}</li>
+<li>{% if ... %}</li>
+<li>{% elif ... %}</li>
+<li>{% else %}</li>
+<li>{% endif %}</li>
+<li>{% with ... %}</li>
+<li>{% endwith %}</li>
+</ul>

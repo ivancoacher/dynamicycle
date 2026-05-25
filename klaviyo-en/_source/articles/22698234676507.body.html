@@ -1,0 +1,100 @@
+<div class="bs-callout bs-callout-default">
+<p>This reference is about the Dutchie v1 integration, which was built by Klaviyo and is no longer allowing new installations. New customers should use the <a href="https://marketplace.klaviyo.com/en-us/apps/01KHYQR9B6SBS6Z9WY49PVNYX4" target="_blank" rel="noopener noreferrer">Dutchie integration in Klaviyo’s app marketplace</a>, built by KAV Labs. Learn more on <a href="https://kavlabs.co/documentation/dutchie">KAV Labs’ help center</a>.</p>
+</div>
+<h2 id="h_01HP039N1KVRP586N83DNQ93X3">You will learn</h2>
+<p>Learn what data is synced from Dutchie POS to Klaviyo, how to view it and what properties Dutchie events contain. Additionally, learn how to view your Dutchie data in Klaviyo.</p>
+<p>If you have not already, read our article <a href="https://help.klaviyo.com/hc/en-us/articles/22698258709531">Getting started with Dutchie POS</a> for step-by-step instructions on how to integrate, and other considerations, before continuing with this article. </p>
+<h2 id="h_01HP039N1KB8ZMGWK3NPZYC4V8">Data synced from Dutchie POS to Klaviyo</h2>
+<p>To check on the data sync from Dutchie POS to Klaviyo:</p>
+<ol>
+<li>In your Klaviyo account, select <strong>Analytics &gt; Metrics</strong>.</li>
+<li>At the top, filter by <em>Dutchie</em>.</li>
+</ol>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/28716118875035" alt="" width="396" height="177"></p>
+<p>The data synced from Dutchie to Klaviyo includes:</p>
+<ul>
+<li>Profile information associated with order events.</li>
+<li>The following order events:
+<ul>
+<li><em>Placed Order</em></li>
+<li><em>Ordered Product</em></li>
+</ul>
+</li>
+</ul>
+<h2 id="h_01HP039N1KWV8M5QKTHHMGAW1D">Customer information details</h2>
+<div class="bs-callout bs-callout-default">
+<p>Klaviyo will only sync profiles that have an email address. We recommend turning on the setting <em>Require email address for guest checkout</em> in Dutchie Ecommerce, which can be found under<strong> Settings &gt; Options &gt; Checkout</strong>. The email address will sync to Dutchie POS.</p>
+</div>
+<p>Customers consenting to email marketing during an ecommerce checkout are not synced to Dutchie POS, and thus:</p>
+<ul>
+<li>No profiles synced from Dutchie POS to Klaviyo show as being explicitly consented to email marketing.
+<ul>
+<li>Klaviyo marks synced profiles from Dutchie as <em>Never Subscribed</em>.</li>
+<li>Profiles marked as <em>Never Subscribed</em> can technically receive emails, though they have not provided explicit consent.<br>
+<p>Customer profile information syncs from Dutchie to Klaviyo with the following properties:</p>
+</li>
+</ul>
+</li>
+<li>email</li>
+<li>phone_number</li>
+<li>first_name</li>
+<li>last_name</li>
+<li>dateOfBirth</li>
+<li>Dutchie createdAtLocation</li>
+<li>Dutchie creationDate</li>
+<li>Dutchie customerId</li>
+<li>Dutchie customerType</li>
+<li>Dutchie isLoyaltyMember</li>
+<li>Dutchie lastModifiedDateUTC</li>
+<li>Dutchie status</li>
+</ul>
+<h2 id="h_01HP039N1KNF5QWFCFE02A2TBH">Synced events and their properties</h2>
+<h3 id="h_01HP039N1KT4SAG6BZW0P4XBM8">Placed Order</h3>
+<p>The <em>Placed Order</em> event syncs from Dutchie POS to Klaviyo with the following properties:</p>
+<ul>
+<li>OrderId</li>
+<li>items</li>
+<li>transactionType</li>
+<li>locationName</li>
+<li>$event_id</li>
+<li>$value</li>
+</ul>
+<h3 id="h_01HP039N1KMZJMFT5YYF07DXJ8">Ordered Product</h3>
+<div class="bs-callout bs-callout-default">
+<p>The following properties will only be received if they have been <a href="https://support.dutchie.com/hc/en-us/articles/12882361852563-Add-products-to-Catalog">added in Dutchie POS Backoffice catalog</a>. It is recommended to review the catalog to ensure all information is complete.</p>
+</div>
+<p>The Ordered Product event syncs from Dutchie POS to Klaviyo with the following properties:</p>
+<ul>
+<li>strain</li>
+<li>strainType</li>
+<li>brandName</li>
+<li>transactionId</li>
+<li>productId</li>
+<li>totalPrice</li>
+<li>quantity</li>
+<li>unitPrice</li>
+<li>unitCost</li>
+<li>packageId</li>
+<li>sourcePackageId</li>
+<li>totalDiscount</li>
+<li>unitId</li>
+<li>unitWeight</li>
+<li>unitWeightUnit</li>
+<li>flowerEquivalent</li>
+<li>flowerEquivalentUnit</li>
+<li>discounts</li>
+<li>taxes</li>
+<li>returnDate</li>
+<li>isReturned</li>
+<li>returnedByTransactionId</li>
+<li>returnReason</li>
+<li>batchName</li>
+<li>transactionItemId</li>
+<li>locationName</li>
+<li>vendor</li>
+<li>isCoupon</li>
+<li>customerId</li>
+<li>transactionDate</li>
+<li>$event_id</li>
+<li>$value</li>
+</ul>

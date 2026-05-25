@@ -1,0 +1,176 @@
+<h2 id="h_01HGGQEZZZFXC1H06Q549M506E">You will learn</h2>
+<p>Learn how to integrate Shift4Shop (formerly 3dcart) with Klaviyo in order to personalize and target emails based on each customer's purchases and website activity. The data synced from Shift4Shop to Klaviyo includes:</p>
+<ul>
+<li>Data about orders your customers make, including sales, refunds, fulfilled orders, and cancelled orders</li>
+<li>Detailed customer information, including when and how often people visit your website</li>
+</ul>
+<div class="bs-callout bs-callout-default">
+<p>Klaviyo only syncs information for customers who have placed an order within the last three years.</p>
+</div>
+<h2 id="h_01HGGQEZZZDTQJ4SFR5N65PEQZ">Table of contents</h2>
+<ol>
+<li>Add the Shift4Shop Integration</li>
+<li>Add Klaviyo onsite tracking</li>
+<li>Monitor the data sync</li>
+<li>Data synced from Shift4Shop</li>
+<li>Additional resources</li>
+</ol>
+<h2 id="h_01HGGQEZZZRR63JV2YNRF4CKA6">Add the Shift4Shop integration</h2>
+<ol>
+<li>In Klaviyo, select the <strong>Integrations</strong> tab.</li>
+<li>Select <strong>Explore apps</strong>.</li>
+<li>Search for <em>Shift4Shop</em> and click the card, then click <strong>Install</strong>.</li>
+<li>To find your Shift4Shop store URL (also known as your secure URL), open your Shift4Shop account in a new tab.</li>
+<li>In Shift4Shop, go to <strong>Settings &gt; General &gt; Store Settings</strong>.</li>
+<li>Under Store Information, click on <strong>Manage Domain &amp; Store URL</strong>.<strong><br></strong><img src="https://klaviyo.zendesk.com/hc/article_attachments/28717985271707" alt="Shift4Shop settings page showing store information" width="594" height="396">
+</li>
+<li>Copy the Store URL from beneath Domain Settings.<br><img src="https://klaviyo.zendesk.com/hc/article_attachments/28717985269659" alt="Shift4Shop domain settings showing store URL" width="538" height="281">
+</li>
+<li>Back in Klaviyo, paste your Store URL in the box and click <strong>Connect to Shift4Shop</strong>.<strong><br></strong>
+</li>
+<li>Copy the Klaviyo Public API Key that appears on the next page.<br><img src="https://klaviyo.zendesk.com/hc/article_attachments/28717985290907">
+</li>
+<li>Click the <strong>Go to Shift4Shop</strong> button.</li>
+<li>On the <em>REST API Apps</em> page in Shift4Shop, click <strong>Add </strong>in the top right hand corner to add the Klaviyo API key.<br><img src="https://klaviyo.zendesk.com/hc/article_attachments/28717991178907" alt="REST API Apps page in Shift4Shop with Add button with blue background">
+</li>
+<li>Paste the Klaviyo public API key (2bd83b00fcd7d56916a28c452d3d080c).<br><img src="https://klaviyo.zendesk.com/hc/article_attachments/28717985281051" alt="Public key setting in Shift4Shop with Save button with blue background">
+</li>
+<li>Click <strong>Save</strong>.</li>
+<li>A popup window will appear, asking you to give Klaviyo authorization to pull the Shift4Shop data into our platform; click <strong>Authorize</strong>.<br><img src="https://klaviyo.zendesk.com/hc/article_attachments/28717991176859" alt="Klaviyo settings in Shift4Shop showing required permissions with Authorize button with blue background" width="552" height="609">
+</li>
+<li>You will be redirected back to your Klaviyo account and your data will begin to sync. A success callout will confirm that your data is syncing.</li>
+</ol>
+<h2 id="h_01HGGQEZZZHMXNC1XXDDP9JVHS">Add Klaviyo onsite tracking</h2>
+<p>There are two Klaviyo onsite tracking code snippets you can add to your Shift4Shop site. The first onsite tracking snippet allows you to track when cookied users are active on your site (the <em>Active on Site </em>metric) and the second onsite tracking snippet allows you to track what products they view (the <em>Viewed Product </em>metric).</p>
+<p>You can then use the <em>Active on Site</em> metric to create segments of known browsers who have visited your site but haven't purchased anything. The <em>Active on Site</em> snippet (also known as Klaviyo.js) also enables the use of Klaviyo sign-up forms. </p>
+<p><em>Viewed Product</em> tracking is most often leveraged to trigger a Browse Abandonment automated email flow. For more information, see our article on <a href="https://help.klaviyo.com/hc/en-us/articles/115002775252">creating a browse abandonment flow</a>.</p>
+<ol>
+<li>Log in to your Shift4Shop store admin and navigate to <strong>Content &gt; Site Content</strong>.</li>
+<li>Click on the <strong>Edit</strong> button under Header &amp; Footer.<br><img src="https://klaviyo.zendesk.com/hc/article_attachments/28717985286939" alt="Site Content page in Shift4Shop with Edit with blue background under Header and Footer">
+</li>
+<li>Click the <strong>+</strong> to the right of Global Header to open the header editor.<br><img src="https://klaviyo.zendesk.com/hc/article_attachments/28717985293211" width="624" height="204">
+</li>
+<li>Click the slider next to <em>WYSIWYG Mode Off / On</em> to toggle the view to the HTML editor.<br><img src="https://klaviyo.zendesk.com/hc/article_attachments/28717991195803" width="621" height="218">
+</li>
+<li>To add<em> Active on Site</em> tracking, paste the following script at the bottom of the HTML editor:<br>
+<pre><code class="language-javascript">&lt;script type="text/javascript" async="" src="https://static.klaviyo.com/onsite/js/PUBLIC_API_KEY/klaviyo.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript"&gt; 
+//Initialize Klaviyo object on page load
+!function(){if(!window.klaviyo){window._klOnsite=window._klOnsite||[];try{window.klaviyo=new Proxy({},{get:function(n,i){return"push"===i?function(){var n;(n=window._klOnsite).push.apply(n,arguments)}:function(){for(var n=arguments.length,o=new Array(n),w=0;w&lt;n;w++)o[w]=arguments[w];var t="function"==typeof o[o.length-1]?o.pop():void 0,e=new Promise((function(n){window._klOnsite.push([i].concat(o,[function(i){t&amp;&amp;t(i),n(i)}]))}));return e}}})}catch(n){window.klaviyo=window.klaviyo||[],window.klaviyo.push=function(){var n;(n=window._klOnsite).push.apply(n,arguments)}}}}(); &lt;/script&gt;</code></pre>
+</li>
+<li>In the first line of the snippet, replace<em> Public API Key</em> with your Klaviyo Public API Key, found under <strong>Account name &gt; Settings &gt; API Keys</strong> in Klaviyo.</li>
+<li>To add <em>Viewed Product</em> tracking, add this script underneath the <em>Active on Site</em> script in the header:
+<pre><code class="language-javascript">&lt;script type="text/javascript"&gt;
+var klaviyo = window.klaviyo || [];
+
+// Track each product view.
+if ('[price]' !== '[' + 'price]') {
+   klaviyo.track("Viewed Product", {
+      ProductID: "[id]",
+      Name: "[name]",
+      Description: "[description]",
+      URL: [location.protocol, '//', location.host, location.pathname].join(''),
+      Categories: "[catid]",
+      ImageURL: [location.protocol, '//', location.host, '/[image1]'].join(''),
+      Price: parseFloat("[price]".slice(1), 10)
+   });
+}<br>&lt;/script&gt;</code></pre>
+</li>
+</ol>
+<p>     8. In the top right hand corner of the page, click<strong> Save</strong></p>
+<h2 id="h_01HGGQEZZZC4VFVGVNXAR3KC8G">Monitor the Klaviyo sync</h2>
+<p>To view your Shift4Shop integration data:</p>
+<ol>
+<li>
+<p>In your Klaviyo account, navigate to <strong>Analytics &gt; Metrics</strong>.</p>
+</li>
+<li>
+<p>Click on the <strong>Placed Order </strong>metric to verify that your data has started to populate. If you see data populating the chart, that means the Shift4Shop integration is successfully syncing to your account. When the sync is complete, you’ll see a green border next to the Shift4Shop integration when viewed in the <strong>Integrations</strong> tab.<br><img src="https://klaviyo.zendesk.com/hc/article_attachments/28717991184411" alt="Shift4Shop integration card in Klaviyo with green bar on the left"></p>
+</li>
+<li>
+<p><span style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;"></span>Klaviyo imports all of your historic Shift4Shop data. To verify this, compare the number of orders on a particular day in Klaviyo with what's in your Shift4Shop interface and confirm they match. </p>
+</li>
+<li>
+<p>If they don't match, the issue is most likely that your Klaviyo account's timezone doesn't match your Shift4Shop timezone. To check your timezone setting in Klaviyo, go to <strong>Account name &gt; Settings &gt; Organization</strong>. </p>
+</li>
+<li>
+<p>In the middle of this page, you will see an area to set your timezone. Update your Klaviyo account to the correct timezone and click <strong>Update Information</strong>.</p>
+</li>
+</ol>
+<h2 id="h_01HGGQF000GR1DSHZMYT98126Z">Data synced from Shift4Shop </h2>
+<p>The Shift4Shop integration syncs data into Klaviyo once every hour, so you should see events appear in Klaviyo within an hour of when the event is recorded in Shift4Shop.</p>
+<p>The following metrics are synced from Shift4Shop:</p>
+<ul>
+<li>Fulfilled Order</li>
+<li>Ordered Product</li>
+<li>Placed Order</li>
+<li>Started Checkout</li>
+</ul>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/28717991188635" alt="Klaviyo metrics tab filtered by Shift4Shop showing metrics such as Fulfilled Order and Ordered Product"></p>
+<h3 id="h_01HGGQF000KQ241X11SJ7XMECC">Fulfilled Order</h3>
+<p>This event is tracked when a customer completes the checkout process and creates an order in your Shift4Shop store. It includes all the product information about the items someone purchased including product names, images, and variation information to use in purchase follow-up emails. You can filter and target <em>Fulfilled Order </em>events based on the following criteria:</p>
+<ul>
+<li>Items: the names of the products in someone's order, e.g., t-shirt or pants</li>
+<li>Categories: the complete set of the categories of the products in someone's order, e.g., t-shirts, men's, pants, and sale</li>
+</ul>
+<h3 id="h_01HGGQF000VKYH8WXQT6570AXD">Ordered Product</h3>
+<p>This metric is tracked when a customer places their order, and tracks an event for each item someone purchases. For example, if someone buys a t-shirt and a pair of pants, two <em>Ordered Product</em> events are created - one for the t-shirt and one for the pants.</p>
+<p>The <em>Ordered Product</em> event includes detailed information about each product someone purchases. This is useful when creating behavioral segments based on product variation options and other detailed information that's not available in the <em>Placed Order</em> event. You can filter and target <em>Ordered Product</em> events based on the following criteria:</p>
+<ul>
+<li>Name: the name or title of the product in Shift4Shop, e.g., t-shirt or pants</li>
+<li>SKU: the SKU of the product variation e.g., REDMEDIUMTSHIRT</li>
+<li>Categories: the complete set of the categories of the product, e.g., t-shirts, men's, and sale</li>
+</ul>
+<h3 id="h_01HGGQF000EMERKZSQKJ0B1PHH">Placed Order</h3>
+<p>This event is tracked when a customer completes the checkout process and creates an order in your Shift4Shop store. It includes all of the product information about the items someone purchased including product names, images, and variation information to use in purchase follow-up emails. You can filter and target <em>Placed Order</em> events based on the following criteria:</p>
+<ul>
+<li>Items: the names of the products in someone's order, e.g., t-shirt or pants</li>
+<li>Categories: the complete set of the categories of the products in someone's order, e.g., t-shirts, men's, pants, and sale</li>
+<li>Item Count: the number of items in the order, e.g., <em>2</em>
+</li>
+</ul>
+<p>Note: By default, Shift4Shop syncs two statuses for Placed Order: 2, 4</p>
+<h3 id="h_01HGGQF0008SMGSVK7K8RNXYQX">Started Checkout</h3>
+<p>This event is tracked when a customer enters their contact and shipping information on the page before the payment page in the Shift4Shop checkout process and clicks continue. It includes all of the product information about the items in someone's cart, including product names, images, and variation information to use in your abandoned cart emails. You can filter and target <em>Started Checkout</em> events based on the following criteria:</p>
+<ul>
+<li>Items: the names of the products in someone's cart, e.g., t-shirt or pants</li>
+<li>Categories: the complete set of the categories of the products in someone's cart, e.g., t-shirts, men's, pants, and sale</li>
+</ul>
+<h3 id="h_01HGGQF00028E02X97VN51SKAY">Customer Data</h3>
+<p>In addition to the metrics Klaviyo syncs from Shift4Shop, there are also properties that are added to each Klaviyo profile. You can use these properties in segments and in flows. The following built-in Klaviyo properties automatically synced from Shift4Shop:</p>
+<ul>
+<li>Email</li>
+<li>First Name</li>
+<li>Last Name</li>
+<li>City</li>
+<li>State/Region</li>
+<li>Zip Code</li>
+<li>Country</li>
+<li>Phone Number</li>
+</ul>
+<h2 id="h_01HGGQF000RZCB5KNX97NB8XXH">Outcome</h2>
+<p>You’ve now integrated with Shift4Shop, enabled Klaviyo onsite tracking, and verified your synced Shift4Shop data. Now, you can view your Shift4Shop data in Klaviyo and personalize and target emails based on each customer's purchases and website activity. </p>
+<h2 id="h_01K1X63Y6EPEP95YZ4NCV89R6R">Update your Shift4Shop integration</h2>
+<div class="bs-callout bs-callout-default">
+<p>Did you integrate Klaviyo with Shift4Shop before May 12, 2025? If so, you are using our old app. Klaviyo has released a new Shift4Shop app to improve security and stability. Our old app will be retired on September 6, 2025 and will cease to work at that time.</p>
+</div>
+<p>To update to the new integration, you need to re-install your Shift4Shop app in Klaviyo:</p>
+<ol>
+<li>In Klaviyo, click the <strong>Integrations</strong> tab.</li>
+<li>Select <strong>Shift4Shop</strong> from the list of enabled integrations.</li>
+<li>In the upper right corner, click <strong>Manage integration</strong>.</li>
+<li>Select <strong>Re-authenticate</strong>.</li>
+<li>Copy the Klaviyo public API key.</li>
+<li>Click the <strong>Go to Shift4Shop</strong> button.</li>
+<li>On the <em>REST API Apps</em> page in Shift4Shop, click <strong>Add</strong> to add the Klaviyo API key, and paste the key.</li>
+<li>Click <strong>Save</strong>.</li>
+<li>On the authorization request modal that appears, click <strong>Authorize</strong>.</li>
+<li>You will be redirected back to your Klaviyo account, where a confirmation modal will indicate that your Shift4Shop account is now connected.</li>
+</ol>
+<p>Your integration has now been updated and will begin using the new app. </p>
+<p>While not necessary, you may wish to remove the deprecated Klaviyo app from your <em>Connected Apps</em> in Shift4Shop. To do so, remove the "Klaviyo" app from the Shift4Shop REST API Apps page.</p>
+<h2 id="h_01HGGQF000TC27NS50WPNDXBQC">Additional resources</h2>
+<ul>
+<li><a href="https://help.klaviyo.com/hc/en-us/articles/115005076767" target="_blank" rel="noopener">Getting started with Klaviyo onsite tracking</a></li>
+<li>How to update<a href="https://help.klaviyo.com/hc/en-us/articles/360003124151" target="_blank" rel="noopener"> Klaviyo after switching ecommerce </a>platforms</li>
+</ul>

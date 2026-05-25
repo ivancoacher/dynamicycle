@@ -1,0 +1,786 @@
+{
+  "captured_at": "2026-05-23T16:15:00Z",
+  "article": {
+    "id": 25995019549979,
+    "url": "https://klaviyo.zendesk.com/api/v2/help_center/en-us/articles/25995019549979.json",
+    "html_url": "https://klaviyo.zendesk.com/hc/en-us/articles/25995019549979-How-to-choose-a-product-ID-variable-for-a-dynamic-review-quote-block",
+    "author_id": 390819509472,
+    "comments_disabled": true,
+    "draft": false,
+    "promoted": false,
+    "position": 0,
+    "vote_sum": 0,
+    "vote_count": 0,
+    "section_id": 49375666744731,
+    "created_at": "2024-05-23T17:25:46Z",
+    "updated_at": "2026-04-20T16:49:36Z",
+    "name": "How to choose a product ID variable for a dynamic review quote block",
+    "title": "How to choose a product ID variable for a dynamic review quote block",
+    "source_locale": "en-us",
+    "locale": "en-us",
+    "outdated": false,
+    "outdated_locales": [],
+    "edited_at": "2026-04-20T16:49:36Z",
+    "user_segment_id": null,
+    "permission_group_id": 146372,
+    "content_tag_ids": [],
+    "label_names": [],
+    "body": "<h2 id=\"h_01J0PFTCQ7E7EDZB4QCP67Z3QT\">You will learn</h2>\n<p>Learn how to select a product ID variable to display dynamic review quotes related to the products someone is interested in. These variables vary between events, so make sure to use the right variable for your flow.</p>\n<h2 id=\"h_01J0PFTCQ7QG74H8VDACF43N6N\">Before you begin</h2>\n<p>This block is only available in accounts that use Klaviyo Reviews. Learn how to <a href=\"https://help.klaviyo.com/hc/en-us/articles/15937542819355\">get started with Klaviyo Reviews</a>. </p>\n<h2 id=\"h_01J0PFTCQ7MS9PQ41N4QE1GG9Z\">About dynamic review blocks</h2>\n<p>Dynamic review quote blocks can display different reviews depending on when the email is sent and what actions the recipient has taken, unlike static review blocks, which feature the same product for every recipient. </p>\n<p>This article specifically covers dynamic review blocks, not static. Static review quote blocks do not require a product ID variable.</p>\n<p>This process is only supported in certain flow emails: event-triggered flows, back in stock flows, low inventory flows, and price drop flows. Learn how to <a href=\"https://klaviyo.zendesk.com/hc/en-us/articles/18007373861915\">add a dynamic review block</a> to your emails.</p>\n<p>In many cases, Klaviyo will auto-detect the product ID. In these cases, you don’t need to manually choose a product ID variable. If you see a button like the one below indicating your flow’s trigger, that means Klaviyo will auto-detect your product ID, and you do not need to follow the steps outlined here.</p>\n<p><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/33237640856475\" alt=\"\" width=\"289\" height=\"114\"></p>\n<p>However, for some custom flows, you may need to manually input a product ID variable. If you see the <em>Product ID variable</em> field shown in the screenshot below, follow these steps to add a variable.</p>\n<p><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/33237663341211\" alt=\"\" width=\"363\" height=\"158\"></p>\n<h2 id=\"h_01J0PFTCQ7EK644A5P977JGNQ7\">Product ID variables</h2>\n<p>The table below offers the most common event variables used for review quote blocks. In addition to those in the table below, you can use any other event variable that references a product ID. To find a product ID variable other than those in the table below: </p>\n<ol>\n<li>From your flow email, click <strong>Preview &amp; test</strong>. </li>\n<li>Click the event variable you’d like to use in your review quote block. When you click the variable name, the tag will be copied to your clipboard. </li>\n<li>Remove all extraneous information from the tag: the curly quotes that surround it and any filters, which follow the tag information. For example, if the original tag was {{ event.product.id|default:”” }}, remove everything from the tag except <em>event.product.id</em>. </li>\n<li>Paste this variable into the <em>Event variable for product ID</em> field. </li>\n</ol>\n<div class=\"bs-callout bs-callout-default\">\n<p>If a trigger event contains multiple items (e.g., abandoned cart flows), only the first item is considered when choosing reviews. We do not recommend using the second, third, or any other items, because not every instance of the event will contain multiple items. </p>\n</div>\n<h3 id=\"h_01J29X3A3VFF641ERSNNX3GE4A\">Shopify product ID variables</h3>\n<table style=\"width: 100%\">\n<tbody>\n<tr>\n<td><strong>Flow trigger</strong></td>\n<td><strong>Event variable</strong></td>\n</tr>\n<tr>\n<td>Browse abandonment </td>\n<td>event.ProductID</td>\n</tr>\n<tr>\n<td>Abandoned cart (<em>Add to cart</em> trigger)</td>\n<td>event.ProductID</td>\n</tr>\n<tr>\n<td>Abandoned checkout (<em>Checkout started</em> trigger)</td>\n<td>event.extra.line_items.0.product.id</td>\n</tr>\n<tr>\n<td>Back in stock </td>\n<td>event.ProductID</td>\n</tr>\n<tr>\n<td>Price drop </td>\n<td>event.product_id</td>\n</tr>\n<tr>\n<td>Low inventory</td>\n<td>event.product_id </td>\n</tr>\n<tr>\n<td>Placed order</td>\n<td>event.extra.line_items.0.product.id</td>\n</tr>\n</tbody>\n</table>\n<h3 id=\"h_01J29X3PT3FEDM1P4G1TQCEQPM\">WooCommerce product ID variables</h3>\n<table style=\"height: 176px\">\n<tbody>\n<tr>\n<td style=\"width: 336.148px; height: 22px\"><strong>Flow trigger</strong></td>\n<td style=\"width: 215.414px; height: 22px\"><strong>Event variable</strong></td>\n</tr>\n<tr>\n<td style=\"width: 336.148px; height: 22px\">Browse abandonment </td>\n<td style=\"width: 215.414px; height: 22px\">event.ProductID</td>\n</tr>\n<tr>\n<td style=\"width: 336.148px; height: 22px\">Abandoned cart (<em>Add to cart</em> trigger)</td>\n<td style=\"width: 215.414px; height: 22px\">event.ProductID</td>\n</tr>\n<tr>\n<td style=\"width: 336.148px; height: 22px\">Abandoned checkout (<em>Checkout started</em> trigger)</td>\n<td style=\"width: 215.414px; height: 22px\">event.extra.Items.0.ProductID</td>\n</tr>\n<tr>\n<td style=\"width: 336.148px; height: 22px\">Placed order</td>\n<td style=\"width: 215.414px; height: 22px\">event.extra.Items.0.ProductId</td>\n</tr>\n</tbody>\n</table>",
+    "user_segment_ids": []
+  },
+  "normalized": {
+    "id": "25995019549979",
+    "title": "How to choose a product ID variable for a dynamic review quote block",
+    "source_url": "https://help.klaviyo.com/hc/en-us/articles/25995019549979-How-to-choose-a-product-ID-variable-for-a-dynamic-review-quote-block",
+    "section_id": 49375666744731,
+    "section": "Build and use reviews",
+    "category_id": 49375133274139,
+    "category": "Reviews",
+    "category_slug": "reviews",
+    "klaviyo_updated": "2026-04-20T16:49:36Z",
+    "created_at": "2024-05-23T17:25:46Z",
+    "draft": false,
+    "promoted": false,
+    "position": 0,
+    "label_names": []
+  },
+  "files": {
+    "body_html": "_source/articles/25995019549979.body.html",
+    "rendered_html": "_source/rendered/25995019549979.html"
+  },
+  "assets": {
+    "api_body": {
+      "images": [
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/33237640856475",
+          "alt": "",
+          "width": "289",
+          "height": "114"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/33237663341211",
+          "alt": "",
+          "width": "363",
+          "height": "158"
+        }
+      ],
+      "links": [
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/15937542819355",
+          "text": "get started with Klaviyo Reviews"
+        },
+        {
+          "href": "https://klaviyo.zendesk.com/hc/en-us/articles/18007373861915",
+          "text": "add a dynamic review block"
+        }
+      ],
+      "headings": [
+        {
+          "level": 2,
+          "id": "h_01J0PFTCQ7E7EDZB4QCP67Z3QT",
+          "text": "You will learn"
+        },
+        {
+          "level": 2,
+          "id": "h_01J0PFTCQ7QG74H8VDACF43N6N",
+          "text": "Before you begin"
+        },
+        {
+          "level": 2,
+          "id": "h_01J0PFTCQ7MS9PQ41N4QE1GG9Z",
+          "text": "About dynamic review blocks"
+        },
+        {
+          "level": 2,
+          "id": "h_01J0PFTCQ7EK644A5P977JGNQ7",
+          "text": "Product ID variables"
+        },
+        {
+          "level": 3,
+          "id": "h_01J29X3A3VFF641ERSNNX3GE4A",
+          "text": "Shopify product ID variables"
+        },
+        {
+          "level": 3,
+          "id": "h_01J29X3PT3FEDM1P4G1TQCEQPM",
+          "text": "WooCommerce product ID variables"
+        }
+      ]
+    },
+    "rendered_page": {
+      "images": [
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/7ff492c2b417b7ecfe572f839a8a81398693c1f7-1920x1080.webp",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/343f377272deec4540c843e26d81485495bbb661-396x156.png?w=289",
+          "alt": "",
+          "width": "289",
+          "height": "114"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/131b503afd70e0620c47c574996d5654131c271e-1046x454.png?w=363",
+          "alt": "",
+          "width": "363",
+          "height": "158"
+        }
+      ],
+      "links": [
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/25995019549979-How-to-choose-a-product-ID-variable-for-a-dynamic-review-quote-block#site-content",
+          "text": "Skip to main content"
+        },
+        {
+          "href": "https://www.klaviyo.com",
+          "text": "Home"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center"
+        },
+        {
+          "href": "https://www.klaviyo.com/enterprise",
+          "text": "Enterprise"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Partners"
+        },
+        {
+          "href": "https://www.klaviyo.com/careers",
+          "text": "Careers"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": "Log in"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": ""
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center Find step-by-step instructions and troubleshooting solutions in our knowledge base."
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000032731",
+          "text": "Integrations"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000312411",
+          "text": "Flows"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867867",
+          "text": "Audience"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867667",
+          "text": "Campaigns"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/360000190711",
+          "text": "Sign-up forms"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000873988",
+          "text": "Deliverability & compliance"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/29173800271259",
+          "text": "SMS"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/16638219724187",
+          "text": "Reviews"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/18073014919195",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/34141283979931",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/37659126754075",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/33948021740315",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/39746685522331",
+          "text": "WhatsApp"
+        },
+        {
+          "href": "https://academy.klaviyo.com",
+          "text": "Klaviyo Academy Expert training and education to help you succeed with Klaviyo, and beyond."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Quick+guide&resource=academy_courses",
+          "text": "Quick guides Learn marketing strategies and concepts in 15 minutes or less."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Course&resource=academy_courses",
+          "text": "Courses Master key marketing topics through structured lessons and exams."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/best-practices",
+          "text": "Best practices Discover top product and marketing strategies for your business."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/learning-paths",
+          "text": "Learning paths Complete curated learning journeys tailored to your marketing goals."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses",
+          "text": "Explore all resources"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Live+training&resource=academy_courses",
+          "text": "Live trainings Build confidence through hands-on interactive workshops and thought-provoking strategy sessions."
+        },
+        {
+          "href": "https://www.bigmarker.com/klaviyo-customer-education/Office-hours-Getting-started-with-Klaviyo",
+          "text": "Live office hours Join a strategic discussion where you can ask questions and get answers in real-time."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/private-live-training",
+          "text": "1:1 Live training Book a private training session with an expert to jumpstart your platform knowledge and confidence."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/credentials",
+          "text": "Klaviyo credentials Dig deeper into select topics and showcase your expertise with a final exam to earn a certificate and digital badge."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/certificates/klaviyo-practitioner-certificate",
+          "text": "Klaviyo practitioner certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/deliverability-certificate",
+          "text": "Deliverability certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/developer-certificate",
+          "text": "Klaviyo developer certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses&select=Certificate",
+          "text": "See all certificates"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Klaviyo Community Join our thriving community network to connect with brands like yours—online and in person."
+        },
+        {
+          "href": "https://community.klaviyo.com/topic/new",
+          "text": "Ask a question Post a question and get thoughtful answers from Klaviyo powerusers."
+        },
+        {
+          "href": "https://community.klaviyo.com/p/roadmap",
+          "text": "Product roadmap"
+        },
+        {
+          "href": "https://community.klaviyo.com/search/activity/recent",
+          "text": "Recent threads"
+        },
+        {
+          "href": "https://community.klaviyo.com/p/champions",
+          "text": "Meet the Champions"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups",
+          "text": "Browse all groups Your people are waiting. New ideas and connections are a click away."
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/developer-group-64",
+          "text": "Developer group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/entrepreneur-user-group-118",
+          "text": "Entrepreneur group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/woo-user-group-87",
+          "text": "WooCommerce group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/new-york-meetup-chapter-82",
+          "text": "New York City"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/los-angeles-meetup-chapter-83",
+          "text": "Los Angeles"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/austin-meetup-chapter-85",
+          "text": "Austin"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/san-diego-meetup-chapter-86",
+          "text": "San Diego"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/amsterdam-meetup-chapter-84",
+          "text": "Amsterdam"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Klaviyo Developers Access API documentation and developer guides to help you build with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/get_started",
+          "text": "Get started Access key resources and a step-by-step checklist for how to start developing with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/build_your_integration",
+          "text": "Grow your app's reach Learn how to join our ecosystem and get your app listed on our marketplace."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/developer-tools",
+          "text": "Developer tools Generate sample data, monitor your API usage, and access our Postman collections."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/reference/api_overview",
+          "text": "API reference Browse our full catalog of API docs."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/changelog_",
+          "text": "Changelog"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/api_versioning_and_deprecation_policy",
+          "text": "Versioning & deprecation policy"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/rate_limits_and_error_handling",
+          "text": "Rate limits & error handling"
+        },
+        {
+          "href": "https://youtube.com/playlist?list=PLHkNfHgtxcUanrkMnKPdkRzuWU7MGv_xM&si=pkG-KH7IT_TUHOGC",
+          "text": "API tutorials on YouTube Subscribe to our Klaviyo API Tutorials playlist for easy access to step-by-step developer walkthroughs."
+        },
+        {
+          "href": "https://www.klaviyo.com/contact-us",
+          "text": "Contact us"
+        },
+        {
+          "href": "https://www.klaviyo.com/sign-up",
+          "text": "Sign up"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": "Search"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/25995019549979",
+          "text": "United States - EN"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/de-de/articles/25995019549979",
+          "text": "Deutschland - DE"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-es/articles/25995019549979",
+          "text": "España - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-mx/articles/25995019549979",
+          "text": "México - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/fr-fr/articles/25995019549979",
+          "text": "France - FR"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/it-it/articles/25995019549979",
+          "text": "Italia - IT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/ko-kr/articles/25995019549979",
+          "text": "한국 - KO"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/nl-nl/articles/25995019549979",
+          "text": "Nederland - NL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pl-pl/articles/25995019549979",
+          "text": "Polska - PL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pt-br/articles/25995019549979",
+          "text": "Brasil - PT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/sv-se/articles/25995019549979",
+          "text": "Sverige - SV"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/49375133274139",
+          "text": "Reviews"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/49375666744731",
+          "text": "Build and use reviews"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/25995019549979-How-to-choose-a-product-ID-variable-for-a-dynamic-review-quote-block#h_01J0PFTCQ7E7EDZB4QCP67Z3QT",
+          "text": "You will learn"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/25995019549979-How-to-choose-a-product-ID-variable-for-a-dynamic-review-quote-block#h_01J0PFTCQ7QG74H8VDACF43N6N",
+          "text": "Before you begin"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/25995019549979-How-to-choose-a-product-ID-variable-for-a-dynamic-review-quote-block#h_01J0PFTCQ7MS9PQ41N4QE1GG9Z",
+          "text": "About dynamic review blocks"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/25995019549979-How-to-choose-a-product-ID-variable-for-a-dynamic-review-quote-block#h_01J0PFTCQ7EK644A5P977JGNQ7",
+          "text": "Product ID variables"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/25995019549979-How-to-choose-a-product-ID-variable-for-a-dynamic-review-quote-block#additional-resources",
+          "text": "Additional resources"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/15937542819355",
+          "text": "get started with Klaviyo Reviews"
+        },
+        {
+          "href": "https://klaviyo.zendesk.com/hc/en-us/articles/18007373861915",
+          "text": "add a dynamic review block"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/18007373861915",
+          "text": "How to feature reviews in emails with the review quote block"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/16681935355163",
+          "text": "Understanding how Klaviyo prioritizes review requests"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115001002272",
+          "text": "Learn how to contact support"
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": ""
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": "Visit Community"
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": ""
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": "Hire a partner"
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/about",
+          "text": "About Klaviyo"
+        },
+        {
+          "href": "https://www.klaviyo.com/newsroom",
+          "text": "Newsroom"
+        },
+        {
+          "href": "https://investors.klaviyo.com/overview/default.aspx",
+          "text": "Investor relations"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Agency and tech partners"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Developers"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/retail",
+          "text": "Retail and ecommerce"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/restaurants",
+          "text": "Restaurant marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/wellness",
+          "text": "Wellness"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform",
+          "text": "B2C CRM overview"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai",
+          "text": "Klaviyo AI (K:AI)"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/marketing-automation",
+          "text": "Klaviyo Marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-service",
+          "text": "Klaviyo Service"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/analytics",
+          "text": "Klaviyo Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-data-platform",
+          "text": "Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare",
+          "text": "Klaviyo vs. Klaviyo alternatives"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-mailchimp",
+          "text": "Klaviyo vs. Mailchimp"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-postscript",
+          "text": "Klaviyo vs. Postscript"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-attentive",
+          "text": "Klaviyo vs. Attentive"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-salesforce-marketing-cloud",
+          "text": "Klaviyo vs. Salesforce"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-listrak",
+          "text": "Klaviyo vs. Listrak"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/omnichannel",
+          "text": "Omnichannel marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/email-marketing",
+          "text": "Email marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing",
+          "text": "SMS marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing/rcs",
+          "text": "RCS for Business"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/mobile-app-marketing",
+          "text": "Mobile app marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/whatsapp",
+          "text": "WhatsApp marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/social",
+          "text": "Social marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources",
+          "text": "Marketing resources"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources/marketing-campaign-calendar",
+          "text": "Marketing campaign calendar"
+        },
+        {
+          "href": "https://www.klaviyo.com/glossary",
+          "text": "Marketing glossary"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/email-subject-line-generator",
+          "text": "Subject line generator"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/roi-calculator",
+          "text": "ROI calculator"
+        },
+        {
+          "href": "https://www.klaviyo.com/customers",
+          "text": "Case studies"
+        },
+        {
+          "href": "https://www.klaviyo.com/composer",
+          "text": "Composer Beta"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/marketing-agent",
+          "text": "Marketing Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/customer-agent",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/customer-experience-hub",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/helpdesk",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/marketing-analytics",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/advanced-cdp",
+          "text": "Advanced Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/web-forms",
+          "text": "Web forms"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/email-templates",
+          "text": "Email templates"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/portfolio",
+          "text": "Portfolio"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform-integrations",
+          "text": "Apps and Integrations"
+        },
+        {
+          "href": "https://www.klaviyo.com/features",
+          "text": "Features"
+        },
+        {
+          "href": "https://www.klaviyo.com/whats-new",
+          "text": "What's new"
+        },
+        {
+          "href": "https://www.klaviyo.com/events",
+          "text": "Events"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help Center"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us",
+          "text": "Academy"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Community"
+        },
+        {
+          "href": "https://www.facebook.com/Klaviyo/",
+          "text": "Facebook"
+        },
+        {
+          "href": "https://twitter.com/klaviyo/",
+          "text": "Twitter"
+        },
+        {
+          "href": "https://www.linkedin.com/company/klaviyo/",
+          "text": "LinkedIn"
+        },
+        {
+          "href": "https://www.instagram.com/klaviyo/",
+          "text": "Instagram"
+        },
+        {
+          "href": "https://www.klaviyo.com/sitemap",
+          "text": "Site Map"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal",
+          "text": "Terms and Privacy"
+        },
+        {
+          "href": "https://www.klaviyo.com/security",
+          "text": "Security"
+        },
+        {
+          "href": "https://www.klaviyo.com/trust",
+          "text": "Trust"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal/intellectual-property-notices",
+          "text": "Intellectual Property Notices"
+        }
+      ],
+      "headings": [
+        {
+          "level": 1,
+          "id": "",
+          "text": "How to choose a product ID variable for a dynamic review quote block"
+        },
+        {
+          "level": 2,
+          "id": "h_01J0PFTCQ7E7EDZB4QCP67Z3QT",
+          "text": "You will learn"
+        },
+        {
+          "level": 2,
+          "id": "h_01J0PFTCQ7QG74H8VDACF43N6N",
+          "text": "Before you begin"
+        },
+        {
+          "level": 2,
+          "id": "h_01J0PFTCQ7MS9PQ41N4QE1GG9Z",
+          "text": "About dynamic review blocks"
+        },
+        {
+          "level": 2,
+          "id": "h_01J0PFTCQ7EK644A5P977JGNQ7",
+          "text": "Product ID variables"
+        },
+        {
+          "level": 3,
+          "id": "h_01J29X3A3VFF641ERSNNX3GE4A",
+          "text": "Shopify product ID variables"
+        },
+        {
+          "level": 3,
+          "id": "h_01J29X3PT3FEDM1P4G1TQCEQPM",
+          "text": "WooCommerce product ID variables"
+        },
+        {
+          "level": 2,
+          "id": "additional-resources",
+          "text": "Additional resources"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "Explore more from Klaviyo"
+        }
+      ]
+    }
+  },
+  "rendered_page": {
+    "status": "fetched",
+    "error": ""
+  }
+}

@@ -1,0 +1,116 @@
+<div class="bs-callout bs-callout-default">
+<p>Klaviyo's Magento 1 integration is no longer accepting new installations and will reach full end-of-support in late 2027. Klaviyo Support is no longer able to assist with Magento 1–related requests.</p>
+</div>
+<h2 id="h_01HH57YA4J78DQG1F86SKS1RWV">You will learn</h2>
+<p>Learn about what Magento 1 data is synced into Klaviyo, along with examples of how you can use that data in flows. When you integrate your Magento 1 account with Klaviyo, you'll have access to both historic and dynamic Magento 1 data that you can use in Klaviyo to personalize your customers' experience. There are many excellent ways to do this through the use of Klaviyo flows.</p>
+<div class="bs-callout bs-callout-default">
+<p>For a deep dive into your Magento 1 data: <a href="https://help.klaviyo.com/hc/en-us/articles/115005254528-Review-and-Understand-your-Magento-1-Data" target="_blank" rel="noopener">Review and Understand your Magento 1 Data</a>.</p>
+</div>
+<p>Magento 1 data can be used to trigger flows and populate flow emails. </p>
+<h2 id="h_01HH57YA4JQBHKZKAXWCH8RNQ6">Flow timing</h2>
+<p>Flow delays are carefully timed to ensure that your content is relevant to your customers’ experience. When you set up your flows, keep in mind the general timing of your Magento 1 sync.</p>
+<div class="bs-callout bs-callout-default">
+<p>Magento 1 syncs with Klaviyo every 30 minutes.</p>
+</div>
+<p>For example, if you set your first abandoned cart email to send 15 minutes after someone abandons their cart, your customer may receive this even if they did complete their purchase, since the Placed Order data may not have been synced into Klaviyo before the email was sent. To prevent this from happening, it would be safest to set your delay for a minimum of 45 to accommodate for the Magento general time sync of 30 minutes.</p>
+<h2 id="h_01HH57YA4J4KKJJ1888F352H0T">Abandoned cart flow</h2>
+<p>Abandoned cart flows are often the highest-revenue flows in a Klaviyo account. Klaviyo provides a pre-built abandoned cart flow which appears in your Flows Library when you integrate with Magento 1.</p>
+<p><em>Integration requirements:</em> Magento 1 plugin installs website tracking</p>
+<p><em>Data you'll use: </em><a href="https://help.klaviyo.com/hc/en-us/articles/115005254528-Review-and-Understand-your-Magento-1-Data#checkout-started4" target="_blank" rel="noopener">Checkout Started</a> (Magento 1 metric), dynamic product data</p>
+<p>Notice that the <em>Checkout Started</em> metric is associated with metadata describing the products added to the cart. You can choose to display or collapse metadata on the event timeline.</p>
+<p><em>What the metric means: </em><a href="https://help.klaviyo.com/hc/en-us/articles/115005254528-Review-and-Understand-your-Magento-1-Data#checkout-started4" target="_blank" rel="noopener">Checkout Started</a> in Magento 1 means that a customer enters their contact and shipping information on the first page of the Magento checkout process and then clicks continue.</p>
+<p><em>How the metric is triggered: </em><em>Checkout Started</em> in Magento 1 is triggered when someone lands on the checkout page and the customer types into the checkout field; Klaviyo captures the C<em>heckout Started</em> event when the email field is changed.  When the Magento cron job runs, the event is synced to Klaviyo. </p>
+<p><em>Flow name:</em> Abandoned Cart</p>
+<p><em>Flow trigger:</em> Event-based; this flow is triggered by the <em>Checkout Started </em>metric</p>
+<p>This is an Abandoned Cart flow for a Magento 1 store:<br><img src="https://klaviyo.zendesk.com/hc/article_attachments/28715963355035"></p>
+<p>You can create personalized flow emails that feature items left in a customer’s cart by pulling Magento 1 product data using <a href="https://klaviyo.zendesk.com/hc/en-us/articles/115000096232" target="_blank" rel="noopener">dynamic template variables</a> into an email <a href="https://help.klaviyo.com/hc/en-us/articles/115005082447-The-Email-Template-Editor#text-blocks4" target="_blank" rel="noopener">text block</a>.</p>
+<p><em>Learn more: </em><a href="https://klaviyo.zendesk.com/hc/en-us/articles/115002779411" target="_blank" rel="noopener">How to create an abandoned cart flow</a></p>
+<h2 id="h_01HH57YA4KD2ZZ0H9SMTFWEBGJ">Browse abandonment flow</h2>
+<p>Browse Abandonment flow is a powerful flow that captures client interest when they view specific products on your website.</p>
+<p>Klaviyo only tracks the browsing activity of "known browsers," which are browsers who have visited and engaged with your site at least once before. There are 2 key ways we are able to identify a site visitor:</p>
+<ol>
+<li>If someone clicks through a Klaviyo email to your website.</li>
+<li>If someone subscribes or opts in through a Klaviyo form. Anonymous browsers are not tracked.</li>
+</ol>
+<p>Klaviyo provides a pre-built Browse Abandonment flow in your Flows section, but you can <a href="https://klaviyo.zendesk.com/hc/en-us/articles/115002775252" target="_blank" rel="noopener">easily create your own.  </a></p>
+<p><em>Integration requirement:</em> the Magento 1 plugin automatically installs the Viewed Product code snippet. If you have not yet implemented Viewed Product tracking in Magento 1, head over to <a href="https://help.klaviyo.com/hc/en-us/articles/115005082187-Integrate-with-Magento-1-x-CE-and-EE-#install-the-klaviyo-extension-in-magento4" target="_blank" rel="noopener">Integrate with Magento 1</a></p>
+<p><em>Data you'll use: Viewed Product</em> (Klaviyo metric), dynamic product data</p>
+<p><em>What the metric means: </em><a href="https://help.klaviyo.com/hc/en-us/articles/360030732832-Review-and-Understand-Your-WooCommerce-Data#viewed-product5"><em>Viewed Product</em></a> is tracked when a customer views a product.</p>
+<p><em>Flow name:</em> Browse Abandonment</p>
+<p><em>Flow trigger:</em> Metric-based; this flow is triggered by the <em>Viewed Product</em> metric</p>
+<p>This is a Browse Abandonment flow for a Magento 1 store:<br><img src="https://klaviyo.zendesk.com/hc/article_attachments/28715969966491" width="611" height="502"></p>
+<p><em>Learn more: </em><a href="https://help.klaviyo.com/hc/en-us/articles/115002775252-Create-a-Browse-Abandonment-Flow">Guide to Creating a Browse Abandonment flow</a></p>
+<h2 id="h_01HH57YA4KHXR12ZMWTB57HS3S">Cross-sell and product review flow</h2>
+<p>Cross-sell flows allow you to target a group of people that have all purchased a particular item, but have not also purchased one or more related items. For example, if someone purchases a video game console, you might consider sending them an email about the most popular video games for that console that they haven't yet purchased.</p>
+<p>Product review flows also allow you to target a group of people who purchase a particular item. You may want to filter your cross-sell/product review flow by category or collection so you can provide more relevant recommendations in the content of your emails.</p>
+<p>Klaviyo offers a pre-built Product Review/Cross-Sell flow which can be found in your <a href="https://klaviyo.zendesk.com/hc/en-us/articles/115002774932" target="_blank" rel="noopener">Klaviyo Flow Library</a>.</p>
+<p><em>Integration requirement:</em> an active Magento 1 integration</p>
+<p><em>Data you'll use:</em> either the <em>Fulfilled Order</em> metric or the <em>Ordered Product</em> metric (both Magento 1 metrics)</p>
+<p><em>What the metrics mean:</em></p>
+<ul>
+<li>
+<em>Fulfilled Order</em> (Magento 1 metric) tracks when you mark an order in your Magento store as shipped.</li>
+<li>
+<em>Ordered Product</em> (Magento 1 metric) tracks when a customer places their order. One Ordered Product event is tracked for each item someone purchases.</li>
+</ul>
+<p><em>Flow name:</em> Product Review/Cross Sell</p>
+<p><em>Flow trigger:</em> Event-based; <em>Fulfilled Order</em> metric</p>
+<p>This is a Product Review/Cross-Sell flow for a Magento 1 store:<br><img src="https://klaviyo.zendesk.com/hc/article_attachments/28715969958811" width="663" height="614"></p>
+<p>You can personalize your cross-sell emails with catalog or product feeds. For more information <a href="https://klaviyo.zendesk.com/hc/en-us/articles/115005082787" target="_blank" rel="noopener">learn how to us product feeds and recommendations</a>.</p>
+<p><em>Learn more:</em> <a href="https://help.klaviyo.com/hc/en-us/articles/115002779391-Create-a-Product-Review-Flow" target="_blank" rel="noopener">Create a product review flow</a> or <a href="https://help.klaviyo.com/hc/en-us/articles/115002775212-Create-an-Upsell-or-Cross-Sell-Flow" target="_blank" rel="noopener">create an upsell or cross sell flow</a></p>
+<h2 id="h_01HH57YA4K8KW5WTWA6G9WCJDR">Customer winback flow</h2>
+<p>Winback flows are used to re-engage inactive customers before they completely disengage with your brand. <span>Consider </span><a href="https://help.klaviyo.com/hc/en-us/articles/115002779231-Back-Populate-a-Flow" target="_blank" rel="noopener noreferrer">adding past profiles</a><span> to your winback flow after setting it up to ensure that anyone who purchased a long time ago but hasn't purchased since can receive your winback series in a timely manner. Let's say, for example, your first winback email is set to send out 6 months after someone makes a purchase. Rather than wait 6 months until someone qualifies to receive this email, you can add past profiles to the flow so that everyone who placed an order 6 months ago but hasn't purchased since will receive the email right away.</span></p>
+<p>Klaviyo provides a pre-built Customer Winback flow in your Flows section, but you can also easily <a href="https://klaviyo.zendesk.com/hc/en-us/articles/115002775192" target="_blank" rel="noopener">build your own</a>.</p>
+<p><em>Integration requirement:</em> an active Magento 1 integration</p>
+<p><em>Data you'll use:</em> <em>Placed Order </em>(Magento 1 metric)</p>
+<p><em>What the metric means:</em> <a href="https://help.klaviyo.com/hc/en-us/articles/115005254528-Review-and-Understand-your-Magento-1-Data#placed-order7" target="_blank" rel="noopener">Placed Order</a> is <span>tracked when a customer completes the checkout process and creates an order in your Magento 1 store.</span></p>
+<p><em>Flow name:</em> Customer Winback Flow</p>
+<p><em>Flow trigger:</em> Metric-based; this flow is triggered by the <em>Placed Order</em> metric</p>
+<p>Flow filter: <em>Placed Order</em> zero times since starting this flow</p>
+<p>This is a Customer Winback flow for a Magento 1 store:<br><img src="https://klaviyo.zendesk.com/hc/article_attachments/28715969973915" width="639" height="673"></p>
+<p>You can personalize your winback emails with catalog or product feeds. For more information review <a href="https://klaviyo.zendesk.com/hc/en-us/articles/115005082787" target="_blank" rel="noopener">product feeds and recommendations</a>.</p>
+<p><em>Learn more:</em> <a href="https://klaviyo.zendesk.com/hc/en-us/articles/115002775192" target="_blank" rel="noopener">Create a winback flow</a></p>
+<h2 id="are-you-using-amazon-buy-with-prime-2">Are you using Amazon Buy with Prime?</h2>
+<p>If you're using Buy with Prime to power payment and fulfillment for any of the products on your store, you'll need to make some additions to your flows, and create some new flows. First:</p>
+<ul>
+<li>
+<a href="https://help.klaviyo.com/hc/en-us/articles/14708088221467">Integrate Buy with Prime with Klaviyo</a><span> </span>to bring Buy with Prime data into your Klaviyo account.</li>
+</ul>
+<p>For your abandoned cart flow:</p>
+<ul>
+<li>Create 2 separate abandoned cart flows: 1 triggered by Magento's checkout event (as described above), and 1 triggered by Buy with Prime's checkout event. For your Buy with Prime flow, read<span> </span><a href="https://help.klaviyo.com/hc/en-us/articles/14985388418331" target="_blank" rel="noopener">How to create an abandoned cart flow for Amazon Buy with Prime</a>.</li>
+<li>For your Magento abandoned cart flow, add the following flow filter to exclude customers who made purchases via Buy with Prime from receiving incorrect messaging:<br>
+<ul>
+<li>
+<em>Placed Order</em><span> </span>(Buy with Prime)<span> </span><em>zero times since starting this flow.</em>
+</li>
+</ul>
+</li>
+</ul>
+<p>For your browse abandonment flow:</p>
+<ul>
+<li>When you create your browse abandonment flow (you only need to create one flow, since it's triggered by the <em>Viewed Product</em> event) add the following flow filters to incorporate Buy with Prime data into your flow:
+<ul>
+<li>
+<em>Checkout Started</em><span> </span>(Buy with Prime)<span> </span><em>zero times since starting this flow<span> </span></em>AND</li>
+<li>
+<em>Placed Order<span> </span></em>(Buy with Prime)<em><span> </span>zero times since starting this flow</em>.</li>
+</ul>
+</li>
+</ul>
+<p>For your customer winback flow:</p>
+<ul>
+<li>Create two separate winback flows: one triggered by Magento's<span> </span><em>Placed Order</em><span> </span>event (as detailed above) and one triggered by Buy with Prime's<span> </span><em>Placed Order</em><span> </span>event to account for customers who placed their original order with Buy with Prime. For your Buy with Prime winback flow, read<span> </span><a href="https://help.klaviyo.com/hc/en-us/articles/15156331062171" target="_blank" rel="noopener">How to create a winback flow for Amazon Buy with Prime</a>.</li>
+<li>When you create your Magento winback flow, add the following flow filter to exclude customers who made purchases via Buy with Prime from receiving incorrect messaging:<br>
+<ul>
+<li>
+<em>Placed Order</em><span> </span>(Buy with Prime)<span> </span><em>zero times since starting this flow.</em>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="h_01HH57YA4MZBK3YXJRP94JTFHV">Additional resources</h2>
+<ul>
+<li><a href="https://klaviyo.zendesk.com/hc/en-us/articles/115005082187" target="_blank" rel="noopener">How to integrate with Magento 1.x (CE and EE)</a></li>
+<li><a href="https://klaviyo.zendesk.com/hc/en-us/articles/115005254528" target="_blank" rel="noopener">Magento 1 data reference</a></li>
+</ul>

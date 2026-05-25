@@ -1,0 +1,105 @@
+---
+id: "360035055312"
+title: "Understanding US SMS compliance laws"
+source_url: "https://help.klaviyo.com/hc/en-us/articles/360035055312-Understanding-US-SMS-compliance-laws"
+section: "North America: SMS compliance"
+category: "SMS"
+category_slug: "sms-whatsapp"
+klaviyo_updated: "2026-04-21T13:54:45Z"
+language: "en"
+---
+## You will learn
+
+Learn about the compliance laws governing the SMS channel. When getting started with SMS marketing, it's important to have a grasp on the corresponding legislation. As with email, to avoid spam violations, it’s important to understand what spam is, the laws that regulate [telemarketing spam (TCPA),](https://www.fcc.gov/general/telemarketing-and-robocalls) and the organizations that protect consumers from spam (CTIA). Please note that Klaviyo cannot provide legal advice regarding US SMS compliance laws, and if you have questions about any of the points outlined in this guide, we recommend contacting legal counsel.
+
+Text messaging laws vary by country. The laws covered in this guide are specifically around US laws. If your business is located in another country, or you have customers in other countries, follow all SMS laws and legal requirements in the areas where you do business.
+
+## Text spam
+
+Like spam emails, spam texts are any unwanted messages sent from an individual or company, often containing irrelevant, inappropriate, or untimely content. They are often sent to a large number of recipients, but this isn't a necessary qualification — any unwanted message can be classified as spam. In addition to generally being a bad practice, it is also illegal to send unsolicited text messages to people without their consent, and the fines can be heavy. This is why [obtaining consent](https://help.klaviyo.com/hc/en-us/articles/360035056972) is so important.
+
+The penalties for violating the TCPA can be severe. Fines range anywhere from $500 per violation to $1,500 per willful violation (meaning you knew what you were doing was wrong, but did it anyway). Some settlements have reached into the tens of millions of dollars. These violations can add up fast, which is why having concrete processes in place is of paramount importance. If you think of how many people you have on your list, imagine if you texted all of them without express consent at $500 per person. You should always have an attorney review your entire texting policy and process. This will help ensure you remain in compliance.
+
+## SMS Compliance Guidelines
+
+While we recommend that you consult an attorney to ensure that your text messaging program and policies comply with US SMS laws and carrier guidelines, there are some general guidelines and best practices you can follow:
+
+### Get express consent
+
+Always obtain express consent before texting anybody. Even if they have opted into your email list and you have their phone number from a signup form, this does not mean they consent to receive text messages from you. The consent you obtain must contain explicit language indicating that the individual agrees to receive recurring marketing messages at the mobile phone number they provided you, that your messages may involve the use of an automatic telephone dialing system or "autodialer," and that consent is not a condition of any purchase.
+
+Consent must be obtained in writing via a physically signed agreement, a digitally signed agreement, or most commonly, an SMS opt-in. An opt-in text message is one in which the user provides you with their number with the understanding that they will receive text messages. During this process, you then send them a text message to confirm that their number is real and that they consent to receive future text messages from your business.
+
+A single consent cannot be provided to multiple brands or organizations. Customers must provide consent to receive messages from your company explicitly. Lead generation, affiliate related, or purchased lists are not valid SMS consent.
+
+### Give recipients a way to opt out
+
+It's important to provide an automated way for recipients to opt out at any time. This can be as simple as replying "stop" to a text message that you sent them. Think of this as a way to "unsubscribe" from text marketing. Opt-out instructions should be provided at regular intervals and at least once per month. Certain carriers like T-Mobile also recommend providing explicit opt out instructions in every fifth message.
+
+### Explain what someone is opting into
+
+You must be clear about what subscribers opting into. If they’re opting in to receive shipping confirmations, don’t send them marketing collateral about unrelated products they haven’t purchased.
+
+### Comply with time of day restrictions
+
+The TCPA prohibits any telephone solicitation (including text messages) anytime before 8 am and after 9 pm in the recipient's time zone (known as "quiet hours"), but certain states have more restrictive rules.
+
+To be safe, you should only send texts during normal hours (9 am to 8 pm in the recipient's time zone). If you have customers in different time zones, you’ll need to take multiple time zones into consideration. A “Good Morning, [name]” text sent at 11 am Pacific Time won’t make sense to somebody reading it on the east coast at 2 pm.
+
+Klaviyo enables [quiet hours for flows](https://help.klaviyo.com/hc/en-us/articles/4408737146651) automatically, preventing SMS flows from sending before 11 am and after 8 pm (using Eastern Time in the US).
+
+### Other best practices
+
+- Provide value — if your text messages aren’t helpful, your subscribers will probably opt-out. Provide something of value, whether it’s a discount code, a link to helpful content, or notifications relevant to something they’ve purchased.
+- Avoid acronyms and shorthand because not everyone will be savvy to common acronyms that you may use in text conversations (e.g., "lol" or "lmk").
+- Cap your frequency. Use [Smart Sending](https://help.klaviyo.com/hc/en-us/articles/115002779311-Smart-Sending-for-Flows#sms-smart-sending-window4) to prevent recipients from receiving too many text messages within a short timeframe. If you’re sending individuals more than one or two texts per day, or four-five a week, you’re likely sending too many and risk that person opting out.
+- Measure your results. Every text campaign or automation should be continuously measured to ensure you’re not losing subscribers and that they’re taking the desired action. While you can’t measure open rates like you can with email, aim for your click rates (for text messages that have links) to be at or above the average of 45%.
+
+## SMS compliance FAQs
+
+### What is TCPA?
+
+TCPA stands for the Telephone Consumer Protection Act. The telemarketing law dates back to 1991 and covers the use of automated telephone communications, including phone calls, voicemails, fax machines, and text messages. Text messages are considered transactions similar to phone calls, which is why they are covered under the TCPA. Under TCPA, sending spam text messages is illegal and can result in fines starting at $500 per infringement, and reaching as high as $1,500.
+
+TCPA defines spam text messages as any “unsolicited advertisement” that communicates the commercial availability of a product, good, or service to a person without their prior express approval or permission, whether in writing or otherwise. Because of this, it's recommended that you use [double opt-in](https://help.klaviyo.com/hc/en-us/articles/115005251108-The-Double-Opt-In-Process) to confirm recipients' subscriptions to SMS. Double opt-in text messages help:
+
+- Confirm the phone number provided by the recipient is legitimate and correct.
+- Capture an electronic record of the recipient’s consent.
+- Provide a way for the person to opt-out.
+
+### What is CTIA?
+
+CTIA is the Cellular Telecommunications Industry Association. The CTIA is a trade organization run by wireless companies such as AT&T, Verizon, and many more. It is not a law or government-run organization like the FCC, and has no legal authority. You cannot be sued for not following CTIA guidelines; however, there can be other ramifications for not following their rules. If found to be in violation of these rules, the CTIA will report you to the mobile carriers, who may shut down or suspend your access to their customers until you resolve the issue.
+
+In addition, the CTIA established the common [short code](https://help.klaviyo.com/hc/en-us/articles/360035256192-How-to-Choose-an-SMS-Sending-Number) system, which is how the majority of businesses send marketing text messages to their customers and prospects. The CTIA also says any messages that contain words relating to sex, hate, alcohol, firearms, or tobacco (SHAFT) should not be delivered.
+
+### What is the best way to acquire proper consent?
+
+Firstly, it's important to understand that you cannot and should not text anybody without their express permission to receive text messages from you. So, if you have their phone number because they were required to submit it at checkout, but do not have their explicit consent to receive messages from you, then you should NOT send them text messages.
+
+Once you have their permission, you should always send a message confirming their opt-in status, and provide an explanation for how they can opt-out. This can be as simple as telling them to reply “STOP” if they ever choose to stop receiving texts from you.
+
+Here are four steps you can follow to ensure you are always collecting phone numbers and communicating via SMS in a compliant manner.
+
+1. Consent must be obtained in writing via a physically signed agreement, a digitally signed agreement, or most commonly, an SMS opt-in. An opt-in text message is one in which the user provides you with their number with the understanding that they will receive text messages. During this process, you then send them a text message to confirm that their number is real and that they consent to receive future text messages from your business.
+2. The consent you obtain must contain explicit language indicating that the individual agrees to receive recurring marketing messages at the mobile phone number they provided you, that your messages may involve the use of an automatic telephone dialing system or "autodialer," and that consent is not a condition of any purchase.
+3. Disclose the type of content they will receive and the frequency of messages.
+4. In subsequent text messages, it is considered a best practice to mention your company by name, the frequency of messages, possible carrier costs and fees, and an option for them to request help or opt-out of future texts.
+
+Learn more about how you can [use Klaviyo to properly collect consent from your subscribers](https://help.klaviyo.com/hc/en-us/articles/360035056972?flash_digest=dccd84e4bda6cb114172e07cea52a05f87ea56ab).
+
+### If my customers already consent to receive email, can I skip this?
+
+No. If somebody is on your email list, it does not necessarily mean you have consent to send them text messages as well, even if they provide their phone number when they subscribe to your emails. Vice versa, if somebody consents to receive text messages from you, it does not necessarily imply email consent. Your email list and text list consent are treated separately by Klaviyo.
+
+### What if my customers opt-out of future SMS text messages? How long do I have to honor opt-out requests?
+
+It’s important to note that the most common way for people to remove consent is to reply “STOP” to any text message you send. However, you should be aware that some people may request to remove consent via other avenues, such as by emailing or calling your customer support team, or even contacting you via social media channels.
+
+You should have processes in place to remove these people from your text messaging lists as quickly as possible, ideally within 10 days. In Klaviyo, if someone texts "STOP," they will automatically be suppressed in your account, meaning they will no longer be eligible to receive texts. Unless somebody specifically opts back in, you cannot send them text messages at all in the future.
+
+## Additional resources
+
+- [SMS compliance for Ecommerce](https://www.klaviyo.com/blog/sms-compliance-for-ecommerce)
+- [Guide to collecting SMS consent](https://klaviyo.zendesk.com/hc/en-us/articles/360035056972)
+- [How To Remove SMS consent from a profile](https://klaviyo.zendesk.com/hc/en-us/articles/360051013832)

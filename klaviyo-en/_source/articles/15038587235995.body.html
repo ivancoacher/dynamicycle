@@ -1,0 +1,86 @@
+<h2 id="h_01HFEMEE80PGKH121EHCS5FQHK">You will learn</h2>
+<p>Learn how to add push notifications to your welcome flow to target those who download your mobile app.</p>
+<h2 id="h_01HFEMEE80X1PYSJ6E92B43N90">Before you begin</h2>
+<p>Unlike with email and SMS welcome flows, a push welcome series is not triggered when someone subscribes to a list or opts in to SMS. Your development team must configure a custom metric using <a href="https://developers.klaviyo.com/en/docs/get_started">Klaviyo’s APIs</a> that triggers when someone installs or otherwise takes a specific action in your mobile app.</p>
+<p>Before you can send push notifications, note that:</p>
+<ul>
+<li>You have to <a href="https://help.klaviyo.com/hc/en-us/articles/360023213971">set up push notifications</a> in your Klaviyo account. </li>
+<li>Only app users that consent to notifications will receive push notifications from you. When an app user opts in to receive notifications, they will be assigned a push token that allows you to target them with notifications through both campaigns and flows in Klaviyo.</li>
+</ul>
+<h2 id="h_01HFEMEE802BX8HMTDRV6EFBGS">Create a welcome series for app users</h2>
+<p>There are 2 ways you can set up a welcome flow for push subscribers: </p>
+<ul>
+<li>Recommended: Use a custom metric from your app (e.g., signed up for app).</li>
+<li>Create a segment based on if someone can receive mobile push marketing and trigger a segment-triggered flow.
+<ul>
+<li>Note that segment-based flows can take longer to trigger than metric-based flows, so this is not recommended unless your app has no way to sync new users to Klaviyo.<br><img src="https://klaviyo.zendesk.com/hc/article_attachments/30481906425627">
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="h_01HFEMEE8091FZKMAZPMD3XASP">Add a push notification action</h3>
+<p>Follow these steps to create a welcome series for your push subscribers triggered by a custom metric:</p>
+<ol>
+<li>Using the main Klaviyo navigation, go to the <strong>Flows</strong> tab.</li>
+<li>Create a new metric-triggered flow triggered by your app’s custom metric or a segment-triggered flow triggered by your segment of subscribers that can receive push marketing.</li>
+<li>Click the trigger of the flow.<br><img src="https://klaviyo.zendesk.com/hc/article_attachments/34451446507547">
+</li>
+<li>Next to <em>Profile filters</em>, click <strong>Add</strong>.</li>
+<li>Add a profile filter to remove anyone who has ever been in this flow. See the example below:<br><img src="https://klaviyo.zendesk.com/hc/article_attachments/28704478303643" alt="Example filter with definition 'has not been in this flow at any time.'" width="345" height="180">
+</li>
+<li>From the left sidebar, drag the push notification action into your flow.<br><img src="https://klaviyo.zendesk.com/hc/article_attachments/34451463052699">
+</li>
+<li>Edit the message title and body, typically to thank the person for downloading your app. Example:<br>“Thanks for joining our app!”<br><img src="https://klaviyo.zendesk.com/hc/article_attachments/34451446513819">
+</li>
+<li>Select the <strong>Behaviors</strong> tab.<br><img src="https://klaviyo.zendesk.com/hc/article_attachments/34451446519963" width="315" height="244">
+</li>
+<li>Select what should happen when a recipient taps on the notification - open app, or deep link.</li>
+<li>For iOS:
+<ul>
+<li>Choose whether to show a badge count.</li>
+<li>Choose if you would like subscribers to hear a sound when they receive the push notification.</li>
+</ul>
+</li>
+<li>Optional: Toggle on <strong>Custom data</strong> and include <a href="https://help.klaviyo.com/hc/en-us/articles/34331971195675" target="_blank" rel="noopener noreferrer">key-value pairs</a> along with your notification to trigger app behaviors. </li>
+<li>When you are done, click <strong>Save &amp; continue</strong>. </li>
+<li>In the <em>Push notification details</em> sidebar, choose whether you would like to <strong>Skip recently messaged profiles</strong>, which enables/disables <a href="https://help.klaviyo.com/hc/en-us/articles/115002779311">Smart Sending</a>. This setting is disabled by default. We recommend keeping it off for welcome series flows.<br><img src="https://klaviyo.zendesk.com/hc/article_attachments/34451446524955" width="429" height="120">
+</li>
+<li>Optional: Add additional filters to the push notification.</li>
+<li>Add a time delay after this message.<br>Note<strong>:</strong> Like with SMS, push notifications ping a recipient’s phone, so sending too often may overwhelm your recipients. For larger flows, such as those with more than 3 messages, avoid sending a push notification every day.</li>
+<li>Add and configure 2-3 push notifications, adding time delays between each message.</li>
+<li>Once you're finished configuring your push notifications, <a href="https://klaviyo.zendesk.com/hc/en-us/articles/360048376172" target="_self" rel="undefined">set the status to live</a>.</li>
+</ol>
+<h2 id="h_01HFEMEE806SDXEJFTQYKESZCN">Best practices</h2>
+<h3 id="h_01HFEMEE80AX54FJ41GYPKF142">Message content</h3>
+<p>Make sure your push notifications contain relevant and actionable information related to your app. Avoid overusing emojis. Multiple repeating emojis are often associated with spam.</p>
+<p>Here are some examples of content to include in your push notifications listed in order of importance:</p>
+<ul>
+<li>Thank people for subscribing.</li>
+<li>Remind them to fill out their profile.</li>
+<li>Remind them to set their location.</li>
+<li>Ask for feedback on your app’s setup experience.</li>
+<li>Mention any features that are relevant to a new app user.</li>
+</ul>
+<h3 id="h_01HFEMEE80KKJJ0SQVNG1SWPZA">Split based on customer actions</h3>
+<p>Depending on the content of your push notifications, you may want to use conditional splits to check if a customer has performed specific actions (e.g., set up their profile) before sending a relevant notification. Depending on your app’s design, you must either set up custom metrics or custom profile properties to use with these splits.</p>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/28704486399003" alt="Example flow that checks for the profile property App Profile Complete"></p>
+<p>The above example shows a flow triggered by a segment of profiles with who can receive push marketing. If a custom metric is used instead of a segment, use a conditional split to check for the ability to receive push marketing or flow filters to filter out profiles that do not have a push token.</p>
+<h3 id="h_01HFEMEE809H4MC0P01CJAWP5M">Time delays</h3>
+<p>Make sure to add appropriate time delays between your push notifications so you are not overwhelming your subscribers. </p>
+<p>For a welcome series flow, we recommend the following delays:</p>
+<ul>
+<li>Message #1: no delay</li>
+<li>Message #2: 1 day</li>
+<li>Message #3: 3 days</li>
+<li>Other messages: 3+ days</li>
+</ul>
+<h2 id="h_01HFEMEE80WB1AVBE450VFDE7Y">Troubleshooting</h2>
+<p>If you are using a custom metric to trigger your flow and it is no longer triggering, contact the developer who configured this metric for your custom integration or the developer of your third-party integration for further assistance.</p>
+<p>If you are using a segment-triggered flow but it is not triggering, make sure your segment has “someone can receive mobile push marketing” as part of the definition.</p>
+<p>Segment-triggered flows only send to people who enter the segment after the flow is set live. If you’d like to send to older segment members, <a href="https://help.klaviyo.com/hc/en-us/articles/360049924272">learn how to add past profiles to a flow</a>.</p>
+<h2 id="h_01HFEMEE80T0WBSHBMBZNC83VN">Additional resources</h2>
+<p>Learn about other actions you can use in your flow:</p>
+<ul>
+<li><a href="https://help.klaviyo.com/hc/en-us/articles/360001768432-How-to-add-an-update-profile-property-action-to-a-flow">How to add an update profile property action to a flow</a></li>
+<li><a href="https://help.klaviyo.com/hc/en-us/articles/360050242251-How-to-add-a-notification-action-to-a-flow">How to add a notification action to a flow</a></li>
+</ul>

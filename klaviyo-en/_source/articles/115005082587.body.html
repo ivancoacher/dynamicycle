@@ -1,0 +1,196 @@
+<h2 id="h_01HHFMD1C5NK4BR0W1HF2A5NZA">You will learn</h2>
+<p>Learn what data is synced to Klaviyo when you integrate with your BigCommerce store, such as order and customer data, and how to access it in Klaviyo.</p>
+<h2 id="h_01HHFMD1C549CJ0C4RZHGM0TF0">Metrics synced from BigCommerce</h2>
+<p>After you've <a href="https://klaviyo.zendesk.com/hc/en-us/articles/115005082547" target="_blank" rel="noopener">integrated with BigCommerce</a>, click the <strong>Analytics</strong> dropdown in Klaviyo and select <strong>Metrics</strong> to see all of the metrics in your account. Here, you can filter by BigCommerce to see which metrics are synced from the integration. <br><img src="https://klaviyo.zendesk.com/hc/article_attachments/28704476453275" alt="Metrics tab in Klaviyo filtered by BigCommerce showing metrics list including Cancelled Order and Fulfilled Order" width="596" height="471"></p>
+<div class="bs-callout bs-callout-default">
+<p>Note that the top-level true/false property Discounted, which is included in many of these metrics, is determined by the discount amount from a coupon. If, for instance, you offer free shipping, but it is not reflected in the discount amount, it will not be reflected in the Discounted property, which will show as False.</p>
+</div>
+<h3 id="h_01HHFMD1C504V6T21RXJVRAC9S">Started Checkout</h3>
+<div class="bs-callout bs-callout-default">
+<p>BigCommerce <em>Started Checkout</em> events are tracked when a cart is created. If you have customer accounts on your site, there are some cases in which this cart will be created when the first item is added to the cart, rather than when the customer enters their contact and shipping information and clicks continue. </p>
+</div>
+<p>The event Klaviyo tracks includes all of the product information about the items in someone's cart including product names, images and category information so you can use that information in your Abandoned Cart emails.</p>
+<ul>
+<li>
+<strong>$value<br></strong>The total value of the cart at time of checkout</li>
+<li>
+<strong>Discounted</strong><br>Whether or not a discount code was used (true/false)</li>
+<li>
+<strong>Item Categories<br></strong>The complete set of the categories of the products in someone's cart, e.g., <em>t-shirts, mens, pants</em> and<em> sale</em>
+</li>
+<li>
+<strong>Item Count<br></strong>The number of items in the order, e.g., <em>2</em>
+</li>
+<li>
+<strong>Items<br></strong>The names of the products in someone's order, e.g., <em>t-shirt </em>or <em>pants</em>
+</li>
+<li>
+<strong>Coupons <br></strong>(optional array)</li>
+<li>
+<strong>ChannelID</strong><br>The ID of the channel for the checkout</li>
+</ul>
+<h3 id="h_01HHFMD1C5GBPBD0249JHA5C58">Placed Order</h3>
+<p>This event is tracked when a customer completes the checkout process and creates an order in your BigCommerce store.</p>
+<div class="bs-callout bs-callout-default">
+<p>By default, when Klaviyo polls for new orders, any order with any of the following statuses will not sync as a Placed Order: <code class="language-html">Incomplete</code>, <code class="language-html">Pending</code>, <code class="language-html">Awaiting Payment</code>.</p>
+</div>
+<p>The <em>Placed Order</em> event Klaviyo tracks includes all of the product information about the items someone purchased including product names, images, and category information so you can use this information in purchase follow up emails. You can filter and target <em>Placed Order</em> events based on the following criteria:</p>
+<ul>
+<li>
+<strong>$value<br></strong>The total value of the cart at time of checkout</li>
+<li>
+<strong>Discounted<br></strong>Whether or not a discount code was used (true/false)</li>
+<li>
+<strong>Item Categories<br></strong>The complete set of the categories of the products in someone's cart, e.g., <em>t-shirts, mens, pants</em> and<em> sale</em>
+</li>
+<li>
+<strong>Item Count<br></strong>The number of items in the order, e.g., <em>2</em>
+</li>
+<li>
+<strong>Items<br></strong>The names of the products in someone's order, e.g., <em>t-shirt </em>or <em>pants</em>
+</li>
+<li>
+<strong>Coupons<br></strong>(optional array)</li>
+<li>
+<strong>ChannelID</strong><br>The ID of the channel for the order</li>
+</ul>
+<p>Revenue, or <em>Placed Order</em><span> </span>value, is calculated as follows: (sub-total + shipping) - any discounts.</p>
+<p>You may see that the <em>Revenue </em>value on your Klaviyo dashboard does not always match up with the revenue value you see in BigCommerce; this is because BigCommerce subtracts refunded orders from their revenue calculation, while Klaviyo does not.</p>
+<h3 id="h_01HHFMD1C6GA2C8BHW9YDVYQ45">Ordered Product</h3>
+<p>This event is tracked when a customer places an order, but one event is tracked for each item someone purchases. For example, if someone buys a t-shirt and a pair of pants, one <em>Placed Order</em> event is tracked and two <em>Ordered Product</em> events - one event for the t-shirt and one event for the pants.</p>
+<p>The event Klaviyo tracks include detailed information about each product someone purchases. This is useful when creating behavioral segments based on product variation options and other detailed information that's not available in the <em>Placed Order</em> event. You can filter and target <em>Ordered Product</em> events based on the following criteria:</p>
+<ul>
+<li>
+<strong>Name<br></strong>The name or title of the product in BigCommerce, e.g., <em>t-shirt</em>
+</li>
+<li>
+<strong>$value<br></strong>The value of the item (product price minus any discounts)</li>
+<li><strong>SKU</strong></li>
+<li>The SKU of the product variation e.g., <em>REDMEDIUMTSHIRT</em>
+</li>
+<li>
+<strong>Categories<br></strong>The complete set of the categories of the product, e.g., <em>t-shirts, mens</em> and<em> sale</em>
+</li>
+<li>
+<strong>Product Price<br></strong>The price of the product</li>
+<li>
+<strong>Product Cost<br></strong>The cost of the product </li>
+<li>
+<strong>Price<br></strong>The price of the entire order for that product</li>
+<li>
+<strong>Discounted<br></strong>Whether or not a discount code was used (true/false)</li>
+<li>
+<strong>ProductID<br></strong>The ID of the ordered product </li>
+<li>
+<strong>Quantity<br></strong>The quantity of the ordered product</li>
+<li>
+<strong>Option (Optional)<br></strong>Custom product attributes</li>
+<li>
+<strong>ChannelID</strong><br>The ID of the channel for the order</li>
+</ul>
+<h3 id="h_01HHFMD1C6YZNJPXK9MM70GE19">Fulfilled Order</h3>
+<p>This event is tracked when an order's status updates to either <code class="language-html">Shipped</code> or <code class="language-html">Completed</code>.</p>
+<p>The <em>Fulfilled Order</em> event Klaviyo tracks includes all of the product information about the items someone purchased including product names, images and variation information so you can use that information in purchase follow up emails. You can filter and target <em>Fulfilled Order</em> events based on the following criteria:</p>
+<ul>
+<li>
+<strong>$value<br></strong>The total value of the cart at time of checkout</li>
+<li>
+<strong>Discounted<br></strong>Whether or not a discount code was used (true/false)</li>
+<li>
+<strong>Item Categories<br></strong>The complete set of the categories of the products in someone's cart, e.g., <em>t-shirts, mens, pants</em> and<em> sale</em>
+</li>
+<li>
+<strong>Item Count<br></strong>The number of items in the order, e.g., <em>2</em>
+</li>
+<li>
+<strong>Items<br></strong>The names of the products in someone's order, e.g., <em>t-shirt </em>or <em>pants</em>
+</li>
+<li>
+<strong>Coupons<br></strong>(optional array)</li>
+<li>
+<strong>ChannelID</strong><br>The ID of the channel for the order</li>
+</ul>
+<h3 id="h_01HHFMD1C6W3465FGQR2JRRVNA">Cancelled Order</h3>
+<p>This event is tracked when a customer creates an order in your BigCommerce store but then cancels the order before fulfillment (when the order status is equal to <code class="language-html">Cancelled</code>). The event Klaviyo tracks include all of the product information about the items someone purchased including product names, images and variation information so you can use that information in purchase follow up emails. You can filter and target<em> Cancelled Order</em> events based on the following criteria:</p>
+<ul>
+<li>
+<strong>$value<br></strong>The total value of the cart at time of checkout</li>
+<li>
+<strong>Discounted<br></strong>Whether or not a discount code was used (true/false)</li>
+<li>
+<strong>Item Categories<br></strong>The complete set of the categories of the products in someone's cart, e.g., <em>t-shirts, mens, pants</em> and<em> sale</em>
+</li>
+<li>
+<strong>Item Count<br></strong>The number of items in the order, e.g., <em>2</em>
+</li>
+<li>
+<strong>Items<br></strong>The names of the products in someone's order, e.g., <em>t-shirt </em>or <em>pants</em>
+</li>
+<li>
+<strong>Coupons<br></strong>(optional array)</li>
+<li>
+<strong>ChannelID</strong><br>The ID of the channel for the order</li>
+</ul>
+<h3 id="h_01HHFMD1C6B9TNBYW6AHNRPNZX">Refunded Order</h3>
+<p>This event is tracked when a customer refunds their order. You can filter and target<span> </span><em>Refunded Order</em><span> </span>events based on the following criteria:</p>
+<ul>
+<li>
+<strong>$value<br></strong>The total value of the refunded order</li>
+<li>
+<strong>Items<br></strong>The names of the products in someone's order, e.g., <em>t-shirt </em>or <em>pants</em>
+</li>
+<li>
+<strong>Item Categories<br></strong>The complete set of categories of the products in the order</li>
+<li>
+<strong>Item Count<br></strong>The number of items in the order, e.g., <em>2</em>
+</li>
+<li>
+<strong>Item Brands<br></strong>The brands of the products in the order</li>
+<li>
+<strong>Discounted<br></strong>Whether or not a discount code was used (true/false)</li>
+<li>
+<strong>Status<br></strong>The status of the order, e.g., <em>Refunded</em>
+</li>
+<li>
+<strong>ChannelID</strong><br>The ID of the channel for the order</li>
+</ul>
+<h2 id="h_01HHFMD1C6W55YDBNHA0VW8M4J">Customer data synced from BigCommerce</h2>
+<p>In addition to the metrics Klaviyo syncs from BigCommerce, there are also custom properties that are added to each Klaviyo profile. You can use these properties in segments and in flows. Here are the properties that are automatically synced from BigCommerce:</p>
+<ul>
+<li>
+<strong>Email, First Name, Last Name, City, Phone Number<br></strong>These built-in Klaviyo fields are automatically synced with the integration.
+<div class="bs-callout bs-callout-default">
+<p>Location information (City, State/Region, Zip Code, Country) is only synced to Klaviyo if the customer has placed an order.</p>
+</div>
+</li>
+<li>
+<strong>External ID<br></strong>Klaviyo also syncs customers' external IDs. This means that if a customer creates an account with your BigCommerce store, we will sync this ID along with their email address. If the same customer then goes on to change the email address associated with the account, we will map the new address to their external ID and update the email address associated with their profile.</li>
+<li>
+<strong>BigCommerce Original Channel ID</strong><strong><br></strong>This property lists the ID of the first storefront visited by the profile, if tracked. Storefront is tracked if you are using BigCommerce Multi-Storefront (MSF) and the customer has started a checkout or placed an order. </li>
+<li>
+<strong>BigCommerce Channel IDs</strong><strong><br></strong>An array of IDs that includes the ID of each storefront visited by the profile, if tracked. Storefront is tracked if you are using BigCommerce Multi-Storefront (MSF) and the customer has started a checkout or placed an order. </li>
+</ul>
+<p>If a customer does not create an account, no external ID will be created, and we will use their email address to map all data. If a customer does not create an account at first, but later creates one with the same email address, an external ID will be added to their profile.</p>
+<p>You may have additional custom properties associated with your BigCommerce profiles. These two custom properties can also be synced to Klaviyo:</p>
+<ul>
+<li>
+<strong>Customer Group</strong><br><a href="https://support.bigcommerce.com/s/article/Customer-Groups" target="_self">Customer Groups</a> allow you to organize your customers, give them discounts, and restrict access to specific products or categories.</li>
+<li><strong>Store Credit</strong></li>
+</ul>
+<p>Custom properties are found in the <em>Information - Custom Properties</em> section of a Klaviyo profile:<br><img src="https://klaviyo.zendesk.com/hc/article_attachments/28704476452251" alt="Information section of customer profile in Klaviyo showing custom properties synced from BigCommerce including Store Credit and Customer Group" width="514" height="306"></p>
+<h2 id="h_01HHFMD1C603395R9FJ42JXRZF">Frequency of the BigCommerce sync</h2>
+<p>Metrics and profile properties from BigCommerce are synced in real-time. This means you should see all events appear in Klaviyo almost immediately when the event is tracked in BigCommerce.</p>
+<h2 id="h_01HHFMD1C6170CREXY89XBFFTP">How to verify your synced order data</h2>
+<p>Klaviyo imports all of your BigCommerce data. When you first integrate, we will run a full historic sync. After the initial sync, Klaviyo runs hourly syncs to poll for new data. To verify this, you can compare the number of daily orders tracked within Klaviyo with the number of daily orders in BigCommerce. </p>
+<ol>
+<li>In Klaviyo, navigate to <strong>Analytics &gt; Metrics</strong>. </li>
+<li>Find the <em>Placed Order</em> metric, and click on it. This will take you to the metric chart page and show the last 30 days of data by default.</li>
+<li>Mouse over yesterday's data point or look in the table of data below the chart to see how many orders you had yesterday. Compare that number to what's stored in BigCommerce and you should see they match exactly.</li>
+<li>If they don't, the most likely issue is your Klaviyo account's timezone doesn't match BigCommerce's timezone. To check your timezone setting, click your account name in the lower left corner, then navigate to <strong>Settings &gt; Organization.<br></strong><img src="https://klaviyo.zendesk.com/hc/article_attachments/28704476454427" alt="Graph of BigCommerce Placed Orders over time in Klaviyo metrics tab" width="637" height="344">
+</li>
+</ol>
+<h2 id="h_01HHFMD1C640305G737MSS8TTG" class="wysiwyg-text-align-left">Additional resources</h2>
+<ul>
+<li><a href="https://klaviyo.zendesk.com/hc/en-us/articles/115005082547" target="_blank" rel="noopener">Getting started with BigCommerce</a></li>
+<li><a href="https://klaviyo.zendesk.com/hc/en-us/articles/360024310292" target="_blank" rel="noopener">How to create an Added to Cart event for BigCommerce</a></li>
+</ul>

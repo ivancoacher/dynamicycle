@@ -1,0 +1,97 @@
+<h2 id="2d5fa7f8050e">You will learn</h2>
+<p>What events Customer Agent emits to your Klaviyo account, what data each event carries, and how to use those events to build segments and flows.</p>
+<h2 id="29f269a6eafa">How Customer Agent events work</h2>
+<p>Events fire automatically — there’s no configuration needed. Every Customer Agent conversation emits events that show up alongside your other Klaviyo profile activity. You can use them to build segments, trigger flows, and reference in reports.</p>
+<p>To verify events are firing for a profile, navigate to <strong>Analytics &gt; Metrics</strong>, find the Customer Agent metric, or open a profile’s <strong>Activity Feed</strong> to see events on a specific shopper.</p>
+<h2 id="35084bfb244e">Events</h2>
+<table>
+<tbody>
+<tr>
+<td><strong>Event</strong></td>
+<td><strong>Fires when</strong></td>
+<td><strong>Key properties</strong></td>
+</tr>
+<tr>
+<td>Started Conversation</td>
+<td>A shopper opens a new Customer Agent conversation</td>
+<td>Conversation ID, Channel, First message, Profile</td>
+</tr>
+<tr>
+<td>Conversation Resolved</td>
+<td>Customer Agent fully resolves a conversation without escalation</td>
+<td>Conversation ID, Channel, Skill, Tags, Resolution time, Profile</td>
+</tr>
+<tr>
+<td>Conversation Escalated</td>
+<td>A conversation hands off to a human</td>
+<td>Conversation ID, Channel, Escalation reason, Skill, Tags, Profile</td>
+</tr>
+<tr>
+<td>Received Product Recommendation</td>
+<td>Customer Agent surfaces product recommendations</td>
+<td>Conversation ID, Channel, Product IDs / SKUs, Profile</td>
+</tr>
+</tbody>
+</table>
+<h3 id="c2dccf35bc82">Started Conversation</h3>
+<p>Fires when a shopper opens a new Customer Agent conversation.</p>
+<p><strong>Properties:</strong></p>
+<ul>
+<li>Conversation ID</li>
+<li>Channel (web chat, email, SMS, WhatsApp)</li>
+<li>First message</li>
+<li>Profile (if linked)</li>
+</ul>
+<h3 id="31aaaafda6b8">Conversation Resolved</h3>
+<p>Fires when Customer Agent fully resolves a conversation without escalation.</p>
+<p><strong>Properties:</strong></p>
+<ul>
+<li>Conversation ID</li>
+<li>Channel</li>
+<li>Skill that handled the conversation</li>
+<li>Tags</li>
+<li>Resolution time</li>
+<li>Profile</li>
+</ul>
+<h3 id="b0669324caff">Conversation Escalated</h3>
+<p>Fires when a conversation hands off to a human — either via an escalation rule or a shopper request.</p>
+<p><strong>Properties:</strong></p>
+<ul>
+<li>Conversation ID</li>
+<li>Channel</li>
+<li>Escalation reason (rule name, shopper-requested, etc.)</li>
+<li>Skill that was active at escalation</li>
+<li>Tags</li>
+<li>Profile</li>
+</ul>
+<h3 id="fc1403d70343">Received Product Recommendation</h3>
+<p>Fires when Customer Agent surfaces product recommendations to a shopper.</p>
+<p><strong>Properties:</strong></p>
+<ul>
+<li>Conversation ID</li>
+<li>Channel</li>
+<li>Product IDs / SKUs recommended</li>
+<li>Profile</li>
+</ul>
+<h2 id="37d91e0d1086">Example segments</h2>
+<p>Three common ways to use these events:</p>
+<h3 id="e9e1d794f9d2">Re-engage shoppers who got a product recommendation</h3>
+<blockquote>Profile has at least 1 <em>Received Product Recommendation</em> in the last 14 days <strong>AND</strong> has not placed an order since</blockquote>
+<p>Use this to trigger a follow-up flow with a soft nudge or discount.</p>
+<h3 id="224c6be2696d">Exclude recently escalated shoppers from automated outreach</h3>
+<blockquote>Profile has at least 1 <em>Conversation Escalated</em> in the last 7 days</blockquote>
+<p>Add this as an exclusion to your campaign or flow targeting to avoid contacting shoppers who are already in an open service conversation.</p>
+<h3 id="14827cf8c417">Identify high-value resolved conversations</h3>
+<blockquote>Profile has at least 1 <em>Conversation Resolved</em> in the last 30 days <strong>AND</strong> has placed an order in the last 30 days</blockquote>
+<p>Use this to measure post-conversation conversion or as a positive signal for VIP segmentation.</p>
+<h2 id="bd3ae7b60071">Next steps</h2>
+<ul>
+<li>
+<strong>Build segments</strong> in Klaviyo using these events — see <a href="https://help.klaviyo.com/hc/en-us/articles/115003078711">Segmentation in Klaviyo</a>
+</li>
+<li>
+<strong>Trigger flows</strong> off Customer Agent events for follow-up campaigns</li>
+<li>
+<strong>Review the dashboard</strong> for aggregate trends — see <em>Understanding the performance dashboard</em>
+</li>
+</ul>

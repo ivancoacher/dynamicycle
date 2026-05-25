@@ -1,0 +1,578 @@
+<h2 id="h_01HDKHG9AMHCA5C4D24JMSY1A9">You will learn</h2><p>Learn about the source ($source) profile property to better understand how your subscribers signed up. Klaviyo automatically assigns a $source property for profiles added using certain methods. For example, a profile’s $source is set to <em>API</em> if they were added through <a href="https://developers.klaviyo.com/en/reference/subscribe_profiles">Klaviyo’s API</a>, or set to <em>Manually Initiated</em> if you added them manually. </p><p>Certain integrations and subscribe methods are tracked using a number, rather than a text description. The chart below outlines what these numbers mean. </p><h2 id="h_01HDKHG9AMZZWZRWH4D59JN83W">Using special $source values</h2><p>When creating a segment or flow filter based on $source, you may need to use these numbers to identify the sources you’d like to include. </p><p>To check if you’ll need to use a number versus a text value, start creating a segment with this definition: <strong>Properties about someone &gt; $source &gt; equals</strong>. Click into the <strong>Dimension value</strong> field to see a list of options. If you see numbers like the ones below (and don’t see the relevant text value), you’ll need to use the special number value in your segment definition. </p><p class="wysiwyg-text-align-center"><img src="https://klaviyo.zendesk.com/hc/article_attachments/33780714599195" alt="Dropdown menu of source values in segment builder"></p><p>To check a specific profile’s source, navigate to their their profile. Locate the <em>$source</em> property and try to edit the value. If a number is shown in the edit field, then that number must be used in any $source-based segments you’d like to include them in. </p><p class="wysiwyg-text-align-center"><img src="https://klaviyo.zendesk.com/hc/article_attachments/28705664314395" alt="Information section for a profile, showing the source" width="551" height="719"></p><p class="wysiwyg-text-align-left">Note that the value set for $source on a profile is overwritten when profiles takes actions that set this field. For example, submitting a form would update the existing $source value on the profile to reflect the form submission.</p><p class="wysiwyg-text-align-left">Values are set when a profile subscribes or unsubscribes through the associated method.</p><h2 id="h_01HDKHG9AM4BSSM009BM6XBF1H">$source value reference </h2><figure class="wysiwyg-table wysiwyg-table-align-left" style="width: 100%;"><table style="border-collapse: collapse; border-style: solid; border-width: 1px;"><tbody>
+<tr style="height: 22px;">
+<td style="background-color: #eeeeee; border-style: solid; border-width: 1px; height: 22px; text-align: center; width: 39.2857%;"><strong>$source Value</strong></td>
+<td style="background-color: #eeeeee; border-style: solid; border-width: 1px; height: 22px; text-align: center; width: 60.5714%;"><strong>Profile Source</strong></td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-1</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">Unknown (subscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-2</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">Modal (subscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-3</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">Flyout (subscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-4</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">Embedded Form (subscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-5</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">Subscribe Page (subscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-6</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">Manually Initiated (subscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-7</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">Twitter (subscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-8</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">Integration (subscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-9</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">API (subscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-10</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">Copied from Another List (subscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-11</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">Swapped Subscription (subscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-12</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">Unknown (unsubscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-13</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">Manually Initiated (unsubscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-14</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">Unsubscribe Page (unsubscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-15</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">Unknown Integration (unsubscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-16</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">Swapped Subscription (unsubscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-17</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">API (unsubscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-18</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">Copied from Another List (unsubscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-19</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">Spam Complaint (unsubscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-20</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">Hard Bounce (unsubscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-21</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">3dcart (subscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-22</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">BigCommerce (subscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-23</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">Postmark (subscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-24</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">Celery (subscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-25</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">Constant Contact (subscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-26</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">Zoho (subscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-27</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">API (subscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-28</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">ActBlue (subscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-29</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">Help Scout (subscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-30</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">Zendesk (subscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-31</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">Olark (subscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-32</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">ShopDirect (subscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-33</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">Mailgun (subscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-34</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">MadMimi (subscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-35</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">Lightspeed (subscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-36</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">Unbounce (subscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-37</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">Janrain (subscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-38</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">WooCommerce (subscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-39</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">Magento (subscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-40</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">Mandrill (subscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-41</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">Wufoo (subscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-42</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">Sendgrid (subscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-43</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">Mailchimp (subscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-44</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">Commercev3 (subscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-45</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">Amazon Web Services (subscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-46</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">AfterShip (subscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-47</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">Klaviyo (subscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-48</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">Salesforce (subscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-49</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">NeonCRM (subscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-50</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">Shopify (subscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-51</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">Volusion (subscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-52</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">UserVoice (subscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-53</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">Eventbrite (subscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-54</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">Kickoff Labs (subscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-55</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">Amazon Marketplace (subscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-56</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">Magento 2. (subscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-57</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">Bloomerang Fundraising (subscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-58</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">StickyStreet (subscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-59</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">Segment (subscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-60</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">Chargebee (subscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-61</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">Recurly (subscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-62</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">Stripe (subscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-63</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">Campaign Monitor (subscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-64</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">Magento (subscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-65</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">GoFundMe Pro (subscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-66</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">Spree (subscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-67</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">Desk.com (subscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-68</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">Facebook Audiences (subscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-69</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">DonorPerfect (subscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-70</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">Donate.ly (subscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-71</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">ExactTarget (subscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-72</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">OpenCart (subscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-73</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">Funraise (subscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-74</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">3dcart (unsubscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-75</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">BigCommerce (unsubscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-76</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">Postmark (unsubscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-77</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">Celery (unsubscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-78</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">Constant Contact (unsubscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-79</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">Zoho (unsubscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-80</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">API (unsubscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-81</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">ActBlue (unsubscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-82</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">Help Scout (unsubscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-83</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">Zendesk (unsubscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-84</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">Olark (unsubscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-85</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">ShopDirect (unsubscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-86</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">Mailgun (unsubscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-87</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">MadMimi (unsubscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-88</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">Lightspeed (unsubscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-89</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">Unbounce (unsubscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-90</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">Janrain (unsubscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-91</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">WooCommerce (unsubscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-92</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">Magento (unsubscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-93</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">Mandrill (unsubscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-94</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">Wufoo (unsubscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-95</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">Sendgrid (unsubscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-96</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">Mailchimp (unsubscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-97</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">Commercev3 (unsubscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-98</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">Amazon Web Services (unsubscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-99</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">AfterShip (unsubscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-100</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">Klaviyo (unsubscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-101</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">Salesforce (unsubscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-102</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">NeonCRM (unsubscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-103</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">Shopify (unsubscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-104</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">Volusion (unsubscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-105</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">UserVoice (unsubscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-106</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">Eventbrite (unsubscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-107</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">Kickoff Labs (unsubscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-108</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">Amazon Marketplace (unsubscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-109</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">Magento 2 (unsubscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-110</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">Bloomerang Fundraising (unsubscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-111</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">StickyStreet (unsubscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-112</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">Segment (unsubscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-113</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">Chargebee (unsubscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-114</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">Recurly (unsubscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-115</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">Stripe (unsubscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-116</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">Campaign Monitor (unsubscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-117</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">Magento (unsubscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-118</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">GoFundMe Pro (unsubscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-119</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">Spree (unsubscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-120</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">Desk.com (unsubscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-121</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">Facebook Audiences (unsubscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-122</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">DonorPerfect (unsubscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-123</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">Donate.ly (unsubscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-124</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">ExactTarget (unsubscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-125</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">OpenCart (unsubscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-126</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">Funraise (unsubscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-127</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">Facebook Lead Ad (subscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-128</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">Typeform (subscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-129</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">Suppressed by Flow (unsubscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-130</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">Back in Stock (subscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-131</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">Back in Stock (unsubscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-132</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">mi9 (subscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-133</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">mi9 (unsubscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-134</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">Invalid Email (unsubscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-135</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">Merged Profiles (unsubscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-136</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">Transferred Memberships (subscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-137</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">Transferred Memberships (unsubscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-138</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">NetSuite (subscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-139</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">Wix (subscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-140</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">Square (subscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-141</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">SFTP (subscribe)</td>
+</tr>
+<tr style="height: 22px;">
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 39.2857%;">-142</td>
+<td style="border-style: solid; border-width: 1px; height: 22px; width: 60.5714%;">Square (unsubscribe)</td>
+</tr>
+</tbody></table></figure><h2 id="h_01JKGGG3Z2EGS3YEKE54P30JH4">Additional resources</h2><ul>
+<li data-list-item-id="ea06fe9b07edfa5d03492b7831293defb"><a href="https://help.klaviyo.com/hc/en-us/articles/115000713811">How to analyze revenue by source</a></li>
+<li data-list-item-id="e6c367d89bc5981d80ae96e1f426431dc"><a href="https://help.klaviyo.com/hc/en-us/articles/360040841811" target="_blank" rel="noopener noreferrer">How to segment for form results</a></li>
+<li data-list-item-id="ed3e3b27d654e9d400920f6787f9cc3d3"><a href="https://help.klaviyo.com/hc/en-us/articles/4408802648731" target="_blank" rel="noopener noreferrer">Message personalization reference</a></li>
+</ul>

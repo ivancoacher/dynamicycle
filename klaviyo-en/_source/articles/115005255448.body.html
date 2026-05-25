@@ -1,0 +1,161 @@
+<h2 id="h_01HGGP9MA27RMNP1P7JT9WAV8F">You will learn</h2>
+<p>Learn how to integrate Spree with Klaviyo. After completing these steps, you'll be able to personalize and target emails based on each customer's purchases and website activity. Here's the data we sync from Spree:</p>
+<ul>
+<li>Sales and order data including which products were purchased, product images, variant details and any discounts applied</li>
+<li>Customer information including first and last name, location, and how they found your store</li>
+<li>Fulfilled order data</li>
+</ul>
+<div class="bs-callout bs-callout-default">
+<p>A security patch pushed for Spree versions 2.2.14, 2.3.13, 2.4.10, and 3.0.4 forces searchable parameters to be allowlisted. The <code>updated_at</code> property of products and orders was not included in the default allowlist. Klaviyo's integration relies on this parameter, and thus you will need to push an update to allowlist this property to ensure your integration runs smoothly. If you don't allowlist the <code>updated_at</code> property for orders, <em>Started Checkout</em> events may not sync until an order is placed.</p>
+</div>
+<h2 id="h_01HGGP9MA2HD4GVQ0JF5ZG49EE">Add the Spree integration in Klaviyo</h2>
+<ol>
+<li>In Klaviyo, select the <strong>Integrations</strong> tab.</li>
+<li>Click <strong>Explore apps</strong>, search for S<em>pree</em>, and click the card. Then, click <strong>Install</strong>.</li>
+<li>On the next page, you'll need to provide your Store URL and a Spree API key / Encrypted Password. You can generate this API key in your Spree admin by navigating to <strong>Users</strong>, choosing an account, and then selecting <strong>Generate API Key</strong>.</li>
+<li>Back in Klaviyo, paste your Store URL and API key/encrypted password in the boxes.<br><img src="https://klaviyo.zendesk.com/hc/article_attachments/28720771093915" width="584" height="486">
+</li>
+<li>If you are using a versioned Spree API (v1), check the corresponding box.</li>
+<li>Click Connect to Spree. </li>
+<li>If you would like to add customers who opt-in to receive email from your Spree store to a list in Klaviyo, check the <em>Add new Spree customers to a Klaviyo list </em>box on the next page. After checking this box, select a list to which new opt-ins will get added.</li>
+<li>When you're ready, click <strong>Complete setup</strong>. You should then see a success message indicating you have integrated successfully.</li>
+</ol>
+<h2 id="h_01HGGP9MA203E2SMHJ7PBZZGP2">Install Klaviyo onsite tracking</h2>
+<p>To install onsite tracking, which consists of two events - <em>Active on Site</em> and <em>Viewed Product</em>, first find your public API key. Log in to your Klaviyo account and go to <strong>Account name &gt; Settings &gt; API keys</strong>. Your public key is six characters long. Securely copy this key for use in the next step. </p>
+<p>There are two types of onsite tracking you can leverage:</p>
+<ul>
+<li>
+<strong>Active on Site<br></strong>This metric is tracked whenever an identifiable browser visits your website</li>
+<li>
+<strong>Viewed Product<br></strong>This metric is tracked whenever an identifiable browser views a product page on your website</li>
+</ul>
+<h3 id="h_01HGGP9MA26VH1B05AYD1VH770">"Active on Site" tracking</h3>
+<p>This metric is tracked whenever an identifiable browser visits your website.</p>
+<ol>
+<li>To begin tracking <em>Active on Site</em> activity, add the following snippet of code to your main store template so it's included on all pages. You should place this snippet either with other analytics scripts you use or right before the closing <em>&lt;/body&gt;</em> tag.</li>
+<li>Make sure to replace <code>Public API Key</code> with your Klaviyo account's Public API key:
+<pre><code class="language-javascript">&lt;script type="text/javascript" async="" src="https://static.klaviyo.com/onsite/js/klaviyo.js?company_id=PUBLIC_API_KEY"&gt;&lt;/script&gt;
+&lt;script type="text/javascript"&gt; 
+//Initialize the Klaviyo object on page load
+!function(){if(!window.klaviyo){window._klOnsite=window._klOnsite||[];try{window.klaviyo=new Proxy({},{get:function(n,i){return"push"===i?function(){var n;(n=window._klOnsite).push.apply(n,arguments)}:function(){for(var n=arguments.length,o=new Array(n),w=0;w&lt;n;w++)o[w]=arguments[w];var t="function"==typeof o[o.length-1]?o.pop():void 0,e=new Promise((function(n){window._klOnsite.push([i].concat(o,[function(i){t&amp;&amp;t(i),n(i)}]))}));return e}}})}catch(n){window.klaviyo=window.klaviyo||[],window.klaviyo.push=function(){var n;(n=window._klOnsite).push.apply(n,arguments)}}}}(); &lt;/script&gt;</code></pre>
+</li>
+<li>Depending on the types of templates you use for your website, the <em>{% if user.is_logged_in %}</em> and <em>{{ user.email }} </em>syntax are likely different. Using the template language available, you want to check if the person viewing the current page is logged in. If so, you should output their email and name, if available. If you don't have name information, remove those two lines and the trailing comma after the email <em>$email</em> line.</li>
+<li>This Klaviyo tracking code will allow you to track an <em>Active on Site</em>metric so that you can see and leverage data related to site visits and visitor behavior. Through this metric, Klaviyo will track onsite activity for known browsers.</li>
+<li>To test that your onsite tracking is set up properly, go to a page in your store and add <code>?utm_email=email@example.com</code> to the end the URL replacing <em>email@example.com</em> with your email address. After your reload the page, search in Klaviyo for your email address. You should see a profile has been created and has tracked your site activity. </li>
+</ol>
+<h3 id="h_01HGGP9MA2TZMHR7X2JPHG4KVF">"Viewed Product" tracking</h3>
+<p>If you'd like to set up <a href="https://klaviyo.zendesk.com/hc/en-us/articles/115005255408">a browse abandonment flow</a> or build segments based on product browsing data, you'll want to add JavaScript event tracking for a <em>Viewed Product</em> metric.</p>
+<ol>
+<li>On your product page template, add the following snippet:
+<pre><code class="language-javascript">&lt;script type="text/javascript"&gt;
+ var klaviyo = window.klaviyo || [];
+ klaviyo.track("Viewed Product", {
+    Title: '{{ product.name }}',
+    ItemId: {{ product.id }},
+    Categories: {{ category in product.categories|json }}, // The list of categories is an array of strings.
+    ImageUrl: '{{ product.image_url }}',
+    Url: '{{ product.permalink }}',
+    Metadata: {
+    Brand: '{{ product.brand }}',
+    Price: {{ product.price }},
+    OnSale: {{ product.on_sale }},
+    RegularPrice: {{ product.regular_price }},
+    SalePrice: {{ product.sale_price }}
+ }
+ });
+&lt;/script&gt;</code></pre>
+</li>
+<li>The snippet above uses the <code>{{ }}</code> placeholder syntax which may be different for your Spree store. The important part is that product fields are dynamically rendered based on which product page you're viewing.</li>
+<li>After <em>Viewed Product</em> tracking has been configured for your site, <em>Viewed Product</em> data should begin populating in your Klaviyo account as known visitors browse your product pages.</li>
+</ol>
+<h3 id="h_01HGGP9MA341KCJT5DY724ZFQJ">How onsite tracking works</h3>
+<p>When you add Klaviyo onsite tracking to your site, we are only able to track the browsing activity of "known browsers" - i.e. browsers that have visited and engaged at least once before. There are two key ways we are able to identify a site visitor for onsite tracking purposes:</p>
+<ul>
+<li>If someone has, at some point, clicked through a Klaviyo email to your website</li>
+<li>If someone has, at some point, subscribed/opted-in through a Klaviyo form</li>
+</ul>
+<p>Klaviyo will not track anonymous browsers.</p>
+<h2 id="h_01HGGP9MA34KB1FVFE5XCS85Z6">Monitor the Klaviyo sync </h2>
+<p>To check your integration:</p>
+<ol>
+<li>Click the <strong>Analytics</strong> dropdown in Klaviyo and select <strong>Metrics</strong>. Here, you can filter to view all Spree metrics.</li>
+<li>Find Spree's <em>Placed Order</em>metric and click on the Activity Feed icon. If your integration has begun syncing data, you will start to see <em>Placed Order</em> events populate here.</li>
+<li>We will automatically sync all historic order data. To verify this, you can compare the number of event on a particular day in Klaviyo with what's in your Spree interface and confirm they match. For example, when exploring the <em>Placed Order</em> metric, you can mouse over yesterday's data point or look at the table of data below the chart to see how many orders were reported yesterday.</li>
+<li>Compare that number to what's stored in Spree from yesterday and you should see they match exactly. If they don't, the issue is most likely that your Klaviyo account's timezone doesn't match your set Spree timezone.</li>
+<li>To check your timezone setting in Klaviyo:
+<ul>
+<li>Click your account name in the lower left.</li>
+<li>Select then clicking <strong>Settings</strong><strong> &gt; Organization</strong>.</li>
+<li>Scroll down to <em>Timezone</em>.</li>
+</ul>
+</li>
+<li>Once this historic sync has completed, you will see a light green border around your Spree integration in the <strong>Integrations</strong> tab.</li>
+</ol>
+<h2 id="h_01HGGP9MA3RVWQQHTZS94N800C">Data synced from Spree</h2>
+<div class="bs-callout bs-callout-default">
+<p>The Spree integration syncs with Klaviyo every hour.</p>
+</div>
+<p>Below are a list of metrics which Spree syncs into Klaviyo. You can view all Spree metrics which sync into your account under <strong>Analytics &gt; Metrics</strong>. </p>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/28720771091739" alt="Metrics tab in Klaviyo filtered by Spree showing metrics such as Fufilled Order and Ordered Product"></p>
+<h3 id="h_01HGGP9MA36ANBC6HSF1HWHWYE">Placed Order </h3>
+<p>This metric records an event every time someone places an order and successfully pays for it. It corresponds to orders in Spree that are complete, meaning a customer has completed the entire checkout process. With this metric, you can easily create dynamic lists of people based on the number of orders they've placed or their lifetime value. You can also create emails to re-engage past customers or send customer thank you emails for first time buyers. You can filter and target <em>Placed Order</em> events based on the following criteria:</p>
+<ul>
+<li>
+<strong>IsDiscounted<br></strong>If an order had a discount applied, e.g., <em>true </em>or <em>false</em>.</li>
+<li>
+<strong>ItemNames<br></strong>The names of the products purchased in this event.</li>
+</ul>
+<h3 id="h_01HGGP9MA3WEHEY9D4DMY1K2K8">Ordered Product</h3>
+<p>This metric is similar to the <em>Placed Order</em> metric, however an event is recorded for each item someone orders. For example, if someone purchased a t-shirt and a pair of shorts, this would appear in Klaviyo as one <em>Placed Order</em> event and two <em>Ordered Product</em> events, one for the t-shirt and one for the pair of shorts. This metric is useful for building lists that target customers who purchased (or have not purchased) specific items or items in specific categories. You can also use the<em> Ordered Product</em> metric as a trigger for flows to send emails about related products that naturally go together, but some customers haven't already bought.</p>
+<ul>
+<li>
+<strong>Categories<br></strong>The categories the product ordered belong to, e.g., <em>Shirts,</em> <em>Mens</em> or <em>Sale</em>.</li>
+<li>
+<strong>Name<br></strong>The name of the product purchased, e.g., <em>Men's Red T-Shirt</em>.</li>
+<li>
+<strong>ProductId<br></strong>The id of your product as it is set in your store, e.g., <em>2022, 2023, 2024</em>.</li>
+<li>
+<strong>Quantity<br></strong>The quantity of a product ordered.</li>
+<li>
+<strong>SKU<br></strong>The SKU of the product as it is set in your store.</li>
+<li>
+<strong>Variant Option: Color<br></strong>The color of the product, if available, e.g., <em>Red </em>or<em> Blue</em>.</li>
+<li>
+<strong>Variant Option: Size<br></strong>The size of the product, if available, e.g., <em>Medium </em>or <em>Large</em>.</li>
+</ul>
+<h3 id="h_01HGGP9MA357SA237KV85PH1R0">Fulfilled Order</h3>
+<p>This metric records an event when a customer's order ships. The event in Klaviyo includes the tracking number for any shipments, so you can use this metric as a trigger for shipping confirmation emails. Another common email based on the <em>Fulfilled Order</em> metric is the product review email, where you ask customers to leave a review for items they recently purchased. Using the <em>Fulfilled Order</em> metric allows you to time these emails based on when someone receives their order so you don't have to worry sending them an email before they've received their package. You can filter and target <em>Fulfilled Order</em> events based on the following criteria:</p>
+<ul>
+<li>
+<strong>IsDiscounted<br></strong>If an order had a discount applied, e.g., <em>true </em>or <em>false</em>.</li>
+<li>
+<strong>ItemNames<br></strong>The names of the items purchased in this event.</li>
+</ul>
+<h3 id="h_01HGGP9MA391FCQ8FXREN0W0R2">Started Checkout</h3>
+<p>This metric records an event each time someone starts a checkout and has entered their email address. The primary use for this metric is sending abandoned cart emails. With Klaviyo, you can easily set up an email flow to send a cart reminder if someone started to checkout but hasn't placed an order after a few hours. The <em>Started Checkout</em> event contains all the information about someone's cart, so you can show the products in their cart as well as images of those products. For more advanced users, you can set up two abandoned cart flows -- one for first-time customers that includes a discount code, and one for repeat purchasers that doesn't include a discount code. You can filter and target <em>Started Checkout</em> events based on the following criteria:</p>
+<ul>
+<li>
+<strong>IsDiscounted<br></strong>If an order had a discount applied, e.g., <em>true </em>or <em>false</em>.</li>
+<li>
+<strong>ItemNames<br></strong>The names of the items purchased in this event.</li>
+</ul>
+<h3 id="h_01HGGP9MA30HR2A2TCA1HR1QER">Customer data</h3>
+<p>In addition to the metrics Klaviyo syncs from Spree, there are also customer properties that are added to each Klaviyo profile. You can use these properties in segments and flows. Here are the properties that are automatically synched from Spree:</p>
+<ul>
+<li>Email</li>
+<li>First Name</li>
+<li>Last Name</li>
+<li>City</li>
+<li>State/Region</li>
+<li>Zip Code</li>
+<li>Country</li>
+<li>Phone Number</li>
+</ul>
+<h2 id="h_01HGGP9MA3A7293905QFN601TD">Outcome</h2>
+<p>You've now integrated your Klaviyo account with Spree, installed onsite tracking, and reviewed your synced data.</p>
+<h2 id="h_01HGGP9MA3Q53YF8J2YJ8DQZ8K">Additional resources</h2>
+<ul>
+<li><a href="https://klaviyo.zendesk.com/hc/en-us/articles/115005253208" target="_blank" rel="noopener">How often integrations sync reference</a></li>
+<li>Need more help integrating with Klaviyo? Check out <a href="https://klaviyo.partnerpage.io/?utm_source=helpcenter&amp;utm_medium=integrations" target="_blank" rel="noopener">Klaviyo's Agency Partners</a>
+</li>
+</ul>

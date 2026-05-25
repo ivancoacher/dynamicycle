@@ -1,0 +1,136 @@
+<h2>Overview</h2>
+<p>This guide will walk you through migrating your data from Drip to Klaviyo. While Klaviyo does not have a built-in integration with Drip, you can export your data from Drip and upload it into Klaviyo.</p>
+<p>Migrate your Drip profiles by creating and exporting several Drip segments of people. First, you'll create a Drip segment of people who have subscribed to email marketing. Then you'll export those profiles to be uploaded into your Klaviyo Newsletter (opt-in) list. You'll also create a Drip segment of people who have unsubscribed to email marketing and add those profiles to your Klaviyo Suppressed Profiles list. </p>
+<p>In addition to migrating your Drip profiles, you'll also need to move your Drip email templates into Klaviyo. When all your information is migrated to Klaviyo, you can begin sunsetting your Drip account.</p>
+<p>This guide will walk you through migrating your data from Drip to Klaviyo. As you migrate your Drip lists, keep in mind that the main objectives for migrating data are to ensure that all relevant contacts and fields are represented in Klaviyo, and that any opted-out contacts are treated as such in Klaviyo. Below we provide a recommended approach that will allow you to upload your Drip contacts to Klaviyo and treat various contacts as unsubscribed based on the contact's status in Drip. We recommend that you also review <a href="https://www.drip.com/learn/docs/manual/people" target="_blank" rel="noopener" data-saferedirecturl="https://www.google.com/url?q=https://help.bronto.com/bmp/concept/c_bmp_contacts_manage_overview.html&amp;source=gmail&amp;ust=1576074448783000&amp;usg=AFQjCNECEsqPHA7-gcotS-v04JhBfsKK_w">how Drip defines these statuses</a> so you can verify data quality in Bronto and ensure that this approach of uploading active, unsubscribes, bounces, and suppressions <span class="diff-added"><span>aligns with your intended use of Klaviyo.</span></span></p>
+<div class="bs-callout bs-callout-default">
+<p>This guide gives you general guidelines for migrating your data from Drip to Klaviyo. Contact <a href="https://www.drip.com/contact" target="_blank" rel="noopener">Drip Support</a> for the most up-to-date instructions on exporting your Drip data.</p>
+</div>
+<h2>Checklist</h2>
+<p>Use this checklist as a guide to migrating your Drip data into Klaviyo: </p>
+<ol>
+<li>Create a Drip segment of active people who have subscribed to email marketing. Export this list as a CSV and format it appropriately.</li>
+<li>Upload this CSV to a list in Klaviyo.</li>
+<li>Create a Drip segment of active people who have unsubscribed. Export this list as a CSV and format it appropriately.</li>
+<li>Upload this CSV of unsubscribes to your Klaviyo Suppression List.</li>
+<li>Migrate your email templates from Drip to Klaviyo.</li>
+<li>Sunset your Drip account.</li>
+</ol>
+<h2>Export Your Drip Active Email Subscribers People List</h2>
+<p>Since Drip's active people grouping does not directly correlate with engaged Klaviyo profiles, you'll need to create a Drip segment of active people who have subscribed to email marketing. Export that segment as a CSV so you can format it for upload to a Klavyio list. <br> <br> In your Drip account, navigate to the <strong>People</strong> section and click the <strong>Active</strong> tab.</p>
+<p class="wysiwyg-text-align-center"><img src="https://klaviyo.zendesk.com/hc/article_attachments/28723630861211" alt="Drip1.png"></p>
+<p>Click the dropdown and select <strong>people subscribed to email marketing</strong>. This will create a segment of all active people who are opted-in and able to receive email communications.</p>
+<p class="wysiwyg-text-align-center"><img src="https://klaviyo.zendesk.com/hc/article_attachments/28723630892955" alt="Drip_Segment1.png"></p>
+<p>Click <strong>Actions</strong> and choose <strong>Export to CSV</strong>. Then, click <strong>OK</strong>. Drip will email the CSV file to the address listed on your <strong>Drip Account</strong>, under <strong>General Info</strong>.</p>
+<p>These segmentation fields will automatically be included in your Drip CSV export file:</p>
+<ul>
+<li>Token</li>
+<li>Email address</li>
+<li>Time zone</li>
+<li>Status</li>
+<li>Created at date</li>
+<li>Confirmed at date</li>
+<li>Tags</li>
+<li>Custom fields</li>
+<li>Campaigns</li>
+<li>Referrer</li>
+<li>Landing URL</li>
+<li>IP address</li>
+<li>Lead score</li>
+<li>Lifetime value</li>
+<li>User ID</li>
+</ul>
+<p>You can also view instructions on exporting your active list on the <a href="https://www.drip.com/learn/docs/manual/people/active" target="_blank" rel="noopener">Drip Help Center</a>.</p>
+<h2>Format the CSV for Import</h2>
+<p>You'll need to format each CSV that you import into Klaviyo. To do this, open the CSV file and comb through the list, paying special attention to the column headings:</p>
+<ul>
+<li>Column headings should be in the first row of the CSV file. If Drip adds additional rows before the column headings, delete these extra rows.</li>
+<li>Your CSV must include an "Email" or an "Email Address" column.</li>
+<li>You may want to include a "First Name" and "Last Name" column.</li>
+<li>Include any custom profile properties such as "Gender" that you'd like to upload to Klaviyo.</li>
+<li>Timestamp fields such as "date added," "last opened," and "last clicked" need to be specifically formatted or Klaviyo will not recognize them as timestamp fields. Make sure timestamp data is formatted in one of these formats:<br>
+<p><code>YYYY-MM-DD HH:MM:SS</code></p>
+<p><code>MM/DD/YYYY HH:MM:SS</code></p>
+<p><code>MM/DD/YY HH:MM:SS</code></p>
+<p><code>MM/DD/YYYY HH:MM</code></p>
+<p><code>MM/DD/YY HH:SS</code></p>
+<p><code>YYYY-MM-DDTHH:MM:SS</code><code></code></p>
+</li>
+</ul>
+<p>Below is an example of how your CSV file should be formatted.<br> <img src="https://klaviyo.zendesk.com/hc/article_attachments/28723625578907" alt="Drip_CSV_Formatted.png"></p>
+<p>Review your CSV carefully, editing and deleting column headings and contact entries as appropriate.</p>
+<p>For more detailed instructions on formatting CSV files, head to our article on <a href="https://klaviyo.zendesk.com/hc/en-us/articles/115005078967" target="_blank" rel="noopener">Creating and Adding Contacts to a New List</a>.</p>
+<h2 id="h_15dc314e-1601-4244-9576-0a81bcc012e9">Import Your CSVs into Klaviyo</h2>
+<p>After you've formatted your CSV, you can import it as a list in Klaviyo.</p>
+<div class="bs-callout bs-callout-default">
+<p>Some Klaviyo flows are triggered by an email address being added to a list, like a welcome series. Before you begin uploading contacts to a list, make sure these related flows are turned to draft or manual mode.</p>
+</div>
+<p>In Klaviyo, navigate to the <strong>Lists &amp; Segments </strong>tab. Select the list you would like to add your contacts to. For simplicity, we recommend adding subscribers to your Newsletter list, but you can add your opt-in email addresses to any list. </p>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/28723659154331" alt="Bronto12.gif"></p>
+<p>On the upper right-hand corner of your list, choose <strong>Import Contact</strong> from the <em>Manage List</em> dropdown.<br> <img src="https://klaviyo.zendesk.com/hc/article_attachments/28723630868763" alt="Import_Contacts_blurred.gif"></p>
+<p>Drag and drop your CSV. You will be prompted to review field mapping before Klaviyo begins the import. Carefully review each import field, corresponding to a Klaviyo field, and modify as appropriate. By default, all identified fields are included in the import. You can omit a field from import by unchecking the box to the right of the field name.</p>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/28723630875163" alt="Omit_Import_Field.gif"></p>
+<div class="bs-callout bs-callout-default">
+<p>Import fields that are not automatically matched to a Klaviyo field are marked <em style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;">Unmapped</em>. If you try to import an unmapped field, Klaviyo will give you an error message and prompt you to map the field. In the dropdown of each <em>Unmapped</em> field, select an existing Klaviyo field name or create a custom field by typing a name into the blank entry field. To the right of the field name, select a data type from these options: <em>String</em>, <em>Boolean</em>, <em>Numeric</em>, <em>Date</em>, or <em>List</em>. If you're unsure of the proper data type, head to our article on <a href="https://klaviyo.zendesk.com/hc/en-us/articles/115005237648" target="_blank" rel="noopener">the data types you can use in your import</a>.</p>
+</div>
+<p><strong><img src="https://klaviyo.zendesk.com/hc/article_attachments/28723630865179" alt="Map_Custom_Property.gif"><br></strong>Below is an example of field mapping for a Drip contacts import.<br> <img src="https://klaviyo.zendesk.com/hc/article_attachments/28723625582875" alt="Drip_Field_Mapping_2.png"><br> When you're finished, click <strong>Start Import</strong> on the upper-right corner of your screen.<img src="https://klaviyo.zendesk.com/hc/article_attachments/28723630883995" alt="Start_CSV_Import.png"></p>
+<p>For a deeper dive into importing contacts, head to our article on <a href="https://klaviyo.zendesk.com/hc/en-us/articles/115002053752" target="_blank" rel="noopener">migrating existing subscribers and unsubscribes into Klaviyo</a>.</p>
+<h2>Export Drip Unsubscribed List</h2>
+<p>It is important to add in recipients who have unsubscribed from emails sent through Drip to your Klaviyo Suppression List to ensure compliance with spam laws and keep your deliverability high.</p>
+<p>Since Drip's inactive people grouping does not directly correlate with suppressed Klaviyo profiles, we recommend creating a Drip segment of active people who have unsubscribed to email marketing. You can also export your Drip inactive people and add those to your Klaviyo Suppression List.</p>
+<p>From your Drip account, navigate to the <strong>People</strong> section and click the <strong>Active</strong> tab.</p>
+<p class="wysiwyg-text-align-center"><img src="https://klaviyo.zendesk.com/hc/article_attachments/28723630861211" alt="Drip1.png"></p>
+<p>Click the dropdown and select <strong>people unsubscribed to email marketing</strong>. This will create a segment of all active people who are opted-out from email marketing.</p>
+<p class="wysiwyg-text-align-center"><img src="https://klaviyo.zendesk.com/hc/article_attachments/28723630892955" alt="Drip_Segment1.png"></p>
+<p>Click <strong>Actions</strong> and choose <strong>Export to CSV</strong>. Then, click <strong>OK</strong>. Drip will email the CSV file to the address listed on your <strong>Drip Account</strong>, under <strong>General Info</strong>.</p>
+<h2>Format CSV File for Suppress List</h2>
+<p>Format the CSV file containing unsubscribes so that it contains a single column of email addresses<em>.</em> Label the column <em>Email</em> for clarity.</p>
+<p>Below is an example of how your suppression list CSV file should be formatted.</p>
+<p class="wysiwyg-text-align-center"><img src="https://klaviyo.zendesk.com/hc/article_attachments/28723659146523" alt="Suppress_list_format.png"></p>
+<div class="bs-callout bs-callout-default">
+<p>As an optional step, you can also export your Drip Inactives and format that list for upload into your Suppression List in Klaviyo. To do so, navigate to <strong>Drip &gt; People &gt; Inactives</strong>. Click <strong>Actions &gt; Export to CSV</strong>. Visit the Drip Help Center for more information on <a href="https://www.drip.com/learn/docs/manual/people/inactive" target="_blank" rel="noopener">exporting Drip Inactives</a>.</p>
+</div>
+<h2>Load Unsubscribes into Klaviyo</h2>
+<p>Navigate to the <strong>Profiles</strong> tab in your Klaviyo account and click <strong>Suppressed Profiles</strong> on the upper right. Then, select <strong>Upload File</strong>.</p>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/28723625557275" alt="Import_CSV_to_Suppressed_blurred.gif"></p>
+<p>Click <strong>Choose File</strong> to select the CSV file containing your Drip suppressions. Then, click <strong>Upload Suppressions</strong>.</p>
+<p class="wysiwyg-text-align-center"><img src="https://klaviyo.zendesk.com/hc/article_attachments/28723630906139" alt="Bronto21.png"></p>
+<p>Your Klaviyo Suppression List will now reflect your import.</p>
+<h2>Migrate Email Templates from Drip to Klaviyo</h2>
+<p>Klaviyo offers an intuitive drag-and-drop template builder that you can use to recreate your Drip email templates. We highly recommend using this method to rebuild your templates because it will ensure that they are mobile-optimized, responsive, and easy-to-edit moving forward.</p>
+<div class="bs-callout bs-callout-default">Check out <a href="https://help.klaviyo.com/hc/en-us/articles/115005082447-The-Email-Template-Editor" target="_self">our guide to using Klaviyo's template editor</a>.</div>
+<p>If you don't have time to recreate your Drip templates, it is possible to export your email templates from Drip in raw HTML and then upload the updated raw HTML into Klaviyo. However, we strongly recommend rebuilding your templates in the template editor so you don't have to update the raw HTML of your emails going forward. If you choose to import raw HTML templates, you can reference our article on <a href="https://klaviyo.zendesk.com/hc/en-us/articles/115005254068" target="_blank" rel="noopener">importing a custom HTML template</a>.</p>
+<h2>Sunset Your Drip Account</h2>
+<p>After you've moved all your data over to Klaviyo, there are three key steps you can take to ensure that you no longer need your Drip account:</p>
+<div class="article__body markdown">
+<ol>
+<li>Ensure that your signup forms and list growth tools point to Klaviyo, not Drip.</li>
+<li>Recreate your Drip workflows as Klaviyo flows.</li>
+<li>Discontinue use of Drip.</li>
+</ol>
+<h3>Signup Forms and List Growth Tools</h3>
+<p>Recreate any Drip signup forms in Klaviyo so that your list continues to grow in Klaviyo, rather than in Drip. You can:</p>
+<ol>
+<li>Use the Klaviyo <a href="https://help.klaviyo.com/hc/en-us/articles/360002050572-The-Signup-Form-Builder" target="_self">Signup Form Builder</a> to re-create your forms from scratch.</li>
+<li>Use a third-party list growth tool that integrates with Klaviyo.</li>
+<li>Integrate your custom form through your ecommerce platform.</li>
+</ol>
+<p>If you are using third-party list growth tools, make sure that these sync to Klaviyo. Klaviyo integrates with a number of <a href="https://help.klaviyo.com/hc/en-us/sections/115001509868-Tools-for-List-Growth-Landing-Pages" target="_blank" rel="noopener">tools for list growth and landing pages</a>. <a href="https://help.klaviyo.com/hc/en-us/categories/115000874028-App-Integrations" target="_blank" rel="noopener">Scan our list of integrations</a> to find the tool that you're using. If you don't see it listed, consider using Klaviyo's signup form builder to create your forms, or try switching to a different third-party tool.</p>
+<div class="bs-callout bs-callout-default">
+<p>Please note that all Klaviyo lists are <a href="https://help.klaviyo.com/hc/en-us/articles/115005251108-The-Double-Opt-In-Process" target="_self">double opt-in</a> by default. If you would like to change a list to single opt-in and you are on a paid plan, <a href="https://help.klaviyo.com/hc/en-us/requests/new" target="_blank" rel="noopener">reach out to support</a>.</p>
+</div>
+<p>If you’re using a custom-coded form, there are two ways you can ensure that these contacts sync to Klaviyo. One option is to make sure that your custom form syncs new subscribers directly to your ecommerce platform and that your ecommerce store is integrated with your Klaviyo account. The second option is to point the form directly to your Klaviyo account by updating the Form Action URL. To find the Form Action URL in your Klaviyo account, go to your <strong>Lists &amp; Segments</strong> tab and click on the list where you want to add your new subscribers. Click on the <strong>Subscribe Page</strong> tab and copy the URL in the upper right.</p>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/28723630915355" alt="Updating_Form_Action_URL.gif"></p>
+<p>After switching all your signup forms to point to Klaviyo, wait a few days and watch your lists in Drip. If you notice subscribers are still being added to these lists, there's probably at least one form that still needs to be swapped out.</p>
+<p>Next, you'll want to turn off your Drip signup forms. <a href="https://www.Drip.com/contact" target="_blank" rel="noopener">Contact Drip Support</a> for information on how to turn off your Drip signup forms.</p>
+<h3>Flows</h3>
+<p>Flows are automated communication, triggered off of customer action, that allow you to personalize your messages to each recipient. It is important to recreate these in Klaviyo so that you don't need to continue to use Drip to send triggered emails.</p>
+<p>As you move from Drip, it may be a good time to refresh and update your automated messaging. We recommend that you turn on your <a href="https://help.klaviyo.com/hc/en-us/articles/115002775172-Create-a-Welcome-Series-Flow" target="_self">welcome series</a> and <a href="https://help.klaviyo.com/hc/en-us/articles/115002779411-Guide-to-Creating-an-Abandoned-Cart-Flow" target="_self">abandoned cart</a> flows as soon as possible. A welcome series is particularly important to engage new subscribers, and abandoned cart flows have the highest ROI of any other type of flow.</p>
+<p>Once your Klaviyo flows are live, you'll want to turn off all of your workflows in Drip to ensure that you're not double-emailing people. <a href="https://www.Drip.com/contact" target="_blank" rel="noopener">Contact Drip Support</a> for more information about turning off your Drip workflows.</p>
+<h3>Discontinue Drip Use</h3>
+<p>Once you’ve pointed all of your list growth tools to your Klaviyo account, paused your Drip workflows, and turned your Klaviyo flows live, you can discontinue using Drip. Before you close your Drip account, double-check that everything is working as expected. Enter a test email into your signup form and other list growth tools, abandon a cart, and sign up for your newsletter to trigger a welcome series. Go to the <strong>Profiles</strong> tab in your Klaviyo account to make sure that the information in the profile reflects all of the correct communication. If the list you sign up to is double opt-in, be sure to confirm your email first.</p>
+<p>After you've taken these steps and are fully migrated to Klaviyo, you can close your Drip account.</p>
+<h2>Next Steps with Klaviyo</h2>
+<p>Once your Klaviyo account is integrated with your store and all of your data is migrated over from Drip, you can work toward your first Klaviyo send by following our <a href="https://klaviyo.zendesk.com/hc/en-us/articles/360027226471" target="_blank" rel="noopener">Guide to Your First Send</a>.</p>
+</div>
+<p>If you have questions about transitioning from Drip or getting started with Klaviyo, please <a href="https://klaviyo.zendesk.com/hc/en-us/articles/115001002272" target="_blank" rel="noopener">reach out to our Support Team</a>.</p>

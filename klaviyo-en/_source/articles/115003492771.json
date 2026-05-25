@@ -1,0 +1,869 @@
+{
+  "captured_at": "2026-05-23T16:19:04Z",
+  "article": {
+    "id": 115003492771,
+    "url": "https://klaviyo.zendesk.com/api/v2/help_center/en-us/articles/115003492771.json",
+    "html_url": "https://klaviyo.zendesk.com/hc/en-us/articles/115003492771-Guide-to-supporting-multiple-Magento-stores-for-Magento-2-x",
+    "author_id": 20424705848,
+    "comments_disabled": true,
+    "draft": false,
+    "promoted": false,
+    "position": 10,
+    "vote_sum": 3,
+    "vote_count": 51,
+    "section_id": 49375848540187,
+    "created_at": "2017-12-18T15:19:40Z",
+    "updated_at": "2026-04-21T13:54:14Z",
+    "name": "Guide to supporting multiple Magento stores (for Magento 2.x)",
+    "title": "Guide to supporting multiple Magento stores (for Magento 2.x)",
+    "source_locale": "en-us",
+    "locale": "en-us",
+    "outdated": false,
+    "outdated_locales": [],
+    "edited_at": "2025-03-17T14:58:27Z",
+    "user_segment_id": null,
+    "permission_group_id": 146372,
+    "content_tag_ids": [],
+    "label_names": [],
+    "body": "<h2 id=\"h_01J9KNQ2BMQT99CBVYT69978HX\">Overview</h2>\n<p>If you have a single Magento 2 server that hosts more than one store, you have two options as you get setup with Klaviyo:</p>\n<ol>\n<li>\n<strong>Create Separate Klaviyo Accounts for Each Magento 2 Store<br></strong>If you're interested in creating separate Klaviyo accounts for each of your Magento 2 stores, click the advanced option on the Magento 2 integration page to retrieve a list of your stores, and select the stores you want to sync to the Klaviyo account you're working with.</li>\n<li>\n<strong>Sync All Store Data to a Single Klaviyo Account<br></strong>This option requires you to then use Klaviyo's Segment Builder and flow filter capabilities to leverage data for each store separately.\n<div class=\"bs-callout bs-callout\">Since Klaviyo is not currently optimized to support multiple brands in a single account, we recommend using this method only for multiple languages of the same brand (e.g English and French stores) or if you have an online/offline store of the same brand.</div>\n</li>\n</ol>\n<h2 id=\"h_01J9KNQ2BM41S984YZZB40QFNF\">Create Separate Klaviyo Accounts for Each Magento Store</h2>\n<p>If you're interested in creating separate Klaviyo accounts for each of your Magento 2 stores, you can select the specific Magento 2 stores you want to connect to your account on the Magento 2 integration page.</p>\n<p>While <a href=\"https://klaviyo.zendesk.com/hc/en-us/articles/115005254348\" target=\"_blank\" rel=\"noopener\">integrating with Magento</a>, if you check the setting <strong>Only sync specific Magento 2 stores</strong>, Klaviyo will give you the option of which to sync.</p>\n<p><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28711673376155\" width=\"411\" height=\"284\"></p>\n<p>Choosing one or more stores here means that Klaviyo will exclusively sync customer and order data from these chosen stores.</p>\n<p>If you don't check this setting and a new store gets added in the future, data from that new store will also begin syncing into Klaviyo at this time.</p>\n<h2 id=\"h_01J9KNQ2BMRJ6SX9DSWRDS653G\">Sync All Store Data to a Single Klaviyo Account</h2>\n<p>When you integrate a Magento 2 server that has multiple stores on it to a single Klaviyo account, we will sync all profiles and order data from each store into this one account.</p>\n<p>Additionally, we will sync <em>Magento Store Name</em> and <em>Magento Website ID</em> properties for each profile created to let you know which of your stores that profile comes from. You will then be able to configure our extension on a site-by-site level to pick which list to add subscribers to, and you can filter flows and segments using the Magento 2 store name to separate flows between stores.</p>\n<p>However, as noted above, Klaviyo is not currently optimized to support more than one store in a single account. This means it is not possible to fully isolate each store's data within a single Klaviyo account.</p>\n<h2 id=\"h_01J9KNQ2BN9S7TBYBVVPQY1BYZ\">Scope the Klaviyo Magento Extension to a Single Store View </h2>\n<p>When you install the Klaviyo Magento Extension, you will be able to enable it for a specific configuration scope. If you would like to configure our extension on a site-by-site level, you just need to shift the scope and set the right Klaviyo API Keys for each view. Make sure to set these API keys at the website level as well as the store view level.</p>\n<p>The screenshot below shows all the available store scopes. Here, you can also see the API key for the English store's associated Klaviyo account.</p>\n<p class=\"wysiwyg-text-align-center\"><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28711661193755\" alt=\"2021-03-22_10-50-19.png\"></p>\n<p>Meanwhile, the screenshot below uses the same site, only now the French store is selected. The API key for that store's associated Klaviyo account is also added.</p>\n<p><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28711661199131\" alt=\"2021-03-22_13-37-59.png\"></p>\n<h2 id=\"h_01J9KNQ2BN28QHQZDZED0Z2Q6H\">Finding Store IDs for your Magento Stores</h2>\n<p>Each Magento store within your Klaviyo account is assigned a unique <em>Store ID</em>. Use this property to keep your flows distinct for each Magento store.</p>\n<p>To find your Magento <em>Store IDs</em>, navigate to Klaviyo and select the <strong>Integrations</strong> tab. Select <strong>Magento 2</strong> and scroll down to the<em> Advanced</em> settings. </p>\n<p><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28711673378459\" width=\"466\" height=\"322\"></p>\n<p>Notice that each store is associated with a distinct Store ID that you can use to filter your flows.</p>\n<h2 id=\"h_01J9KNQ2BN4XA16AK7YP98PMAX\">Flows for Multiple Magento 2 Stores</h2>\n<p>You may want to set up different messaging for multiple Magento stores. For example, if you support multiple languages in your Magento stores, you may want to create a post purchase flow and with different flow branches for your French-speaking stores and for your English speaking stores. You can accomplish this by creating a conditional split based on the <em>MagentoStore</em> profile property.</p>\n<p>This is an example of a post purchase flow with a conditional split based on the <em>MagentoStore</em> profile property. This flow splits to create a flow branch for a Magento 2 \"French\" store:</p>\n<p><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/29859702292251\"></p>\n<p>Another branch can be created based on the <em>MagentoStore</em> value equaling <em>English-UnitedStates</em>.</p>\n<h2 id=\"h_01J9KNQ2BNTJ6MJEHG5Q3BJ5W4\">Sign-up Forms for Multiple Magento Stores</h2>\n<p>You'll want to customize your sign-up forms for each of your Magento stores.</p>\n<ul>\n<li>You can design a distinct form for each of your Magento stores</li>\n<li>You can use one sign-up form and <a href=\"https://klaviyo.zendesk.com/hc/en-us/articles/115005258208\" target=\"_blank\" rel=\"noopener\">show or hide blocks based on dynamic variables</a>\n</li>\n</ul>\n<p>In addition to custom styling, you can choose to surface a form only to specific URLs:</p>\n<p>Within <strong>Sign-up Forms</strong>, navigate to the <strong>Targeting &amp; </strong><strong>Behaviors</strong> tab.</p>\n<p>Under <em>Targeting</em>, check the  <em>URL</em> option and enter the specific URL you wish to target.  </p>\n<p class=\"wysiwyg-text-align-center\"><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28711673372955\" alt=\"mceclip0.png\" width=\"353\" height=\"287\"></p>\n<p>You may also want to consider <a href=\"https://klaviyo.zendesk.com/hc/en-us/articles/360040841811\" target=\"_blank\" rel=\"noopener\">including a hidden field</a> in your sign-up form which passes a custom language property. This will ensure that each subscriber is associated with a hidden language property that you can later use to segment your customers.</p>\n<h2 id=\"h_01J9KNQ2BND4BPJ8SZ0Y5S2TZG\">Support for Multiple Languages within your Klaviyo Account</h2>\n<p>You may have multiple Magento stores in different languages. You can customize your email templates and target your customers based on their location and/or language preferences.</p>\n<div class=\"bs-callout bs-callout\">\n<p>For more information on supporting multiple languages within your Klaviyo account, head over to <a href=\"https://klaviyo.zendesk.com/hc/en-us/articles/115005239028\" target=\"_blank\" rel=\"noopener\">Klaviyo's Support for Multiple Languages</a> </p>\n</div>",
+    "user_segment_ids": []
+  },
+  "normalized": {
+    "id": "115003492771",
+    "title": "Guide to supporting multiple Magento stores (for Magento 2.x)",
+    "source_url": "https://help.klaviyo.com/hc/en-us/articles/115003492771-Guide-to-supporting-multiple-Magento-stores-for-Magento-2-x",
+    "section_id": 49375848540187,
+    "section": "Magento 2",
+    "category_id": 115000032731,
+    "category": "Integrations",
+    "category_slug": "integrations",
+    "klaviyo_updated": "2026-04-21T13:54:14Z",
+    "created_at": "2017-12-18T15:19:40Z",
+    "draft": false,
+    "promoted": false,
+    "position": 10,
+    "label_names": []
+  },
+  "files": {
+    "body_html": "_source/articles/115003492771.body.html",
+    "rendered_html": "_source/rendered/115003492771.html"
+  },
+  "assets": {
+    "api_body": {
+      "images": [
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28711673376155",
+          "alt": "",
+          "width": "411",
+          "height": "284"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28711661193755",
+          "alt": "2021-03-22_10-50-19.png",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28711661199131",
+          "alt": "2021-03-22_13-37-59.png",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28711673378459",
+          "alt": "",
+          "width": "466",
+          "height": "322"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/29859702292251",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28711673372955",
+          "alt": "mceclip0.png",
+          "width": "353",
+          "height": "287"
+        }
+      ],
+      "links": [
+        {
+          "href": "https://klaviyo.zendesk.com/hc/en-us/articles/115005254348",
+          "text": "integrating with Magento"
+        },
+        {
+          "href": "https://klaviyo.zendesk.com/hc/en-us/articles/115005258208",
+          "text": "show or hide blocks based on dynamic variables"
+        },
+        {
+          "href": "https://klaviyo.zendesk.com/hc/en-us/articles/360040841811",
+          "text": "including a hidden field"
+        },
+        {
+          "href": "https://klaviyo.zendesk.com/hc/en-us/articles/115005239028",
+          "text": "Klaviyo's Support for Multiple Languages"
+        }
+      ],
+      "headings": [
+        {
+          "level": 2,
+          "id": "h_01J9KNQ2BMQT99CBVYT69978HX",
+          "text": "Overview"
+        },
+        {
+          "level": 2,
+          "id": "h_01J9KNQ2BM41S984YZZB40QFNF",
+          "text": "Create Separate Klaviyo Accounts for Each Magento Store"
+        },
+        {
+          "level": 2,
+          "id": "h_01J9KNQ2BMRJ6SX9DSWRDS653G",
+          "text": "Sync All Store Data to a Single Klaviyo Account"
+        },
+        {
+          "level": 2,
+          "id": "h_01J9KNQ2BN9S7TBYBVVPQY1BYZ",
+          "text": "Scope the Klaviyo Magento Extension to a Single Store View"
+        },
+        {
+          "level": 2,
+          "id": "h_01J9KNQ2BN28QHQZDZED0Z2Q6H",
+          "text": "Finding Store IDs for your Magento Stores"
+        },
+        {
+          "level": 2,
+          "id": "h_01J9KNQ2BN4XA16AK7YP98PMAX",
+          "text": "Flows for Multiple Magento 2 Stores"
+        },
+        {
+          "level": 2,
+          "id": "h_01J9KNQ2BNTJ6MJEHG5Q3BJ5W4",
+          "text": "Sign-up Forms for Multiple Magento Stores"
+        },
+        {
+          "level": 2,
+          "id": "h_01J9KNQ2BND4BPJ8SZ0Y5S2TZG",
+          "text": "Support for Multiple Languages within your Klaviyo Account"
+        }
+      ]
+    },
+    "rendered_page": {
+      "images": [
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/7ff492c2b417b7ecfe572f839a8a81398693c1f7-1920x1080.webp",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/37bda768084642a431a50f18d949f74ff0f07b7e-966x668.png?w=411",
+          "alt": "",
+          "width": "411",
+          "height": "284"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/8eaa60ffd31c0767155b9f267b0e5c5001f6fdc2-1736x1046.png",
+          "alt": "2021-03-22_10-50-19.png",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/c28acbfeef1fb6d62c8ecd73ff8dae979078741b-1938x1004.png",
+          "alt": "2021-03-22_13-37-59.png",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/37bda768084642a431a50f18d949f74ff0f07b7e-966x668.png?w=466",
+          "alt": "",
+          "width": "466",
+          "height": "322"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/bd25ce6c4511b32a78cbdc106d304b77acfa3458-1468x1054.png",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/261803aacae4a9b1836c907c6b4ec7e77369dd14-868x706.png?w=353",
+          "alt": "mceclip0.png",
+          "width": "353",
+          "height": "287"
+        }
+      ],
+      "links": [
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115003492771-Guide-to-supporting-multiple-Magento-stores-for-Magento-2-x#site-content",
+          "text": "Skip to main content"
+        },
+        {
+          "href": "https://www.klaviyo.com",
+          "text": "Home"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center"
+        },
+        {
+          "href": "https://www.klaviyo.com/enterprise",
+          "text": "Enterprise"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Partners"
+        },
+        {
+          "href": "https://www.klaviyo.com/careers",
+          "text": "Careers"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": "Log in"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": ""
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center Find step-by-step instructions and troubleshooting solutions in our knowledge base."
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000032731",
+          "text": "Integrations"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000312411",
+          "text": "Flows"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867867",
+          "text": "Audience"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867667",
+          "text": "Campaigns"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/360000190711",
+          "text": "Sign-up forms"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000873988",
+          "text": "Deliverability & compliance"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/29173800271259",
+          "text": "SMS"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/16638219724187",
+          "text": "Reviews"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/18073014919195",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/34141283979931",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/37659126754075",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/33948021740315",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/39746685522331",
+          "text": "WhatsApp"
+        },
+        {
+          "href": "https://academy.klaviyo.com",
+          "text": "Klaviyo Academy Expert training and education to help you succeed with Klaviyo, and beyond."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Quick+guide&resource=academy_courses",
+          "text": "Quick guides Learn marketing strategies and concepts in 15 minutes or less."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Course&resource=academy_courses",
+          "text": "Courses Master key marketing topics through structured lessons and exams."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/best-practices",
+          "text": "Best practices Discover top product and marketing strategies for your business."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/learning-paths",
+          "text": "Learning paths Complete curated learning journeys tailored to your marketing goals."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses",
+          "text": "Explore all resources"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Live+training&resource=academy_courses",
+          "text": "Live trainings Build confidence through hands-on interactive workshops and thought-provoking strategy sessions."
+        },
+        {
+          "href": "https://www.bigmarker.com/klaviyo-customer-education/Office-hours-Getting-started-with-Klaviyo",
+          "text": "Live office hours Join a strategic discussion where you can ask questions and get answers in real-time."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/private-live-training",
+          "text": "1:1 Live training Book a private training session with an expert to jumpstart your platform knowledge and confidence."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/credentials",
+          "text": "Klaviyo credentials Dig deeper into select topics and showcase your expertise with a final exam to earn a certificate and digital badge."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/certificates/klaviyo-practitioner-certificate",
+          "text": "Klaviyo practitioner certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/deliverability-certificate",
+          "text": "Deliverability certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/developer-certificate",
+          "text": "Klaviyo developer certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses&select=Certificate",
+          "text": "See all certificates"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Klaviyo Community Join our thriving community network to connect with brands like yours—online and in person."
+        },
+        {
+          "href": "https://community.klaviyo.com/topic/new",
+          "text": "Ask a question Post a question and get thoughtful answers from Klaviyo powerusers."
+        },
+        {
+          "href": "https://community.klaviyo.com/p/roadmap",
+          "text": "Product roadmap"
+        },
+        {
+          "href": "https://community.klaviyo.com/search/activity/recent",
+          "text": "Recent threads"
+        },
+        {
+          "href": "https://community.klaviyo.com/p/champions",
+          "text": "Meet the Champions"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups",
+          "text": "Browse all groups Your people are waiting. New ideas and connections are a click away."
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/developer-group-64",
+          "text": "Developer group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/entrepreneur-user-group-118",
+          "text": "Entrepreneur group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/woo-user-group-87",
+          "text": "WooCommerce group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/new-york-meetup-chapter-82",
+          "text": "New York City"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/los-angeles-meetup-chapter-83",
+          "text": "Los Angeles"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/austin-meetup-chapter-85",
+          "text": "Austin"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/san-diego-meetup-chapter-86",
+          "text": "San Diego"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/amsterdam-meetup-chapter-84",
+          "text": "Amsterdam"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Klaviyo Developers Access API documentation and developer guides to help you build with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/get_started",
+          "text": "Get started Access key resources and a step-by-step checklist for how to start developing with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/build_your_integration",
+          "text": "Grow your app's reach Learn how to join our ecosystem and get your app listed on our marketplace."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/developer-tools",
+          "text": "Developer tools Generate sample data, monitor your API usage, and access our Postman collections."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/reference/api_overview",
+          "text": "API reference Browse our full catalog of API docs."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/changelog_",
+          "text": "Changelog"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/api_versioning_and_deprecation_policy",
+          "text": "Versioning & deprecation policy"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/rate_limits_and_error_handling",
+          "text": "Rate limits & error handling"
+        },
+        {
+          "href": "https://youtube.com/playlist?list=PLHkNfHgtxcUanrkMnKPdkRzuWU7MGv_xM&si=pkG-KH7IT_TUHOGC",
+          "text": "API tutorials on YouTube Subscribe to our Klaviyo API Tutorials playlist for easy access to step-by-step developer walkthroughs."
+        },
+        {
+          "href": "https://www.klaviyo.com/contact-us",
+          "text": "Contact us"
+        },
+        {
+          "href": "https://www.klaviyo.com/sign-up",
+          "text": "Sign up"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": "Search"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115003492771",
+          "text": "United States - EN"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/de-de/articles/115003492771",
+          "text": "Deutschland - DE"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-es/articles/115003492771",
+          "text": "España - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-mx/articles/115003492771",
+          "text": "México - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/fr-fr/articles/115003492771",
+          "text": "France - FR"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/it-it/articles/115003492771",
+          "text": "Italia - IT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/ko-kr/articles/115003492771",
+          "text": "한국 - KO"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/nl-nl/articles/115003492771",
+          "text": "Nederland - NL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pl-pl/articles/115003492771",
+          "text": "Polska - PL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pt-br/articles/115003492771",
+          "text": "Brasil - PT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/sv-se/articles/115003492771",
+          "text": "Sverige - SV"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/14521703806363",
+          "text": "Adobe Commerce (Magento)"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/49375848540187",
+          "text": "Magento 2"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115003492771-Guide-to-supporting-multiple-Magento-stores-for-Magento-2-x#h_01J9KNQ2BMQT99CBVYT69978HX",
+          "text": "Overview"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115003492771-Guide-to-supporting-multiple-Magento-stores-for-Magento-2-x#h_01J9KNQ2BM41S984YZZB40QFNF",
+          "text": "Create Separate Klaviyo Accounts for Each Magento Store"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115003492771-Guide-to-supporting-multiple-Magento-stores-for-Magento-2-x#h_01J9KNQ2BMRJ6SX9DSWRDS653G",
+          "text": "Sync All Store Data to a Single Klaviyo Account"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115003492771-Guide-to-supporting-multiple-Magento-stores-for-Magento-2-x#h_01J9KNQ2BN9S7TBYBVVPQY1BYZ",
+          "text": "Scope the Klaviyo Magento Extension to a Single Store View"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115003492771-Guide-to-supporting-multiple-Magento-stores-for-Magento-2-x#h_01J9KNQ2BN28QHQZDZED0Z2Q6H",
+          "text": "Finding Store IDs for your Magento Stores"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115003492771-Guide-to-supporting-multiple-Magento-stores-for-Magento-2-x#h_01J9KNQ2BN4XA16AK7YP98PMAX",
+          "text": "Flows for Multiple Magento 2 Stores"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115003492771-Guide-to-supporting-multiple-Magento-stores-for-Magento-2-x#h_01J9KNQ2BNTJ6MJEHG5Q3BJ5W4",
+          "text": "Sign-up Forms for Multiple Magento Stores"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115003492771-Guide-to-supporting-multiple-Magento-stores-for-Magento-2-x#h_01J9KNQ2BND4BPJ8SZ0Y5S2TZG",
+          "text": "Support for Multiple Languages within your Klaviyo Account"
+        },
+        {
+          "href": "https://klaviyo.zendesk.com/hc/en-us/articles/115005254348",
+          "text": "integrating with Magento"
+        },
+        {
+          "href": "https://klaviyo.zendesk.com/hc/en-us/articles/115005258208",
+          "text": "show or hide blocks based on dynamic variables"
+        },
+        {
+          "href": "https://klaviyo.zendesk.com/hc/en-us/articles/360040841811",
+          "text": "including a hidden field"
+        },
+        {
+          "href": "https://klaviyo.zendesk.com/hc/en-us/articles/115005239028",
+          "text": "Klaviyo's Support for Multiple Languages"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115001002272",
+          "text": "Learn how to contact support"
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": ""
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": "Visit Community"
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": ""
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": "Hire a partner"
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/about",
+          "text": "About Klaviyo"
+        },
+        {
+          "href": "https://www.klaviyo.com/newsroom",
+          "text": "Newsroom"
+        },
+        {
+          "href": "https://investors.klaviyo.com/overview/default.aspx",
+          "text": "Investor relations"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Agency and tech partners"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Developers"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/retail",
+          "text": "Retail and ecommerce"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/restaurants",
+          "text": "Restaurant marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/wellness",
+          "text": "Wellness"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform",
+          "text": "B2C CRM overview"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai",
+          "text": "Klaviyo AI (K:AI)"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/marketing-automation",
+          "text": "Klaviyo Marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-service",
+          "text": "Klaviyo Service"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/analytics",
+          "text": "Klaviyo Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-data-platform",
+          "text": "Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare",
+          "text": "Klaviyo vs. Klaviyo alternatives"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-mailchimp",
+          "text": "Klaviyo vs. Mailchimp"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-postscript",
+          "text": "Klaviyo vs. Postscript"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-attentive",
+          "text": "Klaviyo vs. Attentive"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-salesforce-marketing-cloud",
+          "text": "Klaviyo vs. Salesforce"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-listrak",
+          "text": "Klaviyo vs. Listrak"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/omnichannel",
+          "text": "Omnichannel marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/email-marketing",
+          "text": "Email marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing",
+          "text": "SMS marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing/rcs",
+          "text": "RCS for Business"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/mobile-app-marketing",
+          "text": "Mobile app marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/whatsapp",
+          "text": "WhatsApp marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/social",
+          "text": "Social marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources",
+          "text": "Marketing resources"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources/marketing-campaign-calendar",
+          "text": "Marketing campaign calendar"
+        },
+        {
+          "href": "https://www.klaviyo.com/glossary",
+          "text": "Marketing glossary"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/email-subject-line-generator",
+          "text": "Subject line generator"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/roi-calculator",
+          "text": "ROI calculator"
+        },
+        {
+          "href": "https://www.klaviyo.com/customers",
+          "text": "Case studies"
+        },
+        {
+          "href": "https://www.klaviyo.com/composer",
+          "text": "Composer Beta"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/marketing-agent",
+          "text": "Marketing Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/customer-agent",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/customer-experience-hub",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/helpdesk",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/marketing-analytics",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/advanced-cdp",
+          "text": "Advanced Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/web-forms",
+          "text": "Web forms"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/email-templates",
+          "text": "Email templates"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/portfolio",
+          "text": "Portfolio"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform-integrations",
+          "text": "Apps and Integrations"
+        },
+        {
+          "href": "https://www.klaviyo.com/features",
+          "text": "Features"
+        },
+        {
+          "href": "https://www.klaviyo.com/whats-new",
+          "text": "What's new"
+        },
+        {
+          "href": "https://www.klaviyo.com/events",
+          "text": "Events"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help Center"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us",
+          "text": "Academy"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Community"
+        },
+        {
+          "href": "https://www.facebook.com/Klaviyo/",
+          "text": "Facebook"
+        },
+        {
+          "href": "https://twitter.com/klaviyo/",
+          "text": "Twitter"
+        },
+        {
+          "href": "https://www.linkedin.com/company/klaviyo/",
+          "text": "LinkedIn"
+        },
+        {
+          "href": "https://www.instagram.com/klaviyo/",
+          "text": "Instagram"
+        },
+        {
+          "href": "https://www.klaviyo.com/sitemap",
+          "text": "Site Map"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal",
+          "text": "Terms and Privacy"
+        },
+        {
+          "href": "https://www.klaviyo.com/security",
+          "text": "Security"
+        },
+        {
+          "href": "https://www.klaviyo.com/trust",
+          "text": "Trust"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal/intellectual-property-notices",
+          "text": "Intellectual Property Notices"
+        }
+      ],
+      "headings": [
+        {
+          "level": 1,
+          "id": "",
+          "text": "Guide to supporting multiple Magento stores (for Magento 2.x)"
+        },
+        {
+          "level": 2,
+          "id": "h_01J9KNQ2BMQT99CBVYT69978HX",
+          "text": "Overview"
+        },
+        {
+          "level": 2,
+          "id": "h_01J9KNQ2BM41S984YZZB40QFNF",
+          "text": "Create Separate Klaviyo Accounts for Each Magento Store"
+        },
+        {
+          "level": 2,
+          "id": "h_01J9KNQ2BMRJ6SX9DSWRDS653G",
+          "text": "Sync All Store Data to a Single Klaviyo Account"
+        },
+        {
+          "level": 2,
+          "id": "h_01J9KNQ2BN9S7TBYBVVPQY1BYZ",
+          "text": "Scope the Klaviyo Magento Extension to a Single Store View"
+        },
+        {
+          "level": 2,
+          "id": "h_01J9KNQ2BN28QHQZDZED0Z2Q6H",
+          "text": "Finding Store IDs for your Magento Stores"
+        },
+        {
+          "level": 2,
+          "id": "h_01J9KNQ2BN4XA16AK7YP98PMAX",
+          "text": "Flows for Multiple Magento 2 Stores"
+        },
+        {
+          "level": 2,
+          "id": "h_01J9KNQ2BNTJ6MJEHG5Q3BJ5W4",
+          "text": "Sign-up Forms for Multiple Magento Stores"
+        },
+        {
+          "level": 2,
+          "id": "h_01J9KNQ2BND4BPJ8SZ0Y5S2TZG",
+          "text": "Support for Multiple Languages within your Klaviyo Account"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "Explore more from Klaviyo"
+        }
+      ]
+    }
+  },
+  "rendered_page": {
+    "status": "fetched",
+    "error": ""
+  }
+}

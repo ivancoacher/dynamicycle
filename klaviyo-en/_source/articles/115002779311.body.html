@@ -1,0 +1,466 @@
+<h2 id="h_01HHHSS05S1992MMXXHZCDEWTV">You will learn</h2>
+<p>Learn about Smart Sending, which allows you to limit the number of emails, SMS messages, or push notifications someone can receive within a set period of time. </p>
+<p>This is a good way to prevent your subscribers from receiving too many messages at once if you have many active flows and campaigns.</p>
+<h2 id="h_01HHHT3EXXSP4XVRKSHAJ7MEJQ">Before you begin</h2>
+<p>Keep the following in mind when using Smart Sending: </p>
+<ul>
+<li>All channels have separate Smart Sending windows.
+<ul>
+<li>Email default: 16 hours</li>
+<li>SMS default: 24 hours</li>
+<li>Push notification default: 24 hours</li>
+</ul>
+</li>
+<li>You can change the Smart Sending windows at any time, but it will not take effect immediately.
+<ul>
+<li>Updating the smart sending window does not retroactively affect recipients.
+<ul>
+<li>Example: If you send an email campaign and then change the email Smart Sending window from 16 to 10 hours, anyone who received that campaign will be skipped from emails with Smart Sending turned on until the full 16 hours pass.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Messages skipped due to Smart Sending are not rescheduled automatically.
+<ul>
+<li>For information on resending emails, read <a href="https://help.klaviyo.com/hc/en-us/articles/360046797191">how to resend emails in Klaviyo</a>.</li>
+<li>Currently, it’s not possible to resend a text message or push notification to someone who was skipped due to Smart Sending except by doing so manually. </li>
+</ul>
+</li>
+<li>If Smart Sending is off for any message, recipients can receive that message even if it’s sent before the Smart Sending window closes. </li>
+<li>Smart Sending for different channels (e.g., SMS and email) are managed independently and do not affect each other.
+<ul>
+<li>
+<p class="p1">For instance, after someone receives an email, you can still send them an SMS the same day when Smart Sending is on. The SMS Smart Sending window only applies to SMS, and the email window only applies to emails.</p>
+</li>
+</ul>
+</li>
+</ul>
+<div class="accordion accordion--default">
+<div class="accordion__item">
+<div class="accordion__item-title"><strong>Why does changing the Smart Sending window not take effect immediately, and is there anything I can do about it? </strong></div>
+<div class="accordion__item-content">
+<p>Think of Smart Sending like a countdown timer on each profile: </p>
+<ul>
+<li>The amount of the time is the same as the Smart Sending window at the time you send. </li>
+<li>The timer starts for everyone who Klaviyo tried to deliver that message to: 
+<ul>
+<li>Includes those that received the message and those where the message failed after leaving Klaviyo (e.g., the message bounced, an inbox provider or wireless carrier filtered the message, etc.).</li>
+<li>Does not include those skipped by Klaviyo (e.g., due to Smart Sending, flow filters, excluded lists or segments, etc.).</li>
+</ul>
+</li>
+<li>The timer is specific to each profile, so the remaining amount of time on each timer varies. </li>
+</ul>
+<p>Say that you do the following:</p>
+<ol>
+<li>Send an email to your full list.</li>
+<li>Change the Smart Sending window from 5 days to 1 hour.</li>
+<li>Send a second email with Smart Sending.</li>
+</ol>
+<p>In this example, the second email will be skipped. All subsequent emails with Smart Sending sent within the next 5 days will also be skipped.</p>
+<table>
+<tbody>
+<tr>
+<td>
+<p><strong>Message</strong></p>
+</td>
+<td>
+<p><strong>Timing</strong></p>
+</td>
+<td>
+<p><strong>Smart Sending turned on? </strong></p>
+</td>
+<td>
+<p><strong>Received email?</strong></p>
+</td>
+</tr>
+<tr>
+<td>
+<p>Email 1</p>
+</td>
+<td>
+<p>Before changing Smart Sending</p>
+</td>
+<td>
+<p>Yes</p>
+</td>
+<td>
+<p>Yes</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>Email 2</p>
+</td>
+<td>
+<p>1 hour after the change</p>
+</td>
+<td>
+<p>Yes</p>
+</td>
+<td>
+<p>No</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>Email 3</p>
+</td>
+<td>
+<p>3 hours after the change</p>
+</td>
+<td>
+<p>Yes</p>
+</td>
+<td>
+<p>No</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>The only exception is if you turn off Smart Sending for a message. In this case, 2 things will happen:</p>
+<ul>
+<li>Klaviyo will send the message to everyone on your list. </li>
+<li>Because Klaviyo attempted to deliver a new message, the timer will be reset to the current Smart Sending window. </li>
+</ul>
+<p>Let’s add this to the example we just looked at. You: </p>
+<ol>
+<li>Send an email to your full list.</li>
+<li>Change the Smart Sending window from 5 days to 1 hour.</li>
+<li>Send a second email that has Smart Sending.</li>
+<li>But now, you send another email without Smart Sending. </li>
+</ol>
+<p>For this last message, everyone you sent to will receive it. Furthermore, the Smart Sending window is now set to 1 hour, so you can send more messages before the rest of the 5 days is up, even when Smart Sending is turned on.</p>
+<table>
+<tbody>
+<tr>
+<td>
+<p><strong>Message</strong></p>
+</td>
+<td>
+<p><strong>Timing</strong></p>
+</td>
+<td>
+<p><strong>Smart Sending turned on? </strong></p>
+</td>
+<td>
+<p><strong>Received email?</strong></p>
+</td>
+</tr>
+<tr>
+<td>
+<p>Email 1</p>
+</td>
+<td>
+<p>Before changing Smart Sending window</p>
+</td>
+<td>
+<p>Yes</p>
+</td>
+<td>
+<p>Yes</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>Email 2</p>
+</td>
+<td>
+<p>1 hour after the change</p>
+</td>
+<td>
+<p>Yes</p>
+</td>
+<td>
+<p>No</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>Email 3</p>
+</td>
+<td>
+<p>3 hours after the change</p>
+</td>
+<td>
+<p>No</p>
+</td>
+<td>
+<p>Yes</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>Email 4</p>
+</td>
+<td>
+<p>6 hours after the change</p>
+</td>
+<td>
+<p>Yes</p>
+</td>
+<td>
+<p>Yes</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>The above scenarios cover if you send all messages to all profiles, but what if the messages are sent to different groups? Or what if Klaviyo skips someone from the message without Smart Sending?</p>
+<p>To illustrate what happens, let’s see what happens if we only send the email where Smart Sending is off to a portion of our audience. </p>
+<table>
+<tbody>
+<tr>
+<td>
+<p><strong>Message</strong></p>
+</td>
+<td>
+<p><strong>Group sent to</strong></p>
+</td>
+<td>
+<p><strong>Timing</strong></p>
+</td>
+<td>
+<p><strong>Smart Sending turned on? </strong></p>
+</td>
+<td>
+<p><strong>Received email?</strong></p>
+</td>
+</tr>
+<tr>
+<td>
+<p>Email 1</p>
+</td>
+<td>
+<p>A and B</p>
+</td>
+<td>
+<p>Before changing Smart Sending window</p>
+</td>
+<td>
+<p>Yes</p>
+</td>
+<td>
+<p>Yes</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>Email 2</p>
+</td>
+<td>
+<p>A and B</p>
+</td>
+<td>
+<p>1 hour after the change</p>
+</td>
+<td>
+<p>Yes</p>
+</td>
+<td>
+<p>No</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>Email 3</p>
+</td>
+<td>
+<p>A</p>
+</td>
+<td>
+<p>3 hours after the change</p>
+</td>
+<td>
+<p>No</p>
+</td>
+<td>
+<p>Yes</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>Email 4</p>
+</td>
+<td>
+<p>A and B</p>
+</td>
+<td>
+<p>6 hours after the change</p>
+</td>
+<td>
+<p>Yes</p>
+</td>
+<td>
+<p>A: Yes</p>
+<p>B: No</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>As you can see, group B is skipped from email 4. Because they didn’t receive email 3, their timer was not reset. Thus, Klavyo will skip them for 4 more days unless they are sent an email without Smart Sending. </p>
+<p>The same is true for anyone who was skipped from email 3 (e.g., if they failed a filter or were excluded). </p>
+</div>
+</div>
+<div class="accordion__item">
+<div class="accordion__item-title"><strong>Is there a way I can change the Smart Sending window for a profile? </strong></div>
+<div class="accordion__item-content">
+<p>The only way is by sending a message where Smart Sending is off.</p>
+<p>Doing so allows your message to be sent without being skipped, and it will reset the timer, updating it to the current window. </p>
+<p>As an example, say you: </p>
+<ol>
+<li>Send an email to your full list.</li>
+<li>Change the Smart Sending window from 5 days to 1 hour.</li>
+<li>Send a second email that has Smart Sending.</li>
+<li>Send a third email without Smart Sending. </li>
+</ol>
+<p>Now, this third message will be sent, and the timer will now be set at 1 hour. </p>
+<table>
+<tbody>
+<tr>
+<td>
+<p><strong>Message</strong></p>
+</td>
+<td>
+<p><strong>Timing</strong></p>
+</td>
+<td>
+<p><strong>Smart Sending turned on? </strong></p>
+</td>
+<td>
+<p><strong>Received email?</strong></p>
+</td>
+</tr>
+<tr>
+<td>
+<p>Email 1</p>
+</td>
+<td>
+<p>Before changing Smart Sending window</p>
+</td>
+<td>
+<p>Yes</p>
+</td>
+<td>
+<p>Yes</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>Email 2</p>
+</td>
+<td>
+<p>1 hour after the change</p>
+</td>
+<td>
+<p>Yes</p>
+</td>
+<td>
+<p>No</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>Email 3</p>
+</td>
+<td>
+<p>3 hours after the change</p>
+</td>
+<td>
+<p>No</p>
+</td>
+<td>
+<p>Yes</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>Email 4</p>
+</td>
+<td>
+<p>6 hours after the change</p>
+</td>
+<td>
+<p>Yes</p>
+</td>
+<td>
+<p>Yes</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<h2 id="h_01HHHSS05SRFTYEZZ01VPFRGV1">Change the Smart Sending timeframe</h2>
+<p>As mentioned the Smart Sending timeframes for email, SMS, and push are separate, so you can adjust one without affecting the other. </p>
+<h3 id="h_01HHHSS05S2T7R42Z9MXCFBTGC">Email Smart Sending window</h3>
+<p>By default, the email Smart Sending window is 16 hours. </p>
+<ol>
+<li>Navigate to your organization name in the bottom left corner of your screen.</li>
+<li>Click <strong>Settings</strong>.</li>
+<li>Select<strong> Email &gt; Sending preferences</strong>.</li>
+<li>Update the number of hours under <em>Smart Sending Period</em>.<br><img src="https://klaviyo.zendesk.com/hc/article_attachments/33469179056923" alt="Smart sending modal">
+</li>
+<li>Check the box to <strong>Ignore transactional messages </strong>if you send <a href="https://help.klaviyo.com/hc/en-us/articles/360003165732" target="_self">transactional emails</a>.
+<ul>
+<li>In almost all cases, Smart Sending should remain disabled for transactional emails, as these are messages that customers anticipate receiving and search for in their inboxes.</li>
+</ul>
+</li>
+</ol>
+<h3 id="h_01HHHSS05SM1GBBVWW6GS8QXF5">SMS Smart Sending window</h3>
+<p>By default, the SMS Smart Sending window is 24 hours. </p>
+<ol>
+<li>Navigate to your organization name in the bottom left corner of your screen.</li>
+<li>Click <strong>Settings</strong>.</li>
+<li>Select <strong>SMS &gt; Sending preferences</strong>.</li>
+<li>Edit your Smart Sending period within the <em>SMS Sending Settings</em><span> area.</span>
+</li>
+</ol>
+<p><span><span style="color: #232426;" data-darkreader-inline-color="">For SMS, you can set distinct Smart Sending timeframes for campaigns and flows. </span></span></p>
+<p><span><span style="color: #232426;" data-darkreader-inline-color=""><img src="https://klaviyo.zendesk.com/hc/article_attachments/30910478392219" width="551" height="207"></span></span></p>
+<h3 id="h_01HHHSS05SNJS46ZFYGVZZ71XV">Push notification Smart Sending window</h3>
+<ol>
+<li>Navigate to your organization name in the bottom left corner of your screen.</li>
+<li>Click <strong>Settings</strong>.</li>
+<li>Select <strong>Push notifications</strong>.</li>
+<li>Edit your Smart Sending period within the <em>Push Sending Settings</em><span> area.</span>
+</li>
+<li><span>Click <strong>Update Push Sending Settings</strong>. <br><img src="https://klaviyo.zendesk.com/hc/article_attachments/33469155306651" alt="Push smart sending settings"><br></span></li>
+</ol>
+<h2 id="h_01HHHSS05S5S2YZYVWE028F5MR">Disable Smart Sending for a message</h2>
+<h3 id="h_01HHHSS05SRDFD425XW5N1CBNE">Campaigns</h3>
+<p>Smart Sending is enabled by default for all campaigns. You can choose to disable Smart Sending on a per-campaign basis. We recommend keeping Smart Sending turned on for most, if not all, marketing emails.</p>
+<p>In step 1 of the campaign, toggle off the option to: </p>
+<ul>
+<li>Email: Skip profiles who recently received an email.<br><img src="https://klaviyo.zendesk.com/hc/article_attachments/30910487106843">
+</li>
+<li>SMS:<br>
+<ul>
+<li>Skip profiles who recently received a campaign message.</li>
+<li>Skip profiles who recently received a flow message.<br><img src="https://klaviyo.zendesk.com/hc/article_attachments/30910478399003">
+</li>
+</ul>
+</li>
+<li>Push: Skip profiles who recently received a push message.</li>
+</ul>
+<h3 id="h_01HHHSS05TDSBPMTY7EWWD8M9B">Flows</h3>
+<p>Smart Sending is enabled for flow messages in many pre-built flows. If you are using a pre-built flow, and Smart Sending is enabled, you can choose to turn it off for individual flow messages.</p>
+<ol>
+<li>Click on an individual flow message.</li>
+<li>Scroll down to <em>Skip recently email profiles</em>.</li>
+<li>Toggle off <strong>Smart Sending</strong>.</li>
+</ol>
+<p class="wysiwyg-text-align-center"><img src="https://klaviyo.zendesk.com/hc/article_attachments/33469155313051" alt="Smart sending option for flow email" width="460" height="268"></p>
+<p class="wysiwyg-text-align-left">Note that SMS Smart Sending uses the phone number to determine if a message to a profile should be skipped. If multiple profiles share the same number, and that number has received an SMS message within the Smart Sending window, any new messages to that number will be skipped, regardless of which profile triggers the send.</p>
+<h2 id="h_01HHHSS05T08VBNSBGM0PGNH62">Smart Sending and A/B testing</h2>
+<p><a href="https://help.klaviyo.com/hc/en-us/articles/115005228148" target="_blank" rel="noopener">A/B tests</a> that receive no results due to Smart Sending are automatically cancelled. This means that everyone in the test pool for your A/B test campaign got skipped because they received another message too recently. If you receive an in-app notification like the one below, your A/B test has been canceled and you need to resend your campaign to reach your recipients. </p>
+<h2 id="h_01HHHSS05T36TKQM5YSVP9SGWE" class="wysiwyg-text-align-left">Additional resources</h2>
+<ul>
+<li>Check out <a href="https://help.klaviyo.com/hc/en-us/articles/360046797191" target="_blank" rel="noopener noreferrer">how to resend emails in Klaviyo</a>
+</li>
+<li>Find out more about A/B testing:
+<ul>
+<li><a href="https://help.klaviyo.com/hc/en-us/articles/115005228148" target="_self">A/B testing campaigns</a></li>
+<li><a href="https://help.klaviyo.com/hc/en-us/articles/6960371049115" target="_blank" rel="noopener">A/B testing an individual flow message</a></li>
+</ul>
+</li>
+</ul>

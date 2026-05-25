@@ -1,0 +1,137 @@
+{
+  "captured_at": "2026-05-23T16:19:13Z",
+  "article": {
+    "id": 360004775072,
+    "url": "https://klaviyo.zendesk.com/api/v2/help_center/en-us/articles/360004775072.json",
+    "html_url": "https://klaviyo.zendesk.com/hc/en-us/articles/360004775072-Custom-Objects",
+    "author_id": 20424705848,
+    "comments_disabled": true,
+    "draft": false,
+    "promoted": false,
+    "position": 12,
+    "vote_sum": 2,
+    "vote_count": 2,
+    "section_id": 49375213829275,
+    "created_at": "2018-06-13T16:06:55Z",
+    "updated_at": "2026-04-21T13:54:42Z",
+    "name": "Custom Objects",
+    "title": "Custom Objects",
+    "source_locale": "en-us",
+    "locale": "en-us",
+    "outdated": false,
+    "outdated_locales": [],
+    "edited_at": "2018-09-26T21:06:45Z",
+    "user_segment_id": null,
+    "permission_group_id": 146372,
+    "content_tag_ids": [],
+    "label_names": [],
+    "body": "<h2>Overview</h2>\n<p>Custom Objects are Klaviyo objects that can accept any schema and that can include a foreign-key reference to any Klaviyo profile object. While our other record types (profiles, events, campaigns, etc.) have fixed schemas (eg, a profile has first name, last name, email, location, accepts marketing, etc.), and while some, like profiles, can accept custom fields (favorite color, pet type), there is a limited amount of flexibility to accept alternative data structures. Custom Objects are a flexible alternative.</p>\n<div class=\"bs-callout bs-callout-danger\">\n<h4>Warning</h4>\n<p>This is an advanced feature reserved for customers who have access to a developer or developer support. To enable this feature you must <a href=\"https://help.klaviyo.com/hc/en-us/requests/new\">reach out to our Customer Success team</a>.</p>\n</div>\n<h2>What's a Schema?</h2>\n<p>A schema is the structure that defines a database table. You can think of a schema as the column headers in an excel spreadsheet: it tells you what each field is named, and what kind of data it will hold, such as dates, string (text), numeric, boolean (true/false), etc.</p>\n<p>For example, the following is a standard profile stored in Klaviyo.</p>\n<p><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28713335502747\"></p>\n<p>If we look how the data is stored in Klaviyo, we can see the structure (or schema) in JSON format.</p>\n<pre><code class=\"language-go\">{\n \"created\": \"2018-07-10 13:28:25\",\n \"updated\": \"2018-07-10 13:28:26\",\n \"object\": \"person\",\n \"id\": \"Lwxf3r\",\n \"$email\": \"klaviyogreen@gmail.com\", \n \"$first_name\": \"John\",\n \"$last_name\": \"Smith\",\n}</code></pre>\n<h2>What Do Custom Objects Let You Do?</h2>\n<p>Custom objects allow you to define a schema for a new database object. This object can have a foreign key relationship (that is, it can point to) any other existing profile object within Klaviyo.</p>\n<p>This is helpful when you have profiles with multiple related records that all share the same schema. For example, if your business model uses gift cards, a single customer can have zero, one, or hundreds of gift cards associated with their profile.</p>\n<p>Other examples include the following:</p>\n<ul>\n<li>Survey responses (where a customer fills out the same survey several times</li>\n<li>Event attendance</li>\n<li>Conversations with your clients</li>\n<li>Product reviews</li>\n</ul>\n<h2>How Can You Use Custom Object Data in Klaviyo?</h2>\n<p>Custom object data can be used to build segments within Klaviyo and to pass data into an email. </p>\n<h3>Segmenting with Custom Object Data</h3>\n<p>Segmentation currently works only on date fields (before / after / on / between dates) and number fields (more than, less than, equal to, between).</p>\n<p>Let's say you've created a custom object that stores gift card information for your customers. Using the data from your custom objects you can build a segment that includes all profiles with one or more gift card worth less than $50 or more.</p>\n<p class=\"wysiwyg-text-align-center\"><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28713329823003\"></p>\n<p>If you're passing date information, you could build a segment that includes all profiles who attended an event between March 1, 2018 and March 31, 2018.</p>\n<h3>Passing Custom Object Data into an Email</h3>\n<p>Any field within a custom object can be pulled into the body of an email. For example, you can use a template tag to insert a variable that shows the gift card code, the current value of the gift card, and the expiration date.</p>\n<p>The tag can loop over all records related to a profile and display values from all of them. If a customer has eight different gift cards, you can show all of their codes in a text block, with the current value next to them.</p>\n<p><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28713329825947\"></p>\n<p>The tag can sum up or perform other basic operations (min, max) on numeric data from custom object records. For example, you can add up the value of all eight gift cards and display it in the subject line of your email. Reference our guide to <a href=\"https://help.klaviyo.com/hc/en-us/articles/115005084927-Template-Tags-and-Variable-Syntax\">Template Tags and Variable Syntax</a> for more information.</p>\n<h2>How Do I Set It Up?</h2>\n<p>After reaching out to our customer support team, your first step is to map your existing datasource to the schema framework for creating a Klaviyo Custom object.</p>\n<p>Below is an example of the data from a single custom object inside Klaviyo.</p>\n<pre><code class=\"language-go\">\"config\": {\n    \"602\": {\n        \"desired_fields\": [\n            \"custrecord_gc_shopify_gc_internal_id\",\n            \"custrecord_gc_remaining_balance\",\n            \"custrecord_gc_initial_balance\",\n            \"custrecord_gc_disabled\",\n            \"custrecord_gc_gift_card_type\",\n            \"custrecord_gc_sales_order\",\n            \"custrecord_gc_customer\",\n            \"custrecord_gc_retrieve_balance\",\n            \"custrecord_gc_gift_card_number\"\n        ],\n        \"desired_fields_mapping\": {\n            \"custrecord_gc_gift_card_number\": \"code\",\n            \"custrecord_gc_gift_card_type\": \"type\",\n            \"custrecord_gc_remaining_balance\": \"value\",\n            \"custrecord_gc_sales_order\": \"shopify_order_number\"\n        },\n        \"email_field\": \"custrecord_gc_customer\",\n        \"emails_separate\": 1,\n        \"fields_to_display\": [\n            \"custrecord_gc_sales_order\",\n            \"created_external\",\n            \"custrecord_gc_gift_card_type\",\n            \"custrecord_gc_initial_balance\",\n            \"custrecord_gc_remaining_balance\"\n        ],\n        \"index_on\": [\n            \"custrecord_gc_gift_card_type\",\n            [\n                \"klaviyo_customer_id\",\n                \"custrecord_gc_gift_card_number\",\n                \"custrecord_gc_remaining_balance\"\n            ]\n        ],\n        \"mapping\": \"gift_card\",\n        \"parsers\": {\n            \"custrecord_gc_sales_order\": [\n                \"Sales Order #\",\n                \"after\"\n            ]\n        }\n    }\n}</code></pre>\n<p>We can use this example data to breakdown Klaviyo's custom object schema framework.</p>\n<pre><code class=\"'language-go&quot;\">\"config\": {\n    \"602\": {\n        \"desired_fields\": [],\n        \"desired_fields_mapping\": {},\n        \"email_field\": \"custrecord_gc_customer\",\n        \"emails_separate\": 1,\n        \"fields_to_display\": [],\n        \"index_on\": [\n            \"custrecord_gc_gift_card_type\",\n            [\n                \"klaviyo_customer_id\",\n                \"custrecord_gc_gift_card_number\",\n                \"custrecord_gc_remaining_balance\"\n            ]\n        ],\n        \"mapping\": \"gift_card\",\n        \"parsers\": {\n            \"custrecord_gc_sales_order\": [\n                \"Sales Order #\",\n                \"after\"\n            ]\n        }\n    }\n}</code></pre>\n<table>\n<tbody>\n<tr style=\"background-color: #eceeef;\">\n<td>Key</td>\n<td>Value</td>\n</tr>\n<tr>\n<td><strong>602</strong></td>\n<td>The object ID from the datasource. Your datasource should have some unique identifier for each object.</td>\n</tr>\n<tr>\n<td><strong>desired_fields</strong></td>\n<td>Which fields should Klaviyo retrieve from the source object? We need to define each field we want access to in Klaviyo.</td>\n</tr>\n<tr>\n<td><strong>desired_fields_mapping</strong></td>\n<td>What are the human-readable labels you want to apply to these fields?  The source field will be named something like \"custrecord_gc_remaining_balance\" in the source system, which can be condensed to \"value\" in the field mapping (which is later used in the template tag).</td>\n</tr>\n<tr>\n<td><strong>email_field</strong></td>\n<td>What field is the foreign-key reference to the profile object, which uses email as a lookup? (This will be configured by an engineer.)  Works in conjuction with <strong>emails_separate</strong>.</td>\n</tr>\n<tr>\n<td><strong>emails_separate</strong></td>\n<td>Does the email value exist on this object in the source system? Works in conjunction with <strong>email_field</strong>.</td>\n</tr>\n<tr>\n<td><strong>fields_to_display</strong></td>\n<td>Which fields do you want to see in the profile block for custom objects?  Customers want to be able to check to make sure that the right profiles are being included in segments, and this lets them determine which fields to display.  Some fields contain sensitive data you will not want to display, such as the remaining balance on one of your customer's gift cards.</td>\n</tr>\n<tr>\n<td><strong>index_on</strong></td>\n<td>What fields should we use as indexes for this data?  What fields are we going to be using to query and retrieve data frequently?  Indexing on a field makes retrieving data faster, so if you are going to use a field for segmentation or to pull data into an email, it's helpful to add an index on it.  This can also be reconfigured after the initial integration, so it's not an issue if you need to add additional index fields later.</td>\n</tr>\n<tr>\n<td><strong>mapping</strong></td>\n<td>Similar to <strong>desired_fields_mapping</strong>, this lets us assign a user friendly name for this object in Klaviyo to use in segmentation interfaces and in template tags.</td>\n</tr>\n<tr>\n<td><strong>parsers</strong></td>\n<td>This lets us trim characters from specified fields, so that we can use the data within them in different ways.  In this example, the Shopify Sales Order Number was stored in the datasource as \"Sales Order # 100000\".  This meant that we couldn't cross-reference it with our existing Shopify Sales Order number field, which only stored the value 100000.  Therefore, we needed to trim out \"Sales Order #\".</td>\n</tr>\n</tbody>\n</table>\n<p>Once you've defined your schema to match Klaviyo's custom object framework, you'll work with Klaviyo engineers to implement a method to send your data to Klaviyo.</p>\n<div class=\"bs-callout bs-callout-primary\">\n<h4>Note</h4>\n<p>We currently do not have a public facing API for custom objects. For sending custom object data to Klaviyo you will need to contact us and work with our engineering team.</p>\n</div>",
+    "user_segment_ids": []
+  },
+  "normalized": {
+    "id": "360004775072",
+    "title": "Custom Objects",
+    "source_url": "https://help.klaviyo.com/hc/en-us/articles/360004775072-Custom-Objects",
+    "section_id": 49375213829275,
+    "section": "Custom integrations",
+    "category_id": 115000032731,
+    "category": "Integrations",
+    "category_slug": "integrations",
+    "klaviyo_updated": "2026-04-21T13:54:42Z",
+    "created_at": "2018-06-13T16:06:55Z",
+    "draft": false,
+    "promoted": false,
+    "position": 12,
+    "label_names": []
+  },
+  "files": {
+    "body_html": "_source/articles/360004775072.body.html",
+    "rendered_html": ""
+  },
+  "assets": {
+    "api_body": {
+      "images": [
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28713335502747",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28713329823003",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28713329825947",
+          "alt": "",
+          "width": "",
+          "height": ""
+        }
+      ],
+      "links": [
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/requests/new",
+          "text": "reach out to our Customer Success team"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005084927-Template-Tags-and-Variable-Syntax",
+          "text": "Template Tags and Variable Syntax"
+        }
+      ],
+      "headings": [
+        {
+          "level": 2,
+          "id": "",
+          "text": "Overview"
+        },
+        {
+          "level": 4,
+          "id": "",
+          "text": "Warning"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "What's a Schema?"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "What Do Custom Objects Let You Do?"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "How Can You Use Custom Object Data in Klaviyo?"
+        },
+        {
+          "level": 3,
+          "id": "",
+          "text": "Segmenting with Custom Object Data"
+        },
+        {
+          "level": 3,
+          "id": "",
+          "text": "Passing Custom Object Data into an Email"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "How Do I Set It Up?"
+        },
+        {
+          "level": 4,
+          "id": "",
+          "text": "Note"
+        }
+      ]
+    },
+    "rendered_page": {}
+  },
+  "rendered_page": {
+    "status": "failed",
+    "error": "404 Client Error: Not Found for url: https://help.klaviyo.com/hc/en-us/articles/360004775072"
+  }
+}

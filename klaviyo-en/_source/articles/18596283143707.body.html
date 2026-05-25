@@ -1,0 +1,85 @@
+<h2 id="h_01H9RBJD85TAFTDMMBBRSC7EA0">You will learn</h2>
+<p>Learn how to add a dynamic image to a push notification. </p>
+<p>Dynamic images are a great way to personalize your push notifications. For instance, you can show someone the exact product they favorited, started a checkout with, or bought.</p>
+<h2 id="h_01H9RBJD855EB7DVMKPYMH5815">Before you begin</h2>
+<p>You can use dynamic images in:</p>
+<ul>
+<li>Metric-triggered flows, using either event data (e.g., items from a checkout or placed order) or catalog tags for an event. </li>
+<li>Campaigns and list- and segment-triggered flows, but only when the image URL exists as a custom property on the recipient’s profile.<br>
+<p>Also, note the following regarding push dynamic images: </p>
+</li>
+<li>Only 1 dynamic image is allowed per push notification.</li>
+<li>Images must be under 1 MB.</li>
+<li>You can use conditional statements with dynamic images.</li>
+</ul>
+<div class="bs-callout bs-callout-default">
+<p>Want to request a feature for Klaviyo push notifications? Fill out this <a href="https://forms.gle/7iPm6JQ4eKB6H2C4A">Google form</a> to tell us about it! </p>
+</div>
+<h2 id="h_01H9RBJD85BA3943X1GGN67BKK">Add a dynamic image to a push notification</h2>
+<ol>
+<li>Select the message where you want to include your dynamic image.</li>
+<li>In the left sidebar, click <strong>Configure Content</strong> or <strong>Edit</strong>.</li>
+<li>Add or select the push notification in the flow. </li>
+<li>Click the <strong>View details</strong> icon in the upper right-hand corner.<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28717418395291" alt="View Details icon within the push preview window" width="549" height="250">
+</li>
+<li>Find the data source for the image you want to include.</li>
+<li>Click the data source for an image's first variable, which will typically end in 0.<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28717391149467" alt="Example of what the data source looks like for an image" width="341" height="720">
+</li>
+<li>On the left, click the <em>Insert media</em> icon in the <em>Body</em> box.<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28717391154459" alt="Add media to push.jpg" width="381" height="295">
+</li>
+<li>Go to the <strong>Dynamic Image</strong> tab.</li>
+<li>Paste the dynamic variable or dynamic URL for the image.<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28717418408731" alt="Dynamic Image tab after pasting in an example variable">
+</li>
+<li>Click <strong>Save</strong>.</li>
+<li>Check that the dynamic image was added correctly by making sure one appears in the preview screen.</li>
+</ol>
+<div class="accordion accordion--default">
+<div class="accordion__item">
+<div class="accordion__item-title"><strong>Example of using catalog tags</strong></div>
+<div class="accordion__item-content">
+<p>You can also use catalog tags to add dynamic images in a rich push notification. To do so: </p>
+<ol>
+<li>Go to <strong>Analytics &gt; Metrics</strong>. </li>
+<li>Select the metric you want to use (e.g., <em>Ordered Product</em>). </li>
+<li>Click <strong>Details</strong> for a specific event.</li>
+<li>Find either the SKU or product ID tag.</li>
+<li>Copy the label for the tag (except any parentheses or colon) so you have the exact spelling and capitalization.<br>
+In the example below, we copy "ProductID."<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28717391147547" alt="image5.png" width="427" height="296">
+</li>
+<li>Paste this somewhere you won't lose it. </li>
+<li>Navigate to a flow triggered by the same metric you just selected. </li>
+<li>Select the push notification where you want to include your dynamic image.</li>
+<li>In the left sidebar, click <strong>Configure Content</strong> or <strong>Edit</strong>.</li>
+<li>On the left, click the <em>Insert media</em> icon in the <em>Body</em> box.<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28717391154459" alt="Add media to push.jpg" width="381" height="295">
+</li>
+<li>Go to the <strong>Dynamic Image</strong> tab.</li>
+<li>Paste in the following catalog tag:<br>
+{% catalog event.id %} {{catalog_item.featured_image.thumbnail.src}} {% endcatalog %}</li>
+<li>Replace id in {% catalog event.id %} with the label you previously copied.<br>
+Example: {% catalog event.ProductID %} {{catalog_item.featured_image.thumbnail.src}} {% endcatalog %}</li>
+<li>Click <strong>Save</strong>. </li>
+</ol>
+</div>
+</div>
+<div class="accordion__item">
+<div class="accordion__item-title"><strong>Example of using conditional statements for dynamic images</strong></div>
+<div class="accordion__item-content">
+<p>Dynamic images can use conditional statements. </p>
+<p>Below is an example of an if/else statement to say that if there's a variant image, show that to recipients; else, use the default image:</p>
+<p><em>{% if event.extra.line_items.0.product.variant.images.0.src %}{{ event.extra.line_items.0.product.variant.images.0.src }}{% else %}{{ event.extra.line_items.0.product.images.0.src }}{% endif %}</em></p>
+<p>Note that the exact format for these statements depends on your integration, and you should not copy them from email templates.</p>
+</div>
+</div>
+</div>

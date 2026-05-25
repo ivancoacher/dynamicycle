@@ -1,0 +1,138 @@
+<h2 id="h_01J6FC2F3QWXXPC83C1HEN8T4S">You will learn</h2>
+<p>Learn how to troubleshoot issues with your <em>Viewed Product</em> tracking, which is used to track when visitors view products on your site. For some ecommerce platforms, <em>Viewed Product</em> is tracked automatically when you integrate with Klaviyo. For other ecommerce platforms, a snippet must be manually added to your product page template. </p>
+<h2 id="h_01J6FC2F3QMAZHARV5CQCMH26V">Before you begin</h2>
+<p>Before consulting this guide, make sure you:</p>
+<ul>
+<li>Enable<em>Viewed Product</em>tracking, if it was not added automatically through your integration.</li>
+<li>Enable Klaviyo’s <a href="https://help.klaviyo.com/hc/en-us/articles/115005076767"><em>Active on Site</em></a> JavaScript, known as Klaviyo.js, in order for<em>Viewed Product</em>tracking to work. <br>
+<p>For the following ecommerce integrations,<em>Viewed Product</em>tracking works as follows:</p>
+</li>
+<li>
+<a href="https://help.klaviyo.com/hc/en-us/articles/115005080407">Shopify</a><br>
+<em>Viewed Product</em>tracking will be automatically added to your store if you’ve toggled on the<a href="https://help.klaviyo.com/hc/en-us/articles/4425956184731">Klaviyo app embed</a>and checked the<em>Viewed Product</em>setting for your integration. </li>
+<li>
+<a href="https://help.klaviyo.com/hc/en-us/articles/115005082547">BigCommerce</a><br>
+Learn how to<a href="https://help.klaviyo.com/hc/en-us/articles/115005082547-How-to-Integrate-with-BigCommerce#add-viewed-product-tracking4">add the snippet manually</a>
+</li>
+<li>
+<a href="https://help.klaviyo.com/hc/en-us/articles/115005082187">Magento 1</a><br>
+Automatically added by Klaviyo</li>
+<li>
+<a href="https://help.klaviyo.com/hc/en-us/articles/115005254348">Magento 2</a><br>
+Automatically added by Klaviyo</li>
+<li>
+<a href="https://help.klaviyo.com/hc/en-us/articles/115005255808">WooCommerce</a><br>
+Automatically added by Klaviyo</li>
+</ul>
+<p>If you are using BigCommerce, and thus added <em>Viewed Product</em> tracking manually, make sure that the snippet you’ve added to your site matches exactly with the snippets shown in the articles linked above. If you didn’t copy and paste the entire snippet, it will not work correctly. </p>
+<p>If you’re using an ecommerce platform without a pre-built Klaviyo integration, or a custom platform, learn about<a href="https://developers.klaviyo.com/en/docs/guide_to_integrating_a_platform_without_a_pre_built_klaviyo_integration#viewed-product-tracking-snippet">how to enable Viewed Product tracking on our Developer site</a>. </p>
+<h3 id="h_01J6FC2F3Q0C8SB4G71P8C1MTC">Test Viewed Product tracking</h3>
+<p>To test that your<em>Viewed Product</em>tracking is set up properly, follow these steps:</p>
+<ol>
+<li>Navigate to your website</li>
+<li>On your homepage, add the following to the end of the URL, replacing<em>testing.email@gmail.com</em>with your email address:<br>
+<em>?utm_email=testing.email@gmail.com</em><br>
+<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28720760666651" alt="Shopify test store with ?utm_email=example@gmail.com appended to URL" width="511" height="96">
+</li>
+<li>Reload the page</li>
+<li>Navigate to a product page on your site</li>
+<li>Search in Klaviyo for your email address<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/33675380127515" alt="Search bar in Klaviyo" width="517" height="122">
+<p>You should see that a Klaviyo profile has been created for you (if one didn't exist already) and that this product view has been tracked on your activity feed.</p>
+<p>To see a feed of all<em>Viewed Product</em>metrics over time:</p>
+</li>
+<li>Click the<strong>Analytics</strong>dropdown in Klaviyo and select <strong>Metrics</strong>
+</li>
+<li>Filter by<em>Viewed Product</em>to view tracked data in an activity feed, activity map, charts, best people, and cohort reports<br>
+</li>
+</ol>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/28720772435867" alt="Metrics tab in Klaviyo with Viewed Product in search bar and Viewed Product in results with gear icon" width="382" height="122"></p>
+<p>Once you’ve reviewed the troubleshooting scenarios below and made changes, you should test your tracking again to make sure it’s working correctly. </p>
+<h2 id="h_01J6FC2F3QVZZGNZ3A2CFSE5AA">Table of contents</h2>
+<p>This guide covers the following troubleshooting scenarios:</p>
+<ul>
+<li>Have you enabled Klaviyo's <em>Active on Site</em> tracking?</li>
+<li>Have you recently switched ecommerce platforms?</li>
+<li>Have you recently updated your store's theme, or made any other updates to your ecommerce platform?</li>
+<li>For WooCommerce and Magento users: Are you using the most recent version of your integration plugin?</li>
+<li>For BigCommerce users: Is your ecommerce store connected to multiple Klaviyo accounts?</li>
+<li>For Shopify users: Do you require cookie consent for visitors in the EU, EEA, UK and Switzerland prior to permitting onsite tracking?</li>
+</ul>
+<h2 id="h_01J6FC2F3Q6ZA4DK9BJX81XZEA">Troubleshooting scenarios</h2>
+<p>Review the following questions in order to diagnose the cause of your<em>Viewed Product</em>issues. Note that some steps are general, and others depend on what ecommerce platform you are using. </p>
+<div class="accordion accordion--default">
+<div class="accordion__item">
+<div class="accordion__item-title"><strong>Have you enabled Klaviyo’s “Active on Site” tracking?</strong></div>
+<div class="accordion__item-content">
+<p>In order for <em>Viewed Product</em> tracking to work correctly, you must first enable Klaviyo’s <em>Active on Site</em> tracking which allows your customers to be cookied. <em>Active on Site</em> tracking is enabled via the addition of a JavaScript snippet (known as “Klaviyo’s onsite JavaScript” or “Klaviyo.js”) to your site.</p>
+<p>Klaviyo adds Klaviyo.js automatically during the integration, though some integrations require that you check a setting to enable it. Learn about your specific ecommerce platform and how to test that Klaviyo.js is working:</p>
+<ol>
+<li>
+<strong>Shopify</strong><br>
+Klaviyo.js is added automatically through the integration or through the Klaviyo app embed in Shopify, if you enable it. </li>
+<li>
+<strong>WooCommerce</strong><br>
+Klaviyo.js is added automatically when you integrate with WooCommerce, and you can make sure that you’ve completed all steps by reading our <a href="https://help.klaviyo.com/hc/en-us/articles/115005255808-How-to-Integrate-with-WooCommerce">WooCommerce integration guide</a>. To test your onsite JavaScript, navigate to <strong>Integrations</strong>, then click the<strong> Setup Web Tracking</strong> button in the upper right. Then, find the step where you can enter your site URL in the box, and follow the instructions to test your tracking. </li>
+<li>
+<strong>BigCommerce</strong><br>
+Make sure you’ve checked the option on your <a href="https://www.klaviyo.com/integration/bigcommerce">integration settings page</a> to <em>Automatically add Klaviyo onsite JavaScript</em>. Then, <a href="https://help.klaviyo.com/hc/en-us/articles/115005082547-How-to-Integrate-with-BigCommerce#confirm-web-tracking-installation3">follow the steps to test your onsite JavaScript</a>. </li>
+<li>
+<strong>Magento 1</strong><br>
+Klaviyo.js is added automatically when you integrate with Magento 1, and you can make sure that you’ve completed all steps by reading our <a href="https://help.klaviyo.com/hc/en-us/articles/115005082187-How-to-Integrate-with-Magento-1-x-CE-and-EE-">Magento 1 integration guide</a>. To test your onsite JavaScript, click your account name in the lower left corner, select <strong>Integrations</strong>, then click the<strong> Setup Web Tracking</strong> button in the upper right. Then, find the step where you can enter your site URL in the box, and follow the instructions to test your tracking. </li>
+<li>
+<strong>Magento 2</strong><br>
+Klaviyo.js is added automatically when you integrate with Magento 2, and you can make sure that you’ve completed all steps by reading our <a href="https://help.klaviyo.com/hc/en-us/articles/115005254348-How-to-Integrate-with-Magento-2-x-CE-and-EE-">Magento 2 integration guide</a>. To test your onsite JavaScript, click your account name in the lower left corner, select <strong>Integrations</strong>, then click the<strong> Setup Web Tracking</strong> button in the upper right. Then, find the step where you can enter your site URL in the box, and follow the instructions to test your tracking. </li>
+</ol>
+</div>
+</div>
+<div class="accordion__item">
+<div class="accordion__item-title"><strong>Have you recently switched ecommerce platforms?</strong></div>
+<div class="accordion__item-content">
+<p>If you’ve recently switched ecommerce platforms, you’ll need to add <em>Viewed Product</em> tracking to your new site. Consult the information in the <em>Before you begin</em> section above to learn about <em>Viewed Product</em> tracking for your new platform. </p>
+</div>
+</div>
+<div class="accordion__item">
+<div class="accordion__item-title"><strong>Have you recently updated your store’s theme, or made any other updates to your ecommerce platform?</strong></div>
+<div class="accordion__item-content">
+<p>If you’ve recently updated your store’s theme, you may need to reinstall both Klaviyo.js and the <em>Viewed Product</em> snippet on your new theme. Making other updates to your ecommerce platform may also affect the snippets previously added to your site.</p>
+<p>To reinstall the <em>Viewed Product</em> snippet for BigCommerce, follow the instructions in the <em>Before you begin</em> section above.</p>
+<p>If you’re using WooCommerce or Magento, or are using the Klaviyo app embed in Shopify, but you’ve made changes to your site and now the event isn’t tracking, you should <a href="https://help.klaviyo.com/hc/en-us/articles/115001002272-How-to-Contact-Support">contact Klaviyo support</a> to help diagnose the problem.</p>
+</div>
+</div>
+<div class="accordion__item">
+<div class="accordion__item-title"><strong>For WooCommerce and Magento users: Are you using the most recent version of your integration plugin?</strong></div>
+<div class="accordion__item-content">
+<p>If you are using WooCommerce or Magento, problems with <em>Viewed Product</em> tracking might be related to other issues with your platform’s Klaviyo plugin. </p>
+<ol>
+<li>If <em>Viewed Product</em> events aren’t tracking, check to see if the <em>Started Checkout</em> event is tracking by searching for <em>Started Checkout </em>within <strong>Analytics</strong><strong>&gt;</strong><strong>Metrics</strong> in Klaviyo. </li>
+<li>If both <em>Viewed Product</em> and <em>Started Checkout</em> aren’t tracking, there may be an issue with your plugin.</li>
+<li>Check to see if you are using the most up-to-date version of the plugin for your integration, if possible. If you are still having issues, please <a href="https://help.klaviyo.com/hc/en-us/articles/115001002272-How-to-Contact-Support">contact Klaviyo support</a>. </li>
+</ol>
+</div>
+</div>
+<div class="accordion__item">
+<div class="accordion__item-title"><strong>For BigCommerce users: Is your ecommerce store connected to multiple Klaviyo accounts?</strong></div>
+<div class="accordion__item-content">
+<p>If you have one store connected to multiple Klaviyo accounts, this can result in duplicate Klaviyo.js on your site, which can cause <em>Viewed Product</em> tracking to break. </p>
+<p>To check if you have duplicate Klaviyo.js:</p>
+<ol>
+<li>Navigate to your main theme file. Klaviyo.js looks like this:<br>
+<pre><code class="language-text">&lt;script type="text/javascript" async="" src="https://static.klaviyo.com/onsite/js/klaviyo.js?company_id=API_KEY"&gt;&lt;/script&gt;</code></pre>
+</li>
+<li>If you search for company_id within the file and find it twice (and see two of the snippets shown above) then you have duplicate Klaviyo.js. There will typically be two different API keys after the equals sign, one from each Klaviyo account. </li>
+<li>To make sure the duplicate is removed correctly from your site, please <a href="https://help.klaviyo.com/hc/en-us/articles/115001002272-How-to-Contact-Support">contact Klaviyo support</a>. </li>
+</ol>
+</div>
+</div>
+<div class="accordion__item">
+<div class="accordion__item-title"><strong>For Shopify users: Do you require cookie consent for visitors in the EU, EEA, UK and Switzerland prior to permitting onsite tracking?</strong></div>
+<div class="accordion__item-content">
+<p>Based on your Customer Privacy settings in Shopify, Klaviyo may not track onsite events for visitors to your Shopify store in the EU, EEA, UK and Switzerland, unless they have provided consent.</p>
+</div>
+</div>
+</div>
+<h2 id="h_01J6FC2F3R8GWRZNN9W518CAH5">Contacting Klaviyo support</h2>
+<p>If you are still encountering issues after consulting this list and testing your tracking, please reach out on our <a href="https://community.klaviyo.com/got-a-question-1">Community</a> or to our <a href="https://help.klaviyo.com/hc/en-us/articles/115001002272-How-to-Contact-Support">Support Team</a>. </p>

@@ -1,0 +1,78 @@
+<h2 id="h_01HGGH8ZYHVNKVG3NH5DY6MM5R">You will learn</h2>
+<p>Learn how to create several types of product-specific flows. You must have metrics in your account in order to split or filter by a product. If there's no metrics, the dimension fields will not populate any products.</p>
+<p>When setting up an abandoned cart, browse abandonment, or post-purchase flow, you may want to filter or split your flow based on the specific item someone left in their cart, viewed, or purchased. This can be useful if you want to offer instructions or messaging around a specific product or products.</p>
+<p>This practice works best if you only offer a handful of products and would like to offer very tailored information on each (or only one) of them. This can also be a useful technique if you would like to target people who are purchasing specific items together and tailor the post-purchase experience to this combination of products.</p>
+<h2 id="h_01HGGH8ZYJHYGB8Y31PW5SAK29">Filter or split a flow based on one specific product</h2>
+<h3 id="h_01HGGH8ZYJZ0B141Q76M6FBA8Y">Post-purchase</h3>
+<p>In our post-purchase flow example, let's say that we just released a new product (a lip balm) and would like to reach out to customers who bought this item to provide feedback. Keep in mind that the trigger filters and splits available for you to use will depend on the event that triggers the flow in the first place. Not all flow triggers will be filterable by product.</p>
+<p>In this example, our flow will be triggered by placing an order. Then, we're going to want to get more granular and identify the specific item someone bought.</p>
+<p>To configure this, we'll need the following flow trigger and trigger split conditions:</p>
+<ul>
+<li>
+<strong>Trigger:</strong> Placed Order</li>
+<li>
+<strong>Trigger Split Filter 1:</strong> Item Count equals "1"<br>AND</li>
+<li>
+<strong>Trigger Split Filter 2: </strong>Items contains "lip balm"</li>
+</ul>
+<p>We only want to identify customers who bought one item because we want to assume that the lip balm is the only item they purchased. If we would like to target anyone who bought lip balm, regardless of whether or not they bought something else, we can remove this filter.</p>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/28723517398939" alt="Trigger Split with configuration 'Items contains lip balm' before the first email"></p>
+<p>You can use this configuration as a trigger filter as well in case you would like to create entirely separate flows for whenever someone purchases a specific product (and only that product).</p>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/28723505746843" alt="Trigger Setup menu with trigger filter 'Items contains lip balm'"></p>
+<h3 id="h_01HGGH8ZYJHGGJSS68JRWHE4JH">Browse abandonment</h3>
+<p>In our browse abandonment flow example, let’s say you want to offer a discount to only those who view the product with the highest margin or price (matte gloss). Select a browse abandonment flow from the Flow Library and then add a trigger split.</p>
+<p>To configure this split, we’ll need the following flow trigger and trigger split conditions:</p>
+<ul>
+<li>
+<strong>Trigger</strong>: Viewed Product</li>
+<li>
+<strong>Profile Filter</strong>: Placed Order zero times since starting this flow<br>AND</li>
+<li>
+<strong>Profile Filter</strong>: Started Checkout zero times since starting this flow</li>
+<li>
+<strong>Profile Filter</strong>: Has not been in flow in the last 30 days</li>
+<li>
+<strong>Trigger Split Filter 1</strong>: Name contains “matte gloss”</li>
+</ul>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/28723517406747" alt="Trigger split with configuration 'Name contains matte gloss'"></p>
+<h3 id="h_01HGGH8ZYJKXYEHZY5NHB23R5B">Abandoned cart</h3>
+<p>In our abandoned cart flow example, let's say we have excess inventory and want to offer shoppers a discount to buy a specific product (matte gloss), but only that product. We're going to start with the default abandoned cart flow and then drag in a Trigger Split to isolate this specific item.</p>
+<p>To configure this, we'll need the following Flow Trigger and Trigger Split conditions:</p>
+<ul>
+<li>
+<strong>Trigger:</strong> Started Checkout</li>
+<li>
+<strong>Profile Filter: </strong>Placed Order zero times since starting this flow </li>
+<li>
+<strong>Trigger Split Filter 1:</strong> Items contains "matte gloss" <br>AND</li>
+<li>
+<strong>Trigger Split Filter 2: </strong>Item Count equals "1"</li>
+</ul>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/28723505753755" alt="Trigger split with configuration 'Items contains matte gloss AND Item Count equals 1'"></p>
+<h2 id="h_01HGGH8ZYJW765ESS67XNBRFV9">Filter or split a flow based on a combination of products</h2>
+<p>There may be cases in which you would like to filter or split your flow based on a combination of products. Let's say that we'd like to offer specific advice to people who buy two items at the same time (a lip balm and a certain lip gloss). To configure this, we'd follow the same steps as above, but change the following:</p>
+<ul>
+<li>
+<strong>Flow Trigger: </strong>Placed Order</li>
+<li>
+<strong>Trigger Split Filter 1:</strong> Items contains "lip balm"<br>AND</li>
+<li>
+<strong>Trigger Split Filter 2: </strong>Items contains "matte gloss<br>AND</li>
+<li>
+<strong>Trigger Filter 3: </strong>Item Count equals "2"</li>
+</ul>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/28723517413403" alt="Trigger split with configuration 'Item Count equals 2 AND Items contains lip balm AND Items contains matte gloss'"></p>
+<h2 id="h_01HGGH8ZYJEAZFS4HH9M8A1ABJ">Additional resources</h2>
+<p>Learn how to create different types of flows:</p>
+<ul>
+<li><a href="https://klaviyo.zendesk.com/hc/en-us/articles/360028872611" target="_self">How to create a post-purchase flow</a></li>
+<li><a href="https://klaviyo.zendesk.com/hc/en-us/articles/115002775252" target="_self">How to create a browse abandonment flow</a></li>
+<li><a href="https://klaviyo.zendesk.com/hc/en-us/articles/115002779411" target="_self">How to create an abandoned cart flow</a></li>
+</ul>
+<p>Learn more about trigger filters and splits: </p>
+<ul>
+<li><a href="https://help.klaviyo.com/hc/en-us/articles/115002779051" target="_blank" rel="noopener">Understand flow triggers and filters</a></li>
+<li><a href="https://help.klaviyo.com/hc/en-us/articles/115003885632" target="_blank" rel="noopener">How to add a trigger split to a flow</a></li>
+<li><a href="https://help.klaviyo.com/hc/en-us/articles/115003883992" target="_blank" rel="noopener">Understand flow branching</a></li>
+</ul>
+<p>See how to <a href="https://help.klaviyo.com/hc/en-us/articles/115002775212" target="_blank" rel="noopener">create a upsell or cross-sell flow</a></p>

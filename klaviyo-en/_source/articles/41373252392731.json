@@ -1,0 +1,753 @@
+{
+  "captured_at": "2026-05-23T16:14:22Z",
+  "article": {
+    "id": 41373252392731,
+    "url": "https://klaviyo.zendesk.com/api/v2/help_center/en-us/articles/41373252392731.json",
+    "html_url": "https://klaviyo.zendesk.com/hc/en-us/articles/41373252392731-Connecting-Klaviyo-and-Snowflake",
+    "author_id": 38504994929947,
+    "comments_disabled": true,
+    "draft": false,
+    "promoted": false,
+    "position": 0,
+    "vote_sum": 0,
+    "vote_count": 0,
+    "section_id": 49375669200027,
+    "created_at": "2025-09-23T19:51:17Z",
+    "updated_at": "2026-04-21T13:54:56Z",
+    "name": "Connecting Klaviyo and Snowflake",
+    "title": "Connecting Klaviyo and Snowflake",
+    "source_locale": "en-us",
+    "locale": "en-us",
+    "outdated": false,
+    "outdated_locales": [],
+    "edited_at": "2026-04-17T00:59:41Z",
+    "user_segment_id": null,
+    "permission_group_id": 146372,
+    "content_tag_ids": [
+      "01K5ZGPK6XJJ7N6E2TM1YJK302",
+      "01K5ZGPT13E0CS1FPX67C61NZ3",
+      "01K5ZGPZ96KZKPTAHS6H8GM5ZD",
+      "01K5ZGRNX6WN1J4GK4WSW1Z0CP"
+    ],
+    "label_names": [],
+    "body": "<div class=\"bs-callout bs-callout-default\">\n<p><a href=\"https://help.klaviyo.com/hc/en-us/articles/17655007276059\">Advanced KDP</a> is not included in Klaviyo’s standard marketing application, and a subscription is required to access the associated functionality. Head to our <a href=\"https://help.klaviyo.com/hc/en-us/articles/115000976672\">billing guide</a> to learn about how to purchase this plan.</p>\n</div>\n<p></p>\n<p>For the purposes of this article we use the term “table”, but views, materialized views, and tables are all valid Snowflake objects that can be imported. As long as Klaviyo can run SELECT col1 FROM table_name on the object, you are free to use whatever you prefer. </p>\n<p>The key words \"MUST\", \"MUST NOT\", \"REQUIRED\", \"SHALL\", \"SHALL NOT\", \"SHOULD\", \"SHOULD NOT\", \"RECOMMENDED\",  \"MAY\", and \"OPTIONAL\" in this document are to be interpreted as described in <a href=\"https://datatracker.ietf.org/doc/html/rfc2119\">RFC 2119</a>.</p>\n<h2 id=\"h_01K5ZH8JF3FSKSNNZG81VDVV0G\">Snowflake Admin Setup</h2>\n<p>This section outlines the steps you must follow in your Snowflake environment to allow Klaviyo to import your data. </p>\n<ol>\n<li>Generate a private key by running the following command in your local terminal:<br>\n<pre><code class=\"language-auto\">openssl genrsa 2048 | openssl pkcs8 -topk8 -inform PEM -out rsa_key.p8 -nocrypt</code></pre>\n</li>\n<li>Generate a public key that references the private key by running the following command in your terminal:<br>\n<pre><code class=\"language-auto\">openssl rsa -in rsa_key.p8 -pubout -out rsa_key.pub</code></pre>\n</li>\n<li>Copy the rsa_key.pub and paste it into the script below to replace the placeholder ‘GENERATE_PUBLIC_KEY’ value for user_rsa_public_key. The script below will work for Mac users, or you can open rsa_key.pub in an IDE and copy the full contents of the file if you prefer. <br>\n<pre><code class=\"language-auto\"># Mac terminal command to write the key to your terminal and copy it to the clipboard\ncat rsa_key.pub | tee /dev/tty | pbcopy</code></pre>\n</li>\n<li>Run the following script in your Snowflake environment to create a service user for Klaviyo to use. You must have securityadmin and sysadmin privileges in order to complete the setup below. To review what role(s) you have, run SHOW GRANTS TO USER &lt;your_username&gt; and ensure that you have both roles listed. Reach out to a system administrator if you need to have your role adjusted. \n<ol>\n<li>You should feel free to update any of the variables set at the beginning of the script. </li>\n<li>In summary, you’ll:\n<ol>\n<li>Choose an existing warehouse or create a new one </li>\n<li>Choose an existing database or create a new one to hold the new schemas </li>\n<li>Create two new schemas <code>KLAVIYO_TMP</code>, and <code>KLAVIYO_IMPORT_FROM_DWH</code>\n</li>\n<li>Create a new network policy and allow list Klaviyo IPs </li>\n<li>Create a user and role for Klaviyo</li>\n</ol>\n</li>\n<li>This script is idempotent (can be safely run multiple times), but will not overwrite existing objects with conflicting names. </li>\n</ol>\n</li>\n</ol>\n<pre><code class=\"language-auto\">BEGIN;\n\n-- create variables for user / password / role / warehouse / database. \n-- Change these to whatever you prefer.\nSET role_name = 'KLAVIYO_DATA_TRANSFER_ROLE'; -- all letters must be uppercase, ex. 'KLAVIYO_DATA_TRANSFER_ROLE'\nSET user_name = 'KLAVIYO_DATA_TRANSFER_USER'; -- all letters must be uppercase, ex. 'KLAVIYO_DATA_TRANSFER_USER'\nSET warehouse_name = 'KLAVIYO_DATA_TRANSFER_WAREHOUSE'; -- all letters must be uppercase, ex. 'KLAVIYO_DATA_TRANSFER_WAREHOUSE'\nSET database_name = 'KLAVIYO_DATABASE'; -- all letters must be uppercase, ex. 'KLAVIYO_DATABASE'. If this database doesn't exist, a new one will be created.\nSET network_policy = 'KLAVIYO_DATA_TRANSFER_NETWORK_POLICY'; -- all letters must be uppercase, ex. 'KLAVIYO_NETWORK_POLICY'\nSET network_rule = 'KLAVIYO_DATA_TRANSFER_NETWORK_RULE'; -- all letters must be uppercase, ex. 'KLAVIYO_NETWORK_RULE'\n/* replace GENERATE_PUBLIC_KEY below with generated public key */\n\n-- DO NOT CHANGE\nSET schema_name_tmp = $database_name || '.KLAVIYO_TMP';  -- DO NOT CHANGE\nSET schema_name_import = $database_name || '.KLAVIYO_IMPORT_FROM_DWH';  -- DO NOT CHANGE\nSET full_network_rule_tmp = $schema_name_tmp || '.' || $network_rule; -- DO NOT CHANGE\nSET full_network_rule_import = $schema_name_import || '.' || $network_rule; -- DO NOT CHANGE\n\n\n-- change role to sysadmin for warehouse / database steps\nUSE ROLE sysadmin;\n\n-- create a warehouse for data transfer service\nCREATE WAREHOUSE IF NOT EXISTS IDENTIFIER($warehouse_name)\n    warehouse_size = xsmall\n    warehouse_type = standard\n    auto_suspend = 60\n    auto_resume = true\n    initially_suspended = true;\n\n-- create database for data transfer service\nCREATE DATABASE IF NOT EXISTS IDENTIFIER($database_name);\n\n-- create schemas for data transfer service\nCREATE SCHEMA IF NOT EXISTS IDENTIFIER($schema_name_tmp);\nCREATE SCHEMA IF NOT EXISTS IDENTIFIER($schema_name_import);\n\n-- change role to securityadmin for user / role steps\nUSE ROLE securityadmin;\n\n-- create network rule and policy for database\nGRANT USAGE ON DATABASE IDENTIFIER($database_name) TO ROLE securityadmin;\nGRANT USAGE, CREATE NETWORK RULE ON SCHEMA IDENTIFIER($schema_name_tmp) TO ROLE securityadmin;\nGRANT USAGE, CREATE NETWORK RULE ON SCHEMA IDENTIFIER($schema_name_import) TO ROLE securityadmin;\n\n-- whitelist klaviyo ip ranges, for KLAVIYO_TMP schema \nCREATE NETWORK RULE IF NOT EXISTS IDENTIFIER($full_network_rule_tmp)\n    type = IPV4\n    value_list = (\n        '184.72.183.187/32', '52.206.71.52/32', '3.227.146.32/32', '44.198.39.11/32', '35.172.58.121/32', '3.228.37.244/32', '54.88.219.8/32', '3.214.211.176/32'\n        )\n    comment = 'Klaviyo IP Ranges as of April 2025';\nCREATE NETWORK POLICY IF NOT EXISTS IDENTIFIER($network_policy)\n    allowed_network_rule_list = ($full_network_rule_tmp);\n\n-- whitelist klaviyo ip ranges, for KLAVIYO_IMPORT_FROM_DWH schema \nCREATE NETWORK RULE IF NOT EXISTS IDENTIFIER($full_network_rule_import)\n    type = IPV4\n    value_list = (\n        '184.72.183.187/32', '52.206.71.52/32', '3.227.146.32/32', '44.198.39.11/32', '35.172.58.121/32', '3.228.37.244/32', '54.88.219.8/32', '3.214.211.176/32'\n        )\n    comment = 'Klaviyo IP Ranges as of April 2025';\nCREATE NETWORK POLICY IF NOT EXISTS IDENTIFIER($network_policy)\nallowed_network_rule_list = ($full_network_rule_import);\n\n\n-- create role for data transfer service\nCREATE ROLE IF NOT EXISTS IDENTIFIER($role_name);\nGRANT ROLE IDENTIFIER($role_name) TO ROLE sysadmin;\n\n-- create a user for data transfer service\nCREATE USER IF NOT EXISTS IDENTIFIER($user_name)\n    type = SERVICE\n    network_policy = $network_policy\n    default_role = $role_name\n    default_warehouse = $warehouse_name\n    rsa_public_key = 'GENERATE_PUBLIC_KEY';\nGRANT ROLE IDENTIFIER($role_name) TO USER IDENTIFIER($user_name);\nALTER USER IDENTIFIER($user_name) SET NETWORK_POLICY = $network_policy;\n\n-- grant service role access to warehouse\nGRANT USAGE\n    ON WAREHOUSE IDENTIFIER($warehouse_name)\n    TO ROLE IDENTIFIER($role_name);\n\n-- grant service access to database\nGRANT MONITOR, USAGE\n    ON DATABASE IDENTIFIER($database_name)\n    TO ROLE IDENTIFIER($role_name);\n\n-- Grant privileges for KLAVIYO_TMP \nGRANT USAGE ON SCHEMA IDENTIFIER($schema_name_tmp) TO ROLE IDENTIFIER($role_name);\nGRANT MONITOR, USAGE, CREATE TABLE, CREATE VIEW, CREATE SEQUENCE, CREATE FUNCTION, CREATE PROCEDURE\n    ON SCHEMA IDENTIFIER($schema_name_tmp)\n    TO ROLE IDENTIFIER($role_name);\nGRANT ALL ON FUTURE TABLES IN SCHEMA IDENTIFIER($schema_name_tmp) TO ROLE IDENTIFIER($role_name);\n\n-- Grant privileges for KLAVIYO_IMPORT_FROM_DWH\nGRANT USAGE ON SCHEMA IDENTIFIER($schema_name_import) TO ROLE IDENTIFIER($role_name);\nGRANT SELECT\n    ON FUTURE TABLES\n    IN SCHEMA IDENTIFIER($schema_name_import)\n    TO ROLE IDENTIFIER($role_name);\n\nCOMMIT;</code></pre>\n<h2 id=\"h_01K5ZHEDCFTKKD1BGXX8QCHYHZ\">Snowflake Data Setup</h2>\n<p>Above, you created two new schemas. </p>\n<ul>\n<li>KLAVIYO_TMP will be used exclusively by Klaviyo. You MUST NOT modify any tables created in this schema. Klaviyo will delete these tables when they are no longer needed. </li>\n<li>KLAVIYO_IMPORT_FROM_DWH is where you should store your final tables for Klaviyo to import. When you go through the sync creation process, all the tables in this schema will be listed for you to choose from. Hence you SHOULD only store the final tables you want to import to avoid confusion during setup. </li>\n</ul>\n<p>All tables you plan to import to Klaviyo must meet the following criteria. </p>\n<h3 id=\"h_01K5ZH8JG6BHD9KPAW6A8N9DYW\">Timestamp Requirements </h3>\n<ol>\n<li>Tables MUST contain a timestamp field that indicates when the row was created or updated. Often this will be inserted_at or updated_at. You will set this for each table during the sync creation process. \n<ol>\n<li>The timestamp field MUST be monotonically increasing (i.e. it must always be getting larger or staying the same, never getting smaller). </li>\n<li>After sync creation, you MUST NOT set a row’s timestamp value to a time in the past or Klaviyo may not pick up that row. </li>\n<li>The timezone of this particular field is not important to Klaviyo, so long as you follow the above requirements</li>\n<li>Klaviyo RECOMMENDS you set the timestamp field with CURRENT_TIMESTAMP() or an equivalent function. Multiple rows can have the same timestamp. See example below. <br>\n<pre><code class=\"language-auto\">INSERT INTO table_name AS \n\nSELECT ... \n\n    , CURRENT_TIMESTAMP() AS inserted_at\n\n... </code></pre>\n</li>\n</ol>\n</li>\n<li>Your timestamps MUST be in UTC, or include timezone information. If timezone information is missing, Klaviyo will assume UTC. For custom properties, these timestamps remain in string format, allowing you to interpret them in your preferred timezone.</li>\n</ol>\n<h3 id=\"h_01K5ZH8JG7PPJ6VZY6TY1GW4QK\">Table Structure </h3>\n<ol>\n<li>Tables SHOULD be treated as append-only (aka insert-only)\n<ol>\n<li>If you prefer to update the rows in place instead, you MUST update the timestamp field so Klaviyo can identify the change. </li>\n</ol>\n</li>\n<li>Tables SHOULD be ordered on your timestamp column. Snowflake will handle clustering and partitioning based on your insert order. This will help optimize Klaviyo’s import queries, keeping compute costs in Snowflake down</li>\n</ol>\n<h3 id=\"h_01K5ZH8JG81C224981NSHAH733\">Profile Uniqueness and Consistency </h3>\n<ol>\n<li>You MUST ensure each profile property is imported from only one data source (table). Klaviyo prevents selecting the same property from different tables during sync creation, simplifying this requirement.</li>\n<li>You SHOULD use the same profile identifier(s) (email, phone number, external ID, etc) in all your import tables, to minimize the risk of duplicate profiles being created. \n<ol>\n<li>Klaviyo will create new profiles if the profile identifier you provide does not match an existing profile within Klaviyo. </li>\n<li>Example: Table1 (Email, fav_color) + Table2 (Phone, birthday)\n<ol>\n<li>This could create 2 profiles for the same person if the profile doesn’t currently exist. If a profile does exist, Klaviyo will handle the profile resolution and updates internally.  </li>\n</ol>\n</li>\n<li>One way to avoid this problem is to use only a single import table for all of your profiles. </li>\n</ol>\n</li>\n</ol>\n<h3 id=\"h_01K5ZH8JG9RX9SAX9KJ2EGZ269\">Circular Import-Export Loop Prevention </h3>\n<ol>\n<li>You SHOULD carefully manage scenarios where both import and export features are used to prevent circular import-export loops. Ensure your export process does not feed data back into a table that is upstream of your import table, as Klaviyo does not currently detect this scenario. \n<ol>\n<li>Klaviyo does not yet have logic to detect this scenario. </li>\n<li>This would look something like: \n<ol>\n<li>On each export sync cycle, Klaviyo will export all your profiles </li>\n<li>Then you add all of your exported profiles to your import table through some series of transformations. </li>\n<li>On each import sync cycle, Klaviyo will read all the profiles in your import table, which will eventually be re-exported</li>\n</ol>\n</li>\n<li>Scenarios where this is probably safe \n<ol>\n<li>if you are only using the export table to restrict the rows added to your import table </li>\n<li>If you verify the export table does not add rows to your import table. </li>\n</ol>\n</li>\n<li>What are the consequences of a circular import-export loop?\n<ol>\n<li>This will result in unnecessary compute costs for both you and Klaviyo.</li>\n</ol>\n</li>\n</ol>\n</li>\n</ol>\n<p></p>",
+    "user_segment_ids": []
+  },
+  "normalized": {
+    "id": "41373252392731",
+    "title": "Connecting Klaviyo and Snowflake",
+    "source_url": "https://help.klaviyo.com/hc/en-us/articles/41373252392731-Connecting-Klaviyo-and-Snowflake",
+    "section_id": 49375669200027,
+    "section": "Syncing",
+    "category_id": 18073014919195,
+    "category": "Advanced KDP & Marketing Analytics",
+    "category_slug": "advanced-kdp-marketing-analytics",
+    "klaviyo_updated": "2026-04-21T13:54:56Z",
+    "created_at": "2025-09-23T19:51:17Z",
+    "draft": false,
+    "promoted": false,
+    "position": 0,
+    "label_names": []
+  },
+  "files": {
+    "body_html": "_source/articles/41373252392731.body.html",
+    "rendered_html": "_source/rendered/41373252392731.html"
+  },
+  "assets": {
+    "api_body": {
+      "images": [],
+      "links": [
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/17655007276059",
+          "text": "Advanced KDP"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115000976672",
+          "text": "billing guide"
+        },
+        {
+          "href": "https://datatracker.ietf.org/doc/html/rfc2119",
+          "text": "RFC 2119"
+        }
+      ],
+      "headings": [
+        {
+          "level": 2,
+          "id": "h_01K5ZH8JF3FSKSNNZG81VDVV0G",
+          "text": "Snowflake Admin Setup"
+        },
+        {
+          "level": 2,
+          "id": "h_01K5ZHEDCFTKKD1BGXX8QCHYHZ",
+          "text": "Snowflake Data Setup"
+        },
+        {
+          "level": 3,
+          "id": "h_01K5ZH8JG6BHD9KPAW6A8N9DYW",
+          "text": "Timestamp Requirements"
+        },
+        {
+          "level": 3,
+          "id": "h_01K5ZH8JG7PPJ6VZY6TY1GW4QK",
+          "text": "Table Structure"
+        },
+        {
+          "level": 3,
+          "id": "h_01K5ZH8JG81C224981NSHAH733",
+          "text": "Profile Uniqueness and Consistency"
+        },
+        {
+          "level": 3,
+          "id": "h_01K5ZH8JG9RX9SAX9KJ2EGZ269",
+          "text": "Circular Import-Export Loop Prevention"
+        }
+      ]
+    },
+    "rendered_page": {
+      "images": [
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/7ff492c2b417b7ecfe572f839a8a81398693c1f7-1920x1080.webp",
+          "alt": "",
+          "width": "",
+          "height": ""
+        }
+      ],
+      "links": [
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/41373252392731-Connecting-Klaviyo-and-Snowflake#site-content",
+          "text": "Skip to main content"
+        },
+        {
+          "href": "https://www.klaviyo.com",
+          "text": "Home"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center"
+        },
+        {
+          "href": "https://www.klaviyo.com/enterprise",
+          "text": "Enterprise"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Partners"
+        },
+        {
+          "href": "https://www.klaviyo.com/careers",
+          "text": "Careers"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": "Log in"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": ""
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center Find step-by-step instructions and troubleshooting solutions in our knowledge base."
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000032731",
+          "text": "Integrations"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000312411",
+          "text": "Flows"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867867",
+          "text": "Audience"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867667",
+          "text": "Campaigns"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/360000190711",
+          "text": "Sign-up forms"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000873988",
+          "text": "Deliverability & compliance"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/29173800271259",
+          "text": "SMS"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/16638219724187",
+          "text": "Reviews"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/18073014919195",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/34141283979931",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/37659126754075",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/33948021740315",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/39746685522331",
+          "text": "WhatsApp"
+        },
+        {
+          "href": "https://academy.klaviyo.com",
+          "text": "Klaviyo Academy Expert training and education to help you succeed with Klaviyo, and beyond."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Quick+guide&resource=academy_courses",
+          "text": "Quick guides Learn marketing strategies and concepts in 15 minutes or less."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Course&resource=academy_courses",
+          "text": "Courses Master key marketing topics through structured lessons and exams."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/best-practices",
+          "text": "Best practices Discover top product and marketing strategies for your business."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/learning-paths",
+          "text": "Learning paths Complete curated learning journeys tailored to your marketing goals."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses",
+          "text": "Explore all resources"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Live+training&resource=academy_courses",
+          "text": "Live trainings Build confidence through hands-on interactive workshops and thought-provoking strategy sessions."
+        },
+        {
+          "href": "https://www.bigmarker.com/klaviyo-customer-education/Office-hours-Getting-started-with-Klaviyo",
+          "text": "Live office hours Join a strategic discussion where you can ask questions and get answers in real-time."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/private-live-training",
+          "text": "1:1 Live training Book a private training session with an expert to jumpstart your platform knowledge and confidence."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/credentials",
+          "text": "Klaviyo credentials Dig deeper into select topics and showcase your expertise with a final exam to earn a certificate and digital badge."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/certificates/klaviyo-practitioner-certificate",
+          "text": "Klaviyo practitioner certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/deliverability-certificate",
+          "text": "Deliverability certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/developer-certificate",
+          "text": "Klaviyo developer certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses&select=Certificate",
+          "text": "See all certificates"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Klaviyo Community Join our thriving community network to connect with brands like yours—online and in person."
+        },
+        {
+          "href": "https://community.klaviyo.com/topic/new",
+          "text": "Ask a question Post a question and get thoughtful answers from Klaviyo powerusers."
+        },
+        {
+          "href": "https://community.klaviyo.com/p/roadmap",
+          "text": "Product roadmap"
+        },
+        {
+          "href": "https://community.klaviyo.com/search/activity/recent",
+          "text": "Recent threads"
+        },
+        {
+          "href": "https://community.klaviyo.com/p/champions",
+          "text": "Meet the Champions"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups",
+          "text": "Browse all groups Your people are waiting. New ideas and connections are a click away."
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/developer-group-64",
+          "text": "Developer group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/entrepreneur-user-group-118",
+          "text": "Entrepreneur group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/woo-user-group-87",
+          "text": "WooCommerce group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/new-york-meetup-chapter-82",
+          "text": "New York City"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/los-angeles-meetup-chapter-83",
+          "text": "Los Angeles"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/austin-meetup-chapter-85",
+          "text": "Austin"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/san-diego-meetup-chapter-86",
+          "text": "San Diego"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/amsterdam-meetup-chapter-84",
+          "text": "Amsterdam"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Klaviyo Developers Access API documentation and developer guides to help you build with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/get_started",
+          "text": "Get started Access key resources and a step-by-step checklist for how to start developing with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/build_your_integration",
+          "text": "Grow your app's reach Learn how to join our ecosystem and get your app listed on our marketplace."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/developer-tools",
+          "text": "Developer tools Generate sample data, monitor your API usage, and access our Postman collections."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/reference/api_overview",
+          "text": "API reference Browse our full catalog of API docs."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/changelog_",
+          "text": "Changelog"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/api_versioning_and_deprecation_policy",
+          "text": "Versioning & deprecation policy"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/rate_limits_and_error_handling",
+          "text": "Rate limits & error handling"
+        },
+        {
+          "href": "https://youtube.com/playlist?list=PLHkNfHgtxcUanrkMnKPdkRzuWU7MGv_xM&si=pkG-KH7IT_TUHOGC",
+          "text": "API tutorials on YouTube Subscribe to our Klaviyo API Tutorials playlist for easy access to step-by-step developer walkthroughs."
+        },
+        {
+          "href": "https://www.klaviyo.com/contact-us",
+          "text": "Contact us"
+        },
+        {
+          "href": "https://www.klaviyo.com/sign-up",
+          "text": "Sign up"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": "Search"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/41373252392731",
+          "text": "United States - EN"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/de-de/articles/41373252392731",
+          "text": "Deutschland - DE"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-es/articles/41373252392731",
+          "text": "España - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-mx/articles/41373252392731",
+          "text": "México - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/fr-fr/articles/41373252392731",
+          "text": "France - FR"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/it-it/articles/41373252392731",
+          "text": "Italia - IT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/ko-kr/articles/41373252392731",
+          "text": "한국 - KO"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/nl-nl/articles/41373252392731",
+          "text": "Nederland - NL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pl-pl/articles/41373252392731",
+          "text": "Polska - PL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pt-br/articles/41373252392731",
+          "text": "Brasil - PT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/sv-se/articles/41373252392731",
+          "text": "Sverige - SV"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/18073014919195",
+          "text": "Advanced KDP & Marketing Analytics"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/28478928202523",
+          "text": "Data management (Advanced KDP)"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/49375669200027",
+          "text": "Syncing"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/41373252392731-Connecting-Klaviyo-and-Snowflake#h_01K5ZH8JF3FSKSNNZG81VDVV0G",
+          "text": "Snowflake Admin Setup"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/41373252392731-Connecting-Klaviyo-and-Snowflake#h_01K5ZHEDCFTKKD1BGXX8QCHYHZ",
+          "text": "Snowflake Data Setup"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/17655007276059",
+          "text": "Advanced KDP"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115000976672",
+          "text": "billing guide"
+        },
+        {
+          "href": "https://datatracker.ietf.org/doc/html/rfc2119",
+          "text": "RFC 2119"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115001002272",
+          "text": "Learn how to contact support"
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": ""
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": "Visit Community"
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": ""
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": "Hire a partner"
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/about",
+          "text": "About Klaviyo"
+        },
+        {
+          "href": "https://www.klaviyo.com/newsroom",
+          "text": "Newsroom"
+        },
+        {
+          "href": "https://investors.klaviyo.com/overview/default.aspx",
+          "text": "Investor relations"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Agency and tech partners"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Developers"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/retail",
+          "text": "Retail and ecommerce"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/restaurants",
+          "text": "Restaurant marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/wellness",
+          "text": "Wellness"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform",
+          "text": "B2C CRM overview"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai",
+          "text": "Klaviyo AI (K:AI)"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/marketing-automation",
+          "text": "Klaviyo Marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-service",
+          "text": "Klaviyo Service"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/analytics",
+          "text": "Klaviyo Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-data-platform",
+          "text": "Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare",
+          "text": "Klaviyo vs. Klaviyo alternatives"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-mailchimp",
+          "text": "Klaviyo vs. Mailchimp"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-postscript",
+          "text": "Klaviyo vs. Postscript"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-attentive",
+          "text": "Klaviyo vs. Attentive"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-salesforce-marketing-cloud",
+          "text": "Klaviyo vs. Salesforce"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-listrak",
+          "text": "Klaviyo vs. Listrak"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/omnichannel",
+          "text": "Omnichannel marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/email-marketing",
+          "text": "Email marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing",
+          "text": "SMS marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing/rcs",
+          "text": "RCS for Business"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/mobile-app-marketing",
+          "text": "Mobile app marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/whatsapp",
+          "text": "WhatsApp marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/social",
+          "text": "Social marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources",
+          "text": "Marketing resources"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources/marketing-campaign-calendar",
+          "text": "Marketing campaign calendar"
+        },
+        {
+          "href": "https://www.klaviyo.com/glossary",
+          "text": "Marketing glossary"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/email-subject-line-generator",
+          "text": "Subject line generator"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/roi-calculator",
+          "text": "ROI calculator"
+        },
+        {
+          "href": "https://www.klaviyo.com/customers",
+          "text": "Case studies"
+        },
+        {
+          "href": "https://www.klaviyo.com/composer",
+          "text": "Composer Beta"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/marketing-agent",
+          "text": "Marketing Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/customer-agent",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/customer-experience-hub",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/helpdesk",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/marketing-analytics",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/advanced-cdp",
+          "text": "Advanced Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/web-forms",
+          "text": "Web forms"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/email-templates",
+          "text": "Email templates"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/portfolio",
+          "text": "Portfolio"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform-integrations",
+          "text": "Apps and Integrations"
+        },
+        {
+          "href": "https://www.klaviyo.com/features",
+          "text": "Features"
+        },
+        {
+          "href": "https://www.klaviyo.com/whats-new",
+          "text": "What's new"
+        },
+        {
+          "href": "https://www.klaviyo.com/events",
+          "text": "Events"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help Center"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us",
+          "text": "Academy"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Community"
+        },
+        {
+          "href": "https://www.facebook.com/Klaviyo/",
+          "text": "Facebook"
+        },
+        {
+          "href": "https://twitter.com/klaviyo/",
+          "text": "Twitter"
+        },
+        {
+          "href": "https://www.linkedin.com/company/klaviyo/",
+          "text": "LinkedIn"
+        },
+        {
+          "href": "https://www.instagram.com/klaviyo/",
+          "text": "Instagram"
+        },
+        {
+          "href": "https://www.klaviyo.com/sitemap",
+          "text": "Site Map"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal",
+          "text": "Terms and Privacy"
+        },
+        {
+          "href": "https://www.klaviyo.com/security",
+          "text": "Security"
+        },
+        {
+          "href": "https://www.klaviyo.com/trust",
+          "text": "Trust"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal/intellectual-property-notices",
+          "text": "Intellectual Property Notices"
+        }
+      ],
+      "headings": [
+        {
+          "level": 1,
+          "id": "",
+          "text": "Connecting Klaviyo and Snowflake"
+        },
+        {
+          "level": 2,
+          "id": "h_01K5ZH8JF3FSKSNNZG81VDVV0G",
+          "text": "Snowflake Admin Setup"
+        },
+        {
+          "level": 2,
+          "id": "h_01K5ZHEDCFTKKD1BGXX8QCHYHZ",
+          "text": "Snowflake Data Setup"
+        },
+        {
+          "level": 3,
+          "id": "h_01K5ZH8JG6BHD9KPAW6A8N9DYW",
+          "text": "Timestamp Requirements"
+        },
+        {
+          "level": 3,
+          "id": "h_01K5ZH8JG7PPJ6VZY6TY1GW4QK",
+          "text": "Table Structure"
+        },
+        {
+          "level": 3,
+          "id": "h_01K5ZH8JG81C224981NSHAH733",
+          "text": "Profile Uniqueness and Consistency"
+        },
+        {
+          "level": 3,
+          "id": "h_01K5ZH8JG9RX9SAX9KJ2EGZ269",
+          "text": "Circular Import-Export Loop Prevention"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "Explore more from Klaviyo"
+        }
+      ]
+    }
+  },
+  "rendered_page": {
+    "status": "fetched",
+    "error": ""
+  }
+}

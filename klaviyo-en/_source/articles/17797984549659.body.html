@@ -1,0 +1,43 @@
+<h2 id="01H84PBA1A3ZYDA5QSN01BHQ5J">You will learn</h2>
+<p id="01H85ZH05403KMTRAD0SKZ6Q2Y">Learn how to troubleshoot potential issues with your funnel analysis cards that may be producing errors or inaccurate numbers. This guide will walk through the main issues that arise when placing certain events together and in certain orders.</p>
+<div class="bs-callout bs-callout-default"><p><a href="https://help.klaviyo.com/hc/en-us/articles/17655007276059">Advanced KDP</a> and <a href="https://help.klaviyo.com/hc/en-us/articles/33789259613595">Marketing Analytics</a> are not included in Klaviyo’s standard marketing application, and a subscription is required to access the associated functionality.<em> </em>Head to our <a href="https://help.klaviyo.com/hc/en-us/articles/115000976672" target="_blank" rel="noopener noreferrer">billing guide</a> to learn about how to purchase these plans.</p></div>
+<h2 id="01H85YAYNKDMGAZKVE5Y8HAGSR">Placing an onsite event before an event from another source</h2>
+<p>For example, you add <em>Viewed product</em> as the first step in a checkout funnel, but the counts of <em>Checkout started</em> and <em>Placed orders</em> seem to have dropped significantly.</p>
+<p>Klaviyo’s funnel analysis report allows you to combine events from different sources in order to visualize various customer journeys. However, when combining events from Klaviyo’s onsite JS tracking with events from an integration partner, it’s important to keep in mind how your shoppers are tracked across these different sources.</p>
+<p>Examples of common events from an ecommerce platform include:</p>
+<ul>
+<li>Checkout started</li>
+<li>Checkout completed</li>
+<li>Placed order</li>
+<li>Refunded order</li>
+<li>Canceled order</li>
+<li>Fulfilled order</li>
+</ul>
+<p>Examples of common events driven by Klaviyo.js include:</p>
+<ul>
+<li>Active on site</li>
+<li>Viewed product</li>
+<li>Custom events sent via `klaviyo.track` from the browser.</li>
+</ul>
+<h3 id="01H84PJYBYWSB65YVR6SFJCK5K">Klaviyo onsite tracking considerations</h3>
+<p>Klaviyo’s onsite tracking (klaviyo.js) only fires for “identified” site visitors that <a href="https://help.klaviyo.com/hc/en-us/articles/115005076767#who-klaviyo-tracks5" target="_blank" rel="noopener noreferrer">Klaviyo has been able to cookie</a>.</p>
+<p>There are 3 key ways Klaviyo will identify a site visitor for onsite tracking: </p>
+<ol>
+<li>If someone has, at some point, clicked through a Klaviyo email to your website.</li>
+<li>If someone has, at some point, subscribed/opted-in through a Klaviyo form.</li>
+<li>If someone has, at some point, logged into your site and you have tracking installed.</li>
+</ol>
+<p>For example, if you support a “guest checkout” experience on your website then you may have a significant list of customers whom Klaviyo has not yet cookied, which means you could be recording events like <em>Checkout started</em>, <em>Placed order</em>, <em>Refunded order</em> etc., but are not recording events like <em>Active on site</em> or <em>Viewed product</em>.</p>
+<p class="wysiwyg-text-align-center"><img src="https://klaviyo.zendesk.com/hc/article_attachments/28717418130459" alt="faqs troubleshooting events.jpg"></p>
+<p>Consequently, when using the funnel analysis report, you may notice that the counts of events from your ecommerce integration drop when you add a Klaviyo onsite event in a preceding funnel step. This is because you are now limiting subsequent steps in your funnel only to “Klaviyo identified” shoppers.</p>
+<p>Additionally, even fully identified shoppers may use different devices and browsers, use ad blockers that prevent onsite tracking from firing, or reside in a country/locale that prevents or blocks cookies. These behaviors can also contribute to a gap between onsite tracking coverage and the server-side tracking supported by integration partners.</p>
+<div class="bs-callout bf-callout-default">Advanced KDP customers now have the option to enable post-identification backfill for anonymous profiles. This feature will store a shopper’s information in a browser’s local storage for a period of time (different browsers impose different time limits on data storage). When this feature is enabled, Klaviyo will populate new customer profiles with any data that has been saved in their browser once the customer becomes identified. This will provide greater coverage for Klaviyo’s onsite events and reduce, but not eliminate, the gap between onsite events and integration partners.</div>
+<h2 id="01H860A6PFNW2ES8G2WR6SBH5G">Using <em>Viewed product</em> and <em>Active on site</em> events together</h2>
+<p id="01H85Y2BYWCX2JNK5PZ68J6AE5">For example, you see a drop in <em>Viewed product</em> counts when you add <em>Active on site</em> in a preceding funnel step.</p>
+<p>It is not recommended to combine <em>Active on site</em> and <em>Viewed product</em> events within the same funnel chart because these events are fired asynchronously. This means that when a user visits your website, we may record a <em>Viewed product</em> event before an <em>Active on site</em> event, or vice versa. Since this behavior is inconsistent, it can provide a misleading view of shopper behavior when visualized in a funnel diagram, which relies on a logical sequence of events.<br><br>For example, you see a large drop in <em>Active on site</em> counts when you add <em>Viewed product</em> in a preceding funnel step.</p>
+<p>As noted above, it is not recommended to combine these events within the same funnel chart. You may notice a larger drop in <em>Active on site</em> counts when <em>Viewed product</em> precedes it in a funnel.</p>
+<p>In addition to the asynchronous relationship between these events, it’s also important to note that <em>Active on site</em> fires once per session (which can last up to an hour), while <em>Viewed product</em> events can fire multiple times per session. This means that if a <em>Viewed product</em> event happens to fire after the initial <em>Active on site</em> event, a user will need to return after their session expires in order to record an <em>Active on site</em> event after the <em>Viewed product</em> event. Hence, you may notice a big drop in <em>Active on site</em> events when you order your funnel this way.</p>
+<h2 id="01H860BA630E82E84NWP2E0S3E">Additional resources</h2>
+<p><a href="https://help.klaviyo.com/hc/en-us/articles/17798009376155" target="_blank" rel="noopener noreferrer">Getting started with the funnel analysis report</a></p>
+<p><a href="https://help.klaviyo.com/hc/en-us/articles/115005076767" target="_blank" rel="noopener noreferrer">Getting started with Klaviyo onsite tracking</a></p>
+<p><a href="https://help.klaviyo.com/hc/en-us/articles/360034666712" target="_blank" rel="noopener noreferrer">Understanding cookies in Klaviyo</a></p>

@@ -1,0 +1,845 @@
+{
+  "captured_at": "2026-05-23T16:16:51Z",
+  "article": {
+    "id": 360004785571,
+    "url": "https://klaviyo.zendesk.com/api/v2/help_center/en-us/articles/360004785571.json",
+    "html_url": "https://klaviyo.zendesk.com/hc/en-us/articles/360004785571-Catalog-lookup-tag-reference",
+    "author_id": 20424705848,
+    "comments_disabled": true,
+    "draft": false,
+    "promoted": false,
+    "position": 1,
+    "vote_sum": 13,
+    "vote_count": 153,
+    "section_id": 49375624479003,
+    "created_at": "2018-06-12T13:50:54Z",
+    "updated_at": "2026-04-21T13:54:42Z",
+    "name": "Catalog lookup tag reference",
+    "title": "Catalog lookup tag reference",
+    "source_locale": "en-us",
+    "locale": "en-us",
+    "outdated": false,
+    "outdated_locales": [],
+    "edited_at": "2026-01-08T20:25:03Z",
+    "user_segment_id": null,
+    "permission_group_id": 146372,
+    "content_tag_ids": [],
+    "label_names": [],
+    "body": "<h2 id=\"h_01HAMB2RMCX3DKBZ36HZ27CDKM\">You will learn</h2><p>Learn how to use the catalog tag, which allows you to reference specific product information from your catalog within your emails, SMS, and push messages. This is useful when you want to create custom product recommendations, or cross-reference product information. For example, if you're using your own recommendation engine, you can pass your own product recommendations as event or profile data to Klaviyo, and then utilize that data in templates.</p><div class=\"bs-callout bs-callout-default\"><p>Please note that this guide is designed for tech-savvy marketers or customers who have access to a developer.</p></div><h2 id=\"h_01HAMB2RMCW97XYRR220498B9E\">The {% catalog %} tag</h2><p>The <code class=\"language-html\">{% catalog %}</code> tag uses the following syntax:</p><pre class=\"wysiwyg-code-block\"><code class=\"language-json\">{% catalog itemID unpublished=\"cancel\" %}\n...\n{% endcatalog %}</code></pre><p>Replace <em>itemID</em> with the Product ID of the product you are referencing. This is the Product ID as synced from your own product catalog. Note, this lookup is specifically for the Product ID and not the SKU.</p><p>Including <em>unpublished=\"cancel\"</em> will ensure that you don't send your message in the event that the item referenced is unpublished. This argument is optional. </p><ul>\n<li data-list-item-id=\"edfd736a43720e3e92c5491f03a045ba7\">If any item referenced in your message is unpublished in your catalog at the time of lookup, the entire message will be skipped.</li>\n<li data-list-item-id=\"ef0b527195dfadc7060845adc4ffd52cb\">For a given flow message, you can navigate to <strong>Analytics &gt; Recipient Activity &gt; Other</strong> and see a list labeled <em>Skipped: Catalog Item Unavailable</em>. This list includes all profiles that were skipped because an item featured in the message was out-of-stock or otherwise unavailable.</li>\n</ul><p>When using this feature, between the opening and closing catalog tags, you can reference specific data from the item associated with the <em>itemID</em> in your Klaviyo product catalog.</p><p>The following data is available to reference inside of a <code class=\"language-html\">{% catalog %}</code> block.</p><figure class=\"wysiwyg-table wysiwyg-table-align-left\" style=\"height: 425px; width: 100%;\"><table>\n<thead><tr style=\"background-color: #eceeef;\">\n<th style=\"height: 22px; width: 52%;\"><strong>Template tag</strong></th>\n<th style=\"height: 22px; width: 14.2857%;\"><strong>Name</strong></th>\n<th style=\"height: 22px; width: 33.5714%;\"><strong>Description</strong></th>\n</tr></thead>\n<tbody>\n<tr style=\"height: 23px;\">\n<td style=\"height: 23px; width: 52%;\"><code class=\"language-html\">{{ catalog_item.description }}</code></td>\n<td style=\"height: 23px; width: 14.2857%;\">Description</td>\n<td style=\"height: 23px; width: 33.5714%;\">The description of the item.</td>\n</tr>\n<tr style=\"height: 44px;\">\n<td style=\"height: 44px; width: 52%;\"><code class=\"language-html\">{{ catalog_item.url }}</code></td>\n<td style=\"height: 44px; width: 14.2857%;\">URL</td>\n<td style=\"height: 44px; width: 33.5714%;\">The url for accessing the item in your store.</td>\n</tr>\n<tr style=\"height: 23px;\">\n<td style=\"height: 23px; width: 52%;\"><code class=\"language-html\">{{ catalog_item.title }}</code></td>\n<td style=\"height: 23px; width: 14.2857%;\">Title</td>\n<td style=\"height: 23px; width: 33.5714%;\">The title of the item.</td>\n</tr>\n<tr style=\"height: 67px;\">\n<td style=\"height: 67px; width: 52%;\"><code class=\"language-html\">{% currency_format catalog_item.metadata|lookup:\"price\" %}</code></td>\n<td style=\"height: 67px; width: 14.2857%;\">Price</td>\n<td style=\"height: 67px; width: 33.5714%;\">The price of an item. This tag formats the item price with the correct currency prefix.</td>\n</tr>\n<tr>\n<td style=\"border-style: solid; border-width: 1px;\"><code class=\"language-html\">{{ catalog_item.currency_symbol }}</code></td>\n<td style=\"border-style: solid; border-width: 1px;\">Currency Symbol</td>\n<td style=\"border-style: solid; border-width: 1px;\">The graphic symbol used to denote a currency unit</td>\n</tr>\n<tr>\n<td style=\"border-style: solid; border-width: 1px;\"><code class=\"language-html\">{{ catalog_item.currency_code }}</code></td>\n<td style=\"border-style: solid; border-width: 1px;\">Currency Code</td>\n<td style=\"border-style: solid; border-width: 1px;\">The alphabetic code used to denote currency</td>\n</tr>\n<tr style=\"height: 67px;\">\n<td style=\"height: 67px; width: 52%;\"><code class=\"language-html\">{{ catalog_item.featured_image.full.src }}</code></td>\n<td style=\"height: 67px; width: 14.2857%;\">Full image</td>\n<td style=\"height: 67px; width: 33.5714%;\">The url for the full image of the item. Use this inside of an image block, or an &lt;img&gt; tag.</td>\n</tr>\n<tr style=\"height: 156px;\">\n<td style=\"height: 156px; width: 52%;\"><code class=\"language-html\">{{ catalog_item.featured_image.thumbnail.src }}</code></td>\n<td style=\"height: 156px; width: 14.2857%;\">Thumbnail</td>\n<td style=\"height: 156px; width: 33.5714%;\">The url for the full image of the item. Use this in an &lt;img&gt; tag in custom HTML, or use it as a dynamic image placeholder URL surrounded by the opening and closing {% catalog %} tags </td>\n</tr>\n<tr style=\"height: 23px;\">\n<td style=\"height: 23px; width: 52%;\"><code class=\"language-html\">{{ catalog_item.id }}</code></td>\n<td style=\"height: 23px; width: 14.2857%;\"> Id</td>\n<td style=\"height: 23px; width: 33.5714%;\">The Product ID of the item.</td>\n</tr>\n<tr>\n<td style=\"width: 52%;\"><code class=\"language-html\">{{ catalog_id }}</code></td>\n<td style=\"width: 14.2857%;\">Catalog ID</td>\n<td style=\"width: 33.5714%;\">The ID of the catalog so you can specify which catalog to pull from if you have multiple. </td>\n</tr>\n</tbody>\n</table></figure><p>There may be additional data fields available that are considered metadata. To reference one of these additional item properties, you can use the variable syntax: {{ catalog_item.metadata.color }}. In this case, the variable will pull in the \"color\" value associated with the item stored in the item's metadata.</p><p>To access a preview of all available details stored on an item — including all metadata — add the following snippet to a text block in a test template, and update <em>itemID</em> with the Product ID of one of the current products in your catalog.</p><pre class=\"wysiwyg-code-block\"><code class=\"language-json\">{% catalog itemID %}\n{{ catalog_item }}\n{% endcatalog %}</code></pre><p>Then, preview the message. This preview provides a raw version of all the data available for your products.</p><h2 id=\"h_01JV556X2ZV3NXZW35HVF1BAN6\">Filtering by catalog ID </h2><p>If you have multiple catalogs you can specify which catalog you want to pull from using the <code class=\"language-html\">{{catalog id}}</code> tag. For example, you might have a catalog synced through a Klaviyo integration such as Shopify, catalog synced via API, or a custom catalog feed. Tag details may vary based on your integration. In the following example, multiple catalogs are synced to the same Klaviyo account and we want to pull a product description from a specific product contained in an API catalog.</p><p>First, find the catalog ID:</p><ol>\n<li data-list-item-id=\"e70105dfcdb54c29a91b10bc18539a269\">In Klaviyo, navigate to <strong>Content &gt; Products</strong>.</li>\n<li data-list-item-id=\"e5a5fcabdc2dab3ca3f495212d9bebda1\">Select the catalog you want to use from the <em style=\"font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;\">All catalogs</em><span style=\"font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;\"> dropdown.</span><br><img style=\"font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;\" src=\"https://klaviyo.zendesk.com/hc/article_attachments/36947752771483\" alt=\"Screenshot 2025-05-13 at 12.08.19 PM.png\" width=\"511\" height=\"297\">\n</li>\n<li data-list-item-id=\"e6d1b1c1946e42b9d9b60ab9b40a65f8b\">Copy the catalog ID from the URL.<br><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/36947760688539\" width=\"486\" height=\"184\">\n</li>\n</ol><p>Then, find the item ID:</p><ol>\n<li data-list-item-id=\"ed34bfb482167f404ea713060f2589b0e\">After selecting the catalog, select the product you want to use from the catalog.</li>\n<li data-list-item-id=\"ee4ba57f1168dec86d6f75cdffbeb867b\">On the product details page, you'll see the Item ID.<br><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/36947760692891\" width=\"484\" height=\"189\">\n</li>\n</ol><p>For the example above, the code would look like:</p><pre class=\"wysiwyg-code-block\"><code class=\"language-json\">{% catalog \"SAMPLE-DATA-ITEM-15\" integration=\"api\" catalog_id=\"1060935\"%} {{ catalog_item.description }}{% endcatalog %}</code></pre><h2 id=\"h_01HAMB2RMDFEM2J8QSYKRTH2HC\">Filtering by locale</h2><p>Locale aware catalogs like the Shopify catalog in Klaviyo can be searched for by locale. Locale language and region can be referenced with two letter country and language code using ISO 3166 and 639 standards. If a localized product can not be found the default product information will be used. <br> </p><pre class=\"wysiwyg-code-block\"><code class=\"language-json\">{% catalog \"SAMPLE-DATA-ITEM-15\" integration=\"api\" catalog_id=\"1060935\" language='fr' region='CA' %} {{ catalog_item.description }}{% endcatalog %}</code></pre><h2 id=\"h_01KEFK1ED9QH449594T6DVA88Q\">Look up an item ID passed with an event</h2><p>Using a catalog lookup with an event is mostly used in the following scenarios:</p><ul>\n<li data-list-item-id=\"ecef9405dcf084a67b1c210b3973b4e5c\">If you're using a custom integration where product recommendations are passed along with an event to show in the message. For example, a browse abandonment message where unique recommendations are generated based on viewed items. Instead of populating the single item a customer viewed in the message, you can generate and populate a set of recommended items based on that item viewed. A set of Product IDs needs to be sent to Klaviyo along with the event.</li>\n<li data-list-item-id=\"efeefbcf4f3766f4c42a196e9e1610948\">If you're using a custom integration and you prefer not to send all product details that need to go in an message. For example, with an abandoned cart message, only send the Product IDs of all abandoned items and Klaviyo can look up each one to pull in all relevant details. There's no need for every event to contain product name, price, image, etc. since all of this can be populated by only passing the Product ID to Klaviyo, then looking up the information in your Klaviyo product catalog.</li>\n</ul><p>When using a <code class=\"language-html\">{% catalog %}</code> tag with an event, the lookup is based on the Item ID of the catalog item (this will either be Product ID or SKU depending on the integration).</p><p>For an event where the identifying value passed is Item ID, the lookup tags will appear like this:</p><pre class=\"wysiwyg-code-block\"><code class=\"language-auto 'language-json\">{% catalog event.ItemID %}\n…\n{% endcatalog %}</code></pre><p>Within this <code class=\"language-html\">{% catalog %}</code> block, add template variables for the data you would like to populate regarding each item (i.e. title, image, etc.)</p><p>For example, using the sample catalog item data below, we can build out a <code class=\"language-html\">{% catalog %}</code> block that references key product information:</p><p><strong>Catalog item data:</strong></p><pre class=\"wysiwyg-code-block\"><code class=\"language-json\">{\n  \"description\": \"Standard issue for all Klaviyos. This t-shirt has the Klaviyo logo on the front and mark diagram on the back.\",\n  \"url\": \"https://klaviyogear.myshopify.com/collections/klaviyo-classics/products/short-sleeve-t-shirt-1\",\n  \"title\": \"Classic Klaviyo T-Shirt\",\n  \"featured_image\": {\n    \"full\": {\n      \"src\": \"https://www.klaviyo.com/media/images/examples/products/klaviyo-tshirt-full.png\"\n    },\n    \"thumbnail\": {\n      \"src\": \"https://www.klaviyo.com/media/images/examples/products/klaviyo-tshirt-thumbnail.png\"\n    }\n  },\n  \"id\": \"KLAVIYO-TSHIRT\",\n  \"metadata\": {\n    \"Color\": \"Grey\",\n    \"Design\": \"Standard\"\n  }\n}</code></pre><p><strong>Template block syntax:</strong></p><p>The syntax for the following <code class=\"language-html\">{% catalog %}</code> block would pull in the item image, item title, and item description from your catalog, for each item in the event:</p><pre class=\"wysiwyg-code-block\"><code class=\"language-json\">{% for item in event.Items %}\n\t{% catalog item.SKU %}\n \t\t&lt;img src=\"{{ catalog_item.featured_image.full.src }}\"/&gt;\n \t\t{{ catalog_item.title }}\n \t\t{{ catalog_item.description }}\n \t{% endcatalog %}\n{% endfor %}</code></pre><p>If the lookup can’t find the item it’s looking for, the message is skipped and does not send.</p><h2 id=\"h_01HAMB2RMDVVVEAEV725BZXQG8\">Look up an item ID as a custom property</h2><p>If you're using your own recommendation engine, you can pass recommended item IDs to profiles in Klaviyo as a <a href=\"https://klaviyo.zendesk.com/hc/en-us/articles/115000250912\" target=\"_blank\" rel=\"noopener noreferrer\">custom profile property</a>. Using a <code class=\"language-html\">{% catalog %}</code> tag, you can reference information from any of these products when messaging this customer.</p><p>If the lookup can’t find the item it’s looking for, the message is skipped and does not send.</p><h3 class=\"wysiwyg-text-align-left\" id=\"h_01HD435VXDGTN65KMTVMT1D6Z1\">Syntax for multiple item IDs stored in a single property</h3><pre class=\"wysiwyg-code-block\"><code class=\"language-json\">{% for item in person|lookup:'Recommended Products' %}{% catalog item %} \n\n&lt;img src=\"{{ catalog_item.featured_image.thumbnail.src }}\" style=\"display: inline-block; border: none\" width=\"150px\" /&gt;\n\n&lt;p&gt;{{ catalog_item.title }} {% endcatalog %}&lt;/p&gt;\n\n{% endfor %}</code></pre><h3 class=\"wysiwyg-text-align-left\" id=\"h_01HD436CQJS8AC0PNH3MP26ANX\">Syntax for a single item ID in a profile property</h3><pre class=\"wysiwyg-code-block\"><code class=\"language-json\">{% catalog person|lookup:\"Recommended Products\" %} \n\n&lt;img style=\"display: inline-block; border: none;\" src=\"{{ catalog_item.featured_image.thumbnail.src }}\" width=\"150px\"/&gt;\n\n  &lt;p&gt;{{ catalog_item.title }} {% endcatalog %}&lt;/p&gt;\n</code></pre><h2 id=\"h_01HAMBD4SXA6XBY7WWJNTZ44EV\">About the has_category tag</h2><p>Use the <em>has_category</em> tag to determine whether an item in your catalog is part of a particular category. It must be used within a catalog lookup tag for a particular item. </p><p>Use the sample code below to use this tag, replacing <em>itemID</em> with a product ID from your catalog and <em>category_name</em> with all or part of a category name. </p><pre class=\"wysiwyg-code-block\"><code class=\"language-json\">{% catalog itemID %}\n{{ catalog_item.title }}\n{% has_category catalog_item \"category_name\" as in_category %}\n{% if in_category %}\nI am on sale!\n{% else %}\n{% endif %}\n{% endcatalog %}</code></pre><p>This example displays the product title, then checks whether the product is in a category, <em>category_name</em>. If this evaluates as <em>true</em>, the message “I am on sale!” will appear following the product title. </p><div class=\"bs-callout bs-callout-default\"><p>The <em>has_category</em> tag searches for full and partial matches to the category name you set. For example, if you use “sale” as the category name and a product has a tag “on-sale”, the <em>has_category</em> tag will evaluate as <em>true</em> for that product.</p></div><h2 class=\"wysiwyg-text-align-left\" id=\"h_01HAMB2RMDRATMWQ35WR2VVWFH\">Additional resources</h2><ul>\n<li data-list-item-id=\"ebf41a3d3f91eeaa5ec93ab0501fe1d19\"><a href=\"https://klaviyo.zendesk.com/hc/en-us/articles/115005082787\" target=\"_blank\" rel=\"noopener noreferrer\">How to use product feeds and recommendations</a></li>\n<li data-list-item-id=\"e3b51d22d5eb5df50db6f4dbf17df2b90\"><a href=\"https://klaviyo.zendesk.com/hc/en-us/articles/115005082447\" target=\"_blank\" rel=\"noopener noreferrer\">Overview of the email template editor</a></li>\n</ul>",
+    "user_segment_ids": []
+  },
+  "normalized": {
+    "id": "360004785571",
+    "title": "Catalog lookup tag reference",
+    "source_url": "https://help.klaviyo.com/hc/en-us/articles/360004785571-Catalog-lookup-tag-reference",
+    "section_id": 49375624479003,
+    "section": "Getting started with products",
+    "category_id": 4414879524891,
+    "category": "Content",
+    "category_slug": "content",
+    "klaviyo_updated": "2026-04-21T13:54:42Z",
+    "created_at": "2018-06-12T13:50:54Z",
+    "draft": false,
+    "promoted": false,
+    "position": 1,
+    "label_names": []
+  },
+  "files": {
+    "body_html": "_source/articles/360004785571.body.html",
+    "rendered_html": "_source/rendered/360004785571.html"
+  },
+  "assets": {
+    "api_body": {
+      "images": [
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/36947752771483",
+          "alt": "Screenshot 2025-05-13 at 12.08.19 PM.png",
+          "width": "511",
+          "height": "297"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/36947760688539",
+          "alt": "",
+          "width": "486",
+          "height": "184"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/36947760692891",
+          "alt": "",
+          "width": "484",
+          "height": "189"
+        }
+      ],
+      "links": [
+        {
+          "href": "https://klaviyo.zendesk.com/hc/en-us/articles/115000250912",
+          "text": "custom profile property"
+        },
+        {
+          "href": "https://klaviyo.zendesk.com/hc/en-us/articles/115005082787",
+          "text": "How to use product feeds and recommendations"
+        },
+        {
+          "href": "https://klaviyo.zendesk.com/hc/en-us/articles/115005082447",
+          "text": "Overview of the email template editor"
+        }
+      ],
+      "headings": [
+        {
+          "level": 2,
+          "id": "h_01HAMB2RMCX3DKBZ36HZ27CDKM",
+          "text": "You will learn"
+        },
+        {
+          "level": 2,
+          "id": "h_01HAMB2RMCW97XYRR220498B9E",
+          "text": "The {% catalog %} tag"
+        },
+        {
+          "level": 2,
+          "id": "h_01JV556X2ZV3NXZW35HVF1BAN6",
+          "text": "Filtering by catalog ID"
+        },
+        {
+          "level": 2,
+          "id": "h_01HAMB2RMDFEM2J8QSYKRTH2HC",
+          "text": "Filtering by locale"
+        },
+        {
+          "level": 2,
+          "id": "h_01KEFK1ED9QH449594T6DVA88Q",
+          "text": "Look up an item ID passed with an event"
+        },
+        {
+          "level": 2,
+          "id": "h_01HAMB2RMDVVVEAEV725BZXQG8",
+          "text": "Look up an item ID as a custom property"
+        },
+        {
+          "level": 3,
+          "id": "h_01HD435VXDGTN65KMTVMT1D6Z1",
+          "text": "Syntax for multiple item IDs stored in a single property"
+        },
+        {
+          "level": 3,
+          "id": "h_01HD436CQJS8AC0PNH3MP26ANX",
+          "text": "Syntax for a single item ID in a profile property"
+        },
+        {
+          "level": 2,
+          "id": "h_01HAMBD4SXA6XBY7WWJNTZ44EV",
+          "text": "About the has_category tag"
+        },
+        {
+          "level": 2,
+          "id": "h_01HAMB2RMDRATMWQ35WR2VVWFH",
+          "text": "Additional resources"
+        }
+      ]
+    },
+    "rendered_page": {
+      "images": [
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/7ff492c2b417b7ecfe572f839a8a81398693c1f7-1920x1080.webp",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/31de4904dc5561c1c89357d965db4c02e083b9d2-1618x940.png?w=511",
+          "alt": "Screenshot 2025-05-13 at 12.08.19 PM.png",
+          "width": "511",
+          "height": "297"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/926d29d10fdea226503ba238ebc6ad3ce73bc3e0-1248x472.png?w=486",
+          "alt": "",
+          "width": "486",
+          "height": "184"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/371483a6891b37771bd82c3e246cb371a39af103-1265x493.png?w=484",
+          "alt": "",
+          "width": "484",
+          "height": "189"
+        }
+      ],
+      "links": [
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360004785571-Catalog-lookup-tag-reference#site-content",
+          "text": "Skip to main content"
+        },
+        {
+          "href": "https://www.klaviyo.com",
+          "text": "Home"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center"
+        },
+        {
+          "href": "https://www.klaviyo.com/enterprise",
+          "text": "Enterprise"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Partners"
+        },
+        {
+          "href": "https://www.klaviyo.com/careers",
+          "text": "Careers"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": "Log in"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": ""
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center Find step-by-step instructions and troubleshooting solutions in our knowledge base."
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000032731",
+          "text": "Integrations"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000312411",
+          "text": "Flows"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867867",
+          "text": "Audience"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867667",
+          "text": "Campaigns"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/360000190711",
+          "text": "Sign-up forms"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000873988",
+          "text": "Deliverability & compliance"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/29173800271259",
+          "text": "SMS"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/16638219724187",
+          "text": "Reviews"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/18073014919195",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/34141283979931",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/37659126754075",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/33948021740315",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/39746685522331",
+          "text": "WhatsApp"
+        },
+        {
+          "href": "https://academy.klaviyo.com",
+          "text": "Klaviyo Academy Expert training and education to help you succeed with Klaviyo, and beyond."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Quick+guide&resource=academy_courses",
+          "text": "Quick guides Learn marketing strategies and concepts in 15 minutes or less."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Course&resource=academy_courses",
+          "text": "Courses Master key marketing topics through structured lessons and exams."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/best-practices",
+          "text": "Best practices Discover top product and marketing strategies for your business."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/learning-paths",
+          "text": "Learning paths Complete curated learning journeys tailored to your marketing goals."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses",
+          "text": "Explore all resources"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Live+training&resource=academy_courses",
+          "text": "Live trainings Build confidence through hands-on interactive workshops and thought-provoking strategy sessions."
+        },
+        {
+          "href": "https://www.bigmarker.com/klaviyo-customer-education/Office-hours-Getting-started-with-Klaviyo",
+          "text": "Live office hours Join a strategic discussion where you can ask questions and get answers in real-time."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/private-live-training",
+          "text": "1:1 Live training Book a private training session with an expert to jumpstart your platform knowledge and confidence."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/credentials",
+          "text": "Klaviyo credentials Dig deeper into select topics and showcase your expertise with a final exam to earn a certificate and digital badge."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/certificates/klaviyo-practitioner-certificate",
+          "text": "Klaviyo practitioner certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/deliverability-certificate",
+          "text": "Deliverability certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/developer-certificate",
+          "text": "Klaviyo developer certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses&select=Certificate",
+          "text": "See all certificates"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Klaviyo Community Join our thriving community network to connect with brands like yours—online and in person."
+        },
+        {
+          "href": "https://community.klaviyo.com/topic/new",
+          "text": "Ask a question Post a question and get thoughtful answers from Klaviyo powerusers."
+        },
+        {
+          "href": "https://community.klaviyo.com/p/roadmap",
+          "text": "Product roadmap"
+        },
+        {
+          "href": "https://community.klaviyo.com/search/activity/recent",
+          "text": "Recent threads"
+        },
+        {
+          "href": "https://community.klaviyo.com/p/champions",
+          "text": "Meet the Champions"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups",
+          "text": "Browse all groups Your people are waiting. New ideas and connections are a click away."
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/developer-group-64",
+          "text": "Developer group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/entrepreneur-user-group-118",
+          "text": "Entrepreneur group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/woo-user-group-87",
+          "text": "WooCommerce group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/new-york-meetup-chapter-82",
+          "text": "New York City"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/los-angeles-meetup-chapter-83",
+          "text": "Los Angeles"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/austin-meetup-chapter-85",
+          "text": "Austin"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/san-diego-meetup-chapter-86",
+          "text": "San Diego"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/amsterdam-meetup-chapter-84",
+          "text": "Amsterdam"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Klaviyo Developers Access API documentation and developer guides to help you build with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/get_started",
+          "text": "Get started Access key resources and a step-by-step checklist for how to start developing with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/build_your_integration",
+          "text": "Grow your app's reach Learn how to join our ecosystem and get your app listed on our marketplace."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/developer-tools",
+          "text": "Developer tools Generate sample data, monitor your API usage, and access our Postman collections."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/reference/api_overview",
+          "text": "API reference Browse our full catalog of API docs."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/changelog_",
+          "text": "Changelog"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/api_versioning_and_deprecation_policy",
+          "text": "Versioning & deprecation policy"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/rate_limits_and_error_handling",
+          "text": "Rate limits & error handling"
+        },
+        {
+          "href": "https://youtube.com/playlist?list=PLHkNfHgtxcUanrkMnKPdkRzuWU7MGv_xM&si=pkG-KH7IT_TUHOGC",
+          "text": "API tutorials on YouTube Subscribe to our Klaviyo API Tutorials playlist for easy access to step-by-step developer walkthroughs."
+        },
+        {
+          "href": "https://www.klaviyo.com/contact-us",
+          "text": "Contact us"
+        },
+        {
+          "href": "https://www.klaviyo.com/sign-up",
+          "text": "Sign up"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": "Search"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360004785571",
+          "text": "United States - EN"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/de-de/articles/360004785571",
+          "text": "Deutschland - DE"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-es/articles/360004785571",
+          "text": "España - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-mx/articles/360004785571",
+          "text": "México - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/fr-fr/articles/360004785571",
+          "text": "France - FR"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/it-it/articles/360004785571",
+          "text": "Italia - IT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/ko-kr/articles/360004785571",
+          "text": "한국 - KO"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/nl-nl/articles/360004785571",
+          "text": "Nederland - NL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pl-pl/articles/360004785571",
+          "text": "Polska - PL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pt-br/articles/360004785571",
+          "text": "Brasil - PT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/sv-se/articles/360004785571",
+          "text": "Sverige - SV"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/4414879524891",
+          "text": "Content"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/49375608819739",
+          "text": "Products"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/49375624479003",
+          "text": "Getting started with products"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360004785571-Catalog-lookup-tag-reference#h_01HAMB2RMCX3DKBZ36HZ27CDKM",
+          "text": "You will learn"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360004785571-Catalog-lookup-tag-reference#h_01HAMB2RMCW97XYRR220498B9E",
+          "text": "The {% catalog %} tag"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360004785571-Catalog-lookup-tag-reference#h_01JV556X2ZV3NXZW35HVF1BAN6",
+          "text": "Filtering by catalog ID"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360004785571-Catalog-lookup-tag-reference#h_01HAMB2RMDFEM2J8QSYKRTH2HC",
+          "text": "Filtering by locale"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360004785571-Catalog-lookup-tag-reference#h_01KEFK1ED9QH449594T6DVA88Q",
+          "text": "Look up an item ID passed with an event"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360004785571-Catalog-lookup-tag-reference#h_01HAMB2RMDVVVEAEV725BZXQG8",
+          "text": "Look up an item ID as a custom property"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360004785571-Catalog-lookup-tag-reference#h_01HAMBD4SXA6XBY7WWJNTZ44EV",
+          "text": "About the has_category tag"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360004785571-Catalog-lookup-tag-reference#additional-resources",
+          "text": "Additional resources"
+        },
+        {
+          "href": "https://klaviyo.zendesk.com/hc/en-us/articles/115000250912",
+          "text": "custom profile property"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005082787",
+          "text": "How to use product feeds and recommendations"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115001002272",
+          "text": "Learn how to contact support"
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": ""
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": "Visit Community"
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": ""
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": "Hire a partner"
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/about",
+          "text": "About Klaviyo"
+        },
+        {
+          "href": "https://www.klaviyo.com/newsroom",
+          "text": "Newsroom"
+        },
+        {
+          "href": "https://investors.klaviyo.com/overview/default.aspx",
+          "text": "Investor relations"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Agency and tech partners"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Developers"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/retail",
+          "text": "Retail and ecommerce"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/restaurants",
+          "text": "Restaurant marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/wellness",
+          "text": "Wellness"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform",
+          "text": "B2C CRM overview"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai",
+          "text": "Klaviyo AI (K:AI)"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/marketing-automation",
+          "text": "Klaviyo Marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-service",
+          "text": "Klaviyo Service"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/analytics",
+          "text": "Klaviyo Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-data-platform",
+          "text": "Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare",
+          "text": "Klaviyo vs. Klaviyo alternatives"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-mailchimp",
+          "text": "Klaviyo vs. Mailchimp"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-postscript",
+          "text": "Klaviyo vs. Postscript"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-attentive",
+          "text": "Klaviyo vs. Attentive"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-salesforce-marketing-cloud",
+          "text": "Klaviyo vs. Salesforce"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-listrak",
+          "text": "Klaviyo vs. Listrak"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/omnichannel",
+          "text": "Omnichannel marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/email-marketing",
+          "text": "Email marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing",
+          "text": "SMS marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing/rcs",
+          "text": "RCS for Business"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/mobile-app-marketing",
+          "text": "Mobile app marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/whatsapp",
+          "text": "WhatsApp marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/social",
+          "text": "Social marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources",
+          "text": "Marketing resources"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources/marketing-campaign-calendar",
+          "text": "Marketing campaign calendar"
+        },
+        {
+          "href": "https://www.klaviyo.com/glossary",
+          "text": "Marketing glossary"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/email-subject-line-generator",
+          "text": "Subject line generator"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/roi-calculator",
+          "text": "ROI calculator"
+        },
+        {
+          "href": "https://www.klaviyo.com/customers",
+          "text": "Case studies"
+        },
+        {
+          "href": "https://www.klaviyo.com/composer",
+          "text": "Composer Beta"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/marketing-agent",
+          "text": "Marketing Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/customer-agent",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/customer-experience-hub",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/helpdesk",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/marketing-analytics",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/advanced-cdp",
+          "text": "Advanced Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/web-forms",
+          "text": "Web forms"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/email-templates",
+          "text": "Email templates"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/portfolio",
+          "text": "Portfolio"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform-integrations",
+          "text": "Apps and Integrations"
+        },
+        {
+          "href": "https://www.klaviyo.com/features",
+          "text": "Features"
+        },
+        {
+          "href": "https://www.klaviyo.com/whats-new",
+          "text": "What's new"
+        },
+        {
+          "href": "https://www.klaviyo.com/events",
+          "text": "Events"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help Center"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us",
+          "text": "Academy"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Community"
+        },
+        {
+          "href": "https://www.facebook.com/Klaviyo/",
+          "text": "Facebook"
+        },
+        {
+          "href": "https://twitter.com/klaviyo/",
+          "text": "Twitter"
+        },
+        {
+          "href": "https://www.linkedin.com/company/klaviyo/",
+          "text": "LinkedIn"
+        },
+        {
+          "href": "https://www.instagram.com/klaviyo/",
+          "text": "Instagram"
+        },
+        {
+          "href": "https://www.klaviyo.com/sitemap",
+          "text": "Site Map"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal",
+          "text": "Terms and Privacy"
+        },
+        {
+          "href": "https://www.klaviyo.com/security",
+          "text": "Security"
+        },
+        {
+          "href": "https://www.klaviyo.com/trust",
+          "text": "Trust"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal/intellectual-property-notices",
+          "text": "Intellectual Property Notices"
+        }
+      ],
+      "headings": [
+        {
+          "level": 1,
+          "id": "",
+          "text": "Catalog lookup tag reference"
+        },
+        {
+          "level": 2,
+          "id": "h_01HAMB2RMCX3DKBZ36HZ27CDKM",
+          "text": "You will learn"
+        },
+        {
+          "level": 2,
+          "id": "h_01HAMB2RMCW97XYRR220498B9E",
+          "text": "The {% catalog %} tag"
+        },
+        {
+          "level": 2,
+          "id": "h_01JV556X2ZV3NXZW35HVF1BAN6",
+          "text": "Filtering by catalog ID"
+        },
+        {
+          "level": 2,
+          "id": "h_01HAMB2RMDFEM2J8QSYKRTH2HC",
+          "text": "Filtering by locale"
+        },
+        {
+          "level": 2,
+          "id": "h_01KEFK1ED9QH449594T6DVA88Q",
+          "text": "Look up an item ID passed with an event"
+        },
+        {
+          "level": 2,
+          "id": "h_01HAMB2RMDVVVEAEV725BZXQG8",
+          "text": "Look up an item ID as a custom property"
+        },
+        {
+          "level": 3,
+          "id": "h_01HD435VXDGTN65KMTVMT1D6Z1",
+          "text": "Syntax for multiple item IDs stored in a single property"
+        },
+        {
+          "level": 3,
+          "id": "h_01HD436CQJS8AC0PNH3MP26ANX",
+          "text": "Syntax for a single item ID in a profile property"
+        },
+        {
+          "level": 2,
+          "id": "h_01HAMBD4SXA6XBY7WWJNTZ44EV",
+          "text": "About the has_category tag"
+        },
+        {
+          "level": 2,
+          "id": "additional-resources",
+          "text": "Additional resources"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "Explore more from Klaviyo"
+        }
+      ]
+    }
+  },
+  "rendered_page": {
+    "status": "fetched",
+    "error": ""
+  }
+}

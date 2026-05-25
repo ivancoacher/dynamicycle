@@ -1,0 +1,311 @@
+<div class="bs-callout bs-callout-requirements">
+<p>You must have a paid Klaviyo account and Smart Translations enabled to use this feature.</p>
+</div>
+<h1 id="08825e80d002">Import an existing glossary</h1>
+<p>Klaviyo's Smart Translation feature uses a <em>glossary</em> to control how specific terms are translated — brand names, product names, slogans, or technical terms that need a consistent translation across every campaign.</p>
+<p>If you already maintain a glossary in another translation system (DeepL, Lokalise, Phrase, an internal spreadsheet), you can import it directly into Klaviyo as a CSV instead of recreating each entry by hand.</p>
+<h2 id="d4dd2a2c3beb">When to use CSV import</h2>
+<p>CSV import is useful when you want to:</p>
+<ul>
+<li>Bring an existing glossary into Klaviyo from a TMS (Translation Management System) like DeepL, Lokalise, Phrase, or memoQ.</li>
+<li>Add a large batch of terms at once (dozens or hundreds), rather than typing each one in the UI.</li>
+<li>Migrate a glossary maintained in a shared spreadsheet to a single source of truth in Klaviyo.</li>
+</ul>
+<p>For just a handful of terms, adding them manually one-by-one in the glossary panel is usually faster.</p>
+<div class="bs-callout bs-callout-default">
+<p>Import is one-way. You upload terms into Klaviyo, but there is no CSV export at this time. Keep a copy of your source file if you need a backup.</p>
+</div>
+<h2 id="733ab2421361">Prepare your CSV file</h2>
+<h3 id="53e9abc8339f">File format</h3>
+<p>- <strong>Encoding:</strong> UTF-8
+- <strong>File type:</strong> <code>.csv</code>
+- <strong>Delimiter:</strong> comma (<code>,</code>)
+- <strong>Header row:</strong> required (see below)</p>
+<h3 id="b2fd9a38b8d0">Sample file</h3>
+<table>
+<tbody>
+<tr>
+<th>source term</th>
+<th>target term</th>
+<th>source locale</th>
+<th>target locale</th>
+</tr>
+<tr>
+<td>hello</td>
+<td>bonjour</td>
+<td>en</td>
+<td>fr</td>
+</tr>
+<tr>
+<td>hello</td>
+<td>hallo</td>
+<td>en</td>
+<td>de</td>
+</tr>
+<tr>
+<td>tschüß</td>
+<td>good bye</td>
+<td>de</td>
+<td>en</td>
+</tr>
+</tbody>
+</table>
+<h3 id="e471469f4bfe">Required columns</h3>
+<p>Every row must include four columns:</p>
+<ul>
+<li>
+<code>source term</code>  — the term in the source language</li>
+<li>
+<code>target term</code>  — how the term should be translated</li>
+<li>
+<code>source locale</code>  — the BCP-47 locale tag of the source language</li>
+<li>
+<code>target locale</code>  — the BCP-47 locale tag of the target language</li>
+</ul>
+<p>All four headers must be present in the first row of the file. Column order does not matter.</p>
+<h3 id="8a44531ef49c">Locale codes (BCP-47)</h3>
+<p>Locale codes follow the <a href="https://www.rfc-editor.org/info/bcp47" target="_blank" rel="noopener noreferrer nofollow">BCP-47</a> standard. The most common form is a two-letter language code, optionally followed by a region:</p>
+<ul>
+<li>
+<code>en</code> — English</li>
+<li>
+<code>en-US</code> — English (United States)</li>
+<li>
+<code>en-GB</code> — English (United Kingdom)</li>
+<li>
+<code>fr</code> — French</li>
+<li>
+<code>fr-CA</code> — French (Canada)</li>
+<li>
+<code>de</code> — German</li>
+<li>
+<code>ja</code> — Japanese</li>
+<li>
+<code>pt-BR</code> — Portuguese (Brazil)</li>
+</ul>
+<p>Use the most specific tag that matches the locale you've configured in Klaviyo.</p>
+<h3 id="94476abae4fa">Multiple language pairs in one file</h3>
+<p>A single CSV can include entries for <strong>many language pairs</strong>. Each row is treated independently, so you can mix pairs freely:</p>
+<table>
+<tbody>
+<tr>
+<th>source term</th>
+<th>target term</th>
+<th>source locale</th>
+<th>target locale</th>
+</tr>
+<tr>
+<td>hello</td>
+<td>bonjour</td>
+<td>en</td>
+<td>fr</td>
+</tr>
+<tr>
+<td>hello</td>
+<td>hola</td>
+<td>en</td>
+<td>es</td>
+</tr>
+<tr>
+<td>hello</td>
+<td>hallo</td>
+<td>en</td>
+<td>de</td>
+</tr>
+<tr>
+<td>bonjour</td>
+<td>buenos días</td>
+<td>fr</td>
+<td>es</td>
+</tr>
+</tbody>
+</table>
+<p>This is useful if you maintain one master glossary that powers translation in several locales.</p>
+<h3 id="96481e769531">Glossary terms are symmetric</h3>
+<p>Each glossary entry defines a <strong>bidirectional</strong> equivalence between terms. If you import:</p>
+<table>
+<tbody>
+<tr>
+<th>source term</th>
+<th>target term</th>
+<th>source locale</th>
+<th>target locale</th>
+</tr>
+<tr>
+<td>hello</td>
+<td>bonjour</td>
+<td>en</td>
+<td>fr</td>
+</tr>
+</tbody>
+</table>
+<p>Klaviyo will:</p>
+<ul>
+<li>Translate <code>hello</code> as <code>bonjour</code> when translating English → French.</li>
+<li>Translate <code>bonjour</code> as <code>hello</code> when translating French → English.</li>
+</ul>
+<p>This means you <strong>cannot</strong> define asymmetric mappings such as:</p>
+<table>
+<tbody>
+<tr>
+<th>source term</th>
+<th>target term</th>
+<th>source locale</th>
+<th>target locale</th>
+</tr>
+<tr>
+<td>hello</td>
+<td>bonjour</td>
+<td>en</td>
+<td>fr</td>
+</tr>
+<tr>
+<td>bonjour</td>
+<td>hi</td>
+<td>fr</td>
+<td>en</td>
+</tr>
+</tbody>
+</table>
+<p>Both rows map <code>bonjour</code> to a different English term, which is a conflict. Only one mapping per locale-pair-term combination is allowed. The importer will skip the conflicting row and report an error (see <a href="#troubleshoot-import-errors">Troubleshoot import errors</a>).</p>
+<p>If you need different English translations for <code>bonjour</code> depending on context, glossary terms aren't the right tool — they're meant for terms that translate the same way every time.</p>
+<h3 id="c3509037ac19">Import modes</h3>
+<p>When you import, choose one of two modes:</p>
+<ul>
+<li>
+<strong>Add</strong> — Existing glossary entries are kept. New entries from the CSV are added. Rows that conflict with existing entries are skipped.</li>
+<li>
+<strong>Replace all</strong> — Your entire current glossary is deleted and replaced with the contents of the CSV.</li>
+</ul>
+<div class="bs-callout bs-callout-warning">
+<p><strong>Replace all</strong> deletes the entire current glossary.</p>
+<p>Use <strong>Replace all</strong> only when you're confident the CSV is the new source of truth. There is no undo.</p>
+</div>
+<p></p>
+<h2 id="ff0167e6b8bc">Import the file</h2>
+<p>1. Go to <strong>Account → Settings → Translations → Glossary</strong>.</p>
+<p>2. Click <strong>Import CSV</strong>.</p>
+<p class="wysiwyg-text-align-none"><img src="https://cdn.sanity.io/images/6ct6b26e/help-center-prod/b5276c1e1afee879a200bb1152311bcae5a99e24-1476x882.png" alt='Glossary panel with "Import CSV" button highlighted' width="full"></p>
+<p>3. In the dialog, choose <strong>Add</strong> or <strong>Replace all</strong>. </p>
+<p class="wysiwyg-text-align-none"><img src="https://cdn.sanity.io/images/6ct6b26e/help-center-prod/c928305cb7b49c52aee43d0e6fc23cbe72098b20-1660x1322.png" alt="Glossary import modal" width="full"></p>
+<p>4. Click the file area and select your <code>.csv</code> file (or drag the file into the area).</p>
+<p>5. Click <strong>Next</strong>. Klaviyo validates the file but does <strong>not</strong> save anything yet. You'll see a preview screen.</p>
+<p>6. Review the preview:</p>
+<ul>
+<li>
+<strong>Total rows</strong> — how many rows were in the file.</li>
+<li>
+<strong>Valid entries</strong> — how many will be imported.</li>
+<li>
+<strong>Rows skipped</strong> — how many were dropped due to validation issues.</li>
+</ul>
+<p>7. If any warnings appear, you can still proceed, or go back and fix the file first.</p>
+<p>8. Click <strong>Import </strong>to save the changes.</p>
+<p class="wysiwyg-text-align-none"><img src="https://cdn.sanity.io/images/6ct6b26e/help-center-prod/2c855c6011a469d53e5daf8cfa4b53f78aaf9b62-1664x462.png" alt="Successful validation, confirm import. " width="full"></p>
+<p>
+If something is wrong with the file, you'll see an <strong>Import failed</strong> screen instead of the preview. </p>
+<p class="wysiwyg-text-align-none"><img src="https://cdn.sanity.io/images/6ct6b26e/help-center-prod/82924f88e6415e2b0c24cef666409b31f8d2ec93-1642x782.png" alt="Failed import example with warnings and errors. " width="full"></p>
+<p></p>
+<h2 id="bf51f011064c">Troubleshoot import errors</h2>
+<p>When the import fails, Klaviyo shows one or more error messages explaining what went wrong. Some errors apply to the entire file; others point to a specific row.</p>
+<h3 id="6ddd4bad24c6">File-level errors</h3>
+<p>These stop the import entirely. Fix them and try again.</p>
+<div class="accordion accordion--default">
+<div class="accordion__item">
+<div class="accordion__item-title"><strong>"The uploaded file is empty."</strong></div>
+<div class="accordion__item-content">
+<p><strong>What it means:</strong> The file contains no content.</p>
+<p><strong>What to do:</strong> Make sure the file isn't 0 bytes and has at least one row plus the header.</p>
+</div>
+</div>
+<div class="accordion__item">
+<div class="accordion__item-title"><strong>"Missing required headers."</strong></div>
+<div class="accordion__item-content">
+<p><strong>What it means:</strong> The header row doesn't include all four required columns.</p>
+<p><strong>What to do:</strong> Check the first row contains <code>source term</code>, <code>target term</code>, <code>source locale</code>, and <code>target locale</code>. Header order doesn't matter; spelling does.</p>
+</div>
+</div>
+<div class="accordion__item">
+<div class="accordion__item-title"><strong>"No valid glossary entries."</strong></div>
+<div class="accordion__item-content">
+<p><strong>What it means:</strong> After validation, no row could be imported.</p>
+<p><strong>What to do:</strong> Open the file and check that the data rows match the expected format.</p>
+</div>
+</div>
+<div class="accordion__item">
+<div class="accordion__item-title"><strong>"Encoding error."</strong></div>
+<div class="accordion__item-content">
+<p><strong>What it means:</strong> The file isn't UTF-8 encoded</p>
+<p><strong>What to do:</strong> Re-save the file from your spreadsheet tool with UTF-8 encoding. In Excel, use <strong>Save As → CSV UTF-8</strong>.</p>
+</div>
+</div>
+<div class="accordion__item">
+<div class="accordion__item-title"><strong>"A term exceeds the maximum length."</strong></div>
+<div class="accordion__item-content">
+<p><strong>What it means:</strong> One or more terms is too long.</p>
+<p><strong>What to do:</strong> Glossary terms should be short phrases. Shorten or split very long entries.</p>
+</div>
+</div>
+</div>
+<h3 id="1fd8e4c47e85">Row-level errors</h3>
+<p>These flag a specific row. The rest of the file can still import — the bad row is skipped.</p>
+<div class="accordion accordion--default">
+<div class="accordion__item">
+<div class="accordion__item-title"><strong>"Row N: unexpected number of columns"</strong></div>
+<div class="accordion__item-content">
+<p><strong>What it means:</strong> The row has too few or too many comma-separated values.</p>
+<p><strong>What to do:</strong> Check the row in your CSV — extra commas inside a term need to be wrapped in quotes (<code>"hello, world"</code>).</p>
+</div>
+</div>
+<div class="accordion__item">
+<div class="accordion__item-title"><strong>"Row N: empty term value"</strong></div>
+<div class="accordion__item-content">
+<p><strong>What it means:</strong> The source or target term cell is blank.</p>
+<p><strong>What to do:</strong> Fill in the missing term, or remove the row.</p>
+</div>
+</div>
+<div class="accordion__item">
+<div class="accordion__item-title"><strong>"Row N: empty locale code"</strong></div>
+<div class="accordion__item-content">
+<p><strong>What it means:</strong> The source or target locale cell is blank.</p>
+<p><strong>What to do:</strong> Fill in the missing locale (e.g. <code>en</code>, <code>fr-CA</code>).</p>
+</div>
+</div>
+<div class="accordion__item">
+<div class="accordion__item-title"><strong>"Row N: unrecognized locale code"</strong></div>
+<div class="accordion__item-content">
+<p><strong>What it means:</strong> The locale string isn't a valid BCP-47 tag.</p>
+<p><strong>What to do:</strong> Use a standard locale code like <code>en</code>, <code>fr</code>, <code>de</code>, <code>pt-BR</code>. See <a href="#locale-codes-bcp-47">Locale codes</a>.</p>
+</div>
+</div>
+<div class="accordion__item">
+<div class="accordion__item-title"><strong>"Row N: duplicate locale column detected"</strong></div>
+<div class="accordion__item-content">
+<p><strong>What it means:</strong> The same locale appears more than once in a single entry context.</p>
+<p><strong>What to do:</strong> Each row needs distinct source and target locales — you can't translate <code>en → en</code>.</p>
+</div>
+</div>
+<div class="accordion__item">
+<div class="accordion__item-title"><strong>"Row N: conflicting translation for the same term and locale"</strong></div>
+<div class="accordion__item-content">
+<p><strong>What it means:</strong> The row tries to map the same source term to a different target than another row in the file.</p>
+<p><strong>What to do:</strong> Decide which translation is correct and remove the duplicate.</p>
+</div>
+</div>
+<div class="accordion__item">
+<div class="accordion__item-title"><strong>"Row N: term conflicts with an existing entry"</strong></div>
+<div class="accordion__item-content">
+<p><strong>What it means:</strong> The row tries to define a translation that contradicts a term already in your glossary (<strong>Add</strong> mode only).</p>
+<p><strong>What to do:</strong> Either update the existing entry in the UI, or use <strong>Replace all</strong> mode if the new file is correct.</p>
+</div>
+</div>
+<div class="accordion__item">
+<div class="accordion__item-title"><strong>"Row N: a leading formula character was stripped for safety"</strong></div>
+<div class="accordion__item-content">
+<p><strong>What it means:</strong> A term started with <code>=</code>, <code>+</code>, <code>-</code>, or <code>@</code>, which spreadsheet apps would interpret as a formula.</p>
+<p><strong>What to do:</strong> This is a warning, not a failure. The term is imported with the leading character removed. If you need the character, wrap the term in quotes.</p>
+</div>
+</div>
+</div>
+<h3 id="b28bb0406310">Generic validation error</h3>
+<p>If you see “<strong>A validation error occurred. Please check your file and try again.”</strong> the importer hit a problem it couldn't categorize. Double-check the file matches the expected format, and contact support if the error persists.</p>

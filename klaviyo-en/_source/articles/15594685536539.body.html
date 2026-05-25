@@ -1,0 +1,215 @@
+<p>Learn about push notification delivery, including how it is delivered and why it might fail.</p>
+<h2 id="h_01HBRFFMP5NPS7X1FDZZ0Z5NHP">Push notification delivery</h2>
+<p>Push notification delivery refers to when a push notification is successfully delivered to a recipient’s device. </p>
+<div class="bs-callout bs-callout-default">
+<p>A profile may have more than 1 push token if they have your mobile app installed on multiple devices. Push notifications will be attempted for all the devices with a token stored on the profile.</p>
+</div>
+<p>The concept of <a href="https://help.klaviyo.com/hc/en-us/articles/115005247008">deliverability</a> does not apply to push notifications like it does for email, as there is no sorting performed once the recipient’s device successfully receives the notification. </p>
+<p>When you send a push notification through a campaign or flow, Klaviyo checks the push and then sends it to Apple Push Notification Service (APNs) for iOS, or Android’s push notification service, Firebase Cloud Messaging (FCM) for delivery to the recipient’s device. You may see some push notifications skipped if there is an issue with delivery.</p>
+<p>APNs and FCM will either accept the notification and attempt to deliver it to the recipient's device, or reject the notification with a series of possible errors.</p>
+<p>Klaviyo only has insight into whether these services accept the notification or reject it. Klaviyo cannot confirm if the notification fails after APNs or FCM accepts the push.</p>
+<div class="bs-callout bs-callout-default">
+<p>Want to request a feature for Klaviyo push notifications? Fill out this <a href="https://forms.gle/7iPm6JQ4eKB6H2C4A">Google form</a> to tell us about it! </p>
+</div>
+<h2 id="h_01HBRFFMP5NVYNYAJGQ7C0ZJYE">Reasons for rejection </h2>
+<p>If Klaviyo receives an error response from APNs or FCM after sending a notification, an event called <em>Bounced push</em> is created for each token affected by the failed delivery. This will appear in the receiving profile’s activity feed along with the recipient activity for the respective flow or campaign the notification was sent from. </p>
+<p>The <em>Bounced push</em> event includes metadata that shows the error code message (e.g., ExpiredToken) returned by APNs or Firebase. If you are seeing delivery issues, work with your app developer to resolve the error based on the description in the event. </p>
+<div class="bs-callout bs-callout-default">
+<p>To view the metadata for an event, click on <strong>Activity details</strong> for the event on the profile’s activity log.</p>
+</div>
+<h3 id="h_01JS269JRRJFKZ1H2RDG5KDFEF">Silent push</h3>
+<p>You are able to see the delivery rate and bounce rate for an individual silent push notifications; however, silent push notifications are excluded from all aggregated performance reporting in Klaviyo. This includes things like mobile push open rates over time, since they do not have opens or conversions.</p>
+<p>Please note that you will see different events for silent push than for standard push, namely <em>Received Silent Push</em> and<em> Bounced Silent Push</em>.</p>
+<p>If you are having issues with silent push notifications being delivered on iOS, note that iOS does not guarantee the delivery of silent push notifications. They may not deliver them <a href="https://developer.apple.com/library/archive/technotes/tn2265/_index.html#//apple_ref/doc/uid/DTS40010376-CH1-TNTAG23">based on the device's current state</a>, like battery level and network connection. </p>
+<h3 id="h_01HBRFFMP5H0EFN98D1A5G0AT4">iOS</h3>
+<p>For iOS push notifications sent through APNs, rejections may occur for at least one of the reasons listed in Apple’s reference for <a href="https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/handling_notification_responses_from_apns">handling notification responses from APNs</a>.</p>
+<table style="width: 680px; height: 517px">
+<tbody>
+<tr>
+<td style="width: 76.75px; height: 10px"><strong>Status code</strong></td>
+<td style="width: 217.531px; height: 10px"><strong>APNs error string</strong></td>
+<td style="width: 351.719px; height: 10px"><strong>APNs description</strong></td>
+</tr>
+<tr>
+<td style="width: 76.75px; height: 67px">400</td>
+<td style="width: 217.531px; height: 67px">BadDeviceToken</td>
+<td style="width: 351.719px; height: 67px">The specified device token was bad. Verify that the request contains a valid token and that the token matches the environment.</td>
+</tr>
+<tr>
+<td style="width: 76.75px; height: 22px">400</td>
+<td style="width: 217.531px; height: 22px">BadTopic</td>
+<td style="width: 351.719px; height: 22px">The apns-topic value is invalid.</td>
+</tr>
+<tr>
+<td style="width: 76.75px; height: 44px">400</td>
+<td style="width: 217.531px; height: 44px">DeviceTokenNotForTopic</td>
+<td style="width: 351.719px; height: 44px">The device token does not match the specified topic.</td>
+</tr>
+<tr>
+<td style="width: 76.75px; height: 22px">400</td>
+<td style="width: 217.531px; height: 22px">DuplicateHeaders</td>
+<td style="width: 351.719px; height: 22px">One or more headers were repeated.</td>
+</tr>
+<tr>
+<td style="width: 76.75px; height: 22px">400</td>
+<td style="width: 217.531px; height: 22px">IdleTimeout</td>
+<td style="width: 351.719px; height: 22px">Idle time out.</td>
+</tr>
+<tr>
+<td style="width: 76.75px; height: 22px">400</td>
+<td style="width: 217.531px; height: 22px">InvalidPushType</td>
+<td style="width: 351.719px; height: 22px">The apns-push-type value is invalid.</td>
+</tr>
+<tr>
+<td style="width: 76.75px; height: 22px">400</td>
+<td style="width: 217.531px; height: 22px">PayloadEmpty</td>
+<td style="width: 351.719px; height: 22px">The message payload was empty.</td>
+</tr>
+<tr>
+<td style="width: 76.75px; height: 22px">403</td>
+<td style="width: 217.531px; height: 22px">BadCertificate</td>
+<td style="width: 351.719px; height: 22px">The certificate was bad.</td>
+</tr>
+<tr>
+<td style="width: 76.75px; height: 44px">403</td>
+<td style="width: 217.531px; height: 44px">BadCertificateEnvironment</td>
+<td style="width: 351.719px; height: 44px">The client certificate was for the wrong environment.</td>
+</tr>
+<tr>
+<td style="width: 76.75px; height: 44px">403</td>
+<td style="width: 217.531px; height: 44px">InvalidProviderToken</td>
+<td style="width: 351.719px; height: 44px">The provider token is not valid or the token signature could not be verified.</td>
+</tr>
+<tr>
+<td style="width: 76.75px; height: 22px">404</td>
+<td style="width: 217.531px; height: 22px">BadPath</td>
+<td style="width: 351.719px; height: 22px">The request contained a bad :path value.</td>
+</tr>
+<tr>
+<td style="width: 76.75px; height: 22px">405</td>
+<td style="width: 217.531px; height: 22px">MethodNotAllowed</td>
+<td style="width: 351.719px; height: 22px">The specified :method was not POST.</td>
+</tr>
+<tr>
+<td style="width: 76.75px; height: 22px">410</td>
+<td style="width: 217.531px; height: 22px">ExpiredToken</td>
+<td style="width: 351.719px; height: 22px">The device token has expired.</td>
+</tr>
+<tr>
+<td style="width: 76.75px; height: 44px">410</td>
+<td style="width: 217.531px; height: 44px">Unregistered</td>
+<td style="width: 351.719px; height: 44px">The device token is inactive for the specified topic.</td>
+</tr>
+<tr>
+<td style="width: 76.75px; height: 22px">429</td>
+<td style="width: 217.531px; height: 22px">TooManyProviderTokenUpdates</td>
+<td style="width: 351.719px; height: 22px">The provider token is being updated too often.</td>
+</tr>
+<tr>
+<td style="width: 76.75px; height: 22px">500</td>
+<td style="width: 217.531px; height: 22px">InternalServerError</td>
+<td style="width: 351.719px; height: 22px">An internal server error occurred.</td>
+</tr>
+<tr>
+<td style="width: 76.75px; height: 22px">503</td>
+<td style="width: 217.531px; height: 22px">ServiceUnavailable</td>
+<td style="width: 351.719px; height: 22px">The service is unavailable.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="h_01HBRFFMP6RZX5YK92CA4T8QK4">Android</h3>
+<p>For Android push notifications sent through FCM, rejections may occur for at least one of the reasons listed in Google’s reference for <a href="https://firebase.google.com/docs/reference/fcm/rest/v1/ErrorCode">FCM error codes.</a></p>
+<table style="width: 682px; height: 757px">
+<tbody>
+<tr>
+<td style="width: 67.7188px; height: 43px"><strong>Status code</strong></td>
+<td style="width: 223.859px; height: 43px"><strong>FCM error string</strong></td>
+<td style="width: 356.422px; height: 43px"><strong>FCM description</strong></td>
+</tr>
+<tr>
+<td style="width: 67.7188px; height: 24px">400</td>
+<td style="width: 223.859px; height: 24px">INVALID_ARGUMENT</td>
+<td style="width: 356.422px; height: 24px">Check the format of the registration token you pass to the server. Make sure it matches the registration token the client app receives from registering with Firebase Notifications. Do not truncate or add additional characters.</td>
+</tr>
+<tr>
+<td style="width: 67.7188px; height: 67px">400</td>
+<td style="width: 223.859px; height: 67px">INVALID_ARGUMENT</td>
+<td style="width: 356.422px; height: 67px">Make sure the message was addressed to a registration token whose package name matches the value passed in the request.</td>
+</tr>
+<tr>
+<td style="width: 67.7188px; height: 111px">400</td>
+<td style="width: 223.859px; height: 111px">INVALID_ARGUMENT</td>
+<td style="width: 356.422px; height: 111px">Check that the total size of the payload data included in a message does not exceed FCM limits: 4096 bytes for most messages, or 2048 bytes in the case of messages to topics. This includes both the keys and the values.</td>
+</tr>
+<tr>
+<td style="width: 67.7188px; height: 179px">400</td>
+<td style="width: 223.859px; height: 179px">INVALID_ARGUMENT</td>
+<td style="width: 356.422px; height: 179px">Check that the payload data does not contain a key (such as from, or gcm, or any value prefixed by google) that is used internally by FCM. Note that some words (such as collapse_key) are also used by FCM but are allowed in the payload, in which case the payload value will be overridden by the FCM value.</td>
+</tr>
+<tr>
+<td style="width: 67.7188px; height: 67px">400</td>
+<td style="width: 223.859px; height: 67px">INVALID_ARGUMENT</td>
+<td style="width: 356.422px; height: 67px">Check that the value used in ttl is an integer representing a duration in seconds between 0 and 2,419,200 (4 weeks).</td>
+</tr>
+<tr>
+<td style="width: 67.7188px; height: 44px">400</td>
+<td style="width: 223.859px; height: 44px">INVALID_ARGUMENT</td>
+<td style="width: 356.422px; height: 44px">Check that the provided parameters have the right name and type.</td>
+</tr>
+<tr>
+<td style="width: 67.7188px; height: 44px">403</td>
+<td style="width: 223.859px; height: 44px">SENDER_ID_MISMATCH</td>
+<td style="width: 356.422px; height: 44px">The authenticated sender ID is different from the sender ID for the registration token.</td>
+</tr>
+<tr>
+<td style="width: 67.7188px; height: 67px">404</td>
+<td style="width: 223.859px; height: 67px">UNREGISTERED</td>
+<td style="width: 356.422px; height: 67px">App instance was unregistered from FCM. This usually means that the token used is no longer valid and a new one must be used.</td>
+</tr>
+<tr>
+<td style="width: 67.7188px; height: 67px">429</td>
+<td style="width: 223.859px; height: 67px">QUOTA_EXCEEDED</td>
+<td style="width: 356.422px; height: 67px">Sending limit exceeded for the message target. An extension of type google.rpc.QuotaFailure is returned to specify which quota was exceeded.</td>
+</tr>
+<tr>
+<td style="width: 67.7188px; height: 22px">500</td>
+<td style="width: 223.859px; height: 22px">INTERNAL</td>
+<td style="width: 356.422px; height: 22px">An unknown internal error occurred.</td>
+</tr>
+<tr>
+<td style="width: 67.7188px; height: 22px">503</td>
+<td style="width: 223.859px; height: 22px">UNAVAILABLE</td>
+<td style="width: 356.422px; height: 22px">The server is overloaded.</td>
+</tr>
+</tbody>
+</table>
+<div class="bs-callout bs-callout-default">
+<p>You will also see a <em>Bounced push</em> event if the recipient is missing or has an invalid push token.</p>
+</div>
+<h2 id="h_01HBRFFMP6ESF42GM1APXX6HA3">Best practices </h2>
+<h3 id="h_01HBRFFMP643SPYMR85A5PZVZT">Collect user consent </h3>
+<p>In order to send a standard push notification to a profile, you must collect their <a href="https://help.klaviyo.com/hc/en-us/articles/4404203889947">explicit consent </a>first.</p>
+<p>To collect push notification consent, you must provide customers with a permission screen prompt during their first interaction with your mobile app. </p>
+<p>It is best practice for your permission screen prompt to include consent language that provides the following information and allows them to opt in or opt out:</p>
+<ul>
+<li>
+<strong>What types of notifications your brand sends</strong><br>
+Include details about the different push notifications your brand plans to send (for example, account changes, account changes, reminders, and special discounts).</li>
+<li>
+<strong>Why users should opt in</strong><br>
+Include information around why a customer should provide permissions (for example, to receive important updates or early access to sales).</li>
+</ul>
+<p>Learn more about collecting <a href="https://help.klaviyo.com/hc/en-us/articles/14781686592283">push notification consent. </a></p>
+<h3 id="h_01HBRFFMP6FJGR8FH2H2BJK63T">Send relevant notifications </h3>
+<p>When sending push notification campaigns, it is important to take advantage of Klaviyo’s <a href="https://help.klaviyo.com/hc/en-us/articles/115005237908">segmentation</a> to send content that is personalized and relevant to your subscribers.</p>
+<p>For example, if you know that you have a segment of dedicated repeat customers, you could use push notifications to alert them to new deals or promotions before anyone else.</p>
+<p>By ensuring that the content you send customers is relevant to their interests and preferences, you can reduce the likelihood of customers opting out and maximize your ability to reach your customers with push notifications. </p>
+<h3 id="h_01HBRFFMP6QA321NR6HTG3ZCM8">Monitor and analyze performance </h3>
+<p>It is essential to continually monitor your push notification performance with Klaviyo to quickly identify delivery issues and drops in key <a href="https://help.klaviyo.com/hc/en-us/articles/15307358769051">push metrics</a>.</p>
+<p>The best way to do so is to monitor the following push notification events: </p>
+<ul>
+<li>Received push</li>
+<li>Opened push</li>
+<li>Bounced push</li>
+</ul>
+<p>You can set up a <a href="https://help.klaviyo.com/hc/en-us/articles/360046234772">multi-metric report</a> in Klaviyo to monitor how your performance with these events changes over time.</p>

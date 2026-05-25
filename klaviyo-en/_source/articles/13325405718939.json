@@ -1,0 +1,871 @@
+{
+  "captured_at": "2026-05-23T16:17:32Z",
+  "article": {
+    "id": 13325405718939,
+    "url": "https://klaviyo.zendesk.com/api/v2/help_center/en-us/articles/13325405718939.json",
+    "html_url": "https://klaviyo.zendesk.com/hc/en-us/articles/13325405718939-How-to-create-a-back-in-stock-flow-for-Shopware",
+    "author_id": 409167690492,
+    "comments_disabled": true,
+    "draft": false,
+    "promoted": false,
+    "position": 3,
+    "vote_sum": -1,
+    "vote_count": 1,
+    "section_id": 49375225542683,
+    "created_at": "2023-03-01T21:07:32Z",
+    "updated_at": "2026-04-21T13:54:28Z",
+    "name": "How to create a back in stock flow for Shopware",
+    "title": "How to create a back in stock flow for Shopware",
+    "source_locale": "en-us",
+    "locale": "en-us",
+    "outdated": false,
+    "outdated_locales": [],
+    "edited_at": "2025-11-05T21:24:01Z",
+    "user_segment_id": null,
+    "permission_group_id": 146392,
+    "content_tag_ids": [],
+    "label_names": [],
+    "body": "<h2 id=\"h_01HH57GQEDKTQX910ZTMGP4FP8\">You will learn</h2>\n<p>Learn how to create a back in stock flow for Shopware 6 to alert customers about inventory. This flow will use the <em>Subscribed to Back in Stock</em> event synced from your Shopware store. </p>\n<h2 id=\"h_01HH57GQEDTD1D4QS6JRPVYSA2\">Before you begin</h2>\n<p>Make sure to do the following:</p>\n<ul>\n<li>Integrate with Shopware 6 (see <a href=\"https://help.klaviyo.com/hc/en-us/articles/13001662470939\" target=\"_blank\" rel=\"noopener\">Getting started with Shopware </a>to learn how). As part of the integration process, make sure you:</li>\n<ul>\n<li>Have <em>Track Back in Stock</em> toggled on in your extension settings, which will sync <em>Subscribed to Back in Stock</em> events to Klaviyo.<br><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28715965319451\" alt=\"Track Back in Stock setting toggled on to blue\" width=\"333\" height=\"52\">\n</li>\n<li>Sync your Shopware 6 product catalog to Klaviyo. </li>\n</ul>\n</ul>\n<h2 id=\"h_01HH57GQEDFDA07Z4N5WW15W9V\">Customize your Back in Stock button and form in Shopware</h2>\n<div class=\"bs-callout bs-callout-default\">\n<p>The Back in Stock form appears on product detail pages only when the product is out of stock and marked for Clearance sale.</p>\n</div>\n<p>If you’re tracking back in stock (via your extension settings in Shopware), you’ll also be able to customize the “Notify me when back in stock” button (which appears for items that are out of stock) and form on your site. Customers must click the button and fill out the form to receive back in stock notifications. </p>\n<p>To customize these elements:</p>\n<ol>\n<li>Log in to your Shopware admin.</li>\n<li>Navigate to <strong>Settings &gt; Extensions &gt; Klaviyo</strong>.</li>\n<li>Scroll down to <em>Back-In-Stock Pop-up styles</em>, where you can customize the text color and background of the Back in Stock pop-up opening button, pop-up close button, and subscribe button. <br><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28715965322267\" alt=\"Pop-up opening button settings with color set to white and background set to dark blue\" width=\"540\" height=\"156\">\n</li>\n<li>Click the square, then use the selector to choose a color, or, if you have the hex color codes for your brand’s colors, paste it in the corresponding box.</li>\n<li>Under <em>Snippet names</em>, you’ll find a reference for how to refer to different back in stock components in HTML, if you wish to customize them within your site code.<br><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28715971891739\" alt=\"Snippet names for open button, close button, and email field label\" width=\"536\" height=\"141\">\n</li>\n<li>When you are finished, click <strong>Save</strong>. </li>\n</ol>\n<h2 id=\"h_01HH57GQED27CGKQQG9HG3GNXX\">Configure your back in stock settings in Klaviyo</h2>\n<p>Next, <a href=\"https://help.klaviyo.com/hc/en-us/articles/115003872251-How-to-build-a-back-in-stock-flow#back-in-stock-flow-settings2\" target=\"_blank\" rel=\"noopener\">configure your back in stock settings in Klaviyo</a>: both minimum inventory rules and customer notification rules. </p>\n<ul>\n<li>Minimum inventory rules refer to how many items need to be restocked before you notify subscribers.</li>\n<li>Customer notification rules allow you to choose how many customers to notify and how long to wait between notifications.</li>\n</ul>\n<h2 id=\"h_01HH57GQED9CBB6J7TMWVCVTBN\">Create the flow</h2>\n<ol>\n<li>In Klaviyo, select the <strong>Flows</strong> tab.</li>\n<li>Click <strong>Create Flow</strong>, then <strong>Create from Scratch</strong>.</li>\n<li>Name your flow, then click <strong>Create Flow</strong>. </li>\n<li>In the flow builder, choose the trigger option <strong>Metric</strong>, then select the Klaviyo metric<strong> Subscribed to Back in Stock</strong>. Do not add any trigger or flow filters, and click <strong>Save</strong>.</li>\n<li>Directly after the trigger, drag in a Back in Stock Delay. Recipients who enter your flow will wait at this delay until their item of interest is restocked. After this occurs, they will move on to the next step in your flow, which in this case is an email message that you add after the delay.<br><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28715965332123\" width=\"519\" height=\"576\">\n</li>\n<li>Design your back in stock email with dynamic variables to pull product information for this notification. <a href=\"https://help.klaviyo.com/hc/en-us/articles/115002779071-Personalize-Flow-Emails-with-Dynamic-Event-Data\" target=\"_blank\" rel=\"noopener\">Learn how to personalize flows with dynamic event data</a>.</li>\n<li>Typically, you will only need a single message in this flow as a notification that the item is back. <a href=\"https://help.klaviyo.com/hc/en-us/articles/115002779311-Smart-Sending-for-Flows#how-to-disable-smart-sending\" target=\"_blank\" rel=\"noopener\">Turn Smart Sending off</a> for this message to ensure everyone gets the alert. </li>\n<li>You do not need to add any additional time delays to this series, as the back in stock delay will ensure each person that enters your flow waits until the item they subscribed to goes back in stock before moving forward.</li>\n<li>To learn about flow statuses and how to set your flow live, read <a href=\"https://help.klaviyo.com/hc/en-us/articles/115002774932-Getting-started-with-flows\" target=\"_blank\" rel=\"noopener\">Getting started with flows</a>. For more guidance on back in stock flows, read <a href=\"https://help.klaviyo.com/hc/en-us/articles/115003872251\" target=\"_blank\" rel=\"noopener\">How to build a back in stock flow</a>.</li>\n</ol>\n<h2 id=\"h_01HH57GQED7TH56Z1VCKT89X5B\">Outcome</h2>\n<p>You’ve created a back in stock flow for Shopware 6. Now, you can better personalize your customer communications and drive revenue.</p>\n<h2 id=\"h_01HH57GQEDVTESZ2RH3W6ACQ3N\">Additional resources</h2>\n<ul>\n<li><a href=\"https://help.klaviyo.com/hc/en-us/articles/360051612551-Understanding-how-back-in-stock-flows-work\" target=\"_blank\" rel=\"noopener\">Understanding how back in stock flows work</a></li>\n<li><a href=\"https://help.klaviyo.com/hc/en-us/articles/13006716790299\" target=\"_blank\" rel=\"noopener\">Shopware data reference</a></li>\n<li><a href=\"https://help.klaviyo.com/hc/en-us/articles/115002779071-Personalize-Flow-Emails-with-Dynamic-Event-Data\" target=\"_blank\" rel=\"noopener\">How to personalize flows with dynamic event data</a></li>\n</ul>",
+    "user_segment_ids": []
+  },
+  "normalized": {
+    "id": "13325405718939",
+    "title": "How to create a back in stock flow for Shopware",
+    "source_url": "https://help.klaviyo.com/hc/en-us/articles/13325405718939-How-to-create-a-back-in-stock-flow-for-Shopware",
+    "section_id": 49375225542683,
+    "section": "Shopware",
+    "category_id": 115000032731,
+    "category": "Integrations",
+    "category_slug": "integrations",
+    "klaviyo_updated": "2026-04-21T13:54:28Z",
+    "created_at": "2023-03-01T21:07:32Z",
+    "draft": false,
+    "promoted": false,
+    "position": 3,
+    "label_names": []
+  },
+  "files": {
+    "body_html": "_source/articles/13325405718939.body.html",
+    "rendered_html": "_source/rendered/13325405718939.html"
+  },
+  "assets": {
+    "api_body": {
+      "images": [
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28715965319451",
+          "alt": "Track Back in Stock setting toggled on to blue",
+          "width": "333",
+          "height": "52"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28715965322267",
+          "alt": "Pop-up opening button settings with color set to white and background set to dark blue",
+          "width": "540",
+          "height": "156"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28715971891739",
+          "alt": "Snippet names for open button, close button, and email field label",
+          "width": "536",
+          "height": "141"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28715965332123",
+          "alt": "",
+          "width": "519",
+          "height": "576"
+        }
+      ],
+      "links": [
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/13001662470939",
+          "text": "Getting started with Shopware"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115003872251-How-to-build-a-back-in-stock-flow#back-in-stock-flow-settings2",
+          "text": "configure your back in stock settings in Klaviyo"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115002779071-Personalize-Flow-Emails-with-Dynamic-Event-Data",
+          "text": "Learn how to personalize flows with dynamic event data"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115002779311-Smart-Sending-for-Flows#how-to-disable-smart-sending",
+          "text": "Turn Smart Sending off"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115002774932-Getting-started-with-flows",
+          "text": "Getting started with flows"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115003872251",
+          "text": "How to build a back in stock flow"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360051612551-Understanding-how-back-in-stock-flows-work",
+          "text": "Understanding how back in stock flows work"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/13006716790299",
+          "text": "Shopware data reference"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115002779071-Personalize-Flow-Emails-with-Dynamic-Event-Data",
+          "text": "How to personalize flows with dynamic event data"
+        }
+      ],
+      "headings": [
+        {
+          "level": 2,
+          "id": "h_01HH57GQEDKTQX910ZTMGP4FP8",
+          "text": "You will learn"
+        },
+        {
+          "level": 2,
+          "id": "h_01HH57GQEDTD1D4QS6JRPVYSA2",
+          "text": "Before you begin"
+        },
+        {
+          "level": 2,
+          "id": "h_01HH57GQEDFDA07Z4N5WW15W9V",
+          "text": "Customize your Back in Stock button and form in Shopware"
+        },
+        {
+          "level": 2,
+          "id": "h_01HH57GQED27CGKQQG9HG3GNXX",
+          "text": "Configure your back in stock settings in Klaviyo"
+        },
+        {
+          "level": 2,
+          "id": "h_01HH57GQED9CBB6J7TMWVCVTBN",
+          "text": "Create the flow"
+        },
+        {
+          "level": 2,
+          "id": "h_01HH57GQED7TH56Z1VCKT89X5B",
+          "text": "Outcome"
+        },
+        {
+          "level": 2,
+          "id": "h_01HH57GQEDVTESZ2RH3W6ACQ3N",
+          "text": "Additional resources"
+        }
+      ]
+    },
+    "rendered_page": {
+      "images": [
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/7ff492c2b417b7ecfe572f839a8a81398693c1f7-1920x1080.webp",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/25f770c922924a04671d31d73738ce28c8e29f44-808x126.png?w=333",
+          "alt": "Track Back in Stock setting toggled on to blue",
+          "width": "333",
+          "height": "52"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/2247b9e79ec6b4379b8138edcf27089db36b1875-1880x542.jpg?w=540",
+          "alt": "Pop-up opening button settings with color set to white and background set to dark blue",
+          "width": "540",
+          "height": "156"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/ad7e2478f4f43d12370e6d213073f5139e32f660-2148x564.jpg?w=536",
+          "alt": "Snippet names for open button, close button, and email field label",
+          "width": "536",
+          "height": "141"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/8596dfa39e68862c103786b3eb97b605c3e16f82-916x1016.png?w=519",
+          "alt": "",
+          "width": "519",
+          "height": "576"
+        }
+      ],
+      "links": [
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/13325405718939-How-to-create-a-back-in-stock-flow-for-Shopware#site-content",
+          "text": "Skip to main content"
+        },
+        {
+          "href": "https://www.klaviyo.com",
+          "text": "Home"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center"
+        },
+        {
+          "href": "https://www.klaviyo.com/enterprise",
+          "text": "Enterprise"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Partners"
+        },
+        {
+          "href": "https://www.klaviyo.com/careers",
+          "text": "Careers"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": "Log in"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": ""
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center Find step-by-step instructions and troubleshooting solutions in our knowledge base."
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000032731",
+          "text": "Integrations"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000312411",
+          "text": "Flows"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867867",
+          "text": "Audience"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867667",
+          "text": "Campaigns"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/360000190711",
+          "text": "Sign-up forms"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000873988",
+          "text": "Deliverability & compliance"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/29173800271259",
+          "text": "SMS"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/16638219724187",
+          "text": "Reviews"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/18073014919195",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/34141283979931",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/37659126754075",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/33948021740315",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/39746685522331",
+          "text": "WhatsApp"
+        },
+        {
+          "href": "https://academy.klaviyo.com",
+          "text": "Klaviyo Academy Expert training and education to help you succeed with Klaviyo, and beyond."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Quick+guide&resource=academy_courses",
+          "text": "Quick guides Learn marketing strategies and concepts in 15 minutes or less."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Course&resource=academy_courses",
+          "text": "Courses Master key marketing topics through structured lessons and exams."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/best-practices",
+          "text": "Best practices Discover top product and marketing strategies for your business."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/learning-paths",
+          "text": "Learning paths Complete curated learning journeys tailored to your marketing goals."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses",
+          "text": "Explore all resources"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Live+training&resource=academy_courses",
+          "text": "Live trainings Build confidence through hands-on interactive workshops and thought-provoking strategy sessions."
+        },
+        {
+          "href": "https://www.bigmarker.com/klaviyo-customer-education/Office-hours-Getting-started-with-Klaviyo",
+          "text": "Live office hours Join a strategic discussion where you can ask questions and get answers in real-time."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/private-live-training",
+          "text": "1:1 Live training Book a private training session with an expert to jumpstart your platform knowledge and confidence."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/credentials",
+          "text": "Klaviyo credentials Dig deeper into select topics and showcase your expertise with a final exam to earn a certificate and digital badge."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/certificates/klaviyo-practitioner-certificate",
+          "text": "Klaviyo practitioner certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/deliverability-certificate",
+          "text": "Deliverability certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/developer-certificate",
+          "text": "Klaviyo developer certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses&select=Certificate",
+          "text": "See all certificates"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Klaviyo Community Join our thriving community network to connect with brands like yours—online and in person."
+        },
+        {
+          "href": "https://community.klaviyo.com/topic/new",
+          "text": "Ask a question Post a question and get thoughtful answers from Klaviyo powerusers."
+        },
+        {
+          "href": "https://community.klaviyo.com/p/roadmap",
+          "text": "Product roadmap"
+        },
+        {
+          "href": "https://community.klaviyo.com/search/activity/recent",
+          "text": "Recent threads"
+        },
+        {
+          "href": "https://community.klaviyo.com/p/champions",
+          "text": "Meet the Champions"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups",
+          "text": "Browse all groups Your people are waiting. New ideas and connections are a click away."
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/developer-group-64",
+          "text": "Developer group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/entrepreneur-user-group-118",
+          "text": "Entrepreneur group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/woo-user-group-87",
+          "text": "WooCommerce group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/new-york-meetup-chapter-82",
+          "text": "New York City"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/los-angeles-meetup-chapter-83",
+          "text": "Los Angeles"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/austin-meetup-chapter-85",
+          "text": "Austin"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/san-diego-meetup-chapter-86",
+          "text": "San Diego"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/amsterdam-meetup-chapter-84",
+          "text": "Amsterdam"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Klaviyo Developers Access API documentation and developer guides to help you build with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/get_started",
+          "text": "Get started Access key resources and a step-by-step checklist for how to start developing with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/build_your_integration",
+          "text": "Grow your app's reach Learn how to join our ecosystem and get your app listed on our marketplace."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/developer-tools",
+          "text": "Developer tools Generate sample data, monitor your API usage, and access our Postman collections."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/reference/api_overview",
+          "text": "API reference Browse our full catalog of API docs."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/changelog_",
+          "text": "Changelog"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/api_versioning_and_deprecation_policy",
+          "text": "Versioning & deprecation policy"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/rate_limits_and_error_handling",
+          "text": "Rate limits & error handling"
+        },
+        {
+          "href": "https://youtube.com/playlist?list=PLHkNfHgtxcUanrkMnKPdkRzuWU7MGv_xM&si=pkG-KH7IT_TUHOGC",
+          "text": "API tutorials on YouTube Subscribe to our Klaviyo API Tutorials playlist for easy access to step-by-step developer walkthroughs."
+        },
+        {
+          "href": "https://www.klaviyo.com/contact-us",
+          "text": "Contact us"
+        },
+        {
+          "href": "https://www.klaviyo.com/sign-up",
+          "text": "Sign up"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": "Search"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/13325405718939",
+          "text": "United States - EN"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/de-de/articles/13325405718939",
+          "text": "Deutschland - DE"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-es/articles/13325405718939",
+          "text": "España - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-mx/articles/13325405718939",
+          "text": "México - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/fr-fr/articles/13325405718939",
+          "text": "France - FR"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/it-it/articles/13325405718939",
+          "text": "Italia - IT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/ko-kr/articles/13325405718939",
+          "text": "한국 - KO"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/nl-nl/articles/13325405718939",
+          "text": "Nederland - NL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pl-pl/articles/13325405718939",
+          "text": "Polska - PL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pt-br/articles/13325405718939",
+          "text": "Brasil - PT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/sv-se/articles/13325405718939",
+          "text": "Sverige - SV"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/14508660690203",
+          "text": "More integrations"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/49375225542683",
+          "text": "Shopware"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/13325405718939-How-to-create-a-back-in-stock-flow-for-Shopware#h_01HH57GQEDKTQX910ZTMGP4FP8",
+          "text": "You will learn"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/13325405718939-How-to-create-a-back-in-stock-flow-for-Shopware#h_01HH57GQEDTD1D4QS6JRPVYSA2",
+          "text": "Before you begin"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/13325405718939-How-to-create-a-back-in-stock-flow-for-Shopware#h_01HH57GQEDFDA07Z4N5WW15W9V",
+          "text": "Customize your Back in Stock button and form in Shopware"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/13325405718939-How-to-create-a-back-in-stock-flow-for-Shopware#h_01HH57GQED27CGKQQG9HG3GNXX",
+          "text": "Configure your back in stock settings in Klaviyo"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/13325405718939-How-to-create-a-back-in-stock-flow-for-Shopware#h_01HH57GQED9CBB6J7TMWVCVTBN",
+          "text": "Create the flow"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/13325405718939-How-to-create-a-back-in-stock-flow-for-Shopware#h_01HH57GQED7TH56Z1VCKT89X5B",
+          "text": "Outcome"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/13325405718939-How-to-create-a-back-in-stock-flow-for-Shopware#additional-resources",
+          "text": "Additional resources"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/13001662470939",
+          "text": "Getting started with Shopware"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115003872251-How-to-build-a-back-in-stock-flow#back-in-stock-flow-settings2",
+          "text": "configure your back in stock settings in Klaviyo"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115002779071-Personalize-Flow-Emails-with-Dynamic-Event-Data",
+          "text": "Learn how to personalize flows with dynamic event data"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115002779311-Smart-Sending-for-Flows#how-to-disable-smart-sending",
+          "text": "Turn Smart Sending off"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115002774932-Getting-started-with-flows",
+          "text": "Getting started with flows"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115003872251",
+          "text": "How to build a back in stock flow"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360051612551",
+          "text": "Understanding how back in stock flows work"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/13006716790299",
+          "text": "Shopware data reference"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115002779071",
+          "text": "How to use event data to personalize email and SMS flows"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115001002272",
+          "text": "Learn how to contact support"
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": ""
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": "Visit Community"
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": ""
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": "Hire a partner"
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/about",
+          "text": "About Klaviyo"
+        },
+        {
+          "href": "https://www.klaviyo.com/newsroom",
+          "text": "Newsroom"
+        },
+        {
+          "href": "https://investors.klaviyo.com/overview/default.aspx",
+          "text": "Investor relations"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Agency and tech partners"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Developers"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/retail",
+          "text": "Retail and ecommerce"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/restaurants",
+          "text": "Restaurant marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/wellness",
+          "text": "Wellness"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform",
+          "text": "B2C CRM overview"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai",
+          "text": "Klaviyo AI (K:AI)"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/marketing-automation",
+          "text": "Klaviyo Marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-service",
+          "text": "Klaviyo Service"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/analytics",
+          "text": "Klaviyo Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-data-platform",
+          "text": "Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare",
+          "text": "Klaviyo vs. Klaviyo alternatives"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-mailchimp",
+          "text": "Klaviyo vs. Mailchimp"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-postscript",
+          "text": "Klaviyo vs. Postscript"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-attentive",
+          "text": "Klaviyo vs. Attentive"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-salesforce-marketing-cloud",
+          "text": "Klaviyo vs. Salesforce"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-listrak",
+          "text": "Klaviyo vs. Listrak"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/omnichannel",
+          "text": "Omnichannel marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/email-marketing",
+          "text": "Email marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing",
+          "text": "SMS marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing/rcs",
+          "text": "RCS for Business"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/mobile-app-marketing",
+          "text": "Mobile app marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/whatsapp",
+          "text": "WhatsApp marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/social",
+          "text": "Social marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources",
+          "text": "Marketing resources"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources/marketing-campaign-calendar",
+          "text": "Marketing campaign calendar"
+        },
+        {
+          "href": "https://www.klaviyo.com/glossary",
+          "text": "Marketing glossary"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/email-subject-line-generator",
+          "text": "Subject line generator"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/roi-calculator",
+          "text": "ROI calculator"
+        },
+        {
+          "href": "https://www.klaviyo.com/customers",
+          "text": "Case studies"
+        },
+        {
+          "href": "https://www.klaviyo.com/composer",
+          "text": "Composer Beta"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/marketing-agent",
+          "text": "Marketing Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/customer-agent",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/customer-experience-hub",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/helpdesk",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/marketing-analytics",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/advanced-cdp",
+          "text": "Advanced Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/web-forms",
+          "text": "Web forms"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/email-templates",
+          "text": "Email templates"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/portfolio",
+          "text": "Portfolio"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform-integrations",
+          "text": "Apps and Integrations"
+        },
+        {
+          "href": "https://www.klaviyo.com/features",
+          "text": "Features"
+        },
+        {
+          "href": "https://www.klaviyo.com/whats-new",
+          "text": "What's new"
+        },
+        {
+          "href": "https://www.klaviyo.com/events",
+          "text": "Events"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help Center"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us",
+          "text": "Academy"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Community"
+        },
+        {
+          "href": "https://www.facebook.com/Klaviyo/",
+          "text": "Facebook"
+        },
+        {
+          "href": "https://twitter.com/klaviyo/",
+          "text": "Twitter"
+        },
+        {
+          "href": "https://www.linkedin.com/company/klaviyo/",
+          "text": "LinkedIn"
+        },
+        {
+          "href": "https://www.instagram.com/klaviyo/",
+          "text": "Instagram"
+        },
+        {
+          "href": "https://www.klaviyo.com/sitemap",
+          "text": "Site Map"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal",
+          "text": "Terms and Privacy"
+        },
+        {
+          "href": "https://www.klaviyo.com/security",
+          "text": "Security"
+        },
+        {
+          "href": "https://www.klaviyo.com/trust",
+          "text": "Trust"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal/intellectual-property-notices",
+          "text": "Intellectual Property Notices"
+        }
+      ],
+      "headings": [
+        {
+          "level": 1,
+          "id": "",
+          "text": "How to create a back in stock flow for Shopware"
+        },
+        {
+          "level": 2,
+          "id": "h_01HH57GQEDKTQX910ZTMGP4FP8",
+          "text": "You will learn"
+        },
+        {
+          "level": 2,
+          "id": "h_01HH57GQEDTD1D4QS6JRPVYSA2",
+          "text": "Before you begin"
+        },
+        {
+          "level": 2,
+          "id": "h_01HH57GQEDFDA07Z4N5WW15W9V",
+          "text": "Customize your Back in Stock button and form in Shopware"
+        },
+        {
+          "level": 2,
+          "id": "h_01HH57GQED27CGKQQG9HG3GNXX",
+          "text": "Configure your back in stock settings in Klaviyo"
+        },
+        {
+          "level": 2,
+          "id": "h_01HH57GQED9CBB6J7TMWVCVTBN",
+          "text": "Create the flow"
+        },
+        {
+          "level": 2,
+          "id": "h_01HH57GQED7TH56Z1VCKT89X5B",
+          "text": "Outcome"
+        },
+        {
+          "level": 2,
+          "id": "additional-resources",
+          "text": "Additional resources"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "Explore more from Klaviyo"
+        }
+      ]
+    }
+  },
+  "rendered_page": {
+    "status": "fetched",
+    "error": ""
+  }
+}

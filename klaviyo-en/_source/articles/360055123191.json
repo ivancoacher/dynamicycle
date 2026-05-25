@@ -1,0 +1,842 @@
+{
+  "captured_at": "2026-05-23T16:16:47Z",
+  "article": {
+    "id": 360055123191,
+    "url": "https://klaviyo.zendesk.com/api/v2/help_center/en-us/articles/360055123191.json",
+    "html_url": "https://klaviyo.zendesk.com/hc/en-us/articles/360055123191-PrestaShop-data-reference",
+    "author_id": 396946107652,
+    "comments_disabled": true,
+    "draft": false,
+    "promoted": false,
+    "position": 1,
+    "vote_sum": 6,
+    "vote_count": 20,
+    "section_id": 49375889864603,
+    "created_at": "2021-01-07T19:52:05Z",
+    "updated_at": "2026-05-15T09:56:47Z",
+    "name": "PrestaShop data reference",
+    "title": "PrestaShop data reference",
+    "source_locale": "en-us",
+    "locale": "en-us",
+    "outdated": false,
+    "outdated_locales": [],
+    "edited_at": "2026-04-17T00:58:20Z",
+    "user_segment_id": null,
+    "permission_group_id": 146372,
+    "content_tag_ids": [],
+    "label_names": [],
+    "body": "<h2 id=\"h_01J9P5VGTP4B4GSR4RJR4PBFYE\">You will learn</h2>\n<p>Learn about the metrics and customer data synced from PrestaShop to Klaviyo. 3 types of events sync from PrestaShop to Klaviyo: </p>\n<ul>\n<li>Order events sync every 30 minutes (e.g., <em>Placed Order</em>).</li>\n<li>Transactional order events sync in real time, if you choose to enable them in your module settings (e.g., <em>Placed Order Transactional</em>).</li>\n<li>Klaviyo onsite events (<em>Active on Site</em>, <em>Viewed Produc</em>t, and <em>Added to Cart</em>).</li>\n</ul>\n<p><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/35198021096347\" alt=\"\" width=\"512\" height=\"467\"></p>\n<p><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28717851526427\" alt=\"List of PrestaShop API metrics in Klaviyo\"></p>\n<h2 id=\"h_01J9P5VGTPGGTAPW6MAC0MQASK\">Transactional versus non-transactional metrics</h2>\n<p>If you toggled on <strong>Send real-time order events to Klaviyo</strong><a href=\"https://help.klaviyo.com/hc/en-us/articles/360054551492\">when integrating</a>, a second set of order events labeled as transactional will sync to Klaviyo in real time. For instance, you’ll see a metric in Klaviyo labeled <em>Placed Order Transactional</em>, which will sync in real time, in addition to a metric labeled <em>Placed Order,</em> which will sync every 30 minutes. The real-time transactional events that sync to Klaviyo are:</p>\n<ul>\n<li>Placed Order Transactional</li>\n<li>Fulfilled Order Transactional </li>\n<li>Cancelled Order Transactional</li>\n<li>Refunded Order Transactional</li>\n</ul>\n<p><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28717851531163\" alt=\"Transactional events toggle on in Klaviyo plugin settings in PrestaShop\"></p>\n<h2 id=\"h_01J9P5VGTPSWWN05721TFGXSJE\">PrestaShop metrics</h2>\n<p>You can view all PrestaShop metrics in Klaviyo by navigating to <strong>Analytics &gt; Metrics</strong>. Filter by <em>PrestaShop</em> to see order and transactional order events (they will have a PrestaShop icon) or filter by <em>API</em> to see Klaviyo onsite events (they will have a gear icon). </p>\n<h3 id=\"h_01J9P5VGTPEA1AD0HY916TDH26\">Active on Site</h3>\n<p>This event is created when a customer is active on your PrestaShop store. </p>\n<h3 id=\"h_01J9P5VGTP8872CG1JBH1681G0\">Viewed Product</h3>\n<p>Klaviyo tracks this event when a customer views a product on your PrestaShop store. This is useful if you'd like to set up a <a href=\"https://help.klaviyo.com/hc/en-us/articles/115002775252-Create-a-Browse-Abandonment-Flow\">browse abandonment flow</a> or provide customers with <a href=\"https://help.klaviyo.com/hc/en-us/articles/115005082787\">personalized product recommendations</a> based on product browsing data.</p>\n<h3 id=\"h_01J9P5VGTP3FNYSP8JJYJ8H77N\">Added to Cart</h3>\n<p>This event is created when a customer adds an item to their cart.</p>\n<h3 id=\"h_01J9P5VGTPWSSGCZ7T0ENTZMPG\">Started Checkout</h3>\n<p>The <em>Started Checkout</em> metric is created when:</p>\n<ul>\n<li>A customer logs in to their account, adds something to their cart, and navigates to the checkout page.</li>\n<li>Without logging in, or using guest checkout, a customer adds something to their cart, navigates to the checkout page, and enters their email address.<br>\n<p>Klaviyo captures the value of a cart at the time of checkout, as well as other pertinent details of a customer's cart that you can leverage for personalized abandoned cart emails. You can filter and target each event based on the following criteria:</p>\n</li>\n<li>\n<strong>Language</strong><br>\nThe language used.</li>\n<li>\n<strong>CartID</strong><br>\nAn ID assigned to the cart.</li>\n<li>\n<strong>Items</strong><br>\nThe names of the products in the cart, e.g., Red T-shirt or Blue Pants.</li>\n<li>\n<strong>ItemCount</strong><br>\nThe number of items in the cart.</li>\n<li>\n<strong>TotalDiscounts</strong><br>\nThe total amount of any coupons or discounts if someone used a code, e.g., 10.00.</li>\n<li>\n<strong>Categories</strong><br>\nThe complete set of categories for the products in the cart, e.g., t-shirts, men's, pants and sale.</li>\n<li>\n<strong>Tags</strong><br>\nThe list of meta keywords for the products in the cart.</li>\n<li>\n<strong>ShopId</strong><br>\nThe ID of the shop associated with the order.</li>\n<li>\n<strong>ReclaimCartUrl</strong><br>\nA URL that can be used to rebuild the customer’s cart, for instance in an abandoned cart email.</li>\n<li>\n<strong>$event_id</strong><br>\nThe ID of this Started Checkout event.</li>\n<li>\n<strong>$value</strong><br>\nThe value of the cart.</li>\n<li>\n<strong>$extra</strong><br>\nAn array of extra data.</li>\n<li>\n<strong>external_catalog_id</strong><br>\nUsed in catalog organization in Klaviyo.</li>\n<li>\n<strong>integration_key</strong><br>\nYour eCommerce platform (PrestaShop).</li>\n</ul>\n<h3 id=\"h_01J9P5VGTQW4622858W9AY5SN2\">Placed Order, Fulfilled Order, Cancelled Order, and Refunded Order</h3>\n<p>All of these events are created based on the order status mapping you configured when integrating. Each event includes product information about the items purchased, including product names, categories, etc. You can filter and target each event based on the same criteria:</p>\n<ul>\n<li>\n<strong>$value</strong><br>\nThe total value of the order.</li>\n<li>\n<strong>$extra</strong><br>\nAn array of extra data.</li>\n<li>\n<strong>Categories</strong><br>\nThe complete set of categories the products in the order, e.g., t-shirts, men's, pants and sale.</li>\n<li>\n<strong>ItemCount</strong><br>\nThe number of items in the order, e.g., 2.</li>\n<li>\n<strong>Items</strong><br>\nThe names of the products in the order, e.g., Red T-shirt or Blue Pants.</li>\n<li>\n<strong>ShopID</strong><br>\nThe ID of the shop associated with the order.</li>\n<li>\n<strong>LanguageID</strong><br>\nShop language ID as a two-letter code e.g., EN.</li>\n<li>\n<strong>TotalDiscounts</strong><br>\nThe total amount of any coupons or discounts if someone used a code, e.g., 10.00.</li>\n<li>\n<strong>DiscountCodes</strong><br>\nAny discount or coupon codes someone used towards the order, e.g., SPRING10.</li>\n<li>\n<strong>Tags</strong><br>\nThe list of meta keywords for products in the order.</li>\n<li>\n<strong>OrderStatus</strong><br>\nThe status of the order, as configured in order status mapping, e.g., <em>Payment Accepted</em>.</li>\n<li>\n<strong>external_catalog_id</strong><br>\nUsed in catalog organization in Klaviyo.</li>\n</ul>\n<h3 id=\"h_01J9P5VGTQ1W84YVF37311EA64\">Ordered Product</h3>\n<p>By default, this event is tracked once for every product a user orders when they place an order. For example, if a customer buys a t-shirt and a pair of jeans, one <em>Placed Order</em> event is tracked along with two <em>Ordered Product </em>events.</p>\n<p>The event Klaviyo tracks includes detailed information about each product someone purchases. This is useful when creating behavioral segments based on product options and other detailed information that's not available in the <em>Placed Order </em>event. You can filter and target <em>Ordered Product</em> events based on the following criteria:</p>\n<ul>\n<li>\n<strong>Name</strong><br>\nThe name of the ordered product.</li>\n<li>\n<strong>SKU</strong><br>\nThe SKU of the ordered product.</li>\n<li>\n<strong>ProductId</strong><br>\nThe ID of the ordered product.</li>\n<li>\n<strong>Quantity</strong><br>\nThe quantity of the ordered product.</li>\n<li>\n<strong>Categories</strong><br>\nThe complete set of categories for the product, e.g., t-shirts, men's, and sale.</li>\n<li>\n<strong>Tags</strong><br>\nThe list of meta keywords for the product.</li>\n<li>\n<strong>$event_id</strong><br>\nAn ID associated with this <em>Ordered Product</em> event.</li>\n<li>\n<strong>$value</strong><br>\nThe value of the ordered product.</li>\n<li>\n<strong>$extra</strong><br>\nAn array of extra data.</li>\n<li>\n<strong>external_catalog_id</strong><br>\nUsed in catalog organization in Klaviyo.</li>\n</ul>\n<h2 id=\"section2\">Synced customer data</h2>\n<p>In addition to the metrics Klaviyo syncs from PrestaShop, Klaviyo will also create a unique profile for every customer that we sync. When we sync contact information, there are also certain custom properties that may get added to each Klaviyo profile. Here are the properties automatically synced from PrestaShop:</p>\n<ul>\n<li>\n<strong>Email, First and Last Name, City, State/Region, Zip Code, Country, Phone Number</strong><br>\nThese built-in Klaviyo fields are automatically populated with all available data from PrestaShop.</li>\n<li>\n<strong>$locale</strong><br>\nThe language and country tag of the store the customer interacted with (e.g., \"en-us\").</li>\n<li>\n<strong>$locale-language</strong><br>\nThe language tag derived from the <em>$locale</em> property (e.g., \"en\").</li>\n<li>\n<strong>$locale-country</strong><br>\nThe country tag derived from the <em>$locale</em> property (e.g., \"us\").</li>\n<li>\n<strong>Last Order Currency</strong><br>\nThe currency of the customer's last order.</li>\n<li>\n<strong>Birthday</strong><br>\nThe customer's birthday.</li>\n<li>\n<strong>Gender</strong><br>\nThe customer's gender.</li>\n<li>\n<strong>PrestaShop Account Created Date</strong><br>\nThe date on which the customer created their PrestaShop account.</li>\n<li>\n<strong>PrestaShop Default Group</strong><br>\nThe default PrestaShop group that the customer belongs to.</li>\n<li>\n<strong>PrestaShop Groups</strong><br>\nAll PrestaShop groups that the customer belongs to.</li>\n<li>\n<strong>PrestaShop Shops</strong><br>\nThe shop(s) with which a customer has interacted.</li>\n</ul>",
+    "user_segment_ids": []
+  },
+  "normalized": {
+    "id": "360055123191",
+    "title": "PrestaShop data reference",
+    "source_url": "https://help.klaviyo.com/hc/en-us/articles/360055123191-PrestaShop-data-reference",
+    "section_id": 49375889864603,
+    "section": "PrestaShop",
+    "category_id": 115000032731,
+    "category": "Integrations",
+    "category_slug": "integrations",
+    "klaviyo_updated": "2026-05-15T09:56:47Z",
+    "created_at": "2021-01-07T19:52:05Z",
+    "draft": false,
+    "promoted": false,
+    "position": 1,
+    "label_names": []
+  },
+  "files": {
+    "body_html": "_source/articles/360055123191.body.html",
+    "rendered_html": "_source/rendered/360055123191.html"
+  },
+  "assets": {
+    "api_body": {
+      "images": [
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/35198021096347",
+          "alt": "",
+          "width": "512",
+          "height": "467"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28717851526427",
+          "alt": "List of PrestaShop API metrics in Klaviyo",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28717851531163",
+          "alt": "Transactional events toggle on in Klaviyo plugin settings in PrestaShop",
+          "width": "",
+          "height": ""
+        }
+      ],
+      "links": [
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360054551492",
+          "text": "when integrating"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115002775252-Create-a-Browse-Abandonment-Flow",
+          "text": "browse abandonment flow"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005082787",
+          "text": "personalized product recommendations"
+        }
+      ],
+      "headings": [
+        {
+          "level": 2,
+          "id": "h_01J9P5VGTP4B4GSR4RJR4PBFYE",
+          "text": "You will learn"
+        },
+        {
+          "level": 2,
+          "id": "h_01J9P5VGTPGGTAPW6MAC0MQASK",
+          "text": "Transactional versus non-transactional metrics"
+        },
+        {
+          "level": 2,
+          "id": "h_01J9P5VGTPSWWN05721TFGXSJE",
+          "text": "PrestaShop metrics"
+        },
+        {
+          "level": 3,
+          "id": "h_01J9P5VGTPEA1AD0HY916TDH26",
+          "text": "Active on Site"
+        },
+        {
+          "level": 3,
+          "id": "h_01J9P5VGTP8872CG1JBH1681G0",
+          "text": "Viewed Product"
+        },
+        {
+          "level": 3,
+          "id": "h_01J9P5VGTP3FNYSP8JJYJ8H77N",
+          "text": "Added to Cart"
+        },
+        {
+          "level": 3,
+          "id": "h_01J9P5VGTPWSSGCZ7T0ENTZMPG",
+          "text": "Started Checkout"
+        },
+        {
+          "level": 3,
+          "id": "h_01J9P5VGTQW4622858W9AY5SN2",
+          "text": "Placed Order, Fulfilled Order, Cancelled Order, and Refunded Order"
+        },
+        {
+          "level": 3,
+          "id": "h_01J9P5VGTQ1W84YVF37311EA64",
+          "text": "Ordered Product"
+        },
+        {
+          "level": 2,
+          "id": "section2",
+          "text": "Synced customer data"
+        }
+      ]
+    },
+    "rendered_page": {
+      "images": [
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/7ff492c2b417b7ecfe572f839a8a81398693c1f7-1920x1080.webp",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/c912413254df822df6362653028a17983485bf44-868x792.png?w=512",
+          "alt": "",
+          "width": "512",
+          "height": "467"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/baa079057d1135c5a56473c91a8f3e7d40252c6c-1600x414.jpg",
+          "alt": "List of PrestaShop API metrics in Klaviyo",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/bfa295d0cc7602cd4765aed07e461a58ef0fc0ed-2400x318.jpg",
+          "alt": "Transactional events toggle on in Klaviyo plugin settings in PrestaShop",
+          "width": "",
+          "height": ""
+        }
+      ],
+      "links": [
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360055123191-PrestaShop-data-reference#site-content",
+          "text": "Skip to main content"
+        },
+        {
+          "href": "https://www.klaviyo.com",
+          "text": "Home"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center"
+        },
+        {
+          "href": "https://www.klaviyo.com/enterprise",
+          "text": "Enterprise"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Partners"
+        },
+        {
+          "href": "https://www.klaviyo.com/careers",
+          "text": "Careers"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": "Log in"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": ""
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center Find step-by-step instructions and troubleshooting solutions in our knowledge base."
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000032731",
+          "text": "Integrations"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000312411",
+          "text": "Flows"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867867",
+          "text": "Audience"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867667",
+          "text": "Campaigns"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/360000190711",
+          "text": "Sign-up forms"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000873988",
+          "text": "Deliverability & compliance"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/29173800271259",
+          "text": "SMS"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/16638219724187",
+          "text": "Reviews"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/18073014919195",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/34141283979931",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/37659126754075",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/33948021740315",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/39746685522331",
+          "text": "WhatsApp"
+        },
+        {
+          "href": "https://academy.klaviyo.com",
+          "text": "Klaviyo Academy Expert training and education to help you succeed with Klaviyo, and beyond."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Quick+guide&resource=academy_courses",
+          "text": "Quick guides Learn marketing strategies and concepts in 15 minutes or less."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Course&resource=academy_courses",
+          "text": "Courses Master key marketing topics through structured lessons and exams."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/best-practices",
+          "text": "Best practices Discover top product and marketing strategies for your business."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/learning-paths",
+          "text": "Learning paths Complete curated learning journeys tailored to your marketing goals."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses",
+          "text": "Explore all resources"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Live+training&resource=academy_courses",
+          "text": "Live trainings Build confidence through hands-on interactive workshops and thought-provoking strategy sessions."
+        },
+        {
+          "href": "https://www.bigmarker.com/klaviyo-customer-education/Office-hours-Getting-started-with-Klaviyo",
+          "text": "Live office hours Join a strategic discussion where you can ask questions and get answers in real-time."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/private-live-training",
+          "text": "1:1 Live training Book a private training session with an expert to jumpstart your platform knowledge and confidence."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/credentials",
+          "text": "Klaviyo credentials Dig deeper into select topics and showcase your expertise with a final exam to earn a certificate and digital badge."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/certificates/klaviyo-practitioner-certificate",
+          "text": "Klaviyo practitioner certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/deliverability-certificate",
+          "text": "Deliverability certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/developer-certificate",
+          "text": "Klaviyo developer certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses&select=Certificate",
+          "text": "See all certificates"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Klaviyo Community Join our thriving community network to connect with brands like yours—online and in person."
+        },
+        {
+          "href": "https://community.klaviyo.com/topic/new",
+          "text": "Ask a question Post a question and get thoughtful answers from Klaviyo powerusers."
+        },
+        {
+          "href": "https://community.klaviyo.com/p/roadmap",
+          "text": "Product roadmap"
+        },
+        {
+          "href": "https://community.klaviyo.com/search/activity/recent",
+          "text": "Recent threads"
+        },
+        {
+          "href": "https://community.klaviyo.com/p/champions",
+          "text": "Meet the Champions"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups",
+          "text": "Browse all groups Your people are waiting. New ideas and connections are a click away."
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/developer-group-64",
+          "text": "Developer group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/entrepreneur-user-group-118",
+          "text": "Entrepreneur group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/woo-user-group-87",
+          "text": "WooCommerce group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/new-york-meetup-chapter-82",
+          "text": "New York City"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/los-angeles-meetup-chapter-83",
+          "text": "Los Angeles"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/austin-meetup-chapter-85",
+          "text": "Austin"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/san-diego-meetup-chapter-86",
+          "text": "San Diego"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/amsterdam-meetup-chapter-84",
+          "text": "Amsterdam"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Klaviyo Developers Access API documentation and developer guides to help you build with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/get_started",
+          "text": "Get started Access key resources and a step-by-step checklist for how to start developing with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/build_your_integration",
+          "text": "Grow your app's reach Learn how to join our ecosystem and get your app listed on our marketplace."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/developer-tools",
+          "text": "Developer tools Generate sample data, monitor your API usage, and access our Postman collections."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/reference/api_overview",
+          "text": "API reference Browse our full catalog of API docs."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/changelog_",
+          "text": "Changelog"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/api_versioning_and_deprecation_policy",
+          "text": "Versioning & deprecation policy"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/rate_limits_and_error_handling",
+          "text": "Rate limits & error handling"
+        },
+        {
+          "href": "https://youtube.com/playlist?list=PLHkNfHgtxcUanrkMnKPdkRzuWU7MGv_xM&si=pkG-KH7IT_TUHOGC",
+          "text": "API tutorials on YouTube Subscribe to our Klaviyo API Tutorials playlist for easy access to step-by-step developer walkthroughs."
+        },
+        {
+          "href": "https://www.klaviyo.com/contact-us",
+          "text": "Contact us"
+        },
+        {
+          "href": "https://www.klaviyo.com/sign-up",
+          "text": "Sign up"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": "Search"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360055123191",
+          "text": "United States - EN"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/de-de/articles/360055123191",
+          "text": "Deutschland - DE"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-es/articles/360055123191",
+          "text": "España - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-mx/articles/360055123191",
+          "text": "México - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/fr-fr/articles/360055123191",
+          "text": "France - FR"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/it-it/articles/360055123191",
+          "text": "Italia - IT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/ko-kr/articles/360055123191",
+          "text": "한국 - KO"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/nl-nl/articles/360055123191",
+          "text": "Nederland - NL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pl-pl/articles/360055123191",
+          "text": "Polska - PL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pt-br/articles/360055123191",
+          "text": "Brasil - PT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/sv-se/articles/360055123191",
+          "text": "Sverige - SV"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/49375889864603",
+          "text": "PrestaShop"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360055123191-PrestaShop-data-reference#h_01J9P5VGTP4B4GSR4RJR4PBFYE",
+          "text": "You will learn"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360055123191-PrestaShop-data-reference#h_01J9P5VGTPGGTAPW6MAC0MQASK",
+          "text": "Transactional versus non-transactional metrics"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360055123191-PrestaShop-data-reference#h_01J9P5VGTPSWWN05721TFGXSJE",
+          "text": "PrestaShop metrics"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360055123191-PrestaShop-data-reference#section2",
+          "text": "Synced customer data"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360055123191-PrestaShop-data-reference#additional-resources",
+          "text": "Additional resources"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360054551492",
+          "text": "when integrating"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115002775252-Create-a-Browse-Abandonment-Flow",
+          "text": "browse abandonment flow"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005082787",
+          "text": "personalized product recommendations"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360054551492",
+          "text": "Getting started with PrestaShop"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360003165732",
+          "text": "How to use flows to send transactional emails"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115001002272",
+          "text": "Learn how to contact support"
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": ""
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": "Visit Community"
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": ""
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": "Hire a partner"
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/about",
+          "text": "About Klaviyo"
+        },
+        {
+          "href": "https://www.klaviyo.com/newsroom",
+          "text": "Newsroom"
+        },
+        {
+          "href": "https://investors.klaviyo.com/overview/default.aspx",
+          "text": "Investor relations"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Agency and tech partners"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Developers"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/retail",
+          "text": "Retail and ecommerce"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/restaurants",
+          "text": "Restaurant marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/wellness",
+          "text": "Wellness"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform",
+          "text": "B2C CRM overview"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai",
+          "text": "Klaviyo AI (K:AI)"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/marketing-automation",
+          "text": "Klaviyo Marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-service",
+          "text": "Klaviyo Service"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/analytics",
+          "text": "Klaviyo Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-data-platform",
+          "text": "Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare",
+          "text": "Klaviyo vs. Klaviyo alternatives"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-mailchimp",
+          "text": "Klaviyo vs. Mailchimp"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-postscript",
+          "text": "Klaviyo vs. Postscript"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-attentive",
+          "text": "Klaviyo vs. Attentive"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-salesforce-marketing-cloud",
+          "text": "Klaviyo vs. Salesforce"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-listrak",
+          "text": "Klaviyo vs. Listrak"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/omnichannel",
+          "text": "Omnichannel marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/email-marketing",
+          "text": "Email marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing",
+          "text": "SMS marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing/rcs",
+          "text": "RCS for Business"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/mobile-app-marketing",
+          "text": "Mobile app marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/whatsapp",
+          "text": "WhatsApp marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/social",
+          "text": "Social marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources",
+          "text": "Marketing resources"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources/marketing-campaign-calendar",
+          "text": "Marketing campaign calendar"
+        },
+        {
+          "href": "https://www.klaviyo.com/glossary",
+          "text": "Marketing glossary"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/email-subject-line-generator",
+          "text": "Subject line generator"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/roi-calculator",
+          "text": "ROI calculator"
+        },
+        {
+          "href": "https://www.klaviyo.com/customers",
+          "text": "Case studies"
+        },
+        {
+          "href": "https://www.klaviyo.com/composer",
+          "text": "Composer Beta"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/marketing-agent",
+          "text": "Marketing Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/customer-agent",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/customer-experience-hub",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/helpdesk",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/marketing-analytics",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/advanced-cdp",
+          "text": "Advanced Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/web-forms",
+          "text": "Web forms"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/email-templates",
+          "text": "Email templates"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/portfolio",
+          "text": "Portfolio"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform-integrations",
+          "text": "Apps and Integrations"
+        },
+        {
+          "href": "https://www.klaviyo.com/features",
+          "text": "Features"
+        },
+        {
+          "href": "https://www.klaviyo.com/whats-new",
+          "text": "What's new"
+        },
+        {
+          "href": "https://www.klaviyo.com/events",
+          "text": "Events"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help Center"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us",
+          "text": "Academy"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Community"
+        },
+        {
+          "href": "https://www.facebook.com/Klaviyo/",
+          "text": "Facebook"
+        },
+        {
+          "href": "https://twitter.com/klaviyo/",
+          "text": "Twitter"
+        },
+        {
+          "href": "https://www.linkedin.com/company/klaviyo/",
+          "text": "LinkedIn"
+        },
+        {
+          "href": "https://www.instagram.com/klaviyo/",
+          "text": "Instagram"
+        },
+        {
+          "href": "https://www.klaviyo.com/sitemap",
+          "text": "Site Map"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal",
+          "text": "Terms and Privacy"
+        },
+        {
+          "href": "https://www.klaviyo.com/security",
+          "text": "Security"
+        },
+        {
+          "href": "https://www.klaviyo.com/trust",
+          "text": "Trust"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal/intellectual-property-notices",
+          "text": "Intellectual Property Notices"
+        }
+      ],
+      "headings": [
+        {
+          "level": 1,
+          "id": "",
+          "text": "PrestaShop data reference"
+        },
+        {
+          "level": 2,
+          "id": "h_01J9P5VGTP4B4GSR4RJR4PBFYE",
+          "text": "You will learn"
+        },
+        {
+          "level": 2,
+          "id": "h_01J9P5VGTPGGTAPW6MAC0MQASK",
+          "text": "Transactional versus non-transactional metrics"
+        },
+        {
+          "level": 2,
+          "id": "h_01J9P5VGTPSWWN05721TFGXSJE",
+          "text": "PrestaShop metrics"
+        },
+        {
+          "level": 3,
+          "id": "h_01J9P5VGTPEA1AD0HY916TDH26",
+          "text": "Active on Site"
+        },
+        {
+          "level": 3,
+          "id": "h_01J9P5VGTP8872CG1JBH1681G0",
+          "text": "Viewed Product"
+        },
+        {
+          "level": 3,
+          "id": "h_01J9P5VGTP3FNYSP8JJYJ8H77N",
+          "text": "Added to Cart"
+        },
+        {
+          "level": 3,
+          "id": "h_01J9P5VGTPWSSGCZ7T0ENTZMPG",
+          "text": "Started Checkout"
+        },
+        {
+          "level": 3,
+          "id": "h_01J9P5VGTQW4622858W9AY5SN2",
+          "text": "Placed Order, Fulfilled Order, Cancelled Order, and Refunded Order"
+        },
+        {
+          "level": 3,
+          "id": "h_01J9P5VGTQ1W84YVF37311EA64",
+          "text": "Ordered Product"
+        },
+        {
+          "level": 2,
+          "id": "section2",
+          "text": "Synced customer data"
+        },
+        {
+          "level": 2,
+          "id": "additional-resources",
+          "text": "Additional resources"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "Explore more from Klaviyo"
+        }
+      ]
+    }
+  },
+  "rendered_page": {
+    "status": "fetched",
+    "error": ""
+  }
+}

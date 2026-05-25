@@ -1,0 +1,948 @@
+{
+  "captured_at": "2026-05-23T16:16:45Z",
+  "article": {
+    "id": 4515829067803,
+    "url": "https://klaviyo.zendesk.com/api/v2/help_center/en-us/articles/4515829067803.json",
+    "html_url": "https://klaviyo.zendesk.com/hc/en-us/articles/4515829067803-Troubleshooting-your-WooCommerce-integration",
+    "author_id": 396946107652,
+    "comments_disabled": true,
+    "draft": false,
+    "promoted": false,
+    "position": 1,
+    "vote_sum": -15,
+    "vote_count": 23,
+    "section_id": 49375375690779,
+    "created_at": "2022-03-02T21:40:01Z",
+    "updated_at": "2026-04-21T13:56:58Z",
+    "name": "Troubleshooting your WooCommerce integration",
+    "title": "Troubleshooting your WooCommerce integration",
+    "source_locale": "en-us",
+    "locale": "en-us",
+    "outdated": false,
+    "outdated_locales": [],
+    "edited_at": "2026-04-17T01:02:05Z",
+    "user_segment_id": null,
+    "permission_group_id": 146372,
+    "content_tag_ids": [],
+    "label_names": [],
+    "body": "<h2 id=\"h_01HSV9R1DRB5A4EDH6N315VRJV\">You will learn</h2>\n<p>Learn how to solve issues with your WooCommerce integration setup by following the relevant troubleshooting scenario described below. If you are encountering issues not on this list, please reach out on the <a href=\"https://community.klaviyo.com/got-a-question-1\">Community</a> or to our <a href=\"https://help.klaviyo.com/hc/en-us/articles/115001002272-How-to-Contact-Support\">Support Team</a>.</p>\n<h2 id=\"h_01HSV9R5XAH467P007R8P5WSDC\">Before you begin</h2>\n<p>If you have not already, read our guide on <a href=\"https://help.klaviyo.com/hc/en-us/articles/115005255808\">getting started with WooCommerce</a> for step-by-step instructions on integrating. If you are looking to upgrade your plugin, check out our article on <a href=\"https://help.klaviyo.com/hc/en-us/articles/4418005597723\">how to upgrade your WooCommerce plugin</a>.</p>\n<h2 id=\"h_01HQBY35G0CCEXJ44GSF0VFYMH\">Troubleshooting scenarios</h2>\n<p>Consult the following scenarios based on the error message received in-app to resolve your issue.</p>\n<div class=\"bs-callout bs-callout-default\">\n<p>Please note that if you choose to remove your integration and then re-integrate, your WooCommerce data will not be deleted from Klaviyo.</p>\n</div>\n<h3 id=\"h_01HSV9VZNMW282DJ8TH8FE0NRT\">\"To avoid functionality disruptions, you may need to disable the following plugins: <em>Plugin Name(s)</em>\"</h3>\n<p>If you have active caching plugins or redirect plugins in WordPress, these can interfere with Klaviyo’s integration and cause connection issues. We recommend disabling these plugins during the integration setup process. <br>\n</p>\n<p><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28716055944091\" alt=\"\" width=\"515\" height=\"92\"></p>\n<h3 id=\"h_01HQBY3NPX35ADNSNWMS4FY8G8\">“We can’t complete your setup”</h3>\n<p><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28716066411035\" alt=\"\" width=\"534\" height=\"183\"></p>\n<p>This message means that either your firewall is blocking Klaviyo’s requests, that you have Bot Fight Mode enabled in Cloudflare, or both. </p>\n<p>To resolve, we recommend both allowlisting Klaviyo integration traffic and disabling Bot Fight Mode (if you have it enabled).</p>\n<ol>\n<li>Learn how to <a href=\"https://help.klaviyo.com/hc/en-us/articles/19143781289115\">allowlist Klaviyo integration traffic IP addresses</a>. </li>\n<li>To disable Bot Fight Mode in Cloudflare:\n<ol>\n<li>Log in to the <a href=\"https://dash.cloudflare.com/login\">Cloudflare dashboard</a>. </li>\n<li>Select your account and domain.</li>\n<li>Go to <strong>Security &gt; Bots</strong>.</li>\n<li>For Bot Fight Mode, select<em> Off</em>.</li>\n</ol>\n</li>\n</ol>\n<h3 id=\"h_01HQBY3VJZHKRFK4MF12HQZBF0\">“Ensure your WooCommerce store has https and SSL enabled”</h3>\n<p><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28716055952027\" alt=\"\" width=\"523\" height=\"89\"></p>\n<p>Klaviyo expects your store URL to adhere to HTTPS protocols, meaning that the website has a valid SSL certificate. If your website is in HTTP rather than HTTPS, you may run into issues.</p>\n<p>You can check if your SSL certificate is valid at <a href=\"https://www.ssllabs.com/ssltest/analyze.html\">SSL Server Test (Powered by Qualys SSL Labs)</a>. </p>\n<p>Klaviyo requires that the tests pass with A gradings. </p>\n<h3 id=\"h_01HSVA2MV3Z18T12GMDGKJP0AJ\">“Unable to access API with provided credentials”</h3>\n<p>You may receive this error if you have customizations in place to prevent API access for non-logged-in users. Typically, this is a function in the<em> functions.php</em> WordPress file, which triggers a 401 status code response. </p>\n<p>If you have a customization like this, delete it or comment it out to eliminate the error. For more information on this error, check out <a href=\"https://developer.wordpress.org/rest-api/frequently-asked-questions/#require-authentication-for-all-requests\">the WooCommerce REST API FAQ</a>.</p>\n<h3 id=\"h_01HSVA2HZDF1EFM13V6Z831K46\">\"Unable to access the orders API, please check connection settings and try again\"</h3>\n<p>This error means that when Klaviyo tries to validate the WooCommerce integration and get an order count, their API doesn’t return a value Klaviyo expects or it returns nothing at all. </p>\n<p>Since the integration hasn't officially connected to Klaviyo yet, this means that it needs to be resolved within WooCommerce.</p>\n<p>To get more information about this error, you need to make an API call to the order count endpoint, which will provide more insight into what is being passed to Klaviyo. Here is an example cURL request. To use it, fill in your store URL, consumer key, and consumer secret: </p>\n<pre><code class=\"language-text\">curl https://STORE_URL/wp-json/wc/v3/orders \\\n-u CONSUMER_KEY:CONSUMER_SECRET\n</code></pre>\n<h3 id=\"h_01HSVA2955MYWSSWTGXV83K1PM\">“Your Klaviyo plugin is out of date”</h3>\n<p><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/33638394936859\" alt=\"\" width=\"645\" height=\"257\"></p>\n<p>Occasionally, the webhook will be delayed in reaching Klaviyo, temporarily causing you to see the old settings page. This should resolve itself after a few minutes.</p>\n<h3 id=\"h_01HSVA26KSH5AQVFSM9ZBDWM2P\">404 when connecting to Klaviyo from WordPress</h3>\n<p>To resolve this, you should confirm that you have Permalinks enabled for your WordPress site. WooCommerce authentication will not work unless Permalinks are enabled. </p>\n<ol>\n<li>Navigate to your WordPress site and go to <strong>Settings</strong> &gt; <strong>Permalinks</strong>.</li>\n<li>Under <em>Common Settings</em>, choose any link structure other than <em>Plain</em>. </li>\n<li>Confirm by clicking <strong>Save Changes</strong>.<br>\n\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28716055953819\" alt=\"\" width=\"425\" height=\"305\">\n</li>\n<li>When you’re done, re-integrate with Klaviyo.</li>\n</ol>\n<h3 id=\"h_01HSVA20N345C98EBJGFRS9E55\">Installation Failed - We were unable to install your extension</h3>\n<p>You may encounter an \"Installation Failed\" error when attempting to install the integration via the <a href=\"https://woocommerce.com/products/klaviyo-for-woocommerce/?utm_source=extensionsscreen&amp;utm_medium=product&amp;utm_campaign=wcaddons&amp;in_app_label=promoted&amp;wccom-site=https%3A%2F%2Fvoluntary-platypus.jurassic.ninja&amp;wccom-back=%252Fwp-admin%252Fadmin.php%253Fpage%253Dwc-admin%2526path%253D%25252Fextensions&amp;wccom-woo-version=10.3.5&amp;wccom-connect-nonce=48111ee6ce&amp;utm_group=discover-our-favorites\">WooCommerce Marketplace</a>. </p>\n<p><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/43279509814939\" alt=\"image (1).png\" width=\"486\" height=\"401\"></p>\n<p>In the event you are unable to successfully install from the WooCommerce Marketplace, you can also install the plugin from your Wordpress plugin admin. </p>\n<ol>\n<li>Navigate to your WordPress admin and go to <strong>Plugins</strong>. </li>\n<li>Select <strong>Add Plugin</strong>. </li>\n<li>Search for <em>Klaviyo</em>in <strong>Search Plugins</strong>.</li>\n<li>Select <strong>Install Now</strong>. </li>\n<li>Select <strong>Activate. </strong>\n</li>\n<li>Select <strong>Marketing</strong> from the lefthand navigation, then click <strong>Klaviyo</strong>.</li>\n<li>Click <strong>Connect Account </strong>to begin, then proceed to <a href=\"https://help.klaviyo.com/hc/en-us/articles/115005255808#h_01FV97DEKASQ117J7HBFCVHBKA\">Enable the WooCommerce integration</a> in the <a href=\"https://help.klaviyo.com/hc/en-us/articles/115005255808\">Getting started with WooCommerce</a> article. <br>\n</li>\n</ol>",
+    "user_segment_ids": []
+  },
+  "normalized": {
+    "id": "4515829067803",
+    "title": "Troubleshooting your WooCommerce integration",
+    "source_url": "https://help.klaviyo.com/hc/en-us/articles/4515829067803-Troubleshooting-your-WooCommerce-integration",
+    "section_id": 49375375690779,
+    "section": "WooCommerce troubleshooting",
+    "category_id": 115000032731,
+    "category": "Integrations",
+    "category_slug": "integrations",
+    "klaviyo_updated": "2026-04-21T13:56:58Z",
+    "created_at": "2022-03-02T21:40:01Z",
+    "draft": false,
+    "promoted": false,
+    "position": 1,
+    "label_names": []
+  },
+  "files": {
+    "body_html": "_source/articles/4515829067803.body.html",
+    "rendered_html": "_source/rendered/4515829067803.html"
+  },
+  "assets": {
+    "api_body": {
+      "images": [
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28716055944091",
+          "alt": "",
+          "width": "515",
+          "height": "92"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28716066411035",
+          "alt": "",
+          "width": "534",
+          "height": "183"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28716055952027",
+          "alt": "",
+          "width": "523",
+          "height": "89"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/33638394936859",
+          "alt": "",
+          "width": "645",
+          "height": "257"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28716055953819",
+          "alt": "",
+          "width": "425",
+          "height": "305"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/43279509814939",
+          "alt": "image (1).png",
+          "width": "486",
+          "height": "401"
+        }
+      ],
+      "links": [
+        {
+          "href": "https://community.klaviyo.com/got-a-question-1",
+          "text": "Community"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115001002272-How-to-Contact-Support",
+          "text": "Support Team"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005255808",
+          "text": "getting started with WooCommerce"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4418005597723",
+          "text": "how to upgrade your WooCommerce plugin"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/19143781289115",
+          "text": "allowlist Klaviyo integration traffic IP addresses"
+        },
+        {
+          "href": "https://dash.cloudflare.com/login",
+          "text": "Cloudflare dashboard"
+        },
+        {
+          "href": "https://www.ssllabs.com/ssltest/analyze.html",
+          "text": "SSL Server Test (Powered by Qualys SSL Labs)"
+        },
+        {
+          "href": "https://developer.wordpress.org/rest-api/frequently-asked-questions/#require-authentication-for-all-requests",
+          "text": "the WooCommerce REST API FAQ"
+        },
+        {
+          "href": "https://woocommerce.com/products/klaviyo-for-woocommerce/?utm_source=extensionsscreen&utm_medium=product&utm_campaign=wcaddons&in_app_label=promoted&wccom-site=https%3A%2F%2Fvoluntary-platypus.jurassic.ninja&wccom-back=%252Fwp-admin%252Fadmin.php%253Fpage%253Dwc-admin%2526path%253D%25252Fextensions&wccom-woo-version=10.3.5&wccom-connect-nonce=48111ee6ce&utm_group=discover-our-favorites",
+          "text": "WooCommerce Marketplace"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005255808#h_01FV97DEKASQ117J7HBFCVHBKA",
+          "text": "Enable the WooCommerce integration"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005255808",
+          "text": "Getting started with WooCommerce"
+        }
+      ],
+      "headings": [
+        {
+          "level": 2,
+          "id": "h_01HSV9R1DRB5A4EDH6N315VRJV",
+          "text": "You will learn"
+        },
+        {
+          "level": 2,
+          "id": "h_01HSV9R5XAH467P007R8P5WSDC",
+          "text": "Before you begin"
+        },
+        {
+          "level": 2,
+          "id": "h_01HQBY35G0CCEXJ44GSF0VFYMH",
+          "text": "Troubleshooting scenarios"
+        },
+        {
+          "level": 3,
+          "id": "h_01HSV9VZNMW282DJ8TH8FE0NRT",
+          "text": "\"To avoid functionality disruptions, you may need to disable the following plugins: Plugin Name(s) \""
+        },
+        {
+          "level": 3,
+          "id": "h_01HQBY3NPX35ADNSNWMS4FY8G8",
+          "text": "“We can’t complete your setup”"
+        },
+        {
+          "level": 3,
+          "id": "h_01HQBY3VJZHKRFK4MF12HQZBF0",
+          "text": "“Ensure your WooCommerce store has https and SSL enabled”"
+        },
+        {
+          "level": 3,
+          "id": "h_01HSVA2MV3Z18T12GMDGKJP0AJ",
+          "text": "“Unable to access API with provided credentials”"
+        },
+        {
+          "level": 3,
+          "id": "h_01HSVA2HZDF1EFM13V6Z831K46",
+          "text": "\"Unable to access the orders API, please check connection settings and try again\""
+        },
+        {
+          "level": 3,
+          "id": "h_01HSVA2955MYWSSWTGXV83K1PM",
+          "text": "“Your Klaviyo plugin is out of date”"
+        },
+        {
+          "level": 3,
+          "id": "h_01HSVA26KSH5AQVFSM9ZBDWM2P",
+          "text": "404 when connecting to Klaviyo from WordPress"
+        },
+        {
+          "level": 3,
+          "id": "h_01HSVA20N345C98EBJGFRS9E55",
+          "text": "Installation Failed - We were unable to install your extension"
+        }
+      ]
+    },
+    "rendered_page": {
+      "images": [
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/7ff492c2b417b7ecfe572f839a8a81398693c1f7-1920x1080.webp",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/334a4cf92d43611148607381f647ede658ff6f06-1444x258.png?w=515",
+          "alt": "",
+          "width": "515",
+          "height": "92"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/fb803f9f43d754ef738550253425cf7d3a99f630-1554x532.png?w=534",
+          "alt": "",
+          "width": "534",
+          "height": "183"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/a6b38a1ff99eb3bbadcfeb279c14f1eadc53bdef-1550x264.png?w=523",
+          "alt": "",
+          "width": "523",
+          "height": "89"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/b4f389ccfb2382eb39546cf7e7232659326b977d-1210x482.png?w=645",
+          "alt": "",
+          "width": "645",
+          "height": "257"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/5aa00a81ee670034cf8fb8b642497c6242a6fb6a-1600x1148.png?w=425",
+          "alt": "",
+          "width": "425",
+          "height": "305"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/7f22970741f45a7793883de3e51cfeab587be57d-486x401.png?w=486",
+          "alt": "image (1).png",
+          "width": "486",
+          "height": "401"
+        }
+      ],
+      "links": [
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4515829067803-Troubleshooting-your-WooCommerce-integration#site-content",
+          "text": "Skip to main content"
+        },
+        {
+          "href": "https://www.klaviyo.com",
+          "text": "Home"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center"
+        },
+        {
+          "href": "https://www.klaviyo.com/enterprise",
+          "text": "Enterprise"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Partners"
+        },
+        {
+          "href": "https://www.klaviyo.com/careers",
+          "text": "Careers"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": "Log in"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": ""
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center Find step-by-step instructions and troubleshooting solutions in our knowledge base."
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000032731",
+          "text": "Integrations"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000312411",
+          "text": "Flows"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867867",
+          "text": "Audience"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867667",
+          "text": "Campaigns"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/360000190711",
+          "text": "Sign-up forms"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000873988",
+          "text": "Deliverability & compliance"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/29173800271259",
+          "text": "SMS"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/16638219724187",
+          "text": "Reviews"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/18073014919195",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/34141283979931",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/37659126754075",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/33948021740315",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/39746685522331",
+          "text": "WhatsApp"
+        },
+        {
+          "href": "https://academy.klaviyo.com",
+          "text": "Klaviyo Academy Expert training and education to help you succeed with Klaviyo, and beyond."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Quick+guide&resource=academy_courses",
+          "text": "Quick guides Learn marketing strategies and concepts in 15 minutes or less."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Course&resource=academy_courses",
+          "text": "Courses Master key marketing topics through structured lessons and exams."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/best-practices",
+          "text": "Best practices Discover top product and marketing strategies for your business."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/learning-paths",
+          "text": "Learning paths Complete curated learning journeys tailored to your marketing goals."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses",
+          "text": "Explore all resources"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Live+training&resource=academy_courses",
+          "text": "Live trainings Build confidence through hands-on interactive workshops and thought-provoking strategy sessions."
+        },
+        {
+          "href": "https://www.bigmarker.com/klaviyo-customer-education/Office-hours-Getting-started-with-Klaviyo",
+          "text": "Live office hours Join a strategic discussion where you can ask questions and get answers in real-time."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/private-live-training",
+          "text": "1:1 Live training Book a private training session with an expert to jumpstart your platform knowledge and confidence."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/credentials",
+          "text": "Klaviyo credentials Dig deeper into select topics and showcase your expertise with a final exam to earn a certificate and digital badge."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/certificates/klaviyo-practitioner-certificate",
+          "text": "Klaviyo practitioner certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/deliverability-certificate",
+          "text": "Deliverability certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/developer-certificate",
+          "text": "Klaviyo developer certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses&select=Certificate",
+          "text": "See all certificates"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Klaviyo Community Join our thriving community network to connect with brands like yours—online and in person."
+        },
+        {
+          "href": "https://community.klaviyo.com/topic/new",
+          "text": "Ask a question Post a question and get thoughtful answers from Klaviyo powerusers."
+        },
+        {
+          "href": "https://community.klaviyo.com/p/roadmap",
+          "text": "Product roadmap"
+        },
+        {
+          "href": "https://community.klaviyo.com/search/activity/recent",
+          "text": "Recent threads"
+        },
+        {
+          "href": "https://community.klaviyo.com/p/champions",
+          "text": "Meet the Champions"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups",
+          "text": "Browse all groups Your people are waiting. New ideas and connections are a click away."
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/developer-group-64",
+          "text": "Developer group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/entrepreneur-user-group-118",
+          "text": "Entrepreneur group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/woo-user-group-87",
+          "text": "WooCommerce group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/new-york-meetup-chapter-82",
+          "text": "New York City"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/los-angeles-meetup-chapter-83",
+          "text": "Los Angeles"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/austin-meetup-chapter-85",
+          "text": "Austin"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/san-diego-meetup-chapter-86",
+          "text": "San Diego"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/amsterdam-meetup-chapter-84",
+          "text": "Amsterdam"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Klaviyo Developers Access API documentation and developer guides to help you build with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/get_started",
+          "text": "Get started Access key resources and a step-by-step checklist for how to start developing with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/build_your_integration",
+          "text": "Grow your app's reach Learn how to join our ecosystem and get your app listed on our marketplace."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/developer-tools",
+          "text": "Developer tools Generate sample data, monitor your API usage, and access our Postman collections."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/reference/api_overview",
+          "text": "API reference Browse our full catalog of API docs."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/changelog_",
+          "text": "Changelog"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/api_versioning_and_deprecation_policy",
+          "text": "Versioning & deprecation policy"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/rate_limits_and_error_handling",
+          "text": "Rate limits & error handling"
+        },
+        {
+          "href": "https://youtube.com/playlist?list=PLHkNfHgtxcUanrkMnKPdkRzuWU7MGv_xM&si=pkG-KH7IT_TUHOGC",
+          "text": "API tutorials on YouTube Subscribe to our Klaviyo API Tutorials playlist for easy access to step-by-step developer walkthroughs."
+        },
+        {
+          "href": "https://www.klaviyo.com/contact-us",
+          "text": "Contact us"
+        },
+        {
+          "href": "https://www.klaviyo.com/sign-up",
+          "text": "Sign up"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": "Search"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4515829067803",
+          "text": "United States - EN"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/de-de/articles/4515829067803",
+          "text": "Deutschland - DE"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-es/articles/4515829067803",
+          "text": "España - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-mx/articles/4515829067803",
+          "text": "México - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/fr-fr/articles/4515829067803",
+          "text": "France - FR"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/it-it/articles/4515829067803",
+          "text": "Italia - IT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/ko-kr/articles/4515829067803",
+          "text": "한국 - KO"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/nl-nl/articles/4515829067803",
+          "text": "Nederland - NL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pl-pl/articles/4515829067803",
+          "text": "Polska - PL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pt-br/articles/4515829067803",
+          "text": "Brasil - PT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/sv-se/articles/4515829067803",
+          "text": "Sverige - SV"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/49375926871067",
+          "text": "WooCommerce"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/49375375690779",
+          "text": "WooCommerce troubleshooting"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4515829067803-Troubleshooting-your-WooCommerce-integration#h_01HSV9R1DRB5A4EDH6N315VRJV",
+          "text": "You will learn"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4515829067803-Troubleshooting-your-WooCommerce-integration#h_01HSV9R5XAH467P007R8P5WSDC",
+          "text": "Before you begin"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4515829067803-Troubleshooting-your-WooCommerce-integration#h_01HQBY35G0CCEXJ44GSF0VFYMH",
+          "text": "Troubleshooting scenarios"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4515829067803-Troubleshooting-your-WooCommerce-integration#additional-resources",
+          "text": "Additional resources"
+        },
+        {
+          "href": "https://community.klaviyo.com/got-a-question-1",
+          "text": "Community"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115001002272-How-to-Contact-Support",
+          "text": "Support Team"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005255808",
+          "text": "getting started with WooCommerce"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4418005597723",
+          "text": "how to upgrade your WooCommerce plugin"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/19143781289115",
+          "text": "allowlist Klaviyo integration traffic IP addresses"
+        },
+        {
+          "href": "https://dash.cloudflare.com/login",
+          "text": "Cloudflare dashboard"
+        },
+        {
+          "href": "https://www.ssllabs.com/ssltest/analyze.html",
+          "text": "SSL Server Test (Powered by Qualys SSL Labs)"
+        },
+        {
+          "href": "https://developer.wordpress.org/rest-api/frequently-asked-questions/#require-authentication-for-all-requests",
+          "text": "the WooCommerce REST API FAQ"
+        },
+        {
+          "href": "https://woocommerce.com/products/klaviyo-for-woocommerce/?utm_source=extensionsscreen&utm_medium=product&utm_campaign=wcaddons&in_app_label=promoted&wccom-site=https%3A%2F%2Fvoluntary-platypus.jurassic.ninja&wccom-back=%252Fwp-admin%252Fadmin.php%253Fpage%253Dwc-admin%2526path%253D%25252Fextensions&wccom-woo-version=10.3.5&wccom-connect-nonce=48111ee6ce&utm_group=discover-our-favorites",
+          "text": "WooCommerce Marketplace"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005255808#h_01FV97DEKASQ117J7HBFCVHBKA",
+          "text": "Enable the WooCommerce integration"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005255808",
+          "text": "Getting started with WooCommerce"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360030732832",
+          "text": "WooCommerce data reference"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115001002272",
+          "text": "Learn how to contact support"
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": ""
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": "Visit Community"
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": ""
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": "Hire a partner"
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/about",
+          "text": "About Klaviyo"
+        },
+        {
+          "href": "https://www.klaviyo.com/newsroom",
+          "text": "Newsroom"
+        },
+        {
+          "href": "https://investors.klaviyo.com/overview/default.aspx",
+          "text": "Investor relations"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Agency and tech partners"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Developers"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/retail",
+          "text": "Retail and ecommerce"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/restaurants",
+          "text": "Restaurant marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/wellness",
+          "text": "Wellness"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform",
+          "text": "B2C CRM overview"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai",
+          "text": "Klaviyo AI (K:AI)"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/marketing-automation",
+          "text": "Klaviyo Marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-service",
+          "text": "Klaviyo Service"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/analytics",
+          "text": "Klaviyo Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-data-platform",
+          "text": "Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare",
+          "text": "Klaviyo vs. Klaviyo alternatives"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-mailchimp",
+          "text": "Klaviyo vs. Mailchimp"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-postscript",
+          "text": "Klaviyo vs. Postscript"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-attentive",
+          "text": "Klaviyo vs. Attentive"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-salesforce-marketing-cloud",
+          "text": "Klaviyo vs. Salesforce"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-listrak",
+          "text": "Klaviyo vs. Listrak"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/omnichannel",
+          "text": "Omnichannel marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/email-marketing",
+          "text": "Email marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing",
+          "text": "SMS marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing/rcs",
+          "text": "RCS for Business"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/mobile-app-marketing",
+          "text": "Mobile app marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/whatsapp",
+          "text": "WhatsApp marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/social",
+          "text": "Social marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources",
+          "text": "Marketing resources"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources/marketing-campaign-calendar",
+          "text": "Marketing campaign calendar"
+        },
+        {
+          "href": "https://www.klaviyo.com/glossary",
+          "text": "Marketing glossary"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/email-subject-line-generator",
+          "text": "Subject line generator"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/roi-calculator",
+          "text": "ROI calculator"
+        },
+        {
+          "href": "https://www.klaviyo.com/customers",
+          "text": "Case studies"
+        },
+        {
+          "href": "https://www.klaviyo.com/composer",
+          "text": "Composer Beta"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/marketing-agent",
+          "text": "Marketing Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/customer-agent",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/customer-experience-hub",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/helpdesk",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/marketing-analytics",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/advanced-cdp",
+          "text": "Advanced Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/web-forms",
+          "text": "Web forms"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/email-templates",
+          "text": "Email templates"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/portfolio",
+          "text": "Portfolio"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform-integrations",
+          "text": "Apps and Integrations"
+        },
+        {
+          "href": "https://www.klaviyo.com/features",
+          "text": "Features"
+        },
+        {
+          "href": "https://www.klaviyo.com/whats-new",
+          "text": "What's new"
+        },
+        {
+          "href": "https://www.klaviyo.com/events",
+          "text": "Events"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help Center"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us",
+          "text": "Academy"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Community"
+        },
+        {
+          "href": "https://www.facebook.com/Klaviyo/",
+          "text": "Facebook"
+        },
+        {
+          "href": "https://twitter.com/klaviyo/",
+          "text": "Twitter"
+        },
+        {
+          "href": "https://www.linkedin.com/company/klaviyo/",
+          "text": "LinkedIn"
+        },
+        {
+          "href": "https://www.instagram.com/klaviyo/",
+          "text": "Instagram"
+        },
+        {
+          "href": "https://www.klaviyo.com/sitemap",
+          "text": "Site Map"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal",
+          "text": "Terms and Privacy"
+        },
+        {
+          "href": "https://www.klaviyo.com/security",
+          "text": "Security"
+        },
+        {
+          "href": "https://www.klaviyo.com/trust",
+          "text": "Trust"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal/intellectual-property-notices",
+          "text": "Intellectual Property Notices"
+        }
+      ],
+      "headings": [
+        {
+          "level": 1,
+          "id": "",
+          "text": "Troubleshooting your WooCommerce integration"
+        },
+        {
+          "level": 2,
+          "id": "h_01HSV9R1DRB5A4EDH6N315VRJV",
+          "text": "You will learn"
+        },
+        {
+          "level": 2,
+          "id": "h_01HSV9R5XAH467P007R8P5WSDC",
+          "text": "Before you begin"
+        },
+        {
+          "level": 2,
+          "id": "h_01HQBY35G0CCEXJ44GSF0VFYMH",
+          "text": "Troubleshooting scenarios"
+        },
+        {
+          "level": 3,
+          "id": "h_01HSV9VZNMW282DJ8TH8FE0NRT",
+          "text": "\"To avoid functionality disruptions, you may need to disable the following plugins: Plugin Name(s) \""
+        },
+        {
+          "level": 3,
+          "id": "h_01HQBY3NPX35ADNSNWMS4FY8G8",
+          "text": "“We can’t complete your setup”"
+        },
+        {
+          "level": 3,
+          "id": "h_01HQBY3VJZHKRFK4MF12HQZBF0",
+          "text": "“Ensure your WooCommerce store has https and SSL enabled”"
+        },
+        {
+          "level": 3,
+          "id": "h_01HSVA2MV3Z18T12GMDGKJP0AJ",
+          "text": "“Unable to access API with provided credentials”"
+        },
+        {
+          "level": 3,
+          "id": "h_01HSVA2HZDF1EFM13V6Z831K46",
+          "text": "\"Unable to access the orders API, please check connection settings and try again\""
+        },
+        {
+          "level": 3,
+          "id": "h_01HSVA2955MYWSSWTGXV83K1PM",
+          "text": "“Your Klaviyo plugin is out of date”"
+        },
+        {
+          "level": 3,
+          "id": "h_01HSVA26KSH5AQVFSM9ZBDWM2P",
+          "text": "404 when connecting to Klaviyo from WordPress"
+        },
+        {
+          "level": 3,
+          "id": "h_01HSVA20N345C98EBJGFRS9E55",
+          "text": "Installation Failed - We were unable to install your extension"
+        },
+        {
+          "level": 2,
+          "id": "additional-resources",
+          "text": "Additional resources"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "Explore more from Klaviyo"
+        }
+      ]
+    }
+  },
+  "rendered_page": {
+    "status": "fetched",
+    "error": ""
+  }
+}

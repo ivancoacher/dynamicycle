@@ -1,0 +1,123 @@
+<p>This guide will walk you through integrating <strong>Google Tag Manager (GTM)</strong> with your Property Management System (Mews, Cloudbeds, or Guesty) using the <strong>Klaviyo Hotels Tag</strong>.</p>
+<p>By the end of this setup, you’ll be able to track key website visitor behaviors like <strong>Active Onsite,</strong> <strong>Viewed Listing,</strong> and <strong>Started Checkout</strong> directly in your Klaviyo account. This will allow you to easily set up revenue-driving automations, such as Browse Abandonment and Abandoned Cart flows, and create highly-targeted segments.</p>
+<p><strong>Before you begin, if you don't already have a Google Tag Manager account, please follow Google's </strong><a href="https://support.google.com/tagmanager/answer/14842164?hl=en"><strong>guide</strong></a><strong> on how to set one up.</strong></p>
+<hr>
+<h2 id="h_01KHC8WHCKBJMC5WN9YRPJWPV1">Step 1: Locate Your GTM Container ID</h2>
+<p>Before you begin, you need to identify the specific container you want to use.</p>
+<ol>
+<li>Log into your <a href="https://tagmanager.google.com/">Google Tag Manager</a> account.</li>
+<li>Select the <strong>Container</strong> associated with your hotel’s website.</li>
+<li>At the top of the window, next to the "Submit" and "Preview" buttons, you will see your <strong>Container ID</strong> (it looks like <code>GTM-XXXXXXX</code>).</li>
+<li>
+<strong>Copy this ID</strong> to your clipboard.</li>
+</ol>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/46643062813851" alt="0.9.png" width="2599" height="1323"></p>
+<hr>
+<h2 id="h_01KHC8WHCRRM1JP2RJPCTVN83M">Step 2: Connect GTM to Your Property Management System (PMS)</h2>
+<p>You need to tell your booking engine to "listen" to your GTM container. Follow the steps for your specific platform below:</p>
+<h3 id="h_01KHC8WHCRVMZRPASXYHT3NCPS">For Cloudbeds</h3>
+<ol>
+<li>Log into Cloudbeds.</li>
+<li>Click on the <strong>Account Icon</strong> &gt; <strong>Settings &gt; Booking Engine</strong>.</li>
+<li>Select the <strong>Analytics </strong>tab<strong>.</strong>
+</li>
+<li>Paste your <strong>Container ID</strong> into the GTM field and save.</li>
+</ol>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/46643062816923" alt="2.png" width="2602" height="1487"></p>
+<p>For more instructions, follow the <a href="https://myfrontdesk.cloudbeds.com/hc/en-us/articles/25825202111387-Connect-Google-Analytics-with-Cloudbeds-Booking-Engine">Cloudbeds guide</a>.</p>
+<h3 id="h_01KHC8WHCVWKPPRQVJFMTQ3E81">For Mews</h3>
+<ol>
+<li>Log in to Mews.</li>
+<li>Go to <strong>Settings &gt; Services</strong>.</li>
+<li>Select a Bookable service. </li>
+<li>Click on <strong>Booking engines</strong>. </li>
+<li>Select the booking engine that you want to track with Google Tag Manager. </li>
+<li>Under <strong>Google tag manager ID</strong>, paste your <strong>Container ID.</strong>
+</li>
+<li>Click <strong>Save</strong>.</li>
+</ol>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/46643094244763" alt="3.png" width="2591" height="1353"></p>
+<p>For more instructions, follow the <a href="https://help.mews.com/s/article/google-tag-manager">Mews guide</a>.</p>
+<h3 id="h_01KHC8WHCY2CZAT2AATB4AF974">For Guesty</h3>
+<ol>
+<li>To install the code on your site:</li>
+<li>Log in to Guesty.</li>
+<li>Select the <strong>Operations</strong> dropdown at the top, then select <strong>Growth &gt; Distribution</strong>.</li>
+<li>
+<br>
+</li>
+<li>
+<br>
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/46643062822683" alt="" width="413" height="237">
+</li>
+<li>Select <strong>Guesty Booking Engine</strong>.</li>
+<li>Click the triple dots next to your booking engine and select <strong>Edit Booking Engine</strong>.</li>
+<li>Scroll to the <em>Web analytics </em>section and past your <strong>Container ID</strong>.</li>
+<li>
+<br>
+</li>
+<li>
+<br>
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/46643062823963" alt="4.png" width="3014" height="1524">
+</li>
+<li>Select <strong>Save Booking Engine.</strong>
+</li>
+</ol>
+<p>For more instructions, follow the <a href="https://help.guesty.com/hc/en-gb/articles/16714065345821-Using-analytics-tools-in-your-Guesty-Booking-Engine">Guesty guide</a>.</p>
+<hr>
+<h2 id="h_01KHC8WHD08Q6JJTCEGRK180DP">Step 3: Add the Klaviyo Hotels Template in GTM</h2>
+<p>Now that GTM is connected to your PMS, you need to add the Klaviyo-specific tracking logic.</p>
+<ol>
+<li>Back in Google Tag Manager, click <strong>Templates</strong> on the left-hand sidebar.</li>
+<li>In the <strong>Tag Templates</strong> section, click <strong>Search Gallery</strong>.</li>
+<li>Search for <strong>"Klaviyo Hotels Tag"</strong>.<br>
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/46643094254363" alt="6.png" width="2603" height="1363">
+</li>
+<li>Select the template and click <strong>Add to Workspace</strong>.</li>
+<li>Confirm by clicking <strong>Add</strong> again.</li>
+</ol>
+<hr>
+<h2 id="h_01KHC8WHD3ZRXFW03XJTCA5GRV">Step 4: Create and Configure Your Tag</h2>
+<p>This step connects the template to your specific Klaviyo account.</p>
+<ol>
+<li>Go to <strong>Tags</strong> on the left sidebar and click <strong>New</strong>.</li>
+<li>
+<strong>Name your tag</strong> (e.g., <code>Klaviyo Hotels Tracking</code>).</li>
+<li>Click <strong>Tag Configuration</strong> and select the <strong>Klaviyo Hotels Tag</strong> you just added.</li>
+<li>
+<strong>Enter your Klaviyo Public API Key:</strong> This is the 6-character identifier found in your Klaviyo Account Settings (see our <a href="https://help.klaviyo.com/hc/en-us/articles/115005062267">guide to finding your public key</a>).</li>
+<li>
+<strong>Select your PMS:</strong> Choose Mews, Cloudbeds, or Guesty from the dropdown menu.</li>
+<li>
+<br>
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/46643062833051" alt="" width="2604" height="1364">
+</li>
+<li>
+<strong>Set the Trigger:</strong> Hover over the <strong>Triggering</strong> section. Click on the pencil that appears in the top right corner. Select <strong>All Pages</strong>.<br>
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/46643094261531" alt="" width="2609" height="1363">
+</li>
+<li>Give the tag a name (e.g. [Cloudbeds/Mews/Guesty] Tag). Click <strong>Save</strong>.</li>
+</ol>
+<hr>
+<h2 id="h_01KHC8WHDEJ5F0D0WW206FJ7QT">Step 5: Publish Your Changes</h2>
+<p>Your tracking will not go live until you submit these changes.</p>
+<ol>
+<li>Click the blue <strong>Submit</strong> button in the top right corner of GTM.<br>
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/48511182753179" alt="10.png" width="2599" height="1355">
+</li>
+<li>Give your version a name (e.g., <code>Added Klaviyo Hotels Tracking</code>).</li>
+<li>Click <strong>Publish</strong>.</li>
+</ol>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/46643062844187" alt="" width="2608" height="1355"></p>
+<hr>
+<h2 id="h_01KHC8WHDF53NT634R0ZJJ8EXW">What Happens Next?</h2>
+<p>Once published, the tag will automatically start sending event data to Klaviyo for identified visitors on your booking engine. <a href="https://help.klaviyo.com/hc/en-us/articles/115005076767#h_01HADAYAACVVC4BXQ0ES5Y50TC">Learn about who Klaviyo can track here</a>. You can verify that events are being tracked by checking the Metrics tab in your Klaviyo account for the following events:</p>
+<ul>
+<li>
+<strong>Active Onsite: </strong>Fires when someone is active on the website.</li>
+<li>
+<strong>Viewed Listing:</strong> Fires when a traveler looks at a specific room or property.</li>
+<li>
+<strong>Started Checkout:</strong> Fires when a traveler enters the booking flow.</li>
+</ul>
+<p>Now you are ready to use the browse abandonment and abandoned cart flow templates, which can be found <a href="https://www.klaviyo.com/flows/create">here</a> after selecting your PMS integration. But that is only the beginning - learn more about what you can do with Klaviyo onsite tracking <a href="https://help.klaviyo.com/hc/en-us/articles/115005076767">here</a>!</p>

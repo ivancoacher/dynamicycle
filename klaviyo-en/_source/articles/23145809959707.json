@@ -1,0 +1,971 @@
+{
+  "captured_at": "2026-05-23T16:15:08Z",
+  "article": {
+    "id": 23145809959707,
+    "url": "https://klaviyo.zendesk.com/api/v2/help_center/en-us/articles/23145809959707.json",
+    "html_url": "https://klaviyo.zendesk.com/hc/en-us/articles/23145809959707-How-to-enable-and-use-email-annotations-for-Gmail",
+    "author_id": 390819509472,
+    "comments_disabled": true,
+    "draft": false,
+    "promoted": false,
+    "position": 0,
+    "vote_sum": 0,
+    "vote_count": 0,
+    "section_id": 49375573073947,
+    "created_at": "2024-02-21T20:41:27Z",
+    "updated_at": "2026-05-11T10:57:19Z",
+    "name": "How to enable and use email annotations for Gmail",
+    "title": "How to enable and use email annotations for Gmail",
+    "source_locale": "en-us",
+    "locale": "en-us",
+    "outdated": false,
+    "outdated_locales": [],
+    "edited_at": "2025-04-16T01:55:07Z",
+    "user_segment_id": null,
+    "permission_group_id": 146372,
+    "content_tag_ids": [],
+    "label_names": [],
+    "body": "<h2 id=\"h_01HQ6P8JEFBNH16AJFYBR6H86W\">You will learn</h2>\n<p>Learn about email annotations, which enable you to display key information in the list view for Gmail inboxes (i.e., before someone opens the email). Email annotations allow you to highlight a deal or offer (e.g., a coupon code), or display product images directly in the inbox. </p>\n<div class=\"bs-callout bs-callout-requirements\">\n<p>The code required to implement Gmail annotations is only supported in custom HTML or hybrid emails. It is not possible to use this code with Klaviyo’s drag-and-drop email editor.</p>\n<p>We only recommend using email annotations for technically savvy marketers, or for anyone who has access to a developer. While our product does support this feature, our support team cannot help you build out your custom templates beyond offering the general guidance covered in this documentation. To maintain the security of your data, Klaviyo's support team is not able to open your HTML files. </p>\n</div>\n<h2 id=\"h_01HQ6P8JEFW08TC9PA40YGYRJH\">About email annotations</h2>\n<p>Email annotations are supported in Gmail mobile inboxes for users with the <em>Promotions</em> tab enabled. These annotations only appear in the <em>Promotions</em> tab, not the primary inbox. </p>\n<p>There are 3 types of annotations: </p>\n<ul>\n<li>\n<strong>Deal/offer </strong><br>Highlight a deal or offer, like a coupon code or free shipping, including the deal expiration date.<br><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28718022989339\" alt=\"Bolas baked goods deal annotation\" width=\"364\" height=\"66\">\n</li>\n<li>\n<strong>Product carousel</strong><br>Display a carousel of product images, optionally including product details like name and price.<br><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28718022991771\" alt=\"Product carousel annotations\" width=\"371\" height=\"241\">\n</li>\n<li>\n<strong>Single image</strong><br>Show a single image, along with optional additional text.<br><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28718022993947\" alt=\"Single image annotations\" width=\"392\" height=\"190\">\n</li>\n</ul>\n<div class=\"bs-callout bs-callout-default\">\n<p>Adding this code provides Gmail with the option to display annotations for your email. Even if an email contains the code for annotations, they may not be displayed to every recipient. Gmail chooses when and how to display annotations based on recipient settings and inbox density. .</p>\n</div>\n<h2 id=\"h_01HQ6P8JEFJ8HXDR85SCV96C66\">Before you begin</h2>\n<p>Google maintains an allowlist of senders who can use annotations. Before using annotations, you must request that your brand be added to this allowlist. </p>\n<p>To request that Google add you to their annotations allowlist, <a href=\"mailto:p-Promo-Outreach@google.com?subject=Allowlisting%20for%20email%20annotations&amp;body=REPLACE%20ALL%20PLACEHOLDERS%20WITH%20YOUR%20COMPANY%20INFORMATION%20BEFORE%20SENDING%0AHello%20team%2C%20%0AI'm%20a%20Klaviyo%20customer%20writing%20to%20request%20that%20www.example.com%20be%20added%20to%20your%20email%20annotations%20allowlist.%20%0AMy%20sending%20domain%20is%20www.example.com%0AWe%20use%20the%20following%20subdomains%3A%20%0A-%20send.example.com%0A-%20marketing-messages.example.com%0AOur%20landing%20page%20URL%20is%20www.example.com%0AThanks%2C%0AYOUR%20NAME\" target=\"_blank\" rel=\"noopener noreferrer\">send an email to p-Promo-Outreach@google.com</a> with the following information: </p>\n<ul>\n<li>All domains (e.g., example.com)</li>\n<li>All subdomains (e.g., send.example.com, blog.example.com, marketing-messages.example.com) </li>\n<li>Your landing page URL(s) (e.g., your homepage) </li>\n</ul>\n<p>Any annotations code added to your messages will be ignored until you are added to the Google allowlist, which can take 7-10 business days or more. </p>\n<div class=\"bs-callout bs-callout-default\">\n<p>Klaviyo does not have visibility into the allowlisting process and cannot expedite your request. If you have questions about the whitelisting process or the status of your request, reach out to <a href=\"mailto:p-Promo-Outreach@google.com\" target=\"_blank\" rel=\"noopener noreferrer\">p-Promo-Outreach@google.com</a>. </p>\n</div>\n<h2 id=\"h_01HQ6P8JEGS5N00JMDPYV5W1C1\">Add annotations to your emails</h2>\n<p>Add the following code within the body section of your HTML email template to add email annotations. There are 3 types of annotations available: </p>\n<ul>\n<li><a href=\"#h_01HQ6P8JEGEDJR27ZSC5YYHXTX\">Deal annotations</a></li>\n<li><a href=\"#h_01HQ6P8JEG583BSXQXXMHHGPQN\">Product carousel annotations</a></li>\n<li><a href=\"#h_01HQ6P8JEGERCMEAT35S9P4CV2\">Single image annotations </a></li>\n</ul>\n<h4 id=\"h_01HQ6P8JEGEDJR27ZSC5YYHXTX\">Deal</h4>\n<pre><code class=\"language-js\">  &lt;div itemscope itemtype=\"http://schema.org/DiscountOffer\"&gt;\n    &lt;meta itemprop=\"description\" content=\"DESCRIPTION\"/&gt;\n    &lt;meta itemprop=\"discountCode\" content=\"DISCOUNT_CODE\"/&gt;\n    &lt;meta itemprop=\"availabilityStarts\" content=\"START_DATE_TIME\"/&gt;\n    &lt;meta itemprop=\"availabilityEnds\" content=\"END_DATE_TIME\"/&gt;\n  &lt;/div&gt;\n</code></pre>\n<p><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28718022989339\" alt=\"Bolas baked goods deal annotation\" width=\"386\" height=\"70\"></p>\n<p>Replace the following placeholders in the code: </p>\n<ul>\n<li>\n<strong>DESCRIPTION</strong><br>A brief (1-2 line) text description of the offer</li>\n<li>\n<strong>DISCOUNT_CODE</strong><br>The code a recipient can enter at checkout to receive the offer</li>\n<li>\n<strong>START_DATE_TIME</strong><strong><br></strong>The offer start date/time, using <a href=\"https://support.google.com/merchants/answer/12756212?visit_id=638424907272835479-1199962788&amp;rd=1\" target=\"_blank\" rel=\"noopener noreferrer\">ISO 8601 format</a>\n</li>\n<li>\n<strong>END_DATE_TIME</strong><br>The offer end date/time, using <a href=\"https://support.google.com/merchants/answer/12756212?visit_id=638424907272835479-1199962788&amp;rd=1\" target=\"_blank\" rel=\"noopener noreferrer\">ISO 8601 format</a>\n</li>\n</ul>\n<h4 id=\"h_01HQ6P8JEG583BSXQXXMHHGPQN\">Product carousel</h4>\n<pre><code class=\"language-js\">  &lt;div itemscope itemtype=\"http://schema.org/PromotionCard\"&gt;\n    &lt;meta itemprop=\"image\" content=\"IMAGE_URL1\"/&gt;\n    &lt;meta itemprop=\"url\" content=\"PROMO_URL1\"/&gt;\n    // Optionally, include the following PromotionCard properties:\n    &lt;meta itemprop=\"headline\" content=\"HEADLINE1\"/&gt;\n    &lt;meta itemprop=\"price\" content=\"PRICE1\"/&gt;\n    &lt;meta itemprop=\"priceCurrency\" content=\"PRICE_CURRENCY1\"/&gt;\n    &lt;meta itemprop=\"discountValue\" content=\"DISCOUNT_VALUE1\"/&gt;\n    &lt;meta itemprop=\"position\" content=\"POSITION\"/&gt;\n  &lt;/div&gt;\n  // Build the second image preview in your product carousel:\n  &lt;div itemscope itemtype=\"http://schema.org/PromotionCard\"&gt;\n    &lt;meta itemprop=\"image\" content=\"IMAGE_URL2\"/&gt;\n    &lt;meta itemprop=\"url\" content=\"PROMO_URL2\"/&gt;\n    // Optionally, include the following PromotionCard properties:\n    &lt;meta itemprop=\"headline\" content=\"HEADLINE2\"/&gt;\n    &lt;meta itemprop=\"price\" content=\"PRICE2\"/&gt;\n    &lt;meta itemprop=\"priceCurrency\" content=\"PRICE_CURRENCY2\"/&gt;\n    &lt;meta itemprop=\"discountValue\" content=\"DISCOUNT_VALUE2\"/&gt;\n    &lt;meta itemprop=\"position\" content=\"POSITION\"/&gt;\n  &lt;/div&gt;\n  // To include more image previews, add additional PromotionCard objects.\n  // You can include up to 10 image previews in a product carousel.\n</code></pre>\n<p><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28718022991771\" alt=\"Product carousel annotations\" width=\"468\" height=\"303\"></p>\n<p>Replace the following placeholders in the code: </p>\n<ul>\n<li>\n<strong>IMAGE_URL1</strong>, <strong>IMAGE_URL2</strong>, etc.<br>The URL of a product image to display in the carousel. Supported aspect ratios are 4:5, 1:1, and 1.91:1. The aspect ratio for every image must be the same. </li>\n<li>\n<strong>PROMO_URL1</strong>, <strong>PROMO_URL2</strong>, etc.<br>The URL to a landing page for recipients who click the product image.</li>\n<li>\n<strong>HEADLINE1, HEADLINE2, etc.</strong><br>A short, 1-2 line description of the product. </li>\n<li>\n<strong>PRICE1</strong>, <strong>PRICE2</strong>, etc.<br>The base price of the product (number only, no currency). </li>\n<li>\n<strong>PRICE_CURRENCY1</strong>, <strong>PRICE_CURRENCY2</strong>, etc.<br>The 3-letter currency code (e.g., USD) for the item’s price.</li>\n<li>\n<strong>DISCOUNT_VALUE1</strong>, <strong>DISCOUNT_VALUE2</strong>, etc.<br>If applicable, the amount an item is discounted (number only, no currency). </li>\n<li>\n<strong>POSITION</strong><br>(Optional) a number indicating this item’s position in the carousel.</li>\n</ul>\n<h4 id=\"h_01HQ6P8JEGERCMEAT35S9P4CV2\">Single image</h4>\n<pre><code class=\"language-js\">  &lt;div itemscope itemtype=\"http://schema.org/PromotionCard\"&gt;\n    &lt;meta itemprop=\"image\" content=\"IMAGE_URL1\"/&gt;\n    &lt;meta itemprop=\"url\" content=\"PROMO_URL1\"/&gt;\n  &lt;/div&gt;\n</code></pre>\n<p><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28718022993947\" alt=\"Single image annotations\" width=\"402\" height=\"195\"></p>\n<p>Replace the following placeholders in the code: </p>\n<ul>\n<li>\n<strong>IMAGE_URL1</strong><br>The URL of a product image to display in the carousel. Supported aspect ratios are 4:5, 1:1, and 1.91:1. </li>\n<li>\n<strong>PROMO_URL1</strong><br>The URL to a landing page for recipients who click the product image.</li>\n</ul>\n<h2 id=\"h_01HQ6P8JEGGKP9NGDV8FYF7HX9\">About automatic annotation extraction</h2>\n<p>Sometimes, Google automatically extracts email data to add annotations, even when a sender hasn’t added the code outlined above. This is done at Google’s discretion, and cannot be controlled by the sender. </p>\n<h2 id=\"h_01HQ6P8JEG721N8AKB8CTAC1V1\">Troubleshooting your annotations</h2>\n<p>Google enforces strict requirements for annotations, and they may not display for multiple reasons. If your annotations are not appearing after following this article's setup instructions outlined above, try the troubleshooting steps below: </p>\n<h3 id=\"h_01HQ6P8JEG9J5RZV0Q6AMNQCY9\">Ensure your brand is allowlisted </h3>\n<p>Google maintains a limited allowlist of approved brands that can use email annotations in order to prevent spam and abuse. If you don't have access, you may need to request it from Google:</p>\n<ol>\n<li>\n<a href=\"#h_01HQ6P8JEFJ8HXDR85SCV96C66\">Reach out to Google</a> using the steps outlined above.</li>\n<li>Allow 7-10 business days for a response.</li>\n</ol>\n<p>There is no guarantee that your brand will be added to the allowlist once you request it, as this is managed at Google’s sole discretion. </p>\n<h3 id=\"h_01HQ6P8JEHXH5VRETCCXBS0KYN\">Check your image quality</h3>\n<p>All images used for email annotations must pass Google's quality filter. Images that don't meet the requirements will not display in the inbox. Make sure your images meet these criteria: </p>\n<ul>\n<li>High quality (i.e., greater than 500 KB)</li>\n<li>Have very little, if any, text </li>\n<li>Are rectangular (don’t use a mask to make the image round, or another shape) </li>\n<li>Are at least 256x256 pixels in size</li>\n</ul>\n<h3 id=\"h_01HQ6P8JEHQ32N5681RY14QF04\">Don’t use unique images per recipient</h3>\n<p>The same image must be used for all recipients. You may add unique tracking parameters to the promo url, but not the image URL. </p>\n<p>Avoid using tools that generate CID images (i.e., images that are unique per recipient), as annotations will not show if used.</p>\n<h3 id=\"h_01HQ6P8JEHKKA8TGHEREFDDCQD\">Consider Gmail’s density cap</h3>\n<p>Google limits the number of annotation images a user can see in their inbox at one time (i.e., a \"density cap\"). If a recipient’s inbox already has several recent emails with annotations, yours may not appear to prevent clutter. This cap is implemented at Google’s sole discretion and cannot be controlled by the sender. </p>\n<h3 id=\"h_01HQ6P8JEHZM1YH2P9PZ3P752N\">Note that annotations may not appear in preview email sends</h3>\n<p>Annotations typically will not appear in the inbox for test emails sent to only a few recipients. The annotations feature is designed for bulk sends, so annotations are likely to only appear when a message is sent to &gt;100 recipients. </p>\n<h3 id=\"h_01HQ6P8JEHYVF01NFR465JA3V2\">Ensure you're looking in the supported Gmail tab</h3>\n<p>Annotations are supported to display only in the Gmail mobile app in the <em>Promotions</em> tab.</p>\n<p>Annotations are not supported to display in: </p>\n<ul>\n<li>Any other tabs in the Gmail app, besides <em>Promotions</em>\n</li>\n<li>Gmail viewed in any web browser (e.g., the mobile or desktop site) </li>\n<li>Inboxes for users who do not have the <em>Promotions</em> tab enabled in their Gmail settings </li>\n</ul>\n<h2 id=\"h_01HQ6P8JEH3MZZKWV5VGKT6MV3\">Additional resources</h2>\n<ul>\n<li><a href=\"https://klaviyo.zendesk.com/hc/en-us/articles/5051278887835\" target=\"_blank\" rel=\"noopener noreferrer\">How to use Klaviyo’s subject line assistant</a></li>\n<li><a href=\"https://klaviyo.zendesk.com/hc/en-us/articles/115005078307\" target=\"_blank\" rel=\"noopener noreferrer\">Understanding Gmail's tabbed inbox</a></li>\n</ul>",
+    "user_segment_ids": []
+  },
+  "normalized": {
+    "id": "23145809959707",
+    "title": "How to enable and use email annotations for Gmail",
+    "source_url": "https://help.klaviyo.com/hc/en-us/articles/23145809959707-How-to-enable-and-use-email-annotations-for-Gmail",
+    "section_id": 49375573073947,
+    "section": "Advanced template design",
+    "category_id": 4414879524891,
+    "category": "Content",
+    "category_slug": "content",
+    "klaviyo_updated": "2026-05-11T10:57:19Z",
+    "created_at": "2024-02-21T20:41:27Z",
+    "draft": false,
+    "promoted": false,
+    "position": 0,
+    "label_names": []
+  },
+  "files": {
+    "body_html": "_source/articles/23145809959707.body.html",
+    "rendered_html": "_source/rendered/23145809959707.html"
+  },
+  "assets": {
+    "api_body": {
+      "images": [
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28718022989339",
+          "alt": "Bolas baked goods deal annotation",
+          "width": "364",
+          "height": "66"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28718022991771",
+          "alt": "Product carousel annotations",
+          "width": "371",
+          "height": "241"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28718022993947",
+          "alt": "Single image annotations",
+          "width": "392",
+          "height": "190"
+        }
+      ],
+      "links": [
+        {
+          "href": "mailto:p-Promo-Outreach@google.com?subject=Allowlisting%20for%20email%20annotations&body=REPLACE%20ALL%20PLACEHOLDERS%20WITH%20YOUR%20COMPANY%20INFORMATION%20BEFORE%20SENDING%0AHello%20team%2C%20%0AI'm%20a%20Klaviyo%20customer%20writing%20to%20request%20that%20www.example.com%20be%20added%20to%20your%20email%20annotations%20allowlist.%20%0AMy%20sending%20domain%20is%20www.example.com%0AWe%20use%20the%20following%20subdomains%3A%20%0A-%20send.example.com%0A-%20marketing-messages.example.com%0AOur%20landing%20page%20URL%20is%20www.example.com%0AThanks%2C%0AYOUR%20NAME",
+          "text": "send an email to p-Promo-Outreach@google.com"
+        },
+        {
+          "href": "mailto:p-Promo-Outreach@google.com",
+          "text": "p-Promo-Outreach@google.com"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/23145809959707-How-to-enable-and-use-email-annotations-for-Gmail#h_01HQ6P8JEGEDJR27ZSC5YYHXTX",
+          "text": "Deal annotations"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/23145809959707-How-to-enable-and-use-email-annotations-for-Gmail#h_01HQ6P8JEG583BSXQXXMHHGPQN",
+          "text": "Product carousel annotations"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/23145809959707-How-to-enable-and-use-email-annotations-for-Gmail#h_01HQ6P8JEGERCMEAT35S9P4CV2",
+          "text": "Single image annotations"
+        },
+        {
+          "href": "https://support.google.com/merchants/answer/12756212?visit_id=638424907272835479-1199962788&rd=1",
+          "text": "ISO 8601 format"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/23145809959707-How-to-enable-and-use-email-annotations-for-Gmail#h_01HQ6P8JEFJ8HXDR85SCV96C66",
+          "text": "Reach out to Google"
+        },
+        {
+          "href": "https://klaviyo.zendesk.com/hc/en-us/articles/5051278887835",
+          "text": "How to use Klaviyo’s subject line assistant"
+        },
+        {
+          "href": "https://klaviyo.zendesk.com/hc/en-us/articles/115005078307",
+          "text": "Understanding Gmail's tabbed inbox"
+        }
+      ],
+      "headings": [
+        {
+          "level": 2,
+          "id": "h_01HQ6P8JEFBNH16AJFYBR6H86W",
+          "text": "You will learn"
+        },
+        {
+          "level": 2,
+          "id": "h_01HQ6P8JEFW08TC9PA40YGYRJH",
+          "text": "About email annotations"
+        },
+        {
+          "level": 2,
+          "id": "h_01HQ6P8JEFJ8HXDR85SCV96C66",
+          "text": "Before you begin"
+        },
+        {
+          "level": 2,
+          "id": "h_01HQ6P8JEGS5N00JMDPYV5W1C1",
+          "text": "Add annotations to your emails"
+        },
+        {
+          "level": 4,
+          "id": "h_01HQ6P8JEGEDJR27ZSC5YYHXTX",
+          "text": "Deal"
+        },
+        {
+          "level": 4,
+          "id": "h_01HQ6P8JEG583BSXQXXMHHGPQN",
+          "text": "Product carousel"
+        },
+        {
+          "level": 4,
+          "id": "h_01HQ6P8JEGERCMEAT35S9P4CV2",
+          "text": "Single image"
+        },
+        {
+          "level": 2,
+          "id": "h_01HQ6P8JEGGKP9NGDV8FYF7HX9",
+          "text": "About automatic annotation extraction"
+        },
+        {
+          "level": 2,
+          "id": "h_01HQ6P8JEG721N8AKB8CTAC1V1",
+          "text": "Troubleshooting your annotations"
+        },
+        {
+          "level": 3,
+          "id": "h_01HQ6P8JEG9J5RZV0Q6AMNQCY9",
+          "text": "Ensure your brand is allowlisted"
+        },
+        {
+          "level": 3,
+          "id": "h_01HQ6P8JEHXH5VRETCCXBS0KYN",
+          "text": "Check your image quality"
+        },
+        {
+          "level": 3,
+          "id": "h_01HQ6P8JEHQ32N5681RY14QF04",
+          "text": "Don’t use unique images per recipient"
+        },
+        {
+          "level": 3,
+          "id": "h_01HQ6P8JEHKKA8TGHEREFDDCQD",
+          "text": "Consider Gmail’s density cap"
+        },
+        {
+          "level": 3,
+          "id": "h_01HQ6P8JEHZM1YH2P9PZ3P752N",
+          "text": "Note that annotations may not appear in preview email sends"
+        },
+        {
+          "level": 3,
+          "id": "h_01HQ6P8JEHYVF01NFR465JA3V2",
+          "text": "Ensure you're looking in the supported Gmail tab"
+        },
+        {
+          "level": 2,
+          "id": "h_01HQ6P8JEH3MZZKWV5VGKT6MV3",
+          "text": "Additional resources"
+        }
+      ]
+    },
+    "rendered_page": {
+      "images": [
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/7ff492c2b417b7ecfe572f839a8a81398693c1f7-1920x1080.webp",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/03a2aa1288bfa1cb85aa437dc95bd2a6c146f75c-796x144.jpg?w=364",
+          "alt": "Bolas baked goods deal annotation",
+          "width": "364",
+          "height": "66"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/b933c52131823d7fd964105555ee1f0b36f68e29-802x520.jpg?w=371",
+          "alt": "Product carousel annotations",
+          "width": "371",
+          "height": "241"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/309eaa224c5a33291ba4a56ae15091c4065a5612-814x394.jpg?w=392",
+          "alt": "Single image annotations",
+          "width": "392",
+          "height": "190"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/03a2aa1288bfa1cb85aa437dc95bd2a6c146f75c-796x144.jpg?w=386",
+          "alt": "Bolas baked goods deal annotation",
+          "width": "386",
+          "height": "70"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/b933c52131823d7fd964105555ee1f0b36f68e29-802x520.jpg?w=468",
+          "alt": "Product carousel annotations",
+          "width": "468",
+          "height": "303"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/309eaa224c5a33291ba4a56ae15091c4065a5612-814x394.jpg?w=402",
+          "alt": "Single image annotations",
+          "width": "402",
+          "height": "195"
+        }
+      ],
+      "links": [
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/23145809959707-How-to-enable-and-use-email-annotations-for-Gmail#site-content",
+          "text": "Skip to main content"
+        },
+        {
+          "href": "https://www.klaviyo.com",
+          "text": "Home"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center"
+        },
+        {
+          "href": "https://www.klaviyo.com/enterprise",
+          "text": "Enterprise"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Partners"
+        },
+        {
+          "href": "https://www.klaviyo.com/careers",
+          "text": "Careers"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": "Log in"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": ""
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center Find step-by-step instructions and troubleshooting solutions in our knowledge base."
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000032731",
+          "text": "Integrations"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000312411",
+          "text": "Flows"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867867",
+          "text": "Audience"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867667",
+          "text": "Campaigns"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/360000190711",
+          "text": "Sign-up forms"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000873988",
+          "text": "Deliverability & compliance"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/29173800271259",
+          "text": "SMS"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/16638219724187",
+          "text": "Reviews"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/18073014919195",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/34141283979931",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/37659126754075",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/33948021740315",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/39746685522331",
+          "text": "WhatsApp"
+        },
+        {
+          "href": "https://academy.klaviyo.com",
+          "text": "Klaviyo Academy Expert training and education to help you succeed with Klaviyo, and beyond."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Quick+guide&resource=academy_courses",
+          "text": "Quick guides Learn marketing strategies and concepts in 15 minutes or less."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Course&resource=academy_courses",
+          "text": "Courses Master key marketing topics through structured lessons and exams."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/best-practices",
+          "text": "Best practices Discover top product and marketing strategies for your business."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/learning-paths",
+          "text": "Learning paths Complete curated learning journeys tailored to your marketing goals."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses",
+          "text": "Explore all resources"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Live+training&resource=academy_courses",
+          "text": "Live trainings Build confidence through hands-on interactive workshops and thought-provoking strategy sessions."
+        },
+        {
+          "href": "https://www.bigmarker.com/klaviyo-customer-education/Office-hours-Getting-started-with-Klaviyo",
+          "text": "Live office hours Join a strategic discussion where you can ask questions and get answers in real-time."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/private-live-training",
+          "text": "1:1 Live training Book a private training session with an expert to jumpstart your platform knowledge and confidence."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/credentials",
+          "text": "Klaviyo credentials Dig deeper into select topics and showcase your expertise with a final exam to earn a certificate and digital badge."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/certificates/klaviyo-practitioner-certificate",
+          "text": "Klaviyo practitioner certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/deliverability-certificate",
+          "text": "Deliverability certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/developer-certificate",
+          "text": "Klaviyo developer certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses&select=Certificate",
+          "text": "See all certificates"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Klaviyo Community Join our thriving community network to connect with brands like yours—online and in person."
+        },
+        {
+          "href": "https://community.klaviyo.com/topic/new",
+          "text": "Ask a question Post a question and get thoughtful answers from Klaviyo powerusers."
+        },
+        {
+          "href": "https://community.klaviyo.com/p/roadmap",
+          "text": "Product roadmap"
+        },
+        {
+          "href": "https://community.klaviyo.com/search/activity/recent",
+          "text": "Recent threads"
+        },
+        {
+          "href": "https://community.klaviyo.com/p/champions",
+          "text": "Meet the Champions"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups",
+          "text": "Browse all groups Your people are waiting. New ideas and connections are a click away."
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/developer-group-64",
+          "text": "Developer group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/entrepreneur-user-group-118",
+          "text": "Entrepreneur group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/woo-user-group-87",
+          "text": "WooCommerce group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/new-york-meetup-chapter-82",
+          "text": "New York City"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/los-angeles-meetup-chapter-83",
+          "text": "Los Angeles"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/austin-meetup-chapter-85",
+          "text": "Austin"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/san-diego-meetup-chapter-86",
+          "text": "San Diego"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/amsterdam-meetup-chapter-84",
+          "text": "Amsterdam"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Klaviyo Developers Access API documentation and developer guides to help you build with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/get_started",
+          "text": "Get started Access key resources and a step-by-step checklist for how to start developing with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/build_your_integration",
+          "text": "Grow your app's reach Learn how to join our ecosystem and get your app listed on our marketplace."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/developer-tools",
+          "text": "Developer tools Generate sample data, monitor your API usage, and access our Postman collections."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/reference/api_overview",
+          "text": "API reference Browse our full catalog of API docs."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/changelog_",
+          "text": "Changelog"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/api_versioning_and_deprecation_policy",
+          "text": "Versioning & deprecation policy"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/rate_limits_and_error_handling",
+          "text": "Rate limits & error handling"
+        },
+        {
+          "href": "https://youtube.com/playlist?list=PLHkNfHgtxcUanrkMnKPdkRzuWU7MGv_xM&si=pkG-KH7IT_TUHOGC",
+          "text": "API tutorials on YouTube Subscribe to our Klaviyo API Tutorials playlist for easy access to step-by-step developer walkthroughs."
+        },
+        {
+          "href": "https://www.klaviyo.com/contact-us",
+          "text": "Contact us"
+        },
+        {
+          "href": "https://www.klaviyo.com/sign-up",
+          "text": "Sign up"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": "Search"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/23145809959707",
+          "text": "United States - EN"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/de-de/articles/23145809959707",
+          "text": "Deutschland - DE"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-es/articles/23145809959707",
+          "text": "España - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-mx/articles/23145809959707",
+          "text": "México - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/fr-fr/articles/23145809959707",
+          "text": "France - FR"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/it-it/articles/23145809959707",
+          "text": "Italia - IT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/ko-kr/articles/23145809959707",
+          "text": "한국 - KO"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/nl-nl/articles/23145809959707",
+          "text": "Nederland - NL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pl-pl/articles/23145809959707",
+          "text": "Polska - PL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pt-br/articles/23145809959707",
+          "text": "Brasil - PT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/sv-se/articles/23145809959707",
+          "text": "Sverige - SV"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/4414879524891",
+          "text": "Content"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/14543554717467",
+          "text": "Templates"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/49375573073947",
+          "text": "Advanced template design"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/23145809959707-How-to-enable-and-use-email-annotations-for-Gmail#h_01HQ6P8JEFBNH16AJFYBR6H86W",
+          "text": "You will learn"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/23145809959707-How-to-enable-and-use-email-annotations-for-Gmail#h_01HQ6P8JEFW08TC9PA40YGYRJH",
+          "text": "About email annotations"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/23145809959707-How-to-enable-and-use-email-annotations-for-Gmail#h_01HQ6P8JEFJ8HXDR85SCV96C66",
+          "text": "Before you begin"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/23145809959707-How-to-enable-and-use-email-annotations-for-Gmail#h_01HQ6P8JEGS5N00JMDPYV5W1C1",
+          "text": "Add annotations to your emails"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/23145809959707-How-to-enable-and-use-email-annotations-for-Gmail#h_01HQ6P8JEGGKP9NGDV8FYF7HX9",
+          "text": "About automatic annotation extraction"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/23145809959707-How-to-enable-and-use-email-annotations-for-Gmail#h_01HQ6P8JEG721N8AKB8CTAC1V1",
+          "text": "Troubleshooting your annotations"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/23145809959707-How-to-enable-and-use-email-annotations-for-Gmail#additional-resources",
+          "text": "Additional resources"
+        },
+        {
+          "href": "mailto:p-Promo-Outreach@google.com?subject=Allowlisting%20for%20email%20annotations&body=REPLACE%20ALL%20PLACEHOLDERS%20WITH%20YOUR%20COMPANY%20INFORMATION%20BEFORE%20SENDING%0AHello%20team%2C%20%0AI'm%20a%20Klaviyo%20customer%20writing%20to%20request%20that%20www.example.com%20be%20added%20to%20your%20email%20annotations%20allowlist.%20%0AMy%20sending%20domain%20is%20www.example.com%0AWe%20use%20the%20following%20subdomains%3A%20%0A-%20send.example.com%0A-%20marketing-messages.example.com%0AOur%20landing%20page%20URL%20is%20www.example.com%0AThanks%2C%0AYOUR%20NAME",
+          "text": "send an email to p-Promo-Outreach@google.com"
+        },
+        {
+          "href": "mailto:p-Promo-Outreach@google.com",
+          "text": "p-Promo-Outreach@google.com"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/23145809959707-How-to-enable-and-use-email-annotations-for-Gmail#h_01HQ6P8JEGEDJR27ZSC5YYHXTX",
+          "text": "Deal annotations"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/23145809959707-How-to-enable-and-use-email-annotations-for-Gmail#h_01HQ6P8JEG583BSXQXXMHHGPQN",
+          "text": "Product carousel annotations"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/23145809959707-How-to-enable-and-use-email-annotations-for-Gmail#h_01HQ6P8JEGERCMEAT35S9P4CV2",
+          "text": "Single image annotations"
+        },
+        {
+          "href": "https://support.google.com/merchants/answer/12756212?visit_id=638424907272835479-1199962788&rd=1",
+          "text": "ISO 8601 format"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/23145809959707-How-to-enable-and-use-email-annotations-for-Gmail#h_01HQ6P8JEFJ8HXDR85SCV96C66",
+          "text": "Reach out to Google"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/5051278887835",
+          "text": "How to use Klaviyo’s subject line assistant"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005078307",
+          "text": "Understanding Gmail's tabbed inbox"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115001002272",
+          "text": "Learn how to contact support"
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": ""
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": "Visit Community"
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": ""
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": "Hire a partner"
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/about",
+          "text": "About Klaviyo"
+        },
+        {
+          "href": "https://www.klaviyo.com/newsroom",
+          "text": "Newsroom"
+        },
+        {
+          "href": "https://investors.klaviyo.com/overview/default.aspx",
+          "text": "Investor relations"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Agency and tech partners"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Developers"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/retail",
+          "text": "Retail and ecommerce"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/restaurants",
+          "text": "Restaurant marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/wellness",
+          "text": "Wellness"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform",
+          "text": "B2C CRM overview"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai",
+          "text": "Klaviyo AI (K:AI)"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/marketing-automation",
+          "text": "Klaviyo Marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-service",
+          "text": "Klaviyo Service"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/analytics",
+          "text": "Klaviyo Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-data-platform",
+          "text": "Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare",
+          "text": "Klaviyo vs. Klaviyo alternatives"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-mailchimp",
+          "text": "Klaviyo vs. Mailchimp"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-postscript",
+          "text": "Klaviyo vs. Postscript"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-attentive",
+          "text": "Klaviyo vs. Attentive"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-salesforce-marketing-cloud",
+          "text": "Klaviyo vs. Salesforce"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-listrak",
+          "text": "Klaviyo vs. Listrak"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/omnichannel",
+          "text": "Omnichannel marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/email-marketing",
+          "text": "Email marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing",
+          "text": "SMS marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing/rcs",
+          "text": "RCS for Business"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/mobile-app-marketing",
+          "text": "Mobile app marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/whatsapp",
+          "text": "WhatsApp marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/social",
+          "text": "Social marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources",
+          "text": "Marketing resources"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources/marketing-campaign-calendar",
+          "text": "Marketing campaign calendar"
+        },
+        {
+          "href": "https://www.klaviyo.com/glossary",
+          "text": "Marketing glossary"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/email-subject-line-generator",
+          "text": "Subject line generator"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/roi-calculator",
+          "text": "ROI calculator"
+        },
+        {
+          "href": "https://www.klaviyo.com/customers",
+          "text": "Case studies"
+        },
+        {
+          "href": "https://www.klaviyo.com/composer",
+          "text": "Composer Beta"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/marketing-agent",
+          "text": "Marketing Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/customer-agent",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/customer-experience-hub",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/helpdesk",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/marketing-analytics",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/advanced-cdp",
+          "text": "Advanced Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/web-forms",
+          "text": "Web forms"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/email-templates",
+          "text": "Email templates"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/portfolio",
+          "text": "Portfolio"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform-integrations",
+          "text": "Apps and Integrations"
+        },
+        {
+          "href": "https://www.klaviyo.com/features",
+          "text": "Features"
+        },
+        {
+          "href": "https://www.klaviyo.com/whats-new",
+          "text": "What's new"
+        },
+        {
+          "href": "https://www.klaviyo.com/events",
+          "text": "Events"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help Center"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us",
+          "text": "Academy"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Community"
+        },
+        {
+          "href": "https://www.facebook.com/Klaviyo/",
+          "text": "Facebook"
+        },
+        {
+          "href": "https://twitter.com/klaviyo/",
+          "text": "Twitter"
+        },
+        {
+          "href": "https://www.linkedin.com/company/klaviyo/",
+          "text": "LinkedIn"
+        },
+        {
+          "href": "https://www.instagram.com/klaviyo/",
+          "text": "Instagram"
+        },
+        {
+          "href": "https://www.klaviyo.com/sitemap",
+          "text": "Site Map"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal",
+          "text": "Terms and Privacy"
+        },
+        {
+          "href": "https://www.klaviyo.com/security",
+          "text": "Security"
+        },
+        {
+          "href": "https://www.klaviyo.com/trust",
+          "text": "Trust"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal/intellectual-property-notices",
+          "text": "Intellectual Property Notices"
+        }
+      ],
+      "headings": [
+        {
+          "level": 1,
+          "id": "",
+          "text": "How to enable and use email annotations for Gmail"
+        },
+        {
+          "level": 2,
+          "id": "h_01HQ6P8JEFBNH16AJFYBR6H86W",
+          "text": "You will learn"
+        },
+        {
+          "level": 2,
+          "id": "h_01HQ6P8JEFW08TC9PA40YGYRJH",
+          "text": "About email annotations"
+        },
+        {
+          "level": 2,
+          "id": "h_01HQ6P8JEFJ8HXDR85SCV96C66",
+          "text": "Before you begin"
+        },
+        {
+          "level": 2,
+          "id": "h_01HQ6P8JEGS5N00JMDPYV5W1C1",
+          "text": "Add annotations to your emails"
+        },
+        {
+          "level": 4,
+          "id": "",
+          "text": "Deal"
+        },
+        {
+          "level": 4,
+          "id": "",
+          "text": "Product carousel"
+        },
+        {
+          "level": 4,
+          "id": "",
+          "text": "Single image"
+        },
+        {
+          "level": 2,
+          "id": "h_01HQ6P8JEGGKP9NGDV8FYF7HX9",
+          "text": "About automatic annotation extraction"
+        },
+        {
+          "level": 2,
+          "id": "h_01HQ6P8JEG721N8AKB8CTAC1V1",
+          "text": "Troubleshooting your annotations"
+        },
+        {
+          "level": 3,
+          "id": "h_01HQ6P8JEG9J5RZV0Q6AMNQCY9",
+          "text": "Ensure your brand is allowlisted"
+        },
+        {
+          "level": 3,
+          "id": "h_01HQ6P8JEHXH5VRETCCXBS0KYN",
+          "text": "Check your image quality"
+        },
+        {
+          "level": 3,
+          "id": "h_01HQ6P8JEHQ32N5681RY14QF04",
+          "text": "Don’t use unique images per recipient"
+        },
+        {
+          "level": 3,
+          "id": "h_01HQ6P8JEHKKA8TGHEREFDDCQD",
+          "text": "Consider Gmail’s density cap"
+        },
+        {
+          "level": 3,
+          "id": "h_01HQ6P8JEHZM1YH2P9PZ3P752N",
+          "text": "Note that annotations may not appear in preview email sends"
+        },
+        {
+          "level": 3,
+          "id": "h_01HQ6P8JEHYVF01NFR465JA3V2",
+          "text": "Ensure you're looking in the supported Gmail tab"
+        },
+        {
+          "level": 2,
+          "id": "additional-resources",
+          "text": "Additional resources"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "Explore more from Klaviyo"
+        }
+      ]
+    }
+  },
+  "rendered_page": {
+    "status": "fetched",
+    "error": ""
+  }
+}

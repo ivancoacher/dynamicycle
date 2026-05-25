@@ -1,0 +1,203 @@
+{
+  "captured_at": "2026-05-23T16:17:19Z",
+  "article": {
+    "id": 360031423431,
+    "url": "https://klaviyo.zendesk.com/api/v2/help_center/en-us/articles/360031423431.json",
+    "html_url": "https://klaviyo.zendesk.com/hc/en-us/articles/360031423431-Integrate-a-Standard-Ecommerce-Platform",
+    "author_id": 114340982852,
+    "comments_disabled": true,
+    "draft": false,
+    "promoted": false,
+    "position": 2,
+    "vote_sum": 1,
+    "vote_count": 1,
+    "section_id": 49375213829275,
+    "created_at": "2019-07-30T16:20:33Z",
+    "updated_at": "2026-04-21T13:54:44Z",
+    "name": "Integrate a Standard Ecommerce Platform",
+    "title": "Integrate a Standard Ecommerce Platform",
+    "source_locale": "en-us",
+    "locale": "en-us",
+    "outdated": false,
+    "outdated_locales": [],
+    "edited_at": "2026-04-17T20:30:44Z",
+    "user_segment_id": null,
+    "permission_group_id": 146372,
+    "content_tag_ids": [],
+    "label_names": [],
+    "body": "<h2>Overview</h2>\n<p>If you've built your own custom cart solution, or the ecommerce data you would like to track in Klaviyo is not yet supported by one of our pre-built integrations, you can integrate with Klaviyo using our <a href=\"https://www.klaviyo.com/docs/getting-started\">JavaScript API</a>, <a href=\"https://www.klaviyo.com/docs/http-api\">server-side API</a>, and Custom Catalog integration.</p>\n<p>The key components of integrating a custom ecommerce cart are:</p>\n<ul>\n<li>Customer data</li>\n<li>Subscribers</li>\n<li>Website activity</li>\n<li>Order activity</li>\n</ul>\n<p>This guide focuses on how to sync important metrics, or key customer activities, to Klaviyo. While our JavaScript and server-side Track and Identify APIs can be used interchangeably, we recommend using the following setup for ecommerce businesses. Use this as a checklist when setting up your integration:</p>\n<ul>\n<li>Use our JavaScript Track API<em> </em>for the following:\n<ul>\n<li>\n<strong>Active on Site</strong> - When someone visits your website</li>\n<li>\n<strong>Viewed Product</strong> - When someone views a product</li>\n<li>\n<strong>Added to Cart</strong> - When someone adds an item to their cart</li>\n<li>\n<strong>Started Checkout</strong> - When someone lands on the checkout page</li>\n</ul>\n</li>\n<li>Use our server-side Track API for the following:\n<ul>\n<li>\n<strong>Placed Order</strong> - When an order successfully processes on your system</li>\n<li>\n<strong>Ordered Product</strong> - An event for each item in a processed order</li>\n<li>\n<strong>Fulfilled Order</strong> - When an order is sent to the customer</li>\n<li>\n<strong>Cancelled Order</strong> - When a customer cancels their order</li>\n<li>\n<strong>Refunded Order</strong> - When a customer’s order is refunded</li>\n</ul>\n</li>\n<li>Use our Custom Catalog Feed integration for the following:\n<ul>\n<li>\n<strong>Catalog Feed</strong> - An XML feed or JSON feed of your product catalog</li>\n</ul>\n</li>\n</ul>\n<p>The level of detailed data you send to Klaviyo within these website, purchase, and checkout events will determine how you can filter and segment based on these events in Klaviyo. To understand how data must be structured so that key event details are available for segmentation, <a href=\"https://help.klaviyo.com/hc/en-us/articles/115005062847-Understand-the-Data-Available-for-Segmentation\">check out our guide on segment conditions</a>.</p>\n<p>Note that the snippets in this guide use example data. You will need to update the values of the JSON properties in these snippets such that they dynamically pull from the relevant information needed for that property.</p>\n<p>Make sure to check out our <a href=\"https://help.klaviyo.com/hc/en-us/articles/360031078492\" target=\"_self\">custom integration FAQ</a> for any questions about custom integrations or <a href=\"https://help.klaviyo.com/hc/en-us/requests/new\" target=\"_self\">reach out to our Support Team</a>.</p>\n<h2>On-Site Behaviors (JavaScript Track API)</h2>\n<p>To enable our JavaScript API and the ability to publish forms directly from Klaviyo to your site, add the following snippet so appears on every page on your website (often the end of the footer is a good place to add this). Make sure to replace PUBLIC_API_KEY with your Klaviyo account's 6 character <a href=\"https://www.klaviyo.com/account#api-keys-tab\">Public API Key</a>:</p>\n<pre><code class=\"language-js\">&lt;script type=\"application/javascript\" async\nsrc=\"https://static.klaviyo.com/onsite/js/klaviyo.js?company_id=PUBLIC_API_KEY\"&gt;&lt;/script&gt;</code></pre>\n<h3>Active on Site</h3>\n<p>Once you’ve added the snippet above, <strong>Active on Site</strong> activity will now trigger for any person who is cookie-ed:</p>\n<ul>\n<li>Via a <a href=\"https://help.klaviyo.com/hc/en-us/articles/115000751052-Klaviyo-API-Reference-Guide#identifying-users--javascript-3\">Javascript Identify API request</a>\n</li>\n<li>By signing up through a Klaviyo form</li>\n<li>By clicking on a Klaviyo email and landing on your site</li>\n</ul>\n<h3>Viewed Product</h3>\n<p>If you'd like to set up a <a href=\"https://help.klaviyo.com/hc/en-us/articles/115002775252-Create-a-Browse-Abandonment-Flow\">browse abandonment flow</a> or build segments based on product browsing data, you'll need to add JavaScript event tracking for a <strong>Viewed Product</strong> metric. On your product page template, add the following snippet:</p>\n<pre><code class=\"language-js\">&lt;script text=\"text/javascript\"&gt;\n   var _learnq = _learnq || [];\n   var item = {\n     \"ProductName\": \"Winnie the Pooh\",\n     \"ProductID\": \"1111\",\n     \"Categories\": [\"Fiction\", \"Children\"],\n     \"ImageURL\": \"http://www.example.com/path/to/product/image.png\",\n     \"URL\": \"http://www.example.com/path/to/product\",\n     \"Brand\": \"Kids Books\",\n     \"Price\": 9.99,\n     \"CompareAtPrice\": 14.99\n   };\n \n   _learnq.push([\"track\", \"Viewed Product\", item]);\n \n   _learnq.push([\"trackViewedItem\", {\n     Title: item.ProductName,\n     ItemId: item.ProductID,\n     Categories: item.Categories,\n     ImageUrl: item.ImageURL,\n     Url: item.URL,\n     Metadata: {\n       Brand: item.Brand,\n       Price: item.Price,\n       CompareAtPrice: item.CompareAtPrice\n     }\n   }]);\n &lt;/script&gt;</code></pre>\n<h3>Added to Cart</h3>\n<p>If you’d like to send abandoned cart emails <em>before</em> someone lands on the checkout page, you’ll need to track information about the cart when someone takes a particular action. For this, we recommend sending an <strong>Added to Cart</strong> event when someone adds an item to their cart. A person will still need to have been \"identified,\" or cookie-ed, to track this event. For the payload, you should include all of the cart information (like <strong>Started Checkout</strong> below) and information about the item that was just added (like Viewed Product above). Here's an example Track request:</p>\n<pre><code class=\"language-js\">&lt;script text=\"text/javascript\"&gt;\n   _learnq.push(['track', Added to Cart, {\n     \"$value\": 29.98,\n     \"AddedItemProductName\": \"A Tale of Two Cities\",\n     \"AddedItemProductID\": \"1112\",\n     \"AddedItem_SKU\": \"TALEOFTWO\",\n     \"AddedItem_Categories\": [\"Fiction\", \"Classics\"],\n     \"AddedItem_ImageURL\": \"http://www.example.com/path/to/product/image2.png\",\n     \"AddedItem_URL\": \"http://www.example.com/path/to/product2\",\n     \"AddedItem_Price\": 19.99,\n     \"AddedItem_Quantity\": 1,\n     \"ItemNames\": [\"Winnie the Pooh\", \"A Tale of Two Cities\"],\n     \"CheckoutURL\": \"http://www.example.com/path/to/checkout\",\n     \"Items\": [{\n         \"ProductID\": \"1111\",\n         \"SKU\": \"WINNIEPOOH\",\n         \"ProductName\": \"Winnie the Pooh\",\n         \"Quantity\": 1,\n         \"ItemPrice\": 9.99,\n         \"RowTotal\": 9.99,\n         \"ProductURL\": \"http://www.example.com/path/to/product\",\n         \"ImageURL\": \"http://www.example.com/path/to/product/image.png\",\n         \"ProductCategories\": [\"Fiction\", \"Children\"]\n       },\n       {\n         \"ProductID\": \"1112\",\n         \"SKU\": \"TALEOFTWO\",\n         \"ProductName\": \"A Tale of Two Cities\",\n         \"Quantity\": 1,\n         \"ItemPrice\": 19.99,\n         \"RowTotal\": 19.99,\n         \"ProductURL\": \"http://www.example.com/path/to/product2\",\n         \"ImageURL\": \"http://www.example.com/path/to/product/image2.png\",\n         \"ProductCategories\": [\"Fiction\", \"Classics\"]\n       }\n     ]\n   }]);\n &lt;/script&gt;</code></pre>\n<h3>Started Checkout</h3>\n<p>Checkout data is important if you'd like to send <a href=\"https://help.klaviyo.com/hc/en-us/articles/115002779411-Guide-to-Creating-an-Abandoned-Cart-Flow\">abandoned checkout emails</a>. When someone starts the checkout process, you'll send Klaviyo an event indicating they started checking out. The best place to trigger this event is when someone visits the checkout page after they’ve been \"identified\" or when they enter their email address on the checkout page if they have not already been identified.</p>\n<p>You'll want to make sure you include all the details of the line items so your abandoned checkout emails can be customized to include pictures, links, and other information about the products in someone's cart. Here's an example Track request:</p>\n<pre><code class=\"language-js\">&lt;script text=\"text/javascript\"&gt;\n   _learnq.push(['track', 'Started Checkout', {\n     \"$event_id\": \"1000123_1387299423\",\n     \"$value\": 29.98,\n     \"ItemNames\": [\"Winnie the Pooh\", \"A Tale of Two Cities\"],\n     \"CheckoutURL\": \"http://www.example.com/path/to/checkout\",\n     \"Items\": [{\n         \"ProductID\": \"1111\",\n         \"SKU\": \"WINNIEPOOH\",\n         \"ProductName\": \"Winnie the Pooh\",\n         \"Quantity\": 1,\n         \"ItemPrice\": 9.99,\n         \"RowTotal\": 9.99,\n         \"ProductURL\": \"http://www.example.com/path/to/product\",\n         \"ImageURL\": \"http://www.example.com/path/to/product/image.png\",\n         \"ProductCategories\": [\"Fiction\", \"Children\"]\n       },\n       {\n         \"ProductID\": \"1112\",\n         \"SKU\": \"TALEOFTWO\",\n         \"ProductName\": \"A Tale of Two Cities\",\n         \"Quantity\": 1,\n         \"ItemPrice\": 19.99,\n         \"RowTotal\": 19.99,\n         \"ProductURL\": \"http://www.example.com/path/to/product2\",\n         \"ImageURL\": \"http://www.example.com/path/to/product/image2.png\",\n         \"ProductCategories\": [\"Fiction\", \"Classics\"]\n       }\n     ]\n   }]);\n &lt;/script&gt;</code></pre>\n<p>The <code class=\"language-html\">$event_id</code> should be a unique identifier for the cart combined with the UNIX formatted time when the event was triggered. This allows someone to trigger the <strong>Started Checkout</strong> more than once when they return after adding additional items.</p>\n<h2>Server-Side Metrics</h2>\n<p>We recommend tracking certain metrics on the server-side due to potential limitations of frontend code as well as security concerns. If someone has a slow connection/computer or a JavaScript-blocking plugin on their browser, the JavaScript requests might not fire. In the case of more crucial metrics (like those for orders and other transactional events and properties) or ones that would contain sensitive data, use our server-side Track and Identify APIs.</p>\n<h3>Placed Order</h3>\n<p>After an order is placed, you should make a Track request to our <a href=\"https://www.klaviyo.com/docs\">server-side API</a>. We have libraries available for <a href=\"https://github.com/klaviyo/python-klaviyo\">Python</a>, <a href=\"https://github.com/klaviyo/ruby-klaviyo\">Ruby</a>, and <a href=\"https://github.com/klaviyo/php-klaviyo\">PHP</a>, but in a general sense, the API just requires making an HTTP GET request with a base64 encoded JSON payload.</p>\n<div class=\"bs-callout bs-callout-default\">\n<p>It is a good practice to send your historical order data as well. This will enhance your ability to segment off that data and improve historical accuracy in revenue tracking. Historical data can be sent to us by iterating through your historical orders and generating <strong>Placed Order</strong> and <strong>Ordered Product</strong> Track API requests for each. The special “time” property for these events should be the UNIX timestamp of when that order occurred.  More details on these metrics below.</p>\n</div>\n<p>You'll want to send order data to Klaviyo in one of two ways: real-time or batch.</p>\n<ul>\n<li>\n<strong> Real-time -</strong> You'll make requests as soon as an order is placed</li>\n<li>\n<strong> Batch -</strong> You’ll write a script that will run at least once an hour to send all events that occurred in that past hour</li>\n</ul>\n<p>If you plan to send abandoned cart/checkout emails, you'll need to send order data at least at a frequency that falls within your email delay in order to stop the email from going to people who have completed their order. For example, if you have a one-hour time delay between when someone triggers the abandoned cart flow and when they receive the first email, you'll need to make sure that you send data over at least once every hour.</p>\n<p>For each order, we recommend you send two types of events:</p>\n<ul>\n<li>One event named <strong>Placed Order</strong> for the entire order\n<ul>\n<li>This includes a <code class=\"language-html\">$value</code> property that represents the total value of an entire order including shipping, tax, discounts, etc.</li>\n</ul>\n</li>\n<li>One event for each line item named <strong>Ordered Product</strong>\n<ul>\n<li>This includes a <code class=\"language-html\">$value</code> property that represents the total cost of an item in the order before any adjustments as well as more SKU-level detailed information about the item</li>\n</ul>\n</li>\n</ul>\n<p>Key things to be aware of when tracking server-side events:</p>\n<ul>\n<li>Make sure to replace <code class=\"language-html\">API_KEY</code> with <a href=\"https://www.klaviyo.com/account#api-keys-tab\">your public API key</a>.</li>\n<li>The <code class=\"language-html\">$event_id</code> should be a unique identifier for the order (eg. Order ID).</li>\n<li>If the same combination of <code class=\"language-html\">event</code> and <code class=\"language-html\">$event_id</code> are sent more than once, we will skip all tracked events after the first with the same combination.</li>\n<li>\n<code class=\"language-html\">$value</code> is a special property that allows Klaviyo to track revenue; this should be the total numerical, monetary value of the event with which it’s associated.</li>\n<li>The \"Items\" array should contain one dictionary for each line item.</li>\n<li>\n<code class=\"language-html\">time</code> is a special property that should be a UNIX timestamp of the order date and time.</li>\n</ul>\n<p>Here’s an example Track request for <strong>Placed Order</strong>:</p>\n<pre><code class=\"language-json\">{\n   \"token\": \"API_KEY\",\n   \"event\": \"Placed Order\",\n   \"customer_properties\": {\n     \"$email\": \"john.smith@example.com\",\n     \"$first_name\": \"John\",\n     \"$last_name\": \"Smith\",\n     \"$phone_number\": \"5551234567\",\n     \"$address1\": \"123 Abc st\",\n     \"$address2\": \"Suite 1\",\n     \"$city\": \"Boston\",\n     \"$zip\": \"02110\",\n     \"$region\": \"MA\",\n     \"$country\": \"USA\"\n   },\n   \"properties\": {\n     \"$event_id\": \"1234\",\n     \"$value\": 29.98,\n     \"Categories\": [\"Fiction\", \"Classics\", \"Children\"],\n     \"ItemNames\": [\"Winnie the Pooh\", \"A Tale of Two Cities\"],\n     \"Brands\": [\"Kids Books\", \"Harcourt Classics\"],\n     \"Discount Code\": \"Free Shipping\",\n     \"Discount Value\": 5,\n     \"Items\": [{\n         \"ProductID\": \"1111\",\n         \"SKU\": \"WINNIEPOOH\",\n         \"ProductName\": \"Winnie the Pooh\",\n         \"Quantity\": 1,\n         \"ItemPrice\": 9.99,\n         \"RowTotal\": 9.99,\n         \"ProductURL\": \"http://www.example.com/path/to/product\",\n         \"ImageURL\": \"http://www.example.com/path/to/product/image.png\",\n         \"Categories\": [\"Fiction\", \"Children\"],\n         \"Brand\": \"Kids Books\"\n       },\n       {\n         \"ProductID\": \"1112\",\n         \"SKU\": \"TALEOFTWO\",\n         \"ProductName\": \"A Tale of Two Cities\",\n         \"Quantity\": 1,\n         \"ItemPrice\": 19.99,\n         \"RowTotal\": 19.99,\n         \"ProductURL\": \"http://www.example.com/path/to/product2\",\n         \"ImageURL\": \"http://www.example.com/path/to/product/image2.png\",\n         \"Categories\": [\"Fiction\", \"Classics\"],\n         \"Brand\": \"Harcourt Classics\"\n       }\n     ]\n   },\n   \"time\": 1387302423\n }</code></pre>\n<h3>Ordered Product</h3>\n<p>For each line item, you should also make Track request for an <strong>Ordered Product</strong> event:</p>\n<pre><code class=\"language-json\">{\n   \"token\": \"API_KEY\",\n   \"event\": \"Ordered Product\",\n   \"customer_properties\": {\n     \"$email\": \"john.smith@example.com\",\n     \"$first_name\": \"John\",\n     \"$last_name\": \"Smith\"\n   },\n   \"properties\": {\n     \"$event_id\": \"1234_WINNIEPOOH\",\n     \"$value\": 9.99,\n     \"ProductID\": \"1111\",\n     \"SKU\": \"WINNIEPOOH\",\n     \"ProductName\": \"Winnie the Pooh\",\n     \"Quantity\": 1,\n     \"ProductURL\": \"http://www.example.com/path/to/product\",\n     \"ImageURL\": \"http://www.example.com/path/to/product/image.png\",\n     \"ProductCategories\": [\n       \"Fiction\",\n       \"Children\"\n     ],\n     \"ProductBrand\": \"Kids Books\"\n   },\n   \"time\": 1387302423\n }</code></pre>\n<h3>Fulfilled Order, Cancelled Order, and Refunded Order</h3>\n<p>Depending on how your products are sent to the customer, or whether they are able to be cancelled or refunded, you may want to send additional events that reflect these actions. Each of these order-related events will have almost the same payload as a <strong>Placed Order</strong> event.</p>\n<p>For <strong>Fulfilled Order</strong>, the only update to be made is the event name and the time at which the fulfillment took place:</p>\n<pre><code class=\"language-json\">{\n   \"token\": \"API_KEY\",\n   \"event\": \"Fulfilled Order\",\n   \"customer_properties\": {\n     \"$email\": \"john.smith@example.com\",\n     \"$first_name\": \"John\",\n     \"$last_name\": \"Smith\",\n     \"$phone_number\": \"5551234567\",\n     \"$address1\": \"123 Abc st\",\n     \"$address2\": \"Suite 1\",\n     \"$city\": \"Boston\",\n     \"$zip\": \"02110\",\n     \"$region\": \"MA\",\n     \"$country\": \"USA\"\n   },\n   \"properties\": {\n     \"$event_id\": \"1234\",\n     \"$value\": 29.98,\n     \"Categories\": [\n       \"Fiction\",\n       \"Classics\",\n       \"Children\"\n     ],\n     \"ItemNames\": [\n       \"Winnie the Pooh\",\n       \"A Tale of Two Cities\"\n     ],\n     \"Brands\": [\n       \"Kids Books\",\n       \"Harcourt Classics\"\n     ],\n     \"Discount Code\": \"Free Shipping\",\n     \"Discount Value\": 5,\n     \"Items\": [\n       {\n         \"ProductID\": \"1111\",\n         \"SKU\": \"WINNIEPOOH\",\n         \"ProductName\": \"Winnie the Pooh\",\n         \"Quantity\": 1,\n         \"ItemPrice\": 9.99,\n         \"RowTotal\": 9.99,\n         \"ProductURL\": \"http://www.example.com/path/to/product\",\n         \"ImageURL\": \"http://www.example.com/path/to/product/image.png\",\n         \"Categories\": [\n           \"Fiction\",\n           \"Children\"\n         ],\n         \"Brand\": \"Kids Books\"\n       },\n       {\n         \"ProductID\": \"1112\",\n         \"SKU\": \"TALEOFTWO\",\n         \"ProductName\": \"A Tale of Two Cities\",\n         \"Quantity\": 1,\n         \"ItemPrice\": 19.99,\n         \"RowTotal\": 19.99,\n         \"ProductURL\": \"http://www.example.com/path/to/product2\",\n         \"ImageURL\": \"http://www.example.com/path/to/product/image2.png\",\n         \"Categories\": [\n           \"Fiction\",\n           \"Classics\"\n         ],\n         \"Brand\": \"Harcourt Classics\"\n       }\n     ]\n   },\n   \"time\": 1387312956\n }</code></pre>\n<p>For <strong>Cancelled Order</strong> and <strong>Refunded Order</strong>, update the event name and the timestamp and add an additional property for the cancellation or refund reason:</p>\n<h4>Cancelled Order</h4>\n<pre><code class=\"language-json\">\n   \"token\": \"API_KEY\",\n   \"event\": \"Cancelled Order\",\n   \"customer_properties\": {\n     \"$email\": \"john.smith@example.com\",\n     \"$first_name\": \"John\",\n     \"$last_name\": \"Smith\",\n     \"$phone_number\": \"5551234567\",\n     \"$address1\": \"123 Abc st\",\n     \"$address2\": \"Suite 1\",\n     \"$city\": \"Boston\",\n     \"$zip\": \"02110\",\n     \"$region\": \"MA\",\n     \"$country\": \"USA\"\n   },\n   \"properties\": {\n     \"$event_id\": \"1234\",\n     \"$value\": 29.98,\n     \"Reason\": \"No longer needed\",\n     \"Categories\": [\n       \"Fiction\",\n       \"Classics\",\n       \"Children\"\n     ],\n     \"ItemNames\": [\n       \"Winnie the Pooh\",\n       \"A Tale of Two Cities\"\n     ],\n     \"Brands\": [\n       \"Kids Books\",\n       \"Harcourt Classics\"\n     ],\n     \"Discount Code\": \"Free Shipping\",\n     \"Discount Value\": 5,\n     \"Items\": [\n       {\n         \"ProductID\": \"1111\",\n         \"SKU\": \"WINNIEPOOH\",\n         \"ProductName\": \"Winnie the Pooh\",\n         \"Quantity\": 1,\n         \"ItemPrice\": 9.99,\n         \"RowTotal\": 9.99,\n         \"ProductURL\": \"http://www.example.com/path/to/product\",\n         \"ImageURL\": \"http://www.example.com/path/to/product/image.png\",\n         \"Categories\": [\n           \"Fiction\",\n           \"Children\"\n         ],\n         \"Brand\": \"Kids Books\"\n       },\n       {\n         \"ProductID\": \"1112\",\n         \"SKU\": \"TALEOFTWO\",\n         \"ProductName\": \"A Tale of Two Cities\",\n         \"Quantity\": 1,\n         \"ItemPrice\": 19.99,\n         \"RowTotal\": 19.99,\n         \"ProductURL\": \"http://www.example.com/path/to/product2\",\n         \"ImageURL\": \"http://www.example.com/path/to/product/image2.png\",\n         \"Categories\": [\n           \"Fiction\",\n           \"Classics\"\n         ],\n         \"Brand\": \"Harcourt Classics\"\n       }\n     ]\n   },\n   \"time\": 1387312956\n }</code></pre>\n<h4>Refunded Order</h4>\n<pre><code class=\"language-json\">{\n   \"token\": \"API_KEY\",\n   \"event\": \"Refunded Order\",\n   \"customer_properties\": {\n     \"$email\": \"john.smith@example.com\",\n     \"$first_name\": \"John\",\n     \"$last_name\": \"Smith\",\n     \"$phone_number\": \"5551234567\",\n     \"$address1\": \"123 Abc st\",\n     \"$address2\": \"Suite 1\",\n     \"$city\": \"Boston\",\n     \"$zip\": \"02110\",\n     \"$region\": \"MA\",\n     \"$country\": \"USA\"\n   },\n   \"properties\": {\n     \"$event_id\": \"1234\",\n     \"$value\": 29.98,\n     \"Reason\": \"No longer needed\",\n     \"Categories\": [\n       \"Fiction\",\n       \"Classics\",\n       \"Children\"\n     ],\n     \"ItemNames\": [\n       \"Winnie the Pooh\",\n       \"A Tale of Two Cities\"\n     ],\n     \"Brands\": [\n       \"Kids Books\",\n       \"Harcourt Classics\"\n     ],\n     \"Discount Code\": \"Free Shipping\",\n     \"Discount Value\": 5,\n     \"Items\": [\n       {\n         \"ProductID\": \"1111\",\n         \"SKU\": \"WINNIEPOOH\",\n         \"ProductName\": \"Winnie the Pooh\",\n         \"Quantity\": 1,\n         \"ItemPrice\": 9.99,\n         \"RowTotal\": 9.99,\n         \"ProductURL\": \"http://www.example.com/path/to/product\",\n         \"ImageURL\": \"http://www.example.com/path/to/product/image.png\",\n         \"Categories\": [\n           \"Fiction\",\n           \"Children\"\n         ],\n         \"Brand\": \"Kids Books\"\n       },\n       {\n         \"ProductID\": \"1112\",\n         \"SKU\": \"TALEOFTWO\",\n         \"ProductName\": \"A Tale of Two Cities\",\n         \"Quantity\": 1,\n         \"ItemPrice\": 19.99,\n         \"RowTotal\": 19.99,\n         \"ProductURL\": \"http://www.example.com/path/to/product2\",\n         \"ImageURL\": \"http://www.example.com/path/to/product/image2.png\",\n         \"Categories\": [\n           \"Fiction\",\n           \"Classics\"\n         ],\n         \"Brand\": \"Harcourt Classics\"\n       }\n     ]\n   },\n   \"time\": 1387312956\n }</code></pre>\n<h2>Catalog Feed Integration</h2>\n<p>Integrating your catalog will allow you to use our <a href=\"https://help.klaviyo.com/hc/en-us/articles/115005082787-Product-Feeds-and-Recommendations\">Product Feeds</a> and <a href=\"https://help.klaviyo.com/hc/en-us/articles/115000219092-Insert-a-Product-Block\">Product Blocks</a> in emails. In order to set up a custom catalog integration, please reach out to our <a href=\"mailto:success@klaviyo.com\">Support Team</a>. They will pass along the documentation and examples for this setup and will need to be notified once the setup is complete in order to activate the feed on your account.</p>\n<h2>Syncing Historical Data</h2>\n<p>It is a good practice to send us your historical order data as well. This will enhance your ability to segment off that data and improve historical accuracy in revenue tracking. This data can be sent to us by iterating through your historical orders and generating <strong>Placed Order</strong> and <strong>Ordered Product</strong> Track API requests for each.</p>",
+    "user_segment_ids": []
+  },
+  "normalized": {
+    "id": "360031423431",
+    "title": "Integrate a Standard Ecommerce Platform",
+    "source_url": "https://help.klaviyo.com/hc/en-us/articles/360031423431-Integrate-a-Standard-Ecommerce-Platform",
+    "section_id": 49375213829275,
+    "section": "Custom integrations",
+    "category_id": 115000032731,
+    "category": "Integrations",
+    "category_slug": "integrations",
+    "klaviyo_updated": "2026-04-21T13:54:44Z",
+    "created_at": "2019-07-30T16:20:33Z",
+    "draft": false,
+    "promoted": false,
+    "position": 2,
+    "label_names": []
+  },
+  "files": {
+    "body_html": "_source/articles/360031423431.body.html",
+    "rendered_html": ""
+  },
+  "assets": {
+    "api_body": {
+      "images": [],
+      "links": [
+        {
+          "href": "https://www.klaviyo.com/docs/getting-started",
+          "text": "JavaScript API"
+        },
+        {
+          "href": "https://www.klaviyo.com/docs/http-api",
+          "text": "server-side API"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005062847-Understand-the-Data-Available-for-Segmentation",
+          "text": "check out our guide on segment conditions"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360031078492",
+          "text": "custom integration FAQ"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/requests/new",
+          "text": "reach out to our Support Team"
+        },
+        {
+          "href": "https://www.klaviyo.com/account#api-keys-tab",
+          "text": "Public API Key"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115000751052-Klaviyo-API-Reference-Guide#identifying-users--javascript-3",
+          "text": "Javascript Identify API request"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115002775252-Create-a-Browse-Abandonment-Flow",
+          "text": "browse abandonment flow"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115002779411-Guide-to-Creating-an-Abandoned-Cart-Flow",
+          "text": "abandoned checkout emails"
+        },
+        {
+          "href": "https://www.klaviyo.com/docs",
+          "text": "server-side API"
+        },
+        {
+          "href": "https://github.com/klaviyo/python-klaviyo",
+          "text": "Python"
+        },
+        {
+          "href": "https://github.com/klaviyo/ruby-klaviyo",
+          "text": "Ruby"
+        },
+        {
+          "href": "https://github.com/klaviyo/php-klaviyo",
+          "text": "PHP"
+        },
+        {
+          "href": "https://www.klaviyo.com/account#api-keys-tab",
+          "text": "your public API key"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005082787-Product-Feeds-and-Recommendations",
+          "text": "Product Feeds"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115000219092-Insert-a-Product-Block",
+          "text": "Product Blocks"
+        },
+        {
+          "href": "mailto:success@klaviyo.com",
+          "text": "Support Team"
+        }
+      ],
+      "headings": [
+        {
+          "level": 2,
+          "id": "",
+          "text": "Overview"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "On-Site Behaviors (JavaScript Track API)"
+        },
+        {
+          "level": 3,
+          "id": "",
+          "text": "Active on Site"
+        },
+        {
+          "level": 3,
+          "id": "",
+          "text": "Viewed Product"
+        },
+        {
+          "level": 3,
+          "id": "",
+          "text": "Added to Cart"
+        },
+        {
+          "level": 3,
+          "id": "",
+          "text": "Started Checkout"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "Server-Side Metrics"
+        },
+        {
+          "level": 3,
+          "id": "",
+          "text": "Placed Order"
+        },
+        {
+          "level": 3,
+          "id": "",
+          "text": "Ordered Product"
+        },
+        {
+          "level": 3,
+          "id": "",
+          "text": "Fulfilled Order, Cancelled Order, and Refunded Order"
+        },
+        {
+          "level": 4,
+          "id": "",
+          "text": "Cancelled Order"
+        },
+        {
+          "level": 4,
+          "id": "",
+          "text": "Refunded Order"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "Catalog Feed Integration"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "Syncing Historical Data"
+        }
+      ]
+    },
+    "rendered_page": {}
+  },
+  "rendered_page": {
+    "status": "failed",
+    "error": "404 Client Error: Not Found for url: https://help.klaviyo.com/hc/en-us/articles/360031423431"
+  }
+}

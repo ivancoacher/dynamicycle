@@ -1,0 +1,98 @@
+<h2 id="h_01HXF1SAJ4A9TJWNCRVBAZ83Q3">You will learn</h2>
+<p>Learn about the data transformation tool in Klaviyo, and how you can use it to make your data consistent and useful. With the standardization transformation method tool in Klaviyo, you can set rules to replace specific profile property values automatically, ensuring they all have the same value. </p>
+<p>A common use case for this transformation is to standardize the country names on your account to make them easier to work with in segmentation and flows. </p>
+<div class="bs-callout bs-callout-default">
+<p><a href="https://help.klaviyo.com/hc/en-us/articles/17655007276059">Advanced KDP</a> is not included in Klaviyo’s standard marketing application, and a subscription is required to access the associated functionality. Head to our <a href="https://help.klaviyo.com/hc/en-us/articles/115000976672" target="_blank" rel="noopener noreferrer">billing guide</a> to learn how to purchase this plan.</p>
+</div>
+<h2 id="h_01HXF1SAJ4KJXX0ZNX926QYS84">Standardize country names </h2>
+<p>You can either use Klaviyo’s pre-built country standardization transformation, or create a transformation from scratch.</p>
+<h3 id="h_01HXF1SAJ4985VDFVVJZZDQVW3">Standardize country names using a pre-built transformation</h3>
+<p>The data transformation tool has some pre-built transformations that you can easily enable, including 1 for standardizing country names. </p>
+<p>To implement a pre-built transformation, navigate to <strong>Advanced KDP &gt; Data management &gt; Transformation</strong>. If this is your first transformation, you’ll immediately see the pre-built transformations on the page. If you already have previous transformations, select <strong>Create</strong>.<img src="https://klaviyo.zendesk.com/hc/article_attachments/28704479382555" alt="Create transformation button"></p>
+<p>You’ll be brought to the transformation builder, where you can edit the pre-built standardization rules for country names to fit the needs of your brand. </p>
+<p class="wysiwyg-text-align-center"><img src="https://klaviyo.zendesk.com/hc/article_attachments/28704487426075" alt="Pre-built transformation options" width="509" height="480"><br><br></p>
+<p>By default, the pre-built transformation includes the following countries, along with different variations of each name: </p>
+<ul>
+<li>United States</li>
+<li>United Kingdom</li>
+<li>Canada</li>
+<li>Spain</li>
+<li>France</li>
+<li>Italy</li>
+<li>Germany </li>
+<li>Australia </li>
+<li>New Zealand</li>
+<li>Ireland</li>
+</ul>
+<div class="bs-callout bs-callout-default">
+<p>You can have up to 30 conditions within a standardization rule. </p>
+</div>
+<h3 id="h_01HXF1SAJ484M5NV8MFF87JBFE">Standardize country names from scratch </h3>
+<p>To create a standardization rule:</p>
+<ol>
+<li>In the <em>If value</em> condition, select <strong>Contains</strong> or <strong>Equals</strong>.<br>
+<div class="bs-callout bs-callout-default">
+<p>The <em>Contains</em> operator requires the property value being replaced to contain the specified substring you enter for the <em>If value</em>. Note that the entire property value will be replaced, not just the substring matched. <em>Contains</em> only supports text values. </p>
+<p>The <em>Equals</em> operator requires an exact match between the value being replaced and the replacement value. The entire property value will be replaced by the replacement value.</p>
+</div>
+</li>
+<li>Select the <a href="https://help.klaviyo.com/hc/en-us/articles/115005237648">data type</a> for the <em>If value</em>.</li>
+<li>Enter your desired values to be replaced in the <em>If value</em> condition. You'll see a drop-down showing up to 512 unique values that exist on your account of the property being transformed. You can include up to 30 values in one condition, or create a new value by selecting the <em>Enter new value</em> option in the drop-down.<br><img src="https://klaviyo.zendesk.com/hc/article_attachments/28704487428635" alt="Different varations of the same property for USA" width="432" height="219">
+</li>
+<li>In the <em>Replace with</em> condition, select <strong>Text</strong> as the <a href="https://help.klaviyo.com/hc/en-us/articles/115005237648">data type</a> for the replacement value.</li>
+<li>Enter your desired replacement value in the <em>Replace with</em> condition.</li>
+</ol>
+<p>You can create up to 30 standardization rules, which are interpreted with “If else” logic. If the first condition doesn’t match, the next will be evaluated, and this will continue until a condition matches. Once a condition matches, the system stops evaluating the remaining conditions. If no condition matches, the transformed profile property will be set to the original value.</p>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/28704487434267" alt="Standardization modal in Klaviyo" width="520" height="257"></p>
+<h2 id="h_01HXF1SAJ4DXMYCVF46ATDWBA2">Use cases for standardized country names </h2>
+<p>By standardizing country names with Klaviyo’s data transformation tool, it is much easier to utilize country data across Klaviyo. Below are common use cases for standardized country names in Klaviyo. </p>
+<h2 id="h_01HXF1SAJ4VP00MW3SHHGZ9PE9">Set up region-based flows</h2>
+<p>Standardizing country names allows you to more effectively personalize flows based on the region a customer is located in. Variations in country names can cause customers to go through conditional splits in a flow incorrectly, or require conditional splits with many conditions to account for each variation. By transforming country names, these variations can be standardized to a single format, making it easy to create splits based on a single value. </p>
+<p>A conditional split in a flow creates 2 distinct paths, branching based on defined characteristics of your recipients. In this case, you can use the <em>Country_tranformed </em>property in Klaviyo as the characteristic that will determine which branch a flow member will go down. This allows you to localize flow emails based on where a customer is located, and they will automatically receive the flow email that is most relevant to them. You can update content like product recommendations, include different privacy policies and terms and conditions, and otherwise personalize content to specific locales.</p>
+<div class="bs-callout bs-callout-default">
+<p>Learn how to add a <a href="https://help.klaviyo.com/hc/en-us/articles/115003872171">conditional split</a> to a flow in Klaviyo.</p>
+</div>
+<p>In the example below, a conditional split sends customers entering a welcome flow down 2 different paths based on whether they are located in the United States. This allows you to better personalize the email subscribers receive based on location. </p>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/28704479384347" alt="Welcome series based on $country_transformed"></p>
+<p>You can also combine multiple conditional splits based on the <em>Country_transfomed</em> property to create a series of paths customers will go down until they reach the right split for their location. Flow members will travel down the <em>No </em>path for each split until they reach the split for their country, or eventually reach a default email if none of the splits are relevant to their location. </p>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/28704479379867" alt="Welcome series based on $country_transformed with multiple branches"></p>
+<h2 id="h_01HXF1SAJ5TP4XX9XQ8MRK6D0G">Measure performance</h2>
+<p>Standardizing country names also allows you to more easily create custom reports to understand your performance by country. Variations in country names can make it more challenging to report on this data due to the large number of items for each country. With the transformation of country names in place, these variations will standardize to a single format, making it easy to create splits based on a single value. </p>
+<p>To create reports in Klaviyo regarding performance by country, navigate to <strong>Custom reports</strong> &gt; <strong>Analytics</strong>.</p>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/28704487436187" alt="Custom reports in Klaviyo navigation" width="665" height="319"></p>
+<p>Here, you can create reports to analyze your performance by country, or select a pre-built report from the <em>Reports Library</em>.</p>
+<div class="bs-callout bs-callout-default">
+<p>Learn more about <a href="https://help.klaviyo.com/hc/en-us/articles/360047725651">custom reports in Klaviyo</a> and how to create them. </p>
+</div>
+<h3 id="h_01HXF1SAJ5K46JZPAJ62CTWGAZ">Sales by country </h3>
+<p>In the <em>Reports Library</em>, you can find the <em>Sales by country </em>report that provides insight on the countries with the most sales for your brand. You can customize the events included in the report, as well as the timeframe you’d like to analyze.</p>
+<p>To take advantage of your country name standardization, change the <em>Group or Filter </em>for the report to the <em>$country_transfomed </em>property. </p>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/28704487427355" alt="Sales by $country_transformed repoirt" width="579" height="397"></p>
+<h3 id="h_01HXF1SAJ56P87AEAF3T86TBQ6">Email performance by country </h3>
+<p>In the <em>Reports Library</em>, you can find the <em>Engagement by country </em>report that provides insight on the countries with the most sales for your brand. You can customize the events included in the report, as well as the timeframe you’d like to analyze.</p>
+<p>To take advantage of your country name standardization, change the <em>Group or Filter </em>for the report to the <em>$country_transfomed </em>property. </p>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/28704487427739" alt="Engagement by $country_transformed report" width="581" height="423"></p>
+<h2 id="h_01HXF1SAJ5TJ1832TYHZ1DEY7J">Build regional segments</h2>
+<p>With the country name standardization, you can also easily create location-based segments. Since the values for country names are standardized, you don’t have to create multiple conditions to capture each variation of a country name. </p>
+<p>To limit a segment to only include profiles in a specific country, use the following condition:</p>
+<ol>
+<li>Properties about someone &gt; $country_transformed &gt; equals &gt; country <br><img src="https://klaviyo.zendesk.com/hc/article_attachments/28704479385371" alt="Segment based on $country_transformed" width="565" height="94">
+</li>
+<li>In the <em>Dimension value</em> field, enter the standardized name for the country you want to include in the segment. </li>
+<li>Optional: To include multiple country conditions, combine them with an <em>OR</em> operator<img style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;" src="https://klaviyo.zendesk.com/hc/article_attachments/28704487433627" alt="Segment with multiple conditions using $country_transformed" width="550" height="179">
+</li>
+</ol>
+<p>You can use these localized segments to personalize your marketing based on the country a profile is located in, targeting them with different content, like languages, deals, and product recommendations.</p>
+<h2 id="h_01HXF1SAJ5V6QG36A6N881X6TZ">Additional ways to use data transformation</h2>
+<p>The following common transformations can also help you clean and format data so it can be utilized more effectively in segmentation and personalization:</p>
+<ul>
+<li>Standardize U.S. state names</li>
+<li>Standardize city names</li>
+<li>Format first names</li>
+<li>Standardize genders</li>
+<li>Reformat custom profile properties like quiz results</li>
+</ul>
+<h2 id="h_01HXF1SAJ5ATT694QBX6A3NTQ2">Additional resources </h2>
+<p><a href="https://help.klaviyo.com/hc/en-us/articles/17760400736539">Understand data transformation in Klaviyo</a></p>
+<p><a href="https://help.klaviyo.com/hc/en-us/articles/115003872171">How to add a conditional split to a flow</a></p>
+<p><a href="https://help.klaviyo.com/hc/en-us/articles/360051182592">Understanding branching best practices for flows</a></p>

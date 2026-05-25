@@ -1,0 +1,71 @@
+<h2 id="h_01K7J6KY51B0KFFA0H937CE612"><strong>About universal links and App Links</strong></h2>
+<p>Universal links (for iOS) and App Links (for Android) direct your customers to content within your mobile app or, if the app isn't installed, to the same content on your website. Using these links in email and text messages allows you to use consistent URLs across all your marketing channels while creating a seamless experience for your customer, no matter their device. It's similar to traditional deep linking, but with additional functionality.</p>
+<p>Universal links and App Links in Klaviyo are fully compatible with click-tracking and UTM tracking. </p>
+<h2 id="h_01K7J6KY53R0JEMD9BRZE69KEK"><strong>How it works</strong></h2>
+<p>After configuration, when a customer clicks a link in one of your messages from a mobile device, Klaviyo is able to correctly identify and route them to the correct location in your mobile app if it's installed on their device. If the app is not installed, the customer will be taken to your website as usual.</p>
+<p>In platforms that don't support this functionality, click-tracking interferes with universal links and App Links. This is because click-tracking uses a redirect to capture the click event, which prevents the app from opening directly.</p>
+<p>Your mobile app must be using at least version 5.1.0 of the iOS SDK, version 4.1.0 of the Android SDK, or version 2.1.0 of the React Native SDK to set up universal links in email and text messaging. </p>
+<h2 id="h_01K7J6KY55AGSP0ABCEXCTE2J6"><strong>Before you begin</strong></h2>
+<p>Before you can set up universal links and / or App Links in Klaviyo, you'll need to have the following in place:</p>
+<ul>
+<li>Your mobile app must be using at least version 5.1.0 of the iOS SDK, version 4.1.0 of the Android SDK, or version 2.1.0 of the React Native SDK to set up universal links in email and text messaging. </li>
+<li>For links in <strong>email</strong>, a <strong>dedicated click-tracking domain</strong>. For set up instructions, see our article on<a href="https://help.klaviyo.com/hc/en-us/articles/360001550572"> </a><a href="https://help.klaviyo.com/hc/en-us/articles/360001550572">how to set up a dedicated click-tracking domain</a>.</li>
+<li>For links in <strong>text messages</strong>, a<strong> branded custom link</strong>. For set up instructions, see our article on<a href="https://help.klaviyo.com/hc/en-us/articles/17649597637147"> </a><a href="https://help.klaviyo.com/hc/en-us/articles/17649597637147">how to create a branded shortened link for SMS</a>.</li>
+<li>The <strong>Klaviyo SDK installed</strong> on your mobile app.</li>
+<li>An <code><strong>apple-app-site-association</strong></code><strong> (AASA) file</strong> (for iOS) and/or an <code><strong>assetlinks.json</strong></code><strong> file</strong> (for Android) hosted on your website domain. These files are required by Apple and Google, respectively, to associate your website with your mobile app.</li>
+<li>Your <strong>mobile app must be configured to support universal links and / or App Links</strong>.
+<ul>
+<li>For more information on configuring for iOS and setting up your <code>apple-app-site-association</code> (AASA) file, please see <a href="https://developer.apple.com/documentation/xcode/allowing-apps-and-websites-to-link-to-your-content/">Apple's developer documentation on supporting associated domains</a>.</li>
+<li>For more information on configuring for Android and setting up your <code>assetlinks.json</code> file, please see <a href="https://developer.android.com/training/app-links">Android's developer documentation on adding app links</a>.</li>
+</ul>
+</li>
+</ul>
+<h2 id="h_01K7J6KY5CR2T7SDZZKW2JR0BF"><strong>How to set up universal links and App Links in Klaviyo</strong></h2>
+<ol>
+<li>Navigate to <strong>Settings</strong> in your Klaviyo account.</li>
+<li>Click <strong>Push notifications</strong>.</li>
+<li>Select the <strong>Universal &amp; app links</strong> tab.</li>
+<li>In the card, click <strong>Set up</strong>.<br>
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/42123623612955" alt="" width="1456" height="638">
+</li>
+<li>Select a click-tracking domain for the channel you wish to enable (email and/or text messages).</li>
+<li>Enter your target domain. This is your website domain that you plan to use in the body of your messages.</li>
+<li>Upload your <code>apple-app-site-association</code> (AASA) file and/or your <code>assetlinks.json</code> file. <br>
+<ul>
+<ul>
+<li>If you have both an iOS and an Android app, you will need to upload both files.</li>
+<li>If you only have an iOS app, you only need to upload an AASA file.</li>
+<li>If you only have an Android app, you will need to upload both files.</li>
+</ul>
+</ul>
+</li>
+<li>Click <strong>Save</strong>. </li>
+<li>Return to the settings page. Select the click tracking domain(s) that should open on your app and <strong>click Enable</strong><br>
+</li>
+</ol>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/42123631357339" alt="" width="1456" height="1208"></p>
+<h2 id="h_01K7J6KY5H0FS8DW5AS1K5ZB9C"><strong>Universal override</strong></h2>
+<p>In some cases, you may want to designate a specific link to open in your app, even if it doesn't match the paths defined in your AASA or <code>assetlinks.json</code> file. You can do this by adding the <code>universal="true"</code> attribute to the link's HTML.</p>
+<p>For example: &lt;a href="trk.example.com" universal="true"&gt;Link to your app!&lt;/a&gt;</p>
+<p>Alternatively, you can do the inverse by adding the <code>universal="false"</code> attribute to the link's HTML.</p>
+<p>Note: This functionality is only available for email.</p>
+<h2 id="h_01K7J6KY5K5ZDYK2XXG34GMG6S"><strong>Testing your setup</strong></h2>
+<p>To test your universal links and App Links, create a new campaign or flow message and include a link to a page on your website that you've configured for deep linking. Send a message to a device with your app installed, and another to a device without your app installed.</p>
+<ul>
+<li>On the device with your app installed, the link should open directly in your app.</li>
+<li>On the device without your app installed, the link should open in the device's web browser.</li>
+</ul>
+<p>Note: Preview messages do not use click-tracking, so links may not be reflected accurately. For proper testing, do not use preview messages.</p>
+<h2 id="h_01K7J6KY5KY4WCGWMD8KXZTY0V"><strong>Viewing your Klaviyo-hosted universal links and App Links files</strong></h2>
+<p>Once you've completed the setup, Klaviyo will host versions of your configuration files. To view them, navigate to the following URLs in your browser, replacing <code>&lt;YOUR_TRACKING_DOMAIN&gt;</code> with your own domain:</p>
+<ul>
+<li>
+<strong>iOS:</strong> <code>https://&lt;YOUR_TRACKING_DOMAIN&gt;/.well-known/apple-app-site-association</code>
+</li>
+<li>
+<strong>Android:</strong> <code>https://&lt;YOUR_TRACKING_DOMAIN&gt;/.well-known/assetlinks.json</code>
+</li>
+</ul>
+<h2 id="h_01K7J6KY5N9XM1EJ20YCT18WSA"><strong>FAQ</strong></h2>
+<p><strong>Do I need to have a dedicated click-tracking domain?</strong> A dedicated click-tracking domain is required to use universal links and App Links for email. For SMS, you will need to set up a branded custom short link.</p>
+<p><strong>What happens if I have multiple Klaviyo accounts that share a single tracking domain?</strong> If multiple accounts share a single tracking domain, changes to the domain configuration will affect all of those accounts.</p>

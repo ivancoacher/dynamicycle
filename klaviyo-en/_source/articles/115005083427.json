@@ -1,0 +1,1007 @@
+{
+  "captured_at": "2026-05-23T16:18:02Z",
+  "article": {
+    "id": 115005083427,
+    "url": "https://klaviyo.zendesk.com/api/v2/help_center/en-us/articles/115005083427.json",
+    "html_url": "https://klaviyo.zendesk.com/hc/en-us/articles/115005083427-How-to-integrate-with-Volusion",
+    "author_id": 20345311467,
+    "comments_disabled": true,
+    "draft": false,
+    "promoted": false,
+    "position": 4,
+    "vote_sum": 16,
+    "vote_count": 36,
+    "section_id": 49375215615771,
+    "created_at": "2017-03-30T18:41:22Z",
+    "updated_at": "2026-04-21T13:56:39Z",
+    "name": "How to integrate with Volusion",
+    "title": "How to integrate with Volusion",
+    "source_locale": "en-us",
+    "locale": "en-us",
+    "outdated": false,
+    "outdated_locales": [],
+    "edited_at": "2025-07-29T16:02:41Z",
+    "user_segment_id": null,
+    "permission_group_id": 146372,
+    "content_tag_ids": [],
+    "label_names": [],
+    "body": "<h2 id=\"h_01HCDNC29K40YB4JKQ2685M5FB\">You will learn</h2>\n<p>Learn how to integrate Volusion with Klaviyo. After completing these steps, you'll be able to personalize and target emails based on synced order data and customer properties.</p>\n<p>From Volusion, Klaviyo tracks <em>Ordered Product</em>and<em> Placed Order</em>metrics; with the addition of some extra code we can track<em> Abandoned Cart</em>information as well.</p>\n<h2 id=\"h_01HCDNC29KZGF48KW96QN8V1HJ\">Before you begin</h2>\n<p>Volusion requires an <a href=\"http://helpcenter.volusion.com/extend-your-site/more-integrations/the-volusion-api\" target=\"_blank\" rel=\"noopener\">update to your Volusion store's administrator account password every 90 days</a>. When making this update your Volusion account, you must also make this update to your Volusion integration in your Klaviyo account. You can also create a permanent API Key by following the steps in the corresponding section of this article.</p>\n<h2 id=\"h_01HCDNC29KZDF6825YDD2EKKYD\">Add the Volusion integration in Klaviyo</h2>\n<ol>\n<li>In Klaviyo, select the <strong>Integrations</strong> tab.</li>\n<li>Select <strong>Explore apps</strong>.</li>\n<li>Search for <em>Volusion</em> and click the card, then click <strong>Install</strong>.</li>\n<li>On the next page, enter your Store URL, login email, and API key/encrypted password. Then, click <strong>Connect to Volusion</strong>.<br><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28711662648859\">\n</li>\n<li>On the next page, you will see a checkbox for <em>Add new Volusion customers to a Klaviyo list</em><strong>. </strong>If you check this box, you can pick one of your lists in Klaviyo to which future customers will be added when they place an order.</li>\n<li>Finally, click <strong>Complete setup</strong>.</li>\n</ol>\n<h2 id=\"h_01HCDNC29KK7YEVR48CQBAVM7B\">Disable email to web tracking in Klaviyo</h2>\n<ol>\n<li>The \"email to web tracking\" feature in Klaviyo uses click tracking to identify a user who arrives at your website through a Klaviyo email before we would originally be able to identify them (such as when they make a purchase or subscribe to your email list).</li>\n<li>Volusion does not support the URL format that our click tracking uses and produces an error when a user tries to visit your store through one of these links, so this feature will have to be disabled in Klaviyo to make sure links in your email follow through to your Volusion store correctly.</li>\n<li>You can disable this tracking in your account settings under <strong>Account name &gt; Settings &gt; Email &gt; Attribution</strong>.</li>\n<li>The only functionality lost with disabling this feature is the ability to track a new profile on your website through an email they clicked. As long as you have the Klaviyo onsite tracking analytics on your website (which we'll add in the next section), we will still be able to track users as soon as we get their email address through either a purchase in your store or when they sign up for an email list.</li>\n</ol>\n<h2 id=\"h_01HCDNC29K22N0VB3KY118HM9E\">Add onsite tracking to your Volusion store</h2>\n<p>Klaviyo provides two onsite tracking snippets to help you collect valuable information about your customers:</p>\n<ul>\n<li>\n<strong>Active on Site<br></strong>This snippet tracks when your customers visit your site. This snippet must be added to the site in order for other snippets such as <em>Viewed Product</em> to work.</li>\n<li>\n<strong>Viewed Product<br></strong>This snippet tracks when your customers view specific products. You can track this event by adding the <em>Viewed Product</em> code snippet to your store.</li>\n</ul>\n<h3 id=\"h_01HCDNC29KYVC1HR9DV61N9N1T\">Add Active on Site tracking</h3>\n<p>Add the following Klaviyo.js snippet so that it appears on every page on your website. This will enable<em> Active on Site</em> tracking and Klaviyo forms. Make sure to replace PUBLIC_API_KEY with your <a href=\"https://help.klaviyo.com/hc/en-us/articles/115005062267-How-to-Manage-Your-Account-s-API-Keys\" target=\"_blank\" rel=\"noopener noreferrer\">Klaviyo public API key</a>.</p>\n<pre><code class=\"language-js\">&lt;script type=\"application/javascript\" async=\"\" src=\"https://static.klaviyo.com/onsite/js/PUBLIC_API_KEY/klaviyo.js\"&gt;&lt;/script&gt;\n&lt;script type=\"text/javascript\"&gt; \n//Script to initialize Klaviyo object on page load\n!function(){if(!window.klaviyo){window._klOnsite=window._klOnsite||[];try{window.klaviyo=new Proxy({},{get:function(n,i){return\"push\"===i?function(){var n;(n=window._klOnsite).push.apply(n,arguments)}:function(){for(var n=arguments.length,o=new Array(n),w=0;w&lt;n;w++)o[w]=arguments[w];var t=\"function\"==typeof o[o.length-1]?o.pop():void 0,e=new Promise((function(n){window._klOnsite.push([i].concat(o,[function(i){t&amp;&amp;t(i),n(i)}]))}));return e}}})}catch(n){window.klaviyo=window.klaviyo||[],window.klaviyo.push=function(){var n;(n=window._klOnsite).push.apply(n,arguments)}}}}(); &lt;/script&gt;</code></pre>\n<h3 id=\"h_01HCDNC29K507X1VF7ZDJYCFGM\">Add Viewed Product tracking</h3>\n<p>To enable <em>Viewed Product</em> tracking, you will need to add the snippet of code below to your store's template page in Volusion's File Editor, which you can find by clicking <strong>Design &gt; File Editor</strong>.</p>\n<pre><code class=\"language-javascript\">&lt;script type=\"text/javascript\"&gt;\n// Check to see if the customer is on the product page before executing code.\n    if ($(\"meta[property='og:type']\").attr(\"content\") == \"product\") {\n        var klaviyo = window.klaviyo || [];\n        // Function to track when a product is viewed\n        var trackViewedProduct = function(item) {\n            klaviyo.track(\"Viewed Product\", item);\n            klaviyo.trackViewedItem({\n                \"Title\": item.ProductName,\n                \"ItemId\": item.ProductID,\n                \"ImageUrl\": item.ImageURL,\n                \"Url\": item.URL,\n                \"Metadata\": {\n                    \"Price\": item.Price,\n                    \"Description\": item.Description,\n                    \"CompareAtPrice\": item.CompareAtPrice,\n                    \"YouSave\": item.YouSave\n                }\n            });\n        };\n        var item = {}\n        $.get(`/ProductDetails.asp?ProductCode=${global_Current_ProductCode}`, function(data) {\n            var product_saleprice = $(\"table.colors_pricebox div.product_saleprice\").length ?\n                Number(`${$(\"table.colors_pricebox div.product_saleprice\").text().trim().split(\"$\")[1].split(\".\")[0]}.${$(\"table.colors_pricebox div.product_saleprice\").text().trim().split(\"$\")[1].split(\".\")[1].substring(0,2)}`) : null;\n            var product_listprice = $(\"table.colors_pricebox div.product_listprice\").length ?\n                Number(`${$(\"table.colors_pricebox div.product_listprice\").text().trim().split(\"$\")[1].split(\".\")[0]}.${$(\"table.colors_pricebox div.product_listprice\").text().trim().split(\"$\")[1].split(\".\")[1].substring(0,2)}`) : null;\n            var product_productprice = $(\"table.colors_pricebox div.product_productprice\").length ?\n                Number(`${$(\"table.colors_pricebox div.product_productprice\").text().trim().split(\"$\")[1].split(\".\")[0]}.${$(\"table.colors_pricebox div.product_productprice\").text().trim().split(\"$\")[1].split(\".\")[1].substring(0,2)}`) : null;\n            var product_yousave = $(\"table.colors_pricebox div.product_yousave\").length ?\n                Number(`${$(\"table.colors_pricebox div.product_yousave\").text().trim().split(\"$\")[1].split(\".\")[0]}.${$(\"table.colors_pricebox div.product_yousave\").text().trim().split(\"$\")[1].split(\".\")[1].substring(0,2)}`) : 0;\n            item = {\n                \"ProductName\": $(\"meta[property='og:title']\").attr(\"content\"),\n                \"ProductID\": global_Current_ProductCode,\n                \"Description\": $(\"meta[property='og:description']\").attr(\"content\"),\n                \"ImageURL\": $(\"meta[property='og:image']\").attr(\"content\"),\n                \"URL\": $(\"meta[property='og:url']\").attr(\"content\"),\n                \"Price\": product_saleprice ? product_saleprice : product_productprice,\n                \"CompareAtPrice\": product_listprice ? product_listprice : product_productprice,\n                \"YouSave\": product_yousave\n            };\n            trackViewedProduct(item);\n        });\n    } \n&lt;/script&gt;</code></pre>\n<h3 id=\"h_01HCDNC29KG6YKJ5DPFZSZN7KT\">Add abandoned cart reminders</h3>\n<p>Volusion does not provide an out-of-the-box way to track abandoned carts through our integration, but we have created a custom script you can add to your Volusion store which will allow you to use this feature in Klaviyo. This will require some knowledge of adding code to your shop's template so if you have a developer, you can send them this doc to walk through adding the code.</p>\n<div class=\"bs-callout bs-callout-default\">\n<p>The abandoned cart feature will only work for Volusion stores using the one page checkout feature, and stores that do not require a user to have an account before making a purchase.</p>\n</div>\n<ol>\n<li>You will need to add the snippet of code below to your store's template page in Volusion's File Editor, which you can find by clicking <strong>Design &gt; File Editor</strong>.\n<pre><code class=\"language-javascript\">&lt;script type=\"text/javascript\"&gt;\n    // Check to see if the customer is on the checkout page before executing code.\n    if (window.location.pathname == \"/one-page-checkout.asp\") {\n        var klaviyo = window.klaviyo || [];\n        // Function to track when a checkout is started.\n        var trackStartedCheckout = function() {\n            $.post('/AjaxCart.asp', function(data) {\n                if (!data || !data.Products || !data.Products.length) {\n                    return;\n                }\n                var items = [],\n                    names = [],\n                    skus = [];\n                // Grab each product and its SKU/Name/Quantity/Price/Total price/Image url\n                $.each(data.Products, function(i, record) {\n                    var item_price = +(record.ProductPrice.replace(/[\\$,]+/g, '')) / record.Quantity;\n                    items.push({\n                        SKU: record.ProductCode,\n                        Name: record.ProductName,\n                        Quantity: +record.Quantity,\n                        ItemPrice: item_price,\n                        RowTotal: item_price * record.Quantity,\n                        ImageURL: record.ImageSource\n                    });\n                    names.push(record.ProductName);\n                    skus.push(record.ProductCode);\n                });\n                // Push Started Checkout metric to Klaviyo with the customers data.\n                klaviyo.track(\"Started Checkout\", {\n                    $value: +(data.Totals[0].CartTotal.replace(/[\\$,]+/g, \"\")),\n                    Items: items,\n                    ProductNames: names,\n                    SKUs: skus\n                });\n            }, 'json');\n        };\n        $(function() {\n            // Grab the email form to get your customers email and tie the event to that email in Klaviyo.\n            $('[name=\"OnePageCheckoutForm\"] [name=\"Email\"]').change(function(e) {\n                var email = $(this).val();\n                // Do some light validation. Klaviyo will do more validation when the data is received.\n                if (email &amp;&amp; /@/.test(email)) {\n                    klaviyo.identify({\n                        $email: email\n                    });\n                    trackStartedCheckout();\n                }\n            });\n        });\n} <br>&lt;/script&gt;</code></pre>\n</li>\n<li>This code will only be able to track checkout events going forward; you will not be able to back-populate abandoned cart flows inside Klaviyo. </li>\n<li>After saving this code to your store, Klaviyo will automatically begin tracking a <em>Started Checkout</em> metric from which you can trigger an abandoned cart flow.</li>\n</ol>\n<h2 id=\"h_01HCDNC29KV58DRE9KTYFZR4SE\">Monitor the Klaviyo sync</h2>\n<ol>\n<li>Once integrated with Volusion, Klaviyo will need time to sync your data before it is ready to be used. You can check the status of this sync by navigating back to the <strong>Integrations </strong>tab and looking for your Volusion integration on the list of <em>Enabled Integrations</em>.</li>\n<li>If there is a gray outline, this means the integration is still syncing. The bigger your store, the longer a sync can take. When your integration is shown with a green border, you're ready to go.</li>\n<li>Klaviyo imports all of your historic Volusion data when you first enable the integration. To verify this, you can compare the number of orders on a particular day with what's in the Volusion interface and confirm they match. For example, when exploring the <em>Placed Order</em> metric (under <strong>Analytics &gt; Metrics</strong> in Klaviyo) you can mouse over yesterday's data point or look at the table of data below the chart to see how many orders were reported yesterday.</li>\n<li>Compare that number to what's stored in Volusion from yesterday and you should see they match exactly. If they don't, the issue is most likely that your Klaviyo account's timezone doesn't match your Volusion timezone.</li>\n<li>To check or update your account's timezone: \n<ul>\n<li>Click your account name in the lower left.</li>\n<li>Select then clicking <strong>Settings</strong><strong> &gt; Organization</strong>.</li>\n<li>Scroll down to <em>Timezone</em>.</li>\n</ul>\n</li>\n</ol>\n<h2 id=\"h_01HCDNC29KT2XXVA9DACMWTW4T\">Data synced from Volusion</h2>\n<p>Navigate to <strong>Analytics &gt; Metrics</strong> to find all of the metrics in your account. The metrics with a Volusion icon are synced from your Volusion integration. Metrics and profile properties from Volusion are synced within the hour of someone placing an order.<br><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28711674775067\" alt=\"Metrics tab in Klaviyo filtered by Volusion showing metrics Placed Order and Ordered Product\" width=\"673\" height=\"174\"></p>\n<h3 id=\"h_01HCDNC29KYXAHNQFMHPX18WM8\">Placed Order</h3>\n<p>This event is tracked when a customer completes the checkout process and creates an order in your Volusion store. The <em>Placed Order</em> event includes all relevant information about the items someone purchased including product names, product codes, images, and price information so you can use that information in purchase follow up emails.</p>\n<h3 id=\"h_01HCDNC29K1Q69GTDG5NHP80XX\">Ordered Product</h3>\n<p>This event is also tracked when a customer places an order, but one event is tracked for each item in the order. For example, if someone buys a t-shirt and a pair of pants, one <em>Placed Order</em> event is tracked and two <em>Ordered Product</em> events - one event for the t-shirt and one event for the pants.</p>\n<p>The <em>Ordered Product</em> event includes detailed information about each product purchased. This is useful when creating behavioral segments based on product variant options and other detailed information that's not available in the <em>Placed Order</em> event. You can filter and target <em>Ordered Product</em> events based on the following criteria:</p>\n<ul>\n<li>\n<strong>Name<br></strong>The name or title of the product in Volusion, e.g., <em>t-shirt</em>.</li>\n<li>\n<strong>Product Code<br></strong>The product code for your product inside of Volusion.</li>\n<li>\n<strong>Quantity<br></strong>The quantity of the item purchased in an order.</li>\n</ul>\n<h3 id=\"h_01HCDNC29K0GZEQMTTSR13009D\">Customer data synced from Volusion</h3>\n<p>In addition to the above metrics Klaviyo syncs from Volusion, there are also customer properties that are added to each Klaviyo profile. You can use these properties in segments and flows. Here are the properties that are automatically synched from Volusion:</p>\n<ul>\n<li>Email</li>\n<li>First Name</li>\n<li>Last Name</li>\n<li>City</li>\n<li>State/Region</li>\n<li>Zip Code</li>\n<li>Country</li>\n<li>Phone Number</li>\n<li>Source (Klaviyo will track customers from Volusion with a Source property on their profile set to \"Volusion\")</li>\n</ul>\n<h2 id=\"h_01HCDNC29KASB8YRM4E70FC1J0\">Troubleshooting</h2>\n<h3 id=\"h_01HCDNC29K3RD7RDFXEHP2BP4G\">Volusion Placed Order data isn’t reporting in Klaviyo</h3>\n<p dir=\"ltr\">This may be an issue with your Volusion API settings that allow data to be exported.</p>\n<ol>\n<li dir=\"ltr\">To fix this, navigate to the <em>Inventory</em> tab of your Volusion admin panel. Select <em>Import/Export </em>from the dropdown menu.<br><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28711662634139\" alt=\"Inventory dropdown in Volusion with Import/Export in blue\" width=\"620\" height=\"365\">\n</li>\n<li dir=\"ltr\">Click on <em>Volusion API</em> to access the main API page.</li>\n<li dir=\"ltr\">In the <em>Generic</em> section, you will find the option to <strong>Run</strong> the export of your store’s Generic/Orders. Once the export is run, the page will refresh.<br><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28711662626331\" alt=\"Import/Export page in Volusion with mouse over Run for Generic\\Orders\">\n</li>\n<li dir=\"ltr\">Select all columns by clicking the checkbox in the column named <strong>*</strong> and click <strong>Run</strong>.<br><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28711662644763\" alt=\"Volusion API: Run Generic\\Orders page with asterisk column checked\" width=\"595\" height=\"270\">\n</li>\n<li dir=\"ltr\">After clicking <em>Run</em> to export your Generic Orders, an API URL is generated at the top of the page. For example, the URL would appear as: <code class=\"'language-html&quot;\">https://storename.com/net/WebService.aspx?Login=user@storename.com&amp;EncryptedPassword=<strong>ABCDEFGHIJKLMNOPQRSTUVWXYZ123456789</strong>&amp;EDI_Name=GenericOrder</code>.<br><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28711674788251\" alt=\"API key highlighted within link on page Volusion API: Run Generic\\Orders\">\n</li>\n<li dir=\"ltr\">The value that appears between \"EncryptedPassword=\" and \"&amp;EDI_Name=GenericOrders\" (highlighted in the screenshot above) serves as your API Key. Use this to re-establish your integration settings from the Integrations tab of your Klaviyo dashboard. </li>\n<li dir=\"ltr\">Upon completion, test by clicking into <strong>Analytics &gt; Metrics</strong>. View recent activity for the Volusion <em>Placed Order</em> metric to see if any new data has synced in Klaviyo. If you see new data for the <em>Placed Order</em> metric, <a href=\"https://klaviyo.zendesk.com/hc/en-us/articles/115001002272\" target=\"_blank\" rel=\"noopener\">contact our Support team</a> to run a gap fill for missing orders in Klaviyo or for any further assistance.</li>\n<li dir=\"ltr\">For additional information on exporting data using the Volusion API, please refer to <a href=\"https://support.volusion.com/hc/en-us/articles/208837888-Exports-Orders-Export-Developer-\" target=\"_blank\" rel=\"noopener\">Volusion support</a>.</li>\n</ol>\n<h3 id=\"h_01HCDNC29M0P130MBHPCRSEBQC\">People see an \"Invalid Input\" error when clicking my email links</h3>\n<p>The \"email to web tracking\" feature in Klaviyo uses click tracking to tie activity to a user who arrives at your website through a Klaviyo email before we would originally be able to identify them (such as when they make a purchase or subscribe to your email list).</p>\n<p>Volusion does not support the URL format that our click tracking uses and produces an error when a user tries to visit your store through one of these links, so this feature will have to be disabled in Klaviyo to make sure links in your email follow through to your Volusion store correctly.</p>\n<p>To fix this issue, make sure to disable email to web tracking in Klaviyo as described at the beginning of this article.</p>\n<h2 id=\"h_01HCDNC29MY6ZVZYFQ0MEYVPD9\">How to create a permanent API key in Volusion</h2>\n<p>Normally Volusion will require you to reset your API key every 90 days when you reset the password on your account, causing you to need to re-configure your Voluision integration in Klaviyo. The following steps will allow you to create a non-expiring API key instead; it involved generating API credentials for an admin account you never log in to:</p>\n<ol>\n<li>From your Volusion admin panel, go to <strong>Customers &gt; Administrators</strong> and create a new administrator account.</li>\n<li>Navigate to <strong>Inventory &gt; Import/Export</strong> and select the <strong>Volusion API</strong> tab.</li>\n<li>Under the Generic section, click the link for <strong>Volusion API Integration Help</strong>.</li>\n<li>Select <strong>Export</strong> and select the new admin you created from the dropdown.</li>\n<li>Expand the \"URL with Query String...\" box to find your permanent URL, login, and encrypted password (API Key).</li>\n</ol>\n<p>Do not log in with this account, it will be used for API access only. Logging in with this account will cause the password to expire after 90 days and you will need to redo these steps to generate a new permanent API key.</p>\n<h2 id=\"h_01HCDNC29M67D5XCMWH5YDAYZH\">Outcome</h2>\n<p>You've now integrated Klaviyo with Volusion, added onsite tracking, reviewed your synced data, and learned how to create a permanent API key.</p>\n<h2 id=\"h_01HCDNC29MMRMP7VP02TQ6XX5A\">Additional resources</h2>\n<ul>\n<li><a href=\"https://klaviyo.zendesk.com/hc/en-us/articles/115005253208\" target=\"_blank\" rel=\"noopener\">How often integrations sync reference</a></li>\n<li>Need more help integrating with Klaviyo? Check out <a href=\"https://klaviyo.partnerpage.io/?utm_source=helpcenter&amp;utm_medium=integrations\" target=\"_blank\" rel=\"noopener\">Klaviyo's Agency Partners</a>\n</li>\n</ul>",
+    "user_segment_ids": []
+  },
+  "normalized": {
+    "id": "115005083427",
+    "title": "How to integrate with Volusion",
+    "source_url": "https://help.klaviyo.com/hc/en-us/articles/115005083427-How-to-integrate-with-Volusion",
+    "section_id": 49375215615771,
+    "section": "Volusion",
+    "category_id": 115000032731,
+    "category": "Integrations",
+    "category_slug": "integrations",
+    "klaviyo_updated": "2026-04-21T13:56:39Z",
+    "created_at": "2017-03-30T18:41:22Z",
+    "draft": false,
+    "promoted": false,
+    "position": 4,
+    "label_names": []
+  },
+  "files": {
+    "body_html": "_source/articles/115005083427.body.html",
+    "rendered_html": "_source/rendered/115005083427.html"
+  },
+  "assets": {
+    "api_body": {
+      "images": [
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28711662648859",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28711674775067",
+          "alt": "Metrics tab in Klaviyo filtered by Volusion showing metrics Placed Order and Ordered Product",
+          "width": "673",
+          "height": "174"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28711662634139",
+          "alt": "Inventory dropdown in Volusion with Import/Export in blue",
+          "width": "620",
+          "height": "365"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28711662626331",
+          "alt": "Import/Export page in Volusion with mouse over Run for Generic\\Orders",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28711662644763",
+          "alt": "Volusion API: Run Generic\\Orders page with asterisk column checked",
+          "width": "595",
+          "height": "270"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28711674788251",
+          "alt": "API key highlighted within link on page Volusion API: Run Generic\\Orders",
+          "width": "",
+          "height": ""
+        }
+      ],
+      "links": [
+        {
+          "href": "http://helpcenter.volusion.com/extend-your-site/more-integrations/the-volusion-api",
+          "text": "update to your Volusion store's administrator account password every 90 days"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005062267-How-to-Manage-Your-Account-s-API-Keys",
+          "text": "Klaviyo public API key"
+        },
+        {
+          "href": "https://klaviyo.zendesk.com/hc/en-us/articles/115001002272",
+          "text": "contact our Support team"
+        },
+        {
+          "href": "https://support.volusion.com/hc/en-us/articles/208837888-Exports-Orders-Export-Developer-",
+          "text": "Volusion support"
+        },
+        {
+          "href": "https://klaviyo.zendesk.com/hc/en-us/articles/115005253208",
+          "text": "How often integrations sync reference"
+        },
+        {
+          "href": "https://klaviyo.partnerpage.io/?utm_source=helpcenter&utm_medium=integrations",
+          "text": "Klaviyo's Agency Partners"
+        }
+      ],
+      "headings": [
+        {
+          "level": 2,
+          "id": "h_01HCDNC29K40YB4JKQ2685M5FB",
+          "text": "You will learn"
+        },
+        {
+          "level": 2,
+          "id": "h_01HCDNC29KZGF48KW96QN8V1HJ",
+          "text": "Before you begin"
+        },
+        {
+          "level": 2,
+          "id": "h_01HCDNC29KZDF6825YDD2EKKYD",
+          "text": "Add the Volusion integration in Klaviyo"
+        },
+        {
+          "level": 2,
+          "id": "h_01HCDNC29KK7YEVR48CQBAVM7B",
+          "text": "Disable email to web tracking in Klaviyo"
+        },
+        {
+          "level": 2,
+          "id": "h_01HCDNC29K22N0VB3KY118HM9E",
+          "text": "Add onsite tracking to your Volusion store"
+        },
+        {
+          "level": 3,
+          "id": "h_01HCDNC29KYVC1HR9DV61N9N1T",
+          "text": "Add Active on Site tracking"
+        },
+        {
+          "level": 3,
+          "id": "h_01HCDNC29K507X1VF7ZDJYCFGM",
+          "text": "Add Viewed Product tracking"
+        },
+        {
+          "level": 3,
+          "id": "h_01HCDNC29KG6YKJ5DPFZSZN7KT",
+          "text": "Add abandoned cart reminders"
+        },
+        {
+          "level": 2,
+          "id": "h_01HCDNC29KV58DRE9KTYFZR4SE",
+          "text": "Monitor the Klaviyo sync"
+        },
+        {
+          "level": 2,
+          "id": "h_01HCDNC29KT2XXVA9DACMWTW4T",
+          "text": "Data synced from Volusion"
+        },
+        {
+          "level": 3,
+          "id": "h_01HCDNC29KYXAHNQFMHPX18WM8",
+          "text": "Placed Order"
+        },
+        {
+          "level": 3,
+          "id": "h_01HCDNC29K1Q69GTDG5NHP80XX",
+          "text": "Ordered Product"
+        },
+        {
+          "level": 3,
+          "id": "h_01HCDNC29K0GZEQMTTSR13009D",
+          "text": "Customer data synced from Volusion"
+        },
+        {
+          "level": 2,
+          "id": "h_01HCDNC29KASB8YRM4E70FC1J0",
+          "text": "Troubleshooting"
+        },
+        {
+          "level": 3,
+          "id": "h_01HCDNC29K3RD7RDFXEHP2BP4G",
+          "text": "Volusion Placed Order data isn’t reporting in Klaviyo"
+        },
+        {
+          "level": 3,
+          "id": "h_01HCDNC29M0P130MBHPCRSEBQC",
+          "text": "People see an \"Invalid Input\" error when clicking my email links"
+        },
+        {
+          "level": 2,
+          "id": "h_01HCDNC29MY6ZVZYFQ0MEYVPD9",
+          "text": "How to create a permanent API key in Volusion"
+        },
+        {
+          "level": 2,
+          "id": "h_01HCDNC29M67D5XCMWH5YDAYZH",
+          "text": "Outcome"
+        },
+        {
+          "level": 2,
+          "id": "h_01HCDNC29MMRMP7VP02TQ6XX5A",
+          "text": "Additional resources"
+        }
+      ]
+    },
+    "rendered_page": {
+      "images": [
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/7ff492c2b417b7ecfe572f839a8a81398693c1f7-1920x1080.webp",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/4af4f83a84c84bc5fd2f5ddefaeaae52fd21a91d-1140x696.png",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/d533c18591d99f94818edc283d5b83ae95e34e70-783x202.jpg?w=673",
+          "alt": "Metrics tab in Klaviyo filtered by Volusion showing metrics Placed Order and Ordered Product",
+          "width": "673",
+          "height": "174"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/fddc81be246cfa938113cf3e4c554beba2770c5d-764x450.jpg?w=620",
+          "alt": "Inventory dropdown in Volusion with Import/Export in blue",
+          "width": "620",
+          "height": "365"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/9c5cbfa4de0b55b3ad7e075e1cf43e293cb52ecb-599x448.jpg",
+          "alt": "Import/Export page in Volusion with mouse over Run for Generic\\Orders",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/491353ee203a5c4a2bc684556c88ec1956a34a7b-1415x642.jpg?w=595",
+          "alt": "Volusion API: Run Generic\\Orders page with asterisk column checked",
+          "width": "595",
+          "height": "270"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/4254848d3eb44b842bdea8a78f9332ff92f37da8-1407x339.jpg",
+          "alt": "API key highlighted within link on page Volusion API: Run Generic\\Orders",
+          "width": "",
+          "height": ""
+        }
+      ],
+      "links": [
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005083427-How-to-integrate-with-Volusion#site-content",
+          "text": "Skip to main content"
+        },
+        {
+          "href": "https://www.klaviyo.com",
+          "text": "Home"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center"
+        },
+        {
+          "href": "https://www.klaviyo.com/enterprise",
+          "text": "Enterprise"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Partners"
+        },
+        {
+          "href": "https://www.klaviyo.com/careers",
+          "text": "Careers"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": "Log in"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": ""
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center Find step-by-step instructions and troubleshooting solutions in our knowledge base."
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000032731",
+          "text": "Integrations"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000312411",
+          "text": "Flows"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867867",
+          "text": "Audience"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867667",
+          "text": "Campaigns"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/360000190711",
+          "text": "Sign-up forms"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000873988",
+          "text": "Deliverability & compliance"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/29173800271259",
+          "text": "SMS"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/16638219724187",
+          "text": "Reviews"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/18073014919195",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/34141283979931",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/37659126754075",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/33948021740315",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/39746685522331",
+          "text": "WhatsApp"
+        },
+        {
+          "href": "https://academy.klaviyo.com",
+          "text": "Klaviyo Academy Expert training and education to help you succeed with Klaviyo, and beyond."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Quick+guide&resource=academy_courses",
+          "text": "Quick guides Learn marketing strategies and concepts in 15 minutes or less."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Course&resource=academy_courses",
+          "text": "Courses Master key marketing topics through structured lessons and exams."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/best-practices",
+          "text": "Best practices Discover top product and marketing strategies for your business."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/learning-paths",
+          "text": "Learning paths Complete curated learning journeys tailored to your marketing goals."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses",
+          "text": "Explore all resources"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Live+training&resource=academy_courses",
+          "text": "Live trainings Build confidence through hands-on interactive workshops and thought-provoking strategy sessions."
+        },
+        {
+          "href": "https://www.bigmarker.com/klaviyo-customer-education/Office-hours-Getting-started-with-Klaviyo",
+          "text": "Live office hours Join a strategic discussion where you can ask questions and get answers in real-time."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/private-live-training",
+          "text": "1:1 Live training Book a private training session with an expert to jumpstart your platform knowledge and confidence."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/credentials",
+          "text": "Klaviyo credentials Dig deeper into select topics and showcase your expertise with a final exam to earn a certificate and digital badge."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/certificates/klaviyo-practitioner-certificate",
+          "text": "Klaviyo practitioner certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/deliverability-certificate",
+          "text": "Deliverability certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/developer-certificate",
+          "text": "Klaviyo developer certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses&select=Certificate",
+          "text": "See all certificates"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Klaviyo Community Join our thriving community network to connect with brands like yours—online and in person."
+        },
+        {
+          "href": "https://community.klaviyo.com/topic/new",
+          "text": "Ask a question Post a question and get thoughtful answers from Klaviyo powerusers."
+        },
+        {
+          "href": "https://community.klaviyo.com/p/roadmap",
+          "text": "Product roadmap"
+        },
+        {
+          "href": "https://community.klaviyo.com/search/activity/recent",
+          "text": "Recent threads"
+        },
+        {
+          "href": "https://community.klaviyo.com/p/champions",
+          "text": "Meet the Champions"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups",
+          "text": "Browse all groups Your people are waiting. New ideas and connections are a click away."
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/developer-group-64",
+          "text": "Developer group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/entrepreneur-user-group-118",
+          "text": "Entrepreneur group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/woo-user-group-87",
+          "text": "WooCommerce group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/new-york-meetup-chapter-82",
+          "text": "New York City"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/los-angeles-meetup-chapter-83",
+          "text": "Los Angeles"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/austin-meetup-chapter-85",
+          "text": "Austin"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/san-diego-meetup-chapter-86",
+          "text": "San Diego"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/amsterdam-meetup-chapter-84",
+          "text": "Amsterdam"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Klaviyo Developers Access API documentation and developer guides to help you build with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/get_started",
+          "text": "Get started Access key resources and a step-by-step checklist for how to start developing with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/build_your_integration",
+          "text": "Grow your app's reach Learn how to join our ecosystem and get your app listed on our marketplace."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/developer-tools",
+          "text": "Developer tools Generate sample data, monitor your API usage, and access our Postman collections."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/reference/api_overview",
+          "text": "API reference Browse our full catalog of API docs."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/changelog_",
+          "text": "Changelog"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/api_versioning_and_deprecation_policy",
+          "text": "Versioning & deprecation policy"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/rate_limits_and_error_handling",
+          "text": "Rate limits & error handling"
+        },
+        {
+          "href": "https://youtube.com/playlist?list=PLHkNfHgtxcUanrkMnKPdkRzuWU7MGv_xM&si=pkG-KH7IT_TUHOGC",
+          "text": "API tutorials on YouTube Subscribe to our Klaviyo API Tutorials playlist for easy access to step-by-step developer walkthroughs."
+        },
+        {
+          "href": "https://www.klaviyo.com/contact-us",
+          "text": "Contact us"
+        },
+        {
+          "href": "https://www.klaviyo.com/sign-up",
+          "text": "Sign up"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": "Search"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005083427",
+          "text": "United States - EN"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/de-de/articles/115005083427",
+          "text": "Deutschland - DE"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-es/articles/115005083427",
+          "text": "España - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-mx/articles/115005083427",
+          "text": "México - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/fr-fr/articles/115005083427",
+          "text": "France - FR"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/it-it/articles/115005083427",
+          "text": "Italia - IT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/ko-kr/articles/115005083427",
+          "text": "한국 - KO"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/nl-nl/articles/115005083427",
+          "text": "Nederland - NL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pl-pl/articles/115005083427",
+          "text": "Polska - PL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pt-br/articles/115005083427",
+          "text": "Brasil - PT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/sv-se/articles/115005083427",
+          "text": "Sverige - SV"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/14508660690203",
+          "text": "More integrations"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/49375215615771",
+          "text": "Volusion"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005083427-How-to-integrate-with-Volusion#h_01HCDNC29K40YB4JKQ2685M5FB",
+          "text": "You will learn"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005083427-How-to-integrate-with-Volusion#h_01HCDNC29KZGF48KW96QN8V1HJ",
+          "text": "Before you begin"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005083427-How-to-integrate-with-Volusion#h_01HCDNC29KZDF6825YDD2EKKYD",
+          "text": "Add the Volusion integration in Klaviyo"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005083427-How-to-integrate-with-Volusion#h_01HCDNC29KK7YEVR48CQBAVM7B",
+          "text": "Disable email to web tracking in Klaviyo"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005083427-How-to-integrate-with-Volusion#h_01HCDNC29K22N0VB3KY118HM9E",
+          "text": "Add onsite tracking to your Volusion store"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005083427-How-to-integrate-with-Volusion#h_01HCDNC29KV58DRE9KTYFZR4SE",
+          "text": "Monitor the Klaviyo sync"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005083427-How-to-integrate-with-Volusion#h_01HCDNC29KT2XXVA9DACMWTW4T",
+          "text": "Data synced from Volusion"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005083427-How-to-integrate-with-Volusion#h_01HCDNC29KASB8YRM4E70FC1J0",
+          "text": "Troubleshooting"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005083427-How-to-integrate-with-Volusion#h_01HCDNC29MY6ZVZYFQ0MEYVPD9",
+          "text": "How to create a permanent API key in Volusion"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005083427-How-to-integrate-with-Volusion#h_01HCDNC29M67D5XCMWH5YDAYZH",
+          "text": "Outcome"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005083427-How-to-integrate-with-Volusion#additional-resources",
+          "text": "Additional resources"
+        },
+        {
+          "href": "http://helpcenter.volusion.com/extend-your-site/more-integrations/the-volusion-api",
+          "text": "update to your Volusion store's administrator account password every 90 days"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005062267-How-to-Manage-Your-Account-s-API-Keys",
+          "text": "Klaviyo public API key"
+        },
+        {
+          "href": "https://klaviyo.zendesk.com/hc/en-us/articles/115001002272",
+          "text": "contact our Support team"
+        },
+        {
+          "href": "https://support.volusion.com/hc/en-us/articles/208837888-Exports-Orders-Export-Developer-",
+          "text": "Volusion support"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005253208",
+          "text": "How often integrations sync reference"
+        },
+        {
+          "href": "https://klaviyo.partnerpage.io/?utm_source=helpcenter&utm_medium=integrations",
+          "text": "Klaviyo's Agency Partners"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115001002272",
+          "text": "Learn how to contact support"
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": ""
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": "Visit Community"
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": ""
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": "Hire a partner"
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/about",
+          "text": "About Klaviyo"
+        },
+        {
+          "href": "https://www.klaviyo.com/newsroom",
+          "text": "Newsroom"
+        },
+        {
+          "href": "https://investors.klaviyo.com/overview/default.aspx",
+          "text": "Investor relations"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Agency and tech partners"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Developers"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/retail",
+          "text": "Retail and ecommerce"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/restaurants",
+          "text": "Restaurant marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/wellness",
+          "text": "Wellness"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform",
+          "text": "B2C CRM overview"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai",
+          "text": "Klaviyo AI (K:AI)"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/marketing-automation",
+          "text": "Klaviyo Marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-service",
+          "text": "Klaviyo Service"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/analytics",
+          "text": "Klaviyo Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-data-platform",
+          "text": "Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare",
+          "text": "Klaviyo vs. Klaviyo alternatives"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-mailchimp",
+          "text": "Klaviyo vs. Mailchimp"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-postscript",
+          "text": "Klaviyo vs. Postscript"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-attentive",
+          "text": "Klaviyo vs. Attentive"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-salesforce-marketing-cloud",
+          "text": "Klaviyo vs. Salesforce"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-listrak",
+          "text": "Klaviyo vs. Listrak"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/omnichannel",
+          "text": "Omnichannel marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/email-marketing",
+          "text": "Email marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing",
+          "text": "SMS marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing/rcs",
+          "text": "RCS for Business"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/mobile-app-marketing",
+          "text": "Mobile app marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/whatsapp",
+          "text": "WhatsApp marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/social",
+          "text": "Social marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources",
+          "text": "Marketing resources"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources/marketing-campaign-calendar",
+          "text": "Marketing campaign calendar"
+        },
+        {
+          "href": "https://www.klaviyo.com/glossary",
+          "text": "Marketing glossary"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/email-subject-line-generator",
+          "text": "Subject line generator"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/roi-calculator",
+          "text": "ROI calculator"
+        },
+        {
+          "href": "https://www.klaviyo.com/customers",
+          "text": "Case studies"
+        },
+        {
+          "href": "https://www.klaviyo.com/composer",
+          "text": "Composer Beta"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/marketing-agent",
+          "text": "Marketing Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/customer-agent",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/customer-experience-hub",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/helpdesk",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/marketing-analytics",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/advanced-cdp",
+          "text": "Advanced Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/web-forms",
+          "text": "Web forms"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/email-templates",
+          "text": "Email templates"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/portfolio",
+          "text": "Portfolio"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform-integrations",
+          "text": "Apps and Integrations"
+        },
+        {
+          "href": "https://www.klaviyo.com/features",
+          "text": "Features"
+        },
+        {
+          "href": "https://www.klaviyo.com/whats-new",
+          "text": "What's new"
+        },
+        {
+          "href": "https://www.klaviyo.com/events",
+          "text": "Events"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help Center"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us",
+          "text": "Academy"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Community"
+        },
+        {
+          "href": "https://www.facebook.com/Klaviyo/",
+          "text": "Facebook"
+        },
+        {
+          "href": "https://twitter.com/klaviyo/",
+          "text": "Twitter"
+        },
+        {
+          "href": "https://www.linkedin.com/company/klaviyo/",
+          "text": "LinkedIn"
+        },
+        {
+          "href": "https://www.instagram.com/klaviyo/",
+          "text": "Instagram"
+        },
+        {
+          "href": "https://www.klaviyo.com/sitemap",
+          "text": "Site Map"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal",
+          "text": "Terms and Privacy"
+        },
+        {
+          "href": "https://www.klaviyo.com/security",
+          "text": "Security"
+        },
+        {
+          "href": "https://www.klaviyo.com/trust",
+          "text": "Trust"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal/intellectual-property-notices",
+          "text": "Intellectual Property Notices"
+        }
+      ],
+      "headings": [
+        {
+          "level": 1,
+          "id": "",
+          "text": "How to integrate with Volusion"
+        },
+        {
+          "level": 2,
+          "id": "h_01HCDNC29K40YB4JKQ2685M5FB",
+          "text": "You will learn"
+        },
+        {
+          "level": 2,
+          "id": "h_01HCDNC29KZGF48KW96QN8V1HJ",
+          "text": "Before you begin"
+        },
+        {
+          "level": 2,
+          "id": "h_01HCDNC29KZDF6825YDD2EKKYD",
+          "text": "Add the Volusion integration in Klaviyo"
+        },
+        {
+          "level": 2,
+          "id": "h_01HCDNC29KK7YEVR48CQBAVM7B",
+          "text": "Disable email to web tracking in Klaviyo"
+        },
+        {
+          "level": 2,
+          "id": "h_01HCDNC29K22N0VB3KY118HM9E",
+          "text": "Add onsite tracking to your Volusion store"
+        },
+        {
+          "level": 3,
+          "id": "h_01HCDNC29KYVC1HR9DV61N9N1T",
+          "text": "Add Active on Site tracking"
+        },
+        {
+          "level": 3,
+          "id": "h_01HCDNC29K507X1VF7ZDJYCFGM",
+          "text": "Add Viewed Product tracking"
+        },
+        {
+          "level": 3,
+          "id": "h_01HCDNC29KG6YKJ5DPFZSZN7KT",
+          "text": "Add abandoned cart reminders"
+        },
+        {
+          "level": 2,
+          "id": "h_01HCDNC29KV58DRE9KTYFZR4SE",
+          "text": "Monitor the Klaviyo sync"
+        },
+        {
+          "level": 2,
+          "id": "h_01HCDNC29KT2XXVA9DACMWTW4T",
+          "text": "Data synced from Volusion"
+        },
+        {
+          "level": 3,
+          "id": "h_01HCDNC29KYXAHNQFMHPX18WM8",
+          "text": "Placed Order"
+        },
+        {
+          "level": 3,
+          "id": "h_01HCDNC29K1Q69GTDG5NHP80XX",
+          "text": "Ordered Product"
+        },
+        {
+          "level": 3,
+          "id": "h_01HCDNC29K0GZEQMTTSR13009D",
+          "text": "Customer data synced from Volusion"
+        },
+        {
+          "level": 2,
+          "id": "h_01HCDNC29KASB8YRM4E70FC1J0",
+          "text": "Troubleshooting"
+        },
+        {
+          "level": 3,
+          "id": "h_01HCDNC29K3RD7RDFXEHP2BP4G",
+          "text": "Volusion Placed Order data isn’t reporting in Klaviyo"
+        },
+        {
+          "level": 3,
+          "id": "h_01HCDNC29M0P130MBHPCRSEBQC",
+          "text": "People see an \"Invalid Input\" error when clicking my email links"
+        },
+        {
+          "level": 2,
+          "id": "h_01HCDNC29MY6ZVZYFQ0MEYVPD9",
+          "text": "How to create a permanent API key in Volusion"
+        },
+        {
+          "level": 2,
+          "id": "h_01HCDNC29M67D5XCMWH5YDAYZH",
+          "text": "Outcome"
+        },
+        {
+          "level": 2,
+          "id": "additional-resources",
+          "text": "Additional resources"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "Explore more from Klaviyo"
+        }
+      ]
+    }
+  },
+  "rendered_page": {
+    "status": "fetched",
+    "error": ""
+  }
+}

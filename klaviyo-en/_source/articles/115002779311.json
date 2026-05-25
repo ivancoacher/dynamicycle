@@ -1,0 +1,907 @@
+{
+  "captured_at": "2026-05-23T16:16:54Z",
+  "article": {
+    "id": 115002779311,
+    "url": "https://klaviyo.zendesk.com/api/v2/help_center/en-us/articles/115002779311.json",
+    "html_url": "https://klaviyo.zendesk.com/hc/en-us/articles/115002779311-Understanding-Smart-Sending-in-Klaviyo",
+    "author_id": 20424705848,
+    "comments_disabled": true,
+    "draft": false,
+    "promoted": false,
+    "position": 1,
+    "vote_sum": 390,
+    "vote_count": 744,
+    "section_id": 49375455119643,
+    "created_at": "2017-11-15T15:44:16Z",
+    "updated_at": "2026-04-21T13:56:37Z",
+    "name": "Understanding Smart Sending in Klaviyo",
+    "title": "Understanding Smart Sending in Klaviyo",
+    "source_locale": "en-us",
+    "locale": "en-us",
+    "outdated": false,
+    "outdated_locales": [],
+    "edited_at": "2025-07-17T15:35:16Z",
+    "user_segment_id": null,
+    "permission_group_id": 146372,
+    "content_tag_ids": [],
+    "label_names": [],
+    "body": "<h2 id=\"h_01HHHSS05S1992MMXXHZCDEWTV\">You will learn</h2>\n<p>Learn about Smart Sending, which allows you to limit the number of emails, SMS messages, or push notifications someone can receive within a set period of time. </p>\n<p>This is a good way to prevent your subscribers from receiving too many messages at once if you have many active flows and campaigns.</p>\n<h2 id=\"h_01HHHT3EXXSP4XVRKSHAJ7MEJQ\">Before you begin</h2>\n<p>Keep the following in mind when using Smart Sending: </p>\n<ul>\n<li>All channels have separate Smart Sending windows.\n<ul>\n<li>Email default: 16 hours</li>\n<li>SMS default: 24 hours</li>\n<li>Push notification default: 24 hours</li>\n</ul>\n</li>\n<li>You can change the Smart Sending windows at any time, but it will not take effect immediately.\n<ul>\n<li>Updating the smart sending window does not retroactively affect recipients.\n<ul>\n<li>Example: If you send an email campaign and then change the email Smart Sending window from 16 to 10 hours, anyone who received that campaign will be skipped from emails with Smart Sending turned on until the full 16 hours pass.</li>\n</ul>\n</li>\n</ul>\n</li>\n<li>Messages skipped due to Smart Sending are not rescheduled automatically.\n<ul>\n<li>For information on resending emails, read <a href=\"https://help.klaviyo.com/hc/en-us/articles/360046797191\">how to resend emails in Klaviyo</a>.</li>\n<li>Currently, it’s not possible to resend a text message or push notification to someone who was skipped due to Smart Sending except by doing so manually. </li>\n</ul>\n</li>\n<li>If Smart Sending is off for any message, recipients can receive that message even if it’s sent before the Smart Sending window closes. </li>\n<li>Smart Sending for different channels (e.g., SMS and email) are managed independently and do not affect each other.\n<ul>\n<li>\n<p class=\"p1\">For instance, after someone receives an email, you can still send them an SMS the same day when Smart Sending is on. The SMS Smart Sending window only applies to SMS, and the email window only applies to emails.</p>\n</li>\n</ul>\n</li>\n</ul>\n<div class=\"accordion accordion--default\">\n<div class=\"accordion__item\">\n<div class=\"accordion__item-title\"><strong>Why does changing the Smart Sending window not take effect immediately, and is there anything I can do about it? </strong></div>\n<div class=\"accordion__item-content\">\n<p>Think of Smart Sending like a countdown timer on each profile: </p>\n<ul>\n<li>The amount of the time is the same as the Smart Sending window at the time you send. </li>\n<li>The timer starts for everyone who Klaviyo tried to deliver that message to: \n<ul>\n<li>Includes those that received the message and those where the message failed after leaving Klaviyo (e.g., the message bounced, an inbox provider or wireless carrier filtered the message, etc.).</li>\n<li>Does not include those skipped by Klaviyo (e.g., due to Smart Sending, flow filters, excluded lists or segments, etc.).</li>\n</ul>\n</li>\n<li>The timer is specific to each profile, so the remaining amount of time on each timer varies. </li>\n</ul>\n<p>Say that you do the following:</p>\n<ol>\n<li>Send an email to your full list.</li>\n<li>Change the Smart Sending window from 5 days to 1 hour.</li>\n<li>Send a second email with Smart Sending.</li>\n</ol>\n<p>In this example, the second email will be skipped. All subsequent emails with Smart Sending sent within the next 5 days will also be skipped.</p>\n<table>\n<tbody>\n<tr>\n<td>\n<p><strong>Message</strong></p>\n</td>\n<td>\n<p><strong>Timing</strong></p>\n</td>\n<td>\n<p><strong>Smart Sending turned on? </strong></p>\n</td>\n<td>\n<p><strong>Received email?</strong></p>\n</td>\n</tr>\n<tr>\n<td>\n<p>Email 1</p>\n</td>\n<td>\n<p>Before changing Smart Sending</p>\n</td>\n<td>\n<p>Yes</p>\n</td>\n<td>\n<p>Yes</p>\n</td>\n</tr>\n<tr>\n<td>\n<p>Email 2</p>\n</td>\n<td>\n<p>1 hour after the change</p>\n</td>\n<td>\n<p>Yes</p>\n</td>\n<td>\n<p>No</p>\n</td>\n</tr>\n<tr>\n<td>\n<p>Email 3</p>\n</td>\n<td>\n<p>3 hours after the change</p>\n</td>\n<td>\n<p>Yes</p>\n</td>\n<td>\n<p>No</p>\n</td>\n</tr>\n</tbody>\n</table>\n<p>The only exception is if you turn off Smart Sending for a message. In this case, 2 things will happen:</p>\n<ul>\n<li>Klaviyo will send the message to everyone on your list. </li>\n<li>Because Klaviyo attempted to deliver a new message, the timer will be reset to the current Smart Sending window. </li>\n</ul>\n<p>Let’s add this to the example we just looked at. You: </p>\n<ol>\n<li>Send an email to your full list.</li>\n<li>Change the Smart Sending window from 5 days to 1 hour.</li>\n<li>Send a second email that has Smart Sending.</li>\n<li>But now, you send another email without Smart Sending. </li>\n</ol>\n<p>For this last message, everyone you sent to will receive it. Furthermore, the Smart Sending window is now set to 1 hour, so you can send more messages before the rest of the 5 days is up, even when Smart Sending is turned on.</p>\n<table>\n<tbody>\n<tr>\n<td>\n<p><strong>Message</strong></p>\n</td>\n<td>\n<p><strong>Timing</strong></p>\n</td>\n<td>\n<p><strong>Smart Sending turned on? </strong></p>\n</td>\n<td>\n<p><strong>Received email?</strong></p>\n</td>\n</tr>\n<tr>\n<td>\n<p>Email 1</p>\n</td>\n<td>\n<p>Before changing Smart Sending window</p>\n</td>\n<td>\n<p>Yes</p>\n</td>\n<td>\n<p>Yes</p>\n</td>\n</tr>\n<tr>\n<td>\n<p>Email 2</p>\n</td>\n<td>\n<p>1 hour after the change</p>\n</td>\n<td>\n<p>Yes</p>\n</td>\n<td>\n<p>No</p>\n</td>\n</tr>\n<tr>\n<td>\n<p>Email 3</p>\n</td>\n<td>\n<p>3 hours after the change</p>\n</td>\n<td>\n<p>No</p>\n</td>\n<td>\n<p>Yes</p>\n</td>\n</tr>\n<tr>\n<td>\n<p>Email 4</p>\n</td>\n<td>\n<p>6 hours after the change</p>\n</td>\n<td>\n<p>Yes</p>\n</td>\n<td>\n<p>Yes</p>\n</td>\n</tr>\n</tbody>\n</table>\n<p>The above scenarios cover if you send all messages to all profiles, but what if the messages are sent to different groups? Or what if Klaviyo skips someone from the message without Smart Sending?</p>\n<p>To illustrate what happens, let’s see what happens if we only send the email where Smart Sending is off to a portion of our audience. </p>\n<table>\n<tbody>\n<tr>\n<td>\n<p><strong>Message</strong></p>\n</td>\n<td>\n<p><strong>Group sent to</strong></p>\n</td>\n<td>\n<p><strong>Timing</strong></p>\n</td>\n<td>\n<p><strong>Smart Sending turned on? </strong></p>\n</td>\n<td>\n<p><strong>Received email?</strong></p>\n</td>\n</tr>\n<tr>\n<td>\n<p>Email 1</p>\n</td>\n<td>\n<p>A and B</p>\n</td>\n<td>\n<p>Before changing Smart Sending window</p>\n</td>\n<td>\n<p>Yes</p>\n</td>\n<td>\n<p>Yes</p>\n</td>\n</tr>\n<tr>\n<td>\n<p>Email 2</p>\n</td>\n<td>\n<p>A and B</p>\n</td>\n<td>\n<p>1 hour after the change</p>\n</td>\n<td>\n<p>Yes</p>\n</td>\n<td>\n<p>No</p>\n</td>\n</tr>\n<tr>\n<td>\n<p>Email 3</p>\n</td>\n<td>\n<p>A</p>\n</td>\n<td>\n<p>3 hours after the change</p>\n</td>\n<td>\n<p>No</p>\n</td>\n<td>\n<p>Yes</p>\n</td>\n</tr>\n<tr>\n<td>\n<p>Email 4</p>\n</td>\n<td>\n<p>A and B</p>\n</td>\n<td>\n<p>6 hours after the change</p>\n</td>\n<td>\n<p>Yes</p>\n</td>\n<td>\n<p>A: Yes</p>\n<p>B: No</p>\n</td>\n</tr>\n</tbody>\n</table>\n<p>As you can see, group B is skipped from email 4. Because they didn’t receive email 3, their timer was not reset. Thus, Klavyo will skip them for 4 more days unless they are sent an email without Smart Sending. </p>\n<p>The same is true for anyone who was skipped from email 3 (e.g., if they failed a filter or were excluded). </p>\n</div>\n</div>\n<div class=\"accordion__item\">\n<div class=\"accordion__item-title\"><strong>Is there a way I can change the Smart Sending window for a profile? </strong></div>\n<div class=\"accordion__item-content\">\n<p>The only way is by sending a message where Smart Sending is off.</p>\n<p>Doing so allows your message to be sent without being skipped, and it will reset the timer, updating it to the current window. </p>\n<p>As an example, say you: </p>\n<ol>\n<li>Send an email to your full list.</li>\n<li>Change the Smart Sending window from 5 days to 1 hour.</li>\n<li>Send a second email that has Smart Sending.</li>\n<li>Send a third email without Smart Sending. </li>\n</ol>\n<p>Now, this third message will be sent, and the timer will now be set at 1 hour. </p>\n<table>\n<tbody>\n<tr>\n<td>\n<p><strong>Message</strong></p>\n</td>\n<td>\n<p><strong>Timing</strong></p>\n</td>\n<td>\n<p><strong>Smart Sending turned on? </strong></p>\n</td>\n<td>\n<p><strong>Received email?</strong></p>\n</td>\n</tr>\n<tr>\n<td>\n<p>Email 1</p>\n</td>\n<td>\n<p>Before changing Smart Sending window</p>\n</td>\n<td>\n<p>Yes</p>\n</td>\n<td>\n<p>Yes</p>\n</td>\n</tr>\n<tr>\n<td>\n<p>Email 2</p>\n</td>\n<td>\n<p>1 hour after the change</p>\n</td>\n<td>\n<p>Yes</p>\n</td>\n<td>\n<p>No</p>\n</td>\n</tr>\n<tr>\n<td>\n<p>Email 3</p>\n</td>\n<td>\n<p>3 hours after the change</p>\n</td>\n<td>\n<p>No</p>\n</td>\n<td>\n<p>Yes</p>\n</td>\n</tr>\n<tr>\n<td>\n<p>Email 4</p>\n</td>\n<td>\n<p>6 hours after the change</p>\n</td>\n<td>\n<p>Yes</p>\n</td>\n<td>\n<p>Yes</p>\n</td>\n</tr>\n</tbody>\n</table>\n</div>\n</div>\n</div>\n<h2 id=\"h_01HHHSS05SRFTYEZZ01VPFRGV1\">Change the Smart Sending timeframe</h2>\n<p>As mentioned the Smart Sending timeframes for email, SMS, and push are separate, so you can adjust one without affecting the other. </p>\n<h3 id=\"h_01HHHSS05S2T7R42Z9MXCFBTGC\">Email Smart Sending window</h3>\n<p>By default, the email Smart Sending window is 16 hours. </p>\n<ol>\n<li>Navigate to your organization name in the bottom left corner of your screen.</li>\n<li>Click <strong>Settings</strong>.</li>\n<li>Select<strong> Email &gt; Sending preferences</strong>.</li>\n<li>Update the number of hours under <em>Smart Sending Period</em>.<br><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/33469179056923\" alt=\"Smart sending modal\">\n</li>\n<li>Check the box to <strong>Ignore transactional messages </strong>if you send <a href=\"https://help.klaviyo.com/hc/en-us/articles/360003165732\" target=\"_self\">transactional emails</a>.\n<ul>\n<li>In almost all cases, Smart Sending should remain disabled for transactional emails, as these are messages that customers anticipate receiving and search for in their inboxes.</li>\n</ul>\n</li>\n</ol>\n<h3 id=\"h_01HHHSS05SM1GBBVWW6GS8QXF5\">SMS Smart Sending window</h3>\n<p>By default, the SMS Smart Sending window is 24 hours. </p>\n<ol>\n<li>Navigate to your organization name in the bottom left corner of your screen.</li>\n<li>Click <strong>Settings</strong>.</li>\n<li>Select <strong>SMS &gt; Sending preferences</strong>.</li>\n<li>Edit your Smart Sending period within the <em>SMS Sending Settings</em><span> area.</span>\n</li>\n</ol>\n<p><span><span style=\"color: #232426;\" data-darkreader-inline-color=\"\">For SMS, you can set distinct Smart Sending timeframes for campaigns and flows. </span></span></p>\n<p><span><span style=\"color: #232426;\" data-darkreader-inline-color=\"\"><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/30910478392219\" width=\"551\" height=\"207\"></span></span></p>\n<h3 id=\"h_01HHHSS05SNJS46ZFYGVZZ71XV\">Push notification Smart Sending window</h3>\n<ol>\n<li>Navigate to your organization name in the bottom left corner of your screen.</li>\n<li>Click <strong>Settings</strong>.</li>\n<li>Select <strong>Push notifications</strong>.</li>\n<li>Edit your Smart Sending period within the <em>Push Sending Settings</em><span> area.</span>\n</li>\n<li><span>Click <strong>Update Push Sending Settings</strong>. <br><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/33469155306651\" alt=\"Push smart sending settings\"><br></span></li>\n</ol>\n<h2 id=\"h_01HHHSS05S5S2YZYVWE028F5MR\">Disable Smart Sending for a message</h2>\n<h3 id=\"h_01HHHSS05SRDFD425XW5N1CBNE\">Campaigns</h3>\n<p>Smart Sending is enabled by default for all campaigns. You can choose to disable Smart Sending on a per-campaign basis. We recommend keeping Smart Sending turned on for most, if not all, marketing emails.</p>\n<p>In step 1 of the campaign, toggle off the option to: </p>\n<ul>\n<li>Email: Skip profiles who recently received an email.<br><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/30910487106843\">\n</li>\n<li>SMS:<br>\n<ul>\n<li>Skip profiles who recently received a campaign message.</li>\n<li>Skip profiles who recently received a flow message.<br><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/30910478399003\">\n</li>\n</ul>\n</li>\n<li>Push: Skip profiles who recently received a push message.</li>\n</ul>\n<h3 id=\"h_01HHHSS05TDSBPMTY7EWWD8M9B\">Flows</h3>\n<p>Smart Sending is enabled for flow messages in many pre-built flows. If you are using a pre-built flow, and Smart Sending is enabled, you can choose to turn it off for individual flow messages.</p>\n<ol>\n<li>Click on an individual flow message.</li>\n<li>Scroll down to <em>Skip recently email profiles</em>.</li>\n<li>Toggle off <strong>Smart Sending</strong>.</li>\n</ol>\n<p class=\"wysiwyg-text-align-center\"><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/33469155313051\" alt=\"Smart sending option for flow email\" width=\"460\" height=\"268\"></p>\n<p class=\"wysiwyg-text-align-left\">Note that SMS Smart Sending uses the phone number to determine if a message to a profile should be skipped. If multiple profiles share the same number, and that number has received an SMS message within the Smart Sending window, any new messages to that number will be skipped, regardless of which profile triggers the send.</p>\n<h2 id=\"h_01HHHSS05T08VBNSBGM0PGNH62\">Smart Sending and A/B testing</h2>\n<p><a href=\"https://help.klaviyo.com/hc/en-us/articles/115005228148\" target=\"_blank\" rel=\"noopener\">A/B tests</a> that receive no results due to Smart Sending are automatically cancelled. This means that everyone in the test pool for your A/B test campaign got skipped because they received another message too recently. If you receive an in-app notification like the one below, your A/B test has been canceled and you need to resend your campaign to reach your recipients. </p>\n<h2 id=\"h_01HHHSS05T36TKQM5YSVP9SGWE\" class=\"wysiwyg-text-align-left\">Additional resources</h2>\n<ul>\n<li>Check out <a href=\"https://help.klaviyo.com/hc/en-us/articles/360046797191\" target=\"_blank\" rel=\"noopener noreferrer\">how to resend emails in Klaviyo</a>\n</li>\n<li>Find out more about A/B testing:\n<ul>\n<li><a href=\"https://help.klaviyo.com/hc/en-us/articles/115005228148\" target=\"_self\">A/B testing campaigns</a></li>\n<li><a href=\"https://help.klaviyo.com/hc/en-us/articles/6960371049115\" target=\"_blank\" rel=\"noopener\">A/B testing an individual flow message</a></li>\n</ul>\n</li>\n</ul>",
+    "user_segment_ids": []
+  },
+  "normalized": {
+    "id": "115002779311",
+    "title": "Understanding Smart Sending in Klaviyo",
+    "source_url": "https://help.klaviyo.com/hc/en-us/articles/115002779311-Understanding-Smart-Sending-in-Klaviyo",
+    "section_id": 49375455119643,
+    "section": "Message settings",
+    "category_id": 115000867647,
+    "category": "Account & billing",
+    "category_slug": "account-billing",
+    "klaviyo_updated": "2026-04-21T13:56:37Z",
+    "created_at": "2017-11-15T15:44:16Z",
+    "draft": false,
+    "promoted": false,
+    "position": 1,
+    "label_names": []
+  },
+  "files": {
+    "body_html": "_source/articles/115002779311.body.html",
+    "rendered_html": "_source/rendered/115002779311.html"
+  },
+  "assets": {
+    "api_body": {
+      "images": [
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/33469179056923",
+          "alt": "Smart sending modal",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/30910478392219",
+          "alt": "",
+          "width": "551",
+          "height": "207"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/33469155306651",
+          "alt": "Push smart sending settings",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/30910487106843",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/30910478399003",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/33469155313051",
+          "alt": "Smart sending option for flow email",
+          "width": "460",
+          "height": "268"
+        }
+      ],
+      "links": [
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360046797191",
+          "text": "how to resend emails in Klaviyo"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360003165732",
+          "text": "transactional emails"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005228148",
+          "text": "A/B tests"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005228148",
+          "text": "A/B testing campaigns"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/6960371049115",
+          "text": "A/B testing an individual flow message"
+        }
+      ],
+      "headings": [
+        {
+          "level": 2,
+          "id": "h_01HHHSS05S1992MMXXHZCDEWTV",
+          "text": "You will learn"
+        },
+        {
+          "level": 2,
+          "id": "h_01HHHT3EXXSP4XVRKSHAJ7MEJQ",
+          "text": "Before you begin"
+        },
+        {
+          "level": 2,
+          "id": "h_01HHHSS05SRFTYEZZ01VPFRGV1",
+          "text": "Change the Smart Sending timeframe"
+        },
+        {
+          "level": 3,
+          "id": "h_01HHHSS05S2T7R42Z9MXCFBTGC",
+          "text": "Email Smart Sending window"
+        },
+        {
+          "level": 3,
+          "id": "h_01HHHSS05SM1GBBVWW6GS8QXF5",
+          "text": "SMS Smart Sending window"
+        },
+        {
+          "level": 3,
+          "id": "h_01HHHSS05SNJS46ZFYGVZZ71XV",
+          "text": "Push notification Smart Sending window"
+        },
+        {
+          "level": 2,
+          "id": "h_01HHHSS05S5S2YZYVWE028F5MR",
+          "text": "Disable Smart Sending for a message"
+        },
+        {
+          "level": 3,
+          "id": "h_01HHHSS05SRDFD425XW5N1CBNE",
+          "text": "Campaigns"
+        },
+        {
+          "level": 3,
+          "id": "h_01HHHSS05TDSBPMTY7EWWD8M9B",
+          "text": "Flows"
+        },
+        {
+          "level": 2,
+          "id": "h_01HHHSS05T08VBNSBGM0PGNH62",
+          "text": "Smart Sending and A/B testing"
+        },
+        {
+          "level": 2,
+          "id": "h_01HHHSS05T36TKQM5YSVP9SGWE",
+          "text": "Additional resources"
+        }
+      ]
+    },
+    "rendered_page": {
+      "images": [
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/7ff492c2b417b7ecfe572f839a8a81398693c1f7-1920x1080.webp",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/e2c22ecec251bf45b71ecfd8298720dbd179fc23-1644x722.jpg",
+          "alt": "Smart sending modal",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/6ebb9d8a8a4ae400b25f9cf614f89ed37f590c72-700x263.jpg?w=551",
+          "alt": "",
+          "width": "551",
+          "height": "207"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/e63c2098775bf778cc19115a29bd86e013608195-1264x540.jpg",
+          "alt": "Push smart sending settings",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/0d7015ef53fe14539f9c49079a3a284105273a75-1000x166.jpg",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/28924b88a4d0b1a815ef6ae27e3f5db8be91c299-1414x468.jpg",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/fbe02fceb3f0105a305f2d773169917f3f8d18d9-754x440.jpg?w=460",
+          "alt": "Smart sending option for flow email",
+          "width": "460",
+          "height": "268"
+        }
+      ],
+      "links": [
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115002779311-Understanding-Smart-Sending-in-Klaviyo#site-content",
+          "text": "Skip to main content"
+        },
+        {
+          "href": "https://www.klaviyo.com",
+          "text": "Home"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center"
+        },
+        {
+          "href": "https://www.klaviyo.com/enterprise",
+          "text": "Enterprise"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Partners"
+        },
+        {
+          "href": "https://www.klaviyo.com/careers",
+          "text": "Careers"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": "Log in"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": ""
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center Find step-by-step instructions and troubleshooting solutions in our knowledge base."
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000032731",
+          "text": "Integrations"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000312411",
+          "text": "Flows"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867867",
+          "text": "Audience"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867667",
+          "text": "Campaigns"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/360000190711",
+          "text": "Sign-up forms"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000873988",
+          "text": "Deliverability & compliance"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/29173800271259",
+          "text": "SMS"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/16638219724187",
+          "text": "Reviews"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/18073014919195",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/34141283979931",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/37659126754075",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/33948021740315",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/39746685522331",
+          "text": "WhatsApp"
+        },
+        {
+          "href": "https://academy.klaviyo.com",
+          "text": "Klaviyo Academy Expert training and education to help you succeed with Klaviyo, and beyond."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Quick+guide&resource=academy_courses",
+          "text": "Quick guides Learn marketing strategies and concepts in 15 minutes or less."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Course&resource=academy_courses",
+          "text": "Courses Master key marketing topics through structured lessons and exams."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/best-practices",
+          "text": "Best practices Discover top product and marketing strategies for your business."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/learning-paths",
+          "text": "Learning paths Complete curated learning journeys tailored to your marketing goals."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses",
+          "text": "Explore all resources"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Live+training&resource=academy_courses",
+          "text": "Live trainings Build confidence through hands-on interactive workshops and thought-provoking strategy sessions."
+        },
+        {
+          "href": "https://www.bigmarker.com/klaviyo-customer-education/Office-hours-Getting-started-with-Klaviyo",
+          "text": "Live office hours Join a strategic discussion where you can ask questions and get answers in real-time."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/private-live-training",
+          "text": "1:1 Live training Book a private training session with an expert to jumpstart your platform knowledge and confidence."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/credentials",
+          "text": "Klaviyo credentials Dig deeper into select topics and showcase your expertise with a final exam to earn a certificate and digital badge."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/certificates/klaviyo-practitioner-certificate",
+          "text": "Klaviyo practitioner certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/deliverability-certificate",
+          "text": "Deliverability certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/developer-certificate",
+          "text": "Klaviyo developer certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses&select=Certificate",
+          "text": "See all certificates"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Klaviyo Community Join our thriving community network to connect with brands like yours—online and in person."
+        },
+        {
+          "href": "https://community.klaviyo.com/topic/new",
+          "text": "Ask a question Post a question and get thoughtful answers from Klaviyo powerusers."
+        },
+        {
+          "href": "https://community.klaviyo.com/p/roadmap",
+          "text": "Product roadmap"
+        },
+        {
+          "href": "https://community.klaviyo.com/search/activity/recent",
+          "text": "Recent threads"
+        },
+        {
+          "href": "https://community.klaviyo.com/p/champions",
+          "text": "Meet the Champions"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups",
+          "text": "Browse all groups Your people are waiting. New ideas and connections are a click away."
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/developer-group-64",
+          "text": "Developer group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/entrepreneur-user-group-118",
+          "text": "Entrepreneur group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/woo-user-group-87",
+          "text": "WooCommerce group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/new-york-meetup-chapter-82",
+          "text": "New York City"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/los-angeles-meetup-chapter-83",
+          "text": "Los Angeles"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/austin-meetup-chapter-85",
+          "text": "Austin"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/san-diego-meetup-chapter-86",
+          "text": "San Diego"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/amsterdam-meetup-chapter-84",
+          "text": "Amsterdam"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Klaviyo Developers Access API documentation and developer guides to help you build with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/get_started",
+          "text": "Get started Access key resources and a step-by-step checklist for how to start developing with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/build_your_integration",
+          "text": "Grow your app's reach Learn how to join our ecosystem and get your app listed on our marketplace."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/developer-tools",
+          "text": "Developer tools Generate sample data, monitor your API usage, and access our Postman collections."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/reference/api_overview",
+          "text": "API reference Browse our full catalog of API docs."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/changelog_",
+          "text": "Changelog"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/api_versioning_and_deprecation_policy",
+          "text": "Versioning & deprecation policy"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/rate_limits_and_error_handling",
+          "text": "Rate limits & error handling"
+        },
+        {
+          "href": "https://youtube.com/playlist?list=PLHkNfHgtxcUanrkMnKPdkRzuWU7MGv_xM&si=pkG-KH7IT_TUHOGC",
+          "text": "API tutorials on YouTube Subscribe to our Klaviyo API Tutorials playlist for easy access to step-by-step developer walkthroughs."
+        },
+        {
+          "href": "https://www.klaviyo.com/contact-us",
+          "text": "Contact us"
+        },
+        {
+          "href": "https://www.klaviyo.com/sign-up",
+          "text": "Sign up"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": "Search"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115002779311",
+          "text": "United States - EN"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/de-de/articles/115002779311",
+          "text": "Deutschland - DE"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-es/articles/115002779311",
+          "text": "España - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-mx/articles/115002779311",
+          "text": "México - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/fr-fr/articles/115002779311",
+          "text": "France - FR"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/it-it/articles/115002779311",
+          "text": "Italia - IT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/ko-kr/articles/115002779311",
+          "text": "한국 - KO"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/nl-nl/articles/115002779311",
+          "text": "Nederland - NL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pl-pl/articles/115002779311",
+          "text": "Polska - PL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pt-br/articles/115002779311",
+          "text": "Brasil - PT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/sv-se/articles/115002779311",
+          "text": "Sverige - SV"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867647",
+          "text": "Account & billing"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/14542875478171",
+          "text": "Email, SMS, and push notifications"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/49375455119643",
+          "text": "Message settings"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115002779311-Understanding-Smart-Sending-in-Klaviyo#h_01HHHSS05S1992MMXXHZCDEWTV",
+          "text": "You will learn"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115002779311-Understanding-Smart-Sending-in-Klaviyo#h_01HHHT3EXXSP4XVRKSHAJ7MEJQ",
+          "text": "Before you begin"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115002779311-Understanding-Smart-Sending-in-Klaviyo#h_01HHHSS05SRFTYEZZ01VPFRGV1",
+          "text": "Change the Smart Sending timeframe"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115002779311-Understanding-Smart-Sending-in-Klaviyo#h_01HHHSS05S5S2YZYVWE028F5MR",
+          "text": "Disable Smart Sending for a message"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115002779311-Understanding-Smart-Sending-in-Klaviyo#h_01HHHSS05T08VBNSBGM0PGNH62",
+          "text": "Smart Sending and A/B testing"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115002779311-Understanding-Smart-Sending-in-Klaviyo#additional-resources",
+          "text": "Additional resources"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360046797191",
+          "text": "how to resend emails in Klaviyo"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360003165732",
+          "text": "transactional emails"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005228148",
+          "text": "A/B tests"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360046797191",
+          "text": "How to resend emails in Klaviyo"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005228148",
+          "text": "How to A/B test an email campaign"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/6960371049115",
+          "text": "How to A/B test a flow email"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115001002272",
+          "text": "Learn how to contact support"
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": ""
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": "Visit Community"
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": ""
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": "Hire a partner"
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/about",
+          "text": "About Klaviyo"
+        },
+        {
+          "href": "https://www.klaviyo.com/newsroom",
+          "text": "Newsroom"
+        },
+        {
+          "href": "https://investors.klaviyo.com/overview/default.aspx",
+          "text": "Investor relations"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Agency and tech partners"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Developers"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/retail",
+          "text": "Retail and ecommerce"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/restaurants",
+          "text": "Restaurant marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/wellness",
+          "text": "Wellness"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform",
+          "text": "B2C CRM overview"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai",
+          "text": "Klaviyo AI (K:AI)"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/marketing-automation",
+          "text": "Klaviyo Marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-service",
+          "text": "Klaviyo Service"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/analytics",
+          "text": "Klaviyo Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-data-platform",
+          "text": "Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare",
+          "text": "Klaviyo vs. Klaviyo alternatives"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-mailchimp",
+          "text": "Klaviyo vs. Mailchimp"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-postscript",
+          "text": "Klaviyo vs. Postscript"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-attentive",
+          "text": "Klaviyo vs. Attentive"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-salesforce-marketing-cloud",
+          "text": "Klaviyo vs. Salesforce"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-listrak",
+          "text": "Klaviyo vs. Listrak"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/omnichannel",
+          "text": "Omnichannel marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/email-marketing",
+          "text": "Email marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing",
+          "text": "SMS marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing/rcs",
+          "text": "RCS for Business"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/mobile-app-marketing",
+          "text": "Mobile app marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/whatsapp",
+          "text": "WhatsApp marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/social",
+          "text": "Social marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources",
+          "text": "Marketing resources"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources/marketing-campaign-calendar",
+          "text": "Marketing campaign calendar"
+        },
+        {
+          "href": "https://www.klaviyo.com/glossary",
+          "text": "Marketing glossary"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/email-subject-line-generator",
+          "text": "Subject line generator"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/roi-calculator",
+          "text": "ROI calculator"
+        },
+        {
+          "href": "https://www.klaviyo.com/customers",
+          "text": "Case studies"
+        },
+        {
+          "href": "https://www.klaviyo.com/composer",
+          "text": "Composer Beta"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/marketing-agent",
+          "text": "Marketing Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/customer-agent",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/customer-experience-hub",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/helpdesk",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/marketing-analytics",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/advanced-cdp",
+          "text": "Advanced Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/web-forms",
+          "text": "Web forms"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/email-templates",
+          "text": "Email templates"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/portfolio",
+          "text": "Portfolio"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform-integrations",
+          "text": "Apps and Integrations"
+        },
+        {
+          "href": "https://www.klaviyo.com/features",
+          "text": "Features"
+        },
+        {
+          "href": "https://www.klaviyo.com/whats-new",
+          "text": "What's new"
+        },
+        {
+          "href": "https://www.klaviyo.com/events",
+          "text": "Events"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help Center"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us",
+          "text": "Academy"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Community"
+        },
+        {
+          "href": "https://www.facebook.com/Klaviyo/",
+          "text": "Facebook"
+        },
+        {
+          "href": "https://twitter.com/klaviyo/",
+          "text": "Twitter"
+        },
+        {
+          "href": "https://www.linkedin.com/company/klaviyo/",
+          "text": "LinkedIn"
+        },
+        {
+          "href": "https://www.instagram.com/klaviyo/",
+          "text": "Instagram"
+        },
+        {
+          "href": "https://www.klaviyo.com/sitemap",
+          "text": "Site Map"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal",
+          "text": "Terms and Privacy"
+        },
+        {
+          "href": "https://www.klaviyo.com/security",
+          "text": "Security"
+        },
+        {
+          "href": "https://www.klaviyo.com/trust",
+          "text": "Trust"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal/intellectual-property-notices",
+          "text": "Intellectual Property Notices"
+        }
+      ],
+      "headings": [
+        {
+          "level": 1,
+          "id": "",
+          "text": "Understanding Smart Sending in Klaviyo"
+        },
+        {
+          "level": 2,
+          "id": "h_01HHHSS05S1992MMXXHZCDEWTV",
+          "text": "You will learn"
+        },
+        {
+          "level": 2,
+          "id": "h_01HHHT3EXXSP4XVRKSHAJ7MEJQ",
+          "text": "Before you begin"
+        },
+        {
+          "level": 2,
+          "id": "h_01HHHSS05SRFTYEZZ01VPFRGV1",
+          "text": "Change the Smart Sending timeframe"
+        },
+        {
+          "level": 3,
+          "id": "h_01HHHSS05S2T7R42Z9MXCFBTGC",
+          "text": "Email Smart Sending window"
+        },
+        {
+          "level": 3,
+          "id": "h_01HHHSS05SM1GBBVWW6GS8QXF5",
+          "text": "SMS Smart Sending window"
+        },
+        {
+          "level": 3,
+          "id": "h_01HHHSS05SNJS46ZFYGVZZ71XV",
+          "text": "Push notification Smart Sending window"
+        },
+        {
+          "level": 2,
+          "id": "h_01HHHSS05S5S2YZYVWE028F5MR",
+          "text": "Disable Smart Sending for a message"
+        },
+        {
+          "level": 3,
+          "id": "h_01HHHSS05SRDFD425XW5N1CBNE",
+          "text": "Campaigns"
+        },
+        {
+          "level": 3,
+          "id": "h_01HHHSS05TDSBPMTY7EWWD8M9B",
+          "text": "Flows"
+        },
+        {
+          "level": 2,
+          "id": "h_01HHHSS05T08VBNSBGM0PGNH62",
+          "text": "Smart Sending and A/B testing"
+        },
+        {
+          "level": 2,
+          "id": "additional-resources",
+          "text": "Additional resources"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "Explore more from Klaviyo"
+        }
+      ]
+    }
+  },
+  "rendered_page": {
+    "status": "fetched",
+    "error": ""
+  }
+}

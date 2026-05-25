@@ -1,0 +1,78 @@
+<div class="article-content">
+<h2 id="section0">Overview</h2>
+<p>Browse abandonment emails are similar to abandoned carts, but are triggered when an identifiable browser visits a product page — a visitor doesn't have to add an item to his/her cart to trigger this flow, all a site visitor has to do is view the item.</p>
+<p>Because visiting a product page doesn’t quite indicate the same level of interest as adding an item to a shopping cart, we recommend including related or similar products in your browse abandonment emails to broaden your net. Adding a discount code into a browse abandonment email can also help turn a casual browser into an enthusiastic customer.</p>
+<p>The following guide will walk you through how to get a new Browse Abandonment flow up and running.</p>
+<h2 id="section1">Add the Viewed Product Tracking Code</h2>
+<p>First, you'll need to add a snippet of code to your Shopify store's backend. This code will get added to your store's product.liquid template.</p>
+<table width="100%">
+<tbody>
+<tr>
+<td>Note: If you have already added code to your product.liquid template to enable product page tracking, you may need to replace this previously added snippet of code with the new updated code shared in this guide.</td>
+</tr>
+</tbody>
+</table>
+<p>Find your store's product.liquid template by navigating to <em>Online Store</em> --&gt; <em>Themes</em> --&gt; <em>Edit HTML/CSS</em>--&gt; <em>product.liquid </em>in your Shopify Admin portal.</p>
+<p>Click into your product.liquid template and scroll down to the very bottom. This is where you will place the following code:</p>
+<pre>&lt;script text="text/javascript"&gt;
+ var _learnq = _learnq || [];
+ var item = {
+   Name: {{ product.title|json }},
+   ProductID: {{ product.id|json }},
+   Categories: {{ product.collections|map:'title'|json }},
+   ImageURL: "https:{{ product.featured_image.src|img_url:'grande' }}",
+   URL: "{{ shop.secure_url }}{{ product.url }}",
+   Brand: {{ product.vendor|json }},
+   Price: {{ product.price|money|json }},
+   CompareAtPrice: {{ product.compare_at_price_max|money|json }}
+ };
+
+ _learnq.push(['track', 'Viewed Product', item]);
+
+ _learnq.push(['trackViewedItem', {
+   Title: item.Name,
+   ItemId: item.ProductID,
+   Categories: item.Categories,
+   ImageUrl: item.ImageURL,
+   Url: item.URL,
+   Metadata: {
+     Brand: item.Brand,
+     Price: item.Price,
+     CompareAtPrice: item.CompareAtPrice
+   }
+ }]);
+&lt;/script&gt;
+</pre>
+<p>Once this code has been pasted at the bottom of your product.liquid template, click <em>Save</em>.</p>
+<p>Remember: If you previously added a very short snippet of code to your product.liquid template to enable product page tracking, you may need to replace it with the above snippet. The updated code will look this this in your product.liquid template:</p>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/28717849944987" alt="647553"></p>
+<h2 id="section2">Monitor the "Viewed Product" Metric</h2>
+<table>
+<tbody>
+<tr>
+<td>Note: When you add the Klaviyo tracking snippet above to your site, we will not track the <em>Viewed Product </em>event for all site visitors. We are only able to track this event for "known browsers". There are a two key ways we will be able to identify a site visitor for web tracking purposes:
+<ul>
+<li>When someone clicks through a Klaviyo email to your website</li>
+<li>When someone has, at some point, subscribed/opted-in through a Klaviyo form</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>After this code snippet has been pasted and saved into your store's product.liquid template, "Viewed Product" data should begin populating in your Klaviyo account as known visitors browse your product pages.</p>
+<p>To check on this metric, click into your account's <em><a href="https://www.klaviyo.com/dashboard" target="_blank" rel="nofollow noopener">Dashboard</a> </em>and navigate to the <em>Activity Feed </em>tab. Here, you will see a dropdown labeled "Showing Feed for". Adjust this dropdown to filter for the metric "Viewed Product".</p>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/28717849946139" alt="647543"></p>
+<p>If there is no data available, test the metric out yourself by browsing your own website and clicking around to view different products. You should see this data begin to flow into Klaviyo. After you send your first campaign, or begin to grow your subscriber list, this browsing data will grow as Klaviyo is able to identify more and more people engaging with your site. If you are concerned this code snippet is not functioning properly, <a href="https://help.klaviyo.com/hc/en-us/requests/new">contact our Success Team</a> and we'll help troubleshoot!</p>
+<h2 id="section3">Set Up the Browse Abandonment Flow</h2>
+<p>If Klaviyo's best-practice Browse Abandonment flow was not pre-populated in your account, you can grab this flow now from the <em>Browse I</em><em>deas </em>section of your <em>Flows</em> tab.</p>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/28717810315675" alt="647541"></p>
+<table>
+<tbody>
+<tr>
+<td>
+<a href="https://docs.klaviyo.com/customer/portal/articles/2475177#section4" target="_blank" rel="noopener">Reference this guide</a> for information on how to customize Klaviyo's Browse Abandonment flow or build your own!</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="rate_article_container"> </div>

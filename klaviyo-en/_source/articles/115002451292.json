@@ -1,0 +1,156 @@
+{
+  "captured_at": "2026-05-23T16:18:50Z",
+  "article": {
+    "id": 115002451292,
+    "url": "https://klaviyo.zendesk.com/api/v2/help_center/en-us/articles/115002451292.json",
+    "html_url": "https://klaviyo.zendesk.com/hc/en-us/articles/115002451292-Sync-a-Shopify-Signup-Form-to-a-List-in-Klaviyo",
+    "author_id": 20424705848,
+    "comments_disabled": true,
+    "draft": false,
+    "promoted": false,
+    "position": 8,
+    "vote_sum": -2,
+    "vote_count": 44,
+    "section_id": 49375337479451,
+    "created_at": "2017-10-27T18:22:27Z",
+    "updated_at": "2026-04-21T13:54:12Z",
+    "name": "Sync a Shopify Signup Form to a List in Klaviyo",
+    "title": "Sync a Shopify Signup Form to a List in Klaviyo",
+    "source_locale": "en-us",
+    "locale": "en-us",
+    "outdated": false,
+    "outdated_locales": [],
+    "edited_at": "2018-06-05T02:22:38Z",
+    "user_segment_id": null,
+    "permission_group_id": 146372,
+    "content_tag_ids": [],
+    "label_names": [],
+    "body": "<h2>Overview</h2>\n<p>This guide covers syncing your Shopify signup form to a list in your Klaviyo account. We use Shopify's 10 free themes as examples. If you plan to use this method to sync a form from a customized theme, keep in mind that if you edited your signup form, you may need to edit some of the items in the code snippet used below.</p>\n<div class=\"bs-callout bs-callout-success\">\n<h4>Learn more</h4>\n<p>We also have a guide for <a href=\"https://help.klaviyo.com/hc/en-us/articles/115001618871-Add-a-Klaviyo-Form-to-a-Shopify-Free-Theme\">adding a Klaviyo form to all of Shopify's free themes</a>.</p>\n</div>\n<script src=\"https://fast.wistia.com/embed/medias/pe4fxluyvn.jsonp\" async=\"\"></script>\n<script src=\"https://fast.wistia.com/assets/external/E-v1.js\" async=\"\"></script>\n<div class=\"wistia_responsive_padding\" style=\"padding: 56.25% 0 0 0; position: relative;\">\n<div class=\"wistia_responsive_wrapper\" style=\"height: 100%; left: 0; position: absolute; top: 0; width: 100%;\">\n<div class=\"wistia_embed wistia_async_pe4fxluyvn videoFoam=true\" style=\"height: 100%; width: 100%;\"> </div>\n</div>\n</div>\n<p><br>The snippet that you add to your Shopify <code class=\"language-html\">theme.liquid</code> file is slightly different depending on your theme. Choose your theme from the list below, and follow the respective instructions. You can also check out our section on <a href=\"https://help.klaviyo.com/hc/en-us/articles/115002451292#using-a-custom-theme\">using a custom theme</a> if you don't see your theme on the list below.</p>\n<table>\n<tbody>\n<tr>\n<td><a href=\"https://help.klaviyo.com/hc/en-us/articles/115002451292#shopify-themes-that-include-jquery-3-2-1-or-higher\">Themes with jQuery 3.2.1 or higher</a></td>\n<td><a href=\"https://help.klaviyo.com/hc/en-us/articles/115002451292#shopify-themes-with-a-jquery-version-lower-than-3-2-1-or-no-jquery\">Themes with a jQuery version &lt; 3.2.1</a></td>\n</tr>\n<tr>\n<td>\n<ul>\n<li>Brooklyn</li>\n<li>Supply</li>\n<li>Jumpstart</li>\n<li>Pop</li>\n<li>Simple</li>\n</ul>\n</td>\n<td>\n<ul>\n<li>Minimal</li>\n<li>Narrative</li>\n<li>Debut</li>\n<li>Venture</li>\n<li>Boundless</li>\n</ul>\n</td>\n</tr>\n</tbody>\n</table>\n<h2>Shopify Themes That Include jQuery 3.2.1 or Higher</h2>\n<p>Use the following snippet to sync your Shopify signup form to a list in your Klaviyo account. Remember to update the list id in the snippet. The basic process is as follows:</p>\n<ol>\n<li>From your Shopify admin click <strong>Online Store</strong>, and then from the <em>Actions</em> dropdown click <strong>Edit Code</strong> to open your web editor.</li>\n<li>Open your <code class=\"language-html\">theme.liquid</code> file and paste in the code snippet below. Paste the snippet before the closing <code class=\"language-html\">&lt;/body&gt;</code> tag.<br>\n<pre><code class=\"language-js\">&lt;script type=\"text/javascript\"&gt;\n    $(\"input[name='contact[email]']\").on('blur', function(e) {\n        e.preventDefault();\n        var email = $(this).val();\n        var settings = {\n            \"async\": true,\n            \"crossDomain\": true,\n            \"url\": \"https://manage.kmail-lists.com/subscriptions/external/subscribe\",\n            \"method\": \"POST\",\n            \"headers\": {\n                \"content-type\": \"application/x-www-form-urlencoded\",\n                \"cache-control\": \"no-cache\"\n            },\n            \"data\": {\n                \"g\": \"LIST_ID\",\n                \"$fields\": \"$source\",\n                \"email\": email,\n                \"$source\": \"Shopify form\"\n            }\n        };\n        $.ajax(settings).done(function (response) {\n            console.log(response);\n        });\n    });\n&lt;/script&gt;</code></pre>\n</li>\n<li>From your Klaviyo account, select the list you want to sync and copy the <a href=\"https://help.klaviyo.com/hc/en-us/articles/115005078647-Find-a-List-ID\">list id</a>.<br><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28716062299547\" alt=\"listID.png\">\n</li>\n<li>From your Shopify account, add the list id to the code snippet in your <code class=\"language-html\">theme.liquid</code> file. At this step, you can also <a href=\"https://help.klaviyo.com/hc/en-us/articles/115002451292#modify-the--source-of-your-form\">modify the $source of this form if you'd like</a>.<br><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28716062302107\" alt=\"shopifyDefaultFormListid.png\">\n</li>\n<li>Save your updated <code class=\"language-html\">theme.liquid</code> file.</li>\n</ol>\n<p>You can now test your signup form to ensure that it is working. First, enter your email address into the form. Next, check your inbox and confirm your subscription with the opt-in email. Last, search for your email address in your Klaviyo account to confirm that your profile has been added.</p>\n<p>If you continue to experience any difficulties please <a href=\"https://help.klaviyo.com/hc/en-us/articles/115001002272-How-to-Contact-Support\">contact our support team</a>.</p>\n<h2>Shopify Themes With a jQuery Version Lower than 3.2.1 or no jQuery</h2>\n<p>Use the following snippet to sync your Shopify signup form to a list in your Klaviyo account. Remember to update the list id in the snippet. The basic process is as follows:</p>\n<ol>\n<li>From your Shopify admin click <strong>Online Store</strong>, and then from the <em>Actions</em> dropdown click <strong>Edit Code</strong> to open your web editor.</li>\n<li>Open your <code class=\"language-html\">theme.liquid</code> file and paste in the code snippet below. Paste the snippet before the closing <code class=\"language-html\">&lt;/body&gt;</code> tag.<br>\n<pre><code class=\"language-js\">\n</code><code class=\"language-js\">&lt;script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js\"&gt;&lt;/script&gt;\n&lt;script&gt;var $KL = jQuery.noConflict(true);&lt;/script&gt;\n&lt;script type=\"text/javascript\"&gt;\n    $KL(\"input[name='contact[email]']\").on('blur', function(e) {\n        e.preventDefault();\n        var email = $KL(this).val();\n        var settings = {\n            \"async\": true,\n            \"crossDomain\": true,\n            \"url\": \"https://manage.kmail-lists.com/subscriptions/external/subscribe\",\n            \"method\": \"POST\",\n            \"headers\": {\n                \"content-type\": \"application/x-www-form-urlencoded\",\n                \"cache-control\": \"no-cache\"\n            },\n            \"data\": {\n                \"g\": \"LIST_ID\",\n                \"$fields\": \"$source\",\n                \"email\": email,\n                \"$source\": \"Shopify form\"\n            }\n        };\n        $KL.ajax(settings).done(function (response) {\n            console.log(response);\n        });\n    });\n&lt;/script&gt;</code></pre>\n</li>\n<li>From your Klaviyo account, select the list you want to sync and copy the <a href=\"https://help.klaviyo.com/hc/en-us/articles/115005078647-Find-a-List-ID\">list id</a>.<br><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28716062299547\" alt=\"listID.png\">\n</li>\n<li>From your Shopify account, add the list id to the code snippet in your <code class=\"language-html\">theme.liquid</code> file. At this step, you can also <a href=\"https://help.klaviyo.com/hc/en-us/articles/115002451292#modify-the--source-of-your-form\">modify the $source of this form if you'd like</a>.<br><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28716062302107\" alt=\"shopifyDefaultFormListid.png\">\n</li>\n<li>Save your updated <code class=\"language-html\">theme.liquid</code> file.</li>\n</ol>\n<p>You can now test your signup form to ensure that it is working. First, enter your email address into the form. Next, check your inbox and confirm your subscription with the opt-in email. Last, search for your email address in your Klaviyo account to confirm that your profile has been added.</p>\n<p>If you continue to experience any difficulties please <a href=\"https://help.klaviyo.com/hc/en-us/articles/115001002272-How-to-Contact-Support\">contact our support team</a>.</p>\n<h2>Using a Custom Theme</h2>\n<p>If you're using a custom theme you first have to verify the version of jQuery that your theme uses, then select a code snippet accordingly. As well, if your theme has modified the standard Shopify signup signup form, you will need to modify the snippet so that it is targeting the email input element with the correct id.</p>\n<ol>\n<li>Navigate to your site and open the console of your web browser (if you're using Chrome on a Mac you can press <kbd>⌥</kbd>-<kbd>⌘</kbd>-<kbd>J).</kbd>\n</li>\n<li>The following command returns the current version of jQuery on your site: <code class=\"language-html\">$.fn</code>. <br><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28716051920923\">\n</li>\n<li>If your jQuery version is 3.2.1 or higher, you can use the instructions in the section for <a href=\"https://help.klaviyo.com/hc/en-us/articles/115002451292#shopify-themes-that-include-jquery-3-2-1-or-higher\">Shopify Themes That Include jQuery 3.2.1 or Higher</a>.</li>\n<li>If your jQuery version is lower than 3.2.1, you can use the instructions in the section for <a href=\"https://help.klaviyo.com/hc/en-us/articles/115002451292#shopify-themes-with-a-jquery-version-lower-than-3-2-1\">Shopify Themes With a jQuery Version Lower than 3.2.1</a>.</li>\n</ol>\n<p>If you continue to experience any difficulties please <a href=\"https://help.klaviyo.com/hc/en-us/articles/115001002272-How-to-Contact-Support\">contact our support team</a>.</p>\n<h2>Modify the <code class=\"language-html\">$source</code> of Your Form</h2>\n<p>In the default snippets on this page, you can modify the line with <code class=\"language-html\">$source\": \"Shopify form\"</code> if you'd like to change the <code class=\"language-html\">$source</code> property that appears on your customer's profiles within Klaviyo. Change only the value of this expression. For example, updating to <code class=\"language-html\">“$source”: “Homepage form”</code> will set a user's <code class=\"language-html\">$source</code> on their profile as follows:</p>\n<p><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28716051912347\"></p>\n<p>Take care when modifying elements of this form. If you find your form is not working correctly, contact customer support or try adding the form from scratch using the default code snippets in this article.</p>",
+    "user_segment_ids": []
+  },
+  "normalized": {
+    "id": "115002451292",
+    "title": "Sync a Shopify Signup Form to a List in Klaviyo",
+    "source_url": "https://help.klaviyo.com/hc/en-us/articles/115002451292-Sync-a-Shopify-Signup-Form-to-a-List-in-Klaviyo",
+    "section_id": 49375337479451,
+    "section": "Shopify best practices",
+    "category_id": 115000032731,
+    "category": "Integrations",
+    "category_slug": "integrations",
+    "klaviyo_updated": "2026-04-21T13:54:12Z",
+    "created_at": "2017-10-27T18:22:27Z",
+    "draft": false,
+    "promoted": false,
+    "position": 8,
+    "label_names": []
+  },
+  "files": {
+    "body_html": "_source/articles/115002451292.body.html",
+    "rendered_html": ""
+  },
+  "assets": {
+    "api_body": {
+      "images": [
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28716062299547",
+          "alt": "listID.png",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28716062302107",
+          "alt": "shopifyDefaultFormListid.png",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28716051920923",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28716051912347",
+          "alt": "",
+          "width": "",
+          "height": ""
+        }
+      ],
+      "links": [
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115001618871-Add-a-Klaviyo-Form-to-a-Shopify-Free-Theme",
+          "text": "adding a Klaviyo form to all of Shopify's free themes"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115002451292#using-a-custom-theme",
+          "text": "using a custom theme"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115002451292#shopify-themes-that-include-jquery-3-2-1-or-higher",
+          "text": "Themes with jQuery 3.2.1 or higher"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115002451292#shopify-themes-with-a-jquery-version-lower-than-3-2-1-or-no-jquery",
+          "text": "Themes with a jQuery version < 3.2.1"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005078647-Find-a-List-ID",
+          "text": "list id"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115002451292#modify-the--source-of-your-form",
+          "text": "modify the $source of this form if you'd like"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115001002272-How-to-Contact-Support",
+          "text": "contact our support team"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115002451292#shopify-themes-that-include-jquery-3-2-1-or-higher",
+          "text": "Shopify Themes That Include jQuery 3.2.1 or Higher"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115002451292#shopify-themes-with-a-jquery-version-lower-than-3-2-1",
+          "text": "Shopify Themes With a jQuery Version Lower than 3.2.1"
+        }
+      ],
+      "headings": [
+        {
+          "level": 2,
+          "id": "",
+          "text": "Overview"
+        },
+        {
+          "level": 4,
+          "id": "",
+          "text": "Learn more"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "Shopify Themes That Include jQuery 3.2.1 or Higher"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "Shopify Themes With a jQuery Version Lower than 3.2.1 or no jQuery"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "Using a Custom Theme"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "Modify the $source of Your Form"
+        }
+      ]
+    },
+    "rendered_page": {}
+  },
+  "rendered_page": {
+    "status": "failed",
+    "error": "404 Client Error: Not Found for url: https://help.klaviyo.com/hc/en-us/articles/115002451292"
+  }
+}

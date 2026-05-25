@@ -1,0 +1,178 @@
+<h2 id="h_01HEQAVA2B99G92243HJZ88ZQN">You will learn</h2>
+<p>Learn how to add SMS to your abandoned cart flow as well as compliance requirements and best practices.</p>
+<h2 id="h_01HEQAVA2BWBE0E70RZTAW1RYG">Before you begin</h2>
+<p>Note that using quiet hours is highly encouraged for SMS abandoned cart reminders. This is on by default in Klaviyo for SMS, and we do not recommend turning it off. </p>
+<p>The US has certain requirements for anyone sending SMS messages in abandoned cart flows. If you are sending to US recipients, the following are all required: </p>
+<ul>
+<li>Use double opt-in when collecting SMS consent.</li>
+<li>Only send 1 SMS per recipient. </li>
+<li>Send within 48 hours of someone abandoning a cart.</li>
+</ul>
+<h2 id="h_01HEQAVA2B8X363SRFXWT3YPR8">Create an SMS abandoned cart flow</h2>
+<p>Here, we walk you through how to add SMS to your existing abandoned cart flow. </p>
+<div class="bs-callout bs-callout-default">
+<p>Please read the Before you begin section before setting up your SMS abandoned cart flow, as it contains critical information on SMS compliance and best practices. </p>
+</div>
+<div class="accordion accordion--default">
+<div class="accordion__item">
+<div class="accordion__item-title"><strong>Don’t already have an abandoned cart flow? Open this section.</strong></div>
+<div class="accordion__item-content">
+<ol>
+<li>Navigate to <strong>Flows</strong>.</li>
+<li>Click <strong>Browse Ideas </strong>in the upper right corner.</li>
+<li>Search for “abandoned cart” and click the icon for email and SMS.<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28722597618843" alt="Searching for an abandoned cart template with both email          and SMS">
+</li>
+<li>Pick an abandoned cart flow template.
+<ol>
+<li>Here, we choose the template named “Standard (Email &amp; SMS).”</li>
+</ol>
+</li>
+<li>Name the flow (e.g., “Abandoned Cart Reminder”).<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28722559225499" alt="Preview of an abandoned cart flow template where you can          name the flow" width="532" height="534">
+</li>
+<li>Click <strong>Create Flow</strong>.</li>
+<li>If you're using <a href="https://klaviyo.zendesk.com/hc/en-us/articles/14708088221467">Amazon Buy with Prime and have integrated it with Klaviyo</a>, add the following flow filter to exclude customers who made purchases via Buy with Prime from receiving incorrect messaging:<br>
+<ul>
+<ul>
+<li>
+<em>Placed Order</em> (Buy with Prime) <em>zero times since starting this flow.</em>
+</li>
+</ul>
+</ul>
+</li>
+<li>Go into each message and edit the text 
+<ol>
+<ol>
+<li>Dynamic variables must be formatted exactly right or they won’t work.</li>
+<li>Copying the block allows you to make changes without the risk of breaking them.</li>
+</ol>
+</ol>
+<br>
+<ul>
+<ul>
+<li>Note: Before changing anything about the dynamic variables, copy the variable or block of variables.</li>
+</ul>
+</ul>
+</li>
+<li>Save your changes.</li>
+<li>Do not turn off quiet hours for the SMS message.</li>
+<li>Click <strong>Update Action Statuses </strong>in the upper right.</li>
+<li>Open the dropdown menu and select <strong>Live</strong>.</li>
+<li>Click <strong>Update Statuses</strong>.</li>
+</ol>
+</div>
+</div>
+</div>
+<h3 id="h_01HEQAVA2B80M62BYG2JKMHXYY">Add SMS to an abandoned cart flow</h3>
+<ol>
+<li>Navigate to <strong>Flows</strong>.</li>
+<li>Find the abandoned cart flow where you want to include SMS.</li>
+<li>In the flow, place a conditional split after the first time delay.
+<ol>
+<li>Note: the time delay must be within 48 hours of when the flow triggers.</li>
+</ol>
+</li>
+<li>Use the following condition.<br>
+<em>If someone can or cannot receive marketing &gt;</em> Person<em> cannot receive &gt; sms marketing.</em><br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28722597626011" alt="Placing a conditional split after the first time delay in an abandoned cart    flow" width="454" height="548">
+</li>
+<li>On the No path, add an SMS message.<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28722559236763" alt="Adding an SMS to the No path for a conditional split" width="500" height="334">
+</li>
+<li>Click on the SMS message card.</li>
+<li>Click <strong>Edit </strong>in the details panel.</li>
+<li>Add in your message.<br>
+“Hey {{ person|lookup:"first_name"|default:'there' }}, your cart is about to expire! Did you want to check it out? [LINK]” </li>
+<li>Recommended: Include a discount to encourage people to buy.<br>
+“Hey {{ person|lookup:"first_name"|default:'there' }}, your cart is about to expire! Get 10% off now with code {% coupon_code 'YOUR_COUPON' %} [LINK]”<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28722597622811" alt="Example of an abandoned cart flow message that includes a 10% coupon" width="401" height="301">
+</li>
+<li>Rejoin the split after the SMS to after the first email.<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28722597634331" alt="Rejoining the split after the first email and SMS in an abandoned cart    flow" width="510" height="444">
+</li>
+<li>Set the SMS message to live.<br>
+</li>
+</ol>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/28722559231515" alt="Changing an SMS message from draft to live" width="328" height="251"></p>
+<h2 id="h_01HEQAVA2BTJ9GQQY555599QWC">Improve your SMS abandoned cart flow</h2>
+<p>Above we detail a basic SMS and email abandoned cart flow. However, there are ways you can customize this flow. </p>
+<p>While you cannot send more than 1 SMS per recipient as an abandoned cart reminder, you can have more than 1 SMS in this flow by further targeting your audience.</p>
+<p>See examples below. </p>
+<div class="accordion accordion--default">
+<div class="accordion__item">
+<div class="accordion__item-title"><strong>Skip SMS if product isn't available</strong></div>
+<div class="accordion__item-content">
+<ul>
+<li>It keeps the SMS short and concise.</li>
+<li>Unlike with email, an SMS doesn't have a way to dynamically populate the exact number of items someone abandoned.</li>
+</ul>
+<p>For that reason, SMS abandonment messages should only show the first item from someone's cart. But what if that product is out of stock?</p>
+<table>
+<tbody>
+<tr>
+<td style="width: 50%"><strong>Format</strong></td>
+<td style="width: 50%"><strong>Example </strong></td>
+</tr>
+<tr>
+<td style="width: 50%">
+<code>{% catalog event.ProductID unpublished="cancel" %}</code><br>
+Your message reminding someone of their abandoned cart...<br>
+[Link to product]<br>
+<code>{% endcatalog %}</code>
+</td>
+<td style="width: 50%">
+<code>{% catalog event.ProductID unpublished="cancel" %}</code><br>
+Hi Friend!<br>
+Did you still want this? Click to shop now: <br>
+<code>{{ event.URL }}</code><br>
+<code>{% endcatalog %}</code>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="accordion__item">
+<div class="accordion__item-title"><strong>Value split</strong></div>
+<div class="accordion__item-content">
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28722559248027" alt="Using a trigger split to send different SMS message to those with carts  below $100">
+</div>
+</div>
+<div class="accordion__item">
+<div class="accordion__item-title"><strong>Product collection split</strong></div>
+<div class="accordion__item-content">
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28722597641115" alt="Using a trigger split to send different SMS message to those purchasing  from a certain collection">
+</div>
+</div>
+<div class="accordion__item">
+<div class="accordion__item-title"><strong>New purchaser vs. returning customer split</strong></div>
+<div class="accordion__item-content">
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28722597631899" alt="Using a conditional split to send different SMS message to new purchasers  versus returning customers">
+</div>
+</div>
+<div class="accordion__item">
+<div class="accordion__item-title"><strong>Frequent purchaser split</strong></div>
+<div class="accordion__item-content">
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28722597655707" alt="Using a conditional split to send different SMS message to more frequent  purchasers">
+</div>
+</div>
+</div>
+<h2 id="h_01HEQAVA2BHXYKQ9Z3H0YEQYZM">Additional resources</h2>
+<ul>
+<li>Learn more about <a href="https://help.klaviyo.com/hc/en-us/articles/115002779411-">abandoned cart flows</a>
+</li>
+<li>See how to create other SMS flows: 
+<ul>
+<li><a href="https://help.klaviyo.com/hc/en-us/articles/15806802249883">Add SMS to your browse abandonment flow</a></li>
+<li><a href="https://help.klaviyo.com/hc/en-us/articles/15800790306715">Add SMS to your thank you flow</a></li>
+</ul>
+</li>
+</ul>
+<p></p>

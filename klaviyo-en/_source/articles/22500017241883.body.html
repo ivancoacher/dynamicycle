@@ -1,0 +1,101 @@
+<h2 id="h_01HNDJ2XVKHZSGCCHTVS2RMM17">You will learn</h2>
+<p>Learn how to add Klaviyo Reviews widgets to a mobile app built with Tapcart. These widgets can be added to your Tapcart app using custom blocks: </p>
+<ul>
+<li>
+<strong>Star rating widget </strong><br>
+Product pages only; show a product’s overall star rating</li>
+<li>
+<strong>Product reviews widget </strong><br>
+Product pages only; show a summary and list of all reviews for a product, plus buttons to ask a question or leave a review </li>
+<li>
+<strong>Featured reviews carousel widget</strong><br>
+Any page; show a selection of featured reviews across several products </li>
+</ul>
+<p>Tapcart is only available for stores built with Shopify.</p>
+<h2 id="h_01HNDJ2XVMH6Z272F878PMCR32">Before you begin</h2>
+<p>This process is only available to companies who:</p>
+<ul>
+<li>Have already built a mobile app with Tapcart</li>
+<li>Use a Tapcart Enterprise plan</li>
+<li>Have an active Klaviyo Reviews plan</li>
+</ul>
+<p>If you haven’t set up Klaviyo Reviews yet, head to our article on <a href="https://help.klaviyo.com/hc/en-us/articles/15937542819355">getting started with Klaviyo Reviews</a>.</p>
+<h2 id="h_01HNDJ2XVM2ZTSFS0A19B64FRF">Add Klaviyo Reviews widgets using a custom block in Tapcart</h2>
+<p>Follow these steps to add any reviews widget in Tapcart. You’ll need to repeat these steps (i.e., create a separate custom block) for all 3 widgets. </p>
+<ol>
+<li>Open the Tapcart editor. </li>
+<li>In <em>App Studio</em>, switch from <em>Design Blocks</em> to <strong>Custom Blocks</strong>.<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28723685323035" alt="launch blocks editor" width="383" height="223">
+</li>
+<li>Click <strong>Launch Blocks Editor</strong> to create a new custom block. </li>
+<li>Name the widget something clear, like <em>Klaviyo Star Rating custom block</em>. </li>
+<li>In the <strong>JS</strong> tab of the block editor, add the following code snippet. Replace PUBLIC_API_KEY with your <a href="https://help.klaviyo.com/hc/en-us/articles/115005062267">6-character Klaviyo site ID</a>.<br>
+
+<pre><code class="language-text">var script = document.createElement('script');
+script.type = 'text/javascript';
+script.async = true;
+script.src = 'https://static.klaviyo.com/onsite/js/PUBLIC_API_KEY/klaviyo.js&amp;module=reviews';
+document.head.appendChild(script);</code></pre>
+</li>
+<li>In the <strong>HTML</strong> tab of the block editor, paste the snippet for the widget you’d like to add (e.g., the star rating widget). Find the code snippets below: 
+<ol>
+<li><a href="https://klaviyo.zendesk.com/hc/en-us/articles/undefined#h_01HNDJ2XVMJGSX6T4QKBBDDBZ2">Star rating widget code</a></li>
+<li><a href="https://klaviyo.zendesk.com/hc/en-us/articles/undefined#h_01HNDJ2XVMZEZKE2MH9KF46K6M">Product reviews widget code</a></li>
+<li>
+<a href="https://klaviyo.zendesk.com/hc/en-us/articles/undefined#h_01HNDJ2XVMV6D8422M9NF6BSS4">Featured reviews carousel widget code</a><br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28723663126811" alt="Tapcart HTML tab">
+</li>
+</ol>
+</li>
+<li>Click <strong>Save</strong>. </li>
+<li>Click <strong>Close</strong> to exit the editor. </li>
+<li>From the <strong>App Studio</strong> dropdown, select <strong>Product detail</strong>.<br>
+<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28723663130907" alt="product detail page" width="306" height="305">
+<div class="bs-callout bs-callout-default">
+<p>This step is required for the star rating and product reviews widgets. You can place the featured review widget on any app page. </p>
+</div>
+</li>
+<li>Drag the saved custom block you just created into your template. </li>
+<li>The editor may not load the widget directly; instead, you’ll see the block name as plain text. This is expected. </li>
+<li>Click <strong>Preview your app</strong> and navigate to the page where you added your app. Note that the widget appears correctly.</li>
+</ol>
+<div class="bs-callout bs-callout-default">
+<p>The <strong>Ask a question</strong> and <strong>Leave a review</strong> buttons will not work in preview mode. Once you publish the changes to your app, clicking these buttons in the app will open a new browser tab.</p>
+</div>
+<h2 id="h_01HNDJ2XVMY25NEJ7M548FMV6N">Code snippets</h2>
+<h3 id="h_01HNDJ2XVMJGSX6T4QKBBDDBZ2">Star rating widget</h3>
+<pre><code class="language-text">&lt;div class="klaviyo-star-rating-widget" data-id="{{product.id}}" data-product-title="{{product.title}}" data-product-type="{{product.type}}"&gt;&lt;/div&gt;
+</code></pre>
+<h3 id="h_01HNDJ2XVMZEZKE2MH9KF46K6M">Product reviews widget</h3>
+<pre><code class="language-text">&lt;div id="klaviyo-reviews-all" data-id="{{product.id}}"&gt;&lt;/div&gt;
+</code></pre>
+<h3 id="h_01HNDJ2XVMV6D8422M9NF6BSS4">Featured reviews carousel</h3>
+<pre><code class="language-text">&lt;div id="klaviyo-featured-reviews-carousel"&gt;&lt;/div&gt;
+</code></pre>
+<h2 id="h_01J1870H2A1FKWF3MBVYN07WXW">Preview app widgets</h2>
+<p>The Klaviyo Reviews widgets won't automatically appear in the Tapcart preview, but will load correctly on your app. This is because the widgets require a real product ID in order to know which reviews to display. To preview the widgets, add a product ID variable in the <em>Variable Preview Values</em> field in the Tapcart editor. </p>
+<ol>
+<li>In the Tapcart <em>App Studio</em>, select <strong>Custom</strong> to view your custom widgets. </li>
+<li>Click the three dots icon next to one of your review widget blocks and click <strong>Launch Editor</strong>. </li>
+<li>Click <strong>Settings</strong>. <br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28723663139099" alt="The settings button" width="652" height="71">
+</li>
+<li>Scroll or search through the JSON to find the <em>id</em> variable within the <em>product</em> object. Note that there are other <em>id</em> variables within other objects; you only need to edit the product ID shown here. <br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28723663133979" alt="The product ID variable within the code" width="338" height="240">
+</li>
+<li>Replace the sample product ID with the ID for a product in your store that has at least 1 review. To find a product ID, navigate to <strong>Content &gt; Products</strong> in Klaviyo, then copy an item ID. <br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28723663136667" alt="An item ID in Klaviyo" width="652" height="150">
+</li>
+<li>Click <strong>Save</strong>. </li>
+<li>Repeat these steps for your other review widget blocks. </li>
+<li>If the previews don't appear correctly right away, refresh the editor. </li>
+</ol>
+<h2 id="h_01HNDJ2XVMA85SZ2GZY5ECHKC5">Style app widgets </h2>
+<p>Any changes made in the main widget editor will apply to both your website and your app. To apply changes to just your app, add custom CSS to the <strong>CSS</strong> tab of the custom block editor in Tapcart. Learn how to use custom CSS to style Klaviyo Reviews widgets. </p>

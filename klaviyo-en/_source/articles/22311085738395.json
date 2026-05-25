@@ -1,0 +1,1012 @@
+{
+  "captured_at": "2026-05-23T16:15:10Z",
+  "article": {
+    "id": 22311085738395,
+    "url": "https://klaviyo.zendesk.com/api/v2/help_center/en-us/articles/22311085738395.json",
+    "html_url": "https://klaviyo.zendesk.com/hc/en-us/articles/22311085738395-How-to-configure-custom-conversion-metrics",
+    "author_id": 1265141506249,
+    "comments_disabled": true,
+    "draft": false,
+    "promoted": false,
+    "position": 0,
+    "vote_sum": 0,
+    "vote_count": 0,
+    "section_id": 49375263424027,
+    "created_at": "2024-01-23T19:21:22Z",
+    "updated_at": "2026-04-21T13:56:45Z",
+    "name": "How to configure custom conversion metrics",
+    "title": "How to configure custom conversion metrics",
+    "source_locale": "en-us",
+    "locale": "en-us",
+    "outdated": false,
+    "outdated_locales": [],
+    "edited_at": "2026-04-17T00:55:52Z",
+    "user_segment_id": null,
+    "permission_group_id": 146372,
+    "content_tag_ids": [],
+    "label_names": [],
+    "body": "<h2 id=\"h_01HN35D5NA4401FR8YKQKHQ70B\">You will learn</h2>\n<p>Learn how to create custom metrics to more accurately track the impact of your marketing and how customers drive conversions. By default Klaviyo provides many metrics (e.g., <em>Placed Order</em>) to track your business’s success. However, if you have a custom setup or a different business use case, these default metrics may not work for you. For example, your <em>Placed Orders</em> events include recurring subscriptions, and you’d like to review only orders placed through your ecommerce website. The guide below walks you through how to set up these custom metrics for your needs.</p>\n<p>If you need help on deciding when you should use custom metrics, head to our <a href=\"https://help.klaviyo.com/hc/en-us/articles/22311212640027/\">strategic guide on using custom metrics</a>.</p>\n<h2 id=\"h_01HN35HF2AGZJWKY70269ZPN0D\">Before you begin</h2>\n<p>It’s important to note when you create your own custom metrics (e.g., <em>Placed Order</em> that excludes subscriptions), they will appear as a new metric option in Klaviyo reporting (i.e., it will not replace the default <em>Placed Order</em> metric). </p>\n<h3 id=\"h_01JBYEP4Z49KWHN3Z3WB4X9K3G\">Mapped metrics</h3>\n<p>You also have the option to utilize custom metrics within your <a href=\"https://help.klaviyo.com/hc/en-us/articles/25829057055899\">mapped metrics</a>. This helps ensure your generated predictive models and default reports are aligned to your account’s data structure and needs. For example, you may create a custom <em>Placed Order</em> event that is then used to calculate <a href=\"https://help.klaviyo.com/hc/en-us/articles/25829057055899#h_01HZ2MPFB9V6HCZES9JCP8KV2R\">applicable reporting</a> using this metric.</p>\n<h3 id=\"h_01JBYEPTQGJN23MGD1EJY7ZV9N\">Reports that can use custom metrics</h3>\n<p>And any time you adjust a custom metric, applicable reporting will update. Reporting where you can use this custom metric includes:</p>\n<ul>\n<li>The <a href=\"https://help.klaviyo.com/hc/en-us/articles/9974064152347\">home dashboard</a> (main dashboard that greets you when logging in)</li>\n<li>\n<a href=\"https://help.klaviyo.com/hc/en-us/articles/16427152766619\">Business review dashboards</a> (within the dashboards section)</li>\n<li>\n<a href=\"https://help.klaviyo.com/hc/en-us/articles/4708299478427\">Overview or analytics dashboards</a> (within the dashboards section)</li>\n<li>\n<a href=\"https://help.klaviyo.com/hc/en-us/articles/360047044892\">Flow performance reports</a> (within custom reports)</li>\n<li>\n<a href=\"https://help.klaviyo.com/hc/en-us/articles/360047022912\">Campaign performance reports</a> (within custom reports)</li>\n<li>\n<a href=\"https://help.klaviyo.com/hc/en-us/articles/360046242952\">Single</a> and <a href=\"https://help.klaviyo.com/hc/en-us/articles/360046234772\">multi-metric reports</a> (within custom reports)</li>\n<li>Within flow analytics (in the flows list page itself)</li>\n<li>Within <a href=\"https://help.klaviyo.com/hc/en-us/articles/115005199947#section1\">campaign conversions</a> (in the campaigns list page itself)</li>\n<li>The <a href=\"https://help.klaviyo.com/hc/en-us/articles/28474458127899\">conversion overview dashboard</a> (Advanced KDP and Marketing Analytics customers only)</li>\n<li>The <a href=\"https://help.klaviyo.com/hc/en-us/articles/17797912816795\">customer lifetime value (CLV) dashboard </a>(Advanced KDP and Marketing Analytics customers only)</li>\n<li>The <a href=\"https://help.klaviyo.com/hc/en-us/articles/17797889315355\">recency, frequency, and monetary (RFM) analysis report</a> (Advanced KDP and Marketing Analytics customers only)</li>\n<li>The <a href=\"https://help.klaviyo.com/hc/en-us/articles/26685770823451\">product analysis dashboard</a> (Advanced KDP and Marketing Analytics customers only)</li>\n</ul>\n<h3 id=\"h_01JBYERFB5C5HXGZE2RG18G85Z\">Using tags</h3>\n<p>Also, tags from your ecommerce integration, as well as other integrations, may not always reliably ingest correctly into Klaviyo. It is advised to avoid using tags in your custom metrics and events setup.</p>\n<h2 id=\"h_01HN35PVW5A2DZ6N53GAYP6JF9\">Default custom metrics</h2>\n<p>For Advanced KDP customers, Klaviyo is able to automatically detect and provide default custom metrics based on certain integrations. If you have a newly created default custom metric, you will see these appear within the <em>Metrics</em> tab. If you are not an Advanced KDP customer, head to the <a href=\"#01HZFNAMK1BTZGXTNG4VE9427D\">next section on creating your metrics</a>.<br>\n<br>\nThe following ecommerce and partner integrations combinations will create default custom metrics:</p>\n<table style=\"width: 100%; height: 1243px\">\n<tbody>\n<tr>\n<td style=\"width: 4.85072%; height: 81px; text-align: center; background-color: #eeeeee\"><strong>Ecommerce integration</strong></td>\n<td style=\"width: 4.13886%; height: 81px; text-align: center; background-color: #eeeeee\"><strong>Partner integration</strong></td>\n<td style=\"width: 15.8097%; height: 81px; text-align: center; background-color: #eeeeee\"><strong>Default custom metric created in your account</strong></td>\n<td style=\"width: 11.4054%; height: 81px; text-align: center; background-color: #eeeeee\"><strong>Metrics used </strong></td>\n<td style=\"width: 16.4638%; height: 81px; text-align: center; background-color: #eeeeee\"><strong>Metric definition</strong></td>\n</tr>\n<tr>\n<td rowspan=\"2\" style=\"width: 4.85072%; height: 161px; text-align: left\">Any ecommerce integration</td>\n<td rowspan=\"2\" style=\"width: 4.13886%; height: 161px; text-align: left\">Not applicable</td>\n<td style=\"width: 15.8097%; height: 72px; text-align: left\"><em>Placed Order - Online</em></td>\n<td style=\"width: 11.4054%; height: 72px; text-align: left\">\n<em>Placed Order</em> via any supported integration.</td>\n<td style=\"width: 16.4638%; height: 72px; text-align: left\">\n<em>Placed Order</em> events not including any point of sale (POS).</td>\n</tr>\n<tr>\n<td style=\"width: 15.8097%; height: 89px; text-align: left\"><em>Placed Order - In Store</em></td>\n<td style=\"width: 11.4054%; height: 89px; text-align: left\">\n<em>Placed Order </em>via any supported integration.</td>\n<td style=\"width: 16.4638%; height: 89px; text-align: left\">\n<em>Placed Order </em>events, including those made via point of sale (POS).</td>\n</tr>\n<tr>\n<td style=\"width: 4.85072%; height: 111px; text-align: left\">BigCommerce<br>\n</td>\n<td style=\"width: 4.13886%; height: 111px; text-align: left\">w/OrderGroove</td>\n<td style=\"width: 15.8097%; height: 111px; text-align: left\"><em>Placed Order - One Time Purchases</em></td>\n<td style=\"width: 11.4054%; height: 111px; text-align: left\">\n<em>Placed Order </em>via BigCommerce</td>\n<td style=\"width: 16.4638%; height: 111px; text-align: left\">\n<em>Placed Order </em>events made on BigCommerce, not including any from OrderGroove.</td>\n</tr>\n<tr>\n<td style=\"width: 4.85072%; height: 134px; text-align: left\">Shopify</td>\n<td style=\"width: 4.13886%; height: 134px; text-align: left\">w/OrderGroove</td>\n<td style=\"width: 15.8097%; height: 134px; text-align: left\"><em>Placed Order - One Time Purchases</em></td>\n<td style=\"width: 11.4054%; height: 134px; text-align: left\">\n<em>Placed Order </em>via Shopify</td>\n<td style=\"width: 16.4638%; height: 134px; text-align: left\">\n<em>Placed Order </em>events made on Shopify, not including any subscription orders.</td>\n</tr>\n<tr>\n<td rowspan=\"3\" style=\"width: 4.85072%; height: 289px; text-align: left\">BigCommerce<br>\n<br>\n<br>\n</td>\n<td rowspan=\"3\" style=\"width: 4.13886%; height: 289px; text-align: left\">w/Recharge<br>\n<br>\n<br>\n</td>\n<td rowspan=\"3\" style=\"width: 15.8097%; height: 289px; text-align: left\">\n<em>Non-Recurring Order</em><br>\n<br>\n</td>\n<td style=\"width: 11.4054%; height: 111px; text-align: left\">\n<em>Placed Order </em>via BigCommerce</td>\n<td style=\"width: 16.4638%; height: 111px; text-align: left\">\n<em>Placed Order </em>events made on BigCommerce, not including any from ReCharge.</td>\n</tr>\n<tr>\n<td style=\"width: 11.4054%; height: 89px; text-align: left\">\n<em>One-time product added on ReCharge</em>via ReCharge.</td>\n<td style=\"width: 16.4638%; height: 89px; text-align: left\">One-time product added to an order through ReCharge only.</td>\n</tr>\n<tr>\n<td style=\"width: 11.4054%; height: 89px; text-align: left\"><em>Subscription started on ReCharge via ReCharge.</em></td>\n<td style=\"width: 16.4638%; height: 89px; text-align: left\">Subscriptions created on ReCharge only.</td>\n</tr>\n<tr>\n<td rowspan=\"3\" style=\"width: 4.85072%; height: 289px; text-align: left\">Shopify<br>\n<br>\n<br>\n</td>\n<td rowspan=\"3\" style=\"width: 4.13886%; height: 289px; text-align: left\">w/ReCharge<br>\n<br>\n<br>\n</td>\n<td rowspan=\"3\" style=\"width: 15.8097%; height: 289px; text-align: left\">\n<em>Non-Recurring Order</em><br>\n<br>\n<br>\n</td>\n<td style=\"width: 11.4054%; height: 111px; text-align: left\">\n<em>Placed Order </em>via Shopify</td>\n<td style=\"width: 16.4638%; height: 111px; text-align: left\">\n<em>Placed Order </em>events, not including any subscription orders.</td>\n</tr>\n<tr>\n<td style=\"width: 11.4054%; height: 89px; text-align: left\">\n<em>One-time Product Added on ReCharge </em>via ReCharge.</td>\n<td style=\"width: 16.4638%; height: 89px; text-align: left\">One-time product added to an order through ReCharge only.</td>\n</tr>\n<tr>\n<td style=\"width: 11.4054%; height: 89px; text-align: left\">\n<em>Subscription started on ReCharge</em> via ReCharge.</td>\n<td style=\"width: 16.4638%; height: 89px; text-align: left\">Subscriptions created on ReCharge only.</td>\n</tr>\n<tr>\n<td rowspan=\"2\" style=\"width: 4.85072%; height: 178px; text-align: left\">Shopify<br>\n<br>\n</td>\n<td rowspan=\"2\" style=\"width: 4.13886%; height: 178px; text-align: left\">w/Skio<br>\n<br>\n</td>\n<td rowspan=\"2\" style=\"width: 15.8097%; height: 178px; text-align: left\">\n<em>Non-Recurring Order</em><br>\n<br>\n</td>\n<td style=\"width: 11.4054%; height: 111px; text-align: left\">\n<em>Placed Order </em>via Shopify</td>\n<td style=\"width: 16.4638%; height: 111px; text-align: left\">\n<em>Placed Order </em>events, not including any subscription orders.</td>\n</tr>\n<tr>\n<td style=\"width: 11.4054%; height: 67px; text-align: left\">\n<em>Skio: New Subscription Created</em> via Skio</td>\n<td style=\"width: 16.4638%; height: 67px; text-align: left\">Subscriptions created on Skio only.</td>\n</tr>\n</tbody>\n</table>\n<h2 id=\"01HZFNAMK1BTZGXTNG4VE9427D\">Creating a new custom metric</h2>\n<div class=\"bs-callout bs-callout-default\">\n<p>For customers using Klaviyo’s marketing application, you have access to create 1 custom metric. For customers also using Klaviyo Marketing Analytics or Advanced KDP, you have increased flexibility to create up to 50 custom metrics. To learn more about adding Klaviyo Advanced KDP, head to our <a href=\"https://help.klaviyo.com/hc/en-us/articles/115000976672\">billing guide.</a></p>\n</div>\n<ol>\n<li>Navigate to <strong>Analytics &gt; Metrics</strong>.</li>\n<li>In the upper right, click <strong>Create custom metric</strong>. Next, you will see the page to set up your new custom metric.</li>\n<li>Under <em>Details</em>, create and enter the name of your new metric. Use a name that will help you easily identify what this metric captures (e.g., “Orders placed w/ subscriptions”).<br>\n\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28723685112475\" alt=\"Custom metrics, details name.jpg\" width=\"525\" height=\"135\">\n</li>\n<li>Click the <strong>Aggregated by</strong> dropdown and choose how you want to calculate your metric (either by <em>Value</em> or <em>Count</em>). For example, if you want to capture revenue from <em>Placed Order</em> events, use <em>Value</em> to show the revenue output. If you want to redefine email clicks, use <em>Count</em>.<br>\n\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28723685092123\" alt=\"aggregated by dropdown.jpg\" width=\"251\" height=\"159\">\n</li>\n<li>In the <em>Define</em> section, click the <strong>Metric name</strong> dropdown and select the metric definition to update. Note that these include Klaviyo and integration-specific events and metrics.<br>\n\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28723662948507\" alt=\"metric naem dropdown fina;.jpg\" width=\"195\" height=\"416\">\n</li>\n<li>Once you have chosen your metric, click the <strong>Metric value property</strong> dropdown and choose from a list of properties that help you create the definition. For example, you may want <em>Placed Order</em> events to include subscriptions, so you may use <em>Source Name</em> to include subscription orders.<br>\n\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28723662940827\" alt=\"metric value dropdown, update.jpg\" width=\"500\" height=\"235\">\n</li>\n<li>If applicable, click <strong>Add Filter</strong> to further define your filters and metric definition.<br>\n\n<div class=\"bs-callout bs-callout-default\">\n<p>If applying multiple filters, they must all be true for an event to qualify.</p>\n</div>\n</li>\n<li>In the <em>Property</em> field, choose how the metric is classified. For example, it can be looked up by <em>Source Name</em>.<br>\n<br>\nOnce you have chosen your property, the <em>Type</em> field will automatically determine how it will be represented (e.g.,<em> number</em>, <em>text</em>, etc.). <br>\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28723685097499\" alt=\"property dropdown, final.jpg\" width=\"224\" height=\"448\">\n</li>\n<li>Click the <strong>Relationship</strong> dropdown and choose how to capture the value. For example, if you want to capture all paid subscriptions into your <em>Placed Order</em> event, select <em>does not equal</em> “non-paid marketing subscription.”<br>\n\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28723685107483\" alt=\"relationship dropdown final.jpg\" width=\"176\" height=\"426\">\n</li>\n<li>In the <em>Value</em> dropdown, find or add the actual value that this property represents.<br>\n<div class=\"bs-callout bs-callout-default\">\n<p>You can choose up to 3 filters that define how your metric or event calculates. It’s important to note that depending on what combination of properties and filters you use, you may run into instances where the configuration you chose inadvertently duplicates values. For example, a customer order includes a subscription and a retail good from your website. When a customer places this order, your Klaviyo account receives 2 unique events (one for the subscription and one for the website order). If you include a revenue value in your new definition and replicate it for the subscription, Klaviyo will count both events as a conversion and inflate the attributed revenue (as both are now mapped to the same custom event).</p>\n</div>\n</li>\n<li>Optional: Once you are finished setting up your metric, you have the option to preview it to ensure it captures what you need. To do this, click <strong>Preview metric</strong> above. A modal will appear showing the conversion metric displayed in a bar chart on the left and profiles that fit this metric criteria on the right. </li>\n<li>When you are ready to save your new metric, click <strong>Create Metric</strong>.</li>\n<li>Return to <strong>Analytics &gt; Metrics</strong> to find your new metric.\n<ol>\n<li>\n</li>\n</ol>\n</li>\n</ol>\n<h2 id=\"h_01HN38DBBQR257SZYQTHM3XW9A\">Editing a previously created custom metric definition</h2>\n<ol>\n<li>If you have previously created a custom event or metric definition and need to update it, head to <strong>Analytics &gt; Metrics</strong>.</li>\n<li>From the list find the metric you want to edit and click on it.</li>\n<li>Click <strong>Edit definition </strong>in the upper right. You will return to the setup page from here, where you can adjust your definition, including filters, relationships, and values. Follow the instructions above to adjust these as needed.</li>\n<li>Once you finish updating, return to <strong>Analytics &gt; Metrics</strong> to confirm that your new definitions are reflected.</li>\n</ol>\n<h2 id=\"h_01HN38DBBQ4N3DAB75XTRXJ219\">Deleting a previously created custom metric definition</h2>\n<ol>\n<li>Head to <strong>Analytics &gt; Metrics</strong>.</li>\n<li>In the list, find the metric you want to edit and click the<strong> 3 dot menu</strong> to the right and select <strong>Delete</strong>.<br>\n\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28723662959259\" alt=\"custom metrics, delete metric.jpg\">\n</li>\n<li>Once you finish updating, return to <strong>Analytics &gt; Metrics</strong> to confirm that the custom metric has been deleted.</li>\n</ol>",
+    "user_segment_ids": []
+  },
+  "normalized": {
+    "id": "22311085738395",
+    "title": "How to configure custom conversion metrics",
+    "source_url": "https://help.klaviyo.com/hc/en-us/articles/22311085738395-How-to-configure-custom-conversion-metrics",
+    "section_id": 49375263424027,
+    "section": "Build and use metrics",
+    "category_id": 115000874048,
+    "category": "Analytics",
+    "category_slug": "analytics-audience",
+    "klaviyo_updated": "2026-04-21T13:56:45Z",
+    "created_at": "2024-01-23T19:21:22Z",
+    "draft": false,
+    "promoted": false,
+    "position": 0,
+    "label_names": []
+  },
+  "files": {
+    "body_html": "_source/articles/22311085738395.body.html",
+    "rendered_html": "_source/rendered/22311085738395.html"
+  },
+  "assets": {
+    "api_body": {
+      "images": [
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28723685112475",
+          "alt": "Custom metrics, details name.jpg",
+          "width": "525",
+          "height": "135"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28723685092123",
+          "alt": "aggregated by dropdown.jpg",
+          "width": "251",
+          "height": "159"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28723662948507",
+          "alt": "metric naem dropdown fina;.jpg",
+          "width": "195",
+          "height": "416"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28723662940827",
+          "alt": "metric value dropdown, update.jpg",
+          "width": "500",
+          "height": "235"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28723685097499",
+          "alt": "property dropdown, final.jpg",
+          "width": "224",
+          "height": "448"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28723685107483",
+          "alt": "relationship dropdown final.jpg",
+          "width": "176",
+          "height": "426"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28723662959259",
+          "alt": "custom metrics, delete metric.jpg",
+          "width": "",
+          "height": ""
+        }
+      ],
+      "links": [
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/22311212640027/",
+          "text": "strategic guide on using custom metrics"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/25829057055899",
+          "text": "mapped metrics"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/25829057055899#h_01HZ2MPFB9V6HCZES9JCP8KV2R",
+          "text": "applicable reporting"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/9974064152347",
+          "text": "home dashboard"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/16427152766619",
+          "text": "Business review dashboards"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4708299478427",
+          "text": "Overview or analytics dashboards"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360047044892",
+          "text": "Flow performance reports"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360047022912",
+          "text": "Campaign performance reports"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360046242952",
+          "text": "Single"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360046234772",
+          "text": "multi-metric reports"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005199947#section1",
+          "text": "campaign conversions"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/28474458127899",
+          "text": "conversion overview dashboard"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/17797912816795",
+          "text": "customer lifetime value (CLV) dashboard"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/17797889315355",
+          "text": "recency, frequency, and monetary (RFM) analysis report"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/26685770823451",
+          "text": "product analysis dashboard"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/22311085738395-How-to-configure-custom-conversion-metrics#01HZFNAMK1BTZGXTNG4VE9427D",
+          "text": "next section on creating your metrics"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115000976672",
+          "text": "billing guide."
+        }
+      ],
+      "headings": [
+        {
+          "level": 2,
+          "id": "h_01HN35D5NA4401FR8YKQKHQ70B",
+          "text": "You will learn"
+        },
+        {
+          "level": 2,
+          "id": "h_01HN35HF2AGZJWKY70269ZPN0D",
+          "text": "Before you begin"
+        },
+        {
+          "level": 3,
+          "id": "h_01JBYEP4Z49KWHN3Z3WB4X9K3G",
+          "text": "Mapped metrics"
+        },
+        {
+          "level": 3,
+          "id": "h_01JBYEPTQGJN23MGD1EJY7ZV9N",
+          "text": "Reports that can use custom metrics"
+        },
+        {
+          "level": 3,
+          "id": "h_01JBYERFB5C5HXGZE2RG18G85Z",
+          "text": "Using tags"
+        },
+        {
+          "level": 2,
+          "id": "h_01HN35PVW5A2DZ6N53GAYP6JF9",
+          "text": "Default custom metrics"
+        },
+        {
+          "level": 2,
+          "id": "01HZFNAMK1BTZGXTNG4VE9427D",
+          "text": "Creating a new custom metric"
+        },
+        {
+          "level": 2,
+          "id": "h_01HN38DBBQR257SZYQTHM3XW9A",
+          "text": "Editing a previously created custom metric definition"
+        },
+        {
+          "level": 2,
+          "id": "h_01HN38DBBQ4N3DAB75XTRXJ219",
+          "text": "Deleting a previously created custom metric definition"
+        }
+      ]
+    },
+    "rendered_page": {
+      "images": [
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/7ff492c2b417b7ecfe572f839a8a81398693c1f7-1920x1080.webp",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/8703ef25624bfc2fc020458b2423de6bb9ccf549-1344x346.jpg?w=525",
+          "alt": "Custom metrics, details name.jpg",
+          "width": "525",
+          "height": "135"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/c08b3f35dad21e2880a12b9b7e96e85b49ceb975-596x378.jpg?w=251",
+          "alt": "aggregated by dropdown.jpg",
+          "width": "251",
+          "height": "159"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/d93668069d4abbf5355880d3e61d9aa90311b7a5-300x640.jpg?w=195",
+          "alt": "metric naem dropdown fina;.jpg",
+          "width": "195",
+          "height": "416"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/b6ca090116fe6010647aea3f39dcc2efce0b40be-700x329.jpg?w=500",
+          "alt": "metric value dropdown, update.jpg",
+          "width": "500",
+          "height": "235"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/6eec7ba35f49bb450c17884967bf7f217e277243-375x750.jpg?w=224",
+          "alt": "property dropdown, final.jpg",
+          "width": "224",
+          "height": "448"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/555a59b02b3745379315193b00d72a5e1a0827a7-330x800.jpg?w=176",
+          "alt": "relationship dropdown final.jpg",
+          "width": "176",
+          "height": "426"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/61685e4a0bef8ba31eadddb6ff471be130bcc9b4-2096x584.jpg",
+          "alt": "custom metrics, delete metric.jpg",
+          "width": "",
+          "height": ""
+        }
+      ],
+      "links": [
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/22311085738395-How-to-configure-custom-conversion-metrics#site-content",
+          "text": "Skip to main content"
+        },
+        {
+          "href": "https://www.klaviyo.com",
+          "text": "Home"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center"
+        },
+        {
+          "href": "https://www.klaviyo.com/enterprise",
+          "text": "Enterprise"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Partners"
+        },
+        {
+          "href": "https://www.klaviyo.com/careers",
+          "text": "Careers"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": "Log in"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": ""
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center Find step-by-step instructions and troubleshooting solutions in our knowledge base."
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000032731",
+          "text": "Integrations"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000312411",
+          "text": "Flows"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867867",
+          "text": "Audience"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867667",
+          "text": "Campaigns"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/360000190711",
+          "text": "Sign-up forms"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000873988",
+          "text": "Deliverability & compliance"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/29173800271259",
+          "text": "SMS"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/16638219724187",
+          "text": "Reviews"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/18073014919195",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/34141283979931",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/37659126754075",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/33948021740315",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/39746685522331",
+          "text": "WhatsApp"
+        },
+        {
+          "href": "https://academy.klaviyo.com",
+          "text": "Klaviyo Academy Expert training and education to help you succeed with Klaviyo, and beyond."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Quick+guide&resource=academy_courses",
+          "text": "Quick guides Learn marketing strategies and concepts in 15 minutes or less."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Course&resource=academy_courses",
+          "text": "Courses Master key marketing topics through structured lessons and exams."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/best-practices",
+          "text": "Best practices Discover top product and marketing strategies for your business."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/learning-paths",
+          "text": "Learning paths Complete curated learning journeys tailored to your marketing goals."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses",
+          "text": "Explore all resources"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Live+training&resource=academy_courses",
+          "text": "Live trainings Build confidence through hands-on interactive workshops and thought-provoking strategy sessions."
+        },
+        {
+          "href": "https://www.bigmarker.com/klaviyo-customer-education/Office-hours-Getting-started-with-Klaviyo",
+          "text": "Live office hours Join a strategic discussion where you can ask questions and get answers in real-time."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/private-live-training",
+          "text": "1:1 Live training Book a private training session with an expert to jumpstart your platform knowledge and confidence."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/credentials",
+          "text": "Klaviyo credentials Dig deeper into select topics and showcase your expertise with a final exam to earn a certificate and digital badge."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/certificates/klaviyo-practitioner-certificate",
+          "text": "Klaviyo practitioner certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/deliverability-certificate",
+          "text": "Deliverability certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/developer-certificate",
+          "text": "Klaviyo developer certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses&select=Certificate",
+          "text": "See all certificates"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Klaviyo Community Join our thriving community network to connect with brands like yours—online and in person."
+        },
+        {
+          "href": "https://community.klaviyo.com/topic/new",
+          "text": "Ask a question Post a question and get thoughtful answers from Klaviyo powerusers."
+        },
+        {
+          "href": "https://community.klaviyo.com/p/roadmap",
+          "text": "Product roadmap"
+        },
+        {
+          "href": "https://community.klaviyo.com/search/activity/recent",
+          "text": "Recent threads"
+        },
+        {
+          "href": "https://community.klaviyo.com/p/champions",
+          "text": "Meet the Champions"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups",
+          "text": "Browse all groups Your people are waiting. New ideas and connections are a click away."
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/developer-group-64",
+          "text": "Developer group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/entrepreneur-user-group-118",
+          "text": "Entrepreneur group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/woo-user-group-87",
+          "text": "WooCommerce group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/new-york-meetup-chapter-82",
+          "text": "New York City"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/los-angeles-meetup-chapter-83",
+          "text": "Los Angeles"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/austin-meetup-chapter-85",
+          "text": "Austin"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/san-diego-meetup-chapter-86",
+          "text": "San Diego"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/amsterdam-meetup-chapter-84",
+          "text": "Amsterdam"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Klaviyo Developers Access API documentation and developer guides to help you build with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/get_started",
+          "text": "Get started Access key resources and a step-by-step checklist for how to start developing with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/build_your_integration",
+          "text": "Grow your app's reach Learn how to join our ecosystem and get your app listed on our marketplace."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/developer-tools",
+          "text": "Developer tools Generate sample data, monitor your API usage, and access our Postman collections."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/reference/api_overview",
+          "text": "API reference Browse our full catalog of API docs."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/changelog_",
+          "text": "Changelog"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/api_versioning_and_deprecation_policy",
+          "text": "Versioning & deprecation policy"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/rate_limits_and_error_handling",
+          "text": "Rate limits & error handling"
+        },
+        {
+          "href": "https://youtube.com/playlist?list=PLHkNfHgtxcUanrkMnKPdkRzuWU7MGv_xM&si=pkG-KH7IT_TUHOGC",
+          "text": "API tutorials on YouTube Subscribe to our Klaviyo API Tutorials playlist for easy access to step-by-step developer walkthroughs."
+        },
+        {
+          "href": "https://www.klaviyo.com/contact-us",
+          "text": "Contact us"
+        },
+        {
+          "href": "https://www.klaviyo.com/sign-up",
+          "text": "Sign up"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": "Search"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/22311085738395",
+          "text": "United States - EN"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/de-de/articles/22311085738395",
+          "text": "Deutschland - DE"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-es/articles/22311085738395",
+          "text": "España - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-mx/articles/22311085738395",
+          "text": "México - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/fr-fr/articles/22311085738395",
+          "text": "France - FR"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/it-it/articles/22311085738395",
+          "text": "Italia - IT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/ko-kr/articles/22311085738395",
+          "text": "한국 - KO"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/nl-nl/articles/22311085738395",
+          "text": "Nederland - NL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pl-pl/articles/22311085738395",
+          "text": "Polska - PL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pt-br/articles/22311085738395",
+          "text": "Brasil - PT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/sv-se/articles/22311085738395",
+          "text": "Sverige - SV"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000874048",
+          "text": "Analytics"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/49375928290587",
+          "text": "Metrics"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/49375263424027",
+          "text": "Build and use metrics"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/22311085738395-How-to-configure-custom-conversion-metrics#h_01HN35D5NA4401FR8YKQKHQ70B",
+          "text": "You will learn"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/22311085738395-How-to-configure-custom-conversion-metrics#h_01HN35HF2AGZJWKY70269ZPN0D",
+          "text": "Before you begin"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/22311085738395-How-to-configure-custom-conversion-metrics#h_01HN35PVW5A2DZ6N53GAYP6JF9",
+          "text": "Default custom metrics"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/22311085738395-How-to-configure-custom-conversion-metrics#01HZFNAMK1BTZGXTNG4VE9427D",
+          "text": "Creating a new custom metric"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/22311085738395-How-to-configure-custom-conversion-metrics#h_01HN38DBBQR257SZYQTHM3XW9A",
+          "text": "Editing a previously created custom metric definition"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/22311085738395-How-to-configure-custom-conversion-metrics#h_01HN38DBBQ4N3DAB75XTRXJ219",
+          "text": "Deleting a previously created custom metric definition"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/22311085738395-How-to-configure-custom-conversion-metrics#additional-resources",
+          "text": "Additional resources"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/22311212640027/",
+          "text": "strategic guide on using custom metrics"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/25829057055899",
+          "text": "mapped metrics"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/25829057055899#h_01HZ2MPFB9V6HCZES9JCP8KV2R",
+          "text": "applicable reporting"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/9974064152347",
+          "text": "home dashboard"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/16427152766619",
+          "text": "Business review dashboards"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4708299478427",
+          "text": "Overview or analytics dashboards"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360047044892",
+          "text": "Flow performance reports"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360047022912",
+          "text": "Campaign performance reports"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360046242952",
+          "text": "Single"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360046234772",
+          "text": "multi-metric reports"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005199947#section1",
+          "text": "campaign conversions"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/28474458127899",
+          "text": "conversion overview dashboard"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/17797912816795",
+          "text": "customer lifetime value (CLV) dashboard"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/17797889315355",
+          "text": "recency, frequency, and monetary (RFM) analysis report"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/26685770823451",
+          "text": "product analysis dashboard"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/22311085738395-How-to-configure-custom-conversion-metrics#01HZFNAMK1BTZGXTNG4VE9427D",
+          "text": "next section on creating your metrics"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115000976672",
+          "text": "billing guide."
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/22311212640027",
+          "text": "Understanding when and how to use custom conversion metrics"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360037957832",
+          "text": "Analytics glossary"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115000976672",
+          "text": "How Klaviyo billing works"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115001002272",
+          "text": "Learn how to contact support"
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": ""
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": "Visit Community"
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": ""
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": "Hire a partner"
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/about",
+          "text": "About Klaviyo"
+        },
+        {
+          "href": "https://www.klaviyo.com/newsroom",
+          "text": "Newsroom"
+        },
+        {
+          "href": "https://investors.klaviyo.com/overview/default.aspx",
+          "text": "Investor relations"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Agency and tech partners"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Developers"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/retail",
+          "text": "Retail and ecommerce"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/restaurants",
+          "text": "Restaurant marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/wellness",
+          "text": "Wellness"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform",
+          "text": "B2C CRM overview"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai",
+          "text": "Klaviyo AI (K:AI)"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/marketing-automation",
+          "text": "Klaviyo Marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-service",
+          "text": "Klaviyo Service"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/analytics",
+          "text": "Klaviyo Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-data-platform",
+          "text": "Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare",
+          "text": "Klaviyo vs. Klaviyo alternatives"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-mailchimp",
+          "text": "Klaviyo vs. Mailchimp"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-postscript",
+          "text": "Klaviyo vs. Postscript"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-attentive",
+          "text": "Klaviyo vs. Attentive"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-salesforce-marketing-cloud",
+          "text": "Klaviyo vs. Salesforce"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-listrak",
+          "text": "Klaviyo vs. Listrak"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/omnichannel",
+          "text": "Omnichannel marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/email-marketing",
+          "text": "Email marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing",
+          "text": "SMS marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing/rcs",
+          "text": "RCS for Business"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/mobile-app-marketing",
+          "text": "Mobile app marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/whatsapp",
+          "text": "WhatsApp marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/social",
+          "text": "Social marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources",
+          "text": "Marketing resources"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources/marketing-campaign-calendar",
+          "text": "Marketing campaign calendar"
+        },
+        {
+          "href": "https://www.klaviyo.com/glossary",
+          "text": "Marketing glossary"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/email-subject-line-generator",
+          "text": "Subject line generator"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/roi-calculator",
+          "text": "ROI calculator"
+        },
+        {
+          "href": "https://www.klaviyo.com/customers",
+          "text": "Case studies"
+        },
+        {
+          "href": "https://www.klaviyo.com/composer",
+          "text": "Composer Beta"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/marketing-agent",
+          "text": "Marketing Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/customer-agent",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/customer-experience-hub",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/helpdesk",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/marketing-analytics",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/advanced-cdp",
+          "text": "Advanced Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/web-forms",
+          "text": "Web forms"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/email-templates",
+          "text": "Email templates"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/portfolio",
+          "text": "Portfolio"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform-integrations",
+          "text": "Apps and Integrations"
+        },
+        {
+          "href": "https://www.klaviyo.com/features",
+          "text": "Features"
+        },
+        {
+          "href": "https://www.klaviyo.com/whats-new",
+          "text": "What's new"
+        },
+        {
+          "href": "https://www.klaviyo.com/events",
+          "text": "Events"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help Center"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us",
+          "text": "Academy"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Community"
+        },
+        {
+          "href": "https://www.facebook.com/Klaviyo/",
+          "text": "Facebook"
+        },
+        {
+          "href": "https://twitter.com/klaviyo/",
+          "text": "Twitter"
+        },
+        {
+          "href": "https://www.linkedin.com/company/klaviyo/",
+          "text": "LinkedIn"
+        },
+        {
+          "href": "https://www.instagram.com/klaviyo/",
+          "text": "Instagram"
+        },
+        {
+          "href": "https://www.klaviyo.com/sitemap",
+          "text": "Site Map"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal",
+          "text": "Terms and Privacy"
+        },
+        {
+          "href": "https://www.klaviyo.com/security",
+          "text": "Security"
+        },
+        {
+          "href": "https://www.klaviyo.com/trust",
+          "text": "Trust"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal/intellectual-property-notices",
+          "text": "Intellectual Property Notices"
+        }
+      ],
+      "headings": [
+        {
+          "level": 1,
+          "id": "",
+          "text": "How to configure custom conversion metrics"
+        },
+        {
+          "level": 2,
+          "id": "h_01HN35D5NA4401FR8YKQKHQ70B",
+          "text": "You will learn"
+        },
+        {
+          "level": 2,
+          "id": "h_01HN35HF2AGZJWKY70269ZPN0D",
+          "text": "Before you begin"
+        },
+        {
+          "level": 3,
+          "id": "h_01JBYEP4Z49KWHN3Z3WB4X9K3G",
+          "text": "Mapped metrics"
+        },
+        {
+          "level": 3,
+          "id": "h_01JBYEPTQGJN23MGD1EJY7ZV9N",
+          "text": "Reports that can use custom metrics"
+        },
+        {
+          "level": 3,
+          "id": "h_01JBYERFB5C5HXGZE2RG18G85Z",
+          "text": "Using tags"
+        },
+        {
+          "level": 2,
+          "id": "h_01HN35PVW5A2DZ6N53GAYP6JF9",
+          "text": "Default custom metrics"
+        },
+        {
+          "level": 2,
+          "id": "01HZFNAMK1BTZGXTNG4VE9427D",
+          "text": "Creating a new custom metric"
+        },
+        {
+          "level": 2,
+          "id": "h_01HN38DBBQR257SZYQTHM3XW9A",
+          "text": "Editing a previously created custom metric definition"
+        },
+        {
+          "level": 2,
+          "id": "h_01HN38DBBQ4N3DAB75XTRXJ219",
+          "text": "Deleting a previously created custom metric definition"
+        },
+        {
+          "level": 2,
+          "id": "additional-resources",
+          "text": "Additional resources"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "Explore more from Klaviyo"
+        }
+      ]
+    }
+  },
+  "rendered_page": {
+    "status": "fetched",
+    "error": ""
+  }
+}

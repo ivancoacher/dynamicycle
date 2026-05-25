@@ -1,0 +1,788 @@
+{
+  "captured_at": "2026-05-23T16:15:50Z",
+  "article": {
+    "id": 4402386684187,
+    "url": "https://klaviyo.zendesk.com/api/v2/help_center/en-us/articles/4402386684187.json",
+    "html_url": "https://klaviyo.zendesk.com/hc/en-us/articles/4402386684187-Troubleshooting-email-template-error-messages",
+    "author_id": 390819509472,
+    "comments_disabled": true,
+    "draft": false,
+    "promoted": false,
+    "position": 0,
+    "vote_sum": -61,
+    "vote_count": 113,
+    "section_id": 49375607281819,
+    "created_at": "2021-06-17T18:53:19Z",
+    "updated_at": "2026-04-21T13:54:57Z",
+    "name": "Troubleshooting email template error messages",
+    "title": "Troubleshooting email template error messages",
+    "source_locale": "en-us",
+    "locale": "en-us",
+    "outdated": false,
+    "outdated_locales": [],
+    "edited_at": "2026-04-17T01:00:22Z",
+    "user_segment_id": null,
+    "permission_group_id": 146372,
+    "content_tag_ids": [],
+    "label_names": [],
+    "body": "<h2 id=\"h_01HCJDQZ1MBS6XBFS1ZN08T5SW\">You will learn</h2>\n<p>If you encounter errors or warnings in an email template, you may need to resolve them before sending your message. Search this resource for the error message or warning you’re encountering to find tips for resolving the issue. </p>\n<h2 id=\"h_01HCJDQZ1MQP7EGDQRCB10DT8Y\">Campaign sending warnings</h2>\n<ul>\n<li>\n<strong>We found # blocks in your email that either still have the default text unmodified or are blank. Please review your email before continuing. </strong><br>\nIf you encounter this warning, look for empty blocks or placeholder content (e.g., “This is a text block. Click here to edit it.”) in your template. Check the desktop and mobile versions of the template. If you can’t find an empty block or placeholder content, send a preview message to yourself and review it on both desktop and mobile. If the preview looks good, it’s safe to send the message and ignore this warning.</li>\n<li>\n<strong>Possible Email Content Issues. It doesn’t look like there are any links in your email. Did you forget to add them to your email? </strong><br>\nThis warning appears if your plain-text or custom HTML email doesn’t include any links. Review the message to make sure all content has been added, including links for any calls-to-action. If you do not want to include any links in your email (other than your unsubscribe link), you can ignore this warning. </li>\n<li>\n<strong>Unsubscribe Link. We couldn’t find an unsubscribe link in your email. Klaviyo will automatically add an unsubscribe link when sending the email if you don’t add one. </strong><br>\nThis warning appears if you haven’t added an unsubscribe tag to your message (e.g., {% unsubscribe %} or {% unsubscribe_link %}). <a href=\"https://help.klaviyo.com/hc/en-us/articles/115006054267-How-to-Add-an-Unsubscribe-Link-to-Email-Campaigns\">Add an unsubscribe link</a> to avoid Klaviyo’s default footer being appended to your message. </li>\n</ul>\n<h2 id=\"h_01HCJDQZ1MJVF25A3X03SWKGTN\">Preview errors</h2>\n<p>When previewing a message, you may encounter this error message: </p>\n<p><strong>Message displayed without tags or variables</strong><br>\n<strong>Fix invalid template tags or variables to preview the message with actual profiles and events.</strong></p>\n<p>This error means that there is invalid syntax somewhere in your message. To locate the source of the error, check your message’s subject line and body content for variables, tags, or conditional statements (i.e., anything in your template surrounded by curly brackets <em>{}</em>) that don’t follow the format outlined in <a href=\"https://help.klaviyo.com/hc/en-us/articles/115005084927\">Klaviyo’s Help Center resources</a>. Below are some tips for locating the error: </p>\n<ul>\n<li>Check both the desktop and mobile versions of your message. </li>\n<li>If your message contains a <a href=\"https://help.klaviyo.com/hc/en-us/articles/115005084727-How-to-Use-Coupon-Codes-in-Klaviyo\">dynamic coupon</a>, make sure the coupon name is correct, and that your coupon has been configured in the <em>Coupons</em> tab. </li>\n</ul>\n<h2 id=\"h_01HCJDQZ1M8TSJM8ZMPEXFAAMH\">Custom HTML template errors</h2>\n<ul>\n<li>\n<strong>We couldn't find the following images: ... Make sure they are included in the zip file you uploaded.</strong><br>\nCheck that you’ve spelled all image source paths correctly, and that they match the file names of the images you uploaded. If no image paths are provided in the error message, review your HTML file for empty background attributes (e.g., <em>background=””</em>)</li>\n<li>\n<strong>An {% unsubscribe %} tag is required.</strong><br>\nAdd a <a href=\"https://help.klaviyo.com/hc/en-us/articles/115005078267\">Klaviyo unsubscribe tag</a> to your message footer to resolve this error. </li>\n<li>\n<strong>Could not parse the remainder: 'Z' from 'XYZ'.</strong><br>\nThis error means that one of your tags (anything surrounded by {% %}) is not recognized by Klaviyo. Refer to our guide to <a href=\"https://klaviyo.zendesk.com/hc/en-us/articles/4408802648731\">message personalization reference</a> to see accepted tags.</li>\n</ul>\n<h2 id=\"h_01HCJDQZ1MKJ2SG392GZVT0K9R\">Catalog errors</h2>\n<p>If your template uses a <a href=\"https://klaviyo.zendesk.com/hc/en-us/articles/360004785571\">catalog lookup tag</a>, you may encounter the error <strong>Unable to find item with code: __. It may have been deleted.</strong></p>\n<p>If you see this error, it means we don't recognize the item ID included in the tab. Make sure that: </p>\n<ul>\n<li>You're previewing with an event that contains item IDs (if the item ID dynamically references event data). </li>\n<li>The reference to your event data's item ID is correctly formatted.</li>\n<li>The item ID from your event data matches what's in your Klaviyo catalog. </li>\n</ul>\n<h2 id=\"h_01HCJDQZ1MEFXVR1J1VTF6M2C3\">Shopify template errors</h2>\n<ul>\n<ul>\n<li>{ % for item in...</li>\n<li>{% endfor %}</li>\n<li>{% if...</li>\n<li>{% elsif...</li>\n<li>{% else %}</li>\n<li>{% endif %}</li>\n</ul>\n<li>\n<strong>Body html Liquid syntax error: Unknown tag 'unsubscribe'</strong><br>\n<strong>Body html Liquid syntax error: Unknown tag 'web_view'</strong><br>\nThese errors, and other errors like them, mean that a Klaviyo-specific tag was added to your template before exporting it to Shopify. Shopify doesn’t support Klaviyo’s unsubscribe, manage preferences, or web view links.</li>\n<li>\n<strong>Body Html Liquid Syntax Error : Unknown tag \"Load\"</strong><br>\nShopify cannot support Klaviyo’s product block feature. If you add a product block into your Shopify notification template, then import that template into Shopify, this error will appear. Remove the product block, export your template’s HTML, and import it into Shopify. </li>\n<li>\n<strong>Body html Liquid syntax error: Unknown tag 'elsif'</strong><br>\n<strong>Body html Liquid syntax error: 'if' tag was never closed</strong><br>\n<strong>Body html Liquid syntax error: 'X' Tag Was Never Closed</strong><br>\nMany of Klaviyo’s Shopify notification templates include conditional statements, which make your message dynamic based on the customer’s order status. If part of a conditional statement is deleted, you’ll see an error like the ones above.<br>\n<br>\nTo resolve this, open the template in Klaviyo and remove the remaining elements of the conditional statement. Search for tags that begin with: </li>\n</ul>",
+    "user_segment_ids": []
+  },
+  "normalized": {
+    "id": "4402386684187",
+    "title": "Troubleshooting email template error messages",
+    "source_url": "https://help.klaviyo.com/hc/en-us/articles/4402386684187-Troubleshooting-email-template-error-messages",
+    "section_id": 49375607281819,
+    "section": "Template troubleshooting ",
+    "category_id": 4414879524891,
+    "category": "Content",
+    "category_slug": "content",
+    "klaviyo_updated": "2026-04-21T13:54:57Z",
+    "created_at": "2021-06-17T18:53:19Z",
+    "draft": false,
+    "promoted": false,
+    "position": 0,
+    "label_names": []
+  },
+  "files": {
+    "body_html": "_source/articles/4402386684187.body.html",
+    "rendered_html": "_source/rendered/4402386684187.html"
+  },
+  "assets": {
+    "api_body": {
+      "images": [],
+      "links": [
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115006054267-How-to-Add-an-Unsubscribe-Link-to-Email-Campaigns",
+          "text": "Add an unsubscribe link"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005084927",
+          "text": "Klaviyo’s Help Center resources"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005084727-How-to-Use-Coupon-Codes-in-Klaviyo",
+          "text": "dynamic coupon"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005078267",
+          "text": "Klaviyo unsubscribe tag"
+        },
+        {
+          "href": "https://klaviyo.zendesk.com/hc/en-us/articles/4408802648731",
+          "text": "message personalization reference"
+        },
+        {
+          "href": "https://klaviyo.zendesk.com/hc/en-us/articles/360004785571",
+          "text": "catalog lookup tag"
+        }
+      ],
+      "headings": [
+        {
+          "level": 2,
+          "id": "h_01HCJDQZ1MBS6XBFS1ZN08T5SW",
+          "text": "You will learn"
+        },
+        {
+          "level": 2,
+          "id": "h_01HCJDQZ1MQP7EGDQRCB10DT8Y",
+          "text": "Campaign sending warnings"
+        },
+        {
+          "level": 2,
+          "id": "h_01HCJDQZ1MJVF25A3X03SWKGTN",
+          "text": "Preview errors"
+        },
+        {
+          "level": 2,
+          "id": "h_01HCJDQZ1M8TSJM8ZMPEXFAAMH",
+          "text": "Custom HTML template errors"
+        },
+        {
+          "level": 2,
+          "id": "h_01HCJDQZ1MKJ2SG392GZVT0K9R",
+          "text": "Catalog errors"
+        },
+        {
+          "level": 2,
+          "id": "h_01HCJDQZ1MEFXVR1J1VTF6M2C3",
+          "text": "Shopify template errors"
+        }
+      ]
+    },
+    "rendered_page": {
+      "images": [
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/7ff492c2b417b7ecfe572f839a8a81398693c1f7-1920x1080.webp",
+          "alt": "",
+          "width": "",
+          "height": ""
+        }
+      ],
+      "links": [
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4402386684187-Troubleshooting-email-template-error-messages#site-content",
+          "text": "Skip to main content"
+        },
+        {
+          "href": "https://www.klaviyo.com",
+          "text": "Home"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center"
+        },
+        {
+          "href": "https://www.klaviyo.com/enterprise",
+          "text": "Enterprise"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Partners"
+        },
+        {
+          "href": "https://www.klaviyo.com/careers",
+          "text": "Careers"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": "Log in"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": ""
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center Find step-by-step instructions and troubleshooting solutions in our knowledge base."
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000032731",
+          "text": "Integrations"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000312411",
+          "text": "Flows"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867867",
+          "text": "Audience"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867667",
+          "text": "Campaigns"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/360000190711",
+          "text": "Sign-up forms"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000873988",
+          "text": "Deliverability & compliance"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/29173800271259",
+          "text": "SMS"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/16638219724187",
+          "text": "Reviews"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/18073014919195",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/34141283979931",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/37659126754075",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/33948021740315",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/39746685522331",
+          "text": "WhatsApp"
+        },
+        {
+          "href": "https://academy.klaviyo.com",
+          "text": "Klaviyo Academy Expert training and education to help you succeed with Klaviyo, and beyond."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Quick+guide&resource=academy_courses",
+          "text": "Quick guides Learn marketing strategies and concepts in 15 minutes or less."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Course&resource=academy_courses",
+          "text": "Courses Master key marketing topics through structured lessons and exams."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/best-practices",
+          "text": "Best practices Discover top product and marketing strategies for your business."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/learning-paths",
+          "text": "Learning paths Complete curated learning journeys tailored to your marketing goals."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses",
+          "text": "Explore all resources"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Live+training&resource=academy_courses",
+          "text": "Live trainings Build confidence through hands-on interactive workshops and thought-provoking strategy sessions."
+        },
+        {
+          "href": "https://www.bigmarker.com/klaviyo-customer-education/Office-hours-Getting-started-with-Klaviyo",
+          "text": "Live office hours Join a strategic discussion where you can ask questions and get answers in real-time."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/private-live-training",
+          "text": "1:1 Live training Book a private training session with an expert to jumpstart your platform knowledge and confidence."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/credentials",
+          "text": "Klaviyo credentials Dig deeper into select topics and showcase your expertise with a final exam to earn a certificate and digital badge."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/certificates/klaviyo-practitioner-certificate",
+          "text": "Klaviyo practitioner certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/deliverability-certificate",
+          "text": "Deliverability certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/developer-certificate",
+          "text": "Klaviyo developer certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses&select=Certificate",
+          "text": "See all certificates"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Klaviyo Community Join our thriving community network to connect with brands like yours—online and in person."
+        },
+        {
+          "href": "https://community.klaviyo.com/topic/new",
+          "text": "Ask a question Post a question and get thoughtful answers from Klaviyo powerusers."
+        },
+        {
+          "href": "https://community.klaviyo.com/p/roadmap",
+          "text": "Product roadmap"
+        },
+        {
+          "href": "https://community.klaviyo.com/search/activity/recent",
+          "text": "Recent threads"
+        },
+        {
+          "href": "https://community.klaviyo.com/p/champions",
+          "text": "Meet the Champions"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups",
+          "text": "Browse all groups Your people are waiting. New ideas and connections are a click away."
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/developer-group-64",
+          "text": "Developer group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/entrepreneur-user-group-118",
+          "text": "Entrepreneur group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/woo-user-group-87",
+          "text": "WooCommerce group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/new-york-meetup-chapter-82",
+          "text": "New York City"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/los-angeles-meetup-chapter-83",
+          "text": "Los Angeles"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/austin-meetup-chapter-85",
+          "text": "Austin"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/san-diego-meetup-chapter-86",
+          "text": "San Diego"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/amsterdam-meetup-chapter-84",
+          "text": "Amsterdam"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Klaviyo Developers Access API documentation and developer guides to help you build with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/get_started",
+          "text": "Get started Access key resources and a step-by-step checklist for how to start developing with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/build_your_integration",
+          "text": "Grow your app's reach Learn how to join our ecosystem and get your app listed on our marketplace."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/developer-tools",
+          "text": "Developer tools Generate sample data, monitor your API usage, and access our Postman collections."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/reference/api_overview",
+          "text": "API reference Browse our full catalog of API docs."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/changelog_",
+          "text": "Changelog"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/api_versioning_and_deprecation_policy",
+          "text": "Versioning & deprecation policy"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/rate_limits_and_error_handling",
+          "text": "Rate limits & error handling"
+        },
+        {
+          "href": "https://youtube.com/playlist?list=PLHkNfHgtxcUanrkMnKPdkRzuWU7MGv_xM&si=pkG-KH7IT_TUHOGC",
+          "text": "API tutorials on YouTube Subscribe to our Klaviyo API Tutorials playlist for easy access to step-by-step developer walkthroughs."
+        },
+        {
+          "href": "https://www.klaviyo.com/contact-us",
+          "text": "Contact us"
+        },
+        {
+          "href": "https://www.klaviyo.com/sign-up",
+          "text": "Sign up"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": "Search"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4402386684187",
+          "text": "United States - EN"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/de-de/articles/4402386684187",
+          "text": "Deutschland - DE"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-es/articles/4402386684187",
+          "text": "España - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-mx/articles/4402386684187",
+          "text": "México - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/fr-fr/articles/4402386684187",
+          "text": "France - FR"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/it-it/articles/4402386684187",
+          "text": "Italia - IT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/ko-kr/articles/4402386684187",
+          "text": "한국 - KO"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/nl-nl/articles/4402386684187",
+          "text": "Nederland - NL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pl-pl/articles/4402386684187",
+          "text": "Polska - PL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pt-br/articles/4402386684187",
+          "text": "Brasil - PT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/sv-se/articles/4402386684187",
+          "text": "Sverige - SV"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/4414879524891",
+          "text": "Content"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/14543554717467",
+          "text": "Templates"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/49375607281819",
+          "text": "Template troubleshooting"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4402386684187-Troubleshooting-email-template-error-messages#h_01HCJDQZ1MBS6XBFS1ZN08T5SW",
+          "text": "You will learn"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4402386684187-Troubleshooting-email-template-error-messages#h_01HCJDQZ1MQP7EGDQRCB10DT8Y",
+          "text": "Campaign sending warnings"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4402386684187-Troubleshooting-email-template-error-messages#h_01HCJDQZ1MJVF25A3X03SWKGTN",
+          "text": "Preview errors"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4402386684187-Troubleshooting-email-template-error-messages#h_01HCJDQZ1M8TSJM8ZMPEXFAAMH",
+          "text": "Custom HTML template errors"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4402386684187-Troubleshooting-email-template-error-messages#h_01HCJDQZ1MKJ2SG392GZVT0K9R",
+          "text": "Catalog errors"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4402386684187-Troubleshooting-email-template-error-messages#h_01HCJDQZ1MEFXVR1J1VTF6M2C3",
+          "text": "Shopify template errors"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115006054267-How-to-Add-an-Unsubscribe-Link-to-Email-Campaigns",
+          "text": "Add an unsubscribe link"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005084927",
+          "text": "Klaviyo’s Help Center resources"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005084727-How-to-Use-Coupon-Codes-in-Klaviyo",
+          "text": "dynamic coupon"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005078267",
+          "text": "Klaviyo unsubscribe tag"
+        },
+        {
+          "href": "https://klaviyo.zendesk.com/hc/en-us/articles/4408802648731",
+          "text": "message personalization reference"
+        },
+        {
+          "href": "https://klaviyo.zendesk.com/hc/en-us/articles/360004785571",
+          "text": "catalog lookup tag"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115001002272",
+          "text": "Learn how to contact support"
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": ""
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": "Visit Community"
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": ""
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": "Hire a partner"
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/about",
+          "text": "About Klaviyo"
+        },
+        {
+          "href": "https://www.klaviyo.com/newsroom",
+          "text": "Newsroom"
+        },
+        {
+          "href": "https://investors.klaviyo.com/overview/default.aspx",
+          "text": "Investor relations"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Agency and tech partners"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Developers"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/retail",
+          "text": "Retail and ecommerce"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/restaurants",
+          "text": "Restaurant marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/wellness",
+          "text": "Wellness"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform",
+          "text": "B2C CRM overview"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai",
+          "text": "Klaviyo AI (K:AI)"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/marketing-automation",
+          "text": "Klaviyo Marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-service",
+          "text": "Klaviyo Service"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/analytics",
+          "text": "Klaviyo Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-data-platform",
+          "text": "Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare",
+          "text": "Klaviyo vs. Klaviyo alternatives"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-mailchimp",
+          "text": "Klaviyo vs. Mailchimp"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-postscript",
+          "text": "Klaviyo vs. Postscript"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-attentive",
+          "text": "Klaviyo vs. Attentive"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-salesforce-marketing-cloud",
+          "text": "Klaviyo vs. Salesforce"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-listrak",
+          "text": "Klaviyo vs. Listrak"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/omnichannel",
+          "text": "Omnichannel marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/email-marketing",
+          "text": "Email marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing",
+          "text": "SMS marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing/rcs",
+          "text": "RCS for Business"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/mobile-app-marketing",
+          "text": "Mobile app marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/whatsapp",
+          "text": "WhatsApp marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/social",
+          "text": "Social marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources",
+          "text": "Marketing resources"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources/marketing-campaign-calendar",
+          "text": "Marketing campaign calendar"
+        },
+        {
+          "href": "https://www.klaviyo.com/glossary",
+          "text": "Marketing glossary"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/email-subject-line-generator",
+          "text": "Subject line generator"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/roi-calculator",
+          "text": "ROI calculator"
+        },
+        {
+          "href": "https://www.klaviyo.com/customers",
+          "text": "Case studies"
+        },
+        {
+          "href": "https://www.klaviyo.com/composer",
+          "text": "Composer Beta"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/marketing-agent",
+          "text": "Marketing Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/customer-agent",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/customer-experience-hub",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/helpdesk",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/marketing-analytics",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/advanced-cdp",
+          "text": "Advanced Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/web-forms",
+          "text": "Web forms"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/email-templates",
+          "text": "Email templates"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/portfolio",
+          "text": "Portfolio"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform-integrations",
+          "text": "Apps and Integrations"
+        },
+        {
+          "href": "https://www.klaviyo.com/features",
+          "text": "Features"
+        },
+        {
+          "href": "https://www.klaviyo.com/whats-new",
+          "text": "What's new"
+        },
+        {
+          "href": "https://www.klaviyo.com/events",
+          "text": "Events"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help Center"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us",
+          "text": "Academy"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Community"
+        },
+        {
+          "href": "https://www.facebook.com/Klaviyo/",
+          "text": "Facebook"
+        },
+        {
+          "href": "https://twitter.com/klaviyo/",
+          "text": "Twitter"
+        },
+        {
+          "href": "https://www.linkedin.com/company/klaviyo/",
+          "text": "LinkedIn"
+        },
+        {
+          "href": "https://www.instagram.com/klaviyo/",
+          "text": "Instagram"
+        },
+        {
+          "href": "https://www.klaviyo.com/sitemap",
+          "text": "Site Map"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal",
+          "text": "Terms and Privacy"
+        },
+        {
+          "href": "https://www.klaviyo.com/security",
+          "text": "Security"
+        },
+        {
+          "href": "https://www.klaviyo.com/trust",
+          "text": "Trust"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal/intellectual-property-notices",
+          "text": "Intellectual Property Notices"
+        }
+      ],
+      "headings": [
+        {
+          "level": 1,
+          "id": "",
+          "text": "Troubleshooting email template error messages"
+        },
+        {
+          "level": 2,
+          "id": "h_01HCJDQZ1MBS6XBFS1ZN08T5SW",
+          "text": "You will learn"
+        },
+        {
+          "level": 2,
+          "id": "h_01HCJDQZ1MQP7EGDQRCB10DT8Y",
+          "text": "Campaign sending warnings"
+        },
+        {
+          "level": 2,
+          "id": "h_01HCJDQZ1MJVF25A3X03SWKGTN",
+          "text": "Preview errors"
+        },
+        {
+          "level": 2,
+          "id": "h_01HCJDQZ1M8TSJM8ZMPEXFAAMH",
+          "text": "Custom HTML template errors"
+        },
+        {
+          "level": 2,
+          "id": "h_01HCJDQZ1MKJ2SG392GZVT0K9R",
+          "text": "Catalog errors"
+        },
+        {
+          "level": 2,
+          "id": "h_01HCJDQZ1MEFXVR1J1VTF6M2C3",
+          "text": "Shopify template errors"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "Explore more from Klaviyo"
+        }
+      ]
+    }
+  },
+  "rendered_page": {
+    "status": "fetched",
+    "error": ""
+  }
+}

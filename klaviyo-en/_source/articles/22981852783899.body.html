@@ -1,0 +1,127 @@
+<h2 id="h_01HPSAJAJHV9P54SK1AE24R018">You will learn</h2>
+<p>Learn about bot clicks (also known as server-clicks), and why some of the clicks on your emails and SMS messages may not come from a human. Bot clicks can impact your marketing strategy, as profiles may appear to be more engaged than they actually are.</p>
+<h2 id="h_01HPSAJAJHP8AZNFXYPKGNNTPG">What are bot clicks?</h2>
+<p>A bot click refers to an email or SMS click performed by a machine, often to verify the safety of a link or display a link preview.</p>
+<p>Inbox providers, some 3rd-party security software, and carriers use bots to click links in emails before any human user. This helps the providers protect users from phishing by making sure the links are safe and not a malicious URL.</p>
+<p>Bot clicks can impact your marketing because they give a false sense of engagement for a profile. It may appear that a customer clicked the link in an email because they were interested in the content, but in reality, a machine performed the click and the user did not perform the action.</p>
+<div class="bs-callout bs-callout-default">
+<p>Note that <a href="https://help.klaviyo.com/hc/en-us/articles/4416791883163">Apple Privacy Opens</a> are a separate concept from bot clicks.</p>
+</div>
+<h2 id="h_01HTDJGZ1EX5JJ52EKH7CSRZ8B">Email bot clicks </h2>
+<h3 id="h_01HPSAJAJJHPB4GWTQDABWJ7XV">Identifying email bot clicks</h3>
+<p>Within the <em>Clicked Email</em> event in Klaviyo, you can find a piece of event data called <em>Bot Click</em>. The value for this can be set to either <em>true</em> or <em>false</em> based on whether the click was performed by a bot.</p>
+<p class="wysiwyg-text-align-center"><img src="https://klaviyo.zendesk.com/hc/article_attachments/28723524314523" alt="Bot click event data within Clicked email event in Klaviyo" width="560" height="288"></p>
+<div class="bs-callout bs-callout-default">
+<p>Email bot-click event data is only available from January 1st, 2022. </p>
+</div>
+<h3 id="h_01HPSAKAPBZQ7DZJ9FF8ZRRVXY">Preventing email bot clicks</h3>
+<p><a href="https://help.klaviyo.com/hc/en-us/articles/7676795223707">Dedicated click tracking</a> allows you to display your own domain on click-tracking links (instead of the default Klaviyo encoding). </p>
+<p>Dedicated click tracking is beneficial because customers and inbox providers can easily recognize your brand, making the links in your email more trustworthy. Instead of a long string of letters and numbers from a Klaviyo-encoded link (i.e., <em>trk.klaviyomail.com</em> or <em>trk.klclick.com</em>), customers will see your brand’s name when hovering over links in your email. This increases the chances that they will click on your links, and makes links look safer in the eyes of inbox providers. </p>
+<p class="wysiwyg-text-align-center"><img src="https://klaviyo.zendesk.com/hc/article_attachments/28723524303387" alt="Click tracking link shown on hover in email"></p>
+<p>In addition to setting up dedicated click tracking, you should avoid linking to external websites and using link shorteners. These can cause email inbox providers to be suspicious of a link and validate its safety with a bot-click.</p>
+<p>Lastly, maintaining a strong <a href="https://help.klaviyo.com/hc/en-us/articles/15332906406171">sender reputation</a> and good overall deliverability shows inbox providers you are a reputable sender and makes them less likely to validate the safety of links in your sends.</p>
+<div class="bs-callout bs-callout-default">
+<p>There is no way to prevent bot clicks performed by inbox providers entirely. While these methods can make inbox providers less likely to verify the safety of links in your emails through an automated click, this does not guarantee that all bot clicks will be prevented. </p>
+</div>
+<h2 id="h_01HSGYTXWC1NWZZ933AZ6QERA2">SMS bot clicks </h2>
+<p>SMS messages can also experience bot clicks. The biggest driver of bot clicks in SMS messages is link previewing functionality, which is a standard feature on most iOS and Android devices. In order for the link preview to be generated, devices must programmatically click the link to retrieve the preview image and present it in the user’s messaging app. The logic varies by device and operating system, but it is known to inflate click rates.</p>
+<p>Additionally, bot clicks can also originate from carriers and providers that examine message content for compliance. </p>
+<h3 id="h_01HSGYTXWCMAPRP3MW6E2EC1QZ">Identifying SMS-bot clicks</h3>
+<p>Within the <em>Clicked SMS</em> event in Klaviyo, you can find an event property called <em>Bot Click</em>. The property’s value will be either <em>true</em> or <em>false</em> based on whether the click was performed by a bot.</p>
+<p class="wysiwyg-text-align-center"><img src="https://klaviyo.zendesk.com/hc/article_attachments/28723546244123" alt="Bot click event data in Clicked SMS event" width="561" height="298"></p>
+<h2 id="h_01HSGYTXWCH5S4DR1WPYFH50AR">Impact of bot clicks </h2>
+<p>Bot clicks do not influence the cost of a campaign and do not impact conversions based on events such as <em>Active on Site</em>, <em>Placed order</em>, etc. However, they can impact attribution if the last click within the attribution window before a conversion is a bot click.</p>
+<p>If you suspect you are experiencing high-levels of bot clicks with your emails or SMS messages, you can exclude bot clicks from tracking and reporting data or measure engagement using the <em>Active on site</em> rate instead of <em>Click rate</em>. Once a campaign is sent, from the overview page, you can select the conversion metric as the <em>Active on site</em> event to see this data.</p>
+<h2 id="h_01J2YR3BHETWJPKA803A83S27A">Monitoring bot clicks</h2>
+<h3 id="h_01J2YR3V6EBN1SXZM731BRFEGM">Segmentation</h3>
+<p>You can use bot click data as a filter when building segments to either see the number of profiles experiencing bot clicks, or to exclude the clicks to make sure you are only including real clicks performed by humans.</p>
+<p>To exclude profiles that have only exhibited bot clicks, use the following filter for <em>Clicked Email</em> or <em>Clicked SMS</em> event conditions. This filter will make sure only profiles with a human click are included in your segment.</p>
+<ul>
+<li>Where <em>Bot Click equals False</em>
+</li>
+</ul>
+<p>Note that a profile can have a mix of both human and bot clicks. Klaviyo uses a number of different factors to determine whether a click was performed by a bot, and is able to distinguish human and bot clicks from each other. A click performed by a human can be identified with the <em>Bot Click = false</em> event data.</p>
+<div class="bs-callout bs-callout-default">
+<p>Bot click data in segments is available from January 1st, 2022.</p>
+</div>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/28723524317339" alt="segment.jpg"></p>
+<h3 id="h_01J2YR4AQ6VYSRSFVDX708NYE2">Metric reports</h3>
+<p>You can also find data around the volume of email or SMS bot clicks in Klaviyo’s <em>Metrics</em> tab. To see this information, navigate to the <em>Clicked Email</em> or <em>Clicked SMS</em> event in Klaviyo’s <em>Metrics</em> tab. Once on the metric, you can set the timeline you’d like to analyze and the <em>By Bot Click</em> filter to view the volume of bot clicks you are experiencing. </p>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/28723524306715" alt="Metric report for Clicked SMS event with bot click filter" width="650" height="454"></p>
+<p>Note that a profile can have a mix of both human and bot clicks. Klaviyo uses a number of different factors to determine whether a click was performed by a bot, and is able to distinguish human and bot clicks from each other. A click performed by a human can be identified with the <em>Bot Click = false</em> event data.</p>
+<h3 id="h_01J2YR4AQ6Z70ZT0NYYCNGFAX7">Custom reports </h3>
+<p>Custom reports can be used to find data around bot clicks as well. Create a <a href="https://help.klaviyo.com/hc/en-us/articles/360046242952">Single Metric Deep Dive Report</a> to analyze the number of bot clicks for the email or SMS channels. </p>
+<p>To see the volume of bot clicks, select the <em>Clicked Email</em> or <em>Clicked SMS</em> event, along with the filter <em>Bot Click = true</em>. Similarly, you can exclude the filter <em>Bot Clicks = false</em> to exclude bot clicks from custom reports data.</p>
+<div class="bs-callout bs-callout-default">
+<p>Learn how to <a href="https://help.klaviyo.com/hc/en-us/articles/27497646637979">configure custom reports to track bot clicks</a>.</p>
+</div>
+<h2 id="h_01J2YR4GNQQR2G3GZ2E0EFRJQE">Excluding bot clicks from attribution and certain reporting data</h2>
+<p>You can exclude bot clicks from both your account’s reporting data and attribution calculations. This way, your attribution windows for capturing actions align with your reporting data. Learn how to <a href="https://help.klaviyo.com/hc/en-us/articles/11118357030555#h_01J5X2K26S69K6ZGMY3NDBX2J6">remove bot clicks, Apple Privacy opens, and adjust your attribution windows</a>.</p>
+<div class="bs-callout bs-callout-default">
+<p>If you are an existing account prior to 8/27/24 and have already chosen to remove <a href="https://help.klaviyo.com/hc/en-us/articles/360004059711#h_01HFEZWHWN7AVGXQB8TGQT6BXG">bot clicks from your email settings</a>, <strong>those will apply to reporting only</strong>. The new options on the <em>Attribution</em> page will remove them from <strong>both reporting and attribution</strong> at the same time. It is advised to select options on this page to apply them both.</p>
+</div>
+<h2 id="h_01J2YR5JFGCWCGQR584GVQ9S8T">Impact of bot click feature on reporting</h2>
+<p>Once you enable the bot click feature, it will affect different areas of Klaviyo reporting or allow you further filtering capabilities. Additionally, some reporting will still include bot clicks regardless of the feature. Read more below about the specific impact per reporting surface.</p>
+<h3 id="h_01J2YR6Q427JAFGHR9DGK898CE">Metrics</h3>
+<p>The bot click reporting filter impacts how the following metrics on your account are calculated:</p>
+<ul>
+<li><em>Click Rate</em></li>
+<li><em>Total Clicks</em></li>
+<li><em>Unique Clicks</em></li>
+</ul>
+<p>Other metrics on your account are not impacted.</p>
+<h3 id="h_01J2YR7B3KER79XZRVRXX924QF">Reporting</h3>
+<p>With the bot click reporting feature enabled, any reports and dashboards showing click rates or counts of clicks over time will exclude bot clicks. These reports include:</p>
+<ul>
+<li>Applicable cards in the <em>Overview</em> dashboards</li>
+<li>Flow performance reporting (from within a specific flow)</li>
+<li>Campaign performance reporting (from within a specific campaign)</li>
+<li>SMS dashboard</li>
+<li>SMS and email benchmarks<br>
+<div class="bs-callout bs-callout-default">
+<p>These reports will be updated retroactively to exclude bot clicks from January 1st, 2022.</p>
+</div>
+<p>The following reports on your account will not be impacted by the bot click reporting filter:</p>
+</li>
+<li><a href="https://help.klaviyo.com/hc/en-us/articles/115005089467">Email campaigns trend report</a></li>
+<li><a href="https://help.klaviyo.com/hc/en-us/articles/115005246328">Personal email reporting</a></li>
+</ul>
+<div class="bs-callout bs-callout-default">
+<p>Data in custom reports includes bot clicks by default but they can be excluded with the <em>Bot Click = false</em> filter.</p>
+</div>
+<h3 id="h_01J2YR8S61TS9DNM1QRAHK07RK">Benchmarks</h3>
+<p>The bot click reporting filter impacts the values you see in <a href="https://help.klaviyo.com/hc/en-us/articles/360050110072">email and SMS benchmarks</a>. Click rates in benchmark reporting will align with your setting selection as of May 2024 and include the previous month’s data.</p>
+<div class="bs-callout bs-callout-default">
+<p>Historical benchmarks before January 1st, 2022 are not impacted by the bot click reporting filter at this time.</p>
+</div>
+<h3 id="h_01J2YR8ZR911G9ZRAVR9JGG9EM">Experiments</h3>
+<p>If you are running A/B tests with <em>Click Rate</em> as a metric for your experiment, the bot click reporting filter can impact your results. The next time any live experiments are evaluated, only human clicks are used to evaluate the winner and bot clicks are excluded. This may cause a shift in the winning variation. Historical winners will not change and the winner was decided based on the data available at the time.</p>
+<div class="accordion accordion--default">
+<div class="accordion__item">
+<div class="accordion__item-title"><strong>Analyzing campaign A/B test results</strong></div>
+<div class="accordion__item-content">
+<p>It is important to note that the <em>Continuous results and Test results </em>pages for <a href="https://help.klaviyo.com/hc/en-us/articles/360052794352">campaign A/B tests</a> behave differently in regards to bot clicks.</p>
+<div class="bs-callout bs-callout-default">
+<p>The <em>Continuous results</em> page only shows in campaign A/B tests on less than 100% of the population (i.e. the winner is sent to the remaining recipients).</p>
+</div>
+<p>The <em>Continuous results</em> page always shows the click rates in adherence to your current bot click setting selection. </p>
+<p>For example if you are currently excluding bot clicks from reporting, you may see the following results on the <em>Continuous results </em>page: </p>
+<ul>
+<li>Variation A = 3% click rate (winner)</li>
+<li>Variation B = 5% click rate<br>
+<p>Because the <em>Continuous results </em>page excludes bot clicks, the variation with a lower click rate may win after accounting for bot clicks. </p>
+<p>Meanwhile, the <em>Test results</em> page always shows the click rate based on your definition at the time that the winner was selected.</p>
+<p>For example, if bot clicks were included in reporting at the time the winner was selected, the <em>Test results </em>page may have the following results:</p>
+</li>
+<li>Variation A = 15% click rate (winner) </li>
+<li>Variation B = 14% click rate</li>
+</ul>
+<p>Because of the differences in behavior between the <em>Continuous results</em> and <em>Test results</em> pages, you may see conflicting results and the variation with a lower click rate declared the winner on the <em>Continuous results </em>page.</p>
+</div>
+</div>
+</div>
+<div class="bs-callout bs-callout-default">
+<p>It’s not recommended to turn on the bot click setting while a live campaign or fixed date flow experiment is running.</p>
+</div>
+<h3 id="h_01J2YR97N3XQ83QZWH94MD5ZFK">Attribution</h3>
+<p>The bot click reporting filter removes the impact of bot-clicks from attribution models for either the email and SMS channels. Conversions that follow a bot click are attributed if they occur in the attribution window. However, it is important to remember that bots cannot complete a purchase. Purchases occurring in the attribution window are real. </p>

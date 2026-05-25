@@ -1,0 +1,985 @@
+{
+  "captured_at": "2026-05-23T16:18:50Z",
+  "article": {
+    "id": 115002779231,
+    "url": "https://klaviyo.zendesk.com/api/v2/help_center/en-us/articles/115002779231.json",
+    "html_url": "https://klaviyo.zendesk.com/hc/en-us/articles/115002779231-Understanding-how-adding-past-profiles-works-in-Klaviyo",
+    "author_id": 20424705848,
+    "comments_disabled": true,
+    "draft": false,
+    "promoted": false,
+    "position": 8,
+    "vote_sum": 391,
+    "vote_count": 865,
+    "section_id": 49375505484315,
+    "created_at": "2017-11-15T15:44:05Z",
+    "updated_at": "2026-04-21T13:54:13Z",
+    "name": "Understanding how adding past profiles works in Klaviyo",
+    "title": "Understanding how adding past profiles works in Klaviyo",
+    "source_locale": "en-us",
+    "locale": "en-us",
+    "outdated": false,
+    "outdated_locales": [],
+    "edited_at": "2026-03-12T15:30:22Z",
+    "user_segment_id": null,
+    "permission_group_id": 146372,
+    "content_tag_ids": [],
+    "label_names": [],
+    "body": "<h2 id=\"01H8G0J42WHTE7J7BHSEBN1Z1P\">You will learn</h2><p>Learn how to add past profiles to a flow which allows you to queue people for flow actions retroactively. This process is formerly known as back-population. This is useful when you create a new flow, as adding past profiles allows you to populate contacts into your flow that would have been queued in real-time had the flow existed earlier.</p><p>In this article, we explain details about adding past profiles to different flows in Klaviyo. For step-by-step instructions, learn <a href=\"https://klaviyo.zendesk.com/hc/en-us/articles/360049924272\" target=\"_self\">how to add past profiles to a flow</a>.</p><h2 id=\"01H8G0J42WKA8XEHNDZK950GHA\">About adding past profiles</h2><p>Who is queued when you add past profiles to a flow depends on the flow’s timeline as well as whether your flow trigger is a metric, list, or segment. Individuals will only be queued at actions when the action's status is manual or live.</p><p>Flows work in real-time, so if you add another step to a flow, you do not need to add past profiles if you only want recipients who are still in the flow (i.e., have not gone through the last step yet) and who haven’t passed the new step to go through it.</p><div class=\"bs-callout bs-callout-default\">\n<p>Due to how they queue recipients, adding past profiles is not available for date property and price drop flows.</p>\n<p>Since back in stock flows are best without time delays (and the back in stock delay functions differently), adding past profiles won't have any effect. If you wish to reach out to those in a back in stock report, we recommend sending a campaign.</p>\n<p>That said, if your back in stock flow does contain a time delay, adding past profiles will work similarly to how other metric-triggered flows add past profiles. The only difference is that with back in stock flows, someone in the waiting queue will be notified as soon as the product is back in stock.</p>\n</div><h2 id=\"01H8G0J42W69TS5JQ8535DN664\">Metric-triggered flows</h2><p>When you add past profiles to a metric-triggered flow, recipients will move through the flow relative to when they performed the triggering action. Adding past profiles does not cause a flow to send out messages immediately; instead, it will simply insert recipients at the step where they would be if the flow was live when they performed the triggering action. They’ll then<a href=\"https://help.klaviyo.com/hc/en-us/articles/360017706091\"> move through the flow</a> like any other recipient.</p><div class=\"bs-callout bs-callout-default\"><p>Flow filters will be checked at each step of the flow while adding past profiles similar to when a profile is moving through a flow normally. Note that flow <em>Re-entry criteria </em>is only checked when someone enters the flow organically, so it will not be checked when adding past profiles.<br><br>Profiles that were in the flow and skipped a message previously will not be scheduled for the same message when adding past profiles, but they can be scheduled for new messages that were added to the flow.</p></div><p>Since adding past profiles for metric-based flows depends on where someone falls in the flow’s timeline, you must include at least one time delay. (Adding a flow filter before adding past profiles will not add any new recipients.) If someone falls outside the flow’s timeline (e.g., if the flow lasts for 10 days but someone performed the action 15 days ago), they will not be added to the flow.</p><p>The <em>Add Past Profiles</em> modal for metric-triggered flows displays an estimate of how far back profiles will be added based on the duration of the flow.</p><p class=\"wysiwyg-text-align-center\"><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28715968360219\" alt=\"Add past profiles modal that explains how adding past profiles works\" width=\"500\" height=\"347\"></p><p>Suppose you want to add past profiles to a winback flow triggered by the <em>Placed Order </em>event. Directly after the trigger, you have a time delay for 75 days, followed by an email, a time delay for 10 days, and then another email.</p><p class=\"wysiwyg-text-align-center\"><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28715961798811\" alt=\"Customer windback flow with 75 and 10 day delays\" width=\"320\" height=\"827\"></p><p>When you add past profiles to this flow, Klaviyo will insert everyone who purchased from you between 1 and 75 days ago into the first time delay. Recipients will then wait until the full 75 days pass from the time they performed the action. For instance, someone who purchased 10 days ago will have to wait 65 more days before they get the first email, whereas someone who placed an order 70 days ago will only be in this time delay for five days.</p><p>Anyone who purchased between 76 and 85 ago will not get the first email and will move straight to second time delay. They’ll then wait for the rest of the 10 days before getting the second email.</p><p>If someone purchased more than 85 days ago, they won’t be added to this flow. The only way to send to them is to build a segment targeting this group and send them a campaign.</p><h2 id=\"01H8G0J42WXMFBFZ7Y4RJV7ZS5\"><strong>List- and segment-triggered flows</strong></h2><div class=\"bs-callout bs-callout-default\"><p>If recipients in a list-based flow are<a href=\"https://help.klaviyo.com/hc/en-us/articles/115002779471-Troubleshoot-Flow-Sending#reviewing-skipped-recipients\"> skipped for any reason</a>, adding past profiles will not re-queue these recipients for the flow. Once you've entered a list-based flow you cannot be re-queued for any flow message you have already received. The best way to reach customers that have been skipped for a list-based flow is to<a href=\"https://klaviyo.zendesk.com/hc/en-us/articles/24898429283739\"> clone the flow</a> and add past profiles to the cloned flow.</p></div><p>List- and segment-triggered flows have two options for adding past profiles:</p><ul>\n<li data-list-item-id=\"e36df38b9ad8a95b4ba771a746a276016\">Throughout the flow</li>\n<li data-list-item-id=\"e5a393fe8d0df3c05948e3ae0e9c48733\">At the beginning</li>\n</ul><p class=\"wysiwyg-text-align-center\"><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28715961790875\" alt=\"Add past profiles modal for a metric-triggered flow\" width=\"501\" height=\"454\"></p><h3 id=\"01H8G0J42WH5D7FER65YYCJBFM\">Schedule recipients throughout the flow</h3><p>Adding past profiles relative to when a recipient was added to a list or segment is similar to how metric-triggered flows add past profiles. Recipients will be inserted into a flow at different points, depending on when they joined your list or segment.</p><p>Say that you have an SMS welcome series that lasts for 14 days with three messages spaced 7 days apart.</p><p class=\"wysiwyg-text-align-center\"><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28715968371867\" alt=\"Example SMS welcome flow with 3 messages and 7 day delays between\" width=\"299\" height=\"816\"></p><p>If you add past profiles, anyone who subscribed to SMS in the last 14 days will be added to the flow. Those who subscribed between 1 and 7 days ago will be placed at the first time delay where they’ll wait until the full 7 days have passed. They’ll then follow the flow just like any other recipient. Those who subscribed between 7 and 14 days ago will do the same, but enter the flow at the second time delay.</p><p class=\"wysiwyg-text-align-center\"><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28715968377627\" alt=\"Example SMS welcome flow with 3 messages and 7 day delays between\" width=\"299\" height=\"807\"></p><h3 id=\"01H8G0J42W6NSBCY7VA7584PV9\">Schedule recipients at the beginning</h3><p>When you schedule recipients based on when you add past profiles, this treats recipients as if they just joined your list or segment. They’ll start at the very beginning of the flow and move through it one step at a time, like any other recipient.</p><p>Suppose you have a flow triggered when someone qualifies for your VIP segment. The flow lasts for 10 days and contains 3 messages spaced 5 days apart.</p><p class=\"wysiwyg-text-align-center\"><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28715968384411\" alt=\"Example VIP segment flow with 3 messages and 5 day time delays between them\" width=\"340\" height=\"926\"></p><p>If you add past profiles via this option, everyone who qualifies for the flow (e.g., is in your VIP segment) will start at the trigger. Those who already went through the flow will not receive the same messages again, while everyone else will start at the beginning and move through it step-by-step.</p><h2 id=\"01H8G0J42WX3B4NQ9AMQ9CERJH\">Adding past profiles with splits</h2><p>When you add past profiles to a flow, Klaviyo will insert recipients at the point that aligns with when they performed the triggering action (unless you schedule recipients based on when you click add past profiles). Also, when you add past profiles to a flow that contains any splits (i.e., a conditional or trigger split), Klaviyo will re-evaluate which path a flow recipient belongs in.</p><div class=\"bs-callout bs-callout-default\"><p>Note that if a time delay is the last component in a flow path, and you place a new message after it, you will have to add past profiles. The reason is that Klaviyo uses time delays to queue recipients for the next action (SMS, email, notification, update profile property). If there's no action following the delay, recipients won't \"wait\" at the delay. Instead, they exit the flow, which is why adding past profiles is necessary. </p></div><p>Let’s say that you edit an abandoned cart flow, changing a trigger split that divides recipients based on if their cart value is at least $100. When you add past profiles, everyone whose cart value was less than 100, and thus no longer qualifies for the Yes path, will move to the No path.</p><p class=\"wysiwyg-text-align-center\"><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28715961811739\" alt=\"Example abandoned cart flow with a split that checks if the value is at least $100\" width=\"600\" height=\"436\"></p><h2 id=\"01H8G0J42WN47YJS4MB7FVB5EH\">Adding a new action to a flow</h2><p>You do not need to add past profiles if you add a new message to the end of a flow (or a single path) and want those currently moving down that path to receive that message. You would only need to add past profiles to send to those who have either exited the flow or continued past the point of the new message. Let’s examine a few cases to understand how this works.</p><p>Note that if a time delay is the last component in a flow path, and you place a new message after it, you will have to add past profiles. The reason is that Klaviyo uses time delays to queue recipients for the next action (SMS, email, notification, update profile property). If there's no action following the delay, recipients won't \"wait\" at the delay. Instead, they exit the flow, which is why adding past profiles is necessary.</p><p>First, let’s say that Becky was just evaluated at a split, and you add new actions to the end of the path Becky is still moving down. Becky will automatically get scheduled for the new actions in sequence without you needing to add past profiles.</p><p class=\"wysiwyg-text-align-center\"><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28715968390811\" alt=\"Example split that checks if someone has placed an order since starting the flow\" width=\"600\" height=\"583\"></p><p>John already completed the flow. If you add a new action at the end of the path John went down, you can add past profiles to queue him for the new message. However, this will only work if John hasn’t already passed the new step. For instance, if you added an email to send 10 days after the flow’s trigger, and John triggered the flow 20 days ago, he will not receive the new email. On the other hand, if Kara triggered the flow 9 days ago, she will get the new email.</p><p class=\"wysiwyg-text-align-center\"><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28715968395163\" alt=\"Example split that checks if someone has placed an order since starting the flow with message added to the NO path\" width=\"600\" height=\"797\"></p><h2 id=\"01H8G0J42WJ68AZFKJNK2MC4RF\">Changing a time delay before adding past profiles</h2><p>If you add, delete, or update the configuration of a time delay before adding past profiles, people who were already scheduled to receive an email will not be affected. However, any new people brought into the flow by adding past profiles will be affected.</p><p>For example, if someone is scheduled to receive an email after a 3 day delay and they are already in the waiting list, changing the time delay to 2 days and adding past profiles will not shorten the delay for those who were previously scheduled by the 3 day delay since the send schedule has already been determined for them. Anyone who enters the flow due to adding past profiles will be scheduled according to the new 2 day delay.</p><p>To adjust the send schedule for people already in the flow, cancel the email before you add past profiles:</p><ol>\n<li data-list-item-id=\"e5aa9a941c2840ed1b8c694a5f7601102\">Click the email you would like to cancel.</li>\n<li data-list-item-id=\"eca20018e98fe59837cd4966219ea3b6e\">In the details sidebar, click <strong>View details</strong>.<br><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28715968379547\" alt=\"View details button in the details sidebar\">\n</li>\n<li data-list-item-id=\"e541d52ac673dd4f4ad600e05b125d2bc\">In the <em>Recipient Activity </em>tab, find the recipient you would like to cancel the email for.</li>\n<li data-list-item-id=\"e9ca8a93c519683e61e95980df316bb61\">Hover over a specific profile and click <strong>Cancel.</strong>\n</li>\n<li data-list-item-id=\"e4fcc6d7c89cfebe571101ecac4ce5201\">Alternatively, click <strong>Cancel All</strong> to cancel the email for all recipients currently waiting.<br><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28715961793307\" alt=\"The Cancel button found when viewing the activity queued messages for a message.\" width=\"703\" height=\"183\">\n</li>\n</ol><p>Learn more from our article on<a href=\"https://help.klaviyo.com/hc/en-us/articles/360017706091\"> understanding how contacts move through a flow.</a></p><h2 id=\"01H8G0J42X89XCETTMZACP3FM9\"><strong>Additional resources</strong></h2><p>Read this article to find out<a href=\"https://help.klaviyo.com/hc/en-us/articles/360049924272\"> how to add past profiles to a flow</a>.</p><p>Learn more about flows in the following articles:</p><ul>\n<li data-list-item-id=\"e50beff9b2fa7c5fb6d45cd6845e2fa78\"><a href=\"https://help.klaviyo.com/hc/en-us/articles/360003031652\">How to create a list-triggered flow</a></li>\n<li data-list-item-id=\"e547cf3a237dc3dd8c58fb44e42e17f83\"><a href=\"https://help.klaviyo.com/hc/en-us/articles/360003040052\">How to create a segment-triggered flow</a></li>\n<li data-list-item-id=\"ea99f5263b406a35b890ad22dfb5d8c8c\"><a href=\"https://help.klaviyo.com/hc/en-us/articles/360003057151\">How to create a metric-triggered flow</a></li>\n</ul>",
+    "user_segment_ids": []
+  },
+  "normalized": {
+    "id": "115002779231",
+    "title": "Understanding how adding past profiles works in Klaviyo",
+    "source_url": "https://help.klaviyo.com/hc/en-us/articles/115002779231-Understanding-how-adding-past-profiles-works-in-Klaviyo",
+    "section_id": 49375505484315,
+    "section": "Add past profiles to flows",
+    "category_id": 115000312411,
+    "category": "Flows",
+    "category_slug": "flows",
+    "klaviyo_updated": "2026-04-21T13:54:13Z",
+    "created_at": "2017-11-15T15:44:05Z",
+    "draft": false,
+    "promoted": false,
+    "position": 8,
+    "label_names": []
+  },
+  "files": {
+    "body_html": "_source/articles/115002779231.body.html",
+    "rendered_html": "_source/rendered/115002779231.html"
+  },
+  "assets": {
+    "api_body": {
+      "images": [
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28715968360219",
+          "alt": "Add past profiles modal that explains how adding past profiles works",
+          "width": "500",
+          "height": "347"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28715961798811",
+          "alt": "Customer windback flow with 75 and 10 day delays",
+          "width": "320",
+          "height": "827"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28715961790875",
+          "alt": "Add past profiles modal for a metric-triggered flow",
+          "width": "501",
+          "height": "454"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28715968371867",
+          "alt": "Example SMS welcome flow with 3 messages and 7 day delays between",
+          "width": "299",
+          "height": "816"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28715968377627",
+          "alt": "Example SMS welcome flow with 3 messages and 7 day delays between",
+          "width": "299",
+          "height": "807"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28715968384411",
+          "alt": "Example VIP segment flow with 3 messages and 5 day time delays between them",
+          "width": "340",
+          "height": "926"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28715961811739",
+          "alt": "Example abandoned cart flow with a split that checks if the value is at least $100",
+          "width": "600",
+          "height": "436"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28715968390811",
+          "alt": "Example split that checks if someone has placed an order since starting the flow",
+          "width": "600",
+          "height": "583"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28715968395163",
+          "alt": "Example split that checks if someone has placed an order since starting the flow with message added to the NO path",
+          "width": "600",
+          "height": "797"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28715968379547",
+          "alt": "View details button in the details sidebar",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28715961793307",
+          "alt": "The Cancel button found when viewing the activity queued messages for a message.",
+          "width": "703",
+          "height": "183"
+        }
+      ],
+      "links": [
+        {
+          "href": "https://klaviyo.zendesk.com/hc/en-us/articles/360049924272",
+          "text": "how to add past profiles to a flow"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360017706091",
+          "text": "move through the flow"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115002779471-Troubleshoot-Flow-Sending#reviewing-skipped-recipients",
+          "text": "skipped for any reason"
+        },
+        {
+          "href": "https://klaviyo.zendesk.com/hc/en-us/articles/24898429283739",
+          "text": "clone the flow"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360017706091",
+          "text": "understanding how contacts move through a flow."
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360049924272",
+          "text": "how to add past profiles to a flow"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360003031652",
+          "text": "How to create a list-triggered flow"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360003040052",
+          "text": "How to create a segment-triggered flow"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360003057151",
+          "text": "How to create a metric-triggered flow"
+        }
+      ],
+      "headings": [
+        {
+          "level": 2,
+          "id": "01H8G0J42WHTE7J7BHSEBN1Z1P",
+          "text": "You will learn"
+        },
+        {
+          "level": 2,
+          "id": "01H8G0J42WKA8XEHNDZK950GHA",
+          "text": "About adding past profiles"
+        },
+        {
+          "level": 2,
+          "id": "01H8G0J42W69TS5JQ8535DN664",
+          "text": "Metric-triggered flows"
+        },
+        {
+          "level": 2,
+          "id": "01H8G0J42WXMFBFZ7Y4RJV7ZS5",
+          "text": "List- and segment-triggered flows"
+        },
+        {
+          "level": 3,
+          "id": "01H8G0J42WH5D7FER65YYCJBFM",
+          "text": "Schedule recipients throughout the flow"
+        },
+        {
+          "level": 3,
+          "id": "01H8G0J42W6NSBCY7VA7584PV9",
+          "text": "Schedule recipients at the beginning"
+        },
+        {
+          "level": 2,
+          "id": "01H8G0J42WX3B4NQ9AMQ9CERJH",
+          "text": "Adding past profiles with splits"
+        },
+        {
+          "level": 2,
+          "id": "01H8G0J42WN47YJS4MB7FVB5EH",
+          "text": "Adding a new action to a flow"
+        },
+        {
+          "level": 2,
+          "id": "01H8G0J42WJ68AZFKJNK2MC4RF",
+          "text": "Changing a time delay before adding past profiles"
+        },
+        {
+          "level": 2,
+          "id": "01H8G0J42X89XCETTMZACP3FM9",
+          "text": "Additional resources"
+        }
+      ]
+    },
+    "rendered_page": {
+      "images": [
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/7ff492c2b417b7ecfe572f839a8a81398693c1f7-1920x1080.webp",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/f1484b4edc334a5bd2168a2f225c3bbea1099877-1244x864.png?w=500",
+          "alt": "Add past profiles modal that explains how adding past profiles works",
+          "width": "500",
+          "height": "347"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/5927656cb67406dd5e7f76ec5cf95284d9a36973-638x1650.jpg?w=320",
+          "alt": "Customer windback flow with 75 and 10 day delays",
+          "width": "320",
+          "height": "827"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/f8bb8e01383f8e60bd0cb5372ddf806dc578d108-1246x1130.png?w=501",
+          "alt": "Add past profiles modal for a metric-triggered flow",
+          "width": "501",
+          "height": "454"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/416ee94d0ece41e5e82a7fb3a03a8a03c16773c9-540x1474.jpg?w=299",
+          "alt": "Example SMS welcome flow with 3 messages and 7 day delays between",
+          "width": "299",
+          "height": "816"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/f97b0ee34f6b12252a769f764ea7ca3178fa4b0e-546x1474.jpg?w=299",
+          "alt": "Example SMS welcome flow with 3 messages and 7 day delays between",
+          "width": "299",
+          "height": "807"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/f6ab091dfd02d382a921b699c2eb95817e16f952-532x1448.jpg?w=340",
+          "alt": "Example VIP segment flow with 3 messages and 5 day time delays between them",
+          "width": "340",
+          "height": "926"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/ea01d22fa2a9cbb08e83b32f149616bea857d182-1200x872.jpg?w=600",
+          "alt": "Example abandoned cart flow with a split that checks if the value is at least $100",
+          "width": "600",
+          "height": "436"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/fc233afaf69cc5053f53de7fe22df9c1896ce64e-1200x1166.jpg?w=600",
+          "alt": "Example split that checks if someone has placed an order since starting the flow",
+          "width": "600",
+          "height": "583"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/54e468cc8ba3802531070e2322ccedb0705cd8c9-1200x1594.jpg?w=600",
+          "alt": "Example split that checks if someone has placed an order since starting the flow with message added to the NO path",
+          "width": "600",
+          "height": "797"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/0f62718e6f7cac42570eb847a380c47c545343d2-1400x312.jpg",
+          "alt": "View details button in the details sidebar",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/057d95da3cda0247b8ca89cc226f61adbf7a009c-700x182.jpg?w=703",
+          "alt": "The Cancel button found when viewing the activity queued messages for a message.",
+          "width": "703",
+          "height": "183"
+        }
+      ],
+      "links": [
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115002779231-Understanding-how-adding-past-profiles-works-in-Klaviyo#site-content",
+          "text": "Skip to main content"
+        },
+        {
+          "href": "https://www.klaviyo.com",
+          "text": "Home"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center"
+        },
+        {
+          "href": "https://www.klaviyo.com/enterprise",
+          "text": "Enterprise"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Partners"
+        },
+        {
+          "href": "https://www.klaviyo.com/careers",
+          "text": "Careers"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": "Log in"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": ""
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center Find step-by-step instructions and troubleshooting solutions in our knowledge base."
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000032731",
+          "text": "Integrations"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000312411",
+          "text": "Flows"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867867",
+          "text": "Audience"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867667",
+          "text": "Campaigns"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/360000190711",
+          "text": "Sign-up forms"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000873988",
+          "text": "Deliverability & compliance"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/29173800271259",
+          "text": "SMS"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/16638219724187",
+          "text": "Reviews"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/18073014919195",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/34141283979931",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/37659126754075",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/33948021740315",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/39746685522331",
+          "text": "WhatsApp"
+        },
+        {
+          "href": "https://academy.klaviyo.com",
+          "text": "Klaviyo Academy Expert training and education to help you succeed with Klaviyo, and beyond."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Quick+guide&resource=academy_courses",
+          "text": "Quick guides Learn marketing strategies and concepts in 15 minutes or less."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Course&resource=academy_courses",
+          "text": "Courses Master key marketing topics through structured lessons and exams."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/best-practices",
+          "text": "Best practices Discover top product and marketing strategies for your business."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/learning-paths",
+          "text": "Learning paths Complete curated learning journeys tailored to your marketing goals."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses",
+          "text": "Explore all resources"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Live+training&resource=academy_courses",
+          "text": "Live trainings Build confidence through hands-on interactive workshops and thought-provoking strategy sessions."
+        },
+        {
+          "href": "https://www.bigmarker.com/klaviyo-customer-education/Office-hours-Getting-started-with-Klaviyo",
+          "text": "Live office hours Join a strategic discussion where you can ask questions and get answers in real-time."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/private-live-training",
+          "text": "1:1 Live training Book a private training session with an expert to jumpstart your platform knowledge and confidence."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/credentials",
+          "text": "Klaviyo credentials Dig deeper into select topics and showcase your expertise with a final exam to earn a certificate and digital badge."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/certificates/klaviyo-practitioner-certificate",
+          "text": "Klaviyo practitioner certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/deliverability-certificate",
+          "text": "Deliverability certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/developer-certificate",
+          "text": "Klaviyo developer certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses&select=Certificate",
+          "text": "See all certificates"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Klaviyo Community Join our thriving community network to connect with brands like yours—online and in person."
+        },
+        {
+          "href": "https://community.klaviyo.com/topic/new",
+          "text": "Ask a question Post a question and get thoughtful answers from Klaviyo powerusers."
+        },
+        {
+          "href": "https://community.klaviyo.com/p/roadmap",
+          "text": "Product roadmap"
+        },
+        {
+          "href": "https://community.klaviyo.com/search/activity/recent",
+          "text": "Recent threads"
+        },
+        {
+          "href": "https://community.klaviyo.com/p/champions",
+          "text": "Meet the Champions"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups",
+          "text": "Browse all groups Your people are waiting. New ideas and connections are a click away."
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/developer-group-64",
+          "text": "Developer group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/entrepreneur-user-group-118",
+          "text": "Entrepreneur group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/woo-user-group-87",
+          "text": "WooCommerce group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/new-york-meetup-chapter-82",
+          "text": "New York City"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/los-angeles-meetup-chapter-83",
+          "text": "Los Angeles"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/austin-meetup-chapter-85",
+          "text": "Austin"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/san-diego-meetup-chapter-86",
+          "text": "San Diego"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/amsterdam-meetup-chapter-84",
+          "text": "Amsterdam"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Klaviyo Developers Access API documentation and developer guides to help you build with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/get_started",
+          "text": "Get started Access key resources and a step-by-step checklist for how to start developing with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/build_your_integration",
+          "text": "Grow your app's reach Learn how to join our ecosystem and get your app listed on our marketplace."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/developer-tools",
+          "text": "Developer tools Generate sample data, monitor your API usage, and access our Postman collections."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/reference/api_overview",
+          "text": "API reference Browse our full catalog of API docs."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/changelog_",
+          "text": "Changelog"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/api_versioning_and_deprecation_policy",
+          "text": "Versioning & deprecation policy"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/rate_limits_and_error_handling",
+          "text": "Rate limits & error handling"
+        },
+        {
+          "href": "https://youtube.com/playlist?list=PLHkNfHgtxcUanrkMnKPdkRzuWU7MGv_xM&si=pkG-KH7IT_TUHOGC",
+          "text": "API tutorials on YouTube Subscribe to our Klaviyo API Tutorials playlist for easy access to step-by-step developer walkthroughs."
+        },
+        {
+          "href": "https://www.klaviyo.com/contact-us",
+          "text": "Contact us"
+        },
+        {
+          "href": "https://www.klaviyo.com/sign-up",
+          "text": "Sign up"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": "Search"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115002779231",
+          "text": "United States - EN"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/de-de/articles/115002779231",
+          "text": "Deutschland - DE"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-es/articles/115002779231",
+          "text": "España - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-mx/articles/115002779231",
+          "text": "México - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/fr-fr/articles/115002779231",
+          "text": "France - FR"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/it-it/articles/115002779231",
+          "text": "Italia - IT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/ko-kr/articles/115002779231",
+          "text": "한국 - KO"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/nl-nl/articles/115002779231",
+          "text": "Nederland - NL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pl-pl/articles/115002779231",
+          "text": "Polska - PL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pt-br/articles/115002779231",
+          "text": "Brasil - PT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/sv-se/articles/115002779231",
+          "text": "Sverige - SV"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/49375535264795",
+          "text": "Build and use flows"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/49375505484315",
+          "text": "Add past profiles to flows"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115002779231-Understanding-how-adding-past-profiles-works-in-Klaviyo#01H8G0J42WHTE7J7BHSEBN1Z1P",
+          "text": "You will learn"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115002779231-Understanding-how-adding-past-profiles-works-in-Klaviyo#01H8G0J42WKA8XEHNDZK950GHA",
+          "text": "About adding past profiles"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115002779231-Understanding-how-adding-past-profiles-works-in-Klaviyo#01H8G0J42W69TS5JQ8535DN664",
+          "text": "Metric-triggered flows"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115002779231-Understanding-how-adding-past-profiles-works-in-Klaviyo#01H8G0J42WXMFBFZ7Y4RJV7ZS5",
+          "text": "List- and segment-triggered flows"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115002779231-Understanding-how-adding-past-profiles-works-in-Klaviyo#01H8G0J42WX3B4NQ9AMQ9CERJH",
+          "text": "Adding past profiles with splits"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115002779231-Understanding-how-adding-past-profiles-works-in-Klaviyo#01H8G0J42WN47YJS4MB7FVB5EH",
+          "text": "Adding a new action to a flow"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115002779231-Understanding-how-adding-past-profiles-works-in-Klaviyo#01H8G0J42WJ68AZFKJNK2MC4RF",
+          "text": "Changing a time delay before adding past profiles"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115002779231-Understanding-how-adding-past-profiles-works-in-Klaviyo#additional-resources",
+          "text": "Additional resources"
+        },
+        {
+          "href": "https://klaviyo.zendesk.com/hc/en-us/articles/360049924272",
+          "text": "how to add past profiles to a flow"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360017706091",
+          "text": "move through the flow"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115002779471-Troubleshoot-Flow-Sending#reviewing-skipped-recipients",
+          "text": "skipped for any reason"
+        },
+        {
+          "href": "https://klaviyo.zendesk.com/hc/en-us/articles/24898429283739",
+          "text": "clone the flow"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360017706091",
+          "text": "understanding how contacts move through a flow."
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360049924272",
+          "text": "How to add past profiles to a flow"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360003040052",
+          "text": "How to create a segment- or list-triggered flow"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360003057151",
+          "text": "How to create a metric-triggered flow"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115001002272",
+          "text": "Learn how to contact support"
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": ""
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": "Visit Community"
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": ""
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": "Hire a partner"
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/about",
+          "text": "About Klaviyo"
+        },
+        {
+          "href": "https://www.klaviyo.com/newsroom",
+          "text": "Newsroom"
+        },
+        {
+          "href": "https://investors.klaviyo.com/overview/default.aspx",
+          "text": "Investor relations"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Agency and tech partners"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Developers"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/retail",
+          "text": "Retail and ecommerce"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/restaurants",
+          "text": "Restaurant marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/wellness",
+          "text": "Wellness"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform",
+          "text": "B2C CRM overview"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai",
+          "text": "Klaviyo AI (K:AI)"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/marketing-automation",
+          "text": "Klaviyo Marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-service",
+          "text": "Klaviyo Service"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/analytics",
+          "text": "Klaviyo Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-data-platform",
+          "text": "Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare",
+          "text": "Klaviyo vs. Klaviyo alternatives"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-mailchimp",
+          "text": "Klaviyo vs. Mailchimp"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-postscript",
+          "text": "Klaviyo vs. Postscript"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-attentive",
+          "text": "Klaviyo vs. Attentive"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-salesforce-marketing-cloud",
+          "text": "Klaviyo vs. Salesforce"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-listrak",
+          "text": "Klaviyo vs. Listrak"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/omnichannel",
+          "text": "Omnichannel marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/email-marketing",
+          "text": "Email marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing",
+          "text": "SMS marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing/rcs",
+          "text": "RCS for Business"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/mobile-app-marketing",
+          "text": "Mobile app marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/whatsapp",
+          "text": "WhatsApp marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/social",
+          "text": "Social marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources",
+          "text": "Marketing resources"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources/marketing-campaign-calendar",
+          "text": "Marketing campaign calendar"
+        },
+        {
+          "href": "https://www.klaviyo.com/glossary",
+          "text": "Marketing glossary"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/email-subject-line-generator",
+          "text": "Subject line generator"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/roi-calculator",
+          "text": "ROI calculator"
+        },
+        {
+          "href": "https://www.klaviyo.com/customers",
+          "text": "Case studies"
+        },
+        {
+          "href": "https://www.klaviyo.com/composer",
+          "text": "Composer Beta"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/marketing-agent",
+          "text": "Marketing Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/customer-agent",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/customer-experience-hub",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/helpdesk",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/marketing-analytics",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/advanced-cdp",
+          "text": "Advanced Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/web-forms",
+          "text": "Web forms"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/email-templates",
+          "text": "Email templates"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/portfolio",
+          "text": "Portfolio"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform-integrations",
+          "text": "Apps and Integrations"
+        },
+        {
+          "href": "https://www.klaviyo.com/features",
+          "text": "Features"
+        },
+        {
+          "href": "https://www.klaviyo.com/whats-new",
+          "text": "What's new"
+        },
+        {
+          "href": "https://www.klaviyo.com/events",
+          "text": "Events"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help Center"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us",
+          "text": "Academy"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Community"
+        },
+        {
+          "href": "https://www.facebook.com/Klaviyo/",
+          "text": "Facebook"
+        },
+        {
+          "href": "https://twitter.com/klaviyo/",
+          "text": "Twitter"
+        },
+        {
+          "href": "https://www.linkedin.com/company/klaviyo/",
+          "text": "LinkedIn"
+        },
+        {
+          "href": "https://www.instagram.com/klaviyo/",
+          "text": "Instagram"
+        },
+        {
+          "href": "https://www.klaviyo.com/sitemap",
+          "text": "Site Map"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal",
+          "text": "Terms and Privacy"
+        },
+        {
+          "href": "https://www.klaviyo.com/security",
+          "text": "Security"
+        },
+        {
+          "href": "https://www.klaviyo.com/trust",
+          "text": "Trust"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal/intellectual-property-notices",
+          "text": "Intellectual Property Notices"
+        }
+      ],
+      "headings": [
+        {
+          "level": 1,
+          "id": "",
+          "text": "Understanding how adding past profiles works in Klaviyo"
+        },
+        {
+          "level": 2,
+          "id": "01H8G0J42WHTE7J7BHSEBN1Z1P",
+          "text": "You will learn"
+        },
+        {
+          "level": 2,
+          "id": "01H8G0J42WKA8XEHNDZK950GHA",
+          "text": "About adding past profiles"
+        },
+        {
+          "level": 2,
+          "id": "01H8G0J42W69TS5JQ8535DN664",
+          "text": "Metric-triggered flows"
+        },
+        {
+          "level": 2,
+          "id": "01H8G0J42WXMFBFZ7Y4RJV7ZS5",
+          "text": "List- and segment-triggered flows"
+        },
+        {
+          "level": 3,
+          "id": "01H8G0J42WH5D7FER65YYCJBFM",
+          "text": "Schedule recipients throughout the flow"
+        },
+        {
+          "level": 3,
+          "id": "01H8G0J42W6NSBCY7VA7584PV9",
+          "text": "Schedule recipients at the beginning"
+        },
+        {
+          "level": 2,
+          "id": "01H8G0J42WX3B4NQ9AMQ9CERJH",
+          "text": "Adding past profiles with splits"
+        },
+        {
+          "level": 2,
+          "id": "01H8G0J42WN47YJS4MB7FVB5EH",
+          "text": "Adding a new action to a flow"
+        },
+        {
+          "level": 2,
+          "id": "01H8G0J42WJ68AZFKJNK2MC4RF",
+          "text": "Changing a time delay before adding past profiles"
+        },
+        {
+          "level": 2,
+          "id": "additional-resources",
+          "text": "Additional resources"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "Explore more from Klaviyo"
+        }
+      ]
+    }
+  },
+  "rendered_page": {
+    "status": "fetched",
+    "error": ""
+  }
+}

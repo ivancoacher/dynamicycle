@@ -1,0 +1,110 @@
+<h2 id="h_01HTJ9366JR29KNVJ50CDBT1T1">You will learn</h2>
+<p>Learn how to create an <em>Added to Cart </em>event for BigCommerce that tracks when a customer adds an item to their cart and can trigger an abandoned cart flow. <em>Added to Cart</em> events do not automatically track when you integrate with BigCommerce; you must first add (and potentially modify) a JavaScript snippet (included in this guide) to your BigCommerce theme files.</p>
+<ul>
+<li>You do not need to create the <em>Added to Cart</em> event to send an abandoned cart flow; the <em>Added to Cart</em> abandoned cart flow is separate from the standard abandoned cart flow, which is triggered by <em>Started Checkout</em>. </li>
+<li>Klaviyo’s built-in BigCommerce integration already tracks a <em>Started Checkout</em> event when a customer enters their email during the checkout process after adding item(s) to their cart. </li>
+</ul>
+<h2 id="h_01HTJ9366JSKXV2F1XX799H9D6">Before you begin</h2>
+<p>The <em>Added to Cart </em>event is only tracked for users previously <a href="https://help.klaviyo.com/hc/en-us/articles/360034666712-About-Cookies-in-Klaviyo" target="_blank" rel="noopener">cookied by Klaviyo</a>. </p>
+<p>You must already have <em>Viewed Product</em> tracking installed in order for the <em>Added to Cart</em> event to function properly. Typically, Klaviyo customers install this during the BigCommerce integration process and the instructions can be found in our <a href="https://help.klaviyo.com/hc/en-us/articles/115005082547-How-to-Integrate-with-BigCommerce#add-viewed-product-tracking4" target="_blank" rel="noopener">integration article</a>. </p>
+<h2 id="h_01HTJ9366KNH8WX00MFV29RZRN">Add the snippet</h2>
+<ol>
+<li>Open your BigCommerce admin and navigate to <strong>Storefront &gt; My Themes</strong>.</li>
+<li>Find your current theme, and click the <strong>Advanced Settings</strong> dropdown.</li>
+<li>Search for the <strong>product.html</strong> file and click to open it.</li>
+<li>Paste the snippet below directly underneath the Klaviyo <em>Viewed Product</em> snippet.
+<pre><code class="language-js">&lt;script text="text/javascript"&gt; 
+//Initialize Klaviyo object immediately on page load
+!function(){if(!window.klaviyo){window._klOnsite=window._klOnsite||[];try{window.klaviyo=new Proxy({},{get:function(n,i){return"push"===i?function(){var n;(n=window._klOnsite).push.apply(n,arguments)}:function(){for(var n=arguments.length,o=new Array(n),w=0;w&lt;n;w++)o[w]=arguments[w];var t="function"==typeof o[o.length-1]?o.pop():void 0,e=new Promise((function(n){window._klOnsite.push([i].concat(o,[function(i){t&amp;&amp;t(i),n(i)}]))}));return e}}})}catch(n){window.klaviyo=window.klaviyo||[],window.klaviyo.push=function(){var n;(n=window._klOnsite).push.apply(n,arguments)}}}}(); &lt;/script&gt;
+&lt;script text="text/javascript"&gt;
+//Added to Cart
+var klaviyo = window.klaviyo || [];
+document.getElementById("form-action-addToCart").addEventListener('click',function (){
+   klaviyo.track("Added to Cart", item);
+});
+&lt;/script&gt;</code></pre>
+</li>
+<li>Next, check if you need to modify your snippet. To do this, you’ll need to check the ID of the “Add to Cart” button on your site, and see if it matches the “Add to Cart” variable highlighted in the snippet below, whose default is <code>form-action-addToCart</code>.<br><img src="https://klaviyo.zendesk.com/hc/article_attachments/28717387201051">
+</li>
+<li>To check the ID of the button, open up one of your site’s product pages, right-click your “Add to Cart” button, and select <strong>Inspect</strong>.<br><img src="https://klaviyo.zendesk.com/hc/article_attachments/28717387183515" alt="BigCommerce store with demo item Smith Journal, right click menu open on Add to Cart button with Inspect highlighted in blue" width="582" height="458">
+</li>
+<li>The console will open, showing the source code of the “Add to Cart” button. The following image shows the ID of the "Add to Cart" button highlighted in the console.<br><img src="https://klaviyo.zendesk.com/hc/article_attachments/28717387187867" alt="BigCommerce store demo item with Chrome console open and add to cart button ID, form-action-addToCart, highlighted" width="625" height="208">
+</li>
+<li>The ID of the button on the page shown here matches <code>form-action-addToCart</code>, so no changes need to be made.
+<ul>
+<li>If the ID of the “Add to Cart” button on your site isn’t <code>form-action-addToCart</code>, you’ll need to change the variable text within the quotes to match the button’s ID</li>
+</ul>
+</li>
+<li>If your source code isn’t showing a button ID, skip ahead to the <a href="https://help.klaviyo.com/hc/en-us/articles/360024310292#alternate-snippet-for--add-to-cart--button-without-a-button-id3" target="_self">next section</a> and learn how to use an alternate snippet with class notation instead of button notation. </li>
+<li>When you’re done, save your <strong>product.html</strong> file. </li>
+</ol>
+<p>You’ve finished adding the snippet and will now track the <em>Added to Cart</em> event. </p>
+<h2 id="h_01HTJ9366KNYT8NN1RT9JP0NK7">Alternate snippet for "Add to Cart" button without a button ID</h2>
+<p>For styling reasons, some sites use a class notation instead of a button ID for “Add to Cart” buttons.</p>
+<p>If your “Add to Cart<em>”</em> button does not have a button ID (which you can determine by following the steps in the previous section) and instead uses a class notation, you should use the alternate code snippet below to enable the <em>Added to Cart</em> event. </p>
+<ol>
+<li>If your button is defined by class notation, paste the following alternate snippet at the bottom of your <strong>product.html</strong> file:
+<pre><code class="language-js">&lt;script text="text/javascript"&gt; 
+//Initialize Klaviyo object immediately on page load
+!function(){if(!window.klaviyo){window._klOnsite=window._klOnsite||[];try{window.klaviyo=new Proxy({},{get:function(n,i){return"push"===i?function(){var n;(n=window._klOnsite).push.apply(n,arguments)}:function(){for(var n=arguments.length,o=new Array(n),w=0;w&lt;n;w++)o[w]=arguments[w];var t="function"==typeof o[o.length-1]?o.pop():void 0,e=new Promise((function(n){window._klOnsite.push([i].concat(o,[function(i){t&amp;&amp;t(i),n(i)}]))}));return e}}})}catch(n){window.klaviyo=window.klaviyo||[],window.klaviyo.push=function(){var n;(n=window._klOnsite).push.apply(n,arguments)}}}}(); &lt;/script&gt;
+&lt;script text="text/javascript"&gt;
+//Viewed Product
+var klaviyo = window.klaviyo || [];<br>var classname = document.getElementsByClassName("add-to-cart");<br>var addToCart = function() {<br>   klaviyo.track("Added to Cart", item);<br>}; <br>for (var i = 0; i &lt; classname.length; i++) {<br>   classname[i].addEventListener('click', addToCart, false);<br>}
+&lt;/script&gt;
+</code></pre>
+</li>
+<li>This code will likely need to be modified with your class name. Compare your button class name in between the quotations, highlighted in the following example, with the contents in between the parentheses after <code>getElementsByClassName</code> in the code snippet above. For example, the class name in the screenshot is <code>btn product-form_cart-submit btn--secondary-accent</code> and the class in the snippet is named <code>add-to-cart</code>.<br><img src="https://klaviyo.zendesk.com/hc/article_attachments/28717387188891" alt="Add to cart button code in Chrome console with button class, btn product-form_cart-submit btn--secondary-accent, higlighted in yellow"><br>
+<ul>
+<li>If these two don't match, change the code snippet to reflect the class name for your button.</li>
+</ul>
+</li>
+<li>For example, the code snippet below has been modified with the classname value <code>btn product-form_cart-submit btn--secondary-accent</code> surrounded by double quotations.<br><img src="https://klaviyo.zendesk.com/hc/article_attachments/28717380936347">
+</li>
+<li>Save your <strong>product.html</strong> file</li>
+</ol>
+<p>Once you save, you’ve finished adding the snippet and can now track the <em>Added to Cart</em> event. </p>
+<h2 id="h_01HTJ9366K818MV9586CHK64AT">Troubleshooting your "Added to Cart" snippet</h2>
+<p>After you’ve added the snippet, it should watch the "Add to Cart'' button and track an <em>Added to Cart</em> event whenever a cookied visitor clicks this button. </p>
+<p>This event functions similarly to the <em>Viewed Product</em> event. Each item someone adds to their cart will trigger a new event. You can view these events by:</p>
+<ol>
+<li>Navigating to <strong>Analytics &gt; Metrics </strong>in Klaviyo</li>
+<li>Searching for the event</li>
+<li>Clicking <strong>Activity Feed<br><img src="https://klaviyo.zendesk.com/hc/article_attachments/28717380926747" alt="Added to cart metric activity feed in Klaviyo, list shows profile names that have recently added to cart" width="558" height="324"><br></strong>
+</li>
+</ol>
+<p>If you don’t see <em>Added to Cart</em> events in your account, try the following:</p>
+<ul>
+<li>Make sure your Klaviyo.js (also known as the Active on Site snippet) is working, which is necessary for <em>Added to Cart</em> to function properly. This should have been added to your site automatically when you integrated with Klaviyo, but you can check that it’s working by following the steps in the <a href="https://help.klaviyo.com/hc/en-us/articles/115005082547-How-to-Integrate-with-BigCommerce#confirm-web-tracking-installation3" target="_blank" rel="noopener">confirming onsite tracking installation section of our BigCommerce integration article</a>.</li>
+<li>Check that your<em> Viewed Product </em>tracking is working, which is also necessary for <em>Added to Cart </em>to function properly. This snippet is added manually, and you can learn how to add and test it in the <a href="https://help.klaviyo.com/hc/en-us/articles/115005082547-How-to-Integrate-with-BigCommerce#add-viewed-product-tracking4" target="_blank" rel="noopener">Viewed Product section of our integration article</a>. </li>
+</ul>
+<div>
+<p>If you are still encountering problems with your <em>Added to Cart</em> snippet, it could be due to an issue with identifying the “Add to Cart” button. In this case, <a href="https://help.klaviyo.com/hc/en-us/articles/115001002272-How-to-Contact-Support" target="_blank" rel="noopener">please contact Klaviyo support</a>. </p>
+</div>
+<h2 id="h_01HTJ9366KBY251D1F8TH79YZQ">The "Added to Cart" abandoned cart flow</h2>
+<p>When creating an abandoned cart flow (either using <em>Added to Cart</em> or <em>Started Checkout</em>) you can leverage Klaviyo SMS in addition to email. For compliance reasons, make sure to only send one SMS in your flow and if you are using multiple types of abandoned cart flows, make sure to only use SMS in one of them. </p>
+<p>In the <em>Essentials</em> section of the library, you will find the standard abandoned cart reminder flow. This flow is triggered by the <em>Started Checkout</em> event.</p>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/28717380929051" alt="Card for standard abandoned cart reminder flow for BigCommerce in the Klaviyo flow library" width="337" height="202"></p>
+<p>To get started with an abandoned cart flow using the <em>Added to Cart</em> event, we recommend using the pre-built flow available in Klaviyo's <a href="https://www.klaviyo.com/library/flows" target="_blank" rel="noopener">Flow Library</a> which has the proper flow filters already set up. This flow tends to target more casual potential shoppers who have yet to start checkout.</p>
+<p>The abandoned cart flow triggered by the <em>Added to Cart</em> event can be found in the "Prevent lost sales" goal section. </p>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/28717380931483" alt="Card for added to cart abandoned cart reminder flow for BigCommerce in the Klaviyo flow library" width="338" height="201"></p>
+<p>If you implemented the BigCommerce <em>Added to Cart</em> snippet, this flow will be ready to go with all the recommended filters and dynamic email content ready to power personalized cart followup emails.</p>
+<h2 id="h_01HTJ9366KD4HT59G54ZXZ8E2Y">Are you using Amazon Buy with Prime?</h2>
+<p>If you're using Buy with Prime to power payment and fulfillment for any of the products on your store, you should:</p>
+<ul>
+<li>
+<a href="https://help.klaviyo.com/hc/en-us/articles/14708088221467" target="_blank" rel="noopener">Integrate Buy with Prime with Klaviyo</a><span> </span>to bring Buy with Prime data into your Klaviyo account.</li>
+<li>For your abandoned "Added to Cart" flow, add the following flow filters to exclude customers who started checkouts or made purchases via Buy with Prime from receiving incorrect messaging:<br>
+<ul>
+<li>
+<em>Started Checkout </em>(Buy with Prime)<em> zero times since starting this flow </em>AND</li>
+<li>
+<em>Placed Order</em><span> </span>(Buy with Prime)<span> </span><em>zero times since starting this flow.</em>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="h_01HTJ9366KM3ZMMXT5QC3PJDKF">Additional resources</h2>
+<ul>
+<li><a href="https://help.klaviyo.com/hc/en-us/articles/115002779411-Guide-to-Creating-an-Abandoned-Cart-Flow" target="_blank" rel="noopener">Creating an abandoned cart flow</a></li>
+<li><a href="https://help.klaviyo.com/hc/en-us/articles/115005082587-Reviewing-Your-BigCommerce-Data" target="_blank" rel="noopener">BigCommerce data reference</a></li>
+</ul>

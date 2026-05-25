@@ -1,0 +1,891 @@
+{
+  "captured_at": "2026-05-23T16:15:12Z",
+  "article": {
+    "id": 21330028699419,
+    "url": "https://klaviyo.zendesk.com/api/v2/help_center/en-us/articles/21330028699419.json",
+    "html_url": "https://klaviyo.zendesk.com/hc/en-us/articles/21330028699419-How-to-verify-email-authentication-configurations",
+    "author_id": 397882329931,
+    "comments_disabled": false,
+    "draft": false,
+    "promoted": false,
+    "position": 0,
+    "vote_sum": -1,
+    "vote_count": 1,
+    "section_id": 49375400060059,
+    "created_at": "2023-12-18T14:21:01Z",
+    "updated_at": "2026-04-21T13:54:33Z",
+    "name": "How to verify email authentication configurations",
+    "title": "How to verify email authentication configurations",
+    "source_locale": "en-us",
+    "locale": "en-us",
+    "outdated": false,
+    "outdated_locales": [],
+    "edited_at": "2025-04-16T13:28:42Z",
+    "user_segment_id": null,
+    "permission_group_id": 146372,
+    "content_tag_ids": [],
+    "label_names": [],
+    "body": "<h2 id=\"h_01HHYMKEJ25XY4NEJ6XGHVGXFE\">You will learn</h2>\n<p>Learn how to verify that your emails are being successfully authenticated using SPF, DKIM, and DMARC records.</p>\n<div class=\"bs-callout bs-callout-default\">\n<p><a href=\"https://www.klaviyo.com/blog/gmail-update\">Google and Yahoo</a> have announced new sender requirements that they are planning to start enforcing in February of 2024. For brands sending more than 5000 daily emails, setting up DMARC authentication will be a key requirement in order to successfully land in Gmail and Yahoo inboxes. <a href=\"https://techcommunity.microsoft.com/blog/microsoftdefenderforoffice365blog/strengthening-email-ecosystem-outlook%E2%80%99s-new-requirements-for-high%E2%80%90volume-senders/4399730\">Microsoft Outlook</a> will also start enforcing these requirements beginning May 2025. </p>\n</div>\n<h2 id=\"h_01HHYMKEJ21X2N6SM8RGAXVG98\">Email authentication</h2>\n<p>“Email authentication” refers to the technical standards that allow for the verification of an email sender's identity. The most commonly used email authentication standards are SPF, DKIM, and DMARC. Mail servers use these authentication protocols to verify that incoming emails are from legitimate senders, protecting your brand and your customers from malicious actors. In addition to preventing phishing and spoofing attempts, implementing these protocols can help improve deliverability, as mailbox providers will be able to confirm the identity of the sender. </p>\n<div class=\"bs-callout bs-callout-default\">\n<p>Learn about <a href=\"https://help.klaviyo.com/hc/en-us/articles/4402601857307\">email authentication</a> and set up DMARC before getting started.</p>\n</div>\n<h2 id=\"h_01HRSG6H935ZFM3JW1PWBE5BS4\">Verify authentication using email headers</h2>\n<h3 id=\"h_01HHYMKEJ2F29RV01EAK8NR5FX\">About email headers</h3>\n<p>An email header contains metadata about an email and the network path it has taken. This includes information like from-address, subject line, recipient, and key authentication details. </p>\n<p>You can use the authentication information found in the header of an email sent by your brand to verify that SPF, DKIM, and DMARC are passing.</p>\n<div class=\"bs-callout bs-callout-default\">\n<p>Learn how to <a href=\"https://help.klaviyo.com/hc/en-us/articles/360002117891\">get your full email header</a> on different inbox providers.</p>\n</div>\n<h3 id=\"h_01HHYMKEJ204GPTRE61HAEMQ5J\">Header summary</h3>\n<p>Some inbox providers, like Gmail, may provide a summary of the key authentication information in the email header. </p>\n<p>This may look something like this: </p>\n<p><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28711702459035\" alt=\"Gmail header summary\"></p>\n<h3 id=\"h_01HHYMKEJ2GQPSV0MGSV8X19WB\">Full header</h3>\n<p>Within the full email header, the key authentication information may look like this: </p>\n<pre>Delivered-To: email@klaviyo.com<br>Received: by 2002:a59:9a44:0:b0:437:660e:55f2 with SMTP id a4csp4934052vqp;<br>    Sun, 10 Dec 2023 16:03:01 -0800 (PST)<br>Authentication-Results: mx.google.com;<br>    dkim=pass header.i=@klaviyo.com header.s=s1 header.b=kBByyR4j;<br>    spf=pass (google.com: domain of <br>bounces+27486840-770f-email=klaviyo.com@send.klaviyo.com designates 000.000.00.000 <br>as permitted sender) <br>smtp.mailfrom=\"bounces+27486840-770f-email=klaviyo.com@send.klaviyo.com\";<br>    dmarc=pass (p=REJECT sp=REJECT dis=NONE) header.from=klaviyo.com</pre>\n<div class=\"bs-callout bs-callout-default\">\n<p>The email header you see may vary by inbox provider, but the key authentication information should live in the section called <em>Authentication-Results</em>.</p>\n</div>\n<h3 id=\"h_01HHYMKEJ26DQJ7TMK73AMX34E\">SPF</h3>\n<p>Sender Policy Framework (SPF) is an email authentication method designed to detect forged sender addresses during the delivery of the email. SPF allows the receiving mail server to verify that emails coming from a specific domain were sent through an IP address authorized by that domain's administrators.</p>\n<p>If your inbox provider has a header summary, you should see SPF along with a pass or fail value and the IP address the email was sent through.</p>\n<p><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28711731439131\" alt=\"SPF pass highlighed in header summary\"></p>\n<p>Within the full email header you can see the SPF record is passing (spf=pass), indicating that the IP address used to send the email (i.e., 000.000.00.000) is permitted to send for the send.klaviyo.com sending domain (i.e., the SPF domain).</p>\n<pre>Authentication-Results: mx.google.com;<br>     dkim=pass header.i=@klaviyo.com header.s=s1 header.b=kBByyR4j;<br><strong>     spf=pass (google.com: domain of </strong><br><strong>     bounces+27486840-770f-email=klaviyo.com@send.klaviyo.com designates 000.000.00.000 </strong><br><strong>as permitted sender) </strong><br>smtp.mailfrom=\"bounces+27486840-770f-email=klaviyo.com@send.klaviyo.com\";<br>     dmarc=pass (p=REJECT sp=REJECT dis=NONE) header.from=klaviyo.com</pre>\n<h3 id=\"h_01HHYMKEJ31JCYPCTAC327T3BN\">DKIM</h3>\n<p>DomainKeys Identified Mail (DKIM) acts as a digital signature that is added to the header of an email to further verify the identity of the sender. Receiving email servers will verify that the DKIM signature matches that of the associated sending domain. </p>\n<p>If your inbox provider has a header summary, you should see DKIM along with a pass or fail value for the domain the email was sent from.</p>\n<p><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28711702472603\" alt=\"DKIM pass highlighed in header summary\"></p>\n<p>Within the full email header, you can see the DKIM record is passing (dkim=pass), indicating that the digital signature set by DKIM matches that of the associated sending domain.</p>\n<pre>Authentication-Results: mx.google.com;<br>     <strong>dkim=pass header.i=@klaviyo.com header.s=s1 header.b=kBByyR4j;</strong><br>     spf=pass (google.com: domain of <br>bounces+27486840-770f-email=klaviyo.com@send.klaviyo.com designates 000.000.00.000 <br>as permitted sender) smtp.mailfrom=\"bounces+27486840-770f-email=klaviyo.com@send.klaviyo.com\";<br>     dmarc=pass (p=REJECT sp=REJECT dis=NONE) header.from=klaviyo.com</pre>\n<h3 id=\"h_01HHYMKEJ34DKJ7S1CW399NGTP\">DMARC</h3>\n<p>DMARC stands for domain-based message authentication, reporting, and conformance. It is a protocol that uses SPF and DKIM to determine the authenticity of an email, giving domain owners the ability to protect their domain from unauthorized use.</p>\n<p>DMARC provides instructions to receiving servers about how to handle incoming mail. In order to get delivered, messages need to pass DKIM and SPF alignment checks according to the requirements set by the DMARC policy. Messages that do not pass DMARC checks can be allowed, rejected, or placed in the spam folder.</p>\n<p>If your inbox provider has a header summary, you should see DMARC along with a pass or fail value.<br><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28711702474779\" alt=\"DMARC pass highlighted in header summary\"></p>\n<p>Within the full email header, you can see DMARC is passing (dmarc=pass), indicating that the email passed the sending domain’s DMARC check. Additionally, you can see the specific DMARC policy that is set on the sending domain (i.e., p=reject).</p>\n<pre>Authentication-Results: mx.google.com;<br>     dkim=pass header.i=@klaviyo.com header.s=s1 header.b=kBByyR4j;<br>     spf=pass (google.com: domain of <br>bounces+27486840-770f-email=klaviyo.com@send.klaviyo.com designates 000.000.00.000 <br>as permitted sender) smtp.mailfrom=\"bounces+27486840-770f-email=klaviyo.com@send.klaviyo.com\";<br>  <strong>   dmarc=pass (p=REJECT sp=REJECT dis=NONE) header.from=klaviyo.com</strong></pre>\n<h2 id=\"h_01HRSGEMFB6BZHQ4CNE0JGTDV5\">Verify authentication using 3rd party tools </h2>\n<p>Another way to verify that your DMARC policy has been published successfully is using a 3rd party tool like the DMARC checker offered by EasyDMARC. With this tool, you can simply enter you brand's root domain and the DMARC record will be returned if one is set.</p>\n<p><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28711702480155\" alt=\"Example lookup on EasyDMARC for the klaviyo.com domain\"></p>\n<div class=\"bs-callout bs-callout-default\">\n<p>If your DMARC policy is set to <em>p=none, </em>the <em>Status</em> will appear as <em>Warning</em> when using EasyDMARC. <em>Warning </em>appears with the <em>p=none</em> policy because it does not protect your domain from spoofing, and allows emails to land in the recipient's main inbox even if there is a misalignment between the sending domain and friendly from-address domain. Both a status of <em>Warning </em>and <em>Valid </em>on EasyDMARC indicate that your brand's DMARC policy meets Gmail and Yahoo sender requirements.</p>\n<p>You can disregard the <em>EasyDMARC Reporting</em> results unless you are using EasyDMARC's reporting services.</p>\n</div>\n<h2 id=\"h_01HHYMKEJ3GGXTGZDZ95BHQ38K\">Additional resources</h2>\n<p><a href=\"https://help.klaviyo.com/hc/en-us/articles/4402601857307\">Understanding email authentication </a></p>\n<p><a href=\"https://help.klaviyo.com/hc/en-us/articles/115000357752\">How to setup a branded sending domain </a></p>\n<p> </p>",
+    "user_segment_ids": []
+  },
+  "normalized": {
+    "id": "21330028699419",
+    "title": "How to verify email authentication configurations",
+    "source_url": "https://help.klaviyo.com/hc/en-us/articles/21330028699419-How-to-verify-email-authentication-configurations",
+    "section_id": 49375400060059,
+    "section": "Monitor deliverability and metrics",
+    "category_id": 115000873988,
+    "category": "Deliverability & compliance",
+    "category_slug": "deliverability-compliance",
+    "klaviyo_updated": "2026-04-21T13:54:33Z",
+    "created_at": "2023-12-18T14:21:01Z",
+    "draft": false,
+    "promoted": false,
+    "position": 0,
+    "label_names": []
+  },
+  "files": {
+    "body_html": "_source/articles/21330028699419.body.html",
+    "rendered_html": "_source/rendered/21330028699419.html"
+  },
+  "assets": {
+    "api_body": {
+      "images": [
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28711702459035",
+          "alt": "Gmail header summary",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28711731439131",
+          "alt": "SPF pass highlighed in header summary",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28711702472603",
+          "alt": "DKIM pass highlighed in header summary",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28711702474779",
+          "alt": "DMARC pass highlighted in header summary",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28711702480155",
+          "alt": "Example lookup on EasyDMARC for the klaviyo.com domain",
+          "width": "",
+          "height": ""
+        }
+      ],
+      "links": [
+        {
+          "href": "https://www.klaviyo.com/blog/gmail-update",
+          "text": "Google and Yahoo"
+        },
+        {
+          "href": "https://techcommunity.microsoft.com/blog/microsoftdefenderforoffice365blog/strengthening-email-ecosystem-outlook%E2%80%99s-new-requirements-for-high%E2%80%90volume-senders/4399730",
+          "text": "Microsoft Outlook"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4402601857307",
+          "text": "email authentication"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360002117891",
+          "text": "get your full email header"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4402601857307",
+          "text": "Understanding email authentication"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115000357752",
+          "text": "How to setup a branded sending domain"
+        }
+      ],
+      "headings": [
+        {
+          "level": 2,
+          "id": "h_01HHYMKEJ25XY4NEJ6XGHVGXFE",
+          "text": "You will learn"
+        },
+        {
+          "level": 2,
+          "id": "h_01HHYMKEJ21X2N6SM8RGAXVG98",
+          "text": "Email authentication"
+        },
+        {
+          "level": 2,
+          "id": "h_01HRSG6H935ZFM3JW1PWBE5BS4",
+          "text": "Verify authentication using email headers"
+        },
+        {
+          "level": 3,
+          "id": "h_01HHYMKEJ2F29RV01EAK8NR5FX",
+          "text": "About email headers"
+        },
+        {
+          "level": 3,
+          "id": "h_01HHYMKEJ204GPTRE61HAEMQ5J",
+          "text": "Header summary"
+        },
+        {
+          "level": 3,
+          "id": "h_01HHYMKEJ2GQPSV0MGSV8X19WB",
+          "text": "Full header"
+        },
+        {
+          "level": 3,
+          "id": "h_01HHYMKEJ26DQJ7TMK73AMX34E",
+          "text": "SPF"
+        },
+        {
+          "level": 3,
+          "id": "h_01HHYMKEJ31JCYPCTAC327T3BN",
+          "text": "DKIM"
+        },
+        {
+          "level": 3,
+          "id": "h_01HHYMKEJ34DKJ7S1CW399NGTP",
+          "text": "DMARC"
+        },
+        {
+          "level": 2,
+          "id": "h_01HRSGEMFB6BZHQ4CNE0JGTDV5",
+          "text": "Verify authentication using 3rd party tools"
+        },
+        {
+          "level": 2,
+          "id": "h_01HHYMKEJ3GGXTGZDZ95BHQ38K",
+          "text": "Additional resources"
+        }
+      ]
+    },
+    "rendered_page": {
+      "images": [
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/7ff492c2b417b7ecfe572f839a8a81398693c1f7-1920x1080.webp",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/2203242e8fa6449565d9bf9e17e85aa04d1ed3ee-2304x724.jpg",
+          "alt": "Gmail header summary",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/0cbd8edef87f53a512ef352f789358f1a10fd45d-1610x502.jpg",
+          "alt": "SPF pass highlighed in header summary",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/3d14b804fedeade4afe9fdc196c2605fbecbb44e-1610x502.jpg",
+          "alt": "DKIM pass highlighed in header summary",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/b087b239a8cfbac6a48b8ea0326431fb91e3e9da-1610x502.jpg",
+          "alt": "DMARC pass highlighted in header summary",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/2c9c588bd44d865dfbd350371e513f8a5a91a84d-2348x944.jpg",
+          "alt": "Example lookup on EasyDMARC for the klaviyo.com domain",
+          "width": "",
+          "height": ""
+        }
+      ],
+      "links": [
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/21330028699419-How-to-verify-email-authentication-configurations#site-content",
+          "text": "Skip to main content"
+        },
+        {
+          "href": "https://www.klaviyo.com",
+          "text": "Home"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center"
+        },
+        {
+          "href": "https://www.klaviyo.com/enterprise",
+          "text": "Enterprise"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Partners"
+        },
+        {
+          "href": "https://www.klaviyo.com/careers",
+          "text": "Careers"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": "Log in"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": ""
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center Find step-by-step instructions and troubleshooting solutions in our knowledge base."
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000032731",
+          "text": "Integrations"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000312411",
+          "text": "Flows"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867867",
+          "text": "Audience"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867667",
+          "text": "Campaigns"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/360000190711",
+          "text": "Sign-up forms"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000873988",
+          "text": "Deliverability & compliance"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/29173800271259",
+          "text": "SMS"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/16638219724187",
+          "text": "Reviews"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/18073014919195",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/34141283979931",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/37659126754075",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/33948021740315",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/39746685522331",
+          "text": "WhatsApp"
+        },
+        {
+          "href": "https://academy.klaviyo.com",
+          "text": "Klaviyo Academy Expert training and education to help you succeed with Klaviyo, and beyond."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Quick+guide&resource=academy_courses",
+          "text": "Quick guides Learn marketing strategies and concepts in 15 minutes or less."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Course&resource=academy_courses",
+          "text": "Courses Master key marketing topics through structured lessons and exams."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/best-practices",
+          "text": "Best practices Discover top product and marketing strategies for your business."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/learning-paths",
+          "text": "Learning paths Complete curated learning journeys tailored to your marketing goals."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses",
+          "text": "Explore all resources"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Live+training&resource=academy_courses",
+          "text": "Live trainings Build confidence through hands-on interactive workshops and thought-provoking strategy sessions."
+        },
+        {
+          "href": "https://www.bigmarker.com/klaviyo-customer-education/Office-hours-Getting-started-with-Klaviyo",
+          "text": "Live office hours Join a strategic discussion where you can ask questions and get answers in real-time."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/private-live-training",
+          "text": "1:1 Live training Book a private training session with an expert to jumpstart your platform knowledge and confidence."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/credentials",
+          "text": "Klaviyo credentials Dig deeper into select topics and showcase your expertise with a final exam to earn a certificate and digital badge."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/certificates/klaviyo-practitioner-certificate",
+          "text": "Klaviyo practitioner certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/deliverability-certificate",
+          "text": "Deliverability certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/developer-certificate",
+          "text": "Klaviyo developer certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses&select=Certificate",
+          "text": "See all certificates"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Klaviyo Community Join our thriving community network to connect with brands like yours—online and in person."
+        },
+        {
+          "href": "https://community.klaviyo.com/topic/new",
+          "text": "Ask a question Post a question and get thoughtful answers from Klaviyo powerusers."
+        },
+        {
+          "href": "https://community.klaviyo.com/p/roadmap",
+          "text": "Product roadmap"
+        },
+        {
+          "href": "https://community.klaviyo.com/search/activity/recent",
+          "text": "Recent threads"
+        },
+        {
+          "href": "https://community.klaviyo.com/p/champions",
+          "text": "Meet the Champions"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups",
+          "text": "Browse all groups Your people are waiting. New ideas and connections are a click away."
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/developer-group-64",
+          "text": "Developer group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/entrepreneur-user-group-118",
+          "text": "Entrepreneur group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/woo-user-group-87",
+          "text": "WooCommerce group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/new-york-meetup-chapter-82",
+          "text": "New York City"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/los-angeles-meetup-chapter-83",
+          "text": "Los Angeles"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/austin-meetup-chapter-85",
+          "text": "Austin"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/san-diego-meetup-chapter-86",
+          "text": "San Diego"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/amsterdam-meetup-chapter-84",
+          "text": "Amsterdam"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Klaviyo Developers Access API documentation and developer guides to help you build with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/get_started",
+          "text": "Get started Access key resources and a step-by-step checklist for how to start developing with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/build_your_integration",
+          "text": "Grow your app's reach Learn how to join our ecosystem and get your app listed on our marketplace."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/developer-tools",
+          "text": "Developer tools Generate sample data, monitor your API usage, and access our Postman collections."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/reference/api_overview",
+          "text": "API reference Browse our full catalog of API docs."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/changelog_",
+          "text": "Changelog"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/api_versioning_and_deprecation_policy",
+          "text": "Versioning & deprecation policy"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/rate_limits_and_error_handling",
+          "text": "Rate limits & error handling"
+        },
+        {
+          "href": "https://youtube.com/playlist?list=PLHkNfHgtxcUanrkMnKPdkRzuWU7MGv_xM&si=pkG-KH7IT_TUHOGC",
+          "text": "API tutorials on YouTube Subscribe to our Klaviyo API Tutorials playlist for easy access to step-by-step developer walkthroughs."
+        },
+        {
+          "href": "https://www.klaviyo.com/contact-us",
+          "text": "Contact us"
+        },
+        {
+          "href": "https://www.klaviyo.com/sign-up",
+          "text": "Sign up"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": "Search"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/21330028699419",
+          "text": "United States - EN"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/de-de/articles/21330028699419",
+          "text": "Deutschland - DE"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-es/articles/21330028699419",
+          "text": "España - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-mx/articles/21330028699419",
+          "text": "México - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/fr-fr/articles/21330028699419",
+          "text": "France - FR"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/it-it/articles/21330028699419",
+          "text": "Italia - IT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/ko-kr/articles/21330028699419",
+          "text": "한국 - KO"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/nl-nl/articles/21330028699419",
+          "text": "Nederland - NL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pl-pl/articles/21330028699419",
+          "text": "Polska - PL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pt-br/articles/21330028699419",
+          "text": "Brasil - PT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/sv-se/articles/21330028699419",
+          "text": "Sverige - SV"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/14416651431323",
+          "text": "Email deliverability"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/49375400060059",
+          "text": "Monitor deliverability and metrics"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/21330028699419-How-to-verify-email-authentication-configurations#h_01HHYMKEJ25XY4NEJ6XGHVGXFE",
+          "text": "You will learn"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/21330028699419-How-to-verify-email-authentication-configurations#h_01HHYMKEJ21X2N6SM8RGAXVG98",
+          "text": "Email authentication"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/21330028699419-How-to-verify-email-authentication-configurations#h_01HRSG6H935ZFM3JW1PWBE5BS4",
+          "text": "Verify authentication using email headers"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/21330028699419-How-to-verify-email-authentication-configurations#h_01HRSGEMFB6BZHQ4CNE0JGTDV5",
+          "text": "Verify authentication using 3rd party tools"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/21330028699419-How-to-verify-email-authentication-configurations#h_01HHYMKEJ3GGXTGZDZ95BHQ38K",
+          "text": "Additional resources"
+        },
+        {
+          "href": "https://www.klaviyo.com/blog/gmail-update",
+          "text": "Google and Yahoo"
+        },
+        {
+          "href": "https://techcommunity.microsoft.com/blog/microsoftdefenderforoffice365blog/strengthening-email-ecosystem-outlook%E2%80%99s-new-requirements-for-high%E2%80%90volume-senders/4399730",
+          "text": "Microsoft Outlook"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4402601857307",
+          "text": "email authentication"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360002117891",
+          "text": "get your full email header"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4402601857307",
+          "text": "Understanding email authentication"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115000357752",
+          "text": "How to setup a branded sending domain"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115001002272",
+          "text": "Learn how to contact support"
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": ""
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": "Visit Community"
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": ""
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": "Hire a partner"
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/about",
+          "text": "About Klaviyo"
+        },
+        {
+          "href": "https://www.klaviyo.com/newsroom",
+          "text": "Newsroom"
+        },
+        {
+          "href": "https://investors.klaviyo.com/overview/default.aspx",
+          "text": "Investor relations"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Agency and tech partners"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Developers"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/retail",
+          "text": "Retail and ecommerce"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/restaurants",
+          "text": "Restaurant marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/wellness",
+          "text": "Wellness"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform",
+          "text": "B2C CRM overview"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai",
+          "text": "Klaviyo AI (K:AI)"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/marketing-automation",
+          "text": "Klaviyo Marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-service",
+          "text": "Klaviyo Service"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/analytics",
+          "text": "Klaviyo Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-data-platform",
+          "text": "Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare",
+          "text": "Klaviyo vs. Klaviyo alternatives"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-mailchimp",
+          "text": "Klaviyo vs. Mailchimp"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-postscript",
+          "text": "Klaviyo vs. Postscript"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-attentive",
+          "text": "Klaviyo vs. Attentive"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-salesforce-marketing-cloud",
+          "text": "Klaviyo vs. Salesforce"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-listrak",
+          "text": "Klaviyo vs. Listrak"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/omnichannel",
+          "text": "Omnichannel marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/email-marketing",
+          "text": "Email marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing",
+          "text": "SMS marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing/rcs",
+          "text": "RCS for Business"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/mobile-app-marketing",
+          "text": "Mobile app marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/whatsapp",
+          "text": "WhatsApp marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/social",
+          "text": "Social marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources",
+          "text": "Marketing resources"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources/marketing-campaign-calendar",
+          "text": "Marketing campaign calendar"
+        },
+        {
+          "href": "https://www.klaviyo.com/glossary",
+          "text": "Marketing glossary"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/email-subject-line-generator",
+          "text": "Subject line generator"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/roi-calculator",
+          "text": "ROI calculator"
+        },
+        {
+          "href": "https://www.klaviyo.com/customers",
+          "text": "Case studies"
+        },
+        {
+          "href": "https://www.klaviyo.com/composer",
+          "text": "Composer Beta"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/marketing-agent",
+          "text": "Marketing Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/customer-agent",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/customer-experience-hub",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/helpdesk",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/marketing-analytics",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/advanced-cdp",
+          "text": "Advanced Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/web-forms",
+          "text": "Web forms"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/email-templates",
+          "text": "Email templates"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/portfolio",
+          "text": "Portfolio"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform-integrations",
+          "text": "Apps and Integrations"
+        },
+        {
+          "href": "https://www.klaviyo.com/features",
+          "text": "Features"
+        },
+        {
+          "href": "https://www.klaviyo.com/whats-new",
+          "text": "What's new"
+        },
+        {
+          "href": "https://www.klaviyo.com/events",
+          "text": "Events"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help Center"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us",
+          "text": "Academy"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Community"
+        },
+        {
+          "href": "https://www.facebook.com/Klaviyo/",
+          "text": "Facebook"
+        },
+        {
+          "href": "https://twitter.com/klaviyo/",
+          "text": "Twitter"
+        },
+        {
+          "href": "https://www.linkedin.com/company/klaviyo/",
+          "text": "LinkedIn"
+        },
+        {
+          "href": "https://www.instagram.com/klaviyo/",
+          "text": "Instagram"
+        },
+        {
+          "href": "https://www.klaviyo.com/sitemap",
+          "text": "Site Map"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal",
+          "text": "Terms and Privacy"
+        },
+        {
+          "href": "https://www.klaviyo.com/security",
+          "text": "Security"
+        },
+        {
+          "href": "https://www.klaviyo.com/trust",
+          "text": "Trust"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal/intellectual-property-notices",
+          "text": "Intellectual Property Notices"
+        }
+      ],
+      "headings": [
+        {
+          "level": 1,
+          "id": "",
+          "text": "How to verify email authentication configurations"
+        },
+        {
+          "level": 2,
+          "id": "h_01HHYMKEJ25XY4NEJ6XGHVGXFE",
+          "text": "You will learn"
+        },
+        {
+          "level": 2,
+          "id": "h_01HHYMKEJ21X2N6SM8RGAXVG98",
+          "text": "Email authentication"
+        },
+        {
+          "level": 2,
+          "id": "h_01HRSG6H935ZFM3JW1PWBE5BS4",
+          "text": "Verify authentication using email headers"
+        },
+        {
+          "level": 3,
+          "id": "h_01HHYMKEJ2F29RV01EAK8NR5FX",
+          "text": "About email headers"
+        },
+        {
+          "level": 3,
+          "id": "h_01HHYMKEJ204GPTRE61HAEMQ5J",
+          "text": "Header summary"
+        },
+        {
+          "level": 3,
+          "id": "h_01HHYMKEJ2GQPSV0MGSV8X19WB",
+          "text": "Full header"
+        },
+        {
+          "level": 3,
+          "id": "h_01HHYMKEJ26DQJ7TMK73AMX34E",
+          "text": "SPF"
+        },
+        {
+          "level": 3,
+          "id": "h_01HHYMKEJ31JCYPCTAC327T3BN",
+          "text": "DKIM"
+        },
+        {
+          "level": 3,
+          "id": "h_01HHYMKEJ34DKJ7S1CW399NGTP",
+          "text": "DMARC"
+        },
+        {
+          "level": 2,
+          "id": "h_01HRSGEMFB6BZHQ4CNE0JGTDV5",
+          "text": "Verify authentication using 3rd party tools"
+        },
+        {
+          "level": 2,
+          "id": "h_01HHYMKEJ3GGXTGZDZ95BHQ38K",
+          "text": "Additional resources"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "Explore more from Klaviyo"
+        }
+      ]
+    }
+  },
+  "rendered_page": {
+    "status": "fetched",
+    "error": ""
+  }
+}

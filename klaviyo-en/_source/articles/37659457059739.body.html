@@ -1,0 +1,90 @@
+<h2 id="e4a268b2211a">You will learn</h2>
+<p>How to test Customer Agent in the test sidebar, debug responses you don’t expect, and validate skills before shoppers see them.</p>
+<h2 id="f13875d5b9c9">Before you begin</h2>
+<p>You’ll need:</p>
+<ul>
+<li>Customer Agent enabled</li>
+<li>Some content, Guidance, and skills configured (you can iterate, but testing without any setup won’t tell you much)</li>
+</ul>
+<h2 id="8ac3e61d3d84">Why testing matters</h2>
+<p>Customer Agent’s behavior comes from a stack of signals — your content, Guidance, skills, tools. A small change in any of those (rewriting your brand summary, adding a comm style rule, attaching a new tool) can ripple into responses you didn’t expect.</p>
+<p>Test before launching, and re-test every time you make a meaningful change. Most brands run a thorough test pass before going live, then check in every 30 days, or any time they update content for a sale, a new product line, or a policy change.</p>
+<h2 id="a91dc9c23b1c">Set it up</h2>
+<h3 id="4ca614090ddc">1. Open the test sidebar</h3>
+<p>Open the test sidebar from anywhere inside Customer Agent. The sidebar simulates a real conversation — Customer Agent uses the same skills, tools, content, and Guidance it would use with a live shopper.</p>
+<p>You can adjust:</p>
+<ul>
+<li>
+<strong>Page context</strong> — simulate the shopper being on a specific page (PDP, collection, cart, etc.)</li>
+<li>
+<strong>Channel</strong> — test how responses render on web chat, SMS, or email</li>
+<li>
+<strong>Profile</strong> — pick a Klaviyo profile so Customer Agent has order history, subscriptions, and other context to work with</li>
+</ul>
+<h3 id="27b9dbd6bdaa">2. Send sample questions</h3>
+<p>Run shopper-style messages. A starter set:</p>
+<ul>
+<li>“How do I care for it?” <em>(tests product question handling)</em>
+</li>
+<li>“What material is this made of?” <em>(tests product knowledge from your catalog)</em>
+</li>
+<li>“Where is my order?” <em>(tests the Order tracking skill)</em>
+</li>
+<li>“What’s your return policy?” <em>(tests content retrieval)</em>
+</li>
+<li>“Can I talk to a person?” <em>(tests handoff)</em>
+</li>
+</ul>
+<p>Mix in questions specific to your brand — anything you’d expect a real shopper to ask.</p>
+<h3 id="2593dacd339b">3. Review what happened under the hood</h3>
+<p>After every response, you can inspect what Customer Agent did:</p>
+<ul>
+<li>
+<strong>Which skill</strong> Customer Agent picked</li>
+<li>
+<strong>Which tools</strong> ran and what they returned</li>
+<li>
+<strong>Which content</strong> was retrieved</li>
+<li>
+<strong>The final response</strong> and any escalation rules that matched</li>
+</ul>
+<p>Use this to trace why Customer Agent responded the way it did. Most issues fall out from one of those four signals.</p>
+<h2 id="d53eec9980b0">Testing skills</h2>
+<p>If you’ve built a fully custom skill, focus your testing on three things:</p>
+<ul>
+<li>
+<strong>Router behavior</strong> — Send messages that should match your skill’s “When to use this skill.” Confirm your skill was actually picked.</li>
+<li>
+<strong>Response behavior</strong> — Walk through the sections in your skill’s “How to respond.” Make sure each section’s behavior happens — including tool usage and any handoff actions.</li>
+<li>
+<strong>Tool usage</strong> — If your skill uses tools, confirm they fire at the right step with the right parameters.</li>
+</ul>
+<p>Iterate on “When to use this skill” if the router is picking it wrong, and on “How to respond” if the behavior is off.</p>
+<h2 id="2cb55e1b14c2">Debugging a bad response</h2>
+<p>When Customer Agent gives a response that doesn’t seem right, work through it in this order:</p>
+<ol>
+<li>
+<strong>Was the right skill picked?</strong> If not, the issue is in the skill’s “When to use this skill.”</li>
+<li>
+<strong>Was the right content retrieved?</strong> If Customer Agent used outdated or wrong content, fix the source — see <em>How to add and manage content</em>.</li>
+<li>
+<strong>Did tools run correctly?</strong> Check the tool calls for missing parameters or unexpected returns.</li>
+<li>
+<strong>Did Guidance shape the response correctly?</strong> Tone, communication style rules, and escalation rules all layer on top of skill output.</li>
+</ol>
+<p>Fix at the source rather than patching downstream.</p>
+<h2 id="575246c8b9fe">Troubleshooting</h2>
+<p><strong>Symptom:</strong> Customer Agent picks the wrong skill.
+<strong>Likely cause:</strong> Skill descriptions overlap, or “When to use this skill” is too broad or too narrow on a fully custom skill.
+<strong>Fix:</strong> Tighten the skill’s “When to use this skill” content. Test multiple phrasings of the same intent.</p>
+<p><strong>Symptom:</strong> Customer Agent doesn’t use a tool you expect.
+<strong>Likely cause:</strong> Tool isn’t attached to the skill, or “How to respond” doesn’t reference the tool at the right step.
+<strong>Fix:</strong> Confirm the tool is attached. In “How to respond,” insert the tool inline at the step where it should run.</p>
+<p><strong>Symptom:</strong> Customer Agent uses the wrong content.
+<strong>Likely cause:</strong> Conflicting sources, or higher-quality content covering the same topic outranks the source you expected.
+<strong>Fix:</strong> Audit and consolidate conflicting content. Re-sync sources you’ve recently edited.</p>
+<p><strong>Symptom:</strong> Response tone or style is off.
+<strong>Likely cause:</strong> Tone of voice or communication style rules need adjustment.
+<strong>Fix:</strong> Review Guidance settings. Iterate on tone or add a specific communication style rule.</p>
+<h2 id="1286363b7ae5">Coming soon: Simulations</h2>
+<p>Simulations are an upcoming feature for running Customer Agent against batches of shopper-style inputs and grading the responses at scale. Until simulations ship, the test sidebar is the main testing tool.</p>

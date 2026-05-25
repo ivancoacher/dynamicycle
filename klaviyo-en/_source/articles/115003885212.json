@@ -1,0 +1,807 @@
+{
+  "captured_at": "2026-05-23T16:16:54Z",
+  "article": {
+    "id": 115003885212,
+    "url": "https://klaviyo.zendesk.com/api/v2/help_center/en-us/articles/115003885212.json",
+    "html_url": "https://klaviyo.zendesk.com/hc/en-us/articles/115003885212-How-to-add-a-time-delay-to-a-flow",
+    "author_id": 114161977131,
+    "comments_disabled": true,
+    "draft": false,
+    "promoted": false,
+    "position": 1,
+    "vote_sum": 47,
+    "vote_count": 169,
+    "section_id": 49375527980059,
+    "created_at": "2018-01-09T19:53:18Z",
+    "updated_at": "2026-04-21T13:54:15Z",
+    "name": "How to add a time delay to a flow",
+    "title": "How to add a time delay to a flow",
+    "source_locale": "en-us",
+    "locale": "en-us",
+    "outdated": false,
+    "outdated_locales": [],
+    "edited_at": "2023-12-06T14:08:28Z",
+    "user_segment_id": null,
+    "permission_group_id": 146372,
+    "content_tag_ids": [],
+    "label_names": [],
+    "body": "<h2 id=\"h_01HGZPK1XRS3FXM8SAY9R5A81P\">You will learn</h2>\n<p>You will learn how to add a time delay component within the flow builder which is used to create delays (or wait periods) between messages or other components in your flow series.</p>\n<p>If components are back-to-back, without any time delays, they will all occur simultaneously. For this reason, you will likely always want to ensure you have a time delay component between consecutive emails or SMS.</p>\n<div class=\"bs-callout bs-callout-default\">\n<p>A time delay must be followed by a flow action that is set to live or manual status. If a time delay is added to the end of a flow without an action following or if all following actions are set to draft status, profiles in the flow will skip the time delay and immediately exit the flow.</p>\n<p>If you want to add a time delay before someone exits a flow, but you do not want to send out a message afterwards, you can use a non-message flow action such as an <a href=\"https://klaviyo.zendesk.com/hc/en-us/articles/360001768432\" target=\"_blank\" rel=\"noopener\">update profile property action</a> at the end of the flow.</p>\n</div>\n<h2 id=\"h_01HGZPK1XRHK8C5Y24PQXYEC9T\">Add a time delay</h2>\n<p>To add a new time delay into a flow:</p>\n<ol>\n<li>Drag the time delay component from the sidebar and drop it where you would like to create this waiting period.</li>\n<li>After you drop the time delay into your flow, configure the details in the left-hand sidebar.</li>\n</ol>\n<p class=\"wysiwyg-text-align-center\">\n<script src=\"https://fast.wistia.com/embed/medias/cr10dmb46w.jsonp\" async=\"\"></script>\n<script src=\"https://fast.wistia.com/assets/external/E-v1.js\" async=\"\"></script>\n</p>\n<div class=\"wistia_responsive_padding\" style=\"padding: 60.63% 0 0 0; position: relative;\">\n<div class=\"wistia_responsive_wrapper\" style=\"height: 100%; left: 0; position: absolute; top: 0; width: 100%;\">\n<div class=\"wistia_embed wistia_async_cr10dmb46w videoFoam=true\" style=\"height: 100%; position: relative; width: 100%;\">\n<div class=\"wistia_swatch\" style=\"height: 100%; left: 0; opacity: 0; overflow: hidden; position: absolute; top: 0; transition: opacity 200ms; width: 100%;\"><img style=\"filter: blur(5px); height: 100%; object-fit: contain; width: 100%;\" src=\"https://fast.wistia.com/embed/medias/cr10dmb46w/swatch\" alt=\"The time delay component is found in the left sidebar and can be dragged into the flow where you'd like it to be placed.\" aria-hidden=\"true\"></div>\n</div>\n</div>\n</div>\n<p>Configuration options for a time delay include:</p>\n<ul>\n<li>Wait __ Minutes</li>\n<li>Wait __ Hours</li>\n<li>Wait __ Days</li>\n<li>Wait __ Days and delay until a specific time of day</li>\n</ul>\n<p>When you choose to create a waiting period of X days, each day will be calculated as a 24-hour period. If you choose to wait X days but specify a certain time of day, however, each day will be calculated as a calendar day to avoid prolonged wait periods depending on when a recipient enters your flow. To explain this further, consider the following scenario.</p>\n<p>Let's say you want to have a time delay set to \"Wait 1 Day, until 3PM\" and then send an email:</p>\n<ul>\n<li>\n<em>Person A </em>enters your series at 2 PM. Waiting 1 day (24 hours) would land your recipient at 2PM the next day and the email would send 1 hour later at 3 PM. The total amount of time between when they trigger the flow and when they receive the first email is 25 hours.</li>\n<li>\n<em> Person B </em>enters your series at 4 PM. Waiting 1 day (24 hours) would land your recipient at 4PM the next day. In order to send at your specified time of 3 PM, we'd need to wait another 23 hours. This means <em>Person B</em> would receive your email almost a full day later than <em>Person A</em>. What happens instead is that <em>Person B<strong> </strong></em>will receive the email at 3 PM the following day, 23 hours after they triggered the flow. </li>\n</ul>\n<p>To avoid the above problem, we'll only wait X \"calendar days\" instead of X \"24-hour days\" when your time delay includes a specific time of day. With this behavior, using the above example, <em>Person A</em> and <em>Person B</em> will both get the email at the same time. </p>\n<h2 id=\"h_01HGZPK1XRNMZMRFBWDBJT2W3D\">Delay until a specific time</h2>\n<p>You may want to control what time of day recipients receive a specific flow email or SMS in your series. This can be useful when you want to normalize the time of day people receive your messages, for instance, if you know your audience typically opens emails at a certain time.</p>\n<p>Within the settings for a time delay component, you can choose, <em>Delay until a specific time of day</em>. If you have an SMS following this time delay, this will establish the send time for that SMS.</p>\n<p>After choosing a time of day, you can then select a timezone. You can choose <strong>Recipient's Local Timezone</strong> in order to ensure each recipient receives your message at your preferred time, regardless of where they are located.</p>\n<p><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28715962257307\" alt=\"When configuring a time delay, there will be an option to set the amount of time for the delay as well as the option to delay until a specific time of day.\" width=\"430\" height=\"345\"></p>\n<p>One benefit to choosing the \"Wait __ Days\" option, without selecting a set time, is that each recipient will then receive the SMS or email at the same time they took the flow's trigger action — the time someone took the trigger action is one data point that tells you the recipient was online engaging with your business at that time, and thus it might be a time they're typically active online. </p>\n<h2 id=\"h_01HGZPK1XRKGJAFBH1WY8Z828W\">Delay until a specific day of the week</h2>\n<p>If you only want a flow email or SMS to send on specific days of the week, you can add a time delay component before it in your series and use the <em>Delay until a specific day(s) of the week</em> option.</p>\n<p>All days will be selected automatically. You can remove days by clicking the X next to the day name or add days by clicking on the dropdown and clicking the checkbox next to the day.</p>\n<p>Selected days shown in the dropdown are the days of the week when the message <em>does </em>send. Unselected days are the days of the week when the message <em>does not</em> send.</p>\n<p>For example, let's say John enters your flow on a Tuesday:</p>\n<ul>\n<li>You have a delay after the trigger to \"Wait 2 Days,\" but delay until a Monday, Wednesday, or Friday.</li>\n<li>John enters the flow on a Tuesday, we wait two days, and now it's Thursday. Because you only want emails to send on Monday, Wednesday, or Friday, however, we'll delay one more day until it's Friday.<br><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28715968827163\" alt=\"Below the option to delay until a specific time of day, there is also the option to delay until a specific day of the week with buttons for each day so that multiple days can be selected.\" width=\"430\" height=\"337\">\n</li>\n</ul>\n<div class=\"bs-callout bs-callout-default\">\n<p>Messages are scheduled based on the timezone associated with the recipient's profile. If the profile's timezone cannot be accurately determined, your account's timezone will be used which can be found in your <a href=\"https://help.klaviyo.com/hc/en-us/articles/115005232388\" target=\"_blank\" rel=\"noopener\">account settings</a>.</p>\n</div>\n<p class=\"wysiwyg-text-align-left\">When you delay until a specific day of the week, note that you will no longer see the expected number of days in any subsequent components (e.g., emails or SMS messages). For instance, if you have a time delay component that's set to wait 10 days and delay until Monday or Friday, it's not possible to determine when exactly a recipient will receive the following message; each person that is added to the flow is going to have a different number of days before they are sent the next message.</p>\n<h2 id=\"h_01HGZPK1XRV5PTE2MYJ8J6AMN8\">Additional resources</h2>\n<p>Read more about <a href=\"https://help.klaviyo.com/hc/en-us/articles/115003883992-Introduction-to-Flow-Branching\" target=\"_self\">flow branching</a>.</p>\n<p>Learn more about time delays in Klaviyo: </p>\n<ul>\n<li><a href=\"https://help.klaviyo.com/hc/en-us/articles/360050334651\" target=\"_self\" rel=\"undefined\">About using time delays near splits</a></li>\n<li><a href=\"https://help.klaviyo.com/hc/en-us/articles/360046164352\" target=\"_self\" rel=\"undefined\">Understanding the timing of a flow</a></li>\n</ul>\n<p>Find out more about <a href=\"https://help.klaviyo.com/hc/en-us/articles/360017706091-How-Contacts-Move-Through-a-Flow\" target=\"_blank\" rel=\"noopener\" data-darkreader-inline-bgcolor=\"\">understanding how contacts move through a flow</a>.</p>",
+    "user_segment_ids": []
+  },
+  "normalized": {
+    "id": "115003885212",
+    "title": "How to add a time delay to a flow",
+    "source_url": "https://help.klaviyo.com/hc/en-us/articles/115003885212-How-to-add-a-time-delay-to-a-flow",
+    "section_id": 49375527980059,
+    "section": "Add steps or actions to flows",
+    "category_id": 115000312411,
+    "category": "Flows",
+    "category_slug": "flows",
+    "klaviyo_updated": "2026-04-21T13:54:15Z",
+    "created_at": "2018-01-09T19:53:18Z",
+    "draft": false,
+    "promoted": false,
+    "position": 1,
+    "label_names": []
+  },
+  "files": {
+    "body_html": "_source/articles/115003885212.body.html",
+    "rendered_html": "_source/rendered/115003885212.html"
+  },
+  "assets": {
+    "api_body": {
+      "images": [
+        {
+          "src": "https://fast.wistia.com/embed/medias/cr10dmb46w/swatch",
+          "alt": "The time delay component is found in the left sidebar and can be dragged into the flow where you'd like it to be placed.",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28715962257307",
+          "alt": "When configuring a time delay, there will be an option to set the amount of time for the delay as well as the option to delay until a specific time of day.",
+          "width": "430",
+          "height": "345"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28715968827163",
+          "alt": "Below the option to delay until a specific time of day, there is also the option to delay until a specific day of the week with buttons for each day so that multiple days can be selected.",
+          "width": "430",
+          "height": "337"
+        }
+      ],
+      "links": [
+        {
+          "href": "https://klaviyo.zendesk.com/hc/en-us/articles/360001768432",
+          "text": "update profile property action"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005232388",
+          "text": "account settings"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115003883992-Introduction-to-Flow-Branching",
+          "text": "flow branching"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360050334651",
+          "text": "About using time delays near splits"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360046164352",
+          "text": "Understanding the timing of a flow"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360017706091-How-Contacts-Move-Through-a-Flow",
+          "text": "understanding how contacts move through a flow"
+        }
+      ],
+      "headings": [
+        {
+          "level": 2,
+          "id": "h_01HGZPK1XRS3FXM8SAY9R5A81P",
+          "text": "You will learn"
+        },
+        {
+          "level": 2,
+          "id": "h_01HGZPK1XRHK8C5Y24PQXYEC9T",
+          "text": "Add a time delay"
+        },
+        {
+          "level": 2,
+          "id": "h_01HGZPK1XRNMZMRFBWDBJT2W3D",
+          "text": "Delay until a specific time"
+        },
+        {
+          "level": 2,
+          "id": "h_01HGZPK1XRKGJAFBH1WY8Z828W",
+          "text": "Delay until a specific day of the week"
+        },
+        {
+          "level": 2,
+          "id": "h_01HGZPK1XRV5PTE2MYJ8J6AMN8",
+          "text": "Additional resources"
+        }
+      ]
+    },
+    "rendered_page": {
+      "images": [
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/7ff492c2b417b7ecfe572f839a8a81398693c1f7-1920x1080.webp",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://fast.wistia.com/embed/medias/cr10dmb46w/swatch",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/28f783beba53153b7112a6b50724e3e7421587f1-800x642.jpg?w=430",
+          "alt": "When configuring a time delay, there will be an option to set the amount of time for the delay as well as the option to delay until a specific time of day.",
+          "width": "430",
+          "height": "345"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/8ed1194ea2c2039a7943c096d50f405623fd3503-800x628.jpg?w=430",
+          "alt": "Below the option to delay until a specific time of day, there is also the option to delay until a specific day of the week with buttons for each day so that multiple days can be selected.",
+          "width": "430",
+          "height": "337"
+        }
+      ],
+      "links": [
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115003885212-How-to-add-a-time-delay-to-a-flow#site-content",
+          "text": "Skip to main content"
+        },
+        {
+          "href": "https://www.klaviyo.com",
+          "text": "Home"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center"
+        },
+        {
+          "href": "https://www.klaviyo.com/enterprise",
+          "text": "Enterprise"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Partners"
+        },
+        {
+          "href": "https://www.klaviyo.com/careers",
+          "text": "Careers"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": "Log in"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": ""
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center Find step-by-step instructions and troubleshooting solutions in our knowledge base."
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000032731",
+          "text": "Integrations"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000312411",
+          "text": "Flows"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867867",
+          "text": "Audience"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867667",
+          "text": "Campaigns"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/360000190711",
+          "text": "Sign-up forms"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000873988",
+          "text": "Deliverability & compliance"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/29173800271259",
+          "text": "SMS"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/16638219724187",
+          "text": "Reviews"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/18073014919195",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/34141283979931",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/37659126754075",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/33948021740315",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/39746685522331",
+          "text": "WhatsApp"
+        },
+        {
+          "href": "https://academy.klaviyo.com",
+          "text": "Klaviyo Academy Expert training and education to help you succeed with Klaviyo, and beyond."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Quick+guide&resource=academy_courses",
+          "text": "Quick guides Learn marketing strategies and concepts in 15 minutes or less."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Course&resource=academy_courses",
+          "text": "Courses Master key marketing topics through structured lessons and exams."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/best-practices",
+          "text": "Best practices Discover top product and marketing strategies for your business."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/learning-paths",
+          "text": "Learning paths Complete curated learning journeys tailored to your marketing goals."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses",
+          "text": "Explore all resources"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Live+training&resource=academy_courses",
+          "text": "Live trainings Build confidence through hands-on interactive workshops and thought-provoking strategy sessions."
+        },
+        {
+          "href": "https://www.bigmarker.com/klaviyo-customer-education/Office-hours-Getting-started-with-Klaviyo",
+          "text": "Live office hours Join a strategic discussion where you can ask questions and get answers in real-time."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/private-live-training",
+          "text": "1:1 Live training Book a private training session with an expert to jumpstart your platform knowledge and confidence."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/credentials",
+          "text": "Klaviyo credentials Dig deeper into select topics and showcase your expertise with a final exam to earn a certificate and digital badge."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/certificates/klaviyo-practitioner-certificate",
+          "text": "Klaviyo practitioner certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/deliverability-certificate",
+          "text": "Deliverability certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/developer-certificate",
+          "text": "Klaviyo developer certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses&select=Certificate",
+          "text": "See all certificates"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Klaviyo Community Join our thriving community network to connect with brands like yours—online and in person."
+        },
+        {
+          "href": "https://community.klaviyo.com/topic/new",
+          "text": "Ask a question Post a question and get thoughtful answers from Klaviyo powerusers."
+        },
+        {
+          "href": "https://community.klaviyo.com/p/roadmap",
+          "text": "Product roadmap"
+        },
+        {
+          "href": "https://community.klaviyo.com/search/activity/recent",
+          "text": "Recent threads"
+        },
+        {
+          "href": "https://community.klaviyo.com/p/champions",
+          "text": "Meet the Champions"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups",
+          "text": "Browse all groups Your people are waiting. New ideas and connections are a click away."
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/developer-group-64",
+          "text": "Developer group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/entrepreneur-user-group-118",
+          "text": "Entrepreneur group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/woo-user-group-87",
+          "text": "WooCommerce group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/new-york-meetup-chapter-82",
+          "text": "New York City"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/los-angeles-meetup-chapter-83",
+          "text": "Los Angeles"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/austin-meetup-chapter-85",
+          "text": "Austin"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/san-diego-meetup-chapter-86",
+          "text": "San Diego"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/amsterdam-meetup-chapter-84",
+          "text": "Amsterdam"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Klaviyo Developers Access API documentation and developer guides to help you build with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/get_started",
+          "text": "Get started Access key resources and a step-by-step checklist for how to start developing with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/build_your_integration",
+          "text": "Grow your app's reach Learn how to join our ecosystem and get your app listed on our marketplace."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/developer-tools",
+          "text": "Developer tools Generate sample data, monitor your API usage, and access our Postman collections."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/reference/api_overview",
+          "text": "API reference Browse our full catalog of API docs."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/changelog_",
+          "text": "Changelog"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/api_versioning_and_deprecation_policy",
+          "text": "Versioning & deprecation policy"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/rate_limits_and_error_handling",
+          "text": "Rate limits & error handling"
+        },
+        {
+          "href": "https://youtube.com/playlist?list=PLHkNfHgtxcUanrkMnKPdkRzuWU7MGv_xM&si=pkG-KH7IT_TUHOGC",
+          "text": "API tutorials on YouTube Subscribe to our Klaviyo API Tutorials playlist for easy access to step-by-step developer walkthroughs."
+        },
+        {
+          "href": "https://www.klaviyo.com/contact-us",
+          "text": "Contact us"
+        },
+        {
+          "href": "https://www.klaviyo.com/sign-up",
+          "text": "Sign up"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": "Search"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115003885212",
+          "text": "United States - EN"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/de-de/articles/115003885212",
+          "text": "Deutschland - DE"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-es/articles/115003885212",
+          "text": "España - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-mx/articles/115003885212",
+          "text": "México - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/fr-fr/articles/115003885212",
+          "text": "France - FR"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/it-it/articles/115003885212",
+          "text": "Italia - IT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/ko-kr/articles/115003885212",
+          "text": "한국 - KO"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/nl-nl/articles/115003885212",
+          "text": "Nederland - NL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pl-pl/articles/115003885212",
+          "text": "Polska - PL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pt-br/articles/115003885212",
+          "text": "Brasil - PT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/sv-se/articles/115003885212",
+          "text": "Sverige - SV"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/49375535264795",
+          "text": "Build and use flows"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/49375527980059",
+          "text": "Add steps or actions to flows"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115003885212-How-to-add-a-time-delay-to-a-flow#h_01HGZPK1XRS3FXM8SAY9R5A81P",
+          "text": "You will learn"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115003885212-How-to-add-a-time-delay-to-a-flow#h_01HGZPK1XRHK8C5Y24PQXYEC9T",
+          "text": "Add a time delay"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115003885212-How-to-add-a-time-delay-to-a-flow#h_01HGZPK1XRNMZMRFBWDBJT2W3D",
+          "text": "Delay until a specific time"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115003885212-How-to-add-a-time-delay-to-a-flow#h_01HGZPK1XRKGJAFBH1WY8Z828W",
+          "text": "Delay until a specific day of the week"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115003885212-How-to-add-a-time-delay-to-a-flow#additional-resources",
+          "text": "Additional resources"
+        },
+        {
+          "href": "https://klaviyo.zendesk.com/hc/en-us/articles/360001768432",
+          "text": "update profile property action"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005232388",
+          "text": "account settings"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115003883992",
+          "text": "Understanding flow branching"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360050334651",
+          "text": "Understanding time delays near splits"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360046164352",
+          "text": "Understanding the timing of a flow"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360017706091",
+          "text": "Understanding how contacts move through a flow"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115001002272",
+          "text": "Learn how to contact support"
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": ""
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": "Visit Community"
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": ""
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": "Hire a partner"
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/about",
+          "text": "About Klaviyo"
+        },
+        {
+          "href": "https://www.klaviyo.com/newsroom",
+          "text": "Newsroom"
+        },
+        {
+          "href": "https://investors.klaviyo.com/overview/default.aspx",
+          "text": "Investor relations"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Agency and tech partners"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Developers"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/retail",
+          "text": "Retail and ecommerce"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/restaurants",
+          "text": "Restaurant marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/wellness",
+          "text": "Wellness"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform",
+          "text": "B2C CRM overview"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai",
+          "text": "Klaviyo AI (K:AI)"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/marketing-automation",
+          "text": "Klaviyo Marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-service",
+          "text": "Klaviyo Service"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/analytics",
+          "text": "Klaviyo Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-data-platform",
+          "text": "Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare",
+          "text": "Klaviyo vs. Klaviyo alternatives"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-mailchimp",
+          "text": "Klaviyo vs. Mailchimp"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-postscript",
+          "text": "Klaviyo vs. Postscript"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-attentive",
+          "text": "Klaviyo vs. Attentive"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-salesforce-marketing-cloud",
+          "text": "Klaviyo vs. Salesforce"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-listrak",
+          "text": "Klaviyo vs. Listrak"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/omnichannel",
+          "text": "Omnichannel marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/email-marketing",
+          "text": "Email marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing",
+          "text": "SMS marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing/rcs",
+          "text": "RCS for Business"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/mobile-app-marketing",
+          "text": "Mobile app marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/whatsapp",
+          "text": "WhatsApp marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/social",
+          "text": "Social marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources",
+          "text": "Marketing resources"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources/marketing-campaign-calendar",
+          "text": "Marketing campaign calendar"
+        },
+        {
+          "href": "https://www.klaviyo.com/glossary",
+          "text": "Marketing glossary"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/email-subject-line-generator",
+          "text": "Subject line generator"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/roi-calculator",
+          "text": "ROI calculator"
+        },
+        {
+          "href": "https://www.klaviyo.com/customers",
+          "text": "Case studies"
+        },
+        {
+          "href": "https://www.klaviyo.com/composer",
+          "text": "Composer Beta"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/marketing-agent",
+          "text": "Marketing Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/customer-agent",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/customer-experience-hub",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/helpdesk",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/marketing-analytics",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/advanced-cdp",
+          "text": "Advanced Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/web-forms",
+          "text": "Web forms"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/email-templates",
+          "text": "Email templates"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/portfolio",
+          "text": "Portfolio"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform-integrations",
+          "text": "Apps and Integrations"
+        },
+        {
+          "href": "https://www.klaviyo.com/features",
+          "text": "Features"
+        },
+        {
+          "href": "https://www.klaviyo.com/whats-new",
+          "text": "What's new"
+        },
+        {
+          "href": "https://www.klaviyo.com/events",
+          "text": "Events"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help Center"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us",
+          "text": "Academy"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Community"
+        },
+        {
+          "href": "https://www.facebook.com/Klaviyo/",
+          "text": "Facebook"
+        },
+        {
+          "href": "https://twitter.com/klaviyo/",
+          "text": "Twitter"
+        },
+        {
+          "href": "https://www.linkedin.com/company/klaviyo/",
+          "text": "LinkedIn"
+        },
+        {
+          "href": "https://www.instagram.com/klaviyo/",
+          "text": "Instagram"
+        },
+        {
+          "href": "https://www.klaviyo.com/sitemap",
+          "text": "Site Map"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal",
+          "text": "Terms and Privacy"
+        },
+        {
+          "href": "https://www.klaviyo.com/security",
+          "text": "Security"
+        },
+        {
+          "href": "https://www.klaviyo.com/trust",
+          "text": "Trust"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal/intellectual-property-notices",
+          "text": "Intellectual Property Notices"
+        }
+      ],
+      "headings": [
+        {
+          "level": 1,
+          "id": "",
+          "text": "How to add a time delay to a flow"
+        },
+        {
+          "level": 2,
+          "id": "h_01HGZPK1XRS3FXM8SAY9R5A81P",
+          "text": "You will learn"
+        },
+        {
+          "level": 2,
+          "id": "h_01HGZPK1XRHK8C5Y24PQXYEC9T",
+          "text": "Add a time delay"
+        },
+        {
+          "level": 2,
+          "id": "h_01HGZPK1XRNMZMRFBWDBJT2W3D",
+          "text": "Delay until a specific time"
+        },
+        {
+          "level": 2,
+          "id": "h_01HGZPK1XRKGJAFBH1WY8Z828W",
+          "text": "Delay until a specific day of the week"
+        },
+        {
+          "level": 2,
+          "id": "additional-resources",
+          "text": "Additional resources"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "Explore more from Klaviyo"
+        }
+      ]
+    }
+  },
+  "rendered_page": {
+    "status": "fetched",
+    "error": ""
+  }
+}

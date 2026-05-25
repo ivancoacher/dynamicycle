@@ -1,0 +1,371 @@
+<h2 id="h_01HXHZTTVXCJM23H5721HWXJJ2">You will learn</h2><p>Learn about the different best practices for email deliverability. Following these best practices and recommendation actions is key to maintaining strong deliverability and successfully landing in customer inboxes.</p><div class="bs-callout bs-callout-default"><p>Learn about <a href="https://help.klaviyo.com/hc/en-us/articles/115005247008">email deliverability and its importance</a>.</p></div><h2 id="h_01HXHPH46BM69NXXXRY3X7G6MR">Infrastructure setup</h2><p>Email deliverability infrastructure refers to the different systems, tools, and domains that are used to deliver your emails to recipients. </p><p>Your infrastructure is an important consideration inbox providers use when determining your trustworthiness as a sender and determining how to place your emails. It is also a key part of protecting your domain and customers from malicious actors attempting to use your brand’s sending identity.</p><p>The main infrastructure components that are important to consider when sending emails in Klaviyo are the following:</p><div class="accordion accordion--default">
+<div class="accordion__item">
+<div class="accordion__item-title"><strong>Branded sending domains</strong></div>
+<div class="accordion__item-content">
+<p>Connecting a <a href="https://help.klaviyo.com/hc/en-us/articles/115000357752">branded sending domain</a> is best practice and allows you to use your brand’s domain name to send emails instead of a shared Klaviyo domain. It also allows you to build a sending reputation on your brand’s own domain, and limit any negative impact to your domain reputation and deliverability from other companies using the same shared domains. In other words, you are the only one that will send from your domain and thus affect your reputation.</p>
+<p>Additionally, connecting a branded sending domain allows you to take advantage of email security protocols like <a href="https://help.klaviyo.com/hc/en-us/articles/4402601857307">DMARC</a>. Mail servers use these protocols to verify that incoming emails are from legitimate senders, protecting your brand and your customers from malicious actors. In addition to preventing phishing and spoofing attempts, implementing these protocols can help improve deliverability, as mailbox providers will be able to more easily verify your sender identity.</p>
+<p>Klaviyo advises all customers to set up a branded sending domain, as this record alignment between your root domain, sending domain, and friendly from-address is critical to supporting successful inbox placement.</p>
+<p>Klaviyo recommends that accounts with a database size of more than 5000 profiles set up a branded sending domain with DMARC to avoid performance disruptions due to <a href="https://academy.klaviyo.com/2024-new-sender-requirements-checklist/1817230">Yahoo and Gmail’s sender requiremenets</a>.</p>
+<div class="bs-callout bs-callout-default"><p>Learn more about <a href="https://help.klaviyo.com/hc/en-us/articles/115000357752">branded sending domains</a> and how to set one up for your account. </p></div>
+</div>
+</div>
+<div class="accordion__item">
+<div class="accordion__item-title"><strong>Dedicated IPs</strong></div>
+<div class="accordion__item-content">
+<p>In Klaviyo, you can send emails using a shared IP address, or your own <a href="https://help.klaviyo.com/hc/en-us/articles/7675517826587">dedicated IP</a>. Sending from a shared IP address means that you will send alongside several other Klaviyo customers, with a shared sending reputation. </p>
+<p>It is recommended that if you consistently send over 1,000,000 emails per month, to use a dedicated IPs. Shared IPs are more effective for smaller senders that don’t have a regular sending schedule.</p>
+<p>The main benefit of using a dedicated IP address is that the reputation of the IP address can only be influenced by the single account that is using it. As such, you have complete control over your own sender reputation. Similarly, you also have complete control over your sending volumes, and will not be affected by shared IP and potential volume spikes during busy times of year. </p>
+<div class="bs-callout bs-callout-default"><p>Not every Klaviyo account qualifies for a dedicated IP. Learn more about <a href="https://help.klaviyo.com/hc/en-us/articles/7675517826587">dedicated IP addresses</a> and how to set one up for your account if applicable. </p></div>
+</div>
+</div>
+<div class="accordion__item">
+<div class="accordion__item-title"><strong>Click tracking domains with SSL</strong></div>
+<div class="accordion__item-content">
+<p>When a Klaviyo user sends an email with a link, the link goes through Klaviyo's domain to enable click tracking for your email. By default, Klaviyo uses a shared domain for click tracking, but it is a best practice to set up <a href="https://help.klaviyo.com/hc/en-us/articles/7676795223707">dedicated click tracking</a>. Dedicated click tracking is beneficial because it allows your customers to further trust the emails that come from your brand as links will be easily recognizable. Instead of a long string of letters and numbers from a Klaviyo encoded link (i.e., <em>trk.klaviyomail.com</em> or <em>trk.klclick.com</em>), they will see your brand’s name when hovering over links in your email. This can increase the chances that they will click on your links.</p>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/28711702864539" alt="Example of an email that shows when hovering over links as klaviyo link tracking" width="414" height="315"></p>
+<p>Additionally, many mailbox providers and filtering softwares consider the reputation of all the domains used in your messaging. Using the same root domain in both your dedicated click tracking links and your sending domain creates alignment across your brand and causes your sends to look more trustworthy to inbox providers. </p>
+<div class="bs-callout bs-callout-default"><p>Learn more about <a href="https://help.klaviyo.com/hc/en-us/articles/7676795223707">dedicated click tracking</a>.</p></div>
+</div>
+</div>
+<div class="accordion__item">
+<div class="accordion__item-title"><strong>Email authentication</strong></div>
+<div class="accordion__item-content">
+<p>“<a href="https://help.klaviyo.com/hc/en-us/articles/4402601857307">Email authentication</a>” refers to the technical standards that allow for the verification of an email sender's identity. The most commonly used email authentication standards are SPF and DKIM. DMARC is also a common security protocol that depends on these authentication methods. Mail servers use these authentication protocols to verify that incoming emails are from legitimate senders, protecting your brand and your customers from malicious actors. In addition to preventing phishing and spoofing attempts, implementing these protocols can help improve deliverability, as mailbox providers will be able to confirm the identity of the sender.</p>
+<p>When you send from a shared sending domain, the domain already has SPF and DKIM records set. Similarly, when you set up a branded sending domain, the CNAME or NS records Klaviyo provides will fulfill DKIM and SPF requirements. </p>
+<p>However, setting up DMARC is both a best practice for deliverability, and a requirement for some inbox providers like Google and Yahoo. </p>
+<div class="bs-callout bs-callout-default"><p>Learn more about <a href="https://help.klaviyo.com/hc/en-us/articles/4402601857307">email authentication</a> and how to set it up for your domain. </p></div>
+</div>
+</div>
+</div><h2 id="h_01HXHPQTGHG2KGW8ZC4ZKKSHP5">List acquisition</h2><p>List acquisition refers to how to get subscribers and keep them. Building a list of valuable subscribers allows you to send to recipients that are genuinely interested in your brand and contact, leading to strong deliverability performance. </p><p>The best practices that you should follow in order for your list acquisition strategies to be a success are:</p><div class="accordion accordion--default">
+<div class="accordion__item">
+<div class="accordion__item-title"><strong>Avoid purchasing lists</strong></div>
+<div class="accordion__item-content">
+<p>Purchasing lists is not only against Klaviyo’s <a href="https://www.klaviyo.com/legal/acceptable-use-policy">acceptable use policy</a>, but leads to contact lists full of unengaged profiles that won’t engage with your sends and are more likely to mark your emails as spam. Profiles from purchased lists are a threat to your deliverability, and are unlikely to convert to customers. </p>
+<p>Additionally, avoid the following practices:</p>
+<ul>
+<li data-list-item-id="e6569c5af5e9ee9aef18841f610802a2d">Renting lists </li>
+<li data-list-item-id="e95179f19f81ecb2294832952e0a8e4ff">Email affiliate marketing</li>
+<li data-list-item-id="ec3bf23c74cb816d1bd8eeb98d87911d6">3rd party party opt-in</li>
+<li data-list-item-id="e13db55d870c712645f9ecaf294e59246">Sending to lists previously suppressed due to lack of engagement</li>
+</ul>
+</div>
+</div>
+<div class="accordion__item">
+<div class="accordion__item-title"><strong>Use signup resources</strong></div>
+<div class="accordion__item-content">
+<p>Klaviyo’s <a href="https://help.klaviyo.com/hc/en-us/articles/360026474752">sign-up forms</a> are a great way to organically acquire new subscribers that have provided consent and a clear indication that they are interested in receiving communications from your brand. </p>
+<p>Before you start building your sign-up form, consider your goals. A form can help you connect with potential customers, learn more about your audience, convert email subscribers to SMS subscribers, and more. </p>
+<p>A simple popup that collects contact information from those who have visited your site, but never subscribed is a great place to start. </p>
+<p>Additionally, make sure to: </p>
+<ul>
+<li data-list-item-id="e19506fc0ba8a7904da19ec26be6a6697">Make your value proposition clear</li>
+<li data-list-item-id="ef54affbca5ccc5074bb9a8cc94960ece">Minimize the number of fields you use</li>
+<li data-list-item-id="eff9a330cb6a4ba4f10afcb36d75b619b">Let people choose their interests</li>
+<li data-list-item-id="ec326925a4827661b3477f91fd50c6741">Create a <a href="https://help.klaviyo.com/hc/en-us/articles/115002775172">welcome series</a> to set expectations</li>
+</ul>
+<div class="bs-callout bs-callout-default"><p>Learn more about <a href="https://help.klaviyo.com/hc/en-us/articles/360026474752">getting started with Klaviyo’s sign-up forms</a>. </p></div>
+</div>
+</div>
+<div class="accordion__item">
+<div class="accordion__item-title"><strong>Secure forms</strong></div>
+<div class="accordion__item-content">
+<p>To prevent invalid emails from form submissions accumulating on your lists, it is best practice to enable <a href="https://help.klaviyo.com/hc/en-us/articles/115005251108">double-opt</a> in on your lists. Double opt-in is a process through which a new subscriber must confirm their subscription before being subscribed to a given list. </p>
+<p>When you add a signup form to your site, you are not able to control who decides to take advantage of this form. Even if you add an extra level of validation, it isn’t always possible to ensure subscribers only submit valid or accurate email addresses and phone numbers. Well-intentioned subscribers could simply type their email or phone number incorrectly, but spam-bots could also find your form and flood it with fake email addresses or phone numbers.</p>
+<div class="bs-callout bs-callout-default"><p>Learn how to enable <a href="https://help.klaviyo.com/hc/en-us/articles/115005251108">double opt-in</a> in Klaviyo.</p></div>
+</div>
+</div>
+<div class="accordion__item">
+<div class="accordion__item-title"><strong>Nurture new subscribers</strong></div>
+<div class="accordion__item-content">
+<p>Once you convert a potential customer into a subscriber, it is important to make use of a <a href="https://help.klaviyo.com/hc/en-us/articles/115002775172">welcome flow</a> that initially onboards a customer to your email marketing program, and sets expectations. It is also common to include a discount as an incentive to sign-up for your emails.</p>
+<p>Beyond email marketing, some methods to nurture your relationship with customers are: </p>
+<ul>
+<li data-list-item-id="e3365d4ceeb1010bf55272e9476d5e08b">Social media ads</li>
+<li data-list-item-id="ebf88af30b61ebb99ffbb101ae54c9f02">Website affiliate marketing</li>
+<li data-list-item-id="e3097bde2ae794e8990f5b60ea14dfb4d">
+<a href="https://help.klaviyo.com/hc/en-us/articles/115000931551">Re-engage</a> subscribers </li>
+<li data-list-item-id="e6fb554b07dd37871864013018602efb1">Increase search engine rankings through blogging</li>
+</ul>
+<p>These methods can help nurture your relationship with your customers outside of consistent email communications, and can help increase the value and length of a customer’s lifecycle. Additionally, consider sending personalized communications at key moments in a customer’s lifecycle.<br><br> </p>
+</div>
+</div>
+</div><h2 id="h_01HXHQEB33DQF2BPM9D5NPGMHR">Warming</h2><p>Warming refers to the process of introducing a new or “cold” IP (i.e., an IP address that has not been used to send emails in the last 30 days) or new or “cold” root domain (i.e., a domain that has been registered in the last 30 days or has never been used to send emails). Warming is the period of time in which you are establishing a reputation as a legitimate or “good” email sender. This is an essential process when sending on new infrastructure, as sending too many emails before your infrastructure is warmed can cause deliverability issues.</p><div class="accordion accordion--default">
+<div class="accordion__item">
+<div class="accordion__item-title"><strong>New customer warming</strong></div>
+<div class="accordion__item-content">
+<p>As a new customer on Klaviyo, it is important to go through the <a href="https://help.klaviyo.com/hc/en-us/articles/360025945671">warming process</a> to establish yourself as a good sender and have good deliverability.</p>
+<p>Some warming best practices that are important to keep in mind as you warm are: </p>
+<ul>
+<li data-list-item-id="ec8961c8f2e502fb6ca3ba6ca098faad3">
+<strong>Start slow</strong><br>Start with a low volume of mail and slowly increase sends over time.</li>
+<li data-list-item-id="ef0fb303f9bd465db791243f5786cb14a">
+<strong>Send consistently</strong><br>Regularly send emails and sustain email volume day to day to keep the domain “warm” and build reputation faster<strong>.</strong>
+</li>
+<li data-list-item-id="e2007b29f0509d6ab6291c7bd137de9aa">
+<strong>Email your best contacts first</strong><br>Every positive engagement during the warming process benefits the sender’s reputation. Focus on sending high-quality mail to contacts who have recently engaged with email as they are more likely to open and click future messages.</li>
+<li data-list-item-id="e44e64ce8c6dbfc913101e6e836ffbf30">
+<strong>Monitor closely </strong><br>Keep an eye on your deliverability performance throughout warming to quickly identify drops in engagement so you can adjust as necessary.</li>
+</ul>
+<p>Additionally when warming, make sure to take the following actions: </p>
+<ul>
+<li data-list-item-id="ef5de5738fbecf646a361abd52036e07e">Suspend any 3rd-party affiliate marketing</li>
+<li data-list-item-id="ee42198c5ff081996223a94119158f618">Suspend high-risk flows (e.g., sunset flows, winback flows, re-engagement flows)</li>
+<li data-list-item-id="e72723675667ff2c0c1c8259eccb38e21">Clean up outdated subscriber lists and suppress unengaged profiles.</li>
+<li data-list-item-id="ea1c58d7a2cb4127fe908378192e5fb35">Create and send only to engaged segments </li>
+<li data-list-item-id="e4025ea3527953669c60e4b039cc55e7a">Follow <a href="https://help.klaviyo.com/hc/en-us/articles/360037527052">daily, weekly, and monthly sending plans</a>
+</li>
+<li data-list-item-id="e30085ceb736007cc810c99cc8f8dc590">Remove/import a suppression list of profiles that have previously bounced, unsubscribed, or marked an email as spam</li>
+</ul>
+<div class="bs-callout bs-callout-default"><p>Learn more about the <a href="https://help.klaviyo.com/hc/en-us/articles/360025945671">different warming processes</a> in Klaviyo.</p></div>
+</div>
+</div>
+<div class="accordion__item">
+<div class="accordion__item-title"><strong>Brand change warming</strong></div>
+<div class="accordion__item-content">
+<p>Warming your sending infrastructure is a required step after renaming your sending domain. Even though you will still use the same Klaviyo account, inbox providers treat each new domain as an entirely separate entity. If you do not ease back into sending, you will risk damaging your deliverability. Prior to updating your domain name, review our guide on <a href="https://help.klaviyo.com/hc/en-us/articles/360025945671">understanding which warming process to use in Klaviyo</a> to make sure you are prepared for the warming process as soon as this change is in place.</p>
+<p>If you are moving to a newly registered domain or have been sending with Klaviyo less than 30 days, you will need to warm your infrastructure. If you are an existing account with a 30-day send history and prior sends on the new domain you are moving to, you do not need to rewarm.</p>
+</div>
+</div>
+</div><h2 id="h_01HXHQTA0KD53MDAXXZ18N6QEE">Monitoring deliverability</h2><p>In order to improve upon and maintain good deliverability, it is essential to continually monitor your email performance with Klaviyo. This allows you to solve issues quickly to avoid lasting deliverability problems. The best way to do so is to monitor your campaign and flow opens, clicks, bounces, and spam rates. </p><div class="bs-callout bs-callout-default"><p>For complete information on how to do so, head to our article on <a href="https://help.klaviyo.com/hc/en-us/articles/115000201131">how to monitor deliverability performance</a>.</p></div><div class="accordion accordion--default">
+<div class="accordion__item">
+<div class="accordion__item-title"><strong>Inboxing</strong></div>
+<div class="accordion__item-content">
+<p>Klaviyo does not have any visibility towards how inbox providers like Gmail and Yahoo sort an email once it has been delivered. However, there are several factors that can be used as an indicator of whether your campaigns are landing in recipients’ main inbox or or in the spam folder. </p>
+<p>Some key metrics to keep an eye on, including any significant drops compared to previous campaigns, include: </p>
+<ul>
+<li data-list-item-id="ed66eae1b1412bb88567d65e88d061a81">Open rates </li>
+<li data-list-item-id="e8347fab7eea053670e0ffc5d50bac2ea">Conversion rates </li>
+<li data-list-item-id="e4c26d2c81bdc6024b5f538d64dee070b">Click rates </li>
+</ul>
+<p>If you are seeing healthy engagement rates, it is likely customers are receiving your emails in their main inbox. However, low engagement rates may be an indicator that your <a href="https://help.klaviyo.com/hc/en-us/articles/12034571748251">emails are going to spam</a>.</p>
+</div>
+</div>
+<div class="accordion__item">
+<div class="accordion__item-title"><strong>Delivery</strong></div>
+<div class="accordion__item-content">
+<p>A "bounce" occurs when an email is either not successfully delivered or is rejected by the recipient's inbox provider. If your account has a high number of bounces, this can have a negative impact on your deliverability and sender reputation and cause inbox providers to send your emails to spam rather than to a recipient’s main inbox. High bounce rates signal to inbox providers that the sender does not regularly clean their list or follow deliverability best practices. It is crucial to be on the lookout for increases in bounce rates so that you can quickly resolve the issues before it becomes a larger problem.</p>
+<p>There are two types of bounces:</p>
+<ul><li data-list-item-id="ef76e422e4f680199d94d84187e89c249">
+<strong>Hard bounces</strong><br>Klaviyo defines a hard bounce as an email that cannot be delivered because the address is not valid. This could be caused by a variety of reasons, including a misspelled email. Klaviyo automatically suppresses any email address that hard bounces.</li></ul>
+<ul><li data-list-item-id="e3ef77661010725b02455d727aecadeaf">
+<strong>Soft bounces</strong><br>A soft bounce is always caused by a temporary reason, such as when a recipient's inbox is full or when their email server is momentarily down. If an email soft bounces 7 consecutive times, Klaviyo will suppress this address.</li></ul>
+<p>To monitor bounce rates, you can use the email deliverability hub in Klaviyo. The Bounce details page on the deliverability hub provides information around why your sends are bouncing. If you are seeing issues with bounces, you can analyze this data to take corrective action and improve your overall email deliverability. In the Bounce details section, you can see the following data:</p>
+<ul>
+<li data-list-item-id="ed45925789e120a69abb2dfdd9624149c">
+<strong>Top bounce categories</strong><br>The <em>Top bounce category</em> card provides information about the types of bounces you are experiencing and volume for each category.<br><img src="https://klaviyo.zendesk.com/hc/article_attachments/28711702856219" alt="Bounce categories report in deliverability hub" width="577" height="377">
+</li>
+<li data-list-item-id="e0cbf9ff05e859f185fd260fdaa636f07">
+<strong>Bounce report</strong><br>The <em>Bounce report</em> card shows a further breakdown of the bounces on your account.<br><img src="https://klaviyo.zendesk.com/hc/article_attachments/28711731847451" alt="Bounce report in deliverability hub" width="576" height="394">
+</li>
+</ul>
+<div class="bs-callout bs-callout-default"><p>Learn more about how to monitor and troubleshoot <a href="https://help.klaviyo.com/hc/en-us/articles/115005250408">bounce rates</a> in Klaviyo.</p></div>
+</div>
+</div>
+<div class="accordion__item">
+<div class="accordion__item-title"><strong>Reputation</strong></div>
+<div class="accordion__item-content">
+<p>Sender reputation refers to the trustworthiness of your brand as an email sender. Inbox providers determine your sender reputation based on multiple differently weighted factors, and consider this when sorting emails in a customer’s inbox. Senders with a positive sender reputation are more likely to have their emails delivered into customers’ inbox, while senders with a poor sender reputation are likely to see their emails placed into spam or not delivered at all. For these reasons, it is critical to maintain a strong sender reputation to be successful with email marketing and Klaviyo. </p>
+<p>You can monitor your sender reputation in Klaviyo using the score shown in Klaviyo’s deliverability hub. The deliverability hub in Klaviyo allows you to analyze and diagnose your email and SMS deliverability health at the account level.</p>
+<p class="wysiwyg-text-align-center"><img src="https://klaviyo.zendesk.com/hc/article_attachments/28711731858203" alt="Deliverability score in Klaviyo's deliverability hub" width="496" height="500"></p>
+<div class="bs-callout bs-callout-default"><p>Learn more about <a href="https://help.klaviyo.com/hc/en-us/articles/15332906406171">sender reputation</a> and <a href="https://help.klaviyo.com/hc/en-us/articles/18378819907995">Klaviyo’s deliverability hub</a>. </p></div>
+</div>
+</div>
+<div class="accordion__item">
+<div class="accordion__item-title"><strong>Key metrics</strong></div>
+<div class="accordion__item-content">
+<p>The metrics that come together to determine your overall deliverability performance and show how successfully you reach your subscribers’ inboxes are: </p>
+<h3 id="h_01HXJ0PTNFXGEJR10Q7XB8AT87">Open rates</h3>
+<p>Open rates refer to how many of your recipients are opening the emails they received. It is best practice to maintain open rates of at least 33%, regardless of your industry.</p>
+<p>If you are seeing low open rates, it indicates that customers are generally not interested in the content you are sending, or you are sending to unengaged contacts that are unlikely to engage with your emails.</p>
+<p>To help help increase open rates, try the following strategies: </p>
+<ul>
+<li data-list-item-id="e9b0775daa26356e07fccd4260b6908bd">Create engaged segments</li>
+<li data-list-item-id="e5e4256f0e54b8c4c0e81d57b6c94588d">Create targeted subject lines</li>
+<li data-list-item-id="e8cedc3301a4cceca88594b55817f2997">Clean your lists regularly</li>
+<li data-list-item-id="e034ac4663d237b0054f542563da13215">Choose the right send time</li>
+<li data-list-item-id="eb60f40f927fdc96ccfeddea09dea0f5f">Continue to monitor performance</li>
+</ul>
+<div class="bs-callout bs-callout-default"><p>Learn more about how to <a href="https://help.klaviyo.com/hc/en-us/articles/360042454031">increase open rates</a> and see more details about these key steps. </p></div>
+<h3 id="h_01HXJ0QZ615BMH4Z5RGJVY11CN">Click rates</h3>
+<p>Click rates refer to how many of your recipients are actually clicking a URL in the emails they receive. It is best practice to maintain click rates of at least 1%, regardless of your industry.</p>
+<p>If you are seeing customers open your emails, but are failing to click through, it indicates that customers may not have any incentive to click or the email design does not help to drive clicks.</p>
+<p>To help help increase open rates, try the following strategies: </p>
+<ul>
+<li data-list-item-id="e9eaff2e7503ac3b905bc8c5a45bcd1e4">Use segmentation to drive better personalization, and send content that is relevant for your different audiences. </li>
+<li data-list-item-id="ea8ded917ef8cc8522366fc077c27b87b">Use a clear call to action (CTA) so it is clear to recipients where they should click. </li>
+<li data-list-item-id="e51dcd77cbb8cae67e18d622559578f33">Test different CTA’s to determine what works best for your audience. </li>
+<li data-list-item-id="e42f4dce1c9fa8bdde5cb79fbc25e3e86">Drive recipients to your site.</li>
+<li data-list-item-id="ef824dc1abe75f4357f3af452087b0dc3">Include a CTA that offers something special for following you on social media or clicking through to your site. </li>
+</ul>
+<div class="bs-callout bs-callout-default"><p>Learn more about how to <a href="https://help.klaviyo.com/hc/en-us/articles/360057459931">increase click rates</a>.<br> </p></div>
+<h3 id="h_01HXJ0RBFSD8F1T250E88JQAC2">Bounce rates</h3>
+<p>A <a href="https://help.klaviyo.com/hc/en-us/articles/115005250408">bounce</a> occurs when an email is either not successfully delivered or is rejected by the recipient's inbox provider. If your account has a high number of bounces, this can have a negative impact on your deliverability rate. It is best practice for bounce rates to stay below 1.0%. </p>
+<p>There are several possible reasons why an email address may hard or soft bounce, including:</p>
+<ul>
+<li data-list-item-id="e11978250eedabe3da39b0803ee8b751c">Content</li>
+<li data-list-item-id="e0486dfc96ebe9ed1993dac1f5234db62">Message length</li>
+<li data-list-item-id="e40edc7d20cb41131c6f9e50ae000d34a">Message size</li>
+<li data-list-item-id="ef21abcd1d3a247b8feb2a20ccb704b9e">Frequency or volume too high</li>
+<li data-list-item-id="e0a7757fe1276f8e99b018b578e934204">Reputation</li>
+<li data-list-item-id="e3a3cc40504688204cf196c2c54c097f7">Invalid address</li>
+<li data-list-item-id="e5c1eae10d53c967a3ec87706f8b1bba2">Mailbox unavailable</li>
+<li data-list-item-id="e6f88cd79ee8ae734f46b62e7c462d06a">Technical</li>
+</ul>
+<p>Some key strategies to decrease bounce rates include:</p>
+<ul>
+<li data-list-item-id="e236ded64fdf71aeef463a946bc4a6ac2">Emailing real, consented profiles</li>
+<li data-list-item-id="eee535f79f98746da0e2352cc86a1ff0f">Enabling <a href="https://help.klaviyo.com/hc/en-us/articles/115005251108">double opt-in</a>
+</li>
+<li data-list-item-id="eb19c0e6fd6423cf8264c69ad6e452a35">
+<a href="https://help.klaviyo.com/hc/en-us/articles/115005078347">Cleaning your lists</a> regularly</li>
+<li data-list-item-id="e731bb78720c3512803af8b72be805f02">Removing profiles that soft bounce</li>
+</ul>
+<div class="bs-callout bs-callout-default"><p>Learn more about <a href="https://help.klaviyo.com/hc/en-us/articles/360057036052">decreasing bounce rates</a> and <a href="https://help.klaviyo.com/hc/en-us/articles/115005250408">why emails bounce</a>. </p></div>
+<h3 id="h_01HXJ0RWJ31RGD507S2JCAKZ30">Unsubscribe rates</h3>
+<p>Unsubscribe rates refer to how many your recipients unsubscribe from further messaging from your brand after receiving an email. While it is important to give users the opportunity to easily unsubscribe, if too many people are unsubscribing, inbox providers may view this as a red flag. It is best practice to maintain unsubscribe rates under 0.3%.</p>
+<p>If you are seeing elevated unsubscribe rate, it indicates that customers may be losing interest in your content due to a lack of value or content that does not meet their expectations, or they are receiving too many emails from your brand and are overwhelmed. </p>
+<p>Some key strategies to decrease unsubscribe rates include:</p>
+<ul>
+<li data-list-item-id="e3c6111dd3748a6b02951efdedbbe7ec4">Set expectations upon signing up with a <a href="https://help.klaviyo.com/hc/en-us/articles/115002775172">welcome series</a>.</li>
+<li data-list-item-id="e037430f175a7fa7e7e3b583e48e85309">Serve personalized content through segmentation.</li>
+<li data-list-item-id="ea8b8e6b4e7b62af50fdf284663d7a3b8">Provide value other than offers (e.g., educational content or humor that is relevant for your audience). </li>
+</ul>
+<div class="bs-callout bs-callout-default"><p>Learn more about how to <a href="https://help.klaviyo.com/hc/en-us/articles/360057471831">decrease unsubscribe rates</a>. </p></div>
+<h3 id="h_01HXJ0S84Y9R3JZKFMKNQXRT4X">Spam complaint rates</h3>
+<p>Spam complaint rates refer to how many people are reporting your messaging as spam. It is best practice to maintain spam complaint rates below 0.01%. </p>
+<p>If you are seeing elevated spam complaint rates, it indicates that customers may be losing interest in your content due to a lack of value and content that does not meet their </p>
+<p>expectations, or they are receiving too many emails from your brand and are overwhelmed. </p>
+<p>Some key strategies to decrease spam complaint rates include:</p>
+<ul>
+<li data-list-item-id="e362780d23a5e21c662dd6e8e315be01d">Make the unsubscribe method clear and easy to understand.</li>
+<li data-list-item-id="e7759295606e27d2adf22887744113814">Set clear expectations upon sign up so customers know what they signed up for.</li>
+<li data-list-item-id="e3e332f0f496c06428196559d1296769d">Ramp down sending frequency as recipients stop engaging.</li>
+</ul>
+<div class="bs-callout bs-callout-default"><p>Learn more about how to <a href="https://help.klaviyo.com/hc/en-us/articles/360057985791">decrease spam complaint rates</a>. </p></div>
+</div>
+</div>
+</div><h2 id="h_01HXHRACKR9P4QN3ZS7YS7855Q">Testing</h2><p>Testing your content and is an important part of deliverability to identify content related spam triggers, and identify what content performs best with your audience to maintain high engagement rates and good deliverability. </p><div class="accordion accordion--default">
+<div class="accordion__item">
+<div class="accordion__item-title"><strong>Content testing</strong></div>
+<div class="accordion__item-content">
+<p>Testing your email content is the best way to find the content that is causing messages to go to the spam folder or being blocked when you have ruled out all other factors or it is only occurring on a specific message and no others is to do testing.</p>
+<div class="bs-callout bs-callout-default"><p>Learn how to <a href="https://help.klaviyo.com/hc/en-us/articles/25617578366491">test your email content to identify spam triggers</a>. </p></div>
+</div>
+</div>
+<div class="accordion__item">
+<div class="accordion__item-title"><strong>Open rate and subject line testing</strong></div>
+<div class="accordion__item-content">
+<p>Subject lines are the first part of your email that customers will see in their inbox, and can be the difference between customers opening your emails or not. Testing different subject lines to see the impact on open rates is a good practice to determine the subject lines that work best for your different audiences. </p>
+<p>In Klaviyo, you can use A/B tests for <a href="https://help.klaviyo.com/hc/en-us/articles/6960371049115">flow emails</a> and <a href="https://help.klaviyo.com/hc/en-us/articles/115005228148">campaigns</a> to test different subject lines and measure their success. A/B testing can provide valuable insight into your audience, and Klaviyo makes it simple to determine what subject lines you should use in your sending. Not only will you know the winning variation for an A/B test, but also other important factors, like the win confidence percentage and winning metric details. </p>
+<div class="bs-callout bs-callout-default"><p>Learn how to A/B test <a href="https://help.klaviyo.com/hc/en-us/articles/6960371049115">flow emails</a> and <a href="https://help.klaviyo.com/hc/en-us/articles/115005228148">campaigns</a>.</p></div>
+</div>
+</div>
+</div><h2 id="h_01HXHRPM50EV4ZPXPW727FWD8Y">Sending</h2><p>Your sending practices are key to maintaining good deliverability and a positive sender reputation that allows you to land in customer inboxes. </p><p>Below are some of the key elements related to your sending that are most impactful towards your overall success:</p><div class="accordion accordion--default">
+<div class="accordion__item">
+<div class="accordion__item-title"><strong>Blocklists</strong></div>
+<div class="accordion__item-content">
+<p>A blocklist is a list of items, such as IP addresses, domain names, URLs, or usernames that are denied access to a certain system protocol. Email blocklists are real-time databases that use multiple criteria to determine if an IP is sending emails considered to be spam. There are blocklists for both IP addresses and domains that can severely impact reputation and deliverability. This is also known as a blacklist.</p>
+<p>Blocklists can have different deliverability impacts based on the particular inbox provider. Gmail for example does not rely on blocklists, and uses Google’s own systems to evaluate sender reputation. However, other inbox providers may consider SpamHaus, as well as SORBS and SpamCop to a lesser extent. Any other blocklists are not relied upon by major inbox providers and will have little to no impact on deliverability.</p>
+<p>Klaviyo closely monitors SpamHaus listings as this is the blocklist that can have the most impact on deliverability. SORBs and SpamCop are also monitored, but have much lower impact. </p>
+</div>
+</div>
+<div class="accordion__item">
+<div class="accordion__item-title"><strong>Spam filtering</strong></div>
+<div class="accordion__item-content">
+<p>Klaviyo is responsible for sending your emails, but once these emails are in the hands of the inbox provider (i.e. Gmail or Yahoo), the messages are filtered according to each provider’s rules. All inbox providers have a built-in system that scans incoming emails, and automatically sorts them using complex algorithms that are not made public. </p>
+<p>Following email deliverability best practices is key for inbox providers to sort your emails into a recipient’s main inbox instead of the spam folder. Emails that go to spam are highly unlikely to be viewed by a recipient, and can negatively impact your revenue and success with Klaviyo.</p>
+<div class="bs-callout bs-callout-default"><p>If you are seeing emails go to spam, see our guide on <a href="https://help.klaviyo.com/hc/en-us/articles/12034571748251">troubleshooting why emails go to spam</a>.</p></div>
+</div>
+</div>
+<div class="accordion__item">
+<div class="accordion__item-title"><strong>Inbox folders</strong></div>
+<div class="accordion__item-content">
+<p>With <a href="https://help.klaviyo.com/hc/en-us/articles/115005078307">Gmail's tabbed inbox</a>, emails can land in any of the following tabs: <em>Primary</em>, <em>Social</em>, <em>Promotions</em>, <em>Updates</em>, or <em>Forums</em>.</p>
+<p>Gmail's algorithms are designed to make it easier for users to sort through an otherwise crowded inbox, so important emails have high visibility. For email marketers, this can seem problematic if Gmail starts sorting your emails into a tab where they may be ignored.</p>
+<p><a href="https://returnpath.com/wp-content/uploads/2015/02/Return_Path_-_The_Tabbed_Inbox.pdf">Studies done</a> on the topic show that open rates for marketing emails landing in the <em>Promotions</em> tab did not experience a rapid decline and the observable change was slight. In fact, marketers might even be better off because emails that now find a safe place in the <em>Promotions</em> tab may have otherwise been blocked or filtered to the spam folder prior to Gmail's tabbed inbox.</p>
+<p>Gmail users themselves can alter the default sorting system by moving an email from one tab to another and electing to have Google always put messages from a specific sender in the tab of their choice. If this is important to you, you can make an appeal to your audience by asking them to drag your newsletters over to their <em>Primary</em> tab for easy access to your brand messaging. You cannot, however, pre-determine which tab your messages will fall into and Klaviyo has no control over inbox placement after an email is successfully delivered.</p>
+<p>Typically, if emails are personalized, they will automatically be sorted in the Primary inbox. Fewer personalized emails tend to end up in the <em>Promotions</em> tab. Gmail's <em>Promotions</em> tab is truly designed to catch marketing emails, so consider the following:</p>
+<ul>
+<li data-list-item-id="e84523a4b6672b5c363a4f084ac3c578f">
+<strong>Watch your text to image ratio</strong><br>Taking an image-heavy approach to email design can impact inbox placement. Spam filters are also suspicious of emails composed mostly of images.</li>
+<li data-list-item-id="ec9815872154dc6469ff9dd0cf831a339">
+<strong>Avoid overuse of links</strong><br>Avoid too many links in your emails and make sure no links are broken.</li>
+<li data-list-item-id="edb390346d5aaa0857ad31daab9fa7224">
+<strong>Personalize</strong><br>Klaviyo makes it easy to personalize your emails. For example, insert a first name into an email with a fallback if you don't have a name on file.<br> </li>
+</ul>
+<p>While there is no way to see which tab your emails are going to, 3rd party tools like <a href="https://www.litmus.com/">Litmus</a> can help with testing as well. <br><br> </p>
+</div>
+</div>
+<div class="accordion__item">
+<div class="accordion__item-title"><strong>Transaction vs. marketing</strong></div>
+<div class="accordion__item-content">
+<p><a href="https://help.klaviyo.com/hc/en-us/articles/360003165732">Transactional emails</a> are emails that a customer must receive in response to an action that they took. For example, an order confirmation message with details about an order the customer just placed.</p>
+<p>While both transactional and marketing emails can be sent in response to an action a customer took, it is important to differentiate between the two. Generally, a trigger-based email that aims to relay essential information to the customer, rather than generating sales, can be considered a transactional email.<br>Common transactional emails include:</p>
+<ul>
+<li data-list-item-id="e0697516d92be17d7c349f7d2d11f9204">Order confirmation</li>
+<li data-list-item-id="e61591c4941e8d5db82bd3a5c40a7727a">Shipping confirmation</li>
+<li data-list-item-id="eca8ef1771e79adc494d5735a7bbe2189">Account created confirmation</li>
+</ul>
+<p>Triggered emails that are not considered transactional emails include:</p>
+<ul>
+<li data-list-item-id="ead905df8ad44623eecc3857e29a697f8">Welcome series</li>
+<li data-list-item-id="e27004f9a97192bca25de631f177fd28f">Abandoned cart</li>
+<li data-list-item-id="e6ce37bbf40b0c0268a213dbe034bc44e">Back in stock notifications</li>
+</ul>
+<p>Another key distinction between marketing and transactional emails is the fact that transactional emails are not tied to whether or not someone has subscribed. Even if a customer has unsubscribed from marketing emails, they would still expect to receive transactional messages around orders or administrative account activity. Because of this, emails marked as transactional in Klaviyo will still be sent to suppressed recipients.</p>
+<div class="bs-callout bs-callout-default"><p>Learn more about <a href="https://help.klaviyo.com/hc/en-us/articles/360003165732">transactional emails</a> in Klaviyo.</p></div>
+</div>
+</div>
+<div class="accordion__item">
+<div class="accordion__item-title"><strong>Spam traps</strong></div>
+<div class="accordion__item-content">
+<p><a href="https://help.klaviyo.com/hc/en-us/articles/360015537111">Spam traps</a> are fake email addresses that live on the web for the purpose of finding people who may be illegitimately acquiring contacts. Internet Service Providers (ISPs) flag a domain if it sends to a higher percentage than normal. Eliminating your risk of sending to spam traps will increase your likelihood of reaching the inbox, leading to more opens, clicks, and ultimately, more money. Klaviyo leverages this fact to identify any spam traps on your list or any other profiles in your account that have never engaged with your brand.</p>
+<p>Inbox providers use spam traps to identify which emails they should place in the spam folder. In their eyes, sending to a spam trap is a sign that a sender is not obtaining emails legitimately and is not following email best practices. </p>
+<div class="bs-callout bs-callout-default"><p>Learn how to <a href="https://help.klaviyo.com/hc/en-us/articles/360015537111">identify and remove spam traps</a> from your account. </p></div>
+</div>
+</div>
+</div><h2 id="h_01HXHRZBNACS6P8HT18FTRB3HS">List hygiene</h2><p>List hygiene is key for good deliverability, as it ensures that your email list is composed of active, engaged profiles that are more likely to interact with your sends. This ultimately leads to a strong sender reputation, making inbox providers more likely to view you as a good sender and sort your emails into main inboxes instead of spam.</p><div class="accordion accordion--default">
+<div class="accordion__item">
+<div class="accordion__item-title"><strong>Re-engagement series</strong></div>
+<div class="accordion__item-content">
+<p>Re-engaging your subscribers and, if re-engagement fails, removing those subscribers is a critical factor for a successful email program.</p>
+<p>Make sure to provide compelling reasons for customers continue, and enforce the following best practices: </p>
+<ul>
+<li data-list-item-id="ea5cbf0d56ad623df50ac2a83bc81d963">Highlight benefits</li>
+<li data-list-item-id="e4fab6bfba303ac4715c3474b3d7ae733">Include testimonials</li>
+<li data-list-item-id="ea0aec2e3aaa3cb20af16ca320db220ac">Provide opportunity to change email addresses</li>
+<li data-list-item-id="e41ba5a0b6eb983c68970b1ee955bcdb5">Reflect your brand personality</li>
+</ul>
+<p>Similarly, you can create a <a href="https://help.klaviyo.com/hc/en-us/articles/115002775192">winback flow</a> in Klaviyo to nurture customers that have fallen out of their usual buying cycles.</p>
+<div class="bs-callout bs-callout-default"><p>Learn more about running a <a href="https://help.klaviyo.com/hc/en-us/articles/115000931551">re-engagement campaign</a> in Klaviyo.</p></div>
+</div>
+</div>
+<div class="accordion__item">
+<div class="accordion__item-title"><strong>Sunset flows</strong></div>
+<div class="accordion__item-content">
+<p>A sunset flow is designed to phase out customers who are no longer engaging with your brand. You can use this flow as a last-ditch effort to win back their business, and then delete or suppress anyone who is not responsive. This will help you maintain a clean list and avoid having inactive customers contribute towards your Klaviyo billing plan, ultimately maximizing the value you get from your active profiles. </p>
+<div class="bs-callout bs-callout-default"><p>Learn how to <a href="https://help.klaviyo.com/hc/en-us/articles/360017518492">create a sunset flow</a> in Klaviyo.</p></div>
+</div>
+</div>
+<div class="accordion__item">
+<div class="accordion__item-title"><strong>Engagement based frequency sending</strong></div>
+<div class="accordion__item-content">
+<p>Using a sending schedule based on email engagement is key to achieving strong open rates and maintaining a positive relationship with your subscribers. Sending too often to unengaged profiles will hurt your sender reputation, whereas sending too infrequently to engaged customers is leaving money on the table. It's best to achieve a happy medium through the use of segments and sending schedules.</p>
+<p>Once you establish your tracks, begin sending campaigns that are targeted and well suited for the segments' specific email habits. You can choose to send email campaigns at the same time to all of the segments with smart sending toggled on, or you can send separate campaigns to each segment. If you choose to do the latter, this will enable you to visualize how much money you made from each campaign, and thus each engagement track.</p>
+<div class="bs-callout bs-callout-default"><p>Learn how to <a href="https://help.klaviyo.com/hc/en-us/articles/360037527052">create a sending schedule based on engagement and frequency</a>.</p></div>
+</div>
+</div>
+<div class="accordion__item">
+<div class="accordion__item-title"><strong>Data quality</strong></div>
+<div class="accordion__item-content">
+<p>Data quality is ensuring that data on your account is accurate, complete, and reliable. Data quality is vital to ensure accuracy in any decision-making process where such data is utilized.</p>
+<p>Maintaining high-quality data on your account has the following benefits: </p>
+<ul>
+<li data-list-item-id="e8c98367b50e9c2bec9f0a9d22d49492f">Avoids problems caused by inaccurate data (duplicate messaging, etc)</li>
+<li data-list-item-id="ed73bc654f9d40f5e5b8a7f4c46214808">Helps you reach more people (reaching out at the right time to avoid burnout)</li>
+<li data-list-item-id="e63697115e2c6ea3b85fdba9160ec4741">Helps you reach the right people (provide relevant information to your subscribers)</li>
+<li data-list-item-id="e34307436cb1b474bdd599d43aa8193b0">Improves customer relationships (quality data helps you understand your subscribers needs)</li>
+</ul>
+</div>
+</div>
+</div><h2 id="h_01HXHS09RGW2AZWB2W1C40A4X0">Additional resources</h2><p><a href="https://help.klaviyo.com/hc/en-us/articles/115005247008">Understanding email deliverability</a></p><p><a href="https://help.klaviyo.com/hc/en-us/articles/360039295051">Deliverability glossary</a></p><p><a href="https://help.klaviyo.com/hc/en-us/articles/16425927010075">Frequently asked questions about deliverability</a></p>

@@ -1,0 +1,178 @@
+<h2 id="h_01HCWR6SBY6HRM5BQMSQEDK791">You will learn</h2>
+<p>Learn about segmentation and properties that aren’t set or have no values in Klaviyo. These changes were implemented in April 2023.</p>
+<div class="bs-callout bs-callout-default">
+<p>In addition to the changes outlined below, all segmentation with dates now uses the UTC timezone. Learn about the changes to <a href="https://help.klaviyo.com/hc/en-us/articles/4403222359451">segmenting with dates</a>. </p>
+</div>
+<h2 id="h_01HCWR6SBYRFKDKP218DX50YAB">Key terms</h2>
+<ul>
+<li>
+<strong>Property not set
+</strong>A property that doesn’t exist on a profile</li>
+<li>
+<strong>Property with no value</strong>
+A property that is set on a profile, but doesn’t have an associated value</li>
+</ul>
+<h2 id="h_01HCWR6SBZKE77DJ2BWMZST4R4">Properties that aren’t set and booleans</h2>
+<p>In boolean conditions (i.e., true/false conditions), properties that don’t exist are no longer considered in the evaluation. </p>
+<ul>
+<li>
+<strong>Old system
+</strong>Profiles where property does not exist used to be evaluated as False.</li>
+<li>
+<strong>New system
+</strong>Profiles where property does not exist are now excluded from evaluation.</li>
+</ul>
+<p>Consider the condition <strong>Properties about someone &gt; VIP &gt; is False</strong>. A Klaviyo account contains the following profiles: </p>
+<table>
+<tbody>
+<tr>
+<td><strong>Profiles</strong></td>
+<td><strong>Under the old system: </strong></td>
+<td><strong>Under the new system: </strong></td>
+</tr>
+<tr>
+<td>100 profiles where <strong>VIP = true</strong>
+</td>
+<td>🚫 Excluded from segment</td>
+<td>🚫 Excluded from segment</td>
+</tr>
+<tr>
+<td>50 profiles where <strong>VIP = false</strong>
+</td>
+<td>✅ Included in segment</td>
+<td>✅ Included in segment</td>
+</tr>
+<tr>
+<td>25 profiles where <strong>VIP property</strong> is not set </td>
+<td>✅ Included in segment</td>
+<td>🚫 Excluded from segment</td>
+</tr>
+</tbody>
+</table>
+<p>Before the change, this segment contained <strong>75 profiles</strong>. After the change, it includes <strong>50 profiles</strong>. </p>
+<h3 id="h_01HCWR6SBZTJFPV9Q9BK8KMHPS">Why this is better</h3>
+<p>The new system more accurately evaluates only True or False conditions, and you have the option to explicitly include profiles where that property is not set, if desired, by adding the condition <strong>OR Properties about someone &gt; [profile property] &gt; is not set</strong>. </p>
+<h2 id="h_01HCWR6SBZT75A9TASE1CFMY3C">Properties that aren’t set and text conditions </h2>
+<p>Historically, when evaluating profile properties that don’t exist for text conditions, these values have been treated as if they contain the text “None.” Now, these values are excluded from consideration in text conditions. </p>
+<ul>
+<li>
+<strong>Old system
+</strong>Text conditions that searched for strings like “N,” “No,” and “None” included properties that aren’t set.</li>
+<li>
+<strong>New system
+</strong>Properties that don’t exist on the profile are now excluded from evaluation.</li>
+</ul>
+<p>Consider the condition <strong>Properties about someone &gt; Do you eat tofu &gt; contains “No”</strong>. A Klaviyo account contains the following profiles: </p>
+<table>
+<tbody>
+<tr>
+<td><strong>Profiles</strong></td>
+<td><strong>Under the old system: </strong></td>
+<td><strong>Under the new system: </strong></td>
+</tr>
+<tr>
+<td>50 profiles where <strong>Do you eat tofu = Yes</strong>
+</td>
+<td>🚫 Excluded from segment</td>
+<td>🚫 Excluded from segment</td>
+</tr>
+<tr>
+<td>25 profiles where <strong>Do you eat tofu = No</strong>
+</td>
+<td>✅ Included in segment</td>
+<td>✅ Included in segment</td>
+</tr>
+<tr>
+<td>15 profiles where the property <strong>Do you eat tofu</strong> is not set</td>
+<td>✅ Included in segment</td>
+<td>🚫 Excluded from segment</td>
+</tr>
+</tbody>
+</table>
+<p>Before the change, this segment contained <strong>40 profiles</strong>. It would count the 25 who answered “No,” and the 15 profiles where that value was not set, because it was treating their empty values as “None.” After the change, it includes <strong>25 profiles</strong>. </p>
+<h3 id="h_01HCWR6SBZNXDS85WXK8V4H523">Why this is better</h3>
+<p>The new system does not erroneously set the string “None” in profile properties that aren’t set. This means that any searches that include “N,” “No,” “Non,” and “None” will no longer include these properties. </p>
+<h2 id="h_01HCWR6SBZJM30R88V9EFM3G18">Properties that aren’t set and negative conditions</h2>
+<p>When a segment uses negative conditions (i.e., a profile property “is not” a specific value, or “does not contain” a specific string), the segment will no longer include properties that aren’t set.</p>
+<ul>
+<li>
+<strong>Old system
+</strong>Properties that aren’t set used to be included in segments with negative conditions. </li>
+<li>
+<strong>New system
+</strong>Properties that aren’t set are now excluded from evaluation.</li>
+</ul>
+<p>Consider the condition <strong>Properties about someone &gt; Favorite color &gt; doesn’t equal &gt; red</strong>. A Klaviyo account contains the following profiles: </p>
+<table>
+<tbody>
+<tr>
+<td><strong>Profiles</strong></td>
+<td><strong>Under the old system: </strong></td>
+<td><strong>Under the new system: </strong></td>
+</tr>
+<tr>
+<td>60 profiles where <strong>Favorite color = red</strong>
+</td>
+<td>🚫 Excluded from segment</td>
+<td>🚫 Excluded from segment</td>
+</tr>
+<tr>
+<td>45 profiles where <strong>Favorite color = blue</strong>
+</td>
+<td>✅ Included in segment</td>
+<td>✅ Included in segment</td>
+</tr>
+<tr>
+<td>100 profiles where the property <strong>Favorite color</strong> is not set</td>
+<td>✅ Included in segment</td>
+<td>🚫 Excluded from segment</td>
+</tr>
+</tbody>
+</table>
+<p>Before the change, this segment contained <strong>145 profiles</strong>. After the change, it includes <strong>45 profiles</strong>. </p>
+<h3 id="h_01HCWR6SBZ8Z1MTB2QQE2SQXW5">Why this is better</h3>
+<p>The previous system was ambiguous, and it was unclear why certain profiles were being included when they did not have a profile property. There was also no straightforward way to exclude those profiles if desired. </p>
+<p>The new system makes it explicit that only profiles where the property is set are included. If you want to include profiles which do not have the profile property set, you can do so by adding <strong>OR Properties about someone &gt; [profile property] &gt; is not set</strong>.</p>
+<h2 id="h_01HCWR6SBZF1NZQT8E3SJZTET1">Countries that aren't set and the "Is or is not within the EU (GDPR)" criteria</h2>
+<p>When a segment criteria contains the definition “If someone is or is not within the EU (GDPR)” “Location is not within European Union/United States,” the segment will no longer include profiles where the Country property is not set.</p>
+<ul>
+<li>
+<strong>Old system
+</strong>Profiles where property does not exist used to be included in this segment.</li>
+<li>
+<strong>New system</strong>
+Profiles where property does not exist are now excluded from evaluation.</li>
+</ul>
+<p>Consider the condition <strong>If someone is or is not within the EU (GDPR) &gt; Location is not &gt; within &gt; European Union</strong>. A Klaviyo account contains the following profiles:</p>
+<table>
+<tbody>
+<tr>
+<td><strong>Profiles</strong></td>
+<td><strong>Under the old system: </strong></td>
+<td><strong>Under the new system: </strong></td>
+</tr>
+<tr>
+<td>50 profiles where <strong>Country</strong> = USA</td>
+<td>✅ Included in segment</td>
+<td>✅ Included in segment</td>
+</tr>
+<tr>
+<td>40 profiles where <strong>Country </strong>= Spain</td>
+<td>🚫 Excluded from segment</td>
+<td>🚫 Excluded from segment</td>
+</tr>
+<tr>
+<td>20 profiles where <strong>Country </strong>= France</td>
+<td>🚫 Excluded from segment</td>
+<td>🚫 Excluded from segment</td>
+</tr>
+<tr>
+<td>100 profiles where the property <strong>Country </strong>is not set</td>
+<td>✅ Included in segment</td>
+<td>🚫 Excluded from segment</td>
+</tr>
+</tbody>
+</table>
+<p>Before the change, this segment contained <strong>150 profiles</strong>. After the change, it includes <strong>50 profiles</strong>.</p>
+<h3 id="h_01HCWR6SC02R4TP2CCW4KMZ8A9">Why this is better</h3>
+<p>The new system more accurately evaluates only profiles with a known country. You can the option to explicitly include profiles without a known country, if desired, by adding the condition <strong>OR Properties about someone &gt; Country &gt; is not set</strong>. </p>

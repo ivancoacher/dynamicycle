@@ -1,0 +1,140 @@
+<h2 id="01H46MXEK0J2ZMC6DSDGSCGNX7">You will learn</h2>
+<p>Learn how to configure key flows in Klaviyo to start acquiring customer reviews. </p>
+<div class="bs-callout bs-callout-default">
+<p>If you use a different reviews platform other than Klaviyo Reviews, learn how to <a href="https://help.klaviyo.com/hc/en-us/articles/115002779391#01H46MRZ7GEJV79PZ506FSSS3A">request reviews using a Klaviyo flow</a>. </p>
+</div>
+<h2 id="01H46MXEK1DNZZGPCN9THQ4NT1">Key reviews flows </h2>
+<p>There are 2 key review flows: </p>
+<ul>
+<li>
+<strong>Review request flow</strong><br>
+Ask a recent purchaser to review a product from their order. Consider offering an incentive (e.g., 15% off, free shipping on their next order, additional loyalty points), which may increase conversions. This flow is triggered by the <em>Ready to review</em> event. </li>
+<li>
+<strong>Review follow-up flow</strong><br>
+If you offer an incentive (recommended) in exchange for customer reviews, deliver that reward once a review is submitted. This flow is triggered by the <em>Review submitted</em> event. </li>
+</ul>
+<h3 id="h_01HWQHKDKZECBZC318XCEER9RE">About the <em>Ready to review</em> event</h3>
+<p>This metric is tracked when an item is delivered or fulfilled and meets the criteria you set to indicate an item is ready to be reviewed. Learn how to <a href="https://klaviyo.zendesk.com/hc/en-us/articles/16682549669403">customize the </a><a href="https://klaviyo.zendesk.com/hc/en-us/articles/16682549669403"><em>Ready to review</em></a><a href="https://klaviyo.zendesk.com/hc/en-us/articles/16682549669403"> metric</a>. </p>
+<div class="bs-callout bs-callout-default">
+<p><em>Ready to review</em> events are only triggered for orders placed after you begin using Klaviyo Reviews. Learn how to <a href="https://klaviyo.zendesk.com/hc/en-us/articles/25930166202651">populate the </a><a href="https://klaviyo.zendesk.com/hc/en-us/articles/25930166202651"><em>Ready to review</em></a><a href="https://klaviyo.zendesk.com/hc/en-us/articles/25930166202651"> metric for past orders</a>. </p>
+</div>
+<h2 id="01H46MXEK1NGKAT561174T6B38">Create a review request flow </h2>
+<ol>
+<li>In Klaviyo, navigate to the <strong>Flows</strong> tab. </li>
+<li>Click <strong>Create flow</strong>. </li>
+<li>Search for “Review request,” then select one of the <strong>Review Request: Klaviyo Reviews</strong> cards.<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28723523744027" alt="" width="1824" height="934">
+</li>
+<li>Click <strong>Use template</strong>. </li>
+<li>Adjust the flow messages to your liking. </li>
+<li>Click <strong>Review and turn on</strong> in the top right corner. </li>
+<li>Choose <strong>Live</strong> from the dropdown. </li>
+<li>Click <strong>Save</strong>. </li>
+</ol>
+<p>Once you’ve completed these steps, your review request flow will begin sending to your customers as they <a href="https://help.klaviyo.com/hc/en-us/articles/16682549669403">become eligible to submit reviews</a>. </p>
+<div class="bs-callout bs-callout-default">
+<p>When someone submits a review by clicking the link in this flow message, they will appear with the <em>Verified buyer</em> badge on your site. </p>
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28723545679387" alt="verified buyer badge" width="269" height="164">
+</div>
+<div class="bs-callout bs-callout-warning">
+<p>If you delete a product after sending a review request for it, recipients who click the email's CTA will see a message indicating the product has been deleted. They will not be able to submit a review for a deleted product. </p>
+</div>
+<h3 id="01H5T5G0VDGW4CYWYAHAJHCQFN">Adjusting the review request button</h3>
+<p>If you'd like to replace the default stars in the review request email, simply add a button to your flow email with the dynamic review request link tag in the <em>URL</em> field: {{ event.review_link }}</p>
+<h2 id="01H46MXEK1116RCER4DBSBT3A0">Create a review follow-up flow</h2>
+<p>If you offer an incentive in exchange for reviews, you must follow through and send them the reward, regardless of the content in their review. Even if you don’t offer an incentive, consider thanking the reviewer for their feedback and offering support if they had a negative experience. </p>
+<ol>
+<li>In Klaviyo, navigate to the <strong>Flows</strong> tab. </li>
+<li>Click <strong>Create flow</strong>. </li>
+<li>Search for “Review follow-up,” then select the <strong>Review Follow-up: Klaviyo Reviews</strong> card.<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28723545674779" alt="Klaviyo reviews flow card" width="310" height="187">
+</li>
+<li>Click <strong>Create Flow</strong>. </li>
+<li>Edit the flow messages to reflect your branding and the reward you’d like to offer.</li>
+<li>Once your flow is complete, click <strong>Update Action Statuses</strong> and set the flow live. </li>
+</ol>
+<h3 id="01H46MXEK1H2EYK35YQSW1R3HF">Add a coupon code (optional) </h3>
+<p>If you’d like to include an incentive in your review follow-up flow, use a personal coupon code built in Klaviyo. </p>
+<ol>
+<li>Create a dynamic coupon code. 
+<ol>
+<li>Learn how to <a href="https://help.klaviyo.com/hc/en-us/articles/115006155388">create unique coupons for Shopify</a>. </li>
+<li>Learn how to <a href="https://help.klaviyo.com/hc/en-us/articles/22168739689627">create unique coupons for WooCommerce</a>.</li>
+</ol>
+</li>
+<li>Navigate back to the tab with your review follow-up flow. </li>
+<li>Add the coupon code tag, <code>{% coupon_code 'NAME_OF_YOUR_COUPON' %}</code>, with the name of your coupon. </li>
+</ol>
+<h2 id="01H4P3T11W9BYT7KJ6W5XSA6YY">The review submission form </h2>
+<p>When your customers click the CTA in your review request flow, they’ll first see an option to select a star rating. Once they select a star rating, they’ll see a form with the following fields: </p>
+<ul>
+<li>Email address</li>
+<li>Review text</li>
+<li>Upload photo (PNG and JPG formats are supported)</li>
+<li>Upload video (MP4 and MOV formats are supported)</li>
+<li>
+<a href="https://help.klaviyo.com/hc/en-us/articles/16319181846171">Custom questions</a>, if configured</li>
+</ul>
+<p>Once the review is submitted, they’ll see a confirmation page with a link to edit their review. If they ordered more than 1 product, they will see the option to review up to 3 additional products from their order. Products are selected and ordered based on your <a href="https://help.klaviyo.com/hc/en-us/articles/16681935355163">prioritization settings</a>. </p>
+<p>Reviewers can return to the original review request link for up to 30 days after they submit their review to edit it.</p>
+<p>
+<script src="https://fast.wistia.com/embed/medias/3o55h7i4wu.jsonp" async="async"></script>
+<script src="https://fast.wistia.com/assets/external/E-v1.js" async="async"></script>
+</p>
+<div class="wistia_responsive_padding" style="padding: 56.25% 0 0 0; position: relative;">
+<div class="wistia_responsive_wrapper" style="height: 100%; left: 0; position: absolute; top: 0; width: 100%;">
+<div class="wistia_embed wistia_async_3o55h7i4wu seo=false videoFoam=true" style="height: 100%; position: relative; width: 100%;">
+<div class="wistia_swatch" style="height: 100%; left: 0; opacity: 0; overflow: hidden; position: absolute; top: 0; transition: opacity 200ms; width: 100%;"><img style="filter: blur(5px); height: 100%; object-fit: contain; width: 100%;" src="https://fast.wistia.com/embed/medias/3o55h7i4wu/swatch" alt="" aria-hidden="true"></div>
+</div>
+</div>
+</div>
+<p></p>
+<p></p>
+<h2 id="h_01HAA27922MBGSFSZ6JXD2WSAV">Manually request reviews</h2>
+<p>You can request a review from a customer directly with a manual review request link. </p>
+<div class="bs-callout bs-callout-default">
+<p>These links are specific to the selected product. You can use a manually-generated review link in a campaign to past purchasers of that product, in customer service conversations, or anywhere else you contact past purchasers of a specific product.  </p>
+</div>
+<ol>
+<li>Select the <strong>Reviews</strong> tab in Klaviyo. </li>
+<li>Click on the <strong>Products </strong>tab.<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28723523738523" alt="reviews product tab" width="465" height="138">
+</li>
+<li>Click the 3 dot menu to the right of the product you’d like to request a review for. </li>
+<li>Click <strong>Copy link to manual review</strong>.<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/30500966980123" alt="Copy link to manual review button" width="446" height="197">
+</li>
+<li>Share this link with a customer directly (e.g., by emailing them).</li>
+</ol>
+<div class="bs-callout bs-callout-default">
+<p>Choose <strong>Copy incentivized link to review</strong> if you are incentivizing the reviewer in any way (e.g., exchanging free product for reviews, offering discount codes, etc.) A review submitted via this link will be marked as <em>Incentivized</em> in your review widgets.  </p>
+</div>
+<h2 id="h_01H9TJC5WQ1V7TBG9BV7WBWDRZ">Get notified about new reviews</h2>
+<p>Set up email notifications whenever someone reviews one of your products. </p>
+<div class="bs-callout bs-callout-default">
+<p>Enabling new review notifications means you’ll also be notified whenever someone asks a question. It is not possible to subscribe exclusively to new review notifications. </p>
+</div>
+<ol>
+<li>Navigate to the <strong>Reviews</strong> tab in Klaviyo.</li>
+<li>Click <strong>Reviews settings</strong>.</li>
+<li>Select <strong>Publishing rules and notifications</strong>.</li>
+<li>Under <em>Notifications</em>, check the box next to <em>Pending activity (reviews and Q&amp;As)</em>.</li>
+<li>Choose a frequency (immediately, daily, or weekly) and delivery timing.<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28723545682459" alt="reviews notifications settings" width="417" height="331">
+</li>
+<li>Choose one or more notification recipients from your list of account users<br>
+Notifications will be sent to them when someone submits a review or product question.<br>
+
+<div class="bs-callout bs-callout-default">
+<p>Notifications can only be sent to account users. If you’d like to send notifications to someone you don’t see in the dropdown, <a href="https://help.klaviyo.com/hc/en-us/articles/360053547071">invite them to join your Klaviyo account</a>. </p>
+</div>
+</li>
+<li>Optionally, check the box next to <em>Weekly stats summary</em> for a weekly report on your product reviews. This can be sent to a different user (or users) than those who are selected for review notifications. </li>
+<li>Click <strong>Save changes</strong>.</li>
+</ol>
+<p>Once you receive reviews, you can optionally <a href="https://help.klaviyo.com/hc/en-us/articles/20817781267739">add a public reply</a> to each one (e.g., thank a reviewer for their feedback or apologize for a frustrating experience).</p>

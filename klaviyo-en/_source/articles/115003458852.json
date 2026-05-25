@@ -1,0 +1,913 @@
+{
+  "captured_at": "2026-05-23T16:16:54Z",
+  "article": {
+    "id": 115003458852,
+    "url": "https://klaviyo.zendesk.com/api/v2/help_center/en-us/articles/115003458852.json",
+    "html_url": "https://klaviyo.zendesk.com/hc/en-us/articles/115003458852-Magento-2-data-reference",
+    "author_id": 20424705848,
+    "comments_disabled": true,
+    "draft": false,
+    "promoted": false,
+    "position": 1,
+    "vote_sum": 25,
+    "vote_count": 117,
+    "section_id": 49375848540187,
+    "created_at": "2017-12-14T15:49:18Z",
+    "updated_at": "2026-04-21T13:54:15Z",
+    "name": "Magento 2 data reference",
+    "title": "Magento 2 data reference",
+    "source_locale": "en-us",
+    "locale": "en-us",
+    "outdated": false,
+    "outdated_locales": [],
+    "edited_at": "2025-07-31T14:37:49Z",
+    "user_segment_id": null,
+    "permission_group_id": 146372,
+    "content_tag_ids": [],
+    "label_names": [],
+    "body": "<p>Learn what data Klaviyo imports from your Magento 2 store when you integrate the two platforms. Klaviyo's integration with Magento 2 pulls in all of the historical data in your Magento 2 store with the initial historic sync. Once enabled the integration will also begin to sync order and customer data every 30 minutes. Examples of this data include the information associated with past placed orders, fulfilled orders, etc.</p>\n<p>In Klaviyo, you can navigate to your account's <em>Analytics tab</em> in the left sidebar to view all of the metrics in your account; the metrics with a Magento 2 icon are the order events synced from your Magento 2 integration. You will also see Klaviyo onsite tracking events with a gear icon; these are also tracked through the integration.</p>\n<p class=\"wysiwyg-text-align-center\"><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/35507590825499\" width=\"390\" height=\"426\"></p>\n<p class=\"wysiwyg-text-align-center\"><strong><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/35507597379867\" width=\"406\" height=\"338\"></strong></p>\n<h2 id=\"01H8PQV0GFXC7AP0M9GEQ342WB\">How Klaviyo determines Magento 2 metrics</h2>\n<h3 id=\"01H8PQV0GFG4BEN0GWFKD7RF3A\">Order metrics</h3>\n<p>Magento 2 order metrics are determined by the <em>Status</em> field in an order in your Magento 2 store.</p>\n<p>Each time an order is created, or its status is updated, it will be evaluated against the matrix below to determine which events should be triggered.</p>\n<table>\n<tbody>\n<tr>\n<td>\n<p><strong>Magento Order Status</strong></p>\n</td>\n<td>\n<p><strong>Metric Triggered in Klaviyo</strong></p>\n</td>\n</tr>\n<tr>\n<td>\n<p>complete</p>\n</td>\n<td>\n<p>Fulfilled Order</p>\n</td>\n</tr>\n<tr>\n<td>\n<p>canceled, cancelled</p>\n</td>\n<td>\n<p>Canceled Order</p>\n</td>\n</tr>\n<tr>\n<td>\n<p>pay_aborted</p>\n</td>\n<td>\n<p>Canceled Payment</p>\n</td>\n</tr>\n<tr>\n<td>\n<p>closed</p>\n</td>\n<td>\n<p>Refunded Order</p>\n</td>\n</tr>\n<tr>\n<td>\n<p>All other order statuses</p>\n</td>\n<td>\n<p>Placed Order</p>\n</td>\n</tr>\n</tbody>\n</table>\n<p>If you have custom order statuses that should not trigger a <em>Placed Order </em>metric, or do not align with the table above, <a href=\"https://klaviyo.zendesk.com/hc/en-us/articles/115001002272\" target=\"_blank\" rel=\"noopener\">please let us know</a> and we can adjust the order status mapping accordingly in your integration.</p>\n<p>Orders with a status of “pending_payment” will be ignored.</p>\n<h3 id=\"01H8PQV0GFQG0W5Y3SBT8R2N3J\">Started Checkout metric</h3>\n<p>With a standard Magento checkout, this event is triggered when a customer enters their contact and shipping information on the first page of the Magento checkout process and clicks <em>Continue</em>. </p>\n<p>The <em>Started Checkout</em> event relies on a “Quote” being created and having an email address associated with it. This happens after the customer has entered their email address at the “Shipping Information” stage of checkout. If a customer does not complete the checkout, this quote is synced to Klaviyo as a <em>Started Checkout</em> event.</p>\n<p>If the customer proceeds to complete the order, this quote is converted to an “invoice” in Magento’s database. As a result a <em>Started Checkout</em> event is not sent to Klaviyo. Instead, a <em>Placed Order</em> event is sent. Note that it may take up to 1 hour for<em> Started Checkout</em> events to sync to Klaviyo.</p>\n<h3 id=\"01H8PQV0GGMQ163VYNB3BT465Z\">Fulfilled Shipment metric</h3>\n<p>This metric is triggered when a new Shipment is created in your Magento 2 store.</p>\n<h2 id=\"01H8PQV0GGNPJBW13F5ND4P30G\">Magento 2 metric data</h2>\n<p>This section covers each of the Magento 2 metrics and the data that is available for filtering when creating segments and flows.</p>\n<h3 id=\"01H8PQV0GG2WZR1YF3PX7BYHW0\">Cancelled Order</h3>\n<p>This event is triggered when an order status is changed to <em>cancelled </em>or <em>canceled</em> in your Magento 2 store.</p>\n<ul>\n<li>\n<strong>ProductCategories<br></strong>The categories of the products in the cancelled order.</li>\n<li>\n<strong>Value<br></strong>The value of the cancelled order.</li>\n<li>\n<strong>Discounted<br></strong>(True or False) The discount state of the cancelled order.</li>\n<li>\n<strong>OrderedProducts<br></strong>The names of the products in the cancelled order.</li>\n<li>\n<strong>OrderedProductCount<br></strong>The number of products in the cancelled order.</li>\n<li>\n<strong>OrderCurrencyCode<br></strong>The currency code used with the cancelled order.</li>\n<li>\n<strong>CartPriceRuleIDs<br></strong>An array of Cart Price Rule IDs (numeric id strings) which include automatically applied rules and the rule for an applied coupon.</li>\n<li>\n<strong>external_catalog_id</strong><br>Used in catalog organization in Klaviyo.</li>\n</ul>\n<h3 id=\"01H8PQV0GG4AQA8C9XM6PSYTHM\">Fulfilled Order</h3>\n<p>This event is tracked when you set an order status to <em>complete</em> in your Magento 2 store.</p>\n<ul>\n<li>\n<strong>ProductCategories<br></strong>The categories of the products in the order.</li>\n<li>\n<strong>Value<br></strong>The value of the order.</li>\n<li>\n<strong>Discounted<br></strong>Whether the order is discounted or not.</li>\n<li>\n<strong>OrderedProducts<br></strong>The names of the products in the order.</li>\n<li>\n<strong>OrderedProductCount<br></strong>The number of products in the order.</li>\n<li>\n<strong>OrderCurrencyCode<br></strong>The currency code used with the order.</li>\n<li>\n<strong>external_catalog_id</strong><br>Used in catalog organization in Klaviyo.</li>\n</ul>\n<h3 id=\"01H8PQV0GG7RRY9WCD11Y71QMF\">Fulfilled Shipment</h3>\n<p>This event is tracked when a new <em>Shipment</em> is created in your Magento 2 store.</p>\n<ul>\n<li>\n<strong>StoreName<br></strong>The name of the store where the order was placed.</li>\n<li>\n<strong>StoreID<br></strong>The ID of the store where the order was placed.</li>\n<li>\n<strong>BillingAddress<br></strong>The billing address for the order.</li>\n<li>\n<strong>Tracks<br></strong>Information on shipment tracking.</li>\n<li>\n<strong>external_catalog_id</strong><br>Used in catalog organization in Klaviyo.</li>\n</ul>\n<h3 id=\"01H8PQV0GGGPM5JE96K0HYPQNK\">Ordered Product</h3>\n<p>This event is tracked once for every product a user orders when they place an order.</p>\n<ul>\n<li>\n<strong>SKU<br></strong>The SKU of the product.</li>\n<li>\n<strong>OrderCurrencyCode<br></strong>The currency code of the product.</li>\n<li>\n<strong>Price<br></strong>The value of the product.</li>\n<li>\n<strong>Categories<br></strong>The category of the product.</li>\n<li>\n<strong>Discounted<br></strong>Any discounts applied to the product.</li>\n<li>\n<strong>Quantity<br></strong>The number of products.</li>\n<li>\n<strong>Value<br></strong>The value of the product.</li>\n<li>\n<strong>ProductID<br></strong>The ID of the product.</li>\n<li>\n<strong>RootProductID<br></strong>The ID of the parent product.</li>\n<li>\n<strong>external_catalog_id</strong><br>Used in catalog organization in Klaviyo.</li>\n</ul>\n<div class=\"bs-callout bs-callout-default\">\n<p>Ordered Product metric has a number of other data fields available for tracking. <a href=\"https://help.klaviyo.com/hc/en-us/articles/115005076747-View-Raw-Metric-or-Event-Data-in-Klaviyo\" target=\"_blank\" rel=\"noopener\">View the raw data</a> of an individual Ordered Product event to see all of the available data for this event.</p>\n</div>\n<h3 id=\"01H8PQV0GG1G7HBRV8NPNP6GBZ\">Placed Order</h3>\n<p>This event is tracked when a user places an order.</p>\n<ul>\n<li>\n<strong>ProductCategories<br></strong>The categories of the products in the order.</li>\n<li>\n<strong>Value<br></strong>The value of the order.</li>\n<li>\n<strong>Discounted<br></strong>Whether the order is discounted or not.</li>\n<li>\n<strong>OrderedProducts<br></strong>The names of the products in the order.</li>\n<li>\n<strong>OrderedProductCount<br></strong>The number of products in the order.</li>\n<li>\n<strong>OrderCurrencyCode<br></strong>The currency code used with the order.</li>\n<li>\n<strong>CartPriceRuleIDs<br></strong>An array of Cart Price Rule IDs (numeric id strings) which include automatically applied rules and the rule for an applied coupon.</li>\n<li>\n<strong>external_catalog_id</strong><br>Used in catalog organization in Klaviyo.</li>\n</ul>\n<h3 id=\"01H8PQV0GGS9CN9D920NSTE0SA\">Refunded Order</h3>\n<p>This event is triggered when a customer refunds an order. </p>\n<ul>\n<li>\n<strong>Value<br></strong>The value of the order.</li>\n<li>\n<strong>Discounted<br></strong>Whether the order is discounted or not. </li>\n<li>\n<strong>OrderedProducts<br></strong>The names of all the products in the order.</li>\n<li>\n<strong>OrderedProductCount<br></strong>The number of products in the order. </li>\n<li>\n<strong>OrderCurrencyCode<br></strong>The currency code used with the order. </li>\n<li>\n<strong>ProductCategories<br></strong>The categories of the products in the order. </li>\n<li>\n<strong>CartPriceRuleIDs<br></strong>An array of Cart Price Rule IDs (numeric id strings) which include automatically applied rules and the rule for an applied coupon.</li>\n<li>\n<strong>external_catalog_id</strong><br>Used in catalog organization in Klaviyo.</li>\n</ul>\n<h3 id=\"01H8PQV0GG3EWNP37Q3D4AS9J0\">Started Checkout</h3>\n<p>This event is triggered when a customer with a known email address begins a checkout. On a standard checkout page this event is triggered when a customer enters their contact and shipping information on the first page of the Magento checkout process and clicks <em>Continue</em>. A <em>Started Checkout </em>event is not sent to Klaviyo if the user completes checkout. Instead, a <em>Placed Order</em> event is logged.</p>\n<ul>\n<li>\n<strong>Value<br></strong>The value of the order during the checkout.</li>\n<li>\n<strong>ItemCount<br></strong>The number of items in the order. </li>\n<li>\n<strong>Items<br></strong>The items in the order. </li>\n<li>\n<strong>ProductCategories<br></strong>The categories of the products in the order. </li>\n<li>\n<strong>ProductNames<br></strong>The names of the products in the order. </li>\n<li>\n<strong>StoreName<br></strong>The name of the store where the order was started.</li>\n<li>\n<strong>StoreID<br></strong>The ID of the store where the order was started.</li>\n<li>\n<strong>external_catalog_id</strong><br>Used in catalog organization in Klaviyo.</li>\n</ul>\n<h3 id=\"01H8PQV0GGPFGK28YTSFB15QJ5\">Added To Cart</h3>\n<p>Please note that this metric is only tracked if you are using Klaviyo extension version 4.0.0 and above. This metric is tracked when a customer who has been cookied by Klaviyo adds an item to their cart.</p>\n<p>It includes detailed information about the item that was added. This is useful when creating segments based on what products users have added to cart, or when building an abandoned cart flow. You can filter and target <em>Added To Cart</em> metrics based on the following criteria:</p>\n<ul>\n<li>\n<strong>MaskedQuoteId<br></strong>MaskedQuoteId or Unique identifier for logged in customers.</li>\n<li>\n<strong>AddedItemCategories<br></strong>The categories to which the item belongs.</li>\n<li>\n<strong>AddedItemProductName<br></strong>The name of the product in your store (e.g., Red T-shirt).</li>\n<li>\n<strong>AddedItemDescription<br></strong>The description of the item.</li>\n<li>\n<strong>AddedItemImageURLKey<br></strong>The URL of the image of the item.</li>\n<li>\n<strong>AddedItemPrice<br></strong>The price of the item.</li>\n<li>\n<strong>AddedItemProductID<br></strong>The custom ID in your Magento 2 store of the product, e.g., 1234.</li>\n<li>\n<strong>AddedItemSKU<br></strong>The SKU of the item in your store (e.g., REDMEDIUMTSHIRT).</li>\n<li>\n<strong>AddedItemURL<br></strong>The URL of the item.</li>\n<li>\n<strong>external_catalog_id</strong><br>Used in catalog organization in Klaviyo.</li>\n<li>\n<strong>integration_key</strong><br>Your eCommerce platform (Magento 2).</li>\n</ul>\n<p>Klaviyo generates a key, the cart rebuild key, that allows you to create a link that rebuilds the customer's cart in case they return to their cart via an email triggered by this event on another device. This key can be found within the ‘extra’ property array. You can create this link using the following URL:</p>\n<pre><code class=\"language-js\">{{ organization.url|trim_slash }}reclaim/checkout/cart?quote_id={{ event.MaskedQuoteId }}\n</code></pre>\n<h3 id=\"h_01JQPPZXX34N8N0KA61T3E3DKV\">Viewed Product</h3>\n<p>This metric is tracked when a customer views a product on your site. You can filter and target <em>Viewed Product</em> metrics based on the following criteria:</p>\n<ul>\n<li>\n<strong>ProductID</strong><br>The ID of the product.</li>\n<li>\n<strong>Name</strong><br>The name of the product.</li>\n<li>\n<strong>SKU</strong><br>The SKU for the product.</li>\n<li>\n<strong>URL</strong><br>The URL for the product.</li>\n<li>\n<strong>Price</strong><br>The price of the product.</li>\n<li>\n<strong>FinalPrice</strong><br>The final price after any discounts.</li>\n<li>\n<strong>Categories</strong><br>An array containing the categories the product belongs to.</li>\n<li>\n<strong>ImageURL</strong><br>The URL for the product's image.</li>\n<li>\n<strong>external_catalog_id</strong><br>Used in catalog organization in Klaviyo.</li>\n<li>\n<strong>integration_key</strong><br>Your eCommerce platform (Magento 2).</li>\n</ul>\n<h3 id=\"h_01JQPPZXX37R50CGSZKEAH44F7\">Active on Site</h3>\n<p>This metric is tracked when a customer is active on your site. You can filter and target <em>Active on Site</em> metrics based on the following criteria:</p>\n<ul>\n<li>\n<strong>utm_medium</strong><br>The medium for the utm tracking parameter (e.g., campaign).</li>\n<li>\n<strong>kx_present</strong><br>(True or False) Whether the <a href=\"https://help.klaviyo.com/hc/en-us/articles/115005076767#h_01HADAYAACCVC5TX5932PQ2AZA\" target=\"_blank\" rel=\"noopener noreferrer\">kx parameter</a> is present.</li>\n<li>\n<strong>os</strong><br>The operating system of the user's device.</li>\n<li>\n<strong>initial_page_path</strong><br>The URL path of the initial page the user landed on.</li>\n<li>\n<strong>browser</strong><br>The user's browser type.</li>\n<li>\n<strong>page</strong><br>The URL of the page the user was active on.</li>\n<li>\n<strong>utm_campaign</strong><br>The UTM tracking parameter for the campaign.</li>\n<li>\n<strong>utm_source</strong><br>The UTM source (e.g., Klaviyo).</li>\n</ul>\n<h3 id=\"01H8PQV0GGKGATN6FHF5CD0PHK\">Synced customer data</h3>\n<p>Klaviyo creates a contact from the creation of an existing order, an existing customer record, or when a checkout is started. Klaviyo will create a new Klaviyo Profile for every synced contact, and will populate this profile with the following information:</p>\n<ul>\n<li>Email</li>\n<li>First and Last Name</li>\n<li>City, State/Region, Zip Code, Country</li>\n<li>Phone Number</li>\n<li>Magento Account Created (e.g., YYY-mm-dd hh:mm:ss; 2015-05-21 13:04:00)</li>\n<li>Magento Customer Group (e.g., Wholesale)</li>\n<li>Magento Store (e.g., US Store)</li>\n<li>Date of Birth (e.g., YYYY-mm-dd; 1990-03-25)</li>\n<li>Gender</li>\n</ul>\n<p>If you update the customer group in Magento 2, even after the original profile has been created in Klaviyo, the customer group will update in Klaviyo.</p>\n<div class=\"bs-callout bs-callout-default\">\n<p>Website_ID will not be pulled. Suppressions are not copied into Klaviyo so they will not be in the Klaviyo platform.</p>\n<p>Klaviyo cannot pull custom image locations.</p>\n</div>\n<h2 id=\"01H8PQV0GGCNJ93CPHNNXFF0M4\">Revenue value</h2>\n<p>You may see that the <em>Revenue </em>value on your Klaviyo dashboard does not always match up with the revenue value you see in Magento; this is because Klaviyo does not subtract cancelled and refunded orders from our revenue calculation.</p>\n<h2 id=\"01H8PQV0GGF7KYBBPEE97EM5S5\">Additional resources</h2>\n<ul>\n<li><a href=\"https://klaviyo.zendesk.com/hc/en-us/articles/115005254348\" target=\"_blank\" rel=\"noopener\">How to integrate with Magento 2.x (CE and EE)</a></li>\n<li><a href=\"https://klaviyo.zendesk.com/hc/en-us/articles/5510750923035\" target=\"_blank\" rel=\"noopener\">Troubleshooting your Magento 2 integration</a></li>\n</ul>",
+    "user_segment_ids": []
+  },
+  "normalized": {
+    "id": "115003458852",
+    "title": "Magento 2 data reference",
+    "source_url": "https://help.klaviyo.com/hc/en-us/articles/115003458852-Magento-2-data-reference",
+    "section_id": 49375848540187,
+    "section": "Magento 2",
+    "category_id": 115000032731,
+    "category": "Integrations",
+    "category_slug": "integrations",
+    "klaviyo_updated": "2026-04-21T13:54:15Z",
+    "created_at": "2017-12-14T15:49:18Z",
+    "draft": false,
+    "promoted": false,
+    "position": 1,
+    "label_names": []
+  },
+  "files": {
+    "body_html": "_source/articles/115003458852.body.html",
+    "rendered_html": "_source/rendered/115003458852.html"
+  },
+  "assets": {
+    "api_body": {
+      "images": [
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/35507590825499",
+          "alt": "",
+          "width": "390",
+          "height": "426"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/35507597379867",
+          "alt": "",
+          "width": "406",
+          "height": "338"
+        }
+      ],
+      "links": [
+        {
+          "href": "https://klaviyo.zendesk.com/hc/en-us/articles/115001002272",
+          "text": "please let us know"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005076747-View-Raw-Metric-or-Event-Data-in-Klaviyo",
+          "text": "View the raw data"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005076767#h_01HADAYAACCVC5TX5932PQ2AZA",
+          "text": "kx parameter"
+        },
+        {
+          "href": "https://klaviyo.zendesk.com/hc/en-us/articles/115005254348",
+          "text": "How to integrate with Magento 2.x (CE and EE)"
+        },
+        {
+          "href": "https://klaviyo.zendesk.com/hc/en-us/articles/5510750923035",
+          "text": "Troubleshooting your Magento 2 integration"
+        }
+      ],
+      "headings": [
+        {
+          "level": 2,
+          "id": "01H8PQV0GFXC7AP0M9GEQ342WB",
+          "text": "How Klaviyo determines Magento 2 metrics"
+        },
+        {
+          "level": 3,
+          "id": "01H8PQV0GFG4BEN0GWFKD7RF3A",
+          "text": "Order metrics"
+        },
+        {
+          "level": 3,
+          "id": "01H8PQV0GFQG0W5Y3SBT8R2N3J",
+          "text": "Started Checkout metric"
+        },
+        {
+          "level": 3,
+          "id": "01H8PQV0GGMQ163VYNB3BT465Z",
+          "text": "Fulfilled Shipment metric"
+        },
+        {
+          "level": 2,
+          "id": "01H8PQV0GGNPJBW13F5ND4P30G",
+          "text": "Magento 2 metric data"
+        },
+        {
+          "level": 3,
+          "id": "01H8PQV0GG2WZR1YF3PX7BYHW0",
+          "text": "Cancelled Order"
+        },
+        {
+          "level": 3,
+          "id": "01H8PQV0GG4AQA8C9XM6PSYTHM",
+          "text": "Fulfilled Order"
+        },
+        {
+          "level": 3,
+          "id": "01H8PQV0GG7RRY9WCD11Y71QMF",
+          "text": "Fulfilled Shipment"
+        },
+        {
+          "level": 3,
+          "id": "01H8PQV0GGGPM5JE96K0HYPQNK",
+          "text": "Ordered Product"
+        },
+        {
+          "level": 3,
+          "id": "01H8PQV0GG1G7HBRV8NPNP6GBZ",
+          "text": "Placed Order"
+        },
+        {
+          "level": 3,
+          "id": "01H8PQV0GGS9CN9D920NSTE0SA",
+          "text": "Refunded Order"
+        },
+        {
+          "level": 3,
+          "id": "01H8PQV0GG3EWNP37Q3D4AS9J0",
+          "text": "Started Checkout"
+        },
+        {
+          "level": 3,
+          "id": "01H8PQV0GGPFGK28YTSFB15QJ5",
+          "text": "Added To Cart"
+        },
+        {
+          "level": 3,
+          "id": "h_01JQPPZXX34N8N0KA61T3E3DKV",
+          "text": "Viewed Product"
+        },
+        {
+          "level": 3,
+          "id": "h_01JQPPZXX37R50CGSZKEAH44F7",
+          "text": "Active on Site"
+        },
+        {
+          "level": 3,
+          "id": "01H8PQV0GGKGATN6FHF5CD0PHK",
+          "text": "Synced customer data"
+        },
+        {
+          "level": 2,
+          "id": "01H8PQV0GGCNJ93CPHNNXFF0M4",
+          "text": "Revenue value"
+        },
+        {
+          "level": 2,
+          "id": "01H8PQV0GGF7KYBBPEE97EM5S5",
+          "text": "Additional resources"
+        }
+      ]
+    },
+    "rendered_page": {
+      "images": [
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/7ff492c2b417b7ecfe572f839a8a81398693c1f7-1920x1080.webp",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/4acfb298d2f219e77e5e2afc0ad208cd697ce254-796x868.png?w=390",
+          "alt": "",
+          "width": "390",
+          "height": "426"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/2ea4378d67165462c1ab39280421a8f11a7eba49-664x554.png?w=406",
+          "alt": "",
+          "width": "406",
+          "height": "338"
+        }
+      ],
+      "links": [
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115003458852-Magento-2-data-reference#site-content",
+          "text": "Skip to main content"
+        },
+        {
+          "href": "https://www.klaviyo.com",
+          "text": "Home"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center"
+        },
+        {
+          "href": "https://www.klaviyo.com/enterprise",
+          "text": "Enterprise"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Partners"
+        },
+        {
+          "href": "https://www.klaviyo.com/careers",
+          "text": "Careers"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": "Log in"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": ""
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center Find step-by-step instructions and troubleshooting solutions in our knowledge base."
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000032731",
+          "text": "Integrations"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000312411",
+          "text": "Flows"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867867",
+          "text": "Audience"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867667",
+          "text": "Campaigns"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/360000190711",
+          "text": "Sign-up forms"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000873988",
+          "text": "Deliverability & compliance"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/29173800271259",
+          "text": "SMS"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/16638219724187",
+          "text": "Reviews"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/18073014919195",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/34141283979931",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/37659126754075",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/33948021740315",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/39746685522331",
+          "text": "WhatsApp"
+        },
+        {
+          "href": "https://academy.klaviyo.com",
+          "text": "Klaviyo Academy Expert training and education to help you succeed with Klaviyo, and beyond."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Quick+guide&resource=academy_courses",
+          "text": "Quick guides Learn marketing strategies and concepts in 15 minutes or less."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Course&resource=academy_courses",
+          "text": "Courses Master key marketing topics through structured lessons and exams."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/best-practices",
+          "text": "Best practices Discover top product and marketing strategies for your business."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/learning-paths",
+          "text": "Learning paths Complete curated learning journeys tailored to your marketing goals."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses",
+          "text": "Explore all resources"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Live+training&resource=academy_courses",
+          "text": "Live trainings Build confidence through hands-on interactive workshops and thought-provoking strategy sessions."
+        },
+        {
+          "href": "https://www.bigmarker.com/klaviyo-customer-education/Office-hours-Getting-started-with-Klaviyo",
+          "text": "Live office hours Join a strategic discussion where you can ask questions and get answers in real-time."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/private-live-training",
+          "text": "1:1 Live training Book a private training session with an expert to jumpstart your platform knowledge and confidence."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/credentials",
+          "text": "Klaviyo credentials Dig deeper into select topics and showcase your expertise with a final exam to earn a certificate and digital badge."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/certificates/klaviyo-practitioner-certificate",
+          "text": "Klaviyo practitioner certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/deliverability-certificate",
+          "text": "Deliverability certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/developer-certificate",
+          "text": "Klaviyo developer certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses&select=Certificate",
+          "text": "See all certificates"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Klaviyo Community Join our thriving community network to connect with brands like yours—online and in person."
+        },
+        {
+          "href": "https://community.klaviyo.com/topic/new",
+          "text": "Ask a question Post a question and get thoughtful answers from Klaviyo powerusers."
+        },
+        {
+          "href": "https://community.klaviyo.com/p/roadmap",
+          "text": "Product roadmap"
+        },
+        {
+          "href": "https://community.klaviyo.com/search/activity/recent",
+          "text": "Recent threads"
+        },
+        {
+          "href": "https://community.klaviyo.com/p/champions",
+          "text": "Meet the Champions"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups",
+          "text": "Browse all groups Your people are waiting. New ideas and connections are a click away."
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/developer-group-64",
+          "text": "Developer group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/entrepreneur-user-group-118",
+          "text": "Entrepreneur group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/woo-user-group-87",
+          "text": "WooCommerce group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/new-york-meetup-chapter-82",
+          "text": "New York City"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/los-angeles-meetup-chapter-83",
+          "text": "Los Angeles"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/austin-meetup-chapter-85",
+          "text": "Austin"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/san-diego-meetup-chapter-86",
+          "text": "San Diego"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/amsterdam-meetup-chapter-84",
+          "text": "Amsterdam"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Klaviyo Developers Access API documentation and developer guides to help you build with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/get_started",
+          "text": "Get started Access key resources and a step-by-step checklist for how to start developing with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/build_your_integration",
+          "text": "Grow your app's reach Learn how to join our ecosystem and get your app listed on our marketplace."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/developer-tools",
+          "text": "Developer tools Generate sample data, monitor your API usage, and access our Postman collections."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/reference/api_overview",
+          "text": "API reference Browse our full catalog of API docs."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/changelog_",
+          "text": "Changelog"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/api_versioning_and_deprecation_policy",
+          "text": "Versioning & deprecation policy"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/rate_limits_and_error_handling",
+          "text": "Rate limits & error handling"
+        },
+        {
+          "href": "https://youtube.com/playlist?list=PLHkNfHgtxcUanrkMnKPdkRzuWU7MGv_xM&si=pkG-KH7IT_TUHOGC",
+          "text": "API tutorials on YouTube Subscribe to our Klaviyo API Tutorials playlist for easy access to step-by-step developer walkthroughs."
+        },
+        {
+          "href": "https://www.klaviyo.com/contact-us",
+          "text": "Contact us"
+        },
+        {
+          "href": "https://www.klaviyo.com/sign-up",
+          "text": "Sign up"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": "Search"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115003458852",
+          "text": "United States - EN"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/de-de/articles/115003458852",
+          "text": "Deutschland - DE"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-es/articles/115003458852",
+          "text": "España - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-mx/articles/115003458852",
+          "text": "México - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/fr-fr/articles/115003458852",
+          "text": "France - FR"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/it-it/articles/115003458852",
+          "text": "Italia - IT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/ko-kr/articles/115003458852",
+          "text": "한국 - KO"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/nl-nl/articles/115003458852",
+          "text": "Nederland - NL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pl-pl/articles/115003458852",
+          "text": "Polska - PL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pt-br/articles/115003458852",
+          "text": "Brasil - PT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/sv-se/articles/115003458852",
+          "text": "Sverige - SV"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/14521703806363",
+          "text": "Adobe Commerce (Magento)"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/49375848540187",
+          "text": "Magento 2"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115003458852-Magento-2-data-reference#01H8PQV0GFXC7AP0M9GEQ342WB",
+          "text": "How Klaviyo determines Magento 2 metrics"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115003458852-Magento-2-data-reference#01H8PQV0GGNPJBW13F5ND4P30G",
+          "text": "Magento 2 metric data"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115003458852-Magento-2-data-reference#01H8PQV0GGCNJ93CPHNNXFF0M4",
+          "text": "Revenue value"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115003458852-Magento-2-data-reference#additional-resources",
+          "text": "Additional resources"
+        },
+        {
+          "href": "https://klaviyo.zendesk.com/hc/en-us/articles/115001002272",
+          "text": "please let us know"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005076747-View-Raw-Metric-or-Event-Data-in-Klaviyo",
+          "text": "View the raw data"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005076767#h_01HADAYAACCVC5TX5932PQ2AZA",
+          "text": "kx parameter"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005254348",
+          "text": "Getting started with Magento 2.x (CE and EE)"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/5510750923035",
+          "text": "Troubleshooting your Magento 2 integration"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115001002272",
+          "text": "Learn how to contact support"
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": ""
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": "Visit Community"
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": ""
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": "Hire a partner"
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/about",
+          "text": "About Klaviyo"
+        },
+        {
+          "href": "https://www.klaviyo.com/newsroom",
+          "text": "Newsroom"
+        },
+        {
+          "href": "https://investors.klaviyo.com/overview/default.aspx",
+          "text": "Investor relations"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Agency and tech partners"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Developers"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/retail",
+          "text": "Retail and ecommerce"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/restaurants",
+          "text": "Restaurant marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/wellness",
+          "text": "Wellness"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform",
+          "text": "B2C CRM overview"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai",
+          "text": "Klaviyo AI (K:AI)"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/marketing-automation",
+          "text": "Klaviyo Marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-service",
+          "text": "Klaviyo Service"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/analytics",
+          "text": "Klaviyo Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-data-platform",
+          "text": "Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare",
+          "text": "Klaviyo vs. Klaviyo alternatives"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-mailchimp",
+          "text": "Klaviyo vs. Mailchimp"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-postscript",
+          "text": "Klaviyo vs. Postscript"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-attentive",
+          "text": "Klaviyo vs. Attentive"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-salesforce-marketing-cloud",
+          "text": "Klaviyo vs. Salesforce"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-listrak",
+          "text": "Klaviyo vs. Listrak"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/omnichannel",
+          "text": "Omnichannel marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/email-marketing",
+          "text": "Email marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing",
+          "text": "SMS marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing/rcs",
+          "text": "RCS for Business"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/mobile-app-marketing",
+          "text": "Mobile app marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/whatsapp",
+          "text": "WhatsApp marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/social",
+          "text": "Social marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources",
+          "text": "Marketing resources"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources/marketing-campaign-calendar",
+          "text": "Marketing campaign calendar"
+        },
+        {
+          "href": "https://www.klaviyo.com/glossary",
+          "text": "Marketing glossary"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/email-subject-line-generator",
+          "text": "Subject line generator"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/roi-calculator",
+          "text": "ROI calculator"
+        },
+        {
+          "href": "https://www.klaviyo.com/customers",
+          "text": "Case studies"
+        },
+        {
+          "href": "https://www.klaviyo.com/composer",
+          "text": "Composer Beta"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/marketing-agent",
+          "text": "Marketing Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/customer-agent",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/customer-experience-hub",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/helpdesk",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/marketing-analytics",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/advanced-cdp",
+          "text": "Advanced Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/web-forms",
+          "text": "Web forms"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/email-templates",
+          "text": "Email templates"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/portfolio",
+          "text": "Portfolio"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform-integrations",
+          "text": "Apps and Integrations"
+        },
+        {
+          "href": "https://www.klaviyo.com/features",
+          "text": "Features"
+        },
+        {
+          "href": "https://www.klaviyo.com/whats-new",
+          "text": "What's new"
+        },
+        {
+          "href": "https://www.klaviyo.com/events",
+          "text": "Events"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help Center"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us",
+          "text": "Academy"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Community"
+        },
+        {
+          "href": "https://www.facebook.com/Klaviyo/",
+          "text": "Facebook"
+        },
+        {
+          "href": "https://twitter.com/klaviyo/",
+          "text": "Twitter"
+        },
+        {
+          "href": "https://www.linkedin.com/company/klaviyo/",
+          "text": "LinkedIn"
+        },
+        {
+          "href": "https://www.instagram.com/klaviyo/",
+          "text": "Instagram"
+        },
+        {
+          "href": "https://www.klaviyo.com/sitemap",
+          "text": "Site Map"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal",
+          "text": "Terms and Privacy"
+        },
+        {
+          "href": "https://www.klaviyo.com/security",
+          "text": "Security"
+        },
+        {
+          "href": "https://www.klaviyo.com/trust",
+          "text": "Trust"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal/intellectual-property-notices",
+          "text": "Intellectual Property Notices"
+        }
+      ],
+      "headings": [
+        {
+          "level": 1,
+          "id": "",
+          "text": "Magento 2 data reference"
+        },
+        {
+          "level": 2,
+          "id": "01H8PQV0GFXC7AP0M9GEQ342WB",
+          "text": "How Klaviyo determines Magento 2 metrics"
+        },
+        {
+          "level": 3,
+          "id": "01H8PQV0GFG4BEN0GWFKD7RF3A",
+          "text": "Order metrics"
+        },
+        {
+          "level": 3,
+          "id": "01H8PQV0GFQG0W5Y3SBT8R2N3J",
+          "text": "Started Checkout metric"
+        },
+        {
+          "level": 3,
+          "id": "01H8PQV0GGMQ163VYNB3BT465Z",
+          "text": "Fulfilled Shipment metric"
+        },
+        {
+          "level": 2,
+          "id": "01H8PQV0GGNPJBW13F5ND4P30G",
+          "text": "Magento 2 metric data"
+        },
+        {
+          "level": 3,
+          "id": "01H8PQV0GG2WZR1YF3PX7BYHW0",
+          "text": "Cancelled Order"
+        },
+        {
+          "level": 3,
+          "id": "01H8PQV0GG4AQA8C9XM6PSYTHM",
+          "text": "Fulfilled Order"
+        },
+        {
+          "level": 3,
+          "id": "01H8PQV0GG7RRY9WCD11Y71QMF",
+          "text": "Fulfilled Shipment"
+        },
+        {
+          "level": 3,
+          "id": "01H8PQV0GGGPM5JE96K0HYPQNK",
+          "text": "Ordered Product"
+        },
+        {
+          "level": 3,
+          "id": "01H8PQV0GG1G7HBRV8NPNP6GBZ",
+          "text": "Placed Order"
+        },
+        {
+          "level": 3,
+          "id": "01H8PQV0GGS9CN9D920NSTE0SA",
+          "text": "Refunded Order"
+        },
+        {
+          "level": 3,
+          "id": "01H8PQV0GG3EWNP37Q3D4AS9J0",
+          "text": "Started Checkout"
+        },
+        {
+          "level": 3,
+          "id": "01H8PQV0GGPFGK28YTSFB15QJ5",
+          "text": "Added To Cart"
+        },
+        {
+          "level": 3,
+          "id": "h_01JQPPZXX34N8N0KA61T3E3DKV",
+          "text": "Viewed Product"
+        },
+        {
+          "level": 3,
+          "id": "h_01JQPPZXX37R50CGSZKEAH44F7",
+          "text": "Active on Site"
+        },
+        {
+          "level": 3,
+          "id": "01H8PQV0GGKGATN6FHF5CD0PHK",
+          "text": "Synced customer data"
+        },
+        {
+          "level": 2,
+          "id": "01H8PQV0GGCNJ93CPHNNXFF0M4",
+          "text": "Revenue value"
+        },
+        {
+          "level": 2,
+          "id": "additional-resources",
+          "text": "Additional resources"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "Explore more from Klaviyo"
+        }
+      ]
+    }
+  },
+  "rendered_page": {
+    "status": "fetched",
+    "error": ""
+  }
+}

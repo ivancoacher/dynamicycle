@@ -1,0 +1,106 @@
+<h2 id="h_01HCWZ7CX3MJ4CW7VVDGKSBV3V">You will learn</h2>
+<p>Learn how to install Klaviyo Reviews with a vintage Shopify theme or headless architecture. This process involves copying several code snippets and pasting them into your site’s code. </p>
+<p>If you are using a Shopify 2.0 theme, you can install Klaviyo Reviews without using code. Head to our article on <a href="https://help.klaviyo.com/hc/en-us/articles/15937542819355">getting started with Klaviyo Reviews</a> to learn more. If you use WooCommerce, learn how to <a href="https://help.klaviyo.com/hc/en-us/articles/26922347702939">install Klaviyo Reviews for WooCommerce</a>. </p>
+<div class="bs-callout bs-callout-default">
+<p>This process requires directly editing your theme files in Shopify. If you aren’t comfortable doing this yourself, reach out to your developer or <a href="https://connect.klaviyo.com/">contact a Klaviyo partner</a> for assistance. </p>
+</div>
+<h2 id="h_01HCWZ7CX40Y980XNXJQR7BZY8">Before you begin</h2>
+<p>Before you paste these code snippets in your site’s code, <a href="https://apps.shopify.com/klaviyo-reviews">add the Klaviyo Reviews app</a> to your Shopify store. For vintage themes, <a href="https://help.klaviyo.com/hc/en-us/articles/4425956184731">enable Klaviyo's onsite tracking</a>. </p>
+<h2 id="h_01HCWZZB9XX16H73SK3C65TFBN">Installing with headless architecture on Shopify</h2>
+<p>To integrate Klaviyo Reviews with a headless Shopify store, add Klaviyo's JavaScript tracking snippet, also known as Klaviyo.js, to all pages where you’d like to add reviews widgets (e.g., product pages). You may have already installed this snippet if you've configured Klaviyo's onsite tracking or sign-up forms. </p>
+<p>Learn how to <a href="https://help.klaviyo.com/hc/en-us/articles/360020342232">install Klaviyo.js for Shopify stores</a>. </p>
+<p>Once you’ve added this script to your site, proceed by copying the code snippets in the steps below into your site's code.</p>
+<h2 id="h_01HCWZ7CX45TRWKRMDDA3PDQTW">Add the code snippets</h2>
+<p>The code snippets below allow certain reviews widgets to appear in different areas of your store. </p>
+<ul>
+<li>The <strong>star rating widget</strong> displays the current star rating for a particular product, and is most often installed beneath your product’s name. </li>
+<li>The <strong>review summary widget</strong> shows a chart breaking down all the ratings selected for a product, user images submitted with reviews, and the most common feedback the product has received. It’s usually installed near the bottom of a product page. </li>
+<li>The <strong>product reviews widget</strong> is a combination of the reviews summary and review list widgets. If you add the product reviews widget to your site, you don’t need to add the review list and review summary widgets separately.</li>
+<li>The <strong>review list widget</strong> displays a list of all published reviews and customer questions, along with a search bar, filters, a <strong>Write a Review</strong> button, and an <strong>Ask a Question</strong> button. It’s typically installed immediately below the review summary widget. </li>
+<li>The <strong>featured review carousel widget</strong> displays highlighted reviews from all your products. This can be featured on your homepage, on a standalone reviews page, or anywhere else on your site. You can select the reviews that are featured in this widget. If available, customer-submitted images accompany each review; your product images are used if no image was submitted alongside the review. </li>
+<li>The <strong>SEO / All reviews widget</strong> displays all your reviews across all products on a single page. Use this widget to improve your SEO and provide a single place for potential customers to see what your current customers love. This widget is most often added to a standalone <em>Reviews</em> page on your site.</li>
+</ul>
+<h3 id="h_01HCWZ7CX45Z82M0C25TNTRGF2">Star rating widget</h3>
+<p>Use the star rating widget to prominently feature a product’s average rating and the number of reviews it has received.</p>
+<p class="wysiwyg-text-align-center"><img src="https://klaviyo.zendesk.com/hc/article_attachments/28715965547163" alt="The star rating widget" width="313" height="167"></p>
+<p>To install this widget beneath your product’s title: </p>
+<ol>
+<li>Open your Shopify store admin. </li>
+<li>Under <em>Sales channels</em> click <strong>Online Store</strong>. </li>
+<li>Click the three dots menu next to your current theme &gt; <strong>Duplicate</strong> to create a clone of your current theme. </li>
+<li>From the three dots menu, click <strong>Edit code</strong>.<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28715972087707" alt="The Edit code button" width="604" height="158">
+</li>
+<li>Search “product” in the file search bar and locate the file used for your product page content. It might be <em>product.liquid</em>, <em>product-template.liquid</em>, or something similar. (If you use a custom product page template, select that instead.)<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28715965535899" alt="Searching for the product page content" width="294" height="298">
+</li>
+<li>Select the file, then search for {{ product.title }} to locate the code that displays your product’s title.<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28715972092955" alt="Product title code" width="657" height="155">
+</li>
+<li>Add a new line beneath this code. </li>
+<li>On the new line, paste this code snippet:<br>
+<code>&lt;div class="klaviyo-star-rating-widget" data-id="{{product.id}}" data-product-title="{{product.title}}"      data-product-type="{{product.type}}"&gt;&lt;/div&gt;</code><br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28715972095899" alt="The star rating code snippet" width="656" height="123">
+</li>
+<li>Click <strong>Save</strong>. </li>
+<li>Click <strong>Preview store</strong>. </li>
+<li>Navigate to a product page within your store preview. You should see a star widget beneath the product’s title. </li>
+</ol>
+<h3 id="h_01HCWZ7CX4E204B3XQ5XCYC42J">Product reviews widget</h3>
+<p>Use the review summary and review list widget (or just the product review widget) to add a summary and list of all published reviews for each product on your site. </p>
+<p class="wysiwyg-text-align-center"><img src="https://klaviyo.zendesk.com/hc/article_attachments/28715972112795" alt="Review summary with images"></p>
+<div class="bs-callout bs-callout-default">
+<p>To install the summary and list widgets separately, head to the <a href="#h_01H3W6P97SQ00C8CRMYP66RBZX">separate review summary and review list widgets</a> section below. </p>
+</div>
+<p>To install this widget: </p>
+<ol>
+<li>Open your Shopify store admin. </li>
+<li>Under <em>Sales channels</em> click <strong>Online Store</strong>. </li>
+<li>Click <strong>Customize</strong> next to your current theme to edit it, or click the three dots menu &gt; <strong>Duplicate</strong> if you’d like to edit a draft theme instead of your live one. </li>
+<li>From the three dots menu, click <strong>Edit code</strong>.<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28715972087707" alt="The Edit code option">
+</li>
+<li>Search “product” in the file search bar and locate the file used for your product page content. It might be <em>product.liquid</em>, <em>product-template.liquid</em>, or something similar. (If you use a custom product page template, select that instead.)<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28715965535899" alt="Locating the product page content" width="296" height="300">
+</li>
+<li>Select the file, then navigate to the very bottom (or wherever you’d like the reviews summary and list widget to appear). </li>
+<li>Add a new line, then paste this code snippet:<br>
+<code>&lt;div id="klaviyo-reviews-all" data-id="{{product.id}}"&gt;&lt;/div&gt;</code><br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28715965542555" alt="The all reviews code snippet" width="652" height="145">
+</li>
+<li>Click <strong>Save</strong>. </li>
+<li>Click <strong>Preview store</strong>. </li>
+<li>Navigate to a product page within your store preview for a product that has reviews. You should see a reviews summary and list view widget near the bottom of the page.</li>
+</ol>
+<h3 id="h_01H3W6P97SQ00C8CRMYP66RBZX">Separate review summary and review list widgets</h3>
+<p>If you’d prefer to install the review summary and review list widgets separately (rather than together, as outlined in the section above), use the following code snippets: </p>
+<h4 id="h_01HCWZ7CX4QP5W6DCTTRJ3R9SD">Review summary widget</h4>
+<p><code>&lt;div id="klaviyo-reviews-summary" data-id="{{product.id}}"&gt;&lt;/div&gt;</code></p>
+<h4 id="h_01HCWZ7CX4NXMPNHD41W3WXAEY">Review list widget</h4>
+<p><code>&lt;div id="klaviyo-reviews-list" data-id="{{product.id}}"&gt;&lt;/div&gt;</code></p>
+<h3 id="h_01HCWZ7CX4W39PKF5HZ2YXX3XS">Featured review carousel widget (optional)</h3>
+<p>The featured reviews carousel displays hand-selected reviews on any page you choose (e.g., your home page). </p>
+<p class="wysiwyg-text-align-center"><img src="https://klaviyo.zendesk.com/hc/article_attachments/28715965550363" alt="The featured reviews carousel widget" width="690" height="215"></p>
+<p>To add a carousel displaying all your featured reviews, you must first select reviews to feature. </p>
+<ol>
+<li>In Klaviyo’s main navigation, select <strong>Reviews</strong>. </li>
+<li>Click <strong>All Reviews</strong>.</li>
+<li>Beside a review you’d like to feature, click <strong>Feature</strong>.<br>
+</li>
+</ol>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/28715972110235" alt="The option to feature a review" width="642" height="133"></p>
+<p>Once you’ve selected several reviews to feature on your site, you can install a review carousel widget on any page. Navigate to the page where you’d like the carousel to appear, then paste the following snippet in that page’s code: </p>
+<p><code>&lt;div id="klaviyo-featured-reviews-carousel"&gt;&lt;/div&gt;</code></p>
+<h2 id="h_01HT2M88RXPGNSMSAA9EKWE3EC">SEO / All reviews widget (optional)</h2>
+<p>The SEO / All reviews widget displays all published reviews across every product. Add this to a standalone Reviews page, or to your About page.</p>
+<p><code>&lt;div id="klaviyo-reviews-all" data-id="all"&gt;&lt;/div&gt;</code></p>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/28715972114843" alt="all reviews widget" width="634" height="335"></p>
+<h2 id="h_01HCWZ7CX40KW2QHXDZ475JM4R">Outcome</h2>
+<p>Once you’ve installed the widgets outlined in this article and set the new theme live, your reviews will appear across product pages (as well as any other pages on your site where you’ve installed them). </p>

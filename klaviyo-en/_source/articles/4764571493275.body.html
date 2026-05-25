@@ -1,0 +1,180 @@
+<h2 id="block-0">You Will Learn</h2>
+<p>Learn how to configure OneTrust cookie management tools (including their Auto-BlockingTM functionality and Cookie Pro product) tools to work with Klaviyo’s tracking and onsite functionality.<br>
+<br>
+Klaviyo.js is Klaviyo's JavaScript snippet that enables Active on Site tracking and signup forms. You have the option to enable this tracking through your ecommerce integration or by pasting the code in your site's theme. Typically when Klaviyo’s JavaScript is enabled, the __kla_id cookie can track and identify site visitors. When not blocked, this cookie temporarily holds personally identifiable information, and once the visitor is identified (e.g., clicking a link through a Klaviyo-sent email), this cookied information is passed to Klaviyo. However, OneTrust requires additional setup steps to ensure this information is captured and then compliantly sent to Klaviyo.<br>
+<br>
+In this article we will walk through the steps to ensure OneTrust is capturing visitor information appropriately and sending it to Klaviyo. Please note that you will need to complete all cookie setup steps in this guide and in the order outlined below.</p>
+<h2 id="block-2">Prerequisites</h2>
+<p>We suggest visiting our <a href="https://help.klaviyo.com/hc/en-us/articles/115005076767">Guide to Klaviyo Web Tracking </a>for more information on how our cookies capture known visitor information in different ways.<br>
+<br>
+Additionally, it is important that you have already enabled Klaviyo.js, either directly through your <a href="https://help.klaviyo.com/hc/en-us/categories/115000032731-Ecommerce-Integrations">ecommerce integration</a> or <a href="https://developers.klaviyo.com/en/docs/guide-to-integrating-a-platform-without-a-pre-built-klaviyo-integration#javascript-track-api-for-on-site-metrics">manually</a>.</p>
+<h2 id="block-4">Configuring Klaviyo and OneTrust’s Tools</h2>
+<p>OneTrust’s tools will automatically block cookies unless visitors have already explicitly consented via OneTrust. These tools can block cookies but also cause Klaviyo forms to stop working altogether, even forms that do not require tracking.<br>
+<br>
+In order to adhere to this compliance protocol and allow certain forms to function, Klaviyo needs to be configured with OneTrust in a way that does not track events without consent. Klaviyo’s tracking includes:</p>
+<ul>
+<li>if a visitor is active on site, the site referrer URL</li>
+<li>if a visitor views or adds to a product to their cart (if you’ve enabled this separately)</li>
+</ul>
+<p>To make consent-based tracking compatible across OneTrust and Klaviyo, as well as some sign-up form functionality continue to work, you will need to follow the steps below inside OneTrust’s CookiePro tool.</p>
+<h2 id="block-9">Add Your Website to CookiePro</h2>
+<p>If you haven’t already, you will need to add your website to your CookiePro account.<br>
+<br>
+1. Log into your <a href="http://app.cookiepro.com/">CookiePro account</a> and click the <strong>Cookie Compliance</strong> section under My Apps.</p>
+<p class="wysiwyg-text-align-center"><img src="https://klaviyo.zendesk.com/hc/article_attachments/28717390181531" alt="View of the CookiePro dashboard with Cookie Compliance section highlighted" width="576" height="307"></p>
+<p>2. Click <strong>Add Website</strong> in the upper right-hand corner.</p>
+<p class="wysiwyg-text-align-center"><img src="https://klaviyo.zendesk.com/hc/article_attachments/28717390183579" alt="The Add Website button in the upper right corner of the CookiePro dashboard page"></p>
+<p>3. From here, you will see a section to set up and add your website and scanning details. Fill in your website URL and name of your organization in the first two fields.</p>
+<p class="wysiwyg-text-align-center"><img src="https://klaviyo.zendesk.com/hc/article_attachments/28717383884059" alt="Scan Website modal with fields to fill website URL and Organization information"></p>
+<p class="wysiwyg-text-align-left">Note that if you already have an organization associated with your CookiePro account, it will appear in the dropdown as an option.<br>
+<br>
+4. Under the <strong>Advanced Options</strong> section, you can choose to adjust or add your scanning settings.<br>
+<br>
+5. You can adjust the number of website pages that CookiePro will scan by changing the number in the <em>Limit scan</em> to field. By default, CookiePro will recommend scanning the first 1,000 pages.</p>
+<p class="wysiwyg-text-align-center"><img src="https://klaviyo.zendesk.com/hc/article_attachments/28717390188315" alt="Inside Scanning Settings page, the ability to input scanned page numbers in field and toggle option on"></p>
+<p>6. You can also limit the CookiePro scan to one area of your site. To do this, toggle on the option next to <em>Limit to this path</em><em>within site.</em> Make sure that your Website URL above reflects this URL path (e.g., retail.com/signups).</p>
+<p class="wysiwyg-text-align-center"><img src="https://klaviyo.zendesk.com/hc/article_attachments/28717383946907" alt="Inside the Scanning Settings page, the toggle option to only scan pages within one area of your website"></p>
+<p>7. Finally, if there are certain pages or types of pages that you want CookiePro to scan, you can add these in the next few fields. Add page IDs separated by commas to the <em>Scan Pages with Query</em><em>Parameters</em> field to scan pages by ID number.<br>
+<br>
+You can also scan pages by URL by adding these URLs in the <em>Target Pages to Scan</em> field.<br>
+<br>
+If you have a longer list of URLs or a sitemap, you can copy and paste those into the <em>Sitemap URLs</em> field. These URLs will be scanned first in the scan queue.</p>
+<p class="wysiwyg-text-align-center"><img src="https://klaviyo.zendesk.com/hc/article_attachments/28717383893403" alt="In the Scanning Settings page, fields to add additional information on certain pages or areas of your website to scan "></p>
+<p>8. Once you have all settings completed, click <strong>Scan &amp; Configure</strong> in the lower right corner.</p>
+<h2 id="block-23">Configuring the Static-Tracking Cookie</h2>
+<p>In the section below we will walk through setting up your static-tracking cookie to ensure you are able to gather third-party cookies and pass these to Klaviyo.<br>
+<br>
+1. Once your website has been added, navigate to <strong>Cookiepedia</strong> &gt; <strong>Categorizations</strong> in the left hand navigation.<br>
+<br>
+2. Look for the Klaviyo static-tracking __kla_id cookie either by searching for it in the field above or by scrolling through the list below. It should be the option labeled as “Persistent” with the <em>static-tracking.klaviyo.com</em> hostname.<br>
+<br>
+3. Click the <strong>__kla_id</strong> cookie option.<br>
+</p>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/28717390192411" alt="Inside the Categorizations page, a highlighted view of the __kla_id cookie in a list"></p>
+<p class="wysiwyg-text-align-left">4. Once on the <em>Cookie Details</em> page, navigate to the <strong>Categorization</strong> tab.<br>
+<br>
+5. If you have not run a scan with Klaviyo and OneTrust yet, make sure to choose <strong>Targeting Cookies</strong> from the <em>Select a category</em> dropdown. Make sure that <em>Third-Party Cookie</em> is already populated in the <em>Select a party</em> dropdown.</p>
+<p class="wysiwyg-text-align-center"><img src="https://klaviyo.zendesk.com/hc/article_attachments/28717390194715" alt="On the Categorization tab, a modal showing dropdowns for selecting a cookie category and cookie party"></p>
+<p>6. Once you have made these updates, click <strong>Save</strong> in the lower right corner.<br>
+<br>
+7. In this same area, navigate to the <strong>Source</strong> tab. You should see your website URL appear in the list, as shown in the example below.</p>
+<p class="wysiwyg-text-align-center"><img src="https://klaviyo.zendesk.com/hc/article_attachments/28717383898267" alt="Inside the Sources page, a view of your website URL displayed"></p>
+<p>8. Click on your <strong>website URL</strong>.<br>
+<br>
+9. A dropdown will appear with a new URL; click on the pencil icon to the right.</p>
+<p class="wysiwyg-text-align-center"><img src="https://klaviyo.zendesk.com/hc/article_attachments/28717383900315" alt="A highligted view of the pencil editing icon to the right of your website URL" width="552" height="67"></p>
+<p>10. In the modal, remove your current URL and replace it with: <em>https://static-tracking.klaviyo.com</em>.<br>
+<br>
+11. Click <strong>Confirm</strong> once you have updated the URL.</p>
+<p class="wysiwyg-text-align-center"><img src="https://klaviyo.zendesk.com/hc/article_attachments/28717383943067" alt="A modal view of your Resource URL with a confirm butotn in the lower right"></p>
+<p class="wysiwyg-text-align-left">12. To confirm that the Klaviyo cookie has been updated, navigate to <strong>Cookpedia</strong><strong>&gt; Categorizations</strong> in the left-hand navigation. 1<br>
+<br>
+3. Click on the <strong>Cookies</strong> tab.<br>
+<br>
+14. From here, your __kla_id cookie should show a “1” listed under both the <em>Domain Category Overrides</em> and <em>Domains</em> columns.</p>
+<p class="wysiwyg-text-align-center"><img src="https://klaviyo.zendesk.com/hc/article_attachments/28717390203035" alt="On the confirmation screen, a list view showing your __kla_id cookie with domain category overrides and domain as a numeric one" width="335" height="95"></p>
+<h2 id="block-36">Configuring the Static.Klaviyo Cookie</h2>
+<p>In the section below, we will walk through setting up your static.Klaviyo cookie to ensure you are able to gather third-party cookies and pass these to Klaviyo.<br>
+<br>
+1. Navigate to <strong>Cookiepedia &gt; Categorizations</strong> in the left hand navigation.<br>
+<br>
+2. Look for the static.Klaviyo __kla_id cookie either by searching for it in the field above or by scrolling through the list below. It should be the option labeled as “Persistent” with the <em>static.klaviyo.com</em> hostname.<br>
+<br>
+3. Click this <strong>__kla_id</strong> cookie option.<br>
+</p>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/28717383910299" alt="On the Categorizations page, the __kla_id cookie option highlighted in a list view" width="856" height="132"></p>
+<p class="wysiwyg-text-align-left">4. Once on the <em>Cookie Details</em> page, navigate to the <strong>Categorization</strong> tab.<br>
+<br>
+5. Choose <strong>Targeting Cookies</strong> from the <em>Select a Category</em> dropdown. Make sure that <em>Third-Party Cookie</em> is already populated in the <em>Select a party</em> dropdown.</p>
+<p class="wysiwyg-text-align-center"><img src="https://klaviyo.zendesk.com/hc/article_attachments/28717390194715" alt="On the Categorization tab, a modal showing dropdowns for selecting a cookie category and cookie party"></p>
+<p>6. Once you have made these updates, click <strong>Save</strong> in the lower right corner.<br>
+<br>
+7. In this same area, navigate to the <strong>Source</strong> tab. You should see your website URL appear in the list below.</p>
+<p class="wysiwyg-text-align-center"><img src="https://klaviyo.zendesk.com/hc/article_attachments/28717383898267" alt="A modal view of your website URL"></p>
+<p>8. Click on your <strong>website URL</strong>.<br>
+<br>
+9. A dropdown will appear with a new URL; click on the pencil icon that appears to the right of this.</p>
+<p class="wysiwyg-text-align-center"><img src="https://klaviyo.zendesk.com/hc/article_attachments/28717383900315" alt="A highligted view of the pencil editing icon to the right of your website URL" width="519" height="63"></p>
+<p class="wysiwyg-text-align-left">10. In the modal remove your current URL and replace with: <em>https://static-tracking.klaviyo.com</em><a href="https://static-tracking.klaviyo.com.">. </a><br>
+<br>
+11. Click <strong>Confirm</strong> once you have updated the URL.</p>
+<p class="wysiwyg-text-align-center"><img src="https://klaviyo.zendesk.com/hc/article_attachments/28717383943067" alt="A modal of your website URL with a confirm button in the lower right"></p>
+<p>12. To confirm that the Klaviyo cookie has been updated, navigate to <strong>Cookiepedia &gt; Categorizations</strong> in the left hand navigation.<br>
+<br>
+13. From here, your __kla_id cookie should show a “1” listed under both the <em>Domain Category Overrides</em> and <em>Domains</em> columns.</p>
+<p class="wysiwyg-text-align-center"><img src="https://klaviyo.zendesk.com/hc/article_attachments/28717390203035" alt="On the confirmation screen, a list view showing your __kla_id cookie with domain category overrides and domain as a numeric one" width="335" height="95"></p>
+<h2 id="block-49">Configuring Your Website First-Party Cookie</h2>
+<p>In the section below we will walk through how to set up your websites or first-party cookies directly to capture the events on your ecommerce site.<br>
+<br>
+1. Navigate to <strong>Cookiepedia &gt; Categorizations</strong> in the left hand navigation.<br>
+<br>
+2. Look for your website specific __kla_id cookie either by searching for it in the field above or by scrolling through the list below. It should be the option labeled as “Persistent” with your website URL as the hostname.<br>
+<br>
+3. Click this <strong>__kla_id</strong> cookie option.</p>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/28717383916315" alt="On the Categorization page, your __kla_id cookie highlighted in a list view"></p>
+<p>4. Once on the <em>Cookie Details</em> page, navigate to the <strong>Categorization</strong> tab.<br>
+<br>
+5. Choose <strong>Targeting Cookies</strong> from the <em>Select a Category</em> dropdown. Make sure that <em>First-Party Cookie</em> is already populated in the <em>Select a party</em> dropdown.</p>
+<p class="wysiwyg-text-align-center"><img src="https://klaviyo.zendesk.com/hc/article_attachments/28717390209819" alt="On the Categorization tab, a modal showing dropdowns for selecting a cookie category and cookie party"></p>
+<p>6. Once you have made these updates, click <strong>Save</strong> in the lower right corner.<br>
+<br>
+7. In this same area, navigate to the <strong>Source</strong> tab. You should see your website URL appear in the list below.</p>
+<p class="wysiwyg-text-align-center"><img src="https://klaviyo.zendesk.com/hc/article_attachments/28717383898267" alt="A modal view of your website URL"></p>
+<p>8. Click on your <strong>website URL</strong>.<br>
+<br>
+9. A dropdown will appear with a new URL; click on the pencil icon that appears to the right of this.</p>
+<p class="wysiwyg-text-align-center"><img src="https://klaviyo.zendesk.com/hc/article_attachments/28717383900315" alt="A highligted view of the pencil editing icon to the right of your website URL" width="535" height="65"></p>
+<p>10. In the modal remove your current URL and replace with: <em>https://static-tracking.klaviyo.com</em>. <br>
+<br>
+11. Click <strong>Confirm</strong> once you have updated the URL.</p>
+<p class="wysiwyg-text-align-center"><img src="https://klaviyo.zendesk.com/hc/article_attachments/28717383943067" alt="A modal showing your website URL with a Confirm button in the lower right corner"></p>
+<h2 id="block-60">Previewing Your Updated Cookies</h2>
+<p class="wysiwyg-text-align-left">1. Navigate to <strong>Scripts</strong> in the left-hand navigation.<br>
+<br>
+2. On the Scripts page, click on your <strong>website URL</strong> that appears below.</p>
+<p class="wysiwyg-text-align-center"><img src="https://klaviyo.zendesk.com/hc/article_attachments/28717383922971" alt="On the Scripts page, your website URL will appear in the list below to click"></p>
+<p class="wysiwyg-text-align-left">3. Then, click <strong>Publish Production</strong> in the upper right-hand corner.</p>
+<p class="wysiwyg-text-align-center"><img src="https://klaviyo.zendesk.com/hc/article_attachments/28717383924507" alt="View of the Publish Production button to click in the upper right corner of the Scripts page" width="384" height="120"></p>
+<p>4. In the right sidebar that appears, click <strong>Confirm</strong>.<br>
+<br>
+5. Once on the <em>Review</em> tab, scroll down and click <strong>Continue</strong>.<br>
+<br>
+6. Finally, on the <em>Confirm</em><em>and Publish</em> tab, click <strong>Publish Test &amp; Preview</strong>. Your preview may take a few seconds to load, but you will see a green check appear below once it’s ready.</p>
+<p></p>
+<p></p>
+<p>
+<script src="https://fast.wistia.com/embed/medias/2b9o3tsibi.jsonp" async="async"></script>
+<script src="https://fast.wistia.com/assets/external/E-v1.js" async="async"></script>
+</p>
+<div class="wistia_responsive_padding" style="padding: 56.25% 0 0 0; position: relative;">
+<div class="wistia_responsive_wrapper" style="height: 100%; left: 0; position: absolute; top: 0; width: 100%;">
+<div class="wistia_embed wistia_async_2b9o3tsibi seo=false videoFoam=true" style="height: 100%; position: relative; width: 100%;">
+<div class="wistia_swatch" style="height: 100%; left: 0; opacity: 0; overflow: hidden; position: absolute; top: 0; transition: opacity 200ms; width: 100%;"><img style="filter: blur(5px); height: 100%; object-fit: contain; width: 100%;" src="https://fast.wistia.com/embed/medias/2b9o3tsibi/swatch" alt="" aria-hidden="true"></div>
+</div>
+</div>
+</div>
+<p><br>
+7. Once this success message appears, click <strong>Confirm</strong> below.</p>
+<h2 id="block-70">Publishing Your Updated Cookies</h2>
+<div class="bs-callout bs-callout-default">
+<p>Before you publish your cookies, it’s important to note that production scripts can take up to four hours to take effect on your website. Once you follow the directions below, please wait up to four hours to see these updates.</p>
+</div>
+<p>1. Navigate to <strong>Websites</strong> in the left-hand navigation.<br>
+<br>
+2. On the <em>Websites</em> page, click on your <strong>website URL</strong> from the list below.</p>
+<p class="wysiwyg-text-align-center"><img src="https://klaviyo.zendesk.com/hc/article_attachments/28717390222491" alt="On the Websites page, your website URL will appear in the list below to click"></p>
+<p class="wysiwyg-text-align-left">3. From here, click <strong>Publish</strong> in the upper right corner.<br>
+<br>
+4. A sidebar modal will appear confirming your version to publish. Click <strong>Confirm</strong> in the lower right corner.</p>
+<p class="wysiwyg-text-align-center"><img src="https://klaviyo.zendesk.com/hc/article_attachments/28717390226715" alt="A modal that will appear from the right sidebar to publish your website cookies with confirm button in lower right corner" width="498" height="577"></p>
+<p>5. In this same modal, you will move onto the <em>Review and Publish</em> screen. Click the toggle on <strong>Enable Automatic Blocking of Cookies</strong>.<br>
+<br>
+You can read more about CookiePro’s Auto-Blocking feature in their <a href="https://community.cookiepro.com/s/article/UUID-5b03e81d-8b3b-5da8-eed5-b3b015730f3c?language=en_US">guide</a>.</p>
+<p class="wysiwyg-text-align-center"><img src="https://klaviyo.zendesk.com/hc/article_attachments/28717383934235" alt="On the Review and Publish screen, a highlighted area to toggle on Automatic Blocking of Cookies" width="498" height="577"></p>
+<p>6. Click <strong>Publish</strong> in the lower right corner.<br>
+<br>
+7. A popup will appear with your Production Scripts. Click <strong>Copy Scripts</strong>.</p>
+<p class="wysiwyg-text-align-center"><img src="https://klaviyo.zendesk.com/hc/article_attachments/28717390232603" alt="A popup window showing your production scripts to copy and paste to your website" width="362" height="485"></p>
+<p>8. Place these scripts within the html of your ecommerce website. Read more about placing these scripts into your ecommerce website in CookiePro’s step-by-step <a href="https://community.cookiepro.com/s/article/UUID-7478d3b4-18eb-3ac0-a6fd-fb7ebff9f8dc?language=en_US">guide</a>.</p>
+<h2 id="block-81">Outcome</h2>
+<p>You have successfully set up your OneTrust cookie tracking software to ensure that your visitor information is captured and then compliantly sent to Klaviyo.</p>

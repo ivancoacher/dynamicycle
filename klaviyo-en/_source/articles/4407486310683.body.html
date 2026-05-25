@@ -1,0 +1,167 @@
+<h2 id="h_01HCJNFYSWVWTJJPWATKS17YJ1">You will learn</h2>
+<p>Learn how to create a custom Zapier webhook to send SMS consent to Klaviyo. You can easily modify the instructions in this guide to send email consent as well. </p>
+<p>The steps below will help you create a Zap using a webhook (also called a catch hook) that triggers a Python script action. The script sends an API call to Klaviyo to subscribe email and phone numbers to a list.</p>
+<div class="bs-callout bs-callout-default">
+<p>This feature is only available to users with Premium Zapier plans.</p>
+</div>
+<h2 id="h_01HCJNFYSW21FW2BHFS6BE2WXR">About the integration</h2>
+<div class="bs-callout bs-callout-default">
+<p>This integration is not fully supported by Klaviyo, but can be used as a work around if needed. We recommend only using this integration if you have developers on your team who can support it.</p>
+</div>
+<p>This guide uses a Zapier code action that runs a Python script when the trigger is detected. With this solution, you can map fields to the data types that Klaviyo endpoints require; specifically, the <a href="https://developers.klaviyo.com/en/reference/subscribe_profiles">Subscribe Profiles</a> and <a href="https://developers.klaviyo.com/en/reference/unsubscribe_profiles">Unsubscribe Profiles</a> endpoints.</p>
+<h2 id="h_01HCJNFYSWHJYRNQ69A04MKQ7Q">Set up Zapier webhook</h2>
+<ol>
+<li>Log in to your Zapier account.</li>
+<li>From the main page in Zapier, select <strong>+Create</strong>, then select <strong>Zap</strong>.</li>
+<li>Enter a name for your new Zap (e.g., Klaviyo Webhook).</li>
+<li>Search for <em>Webhook</em>, then select <strong>Webhooks by Zapier</strong> from the Trigger menu.<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28717383531547" alt="" width="617" height="419">
+</li>
+<li>In the next menu, select <strong>Catch Hook</strong> from the <em>Trigger Event</em> options.<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28717389841051" alt="" width="382" height="440">
+</li>
+<li>Click <strong>Continue</strong>.</li>
+<li>Select the <strong>Test</strong> tab.</li>
+<li>Copy the webhook URL that Zapier provides for you to send your requests to.<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28717383537947" alt="" width="432" height="274">
+</li>
+<li>Before testing, you’ll need to send test data to your webhook. See our guide on <a href="https://help.klaviyo.com/hc/en-us/articles/4407493023131-How-to-Send-Test-Data-to-Zapier">How to send test data to Zapier</a> for more information. Make sure to <a href="https://klaviyo.zendesk.com/hc/en-us/articles/360046055671">format phone numbers correctly</a> when sending test data.</li>
+<li>Once you’ve sent the test data to the webhook, click <strong>Test trigger </strong>(on the <strong>Test</strong> tab).<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28717389848475" alt="" width="439" height="520">
+</li>
+<li>If the request is successful, you’ll see a success message, and the test data will populate below the success message, similar to the example below:<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28717389853211" alt="" width="442" height="515">
+</li>
+<li>Once your trigger is working, click <strong>Continue with selected record</strong>.</li>
+</ol>
+<h2 id="h_01HCJNFYSWR26V2981JC1YZSDK">Set up Zapier action</h2>
+<ol>
+<li>In the Action menu, enter <strong>Code by Zapier</strong> in the search box and select the option from the list.<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28717383547419" alt="" width="381" height="211">
+</li>
+<li>Click <strong>Choose an event &gt; Run Python</strong>.<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28717383551259" alt="" width="383" height="439">
+</li>
+<li>Click <strong>Continue</strong>.</li>
+</ol>
+<h2 id="h_01HCJNFYSWG1QMQH8EKG5SJ7KN">Set up field mapping and create script logic</h2>
+<ol>
+<li>Set up field mapping to correlate the input data in the table below to the correct test data you previously sent. <br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28717389869851" alt="" width="398" height="306">
+<table style="width: 100%; height: 98px">
+<tbody>
+<tr>
+<td style="width: 29.5008%; height: 22px"><strong>Input data</strong></td>
+<td style="width: 70.348%; height: 22px"><strong>Test data mapped</strong></td>
+</tr>
+<tr>
+<td style="width: 29.5008%; height: 22px"><code>email</code></td>
+<td style="width: 70.348%; height: 22px">1. Email: &lt;Test email&gt;</td>
+</tr>
+<tr>
+<td style="width: 29.5008%; height: 10px"><code>phone_number</code></td>
+<td style="width: 70.348%; height: 10px">1. Phone Number: &lt;Test phone number&gt;</td>
+</tr>
+<tr>
+<td style="width: 29.5008%; height: 22px"><code>sms_consent</code></td>
+<td style="width: 70.348%; height: 22px">1. Sms_consent: true</td>
+</tr>
+<tr>
+<td style="width: 29.5008%; height: 22px"><code>name</code></td>
+<td style="width: 70.348%; height: 22px">1. Name: &lt;Test name&gt;</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>Add a script like the one below to the code box:<br>
+
+<pre><code class="language-text">import requests
+
+# configuring sms subscribe or unsubscribe call
+if (input_data["sms_consent"] == "true" or input_data["sms_consent"] == "True" or input_data["sms_consent"] == "TRUE"):
+  url = "https://a.klaviyo.com/api/profile-subscription-bulk-create-jobs/"  payload = { "data": {
+        "type": "profile-subscription-bulk-create-job",
+        "attributes": {
+            "profiles": { "data": [
+                    {
+                        "type": "profile",
+                        "attributes": {
+                            "email": input_data["email"],
+                            "phone_number": input_data["phone_number"],
+                            "subscriptions": {
+                                "sms": { "marketing": { "consent": "SUBSCRIBED" } }
+                            }
+                        }
+                    }
+                ] }
+        },
+        "relationships": { "list": { "data": {
+                    "type": "list",
+                    "id": "LIST_ID"
+                } } }
+    } }
+
+elif (input_data["sms_consent"] == "false" or input_data["sms_consent"] == "False" or input_data["sms_consent"] == "FALSE"):  url = "https://a.klaviyo.com/api/profile-subscription-bulk-delete-jobs/"
+  payload = { "data": {
+        "type": "profile-subscription-bulk-delete-job",
+        "attributes": {
+            "profiles": { "data": [
+                    {
+                        "type": "profile",
+                        "attributes": {
+                            "email": input_data["email"],
+                            "phone_number": input_data["phone_number"],
+                        }
+                    }
+                ] }
+        },
+        "relationships": { "list": { "data": {
+                    "type": "list",
+                    "id": "LIST_ID"
+                } } }
+    } }
+headers = {
+    "accept": "application/json",
+    "revision": "2024-05-15",
+    "content-type": "application/json",
+    "Authorization": "Klaviyo-API-Key your-private-api-key"
+}
+
+response = requests.post(url, json=payload, headers=headers)
+
+# Zapier requires an 'output' object
+output = {"response text": response.text}
+</code></pre>
+</li>
+<li>Replace <code>your-private-api-key</code>with your Klaviyo private API key.<br>
+
+<div class="bs-callout bs-callout-default">
+<p>Treat private API keys like passwords - keep them in a safe place and never expose them to the public.</p>
+</div>
+</li>
+<li>Replace the <code>LIST_ID</code> (in both locations) with the Klaviyo list ID you want to send your Zapier data to. You can find your list ID in Klaviyo by navigating to <strong>Audience &gt; Lists &amp; segments &gt; Settings</strong>. If you wish to immediately subscribe people without a confirmation (which can be helpful during testing) make sure that your list is set to single opt-in (found under the <em>Consent</em> tab within list settings). </li>
+<li>Click <strong>Continue</strong>, then click <strong>Test step</strong>.</li>
+<li>If your test is successful, you’ll see a response with no errors, like the one below:<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28717383558299" alt="" width="377" height="382">
+</li>
+<li>You can also check for a successful test in Klaviyo by navigating to your list and making sure the profile was added.<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28717389862939" alt="" width="580" height="201">
+</li>
+<li>Once your test is successful, click <strong>Publish</strong> to publish your zap. If your test isn’t successful, check out our <a href="#TroubleshootingTips">troubleshooting tips</a> for common issues.</li>
+</ol>
+<h2 id="h_01HCJNFYSXVQ1AZ4RFWWBHB47E">Troubleshooting tips</h2>
+<p>The following are common issues you may run into while setting up the Zapier webhook. If you encounter any other issues, you can reach out to the <a href="https://community.klaviyo.com/">Klaviyo Community</a> for further guidance.</p>
+<h3 id="h_01HCJNFYSX38K91ADZX90Z0YET">EOL while scanning string literal</h3>
+<p>If you see this error, then you’re missing a quotation mark around one of your variables. Check the list ID and private API key to make sure they’re surrounded on both sides by quotation marks.</p>
+<h3 id="h_01HCJNFYSXAJSQBWZ9WTW8HBKC">SyntaxError: invalid syntax</h3>
+<p>If you see this error, remove the comments in the Python code (any line that starts with a <code>#</code>).</p>

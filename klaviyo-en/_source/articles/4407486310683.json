@@ -1,0 +1,942 @@
+{
+  "captured_at": "2026-05-23T16:18:11Z",
+  "article": {
+    "id": 4407486310683,
+    "url": "https://klaviyo.zendesk.com/api/v2/help_center/en-us/articles/4407486310683.json",
+    "html_url": "https://klaviyo.zendesk.com/hc/en-us/articles/4407486310683-How-to-send-consent-to-Klaviyo-via-Zapier",
+    "author_id": 1263759681109,
+    "comments_disabled": true,
+    "draft": false,
+    "promoted": false,
+    "position": 5,
+    "vote_sum": 0,
+    "vote_count": 20,
+    "section_id": 49375599125915,
+    "created_at": "2021-09-27T22:25:00Z",
+    "updated_at": "2026-04-21T13:54:59Z",
+    "name": "How to send consent to Klaviyo via Zapier",
+    "title": "How to send consent to Klaviyo via Zapier",
+    "source_locale": "en-us",
+    "locale": "en-us",
+    "outdated": false,
+    "outdated_locales": [],
+    "edited_at": "2026-04-17T01:01:10Z",
+    "user_segment_id": null,
+    "permission_group_id": 146372,
+    "content_tag_ids": [],
+    "label_names": [],
+    "body": "<h2 id=\"h_01HCJNFYSWVWTJJPWATKS17YJ1\">You will learn</h2>\n<p>Learn how to create a custom Zapier webhook to send SMS consent to Klaviyo. You can easily modify the instructions in this guide to send email consent as well. </p>\n<p>The steps below will help you create a Zap using a webhook (also called a catch hook) that triggers a Python script action. The script sends an API call to Klaviyo to subscribe email and phone numbers to a list.</p>\n<div class=\"bs-callout bs-callout-default\">\n<p>This feature is only available to users with Premium Zapier plans.</p>\n</div>\n<h2 id=\"h_01HCJNFYSW21FW2BHFS6BE2WXR\">About the integration</h2>\n<div class=\"bs-callout bs-callout-default\">\n<p>This integration is not fully supported by Klaviyo, but can be used as a work around if needed. We recommend only using this integration if you have developers on your team who can support it.</p>\n</div>\n<p>This guide uses a Zapier code action that runs a Python script when the trigger is detected. With this solution, you can map fields to the data types that Klaviyo endpoints require; specifically, the <a href=\"https://developers.klaviyo.com/en/reference/subscribe_profiles\">Subscribe Profiles</a> and <a href=\"https://developers.klaviyo.com/en/reference/unsubscribe_profiles\">Unsubscribe Profiles</a> endpoints.</p>\n<h2 id=\"h_01HCJNFYSWHJYRNQ69A04MKQ7Q\">Set up Zapier webhook</h2>\n<ol>\n<li>Log in to your Zapier account.</li>\n<li>From the main page in Zapier, select <strong>+Create</strong>, then select <strong>Zap</strong>.</li>\n<li>Enter a name for your new Zap (e.g., Klaviyo Webhook).</li>\n<li>Search for <em>Webhook</em>, then select <strong>Webhooks by Zapier</strong> from the Trigger menu.<br>\n\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28717383531547\" alt=\"\" width=\"617\" height=\"419\">\n</li>\n<li>In the next menu, select <strong>Catch Hook</strong> from the <em>Trigger Event</em> options.<br>\n\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28717389841051\" alt=\"\" width=\"382\" height=\"440\">\n</li>\n<li>Click <strong>Continue</strong>.</li>\n<li>Select the <strong>Test</strong> tab.</li>\n<li>Copy the webhook URL that Zapier provides for you to send your requests to.<br>\n\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28717383537947\" alt=\"\" width=\"432\" height=\"274\">\n</li>\n<li>Before testing, you’ll need to send test data to your webhook. See our guide on <a href=\"https://help.klaviyo.com/hc/en-us/articles/4407493023131-How-to-Send-Test-Data-to-Zapier\">How to send test data to Zapier</a> for more information. Make sure to <a href=\"https://klaviyo.zendesk.com/hc/en-us/articles/360046055671\">format phone numbers correctly</a> when sending test data.</li>\n<li>Once you’ve sent the test data to the webhook, click <strong>Test trigger </strong>(on the <strong>Test</strong> tab).<br>\n\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28717389848475\" alt=\"\" width=\"439\" height=\"520\">\n</li>\n<li>If the request is successful, you’ll see a success message, and the test data will populate below the success message, similar to the example below:<br>\n\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28717389853211\" alt=\"\" width=\"442\" height=\"515\">\n</li>\n<li>Once your trigger is working, click <strong>Continue with selected record</strong>.</li>\n</ol>\n<h2 id=\"h_01HCJNFYSWR26V2981JC1YZSDK\">Set up Zapier action</h2>\n<ol>\n<li>In the Action menu, enter <strong>Code by Zapier</strong> in the search box and select the option from the list.<br>\n\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28717383547419\" alt=\"\" width=\"381\" height=\"211\">\n</li>\n<li>Click <strong>Choose an event &gt; Run Python</strong>.<br>\n\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28717383551259\" alt=\"\" width=\"383\" height=\"439\">\n</li>\n<li>Click <strong>Continue</strong>.</li>\n</ol>\n<h2 id=\"h_01HCJNFYSWG1QMQH8EKG5SJ7KN\">Set up field mapping and create script logic</h2>\n<ol>\n<li>Set up field mapping to correlate the input data in the table below to the correct test data you previously sent. <br>\n\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28717389869851\" alt=\"\" width=\"398\" height=\"306\">\n<table style=\"width: 100%; height: 98px\">\n<tbody>\n<tr>\n<td style=\"width: 29.5008%; height: 22px\"><strong>Input data</strong></td>\n<td style=\"width: 70.348%; height: 22px\"><strong>Test data mapped</strong></td>\n</tr>\n<tr>\n<td style=\"width: 29.5008%; height: 22px\"><code>email</code></td>\n<td style=\"width: 70.348%; height: 22px\">1. Email: &lt;Test email&gt;</td>\n</tr>\n<tr>\n<td style=\"width: 29.5008%; height: 10px\"><code>phone_number</code></td>\n<td style=\"width: 70.348%; height: 10px\">1. Phone Number: &lt;Test phone number&gt;</td>\n</tr>\n<tr>\n<td style=\"width: 29.5008%; height: 22px\"><code>sms_consent</code></td>\n<td style=\"width: 70.348%; height: 22px\">1. Sms_consent: true</td>\n</tr>\n<tr>\n<td style=\"width: 29.5008%; height: 22px\"><code>name</code></td>\n<td style=\"width: 70.348%; height: 22px\">1. Name: &lt;Test name&gt;</td>\n</tr>\n</tbody>\n</table>\n</li>\n<li>Add a script like the one below to the code box:<br>\n\n<pre><code class=\"language-text\">import requests\n\n# configuring sms subscribe or unsubscribe call\nif (input_data[\"sms_consent\"] == \"true\" or input_data[\"sms_consent\"] == \"True\" or input_data[\"sms_consent\"] == \"TRUE\"):\n  url = \"https://a.klaviyo.com/api/profile-subscription-bulk-create-jobs/\"  payload = { \"data\": {\n        \"type\": \"profile-subscription-bulk-create-job\",\n        \"attributes\": {\n            \"profiles\": { \"data\": [\n                    {\n                        \"type\": \"profile\",\n                        \"attributes\": {\n                            \"email\": input_data[\"email\"],\n                            \"phone_number\": input_data[\"phone_number\"],\n                            \"subscriptions\": {\n                                \"sms\": { \"marketing\": { \"consent\": \"SUBSCRIBED\" } }\n                            }\n                        }\n                    }\n                ] }\n        },\n        \"relationships\": { \"list\": { \"data\": {\n                    \"type\": \"list\",\n                    \"id\": \"LIST_ID\"\n                } } }\n    } }\n\nelif (input_data[\"sms_consent\"] == \"false\" or input_data[\"sms_consent\"] == \"False\" or input_data[\"sms_consent\"] == \"FALSE\"):  url = \"https://a.klaviyo.com/api/profile-subscription-bulk-delete-jobs/\"\n  payload = { \"data\": {\n        \"type\": \"profile-subscription-bulk-delete-job\",\n        \"attributes\": {\n            \"profiles\": { \"data\": [\n                    {\n                        \"type\": \"profile\",\n                        \"attributes\": {\n                            \"email\": input_data[\"email\"],\n                            \"phone_number\": input_data[\"phone_number\"],\n                        }\n                    }\n                ] }\n        },\n        \"relationships\": { \"list\": { \"data\": {\n                    \"type\": \"list\",\n                    \"id\": \"LIST_ID\"\n                } } }\n    } }\nheaders = {\n    \"accept\": \"application/json\",\n    \"revision\": \"2024-05-15\",\n    \"content-type\": \"application/json\",\n    \"Authorization\": \"Klaviyo-API-Key your-private-api-key\"\n}\n\nresponse = requests.post(url, json=payload, headers=headers)\n\n# Zapier requires an 'output' object\noutput = {\"response text\": response.text}\n</code></pre>\n</li>\n<li>Replace <code>your-private-api-key</code>with your Klaviyo private API key.<br>\n\n<div class=\"bs-callout bs-callout-default\">\n<p>Treat private API keys like passwords - keep them in a safe place and never expose them to the public.</p>\n</div>\n</li>\n<li>Replace the <code>LIST_ID</code> (in both locations) with the Klaviyo list ID you want to send your Zapier data to. You can find your list ID in Klaviyo by navigating to <strong>Audience &gt; Lists &amp; segments &gt; Settings</strong>. If you wish to immediately subscribe people without a confirmation (which can be helpful during testing) make sure that your list is set to single opt-in (found under the <em>Consent</em> tab within list settings). </li>\n<li>Click <strong>Continue</strong>, then click <strong>Test step</strong>.</li>\n<li>If your test is successful, you’ll see a response with no errors, like the one below:<br>\n\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28717383558299\" alt=\"\" width=\"377\" height=\"382\">\n</li>\n<li>You can also check for a successful test in Klaviyo by navigating to your list and making sure the profile was added.<br>\n\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28717389862939\" alt=\"\" width=\"580\" height=\"201\">\n</li>\n<li>Once your test is successful, click <strong>Publish</strong> to publish your zap. If your test isn’t successful, check out our <a href=\"#TroubleshootingTips\">troubleshooting tips</a> for common issues.</li>\n</ol>\n<h2 id=\"h_01HCJNFYSXVQ1AZ4RFWWBHB47E\">Troubleshooting tips</h2>\n<p>The following are common issues you may run into while setting up the Zapier webhook. If you encounter any other issues, you can reach out to the <a href=\"https://community.klaviyo.com/\">Klaviyo Community</a> for further guidance.</p>\n<h3 id=\"h_01HCJNFYSX38K91ADZX90Z0YET\">EOL while scanning string literal</h3>\n<p>If you see this error, then you’re missing a quotation mark around one of your variables. Check the list ID and private API key to make sure they’re surrounded on both sides by quotation marks.</p>\n<h3 id=\"h_01HCJNFYSXAJSQBWZ9WTW8HBKC\">SyntaxError: invalid syntax</h3>\n<p>If you see this error, remove the comments in the Python code (any line that starts with a <code>#</code>).</p>",
+    "user_segment_ids": []
+  },
+  "normalized": {
+    "id": "4407486310683",
+    "title": "How to send consent to Klaviyo via Zapier",
+    "source_url": "https://help.klaviyo.com/hc/en-us/articles/4407486310683-How-to-send-consent-to-Klaviyo-via-Zapier",
+    "section_id": 49375599125915,
+    "section": "Migrate from an SMS platform",
+    "category_id": 115000032731,
+    "category": "Integrations",
+    "category_slug": "integrations",
+    "klaviyo_updated": "2026-04-21T13:54:59Z",
+    "created_at": "2021-09-27T22:25:00Z",
+    "draft": false,
+    "promoted": false,
+    "position": 5,
+    "label_names": []
+  },
+  "files": {
+    "body_html": "_source/articles/4407486310683.body.html",
+    "rendered_html": "_source/rendered/4407486310683.html"
+  },
+  "assets": {
+    "api_body": {
+      "images": [
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28717383531547",
+          "alt": "",
+          "width": "617",
+          "height": "419"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28717389841051",
+          "alt": "",
+          "width": "382",
+          "height": "440"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28717383537947",
+          "alt": "",
+          "width": "432",
+          "height": "274"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28717389848475",
+          "alt": "",
+          "width": "439",
+          "height": "520"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28717389853211",
+          "alt": "",
+          "width": "442",
+          "height": "515"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28717383547419",
+          "alt": "",
+          "width": "381",
+          "height": "211"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28717383551259",
+          "alt": "",
+          "width": "383",
+          "height": "439"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28717389869851",
+          "alt": "",
+          "width": "398",
+          "height": "306"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28717383558299",
+          "alt": "",
+          "width": "377",
+          "height": "382"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28717389862939",
+          "alt": "",
+          "width": "580",
+          "height": "201"
+        }
+      ],
+      "links": [
+        {
+          "href": "https://developers.klaviyo.com/en/reference/subscribe_profiles",
+          "text": "Subscribe Profiles"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/reference/unsubscribe_profiles",
+          "text": "Unsubscribe Profiles"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4407493023131-How-to-Send-Test-Data-to-Zapier",
+          "text": "How to send test data to Zapier"
+        },
+        {
+          "href": "https://klaviyo.zendesk.com/hc/en-us/articles/360046055671",
+          "text": "format phone numbers correctly"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4407486310683-How-to-send-consent-to-Klaviyo-via-Zapier#TroubleshootingTips",
+          "text": "troubleshooting tips"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Klaviyo Community"
+        }
+      ],
+      "headings": [
+        {
+          "level": 2,
+          "id": "h_01HCJNFYSWVWTJJPWATKS17YJ1",
+          "text": "You will learn"
+        },
+        {
+          "level": 2,
+          "id": "h_01HCJNFYSW21FW2BHFS6BE2WXR",
+          "text": "About the integration"
+        },
+        {
+          "level": 2,
+          "id": "h_01HCJNFYSWHJYRNQ69A04MKQ7Q",
+          "text": "Set up Zapier webhook"
+        },
+        {
+          "level": 2,
+          "id": "h_01HCJNFYSWR26V2981JC1YZSDK",
+          "text": "Set up Zapier action"
+        },
+        {
+          "level": 2,
+          "id": "h_01HCJNFYSWG1QMQH8EKG5SJ7KN",
+          "text": "Set up field mapping and create script logic"
+        },
+        {
+          "level": 2,
+          "id": "h_01HCJNFYSXVQ1AZ4RFWWBHB47E",
+          "text": "Troubleshooting tips"
+        },
+        {
+          "level": 3,
+          "id": "h_01HCJNFYSX38K91ADZX90Z0YET",
+          "text": "EOL while scanning string literal"
+        },
+        {
+          "level": 3,
+          "id": "h_01HCJNFYSXAJSQBWZ9WTW8HBKC",
+          "text": "SyntaxError: invalid syntax"
+        }
+      ]
+    },
+    "rendered_page": {
+      "images": [
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/7ff492c2b417b7ecfe572f839a8a81398693c1f7-1920x1080.webp",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/f762f3a9b73e72ca3626d6b9f7efc82dc53e2e98-1806x1228.png?w=617",
+          "alt": "",
+          "width": "617",
+          "height": "419"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/ae12e29b08b6de7ecc008517b2df5b19382cb52f-1086x1252.png?w=382",
+          "alt": "",
+          "width": "382",
+          "height": "440"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/f5e504b2106a865c17ae9d685a1cbd3d6a43c0c6-1100x698.png?w=432",
+          "alt": "",
+          "width": "432",
+          "height": "274"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/19228e6bcf9bb4f046da01afceb16aac6531228f-1064x1260.png?w=439",
+          "alt": "",
+          "width": "439",
+          "height": "520"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/6e14c061b5d2c3cee56dbaa6591132dbdf5ae784-1066x1242.png?w=442",
+          "alt": "",
+          "width": "442",
+          "height": "515"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/21a5047e5770824eac7be6a7ee42642a9fc04ece-1022x566.png?w=381",
+          "alt": "",
+          "width": "381",
+          "height": "211"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/dd0326aa0f5cb3bcd3d1dd026c43dd4eef5666d5-1096x1258.png?w=383",
+          "alt": "",
+          "width": "383",
+          "height": "439"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/83fedb3a4fc09b24fde256ad8127191cfbeb2c5a-1066x820.png?w=398",
+          "alt": "",
+          "width": "398",
+          "height": "306"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/02f9d9fa36955153d6f77394f52ac9811e6182c1-1054x1070.png?w=377",
+          "alt": "",
+          "width": "377",
+          "height": "382"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/ab9b076299fc57db83e0455862e7dad7ea562e01-1684x584.png?w=580",
+          "alt": "",
+          "width": "580",
+          "height": "201"
+        }
+      ],
+      "links": [
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4407486310683-How-to-send-consent-to-Klaviyo-via-Zapier#site-content",
+          "text": "Skip to main content"
+        },
+        {
+          "href": "https://www.klaviyo.com",
+          "text": "Home"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center"
+        },
+        {
+          "href": "https://www.klaviyo.com/enterprise",
+          "text": "Enterprise"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Partners"
+        },
+        {
+          "href": "https://www.klaviyo.com/careers",
+          "text": "Careers"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": "Log in"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": ""
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center Find step-by-step instructions and troubleshooting solutions in our knowledge base."
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000032731",
+          "text": "Integrations"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000312411",
+          "text": "Flows"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867867",
+          "text": "Audience"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867667",
+          "text": "Campaigns"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/360000190711",
+          "text": "Sign-up forms"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000873988",
+          "text": "Deliverability & compliance"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/29173800271259",
+          "text": "SMS"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/16638219724187",
+          "text": "Reviews"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/18073014919195",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/34141283979931",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/37659126754075",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/33948021740315",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/39746685522331",
+          "text": "WhatsApp"
+        },
+        {
+          "href": "https://academy.klaviyo.com",
+          "text": "Klaviyo Academy Expert training and education to help you succeed with Klaviyo, and beyond."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Quick+guide&resource=academy_courses",
+          "text": "Quick guides Learn marketing strategies and concepts in 15 minutes or less."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Course&resource=academy_courses",
+          "text": "Courses Master key marketing topics through structured lessons and exams."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/best-practices",
+          "text": "Best practices Discover top product and marketing strategies for your business."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/learning-paths",
+          "text": "Learning paths Complete curated learning journeys tailored to your marketing goals."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses",
+          "text": "Explore all resources"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Live+training&resource=academy_courses",
+          "text": "Live trainings Build confidence through hands-on interactive workshops and thought-provoking strategy sessions."
+        },
+        {
+          "href": "https://www.bigmarker.com/klaviyo-customer-education/Office-hours-Getting-started-with-Klaviyo",
+          "text": "Live office hours Join a strategic discussion where you can ask questions and get answers in real-time."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/private-live-training",
+          "text": "1:1 Live training Book a private training session with an expert to jumpstart your platform knowledge and confidence."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/credentials",
+          "text": "Klaviyo credentials Dig deeper into select topics and showcase your expertise with a final exam to earn a certificate and digital badge."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/certificates/klaviyo-practitioner-certificate",
+          "text": "Klaviyo practitioner certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/deliverability-certificate",
+          "text": "Deliverability certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/developer-certificate",
+          "text": "Klaviyo developer certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses&select=Certificate",
+          "text": "See all certificates"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Klaviyo Community Join our thriving community network to connect with brands like yours—online and in person."
+        },
+        {
+          "href": "https://community.klaviyo.com/topic/new",
+          "text": "Ask a question Post a question and get thoughtful answers from Klaviyo powerusers."
+        },
+        {
+          "href": "https://community.klaviyo.com/p/roadmap",
+          "text": "Product roadmap"
+        },
+        {
+          "href": "https://community.klaviyo.com/search/activity/recent",
+          "text": "Recent threads"
+        },
+        {
+          "href": "https://community.klaviyo.com/p/champions",
+          "text": "Meet the Champions"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups",
+          "text": "Browse all groups Your people are waiting. New ideas and connections are a click away."
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/developer-group-64",
+          "text": "Developer group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/entrepreneur-user-group-118",
+          "text": "Entrepreneur group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/woo-user-group-87",
+          "text": "WooCommerce group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/new-york-meetup-chapter-82",
+          "text": "New York City"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/los-angeles-meetup-chapter-83",
+          "text": "Los Angeles"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/austin-meetup-chapter-85",
+          "text": "Austin"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/san-diego-meetup-chapter-86",
+          "text": "San Diego"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/amsterdam-meetup-chapter-84",
+          "text": "Amsterdam"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Klaviyo Developers Access API documentation and developer guides to help you build with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/get_started",
+          "text": "Get started Access key resources and a step-by-step checklist for how to start developing with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/build_your_integration",
+          "text": "Grow your app's reach Learn how to join our ecosystem and get your app listed on our marketplace."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/developer-tools",
+          "text": "Developer tools Generate sample data, monitor your API usage, and access our Postman collections."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/reference/api_overview",
+          "text": "API reference Browse our full catalog of API docs."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/changelog_",
+          "text": "Changelog"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/api_versioning_and_deprecation_policy",
+          "text": "Versioning & deprecation policy"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/rate_limits_and_error_handling",
+          "text": "Rate limits & error handling"
+        },
+        {
+          "href": "https://youtube.com/playlist?list=PLHkNfHgtxcUanrkMnKPdkRzuWU7MGv_xM&si=pkG-KH7IT_TUHOGC",
+          "text": "API tutorials on YouTube Subscribe to our Klaviyo API Tutorials playlist for easy access to step-by-step developer walkthroughs."
+        },
+        {
+          "href": "https://www.klaviyo.com/contact-us",
+          "text": "Contact us"
+        },
+        {
+          "href": "https://www.klaviyo.com/sign-up",
+          "text": "Sign up"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": "Search"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4407486310683",
+          "text": "United States - EN"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/de-de/articles/4407486310683",
+          "text": "Deutschland - DE"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-es/articles/4407486310683",
+          "text": "España - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-mx/articles/4407486310683",
+          "text": "México - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/fr-fr/articles/4407486310683",
+          "text": "France - FR"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/it-it/articles/4407486310683",
+          "text": "Italia - IT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/ko-kr/articles/4407486310683",
+          "text": "한국 - KO"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/nl-nl/articles/4407486310683",
+          "text": "Nederland - NL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pl-pl/articles/4407486310683",
+          "text": "Polska - PL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pt-br/articles/4407486310683",
+          "text": "Brasil - PT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/sv-se/articles/4407486310683",
+          "text": "Sverige - SV"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/49375918518171",
+          "text": "Migrate to Klaviyo"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/49375599125915",
+          "text": "Migrate from an SMS platform"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4407486310683-How-to-send-consent-to-Klaviyo-via-Zapier#h_01HCJNFYSWVWTJJPWATKS17YJ1",
+          "text": "You will learn"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4407486310683-How-to-send-consent-to-Klaviyo-via-Zapier#h_01HCJNFYSW21FW2BHFS6BE2WXR",
+          "text": "About the integration"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4407486310683-How-to-send-consent-to-Klaviyo-via-Zapier#h_01HCJNFYSWHJYRNQ69A04MKQ7Q",
+          "text": "Set up Zapier webhook"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4407486310683-How-to-send-consent-to-Klaviyo-via-Zapier#h_01HCJNFYSWR26V2981JC1YZSDK",
+          "text": "Set up Zapier action"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4407486310683-How-to-send-consent-to-Klaviyo-via-Zapier#h_01HCJNFYSWG1QMQH8EKG5SJ7KN",
+          "text": "Set up field mapping and create script logic"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4407486310683-How-to-send-consent-to-Klaviyo-via-Zapier#h_01HCJNFYSXVQ1AZ4RFWWBHB47E",
+          "text": "Troubleshooting tips"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4407486310683-How-to-send-consent-to-Klaviyo-via-Zapier#additional-resources",
+          "text": "Additional resources"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/reference/subscribe_profiles",
+          "text": "Subscribe Profiles"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/reference/unsubscribe_profiles",
+          "text": "Unsubscribe Profiles"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4407493023131-How-to-Send-Test-Data-to-Zapier",
+          "text": "How to send test data to Zapier"
+        },
+        {
+          "href": "https://klaviyo.zendesk.com/hc/en-us/articles/360046055671",
+          "text": "format phone numbers correctly"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4407486310683-How-to-send-consent-to-Klaviyo-via-Zapier#TroubleshootingTips",
+          "text": "troubleshooting tips"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Klaviyo Community"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005062267",
+          "text": "How to manage your account's API keys"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4407493023131",
+          "text": "How to send test data to Zapier"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115001002272",
+          "text": "Learn how to contact support"
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": ""
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": "Visit Community"
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": ""
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": "Hire a partner"
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/about",
+          "text": "About Klaviyo"
+        },
+        {
+          "href": "https://www.klaviyo.com/newsroom",
+          "text": "Newsroom"
+        },
+        {
+          "href": "https://investors.klaviyo.com/overview/default.aspx",
+          "text": "Investor relations"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Agency and tech partners"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Developers"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/retail",
+          "text": "Retail and ecommerce"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/restaurants",
+          "text": "Restaurant marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/wellness",
+          "text": "Wellness"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform",
+          "text": "B2C CRM overview"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai",
+          "text": "Klaviyo AI (K:AI)"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/marketing-automation",
+          "text": "Klaviyo Marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-service",
+          "text": "Klaviyo Service"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/analytics",
+          "text": "Klaviyo Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-data-platform",
+          "text": "Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare",
+          "text": "Klaviyo vs. Klaviyo alternatives"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-mailchimp",
+          "text": "Klaviyo vs. Mailchimp"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-postscript",
+          "text": "Klaviyo vs. Postscript"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-attentive",
+          "text": "Klaviyo vs. Attentive"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-salesforce-marketing-cloud",
+          "text": "Klaviyo vs. Salesforce"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-listrak",
+          "text": "Klaviyo vs. Listrak"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/omnichannel",
+          "text": "Omnichannel marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/email-marketing",
+          "text": "Email marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing",
+          "text": "SMS marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing/rcs",
+          "text": "RCS for Business"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/mobile-app-marketing",
+          "text": "Mobile app marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/whatsapp",
+          "text": "WhatsApp marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/social",
+          "text": "Social marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources",
+          "text": "Marketing resources"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources/marketing-campaign-calendar",
+          "text": "Marketing campaign calendar"
+        },
+        {
+          "href": "https://www.klaviyo.com/glossary",
+          "text": "Marketing glossary"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/email-subject-line-generator",
+          "text": "Subject line generator"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/roi-calculator",
+          "text": "ROI calculator"
+        },
+        {
+          "href": "https://www.klaviyo.com/customers",
+          "text": "Case studies"
+        },
+        {
+          "href": "https://www.klaviyo.com/composer",
+          "text": "Composer Beta"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/marketing-agent",
+          "text": "Marketing Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/customer-agent",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/customer-experience-hub",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/helpdesk",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/marketing-analytics",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/advanced-cdp",
+          "text": "Advanced Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/web-forms",
+          "text": "Web forms"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/email-templates",
+          "text": "Email templates"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/portfolio",
+          "text": "Portfolio"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform-integrations",
+          "text": "Apps and Integrations"
+        },
+        {
+          "href": "https://www.klaviyo.com/features",
+          "text": "Features"
+        },
+        {
+          "href": "https://www.klaviyo.com/whats-new",
+          "text": "What's new"
+        },
+        {
+          "href": "https://www.klaviyo.com/events",
+          "text": "Events"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help Center"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us",
+          "text": "Academy"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Community"
+        },
+        {
+          "href": "https://www.facebook.com/Klaviyo/",
+          "text": "Facebook"
+        },
+        {
+          "href": "https://twitter.com/klaviyo/",
+          "text": "Twitter"
+        },
+        {
+          "href": "https://www.linkedin.com/company/klaviyo/",
+          "text": "LinkedIn"
+        },
+        {
+          "href": "https://www.instagram.com/klaviyo/",
+          "text": "Instagram"
+        },
+        {
+          "href": "https://www.klaviyo.com/sitemap",
+          "text": "Site Map"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal",
+          "text": "Terms and Privacy"
+        },
+        {
+          "href": "https://www.klaviyo.com/security",
+          "text": "Security"
+        },
+        {
+          "href": "https://www.klaviyo.com/trust",
+          "text": "Trust"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal/intellectual-property-notices",
+          "text": "Intellectual Property Notices"
+        }
+      ],
+      "headings": [
+        {
+          "level": 1,
+          "id": "",
+          "text": "How to send consent to Klaviyo via Zapier"
+        },
+        {
+          "level": 2,
+          "id": "h_01HCJNFYSWVWTJJPWATKS17YJ1",
+          "text": "You will learn"
+        },
+        {
+          "level": 2,
+          "id": "h_01HCJNFYSW21FW2BHFS6BE2WXR",
+          "text": "About the integration"
+        },
+        {
+          "level": 2,
+          "id": "h_01HCJNFYSWHJYRNQ69A04MKQ7Q",
+          "text": "Set up Zapier webhook"
+        },
+        {
+          "level": 2,
+          "id": "h_01HCJNFYSWR26V2981JC1YZSDK",
+          "text": "Set up Zapier action"
+        },
+        {
+          "level": 2,
+          "id": "h_01HCJNFYSWG1QMQH8EKG5SJ7KN",
+          "text": "Set up field mapping and create script logic"
+        },
+        {
+          "level": 2,
+          "id": "h_01HCJNFYSXVQ1AZ4RFWWBHB47E",
+          "text": "Troubleshooting tips"
+        },
+        {
+          "level": 3,
+          "id": "h_01HCJNFYSX38K91ADZX90Z0YET",
+          "text": "EOL while scanning string literal"
+        },
+        {
+          "level": 3,
+          "id": "h_01HCJNFYSXAJSQBWZ9WTW8HBKC",
+          "text": "SyntaxError: invalid syntax"
+        },
+        {
+          "level": 2,
+          "id": "additional-resources",
+          "text": "Additional resources"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "Explore more from Klaviyo"
+        }
+      ]
+    }
+  },
+  "rendered_page": {
+    "status": "fetched",
+    "error": ""
+  }
+}

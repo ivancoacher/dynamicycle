@@ -1,0 +1,155 @@
+<blockquote>
+<strong>Beta feature.</strong> Creating fully custom procedures from scratch is currently in a closed managed beta. If you don’t see the option to create a procedure, your account doesn’t have beta access yet.</blockquote>
+<h2 id="061c10e83e70">You will learn</h2>
+<p>How to build a fully custom procedure from scratch, write a description and instructions that make Customer Agent use your procedure at the right time, and test it before shoppers see it. This article also covers how to customize the procedures Customer Agent comes with.</p>
+<h2 id="57d34bc58c31">Before you begin</h2>
+<p>You’ll need:</p>
+<ul>
+<li>Customer Agent enabled and beta access for creating fully custom procedures</li>
+<li>A clear idea of what your procedure should handle — the type of question, situation, or workflow</li>
+<li>Any tools your procedure will use — either tools that come with Customer Agent or fully custom tools you’ve built</li>
+</ul>
+<p>If you want Customer Agent to do something specific (look up data in your system, take an action in another platform), create the tool first or alongside your procedure.</p>
+<h2 id="131ce0682c32">What a procedure is</h2>
+<p>A <strong>procedure</strong> is a scoped capability that lets Customer Agent handle a specific type of shopper request. Customer Agent comes with procedures out of the box, and creating fully custom procedures from scratch is currently in closed beta.</p>
+<p>A procedure has a <strong>Title</strong>, a <strong>When to use this procedure</strong> section (how Customer Agent knows this procedure should handle a given request), and a <strong>How to respond</strong> section (how Customer Agent should behave once the procedure is picked). You can also attach tools and content scopes.</p>
+<p>For the underlying concepts, see the Understanding Customer Agent tools article and the Understanding procedures vs. tools article.</p>
+<h2 id="6f6d4f259b06">When to create a fully custom procedure</h2>
+<p>Build a fully custom procedure when:</p>
+<ul>
+<li>
+<strong>The procedures Customer Agent comes with don’t cover your use case</strong> — you have a workflow or question type Customer Agent doesn’t handle out of the box</li>
+<li>
+<strong>Your business has industry-specific behavior</strong> — specialized rules, unique product configurations, domain language</li>
+<li>
+<strong>You want a multi-step custom process</strong> — for example, a quiz, a guided troubleshooter, or a workflow that chains several tools together</li>
+<li>
+<strong>You want to use a fully custom tool</strong> — fully custom tools only do something when attached to a procedure</li>
+</ul>
+<h2 id="af76cd4a7f8e">Set it up</h2>
+<h3 id="981d858b9e5c">1. Open the Procedures page</h3>
+<p>Navigate to <strong>Customer Agent &gt; Procedures</strong>, then click <strong>Create procedure</strong>.</p>
+<h3 id="599b10ec0e50">2. Add a Title</h3>
+<p>A short identifier like “Size Guide” or “Warranty Claim.” The title is mainly for your reference and for organization — it isn’t used to decide when the procedure fires.</p>
+<h3 id="3d41a3734dc4">3. Write “When to use this procedure”</h3>
+<p><strong>When to use this procedure</strong> tells Customer Agent’s router when your procedure should handle a request. Use natural language. Be specific about what this procedure handles and, where useful, what it does <em>not</em> handle. Including example shopper questions helps the router recognize matching intent.</p>
+<p><strong>Good examples:</strong></p>
+<p><em>Size Guide procedure:</em></p>
+<blockquote>Use this procedure when the shopper asks about finding the right size for apparel or footwear — including sizing charts, fit advice, and size exchanges. Example questions: “What size should I get for this dress?”, “Do your shoes run small?”, “How do I know if this will fit?”, “Can I exchange for a different size?”. Do not use this procedure for out-of-stock questions; those go to general support.</blockquote>
+<p><strong>Vague example (avoid):</strong></p>
+<blockquote>For questions about sizing and other product stuff.</blockquote>
+<p>The vague version doesn’t tell the router when to pick this procedure over any other, and doesn’t show any concrete shopper questions it should match.</p>
+<h3 id="7b420f43eb96">4. Write “How to respond”</h3>
+<p><strong>How to respond</strong> tells Customer Agent how to behave once your procedure is picked. Think of it as a short playbook. The field is a rich text editor — you can type freely, and you can also type <code>/</code> to insert specific elements (headings, lists, tools, or handoff actions).</p>
+<p>Good “How to respond” content:</p>
+<ul>
+<li>Is specific and scoped to what this procedure handles</li>
+<li>Describes how Customer Agent should approach the request — broken into clear topical sections (not numbered steps)</li>
+<li>Inserts tools via <code>/</code> at the point where each tool should run</li>
+<li>Inserts handoff actions via <code>/</code> where escalation applies</li>
+<li>Calls out what to do when data is missing or the request is out of scope<br>
+<p>Keep it concise. Long, meandering guidance hurts performance more than it helps.</p>
+<p><strong>What you can insert via </strong><code><strong>/</strong></code><strong>:</strong></p>
+</li>
+<li>
+<strong>Formatting</strong> — Text, Heading 1/2/3, Bullet list, Numbered list. Use these to structure the instructions so they’re easy to read and edit.</li>
+<li>
+<strong>Actions</strong> — Two handoff actions:
+<ul>
+<li>
+<em>Offer to hand off</em> — Customer Agent offers the shopper the option to connect with a human before handing off.</li>
+<li>
+<em>Hand off immediately</em> — Customer Agent hands off without asking.</li>
+</ul>
+</li>
+<li>
+<strong>Tools</strong> — Every tool attached to this procedure shows up here. Insert a tool inline at the point where you want Customer Agent to use it.</li>
+</ul>
+<h3 id="c19b18a55f13">5. Attach tools (optional)</h3>
+<p>If your procedure needs to fetch data or take an action, attach the tools it should use. A procedure can use multiple tools. The “How to respond” section should tell Customer Agent when to use which tool.</p>
+<p>See the How to create a tool article for building your own.</p>
+<h3 id="99e8353a2b74">6. Attach content scopes (optional)</h3>
+<p>If your procedure should only use specific content (for example, only a dedicated sizing guide rather than your entire knowledge base), set a content scope. Leave this blank to use all available content.</p>
+<h3 id="5e4b47e983c3">7. Test in the playground</h3>
+<p>Click <strong>Test</strong> to open the playground. Send test messages that would normally route to your procedure, and check:</p>
+<ul>
+<li>
+<strong>Router behavior</strong> — does Customer Agent actually pick your procedure for the test message? If not, “When to use this procedure” needs work.</li>
+<li>
+<strong>Response behavior</strong> — does Customer Agent follow the steps you described in “How to respond”?</li>
+<li>
+<strong>Tools</strong> — if the procedure should use a tool, does it? With the right parameters?</li>
+<li>
+<strong>Response quality</strong> — is the output what a shopper would expect?</li>
+</ul>
+<p>Iterate on “When to use this procedure” and “How to respond” based on what you see.</p>
+<h3 id="8c4dc9017205">8. Enable the procedure</h3>
+<p>When you’re satisfied with playground testing, enable the procedure. It will start handling live conversations that match “When to use this procedure.”</p>
+<h2 id="3bb0b5a4b397">Writing a good “When to use this procedure”</h2>
+<p>This is the most important field on a procedure. The router uses it — and only it — to decide when your procedure should handle a request. A good “When to use this procedure”:</p>
+<ul>
+<li>
+<strong>Describes what the procedure handles</strong> in plain language</li>
+<li>
+<strong>Is specific enough</strong> that the router won’t pick it for unrelated requests</li>
+<li>
+<strong>Is broad enough</strong> that the router picks it for all the requests it should handle</li>
+<li>
+<strong>Calls out edge cases</strong> where useful — what this procedure does <em>not</em> handle</li>
+</ul>
+<p>Iterate with playground tests. If your procedure fires when it shouldn’t, tighten “When to use this procedure.” If it doesn’t fire when it should, broaden it or add examples.</p>
+<h2 id="57408d5df3a5">Writing a good “How to respond”</h2>
+<p>This tells Customer Agent how to handle the request once the procedure is picked. Good “How to respond” content:</p>
+<ul>
+<li>
+<strong>Is scoped</strong> to what this procedure does — don’t try to cover everything</li>
+<li>
+<strong>Breaks the response into clear topical sections</strong> using headings (not numbered steps)</li>
+<li>
+<strong>Inserts tools inline</strong> at the point where each tool should run — type <code>/</code> and pick the tool from the menu</li>
+<li>
+<strong>Inserts handoff actions inline</strong> — type <code>/</code> and pick <em>Offer to hand off</em> or <em>Hand off immediately</em> where it applies</li>
+<li>
+<strong>Handles fallback cases</strong> — “If the data is missing, apologize and offer to hand off”</li>
+<li>
+<strong>Shows the shape of a good response</strong> — formatting, tone, what to include</li>
+</ul>
+<p><strong>Example (“How to respond” for an order-tracking procedure):</strong></p>
+<blockquote>
+<strong>Identify shopper and order</strong>
+If the shopper isn’t signed in, let them know they’ll need to log in to locate their order. Once signed in, locate the customer’s profile using their email or phone number to find their recent orders with /Get Profile.</blockquote>
+<blockquote>
+<strong>Check shipment status</strong>
+Retrieve the real-time status, tracking URL, and estimated delivery date for the specific order using /Order Status.</blockquote>
+<blockquote>
+<strong>Provide update</strong>
+Communicate the current status clearly (e.g., Processing, Shipped, Delivered). If shipped, always provide the clickable tracking link.</blockquote>
+<h2 id="0f6abe999ac4">Customizing existing procedures</h2>
+<p>You can disable any procedure Customer Agent comes with from the Procedures page — useful if you don’t want Customer Agent handling a particular type of request.</p>
+<p>Editing existing procedures (changing instructions, swapping tools) is coming soon. When it ships, this article will cover that flow.</p>
+<h2 id="ab47891801d3">Troubleshooting</h2>
+<p><strong>Symptom:</strong> The procedure never gets used.
+<strong>Likely cause:</strong> “When to use this procedure” is too vague, or the router doesn’t recognize matching requests.
+<strong>Fix:</strong> Rewrite “When to use this procedure” to be more specific about what the procedure handles. Add example request types. Test with real shopper-style messages in the playground.</p>
+<p><strong>Symptom:</strong> The procedure gets used at the wrong time.
+<strong>Likely cause:</strong> “When to use this procedure” is too broad, or it overlaps with another procedure.
+<strong>Fix:</strong> Narrow “When to use this procedure.” Call out what the procedure does <em>not</em> handle. Check if another procedure should handle those requests instead.</p>
+<p><strong>Symptom:</strong> The procedure doesn’t use its tool.
+<strong>Likely cause:</strong> The tool isn’t attached, or “How to respond” doesn’t insert the tool at the right step.
+<strong>Fix:</strong> Confirm the tool is attached to the procedure. In “How to respond,” type <code>/</code> and insert the tool at the step where it should run.</p>
+<p><strong>Symptom:</strong> The procedure ignores “How to respond.”
+<strong>Likely cause:</strong> “How to respond” is too long, contradictory, or unclear.
+<strong>Fix:</strong> Tighten it. Remove unrelated guidance. Break it into clear topical sections with headings. Test changes in the playground.</p>
+<h2 id="6390881ef065">FAQ</h2>
+<p><strong>Can a fully custom procedure use the tools Customer Agent comes with?</strong>
+Yes. Attach any tool to your procedure.</p>
+<p><strong>How do I disable a procedure?</strong>
+Toggle the procedure off on the Procedures page. You can re-enable it at any time. This works for both procedures Customer Agent comes with and fully custom procedures you’ve built.</p>
+<p><strong>How do I monitor how my procedure is performing?</strong>
+The Performance dashboard breaks down resolution by procedure. See Understanding the performance dashboard for details.</p>
+<h2 id="2c3785c81e39">Next steps</h2>
+<ul>
+<li>Build tools your procedure will use</li>
+<li>Test your procedure thoroughly in the playground</li>
+<li>Monitor the procedure’s performance after it goes live</li>
+</ul>

@@ -1,0 +1,68 @@
+<h2 id="h_01HGZPK1XRS3FXM8SAY9R5A81P">You will learn</h2>
+<p>You will learn how to add a time delay component within the flow builder which is used to create delays (or wait periods) between messages or other components in your flow series.</p>
+<p>If components are back-to-back, without any time delays, they will all occur simultaneously. For this reason, you will likely always want to ensure you have a time delay component between consecutive emails or SMS.</p>
+<div class="bs-callout bs-callout-default">
+<p>A time delay must be followed by a flow action that is set to live or manual status. If a time delay is added to the end of a flow without an action following or if all following actions are set to draft status, profiles in the flow will skip the time delay and immediately exit the flow.</p>
+<p>If you want to add a time delay before someone exits a flow, but you do not want to send out a message afterwards, you can use a non-message flow action such as an <a href="https://klaviyo.zendesk.com/hc/en-us/articles/360001768432" target="_blank" rel="noopener">update profile property action</a> at the end of the flow.</p>
+</div>
+<h2 id="h_01HGZPK1XRHK8C5Y24PQXYEC9T">Add a time delay</h2>
+<p>To add a new time delay into a flow:</p>
+<ol>
+<li>Drag the time delay component from the sidebar and drop it where you would like to create this waiting period.</li>
+<li>After you drop the time delay into your flow, configure the details in the left-hand sidebar.</li>
+</ol>
+<p class="wysiwyg-text-align-center">
+<script src="https://fast.wistia.com/embed/medias/cr10dmb46w.jsonp" async=""></script>
+<script src="https://fast.wistia.com/assets/external/E-v1.js" async=""></script>
+</p>
+<div class="wistia_responsive_padding" style="padding: 60.63% 0 0 0; position: relative;">
+<div class="wistia_responsive_wrapper" style="height: 100%; left: 0; position: absolute; top: 0; width: 100%;">
+<div class="wistia_embed wistia_async_cr10dmb46w videoFoam=true" style="height: 100%; position: relative; width: 100%;">
+<div class="wistia_swatch" style="height: 100%; left: 0; opacity: 0; overflow: hidden; position: absolute; top: 0; transition: opacity 200ms; width: 100%;"><img style="filter: blur(5px); height: 100%; object-fit: contain; width: 100%;" src="https://fast.wistia.com/embed/medias/cr10dmb46w/swatch" alt="The time delay component is found in the left sidebar and can be dragged into the flow where you'd like it to be placed." aria-hidden="true"></div>
+</div>
+</div>
+</div>
+<p>Configuration options for a time delay include:</p>
+<ul>
+<li>Wait __ Minutes</li>
+<li>Wait __ Hours</li>
+<li>Wait __ Days</li>
+<li>Wait __ Days and delay until a specific time of day</li>
+</ul>
+<p>When you choose to create a waiting period of X days, each day will be calculated as a 24-hour period. If you choose to wait X days but specify a certain time of day, however, each day will be calculated as a calendar day to avoid prolonged wait periods depending on when a recipient enters your flow. To explain this further, consider the following scenario.</p>
+<p>Let's say you want to have a time delay set to "Wait 1 Day, until 3PM" and then send an email:</p>
+<ul>
+<li>
+<em>Person A </em>enters your series at 2 PM. Waiting 1 day (24 hours) would land your recipient at 2PM the next day and the email would send 1 hour later at 3 PM. The total amount of time between when they trigger the flow and when they receive the first email is 25 hours.</li>
+<li>
+<em> Person B </em>enters your series at 4 PM. Waiting 1 day (24 hours) would land your recipient at 4PM the next day. In order to send at your specified time of 3 PM, we'd need to wait another 23 hours. This means <em>Person B</em> would receive your email almost a full day later than <em>Person A</em>. What happens instead is that <em>Person B<strong> </strong></em>will receive the email at 3 PM the following day, 23 hours after they triggered the flow. </li>
+</ul>
+<p>To avoid the above problem, we'll only wait X "calendar days" instead of X "24-hour days" when your time delay includes a specific time of day. With this behavior, using the above example, <em>Person A</em> and <em>Person B</em> will both get the email at the same time. </p>
+<h2 id="h_01HGZPK1XRNMZMRFBWDBJT2W3D">Delay until a specific time</h2>
+<p>You may want to control what time of day recipients receive a specific flow email or SMS in your series. This can be useful when you want to normalize the time of day people receive your messages, for instance, if you know your audience typically opens emails at a certain time.</p>
+<p>Within the settings for a time delay component, you can choose, <em>Delay until a specific time of day</em>. If you have an SMS following this time delay, this will establish the send time for that SMS.</p>
+<p>After choosing a time of day, you can then select a timezone. You can choose <strong>Recipient's Local Timezone</strong> in order to ensure each recipient receives your message at your preferred time, regardless of where they are located.</p>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/28715962257307" alt="When configuring a time delay, there will be an option to set the amount of time for the delay as well as the option to delay until a specific time of day." width="430" height="345"></p>
+<p>One benefit to choosing the "Wait __ Days" option, without selecting a set time, is that each recipient will then receive the SMS or email at the same time they took the flow's trigger action — the time someone took the trigger action is one data point that tells you the recipient was online engaging with your business at that time, and thus it might be a time they're typically active online. </p>
+<h2 id="h_01HGZPK1XRKGJAFBH1WY8Z828W">Delay until a specific day of the week</h2>
+<p>If you only want a flow email or SMS to send on specific days of the week, you can add a time delay component before it in your series and use the <em>Delay until a specific day(s) of the week</em> option.</p>
+<p>All days will be selected automatically. You can remove days by clicking the X next to the day name or add days by clicking on the dropdown and clicking the checkbox next to the day.</p>
+<p>Selected days shown in the dropdown are the days of the week when the message <em>does </em>send. Unselected days are the days of the week when the message <em>does not</em> send.</p>
+<p>For example, let's say John enters your flow on a Tuesday:</p>
+<ul>
+<li>You have a delay after the trigger to "Wait 2 Days," but delay until a Monday, Wednesday, or Friday.</li>
+<li>John enters the flow on a Tuesday, we wait two days, and now it's Thursday. Because you only want emails to send on Monday, Wednesday, or Friday, however, we'll delay one more day until it's Friday.<br><img src="https://klaviyo.zendesk.com/hc/article_attachments/28715968827163" alt="Below the option to delay until a specific time of day, there is also the option to delay until a specific day of the week with buttons for each day so that multiple days can be selected." width="430" height="337">
+</li>
+</ul>
+<div class="bs-callout bs-callout-default">
+<p>Messages are scheduled based on the timezone associated with the recipient's profile. If the profile's timezone cannot be accurately determined, your account's timezone will be used which can be found in your <a href="https://help.klaviyo.com/hc/en-us/articles/115005232388" target="_blank" rel="noopener">account settings</a>.</p>
+</div>
+<p class="wysiwyg-text-align-left">When you delay until a specific day of the week, note that you will no longer see the expected number of days in any subsequent components (e.g., emails or SMS messages). For instance, if you have a time delay component that's set to wait 10 days and delay until Monday or Friday, it's not possible to determine when exactly a recipient will receive the following message; each person that is added to the flow is going to have a different number of days before they are sent the next message.</p>
+<h2 id="h_01HGZPK1XRV5PTE2MYJ8J6AMN8">Additional resources</h2>
+<p>Read more about <a href="https://help.klaviyo.com/hc/en-us/articles/115003883992-Introduction-to-Flow-Branching" target="_self">flow branching</a>.</p>
+<p>Learn more about time delays in Klaviyo: </p>
+<ul>
+<li><a href="https://help.klaviyo.com/hc/en-us/articles/360050334651" target="_self" rel="undefined">About using time delays near splits</a></li>
+<li><a href="https://help.klaviyo.com/hc/en-us/articles/360046164352" target="_self" rel="undefined">Understanding the timing of a flow</a></li>
+</ul>
+<p>Find out more about <a href="https://help.klaviyo.com/hc/en-us/articles/360017706091-How-Contacts-Move-Through-a-Flow" target="_blank" rel="noopener" data-darkreader-inline-bgcolor="">understanding how contacts move through a flow</a>.</p>

@@ -1,0 +1,137 @@
+<p>Find out how price drop flows work and how to set them up in Klaviyo. Price drop flows work for either a catalog from an ecommerce integration or a custom catalog. Price drop flows will not send to anyone who has already purchased the item, regardless of whether they bought it at full price or when it was discounted. Additionally, price drop flows will not send if inventory is 0 or negative or the variant is not published.</p>
+<p>Price drop flows let customers know when products they’ve looked at lower in price. This can mean an easy sale for you, as customers love a deal — especially on items they actually want. These flows are also a valuable tool for marketers, as the messages typically receive high engagement and conversion rates.</p>
+<h2 id="h_01JN4CGHAQVE92CBC3FB1N69VN">Before you begin</h2>
+<ul>
+<li>Price drop flows are available for stores using Shopify, BigCommerce, WooCommerce, Magento 2, PrestaShop, Salesforce Commerce Cloud, or a catalog synced via custom catalog feed or API.</li>
+<li>Price drop flows will only trigger for items that are listed as in stock.</li>
+</ul>
+<h2 id="h_01JN4CKB5XDW99A8523AT607BG">Requirements for catalogs synced via custom catalog feed or API</h2>
+<p>If you have not done so, consult our developer resources:</p>
+<ul>
+<li><a href="https://developers.klaviyo.com/en/docs/guide_to_syncing_a_custom_catalog_feed_to_klaviyo">How to sync a custom catalog feed to Klaviyo</a></li>
+<li>
+<a href="https://developers.klaviyo.com/en/reference/catalogs_api_overview">Catalogs API overview</a><br>
+<p>In order to create a price drop flow, make sure your catalog meets the following requirements:</p>
+</li>
+<li>Products or variants must have <em>price</em> and <em>inventory</em> fields mapped with data available.</li>
+<li>
+<em>Ordered Product </em>and either one or both of <em>Viewed Product </em>or <em>Started Checkout</em> events must have <em>price</em> and <em>product</em> ID fields as part of the event payload, as well as existing instances of these events in your account.</li>
+<li>Even if the catalog contains product variants, these events must include parent product level IDs.<br>
+<p>Please be aware of the following before setting up price drop:</p>
+</li>
+<li>If you’re using the Catalogs API, your catalog must contain variants, even if the variant is a duplicate of the main product.</li>
+<li>If you are using a custom catalog in addition to a catalog from an ecommerce integration, price drop flows will only trigger based off of one of these catalogs. If you set up your flow to trigger off of your custom catalog, you may contact Klaviyo Support to revert this back to your integration catalog.</li>
+</ul>
+<h3 id="h_01JN4CWDM7TG9DMJPFARX1MCMT">Next steps</h3>
+<ol>
+<li>From the main Klaviyo menu, navigate to <strong>Content &gt;</strong><strong>Products </strong>to confirm that products from your custom catalog have been synced.</li>
+<li>
+<a href="https://help.klaviyo.com/hc/en-us/articles/115001002272-How-to-Contact-Support">Reach out to our Support Team</a> and request access to the “price drop trigger for custom catalogs” feature. Make sure to specify the following:<br>
+<ul>
+<ul>
+<li>The account which has a custom catalog or API catalog, if you have multiple accounts.</li>
+<li>Event IDs for all metrics used as triggers with product data such as <em>Ordered Product</em>, <em>Started Checkout</em>, and <em>Viewed Product</em>.</li>
+<li>For each event, the field names for product ID and price.</li>
+<li>For <em>Started Checkout</em>, the field name for the list that contains the products from the checkout.</li>
+</ul>
+</ul>
+</li>
+<li>Once the support team has completed your request, you can continue on and create the flow.</li>
+</ol>
+<h2 id="h_01HC0RVV0TPNB8B1YM4B6Y6AVA">How to trigger a price drop flow</h2>
+<ol>
+<li>Navigate to <strong>Flows &gt; Create flow &gt; Build your own</strong>.</li>
+<li>Name your flow and add tags.</li>
+<li>Click <strong>Create flow </strong>to continue.</li>
+<li>In the flow builder, select <strong>Price drop</strong> from either the <em>Recommended</em> or <em>All triggers</em> tab.<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/31432288697371" alt="In the Trigger Setup menu, the Price Drop option is found towards the bottom of the list" width="303" height="501">
+</li>
+<li>Choose when a price drop flow will trigger; i.e., at what amount or percentage a product's price needs to drop.<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28717389650075" alt="For the flow trigger Price Drop option, there is a textbox to enter the amount the price dropped by as well as buttons for dollar amount or percentage." width="363" height="156">
+<div class="bs-callout bs-callout-default">
+<p>You can adjust the trigger at any point, but it will only apply to events triggered after you change it.</p>
+</div>
+</li>
+<li>Choose who you want this flow to send to, people who:<br>
+<ul>
+<ul>
+<li>Started checkout with that product in their cart — this will include the fewest people, but they will be more likely to convert.</li>
+<li>Viewed the product — this will include a greater number of people in the flow, but they will be less likely to make a purchase.</li>
+<li>Both — this option will pull in both groups.</li>
+</ul>
+</ul>
+<div class="bs-callout bs-callout-default">
+<p>These conditions are checked both at the trigger and before any messages send out to ensure that you’re not sending to those who have already purchased or only seen the lower price. Klaviyo does not pull in anyone who either purchased the product after the flow’s triggering event or viewed/started checkout when the item was at a lower price.</p>
+</div>
+</li>
+<li>(Optional) Change the time period for when you want someone to have viewed or started checkout with the item. The default is the past 30 days.<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28717389665947" alt="At the bottom of the Price Drop configuration menu is the option to configure a time period for when someone viewed or checked out the item." width="300" height="476">
+</li>
+<li>When you're done, save the trigger.</li>
+<li>Add in a message immediately after the trigger.</li>
+<li>Add in any splits, time delays, and follow-up messages.<br>
+<div class="bs-callout bs-callout-default">
+<p>A time delay is not recommended, as you want to inform customers as soon as the price changes.</p>
+</div>
+</li>
+<li>Select <strong>Update status </strong>when you're ready for the flow to start sending.</li>
+<li>Choose <strong>Live </strong>from the dropdown.</li>
+<li>Click <strong>Save</strong>.</li>
+</ol>
+<h2 id="h_01HC0RVV0T0FX8FNBPCXFB1PWR">How to preview and test a price drop flow</h2>
+<p>Unlike with other metrics, a price drop event will only be registered in Klaviyo if a price drop flow is set to <em>live </em>or <em>manual </em>status when a price drop occurs. This means at least 1 message in a price drop flow needs to be live or manual for the events to be added to your account for the purposes of previewing.</p>
+<p>If you want to use price drop event variables in your message, such as the original price and reduced price:</p>
+<ol>
+<li>Set a message in the flow to <strong>Manual</strong> status using the dropdown on the action card.<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/34454394354203" alt="" width="305" height="249">
+</li>
+<li>Trigger a price drop event from your store by starting a checkout or viewing a product (depending on your price drop flow settings) with an item then lowering the price of the item.</li>
+<li>Select a message in the flow and click <strong>Edit</strong> from either the action button (3 dots) or the sidebar.<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/34454411028763" alt="" width="330" height="176">
+</li>
+<li>Click <strong>Edit email </strong>for email messages.</li>
+<li>In the editor, click <strong>Preview &amp; test </strong>in the upper right.<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/34454394359963" alt="">
+</li>
+<li>In the sidebar, select the event and person you want to use to see a preview directly in Klaviyo.</li>
+<li>Hover over the variable’s name until you see the message <em>Copy {{ person.variable_name }} variable</em>, then click to copy it.</li>
+<li> Paste the variable where you'd like to see it appear in your message.</li>
+<li>Once you've added all the variables you'd like, click <strong>Send test</strong> to send a preview to your own inbox.</li>
+</ol>
+<h2 id="h_01JN4DC4Q8JDJT22F412TGB3HP">Price drop flow examples</h2>
+<p>Depending on how you want your price drop flow to work, you can set it up in various ways. Let’s start with a basic example that sends two messages: one right away and a reminder for those who haven’t made a purchase. For this flow, it will look like the following.</p>
+<p class="wysiwyg-text-align-center"><img src="https://klaviyo.zendesk.com/hc/article_attachments/28717383340699" alt="Example price drop flow with one email right away after the trigger and a second email after a 1 day delay" width="280" height="581"></p>
+<p>You can use email, SMS, or WhatsApp for these messages. Klaviyo will only send SMS or WhatsApp messages to profiles who have explicitly opted in to that channel. Profiles without consent for a specific channel will automatically be skipped for that message.</p>
+<h3 id="h_01HC0RVV0TS278DYPF1E28TR0W">Using SMS, WhatsApp, and email together </h3>
+<p>For a multichannel price drop flow, add a conditional split directly after the trigger. Use the split to check whether someone is subscribed to SMS or WhatsApp.</p>
+<p>Send subscribers with SMS or WhatsApp consent down one path and everyone else down the other. This allows you to prioritize sending a text message first while continuing to send email to profiles who are not opted in to SMS or WhatsApp.</p>
+<p class="wysiwyg-text-align-left"><img src="https://klaviyo.zendesk.com/hc/article_attachments/34454394363291" alt="" width="349" height="141"></p>
+<h3 id="h_01HC0RVV0TRR4SKABTSY4AYG5B">Send to non-customers first</h3>
+<p>One of the largest dropoffs in the marketing funnel is when you try to convert someone into a customer. Price drop flows are a great tool for converting a website browser into a buyer. In Klaviyo, you can set this up by placing a conditional split directly after the trigger to send returning customers down a different path. Then, add a time delay before the message to returning customers. </p>
+<p>The example below shows what this looks like for a price drop flow with both SMS and email messages. </p>
+<p class="wysiwyg-text-align-center"><img src="https://klaviyo.zendesk.com/hc/article_attachments/34454411041947" alt=""></p>
+<h3 id="h_01HC0RVV0T6G6QCXSTDAR6ZHN7">Set different rules based on product</h3>
+<p>To set different rules based on a product’s price or category, you need to set up multiple price drop flows and then use filters to target specific items. </p>
+<p>Say you want to change the message based on the item’s initial price and how much the price dropped. Perhaps on most items, you want to send a message whenever the price drops by at least 10%. However, say you have products that are under $20, and on those products, you want to send a message when the price drops by $2.00 or more. In this case, create two price drop flows and add trigger filters to target the products you want.</p>
+<h2 id="h_01HC0RVV0TNVDG7RKR8XDQQF8N">Price drop report</h2>
+<p>It’s important to monitor the performance of your price drop flow over time. To access this report, click on the flow’s trigger and then click <strong>View price drop report</strong>. You can export this report as a CSV. </p>
+<div class="bs-callout bs-callout-default">
+<p>If you have multiple versions of the same product with different variants, you would need to drop all these products and their variants to the same price in order for them to appear in your price drop report.</p>
+<p>The price drop report will only include price drop events that occur after the flow has been set up. It will not include a history of all price drop activities.</p>
+</div>
+<p>The report will show the following in order of most to least recent: </p>
+<ul>
+<li>SKU</li>
+<li>Product title</li>
+<li>Original price</li>
+<li>Reduced price</li>
+<li>Price drop timestamp</li>
+<li>Sent</li>
+</ul>
+<p>Learn how to create other flows on the Help Center:</p>

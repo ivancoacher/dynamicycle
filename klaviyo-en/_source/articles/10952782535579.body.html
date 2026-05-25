@@ -1,0 +1,238 @@
+<h2 id="h_01HBXG3G7P1HFK8DB6VVVPQEAF">You will learn</h2>
+<p>Learn how to set up a system for cross-domain identity management (SCIM) user provisioning in an account or portfolio.</p>
+<div class="bs-callout bs-callout-default">
+<p>You must have a paid plan and be an Admin or Owner to set up this feature. </p>
+</div>
+<h2 id="h_01HBXG3G7PM9KQF346WRAYGTTY">Before you begin</h2>
+<p>You also have <a href="https://help.klaviyo.com/hc/en-us/articles/9353860331035">SSO turned on in Klaviyo</a> before you set up SCIM. </p>
+<p>Note that SCIM provisioning is often an add-on for identity providers (IdPs). For instance, IdPs often require a separate SCIM plan in addition to an SSO plan. If you don't see the following steps in your IdP, please confirm you have the correct plan. </p>
+<h2 id="h_01HBXG3G7PXHMYF366HWCP4KR1">Turn on SCIM user provisioning</h2>
+<ol>
+<li>Click your organization name in the lower left corner.</li>
+<li>Click <strong>Settings &gt; Security</strong>.<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28704477982875" alt="Security tab in Account settings">
+</li>
+<li>Check the <em>SCIM Provisioning </em>box. </li>
+<li>Copy or download the access key, including the prefix <code>Klaviyo-API-Key</code>.<br>
+Note that this key is only shown once, so make sure you can access it. If copying it, paste it somewhere secure immediately.<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28704486111131" alt="Example of an access key">
+</li>
+<li>Click <strong>Done</strong>. </li>
+<li>Copy the base URL and paste it somewhere, preferably where you stored the access key.</li>
+</ol>
+<p>Next, you must go to your SSO provider to finish the process. This process varies by provider. Below, we have instructions for OKTA, One Login, and Azure, although you can set it up using any other provider. </p>
+<div class="accordion accordion--default">
+<div class="accordion__item">
+<div class="accordion__item-title"><strong>OKTA</strong></div>
+<div class="accordion__item-content">
+<ol>
+<li>Navigate to <strong>Application &gt; Applications</strong>. </li>
+<li>Select the Klaviyo app. </li>
+<li>Go to the <strong>Sign On </strong>tab.<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28704477997723" alt="Four tabs for an app with SSO: General, Sign On, Import, and Assignments">
+</li>
+<li>Under <em>Credential Details</em>, check that:<br>
+<ul>
+<ul>
+<li>
+<em>Application username format</em> is set to <strong>Email</strong>.</li>
+<li>
+<em>Update application username on </em>is set to <strong>Create and update</strong>.<br>
+</li>
+</ul>
+</ul>
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28704486118683" alt="Credental Details section in the Sign On tab">
+</li>
+<li>Click into the <strong>General </strong>tab. <br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28704477985051" alt="General tab for app, when there's no provisioning">
+</li>
+<li>Select <strong>Edit</strong>. </li>
+<li>Under <em>Provisioning</em>, select SCIM. <br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28704486124827" alt="Selecting SCIM for the provisioning">
+</li>
+<li>Click <strong>Save</strong>. </li>
+<li>Click into the <strong>Provisioning </strong>tab. </li>
+<li>Select <strong>Edit </strong>to open the <em>SCIM Connection </em>page (shown below).<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28704477991963" alt="SCIM Connection page with no information">
+</li>
+<li>In <em>SCIM connector base URL</em>, paste the base URL from Klaviyo.</li>
+<li>For <em>Unique identifier field for users</em>, type in “userName.” </li>
+<li>Under <em>Supported provisioning actions</em>, check the following boxes: <br>
+<ul>
+<ul>
+<li>Import New Users and Profile Updates</li>
+<li>Push New Users</li>
+<li>Push Profile Update</li>
+</ul>
+</ul>
+</li>
+<li>Change the <em>Authentication Mode</em> option to HTTP Header. </li>
+<li>Paste in the access key under <em>Authorization</em>. <br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28704486119195" alt="How the SCIM Connection should look once filled out">
+</li>
+<li>Click<strong> Test Connector Configuration</strong>. </li>
+<li>Click <strong>Save</strong>.</li>
+<li>Next to <em>Provisioning to App</em>, click <strong>Edit</strong>. </li>
+<li>Check <strong>Enable</strong> for the following features:<br>
+<ul>
+<ul>
+<li>
+<em>Create Users</em>.</li>
+<li>
+<em>Update User Attribute</em>.</li>
+<li>
+<em>Deactivate Users.</em><br>
+</li>
+</ul>
+</ul>
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28704486120731" alt="Enabled features in the Provisioning to App page">
+</li>
+<li>Click <strong>Save</strong>. </li>
+<li>Scroll down to your app’s attribute mappings section. </li>
+<li>Click <strong>Go to Profile Editor</strong>. </li>
+<li>Click <strong>Add Attribute</strong>. <br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28704477999899" alt="Top of the Profile Editor page in Okta, showing the button to add an attribute">
+</li>
+<li>Type “role” for <em>Display name</em>, <em>Variable name</em>, and <em>External name</em>.</li>
+<li>In <em>External namespace</em>, enter the following:<br>
+urn:ietf:params:scim:schemas:core:2.0:User</li>
+<li>Check the box for <strong>Define enumerated list of values</strong>.<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28704486132763" alt="The first of the required settings for the role attribute">
+</li>
+<li>Add in the roles and values; valid role values are as follows:<br>
+<ul>
+<ul>
+<li>admin</li>
+<li>manager</li>
+<li>analyst</li>
+<li>campaign_coordinator</li>
+<li>content_creator</li>
+<li>support<br>
+</li>
+</ul>
+</ul>
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28704486134171" alt="All roles with the correct values for the role attribute">
+</li>
+<li>Scroll down to <em>Attribute required </em>and check <strong>Yes</strong>. </li>
+<li>Choose the attribute type (personal or group).</li>
+<li>Recommended: leave the <em>User permission </em>as<strong> Read Only</strong>. <br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28704478000539" alt="The rest of the required settings for the role attribute">
+</li>
+<li>Click <strong>Save</strong>. </li>
+<li>Navigate to <strong>Applications &gt; Applications</strong> and then select your app. </li>
+<li>Click <strong>Assign</strong>.</li>
+<li>Choose whether to assign the app to an individual (i.e., people) or to a group.<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28704486135323" alt="Assignments tab showing the Assign dropdown">
+</li>
+<li>Find the people or groups you want to assign Klaviyo to, and click <strong>Assign </strong>next to their name(s).<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28704478005915" alt="Example of searching for a user to assign to an app">
+</li>
+<li>Scroll down to the <em>role </em>field and assign them the correct role. <br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28704486114843" alt="Role dropdown, showing all the values for roles within Klaviyo">
+</li>
+<li>Click <strong>Save and go back</strong>.</li>
+</ol>
+</div>
+</div>
+<div class="accordion__item">
+<div class="accordion__item-title"><strong>One Login</strong></div>
+<div class="accordion__item-content">
+<ol>
+<li>In the Admin Portal, click <strong>Applications</strong>.</li>
+<li>Click <strong>Add App</strong>.</li>
+<li>Search “Klaviyo.”</li>
+<li>Click <strong>Klaviyo </strong>to add it. </li>
+<li>Optional: Rename the connection.</li>
+<li>Click <strong>Configuration.</strong>
+</li>
+<li>In the <em>SCIM Bearer Token </em>field, paste your SCIM access key.</li>
+<li>Click <strong>Enable </strong>under <em>API Connection</em>. </li>
+<li>Click <strong>Save.</strong>
+</li>
+<li>Go to <strong>Provisioning </strong>in the left sidebar. </li>
+<li>Check the <strong>Enable Provisioning </strong>box. </li>
+<li>Do not uncheck the <em>Create user</em>, <em>Delete user</em>, or <em>Update user</em> boxes.<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28704477975451" alt="Credential details section with the correct settings">
+</li>
+<li>Recommended: select <strong>Delete</strong> in the dropdown for <em>When users are deleted in OneLogin, or the user's app access is removed, perform the below action</em>.</li>
+<li>Click <strong>Save</strong>.</li>
+</ol>
+</div>
+</div>
+<div class="accordion__item">
+<div class="accordion__item-title"><strong>Microsoft Entra ID (formerly Azure AD)</strong></div>
+<div class="accordion__item-content">
+<ol>
+<li>Log into <a href="https://portal.azure.com/#home.">Microsoft Entra ID</a>.</li>
+<li>Click <strong>Microsoft Entra ID</strong> (formerly called “Azure Active Directory”)</li>
+<li>Click <strong>Enterprise Applications</strong> on the left side.<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28704486140699" alt="The Enterprise applications option in the left sidebar" width="417" height="808">
+</li>
+<li>Select your application. <br>
+<ul>
+<ul>
+<li>If you haven’t created your application yet, follow the steps in the <a href="https://help.klaviyo.com/hc/en-us/articles/9353860331035">SSO guide</a>.</li>
+</ul>
+</ul>
+</li>
+<li>Click <strong>Provisioning </strong>on the left, then select<strong> Get Started</strong>.<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28704478008731" alt="Left sidebar for app when Provisioning is highlighted" width="285" height="565">
+</li>
+<li>In the field named <em>Provisioning Mode</em>, select <strong>Automatic</strong>.<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28704478010011" alt="Changing the Provisioning mode to automatic">
+</li>
+<li>Go to the <em>Admin Credentials</em>.</li>
+<li>Paste the SCIM base URL from Klaviyo into the <em>Tenant URL</em> field.</li>
+<li>Paste the SCIM API key into the<em> Secret Token</em> field. Note that this token should be pasted in without any prefixes (e.g., don’t include "Bearer" or "Klaviyo-API-Key").</li>
+<li>Test the connection.</li>
+<li>Once the connection is successful, click <strong>Save </strong>in the upper left.</li>
+<li>In that same page, scroll down and open the <strong>Mappings </strong>dropdown.  <br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28704486146459" alt="Mappings dropdown to provision (in order) Azure AD groups or users">
+</li>
+<li>Select <strong>Provision Azure Active Directory Users</strong>. </li>
+<li>Optional: delete non-supported attributes. Note that Klaviyo only supports the following attributes in c<em>ustomappsso Attribute</em> column for SCIM:<br>
+<ul>
+<ul>
+<li>"userName"</li>
+<li>"active"</li>
+<li>emails[type eq "work"].value'</li>
+<li>"name.givenName"</li>
+<li>"name.familyName"</li>
+<li>emails[primary eq "True"].value'</li>
+<li>roles[primary eq "True"].value'</li>
+<li>SingleAppRoleAssignment([appRoleAssignments]) <br>
+
+<ul>
+<li>appRoleAssignments is not supported</li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+<li>Click <strong>Save</strong> and then click <strong>Home</strong>. </li>
+<li>Navigate back to <strong>Microsoft Entra ID &gt; Enterprise applications &gt; Klaviyo &gt; Provisioning</strong>. </li>
+<li>Select <strong>Start Provisioning</strong>.<br>
+</li>
+</ol>
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28704478011931" alt="Provisioning tab, showing the start provisioning button">
+</div>
+</div>
+</div>

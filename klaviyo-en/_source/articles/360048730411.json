@@ -1,0 +1,816 @@
+{
+  "captured_at": "2026-05-23T16:18:57Z",
+  "article": {
+    "id": 360048730411,
+    "url": "https://klaviyo.zendesk.com/api/v2/help_center/en-us/articles/360048730411.json",
+    "html_url": "https://klaviyo.zendesk.com/hc/en-us/articles/360048730411-Magento-integration-system-requirements-reference",
+    "author_id": 396946107652,
+    "comments_disabled": true,
+    "draft": false,
+    "promoted": false,
+    "position": 9,
+    "vote_sum": -8,
+    "vote_count": 38,
+    "section_id": 49375848540187,
+    "created_at": "2020-08-25T18:11:44Z",
+    "updated_at": "2026-04-21T13:54:49Z",
+    "name": "Magento integration system requirements reference",
+    "title": "Magento integration system requirements reference",
+    "source_locale": "en-us",
+    "locale": "en-us",
+    "outdated": false,
+    "outdated_locales": [],
+    "edited_at": "2025-10-07T13:52:55Z",
+    "user_segment_id": null,
+    "permission_group_id": 146372,
+    "content_tag_ids": [],
+    "label_names": [],
+    "body": "<h2 id=\"h_01HYKBBKNSXMWS1S2KT34N1G7T\">You will learn</h2>\n<p>Learn about the system requirements for optimal syncing with Magento 1 or 2. The administrator of your Magento store is responsible for system specifications and configuration. Ensuring that your system is configured to work with Klaviyo will enable a smooth integration experience. </p>\n<h2 id=\"h_01HYKBBKNS3A2QE6G4EWY2QWC8\">Configure API user permissions </h2>\n<p>In the process of integrating your Magento store with Klaviyo, you will create a new <a href=\"https://help.klaviyo.com/hc/en-us/articles/115005082187#set-up-magento-api-credentials1\" target=\"_blank\" rel=\"noopener\">SOAP</a> (for Magento 1) or <a href=\"https://help.klaviyo.com/hc/en-us/articles/115005254348-Integrate-with-Magento-2-x-CE-and-EE-%23setup-your-magento-api-credentials2\" target=\"_blank\" rel=\"noopener\">REST</a> (for Magento 2) role with full resource access and assign a new user to this role. Ensure <em>Resource Access</em> is set to <em>All</em>. </p>\n<p>Without the necessary permissions for this API user, Klaviyo will not be able to properly interact with your Magento store’s APIs, which will prevent the integration from retrieving data from your store.</p>\n<h2 id=\"h_01HYKBBKNSEE01J429YWMG23PK\">Enable access to required API endpoints</h2>\n<p>Klaviyo requests data from specific endpoints. Your system configurations must allow access to these endpoints; consider the impact of security controls or URL redirection logic on the accessibility of these endpoints to Klaviyo. <span style=\"font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;\">If Klaviyo does not have access to the expected API endpoints, some or all Magento data will be unable to sync and you will see error reporting in the application.</span></p>\n<p>All outbound Klaviyo integration traffic is behind a set of predictable, static IP addresses so that you can have a high level of confidence that this traffic is coming from Klaviyo; we recommend <a href=\"https://help.klaviyo.com/hc/en-us/articles/19143781289115\" target=\"_blank\" rel=\"noopener noreferrer\">allowlisting these addresses</a>.</p>\n<h2 id=\"h_01HYKBBKNSY7XWFQ74ZPS4A756\">System capacity for historical data sync API requests</h2>\n<p>When you activate the integration, Klaviyo automatically queues API requests to sync historical data including customer records, order records, and the product catalog. We attempt to do this quickly to empower marketers to use this data in their accounts as soon as possible. We also attempt to do this responsibly by limiting concurrency and by gracefully handling retries. If your store has a high volume of historical data, limited resource capacity, or other applications that make substantial API requests, we recommend consulting your Magento administrator to ensure your infrastructure is equipped to support the historical data sync. Your administrator may want to consider temporarily increasing resources or applying auto-scaling. </p>\n<div class=\"bs-callout bs-callout-default\">If you have concerns about the volume of historical data or the server's ability to handle a temporary increase of API requests to fetch this data, consider temporarily scaling up server resources, applying auto-scaling.</div>\n<h2 id=\"h_01HYKBBKNSM0NQSYH5XSD9EXTB\">Verify SSL certificate validity</h2>\n<p>An SSL certificate digitally authenticates the identity of a website and enables an encrypted connection between a web browser and a web server. Your website’s SSL certificate is hosted by the site’s origin server. A valid SSL certificate is critical to accepting payment securely, protecting password logins, and securing web forms. <a href=\"https://www.ssllabs.com/ssltest/analyze.html?viaform=on&amp;d=\" target=\"_blank\" rel=\"noopener\">This tool</a> can be used to verify a website’s SSL certificate. </p>\n<p>Magento integrations may become disabled if your website’s SSL certification expires. In this case, the domain and intermediate certifications must be updated on the hosting provider. If you are unsure of the location of your certifications, reach out to your host provider for assistance</p>\n<h2 id=\"h_01HYKBBKNS69285GHFT58Q3H6B\">Sufficient server memory allocation</h2>\n<p>The amount of disk space required by an ecommerce website depends on a variety of factors, including the number of products, the number of images for each product, the quality of the images, the number of emails stored on the server, and static content pages. </p>\n<p>We recommend over 1 gigabyte of memory allocated to your Klaviyo integration, but 512 megabytes is the required minimum. If your server cannot allocate sufficient resources to respond to Klaviyo’s requests, integration errors will occur. The Klaviyo-Magento integration begins with a sync of historical data, so it is recommended you verify memory settings in Magento and your server before activating the integration. </p>\n<p>The default Magento PHP memory setting is 128 megabytes. This setting can be updated in the php.ini file, by changing the value of the “memory_limit” variable to the recommended 1024 megabytes.</p>\n<h2 id=\"h_01HYKBBKNSZW5VNQFPS8FHBV3V\">Set timezone to UTC</h2>\n<p>Coordinated Universal Time, or UTC, has been the world’s primary time standard since the 1960s. Klaviyo relies on UTC to schedule syncs of your most recent data. </p>\n<p>If your Magento instance uses a different timezone, it will be more difficult for Klaviyo to determine which data is most recent and should be synced. Your timezone should be <a href=\"https://www.simicart.com/blog/set-configure-timezone-magento/\" target=\"_blank\" rel=\"noopener\">updated to UTC</a> in both your Magento backend and in the app/Mage.php as well as app/code/local/Mage/Core/Model/Locale.php files. </p>\n<h2 id=\"h_01HYKBBKNSG3V0GZVYM7A383GE\">Additional resources</h2>\n<ul>\n<li><a href=\"https://klaviyo.zendesk.com/hc/en-us/articles/115005082187\" target=\"_blank\" rel=\"noopener\">How to Integrate with Magento 1.x (CE and EE)</a></li>\n<li><a href=\"https://klaviyo.zendesk.com/hc/en-us/articles/115005254348\" target=\"_blank\" rel=\"noopener\">How to integrate with Magento 2.x (CE and EE)</a></li>\n</ul>",
+    "user_segment_ids": []
+  },
+  "normalized": {
+    "id": "360048730411",
+    "title": "Magento integration system requirements reference",
+    "source_url": "https://help.klaviyo.com/hc/en-us/articles/360048730411-Magento-integration-system-requirements-reference",
+    "section_id": 49375848540187,
+    "section": "Magento 2",
+    "category_id": 115000032731,
+    "category": "Integrations",
+    "category_slug": "integrations",
+    "klaviyo_updated": "2026-04-21T13:54:49Z",
+    "created_at": "2020-08-25T18:11:44Z",
+    "draft": false,
+    "promoted": false,
+    "position": 9,
+    "label_names": []
+  },
+  "files": {
+    "body_html": "_source/articles/360048730411.body.html",
+    "rendered_html": "_source/rendered/360048730411.html"
+  },
+  "assets": {
+    "api_body": {
+      "images": [],
+      "links": [
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005082187#set-up-magento-api-credentials1",
+          "text": "SOAP"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005254348-Integrate-with-Magento-2-x-CE-and-EE-%23setup-your-magento-api-credentials2",
+          "text": "REST"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/19143781289115",
+          "text": "allowlisting these addresses"
+        },
+        {
+          "href": "https://www.ssllabs.com/ssltest/analyze.html?viaform=on&d=",
+          "text": "This tool"
+        },
+        {
+          "href": "https://www.simicart.com/blog/set-configure-timezone-magento/",
+          "text": "updated to UTC"
+        },
+        {
+          "href": "https://klaviyo.zendesk.com/hc/en-us/articles/115005082187",
+          "text": "How to Integrate with Magento 1.x (CE and EE)"
+        },
+        {
+          "href": "https://klaviyo.zendesk.com/hc/en-us/articles/115005254348",
+          "text": "How to integrate with Magento 2.x (CE and EE)"
+        }
+      ],
+      "headings": [
+        {
+          "level": 2,
+          "id": "h_01HYKBBKNSXMWS1S2KT34N1G7T",
+          "text": "You will learn"
+        },
+        {
+          "level": 2,
+          "id": "h_01HYKBBKNS3A2QE6G4EWY2QWC8",
+          "text": "Configure API user permissions"
+        },
+        {
+          "level": 2,
+          "id": "h_01HYKBBKNSEE01J429YWMG23PK",
+          "text": "Enable access to required API endpoints"
+        },
+        {
+          "level": 2,
+          "id": "h_01HYKBBKNSY7XWFQ74ZPS4A756",
+          "text": "System capacity for historical data sync API requests"
+        },
+        {
+          "level": 2,
+          "id": "h_01HYKBBKNSM0NQSYH5XSD9EXTB",
+          "text": "Verify SSL certificate validity"
+        },
+        {
+          "level": 2,
+          "id": "h_01HYKBBKNS69285GHFT58Q3H6B",
+          "text": "Sufficient server memory allocation"
+        },
+        {
+          "level": 2,
+          "id": "h_01HYKBBKNSZW5VNQFPS8FHBV3V",
+          "text": "Set timezone to UTC"
+        },
+        {
+          "level": 2,
+          "id": "h_01HYKBBKNSG3V0GZVYM7A383GE",
+          "text": "Additional resources"
+        }
+      ]
+    },
+    "rendered_page": {
+      "images": [
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/7ff492c2b417b7ecfe572f839a8a81398693c1f7-1920x1080.webp",
+          "alt": "",
+          "width": "",
+          "height": ""
+        }
+      ],
+      "links": [
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360048730411-Magento-integration-system-requirements-reference#site-content",
+          "text": "Skip to main content"
+        },
+        {
+          "href": "https://www.klaviyo.com",
+          "text": "Home"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center"
+        },
+        {
+          "href": "https://www.klaviyo.com/enterprise",
+          "text": "Enterprise"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Partners"
+        },
+        {
+          "href": "https://www.klaviyo.com/careers",
+          "text": "Careers"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": "Log in"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": ""
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center Find step-by-step instructions and troubleshooting solutions in our knowledge base."
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000032731",
+          "text": "Integrations"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000312411",
+          "text": "Flows"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867867",
+          "text": "Audience"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867667",
+          "text": "Campaigns"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/360000190711",
+          "text": "Sign-up forms"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000873988",
+          "text": "Deliverability & compliance"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/29173800271259",
+          "text": "SMS"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/16638219724187",
+          "text": "Reviews"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/18073014919195",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/34141283979931",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/37659126754075",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/33948021740315",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/39746685522331",
+          "text": "WhatsApp"
+        },
+        {
+          "href": "https://academy.klaviyo.com",
+          "text": "Klaviyo Academy Expert training and education to help you succeed with Klaviyo, and beyond."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Quick+guide&resource=academy_courses",
+          "text": "Quick guides Learn marketing strategies and concepts in 15 minutes or less."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Course&resource=academy_courses",
+          "text": "Courses Master key marketing topics through structured lessons and exams."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/best-practices",
+          "text": "Best practices Discover top product and marketing strategies for your business."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/learning-paths",
+          "text": "Learning paths Complete curated learning journeys tailored to your marketing goals."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses",
+          "text": "Explore all resources"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Live+training&resource=academy_courses",
+          "text": "Live trainings Build confidence through hands-on interactive workshops and thought-provoking strategy sessions."
+        },
+        {
+          "href": "https://www.bigmarker.com/klaviyo-customer-education/Office-hours-Getting-started-with-Klaviyo",
+          "text": "Live office hours Join a strategic discussion where you can ask questions and get answers in real-time."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/private-live-training",
+          "text": "1:1 Live training Book a private training session with an expert to jumpstart your platform knowledge and confidence."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/credentials",
+          "text": "Klaviyo credentials Dig deeper into select topics and showcase your expertise with a final exam to earn a certificate and digital badge."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/certificates/klaviyo-practitioner-certificate",
+          "text": "Klaviyo practitioner certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/deliverability-certificate",
+          "text": "Deliverability certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/developer-certificate",
+          "text": "Klaviyo developer certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses&select=Certificate",
+          "text": "See all certificates"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Klaviyo Community Join our thriving community network to connect with brands like yours—online and in person."
+        },
+        {
+          "href": "https://community.klaviyo.com/topic/new",
+          "text": "Ask a question Post a question and get thoughtful answers from Klaviyo powerusers."
+        },
+        {
+          "href": "https://community.klaviyo.com/p/roadmap",
+          "text": "Product roadmap"
+        },
+        {
+          "href": "https://community.klaviyo.com/search/activity/recent",
+          "text": "Recent threads"
+        },
+        {
+          "href": "https://community.klaviyo.com/p/champions",
+          "text": "Meet the Champions"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups",
+          "text": "Browse all groups Your people are waiting. New ideas and connections are a click away."
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/developer-group-64",
+          "text": "Developer group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/entrepreneur-user-group-118",
+          "text": "Entrepreneur group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/woo-user-group-87",
+          "text": "WooCommerce group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/new-york-meetup-chapter-82",
+          "text": "New York City"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/los-angeles-meetup-chapter-83",
+          "text": "Los Angeles"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/austin-meetup-chapter-85",
+          "text": "Austin"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/san-diego-meetup-chapter-86",
+          "text": "San Diego"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/amsterdam-meetup-chapter-84",
+          "text": "Amsterdam"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Klaviyo Developers Access API documentation and developer guides to help you build with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/get_started",
+          "text": "Get started Access key resources and a step-by-step checklist for how to start developing with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/build_your_integration",
+          "text": "Grow your app's reach Learn how to join our ecosystem and get your app listed on our marketplace."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/developer-tools",
+          "text": "Developer tools Generate sample data, monitor your API usage, and access our Postman collections."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/reference/api_overview",
+          "text": "API reference Browse our full catalog of API docs."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/changelog_",
+          "text": "Changelog"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/api_versioning_and_deprecation_policy",
+          "text": "Versioning & deprecation policy"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/rate_limits_and_error_handling",
+          "text": "Rate limits & error handling"
+        },
+        {
+          "href": "https://youtube.com/playlist?list=PLHkNfHgtxcUanrkMnKPdkRzuWU7MGv_xM&si=pkG-KH7IT_TUHOGC",
+          "text": "API tutorials on YouTube Subscribe to our Klaviyo API Tutorials playlist for easy access to step-by-step developer walkthroughs."
+        },
+        {
+          "href": "https://www.klaviyo.com/contact-us",
+          "text": "Contact us"
+        },
+        {
+          "href": "https://www.klaviyo.com/sign-up",
+          "text": "Sign up"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": "Search"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360048730411",
+          "text": "United States - EN"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/de-de/articles/360048730411",
+          "text": "Deutschland - DE"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-es/articles/360048730411",
+          "text": "España - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-mx/articles/360048730411",
+          "text": "México - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/fr-fr/articles/360048730411",
+          "text": "France - FR"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/it-it/articles/360048730411",
+          "text": "Italia - IT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/ko-kr/articles/360048730411",
+          "text": "한국 - KO"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/nl-nl/articles/360048730411",
+          "text": "Nederland - NL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pl-pl/articles/360048730411",
+          "text": "Polska - PL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pt-br/articles/360048730411",
+          "text": "Brasil - PT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/sv-se/articles/360048730411",
+          "text": "Sverige - SV"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/14521703806363",
+          "text": "Adobe Commerce (Magento)"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/49375848540187",
+          "text": "Magento 2"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360048730411-Magento-integration-system-requirements-reference#h_01HYKBBKNSXMWS1S2KT34N1G7T",
+          "text": "You will learn"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360048730411-Magento-integration-system-requirements-reference#h_01HYKBBKNS3A2QE6G4EWY2QWC8",
+          "text": "Configure API user permissions"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360048730411-Magento-integration-system-requirements-reference#h_01HYKBBKNSEE01J429YWMG23PK",
+          "text": "Enable access to required API endpoints"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360048730411-Magento-integration-system-requirements-reference#h_01HYKBBKNSY7XWFQ74ZPS4A756",
+          "text": "System capacity for historical data sync API requests"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360048730411-Magento-integration-system-requirements-reference#h_01HYKBBKNSM0NQSYH5XSD9EXTB",
+          "text": "Verify SSL certificate validity"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360048730411-Magento-integration-system-requirements-reference#h_01HYKBBKNS69285GHFT58Q3H6B",
+          "text": "Sufficient server memory allocation"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360048730411-Magento-integration-system-requirements-reference#h_01HYKBBKNSZW5VNQFPS8FHBV3V",
+          "text": "Set timezone to UTC"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360048730411-Magento-integration-system-requirements-reference#additional-resources",
+          "text": "Additional resources"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005082187#set-up-magento-api-credentials1",
+          "text": "SOAP"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005254348-Integrate-with-Magento-2-x-CE-and-EE-%23setup-your-magento-api-credentials2",
+          "text": "REST"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/19143781289115",
+          "text": "allowlisting these addresses"
+        },
+        {
+          "href": "https://www.ssllabs.com/ssltest/analyze.html?viaform=on&d=",
+          "text": "This tool"
+        },
+        {
+          "href": "https://www.simicart.com/blog/set-configure-timezone-magento/",
+          "text": "updated to UTC"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005254348",
+          "text": "Getting started with Magento 2.x (CE and EE)"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115001002272",
+          "text": "Learn how to contact support"
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": ""
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": "Visit Community"
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": ""
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": "Hire a partner"
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/about",
+          "text": "About Klaviyo"
+        },
+        {
+          "href": "https://www.klaviyo.com/newsroom",
+          "text": "Newsroom"
+        },
+        {
+          "href": "https://investors.klaviyo.com/overview/default.aspx",
+          "text": "Investor relations"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Agency and tech partners"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Developers"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/retail",
+          "text": "Retail and ecommerce"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/restaurants",
+          "text": "Restaurant marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/wellness",
+          "text": "Wellness"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform",
+          "text": "B2C CRM overview"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai",
+          "text": "Klaviyo AI (K:AI)"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/marketing-automation",
+          "text": "Klaviyo Marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-service",
+          "text": "Klaviyo Service"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/analytics",
+          "text": "Klaviyo Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-data-platform",
+          "text": "Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare",
+          "text": "Klaviyo vs. Klaviyo alternatives"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-mailchimp",
+          "text": "Klaviyo vs. Mailchimp"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-postscript",
+          "text": "Klaviyo vs. Postscript"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-attentive",
+          "text": "Klaviyo vs. Attentive"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-salesforce-marketing-cloud",
+          "text": "Klaviyo vs. Salesforce"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-listrak",
+          "text": "Klaviyo vs. Listrak"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/omnichannel",
+          "text": "Omnichannel marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/email-marketing",
+          "text": "Email marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing",
+          "text": "SMS marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing/rcs",
+          "text": "RCS for Business"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/mobile-app-marketing",
+          "text": "Mobile app marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/whatsapp",
+          "text": "WhatsApp marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/social",
+          "text": "Social marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources",
+          "text": "Marketing resources"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources/marketing-campaign-calendar",
+          "text": "Marketing campaign calendar"
+        },
+        {
+          "href": "https://www.klaviyo.com/glossary",
+          "text": "Marketing glossary"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/email-subject-line-generator",
+          "text": "Subject line generator"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/roi-calculator",
+          "text": "ROI calculator"
+        },
+        {
+          "href": "https://www.klaviyo.com/customers",
+          "text": "Case studies"
+        },
+        {
+          "href": "https://www.klaviyo.com/composer",
+          "text": "Composer Beta"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/marketing-agent",
+          "text": "Marketing Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/customer-agent",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/customer-experience-hub",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/helpdesk",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/marketing-analytics",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/advanced-cdp",
+          "text": "Advanced Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/web-forms",
+          "text": "Web forms"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/email-templates",
+          "text": "Email templates"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/portfolio",
+          "text": "Portfolio"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform-integrations",
+          "text": "Apps and Integrations"
+        },
+        {
+          "href": "https://www.klaviyo.com/features",
+          "text": "Features"
+        },
+        {
+          "href": "https://www.klaviyo.com/whats-new",
+          "text": "What's new"
+        },
+        {
+          "href": "https://www.klaviyo.com/events",
+          "text": "Events"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help Center"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us",
+          "text": "Academy"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Community"
+        },
+        {
+          "href": "https://www.facebook.com/Klaviyo/",
+          "text": "Facebook"
+        },
+        {
+          "href": "https://twitter.com/klaviyo/",
+          "text": "Twitter"
+        },
+        {
+          "href": "https://www.linkedin.com/company/klaviyo/",
+          "text": "LinkedIn"
+        },
+        {
+          "href": "https://www.instagram.com/klaviyo/",
+          "text": "Instagram"
+        },
+        {
+          "href": "https://www.klaviyo.com/sitemap",
+          "text": "Site Map"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal",
+          "text": "Terms and Privacy"
+        },
+        {
+          "href": "https://www.klaviyo.com/security",
+          "text": "Security"
+        },
+        {
+          "href": "https://www.klaviyo.com/trust",
+          "text": "Trust"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal/intellectual-property-notices",
+          "text": "Intellectual Property Notices"
+        }
+      ],
+      "headings": [
+        {
+          "level": 1,
+          "id": "",
+          "text": "Magento integration system requirements reference"
+        },
+        {
+          "level": 2,
+          "id": "h_01HYKBBKNSXMWS1S2KT34N1G7T",
+          "text": "You will learn"
+        },
+        {
+          "level": 2,
+          "id": "h_01HYKBBKNS3A2QE6G4EWY2QWC8",
+          "text": "Configure API user permissions"
+        },
+        {
+          "level": 2,
+          "id": "h_01HYKBBKNSEE01J429YWMG23PK",
+          "text": "Enable access to required API endpoints"
+        },
+        {
+          "level": 2,
+          "id": "h_01HYKBBKNSY7XWFQ74ZPS4A756",
+          "text": "System capacity for historical data sync API requests"
+        },
+        {
+          "level": 2,
+          "id": "h_01HYKBBKNSM0NQSYH5XSD9EXTB",
+          "text": "Verify SSL certificate validity"
+        },
+        {
+          "level": 2,
+          "id": "h_01HYKBBKNS69285GHFT58Q3H6B",
+          "text": "Sufficient server memory allocation"
+        },
+        {
+          "level": 2,
+          "id": "h_01HYKBBKNSZW5VNQFPS8FHBV3V",
+          "text": "Set timezone to UTC"
+        },
+        {
+          "level": 2,
+          "id": "additional-resources",
+          "text": "Additional resources"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "Explore more from Klaviyo"
+        }
+      ]
+    }
+  },
+  "rendered_page": {
+    "status": "fetched",
+    "error": ""
+  }
+}

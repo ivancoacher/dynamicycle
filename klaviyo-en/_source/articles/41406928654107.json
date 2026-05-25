@@ -1,0 +1,806 @@
+{
+  "captured_at": "2026-05-23T16:14:22Z",
+  "article": {
+    "id": 41406928654107,
+    "url": "https://klaviyo.zendesk.com/api/v2/help_center/en-us/articles/41406928654107.json",
+    "html_url": "https://klaviyo.zendesk.com/hc/en-us/articles/41406928654107-Connecting-Klaviyo-and-BigQuery-Reverse-ETL",
+    "author_id": 38504994929947,
+    "comments_disabled": true,
+    "draft": false,
+    "promoted": false,
+    "position": 0,
+    "vote_sum": 0,
+    "vote_count": 0,
+    "section_id": 49375669200027,
+    "created_at": "2025-09-24T17:24:05Z",
+    "updated_at": "2026-04-21T13:54:56Z",
+    "name": "Connecting Klaviyo and BigQuery (Reverse ETL)",
+    "title": "Connecting Klaviyo and BigQuery (Reverse ETL)",
+    "source_locale": "en-us",
+    "locale": "en-us",
+    "outdated": false,
+    "outdated_locales": [],
+    "edited_at": "2026-04-17T00:59:44Z",
+    "user_segment_id": null,
+    "permission_group_id": 146372,
+    "content_tag_ids": [
+      "01K5ZGPK6XJJ7N6E2TM1YJK302",
+      "01K5ZGPT13E0CS1FPX67C61NZ3",
+      "01K5ZGQHK55FQ7BKQVYVY8B7EX",
+      "01K5ZGRNX6WN1J4GK4WSW1Z0CP",
+      "01K5ZHSB085YXJE3AC3KTMQ7NW"
+    ],
+    "label_names": [],
+    "body": "<div class=\"bs-callout bs-callout-default\">\n<p><a href=\"https://help.klaviyo.com/hc/en-us/articles/17655007276059\">Advanced KDP</a> is not included in Klaviyo’s standard marketing application, and a subscription is required to access the associated functionality. Head to our <a href=\"https://help.klaviyo.com/hc/en-us/articles/115000976672\">billing guide</a> to learn about how to purchase this plan.</p>\n</div>\n<h1 id=\"h_01K8VYGVD0VFTJGH85G5S67NKS\">Environment Setup and Connection</h1>\n<p><strong>Overview:</strong> Follow these steps to prepare BigQuery for Klaviyo. You’ll create required schemas (in a dataset/project), set up a dedicated service account and key, assign the minimum required privileges, verify the configuration, and connect BigQuery to Klaviyo.</p>\n<p>For details on how data warehouse import works in Klaviyo—including schema structure, required tables, and field mappings—see <a href=\"https://help.klaviyo.com/hc/en-us/articles/40939206649627\">How Data Warehouse Imports Work in Klaviyo</a>.</p>\n<hr>\n<h2 id=\"h_01K8VYGVD0D1AJQJT3GZG8V5KY\">1) Create Required Schemas / Datasets</h2>\n<p>In BigQuery, create two datasets in the project you’ll use for Klaviyo.</p>\n<pre><code class=\"language-sql\">CREATE SCHEMA `KLAVIYO_IMPORT_FROM_DWH`;\nCREATE SCHEMA `KLAVIYO_TMP`;</code></pre>\n<ul>\n<li>\n<code>KLAVIYO_IMPORT_FROM_DWH</code>: Tables and views created in this dataset will be available for Klaviyo to read/write.</li>\n<li>\n<code>KLAVIYO_TMP</code>: Temporary or staging data used during sync operations.</li>\n</ul>\n<hr>\n<h2 id=\"h_01K8VYGVD1JDTD4F0TTMK9967A\">2) Create the Klaviyo Service Account and Key</h2>\n<p>Create a Google service account (e.g. KLAVIYO_DATA_TRANSFER_USER) that Klaviyo will use exclusively for this integration. Download a JSON key for this account and store it securely.</p>\n<ul>\n<li>Go to <strong>IAM &amp; Admin → Service accounts</strong> in the GCP Console.</li>\n<li>Create a new service account (or select an existing one dedicated to Klaviyo).</li>\n<li>In the Keys tab, create a new key of type JSON. Keep this key file safe — you’ll need it when configuring the connection in Klaviyo.</li>\n</ul>\n<hr>\n<h2 id=\"h_01K8VYGVD1TXK73HJESWAAENXV\">3) Assign Required Permissions</h2>\n<p>Grant the service account the following roles, scoped to the two datasets you created:</p>\n<table>\n<tbody>\n<tr>\n<th style=\"text-align: center\">Dataset</th>\n<th style=\"text-align: center\">Minimum Required Roles</th>\n<th style=\"text-align: center\">Description</th>\n</tr>\n<tr>\n<td><code>KLAVIYO_TMP</code></td>\n<td>\n<code>BigQuery Data Editor</code> + <code>BigQuery Job User</code>\n</td>\n<td>Allows Klaviyo to create and manage temporary tables, jobs, etc.</td>\n</tr>\n<tr>\n<td><code>KLAVIYO_IMPORT_FROM_DWH</code></td>\n<td>\n<code>BigQuery Data Viewer</code> + <code>BigQuery Job User</code>\n</td>\n<td>Allows Klaviyo to read from your tables.</td>\n</tr>\n</tbody>\n</table>\n<pre><code class=\"language-sql\">-- Example commands in GCP CLI (replace placeholders):\ngcloud projects add-iam-policy-binding YOUR_PROJECT_ID \\\n  --member=\"serviceAccount:KLAVIYO_DATA_TRANSFER_USER@YOUR_PROJECT_ID.iam.gserviceaccount.com\" \\\n  --role=\"roles/bigquery.dataEditor\" \\\n  --condition=None \\\n  --dataset=\"KLAVIYO_TMP\"\n\ngcloud projects add-iam-policy-binding YOUR_PROJECT_ID \\\n  --member=\"serviceAccount:KLAVIYO_DATA_TRANSFER_USER@YOUR_PROJECT_ID.iam.gserviceaccount.com\" \\\n  --role=\"roles/bigquery.dataViewer\" \\\n  --condition=None \\\n  --dataset=\"KLAVIYO_IMPORT_FROM_DWH\"\n</code></pre>\n<hr>\n<h2 id=\"h_01K8VYGVD17W2R3W5T6ZN6JX3V\">4) Verify Your Setup (Optional)</h2>\n<h3 id=\"h_01K8VYGVD1MC5RM2X9XMH5966S\">4.1 Confirm the datasets exist</h3>\n<pre><code class=\"language-sql\">SELECT schema_name \nFROM `YOUR_PROJECT_ID.INFORMATION_SCHEMA.SCHEMATA`\nWHERE schema_name IN ('KLAVIYO_IMPORT_FROM_DWH','KLAVIYO_TMP');\n</code></pre>\n<h3 id=\"h_01K8VYGVD1FQT2PMDPK6AD812Y\">4.2 Confirm service account access</h3>\n<p>Use the service account key to authenticate with the BigQuery CLI or API and run a simple query:</p>\n<pre><code class=\"language-bash\">bq --project_id=YOUR_PROJECT_ID \\\n   --dataset_id=KLAVIYO_IMPORT_FROM_DWH \\\n   query --use_legacy_sql=false \\\n   'SELECT COUNT(*) FROM `YOUR_PROJECT_ID.KLAVIYO_IMPORT_FROM_DWH.some_table` LIMIT 1'\n</code></pre>\n<h3 id=\"h_01K8VYGVD1KQ1PDD8DB1BHF3AW\">4.3 Check permissions on each dataset</h3>\n<pre><code class=\"language-sql\">SELECT * \nFROM `YOUR_PROJECT_ID.KLAVIYO_IMPORT_FROM_DWH.INFORMATION_SCHEMA.OBJECT_PRIVILEGES`\nWHERE grantee = 'KLAVIYO_DATA_TRANSFER_USER@YOUR_PROJECT_ID.iam.gserviceaccount.com';\n</code></pre>\n<h3 id=\"h_01K8VYGVD1425MWR105X8YHZQG\">4.4 Optional: Validate create/read operations</h3>\n<pre><code class=\"language-sql\">-- Test create in KLAVIYO_TMP\nCREATE TABLE `YOUR_PROJECT_ID.KLAVIYO_TMP.test_permissions` (id INT64);\nDROP TABLE `YOUR_PROJECT_ID.KLAVIYO_TMP.test_permissions`;\n\n-- Test select in KLAVIYO_IMPORT_FROM_DWH\nSELECT * FROM `YOUR_PROJECT_ID.KLAVIYO_IMPORT_FROM_DWH.some_existing_table` LIMIT 1;\n</code></pre>\n<p><strong>Tip:</strong> Run these checks using the same service account and key that you will provide to Klaviyo. Keep a copy of the results for auditing.</p>\n<hr>\n<h2 id=\"h_01K8VYGVD1R81EKVKS4PH3X7V3\">5) Connect Klaviyo to BigQuery</h2>\n<p>Once your BigQuery environment is configured, complete the connection in Klaviyo.</p>\n<ol>\n<li>In Klaviyo, navigate to <strong>Advanced → Syncing</strong> in the left sidebar.</li>\n<li>Click <strong>Create sync</strong>.</li>\n<li>Select <strong>Import or export data to your data warehouse</strong>.</li>\n<li>Choose <strong>BigQuery</strong> as your data warehouse.</li>\n<li>Click <strong>Connect to BigQuery</strong>.</li>\n</ol>\n<p>When prompted, provide the following connection configuration details:</p>\n<table>\n<tbody>\n<tr>\n<th style=\"text-align: center\">Field</th>\n<th style=\"text-align: center\">Description</th>\n<th style=\"text-align: center\">Where to Find It</th>\n</tr>\n<tr>\n<td><strong>Project ID</strong></td>\n<td>Your Google Cloud Project ID.</td>\n<td>Found in the GCP console at the top of the project page.</td>\n</tr>\n<tr>\n<td><strong>Dataset</strong></td>\n<td>The dataset (schema) containing your Klaviyo tables (e.g., <code>KLAVIYO_IMPORT_FROM_DWH</code>).</td>\n<td>Use the dataset you created in Step 1. Select that dataset when configuring the connection.</td>\n</tr>\n<tr>\n<td><strong>Service Account Key (JSON)</strong></td>\n<td>The JSON key file you downloaded for the service account.</td>\n<td>Upload or paste the contents of the JSON key file you created in Step 2.</td>\n</tr>\n</tbody>\n</table>\n<p><strong>After you connect:</strong> Klaviyo will validate the connection, test access to your datasets, and then allow you to configure syncs — for both importing data into Klaviyo and exporting Klaviyo data into BigQuery.</p>\n<hr>\n<p><em>Next step:</em> After connecting successfully, create your first import or export sync in Klaviyo and begin moving data to or from BigQuery.</p>\n<p><br>\n</p>",
+    "user_segment_ids": []
+  },
+  "normalized": {
+    "id": "41406928654107",
+    "title": "Connecting Klaviyo and BigQuery (Reverse ETL)",
+    "source_url": "https://help.klaviyo.com/hc/en-us/articles/41406928654107-Connecting-Klaviyo-and-BigQuery-Reverse-ETL",
+    "section_id": 49375669200027,
+    "section": "Syncing",
+    "category_id": 18073014919195,
+    "category": "Advanced KDP & Marketing Analytics",
+    "category_slug": "advanced-kdp-marketing-analytics",
+    "klaviyo_updated": "2026-04-21T13:54:56Z",
+    "created_at": "2025-09-24T17:24:05Z",
+    "draft": false,
+    "promoted": false,
+    "position": 0,
+    "label_names": []
+  },
+  "files": {
+    "body_html": "_source/articles/41406928654107.body.html",
+    "rendered_html": "_source/rendered/41406928654107.html"
+  },
+  "assets": {
+    "api_body": {
+      "images": [],
+      "links": [
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/17655007276059",
+          "text": "Advanced KDP"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115000976672",
+          "text": "billing guide"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/40939206649627",
+          "text": "How Data Warehouse Imports Work in Klaviyo"
+        }
+      ],
+      "headings": [
+        {
+          "level": 1,
+          "id": "h_01K8VYGVD0VFTJGH85G5S67NKS",
+          "text": "Environment Setup and Connection"
+        },
+        {
+          "level": 2,
+          "id": "h_01K8VYGVD0D1AJQJT3GZG8V5KY",
+          "text": "1) Create Required Schemas / Datasets"
+        },
+        {
+          "level": 2,
+          "id": "h_01K8VYGVD1JDTD4F0TTMK9967A",
+          "text": "2) Create the Klaviyo Service Account and Key"
+        },
+        {
+          "level": 2,
+          "id": "h_01K8VYGVD1TXK73HJESWAAENXV",
+          "text": "3) Assign Required Permissions"
+        },
+        {
+          "level": 2,
+          "id": "h_01K8VYGVD17W2R3W5T6ZN6JX3V",
+          "text": "4) Verify Your Setup (Optional)"
+        },
+        {
+          "level": 3,
+          "id": "h_01K8VYGVD1MC5RM2X9XMH5966S",
+          "text": "4.1 Confirm the datasets exist"
+        },
+        {
+          "level": 3,
+          "id": "h_01K8VYGVD1FQT2PMDPK6AD812Y",
+          "text": "4.2 Confirm service account access"
+        },
+        {
+          "level": 3,
+          "id": "h_01K8VYGVD1KQ1PDD8DB1BHF3AW",
+          "text": "4.3 Check permissions on each dataset"
+        },
+        {
+          "level": 3,
+          "id": "h_01K8VYGVD1425MWR105X8YHZQG",
+          "text": "4.4 Optional: Validate create/read operations"
+        },
+        {
+          "level": 2,
+          "id": "h_01K8VYGVD1R81EKVKS4PH3X7V3",
+          "text": "5) Connect Klaviyo to BigQuery"
+        }
+      ]
+    },
+    "rendered_page": {
+      "images": [
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/7ff492c2b417b7ecfe572f839a8a81398693c1f7-1920x1080.webp",
+          "alt": "",
+          "width": "",
+          "height": ""
+        }
+      ],
+      "links": [
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/41406928654107-Connecting-Klaviyo-and-BigQuery-Reverse-ETL#site-content",
+          "text": "Skip to main content"
+        },
+        {
+          "href": "https://www.klaviyo.com",
+          "text": "Home"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center"
+        },
+        {
+          "href": "https://www.klaviyo.com/enterprise",
+          "text": "Enterprise"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Partners"
+        },
+        {
+          "href": "https://www.klaviyo.com/careers",
+          "text": "Careers"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": "Log in"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": ""
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center Find step-by-step instructions and troubleshooting solutions in our knowledge base."
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000032731",
+          "text": "Integrations"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000312411",
+          "text": "Flows"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867867",
+          "text": "Audience"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867667",
+          "text": "Campaigns"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/360000190711",
+          "text": "Sign-up forms"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000873988",
+          "text": "Deliverability & compliance"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/29173800271259",
+          "text": "SMS"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/16638219724187",
+          "text": "Reviews"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/18073014919195",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/34141283979931",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/37659126754075",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/33948021740315",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/39746685522331",
+          "text": "WhatsApp"
+        },
+        {
+          "href": "https://academy.klaviyo.com",
+          "text": "Klaviyo Academy Expert training and education to help you succeed with Klaviyo, and beyond."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Quick+guide&resource=academy_courses",
+          "text": "Quick guides Learn marketing strategies and concepts in 15 minutes or less."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Course&resource=academy_courses",
+          "text": "Courses Master key marketing topics through structured lessons and exams."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/best-practices",
+          "text": "Best practices Discover top product and marketing strategies for your business."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/learning-paths",
+          "text": "Learning paths Complete curated learning journeys tailored to your marketing goals."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses",
+          "text": "Explore all resources"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Live+training&resource=academy_courses",
+          "text": "Live trainings Build confidence through hands-on interactive workshops and thought-provoking strategy sessions."
+        },
+        {
+          "href": "https://www.bigmarker.com/klaviyo-customer-education/Office-hours-Getting-started-with-Klaviyo",
+          "text": "Live office hours Join a strategic discussion where you can ask questions and get answers in real-time."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/private-live-training",
+          "text": "1:1 Live training Book a private training session with an expert to jumpstart your platform knowledge and confidence."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/credentials",
+          "text": "Klaviyo credentials Dig deeper into select topics and showcase your expertise with a final exam to earn a certificate and digital badge."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/certificates/klaviyo-practitioner-certificate",
+          "text": "Klaviyo practitioner certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/deliverability-certificate",
+          "text": "Deliverability certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/developer-certificate",
+          "text": "Klaviyo developer certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses&select=Certificate",
+          "text": "See all certificates"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Klaviyo Community Join our thriving community network to connect with brands like yours—online and in person."
+        },
+        {
+          "href": "https://community.klaviyo.com/topic/new",
+          "text": "Ask a question Post a question and get thoughtful answers from Klaviyo powerusers."
+        },
+        {
+          "href": "https://community.klaviyo.com/p/roadmap",
+          "text": "Product roadmap"
+        },
+        {
+          "href": "https://community.klaviyo.com/search/activity/recent",
+          "text": "Recent threads"
+        },
+        {
+          "href": "https://community.klaviyo.com/p/champions",
+          "text": "Meet the Champions"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups",
+          "text": "Browse all groups Your people are waiting. New ideas and connections are a click away."
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/developer-group-64",
+          "text": "Developer group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/entrepreneur-user-group-118",
+          "text": "Entrepreneur group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/woo-user-group-87",
+          "text": "WooCommerce group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/new-york-meetup-chapter-82",
+          "text": "New York City"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/los-angeles-meetup-chapter-83",
+          "text": "Los Angeles"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/austin-meetup-chapter-85",
+          "text": "Austin"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/san-diego-meetup-chapter-86",
+          "text": "San Diego"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/amsterdam-meetup-chapter-84",
+          "text": "Amsterdam"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Klaviyo Developers Access API documentation and developer guides to help you build with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/get_started",
+          "text": "Get started Access key resources and a step-by-step checklist for how to start developing with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/build_your_integration",
+          "text": "Grow your app's reach Learn how to join our ecosystem and get your app listed on our marketplace."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/developer-tools",
+          "text": "Developer tools Generate sample data, monitor your API usage, and access our Postman collections."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/reference/api_overview",
+          "text": "API reference Browse our full catalog of API docs."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/changelog_",
+          "text": "Changelog"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/api_versioning_and_deprecation_policy",
+          "text": "Versioning & deprecation policy"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/rate_limits_and_error_handling",
+          "text": "Rate limits & error handling"
+        },
+        {
+          "href": "https://youtube.com/playlist?list=PLHkNfHgtxcUanrkMnKPdkRzuWU7MGv_xM&si=pkG-KH7IT_TUHOGC",
+          "text": "API tutorials on YouTube Subscribe to our Klaviyo API Tutorials playlist for easy access to step-by-step developer walkthroughs."
+        },
+        {
+          "href": "https://www.klaviyo.com/contact-us",
+          "text": "Contact us"
+        },
+        {
+          "href": "https://www.klaviyo.com/sign-up",
+          "text": "Sign up"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": "Search"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/41406928654107",
+          "text": "United States - EN"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/de-de/articles/41406928654107",
+          "text": "Deutschland - DE"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-es/articles/41406928654107",
+          "text": "España - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-mx/articles/41406928654107",
+          "text": "México - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/fr-fr/articles/41406928654107",
+          "text": "France - FR"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/it-it/articles/41406928654107",
+          "text": "Italia - IT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/ko-kr/articles/41406928654107",
+          "text": "한국 - KO"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/nl-nl/articles/41406928654107",
+          "text": "Nederland - NL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pl-pl/articles/41406928654107",
+          "text": "Polska - PL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pt-br/articles/41406928654107",
+          "text": "Brasil - PT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/sv-se/articles/41406928654107",
+          "text": "Sverige - SV"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/18073014919195",
+          "text": "Advanced KDP & Marketing Analytics"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/28478928202523",
+          "text": "Data management (Advanced KDP)"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/49375669200027",
+          "text": "Syncing"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/41406928654107-Connecting-Klaviyo-and-BigQuery-Reverse-ETL#h_01K8VYGVD0D1AJQJT3GZG8V5KY",
+          "text": "1) Create Required Schemas / Datasets"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/41406928654107-Connecting-Klaviyo-and-BigQuery-Reverse-ETL#h_01K8VYGVD1JDTD4F0TTMK9967A",
+          "text": "2) Create the Klaviyo Service Account and Key"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/41406928654107-Connecting-Klaviyo-and-BigQuery-Reverse-ETL#h_01K8VYGVD1TXK73HJESWAAENXV",
+          "text": "3) Assign Required Permissions"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/41406928654107-Connecting-Klaviyo-and-BigQuery-Reverse-ETL#h_01K8VYGVD17W2R3W5T6ZN6JX3V",
+          "text": "4) Verify Your Setup (Optional)"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/41406928654107-Connecting-Klaviyo-and-BigQuery-Reverse-ETL#h_01K8VYGVD1R81EKVKS4PH3X7V3",
+          "text": "5) Connect Klaviyo to BigQuery"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/17655007276059",
+          "text": "Advanced KDP"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115000976672",
+          "text": "billing guide"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/40939206649627",
+          "text": "How Data Warehouse Imports Work in Klaviyo"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115001002272",
+          "text": "Learn how to contact support"
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": ""
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": "Visit Community"
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": ""
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": "Hire a partner"
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/about",
+          "text": "About Klaviyo"
+        },
+        {
+          "href": "https://www.klaviyo.com/newsroom",
+          "text": "Newsroom"
+        },
+        {
+          "href": "https://investors.klaviyo.com/overview/default.aspx",
+          "text": "Investor relations"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Agency and tech partners"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Developers"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/retail",
+          "text": "Retail and ecommerce"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/restaurants",
+          "text": "Restaurant marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/wellness",
+          "text": "Wellness"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform",
+          "text": "B2C CRM overview"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai",
+          "text": "Klaviyo AI (K:AI)"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/marketing-automation",
+          "text": "Klaviyo Marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-service",
+          "text": "Klaviyo Service"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/analytics",
+          "text": "Klaviyo Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-data-platform",
+          "text": "Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare",
+          "text": "Klaviyo vs. Klaviyo alternatives"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-mailchimp",
+          "text": "Klaviyo vs. Mailchimp"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-postscript",
+          "text": "Klaviyo vs. Postscript"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-attentive",
+          "text": "Klaviyo vs. Attentive"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-salesforce-marketing-cloud",
+          "text": "Klaviyo vs. Salesforce"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-listrak",
+          "text": "Klaviyo vs. Listrak"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/omnichannel",
+          "text": "Omnichannel marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/email-marketing",
+          "text": "Email marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing",
+          "text": "SMS marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing/rcs",
+          "text": "RCS for Business"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/mobile-app-marketing",
+          "text": "Mobile app marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/whatsapp",
+          "text": "WhatsApp marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/social",
+          "text": "Social marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources",
+          "text": "Marketing resources"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources/marketing-campaign-calendar",
+          "text": "Marketing campaign calendar"
+        },
+        {
+          "href": "https://www.klaviyo.com/glossary",
+          "text": "Marketing glossary"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/email-subject-line-generator",
+          "text": "Subject line generator"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/roi-calculator",
+          "text": "ROI calculator"
+        },
+        {
+          "href": "https://www.klaviyo.com/customers",
+          "text": "Case studies"
+        },
+        {
+          "href": "https://www.klaviyo.com/composer",
+          "text": "Composer Beta"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/marketing-agent",
+          "text": "Marketing Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/customer-agent",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/customer-experience-hub",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/helpdesk",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/marketing-analytics",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/advanced-cdp",
+          "text": "Advanced Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/web-forms",
+          "text": "Web forms"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/email-templates",
+          "text": "Email templates"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/portfolio",
+          "text": "Portfolio"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform-integrations",
+          "text": "Apps and Integrations"
+        },
+        {
+          "href": "https://www.klaviyo.com/features",
+          "text": "Features"
+        },
+        {
+          "href": "https://www.klaviyo.com/whats-new",
+          "text": "What's new"
+        },
+        {
+          "href": "https://www.klaviyo.com/events",
+          "text": "Events"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help Center"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us",
+          "text": "Academy"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Community"
+        },
+        {
+          "href": "https://www.facebook.com/Klaviyo/",
+          "text": "Facebook"
+        },
+        {
+          "href": "https://twitter.com/klaviyo/",
+          "text": "Twitter"
+        },
+        {
+          "href": "https://www.linkedin.com/company/klaviyo/",
+          "text": "LinkedIn"
+        },
+        {
+          "href": "https://www.instagram.com/klaviyo/",
+          "text": "Instagram"
+        },
+        {
+          "href": "https://www.klaviyo.com/sitemap",
+          "text": "Site Map"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal",
+          "text": "Terms and Privacy"
+        },
+        {
+          "href": "https://www.klaviyo.com/security",
+          "text": "Security"
+        },
+        {
+          "href": "https://www.klaviyo.com/trust",
+          "text": "Trust"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal/intellectual-property-notices",
+          "text": "Intellectual Property Notices"
+        }
+      ],
+      "headings": [
+        {
+          "level": 1,
+          "id": "",
+          "text": "Connecting Klaviyo and BigQuery (Reverse ETL)"
+        },
+        {
+          "level": 1,
+          "id": "",
+          "text": "Environment Setup and Connection"
+        },
+        {
+          "level": 2,
+          "id": "h_01K8VYGVD0D1AJQJT3GZG8V5KY",
+          "text": "1) Create Required Schemas / Datasets"
+        },
+        {
+          "level": 2,
+          "id": "h_01K8VYGVD1JDTD4F0TTMK9967A",
+          "text": "2) Create the Klaviyo Service Account and Key"
+        },
+        {
+          "level": 2,
+          "id": "h_01K8VYGVD1TXK73HJESWAAENXV",
+          "text": "3) Assign Required Permissions"
+        },
+        {
+          "level": 2,
+          "id": "h_01K8VYGVD17W2R3W5T6ZN6JX3V",
+          "text": "4) Verify Your Setup (Optional)"
+        },
+        {
+          "level": 3,
+          "id": "h_01K8VYGVD1MC5RM2X9XMH5966S",
+          "text": "4.1 Confirm the datasets exist"
+        },
+        {
+          "level": 3,
+          "id": "h_01K8VYGVD1FQT2PMDPK6AD812Y",
+          "text": "4.2 Confirm service account access"
+        },
+        {
+          "level": 3,
+          "id": "h_01K8VYGVD1KQ1PDD8DB1BHF3AW",
+          "text": "4.3 Check permissions on each dataset"
+        },
+        {
+          "level": 3,
+          "id": "h_01K8VYGVD1425MWR105X8YHZQG",
+          "text": "4.4 Optional: Validate create/read operations"
+        },
+        {
+          "level": 2,
+          "id": "h_01K8VYGVD1R81EKVKS4PH3X7V3",
+          "text": "5) Connect Klaviyo to BigQuery"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "Explore more from Klaviyo"
+        }
+      ]
+    }
+  },
+  "rendered_page": {
+    "status": "fetched",
+    "error": ""
+  }
+}

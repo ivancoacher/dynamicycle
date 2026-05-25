@@ -1,0 +1,917 @@
+{
+  "captured_at": "2026-05-23T16:15:01Z",
+  "article": {
+    "id": 25825620314651,
+    "url": "https://klaviyo.zendesk.com/api/v2/help_center/en-us/articles/25825620314651.json",
+    "html_url": "https://klaviyo.zendesk.com/hc/en-us/articles/25825620314651-How-to-skip-lines-in-a-dynamic-table-block",
+    "author_id": 390819509472,
+    "comments_disabled": true,
+    "draft": false,
+    "promoted": false,
+    "position": 0,
+    "vote_sum": 0,
+    "vote_count": 0,
+    "section_id": 49375545220123,
+    "created_at": "2024-05-17T13:44:28Z",
+    "updated_at": "2026-04-21T13:54:36Z",
+    "name": "How to skip lines in a dynamic table block",
+    "title": "How to skip lines in a dynamic table block",
+    "source_locale": "en-us",
+    "locale": "en-us",
+    "outdated": false,
+    "outdated_locales": [],
+    "edited_at": "2025-04-15T20:06:30Z",
+    "user_segment_id": null,
+    "permission_group_id": 146372,
+    "content_tag_ids": [],
+    "label_names": [],
+    "body": "<h2 id=\"h_01HY3CPMXGK4CWDZX0F7XZFM9R\">You will learn</h2>\n<p>Learn how to skip rows (e.g., items) in a dynamic table block. The most common use case for this is hiding irrelevant items, like shipping insurance or free gift items, from an abandoned cart email. However, you can follow these steps for any email that uses a dynamic table block. </p>\n<div class=\"bs-callout bs-callout-default\">\n<p>This process involves directly editing your email’s code. This is only recommended for technically savvy marketers or those who have access to a developer. Our support team cannot help you write custom code beyond the general guidance covered in this documentation. To maintain the security of your data, Klaviyo's support team is not able to open HTML files.</p>\n</div>\n<h2 id=\"h_01HY3CPMXG679HCJP9V0ZM3XZM\">Before you begin</h2>\n<p>This article covers how to hide items from existing dynamic table blocks. If you have not yet created a working dynamic table block (e.g., the products in an abandoned cart or order confirmation email), learn how to <a href=\"https://klaviyo.zendesk.com/hc/en-us/articles/4408802597659\" target=\"_blank\" rel=\"noopener noreferrer\">create one from scratch</a> or start with a message in our <a href=\"https://klaviyo.zendesk.com/hc/en-us/articles/115002779411\" target=\"_blank\" rel=\"noopener noreferrer\">flow library</a>. </p>\n<h2 id=\"h_01HY3CPMXG09T29MNA10VKB11T\">Write your <em>if</em> statements</h2>\n<p>Before making changes to your template, create 2 code snippets using a text or code editor (somewhere you can copy and paste the snippets from later). Each code snippet will consist of 3 parts: </p>\n<ol>\n<li>\n<a href=\"#h_01HY3CPMXG09XHJQTMZP0VJV82\">An opening <em>if</em> tag</a>, <code class=\"language-django\">{% if … %}</code>, indicating which items should appear in your table block. </li>\n<li>\n<a href=\"#h_01HY3CPMXGEPNZ4B9JC9SS91F2\">Content</a>, like an image tag or text about the product.</li>\n<li>\n<a href=\"#h_01HY3CPMXGHQ358JG8EH463SGG\">A closing tag</a>, <code class=\"language-django\">{% endif %}</code>.</li>\n</ol>\n<h3 id=\"h_01HY3CPMXG09XHJQTMZP0VJV82\">\n<span style=\"color: #434343;\" data-darkreader-inline-color=\"\">Create the opening </span><em><span style=\"color: #434343;\" data-darkreader-inline-color=\"\">if </span></em><span style=\"color: #434343;\" data-darkreader-inline-color=\"\">tag</span>\n</h3>\n<p>Here are some examples of opening <em>if</em> tags: </p>\n<div>\n<table style=\"width: 100%;\">\n<tbody>\n<tr>\n<td><strong>Tag</strong></td>\n<td><strong>Meaning</strong></td>\n</tr>\n<tr>\n<td>{% if item.price != 0 %}</td>\n<td>If the item price (<em>item.price</em>) is anything other than 0. </td>\n</tr>\n<tr>\n<td>{% if item.product.name != \"Route Shipping Insurance\" %}</td>\n<td>If the item name (<em>item.product.name</em>) is anything other than “Route Shipping Insurance.” </td>\n</tr>\n<tr>\n<td>{% if not \"T-Shirt\" in item.product.title %}</td>\n<td>If the item’s title (<em>item.product.title</em>) does not contain “T-Shirt.” </td>\n</tr>\n<tr>\n<td>{% if item.title %}</td>\n<td>If the item’s title (<em>item.title</em>) is set (i.e., has any value).</td>\n</tr>\n</tbody>\n</table>\n</div>\n<div class=\"bs-callout bs-callout-default\">\n<p>These tags are case sensitive and must match your data exactly. For example, if the variable for your item’s price is something other than <em>item.price</em> (e.g., <em>item.Price</em> or <em>item.details.line_price</em>), update the code to match your data source. </p>\n</div>\n<h3 id=\"h_01HY3CPMXGEPNZ4B9JC9SS91F2\"><span style=\"color: #434343;\" data-darkreader-inline-color=\"\">Create the content for the if statement</span></h3>\n<p>For content, follow these steps to use the existing content from your dynamic table block. Write this code snippet in a code or text editor; you’ll add it to your template in the next section. </p>\n<ol>\n<li>Under <em>Cell Content</em> for the table block’s image, click <strong>Replace</strong> to view the image placeholder.<br><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28717391398811\" alt=\"Replace cell content button.jpg\" width=\"342\" height=\"187\">\n</li>\n<li>Copy the entire code from the <em>Dynamic variable or dynamic URL</em> field. Note that this may be a simple dynamic variable, or it may be a longer code snippet; copy all of it, regardless of length.<br><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28717418658971\" alt=\"Abandoned cart product image variable.jpg\" width=\"678\" height=\"243\">\n</li>\n<li>Replace the placeholder in this code snippet with the code you copied from the <em>Dynamic variable or dynamic URL</em> field.<br>\n<pre><code class=\"language-django\">&lt;img src=\"PLACEHOLDER\" style=\"width: 200px; height: auto;\" width=\"200\"&gt;</code></pre>\n</li>\n</ol>\n<p>If your existing table block has a simple dynamic variable for the image, the resulting content will look something like this: </p>\n<pre><code class=\"language-django\">&lt;img src=\"{{item.product.variant.images.0.src}}\" style=\"width: 200px; height: auto;\" width=\"200\"&gt;  </code></pre>\n<p>If your existing table block contains a longer code snippet, the resulting content might look like this: </p>\n<pre><code class=\"language-django\">&lt;img src=\"{% if item.product.variant.images.0.src %}{{item.product.variant.images.0.src}}{%else%}{{item.product.images.0.src|missing_product_image}}{%endif%}\" style=\"width: 200px; height: auto;\" width=\"200\"&gt;\n</code></pre>\n<h3 id=\"h_01HY3CPMXGHQ358JG8EH463SGG\"><span style=\"color: #434343;\" data-darkreader-inline-color=\"\">Add your ending tag</span></h3>\n<p>Then, put all the content together: your opening if statement, then your content, and finally a closing <code class=\"language-django\">{% endif %}</code> tag. </p>\n<h3 id=\"h_01HY3CPMXGWC1AJMW0M201K7S4\"><span style=\"color: #434343;\" data-darkreader-inline-color=\"\">Repeat for the text content</span></h3>\n<p>Then, repeat this process with the content from the right side of your table block (e.g., the text content). Click <strong>&lt;/&gt;</strong> to open the code editor and copy all of the HTML content, then wrap this content in the same if statement (steps 1 and 3) you used for the image content. </p>\n<p>Here’s what everything looks like together: </p>\n<div>\n<table style=\"width: 100%;\">\n<tbody>\n<tr>\n<td><strong>Code snippet 1 (product image)</strong></td>\n<td><strong>Code snippet 2 (product details) </strong></td>\n</tr>\n<tr>\n<td style=\"width: 46.0332%;\">\n<pre><code class=\"language-django\">{% if item.product.name != \"Route Shipping Insurance\" %}\n&lt;img src=\"{% if item.product.variant.images.0.src %}\n{{item.product.variant.images.0.src}}{%else%}\n{{item.product.images.0.src|missing_product_image}}\n{%endif%}\"style=\"width: 200px; height: auto;\" width=\"200\"&gt;\n{% endif %}</code></pre>\n</td>\n<td style=\"width: 53.922%;\">\n<pre><code class=\"language-django\">{% if item.product.name != \"Route Shipping Insurance\" %}\n&lt;h3&gt;&lt;a href=\"{{ organization.url }}products/{{ item.product.url }}\"&gt;\n   {{ item.product.name }}\n&lt;/a&gt;&lt;/h3&gt;\n&lt;p&gt;\n   Quantity: {{ item.quantity|floatformat:0 }} — \n   Total: {% currency_format item.line_price|floatformat:2 %}\n&lt;/p&gt;\n{% endif %}</code></pre>\n</td>\n</tr>\n</tbody>\n</table>\n</div>\n<p>And here’s a breakdown of those code snippets: </p>\n<div>\n<table style=\"width: 100%;\">\n<colgroup> <col> <col> </colgroup>\n<tbody>\n<tr>\n<td><strong>Code snippet 1 (product image)</strong></td>\n<td><strong>Code snippet 2 (product details) </strong></td>\n</tr>\n<tr>\n<td>\n<pre><code class=\"language-django\">{% if CRITERIA %}\n   IMAGE PLACEHOLDER CONTENT\n{% endif %}</code></pre>\n</td>\n<td>\n<pre><code class=\"language-django\">{% if CRITERIA %}\n   PRODUCT DESCRIPTION\n{% endif %}</code></pre>\n</td>\n</tr>\n</tbody>\n</table>\n</div>\n<div class=\"bs-callout bs-callout-default\">\n<p>When using these code snippets, make sure to use straight quotes (\") rather than curly quotes (“) to ensure the code renders correctly. </p>\n</div>\n<p>Once you’ve written both code snippets, continue in the template editor following the steps below. </p>\n<h2 id=\"h_01HY3CPMXGJGQHPZSVA8EE0W6W\">Skip rows in a dynamic table block</h2>\n<div class=\"bs-callout bs-callout-default\">\n<p>Before editing your dynamic table block, consider saving the original block as universal content in case you need to reference it in future messages. Then unlink the block and edit it separately, so your edits aren’t saved to the universal content block. </p>\n</div>\n<ol>\n<li>If your email is part of a flow, set it to <em>Draft</em> or <em>Manual</em> so messages don’t send while you edit the flow message. </li>\n<li>Make sure the <em>Cell Content</em> for both columns of the new table block are set to <em>Text</em>.<br><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28717418651163\" width=\"336\" height=\"338\">\n</li>\n<li>Click <strong>&lt;/&gt;</strong> to open the HTML editor for the left side of the table block. </li>\n<li>Copy the product image code snippet you created in the previous section and paste it into the HTML field.<br><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28717418647579\" width=\"333\" height=\"470\">\n</li>\n<li>Click <strong>Done </strong>in the upper left. </li>\n<li>Navigate to the editor for the right side of the table block. </li>\n<li>Click <strong>&lt;/&gt;</strong> to open the HTML editor for the right side of the table block. </li>\n<li>Copy the product details code snippet you created in the previous section and paste it into the HTML field, replacing all previous content. </li>\n<li>Click <strong>Done</strong>. </li>\n<li>Preview the email to ensure it appears as expected: the skipped item should not appear, but all other items will appear normally. Make sure to preview with an event that contains the item you’re trying to hide, so you can ensure it is hidden. </li>\n</ol>\n<h3 id=\"h_01J8JFW0C92YQZ7C477DEAFV4N\">Conditional statements and the inline text editor</h3>\n<p>When you add certain conditional statements to a text block, they may disappear from the inline text editor. The code is still present; it is just hidden. To view and edit conditional statements, open the text block's <em>Source code</em> field. </p>\n<p>The following tags are only visible in a text block's <em>Source code</em> field: </p>\n<ul>\n<li>{% for ... %}</li>\n<li>{% endfor %}</li>\n<li>{% if ... %}</li>\n<li>{% elif ... %}</li>\n<li>{% else %}</li>\n<li>{% endif %}</li>\n<li>{% with ... %}</li>\n<li>{% endwith %}</li>\n</ul>\n\n<h2 id=\"h_01HY3CPMXGWM8MVT9ES07AY1H7\">Troubleshooting</h2>\n<p><strong>No items appear in the preview</strong></p>\n<ol>\n<li>Make sure you are previewing with an event that matches the data source you used (e.g., <em>Started checkout</em> for an abandoned cart message). </li>\n<li>Confirm the <em>Repeat for</em> and <em>Row alias</em> exactly match the <em>Row collection</em> and <em>Row alias</em> from the original block. </li>\n</ol>\n<p><strong>The item that should be skipped is still appearing</strong></p>\n<p>Check the spelling and capitalization of your if statement. If the product is still appearing, that means it meets the criteria in your if statement, so your if statement is not configured correctly. Learn more about <a href=\"https://help.klaviyo.com/hc/en-us/articles/7655926841499\" target=\"_blank\" rel=\"noopener noreferrer\">conditional logic in templates</a>. </p>\n<h2 id=\"h_01HY3CPMXG2ZRD6ST5FW8H873R\">Outcome</h2>\n<p>After following these steps, any items that don’t meet the criteria in your if statement will not appear in messages like abandoned cart or order confirmation emails.  </p>\n<h2 id=\"h_01HY3CPMXG4V8Q1XNE6N59HC4R\">Additional resources</h2>\n<ul>\n<li><a href=\"https://klaviyo.zendesk.com/hc/en-us/articles/4408802648731\" target=\"_blank\" rel=\"noopener noreferrer\">Message personalization reference</a></li>\n<li><a href=\"https://klaviyo.zendesk.com/hc/en-us/articles/115005254068\" target=\"_blank\" rel=\"noopener noreferrer\">How to import a custom HTML template</a></li>\n</ul>",
+    "user_segment_ids": []
+  },
+  "normalized": {
+    "id": "25825620314651",
+    "title": "How to skip lines in a dynamic table block",
+    "source_url": "https://help.klaviyo.com/hc/en-us/articles/25825620314651-How-to-skip-lines-in-a-dynamic-table-block",
+    "section_id": 49375545220123,
+    "section": "Use variable syntax and tags",
+    "category_id": 4414879524891,
+    "category": "Content",
+    "category_slug": "content",
+    "klaviyo_updated": "2026-04-21T13:54:36Z",
+    "created_at": "2024-05-17T13:44:28Z",
+    "draft": false,
+    "promoted": false,
+    "position": 0,
+    "label_names": []
+  },
+  "files": {
+    "body_html": "_source/articles/25825620314651.body.html",
+    "rendered_html": "_source/rendered/25825620314651.html"
+  },
+  "assets": {
+    "api_body": {
+      "images": [
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28717391398811",
+          "alt": "Replace cell content button.jpg",
+          "width": "342",
+          "height": "187"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28717418658971",
+          "alt": "Abandoned cart product image variable.jpg",
+          "width": "678",
+          "height": "243"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28717418651163",
+          "alt": "",
+          "width": "336",
+          "height": "338"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28717418647579",
+          "alt": "",
+          "width": "333",
+          "height": "470"
+        }
+      ],
+      "links": [
+        {
+          "href": "https://klaviyo.zendesk.com/hc/en-us/articles/4408802597659",
+          "text": "create one from scratch"
+        },
+        {
+          "href": "https://klaviyo.zendesk.com/hc/en-us/articles/115002779411",
+          "text": "flow library"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/25825620314651-How-to-skip-lines-in-a-dynamic-table-block#h_01HY3CPMXG09XHJQTMZP0VJV82",
+          "text": "An opening if tag"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/25825620314651-How-to-skip-lines-in-a-dynamic-table-block#h_01HY3CPMXGEPNZ4B9JC9SS91F2",
+          "text": "Content"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/25825620314651-How-to-skip-lines-in-a-dynamic-table-block#h_01HY3CPMXGHQ358JG8EH463SGG",
+          "text": "A closing tag"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/7655926841499",
+          "text": "conditional logic in templates"
+        },
+        {
+          "href": "https://klaviyo.zendesk.com/hc/en-us/articles/4408802648731",
+          "text": "Message personalization reference"
+        },
+        {
+          "href": "https://klaviyo.zendesk.com/hc/en-us/articles/115005254068",
+          "text": "How to import a custom HTML template"
+        }
+      ],
+      "headings": [
+        {
+          "level": 2,
+          "id": "h_01HY3CPMXGK4CWDZX0F7XZFM9R",
+          "text": "You will learn"
+        },
+        {
+          "level": 2,
+          "id": "h_01HY3CPMXG679HCJP9V0ZM3XZM",
+          "text": "Before you begin"
+        },
+        {
+          "level": 2,
+          "id": "h_01HY3CPMXG09T29MNA10VKB11T",
+          "text": "Write your if statements"
+        },
+        {
+          "level": 3,
+          "id": "h_01HY3CPMXG09XHJQTMZP0VJV82",
+          "text": "Create the opening if tag"
+        },
+        {
+          "level": 3,
+          "id": "h_01HY3CPMXGEPNZ4B9JC9SS91F2",
+          "text": "Create the content for the if statement"
+        },
+        {
+          "level": 3,
+          "id": "h_01HY3CPMXGHQ358JG8EH463SGG",
+          "text": "Add your ending tag"
+        },
+        {
+          "level": 3,
+          "id": "h_01HY3CPMXGWC1AJMW0M201K7S4",
+          "text": "Repeat for the text content"
+        },
+        {
+          "level": 2,
+          "id": "h_01HY3CPMXGJGQHPZSVA8EE0W6W",
+          "text": "Skip rows in a dynamic table block"
+        },
+        {
+          "level": 3,
+          "id": "h_01J8JFW0C92YQZ7C477DEAFV4N",
+          "text": "Conditional statements and the inline text editor"
+        },
+        {
+          "level": 2,
+          "id": "h_01HY3CPMXGWM8MVT9ES07AY1H7",
+          "text": "Troubleshooting"
+        },
+        {
+          "level": 2,
+          "id": "h_01HY3CPMXG2ZRD6ST5FW8H873R",
+          "text": "Outcome"
+        },
+        {
+          "level": 2,
+          "id": "h_01HY3CPMXG4V8Q1XNE6N59HC4R",
+          "text": "Additional resources"
+        }
+      ]
+    },
+    "rendered_page": {
+      "images": [
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/7ff492c2b417b7ecfe572f839a8a81398693c1f7-1920x1080.webp",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/8c9410006bb9fa56dcbd9143fbe6d92454bddfe4-772x422.jpg?w=342",
+          "alt": "Replace cell content button.jpg",
+          "width": "342",
+          "height": "187"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/e322055faf98b615a5893ed242013755a58387ce-1560x560.jpg?w=678",
+          "alt": "Abandoned cart product image variable.jpg",
+          "width": "678",
+          "height": "243"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/c97959d7c19afdab81f1eb8dffda1e6b8aed26b2-786x790.jpg?w=336",
+          "alt": "",
+          "width": "336",
+          "height": "338"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/5eca4dc5ee041f0f1ed8548ee5578bff63913dc0-798x1126.jpg?w=333",
+          "alt": "",
+          "width": "333",
+          "height": "470"
+        }
+      ],
+      "links": [
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/25825620314651-How-to-skip-lines-in-a-dynamic-table-block#site-content",
+          "text": "Skip to main content"
+        },
+        {
+          "href": "https://www.klaviyo.com",
+          "text": "Home"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center"
+        },
+        {
+          "href": "https://www.klaviyo.com/enterprise",
+          "text": "Enterprise"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Partners"
+        },
+        {
+          "href": "https://www.klaviyo.com/careers",
+          "text": "Careers"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": "Log in"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": ""
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center Find step-by-step instructions and troubleshooting solutions in our knowledge base."
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000032731",
+          "text": "Integrations"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000312411",
+          "text": "Flows"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867867",
+          "text": "Audience"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867667",
+          "text": "Campaigns"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/360000190711",
+          "text": "Sign-up forms"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000873988",
+          "text": "Deliverability & compliance"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/29173800271259",
+          "text": "SMS"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/16638219724187",
+          "text": "Reviews"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/18073014919195",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/34141283979931",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/37659126754075",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/33948021740315",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/39746685522331",
+          "text": "WhatsApp"
+        },
+        {
+          "href": "https://academy.klaviyo.com",
+          "text": "Klaviyo Academy Expert training and education to help you succeed with Klaviyo, and beyond."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Quick+guide&resource=academy_courses",
+          "text": "Quick guides Learn marketing strategies and concepts in 15 minutes or less."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Course&resource=academy_courses",
+          "text": "Courses Master key marketing topics through structured lessons and exams."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/best-practices",
+          "text": "Best practices Discover top product and marketing strategies for your business."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/learning-paths",
+          "text": "Learning paths Complete curated learning journeys tailored to your marketing goals."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses",
+          "text": "Explore all resources"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Live+training&resource=academy_courses",
+          "text": "Live trainings Build confidence through hands-on interactive workshops and thought-provoking strategy sessions."
+        },
+        {
+          "href": "https://www.bigmarker.com/klaviyo-customer-education/Office-hours-Getting-started-with-Klaviyo",
+          "text": "Live office hours Join a strategic discussion where you can ask questions and get answers in real-time."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/private-live-training",
+          "text": "1:1 Live training Book a private training session with an expert to jumpstart your platform knowledge and confidence."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/credentials",
+          "text": "Klaviyo credentials Dig deeper into select topics and showcase your expertise with a final exam to earn a certificate and digital badge."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/certificates/klaviyo-practitioner-certificate",
+          "text": "Klaviyo practitioner certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/deliverability-certificate",
+          "text": "Deliverability certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/developer-certificate",
+          "text": "Klaviyo developer certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses&select=Certificate",
+          "text": "See all certificates"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Klaviyo Community Join our thriving community network to connect with brands like yours—online and in person."
+        },
+        {
+          "href": "https://community.klaviyo.com/topic/new",
+          "text": "Ask a question Post a question and get thoughtful answers from Klaviyo powerusers."
+        },
+        {
+          "href": "https://community.klaviyo.com/p/roadmap",
+          "text": "Product roadmap"
+        },
+        {
+          "href": "https://community.klaviyo.com/search/activity/recent",
+          "text": "Recent threads"
+        },
+        {
+          "href": "https://community.klaviyo.com/p/champions",
+          "text": "Meet the Champions"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups",
+          "text": "Browse all groups Your people are waiting. New ideas and connections are a click away."
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/developer-group-64",
+          "text": "Developer group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/entrepreneur-user-group-118",
+          "text": "Entrepreneur group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/woo-user-group-87",
+          "text": "WooCommerce group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/new-york-meetup-chapter-82",
+          "text": "New York City"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/los-angeles-meetup-chapter-83",
+          "text": "Los Angeles"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/austin-meetup-chapter-85",
+          "text": "Austin"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/san-diego-meetup-chapter-86",
+          "text": "San Diego"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/amsterdam-meetup-chapter-84",
+          "text": "Amsterdam"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Klaviyo Developers Access API documentation and developer guides to help you build with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/get_started",
+          "text": "Get started Access key resources and a step-by-step checklist for how to start developing with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/build_your_integration",
+          "text": "Grow your app's reach Learn how to join our ecosystem and get your app listed on our marketplace."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/developer-tools",
+          "text": "Developer tools Generate sample data, monitor your API usage, and access our Postman collections."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/reference/api_overview",
+          "text": "API reference Browse our full catalog of API docs."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/changelog_",
+          "text": "Changelog"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/api_versioning_and_deprecation_policy",
+          "text": "Versioning & deprecation policy"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/rate_limits_and_error_handling",
+          "text": "Rate limits & error handling"
+        },
+        {
+          "href": "https://youtube.com/playlist?list=PLHkNfHgtxcUanrkMnKPdkRzuWU7MGv_xM&si=pkG-KH7IT_TUHOGC",
+          "text": "API tutorials on YouTube Subscribe to our Klaviyo API Tutorials playlist for easy access to step-by-step developer walkthroughs."
+        },
+        {
+          "href": "https://www.klaviyo.com/contact-us",
+          "text": "Contact us"
+        },
+        {
+          "href": "https://www.klaviyo.com/sign-up",
+          "text": "Sign up"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": "Search"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/25825620314651",
+          "text": "United States - EN"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/de-de/articles/25825620314651",
+          "text": "Deutschland - DE"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-es/articles/25825620314651",
+          "text": "España - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-mx/articles/25825620314651",
+          "text": "México - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/fr-fr/articles/25825620314651",
+          "text": "France - FR"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/it-it/articles/25825620314651",
+          "text": "Italia - IT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/ko-kr/articles/25825620314651",
+          "text": "한국 - KO"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/nl-nl/articles/25825620314651",
+          "text": "Nederland - NL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pl-pl/articles/25825620314651",
+          "text": "Polska - PL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pt-br/articles/25825620314651",
+          "text": "Brasil - PT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/sv-se/articles/25825620314651",
+          "text": "Sverige - SV"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/4414879524891",
+          "text": "Content"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/14543554717467",
+          "text": "Templates"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/49375545220123",
+          "text": "Use variable syntax and tags"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/25825620314651-How-to-skip-lines-in-a-dynamic-table-block#h_01HY3CPMXGK4CWDZX0F7XZFM9R",
+          "text": "You will learn"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/25825620314651-How-to-skip-lines-in-a-dynamic-table-block#h_01HY3CPMXG679HCJP9V0ZM3XZM",
+          "text": "Before you begin"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/25825620314651-How-to-skip-lines-in-a-dynamic-table-block#h_01HY3CPMXG09T29MNA10VKB11T",
+          "text": "Write your if statements"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/25825620314651-How-to-skip-lines-in-a-dynamic-table-block#h_01HY3CPMXGJGQHPZSVA8EE0W6W",
+          "text": "Skip rows in a dynamic table block"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/25825620314651-How-to-skip-lines-in-a-dynamic-table-block#h_01HY3CPMXGWM8MVT9ES07AY1H7",
+          "text": "Troubleshooting"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/25825620314651-How-to-skip-lines-in-a-dynamic-table-block#h_01HY3CPMXG2ZRD6ST5FW8H873R",
+          "text": "Outcome"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/25825620314651-How-to-skip-lines-in-a-dynamic-table-block#additional-resources",
+          "text": "Additional resources"
+        },
+        {
+          "href": "https://klaviyo.zendesk.com/hc/en-us/articles/4408802597659",
+          "text": "create one from scratch"
+        },
+        {
+          "href": "https://klaviyo.zendesk.com/hc/en-us/articles/115002779411",
+          "text": "flow library"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/25825620314651-How-to-skip-lines-in-a-dynamic-table-block#h_01HY3CPMXG09XHJQTMZP0VJV82",
+          "text": "An opening if tag"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/25825620314651-How-to-skip-lines-in-a-dynamic-table-block#h_01HY3CPMXGEPNZ4B9JC9SS91F2",
+          "text": "Content"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/25825620314651-How-to-skip-lines-in-a-dynamic-table-block#h_01HY3CPMXGHQ358JG8EH463SGG",
+          "text": "A closing tag"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/7655926841499",
+          "text": "conditional logic in templates"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4408802648731",
+          "text": "Message personalization reference"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005254068",
+          "text": "How to import a custom HTML template"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115001002272",
+          "text": "Learn how to contact support"
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": ""
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": "Visit Community"
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": ""
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": "Hire a partner"
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/about",
+          "text": "About Klaviyo"
+        },
+        {
+          "href": "https://www.klaviyo.com/newsroom",
+          "text": "Newsroom"
+        },
+        {
+          "href": "https://investors.klaviyo.com/overview/default.aspx",
+          "text": "Investor relations"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Agency and tech partners"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Developers"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/retail",
+          "text": "Retail and ecommerce"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/restaurants",
+          "text": "Restaurant marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/wellness",
+          "text": "Wellness"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform",
+          "text": "B2C CRM overview"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai",
+          "text": "Klaviyo AI (K:AI)"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/marketing-automation",
+          "text": "Klaviyo Marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-service",
+          "text": "Klaviyo Service"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/analytics",
+          "text": "Klaviyo Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-data-platform",
+          "text": "Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare",
+          "text": "Klaviyo vs. Klaviyo alternatives"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-mailchimp",
+          "text": "Klaviyo vs. Mailchimp"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-postscript",
+          "text": "Klaviyo vs. Postscript"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-attentive",
+          "text": "Klaviyo vs. Attentive"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-salesforce-marketing-cloud",
+          "text": "Klaviyo vs. Salesforce"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-listrak",
+          "text": "Klaviyo vs. Listrak"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/omnichannel",
+          "text": "Omnichannel marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/email-marketing",
+          "text": "Email marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing",
+          "text": "SMS marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing/rcs",
+          "text": "RCS for Business"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/mobile-app-marketing",
+          "text": "Mobile app marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/whatsapp",
+          "text": "WhatsApp marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/social",
+          "text": "Social marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources",
+          "text": "Marketing resources"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources/marketing-campaign-calendar",
+          "text": "Marketing campaign calendar"
+        },
+        {
+          "href": "https://www.klaviyo.com/glossary",
+          "text": "Marketing glossary"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/email-subject-line-generator",
+          "text": "Subject line generator"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/roi-calculator",
+          "text": "ROI calculator"
+        },
+        {
+          "href": "https://www.klaviyo.com/customers",
+          "text": "Case studies"
+        },
+        {
+          "href": "https://www.klaviyo.com/composer",
+          "text": "Composer Beta"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/marketing-agent",
+          "text": "Marketing Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/customer-agent",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/customer-experience-hub",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/helpdesk",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/marketing-analytics",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/advanced-cdp",
+          "text": "Advanced Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/web-forms",
+          "text": "Web forms"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/email-templates",
+          "text": "Email templates"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/portfolio",
+          "text": "Portfolio"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform-integrations",
+          "text": "Apps and Integrations"
+        },
+        {
+          "href": "https://www.klaviyo.com/features",
+          "text": "Features"
+        },
+        {
+          "href": "https://www.klaviyo.com/whats-new",
+          "text": "What's new"
+        },
+        {
+          "href": "https://www.klaviyo.com/events",
+          "text": "Events"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help Center"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us",
+          "text": "Academy"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Community"
+        },
+        {
+          "href": "https://www.facebook.com/Klaviyo/",
+          "text": "Facebook"
+        },
+        {
+          "href": "https://twitter.com/klaviyo/",
+          "text": "Twitter"
+        },
+        {
+          "href": "https://www.linkedin.com/company/klaviyo/",
+          "text": "LinkedIn"
+        },
+        {
+          "href": "https://www.instagram.com/klaviyo/",
+          "text": "Instagram"
+        },
+        {
+          "href": "https://www.klaviyo.com/sitemap",
+          "text": "Site Map"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal",
+          "text": "Terms and Privacy"
+        },
+        {
+          "href": "https://www.klaviyo.com/security",
+          "text": "Security"
+        },
+        {
+          "href": "https://www.klaviyo.com/trust",
+          "text": "Trust"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal/intellectual-property-notices",
+          "text": "Intellectual Property Notices"
+        }
+      ],
+      "headings": [
+        {
+          "level": 1,
+          "id": "",
+          "text": "How to skip lines in a dynamic table block"
+        },
+        {
+          "level": 2,
+          "id": "h_01HY3CPMXGK4CWDZX0F7XZFM9R",
+          "text": "You will learn"
+        },
+        {
+          "level": 2,
+          "id": "h_01HY3CPMXG679HCJP9V0ZM3XZM",
+          "text": "Before you begin"
+        },
+        {
+          "level": 2,
+          "id": "h_01HY3CPMXG09T29MNA10VKB11T",
+          "text": "Write your if statements"
+        },
+        {
+          "level": 3,
+          "id": "h_01HY3CPMXG09XHJQTMZP0VJV82",
+          "text": "Create the opening if tag"
+        },
+        {
+          "level": 3,
+          "id": "h_01HY3CPMXGEPNZ4B9JC9SS91F2",
+          "text": "Create the content for the if statement"
+        },
+        {
+          "level": 3,
+          "id": "h_01HY3CPMXGHQ358JG8EH463SGG",
+          "text": "Add your ending tag"
+        },
+        {
+          "level": 3,
+          "id": "h_01HY3CPMXGWC1AJMW0M201K7S4",
+          "text": "Repeat for the text content"
+        },
+        {
+          "level": 2,
+          "id": "h_01HY3CPMXGJGQHPZSVA8EE0W6W",
+          "text": "Skip rows in a dynamic table block"
+        },
+        {
+          "level": 3,
+          "id": "h_01J8JFW0C92YQZ7C477DEAFV4N",
+          "text": "Conditional statements and the inline text editor"
+        },
+        {
+          "level": 2,
+          "id": "h_01HY3CPMXGWM8MVT9ES07AY1H7",
+          "text": "Troubleshooting"
+        },
+        {
+          "level": 2,
+          "id": "h_01HY3CPMXG2ZRD6ST5FW8H873R",
+          "text": "Outcome"
+        },
+        {
+          "level": 2,
+          "id": "additional-resources",
+          "text": "Additional resources"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "Explore more from Klaviyo"
+        }
+      ]
+    }
+  },
+  "rendered_page": {
+    "status": "fetched",
+    "error": ""
+  }
+}

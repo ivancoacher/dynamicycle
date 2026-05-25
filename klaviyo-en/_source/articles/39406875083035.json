@@ -1,0 +1,778 @@
+{
+  "captured_at": "2026-05-23T16:14:31Z",
+  "article": {
+    "id": 39406875083035,
+    "url": "https://klaviyo.zendesk.com/api/v2/help_center/en-us/articles/39406875083035.json",
+    "html_url": "https://klaviyo.zendesk.com/hc/en-us/articles/39406875083035-Cloudbeds-data-reference",
+    "author_id": 409167690492,
+    "comments_disabled": true,
+    "draft": false,
+    "promoted": false,
+    "position": 0,
+    "vote_sum": 0,
+    "vote_count": 0,
+    "section_id": 49375952441243,
+    "created_at": "2025-07-28T14:31:20Z",
+    "updated_at": "2026-05-11T12:54:33Z",
+    "name": "Cloudbeds data reference",
+    "title": "Cloudbeds data reference",
+    "source_locale": "en-us",
+    "locale": "en-us",
+    "outdated": false,
+    "outdated_locales": [],
+    "edited_at": "2026-04-17T00:58:48Z",
+    "user_segment_id": null,
+    "permission_group_id": 146372,
+    "content_tag_ids": [],
+    "label_names": [],
+    "body": "<p>Learn what data syncs from Cloudbeds to Klaviyo and where to view it. This includes reservations, guest information, and email consent. If you have not already, read our guide on <a href=\"https://help.klaviyo.com/hc/en-us/articles/39406849361691\">getting started with Cloudbeds</a> for step-by-step instructions on integrating, before continuing with this article.</p>\n<h2 id=\"h_01K459V96BD6D0F4MT7G60NRCN\">Sync frequency</h2>\n<p>When you integrate with Cloudbeds, Klaviyo will sync all historic reservation and guest data. Going forward, reservation and guest data sync in real time.</p>\n<h2 id=\"h_01K459VN1WTTS8EATFDQPAE262\">How to view your Cloudbeds data</h2>\n<p>To view your Cloudbeds data:</p>\n<ol>\n<li>Navigate to <strong>Analytics &gt; Metrics</strong>.</li>\n<li>Here, you can view all of the metrics in your account. The metrics with a Cloudbeds icon represent all of the metrics synced from your Cloudbeds integration.</li>\n<li>Use the <em>All integrations</em> dropdown and select <strong>Cloudbeds</strong> to view only Cloudbeds metrics.</li>\n</ol>\n<p><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/46850854258331\" alt=\"Screenshot 2026-02-19 at 3.19.38 PM.png\" width=\"944\" height=\"1210\"></p>\n<h2 id=\"h_01K45A368Q03V7W6X9XCHQRAEM\">Room Night metrics</h2>\n<p>The following room night metrics, related to reservations, are synced from Cloudbeds:</p>\n<ul>\n<li>\n<strong>Confirmed Room Night</strong><br>\nWhen a guest confirms a reservation in Cloudbeds, we create 1 <strong>Confirmed Room Night </strong>event per room night (e.g., a reservation with 2 rooms for 2 nights will have 4 events).</li>\n<li>\n<strong>Completed Room Night</strong><br>\nWhen a guest checks out in Cloudbeds, we create 1 <strong>Completed Room Night </strong>event per room night (e.g., a reservation with 2 rooms for 2 nights will have 4 events).<br>\n<p>For each of these metrics, the following top-level properties are synced to Klaviyo:</p>\n</li>\n<li>\n<strong>Value</strong><br>\nThe total value of the room (i.e. room revenue) for a given night.</li>\n<li>\n<strong>Id</strong><br>\nThe Klaviyo-generated ID associated with the room night.</li>\n<li>\n<strong>ReservationID</strong><br>\nThe ID associated with the Reservation in the PMS.</li>\n<li>\n<strong>StartDate</strong><br>\nThe date a night begins.</li>\n<li>\n<strong>EndDate</strong><br>\nThe date a night ends.</li>\n<li>\n<strong>DayOfWeek</strong><br>\nThe day of the week (e.g. Monday) when the night begins.</li>\n<li>\n<strong>AdultCounts</strong><br>\nNumber of adults in a room.</li>\n<li>\n<strong>ChildCounts</strong><br>\nNumber of children in a room.</li>\n<li>\n<strong>PersonCounts</strong><br>\nNumber of people in a room (i.e. sum of adults and children).</li>\n<li>\n<strong>RoomTypeName</strong><br>\nThe name of the room as stored in the PMS.</li>\n<li>\n<strong>PropertyID</strong><br>\nID corresponding to the hotel.</li>\n<li>\n<strong>PropertyName</strong><br>\nName corresponding to the hotel property.</li>\n<li>\n<strong>Source</strong><br>\nName corresponding to the hotel property.</li>\n<li>\n<strong>MarketCode</strong><br>\nMarket code for the room.</li>\n</ul>\n<h2 id=\"h_01KHVSXGXGE0BZZTZQHAJE79H6\">Reservation metrics</h2>\n<p>The following reservation metrics are synced from Cloudbeds:</p>\n<ul>\n<li>\n<strong>Created Reservation</strong><br>\nWhen a guest’s reservation is created in Cloudbeds.</li>\n<li>\n<strong>Confirmed Reservation</strong><br>\nWhen a guest’s reservation is confirmed in Cloudbeds.</li>\n<li>\n<strong>Checked In to Reservation</strong><br>\nWhen a guest checks in to their reservation.</li>\n<li>\n<strong>Checked Out of Reservation</strong><br>\nWhen a guest checks out of their reservation.</li>\n<li>\n<strong>Cancelled Reservation</strong><br>\nWhen a guest or admin cancels a guest’s reservation.</li>\n<li>\n<strong>No Show Reservation</strong><br>\nWhen a guest does not show up to a reservation.<br>\n<p>For each of these metrics, the following top-level properties are synced to Klaviyo:</p>\n</li>\n<li>\n<strong>Value</strong><br>\nThe total monetary value of the reservation.</li>\n<li>\n<strong>Reservation ID</strong><br>\nThe reservation ID from Cloudbeds.</li>\n<li>\n<strong>Reservation Nights</strong><br>\nThe number of nights of a reservation.</li>\n<li>\n<strong>Property ID</strong><br>\nThe ID of the property that the reservation was booked at (e.g., “12345”).</li>\n<li>\n<strong>Property Name</strong><br>\nThe name of the property that the reservation was booked at (e.g., “Boutique Hotel in Maine”).</li>\n<li>\n<strong>Property Image</strong><br>\nThe main image URL for the property.</li>\n<li>\n<strong>Source</strong><br>\nThe source the reservation was booked from (e.g., “Website/Booking Engine”).</li>\n<li>\n<strong>Source ID</strong><br>\nThe ID of the source of the reservation (e.g., “s-1”).</li>\n<li>\n<strong>Origin</strong><br>\nThe origin of the reservation (e.g., “Expedia”).</li>\n<li>\n<strong>Third Party Identifier</strong><br>\nIf the reservation came from an online travel agency (OTA), the ID of the reservation in that system.</li>\n<li>\n<strong>Estimated Arrival Time</strong><br>\nThe estimated time the guest will arrive at the property.</li>\n<li>\n<strong>Start Date</strong><br>\nThe start date for the reservation.</li>\n<li>\n<strong>End Date</strong><br>\nThe end date for the reservation.</li>\n<li>\n<strong>Allotment Block Code</strong><br>\nThe allotment block code that was used on the reservation.</li>\n<li>\n<strong>Additional Products Value</strong><br>\nThe value of any add-ons a guest purchased on their reservation.</li>\n<li>\n<strong>Additional Product Items Count</strong><br>\nThe total number of additional products that a guest purchased on their reservation.</li>\n<li>\n<strong>Reservation Person Counts</strong><br>\nThe total number of people included on a reservation.</li>\n<li>\n<strong>Reservation Adult Counts</strong><br>\nThe total number of adults included on a reservation.</li>\n<li>\n<strong>Reservation Child Counts</strong><br>\nThe total number of children included on a reservation.</li>\n</ul>\n<h2 id=\"h_01K459ZFYC6JEGG3P1AQPF8FWC\">Reservation objects</h2>\n<p>The latest version of the Cloudbeds integration (<a href=\"https://help.klaviyo.com/hc/en-us/articles/39406849361691#h_01K45A8TV1MNXM2CV3TMGRSWWR\">upgrade guide</a>) syncs Reservation objects from Cloudbeds. These have the following fields:</p>\n<ul>\n<li>\n<strong>Value</strong><br>\nThe total monetary value of the reservation.</li>\n<li>\n<strong>ReservationID</strong><br>\nThe reservation ID from Cloudbeds. Used as the object ID.</li>\n<li>\n<strong>ReservationStatus</strong><br>\nThe current status of the reservation.</li>\n<li>\n<strong>ReservationNights</strong><br>\nThe number of nights of a reservation.</li>\n<li>\n<strong>PropertyID</strong><br>\nThe ID of the property that the reservation was booked at (e.g., “12345”).</li>\n<li>\n<strong>PropertyName</strong><br>\nThe name of the property that the reservation was booked at (e.g., “Boutique Hotel in Maine”).</li>\n<li>\n<strong>PropertyImage</strong><br>\nThe main image URL for the property.</li>\n<li>\n<strong>Source</strong><br>\nThe source the reservation was booked from (e.g., “Website/Booking Engine”).</li>\n<li>\n<strong>SourceID</strong><br>\nThe ID of the source of the reservation (e.g., “s-1”).</li>\n<li>\n<strong>Origin</strong><br>\nThe origin of the reservation (e.g., “Expedia”).</li>\n<li>\n<strong>ThirdPartyIdentifier</strong><br>\nIf the reservation came from an online travel agency (OTA), the ID of the reservation in that system.</li>\n<li>\n<strong>EstimatedArrivalTime</strong><br>\nThe estimated time the guest will arrive at the property.</li>\n<li>\n<strong>StartDate</strong><br>\nThe start date for the reservation.</li>\n<li>\n<strong>EndDate</strong><br>\nThe end date for the reservation.</li>\n<li>\n<strong>AllotmentBlockCode</strong><br>\nThe allotment block code that was used on the reservation.</li>\n<li>\n<strong>RoomTypeName</strong><br>\nThe name of the room type.</li>\n<li>\n<strong>AdditionalProductsValue</strong><br>\nThe value of any add-ons a guest purchased on their reservation.</li>\n<li>\n<strong>AdditionalProductItemsCount</strong><br>\nThe total number of additional products that a guest purchased on their reservation.</li>\n<li>\n<strong>ReservationPersonCounts</strong><br>\nThe total number of people included on a reservation.</li>\n<li>\n<strong>ReservationAdultCounts</strong><br>\nThe total number of adults included on a reservation.</li>\n<li>\n<strong>ReservationChildCounts</strong><br>\nThe total number of children included on a reservation.</li>\n</ul>\n<h2 id=\"h_01KG3BMNGJNJAE4KKZEQMJT837\">Guest data</h2>\n<p>Klaviyo syncs guest data from Cloudbeds. Please note that we do not sync any profiles associated with an online travel agency (OTA). </p>\n<p>We sync the following guest data to Klaviyo profiles:</p>\n<ul>\n<li>Email</li>\n<li>Phone number</li>\n<li>First name</li>\n<li>Last name</li>\n<li>Street</li>\n<li>City</li>\n<li>State</li>\n<li>Zip</li>\n<li>Country</li>\n<li>Cloudbeds Guest ID</li>\n<li>Cloudbeds Gender</li>\n<li>Cloudbeds Birthday</li>\n<li>Cloudbeds Company Name</li>\n<li>Cloudbeds Special Requests</li>\n<li>Cloudbeds Main Guest</li>\n<li>Cloudbeds Custom Fields</li>\n<li>Cloudbeds Date Created</li>\n<li>Email consent</li>\n</ul>\n<p>Please note that SMS consent is not synced from Cloudbeds.</p>",
+    "user_segment_ids": []
+  },
+  "normalized": {
+    "id": "39406875083035",
+    "title": "Cloudbeds data reference",
+    "source_url": "https://help.klaviyo.com/hc/en-us/articles/39406875083035-Cloudbeds-data-reference",
+    "section_id": 49375952441243,
+    "section": "Cloudbeds",
+    "category_id": 115000032731,
+    "category": "Integrations",
+    "category_slug": "integrations",
+    "klaviyo_updated": "2026-05-11T12:54:33Z",
+    "created_at": "2025-07-28T14:31:20Z",
+    "draft": false,
+    "promoted": false,
+    "position": 0,
+    "label_names": []
+  },
+  "files": {
+    "body_html": "_source/articles/39406875083035.body.html",
+    "rendered_html": "_source/rendered/39406875083035.html"
+  },
+  "assets": {
+    "api_body": {
+      "images": [
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/46850854258331",
+          "alt": "Screenshot 2026-02-19 at 3.19.38 PM.png",
+          "width": "944",
+          "height": "1210"
+        }
+      ],
+      "links": [
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/39406849361691",
+          "text": "getting started with Cloudbeds"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/39406849361691#h_01K45A8TV1MNXM2CV3TMGRSWWR",
+          "text": "upgrade guide"
+        }
+      ],
+      "headings": [
+        {
+          "level": 2,
+          "id": "h_01K459V96BD6D0F4MT7G60NRCN",
+          "text": "Sync frequency"
+        },
+        {
+          "level": 2,
+          "id": "h_01K459VN1WTTS8EATFDQPAE262",
+          "text": "How to view your Cloudbeds data"
+        },
+        {
+          "level": 2,
+          "id": "h_01K45A368Q03V7W6X9XCHQRAEM",
+          "text": "Room Night metrics"
+        },
+        {
+          "level": 2,
+          "id": "h_01KHVSXGXGE0BZZTZQHAJE79H6",
+          "text": "Reservation metrics"
+        },
+        {
+          "level": 2,
+          "id": "h_01K459ZFYC6JEGG3P1AQPF8FWC",
+          "text": "Reservation objects"
+        },
+        {
+          "level": 2,
+          "id": "h_01KG3BMNGJNJAE4KKZEQMJT837",
+          "text": "Guest data"
+        }
+      ]
+    },
+    "rendered_page": {
+      "images": [
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/7ff492c2b417b7ecfe572f839a8a81398693c1f7-1920x1080.webp",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/baf9c6c721cecd44a35de0c0c5328fc306d8cd5c-944x1210.png?w=944",
+          "alt": "Screenshot 2026-02-19 at 3.19.38 PM.png",
+          "width": "944",
+          "height": "1210"
+        }
+      ],
+      "links": [
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/39406875083035-Cloudbeds-data-reference#site-content",
+          "text": "Skip to main content"
+        },
+        {
+          "href": "https://www.klaviyo.com",
+          "text": "Home"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center"
+        },
+        {
+          "href": "https://www.klaviyo.com/enterprise",
+          "text": "Enterprise"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Partners"
+        },
+        {
+          "href": "https://www.klaviyo.com/careers",
+          "text": "Careers"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": "Log in"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": ""
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center Find step-by-step instructions and troubleshooting solutions in our knowledge base."
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000032731",
+          "text": "Integrations"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000312411",
+          "text": "Flows"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867867",
+          "text": "Audience"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867667",
+          "text": "Campaigns"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/360000190711",
+          "text": "Sign-up forms"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000873988",
+          "text": "Deliverability & compliance"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/29173800271259",
+          "text": "SMS"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/16638219724187",
+          "text": "Reviews"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/18073014919195",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/34141283979931",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/37659126754075",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/33948021740315",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/39746685522331",
+          "text": "WhatsApp"
+        },
+        {
+          "href": "https://academy.klaviyo.com",
+          "text": "Klaviyo Academy Expert training and education to help you succeed with Klaviyo, and beyond."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Quick+guide&resource=academy_courses",
+          "text": "Quick guides Learn marketing strategies and concepts in 15 minutes or less."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Course&resource=academy_courses",
+          "text": "Courses Master key marketing topics through structured lessons and exams."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/best-practices",
+          "text": "Best practices Discover top product and marketing strategies for your business."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/learning-paths",
+          "text": "Learning paths Complete curated learning journeys tailored to your marketing goals."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses",
+          "text": "Explore all resources"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Live+training&resource=academy_courses",
+          "text": "Live trainings Build confidence through hands-on interactive workshops and thought-provoking strategy sessions."
+        },
+        {
+          "href": "https://www.bigmarker.com/klaviyo-customer-education/Office-hours-Getting-started-with-Klaviyo",
+          "text": "Live office hours Join a strategic discussion where you can ask questions and get answers in real-time."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/private-live-training",
+          "text": "1:1 Live training Book a private training session with an expert to jumpstart your platform knowledge and confidence."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/credentials",
+          "text": "Klaviyo credentials Dig deeper into select topics and showcase your expertise with a final exam to earn a certificate and digital badge."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/certificates/klaviyo-practitioner-certificate",
+          "text": "Klaviyo practitioner certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/deliverability-certificate",
+          "text": "Deliverability certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/developer-certificate",
+          "text": "Klaviyo developer certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses&select=Certificate",
+          "text": "See all certificates"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Klaviyo Community Join our thriving community network to connect with brands like yours—online and in person."
+        },
+        {
+          "href": "https://community.klaviyo.com/topic/new",
+          "text": "Ask a question Post a question and get thoughtful answers from Klaviyo powerusers."
+        },
+        {
+          "href": "https://community.klaviyo.com/p/roadmap",
+          "text": "Product roadmap"
+        },
+        {
+          "href": "https://community.klaviyo.com/search/activity/recent",
+          "text": "Recent threads"
+        },
+        {
+          "href": "https://community.klaviyo.com/p/champions",
+          "text": "Meet the Champions"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups",
+          "text": "Browse all groups Your people are waiting. New ideas and connections are a click away."
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/developer-group-64",
+          "text": "Developer group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/entrepreneur-user-group-118",
+          "text": "Entrepreneur group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/woo-user-group-87",
+          "text": "WooCommerce group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/new-york-meetup-chapter-82",
+          "text": "New York City"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/los-angeles-meetup-chapter-83",
+          "text": "Los Angeles"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/austin-meetup-chapter-85",
+          "text": "Austin"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/san-diego-meetup-chapter-86",
+          "text": "San Diego"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/amsterdam-meetup-chapter-84",
+          "text": "Amsterdam"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Klaviyo Developers Access API documentation and developer guides to help you build with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/get_started",
+          "text": "Get started Access key resources and a step-by-step checklist for how to start developing with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/build_your_integration",
+          "text": "Grow your app's reach Learn how to join our ecosystem and get your app listed on our marketplace."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/developer-tools",
+          "text": "Developer tools Generate sample data, monitor your API usage, and access our Postman collections."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/reference/api_overview",
+          "text": "API reference Browse our full catalog of API docs."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/changelog_",
+          "text": "Changelog"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/api_versioning_and_deprecation_policy",
+          "text": "Versioning & deprecation policy"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/rate_limits_and_error_handling",
+          "text": "Rate limits & error handling"
+        },
+        {
+          "href": "https://youtube.com/playlist?list=PLHkNfHgtxcUanrkMnKPdkRzuWU7MGv_xM&si=pkG-KH7IT_TUHOGC",
+          "text": "API tutorials on YouTube Subscribe to our Klaviyo API Tutorials playlist for easy access to step-by-step developer walkthroughs."
+        },
+        {
+          "href": "https://www.klaviyo.com/contact-us",
+          "text": "Contact us"
+        },
+        {
+          "href": "https://www.klaviyo.com/sign-up",
+          "text": "Sign up"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": "Search"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/39406875083035",
+          "text": "United States - EN"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/de-de/articles/39406875083035",
+          "text": "Deutschland - DE"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-es/articles/39406875083035",
+          "text": "España - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-mx/articles/39406875083035",
+          "text": "México - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/fr-fr/articles/39406875083035",
+          "text": "France - FR"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/it-it/articles/39406875083035",
+          "text": "Italia - IT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/ko-kr/articles/39406875083035",
+          "text": "한국 - KO"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/nl-nl/articles/39406875083035",
+          "text": "Nederland - NL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pl-pl/articles/39406875083035",
+          "text": "Polska - PL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pt-br/articles/39406875083035",
+          "text": "Brasil - PT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/sv-se/articles/39406875083035",
+          "text": "Sverige - SV"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/37673289679771",
+          "text": "Hotels and travel"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/49375952441243",
+          "text": "Cloudbeds"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/39406875083035-Cloudbeds-data-reference#h_01K459V96BD6D0F4MT7G60NRCN",
+          "text": "Sync frequency"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/39406875083035-Cloudbeds-data-reference#h_01K459VN1WTTS8EATFDQPAE262",
+          "text": "How to view your Cloudbeds data"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/39406875083035-Cloudbeds-data-reference#h_01K45A368Q03V7W6X9XCHQRAEM",
+          "text": "Room Night metrics"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/39406875083035-Cloudbeds-data-reference#h_01KHVSXGXGE0BZZTZQHAJE79H6",
+          "text": "Reservation metrics"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/39406875083035-Cloudbeds-data-reference#h_01K459ZFYC6JEGG3P1AQPF8FWC",
+          "text": "Reservation objects"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/39406875083035-Cloudbeds-data-reference#h_01KG3BMNGJNJAE4KKZEQMJT837",
+          "text": "Guest data"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/39406875083035-Cloudbeds-data-reference#additional-resources",
+          "text": "Additional resources"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/39406849361691",
+          "text": "getting started with Cloudbeds"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/39406849361691#h_01K45A8TV1MNXM2CV3TMGRSWWR",
+          "text": "upgrade guide"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/39406849361691",
+          "text": "Getting started with Cloudbeds"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115001002272",
+          "text": "Learn how to contact support"
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": ""
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": "Visit Community"
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": ""
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": "Hire a partner"
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/about",
+          "text": "About Klaviyo"
+        },
+        {
+          "href": "https://www.klaviyo.com/newsroom",
+          "text": "Newsroom"
+        },
+        {
+          "href": "https://investors.klaviyo.com/overview/default.aspx",
+          "text": "Investor relations"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Agency and tech partners"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Developers"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/retail",
+          "text": "Retail and ecommerce"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/restaurants",
+          "text": "Restaurant marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/wellness",
+          "text": "Wellness"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform",
+          "text": "B2C CRM overview"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai",
+          "text": "Klaviyo AI (K:AI)"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/marketing-automation",
+          "text": "Klaviyo Marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-service",
+          "text": "Klaviyo Service"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/analytics",
+          "text": "Klaviyo Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-data-platform",
+          "text": "Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare",
+          "text": "Klaviyo vs. Klaviyo alternatives"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-mailchimp",
+          "text": "Klaviyo vs. Mailchimp"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-postscript",
+          "text": "Klaviyo vs. Postscript"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-attentive",
+          "text": "Klaviyo vs. Attentive"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-salesforce-marketing-cloud",
+          "text": "Klaviyo vs. Salesforce"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-listrak",
+          "text": "Klaviyo vs. Listrak"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/omnichannel",
+          "text": "Omnichannel marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/email-marketing",
+          "text": "Email marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing",
+          "text": "SMS marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing/rcs",
+          "text": "RCS for Business"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/mobile-app-marketing",
+          "text": "Mobile app marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/whatsapp",
+          "text": "WhatsApp marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/social",
+          "text": "Social marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources",
+          "text": "Marketing resources"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources/marketing-campaign-calendar",
+          "text": "Marketing campaign calendar"
+        },
+        {
+          "href": "https://www.klaviyo.com/glossary",
+          "text": "Marketing glossary"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/email-subject-line-generator",
+          "text": "Subject line generator"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/roi-calculator",
+          "text": "ROI calculator"
+        },
+        {
+          "href": "https://www.klaviyo.com/customers",
+          "text": "Case studies"
+        },
+        {
+          "href": "https://www.klaviyo.com/composer",
+          "text": "Composer Beta"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/marketing-agent",
+          "text": "Marketing Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/customer-agent",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/customer-experience-hub",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/helpdesk",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/marketing-analytics",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/advanced-cdp",
+          "text": "Advanced Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/web-forms",
+          "text": "Web forms"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/email-templates",
+          "text": "Email templates"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/portfolio",
+          "text": "Portfolio"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform-integrations",
+          "text": "Apps and Integrations"
+        },
+        {
+          "href": "https://www.klaviyo.com/features",
+          "text": "Features"
+        },
+        {
+          "href": "https://www.klaviyo.com/whats-new",
+          "text": "What's new"
+        },
+        {
+          "href": "https://www.klaviyo.com/events",
+          "text": "Events"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help Center"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us",
+          "text": "Academy"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Community"
+        },
+        {
+          "href": "https://www.facebook.com/Klaviyo/",
+          "text": "Facebook"
+        },
+        {
+          "href": "https://twitter.com/klaviyo/",
+          "text": "Twitter"
+        },
+        {
+          "href": "https://www.linkedin.com/company/klaviyo/",
+          "text": "LinkedIn"
+        },
+        {
+          "href": "https://www.instagram.com/klaviyo/",
+          "text": "Instagram"
+        },
+        {
+          "href": "https://www.klaviyo.com/sitemap",
+          "text": "Site Map"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal",
+          "text": "Terms and Privacy"
+        },
+        {
+          "href": "https://www.klaviyo.com/security",
+          "text": "Security"
+        },
+        {
+          "href": "https://www.klaviyo.com/trust",
+          "text": "Trust"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal/intellectual-property-notices",
+          "text": "Intellectual Property Notices"
+        }
+      ],
+      "headings": [
+        {
+          "level": 1,
+          "id": "",
+          "text": "Cloudbeds data reference"
+        },
+        {
+          "level": 2,
+          "id": "h_01K459V96BD6D0F4MT7G60NRCN",
+          "text": "Sync frequency"
+        },
+        {
+          "level": 2,
+          "id": "h_01K459VN1WTTS8EATFDQPAE262",
+          "text": "How to view your Cloudbeds data"
+        },
+        {
+          "level": 2,
+          "id": "h_01K45A368Q03V7W6X9XCHQRAEM",
+          "text": "Room Night metrics"
+        },
+        {
+          "level": 2,
+          "id": "h_01KHVSXGXGE0BZZTZQHAJE79H6",
+          "text": "Reservation metrics"
+        },
+        {
+          "level": 2,
+          "id": "h_01K459ZFYC6JEGG3P1AQPF8FWC",
+          "text": "Reservation objects"
+        },
+        {
+          "level": 2,
+          "id": "h_01KG3BMNGJNJAE4KKZEQMJT837",
+          "text": "Guest data"
+        },
+        {
+          "level": 2,
+          "id": "additional-resources",
+          "text": "Additional resources"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "Explore more from Klaviyo"
+        }
+      ]
+    }
+  },
+  "rendered_page": {
+    "status": "fetched",
+    "error": ""
+  }
+}

@@ -1,0 +1,56 @@
+<h2 id="h_01HHYMKEJ25XY4NEJ6XGHVGXFE">You will learn</h2>
+<p>Learn how to verify that your emails are being successfully authenticated using SPF, DKIM, and DMARC records.</p>
+<div class="bs-callout bs-callout-default">
+<p><a href="https://www.klaviyo.com/blog/gmail-update">Google and Yahoo</a> have announced new sender requirements that they are planning to start enforcing in February of 2024. For brands sending more than 5000 daily emails, setting up DMARC authentication will be a key requirement in order to successfully land in Gmail and Yahoo inboxes. <a href="https://techcommunity.microsoft.com/blog/microsoftdefenderforoffice365blog/strengthening-email-ecosystem-outlook%E2%80%99s-new-requirements-for-high%E2%80%90volume-senders/4399730">Microsoft Outlook</a> will also start enforcing these requirements beginning May 2025. </p>
+</div>
+<h2 id="h_01HHYMKEJ21X2N6SM8RGAXVG98">Email authentication</h2>
+<p>“Email authentication” refers to the technical standards that allow for the verification of an email sender's identity. The most commonly used email authentication standards are SPF, DKIM, and DMARC. Mail servers use these authentication protocols to verify that incoming emails are from legitimate senders, protecting your brand and your customers from malicious actors. In addition to preventing phishing and spoofing attempts, implementing these protocols can help improve deliverability, as mailbox providers will be able to confirm the identity of the sender. </p>
+<div class="bs-callout bs-callout-default">
+<p>Learn about <a href="https://help.klaviyo.com/hc/en-us/articles/4402601857307">email authentication</a> and set up DMARC before getting started.</p>
+</div>
+<h2 id="h_01HRSG6H935ZFM3JW1PWBE5BS4">Verify authentication using email headers</h2>
+<h3 id="h_01HHYMKEJ2F29RV01EAK8NR5FX">About email headers</h3>
+<p>An email header contains metadata about an email and the network path it has taken. This includes information like from-address, subject line, recipient, and key authentication details. </p>
+<p>You can use the authentication information found in the header of an email sent by your brand to verify that SPF, DKIM, and DMARC are passing.</p>
+<div class="bs-callout bs-callout-default">
+<p>Learn how to <a href="https://help.klaviyo.com/hc/en-us/articles/360002117891">get your full email header</a> on different inbox providers.</p>
+</div>
+<h3 id="h_01HHYMKEJ204GPTRE61HAEMQ5J">Header summary</h3>
+<p>Some inbox providers, like Gmail, may provide a summary of the key authentication information in the email header. </p>
+<p>This may look something like this: </p>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/28711702459035" alt="Gmail header summary"></p>
+<h3 id="h_01HHYMKEJ2GQPSV0MGSV8X19WB">Full header</h3>
+<p>Within the full email header, the key authentication information may look like this: </p>
+<pre>Delivered-To: email@klaviyo.com<br>Received: by 2002:a59:9a44:0:b0:437:660e:55f2 with SMTP id a4csp4934052vqp;<br>    Sun, 10 Dec 2023 16:03:01 -0800 (PST)<br>Authentication-Results: mx.google.com;<br>    dkim=pass header.i=@klaviyo.com header.s=s1 header.b=kBByyR4j;<br>    spf=pass (google.com: domain of <br>bounces+27486840-770f-email=klaviyo.com@send.klaviyo.com designates 000.000.00.000 <br>as permitted sender) <br>smtp.mailfrom="bounces+27486840-770f-email=klaviyo.com@send.klaviyo.com";<br>    dmarc=pass (p=REJECT sp=REJECT dis=NONE) header.from=klaviyo.com</pre>
+<div class="bs-callout bs-callout-default">
+<p>The email header you see may vary by inbox provider, but the key authentication information should live in the section called <em>Authentication-Results</em>.</p>
+</div>
+<h3 id="h_01HHYMKEJ26DQJ7TMK73AMX34E">SPF</h3>
+<p>Sender Policy Framework (SPF) is an email authentication method designed to detect forged sender addresses during the delivery of the email. SPF allows the receiving mail server to verify that emails coming from a specific domain were sent through an IP address authorized by that domain's administrators.</p>
+<p>If your inbox provider has a header summary, you should see SPF along with a pass or fail value and the IP address the email was sent through.</p>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/28711731439131" alt="SPF pass highlighed in header summary"></p>
+<p>Within the full email header you can see the SPF record is passing (spf=pass), indicating that the IP address used to send the email (i.e., 000.000.00.000) is permitted to send for the send.klaviyo.com sending domain (i.e., the SPF domain).</p>
+<pre>Authentication-Results: mx.google.com;<br>     dkim=pass header.i=@klaviyo.com header.s=s1 header.b=kBByyR4j;<br><strong>     spf=pass (google.com: domain of </strong><br><strong>     bounces+27486840-770f-email=klaviyo.com@send.klaviyo.com designates 000.000.00.000 </strong><br><strong>as permitted sender) </strong><br>smtp.mailfrom="bounces+27486840-770f-email=klaviyo.com@send.klaviyo.com";<br>     dmarc=pass (p=REJECT sp=REJECT dis=NONE) header.from=klaviyo.com</pre>
+<h3 id="h_01HHYMKEJ31JCYPCTAC327T3BN">DKIM</h3>
+<p>DomainKeys Identified Mail (DKIM) acts as a digital signature that is added to the header of an email to further verify the identity of the sender. Receiving email servers will verify that the DKIM signature matches that of the associated sending domain. </p>
+<p>If your inbox provider has a header summary, you should see DKIM along with a pass or fail value for the domain the email was sent from.</p>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/28711702472603" alt="DKIM pass highlighed in header summary"></p>
+<p>Within the full email header, you can see the DKIM record is passing (dkim=pass), indicating that the digital signature set by DKIM matches that of the associated sending domain.</p>
+<pre>Authentication-Results: mx.google.com;<br>     <strong>dkim=pass header.i=@klaviyo.com header.s=s1 header.b=kBByyR4j;</strong><br>     spf=pass (google.com: domain of <br>bounces+27486840-770f-email=klaviyo.com@send.klaviyo.com designates 000.000.00.000 <br>as permitted sender) smtp.mailfrom="bounces+27486840-770f-email=klaviyo.com@send.klaviyo.com";<br>     dmarc=pass (p=REJECT sp=REJECT dis=NONE) header.from=klaviyo.com</pre>
+<h3 id="h_01HHYMKEJ34DKJ7S1CW399NGTP">DMARC</h3>
+<p>DMARC stands for domain-based message authentication, reporting, and conformance. It is a protocol that uses SPF and DKIM to determine the authenticity of an email, giving domain owners the ability to protect their domain from unauthorized use.</p>
+<p>DMARC provides instructions to receiving servers about how to handle incoming mail. In order to get delivered, messages need to pass DKIM and SPF alignment checks according to the requirements set by the DMARC policy. Messages that do not pass DMARC checks can be allowed, rejected, or placed in the spam folder.</p>
+<p>If your inbox provider has a header summary, you should see DMARC along with a pass or fail value.<br><img src="https://klaviyo.zendesk.com/hc/article_attachments/28711702474779" alt="DMARC pass highlighted in header summary"></p>
+<p>Within the full email header, you can see DMARC is passing (dmarc=pass), indicating that the email passed the sending domain’s DMARC check. Additionally, you can see the specific DMARC policy that is set on the sending domain (i.e., p=reject).</p>
+<pre>Authentication-Results: mx.google.com;<br>     dkim=pass header.i=@klaviyo.com header.s=s1 header.b=kBByyR4j;<br>     spf=pass (google.com: domain of <br>bounces+27486840-770f-email=klaviyo.com@send.klaviyo.com designates 000.000.00.000 <br>as permitted sender) smtp.mailfrom="bounces+27486840-770f-email=klaviyo.com@send.klaviyo.com";<br>  <strong>   dmarc=pass (p=REJECT sp=REJECT dis=NONE) header.from=klaviyo.com</strong></pre>
+<h2 id="h_01HRSGEMFB6BZHQ4CNE0JGTDV5">Verify authentication using 3rd party tools </h2>
+<p>Another way to verify that your DMARC policy has been published successfully is using a 3rd party tool like the DMARC checker offered by EasyDMARC. With this tool, you can simply enter you brand's root domain and the DMARC record will be returned if one is set.</p>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/28711702480155" alt="Example lookup on EasyDMARC for the klaviyo.com domain"></p>
+<div class="bs-callout bs-callout-default">
+<p>If your DMARC policy is set to <em>p=none, </em>the <em>Status</em> will appear as <em>Warning</em> when using EasyDMARC. <em>Warning </em>appears with the <em>p=none</em> policy because it does not protect your domain from spoofing, and allows emails to land in the recipient's main inbox even if there is a misalignment between the sending domain and friendly from-address domain. Both a status of <em>Warning </em>and <em>Valid </em>on EasyDMARC indicate that your brand's DMARC policy meets Gmail and Yahoo sender requirements.</p>
+<p>You can disregard the <em>EasyDMARC Reporting</em> results unless you are using EasyDMARC's reporting services.</p>
+</div>
+<h2 id="h_01HHYMKEJ3GGXTGZDZ95BHQ38K">Additional resources</h2>
+<p><a href="https://help.klaviyo.com/hc/en-us/articles/4402601857307">Understanding email authentication </a></p>
+<p><a href="https://help.klaviyo.com/hc/en-us/articles/115000357752">How to setup a branded sending domain </a></p>
+<p> </p>

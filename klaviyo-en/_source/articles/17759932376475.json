@@ -1,0 +1,1180 @@
+{
+  "captured_at": "2026-05-23T16:15:23Z",
+  "article": {
+    "id": 17759932376475,
+    "url": "https://klaviyo.zendesk.com/api/v2/help_center/en-us/articles/17759932376475.json",
+    "html_url": "https://klaviyo.zendesk.com/hc/en-us/articles/17759932376475-Understand-data-warehouse-syncing-in-Klaviyo",
+    "author_id": 397882329931,
+    "comments_disabled": false,
+    "draft": false,
+    "promoted": false,
+    "position": 0,
+    "vote_sum": 0,
+    "vote_count": 0,
+    "section_id": 49375669200027,
+    "created_at": "2023-08-08T13:34:32Z",
+    "updated_at": "2026-04-21T13:54:30Z",
+    "name": "Understand data warehouse syncing in Klaviyo",
+    "title": "Understand data warehouse syncing in Klaviyo",
+    "source_locale": "en-us",
+    "locale": "en-us",
+    "outdated": false,
+    "outdated_locales": [],
+    "edited_at": "2026-04-17T00:55:47Z",
+    "user_segment_id": null,
+    "permission_group_id": 146372,
+    "content_tag_ids": [],
+    "label_names": [],
+    "body": "<h2 id=\"01H826355V28CWDJABSZ13H409\">You will learn</h2>\n<p>Learn how to sync data from Klaviyo to your data warehouse, and import warehouse data to Klaviyo via SFTP. You can sync your customer profile and event data, allowing you to store and analyze key information about your customers outside of Klaviyo. </p>\n<div class=\"bs-callout bs-callout-default\">\n<p><a href=\"https://help.klaviyo.com/hc/en-us/articles/17655007276059\">Advanced KDP</a> is not included in Klaviyo’s standard marketing application, and a subscription is required to access the associated functionality. Head to our <a href=\"https://help.klaviyo.com/hc/en-us/articles/115000976672\">billing guide</a> to learn about how to purchase this plan.</p>\n</div>\n<p></p>\n<p>\n<script src=\"https://fast.wistia.com/embed/medias/1luu8fozn2.jsonp\" async=\"async\"></script>\n<script src=\"https://fast.wistia.com/assets/external/E-v1.js\" async=\"async\"></script>\n</p>\n<div class=\"wistia_responsive_padding\" style=\"padding: 56.25% 0 0 0; position: relative;\">\n<div class=\"wistia_responsive_wrapper\" style=\"height: 100%; left: 0; position: absolute; top: 0; width: 100%;\">\n<div class=\"wistia_embed wistia_async_1luu8fozn2 qualityMin=720 seo=false videoFoam=true\" style=\"height: 100%; position: relative; width: 100%;\">\n<div class=\"wistia_swatch\" style=\"height: 100%; left: 0; opacity: 0; overflow: hidden; position: absolute; top: 0; transition: opacity 200ms; width: 100%;\"><img style=\"filter: blur(5px); height: 100%; object-fit: contain; width: 100%;\" src=\"https://fast.wistia.com/embed/medias/1luu8fozn2/swatch\" alt=\"\" aria-hidden=\"true\"></div>\n</div>\n</div>\n</div>\n<h2 id=\"01H826355VCVZ1BZ3M6JV679SA\">Before you begin</h2>\n<p>You will need to ensure that the data warehouse you are connecting with is configured as a destination. To make sure you have set this up correctly:</p>\n<ul>\n<li>Make sure the user that is provided to Klaviyo has the right permissions.</li>\n<li>Make sure to set tables with the appropriate names, shown below, based on your warehouse.<br>\n<p>Additionally, make sure to allowlist Klaviyo's outbound data warehouse traffic IP addresses. This will ensure that Klaviyo's requests are not blocked by your security layer. These addresses are represented by the following CIDR ranges:</p>\n</li>\n<li><code>184.72.183.187/32</code></li>\n<li><code>52.206.71.52/32</code></li>\n<li><code>3.227.146.32/32</code></li>\n<li><code>44.198.39.11/32</code></li>\n<li><code>35.172.58.121/32</code></li>\n<li><code>3.228.37.244/32</code></li>\n<li><code>54.88.219.8/32</code></li>\n<li><code>3.214.211.176/32</code></li>\n</ul>\n<h2 id=\"01H826355WMNAPHTASY78SSYEG\">Connect to a data warehouse </h2>\n<p>To add a data warehouse connection to Klaviyo, navigate to <strong>Advanced KDP &gt;</strong><strong>Data management &gt; Syncing</strong>.</p>\n<p>To add a data warehouse, select a supported data warehouse on the <em>Select a connector modal</em>.</p>\n<div class=\"bs-callout bs-callout-default\">\n<p>You can only have 1 data warehouse destination per account.</p>\n</div>\n<p>Alternatively, you can select your data warehouse from Klaviyo’s app marketplace by going to <strong>Integrations &gt; Explore apps </strong>and searching for your platform.</p>\n<p>When connecting a warehouse, you can either import data from your data warehouse to Klaviyo, or set a warehouse as an outbound sync destination.</p>\n<p class=\"wysiwyg-text-align-center\"><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/29207563157019\" alt=\"import_export.jpg\" width=\"430\" height=\"274\"></p>\n<h2 id=\"h_01J6J4RJ84SGTRC5K4ME999ZWE\">Import data via SFTP</h2>\n<p>If you’d like to import data from your data warehouse into Klaviyo, you can do this via <a href=\"https://developers.klaviyo.com/en/docs/use_klaviyos_sftp_import_tool\">SFTP</a>.</p>\n<p>To import your data into Klaviyo, select <strong>Import data</strong> when first connecting a warehouse destination, or click the <strong>Import</strong> button on the <em>Data syncing</em> page if you already have a connection established.</p>\n<p>The process to import warehouse data into Klaviyo is as follows:</p>\n<ol>\n<li>Export your desired data from your data warehouse.</li>\n<li>Generate SSH keys on your local machine.</li>\n<li>Configure SFTP client and import.</li>\n</ol>\n<div class=\"bs-callout bs-callout-default\">\n<p>This is demonstrated with Snowflake, but the import process is similar regardless of your warehouse integration.</p>\n</div>\n<h3 id=\"h_01J6J4X40QYNV4FC2NQ0J65ASC\">Export your database</h3>\n<p>First, you’ll need to export your data from your warehouse. Log into your warehouse and export the data you’d like to import to Klaviyo into a CSV file.</p>\n<div class=\"bs-callout bs-callout-default\">\n<p>Format your exported data based on the <a href=\"https://developers.klaviyo.com/en/docs/use_klaviyos_sftp_import_tool#general-csv-formatting-and-size-limitations\">CSV format and size limitations</a>.</p>\n</div>\n<h3 id=\"h_01J6J4ZBR096HSA9TPFY6SY0RF\">Generate SSH keys on your local machine</h3>\n<p>Once you have your desired data exported from your warehouse, generate a new SSH key on your local machine and add it to Klaviyo by selecting the <strong>Add SSH key</strong> button.</p>\n<div class=\"bs-callout bs-callout-default\">\n<p>When adding your key, make sure it starts with 1 of the following:</p>\n<ul>\n<li>Ssh-ras</li>\n<li>Ecdsa-sha2</li>\n<li>Ssh-ed</li>\n<li>Sk-ecdsa</li>\n<li>sk-ssh</li>\n</ul>\n</div>\n<h3 id=\"h_01J6J51E5JHY9566KXDJ7XNHJR\">Configure SFTP client and import</h3>\n<p>Once your SSH key has been successfully added to Klaviyo, you’ll need to configure your SFTP client and import the data.</p>\n<ol>\n<li>Open your SFTP client and configure a new connection with the credentials presented in Klaviyo You’ll see the credentials presented after successfully adding your SSH key</li>\n<li>Once authenticated, make sure your database follows the recommended guidelines before importing</li>\n<li>Upload your database file via your SFTP client and review</li>\n</ol>\n<p class=\"wysiwyg-text-align-center\"><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/29207563159451\" alt=\"configure.jpg\" width=\"579\" height=\"452\"></p>\n<p>You’ll also see a list view of your recent imports with the following information:</p>\n<ul>\n<li>\n<strong>Status</strong><br>\nCompleted or incomplete.</li>\n<li>\n<strong>Rows processed</strong><br>\nPercentage of total rows processed so far.</li>\n<li>\n<strong>Import date</strong><br>\nDate of import.</li>\n<li>\n<strong>Imported by </strong><br>\nUser that imported data.</li>\n</ul>\n<p class=\"wysiwyg-text-align-center\"><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/29207608998811\" alt=\"Panel.jpg\" width=\"502\" height=\"513\"></p>\n<h2 id=\"h_01J6J5F6T27QB64PK5YR884KEC\">Export data to your warehouse  </h2>\n<p>To configure your data warehouse as destination, you’ll need the following set of information and credentials for each data warehouse.</p>\n<div class=\"accordion accordion--default\">\n<div class=\"accordion__item\">\n<div class=\"accordion__item-title\"><strong>Amazon Redshift</strong></div>\n<div class=\"accordion__item-content\">\n<div class=\"bs-callout bs-callout-requirements\">\n<p>To configure Amazon Redshift as a destination, run the following script to create the <em>klaviyo_event</em> and <em>klaviyo_profile</em> tables. <br>\n<br>\n</p>\n<iframe src=\"https://www.napkin.io/api/embed/2907a5ae195545d4\" height=\"600\" title=\"“Example\" frameborder=\"0\" style=\"width:100%;\"></iframe>\n</div>\n<p>Once configured as a destination, connect your warehouse with Klaviyo using the following set of credentials:</p>\n<ul>\n<li>\n<strong>Name: </strong>The name of your database in Redshift (it’s recommend to use the same same name as your database in Redshift)</li>\n<li>\n<strong>Host URL: </strong>The endpoint of the Amazon Redshift server (called the connection URL in Redshift)</li>\n<li>\n<strong>Database: </strong> The name to identify your data source</li>\n<li>\n<strong>Port: </strong>The port number used by Redshift</li>\n<li>\n<strong>Schema: </strong>Your database schema </li>\n<li>\n<strong>Username: </strong>The username used for logging into Redshift </li>\n<li>\n<strong>Database password: </strong>The password used for logging into Redshift<br>\n</li>\n</ul>\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28705665436571\" alt=\"Redshift credentials to connect\" width=\"500\" height=\"632\">\n</div>\n</div>\n<div class=\"accordion__item\">\n<div class=\"accordion__item-title\"><strong>Amazon S3</strong></div>\n<div class=\"accordion__item-content\">\n<div class=\"bs-callout bs-callout-requirements\">\n<p>To configure Amazon S3 as a destination, set the table names to <em>klaviyo_profile</em> and <em>klaviyo_event</em>.</p>\n</div>\n<p>Once configured as a destination, connect your warehouse with Klaviyo using the following set of credentials:</p>\n<ul>\n<li>\n<strong>Name</strong>: The machine readable name for Amazon S3 database.</li>\n<li>\n<strong>Bucket</strong>: Your bucket name.</li>\n<li>\n<strong>Bucket location</strong>: The region name that was chosen when the storage bucket was created.</li>\n<li>\n<strong>Access key ID: </strong>Your AWS access key ID.</li>\n<li>\n<strong>Secret access key</strong>: Your AWS secret access key.<br>\n</li>\n</ul>\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28705665430939\" alt=\"Amazon S3 credentials to connect\" width=\"500\" height=\"473\">\n</div>\n</div>\n<div class=\"accordion__item\">\n<div class=\"accordion__item-title\"><strong>Google BigQuery</strong></div>\n<div class=\"accordion__item-content\">\n<div class=\"bs-callout bs-callout-requirements\">\n<p>To configure Google BigQuery as a destination, run the following script to set the <em>klaviyo_profile</em> and <em>klaviyo_event </em>tables. Your Google BigQuery account must have a payment profile for the connection process to be successful.</p>\n<p>Note that in this script you must replace the placeholder \"SERVICE ACCOUNT EMAIL\" with your BigQuery service account email.<br>\n<br>\n</p>\n<iframe src=\"https://www.napkin.io/api/embed/5a9fffbe699c45b6\" height=\"600\" title=\"“Example\" frameborder=\"0\" style=\"width:100%;\"></iframe>\n</div>\n<p>Once configured as a destination, connect your warehouse with Klaviyo using the following set of credentials:</p>\n<ul>\n<li>\n<strong>Name: </strong>A name to help your identify this destination </li>\n<li>\n<strong>Project ID:</strong> This is known as the Project ID and can be found in your API console.</li>\n<li>\n<strong>Dataset: </strong>Also known as schema. This is the same name you used in the script you should have run for setup.</li>\n<li>\n<strong>Service account key: </strong>Paste the entire contents of the JSON file you downloaded when creating your service account in BigQuery. <br>\n</li>\n</ul>\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28705638604827\" alt=\"BigQuery credentials to connect\" width=\"500\" height=\"476\">\n</div>\n</div>\n<div class=\"accordion__item\">\n<div class=\"accordion__item-title\"><strong>Microsoft Azure Synapse Analytics</strong></div>\n<div class=\"accordion__item-content\">\n<div class=\"bs-callout bs-callout-requirements\">\n<p>To configure Microsoft Azure as a destination, run the following script to create the <em>klaviyo_profile</em> and <em>klaviyo_event </em>tables.<br>\n<br>\n</p>\n<iframe src=\"https://www.napkin.io/api/embed/9814f97b94764202\" height=\"600\" title=\"“Example\" frameborder=\"0\" style=\"width:100%;\"></iframe>\n<p></p>\n</div>\n<ul>\n<li>\n<strong>Name: </strong>It is recommended to use the same name as your database in Azure. </li>\n<li>\n<strong>Workspace: </strong>The Azure Synapse workspace name.</li>\n<li>\n<strong>Database name: </strong>This identifies your Dedicated SQL Pool database.</li>\n<li>\n<strong>Username: </strong>Your login username for your Dedicated SQL Pool database.</li>\n<li>\n<strong>Database password:</strong>Your login password for your Dedicated SQL Pool database.</li>\n<li>\n<strong>Account name: </strong>Your Windows Azure storage account, or DNS prefix you created.</li>\n<li>\n<strong>Access signature: </strong>Your shared access signature (SAS) string that proves access to the Blob Storage container.</li>\n<li>\n<strong>Container name: </strong>The Azure Blob container name for temporary staging area for data transfer.<br>\n</li>\n</ul>\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28705665467547\" alt=\"Azure credentials\" width=\"500\" height=\"712\">\n</div>\n</div>\n<div class=\"accordion__item\">\n<div class=\"accordion__item-title\"><strong>Snowflake</strong></div>\n<div class=\"accordion__item-content\">\n<p>To configure Snowflake as a destination, take the following steps: </p>\n<p>1. Generate a private key by running the following command in your terminal:</p>\n<pre><code class=\"language-text\">openssl genrsa 2048 | openssl pkcs8 -topk8 -inform PEM -out rsa_key.p8 -nocrypt</code></pre>\n<p>2. Generate a public key that references the private key by running the following command in your terminal:</p>\n<pre><code class=\"language-text\">openssl rsa -in rsa_key.p8 -pubout -out rsa_key.pub</code></pre>\n<p>3. Run the following script to set the <em>KLAVIYO_PROFILE</em>, <em>KLAVIYO_EVENT</em>, and <em>KLAVIYO_METRIC</em> tables. You must have securityadmin and sysadminprivileges in order to complete the setup below. To review what role(s) you have, run SHOW GRANTS TO USER &lt;your_username&gt; and ensure that you have both roles listed. Reach out to a system administrator if you need to have your role adjusted.</p>\n<iframe src=\"https://www.napkin.io/api/embed/06339b3a07a5475f\" height=\"600\" title=\"“Example\" frameborder=\"0\" style=\"width:100%;\"></iframe>\n<p>Once configured as a destination, connect your warehouse with Klaviyo using the following set of credentials:</p>\n<ul>\n<li>\n<strong>Name:</strong> It’s recommended to use the same name as your database in Snowflake.</li>\n<li>\n<strong>Username: </strong>Username to connect to your database. This should be the same as <em>user_name</em> in the setup script.<br>\n</li>\n<li>\n<strong>Private key:</strong> The Snowflake private key generated.<br>\n</li>\n<li>\n<strong>Warehouse:  </strong>Your warehouse in Snowflake.</li>\n<li>\n<strong>Account: </strong>Your account in Snowflake.</li>\n<li>\n<strong>Database: </strong>Your database name. This should be the same as <em>database_name</em> in the setup script.</li>\n<li>\n<strong>Schema: </strong>Your database schema. This should be the same as <em>schema_name</em> in the setup script.<br>\n</li>\n</ul>\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/36251501527707\" alt=\"\" width=\"433\" height=\"565\">\n</div>\n</div>\n</div>\n<p>After entering your credentials for the data warehouse you are syncing with, choose the data you want to sync from Klaviyo. </p>\n<h3 id=\"h_01HTFYVX5D1TQS183VPS2F9E1W\">Data objects </h3>\n<p>In the <em>Data objects </em>section you can choose to sync all profile data, just specific event data, or both types of data by checking the applicable box(es) next to each option.</p>\n<div class=\"bs-callout bs-callout-default\">\n<p>Klaviyo uses a nested JSON structure when sending data to your data warehouse. Profiles and events are each sent as a single table, allowing you to query against 1 table instead of a large number of potential table names in your data warehouse.</p>\n</div>\n<p class=\"wysiwyg-text-align-center\"><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28705638636059\" alt=\"Profile and events data objects\" width=\"552\" height=\"238\"></p>\n<div class=\"bs-callout bs-callout-warning\">\n<p class=\"wysiwyg-text-align-left\">Syncing all data from Klaviyo may cause you to incur additional charges from your data warehouse. </p>\n</div>\n<h3 id=\"h_01HTFYW8GWJ7AWSRCH2R1W0QBH\">Integrations to exclude</h3>\n<p>In the <em>Integrations to exclude</em> field, you can select the specific integration(s) that you want to exclude in the data warehouse sync. This is helpful if you want to remove a specific integration’s data that you may have already connected to Klaviyo from syncing as well.</p>\n<div class=\"bs-callout bs-callout-default\">\n<p>Excluding specific integration data is only for events data, and does not exclude profile data.</p>\n</div>\n<p class=\"wysiwyg-text-align-center\"><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28705665480347\" alt=\"Integrations to exclude field\" width=\"550\" height=\"125\"></p>\n<h3 id=\"h_01HTFYXVZHMZH7P9M6M583C5AD\">Selective sync</h3>\n<p>In the <em>Selective sync </em>field, you select the specific events that you want to sync to your data warehouse from Klaviyo. By default, all events are included. When you set specific events to sync with this field, only the selected events will sync. </p>\n<div class=\"bs-callout bs-callout-default\">\n<p>This field will only appear if you select the <em>Events </em>data object. </p>\n</div>\n<p class=\"wysiwyg-text-align-center\"><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28705665484699\" alt=\"Selective sync field\" width=\"551\" height=\"107\"></p>\n<h3 id=\"h_01HTFZ0Y1YD0YDEWTKSV3ZF505\">Select how often your data will sync</h3>\n<p>The value set for the <em>Periodic sync cadence</em> field in the section called <em>Select how often your data will sync</em> defines how frequently a sync will occur from Klaviyo to your data warehouse. </p>\n<div class=\"bs-callout bs-callout-default\">\n<p>Periodic sync cadence is set to be hourly by default and cannot be changed.</p>\n</div>\n<p class=\"wysiwyg-text-align-center\"><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28705665488283\" alt=\"Periodic sync cadence field\" width=\"550\" height=\"161\"></p>\n<h3 id=\"h_01HTFZ0001Z4YKP3YQKV8QYE1H\">Select how much historical data you want to sync </h3>\n<p>In the <em>Select how much historical data you want to sync </em>section, you can define how much historical data you'd like to sync from Klaviyo to your data warehouse during the initial connection. You can pick: </p>\n<ul>\n<li>30 days </li>\n<li>90 days</li>\n<li>1 year</li>\n<li>All time </li>\n</ul>\n<p class=\"wysiwyg-text-align-center\"><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28705665476763\" alt=\"Select how much data to sync to your data warehouse\" width=\"551\" height=\"221\"></p>\n<div class=\"bs-callout bs-callout-warning\">\n<p>You may incur additional costs from your data warehouse if syncing a large amount of data at once. </p>\n</div>\n<h3 id=\"h_01HTFZBKWRG3NDRT2FY3HTBDRM\">Sync review</h3>\n<p>Once you have connected your integration, if the setup was successful, you will see a final screen noting that the connection is <em>Enabled</em>, along with: </p>\n<ul>\n<li>Details of the sync you setup</li>\n<li>What data is being shared (profiles, events, or both)</li>\n<li>Any excluded integrations<br>\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28705665449115\" alt=\"Connection successful modal\" width=\"502\" height=\"373\">\n<p>If your sync was not successfully connected, you will instead see an<em> Unable to connect</em> status, along with options to either retry your connection or to edit the information in your credentials.</p>\n<p>Once you have successfully connected your data warehouse, you will be brought back to the main <em>Data syncing</em> list page. Here you will see your:</p>\n</li>\n<li>Warehouse <em>Destination</em>\n</li>\n<li>The <em>Enabled</em> status</li>\n<li>Any potential errors that may have occurred with your sync in the past 24 hours</li>\n<li>The last sync that occurred along with a timestamp of this event</li>\n</ul>\n<p class=\"wysiwyg-text-align-center\"><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/29207563162267\" alt=\"Card.jpg\"></p>\n<p>Since you will only ever be able to connect 1 destination, you will only see 1 destination reflected in this list view.</p>\n<h2 id=\"01H82C0AP6068EXYVB12BZBDTW\">Data syncing dashboard</h2>\n<p>Once you have a successful connection, click on your integration from the <em>Data syncing</em> list page. From here you will be brought to the data syncing dashboard providing historic and current information on the data syncs that have run.</p>\n<p><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28705638606491\" alt=\"Sync interface after connecting warehouse\"></p>\n<p>Here you’ll see the syncing information split into 2 tabs:</p>\n<ul>\n<li>Historical</li>\n<li>Periodic</li>\n</ul>\n<h3 id=\"01H826DXTCM7D7YHZR16G1S4HE\">Historical </h3>\n<p>The <em>Historical</em> tab has logs that show the status of your historical data syncs. Historical syncs refer to the syncing of your existing data from Klaviyo to your data warehouse when you establish a connection. </p>\n<p>You’ll see the following information for each sync: </p>\n<ul>\n<li>\n<strong>Name</strong><br>\nThe data is being included in the sync.</li>\n<li>\n<strong>Status</strong><br>\nStatus and potential progress of the sync with an estimated percentage or potential errors noted. These statuses could include:<br>\n<br>\n\n<ul>\n<li>\n<strong>Completed</strong><br>\nYour data finished syncing for this one-off sync. It will not resync again automatically.</li>\n<li>\n<strong>Scheduled</strong><br>\nWhen the next sync is scheduled to automatically run.</li>\n<li>\n<strong>In progress</strong><br>\nData is actively syncing to your data warehouse with an estimated percentage of completion.</li>\n<li>\n<strong>Errored</strong><br>\nAn error occurred but Klaviyo will keep trying to re-establish a connection. Depending on the integration, this timing may slightly differ.</li>\n<li>\n<strong>Failed</strong><br>\nThe sync completely failed even after trying to re-establish a connection. This means that you will need to review your configuration settings or even data warehouse setup.</li>\n<li>\n<strong>Paused</strong><br>\nYou have paused the sync manually.</li>\n<li>\n<strong>Disabled</strong><br>\nThe sync was disabled because the integration itself was disabled or removed.</li>\n</ul>\n</li>\n<li>\n<strong>Started on</strong><br>\nStart time of the sync.</li>\n<li>\n<strong>Ended on</strong><br>\nEnd time of the sync.</li>\n</ul>\n<h3 id=\"01H826YHT3S3A804T5Z59NNSDS\">Periodic</h3>\n<p>The <em>Periodic</em> tab has logs that show the status of your periodic syncs. As customers continue to interact with your brand and new data is created, it will be routinely sent to your data warehouse. When setting up a data warehouse connection, periodic syncs will occur every hour. </p>\n<p>You’ll see the following information for each sync: </p>\n<ul>\n<li>\n<strong>Name</strong><br>\nThe data is being included in the sync.</li>\n<li>\n<strong>Status</strong><br>\nStatus and potential progress of the sync with an estimated percentage or potential errors noted. These statuses could include:<br>\n<br>\n\n<ul>\n<li>\n<strong>Completed</strong><br>\nYour data finished syncing for this one-off sync. It will not resync again automatically.</li>\n<li>\n<strong>Scheduled</strong><br>\nWhen the next sync is scheduled to automatically run.</li>\n<li>\n<strong>In progress</strong><br>\nData is actively syncing to your data warehouse with an estimated percentage of completion.</li>\n<li>\n<strong>Errored</strong><br>\nAn error occurred but Klaviyo will keep trying to re-establish a connection. Depending on the integration, this timing may slightly differ.</li>\n<li>\n<strong>Failed</strong><br>\nThe sync completely failed even after trying to re-establish a connection. This means that you will need to review your configuration settings or even data warehouse setup.</li>\n<li>\n<strong>Paused</strong><br>\nYou have paused the sync manually.</li>\n<li>\n<strong>Disabled</strong><br>\nThe sync was disabled because the integration itself was disabled or removed.</li>\n</ul>\n</li>\n<li>\n<strong>Data freshness</strong><br>\nData freshness refers to how up-to-date your data is. For example, if a sync has a freshness of 2 minutes, this means that any new data created in Klaviyo in the past 2 minutes is not yet in your data warehouse. </li>\n<li>Buttons to <em>Pause</em>, <em>Resume</em>, and re-enable individual syncs.</li>\n</ul>\n<h2 id=\"01H828QD9TR3P4JX6B4KGZH9MN\">Removing data warehouse connections </h2>\n<p>To delete a data warehouse connection from your Klaviyo account, select the <strong>Integrations</strong> tab.</p>\n<p class=\"wysiwyg-text-align-left\">Open the menu next to your data warehouse integration and select <strong>Remove integration</strong> to remove the connection.</p>\n<p class=\"wysiwyg-text-align-center\"><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28705638617627\" alt=\"integrations_page.jpg\" width=\"641\" height=\"174\"></p>\n<h2 id=\"h_01J30ZH4E77SWQ61QKBCAJJEDE\">View error logs </h2>\n<p>If you are experiencing issues with data syncing between Klaviyo and your data warehouse, viewing the associated error logs can provide additional information around the cause of the issue. </p>\n<p>To view errors, click into your warehouse destination on the <em>Syncing</em> page. On both the <em>Historical</em> and <em>Periodic </em>sync tabs you’ll see a list of the exports and their status, along with an indicator showing whether there are any active errors.</p>\n<p><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28705638663707\" alt=\"List of exports to warehouse with information about health and count of errors\" width=\"624\" height=\"261\"></p>\n<p>To view more details about a particular error, click into the export experiencing the failure. </p>\n<p>Here, you’ll see a timeline of the outbound syncs, along with an error or success message based on the status of the sync. </p>\n<p><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28705638666395\" alt=\"Timeline of outbound syncs with health status\" width=\"624\" height=\"265\"></p>\n<p>Clicking into a specific error will open a drawer with the following information:</p>\n<ul>\n<li>\n<strong>Summary</strong><br>\nA brief description of the error returned by the data warehouse </li>\n<li>\n<strong>Code</strong><br>\nThe error code for the error</li>\n<li>\n<strong>External message</strong><br>\nThe actual error message returned by the data warehouse</li>\n<li>\n<strong>Date</strong><br>\nThe date and time of the error</li>\n</ul>\n<p><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28705638658459\" alt=\"Drawer with information about syncing error\" width=\"345\" height=\"559\"></p>",
+    "user_segment_ids": []
+  },
+  "normalized": {
+    "id": "17759932376475",
+    "title": "Understand data warehouse syncing in Klaviyo",
+    "source_url": "https://help.klaviyo.com/hc/en-us/articles/17759932376475-Understand-data-warehouse-syncing-in-Klaviyo",
+    "section_id": 49375669200027,
+    "section": "Syncing",
+    "category_id": 18073014919195,
+    "category": "Advanced KDP & Marketing Analytics",
+    "category_slug": "advanced-kdp-marketing-analytics",
+    "klaviyo_updated": "2026-04-21T13:54:30Z",
+    "created_at": "2023-08-08T13:34:32Z",
+    "draft": false,
+    "promoted": false,
+    "position": 0,
+    "label_names": []
+  },
+  "files": {
+    "body_html": "_source/articles/17759932376475.body.html",
+    "rendered_html": "_source/rendered/17759932376475.html"
+  },
+  "assets": {
+    "api_body": {
+      "images": [
+        {
+          "src": "https://fast.wistia.com/embed/medias/1luu8fozn2/swatch",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/29207563157019",
+          "alt": "import_export.jpg",
+          "width": "430",
+          "height": "274"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/29207563159451",
+          "alt": "configure.jpg",
+          "width": "579",
+          "height": "452"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/29207608998811",
+          "alt": "Panel.jpg",
+          "width": "502",
+          "height": "513"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28705665436571",
+          "alt": "Redshift credentials to connect",
+          "width": "500",
+          "height": "632"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28705665430939",
+          "alt": "Amazon S3 credentials to connect",
+          "width": "500",
+          "height": "473"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28705638604827",
+          "alt": "BigQuery credentials to connect",
+          "width": "500",
+          "height": "476"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28705665467547",
+          "alt": "Azure credentials",
+          "width": "500",
+          "height": "712"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/36251501527707",
+          "alt": "",
+          "width": "433",
+          "height": "565"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28705638636059",
+          "alt": "Profile and events data objects",
+          "width": "552",
+          "height": "238"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28705665480347",
+          "alt": "Integrations to exclude field",
+          "width": "550",
+          "height": "125"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28705665484699",
+          "alt": "Selective sync field",
+          "width": "551",
+          "height": "107"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28705665488283",
+          "alt": "Periodic sync cadence field",
+          "width": "550",
+          "height": "161"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28705665476763",
+          "alt": "Select how much data to sync to your data warehouse",
+          "width": "551",
+          "height": "221"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28705665449115",
+          "alt": "Connection successful modal",
+          "width": "502",
+          "height": "373"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/29207563162267",
+          "alt": "Card.jpg",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28705638606491",
+          "alt": "Sync interface after connecting warehouse",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28705638617627",
+          "alt": "integrations_page.jpg",
+          "width": "641",
+          "height": "174"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28705638663707",
+          "alt": "List of exports to warehouse with information about health and count of errors",
+          "width": "624",
+          "height": "261"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28705638666395",
+          "alt": "Timeline of outbound syncs with health status",
+          "width": "624",
+          "height": "265"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28705638658459",
+          "alt": "Drawer with information about syncing error",
+          "width": "345",
+          "height": "559"
+        }
+      ],
+      "links": [
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/17655007276059",
+          "text": "Advanced KDP"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115000976672",
+          "text": "billing guide"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/use_klaviyos_sftp_import_tool",
+          "text": "SFTP"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/use_klaviyos_sftp_import_tool#general-csv-formatting-and-size-limitations",
+          "text": "CSV format and size limitations"
+        }
+      ],
+      "headings": [
+        {
+          "level": 2,
+          "id": "01H826355V28CWDJABSZ13H409",
+          "text": "You will learn"
+        },
+        {
+          "level": 2,
+          "id": "01H826355VCVZ1BZ3M6JV679SA",
+          "text": "Before you begin"
+        },
+        {
+          "level": 2,
+          "id": "01H826355WMNAPHTASY78SSYEG",
+          "text": "Connect to a data warehouse"
+        },
+        {
+          "level": 2,
+          "id": "h_01J6J4RJ84SGTRC5K4ME999ZWE",
+          "text": "Import data via SFTP"
+        },
+        {
+          "level": 3,
+          "id": "h_01J6J4X40QYNV4FC2NQ0J65ASC",
+          "text": "Export your database"
+        },
+        {
+          "level": 3,
+          "id": "h_01J6J4ZBR096HSA9TPFY6SY0RF",
+          "text": "Generate SSH keys on your local machine"
+        },
+        {
+          "level": 3,
+          "id": "h_01J6J51E5JHY9566KXDJ7XNHJR",
+          "text": "Configure SFTP client and import"
+        },
+        {
+          "level": 2,
+          "id": "h_01J6J5F6T27QB64PK5YR884KEC",
+          "text": "Export data to your warehouse"
+        },
+        {
+          "level": 3,
+          "id": "h_01HTFYVX5D1TQS183VPS2F9E1W",
+          "text": "Data objects"
+        },
+        {
+          "level": 3,
+          "id": "h_01HTFYW8GWJ7AWSRCH2R1W0QBH",
+          "text": "Integrations to exclude"
+        },
+        {
+          "level": 3,
+          "id": "h_01HTFYXVZHMZH7P9M6M583C5AD",
+          "text": "Selective sync"
+        },
+        {
+          "level": 3,
+          "id": "h_01HTFZ0Y1YD0YDEWTKSV3ZF505",
+          "text": "Select how often your data will sync"
+        },
+        {
+          "level": 3,
+          "id": "h_01HTFZ0001Z4YKP3YQKV8QYE1H",
+          "text": "Select how much historical data you want to sync"
+        },
+        {
+          "level": 3,
+          "id": "h_01HTFZBKWRG3NDRT2FY3HTBDRM",
+          "text": "Sync review"
+        },
+        {
+          "level": 2,
+          "id": "01H82C0AP6068EXYVB12BZBDTW",
+          "text": "Data syncing dashboard"
+        },
+        {
+          "level": 3,
+          "id": "01H826DXTCM7D7YHZR16G1S4HE",
+          "text": "Historical"
+        },
+        {
+          "level": 3,
+          "id": "01H826YHT3S3A804T5Z59NNSDS",
+          "text": "Periodic"
+        },
+        {
+          "level": 2,
+          "id": "01H828QD9TR3P4JX6B4KGZH9MN",
+          "text": "Removing data warehouse connections"
+        },
+        {
+          "level": 2,
+          "id": "h_01J30ZH4E77SWQ61QKBCAJJEDE",
+          "text": "View error logs"
+        }
+      ]
+    },
+    "rendered_page": {
+      "images": [
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/7ff492c2b417b7ecfe572f839a8a81398693c1f7-1920x1080.webp",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://fast.wistia.com/embed/medias/1luu8fozn2/swatch",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/8828ab1c1de60a3a8d8537bbe591b0df20ec3bcc-556x354.jpg?w=430",
+          "alt": "import_export.jpg",
+          "width": "430",
+          "height": "274"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/85fa854717bf32dd0d9f14cca2cd6f1f8213caf0-871x679.jpg?w=579",
+          "alt": "configure.jpg",
+          "width": "579",
+          "height": "452"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/68bee746da75cbe514bb9b106b06e8c2e4f43a5e-996x1018.jpg?w=502",
+          "alt": "Panel.jpg",
+          "width": "502",
+          "height": "513"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/32c4eb45a125ba88ffb1ef924b83e1790a1249ac-1026x1296.jpg?w=500",
+          "alt": "Redshift credentials to connect",
+          "width": "500",
+          "height": "632"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/8a54d793c73b681717c48b82adbac6d593768413-1036x980.jpg?w=500",
+          "alt": "Amazon S3 credentials to connect",
+          "width": "500",
+          "height": "473"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/85badd0f1df63b36bbc279e65b8de59b408acb1e-1022x972.jpg?w=500",
+          "alt": "BigQuery credentials to connect",
+          "width": "500",
+          "height": "476"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/93f8db7a792e36d053c3cff0bc2849cb5be97504-910x1296.jpg?w=500",
+          "alt": "Azure credentials",
+          "width": "500",
+          "height": "712"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/3dfdc64973391b83abeba3e7635c6524c83874d1-1126x1468.png?w=433",
+          "alt": "",
+          "width": "433",
+          "height": "565"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/dc6159fe792fcdf8b5ea63bcc4bd9b5eda34bdb6-1472x636.jpg?w=552",
+          "alt": "Profile and events data objects",
+          "width": "552",
+          "height": "238"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/d313952940ed6ad3c3d0a12d12a85b664cb9bb7a-1454x330.jpg?w=550",
+          "alt": "Integrations to exclude field",
+          "width": "550",
+          "height": "125"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/c62ec3ee92d0cc467d17cf63945d0c32da3264f1-1412x274.jpg?w=551",
+          "alt": "Selective sync field",
+          "width": "551",
+          "height": "107"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/b1aab6eed7af93b618448f2d910c621a6295155f-1404x412.jpg?w=550",
+          "alt": "Periodic sync cadence field",
+          "width": "550",
+          "height": "161"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/9707fe817e30afc1eac46bd78ec83a93ec399382-2118x850.jpg?w=551",
+          "alt": "Select how much data to sync to your data warehouse",
+          "width": "551",
+          "height": "221"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/c7603b600946132f58a020978d8896b2cc436417-1174x874.jpg?w=502",
+          "alt": "Connection successful modal",
+          "width": "502",
+          "height": "373"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/9d3c4bf34da9c968989420c63e39d279f29e2f76-423x171.jpg",
+          "alt": "Card.jpg",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/6dd838e74bdd34fe0394b8ef078727381e904306-2570x768.jpg",
+          "alt": "Sync interface after connecting warehouse",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/4d82e718630f87f6213a851715213d4ec76915e1-1444x392.jpg?w=641",
+          "alt": "integrations_page.jpg",
+          "width": "641",
+          "height": "174"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/4c186094ab195d0729248ca297594b31d7a039c0-1600x670.png?w=624",
+          "alt": "List of exports to warehouse with information about health and count of errors",
+          "width": "624",
+          "height": "261"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/8230b574c26f82ec65108d2baae26fabd9a87c00-1600x681.png?w=624",
+          "alt": "Timeline of outbound syncs with health status",
+          "width": "624",
+          "height": "265"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/8518727237f361732b9a6938fb2273179f5557bf-710x1153.png?w=345",
+          "alt": "Drawer with information about syncing error",
+          "width": "345",
+          "height": "559"
+        }
+      ],
+      "links": [
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/17759932376475-Understand-data-warehouse-syncing-in-Klaviyo#site-content",
+          "text": "Skip to main content"
+        },
+        {
+          "href": "https://www.klaviyo.com",
+          "text": "Home"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center"
+        },
+        {
+          "href": "https://www.klaviyo.com/enterprise",
+          "text": "Enterprise"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Partners"
+        },
+        {
+          "href": "https://www.klaviyo.com/careers",
+          "text": "Careers"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": "Log in"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": ""
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center Find step-by-step instructions and troubleshooting solutions in our knowledge base."
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000032731",
+          "text": "Integrations"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000312411",
+          "text": "Flows"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867867",
+          "text": "Audience"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867667",
+          "text": "Campaigns"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/360000190711",
+          "text": "Sign-up forms"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000873988",
+          "text": "Deliverability & compliance"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/29173800271259",
+          "text": "SMS"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/16638219724187",
+          "text": "Reviews"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/18073014919195",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/34141283979931",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/37659126754075",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/33948021740315",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/39746685522331",
+          "text": "WhatsApp"
+        },
+        {
+          "href": "https://academy.klaviyo.com",
+          "text": "Klaviyo Academy Expert training and education to help you succeed with Klaviyo, and beyond."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Quick+guide&resource=academy_courses",
+          "text": "Quick guides Learn marketing strategies and concepts in 15 minutes or less."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Course&resource=academy_courses",
+          "text": "Courses Master key marketing topics through structured lessons and exams."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/best-practices",
+          "text": "Best practices Discover top product and marketing strategies for your business."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/learning-paths",
+          "text": "Learning paths Complete curated learning journeys tailored to your marketing goals."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses",
+          "text": "Explore all resources"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Live+training&resource=academy_courses",
+          "text": "Live trainings Build confidence through hands-on interactive workshops and thought-provoking strategy sessions."
+        },
+        {
+          "href": "https://www.bigmarker.com/klaviyo-customer-education/Office-hours-Getting-started-with-Klaviyo",
+          "text": "Live office hours Join a strategic discussion where you can ask questions and get answers in real-time."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/private-live-training",
+          "text": "1:1 Live training Book a private training session with an expert to jumpstart your platform knowledge and confidence."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/credentials",
+          "text": "Klaviyo credentials Dig deeper into select topics and showcase your expertise with a final exam to earn a certificate and digital badge."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/certificates/klaviyo-practitioner-certificate",
+          "text": "Klaviyo practitioner certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/deliverability-certificate",
+          "text": "Deliverability certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/developer-certificate",
+          "text": "Klaviyo developer certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses&select=Certificate",
+          "text": "See all certificates"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Klaviyo Community Join our thriving community network to connect with brands like yours—online and in person."
+        },
+        {
+          "href": "https://community.klaviyo.com/topic/new",
+          "text": "Ask a question Post a question and get thoughtful answers from Klaviyo powerusers."
+        },
+        {
+          "href": "https://community.klaviyo.com/p/roadmap",
+          "text": "Product roadmap"
+        },
+        {
+          "href": "https://community.klaviyo.com/search/activity/recent",
+          "text": "Recent threads"
+        },
+        {
+          "href": "https://community.klaviyo.com/p/champions",
+          "text": "Meet the Champions"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups",
+          "text": "Browse all groups Your people are waiting. New ideas and connections are a click away."
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/developer-group-64",
+          "text": "Developer group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/entrepreneur-user-group-118",
+          "text": "Entrepreneur group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/woo-user-group-87",
+          "text": "WooCommerce group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/new-york-meetup-chapter-82",
+          "text": "New York City"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/los-angeles-meetup-chapter-83",
+          "text": "Los Angeles"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/austin-meetup-chapter-85",
+          "text": "Austin"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/san-diego-meetup-chapter-86",
+          "text": "San Diego"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/amsterdam-meetup-chapter-84",
+          "text": "Amsterdam"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Klaviyo Developers Access API documentation and developer guides to help you build with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/get_started",
+          "text": "Get started Access key resources and a step-by-step checklist for how to start developing with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/build_your_integration",
+          "text": "Grow your app's reach Learn how to join our ecosystem and get your app listed on our marketplace."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/developer-tools",
+          "text": "Developer tools Generate sample data, monitor your API usage, and access our Postman collections."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/reference/api_overview",
+          "text": "API reference Browse our full catalog of API docs."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/changelog_",
+          "text": "Changelog"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/api_versioning_and_deprecation_policy",
+          "text": "Versioning & deprecation policy"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/rate_limits_and_error_handling",
+          "text": "Rate limits & error handling"
+        },
+        {
+          "href": "https://youtube.com/playlist?list=PLHkNfHgtxcUanrkMnKPdkRzuWU7MGv_xM&si=pkG-KH7IT_TUHOGC",
+          "text": "API tutorials on YouTube Subscribe to our Klaviyo API Tutorials playlist for easy access to step-by-step developer walkthroughs."
+        },
+        {
+          "href": "https://www.klaviyo.com/contact-us",
+          "text": "Contact us"
+        },
+        {
+          "href": "https://www.klaviyo.com/sign-up",
+          "text": "Sign up"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": "Search"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/17759932376475",
+          "text": "United States - EN"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/de-de/articles/17759932376475",
+          "text": "Deutschland - DE"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-es/articles/17759932376475",
+          "text": "España - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-mx/articles/17759932376475",
+          "text": "México - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/fr-fr/articles/17759932376475",
+          "text": "France - FR"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/it-it/articles/17759932376475",
+          "text": "Italia - IT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/ko-kr/articles/17759932376475",
+          "text": "한국 - KO"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/nl-nl/articles/17759932376475",
+          "text": "Nederland - NL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pl-pl/articles/17759932376475",
+          "text": "Polska - PL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pt-br/articles/17759932376475",
+          "text": "Brasil - PT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/sv-se/articles/17759932376475",
+          "text": "Sverige - SV"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/18073014919195",
+          "text": "Advanced KDP & Marketing Analytics"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/28478928202523",
+          "text": "Data management (Advanced KDP)"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/49375669200027",
+          "text": "Syncing"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/17759932376475-Understand-data-warehouse-syncing-in-Klaviyo#01H826355V28CWDJABSZ13H409",
+          "text": "You will learn"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/17759932376475-Understand-data-warehouse-syncing-in-Klaviyo#01H826355VCVZ1BZ3M6JV679SA",
+          "text": "Before you begin"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/17759932376475-Understand-data-warehouse-syncing-in-Klaviyo#01H826355WMNAPHTASY78SSYEG",
+          "text": "Connect to a data warehouse"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/17759932376475-Understand-data-warehouse-syncing-in-Klaviyo#h_01J6J4RJ84SGTRC5K4ME999ZWE",
+          "text": "Import data via SFTP"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/17759932376475-Understand-data-warehouse-syncing-in-Klaviyo#h_01J6J5F6T27QB64PK5YR884KEC",
+          "text": "Export data to your warehouse"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/17759932376475-Understand-data-warehouse-syncing-in-Klaviyo#01H82C0AP6068EXYVB12BZBDTW",
+          "text": "Data syncing dashboard"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/17759932376475-Understand-data-warehouse-syncing-in-Klaviyo#01H828QD9TR3P4JX6B4KGZH9MN",
+          "text": "Removing data warehouse connections"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/17759932376475-Understand-data-warehouse-syncing-in-Klaviyo#h_01J30ZH4E77SWQ61QKBCAJJEDE",
+          "text": "View error logs"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/17759932376475-Understand-data-warehouse-syncing-in-Klaviyo#additional-resources",
+          "text": "Additional resources"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/17655007276059",
+          "text": "Advanced KDP"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115000976672",
+          "text": "billing guide"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/use_klaviyos_sftp_import_tool",
+          "text": "SFTP"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/use_klaviyos_sftp_import_tool#general-csv-formatting-and-size-limitations",
+          "text": "CSV format and size limitations"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360030265051",
+          "text": "Understanding how information is exchanged between Klaviyo and apps"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360030696012",
+          "text": "Understanding the types of information exchanged between Klaviyo and apps"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115001002272",
+          "text": "Learn how to contact support"
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": ""
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": "Visit Community"
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": ""
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": "Hire a partner"
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/about",
+          "text": "About Klaviyo"
+        },
+        {
+          "href": "https://www.klaviyo.com/newsroom",
+          "text": "Newsroom"
+        },
+        {
+          "href": "https://investors.klaviyo.com/overview/default.aspx",
+          "text": "Investor relations"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Agency and tech partners"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Developers"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/retail",
+          "text": "Retail and ecommerce"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/restaurants",
+          "text": "Restaurant marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/wellness",
+          "text": "Wellness"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform",
+          "text": "B2C CRM overview"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai",
+          "text": "Klaviyo AI (K:AI)"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/marketing-automation",
+          "text": "Klaviyo Marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-service",
+          "text": "Klaviyo Service"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/analytics",
+          "text": "Klaviyo Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-data-platform",
+          "text": "Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare",
+          "text": "Klaviyo vs. Klaviyo alternatives"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-mailchimp",
+          "text": "Klaviyo vs. Mailchimp"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-postscript",
+          "text": "Klaviyo vs. Postscript"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-attentive",
+          "text": "Klaviyo vs. Attentive"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-salesforce-marketing-cloud",
+          "text": "Klaviyo vs. Salesforce"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-listrak",
+          "text": "Klaviyo vs. Listrak"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/omnichannel",
+          "text": "Omnichannel marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/email-marketing",
+          "text": "Email marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing",
+          "text": "SMS marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing/rcs",
+          "text": "RCS for Business"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/mobile-app-marketing",
+          "text": "Mobile app marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/whatsapp",
+          "text": "WhatsApp marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/social",
+          "text": "Social marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources",
+          "text": "Marketing resources"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources/marketing-campaign-calendar",
+          "text": "Marketing campaign calendar"
+        },
+        {
+          "href": "https://www.klaviyo.com/glossary",
+          "text": "Marketing glossary"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/email-subject-line-generator",
+          "text": "Subject line generator"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/roi-calculator",
+          "text": "ROI calculator"
+        },
+        {
+          "href": "https://www.klaviyo.com/customers",
+          "text": "Case studies"
+        },
+        {
+          "href": "https://www.klaviyo.com/composer",
+          "text": "Composer Beta"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/marketing-agent",
+          "text": "Marketing Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/customer-agent",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/customer-experience-hub",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/helpdesk",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/marketing-analytics",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/advanced-cdp",
+          "text": "Advanced Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/web-forms",
+          "text": "Web forms"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/email-templates",
+          "text": "Email templates"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/portfolio",
+          "text": "Portfolio"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform-integrations",
+          "text": "Apps and Integrations"
+        },
+        {
+          "href": "https://www.klaviyo.com/features",
+          "text": "Features"
+        },
+        {
+          "href": "https://www.klaviyo.com/whats-new",
+          "text": "What's new"
+        },
+        {
+          "href": "https://www.klaviyo.com/events",
+          "text": "Events"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help Center"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us",
+          "text": "Academy"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Community"
+        },
+        {
+          "href": "https://www.facebook.com/Klaviyo/",
+          "text": "Facebook"
+        },
+        {
+          "href": "https://twitter.com/klaviyo/",
+          "text": "Twitter"
+        },
+        {
+          "href": "https://www.linkedin.com/company/klaviyo/",
+          "text": "LinkedIn"
+        },
+        {
+          "href": "https://www.instagram.com/klaviyo/",
+          "text": "Instagram"
+        },
+        {
+          "href": "https://www.klaviyo.com/sitemap",
+          "text": "Site Map"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal",
+          "text": "Terms and Privacy"
+        },
+        {
+          "href": "https://www.klaviyo.com/security",
+          "text": "Security"
+        },
+        {
+          "href": "https://www.klaviyo.com/trust",
+          "text": "Trust"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal/intellectual-property-notices",
+          "text": "Intellectual Property Notices"
+        }
+      ],
+      "headings": [
+        {
+          "level": 1,
+          "id": "",
+          "text": "Understand data warehouse syncing in Klaviyo"
+        },
+        {
+          "level": 2,
+          "id": "01H826355V28CWDJABSZ13H409",
+          "text": "You will learn"
+        },
+        {
+          "level": 2,
+          "id": "01H826355VCVZ1BZ3M6JV679SA",
+          "text": "Before you begin"
+        },
+        {
+          "level": 2,
+          "id": "01H826355WMNAPHTASY78SSYEG",
+          "text": "Connect to a data warehouse"
+        },
+        {
+          "level": 2,
+          "id": "h_01J6J4RJ84SGTRC5K4ME999ZWE",
+          "text": "Import data via SFTP"
+        },
+        {
+          "level": 3,
+          "id": "h_01J6J4X40QYNV4FC2NQ0J65ASC",
+          "text": "Export your database"
+        },
+        {
+          "level": 3,
+          "id": "h_01J6J4ZBR096HSA9TPFY6SY0RF",
+          "text": "Generate SSH keys on your local machine"
+        },
+        {
+          "level": 3,
+          "id": "h_01J6J51E5JHY9566KXDJ7XNHJR",
+          "text": "Configure SFTP client and import"
+        },
+        {
+          "level": 2,
+          "id": "h_01J6J5F6T27QB64PK5YR884KEC",
+          "text": "Export data to your warehouse"
+        },
+        {
+          "level": 3,
+          "id": "h_01HTFYVX5D1TQS183VPS2F9E1W",
+          "text": "Data objects"
+        },
+        {
+          "level": 3,
+          "id": "h_01HTFYW8GWJ7AWSRCH2R1W0QBH",
+          "text": "Integrations to exclude"
+        },
+        {
+          "level": 3,
+          "id": "h_01HTFYXVZHMZH7P9M6M583C5AD",
+          "text": "Selective sync"
+        },
+        {
+          "level": 3,
+          "id": "h_01HTFZ0Y1YD0YDEWTKSV3ZF505",
+          "text": "Select how often your data will sync"
+        },
+        {
+          "level": 3,
+          "id": "h_01HTFZ0001Z4YKP3YQKV8QYE1H",
+          "text": "Select how much historical data you want to sync"
+        },
+        {
+          "level": 3,
+          "id": "h_01HTFZBKWRG3NDRT2FY3HTBDRM",
+          "text": "Sync review"
+        },
+        {
+          "level": 2,
+          "id": "01H82C0AP6068EXYVB12BZBDTW",
+          "text": "Data syncing dashboard"
+        },
+        {
+          "level": 3,
+          "id": "01H826DXTCM7D7YHZR16G1S4HE",
+          "text": "Historical"
+        },
+        {
+          "level": 3,
+          "id": "01H826YHT3S3A804T5Z59NNSDS",
+          "text": "Periodic"
+        },
+        {
+          "level": 2,
+          "id": "01H828QD9TR3P4JX6B4KGZH9MN",
+          "text": "Removing data warehouse connections"
+        },
+        {
+          "level": 2,
+          "id": "h_01J30ZH4E77SWQ61QKBCAJJEDE",
+          "text": "View error logs"
+        },
+        {
+          "level": 2,
+          "id": "additional-resources",
+          "text": "Additional resources"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "Explore more from Klaviyo"
+        }
+      ]
+    }
+  },
+  "rendered_page": {
+    "status": "fetched",
+    "error": ""
+  }
+}

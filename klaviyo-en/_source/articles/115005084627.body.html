@@ -1,0 +1,38 @@
+<h2 id="01GJ5KC8Z4J9ZVE7PTKCTBJZZ3">You will learn</h2>
+<p>Learn how to send a simple survey via email to collect information from users and then send that information back to Klaviyo as a custom property. A common use case for this is including rating links in an email or an NPS Survey.</p>
+<h2 id="01GJ5KC8Z4BBMQ5X47BYD5NYWB">Configure your email template to collect user ratings</h2>
+
+<div class="bs-callout bs-callout-default"><p>When using the code snippets provided below, make sure to use straight quotes (') rather than curly quotes (‘) to ensure the code renders correctly. This can be achieved by copying the code below and pasting it directly into your template using the "Paste as Plain Text" function (Ctrl+Shift+V or Cmd+Shift+V). </p></div>
+<ol>
+<li>Within your email template, drag in a <em>Header</em> block.</li>
+<li>In the <em>Desktop layout</em> and <em>Mobile layout</em> menus, select <strong>Links and buttons only</strong>.</li>
+<li>In the <em>Content </em>section of the block settings, click <strong>Add Link</strong> until you have 10 link fields (or, as many as desired).</li>
+<li>For <em>Link 1</em>, add the number 1 in the <em>Text</em> field. Repeat with the number 2 in <em>Link 2</em>, and so on.</li>
+<li>Add the following tag in the <em>Link address</em> field for each link:<br><code class="language-js" style="font-size: 13px; white-space: pre;">{% update_property_link 'profile_property' 'property_value' 'redirect_link' %}</code>
+</li>
+<li>Replace the generic placeholders in the tag above with the following information:
+<ul>
+<li>
+<strong>profile_property<br></strong>The custom property name that should be recorded on someone's profile (e.g., 'NPS Rating').</li>
+<li>
+<strong>property_value<br></strong>The actual value that is recorded for the custom property, like the numbers 1-10 in this example.</li>
+<li>
+<strong>redirect_link<br></strong>This is the URL that someone will be taken to after they select a value (e.g., your website homepage).</li>
+</ul>
+</li>
+</ol>
+<p>In the example below, the full tag for button <strong>1</strong> is:</p>
+<pre><code class="language-js">{% update_property_link 'NPS Rating' '1' 'https://botanic-organics.com/' %}</code></pre>
+<p>The full tag for button <strong>2 </strong>is:</p>
+<pre><code class="language-js">{% update_property_link 'NPS Rating' '2' 'https://botanic-organics.com/' %}</code></pre>
+<p class="wysiwyg-text-align-center"><img src="https://klaviyo.zendesk.com/hc/article_attachments/34368159432475" alt="NPS configuration in email template.png"></p>
+<p>Once a recipient clicks on a button, they will be brought to the URL that you specify as a redirect URL and the value will automatically be added to their profile as a custom property. Please note that if someone responds to multiple NPS survey emails that use the same <strong>profile_property</strong>, the new value they input will overwrite their previous response. </p>
+<h2 id="01GJ5KC8Z4DFF4PR3GAHQ5E4Q5">Preview your template</h2>
+<p>When you preview your template and click any of your ratings links, you’ll be directed to a placeholder page, rather than the link provided in the Update Property tag.</p>
+<p class="wysiwyg-text-align-center"><img src="https://klaviyo.zendesk.com/hc/article_attachments/28723517937819" alt="Placeholder displayed when an Update Property link is clicked from a preview email" width="470" height="163"></p>
+<p>If you’d like to test the full functionality of the link or button, send yourself a live email following our guide: <a href="https://klaviyo.zendesk.com/hc/en-us/articles/115005246328" target="_blank" rel="noopener">How to send a personal email in Klaviyo</a>.</p>
+<h2 id="01GJ5KC8Z448JZ51HZKP6H92W1">Additional resources</h2>
+<ul>
+<li><a href="https://klaviyo.zendesk.com/hc/en-us/articles/7655965301531" target="_blank" rel="noopener noreferrer">How to show or hide template blocks and sections based on dynamic variables</a></li>
+<li><a href="https://klaviyo.zendesk.com/hc/en-us/articles/360028872611" target="_blank" rel="noopener">Guide to creating a post-purchase flow</a></li>
+</ul>

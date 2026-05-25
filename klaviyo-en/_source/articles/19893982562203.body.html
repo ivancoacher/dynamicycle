@@ -1,0 +1,94 @@
+<h2 id="h_01HDPM1N08PKXYHQ2JW53ST31V">You will learn</h2>
+<p>Learn how to set up your Google service account and enable Firebase Cloud Messaging so you can send Klaviyo push notifications to Android devices. </p>
+<h2 id="h_01HDPM1N08R9PCW19AY8XFVYT0">Before you begin</h2>
+<p>Before following the steps below, you must have an existing Firebase project.</p>
+<h2 id="h_01HDPM1N08WYX807F09HW40SM1">Enable Cloud messaging API</h2>
+<ol>
+<li>Navigate to the <a href="https://console.cloud.google.com/welcome">Google Cloud console</a>. </li>
+<li>Select your Firebase project from the dropdown in the top left corner.</li>
+<li>Search for “Firebase Cloud Messaging API.”</li>
+<li>Select <strong>Firebase Cloud Messaging API </strong>from the marketplace list.<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28720761878939" alt="Searching for the Firebase Cloud Messaging API" width="564" height="622">
+</li>
+<li>In the modal that appears, click <strong>Enable</strong>.<br>
+</li>
+</ol>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/28720790367387" alt="Page to enable Firebase Cloud Messaging API"></p>
+<h2 id="h_01HDPM1N090P47HT4HAV42C3E4">Create a custom role that supports message creation</h2>
+<ol>
+<li>From the <a href="https://console.cloud.google.com/welcome">Google Cloud console dashboard</a>, select <strong>IAM &amp; Admin</strong> under the<em> Quick Access</em> section.<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28720790364315" alt="All Quick Access links, with only the IAM &amp; Admin option highlighted" width="560" height="311">
+</li>
+<li>In the left menu, navigate to the <strong>Roles</strong> section. <br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28720790354971" alt="Roles highlighted in the left sidebar" width="231" height="592">
+</li>
+<li>Click <strong>+Create Role</strong>.<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28720761885595" alt="Roles page, where Create role is shown in the upper left" width="532" height="323">
+</li>
+<li>Fill out details about the role (name, description, etc.).<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28720761875611" alt="Create Role window" width="538" height="787">
+</li>
+<li>Click <strong>+Add Permissions</strong>. </li>
+<li>Add only the<em> cloudmessaging.messages.create</em> permission. (For more details, see Google’s instructions for <a href="https://cloud.google.com/iam/docs/creating-custom-roles#creating">creating a custom role</a>.).<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28720790351643" alt="Searching for the correct role permission" width="534" height="607">
+</li>
+<li>Click <strong>Add</strong>. </li>
+<li>When ready, create the role by selecting <strong>Create</strong>. </li>
+</ol>
+<h2 id="h_01HE5GH4CN8W5KBE2E7BSJRZPT">Create a Google service account</h2>
+<ol>
+<li>In the left side menu of the <a href="https://console.cloud.google.com/iam-admin/iam">IAM &amp; Admin section</a>, navigate to the <em>Service Accounts</em> tab.</li>
+<li>Click <strong>+Create Service Account</strong>.<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28720790390043" alt="Button to create a Google service account">
+</li>
+<li>Fill out the <em>Service account name</em> and <em>Service account description </em>(optional) fields.<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28720761897883" alt="First step of the wizard to create a new service account" width="591" height="434">
+</li>
+<li>Click <strong>Create And Continue</strong>.</li>
+<li>Click into the <em>Select a role</em> field.<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28720790375579" alt="Adding a role to a new service account" width="542" height="532">
+</li>
+<li>Select the custom role that you just created. Here, we choose “Test Role,” but select the role you created in the previous section.</li>
+<li>Click <strong>Done </strong>to finish creating the service account.</li>
+</ol>
+<h2 id="h_01HE5GH4CNKP0Z25MFHBW8RNCX">Generate a service account key</h2>
+<ol>
+<li>In the <a href="https://console.cloud.google.com/iam-admin/serviceaccounts">Service Accounts</a> page, click on the email address for the service account that you created in the previous section.<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28720790388635" alt="Service accounts page, where the accounts are blurred for security purposes" width="620" height="287">
+</li>
+<li>Navigate to the <strong>Keys</strong> tab.</li>
+<li>Click <strong>Add Key</strong>.</li>
+<li>Click <strong>Create new key</strong>.<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28720790379163" alt="Add key dropdown, when the Create new key option is highlighted">
+</li>
+<li>Under <em>Key type</em>, select <strong>JSON</strong>.<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28720790372379" alt="Modal to select the key type when JSON is selected">
+</li>
+<li>Click <strong>Create </strong>to download the service account key file.<br>
+Note: you cannot download the file again, so ensure that you can locate the file on your computer. The downloaded JSON file should have the following format:<br>
+<code>{ "type": "service_account", <br>
+"project_id": "PROJECT_ID", <br>
+"private_key_id": "KEY_ID", <br>
+"private_key": "-----BEGIN PRIVATE KEY-----\nPRIVATE_KEY\n-----END PRIVATE KEY-----\n", <br>
+"client_email": "SERVICE_ACCOUNT_EMAIL", <br>
+"client_id": "CLIENT_ID", <br>
+"auth_uri": "https://accounts.google.com/o/oauth2/auth", <br>
+"token_uri": "https://accounts.google.com/o/oauth2/token", <br>
+"auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs", <br>
+"client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/SERVICE_ACCOUNT_EMAIL" }</code>
+</li>
+</ol>
+<h2 id="h_01HDPM1N099TT0Q9H1WME91S23">Outcome</h2>
+<p>Now that you created and assigned the role to your Google service account, you can begin setting up Klaviyo Android push notifications.</p>

@@ -1,0 +1,1174 @@
+{
+  "captured_at": "2026-05-23T16:10:20Z",
+  "article": {
+    "id": 48920041574811,
+    "url": "https://klaviyo.zendesk.com/api/v2/help_center/en-us/articles/48920041574811.json",
+    "html_url": "https://klaviyo.zendesk.com/hc/en-us/articles/48920041574811-Hotel-Enablement-Guide",
+    "author_id": 32458090987419,
+    "comments_disabled": false,
+    "draft": false,
+    "promoted": false,
+    "position": 0,
+    "vote_sum": 0,
+    "vote_count": 0,
+    "section_id": 48484642896283,
+    "created_at": "2026-04-09T15:14:01Z",
+    "updated_at": "2026-04-21T13:56:53Z",
+    "name": "Hotel Enablement Guide",
+    "title": "Hotel Enablement Guide",
+    "source_locale": "en-us",
+    "locale": "en-us",
+    "outdated": false,
+    "outdated_locales": [],
+    "edited_at": "2026-04-10T19:49:18Z",
+    "user_segment_id": null,
+    "permission_group_id": 146372,
+    "content_tag_ids": [],
+    "label_names": [],
+    "body": "<h1 id=\"d5e2936528ab\">Hotel Enablement Guide</h1>\n<h2 id=\"7afc235e75d9\"><strong>Crawl</strong></h2>\n<p><em>This section covers the initial set up required to start getting value out of Klaviyo. It does not cover all steps (e.g. adding brand assets), but focuses on solving the core hotel use cases.</em></p>\n<h2 id=\"71442405f5c4\"><strong>Integrations</strong></h2>\n<p>For Klaviyo to effectively function as a brain, it needs data:</p>\n<ul>\n<li>Integrate your PMS →\n<ul>\n<li>This will automatically (1) create Klaviyo profiles based on your historic guest data (2) create reservation events and objects based on guest actions.\n<ul>\n<li>\n<em>Note: If you installed the integration before 1/30/26, you need to follow the steps to update your integration to sync reservation objects:</em> <a href=\"https://help.klaviyo.com/hc/en-us/articles/38311148860955\"><em>Mews</em></a><em>,</em> <a href=\"https://help.klaviyo.com/hc/en-us/articles/39406849361691#h_01K45A8TV1MNXM2CV3TMGRSWWR\"><em>Cloudbeds</em></a><em>, and</em> <a href=\"https://help.klaviyo.com/hc/en-us/articles/37673288455323#01KG8CX52V9GG13ZHD68DRRFHD\"><em>Guesty</em></a><em>.</em>\n</li>\n</ul>\n</li>\n<li>Getting started guides for <a href=\"https://help.klaviyo.com/hc/en-us/articles/38311148860955\">Mews</a>, <a href=\"https://help.klaviyo.com/hc/en-us/articles/39406849361691\">Cloudbeds</a>, and <a href=\"https://help.klaviyo.com/hc/en-us/articles/37673288455323\">Guesty</a>.</li>\n</ul>\n</li>\n<li>Set up other core integrations →\n<ul>\n<li>Previously-used ESPs (e.g. Mailchimp) may be helpful for porting over data.</li>\n</ul>\n</li>\n</ul>\n<h2 id=\"513b54ce4c34\"><strong>Segments</strong></h2>\n<p>Sending effective campaigns depends on determining the right audience to message. By connecting your PMS, Klaviyo automatically creates the following segments for you:</p>\n<ul>\n<li>First time customers →\n<ul>\n<li>Person has Confirmed Reservation once over all time AND Person can receive email marketing</li>\n</ul>\n</li>\n<li>VIP customers →\n<ul>\n<li>Person has Confirmed Reservation is greater than 5 over all time AND Person can receive email marketing</li>\n</ul>\n</li>\n<li>Churn risks →\n<ul>\n<li>Person has Confirmed Reservation at least once over all time AND Person has Confirmed Reservation zero times in the last 180 days AND Person has Received Email at least 2 in the last 90 days AND Person has Opened Email zero times in the last 90 days AND Person can receive email marketing</li>\n</ul>\n</li>\n<li>Winback opportunities →\n<ul>\n<li>Person has Confirmed Reservation at least once over all time AND Confirmed Reservation zero times in the last 180 days AND Person can receive email marketing</li>\n</ul>\n</li>\n<li>Repeat guests →\n<ul>\n<li>Person has Confirmed Reservation is greater than 1 over all time AND Person can receive email marketing<br>\n<p>We also recommend setting up a couple of date-based segments with reservation objects (see step #1). Then you can create a <em>Future Guests</em> segment, which will be useful for sending campaigns to everyone with a reservation from tomorrow onwards:</p>\n</li>\n</ul>\n</li>\n<li>Create a future guest segment →\n<ul>\n<li>Navigate to <strong>Audience &gt; Lists &amp; Segments</strong>.</li>\n<li>Click <strong>Create New</strong> and choose <strong>Create new segment</strong>.</li>\n<li>Name the segment (e.g., \"Future Guests\") and add tags if desired.</li>\n<li>Under <strong>Definition</strong>, select:\n<ul>\n<li>\n<strong>Properties about someone</strong> &gt; <strong>Reservation</strong> &gt; <strong>has at least one</strong>\n</li>\n<li>Click <strong>Add filter</strong> and select: <strong>where</strong> &gt; <strong>StartDate</strong> &gt; <strong>is in the next</strong> &gt; <strong>1000 weeks</strong>\n</li>\n</ul>\n</li>\n<li>Click <strong>Create segment</strong>.<br>\n<p>And you can create a <em>Current and Future Guests</em> segment. This will be useful for excluding people from promotional emails:</p>\n</li>\n</ul>\n</li>\n<li>Create a current and future guests segment →\n<ul>\n<li>Navigate to <strong>Audience &gt; Lists &amp; Segments</strong>.</li>\n<li>Click <strong>Create New</strong> and choose <strong>Create new segment</strong>.</li>\n<li>Name the segment (e.g., \"Current &amp; Future Guests\") and add tags if desired.</li>\n<li>Under <strong>Definition</strong>, add two conditions joined by <strong>OR</strong>:\n<ul>\n<li>\n<strong>Condition 1 (future guests):</strong>\n<ul>\n<li>\n<strong>Properties about someone</strong> &gt; <strong>Reservation</strong> &gt; <strong>has at least one</strong> &gt; <strong>where</strong> &gt; <strong>StartDate</strong> &gt; <strong>is in the next</strong> &gt; <strong>1000 weeks</strong>\n</li>\n</ul>\n</li>\n<li>\n<strong>Condition 2 (currently checked in):</strong>\n<ul>\n<li>\n<strong>Properties about someone</strong> &gt; <strong>Reservation</strong> &gt; <strong>has at least one</strong> &gt; <strong>where</strong> &gt; <strong>StartDate</strong> &gt; <strong>is in the last</strong> &gt; <strong>90 days</strong>\n</li>\n<li>Click <strong>Add filter</strong> and select: <strong>where</strong> &gt; <strong>EndDate</strong> &gt; <strong>is in the next</strong> &gt; <strong>90 days</strong>.</li>\n</ul>\n</li>\n</ul>\n</li>\n</ul>\n</li>\n</ul>\n<p>These provide a good starting point for people to reach through your campaign strategy.</p>\n<h2 id=\"e72dced9e741\"><strong>Onsite JS</strong></h2>\n<p>Setting up onsite JS will allow you to set up Klaviyo forms on your booking engine (see next step) as well as track user events on your website, which enables <strong>abandoned cart and browse abandonment flows</strong> and enhanced segmentation:</p>\n<ul>\n<li>Set up onsite JS →\n<ul>\n<li>If you're using the Mews/Cloudbeds/Guesty booking engine, you can follow <a href=\"https://help.klaviyo.com/hc/en-us/articles/46643094275099\">this guide</a> to set up Klaviyo onsite JS via Google Tag Manager.\n<ul>\n<li>This will start syncing onsite events (e.g. Started Checkout, Viewed Listing) from the booking engine.</li>\n</ul>\n</li>\n<li>Otherwise, you can follow the steps to <a href=\"https://help.klaviyo.com/hc/en-us/articles/115005076767#h_01GMEAQZXKADF4FR7P1FMNC7EB\">set up Klaviyo JS manually</a>.</li>\n<li>Once you have it set up, follow the <a href=\"https://help.klaviyo.com/hc/en-us/articles/115005076767#h_01HADAYAACFYSN7F22XPPCGT6B\">testing steps</a> to make sure you're getting the expected events.\n<ul>\n<li>Note: You will not get <em>Viewed Product</em> events as those are specific to e-commerce stores.</li>\n</ul>\n</li>\n</ul>\n</li>\n</ul>\n<h2 id=\"0814f9b73d2a\"><strong>Forms</strong></h2>\n<p>Now that you have onsite JS set up, you can start using Klaviyo forms to capture the contact information of potential guests that land on your website. Later, you'll be able to message these guests to drive direct bookings, thus avoiding the 15-30% fee OTAs take:</p>\n<ul>\n<li>Set up Klaviyo forms →\n<ul>\n<li>Follow the steps outlined in the <a href=\"https://help.klaviyo.com/hc/en-us/articles/360026474752\">help center</a> or the <a href=\"https://academy.klaviyo.com/en-us/courses/getting-started-with-sign-up-forms\">academy</a>.</li>\n</ul>\n</li>\n</ul>\n<h2 id=\"b58bd5cc38b0\"><strong>Flows</strong></h2>\n<p>Klaviyo flows are automated email and SMS sequences triggered by specific customer behaviors. They allow you to message the right person at the right time. By connecting your PMS, Klaviyo provides you with the following flow templates:</p>\n<table>\n<tbody>\n<tr>\n<th><strong>Flow</strong></th>\n<th><strong>Trigger</strong></th>\n<th><strong>When it sends</strong></th>\n<th><strong>Why it matters</strong></th>\n</tr>\n<tr>\n<td>Welcome Series</td>\n<td>Guest joins your list (e.g. via sign-up form) but hasn't yet booked</td>\n<td>2-3 emails over 7 days</td>\n<td>Converts website visitors into first-time bookers; particularly effective for driving direct bookings away from OTAs.</td>\n</tr>\n<tr>\n<td>Guest Winback</td>\n<td>Time-based (e.g. 12 months since last checkout)</td>\n<td>Ongoing</td>\n<td>Lapsed guests are cheaper to re-engage than acquiring new ones.</td>\n</tr>\n<tr>\n<td>Pre-Arrival</td>\n<td>Check-in date (via Reservation Object)</td>\n<td>1-14 days before check-in</td>\n<td>Best opportunity for up-sells and cross-sells (e.g. room upgrades, spa, dining, etc.).</td>\n</tr>\n<tr>\n<td>Guest Thank You</td>\n<td>Guest confirms a reservation</td>\n<td>Immediately</td>\n<td>Thank the guest for making a reservation.</td>\n</tr>\n<tr>\n<td>Reservation Cancellation</td>\n<td>Guest cancels a reservation</td>\n<td>Immediately</td>\n<td>Opportunity to understand why they cancelled + win back the booking.</td>\n</tr>\n<tr>\n<td>Abandoned Checkout Reminder* <em>Note: only available for websites using either the Guesty booking engine or a custom one.</em>\n</td>\n<td>Guest started checkout</td>\n<td>Wait 2 hours</td>\n<td>Remind the guest to complete checkout. Opportunity to offer a discount.</td>\n</tr>\n<tr>\n<td>Browse Abandonment* <em>Note: only available for websites using either the Guesty booking engine or a custom one.</em>\n</td>\n<td>Guest viewed listing</td>\n<td>Wait 2 hours</td>\n<td>Re-engage the guest. Share more details about the room and/or offer a discount.</td>\n</tr>\n</tbody>\n</table>\n<ul>\n<li>Set up your flows →\n<ul>\n<li>Go to <strong>Flows &gt; Create Flow</strong> and filter by your PMS (Mews, Cloudbeds, or Guesty) to find pre-built versions of the flows above.\n<ul>\n<li>\n<em>Note: Pre-Arrival requires reservation objects, see step #1 or the getting started guide (</em><a href=\"https://help.klaviyo.com/hc/en-us/articles/38311148860955#h_01KG8CE0CWN9M7TGWZ52YJY0VK\"><em>Mews</em></a><em>,</em> <a href=\"https://help.klaviyo.com/hc/en-us/articles/39406849361691#h_01K45A8TV1MNXM2CV3TMGRSWWR\"><em>Cloudbeds</em></a><em>, and</em> <a href=\"https://help.klaviyo.com/hc/en-us/articles/37673288455323#01KG8CX52V9GG13ZHD68DRRFHD\"><em>Guesty</em></a><em>).</em>\n</li>\n</ul>\n</li>\n<li>Klaviyo's <a href=\"https://help.klaviyo.com/hc/en-us/articles/115002774932\">flow help center</a> and <a href=\"https://academy.klaviyo.com/en-us/courses/getting-started-with-flows\">academy</a> cover the full setup process.</li>\n</ul>\n</li>\n</ul>\n<h2 id=\"ad08108bb4b3\"><strong>Campaigns</strong></h2>\n<p>Campaigns are what you send intentionally to specific audiences — promotions, seasonal offers, newsletters, and anything that isn't tied to a single guest action. Here are some good places to start:</p>\n<ol>\n<li>Seasonal &amp; Promotional Campaigns →<br>\n<ul>\n<ul>\n<li>Timely sends aligned to holidays, local events, or low-occupancy periods (e.g. Valentine's Day, summer early-bird rate, etc.).</li>\n</ul>\n</ul>\n</li>\n<li>Re-Engagement / Winback Campaigns →<br>\n<ul>\n<ul>\n<li>Send a special rate, a loyalty perk, or a \"we miss you\" message to lapsed guests who haven't booked in over a year.</li>\n</ul>\n</ul>\n</li>\n<li>Loyalty &amp; VIP Campaigns →</li>\n</ol>\n<ul>\n<ul>\n<li>Send your VIP segment exclusive offers, first access to new packages, or a personal note acknowledging their loyalty.</li>\n</ul>\n<li>Set up your campaigns →\n<ul>\n<li>Go to <strong>Campaigns &gt; Create Campaign</strong> and select Email or SMS.</li>\n<li>Choose the relevant segment as your audience and exclude (<a href=\"https://help.klaviyo.com/hc/en-us/articles/360007016571\">help guide</a>) the <em>Current &amp; Future Guests</em> segment set up above when appropriate.</li>\n</ul>\n</li>\n</ul>\n<hr>\n<h2 id=\"f4f0358cdea5\"><strong>Your Guest Journey After Crawl</strong></h2>\n<p>Great work! This is what your guest journey looks like after completing this phase:</p>\n<table>\n<tbody>\n<tr>\n<th><strong>Guest Journey Stage</strong></th>\n<th><strong>Guest Action</strong></th>\n<th><strong>How Klaviyo Engages</strong></th>\n<th><strong>Type</strong></th>\n</tr>\n<tr>\n<td>🟢 <strong>Discovers website</strong>\n</td>\n<td>Visits your hotel website</td>\n<td>Sign-up form captures contact info → Welcome Series email sequence nurtures them toward a first booking</td>\n<td>Form + Flow</td>\n</tr>\n<tr>\n<td>🟢 <strong>Books</strong>\n</td>\n<td>Confirms a reservation</td>\n<td>Reservation Confirmation / Thank You flow fires automatically</td>\n<td>Flow</td>\n</tr>\n<tr>\n<td>🟢 <strong>Cancels</strong>\n</td>\n<td>Cancels a reservation</td>\n<td>Cancellation flow fires with a soft win-back message and reason to rebook</td>\n<td>Flow</td>\n</tr>\n<tr>\n<td>🟢 <strong>Pre-Arrival</strong>\n</td>\n<td>1-14 days before check-in</td>\n<td>Pre-Arrival flow sends upsell offers (room upgrades, dining, spa)</td>\n<td>Flow</td>\n</tr>\n<tr>\n<td>⬜ <strong>Arrival Day</strong>\n</td>\n<td>Checks in</td>\n<td>Not yet enabled → <em>unlocked in Run</em>\n</td>\n<td>—</td>\n</tr>\n<tr>\n<td>⬜ <strong>Post-Stay</strong>\n</td>\n<td>Checks out</td>\n<td>Not yet enabled → <em>unlocked in Walk</em>\n</td>\n<td>—</td>\n</tr>\n<tr>\n<td>🟢 <strong>Lapsed</strong>\n</td>\n<td>No booking in 6–12 months</td>\n<td>Winback flow fires automatically</td>\n<td>Flow</td>\n</tr>\n<tr>\n<td>🟢 <strong>All Guests</strong>\n</td>\n<td>Broad audience outreach</td>\n<td>Seasonal promotions, VIP perks, and re-engagement sends to the right segments</td>\n<td>Campaign</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h1 id=\"6f68e8f290fd\"><strong>Walk</strong></h1>\n<p><em>This section is for teams who have completed the Crawl stage and are ready to get more out of their data. The focus here is understanding performance, reaching the right guests with more precision, and driving direct bookings.</em></p>\n<h2 id=\"9502a80e10ea\"><strong>Reporting</strong></h2>\n<p>Klaviyo functions as a unified data platform. It is easy to set up core hotel reports within the app:</p>\n<ul>\n<li>Set up key hotel reports →\n<ul>\n<li>The <a href=\"https://help.klaviyo.com/hc/en-us/articles/47194724598555\">Mews</a> and <a href=\"https://help.klaviyo.com/hc/en-us/articles/47187823602459\">Cloudbeds</a> help guides show how to set up hotel reports based on <strong>Room Night</strong> event metrics.\n<ul>\n<li><em>Note: If you are using Guesty, these event metrics are not yet available.</em></li>\n</ul>\n</li>\n</ul>\n</li>\n<li>View revenue reports →\n<ul>\n<li>Klaviyo tracks revenue attributed to each campaign and flow automatically when a guest clicks through and completes a booking. To see overall revenue performance:\n<ul>\n<li>Navigate to <strong>Analytics</strong> &gt; <strong>Dashboards</strong> &gt; <strong>Business review</strong>.</li>\n<li>Track attributed revenue, orders, and conversion rates.</li>\n</ul>\n</li>\n</ul>\n</li>\n</ul>\n<h2 id=\"fad37f1d79c8\"><strong>Advanced Segments</strong></h2>\n<ul>\n<li>Set up an OTA bookers segment →\n<ul>\n<li>Mews →\n<ul>\n<li>OTA bookings arrive via the channel manager and are stamped with an <code>Origin</code> of <code>ChannelManager</code>. To build the segment:\n<ul>\n<li>Navigate to <strong>Audience &gt; Lists &amp; Segments &gt; Create new segment</strong>.</li>\n<li>Name the segment (e.g., \"OTA Bookers\").</li>\n<li>Set the definition to: <strong>What someone has done</strong> &gt; <strong>Confirmed Reservation (Mews)</strong> &gt; <strong>at least once</strong> &gt; <strong>over all time</strong>\n</li>\n<li>Click <strong>Add filter</strong> and select: <strong>where</strong> &gt; <strong>Origin</strong> &gt; <strong>equals</strong> &gt; <strong>ChannelManager</strong>\n</li>\n<li>Click <strong>Create segment</strong>.</li>\n<li>\n<em>Optional: To target guests who booked through a specific OTA (e.g., Booking.com), add a second filter:</em> <strong><em>where</em></strong> <em>&gt;</em> <strong><em>TravelAgency</em></strong> <em>&gt;</em> <strong><em>equals</em></strong> <em>&gt;</em> <strong><em>[OTA name]</em></strong><em>. Note that</em> <code><em>TravelAgency</em></code> <em>is only populated for channel manager bookings, so this filter works alongside the</em> <code><em>Origin</em></code> <em>filter above.</em>\n</li>\n</ul>\n</li>\n</ul>\n</li>\n<li>Cloudbeds →\n<ul>\n<li>The booking source is captured in the <code>Source</code> property on the Confirmed Reservation event. To build the segment:\n<ul>\n<li>Navigate to <strong>Audience &gt; Lists &amp; Segments &gt; Create new segment</strong>.</li>\n<li>Name the segment (e.g., \"OTA Bookers\").</li>\n<li>Set the definition to: <strong>What someone has done</strong> &gt; <strong>Confirmed Reservation (Cloudbeds)</strong> &gt; <strong>at least once</strong> &gt; <strong>over all time</strong>\n</li>\n<li>Click <strong>Add filter</strong> and select: <strong>where</strong> &gt; <strong>Source</strong> &gt; <strong>does not equal</strong> &gt; <strong>Direct</strong>\n</li>\n<li>Click <strong>Create segment</strong>.</li>\n<li>\n<em>Optional: If you want to target a specific OTA, change the filter to</em> <strong><em>Source</em></strong> <em>&gt;</em> <strong><em>equals</em></strong> <em>&gt;</em> <strong><em>[OTA name]</em></strong> <em>(e.g., \"Booking.com\").</em>\n</li>\n</ul>\n</li>\n</ul>\n</li>\n<li>Guesty →\n<ul>\n<li>The booking channel is captured in the <code>Source</code> property on the Confirmed Reservation event. To build the segment:\n<ul>\n<li>Navigate to <strong>Audience &gt; Lists &amp; Segments &gt; Create new segment</strong>.</li>\n<li>Name the segment (e.g., \"OTA Bookers\").</li>\n<li>Set the definition to: <strong>What someone has done</strong> &gt; <strong>Confirmed Reservation (Guesty)</strong> &gt; <strong>at least once</strong> &gt; <strong>over all time</strong>\n</li>\n<li>Click <strong>Add filter</strong> and select: <strong>where</strong> &gt; <strong>Booking Source</strong> &gt; <strong>does not equal</strong> &gt; <strong>Direct</strong>\n</li>\n<li>Click <strong>Create segment</strong>.</li>\n<li>\n<em>Optional: To target a specific channel (e.g., Airbnb or Booking.com), change the filter to</em> <strong><em>Source</em></strong> <em>&gt;</em> <strong><em>equals</em></strong> <em>&gt;</em> <strong><em>[channel name]</em></strong><em>.</em>\n</li>\n</ul>\n</li>\n</ul>\n</li>\n</ul>\n</li>\n</ul>\n<h2 id=\"f0994643e115\"><strong>Advanced Flows</strong></h2>\n<p>These flows require a bit more setup but tend to have a strong ROI because they reach guests at highly personal moments:</p>\n<ul>\n<li>Set up a post-stay review request flow →\n<ul>\n<li>Go to <strong>Flows &gt; Create Flow</strong> and filter by your PMS to find the pre-built <strong>Reservation Check Out</strong> flow.</li>\n<li>Set the trigger to the <strong>Reservation Check Out</strong> event.</li>\n<li>Add a single email that sends 24 hours after checkout, thanking the guest and including direct links to your preferred review platforms (Google, TripAdvisor, etc.).</li>\n</ul>\n</li>\n<li>Set up a birthday or stay anniversary flow →\n<ul>\n<li>Go to <strong>Flows &gt; Create Flow &gt; Build your own</strong>.</li>\n<li>Select the <strong>Date property</strong> trigger and choose the relevant date field (birthday from the guest profile, or their first check-in date).</li>\n<li>Add an email with a personalized offer (e.g., complimentary upgrade, F&amp;B credit, or a special rate) that expires within 30 days to create urgency.</li>\n<li><em>Note: Birthday flows require that guest birthday data is being synced from your PMS. Confirm this is populating on guest profiles before setting up the flow.</em></li>\n</ul>\n</li>\n</ul>\n<h2 id=\"78b4b8de64bc\"><strong>Advanced Campaigns</strong></h2>\n<ul>\n<li>Set up a direct booking campaign →\n<ul>\n<li>Target guests who previously booked via an OTA and offer them an incentive to book direct next time (e.g. early check-in, discounted rate, etc.). Use your <em>OTA Bookers</em> segment for this.</li>\n<li>Since OTAs charge 15-30% commission, you can pass some of that savings on to the guest as a perk while still coming out ahead on every direct booking.</li>\n</ul>\n</li>\n<li>Set up a first-stay-to-repeat campaign →\n<ul>\n<li>Set up a campaign to encourage people who stayed for the first time to return.</li>\n<li>Use your auto-created <em>First time customers</em> segment as the audience.</li>\n<li>Send 2-4 weeks after checkout with a personalized incentive to return: a rate discount, a room upgrade, or early access to a package.</li>\n<li>Exclude the <em>Current &amp; Future Guests</em> segment so you don't send to guests who have already rebooked.</li>\n</ul>\n</li>\n<li>Set up a high-value guest campaign →\n<ul>\n<li>Target guests who have paid above-average nightly rates and treat them accordingly — think early access to new packages, room upgrade offers, or a personal note from the GM.</li>\n<li>\n<em>For Mews and Cloudbeds only:</em> Use the Room Night event data from your reporting dashboards (set up above) to determine your average nightly rate, then build a segment:\n<ul>\n<li>Navigate to <strong>Audience &gt; Lists &amp; Segments &gt; Create new segment</strong>.</li>\n<li>Name the segment (e.g., \"High-Value Guests\").</li>\n<li>Set the definition to: <strong>What someone has done</strong> &gt; <strong>Confirmed Room Night</strong> &gt; <strong>at least once</strong> &gt; <strong>over all time</strong>\n</li>\n<li>Click <strong>Add filter</strong> and select: <strong>where</strong> &gt; <strong>Value</strong> &gt; <strong>is greater than</strong> &gt; <strong>[your average nightly rate]</strong>\n</li>\n<li>Click <strong>Create segment</strong>.</li>\n</ul>\n</li>\n</ul>\n</li>\n</ul>\n<hr>\n<h2 id=\"4566a5e7591c\"><strong>Your Guest Journey After Walk</strong></h2>\n<p><em>New touchpoints unlocked in Walk are marked 🟢. Previously enabled touchpoints are marked ✅.</em></p>\n<table>\n<tbody>\n<tr>\n<th><strong>Journey Stage</strong></th>\n<th><strong>Guest Action</strong></th>\n<th><strong>How Klaviyo Engages</strong></th>\n<th><strong>Type</strong></th>\n</tr>\n<tr>\n<td>✅ <strong>Discovers website</strong>\n</td>\n<td>Visits your hotel website</td>\n<td>Sign-up form → Welcome Series</td>\n<td>Form + Flow</td>\n</tr>\n<tr>\n<td>✅ <strong>Books</strong>\n</td>\n<td>Confirms a reservation</td>\n<td>Reservation Confirmation flow</td>\n<td>Flow</td>\n</tr>\n<tr>\n<td>✅ <strong>Cancels</strong>\n</td>\n<td>Cancels a reservation</td>\n<td>Cancellation win-back flow</td>\n<td>Flow</td>\n</tr>\n<tr>\n<td>✅ <strong>Pre-Arrival</strong>\n</td>\n<td>1–14 days before check-in</td>\n<td>Pre-Arrival flow (upsell)</td>\n<td>Flow</td>\n</tr>\n<tr>\n<td>⬜ <strong>Arrival Day</strong>\n</td>\n<td>Checks in</td>\n<td>Not yet enabled → <em>unlocked in Run</em>\n</td>\n<td>—</td>\n</tr>\n<tr>\n<td>🟢 <strong>Post-Stay</strong>\n</td>\n<td>Checks out</td>\n<td>Review request email fires 24 hours after checkout; return incentive fires at day 7</td>\n<td>Flow</td>\n</tr>\n<tr>\n<td>🟢 <strong>Birthday / Anniversary</strong>\n</td>\n<td>Guest's birthday or stay anniversary</td>\n<td>Personalized offer email with expiring incentive</td>\n<td>Flow</td>\n</tr>\n<tr>\n<td>✅ <strong>Lapsed</strong>\n</td>\n<td>No booking in 6–12 months</td>\n<td>Winback flow</td>\n<td>Flow</td>\n</tr>\n<tr>\n<td>✅ <strong>All Guests</strong>\n</td>\n<td>Broad audience outreach</td>\n<td>Seasonal, VIP, re-engagement campaigns</td>\n<td>Campaign</td>\n</tr>\n<tr>\n<td>🟢 <strong>OTA Bookers</strong>\n</td>\n<td>Previously booked via an OTA</td>\n<td>Direct booking incentive campaign</td>\n<td>Campaign</td>\n</tr>\n<tr>\n<td>🟢 <strong>First-Time Guests</strong>\n</td>\n<td>Completed their first stay</td>\n<td>Second-stay incentive campaign (sent 2–4 weeks post-checkout)</td>\n<td>Campaign</td>\n</tr>\n<tr>\n<td>🟢 <strong>High-Value Guests</strong>\n</td>\n<td>Paid above-average nightly rate</td>\n<td>Premium offer campaign (upgrades, exclusive packages)</td>\n<td>Campaign</td>\n</tr>\n</tbody>\n</table>\n<hr>\n<h1 id=\"b08ff85ddae9\"><strong>Run</strong></h1>\n<p><em>This section is for teams who have completed the Crawl and Walk stages and are ready to operate like best-in-class hotel marketers. The focus here is personalization at scale, multichannel messaging, and paid media amplification.</em></p>\n<h2 id=\"1793a2c09ec0\"><strong>Personalization</strong></h2>\n<p>Klaviyo's dynamic content blocks let you show different content to different guests within the same email — no separate sends required:</p>\n<ul>\n<li>Add dynamic content to your templates →\n<ul>\n<li>In the template editor, use <strong>conditional content blocks</strong> to show different sections based on guest properties. Examples:\n<ul>\n<li>Show a room upgrade offer only to guests who have never stayed in a suite (filter by room type from past Confirmed Reservation events).</li>\n<li>Show a loyalty acknowledgment (\"Welcome back!\") only to guests in the <em>VIP customers</em> segment.</li>\n<li>Show property-specific imagery and offers when you manage multiple properties (filter by <code>PropertyName</code>).</li>\n</ul>\n</li>\n<li>Learn more in Klaviyo's <a href=\"https://help.klaviyo.com/hc/en-us/articles/115005082927\">personalization help guide</a>.</li>\n</ul>\n</li>\n</ul>\n<h2 id=\"4d511e8a1569\"><strong>A/B Testing</strong></h2>\n<p>Once your forms, flows, and campaigns are running, small improvements compound significantly at scale:</p>\n<ul>\n<li>Create an A/B testing plan →\n<ul>\n<li>Follow this <a href=\"https://www.klaviyo.com/blog/how-to-build-an-ab-testing-roadmap\">A/B testing roadmap guide</a> to create a test plan that makes sense for your business.</li>\n</ul>\n</li>\n<li>Run A/B tests on your forms →\n<ul>\n<li>Follow this <a href=\"https://help.klaviyo.com/hc/en-us/articles/360045462071\">help guide</a> for A/B testing forms.</li>\n</ul>\n</li>\n<li>Run A/B tests on your campaigns →\n<ul>\n<li>Follow this <a href=\"https://help.klaviyo.com/hc/en-us/articles/115005228148\">help guide</a> for A/B testing campaigns.</li>\n</ul>\n</li>\n<li>Run A/B tests on your flows →\n<ul>\n<li>Follow this <a href=\"https://help.klaviyo.com/hc/en-us/articles/6960371049115\">help guide</a> for A/B testing flow messaging.</li>\n</ul>\n</li>\n</ul>\n<h2 id=\"4d55e3420021\"><strong>SMS &amp; WhatsApp</strong></h2>\n<p>Adding SMS to your flows dramatically increases engagement for time-sensitive messages. Klaviyo supports SMS natively alongside email in the same flows, so you don't need a separate tool:</p>\n<ul>\n<li>Set up SMS →\n<ul>\n<li>Navigate to <strong>Settings &gt; SMS</strong> to configure your sending number and opt-in compliance settings.</li>\n<li>Once set up, add SMS steps directly inside your existing flows. The highest-value SMS touchpoints for hotels are:\n<ul>\n<li>\n<strong>Day-of check-in:</strong> A text the morning of arrival with a mobile check-in link, directions, parking info, and/or check-in time.</li>\n<li>\n<strong>Pre-Arrival:</strong> A short text 1-2 days before check-in with a room upgrade offer or a preview of on-property amenities.</li>\n<li>\n<strong>Post-Stay:</strong> A review request text the morning after checkout (short, direct, one link).</li>\n<li>\n<strong>Flash sales:</strong> A last-minute availability offer sent to your <em>Winback opportunities</em> segment on a slow day.</li>\n</ul>\n</li>\n<li>Learn more in Klaviyo's <a href=\"https://help.klaviyo.com/hc/en-us/articles/4404274419355\">SMS getting started guide</a>.</li>\n</ul>\n</li>\n<li>Set up WhatsApp →\n<ul>\n<li>Navigate to <strong>Settings &gt; WhatsApp</strong> and click <strong>Connect to WhatsApp</strong> to get started.</li>\n<li>Setup requires a Meta Business Account and a dedicated phone number (this cannot be the same number used for SMS). Meta may take up to several hours to verify new accounts.</li>\n<li>Once connected, add WhatsApp steps directly inside your existing flows alongside email and SMS. The use cases largely mirror SMS: pre-arrival reminders, day-of check-in messages, and post-stay review requests.</li>\n<li>Learn more in Klaviyo's <a href=\"https://help.klaviyo.com/hc/en-us/sections/40111669484187\">WhatsApp getting started guide</a> and <a href=\"https://help.klaviyo.com/hc/en-us/articles/40111819732635\">how to connect your WhatsApp Business account</a>.\n<ul>\n<li><em>Note: As of April 2025, Meta has paused support for WhatsApp marketing message templates sent to US phone numbers, though transactional messages are still allowed (e.g. booking confirmations, check-in notifications, etc.). Marketing messages to non-US numbers are unaffected.</em></li>\n</ul>\n</li>\n</ul>\n</li>\n</ul>\n<h2 id=\"97d719194489\"><strong>Additional Integrations</strong></h2>\n<h3 id=\"3902bb397efe\">Ad integrations</h3>\n<p>The segments you've built in Klaviyo can be pushed directly to Google, Meta, TikTok, and Pinterest — letting you reach the same audiences with paid advertising and creating a unified owned + paid strategy.</p>\n<ul>\n<li>Connect your ad platforms →\n<ul>\n<li>Go to <strong>Integrations &gt; Explore apps</strong> and install the Google Ads, Meta Ads, TikTok Ads, or Pinterest Ads integration.</li>\n<li>Once connected, navigate to any segment and enable the <strong>Sync to ads</strong> option to push that audience to your ad platform.</li>\n<li>The highest-value use cases for hotels are:\n<ul>\n<li>\n<strong>Retargeting lapsed guests</strong> — serve display or social ads to your <em>Winback opportunities</em> segment before (or alongside) your winback email campaign.</li>\n<li>\n<strong>Lookalike audiences</strong> — upload your <em>VIP customers</em> segment to Meta or Google and let the platform find new guests who look like your best ones.</li>\n<li>\n<strong>Suppression</strong> — exclude your <em>Future Guests</em> segment from paid acquisition campaigns so you don't pay to acquire someone who already has a booking.</li>\n</ul>\n</li>\n</ul>\n</li>\n</ul>\n<h3 id=\"0680201f2b67\">Restaurant &amp; spa integrations</h3>\n<p>Connecting your restaurant and spa platforms enriches each guest's Klaviyo profile with on-property spend data — giving you a complete picture of the guest beyond just the room booking, and enabling highly personalized upsell and retention messaging.</p>\n<ul>\n<li>Connect your restaurant platforms (if applicable) →\n<ul>\n<li>Go to <strong>Integrations &gt; Explore apps</strong> and search for your reservation or POS platform (e.g. OpenTable).\n<ul>\n<li>If you don't find it there, please send an email to <a href=\"mailto:arjun.madgavkar@klaviyo.com\">Arjun Madgavkar</a> and we can consider it for our roadmap.</li>\n</ul>\n</li>\n<li>Once connected, dining reservation events will appear on guest profiles, letting you:\n<ul>\n<li>\n<strong>Pre-arrival upsell</strong> — in your Pre-Arrival flow, add a conditional block that shows a restaurant CTA only to guests who <em>haven't</em> made a dining reservation for their stay.</li>\n<li>\n<strong>Post-dining follow-up</strong> — trigger a flow after a dining visit to request a review or share a return offer.</li>\n<li>\n<strong>High-value diner campaigns</strong> — build a segment of guests who dine on-property frequently and treat them as VIPs with exclusive F&amp;B offers or early access to special menus.</li>\n</ul>\n</li>\n</ul>\n</li>\n<li>Connect your spa platforms (if applicable) →\n<ul>\n<li>Go to <strong>Integrations &gt; Explore apps</strong> and search for your spa or wellness booking platform (e.g. Mindbody).\n<ul>\n<li>If you don't find it there, please send an email to <a href=\"mailto:arjun.madgavkar@klaviyo.com\">Arjun Madgavkar</a> and we can consider it for our roadmap.</li>\n</ul>\n</li>\n<li>Once connected, spa booking events will appear on guest profiles, letting you:\n<ul>\n<li>\n<strong>Pre-arrival upsell</strong> — similar to dining, add a conditional block in your Pre-Arrival flow that promotes spa offers to guests who haven't yet booked a treatment.</li>\n<li>\n<strong>Repeat spa guest campaign</strong> — identify guests who have booked spa treatments across multiple stays and send them exclusive offers (e.g., a package deal or early booking access).</li>\n<li>\n<strong>Lapsed spa guests</strong> — build a segment of guests who have used the spa in the past but not in the last 12 months, and target them with a re-engagement offer tied to their next stay.</li>\n</ul>\n</li>\n</ul>\n</li>\n</ul>\n<h3 id=\"cd1633680b24\">E-commerce integrations</h3>\n<p>If you sell merchandise — branded goods, local products, gift sets, or anything else — connecting your e-commerce platform brings purchase and browse data into Klaviyo alongside your reservation data, letting you drive incremental revenue before, during, and after each stay.</p>\n<ul>\n<li>Connect your e-commerce platforms (if applicable) →\n<ul>\n<li>Go to <strong>Integrations &gt; Explore apps</strong> and search for your e-commerce platform (e.g. Shopify).</li>\n<li>Once connected, purchase and browse events will appear on guest profiles, letting you:\n<ul>\n<li>\n<strong>Merchandise upsell in Pre-Arrival</strong> — add a conditional block in your Pre-Arrival flow promoting relevant products (e.g., branded robes, local goods, gift sets) to guests who haven't yet made a purchase.</li>\n<li>\n<strong>Post-stay purchase follow-up</strong> — after checkout, trigger a flow promoting your online shop to guests while the experience is still fresh (e.g., \"Take a piece of [Property Name] home with you\").</li>\n<li>\n<strong>Repeat buyer campaigns</strong> — identify guests who have purchased merchandise and send them early access to new products, seasonal collections, or exclusive bundles.</li>\n</ul>\n</li>\n</ul>\n</li>\n</ul>\n<h3 id=\"2f678d762a31\">Other integrations</h3>\n<p>Klaviyo has hundreds of integrations beyond the ones covered above — from design tools like Canva to event management apps like Eventbrite. As your marketing program matures, connecting additional platforms helps ensure Klaviyo reflects the full picture of how guests interact with your property.</p>\n<ul>\n<li>Connect other platforms →\n<ul>\n<li>Go to <strong>Integrations &gt; Explore apps</strong> and search for the apps that make sense for your business.</li>\n</ul>\n</li>\n</ul>\n<hr>\n<h2 id=\"a83a3ad317bd\"><strong>Your Complete Guest Journey</strong></h2>\n<p><em>This is the full picture — every stage of the guest journey, and how Klaviyo is now engaging at each one. New touchpoints unlocked in Run are marked 🟢.</em></p>\n<table>\n<tbody>\n<tr>\n<th><strong>Journey Stage</strong></th>\n<th><strong>Guest Action</strong></th>\n<th><strong>How Klaviyo Engages</strong></th>\n<th><strong>Type</strong></th>\n</tr>\n<tr>\n<td>🟢 <strong>Discovery</strong>\n</td>\n<td>Browsing online before visiting your site</td>\n<td>Lookalike ads (Meta/Google) built from your VIP guest segment attract new high-value guests</td>\n<td>Paid Ads</td>\n</tr>\n<tr>\n<td>🟢 <strong>Consideration</strong>\n</td>\n<td>Visited your site but didn't book</td>\n<td>Retargeting ads re-engage lapsed guests across social and display</td>\n<td>Paid Ads</td>\n</tr>\n<tr>\n<td>✅ <strong>Discovers website</strong>\n</td>\n<td>Lands on your hotel website</td>\n<td>Sign-up form captures contact info → Welcome Series nurtures toward first booking</td>\n<td>Form + Flow</td>\n</tr>\n<tr>\n<td>✅ <strong>Books</strong>\n</td>\n<td>Confirms a reservation</td>\n<td>Reservation Confirmation flow (now with personalized dynamic content by guest type)</td>\n<td>Flow</td>\n</tr>\n<tr>\n<td>✅ <strong>Cancels</strong>\n</td>\n<td>Cancels a reservation</td>\n<td>Cancellation win-back flow</td>\n<td>Flow</td>\n</tr>\n<tr>\n<td>✅ <strong>Pre-Arrival</strong>\n</td>\n<td>1–14 days before check-in</td>\n<td>Pre-Arrival email with personalized upsell + 🟢 SMS upgrade offer 1–2 days out</td>\n<td>Flow (Email + SMS)</td>\n</tr>\n<tr>\n<td>🟢 <strong>Arrival Day</strong>\n</td>\n<td>Day of check-in</td>\n<td>SMS with mobile check-in link sent morning of arrival</td>\n<td>SMS</td>\n</tr>\n<tr>\n<td>✅ <strong>Post-Stay</strong>\n</td>\n<td>Checks out</td>\n<td>Review request email (24hr) + 🟢 SMS review request; return incentive at day 7</td>\n<td>Flow (Email + SMS)</td>\n</tr>\n<tr>\n<td>✅ <strong>Birthday / Anniversary</strong>\n</td>\n<td>Guest's birthday or stay anniversary</td>\n<td>Personalized offer email with expiring incentive</td>\n<td>Flow</td>\n</tr>\n<tr>\n<td>✅ <strong>Lapsed</strong>\n</td>\n<td>No booking in 6–12 months</td>\n<td>Winback flow + 🟢 retargeting ads running in parallel</td>\n<td>Flow + Paid Ads</td>\n</tr>\n<tr>\n<td>✅ <strong>OTA Bookers</strong>\n</td>\n<td>Previously booked via an OTA</td>\n<td>Direct booking incentive campaign</td>\n<td>Campaign</td>\n</tr>\n<tr>\n<td>✅ <strong>First-Time Guests</strong>\n</td>\n<td>Completed their first stay</td>\n<td>Second-stay incentive campaign</td>\n<td>Campaign</td>\n</tr>\n<tr>\n<td>✅ <strong>High-Value Guests</strong>\n</td>\n<td>Paid above-average nightly rate</td>\n<td>Premium offer campaign</td>\n<td>Campaign</td>\n</tr>\n<tr>\n<td>✅ <strong>VIP Guests</strong>\n</td>\n<td>More than 5 confirmed reservations</td>\n<td>Exclusive loyalty campaign</td>\n<td>Campaign</td>\n</tr>\n</tbody>\n</table>",
+    "user_segment_ids": []
+  },
+  "normalized": {
+    "id": "48920041574811",
+    "title": "Hotel Enablement Guide",
+    "source_url": "https://help.klaviyo.com/hc/en-us/articles/48920041574811-Hotel-Enablement-Guide",
+    "section_id": 48484642896283,
+    "section": "General",
+    "category_id": 115000032731,
+    "category": "Integrations",
+    "category_slug": "integrations",
+    "klaviyo_updated": "2026-04-21T13:56:53Z",
+    "created_at": "2026-04-09T15:14:01Z",
+    "draft": false,
+    "promoted": false,
+    "position": 0,
+    "label_names": []
+  },
+  "files": {
+    "body_html": "_source/articles/48920041574811.body.html",
+    "rendered_html": "_source/rendered/48920041574811.html"
+  },
+  "assets": {
+    "api_body": {
+      "images": [],
+      "links": [
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/38311148860955",
+          "text": "Mews"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/39406849361691#h_01K45A8TV1MNXM2CV3TMGRSWWR",
+          "text": "Cloudbeds"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/37673288455323#01KG8CX52V9GG13ZHD68DRRFHD",
+          "text": "Guesty"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/39406849361691",
+          "text": "Cloudbeds"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/37673288455323",
+          "text": "Guesty"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/46643094275099",
+          "text": "this guide"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005076767#h_01GMEAQZXKADF4FR7P1FMNC7EB",
+          "text": "set up Klaviyo JS manually"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005076767#h_01HADAYAACFYSN7F22XPPCGT6B",
+          "text": "testing steps"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360026474752",
+          "text": "help center"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/courses/getting-started-with-sign-up-forms",
+          "text": "academy"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/38311148860955#h_01KG8CE0CWN9M7TGWZ52YJY0VK",
+          "text": "Mews"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115002774932",
+          "text": "flow help center"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/courses/getting-started-with-flows",
+          "text": "academy"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360007016571",
+          "text": "help guide"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/47194724598555",
+          "text": "Mews"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/47187823602459",
+          "text": "Cloudbeds"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005082927",
+          "text": "personalization help guide"
+        },
+        {
+          "href": "https://www.klaviyo.com/blog/how-to-build-an-ab-testing-roadmap",
+          "text": "A/B testing roadmap guide"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360045462071",
+          "text": "help guide"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005228148",
+          "text": "help guide"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/6960371049115",
+          "text": "help guide"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4404274419355",
+          "text": "SMS getting started guide"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/40111669484187",
+          "text": "WhatsApp getting started guide"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/40111819732635",
+          "text": "how to connect your WhatsApp Business account"
+        },
+        {
+          "href": "mailto:arjun.madgavkar@klaviyo.com",
+          "text": "Arjun Madgavkar"
+        }
+      ],
+      "headings": [
+        {
+          "level": 1,
+          "id": "d5e2936528ab",
+          "text": "Hotel Enablement Guide"
+        },
+        {
+          "level": 2,
+          "id": "7afc235e75d9",
+          "text": "Crawl"
+        },
+        {
+          "level": 2,
+          "id": "71442405f5c4",
+          "text": "Integrations"
+        },
+        {
+          "level": 2,
+          "id": "513b54ce4c34",
+          "text": "Segments"
+        },
+        {
+          "level": 2,
+          "id": "e72dced9e741",
+          "text": "Onsite JS"
+        },
+        {
+          "level": 2,
+          "id": "0814f9b73d2a",
+          "text": "Forms"
+        },
+        {
+          "level": 2,
+          "id": "b58bd5cc38b0",
+          "text": "Flows"
+        },
+        {
+          "level": 2,
+          "id": "ad08108bb4b3",
+          "text": "Campaigns"
+        },
+        {
+          "level": 2,
+          "id": "f4f0358cdea5",
+          "text": "Your Guest Journey After Crawl"
+        },
+        {
+          "level": 1,
+          "id": "6f68e8f290fd",
+          "text": "Walk"
+        },
+        {
+          "level": 2,
+          "id": "9502a80e10ea",
+          "text": "Reporting"
+        },
+        {
+          "level": 2,
+          "id": "fad37f1d79c8",
+          "text": "Advanced Segments"
+        },
+        {
+          "level": 2,
+          "id": "f0994643e115",
+          "text": "Advanced Flows"
+        },
+        {
+          "level": 2,
+          "id": "78b4b8de64bc",
+          "text": "Advanced Campaigns"
+        },
+        {
+          "level": 2,
+          "id": "4566a5e7591c",
+          "text": "Your Guest Journey After Walk"
+        },
+        {
+          "level": 1,
+          "id": "b08ff85ddae9",
+          "text": "Run"
+        },
+        {
+          "level": 2,
+          "id": "1793a2c09ec0",
+          "text": "Personalization"
+        },
+        {
+          "level": 2,
+          "id": "4d511e8a1569",
+          "text": "A/B Testing"
+        },
+        {
+          "level": 2,
+          "id": "4d55e3420021",
+          "text": "SMS & WhatsApp"
+        },
+        {
+          "level": 2,
+          "id": "97d719194489",
+          "text": "Additional Integrations"
+        },
+        {
+          "level": 3,
+          "id": "3902bb397efe",
+          "text": "Ad integrations"
+        },
+        {
+          "level": 3,
+          "id": "0680201f2b67",
+          "text": "Restaurant & spa integrations"
+        },
+        {
+          "level": 3,
+          "id": "cd1633680b24",
+          "text": "E-commerce integrations"
+        },
+        {
+          "level": 3,
+          "id": "2f678d762a31",
+          "text": "Other integrations"
+        },
+        {
+          "level": 2,
+          "id": "a83a3ad317bd",
+          "text": "Your Complete Guest Journey"
+        }
+      ]
+    },
+    "rendered_page": {
+      "images": [
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/7ff492c2b417b7ecfe572f839a8a81398693c1f7-1920x1080.webp",
+          "alt": "",
+          "width": "",
+          "height": ""
+        }
+      ],
+      "links": [
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/48920041574811-Hotel-Enablement-Guide#site-content",
+          "text": "Skip to main content"
+        },
+        {
+          "href": "https://www.klaviyo.com",
+          "text": "Home"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center"
+        },
+        {
+          "href": "https://www.klaviyo.com/enterprise",
+          "text": "Enterprise"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Partners"
+        },
+        {
+          "href": "https://www.klaviyo.com/careers",
+          "text": "Careers"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": "Log in"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": ""
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center Find step-by-step instructions and troubleshooting solutions in our knowledge base."
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000032731",
+          "text": "Integrations"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000312411",
+          "text": "Flows"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867867",
+          "text": "Audience"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867667",
+          "text": "Campaigns"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/360000190711",
+          "text": "Sign-up forms"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000873988",
+          "text": "Deliverability & compliance"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/29173800271259",
+          "text": "SMS"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/16638219724187",
+          "text": "Reviews"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/18073014919195",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/34141283979931",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/37659126754075",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/33948021740315",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/39746685522331",
+          "text": "WhatsApp"
+        },
+        {
+          "href": "https://academy.klaviyo.com",
+          "text": "Klaviyo Academy Expert training and education to help you succeed with Klaviyo, and beyond."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Quick+guide&resource=academy_courses",
+          "text": "Quick guides Learn marketing strategies and concepts in 15 minutes or less."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Course&resource=academy_courses",
+          "text": "Courses Master key marketing topics through structured lessons and exams."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/best-practices",
+          "text": "Best practices Discover top product and marketing strategies for your business."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/learning-paths",
+          "text": "Learning paths Complete curated learning journeys tailored to your marketing goals."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses",
+          "text": "Explore all resources"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Live+training&resource=academy_courses",
+          "text": "Live trainings Build confidence through hands-on interactive workshops and thought-provoking strategy sessions."
+        },
+        {
+          "href": "https://www.bigmarker.com/klaviyo-customer-education/Office-hours-Getting-started-with-Klaviyo",
+          "text": "Live office hours Join a strategic discussion where you can ask questions and get answers in real-time."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/private-live-training",
+          "text": "1:1 Live training Book a private training session with an expert to jumpstart your platform knowledge and confidence."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/credentials",
+          "text": "Klaviyo credentials Dig deeper into select topics and showcase your expertise with a final exam to earn a certificate and digital badge."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/certificates/klaviyo-practitioner-certificate",
+          "text": "Klaviyo practitioner certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/deliverability-certificate",
+          "text": "Deliverability certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/developer-certificate",
+          "text": "Klaviyo developer certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses&select=Certificate",
+          "text": "See all certificates"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Klaviyo Community Join our thriving community network to connect with brands like yours—online and in person."
+        },
+        {
+          "href": "https://community.klaviyo.com/topic/new",
+          "text": "Ask a question Post a question and get thoughtful answers from Klaviyo powerusers."
+        },
+        {
+          "href": "https://community.klaviyo.com/p/roadmap",
+          "text": "Product roadmap"
+        },
+        {
+          "href": "https://community.klaviyo.com/search/activity/recent",
+          "text": "Recent threads"
+        },
+        {
+          "href": "https://community.klaviyo.com/p/champions",
+          "text": "Meet the Champions"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups",
+          "text": "Browse all groups Your people are waiting. New ideas and connections are a click away."
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/developer-group-64",
+          "text": "Developer group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/entrepreneur-user-group-118",
+          "text": "Entrepreneur group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/woo-user-group-87",
+          "text": "WooCommerce group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/new-york-meetup-chapter-82",
+          "text": "New York City"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/los-angeles-meetup-chapter-83",
+          "text": "Los Angeles"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/austin-meetup-chapter-85",
+          "text": "Austin"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/san-diego-meetup-chapter-86",
+          "text": "San Diego"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/amsterdam-meetup-chapter-84",
+          "text": "Amsterdam"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Klaviyo Developers Access API documentation and developer guides to help you build with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/get_started",
+          "text": "Get started Access key resources and a step-by-step checklist for how to start developing with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/build_your_integration",
+          "text": "Grow your app's reach Learn how to join our ecosystem and get your app listed on our marketplace."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/developer-tools",
+          "text": "Developer tools Generate sample data, monitor your API usage, and access our Postman collections."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/reference/api_overview",
+          "text": "API reference Browse our full catalog of API docs."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/changelog_",
+          "text": "Changelog"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/api_versioning_and_deprecation_policy",
+          "text": "Versioning & deprecation policy"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/rate_limits_and_error_handling",
+          "text": "Rate limits & error handling"
+        },
+        {
+          "href": "https://youtube.com/playlist?list=PLHkNfHgtxcUanrkMnKPdkRzuWU7MGv_xM&si=pkG-KH7IT_TUHOGC",
+          "text": "API tutorials on YouTube Subscribe to our Klaviyo API Tutorials playlist for easy access to step-by-step developer walkthroughs."
+        },
+        {
+          "href": "https://www.klaviyo.com/contact-us",
+          "text": "Contact us"
+        },
+        {
+          "href": "https://www.klaviyo.com/sign-up",
+          "text": "Sign up"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": "Search"
+        },
+        {
+          "href": "https://help.klaviyo.com/en-us",
+          "text": "United States - EN"
+        },
+        {
+          "href": "https://help.klaviyo.com/de-de",
+          "text": "Deutschland - DE"
+        },
+        {
+          "href": "https://help.klaviyo.com/es-es",
+          "text": "España - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/es-mx",
+          "text": "México - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/fr-fr",
+          "text": "France - FR"
+        },
+        {
+          "href": "https://help.klaviyo.com/it-it",
+          "text": "Italia - IT"
+        },
+        {
+          "href": "https://help.klaviyo.com/ko-kr",
+          "text": "한국 - KO"
+        },
+        {
+          "href": "https://help.klaviyo.com/nl-nl",
+          "text": "Nederland - NL"
+        },
+        {
+          "href": "https://help.klaviyo.com/pl-pl",
+          "text": "Polska - PL"
+        },
+        {
+          "href": "https://help.klaviyo.com/pt-br",
+          "text": "Brasil - PT"
+        },
+        {
+          "href": "https://help.klaviyo.com/sv-se",
+          "text": "Sverige - SV"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/37673289679771",
+          "text": "Hotels and travel"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/48484642896283",
+          "text": "General"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/48920041574811-Hotel-Enablement-Guide#crawl",
+          "text": "Crawl"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/48920041574811-Hotel-Enablement-Guide#integrations",
+          "text": "Integrations"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/48920041574811-Hotel-Enablement-Guide#segments",
+          "text": "Segments"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/48920041574811-Hotel-Enablement-Guide#onsite-js",
+          "text": "Onsite JS"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/48920041574811-Hotel-Enablement-Guide#forms",
+          "text": "Forms"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/48920041574811-Hotel-Enablement-Guide#flows",
+          "text": "Flows"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/48920041574811-Hotel-Enablement-Guide#campaigns",
+          "text": "Campaigns"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/48920041574811-Hotel-Enablement-Guide#your-guest-journey-after-crawl",
+          "text": "Your Guest Journey After Crawl"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/48920041574811-Hotel-Enablement-Guide#reporting",
+          "text": "Reporting"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/48920041574811-Hotel-Enablement-Guide#advanced-segments",
+          "text": "Advanced Segments"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/48920041574811-Hotel-Enablement-Guide#advanced-flows",
+          "text": "Advanced Flows"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/48920041574811-Hotel-Enablement-Guide#advanced-campaigns",
+          "text": "Advanced Campaigns"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/48920041574811-Hotel-Enablement-Guide#your-guest-journey-after-walk",
+          "text": "Your Guest Journey After Walk"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/48920041574811-Hotel-Enablement-Guide#personalization",
+          "text": "Personalization"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/48920041574811-Hotel-Enablement-Guide#ab-testing",
+          "text": "A/B Testing"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/48920041574811-Hotel-Enablement-Guide#sms-and-whatsapp",
+          "text": "SMS & WhatsApp"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/48920041574811-Hotel-Enablement-Guide#additional-integrations",
+          "text": "Additional Integrations"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/48920041574811-Hotel-Enablement-Guide#your-complete-guest-journey",
+          "text": "Your Complete Guest Journey"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/38311148860955",
+          "text": "Mews"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/39406849361691#h_01K45A8TV1MNXM2CV3TMGRSWWR",
+          "text": "Cloudbeds"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/37673288455323#01KG8CX52V9GG13ZHD68DRRFHD",
+          "text": "Guesty"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/39406849361691",
+          "text": "Cloudbeds"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/37673288455323",
+          "text": "Guesty"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/46643094275099",
+          "text": "this guide"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005076767#h_01GMEAQZXKADF4FR7P1FMNC7EB",
+          "text": "set up Klaviyo JS manually"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005076767#h_01HADAYAACFYSN7F22XPPCGT6B",
+          "text": "testing steps"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360026474752",
+          "text": "help center"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/courses/getting-started-with-sign-up-forms",
+          "text": "academy"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/38311148860955#h_01KG8CE0CWN9M7TGWZ52YJY0VK",
+          "text": "Mews"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115002774932",
+          "text": "flow help center"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/courses/getting-started-with-flows",
+          "text": "academy"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360007016571",
+          "text": "help guide"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/47194724598555",
+          "text": "Mews"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/47187823602459",
+          "text": "Cloudbeds"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005082927",
+          "text": "personalization help guide"
+        },
+        {
+          "href": "https://www.klaviyo.com/blog/how-to-build-an-ab-testing-roadmap",
+          "text": "A/B testing roadmap guide"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360045462071",
+          "text": "help guide"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005228148",
+          "text": "help guide"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/6960371049115",
+          "text": "help guide"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4404274419355",
+          "text": "SMS getting started guide"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/40111669484187",
+          "text": "WhatsApp getting started guide"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/40111819732635",
+          "text": "how to connect your WhatsApp Business account"
+        },
+        {
+          "href": "mailto:arjun.madgavkar@klaviyo.com",
+          "text": "Arjun Madgavkar"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115001002272",
+          "text": "Learn how to contact support"
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": ""
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": "Visit Community"
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": ""
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": "Hire a partner"
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/about",
+          "text": "About Klaviyo"
+        },
+        {
+          "href": "https://www.klaviyo.com/newsroom",
+          "text": "Newsroom"
+        },
+        {
+          "href": "https://investors.klaviyo.com/overview/default.aspx",
+          "text": "Investor relations"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Agency and tech partners"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Developers"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/retail",
+          "text": "Retail and ecommerce"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/restaurants",
+          "text": "Restaurant marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/wellness",
+          "text": "Wellness"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform",
+          "text": "B2C CRM overview"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai",
+          "text": "Klaviyo AI (K:AI)"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/marketing-automation",
+          "text": "Klaviyo Marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-service",
+          "text": "Klaviyo Service"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/analytics",
+          "text": "Klaviyo Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-data-platform",
+          "text": "Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare",
+          "text": "Klaviyo vs. Klaviyo alternatives"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-mailchimp",
+          "text": "Klaviyo vs. Mailchimp"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-postscript",
+          "text": "Klaviyo vs. Postscript"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-attentive",
+          "text": "Klaviyo vs. Attentive"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-salesforce-marketing-cloud",
+          "text": "Klaviyo vs. Salesforce"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-listrak",
+          "text": "Klaviyo vs. Listrak"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/omnichannel",
+          "text": "Omnichannel marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/email-marketing",
+          "text": "Email marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing",
+          "text": "SMS marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing/rcs",
+          "text": "RCS for Business"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/mobile-app-marketing",
+          "text": "Mobile app marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/whatsapp",
+          "text": "WhatsApp marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/social",
+          "text": "Social marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources",
+          "text": "Marketing resources"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources/marketing-campaign-calendar",
+          "text": "Marketing campaign calendar"
+        },
+        {
+          "href": "https://www.klaviyo.com/glossary",
+          "text": "Marketing glossary"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/email-subject-line-generator",
+          "text": "Subject line generator"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/roi-calculator",
+          "text": "ROI calculator"
+        },
+        {
+          "href": "https://www.klaviyo.com/customers",
+          "text": "Case studies"
+        },
+        {
+          "href": "https://www.klaviyo.com/composer",
+          "text": "Composer Beta"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/marketing-agent",
+          "text": "Marketing Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/customer-agent",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/customer-experience-hub",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/helpdesk",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/marketing-analytics",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/advanced-cdp",
+          "text": "Advanced Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/web-forms",
+          "text": "Web forms"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/email-templates",
+          "text": "Email templates"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/portfolio",
+          "text": "Portfolio"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform-integrations",
+          "text": "Apps and Integrations"
+        },
+        {
+          "href": "https://www.klaviyo.com/features",
+          "text": "Features"
+        },
+        {
+          "href": "https://www.klaviyo.com/whats-new",
+          "text": "What's new"
+        },
+        {
+          "href": "https://www.klaviyo.com/events",
+          "text": "Events"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help Center"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us",
+          "text": "Academy"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Community"
+        },
+        {
+          "href": "https://www.facebook.com/Klaviyo/",
+          "text": "Facebook"
+        },
+        {
+          "href": "https://twitter.com/klaviyo/",
+          "text": "Twitter"
+        },
+        {
+          "href": "https://www.linkedin.com/company/klaviyo/",
+          "text": "LinkedIn"
+        },
+        {
+          "href": "https://www.instagram.com/klaviyo/",
+          "text": "Instagram"
+        },
+        {
+          "href": "https://www.klaviyo.com/sitemap",
+          "text": "Site Map"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal",
+          "text": "Terms and Privacy"
+        },
+        {
+          "href": "https://www.klaviyo.com/security",
+          "text": "Security"
+        },
+        {
+          "href": "https://www.klaviyo.com/trust",
+          "text": "Trust"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal/intellectual-property-notices",
+          "text": "Intellectual Property Notices"
+        }
+      ],
+      "headings": [
+        {
+          "level": 1,
+          "id": "",
+          "text": "Hotel Enablement Guide"
+        },
+        {
+          "level": 1,
+          "id": "",
+          "text": "Hotel Enablement Guide"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "Crawl"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "Integrations"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "Segments"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "Onsite JS"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "Forms"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "Flows"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "Campaigns"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "Your Guest Journey After Crawl"
+        },
+        {
+          "level": 1,
+          "id": "",
+          "text": "Walk"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "Reporting"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "Advanced Segments"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "Advanced Flows"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "Advanced Campaigns"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "Your Guest Journey After Walk"
+        },
+        {
+          "level": 1,
+          "id": "",
+          "text": "Run"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "Personalization"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "A/B Testing"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "SMS & WhatsApp"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "Additional Integrations"
+        },
+        {
+          "level": 3,
+          "id": "ad-integrations",
+          "text": "Ad integrations"
+        },
+        {
+          "level": 3,
+          "id": "restaurant-and-spa-integrations",
+          "text": "Restaurant & spa integrations"
+        },
+        {
+          "level": 3,
+          "id": "e-commerce-integrations",
+          "text": "E-commerce integrations"
+        },
+        {
+          "level": 3,
+          "id": "other-integrations",
+          "text": "Other integrations"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "Your Complete Guest Journey"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "Explore more from Klaviyo"
+        }
+      ]
+    }
+  },
+  "rendered_page": {
+    "status": "fetched",
+    "error": ""
+  }
+}

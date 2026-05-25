@@ -1,0 +1,86 @@
+<h2 id="h_01HH33NPSFZJ6VGHX9FR2P23SP">You will learn</h2>
+<p>Learn how to integrate ActBlue with Klaviyo. After completing these steps, you'll be able to personalize and target emails based on each Contributor's donation and website activity. Here's some of the data we sync from ActBlue:</p>
+<ul>
+<li>Amount of the contribution</li>
+<li>Contributor information including first and last name, location, and how they found your site</li>
+<li>Whether the donation is recurring and if so, how often in will occur</li>
+<li>The Committee to which the donation was made</li>
+<li>The EntityID and FecID</li>
+</ul>
+<h2 id="h_01HH33NPSF6D5HMS4HE13DKGFB">Add the ActBlue integration</h2>
+<ol>
+<li>In Klaviyo, select the <strong>Integrations</strong> tab.</li>
+<li>Click <strong>Explore apps</strong>, search for <em>ActBlue</em>, and click the card. Then, click <strong>Install</strong>.</li>
+<li>Select <strong>Connect to ActBlue</strong>.<br><img src="https://klaviyo.zendesk.com/hc/article_attachments/28723518757659" width="610" height="386">
+</li>
+<li>On the next page, copy the Webhook URL, Username, and Password and send it to your ActBlue Account Manager. If you don't have a contact at ActBlue, please <a href="https://help.klaviyo.com/hc/en-us/articles/115001002272" target="_blank" rel="noopener noreferrer">contact our Support Team</a> and we will forward it to ActBlue (this process usually takes less than 24 hours).</li>
+<li>Click <strong>Complete setup</strong>.</li>
+</ol>
+<h2 id="h_01HH33NPSF0SNYMQHGRSP7M3MJ">Monitor the Klaviyo sync</h2>
+<p>To check on your ActBlue integration (once you've fully integrated):</p>
+<ol>
+<li>Click the <strong>Analytics</strong> dropdown in your Klaviyo account and select the <strong>Metrics</strong> tab.</li>
+<li>Click on the <strong>Made Contribution</strong> metric (identifiable with an ActBlue icon) to verify that there is data populated for this metric.</li>
+<li>If there is data, all you need to do is wait until your ActBlue integration's historical sync has completed; this process can take up to a couple hours depending on how much data you have in your account.</li>
+<li>Klaviyo will import all of your historic ActBlue data. To verify this, you can compare the number of orders on a particular day in Klaviyo with what's in your ActBlue interface and confirm they match. For example, when exploring the <em>Made Contribution</em> metric<em>,</em> you can mouse over yesterday's data point or look at the table of data below the chart to see how many orders were reported yesterday.</li>
+<li>Compare that number to what's stored in ActBlue from yesterday and you should see they match exactly. If they don't, the issue is most likely that your Klaviyo account's timezone doesn't match your ActBlue timezone.</li>
+<li>To check your timezone setting in Klaviyo: 
+<ul>
+<li>Click your account name in the lower left.</li>
+<li>Select then clicking <strong>Settings</strong><strong> &gt; Organization</strong>.</li>
+<li>Scroll down to <em>Timezone</em>.</li>
+</ul>
+</li>
+</ol>
+<h2 id="h_01HH33NPSF7AKYVWG2VST7295F">Data synced from ActBlue</h2>
+<p>There is one major metric that is captured by ActBlue and synced into Klaviyo: <em>Made Contribution</em>.</p>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/28723518748571" alt="Metrics tab in Klaviyo filtered by ActBlue showing Made Contribution metric"></p>
+<h3 id="h_01HH33NPSFF25K9M0ZXD1A5CAN">Made Contribution</h3>
+<p>This event is tracked when a customer completes the checkout process and makes a contribution in ActBlue. The event Klaviyo syncs includes all the information ActBlue collects including the contribution amount, whether the donation is recurring, and if so, how often the donation will recur. You can filter and target <em>Made Contribution</em> events based on the following criteria:</p>
+<ul>
+<li><strong>Amount</strong></li>
+<li>
+<strong>Recurring<br></strong>This is either True or False.</li>
+<li>
+<strong>Recurring Period<br></strong>This will be "Once" if the donation is not recurring, otherwise it will indicate how often the donation recurs.</li>
+<li>
+<strong>Committee Name<br></strong>The name of the committee to which the contribution was made.</li>
+<li><strong>EntityID</strong></li>
+<li><strong>FecID</strong></li>
+</ul>
+<p>Here is an example of the data we receive along with a <em>Made Contribution </em>event:</p>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/28723507080091" alt="Event details popup in Klaviyo for a Made Contribution event" width="471" height="270"></p>
+<h3 id="h_01HH33NPSFG07PGQP0T75AJN88">Customer data</h3>
+<p>In addition to the two core metrics Klaviyo syncs from ActBlue, Klaviyo also creates a comprehensive Klaviyo Profile for every contributor. Along with basic contact information, Klaviyo will also sync any additional details you might have stored in ActBlue about a given person - these details will sync as Custom Properties that get added to each Klaviyo profile. You can use these properties in segments and flows. Here are the default properties that are automatically synced from ActBlue:</p>
+<ul>
+<li>Email</li>
+<li>First Name</li>
+<li>Last Name</li>
+<li>City</li>
+<li>State/Region</li>
+<li>Zip Code</li>
+<li>Country</li>
+<li>Phone Number</li>
+</ul>
+<h3 id="h_01HH33NPSFC8MVBMGF5RW8RWQS">Frequency of ActBlue sync</h3>
+<p>The Made Contribution metric and custom profile properties from ActBlue are synced using webhooks. This means that ActBlue indicates to Klaviyo when an event has occurred and Klaviyo will then pull all relevant data for the event. This occurs almost instantaneously. </p>
+<h2 id="h_01HH33NPSFPJH6ZHGF3NVDK37X">Add Klaviyo onsite tracking</h2>
+<p>The final step here is adding Klaviyo's <em>Active on Site</em> tracking code to your website footer. This Klaviyo tracking code will allow us to track an <em>Active on Site </em>metric for you so that you can see and leverage data related to site visits and visitor behavior. Through this metric, Klaviyo will track website activity for known browsers.</p>
+<p>For example, you can use the <em>Active on Site</em> metric to create segments of people who have visited your site (while logged in), but haven't yet made a donation. </p>
+<ol>
+<li>The following tracking script can be found in Klaviyo by selecting the <strong>Integrations</strong> tab, then clicking<strong> Manage data &gt; Set up web tracking </strong>in the upper right corner.</li>
+<li>We've also included the Klaviyo <em>Active on Site</em> tracking script here, which you can paste into the main template of your app before the <code>&lt;/body&gt;</code> tag. Remember to add your own API key, found under <strong>Settings &gt; API keys</strong>, where you see 'Public API Key':
+<pre><code>&lt;script type="application/javascript" async
+ src="https://static.klaviyo.com/onsite/js/klaviyo.js?company_id=Public API Key"&gt;&lt;/script&gt;
+</code></pre>
+</li>
+<li>You will then need to enter your site URL on the <em>Set Up Web Tracking</em> page. Once you have entered your URL, click <strong>Next</strong> to test the tracking setup. You should receive a success message if it's working correctly. <br><img src="https://klaviyo.zendesk.com/hc/article_attachments/28723507087771" alt="Step 2 of set up web tracking with text box for URL and Next button with blue background" width="577" height="82">
+</li>
+</ol>
+<h2 id="h_01HH33NPSG0HVP56HRCDYWPB0Q">Outcome</h2>
+<p>You have now integrated with ActBlue, verified your synced data, and added Klaviyo onsite tracking. </p>
+<h2 id="h_01HH33NPSGRNZCPRFMJRMPWAMW">Additional resources</h2>
+<ul>
+<li><a href="https://help.klaviyo.com/hc/en-us/articles/115005081007" target="_blank" rel="noopener">Integration FAQ reference</a></li>
+<li><a href="https://help.klaviyo.com/hc/en-us/articles/115005253208" target="_blank" rel="noopener">How often integrations sync reference</a></li>
+</ul>

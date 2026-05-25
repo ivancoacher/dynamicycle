@@ -1,0 +1,69 @@
+<h2 id="h_01JFB0Z06D022TWJSSSTSYTPFC">You will learn</h2>
+<p>Learn how to add a Klaviyo embed form to your BigCommerce site, which requires creating the form in Klaviyo, and then pasting it's embed code to your site’s files where you want it to appear (e.g., the footer).</p>
+<p>This guide shows how to replace the BigCommerce default sign-up form with a Klaviyo embed form.</p>
+<h2 id="h_01JFB0Z06EFA34YFGRVSR522NC">Before you begin</h2>
+<p>Before creating an embed form in Klaviyo, you must first integrate with BigCommerce, and then enable sign-up form functionality (also called "onsite tracking"). If you checked the setting <em>Automatically add Klaviyo onsite JavaScript</em> when <a href="https://help.klaviyo.com/hc/en-us/articles/115005082547-Integrate-with-BigCommerce-Stencil-Themes#step-3---install-klaviyo-js-and-viewed-product-tracking5" target="_blank" rel="noopener">integrating with BigCommerce</a>, you’re all set. </p>
+<p>If not:</p>
+<ol>
+<li>In Klaviyo, select the <strong>Integrations</strong> tab.<br><img src="https://klaviyo.zendesk.com/hc/article_attachments/32015108658459" alt="An example account name selected in Klaviyo showing the Integrations tab being selected from the navigation menu.">
+</li>
+<li>Click <strong>BigCommerce</strong>.</li>
+<li>Check the setting <strong>Automatically add Klaviyo onsite javascript</strong>.</li>
+<li>Click <strong>Save</strong>.</li>
+</ol>
+<p>The example in this article uses BigCommerce’s default Cornerstone theme. Keep in mind that your theme may differ, along with the names of some files or locations of code snippets.</p>
+<h2 id="h_01JFB0Z06E10KXMMW950XCARV0">Adding the form's embed code to your site</h2>
+<p>First, <a href="https://help.klaviyo.com/hc/en-us/articles/360006897412">create and publish an embed form in Klaviyo</a>. This section will go over the next steps of pasting your form's embed code on your BigCommerce site so it displays and syncs data properly.</p>
+<ol>
+<li>If you have not already, copy the embed code for your embed form. You can access the form’s embed code by opening the form in the editor and clicking into the <strong>Targeting &amp; behavior</strong> section.<br><img src="https://klaviyo.zendesk.com/hc/article_attachments/32015108670619" alt="An example form's embed code highlighted to copy from the Display menu of the Targeting and behaviors tab within the form editor." width="468" height="372">
+</li>
+<li>Navigate to your website and locate the default BigCommerce sign-up form. If you’re using a Cornerstone theme, it’s in the footer of the site.<br><img src="https://klaviyo.zendesk.com/hc/article_attachments/28723630357531" alt="A BigCommerce storefront showing sample products and an email subscription form in the site footer" width="553" height="251">
+<ul>
+<li>If you do not see a default form on your website:
+<ul>
+<li>Open your BigCommerce dashboard.</li>
+<li>Navigate to <strong>Marketing &gt; Email Marketing</strong>
+</li>
+<li>Check the box labeled <em>Allow newsletter subscriptions</em>. This enables you to collect email consent from visitors on your website, and also adds a default email sign-up box on your BigCommerce site. If this box is already checked and you still don’t see a default form, then your theme may not include one.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Open your BigCommerce dashboard, then navigate to <strong>Storefront &gt; Themes</strong>.</li>
+<li>From the <em>Current Theme</em> section, click the <strong>Advanced</strong> dropdown then choose <strong>Edit Theme Files</strong>.<br><img src="https://klaviyo.zendesk.com/hc/article_attachments/28723625055131" alt="BigCommerce dashboard showing Current Theme with Advanced Settings dropdown open and Edit Theme Files highlighted in blue." width="614" height="379">
+<ul>
+<li>If you’re using a default theme, you will not be able to select this option. Instead:<br>
+<ul>
+<li>Click <strong>Make a Copy</strong>, name it, then select <strong>Save a Copy</strong>. </li>
+<li>Once it’s added to the <em>Themes</em> section, select the 3 dots, then choose <strong>Edit Theme Files</strong>. Note that any edits you make will only apply to the theme you're editing, and you'll need to apply the theme to your website to see the changes reflected.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>In the left sidebar, open the file corresponding to where the default form appeared on your site. If the default form was located in the footer, like in the example, navigate to <strong>templates &gt; components &gt; common</strong>, and click the <strong>footer.html</strong> file.</li>
+<li>Use the find shortcut (Command+F on Mac or Control+F on Windows) to search the word “newsletter” within the footer file.<br><img src="https://klaviyo.zendesk.com/hc/article_attachments/32015094392091" alt="The find shortcut command searching the term ">
+</li>
+<li>Within the code beneath it, find the reference to the form. In the example, the form is referenced in a different file path: {{&gt; components/common/subscription-form}}.<br><img src="https://klaviyo.zendesk.com/hc/article_attachments/32015094399003" alt="The file path for the newsletter form referenced within an example site's footer file.">
+</li>
+<li>In the left sidebar, follow the file path referenced in the code (in this example, select <strong>components &gt; common &gt; subscription-form</strong>). You’ll see the actual components of the default form from here.
+<ul>
+<li>Because the default form's header and language matches the rest of our site's styles, we're only going to replace the actual form input. In the source code, you can see that the default form’s input is contained in the &lt;form&gt; element.</li>
+</ul>
+</li>
+<li>Highlight everything between the opening and closing &lt;form&gt; tags, then paste the embed code that you copied from Klaviyo to replace the highlighted text. <br><img src="https://klaviyo.zendesk.com/hc/article_attachments/32015108693787" alt="The subscription-form file for an example website showing the default form input highlighted within the form tags.">
+</li>
+<li>Click <strong>Save and apply file</strong> to apply these changes to your website.
+<ul>
+<li>If the button only says <strong>Save file</strong>, then the file you just edited is not your <em>Current Theme</em> yet. You’ll need to click <strong>Save file</strong>, then scroll up and select <strong>Edit Theme Files &gt; Save &gt; Use as Active Theme</strong> in the top right corner to apply the theme to your website. </li>
+</ul>
+</li>
+</ol>
+<p>Once you’ve pasted the embed code, saved, and applied the changes in BigCommerce, navigate back to your website and refresh the page. Your Klaviyo embed form will display on your site and begin adding new subscribers to the Klaviyo list linked to the form. </p>
+<p>If you don’t see your form, see <a href="https://help.klaviyo.com/hc/en-us/articles/360006897412#h_01JFAQY2NHMG3PPV523K4ESXEV" target="_blank" rel="noopener noreferrer">troubleshooting embed forms</a>.</p>
+<h2 id="h_01JFB1VS4P493K3WS96BZXSGD8">Next steps</h2>
+<p>Next, create a <a href="https://help.klaviyo.com/hc/en-us/articles/115002775172" target="_blank" rel="noopener noreferrer">welcome series flow</a> to make an immediate impact on your new subscribers.</p>
+<h2 id="h_01JFB0Z06EF316DDFV9A01CB6N">Additional resources</h2>
+<ul>
+<li><a href="https://help.klaviyo.com/hc/en-us/articles/115002775172-How-to-Create-an-Email-Welcome-Series" target="_blank" rel="noopener">How to create an email welcome series</a></li>
+<li><a href="https://help.klaviyo.com/hc/en-us/articles/4403594764315-How-to-Disable-Notification-Emails-Sent-by-BigCommerce" target="_blank" rel="noopener">How to disable notification emails sent by BigCommerce</a></li>
+</ul>

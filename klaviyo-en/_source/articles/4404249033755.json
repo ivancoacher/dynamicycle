@@ -1,0 +1,930 @@
+{
+  "captured_at": "2026-05-23T16:15:48Z",
+  "article": {
+    "id": 4404249033755,
+    "url": "https://klaviyo.zendesk.com/api/v2/help_center/en-us/articles/4404249033755.json",
+    "html_url": "https://klaviyo.zendesk.com/hc/en-us/articles/4404249033755-How-to-create-a-price-drop-flow",
+    "author_id": 388325929192,
+    "comments_disabled": true,
+    "draft": false,
+    "promoted": false,
+    "position": 0,
+    "vote_sum": 47,
+    "vote_count": 119,
+    "section_id": 49375570280603,
+    "created_at": "2021-07-27T17:11:47Z",
+    "updated_at": "2026-04-21T13:54:58Z",
+    "name": "How to create a price drop flow",
+    "title": "How to create a price drop flow",
+    "source_locale": "en-us",
+    "locale": "en-us",
+    "outdated": false,
+    "outdated_locales": [],
+    "edited_at": "2026-04-17T01:00:47Z",
+    "user_segment_id": null,
+    "permission_group_id": 146372,
+    "content_tag_ids": [],
+    "label_names": [],
+    "body": "<p>Find out how price drop flows work and how to set them up in Klaviyo. Price drop flows work for either a catalog from an ecommerce integration or a custom catalog. Price drop flows will not send to anyone who has already purchased the item, regardless of whether they bought it at full price or when it was discounted. Additionally, price drop flows will not send if inventory is 0 or negative or the variant is not published.</p>\n<p>Price drop flows let customers know when products they’ve looked at lower in price. This can mean an easy sale for you, as customers love a deal — especially on items they actually want. These flows are also a valuable tool for marketers, as the messages typically receive high engagement and conversion rates.</p>\n<h2 id=\"h_01JN4CGHAQVE92CBC3FB1N69VN\">Before you begin</h2>\n<ul>\n<li>Price drop flows are available for stores using Shopify, BigCommerce, WooCommerce, Magento 2, PrestaShop, Salesforce Commerce Cloud, or a catalog synced via custom catalog feed or API.</li>\n<li>Price drop flows will only trigger for items that are listed as in stock.</li>\n</ul>\n<h2 id=\"h_01JN4CKB5XDW99A8523AT607BG\">Requirements for catalogs synced via custom catalog feed or API</h2>\n<p>If you have not done so, consult our developer resources:</p>\n<ul>\n<li><a href=\"https://developers.klaviyo.com/en/docs/guide_to_syncing_a_custom_catalog_feed_to_klaviyo\">How to sync a custom catalog feed to Klaviyo</a></li>\n<li>\n<a href=\"https://developers.klaviyo.com/en/reference/catalogs_api_overview\">Catalogs API overview</a><br>\n<p>In order to create a price drop flow, make sure your catalog meets the following requirements:</p>\n</li>\n<li>Products or variants must have <em>price</em> and <em>inventory</em> fields mapped with data available.</li>\n<li>\n<em>Ordered Product </em>and either one or both of <em>Viewed Product </em>or <em>Started Checkout</em> events must have <em>price</em> and <em>product</em> ID fields as part of the event payload, as well as existing instances of these events in your account.</li>\n<li>Even if the catalog contains product variants, these events must include parent product level IDs.<br>\n<p>Please be aware of the following before setting up price drop:</p>\n</li>\n<li>If you’re using the Catalogs API, your catalog must contain variants, even if the variant is a duplicate of the main product.</li>\n<li>If you are using a custom catalog in addition to a catalog from an ecommerce integration, price drop flows will only trigger based off of one of these catalogs. If you set up your flow to trigger off of your custom catalog, you may contact Klaviyo Support to revert this back to your integration catalog.</li>\n</ul>\n<h3 id=\"h_01JN4CWDM7TG9DMJPFARX1MCMT\">Next steps</h3>\n<ol>\n<li>From the main Klaviyo menu, navigate to <strong>Content &gt;</strong><strong>Products </strong>to confirm that products from your custom catalog have been synced.</li>\n<li>\n<a href=\"https://help.klaviyo.com/hc/en-us/articles/115001002272-How-to-Contact-Support\">Reach out to our Support Team</a> and request access to the “price drop trigger for custom catalogs” feature. Make sure to specify the following:<br>\n<ul>\n<ul>\n<li>The account which has a custom catalog or API catalog, if you have multiple accounts.</li>\n<li>Event IDs for all metrics used as triggers with product data such as <em>Ordered Product</em>, <em>Started Checkout</em>, and <em>Viewed Product</em>.</li>\n<li>For each event, the field names for product ID and price.</li>\n<li>For <em>Started Checkout</em>, the field name for the list that contains the products from the checkout.</li>\n</ul>\n</ul>\n</li>\n<li>Once the support team has completed your request, you can continue on and create the flow.</li>\n</ol>\n<h2 id=\"h_01HC0RVV0TPNB8B1YM4B6Y6AVA\">How to trigger a price drop flow</h2>\n<ol>\n<li>Navigate to <strong>Flows &gt; Create flow &gt; Build your own</strong>.</li>\n<li>Name your flow and add tags.</li>\n<li>Click <strong>Create flow </strong>to continue.</li>\n<li>In the flow builder, select <strong>Price drop</strong> from either the <em>Recommended</em> or <em>All triggers</em> tab.<br>\n\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/31432288697371\" alt=\"In the Trigger Setup menu, the Price Drop option is found towards the bottom of the list\" width=\"303\" height=\"501\">\n</li>\n<li>Choose when a price drop flow will trigger; i.e., at what amount or percentage a product's price needs to drop.<br>\n\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28717389650075\" alt=\"For the flow trigger Price Drop option, there is a textbox to enter the amount the price dropped by as well as buttons for dollar amount or percentage.\" width=\"363\" height=\"156\">\n<div class=\"bs-callout bs-callout-default\">\n<p>You can adjust the trigger at any point, but it will only apply to events triggered after you change it.</p>\n</div>\n</li>\n<li>Choose who you want this flow to send to, people who:<br>\n<ul>\n<ul>\n<li>Started checkout with that product in their cart — this will include the fewest people, but they will be more likely to convert.</li>\n<li>Viewed the product — this will include a greater number of people in the flow, but they will be less likely to make a purchase.</li>\n<li>Both — this option will pull in both groups.</li>\n</ul>\n</ul>\n<div class=\"bs-callout bs-callout-default\">\n<p>These conditions are checked both at the trigger and before any messages send out to ensure that you’re not sending to those who have already purchased or only seen the lower price. Klaviyo does not pull in anyone who either purchased the product after the flow’s triggering event or viewed/started checkout when the item was at a lower price.</p>\n</div>\n</li>\n<li>(Optional) Change the time period for when you want someone to have viewed or started checkout with the item. The default is the past 30 days.<br>\n\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28717389665947\" alt=\"At the bottom of the Price Drop configuration menu is the option to configure a time period for when someone viewed or checked out the item.\" width=\"300\" height=\"476\">\n</li>\n<li>When you're done, save the trigger.</li>\n<li>Add in a message immediately after the trigger.</li>\n<li>Add in any splits, time delays, and follow-up messages.<br>\n<div class=\"bs-callout bs-callout-default\">\n<p>A time delay is not recommended, as you want to inform customers as soon as the price changes.</p>\n</div>\n</li>\n<li>Select <strong>Update status </strong>when you're ready for the flow to start sending.</li>\n<li>Choose <strong>Live </strong>from the dropdown.</li>\n<li>Click <strong>Save</strong>.</li>\n</ol>\n<h2 id=\"h_01HC0RVV0T0FX8FNBPCXFB1PWR\">How to preview and test a price drop flow</h2>\n<p>Unlike with other metrics, a price drop event will only be registered in Klaviyo if a price drop flow is set to <em>live </em>or <em>manual </em>status when a price drop occurs. This means at least 1 message in a price drop flow needs to be live or manual for the events to be added to your account for the purposes of previewing.</p>\n<p>If you want to use price drop event variables in your message, such as the original price and reduced price:</p>\n<ol>\n<li>Set a message in the flow to <strong>Manual</strong> status using the dropdown on the action card.<br>\n\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/34454394354203\" alt=\"\" width=\"305\" height=\"249\">\n</li>\n<li>Trigger a price drop event from your store by starting a checkout or viewing a product (depending on your price drop flow settings) with an item then lowering the price of the item.</li>\n<li>Select a message in the flow and click <strong>Edit</strong> from either the action button (3 dots) or the sidebar.<br>\n\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/34454411028763\" alt=\"\" width=\"330\" height=\"176\">\n</li>\n<li>Click <strong>Edit email </strong>for email messages.</li>\n<li>In the editor, click <strong>Preview &amp; test </strong>in the upper right.<br>\n\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/34454394359963\" alt=\"\">\n</li>\n<li>In the sidebar, select the event and person you want to use to see a preview directly in Klaviyo.</li>\n<li>Hover over the variable’s name until you see the message <em>Copy {{ person.variable_name }} variable</em>, then click to copy it.</li>\n<li> Paste the variable where you'd like to see it appear in your message.</li>\n<li>Once you've added all the variables you'd like, click <strong>Send test</strong> to send a preview to your own inbox.</li>\n</ol>\n<h2 id=\"h_01JN4DC4Q8JDJT22F412TGB3HP\">Price drop flow examples</h2>\n<p>Depending on how you want your price drop flow to work, you can set it up in various ways. Let’s start with a basic example that sends two messages: one right away and a reminder for those who haven’t made a purchase. For this flow, it will look like the following.</p>\n<p class=\"wysiwyg-text-align-center\"><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28717383340699\" alt=\"Example price drop flow with one email right away after the trigger and a second email after a 1 day delay\" width=\"280\" height=\"581\"></p>\n<p>You can use email, SMS, or WhatsApp for these messages. Klaviyo will only send SMS or WhatsApp messages to profiles who have explicitly opted in to that channel. Profiles without consent for a specific channel will automatically be skipped for that message.</p>\n<h3 id=\"h_01HC0RVV0TS278DYPF1E28TR0W\">Using SMS, WhatsApp, and email together </h3>\n<p>For a multichannel price drop flow, add a conditional split directly after the trigger. Use the split to check whether someone is subscribed to SMS or WhatsApp.</p>\n<p>Send subscribers with SMS or WhatsApp consent down one path and everyone else down the other. This allows you to prioritize sending a text message first while continuing to send email to profiles who are not opted in to SMS or WhatsApp.</p>\n<p class=\"wysiwyg-text-align-left\"><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/34454394363291\" alt=\"\" width=\"349\" height=\"141\"></p>\n<h3 id=\"h_01HC0RVV0TRR4SKABTSY4AYG5B\">Send to non-customers first</h3>\n<p>One of the largest dropoffs in the marketing funnel is when you try to convert someone into a customer. Price drop flows are a great tool for converting a website browser into a buyer. In Klaviyo, you can set this up by placing a conditional split directly after the trigger to send returning customers down a different path. Then, add a time delay before the message to returning customers. </p>\n<p>The example below shows what this looks like for a price drop flow with both SMS and email messages. </p>\n<p class=\"wysiwyg-text-align-center\"><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/34454411041947\" alt=\"\"></p>\n<h3 id=\"h_01HC0RVV0T6G6QCXSTDAR6ZHN7\">Set different rules based on product</h3>\n<p>To set different rules based on a product’s price or category, you need to set up multiple price drop flows and then use filters to target specific items. </p>\n<p>Say you want to change the message based on the item’s initial price and how much the price dropped. Perhaps on most items, you want to send a message whenever the price drops by at least 10%. However, say you have products that are under $20, and on those products, you want to send a message when the price drops by $2.00 or more. In this case, create two price drop flows and add trigger filters to target the products you want.</p>\n<h2 id=\"h_01HC0RVV0TNVDG7RKR8XDQQF8N\">Price drop report</h2>\n<p>It’s important to monitor the performance of your price drop flow over time. To access this report, click on the flow’s trigger and then click <strong>View price drop report</strong>. You can export this report as a CSV. </p>\n<div class=\"bs-callout bs-callout-default\">\n<p>If you have multiple versions of the same product with different variants, you would need to drop all these products and their variants to the same price in order for them to appear in your price drop report.</p>\n<p>The price drop report will only include price drop events that occur after the flow has been set up. It will not include a history of all price drop activities.</p>\n</div>\n<p>The report will show the following in order of most to least recent: </p>\n<ul>\n<li>SKU</li>\n<li>Product title</li>\n<li>Original price</li>\n<li>Reduced price</li>\n<li>Price drop timestamp</li>\n<li>Sent</li>\n</ul>\n<p>Learn how to create other flows on the Help Center:</p>",
+    "user_segment_ids": []
+  },
+  "normalized": {
+    "id": "4404249033755",
+    "title": "How to create a price drop flow",
+    "source_url": "https://help.klaviyo.com/hc/en-us/articles/4404249033755-How-to-create-a-price-drop-flow",
+    "section_id": 49375570280603,
+    "section": "Ecommerce-specific flows",
+    "category_id": 115000312411,
+    "category": "Flows",
+    "category_slug": "flows",
+    "klaviyo_updated": "2026-04-21T13:54:58Z",
+    "created_at": "2021-07-27T17:11:47Z",
+    "draft": false,
+    "promoted": false,
+    "position": 0,
+    "label_names": []
+  },
+  "files": {
+    "body_html": "_source/articles/4404249033755.body.html",
+    "rendered_html": "_source/rendered/4404249033755.html"
+  },
+  "assets": {
+    "api_body": {
+      "images": [
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/31432288697371",
+          "alt": "In the Trigger Setup menu, the Price Drop option is found towards the bottom of the list",
+          "width": "303",
+          "height": "501"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28717389650075",
+          "alt": "For the flow trigger Price Drop option, there is a textbox to enter the amount the price dropped by as well as buttons for dollar amount or percentage.",
+          "width": "363",
+          "height": "156"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28717389665947",
+          "alt": "At the bottom of the Price Drop configuration menu is the option to configure a time period for when someone viewed or checked out the item.",
+          "width": "300",
+          "height": "476"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/34454394354203",
+          "alt": "",
+          "width": "305",
+          "height": "249"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/34454411028763",
+          "alt": "",
+          "width": "330",
+          "height": "176"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/34454394359963",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28717383340699",
+          "alt": "Example price drop flow with one email right away after the trigger and a second email after a 1 day delay",
+          "width": "280",
+          "height": "581"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/34454394363291",
+          "alt": "",
+          "width": "349",
+          "height": "141"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/34454411041947",
+          "alt": "",
+          "width": "",
+          "height": ""
+        }
+      ],
+      "links": [
+        {
+          "href": "https://developers.klaviyo.com/en/docs/guide_to_syncing_a_custom_catalog_feed_to_klaviyo",
+          "text": "How to sync a custom catalog feed to Klaviyo"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/reference/catalogs_api_overview",
+          "text": "Catalogs API overview"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115001002272-How-to-Contact-Support",
+          "text": "Reach out to our Support Team"
+        }
+      ],
+      "headings": [
+        {
+          "level": 2,
+          "id": "h_01JN4CGHAQVE92CBC3FB1N69VN",
+          "text": "Before you begin"
+        },
+        {
+          "level": 2,
+          "id": "h_01JN4CKB5XDW99A8523AT607BG",
+          "text": "Requirements for catalogs synced via custom catalog feed or API"
+        },
+        {
+          "level": 3,
+          "id": "h_01JN4CWDM7TG9DMJPFARX1MCMT",
+          "text": "Next steps"
+        },
+        {
+          "level": 2,
+          "id": "h_01HC0RVV0TPNB8B1YM4B6Y6AVA",
+          "text": "How to trigger a price drop flow"
+        },
+        {
+          "level": 2,
+          "id": "h_01HC0RVV0T0FX8FNBPCXFB1PWR",
+          "text": "How to preview and test a price drop flow"
+        },
+        {
+          "level": 2,
+          "id": "h_01JN4DC4Q8JDJT22F412TGB3HP",
+          "text": "Price drop flow examples"
+        },
+        {
+          "level": 3,
+          "id": "h_01HC0RVV0TS278DYPF1E28TR0W",
+          "text": "Using SMS, WhatsApp, and email together"
+        },
+        {
+          "level": 3,
+          "id": "h_01HC0RVV0TRR4SKABTSY4AYG5B",
+          "text": "Send to non-customers first"
+        },
+        {
+          "level": 3,
+          "id": "h_01HC0RVV0T6G6QCXSTDAR6ZHN7",
+          "text": "Set different rules based on product"
+        },
+        {
+          "level": 2,
+          "id": "h_01HC0RVV0TNVDG7RKR8XDQQF8N",
+          "text": "Price drop report"
+        }
+      ]
+    },
+    "rendered_page": {
+      "images": [
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/7ff492c2b417b7ecfe572f839a8a81398693c1f7-1920x1080.webp",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/a88586d33f68b670a43360cdec4354a97d97314d-834x1378.jpg?w=303",
+          "alt": "In the Trigger Setup menu, the Price Drop option is found towards the bottom of the list",
+          "width": "303",
+          "height": "501"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/80a01715221bb3aaec1d86a7dc0b30d9d285faf7-600x258.jpg?w=363",
+          "alt": "For the flow trigger Price Drop option, there is a textbox to enter the amount the price dropped by as well as buttons for dollar amount or percentage.",
+          "width": "363",
+          "height": "156"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/778f260a767ac38bbb18baa3f8107aa575c9efd7-600x952.jpg?w=300",
+          "alt": "At the bottom of the Price Drop configuration menu is the option to configure a time period for when someone viewed or checked out the item.",
+          "width": "300",
+          "height": "476"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/69e2f1458e1e5f5d27dc5cad9c10ca86309e0c72-600x490.jpg?w=305",
+          "alt": "",
+          "width": "305",
+          "height": "249"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/dd59df15809c61129c615c515ee97cd060adba87-600x320.jpg?w=330",
+          "alt": "",
+          "width": "330",
+          "height": "176"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/ed59a86ce24d69f383e3bd007617254ba5cead50-2576x218.png",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/cb9bd92e6c68de345a090c602cd4628ebd000139-400x830.jpg?w=280",
+          "alt": "Example price drop flow with one email right away after the trigger and a second email after a 1 day delay",
+          "width": "280",
+          "height": "581"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/6f317a9f8d968f3c51c49249ae66e6b41dc5357f-574x232.png?w=349",
+          "alt": "",
+          "width": "349",
+          "height": "141"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/d886088a9d9451e8317c4d050425718734905a67-1336x1014.png",
+          "alt": "",
+          "width": "",
+          "height": ""
+        }
+      ],
+      "links": [
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4404249033755-How-to-create-a-price-drop-flow#site-content",
+          "text": "Skip to main content"
+        },
+        {
+          "href": "https://www.klaviyo.com",
+          "text": "Home"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center"
+        },
+        {
+          "href": "https://www.klaviyo.com/enterprise",
+          "text": "Enterprise"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Partners"
+        },
+        {
+          "href": "https://www.klaviyo.com/careers",
+          "text": "Careers"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": "Log in"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": ""
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center Find step-by-step instructions and troubleshooting solutions in our knowledge base."
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000032731",
+          "text": "Integrations"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000312411",
+          "text": "Flows"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867867",
+          "text": "Audience"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867667",
+          "text": "Campaigns"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/360000190711",
+          "text": "Sign-up forms"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000873988",
+          "text": "Deliverability & compliance"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/29173800271259",
+          "text": "SMS"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/16638219724187",
+          "text": "Reviews"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/18073014919195",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/34141283979931",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/37659126754075",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/33948021740315",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/39746685522331",
+          "text": "WhatsApp"
+        },
+        {
+          "href": "https://academy.klaviyo.com",
+          "text": "Klaviyo Academy Expert training and education to help you succeed with Klaviyo, and beyond."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Quick+guide&resource=academy_courses",
+          "text": "Quick guides Learn marketing strategies and concepts in 15 minutes or less."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Course&resource=academy_courses",
+          "text": "Courses Master key marketing topics through structured lessons and exams."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/best-practices",
+          "text": "Best practices Discover top product and marketing strategies for your business."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/learning-paths",
+          "text": "Learning paths Complete curated learning journeys tailored to your marketing goals."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses",
+          "text": "Explore all resources"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Live+training&resource=academy_courses",
+          "text": "Live trainings Build confidence through hands-on interactive workshops and thought-provoking strategy sessions."
+        },
+        {
+          "href": "https://www.bigmarker.com/klaviyo-customer-education/Office-hours-Getting-started-with-Klaviyo",
+          "text": "Live office hours Join a strategic discussion where you can ask questions and get answers in real-time."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/private-live-training",
+          "text": "1:1 Live training Book a private training session with an expert to jumpstart your platform knowledge and confidence."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/credentials",
+          "text": "Klaviyo credentials Dig deeper into select topics and showcase your expertise with a final exam to earn a certificate and digital badge."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/certificates/klaviyo-practitioner-certificate",
+          "text": "Klaviyo practitioner certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/deliverability-certificate",
+          "text": "Deliverability certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/developer-certificate",
+          "text": "Klaviyo developer certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses&select=Certificate",
+          "text": "See all certificates"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Klaviyo Community Join our thriving community network to connect with brands like yours—online and in person."
+        },
+        {
+          "href": "https://community.klaviyo.com/topic/new",
+          "text": "Ask a question Post a question and get thoughtful answers from Klaviyo powerusers."
+        },
+        {
+          "href": "https://community.klaviyo.com/p/roadmap",
+          "text": "Product roadmap"
+        },
+        {
+          "href": "https://community.klaviyo.com/search/activity/recent",
+          "text": "Recent threads"
+        },
+        {
+          "href": "https://community.klaviyo.com/p/champions",
+          "text": "Meet the Champions"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups",
+          "text": "Browse all groups Your people are waiting. New ideas and connections are a click away."
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/developer-group-64",
+          "text": "Developer group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/entrepreneur-user-group-118",
+          "text": "Entrepreneur group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/woo-user-group-87",
+          "text": "WooCommerce group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/new-york-meetup-chapter-82",
+          "text": "New York City"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/los-angeles-meetup-chapter-83",
+          "text": "Los Angeles"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/austin-meetup-chapter-85",
+          "text": "Austin"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/san-diego-meetup-chapter-86",
+          "text": "San Diego"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/amsterdam-meetup-chapter-84",
+          "text": "Amsterdam"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Klaviyo Developers Access API documentation and developer guides to help you build with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/get_started",
+          "text": "Get started Access key resources and a step-by-step checklist for how to start developing with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/build_your_integration",
+          "text": "Grow your app's reach Learn how to join our ecosystem and get your app listed on our marketplace."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/developer-tools",
+          "text": "Developer tools Generate sample data, monitor your API usage, and access our Postman collections."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/reference/api_overview",
+          "text": "API reference Browse our full catalog of API docs."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/changelog_",
+          "text": "Changelog"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/api_versioning_and_deprecation_policy",
+          "text": "Versioning & deprecation policy"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/rate_limits_and_error_handling",
+          "text": "Rate limits & error handling"
+        },
+        {
+          "href": "https://youtube.com/playlist?list=PLHkNfHgtxcUanrkMnKPdkRzuWU7MGv_xM&si=pkG-KH7IT_TUHOGC",
+          "text": "API tutorials on YouTube Subscribe to our Klaviyo API Tutorials playlist for easy access to step-by-step developer walkthroughs."
+        },
+        {
+          "href": "https://www.klaviyo.com/contact-us",
+          "text": "Contact us"
+        },
+        {
+          "href": "https://www.klaviyo.com/sign-up",
+          "text": "Sign up"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": "Search"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4404249033755",
+          "text": "United States - EN"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/de-de/articles/4404249033755",
+          "text": "Deutschland - DE"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-es/articles/4404249033755",
+          "text": "España - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-mx/articles/4404249033755",
+          "text": "México - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/fr-fr/articles/4404249033755",
+          "text": "France - FR"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/it-it/articles/4404249033755",
+          "text": "Italia - IT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/ko-kr/articles/4404249033755",
+          "text": "한국 - KO"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/nl-nl/articles/4404249033755",
+          "text": "Nederland - NL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pl-pl/articles/4404249033755",
+          "text": "Polska - PL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pt-br/articles/4404249033755",
+          "text": "Brasil - PT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/sv-se/articles/4404249033755",
+          "text": "Sverige - SV"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/14543713508123",
+          "text": "Flow best practices and examples"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/49375570280603",
+          "text": "Ecommerce-specific flows"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4404249033755-How-to-create-a-price-drop-flow#h_01JN4CGHAQVE92CBC3FB1N69VN",
+          "text": "Before you begin"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4404249033755-How-to-create-a-price-drop-flow#h_01JN4CKB5XDW99A8523AT607BG",
+          "text": "Requirements for catalogs synced via custom catalog feed or API"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4404249033755-How-to-create-a-price-drop-flow#h_01HC0RVV0TPNB8B1YM4B6Y6AVA",
+          "text": "How to trigger a price drop flow"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4404249033755-How-to-create-a-price-drop-flow#h_01HC0RVV0T0FX8FNBPCXFB1PWR",
+          "text": "How to preview and test a price drop flow"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4404249033755-How-to-create-a-price-drop-flow#h_01JN4DC4Q8JDJT22F412TGB3HP",
+          "text": "Price drop flow examples"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4404249033755-How-to-create-a-price-drop-flow#h_01HC0RVV0TNVDG7RKR8XDQQF8N",
+          "text": "Price drop report"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/4404249033755-How-to-create-a-price-drop-flow#additional-resources",
+          "text": "Additional resources"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/guide_to_syncing_a_custom_catalog_feed_to_klaviyo",
+          "text": "How to sync a custom catalog feed to Klaviyo"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/reference/catalogs_api_overview",
+          "text": "Catalogs API overview"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115001002272-How-to-Contact-Support",
+          "text": "Reach out to our Support Team"
+        },
+        {
+          "href": "https://academy.klaviyo.com/automating-the-customer-journey-with-flows",
+          "text": "automate the customer journey with flows"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115002775212",
+          "text": "How to create an upsell or cross-sell flow"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360002732652",
+          "text": "How to create a date property-triggered flow"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115001002272",
+          "text": "Learn how to contact support"
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": ""
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": "Visit Community"
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": ""
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": "Hire a partner"
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/about",
+          "text": "About Klaviyo"
+        },
+        {
+          "href": "https://www.klaviyo.com/newsroom",
+          "text": "Newsroom"
+        },
+        {
+          "href": "https://investors.klaviyo.com/overview/default.aspx",
+          "text": "Investor relations"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Agency and tech partners"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Developers"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/retail",
+          "text": "Retail and ecommerce"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/restaurants",
+          "text": "Restaurant marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/wellness",
+          "text": "Wellness"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform",
+          "text": "B2C CRM overview"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai",
+          "text": "Klaviyo AI (K:AI)"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/marketing-automation",
+          "text": "Klaviyo Marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-service",
+          "text": "Klaviyo Service"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/analytics",
+          "text": "Klaviyo Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-data-platform",
+          "text": "Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare",
+          "text": "Klaviyo vs. Klaviyo alternatives"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-mailchimp",
+          "text": "Klaviyo vs. Mailchimp"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-postscript",
+          "text": "Klaviyo vs. Postscript"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-attentive",
+          "text": "Klaviyo vs. Attentive"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-salesforce-marketing-cloud",
+          "text": "Klaviyo vs. Salesforce"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-listrak",
+          "text": "Klaviyo vs. Listrak"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/omnichannel",
+          "text": "Omnichannel marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/email-marketing",
+          "text": "Email marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing",
+          "text": "SMS marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing/rcs",
+          "text": "RCS for Business"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/mobile-app-marketing",
+          "text": "Mobile app marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/whatsapp",
+          "text": "WhatsApp marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/social",
+          "text": "Social marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources",
+          "text": "Marketing resources"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources/marketing-campaign-calendar",
+          "text": "Marketing campaign calendar"
+        },
+        {
+          "href": "https://www.klaviyo.com/glossary",
+          "text": "Marketing glossary"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/email-subject-line-generator",
+          "text": "Subject line generator"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/roi-calculator",
+          "text": "ROI calculator"
+        },
+        {
+          "href": "https://www.klaviyo.com/customers",
+          "text": "Case studies"
+        },
+        {
+          "href": "https://www.klaviyo.com/composer",
+          "text": "Composer Beta"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/marketing-agent",
+          "text": "Marketing Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/customer-agent",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/customer-experience-hub",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/helpdesk",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/marketing-analytics",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/advanced-cdp",
+          "text": "Advanced Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/web-forms",
+          "text": "Web forms"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/email-templates",
+          "text": "Email templates"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/portfolio",
+          "text": "Portfolio"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform-integrations",
+          "text": "Apps and Integrations"
+        },
+        {
+          "href": "https://www.klaviyo.com/features",
+          "text": "Features"
+        },
+        {
+          "href": "https://www.klaviyo.com/whats-new",
+          "text": "What's new"
+        },
+        {
+          "href": "https://www.klaviyo.com/events",
+          "text": "Events"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help Center"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us",
+          "text": "Academy"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Community"
+        },
+        {
+          "href": "https://www.facebook.com/Klaviyo/",
+          "text": "Facebook"
+        },
+        {
+          "href": "https://twitter.com/klaviyo/",
+          "text": "Twitter"
+        },
+        {
+          "href": "https://www.linkedin.com/company/klaviyo/",
+          "text": "LinkedIn"
+        },
+        {
+          "href": "https://www.instagram.com/klaviyo/",
+          "text": "Instagram"
+        },
+        {
+          "href": "https://www.klaviyo.com/sitemap",
+          "text": "Site Map"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal",
+          "text": "Terms and Privacy"
+        },
+        {
+          "href": "https://www.klaviyo.com/security",
+          "text": "Security"
+        },
+        {
+          "href": "https://www.klaviyo.com/trust",
+          "text": "Trust"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal/intellectual-property-notices",
+          "text": "Intellectual Property Notices"
+        }
+      ],
+      "headings": [
+        {
+          "level": 1,
+          "id": "",
+          "text": "How to create a price drop flow"
+        },
+        {
+          "level": 2,
+          "id": "h_01JN4CGHAQVE92CBC3FB1N69VN",
+          "text": "Before you begin"
+        },
+        {
+          "level": 2,
+          "id": "h_01JN4CKB5XDW99A8523AT607BG",
+          "text": "Requirements for catalogs synced via custom catalog feed or API"
+        },
+        {
+          "level": 3,
+          "id": "h_01JN4CWDM7TG9DMJPFARX1MCMT",
+          "text": "Next steps"
+        },
+        {
+          "level": 2,
+          "id": "h_01HC0RVV0TPNB8B1YM4B6Y6AVA",
+          "text": "How to trigger a price drop flow"
+        },
+        {
+          "level": 2,
+          "id": "h_01HC0RVV0T0FX8FNBPCXFB1PWR",
+          "text": "How to preview and test a price drop flow"
+        },
+        {
+          "level": 2,
+          "id": "h_01JN4DC4Q8JDJT22F412TGB3HP",
+          "text": "Price drop flow examples"
+        },
+        {
+          "level": 3,
+          "id": "h_01HC0RVV0TS278DYPF1E28TR0W",
+          "text": "Using SMS, WhatsApp, and email together"
+        },
+        {
+          "level": 3,
+          "id": "h_01HC0RVV0TRR4SKABTSY4AYG5B",
+          "text": "Send to non-customers first"
+        },
+        {
+          "level": 3,
+          "id": "h_01HC0RVV0T6G6QCXSTDAR6ZHN7",
+          "text": "Set different rules based on product"
+        },
+        {
+          "level": 2,
+          "id": "h_01HC0RVV0TNVDG7RKR8XDQQF8N",
+          "text": "Price drop report"
+        },
+        {
+          "level": 2,
+          "id": "additional-resources",
+          "text": "Additional resources"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "Explore more from Klaviyo"
+        }
+      ]
+    }
+  },
+  "rendered_page": {
+    "status": "fetched",
+    "error": ""
+  }
+}

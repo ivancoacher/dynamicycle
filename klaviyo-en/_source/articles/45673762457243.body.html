@@ -1,0 +1,205 @@
+<h2 id="h_01KFHXS82R1811TD4XJHGPDBPS"><strong>What is Regex Matching?</strong></h2>
+<p>Regex matching lets you filter profiles based on text patterns instead of exact values. This is useful for finding profiles that follow a specific format, like email addresses from certain domains or phone numbers in a particular format.</p>
+<p><strong>⚠️ Important: </strong>Regex always matches the complete value from beginning to end.</p>
+<p></p>
+<h2 id="h_01KFED7VGEFCH1D5QGZD0EGMBY"><strong>How to Use Regex</strong></h2>
+<p>When building a segment, you can use two regex operators:</p>
+<ul>
+<li>Matches regex - Includes profiles where the value matches your regex</li>
+<li>Does not match regex - Includes profiles where the value does NOT match your regex</li>
+</ul>
+<p>It can be used in the following segment conditions:</p>
+<ol>
+<li>Properties about someone (including custom objects)</li>
+</ol>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/45728065801627" alt="" width="2254" height="794"></p>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/45728020929051" alt="" width="2426" height="680"></p>
+<p></p>
+<p>2. Filters on "What someone has done or not done" and "Steps someone has taken in a specific order"</p>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/45728020931227" alt="" width="2266" height="924"></p>
+<h3 id="h_01KFED7VGHYMW3ZF7G6GGKG8SZ"></h3>
+<h2 id="h_01KFH9DXSPH9B2EWD76J9M6A5W"><strong>Regex Basics</strong></h2>
+<h4 id="h_01KFED7VGH0THMZ66R7VM52ND2"><strong>Matching Characters</strong></h4>
+<ul>
+<li>Letters and numbers - Type normally: hello matches "hello"</li>
+<li>Any digit - Use \d to match any number 0-9</li>
+<li>Any letter - Use [a-z] for lowercase, [A-Z] for uppercase, or [a-zA-Z] for both</li>
+<li>Either/or - Use | to match options: gmail|yahoo matches either "gmail" or "yahoo"</li>
+<li>Anything - Use .* to match any characters</li>
+</ul>
+<h4 id="h_01KFED7VGK0ZYZP9D8DP5VWGR6"><strong>Special Characters</strong></h4>
+<p>Add a backslash \ before these to match them literally:</p>
+<ul>
+<li>Period: \. matches a period</li>
+<li>Plus sign: \+ matches a plus sign</li>
+<li>Parentheses: \( and \) match parentheses</li>
+</ul>
+<h4 id="h_01KFED7VGMWN40CQN09SGH9321"><strong>Repeating Patterns</strong></h4>
+<ul>
+<li>{5} - Exactly 5 times (e.g., \d{5} matches 5 digits)</li>
+<li>{2,4} - Between 2 and 4 times</li>
+<li>? - Optional (0 or 1 time)</li>
+</ul>
+<p><strong>Note: we limit repeating patterns at Maximum 1,000 repetitions</strong></p>
+<h3 id="h_01KFED7VGP6WRE6G00RBBY9RH5"></h3>
+<h2 id="h_01KFKYM07QKMZHAQ6KDC70BV14"><strong>Common Examples</strong></h2>
+<h4 id="h_01KFED7VGPGGVTGZXB6F70D8MJ"><strong>Email Addresses</strong></h4>
+<ul>
+<li>Specific domain:
+<ul>
+<li>.*@example\.com</li>
+<li>Matches: john@example.com, support@example.com</li>
+</ul>
+</li>
+<li>Multiple domains:
+<ul>
+<li>.*@(gmail|yahoo|hotmail)\.com</li>
+<li>Matches: user@gmail.com, user@yahoo.com, <a href="mailto:user@hotmail.com">user@hotmail.com</a>
+</li>
+</ul>
+</li>
+<li>Any .com email:
+<ul>
+<li>.*@.*\.com</li>
+</ul>
+</li>
+</ul>
+<h4 id="h_01KFED7VGS202MC1B4V7WZCF4K"><strong>Phone Numbers</strong></h4>
+<ul>
+<li>10-digit US number
+<ul>
+<li>\d{10}</li>
+<li>Matches: 5551234567</li>
+</ul>
+</li>
+<li>Formatted with parentheses:
+<ul>
+<li>\(\d{3}\) \d{3}-\d{4}</li>
+<li>Matches: (555) 123-4567</li>
+</ul>
+</li>
+</ul>
+<h4 id="h_01KFED7VGVVY40APSS2GNKN0S5"><strong>Postal Codes</strong></h4>
+<ul>
+<li>5-digit ZIP:
+<ul>
+<li>\d{5}</li>
+<li>Matches: 12345</li>
+</ul>
+</li>
+<li>ZIP+4:
+<ul>
+<li>\d{5}-\d{4}</li>
+<li>Matches: 12345-6789</li>
+</ul>
+</li>
+</ul>
+<p><strong>For advanced references: our implementation uses Google RE2 as our standard. </strong><a href="https://github.com/google/re2/wiki/Syntax"><strong>Learn more here</strong></a><strong>.</strong></p>
+<h3 id="h_01KFED7VGX4W7N8E26A02W2GSA"></h3>
+<h2 id="h_01KFKYM788Z4FQ28AA3WD6V0AQ"><strong>RegEx Limits</strong></h2>
+<table>
+<tbody>
+<tr>
+<td><strong>Limit</strong></td>
+<td><strong>Value</strong></td>
+<td><strong>Example</strong></td>
+</tr>
+<tr>
+<td>Regex length</td>
+<td>max 1,000 characters</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Regex lines</td>
+<td>max 100 lines </td>
+<td>-</td>
+</tr>
+<tr>
+<td>Repetitions</td>
+<td>max 1,000 repetitions</td>
+<td>\d{1000} allowed<br>
+\d{1001} not allowed</td>
+</tr>
+<tr>
+<td>Options (|)</td>
+<td>5 max at main level</td>
+<td>a|b|c|d|e|f exceeds limit (6 options)</td>
+</tr>
+<tr>
+<td>Nesting depth</td>
+<td>5 levels max</td>
+<td>((((a)))) is 4 levels, allowed</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Additionally, the following features are not supported at this time.</strong></p>
+<table>
+<tbody>
+<tr>
+<td><strong>Feature</strong></td>
+<td><strong>Example</strong></td>
+</tr>
+<tr>
+<td>Lookahead/Lookbehind</td>
+<td>(?=...), (?!...), (?&lt;=...), (?&lt;!...)</td>
+</tr>
+<tr>
+<td>Backreferences</td>
+<td>\1, \2, (\w+)\s+\1</td>
+</tr>
+<tr>
+<td>Unicode escapes</td>
+<td>\uXXXX, \u00A0</td>
+</tr>
+<tr>
+<td>Nested quantifiers</td>
+<td>(a+)+, (x*)*, (a{2,5})+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="h_01KFED7VH7XJNZNK9SBCSVMAR7"></h3>
+<h2 id="h_01KFEDAJ069K97CYCD37QV50MC"><strong>Tips for Success</strong></h2>
+<p><strong>1. Regex matches the complete value</strong></p>
+<p>Your regex must describe the entire value, not just part of it.</p>
+<p>Wrong: gmail\.com (only matches the text "gmail.com")</p>
+<p>Right: .*@gmail\.com (matches complete emails like john@gmail.com)</p>
+<p></p>
+<p><strong>2. Always escape periods</strong></p>
+<p>When matching .com, .net, etc., write it as \.com with a backslash.</p>
+<p>Wrong: @gmail.com (period matches any character)</p>
+<p>Right: @gmail\.com (matches literal period)</p>
+<p></p>
+<p><strong>3. Use .* for "Anything"</strong></p>
+<p>Match any characters with .*</p>
+<ul>
+<li>.*@company\.com - Any email at <a href="http://company.com">company.com</a>
+</li>
+<li>\+.* - Anything starting with +</li>
+<li>.*urgent.* - Text containing "urgent"<br>
+<p></p>
+<p><strong>4. Start simple, then refine</strong></p>
+<p>Begin with a basic regex and add details gradually.</p>
+</li>
+<li>Example: .*@gmail\.com → [a-z]+\.[a-z]+@gmail\.com<br>
+<p>Split complex logic into multiple simple filters when possible.</p>
+</li>
+<li>Example for "Gmail or Yahoo emails from California":
+<ul>
+<li>Filter 1: Email matches regex .*@(gmail|yahoo)\.com</li>
+<li>Filter 2: State equals California<br>
+<p><strong>5. RegEx is case sensitive by default</strong></p>
+<p>If you want to make a statement case insensitive, you can add <code>(?i)</code> as a prefix.</p>
+</li>
+</ul>
+</li>
+<li>Product matches (?i)^iphone$</li>
+</ul>
+<p></p>
+<h2 id="h_01KFED7VHA85P8AWB5KVGZYNGX"><strong>When to use RegEx vs Standard Operators</strong></h2>
+<p>Use regex when you need to match specific formats or patterns. For simpler needs, we strongly recommend using standard operators instead:</p>
+<ul>
+<li>Contains - Text appears anywhere</li>
+<li>Starts with - Matches the beginning</li>
+<li>Ends with - Matches the ending</li>
+<li>Equals - Exact match</li>
+</ul>

@@ -1,0 +1,173 @@
+<div class="bs-callout bs-callout-default">
+<p><a href="https://help.klaviyo.com/hc/en-us/articles/17655007276059">Advanced KDP</a> is not included in Klaviyo’s standard marketing application, and a subscription is required to access the associated functionality. Head to our <a href="https://help.klaviyo.com/hc/en-us/articles/115000976672">billing guide</a> to learn about how to purchase this plan.</p>
+</div>
+<h1 id="h_01K8VQEPP3RZBAM525QPXWX41G">Environment Setup and Connection</h1>
+<p><strong>Overview:</strong> Follow these steps to prepare Databricks for Klaviyo. You’ll create required <em>schemas</em> (in a catalog), set up a dedicated account and access token for Klaviyo, assign the minimum required privileges, verify the configuration, and connect Databricks to Klaviyo.</p>
+<p><strong>Important:</strong> The Databricks connection currently supports <strong>importing data into Klaviyo</strong> only.</p>
+<ul>
+<li>
+<strong>Profiles</strong> and <strong>Events</strong> can be imported now.</li>
+<li>
+<strong>Exporting to Databricks</strong> is not yet available. Until then, exporting to S3 is recommended.</li>
+<li>
+<strong>Unity Catalog </strong>is required. To connect to a Databricks instance that uses Hive metastore (HMS), consider <a href="https://docs.databricks.com/aws/en/query-federation/hms-federation-concepts">Hive metastore federation</a>.</li>
+</ul>
+<p>For details on how data warehouse imports work in Klaviyo—including schema structure, required tables, and field mappings—see <a href="https://klaviyo.zendesk.com/hc/en-us/articles/40939206649627">How Data Warehouse Imports Work in Klaviyo</a> and <a href="https://klaviyo.zendesk.com/hc/en-us/articles/45442043369499">Understanding Data Warehouse Event Import.</a></p>
+<hr>
+<h2 id="h_01K8VPRYQWTER950503Y1XSM64">1) Create Required Schemas</h2>
+<p>In Databricks, <strong>schemas</strong> (sometimes called databases) live <strong>inside a catalog</strong>. You can use the default <code>main</code> catalog or another catalog if your workspace uses Unity Catalog.</p>
+<pre><code class="language-sql">USE CATALOG main;  -- or your organization’s designated catalog
+CREATE SCHEMA IF NOT EXISTS KLAVIYO_IMPORT_FROM_DWH;
+CREATE SCHEMA IF NOT EXISTS KLAVIYO_TMP;</code></pre>
+<ul>
+<li>
+<code>KLAVIYO_IMPORT_FROM_DWH</code>: Tables and views created in this schema will be available for selection when configuring a new sync.</li>
+<li>
+<code>KLAVIYO_TMP</code>: temporary/staging data used during sync.</li>
+</ul>
+<p><strong>Note:</strong> If your workspace does not use Unity Catalog, Databricks treats “schema” and “database” as equivalent. You can use <code>CREATE DATABASE</code> instead of <code>CREATE SCHEMA</code>.</p>
+<hr>
+<h2 id="h_01K8VPRYQW7M9899ZXRSVPYARM">2) Create the Klaviyo Service Account and Access Token</h2>
+<p>Klaviyo authenticates to Databricks using a dedicated account with a <strong>personal access token (PAT)</strong>. Use a non-human (service) account when possible and store the PAT securely (e.g., a password manager or secret store). You will provide this token to Klaviyo during initial setup.</p>
+<h3 id="h_01K8VPRYQWR8KHCBE96D8BKBN7">2.1 Create the account</h3>
+<p>Create a Databricks workspace user or a service principal that Klaviyo will use exclusively for this integration.</p>
+<h3 id="h_01K8VPRYQWD3APST2RSG1Y9GFP">2.2 Generate the personal access token</h3>
+<ul>
+<li>
+<strong>Workspace user account:</strong> Generate the token via the Databricks web UI (see Databricks docs): <a href="https://docs.databricks.com/aws/en/dev-tools/auth/pat#create-personal-access-tokens-for-workspace-users">Create personal access tokens for workspace users</a>
+</li>
+<li>
+<strong>Service principal:</strong> Generate the token using the Databricks CLI (see Databricks docs): <a href="https://docs.databricks.com/aws/en/dev-tools/auth/pat#create-personal-access-tokens-for-service-principals">Create personal access tokens via the Databricks CLI</a>
+</li>
+</ul>
+<p><strong>Important:</strong> Treat the PAT as a secret. Anyone with the token can access Databricks with the associated account’s permissions.</p>
+<hr>
+<h2 id="h_01K8VPRYQW2N5EYKF4WJEGMJPD">3) Assign Required Permissions</h2>
+<p>Grant the Klaviyo account the following privileges on the schemas created in Step 1. Replace <code>klaviyo_service_user</code> with your actual username or service principal name, and prefix schemas with the correct catalog (e.g., <code>main</code>).</p>
+<table>
+<tbody>
+<tr>
+<th style="text-align: center">Schema</th>
+<th style="text-align: center">Minimum Required Privileges</th>
+<th style="text-align: center">Purpose</th>
+</tr>
+<tr>
+<td><code>KLAVIYO_TMP</code></td>
+<td>
+<code>ALL PRIVILEGES</code> <em>or</em> the combination of <code>USE SCHEMA</code>, <code>MODIFY</code>, <code>SELECT</code>, and <code>CREATE TABLE</code>
+</td>
+<td>Allows Klaviyo to create and manage temporary tables during sync.</td>
+</tr>
+<tr>
+<td><code>KLAVIYO_IMPORT_FROM_DWH</code></td>
+<td>
+<code>USE SCHEMA</code>, <code>SELECT</code>
+</td>
+<td>Allows Klaviyo to read your tables and views.</td>
+</tr>
+</tbody>
+</table>
+<pre><code class="language-sql">-- Grant permissions on temporary schema
+GRANT ALL PRIVILEGES ON SCHEMA main.KLAVIYO_TMP TO `klaviyo_service_user`;
+
+-- OR, grant granular privileges:
+GRANT USE SCHEMA, MODIFY, SELECT, CREATE TABLE ON SCHEMA main.KLAVIYO_TMP TO `klaviyo_service_user`;
+
+-- Grant read-only access to import schema
+GRANT USE SCHEMA, SELECT ON SCHEMA main.KLAVIYO_IMPORT_FROM_DWH TO `klaviyo_service_user`;
+</code></pre>
+<p><strong>Best practice:</strong> Apply the principle of least privilege—grant only what’s required.</p>
+<hr>
+<h2 id="h_01K8VPRYQWKEA12G31H6ETZM91">4) Verify Your Setup (Optional)</h2>
+<h3 id="h_01K8VPRYQW2YFHGY6QFTA3H9YX">4.1 Confirm the schemas exist</h3>
+<p>Run in a Databricks SQL notebook or editor:</p>
+<pre><code class="language-sql">SHOW SCHEMAS IN main;  -- replace 'main' with your catalog if different</code></pre>
+<p>You should see:</p>
+<pre><code class="language-auto">klaviyo_import_from_dwh
+klaviyo_tmp</code></pre>
+<h3 id="h_01K8VPRYQWM521DZZAWDY9X5KT">4.2 Test authentication (using your PAT)</h3>
+<p>Use the Databricks CLI with the same token you plan to provide to Klaviyo:</p>
+<pre><code class="language-bash"># Set your token and host (example for AWS)
+export DATABRICKS_HOST="https://&lt;your-workspace&gt;.cloud.databricks.com"
+export DATABRICKS_TOKEN="&lt;your-PAT&gt;"
+
+# Run a simple API call
+databricks current-user me</code></pre>
+<p><em>Expected result:</em> JSON output showing the user or service principal details (e.g., display name, user ID). If you get an HTTP 403 or authentication error, verify the token and host URL.</p>
+<h3 id="h_01K8VPRYQW2W9N9VDV3X1XSDJ2">4.3 Check permissions on each schema</h3>
+<pre><code class="language-sql">SHOW GRANTS ON SCHEMA main.klaviyo_tmp;
+SHOW GRANTS ON SCHEMA main.klaviyo_import_from_dwh;</code></pre>
+<p>Confirm that your Klaviyo account appears with the expected privileges (e.g., <code>USE SCHEMA</code>, <code>SELECT</code>, <code>MODIFY</code>, <code>CREATE TABLE</code>).</p>
+<h3 id="h_01K8VPRYQWQ1QEBBB57A2KJC54">4.4 Validate create/read operations</h3>
+<pre><code class="language-sql">-- Test create/drop in KLAVIYO_TMP
+USE SCHEMA main.klaviyo_tmp;
+CREATE TABLE IF NOT EXISTS test_permissions (id INT);
+DROP TABLE test_permissions;
+
+-- Test select in KLAVIYO_IMPORT_FROM_DWH
+USE SCHEMA main.klaviyo_import_from_dwh;
+SHOW TABLES;</code></pre>
+<p><strong>Tips:</strong></p>
+<ul>
+<li>Run these verification steps using the same identity and PAT that you’ll share with Klaviyo.</li>
+<li>Retain the SQL grant statements and verification output for audit/troubleshooting.</li>
+<li>Rotate the PAT on a regular cadence and after staff changes.</li>
+</ul>
+<hr>
+<h2 id="h_01K8VPRYQW9VTKZRAKC9WW7NS6">5) Connect Klaviyo to Databricks</h2>
+<p>Once Databricks is configured, complete the connection in Klaviyo.</p>
+<ol>
+<li>In Klaviyo, open the <strong>left sidebar</strong> and navigate to <strong>Advanced &gt; Syncing</strong>.</li>
+<li>Click <strong>Create sync</strong>.</li>
+<li>Select <strong>Import data from your data warehouse</strong>.</li>
+<li>Choose <strong>Databricks</strong> as your data warehouse.</li>
+<li>Click <strong>Connect to Databricks</strong>.</li>
+</ol>
+<p>When prompted, provide the following connection details:</p>
+<table>
+<tbody>
+<tr>
+<th style="text-align: center">Field</th>
+<th style="text-align: center">Description</th>
+<th style="text-align: center">Where to Find It</th>
+</tr>
+<tr>
+<td><strong>Hostname</strong></td>
+<td>The host indicated in the URL of your Databricks workspace.</td>
+<td>Found in your browser’s address bar when logged into Databricks:<br>
+<code>https://&lt;your-workspace&gt;.cloud.databricks.com</code><br>
+<br>
+Example: <code>abc-12345678.cloud.databricks.com</code>
+</td>
+</tr>
+<tr>
+<td><strong>HTTP Path</strong></td>
+<td>The HTTP path of the SQL Warehouse to use for queries.</td>
+<td>
+<p>In the Databricks UI:</p>
+<ol>
+<li>Go to <strong>SQL Warehouses</strong>.</li>
+<li>Select the warehouse you plan to use.</li>
+<li>Copy the <strong>HTTP Path</strong> under <strong>Connection details</strong>.</li>
+</ol>
+<p>Example: <code>/sql/1.0/warehouses/1234abcd5678efgh</code></p>
+</td>
+</tr>
+<tr>
+<td><strong>Catalog</strong></td>
+<td>The catalog containing your Klaviyo schemas (e.g., <code>main</code>).</td>
+<td>
+<p>Verify using:</p>
+<p>SHOW CATALOGS;</p>
+</td>
+</tr>
+<tr>
+<td><strong>Access Token</strong></td>
+<td>The personal access token (PAT) you created in Step 2.</td>
+<td>Store and paste the token securely during setup.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>After you connect:</strong> Klaviyo will test the connection and confirm access to your Databricks environment. Once verified, you can configure syncs to import data from the schemas you prepared earlier.</p>
+<hr>
+<p><em>Next step:</em> After connecting successfully, proceed to create your first sync in Klaviyo and start importing data from Databricks.</p>

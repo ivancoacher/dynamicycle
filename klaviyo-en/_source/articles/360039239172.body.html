@@ -1,0 +1,104 @@
+<h2 id="h_01HHFR3EWA2T4FMEYKC2E9KAW3">You will learn</h2>
+<p>Learn reasons why SMS message delivery can fail and best practices for avoiding failures.</p>
+<h2 id="h_01HHFR3EWA46A8W75V16ZNN9CS">Receiving an SMS error message</h2>
+<p>When sending SMS with Klaviyo, it is important to pay attention to your failed deliveries. Ideally, the failed delivery rate should be as low as possible. If you’re seeing a lot of failed deliveries, review the failure reasons and take action to prevent further delivery issues.</p>
+<p>To view this information for a text message:</p>
+<ol>
+<li>Navigate to the SMS flow or campaign you want to look at.
+<ul>
+<li>For flows, click on the SMS message and then click <strong>View all Analytics</strong> on the left-hand side.</li>
+<li>For campaigns, go directly to step 2.</li>
+</ul>
+</li>
+<li>Select <strong>Recipient activity.</strong>
+</li>
+<li>Select the <strong>Other</strong> dropdown menu.</li>
+<li>Choose <strong>Failed delivery.</strong>
+</li>
+<li>Review the reason for the message’s failure in the <em>Failed Reason</em> column.</li>
+</ol>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/28711677393051" alt="Failure reasons for SMS message in flow"></p>
+<h3 id="h_01HHFR3EWAN4XYYPZZDTVSA729">Device disconnected </h3>
+<p>The <em>Device disconnected </em>failure indicates that the recipient’s device is no longer in service.<br><br>If these errors exceed 5% of the total send, take the following resolution steps:</p>
+<ul>
+<li>Implement an <a href="https://help.klaviyo.com/hc/en-us/articles/9821790118171">SMS error segment</a> to ensure unreliable data is excluded from SMS sends.</li>
+</ul>
+<h3 id="h_01HHFR3EWAGQPX75E4Q2E1TYMH">Device unreachable</h3>
+<p>The <em>Device unreachable</em> failure indicates that the recipient’s device is not in a service area, not accepting messages, or the device is off and cannot receive SMS. </p>
+<p>If these errors exceed 5% of the total send, take the following resolution steps:</p>
+<ul>
+<li>Implement an <a href="https://help.klaviyo.com/hc/en-us/articles/9821790118171">SMS error segment</a> to ensure unreliable data is excluded from SMS sends.</li>
+</ul>
+<h3 id="h_01HHFR3EWAPTZ24M78BVD159V3">Carrier violation </h3>
+<p>The <em>Carrier violation</em> failure reason indicates that your send is failing due to mobile carrier filtering.<br><br>Mobile carriers filter SMS messages for 2 main reasons:</p>
+<ul>
+<li>Protect their customers from receiving spam messages.</li>
+<li>Meet regulations for sending SMS to phones in a specific country or on a certain mobile network.</li>
+</ul>
+<div class="bs-callout bs-callout-default">
+<p>SMS message filtering can vary by country and across different mobile networks (e.g., Verizon, AT&amp;T, etc.)</p>
+</div>
+<p>Carriers will filter messages that contain terms related to <a href="https://help.klaviyo.com/hc/en-us/articles/4401822831771">sex, hate, alcohol, firearms, and tobacco (SHAFT)</a>. SHAFT words are prohibited by the <a href="https://help.klaviyo.com/hc/en-us/articles/360035055312">CTIA</a>, the regulatory body which enforces guidelines for SMS messages. Further, terms that are considered or relate to profanity, controlled substances, or CBD are similarly filtered.</p>
+<p>If you are seeing<em> Carrier violation</em> failures exceed 10% of your total send, take the following actions: </p>
+<ul>
+<li>Remove any prohibited content prior that is classified as <a href="https://help.klaviyo.com/hc/en-us/articles/4401822831771">SHAFT or prohibited on SMS</a>.</li>
+<li>Ensure that the SMS message content does not resemble spam (e.g.,contain many capital letters or includes any bitly, tinyurl, or other third-party shortened links).</li>
+<li>Review your recent SMS campaign unsubscribe rates in relation to our <a href="https://help.klaviyo.com/hc/en-us/articles/360051110111">campaign SMS and MMS benchmarks</a>. If your unsubscribe rates are increasing or high, learn how to <a href="https://help.klaviyo.com/hc/en-us/articles/4404612542619">decrease your SMS unsubscribe rates</a>.</li>
+<li>Enable <a href="https://help.klaviyo.com/hc/en-us/articles/115005251108">double opt-in</a> to ensure users are aware of what they are subscribing to.</li>
+<li>Review <a href="https://help.klaviyo.com/hc/en-us/articles/4412878737051">SMS disclosure language</a> to ensure consent is transparent to the end user.</li>
+</ul>
+<p>Once you have completed the recommended resolution actions, test an SMS message through a preview.</p>
+<div class="bs-callout bs-callout-default">
+<p>Make sure to test this with a preview SMS, rather than a campaign. </p>
+</div>
+<p>If your delivery problems persist, you can reach out to Klaviyo’s <a href="https://help.klaviyo.com/hc/en-us/articles/115001002272">support team</a>.</p>
+<h3 id="h_01HHFR3EWADN7563K8P9H0WC58">Message blocked</h3>
+<p>The <em>Message blocked </em>failure reason indicates that a wireless carrier, Klaviyo's system, or the recipient has blocked the message. Klaviyo will automatically suppress failures where the error is returned as <em>Message blocked</em>,so that these errors do not reoccur on the same number. </p>
+<p>If a single number is repeatedly receiving <em>Message blocked</em> errors, it signifies a continual manual upload of numbers. The origin of those errors relates to the mobile provider observing a STOP from the recipient handset to sender, but there is an attempt to continue sending to the user in their opted out state. </p>
+<p>If you are seeing <em>Message blocked </em>errors exceed 5% of your total send, take the following resolution steps: </p>
+<ul>
+<li>Implement an <a href="https://help.klaviyo.com/hc/en-us/articles/9821790118171">SMS error segment</a> to ensure unreliable data is excluded from your sends. </li>
+<li>Enable <a href="https://help.klaviyo.com/hc/en-us/articles/115005251108">double opt-in</a> to require customers to confirm subscriptions in order to prevent invalid numbers from entering subscriber lists. </li>
+<li>Refrain from uploading unknown SMS data.</li>
+</ul>
+<h3 id="h_01HHFR3EWADTARPVDYKHHP4M7T">Device incapable of receiving SMS</h3>
+<p>The <em>Device incapable of receiving SMS</em> failure reason relates to landlines or other devices that cannot receive the SMS as they’re not designed to do so. Klaviyo will automatically suppress failures where the error is returned as <em>Device incapable of receiving SMS</em>. </p>
+<p>If you are seeing <em>Device incapable of receiving SMS </em>failures exceed 5% of your total send, take the following resolution steps: </p>
+<ul>
+<li>Implement an <a href="https://help.klaviyo.com/hc/en-us/articles/9821790118171">SMS error segment</a> to ensure unreliable data is excluded from your sends. </li>
+<li>Enable <a href="https://help.klaviyo.com/hc/en-us/articles/115005251108">double opt-in</a> to require customers to confirm subscriptions in order to prevent landlines or ineligible numbers from joining subscriber lists.</li>
+</ul>
+<h3 id="h_01HHFR3EWAY0K2ZVT125KQTTCE">Toll-free number not registered or number not verified </h3>
+<p>The <em>Number not verified error</em> indicates that subscribers are not receiving messages to their device because your Sender ID has not been approved. </p>
+<ul>
+<li>Ensure that the sender ID is <a href="https://help.klaviyo.com/hc/en-us/articles/4415873897499"><em>Verified</em></a> or <a href="https://help.klaviyo.com/hc/en-us/articles/14953787622427"><em>Approved</em></a> from the SMS settings section of your Klaviyo account. Refrain from sending SMS via flows until applicable sender IDs are verified.</li>
+</ul>
+<p>Once you have completed the recommended resolution actions, test an SMS message through a preview.</p>
+<div class="bs-callout bs-callout-default">
+<p>Make sure to test this with a preview SMS, rather than a campaign. </p>
+</div>
+<p>If delivery problems persist, reach out to Klaviyo’s <a href="https://help.klaviyo.com/hc/en-us/articles/115001002272">support team</a>.</p>
+<h3>Invalid content type</h3>
+<p>The <em>Invalid content type </em>error includes when you send some content (e.g., image file type) that carriers don't support. </p>
+<p>For instance, WebP<em> </em>files are not supported by mobile carriers. That file type is designed to work on internet browsers and while the user is online. It is not ideal for any use case outside of that, including being sent via mobile networks.  </p>
+<h3 id="h_01HHFR3EWAJ9VJCTK45GRNHJZX">Unknown errors </h3>
+<p>The <em>Unknown </em>failure reason indicates that the wireless carrier did not report why a message could not be delivered.</p>
+<p>If you are seeing <em>Unknown</em> failures exceed 10% of your total send, you can reach out to Klaviyo’s <a href="https://help.klaviyo.com/hc/en-us/articles/115001002272">support team</a>. </p>
+<h2 id="h_01HHFR3EWA2GYMHSJHS79S5RJF">Best practices for not being filtered</h2>
+<p>To try and prevent from being filtered by mobile carriers or having sending failures, it’s important to follow best practices for SMS messaging. Make sure you are personalizing your messages and providing value to your subscribers.</p>
+<p>See our <a href="https://help.klaviyo.com/hc/en-us/articles/360047879512">recommended SMS segments</a> to better understand your audience and send more targeted messages with Klaviyo. </p>
+<p>Following these best practices can also lead to better SMS delivery: </p>
+<ul>
+<li>Always provide a way for subscribers to easily opt out. Carriers heavily filter messages that don't include STOP language.</li>
+<li>Enable <a href="https://help.klaviyo.com/hc/en-us/articles/115005251108">double opt-in</a> for SMS lists.</li>
+<li>Let subscribers know who is sending the message.</li>
+<li>Do not send SMS messages <a href="https://help.klaviyo.com/hc/en-us/articles/4408737146651">early in the morning or late at night</a>, as a text message from a business during off-hours may be seen as intrusive.</li>
+<li>Take advantage of <a href="https://help.klaviyo.com/hc/en-us/articles/115002779311">Smart Sending</a> to avoid overloading SMS subscribers with messages.</li>
+<li>Use a personal tone to sound more human.</li>
+<li>Avoid SHAFT-related words.</li>
+<li>Use a trusted sending number, such as a short code or verified toll-free number.</li>
+</ul>
+<h2 id="h_01HHFR3EWABBEF1D7SAPCACBC5">Additional resources </h2>
+<p><a href="https://help.klaviyo.com/hc/en-us/articles/360035345572">Understanding SMS metrics</a></p>
+<p><a href="https://academy.klaviyo.com/writing-sms-and-mms-copy">Guide to writing SMS copy</a></p>
+<p><a href="https://help.klaviyo.com/hc/en-us/articles/4401822831771">SMS and MMS prohibited content in the US</a></p>

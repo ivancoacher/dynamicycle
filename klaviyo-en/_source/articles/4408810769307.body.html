@@ -1,0 +1,52 @@
+<h2 id="01FJZ32RN3ZN3XJKGT3N101XGQ">You will learn</h2>
+<p>Learn about the <em>Dynamic Image</em> option in an email image block, including how to find the right personalization tag to use and add it to an email template. </p>
+<p>Dynamic images allow you to customize each recipient’s message based on data stored in their Klaviyo profile or event data. For example, you can use this feature to display an item they recently added to their cart in a flow triggered by the Added to Cart metric. Or, by storing a unique image URL in a subscriber’s profile, you can show that custom image in campaigns you send them.</p>
+<h2 id="01FJZ32RN3A4YTW08MN3F014W7">Store your images in a profile or event</h2>
+<p>You can display dynamic images from event data (e.g., started checkout events for an abandoned cart flow) in metric-triggered flow emails. Images stored in event data cannot be displayed in campaigns or non-metric triggered flows, which can only use images stored on the recipient's profile as profile properties.</p>
+<h3 id="01FJZ32RN3Y3FSYZ7FF7610HQM">Storing images for campaigns and non-metric triggered flows</h3>
+<p>To display a dynamic image in a campaign or non-metric triggered flow (i.e., a flow triggered by a list, segment, or date), an image URL (e.g., <a href="https://www.klaviyo.com/static/klaviyo-social-share-image.jpg">https://www.klaviyo.com/static/klaviyo-social-share-image.jpg</a>) must be stored in each recipient’s profile properties. You can add an image URL to their profile properties in the following ways: </p>
+<ul>
+<li><a href="https://klaviyo.zendesk.com/hc/en-us/articles/1260806293150">Upload a CSV of profile data</a></li>
+<li><a href="https://klaviyo.zendesk.com/hc/en-us/articles/360049626051">Use a third-party integration </a></li>
+<li><a href="https://developers.klaviyo.com/en/reference/api_overview">Use Klaviyo’s APIs</a></li>
+</ul>
+<h3 id="01FJZ32RN4G932M83GJVA0KHNA">Storing images for metric-triggered flows</h3>
+<p>To display a dynamic image in a metric-triggered flow (e.g., a flow triggered by an Add to Cart event), you can either use profile data stored using the methods outlined above, or use event data from the metric that triggers the flow. </p>
+<p>Note that event data can only be used in a flow triggered by that event. </p>
+<p>You can add event data to Klaviyo in the following ways: </p>
+<ul>
+<li><a href="https://klaviyo.zendesk.com/hc/en-us/articles/115000256472">Through a default Klaviyo integration</a></li>
+<li><a href="https://klaviyo.zendesk.com/hc/en-us/articles/360049626051">Through a third-party integration</a></li>
+<li><a href="https://developers.klaviyo.com/en/reference/api_overview">Using Klaviyo’s APIs</a></li>
+</ul>
+<h2 id="01FJZ32RN4QKPEGVSMZ941X3AS">Add a dynamic image to an email</h2>
+<p>Once you’ve stored your dynamic image information in Klaviyo, identify the correct tag to use to include it in your email. </p>
+<ol>
+<li>Open the email template where you’d like to add the dynamic image.</li>
+<li>Click <strong>Preview &amp; test</strong>.</li>
+<li>Scroll through the sample event and profile data under <strong>All properties</strong> until you find the image variable. Then, click the variable name to copy it.</li>
+<li>Once you’ve copied your tag, drag an image block into your message.</li>
+<li>Click <strong>Select image &gt; Dynamic Image</strong>.</li>
+<li>Paste the tag into the <em>Dynamic variable or dynamic URL</em> field.</li>
+<li>Finally, preview your email to ensure that the tag is working correctly. If you don't see your image, double check that you’ve selected an event or profile that contains the variable you used. </li>
+</ol>
+<h2 id="01FJZ32RN485M57MDSPCX0ENEB">Add a backup image</h2>
+<p>If you aren’t confident that every email recipient will have an image available in their profile or event data, consider using a backup image so the area doesn’t appear blank. There are 2 ways to add a backup image: </p>
+<h3 id="01FJZ32RN47BVP9DHVJFEMA7CE">Use the missing product filter </h3>
+<p>Add the missing product filter to the end of your dynamic image variable to use Klaviyo’s default backup image. To add this filter, add |missing_product_image after the dynamic image variable, like this: </p>
+<p><code>{{ event.image_url|missing_product_image }}</code></p>
+<p>If anyone who receives the email is missing an image, they’ll see the missing product image instead:</p>
+<p class="wysiwyg-text-align-center"><img src="https://klaviyo.zendesk.com/hc/article_attachments/28704485792155" alt="The missing image placeholder"></p>
+<h3 id="01FJZ32RN4AC4SNT1A1XNASEPS">Set your own backup image</h3>
+<p>To choose your own backup image, apply the default filter with an image URL of your choosing. This will display your custom backup image if a recipient doesn’t have an image set. To add this filter, add |default:'' to the end of your image variable with your custom image URL between the single quotes, like this: </p>
+<p><code>  {{ event.image_url|default:'www.example.com/custom_image_url.jpg' }}</code></p>
+<h2 id="01FJZ32RN42ZS0A1XXARN487EK">Additional resources</h2>
+<ul>
+<li><a href="https://help.klaviyo.com/hc/en-us/articles/4408810654235">How to add personalization into text blocks</a></li>
+<li><a href="https://help.klaviyo.com/hc/en-us/articles/4408802597659">How to build dynamic blocks in a flow email</a></li>
+<li><a href="https://klaviyo.zendesk.com/hc/en-us/articles/360003057151">How to create a metric-triggered flow</a></li>
+<li><a href="https://klaviyo.zendesk.com/hc/en-us/articles/115005256968">How to embed assets directly in an email </a></li>
+</ul>
+<p><br>
+<br>
+</p>

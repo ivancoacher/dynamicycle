@@ -1,0 +1,855 @@
+{
+  "captured_at": "2026-05-23T16:18:17Z",
+  "article": {
+    "id": 115002779431,
+    "url": "https://klaviyo.zendesk.com/api/v2/help_center/en-us/articles/115002779431.json",
+    "html_url": "https://klaviyo.zendesk.com/hc/en-us/articles/115002779431-How-to-create-a-product-specific-flow",
+    "author_id": 20424705848,
+    "comments_disabled": true,
+    "draft": false,
+    "promoted": false,
+    "position": 5,
+    "vote_sum": 106,
+    "vote_count": 332,
+    "section_id": 49375570280603,
+    "created_at": "2017-11-15T15:44:42Z",
+    "updated_at": "2026-04-21T13:56:38Z",
+    "name": "How to create a product-specific flow",
+    "title": "How to create a product-specific flow",
+    "source_locale": "en-us",
+    "locale": "en-us",
+    "outdated": false,
+    "outdated_locales": [],
+    "edited_at": "2024-04-11T09:19:42Z",
+    "user_segment_id": null,
+    "permission_group_id": 146372,
+    "content_tag_ids": [],
+    "label_names": [],
+    "body": "<h2 id=\"h_01HGGH8ZYHVNKVG3NH5DY6MM5R\">You will learn</h2>\n<p>Learn how to create several types of product-specific flows. You must have metrics in your account in order to split or filter by a product. If there's no metrics, the dimension fields will not populate any products.</p>\n<p>When setting up an abandoned cart, browse abandonment, or post-purchase flow, you may want to filter or split your flow based on the specific item someone left in their cart, viewed, or purchased. This can be useful if you want to offer instructions or messaging around a specific product or products.</p>\n<p>This practice works best if you only offer a handful of products and would like to offer very tailored information on each (or only one) of them. This can also be a useful technique if you would like to target people who are purchasing specific items together and tailor the post-purchase experience to this combination of products.</p>\n<h2 id=\"h_01HGGH8ZYJHYGB8Y31PW5SAK29\">Filter or split a flow based on one specific product</h2>\n<h3 id=\"h_01HGGH8ZYJZ0B141Q76M6FBA8Y\">Post-purchase</h3>\n<p>In our post-purchase flow example, let's say that we just released a new product (a lip balm) and would like to reach out to customers who bought this item to provide feedback. Keep in mind that the trigger filters and splits available for you to use will depend on the event that triggers the flow in the first place. Not all flow triggers will be filterable by product.</p>\n<p>In this example, our flow will be triggered by placing an order. Then, we're going to want to get more granular and identify the specific item someone bought.</p>\n<p>To configure this, we'll need the following flow trigger and trigger split conditions:</p>\n<ul>\n<li>\n<strong>Trigger:</strong> Placed Order</li>\n<li>\n<strong>Trigger Split Filter 1:</strong> Item Count equals \"1\"<br>AND</li>\n<li>\n<strong>Trigger Split Filter 2: </strong>Items contains \"lip balm\"</li>\n</ul>\n<p>We only want to identify customers who bought one item because we want to assume that the lip balm is the only item they purchased. If we would like to target anyone who bought lip balm, regardless of whether or not they bought something else, we can remove this filter.</p>\n<p><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28723517398939\" alt=\"Trigger Split with configuration 'Items contains lip balm' before the first email\"></p>\n<p>You can use this configuration as a trigger filter as well in case you would like to create entirely separate flows for whenever someone purchases a specific product (and only that product).</p>\n<p><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28723505746843\" alt=\"Trigger Setup menu with trigger filter 'Items contains lip balm'\"></p>\n<h3 id=\"h_01HGGH8ZYJHGGJSS68JRWHE4JH\">Browse abandonment</h3>\n<p>In our browse abandonment flow example, let’s say you want to offer a discount to only those who view the product with the highest margin or price (matte gloss). Select a browse abandonment flow from the Flow Library and then add a trigger split.</p>\n<p>To configure this split, we’ll need the following flow trigger and trigger split conditions:</p>\n<ul>\n<li>\n<strong>Trigger</strong>: Viewed Product</li>\n<li>\n<strong>Profile Filter</strong>: Placed Order zero times since starting this flow<br>AND</li>\n<li>\n<strong>Profile Filter</strong>: Started Checkout zero times since starting this flow</li>\n<li>\n<strong>Profile Filter</strong>: Has not been in flow in the last 30 days</li>\n<li>\n<strong>Trigger Split Filter 1</strong>: Name contains “matte gloss”</li>\n</ul>\n<p><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28723517406747\" alt=\"Trigger split with configuration 'Name contains matte gloss'\"></p>\n<h3 id=\"h_01HGGH8ZYJKXYEHZY5NHB23R5B\">Abandoned cart</h3>\n<p>In our abandoned cart flow example, let's say we have excess inventory and want to offer shoppers a discount to buy a specific product (matte gloss), but only that product. We're going to start with the default abandoned cart flow and then drag in a Trigger Split to isolate this specific item.</p>\n<p>To configure this, we'll need the following Flow Trigger and Trigger Split conditions:</p>\n<ul>\n<li>\n<strong>Trigger:</strong> Started Checkout</li>\n<li>\n<strong>Profile Filter: </strong>Placed Order zero times since starting this flow </li>\n<li>\n<strong>Trigger Split Filter 1:</strong> Items contains \"matte gloss\" <br>AND</li>\n<li>\n<strong>Trigger Split Filter 2: </strong>Item Count equals \"1\"</li>\n</ul>\n<p><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28723505753755\" alt=\"Trigger split with configuration 'Items contains matte gloss AND Item Count equals 1'\"></p>\n<h2 id=\"h_01HGGH8ZYJW765ESS67XNBRFV9\">Filter or split a flow based on a combination of products</h2>\n<p>There may be cases in which you would like to filter or split your flow based on a combination of products. Let's say that we'd like to offer specific advice to people who buy two items at the same time (a lip balm and a certain lip gloss). To configure this, we'd follow the same steps as above, but change the following:</p>\n<ul>\n<li>\n<strong>Flow Trigger: </strong>Placed Order</li>\n<li>\n<strong>Trigger Split Filter 1:</strong> Items contains \"lip balm\"<br>AND</li>\n<li>\n<strong>Trigger Split Filter 2: </strong>Items contains \"matte gloss<br>AND</li>\n<li>\n<strong>Trigger Filter 3: </strong>Item Count equals \"2\"</li>\n</ul>\n<p><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28723517413403\" alt=\"Trigger split with configuration 'Item Count equals 2 AND Items contains lip balm AND Items contains matte gloss'\"></p>\n<h2 id=\"h_01HGGH8ZYJEAZFS4HH9M8A1ABJ\">Additional resources</h2>\n<p>Learn how to create different types of flows:</p>\n<ul>\n<li><a href=\"https://klaviyo.zendesk.com/hc/en-us/articles/360028872611\" target=\"_self\">How to create a post-purchase flow</a></li>\n<li><a href=\"https://klaviyo.zendesk.com/hc/en-us/articles/115002775252\" target=\"_self\">How to create a browse abandonment flow</a></li>\n<li><a href=\"https://klaviyo.zendesk.com/hc/en-us/articles/115002779411\" target=\"_self\">How to create an abandoned cart flow</a></li>\n</ul>\n<p>Learn more about trigger filters and splits: </p>\n<ul>\n<li><a href=\"https://help.klaviyo.com/hc/en-us/articles/115002779051\" target=\"_blank\" rel=\"noopener\">Understand flow triggers and filters</a></li>\n<li><a href=\"https://help.klaviyo.com/hc/en-us/articles/115003885632\" target=\"_blank\" rel=\"noopener\">How to add a trigger split to a flow</a></li>\n<li><a href=\"https://help.klaviyo.com/hc/en-us/articles/115003883992\" target=\"_blank\" rel=\"noopener\">Understand flow branching</a></li>\n</ul>\n<p>See how to <a href=\"https://help.klaviyo.com/hc/en-us/articles/115002775212\" target=\"_blank\" rel=\"noopener\">create a upsell or cross-sell flow</a></p>",
+    "user_segment_ids": []
+  },
+  "normalized": {
+    "id": "115002779431",
+    "title": "How to create a product-specific flow",
+    "source_url": "https://help.klaviyo.com/hc/en-us/articles/115002779431-How-to-create-a-product-specific-flow",
+    "section_id": 49375570280603,
+    "section": "Ecommerce-specific flows",
+    "category_id": 115000312411,
+    "category": "Flows",
+    "category_slug": "flows",
+    "klaviyo_updated": "2026-04-21T13:56:38Z",
+    "created_at": "2017-11-15T15:44:42Z",
+    "draft": false,
+    "promoted": false,
+    "position": 5,
+    "label_names": []
+  },
+  "files": {
+    "body_html": "_source/articles/115002779431.body.html",
+    "rendered_html": "_source/rendered/115002779431.html"
+  },
+  "assets": {
+    "api_body": {
+      "images": [
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28723517398939",
+          "alt": "Trigger Split with configuration 'Items contains lip balm' before the first email",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28723505746843",
+          "alt": "Trigger Setup menu with trigger filter 'Items contains lip balm'",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28723517406747",
+          "alt": "Trigger split with configuration 'Name contains matte gloss'",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28723505753755",
+          "alt": "Trigger split with configuration 'Items contains matte gloss AND Item Count equals 1'",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28723517413403",
+          "alt": "Trigger split with configuration 'Item Count equals 2 AND Items contains lip balm AND Items contains matte gloss'",
+          "width": "",
+          "height": ""
+        }
+      ],
+      "links": [
+        {
+          "href": "https://klaviyo.zendesk.com/hc/en-us/articles/360028872611",
+          "text": "How to create a post-purchase flow"
+        },
+        {
+          "href": "https://klaviyo.zendesk.com/hc/en-us/articles/115002775252",
+          "text": "How to create a browse abandonment flow"
+        },
+        {
+          "href": "https://klaviyo.zendesk.com/hc/en-us/articles/115002779411",
+          "text": "How to create an abandoned cart flow"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115002779051",
+          "text": "Understand flow triggers and filters"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115003885632",
+          "text": "How to add a trigger split to a flow"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115003883992",
+          "text": "Understand flow branching"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115002775212",
+          "text": "create a upsell or cross-sell flow"
+        }
+      ],
+      "headings": [
+        {
+          "level": 2,
+          "id": "h_01HGGH8ZYHVNKVG3NH5DY6MM5R",
+          "text": "You will learn"
+        },
+        {
+          "level": 2,
+          "id": "h_01HGGH8ZYJHYGB8Y31PW5SAK29",
+          "text": "Filter or split a flow based on one specific product"
+        },
+        {
+          "level": 3,
+          "id": "h_01HGGH8ZYJZ0B141Q76M6FBA8Y",
+          "text": "Post-purchase"
+        },
+        {
+          "level": 3,
+          "id": "h_01HGGH8ZYJHGGJSS68JRWHE4JH",
+          "text": "Browse abandonment"
+        },
+        {
+          "level": 3,
+          "id": "h_01HGGH8ZYJKXYEHZY5NHB23R5B",
+          "text": "Abandoned cart"
+        },
+        {
+          "level": 2,
+          "id": "h_01HGGH8ZYJW765ESS67XNBRFV9",
+          "text": "Filter or split a flow based on a combination of products"
+        },
+        {
+          "level": 2,
+          "id": "h_01HGGH8ZYJEAZFS4HH9M8A1ABJ",
+          "text": "Additional resources"
+        }
+      ]
+    },
+    "rendered_page": {
+      "images": [
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/7ff492c2b417b7ecfe572f839a8a81398693c1f7-1920x1080.webp",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/8047b1b9df8c6f046d9f1a825a62ad3e0f8e1a3e-1200x788.jpg",
+          "alt": "Trigger Split with configuration 'Items contains lip balm' before the first email",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/0a3c4f295191b0babc017d1883952e651233ae5e-1200x704.jpg",
+          "alt": "Trigger Setup menu with trigger filter 'Items contains lip balm'",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/c83fa757e2bc39ebdee6e156c0872abac471e0df-1200x728.jpg",
+          "alt": "Trigger split with configuration 'Name contains matte gloss'",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/296a6e23e18446a6b11b680729572c18416cff55-1200x740.jpg",
+          "alt": "Trigger split with configuration 'Items contains matte gloss AND Item Count equals 1'",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/ac11f7956a1069eab83bd62f2e5262abf4dd18d3-1200x816.jpg",
+          "alt": "Trigger split with configuration 'Item Count equals 2 AND Items contains lip balm AND Items contains matte gloss'",
+          "width": "",
+          "height": ""
+        }
+      ],
+      "links": [
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115002779431-How-to-create-a-product-specific-flow#site-content",
+          "text": "Skip to main content"
+        },
+        {
+          "href": "https://www.klaviyo.com",
+          "text": "Home"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center"
+        },
+        {
+          "href": "https://www.klaviyo.com/enterprise",
+          "text": "Enterprise"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Partners"
+        },
+        {
+          "href": "https://www.klaviyo.com/careers",
+          "text": "Careers"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": "Log in"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": ""
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center Find step-by-step instructions and troubleshooting solutions in our knowledge base."
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000032731",
+          "text": "Integrations"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000312411",
+          "text": "Flows"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867867",
+          "text": "Audience"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867667",
+          "text": "Campaigns"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/360000190711",
+          "text": "Sign-up forms"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000873988",
+          "text": "Deliverability & compliance"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/29173800271259",
+          "text": "SMS"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/16638219724187",
+          "text": "Reviews"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/18073014919195",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/34141283979931",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/37659126754075",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/33948021740315",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/39746685522331",
+          "text": "WhatsApp"
+        },
+        {
+          "href": "https://academy.klaviyo.com",
+          "text": "Klaviyo Academy Expert training and education to help you succeed with Klaviyo, and beyond."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Quick+guide&resource=academy_courses",
+          "text": "Quick guides Learn marketing strategies and concepts in 15 minutes or less."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Course&resource=academy_courses",
+          "text": "Courses Master key marketing topics through structured lessons and exams."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/best-practices",
+          "text": "Best practices Discover top product and marketing strategies for your business."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/learning-paths",
+          "text": "Learning paths Complete curated learning journeys tailored to your marketing goals."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses",
+          "text": "Explore all resources"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Live+training&resource=academy_courses",
+          "text": "Live trainings Build confidence through hands-on interactive workshops and thought-provoking strategy sessions."
+        },
+        {
+          "href": "https://www.bigmarker.com/klaviyo-customer-education/Office-hours-Getting-started-with-Klaviyo",
+          "text": "Live office hours Join a strategic discussion where you can ask questions and get answers in real-time."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/private-live-training",
+          "text": "1:1 Live training Book a private training session with an expert to jumpstart your platform knowledge and confidence."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/credentials",
+          "text": "Klaviyo credentials Dig deeper into select topics and showcase your expertise with a final exam to earn a certificate and digital badge."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/certificates/klaviyo-practitioner-certificate",
+          "text": "Klaviyo practitioner certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/deliverability-certificate",
+          "text": "Deliverability certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/developer-certificate",
+          "text": "Klaviyo developer certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses&select=Certificate",
+          "text": "See all certificates"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Klaviyo Community Join our thriving community network to connect with brands like yours—online and in person."
+        },
+        {
+          "href": "https://community.klaviyo.com/topic/new",
+          "text": "Ask a question Post a question and get thoughtful answers from Klaviyo powerusers."
+        },
+        {
+          "href": "https://community.klaviyo.com/p/roadmap",
+          "text": "Product roadmap"
+        },
+        {
+          "href": "https://community.klaviyo.com/search/activity/recent",
+          "text": "Recent threads"
+        },
+        {
+          "href": "https://community.klaviyo.com/p/champions",
+          "text": "Meet the Champions"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups",
+          "text": "Browse all groups Your people are waiting. New ideas and connections are a click away."
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/developer-group-64",
+          "text": "Developer group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/entrepreneur-user-group-118",
+          "text": "Entrepreneur group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/woo-user-group-87",
+          "text": "WooCommerce group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/new-york-meetup-chapter-82",
+          "text": "New York City"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/los-angeles-meetup-chapter-83",
+          "text": "Los Angeles"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/austin-meetup-chapter-85",
+          "text": "Austin"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/san-diego-meetup-chapter-86",
+          "text": "San Diego"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/amsterdam-meetup-chapter-84",
+          "text": "Amsterdam"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Klaviyo Developers Access API documentation and developer guides to help you build with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/get_started",
+          "text": "Get started Access key resources and a step-by-step checklist for how to start developing with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/build_your_integration",
+          "text": "Grow your app's reach Learn how to join our ecosystem and get your app listed on our marketplace."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/developer-tools",
+          "text": "Developer tools Generate sample data, monitor your API usage, and access our Postman collections."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/reference/api_overview",
+          "text": "API reference Browse our full catalog of API docs."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/changelog_",
+          "text": "Changelog"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/api_versioning_and_deprecation_policy",
+          "text": "Versioning & deprecation policy"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/rate_limits_and_error_handling",
+          "text": "Rate limits & error handling"
+        },
+        {
+          "href": "https://youtube.com/playlist?list=PLHkNfHgtxcUanrkMnKPdkRzuWU7MGv_xM&si=pkG-KH7IT_TUHOGC",
+          "text": "API tutorials on YouTube Subscribe to our Klaviyo API Tutorials playlist for easy access to step-by-step developer walkthroughs."
+        },
+        {
+          "href": "https://www.klaviyo.com/contact-us",
+          "text": "Contact us"
+        },
+        {
+          "href": "https://www.klaviyo.com/sign-up",
+          "text": "Sign up"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": "Search"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115002779431",
+          "text": "United States - EN"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/de-de/articles/115002779431",
+          "text": "Deutschland - DE"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-es/articles/115002779431",
+          "text": "España - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-mx/articles/115002779431",
+          "text": "México - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/fr-fr/articles/115002779431",
+          "text": "France - FR"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/it-it/articles/115002779431",
+          "text": "Italia - IT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/ko-kr/articles/115002779431",
+          "text": "한국 - KO"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/nl-nl/articles/115002779431",
+          "text": "Nederland - NL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pl-pl/articles/115002779431",
+          "text": "Polska - PL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pt-br/articles/115002779431",
+          "text": "Brasil - PT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/sv-se/articles/115002779431",
+          "text": "Sverige - SV"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/14543713508123",
+          "text": "Flow best practices and examples"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/49375570280603",
+          "text": "Ecommerce-specific flows"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115002779431-How-to-create-a-product-specific-flow#h_01HGGH8ZYHVNKVG3NH5DY6MM5R",
+          "text": "You will learn"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115002779431-How-to-create-a-product-specific-flow#h_01HGGH8ZYJHYGB8Y31PW5SAK29",
+          "text": "Filter or split a flow based on one specific product"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115002779431-How-to-create-a-product-specific-flow#h_01HGGH8ZYJW765ESS67XNBRFV9",
+          "text": "Filter or split a flow based on a combination of products"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115002779431-How-to-create-a-product-specific-flow#additional-resources",
+          "text": "Additional resources"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360028872611",
+          "text": "How to create a post-purchase flow"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115002775252",
+          "text": "How to create a browse abandonment flow"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115002779411",
+          "text": "How to create an abandoned cart flow"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115002779051",
+          "text": "Understanding flow triggers and filters"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115003885632",
+          "text": "How to add a trigger split to a flow"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115003883992",
+          "text": "Understanding flow branching"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115002775212",
+          "text": "How to create an upsell or cross-sell flow"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115001002272",
+          "text": "Learn how to contact support"
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": ""
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": "Visit Community"
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": ""
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": "Hire a partner"
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/about",
+          "text": "About Klaviyo"
+        },
+        {
+          "href": "https://www.klaviyo.com/newsroom",
+          "text": "Newsroom"
+        },
+        {
+          "href": "https://investors.klaviyo.com/overview/default.aspx",
+          "text": "Investor relations"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Agency and tech partners"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Developers"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/retail",
+          "text": "Retail and ecommerce"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/restaurants",
+          "text": "Restaurant marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/wellness",
+          "text": "Wellness"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform",
+          "text": "B2C CRM overview"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai",
+          "text": "Klaviyo AI (K:AI)"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/marketing-automation",
+          "text": "Klaviyo Marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-service",
+          "text": "Klaviyo Service"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/analytics",
+          "text": "Klaviyo Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-data-platform",
+          "text": "Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare",
+          "text": "Klaviyo vs. Klaviyo alternatives"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-mailchimp",
+          "text": "Klaviyo vs. Mailchimp"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-postscript",
+          "text": "Klaviyo vs. Postscript"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-attentive",
+          "text": "Klaviyo vs. Attentive"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-salesforce-marketing-cloud",
+          "text": "Klaviyo vs. Salesforce"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-listrak",
+          "text": "Klaviyo vs. Listrak"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/omnichannel",
+          "text": "Omnichannel marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/email-marketing",
+          "text": "Email marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing",
+          "text": "SMS marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing/rcs",
+          "text": "RCS for Business"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/mobile-app-marketing",
+          "text": "Mobile app marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/whatsapp",
+          "text": "WhatsApp marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/social",
+          "text": "Social marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources",
+          "text": "Marketing resources"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources/marketing-campaign-calendar",
+          "text": "Marketing campaign calendar"
+        },
+        {
+          "href": "https://www.klaviyo.com/glossary",
+          "text": "Marketing glossary"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/email-subject-line-generator",
+          "text": "Subject line generator"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/roi-calculator",
+          "text": "ROI calculator"
+        },
+        {
+          "href": "https://www.klaviyo.com/customers",
+          "text": "Case studies"
+        },
+        {
+          "href": "https://www.klaviyo.com/composer",
+          "text": "Composer Beta"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/marketing-agent",
+          "text": "Marketing Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/customer-agent",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/customer-experience-hub",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/helpdesk",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/marketing-analytics",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/advanced-cdp",
+          "text": "Advanced Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/web-forms",
+          "text": "Web forms"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/email-templates",
+          "text": "Email templates"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/portfolio",
+          "text": "Portfolio"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform-integrations",
+          "text": "Apps and Integrations"
+        },
+        {
+          "href": "https://www.klaviyo.com/features",
+          "text": "Features"
+        },
+        {
+          "href": "https://www.klaviyo.com/whats-new",
+          "text": "What's new"
+        },
+        {
+          "href": "https://www.klaviyo.com/events",
+          "text": "Events"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help Center"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us",
+          "text": "Academy"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Community"
+        },
+        {
+          "href": "https://www.facebook.com/Klaviyo/",
+          "text": "Facebook"
+        },
+        {
+          "href": "https://twitter.com/klaviyo/",
+          "text": "Twitter"
+        },
+        {
+          "href": "https://www.linkedin.com/company/klaviyo/",
+          "text": "LinkedIn"
+        },
+        {
+          "href": "https://www.instagram.com/klaviyo/",
+          "text": "Instagram"
+        },
+        {
+          "href": "https://www.klaviyo.com/sitemap",
+          "text": "Site Map"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal",
+          "text": "Terms and Privacy"
+        },
+        {
+          "href": "https://www.klaviyo.com/security",
+          "text": "Security"
+        },
+        {
+          "href": "https://www.klaviyo.com/trust",
+          "text": "Trust"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal/intellectual-property-notices",
+          "text": "Intellectual Property Notices"
+        }
+      ],
+      "headings": [
+        {
+          "level": 1,
+          "id": "",
+          "text": "How to create a product-specific flow"
+        },
+        {
+          "level": 2,
+          "id": "h_01HGGH8ZYHVNKVG3NH5DY6MM5R",
+          "text": "You will learn"
+        },
+        {
+          "level": 2,
+          "id": "h_01HGGH8ZYJHYGB8Y31PW5SAK29",
+          "text": "Filter or split a flow based on one specific product"
+        },
+        {
+          "level": 3,
+          "id": "h_01HGGH8ZYJZ0B141Q76M6FBA8Y",
+          "text": "Post-purchase"
+        },
+        {
+          "level": 3,
+          "id": "h_01HGGH8ZYJHGGJSS68JRWHE4JH",
+          "text": "Browse abandonment"
+        },
+        {
+          "level": 3,
+          "id": "h_01HGGH8ZYJKXYEHZY5NHB23R5B",
+          "text": "Abandoned cart"
+        },
+        {
+          "level": 2,
+          "id": "h_01HGGH8ZYJW765ESS67XNBRFV9",
+          "text": "Filter or split a flow based on a combination of products"
+        },
+        {
+          "level": 2,
+          "id": "additional-resources",
+          "text": "Additional resources"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "Explore more from Klaviyo"
+        }
+      ]
+    }
+  },
+  "rendered_page": {
+    "status": "fetched",
+    "error": ""
+  }
+}

@@ -1,0 +1,780 @@
+{
+  "captured_at": "2026-05-23T16:19:13Z",
+  "article": {
+    "id": 18596283143707,
+    "url": "https://klaviyo.zendesk.com/api/v2/help_center/en-us/articles/18596283143707.json",
+    "html_url": "https://klaviyo.zendesk.com/hc/en-us/articles/18596283143707-How-to-add-a-dynamic-image-to-a-push-notification",
+    "author_id": 388325929192,
+    "comments_disabled": true,
+    "draft": false,
+    "promoted": false,
+    "position": 12,
+    "vote_sum": 0,
+    "vote_count": 0,
+    "section_id": 49375884050075,
+    "created_at": "2023-09-07T17:38:18Z",
+    "updated_at": "2026-04-20T16:49:11Z",
+    "name": "How to add a dynamic image to a push notification",
+    "title": "How to add a dynamic image to a push notification",
+    "source_locale": "en-us",
+    "locale": "en-us",
+    "outdated": false,
+    "outdated_locales": [],
+    "edited_at": "2026-04-17T00:55:55Z",
+    "user_segment_id": null,
+    "permission_group_id": 146372,
+    "content_tag_ids": [],
+    "label_names": [],
+    "body": "<h2 id=\"h_01H9RBJD85TAFTDMMBBRSC7EA0\">You will learn</h2>\n<p>Learn how to add a dynamic image to a push notification. </p>\n<p>Dynamic images are a great way to personalize your push notifications. For instance, you can show someone the exact product they favorited, started a checkout with, or bought.</p>\n<h2 id=\"h_01H9RBJD855EB7DVMKPYMH5815\">Before you begin</h2>\n<p>You can use dynamic images in:</p>\n<ul>\n<li>Metric-triggered flows, using either event data (e.g., items from a checkout or placed order) or catalog tags for an event. </li>\n<li>Campaigns and list- and segment-triggered flows, but only when the image URL exists as a custom property on the recipient’s profile.<br>\n<p>Also, note the following regarding push dynamic images: </p>\n</li>\n<li>Only 1 dynamic image is allowed per push notification.</li>\n<li>Images must be under 1 MB.</li>\n<li>You can use conditional statements with dynamic images.</li>\n</ul>\n<div class=\"bs-callout bs-callout-default\">\n<p>Want to request a feature for Klaviyo push notifications? Fill out this <a href=\"https://forms.gle/7iPm6JQ4eKB6H2C4A\">Google form</a> to tell us about it! </p>\n</div>\n<h2 id=\"h_01H9RBJD85BA3943X1GGN67BKK\">Add a dynamic image to a push notification</h2>\n<ol>\n<li>Select the message where you want to include your dynamic image.</li>\n<li>In the left sidebar, click <strong>Configure Content</strong> or <strong>Edit</strong>.</li>\n<li>Add or select the push notification in the flow. </li>\n<li>Click the <strong>View details</strong> icon in the upper right-hand corner.<br>\n\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28717418395291\" alt=\"View Details icon within the push preview window\" width=\"549\" height=\"250\">\n</li>\n<li>Find the data source for the image you want to include.</li>\n<li>Click the data source for an image's first variable, which will typically end in 0.<br>\n\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28717391149467\" alt=\"Example of what the data source looks like for an image\" width=\"341\" height=\"720\">\n</li>\n<li>On the left, click the <em>Insert media</em> icon in the <em>Body</em> box.<br>\n\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28717391154459\" alt=\"Add media to push.jpg\" width=\"381\" height=\"295\">\n</li>\n<li>Go to the <strong>Dynamic Image</strong> tab.</li>\n<li>Paste the dynamic variable or dynamic URL for the image.<br>\n\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28717418408731\" alt=\"Dynamic Image tab after pasting in an example variable\">\n</li>\n<li>Click <strong>Save</strong>.</li>\n<li>Check that the dynamic image was added correctly by making sure one appears in the preview screen.</li>\n</ol>\n<div class=\"accordion accordion--default\">\n<div class=\"accordion__item\">\n<div class=\"accordion__item-title\"><strong>Example of using catalog tags</strong></div>\n<div class=\"accordion__item-content\">\n<p>You can also use catalog tags to add dynamic images in a rich push notification. To do so: </p>\n<ol>\n<li>Go to <strong>Analytics &gt; Metrics</strong>. </li>\n<li>Select the metric you want to use (e.g., <em>Ordered Product</em>). </li>\n<li>Click <strong>Details</strong> for a specific event.</li>\n<li>Find either the SKU or product ID tag.</li>\n<li>Copy the label for the tag (except any parentheses or colon) so you have the exact spelling and capitalization.<br>\nIn the example below, we copy \"ProductID.\"<br>\n\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28717391147547\" alt=\"image5.png\" width=\"427\" height=\"296\">\n</li>\n<li>Paste this somewhere you won't lose it. </li>\n<li>Navigate to a flow triggered by the same metric you just selected. </li>\n<li>Select the push notification where you want to include your dynamic image.</li>\n<li>In the left sidebar, click <strong>Configure Content</strong> or <strong>Edit</strong>.</li>\n<li>On the left, click the <em>Insert media</em> icon in the <em>Body</em> box.<br>\n\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28717391154459\" alt=\"Add media to push.jpg\" width=\"381\" height=\"295\">\n</li>\n<li>Go to the <strong>Dynamic Image</strong> tab.</li>\n<li>Paste in the following catalog tag:<br>\n{% catalog event.id %} {{catalog_item.featured_image.thumbnail.src}} {% endcatalog %}</li>\n<li>Replace id in {% catalog event.id %} with the label you previously copied.<br>\nExample: {% catalog event.ProductID %} {{catalog_item.featured_image.thumbnail.src}} {% endcatalog %}</li>\n<li>Click <strong>Save</strong>. </li>\n</ol>\n</div>\n</div>\n<div class=\"accordion__item\">\n<div class=\"accordion__item-title\"><strong>Example of using conditional statements for dynamic images</strong></div>\n<div class=\"accordion__item-content\">\n<p>Dynamic images can use conditional statements. </p>\n<p>Below is an example of an if/else statement to say that if there's a variant image, show that to recipients; else, use the default image:</p>\n<p><em>{% if event.extra.line_items.0.product.variant.images.0.src %}{{ event.extra.line_items.0.product.variant.images.0.src }}{% else %}{{ event.extra.line_items.0.product.images.0.src }}{% endif %}</em></p>\n<p>Note that the exact format for these statements depends on your integration, and you should not copy them from email templates.</p>\n</div>\n</div>\n</div>",
+    "user_segment_ids": []
+  },
+  "normalized": {
+    "id": "18596283143707",
+    "title": "How to add a dynamic image to a push notification",
+    "source_url": "https://help.klaviyo.com/hc/en-us/articles/18596283143707-How-to-add-a-dynamic-image-to-a-push-notification",
+    "section_id": 49375884050075,
+    "section": "Push notification campaigns",
+    "category_id": 49375106949275,
+    "category": "Campaigns",
+    "category_slug": "campaigns",
+    "klaviyo_updated": "2026-04-20T16:49:11Z",
+    "created_at": "2023-09-07T17:38:18Z",
+    "draft": false,
+    "promoted": false,
+    "position": 12,
+    "label_names": []
+  },
+  "files": {
+    "body_html": "_source/articles/18596283143707.body.html",
+    "rendered_html": "_source/rendered/18596283143707.html"
+  },
+  "assets": {
+    "api_body": {
+      "images": [
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28717418395291",
+          "alt": "View Details icon within the push preview window",
+          "width": "549",
+          "height": "250"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28717391149467",
+          "alt": "Example of what the data source looks like for an image",
+          "width": "341",
+          "height": "720"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28717391154459",
+          "alt": "Add media to push.jpg",
+          "width": "381",
+          "height": "295"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28717418408731",
+          "alt": "Dynamic Image tab after pasting in an example variable",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28717391147547",
+          "alt": "image5.png",
+          "width": "427",
+          "height": "296"
+        }
+      ],
+      "links": [
+        {
+          "href": "https://forms.gle/7iPm6JQ4eKB6H2C4A",
+          "text": "Google form"
+        }
+      ],
+      "headings": [
+        {
+          "level": 2,
+          "id": "h_01H9RBJD85TAFTDMMBBRSC7EA0",
+          "text": "You will learn"
+        },
+        {
+          "level": 2,
+          "id": "h_01H9RBJD855EB7DVMKPYMH5815",
+          "text": "Before you begin"
+        },
+        {
+          "level": 2,
+          "id": "h_01H9RBJD85BA3943X1GGN67BKK",
+          "text": "Add a dynamic image to a push notification"
+        }
+      ]
+    },
+    "rendered_page": {
+      "images": [
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/7ff492c2b417b7ecfe572f839a8a81398693c1f7-1920x1080.webp",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/e240b3c9a262c2562d3ae4a63c7b83478e8f8239-1308x596.jpg?w=549",
+          "alt": "View Details icon within the push preview window",
+          "width": "549",
+          "height": "250"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/65a679bb726f9a9f66a94e4c26c77f7b68be2da3-434x916.jpg?w=341",
+          "alt": "Example of what the data source looks like for an image",
+          "width": "341",
+          "height": "720"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/30a940666a154f51fc12a846401c1378d49bfb2b-409x317.jpg?w=381",
+          "alt": "Add media to push.jpg",
+          "width": "381",
+          "height": "295"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/665966fba3c8f52c293f52cce876d7dd3a797316-1572x404.png",
+          "alt": "Dynamic Image tab after pasting in an example variable",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/ef8fe6632fbec36af8c74f37cdde15eac9b68af0-606x420.png?w=427",
+          "alt": "image5.png",
+          "width": "427",
+          "height": "296"
+        }
+      ],
+      "links": [
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/18596283143707-How-to-add-a-dynamic-image-to-a-push-notification#site-content",
+          "text": "Skip to main content"
+        },
+        {
+          "href": "https://www.klaviyo.com",
+          "text": "Home"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center"
+        },
+        {
+          "href": "https://www.klaviyo.com/enterprise",
+          "text": "Enterprise"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Partners"
+        },
+        {
+          "href": "https://www.klaviyo.com/careers",
+          "text": "Careers"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": "Log in"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": ""
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center Find step-by-step instructions and troubleshooting solutions in our knowledge base."
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000032731",
+          "text": "Integrations"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000312411",
+          "text": "Flows"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867867",
+          "text": "Audience"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867667",
+          "text": "Campaigns"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/360000190711",
+          "text": "Sign-up forms"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000873988",
+          "text": "Deliverability & compliance"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/29173800271259",
+          "text": "SMS"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/16638219724187",
+          "text": "Reviews"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/18073014919195",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/34141283979931",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/37659126754075",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/33948021740315",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/39746685522331",
+          "text": "WhatsApp"
+        },
+        {
+          "href": "https://academy.klaviyo.com",
+          "text": "Klaviyo Academy Expert training and education to help you succeed with Klaviyo, and beyond."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Quick+guide&resource=academy_courses",
+          "text": "Quick guides Learn marketing strategies and concepts in 15 minutes or less."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Course&resource=academy_courses",
+          "text": "Courses Master key marketing topics through structured lessons and exams."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/best-practices",
+          "text": "Best practices Discover top product and marketing strategies for your business."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/learning-paths",
+          "text": "Learning paths Complete curated learning journeys tailored to your marketing goals."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses",
+          "text": "Explore all resources"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Live+training&resource=academy_courses",
+          "text": "Live trainings Build confidence through hands-on interactive workshops and thought-provoking strategy sessions."
+        },
+        {
+          "href": "https://www.bigmarker.com/klaviyo-customer-education/Office-hours-Getting-started-with-Klaviyo",
+          "text": "Live office hours Join a strategic discussion where you can ask questions and get answers in real-time."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/private-live-training",
+          "text": "1:1 Live training Book a private training session with an expert to jumpstart your platform knowledge and confidence."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/credentials",
+          "text": "Klaviyo credentials Dig deeper into select topics and showcase your expertise with a final exam to earn a certificate and digital badge."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/certificates/klaviyo-practitioner-certificate",
+          "text": "Klaviyo practitioner certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/deliverability-certificate",
+          "text": "Deliverability certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/developer-certificate",
+          "text": "Klaviyo developer certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses&select=Certificate",
+          "text": "See all certificates"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Klaviyo Community Join our thriving community network to connect with brands like yours—online and in person."
+        },
+        {
+          "href": "https://community.klaviyo.com/topic/new",
+          "text": "Ask a question Post a question and get thoughtful answers from Klaviyo powerusers."
+        },
+        {
+          "href": "https://community.klaviyo.com/p/roadmap",
+          "text": "Product roadmap"
+        },
+        {
+          "href": "https://community.klaviyo.com/search/activity/recent",
+          "text": "Recent threads"
+        },
+        {
+          "href": "https://community.klaviyo.com/p/champions",
+          "text": "Meet the Champions"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups",
+          "text": "Browse all groups Your people are waiting. New ideas and connections are a click away."
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/developer-group-64",
+          "text": "Developer group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/entrepreneur-user-group-118",
+          "text": "Entrepreneur group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/woo-user-group-87",
+          "text": "WooCommerce group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/new-york-meetup-chapter-82",
+          "text": "New York City"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/los-angeles-meetup-chapter-83",
+          "text": "Los Angeles"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/austin-meetup-chapter-85",
+          "text": "Austin"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/san-diego-meetup-chapter-86",
+          "text": "San Diego"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/amsterdam-meetup-chapter-84",
+          "text": "Amsterdam"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Klaviyo Developers Access API documentation and developer guides to help you build with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/get_started",
+          "text": "Get started Access key resources and a step-by-step checklist for how to start developing with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/build_your_integration",
+          "text": "Grow your app's reach Learn how to join our ecosystem and get your app listed on our marketplace."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/developer-tools",
+          "text": "Developer tools Generate sample data, monitor your API usage, and access our Postman collections."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/reference/api_overview",
+          "text": "API reference Browse our full catalog of API docs."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/changelog_",
+          "text": "Changelog"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/api_versioning_and_deprecation_policy",
+          "text": "Versioning & deprecation policy"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/rate_limits_and_error_handling",
+          "text": "Rate limits & error handling"
+        },
+        {
+          "href": "https://youtube.com/playlist?list=PLHkNfHgtxcUanrkMnKPdkRzuWU7MGv_xM&si=pkG-KH7IT_TUHOGC",
+          "text": "API tutorials on YouTube Subscribe to our Klaviyo API Tutorials playlist for easy access to step-by-step developer walkthroughs."
+        },
+        {
+          "href": "https://www.klaviyo.com/contact-us",
+          "text": "Contact us"
+        },
+        {
+          "href": "https://www.klaviyo.com/sign-up",
+          "text": "Sign up"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": "Search"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/18596283143707",
+          "text": "United States - EN"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/de-de/articles/18596283143707",
+          "text": "Deutschland - DE"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-es/articles/18596283143707",
+          "text": "España - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-mx/articles/18596283143707",
+          "text": "México - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/fr-fr/articles/18596283143707",
+          "text": "France - FR"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/it-it/articles/18596283143707",
+          "text": "Italia - IT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/ko-kr/articles/18596283143707",
+          "text": "한국 - KO"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/nl-nl/articles/18596283143707",
+          "text": "Nederland - NL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pl-pl/articles/18596283143707",
+          "text": "Polska - PL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pt-br/articles/18596283143707",
+          "text": "Brasil - PT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/sv-se/articles/18596283143707",
+          "text": "Sverige - SV"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/50026805374363",
+          "text": "Push Notifications"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/50026848876443",
+          "text": "Send push notifications"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/18596283143707-How-to-add-a-dynamic-image-to-a-push-notification#h_01H9RBJD85TAFTDMMBBRSC7EA0",
+          "text": "You will learn"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/18596283143707-How-to-add-a-dynamic-image-to-a-push-notification#h_01H9RBJD855EB7DVMKPYMH5815",
+          "text": "Before you begin"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/18596283143707-How-to-add-a-dynamic-image-to-a-push-notification#h_01H9RBJD85BA3943X1GGN67BKK",
+          "text": "Add a dynamic image to a push notification"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/18596283143707-How-to-add-a-dynamic-image-to-a-push-notification#additional-resources",
+          "text": "Additional resources"
+        },
+        {
+          "href": "https://forms.gle/7iPm6JQ4eKB6H2C4A",
+          "text": "Google form"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/16917302437275",
+          "text": "Understanding rich push notifications"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115002779071",
+          "text": "How to use event data to personalize email and SMS flows"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115001002272",
+          "text": "Learn how to contact support"
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": ""
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": "Visit Community"
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": ""
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": "Hire a partner"
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/about",
+          "text": "About Klaviyo"
+        },
+        {
+          "href": "https://www.klaviyo.com/newsroom",
+          "text": "Newsroom"
+        },
+        {
+          "href": "https://investors.klaviyo.com/overview/default.aspx",
+          "text": "Investor relations"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Agency and tech partners"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Developers"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/retail",
+          "text": "Retail and ecommerce"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/restaurants",
+          "text": "Restaurant marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/wellness",
+          "text": "Wellness"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform",
+          "text": "B2C CRM overview"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai",
+          "text": "Klaviyo AI (K:AI)"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/marketing-automation",
+          "text": "Klaviyo Marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-service",
+          "text": "Klaviyo Service"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/analytics",
+          "text": "Klaviyo Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-data-platform",
+          "text": "Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare",
+          "text": "Klaviyo vs. Klaviyo alternatives"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-mailchimp",
+          "text": "Klaviyo vs. Mailchimp"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-postscript",
+          "text": "Klaviyo vs. Postscript"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-attentive",
+          "text": "Klaviyo vs. Attentive"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-salesforce-marketing-cloud",
+          "text": "Klaviyo vs. Salesforce"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-listrak",
+          "text": "Klaviyo vs. Listrak"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/omnichannel",
+          "text": "Omnichannel marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/email-marketing",
+          "text": "Email marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing",
+          "text": "SMS marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing/rcs",
+          "text": "RCS for Business"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/mobile-app-marketing",
+          "text": "Mobile app marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/whatsapp",
+          "text": "WhatsApp marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/social",
+          "text": "Social marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources",
+          "text": "Marketing resources"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources/marketing-campaign-calendar",
+          "text": "Marketing campaign calendar"
+        },
+        {
+          "href": "https://www.klaviyo.com/glossary",
+          "text": "Marketing glossary"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/email-subject-line-generator",
+          "text": "Subject line generator"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/roi-calculator",
+          "text": "ROI calculator"
+        },
+        {
+          "href": "https://www.klaviyo.com/customers",
+          "text": "Case studies"
+        },
+        {
+          "href": "https://www.klaviyo.com/composer",
+          "text": "Composer Beta"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/marketing-agent",
+          "text": "Marketing Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/customer-agent",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/customer-experience-hub",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/helpdesk",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/marketing-analytics",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/advanced-cdp",
+          "text": "Advanced Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/web-forms",
+          "text": "Web forms"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/email-templates",
+          "text": "Email templates"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/portfolio",
+          "text": "Portfolio"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform-integrations",
+          "text": "Apps and Integrations"
+        },
+        {
+          "href": "https://www.klaviyo.com/features",
+          "text": "Features"
+        },
+        {
+          "href": "https://www.klaviyo.com/whats-new",
+          "text": "What's new"
+        },
+        {
+          "href": "https://www.klaviyo.com/events",
+          "text": "Events"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help Center"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us",
+          "text": "Academy"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Community"
+        },
+        {
+          "href": "https://www.facebook.com/Klaviyo/",
+          "text": "Facebook"
+        },
+        {
+          "href": "https://twitter.com/klaviyo/",
+          "text": "Twitter"
+        },
+        {
+          "href": "https://www.linkedin.com/company/klaviyo/",
+          "text": "LinkedIn"
+        },
+        {
+          "href": "https://www.instagram.com/klaviyo/",
+          "text": "Instagram"
+        },
+        {
+          "href": "https://www.klaviyo.com/sitemap",
+          "text": "Site Map"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal",
+          "text": "Terms and Privacy"
+        },
+        {
+          "href": "https://www.klaviyo.com/security",
+          "text": "Security"
+        },
+        {
+          "href": "https://www.klaviyo.com/trust",
+          "text": "Trust"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal/intellectual-property-notices",
+          "text": "Intellectual Property Notices"
+        }
+      ],
+      "headings": [
+        {
+          "level": 1,
+          "id": "",
+          "text": "How to add a dynamic image to a push notification"
+        },
+        {
+          "level": 2,
+          "id": "h_01H9RBJD85TAFTDMMBBRSC7EA0",
+          "text": "You will learn"
+        },
+        {
+          "level": 2,
+          "id": "h_01H9RBJD855EB7DVMKPYMH5815",
+          "text": "Before you begin"
+        },
+        {
+          "level": 2,
+          "id": "h_01H9RBJD85BA3943X1GGN67BKK",
+          "text": "Add a dynamic image to a push notification"
+        },
+        {
+          "level": 2,
+          "id": "additional-resources",
+          "text": "Additional resources"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "Explore more from Klaviyo"
+        }
+      ]
+    }
+  },
+  "rendered_page": {
+    "status": "fetched",
+    "error": ""
+  }
+}

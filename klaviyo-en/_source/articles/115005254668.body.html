@@ -1,0 +1,103 @@
+<h2 id="01H8KYV44ZN8H2CA9C317KEG8Q">You will learn</h2>
+<p>Learn how to prevent out-of stock items from showing in flow emails when you are using Klaviyo's Magento 2 integration.</p>
+<p>If you run a business with high-demand inventory and often sell out of popular items, it's possible that a customer will place an item in his/her cart one minute and come back hours later to find that the same item is out of stock.</p>
+<p>While abandoned cart and browse abandonment flows can drive significant revenue to your business, fast selling inventory can make it challenging to send reminders that don't fall flat. Encouraging customers to return to a cart full of out-of-stock items can lead to a frustrating customer experience.</p>
+<p>In Klaviyo, you can adjust any abandoned cart or browse abandonment flow to ensure emails featuring out-of-stock items get automatically canceled. To take advantage of this feature, you will need to slightly update the way dynamic content is populated in your abandoned cart or browse abandonment emails.</p>
+<div class="bs-callout bs-callout-default">
+<p>For Magento 2 stores, Klaviyo will "un-publish" an item when one of the following is true:</p>
+<ul>
+<li>The "visibility" of an item is 1, meaning the visibility status is  <code class="language-html">NOT VISIBLE</code>
+</li>
+<li>The "status" of an item is 2, meaning the status is <code class="language-html">DISABLED</code>
+</li>
+<li>The product is out-of-stock, where <code class="language-html">IS_IN_STOCK -&gt; 0</code>
+</li>
+</ul>
+<p>You must have "manage stock" = yes in your Magento Admin panel. </p>
+</div>
+<h2 id="section1">Abandoned cart flow</h2>
+<p>Klaviyo's default abandoned cart templates feature a dynamic table that is used to populate each email with the specific items the recipient left behind in his/her abandoned cart.</p>
+<p>If you would like an abandoned cart email to automatically be canceled if it is going to feature one or more items that have since gone out-of-stock, you will only need to adjust the image section of the existing dynamic table in a given template.</p>
+<ol>
+<li>Click on your dynamic table in the email template editor.</li>
+<li>In the <strong>Content</strong> tab, click the left dynamic row.</li>
+<li>Under <em>Cell Content</em>, toggle content from <strong>Image</strong> to <strong>Text</strong>. <br><img src="https://klaviyo.zendesk.com/hc/article_attachments/28704484629531" alt="Example of a dynamic table block configuration in the email template editor.">
+</li>
+<li>Above the text box, click into the <code class="language-html" style="font-size: 15px;">Source</code><span style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;"> of this text block by clicking the <strong>&lt;/&gt;</strong> button on the right.</span>
+</li>
+<li>
+<span style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;">In the </span><strong style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;">Source</strong><span style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;"> area, you are going to copy and paste the following snippet:</span>
+<pre><code class="language-html">{% catalog item.product.id unpublished="cancel" %} 
+&lt;a href="{{ event.extra.checkout_url }}"&gt;&lt;img alt="" src="{{ catalog_item.featured_image.thumbnail.src }}" width="200" /&gt;&lt;/a&gt; 
+{% endcatalog %}
+</code></pre>
+</li>
+<li>
+<p>Make sure to then click <strong>Source</strong> again <u>before</u> clicking <strong>Done</strong> in the top left to save this snippet in your text block.</p>
+</li>
+</ol>
+<div class="article-content wysiwyg-text-align-left">
+<div>
+<p>What this will do:</p>
+<ul>
+<li>Before a given email in your flow is scheduled to send, Klaviyo will look up each item that will dynamically populate in the individual email</li>
+<li>If any one item is "unpublished" in your catalog at the time of lookup, the email will not be sent</li>
+<li>For a given flow email, you can navigate to <strong>Analytics &gt; Recipient Activity &gt; Other</strong> and you will see a category labeled: <strong>Skipped: Catalog Item Unavailable</strong>
+</li>
+<li>This is where you can view all emails that were canceled -- i.e. skipped -- because an item featured in the email was out-of-stock or otherwise unavailable (if the item is no longer in your catalog)</li>
+</ul>
+<center><img src="https://klaviyo.zendesk.com/hc/article_attachments/28704476492187" alt="Recipient Activity page showing skipped reason 'Catalog item unavailable'."></center>
+</div>
+<div>
+<div class="bs-callout bs-callout-default">
+<p>At this time, it is not possible to remove a single out-of-stock item from an email and send the rest of the email as scheduled. If someone abandons 5 items in a cart, and only 1 of the 5 items has gone out-of-stock, this feature will still cancel the full email.</p>
+</div>
+<h2 id="section2">Browse abandonment flow</h2>
+<p>Klaviyo's default browse abandonment email template features a static table block that is used to populate each email with the specific item a recipient browsed your website.</p>
+<p>If you want browse abandonment emails to automatically get canceled if they are going to feature an item that has since gone out-of-stock, you have to adjust the image section of the existing table in a given template.</p>
+<ol>
+<li>Click on your dynamic table in the email template editor.</li>
+<li>In the <strong>Content</strong> tab, click the left dynamic row.</li>
+<li>Under <em>Cell Content</em>, toggle content from <strong>Image</strong> to <strong>Text</strong>. <br><img src="https://klaviyo.zendesk.com/hc/article_attachments/28704484629531" alt="Example of a dynamic table block configuration in the email template editor.">
+</li>
+<li>Above the text box, click into the <code class="language-html" style="font-size: 15px;">Source</code><span style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;"> of this text block by clicking the <strong>&lt;/&gt;</strong> button on the right.</span>
+</li>
+<li>In the <strong>Source</strong> area, copy and paste the following snippet:<br>
+<pre><code class="language-html">{% catalog event.ProductID unpublished="cancel" %} 
+&lt;a href="{{ catalog_item.url }}"&gt;&lt;img src="{{ catalog_item.featured_image.full.src }}" width="200" /&gt;&lt;/a&gt; 
+{% endcatalog %}
+</code></pre>
+</li>
+<li>
+<p>Make sure to then click <strong>Source</strong> again <u>before</u> clicking <strong>Done</strong> in the top left to save this snippet in your text block.</p>
+</li>
+</ol>
+<p>What this will do:</p>
+<ul>
+<li>Before a given email in your flow is scheduled to send, Klaviyo will look up the item that will dynamically populate in the individual email</li>
+<li>If this item is "unpublished" in your catalog at the time of lookup, the email will get skipped</li>
+<li>For a given flow email, you can navigate to <strong>Analytics &gt; Recipient Activity &gt; Other</strong><em> </em>and you will see a category labeled: <strong>Skipped: Catalog Item Unavailable</strong>
+</li>
+<li>This is where you can view all emails that were canceled -- i.e. skipped -- because an item featured in the email was out-of-stock or otherwise unavailable (if the item is no longer in your catalog)</li>
+</ul>
+</div>
+<h2 id="section3">Test the out-of-stock feature</h2>
+The best way to test out this feature:
+<ol>
+<li>Adjust your email templates as explained above</li>
+<li>View an item on your site and/or start a checkout with a single item in your cart</li>
+<li>Wait until you see your tracked event appear in your account's <a href="https://www.klaviyo.com/dashboard/activity" target="_blank" rel="noopener">Activity Feed</a>
+</li>
+<li>Mark this single item out-of-stock in your store's backend</li>
+<li>Navigate to the flow that is triggered by the action you took (<em>Viewed Product</em> or <em>Started Checkout</em>) and has your newly adjusted email templates</li>
+<li>Click to preview one of these emails, and make sure the "choose a recent event to preview with" window features your own recent event</li>
+<li>When you click <strong>Preview</strong>, you should see a preview where the item's image doesn't populate and instead the following message appears "Item (XXXXXX) is not published and unavailable."</li>
+</ol>
+<center><img src="https://klaviyo.zendesk.com/hc/article_attachments/28704484630427" alt="Example of an email preview showing a message that a specific item is unavailable."></center>
+<h2 id="01H8KYV450EA0JQF4WP5TZFNA5">Additional resources</h2>
+<p>Learn more about the Magento integration:</p>
+<ul>
+<li><a href="https://klaviyo.zendesk.com/hc/en-us/articles/115003458852" target="_blank" rel="noopener">Magento 2 data reference</a></li>
+</ul>
+<p> </p>
+</div>

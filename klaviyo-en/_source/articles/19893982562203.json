@@ -1,0 +1,964 @@
+{
+  "captured_at": "2026-05-23T16:18:07Z",
+  "article": {
+    "id": 19893982562203,
+    "url": "https://klaviyo.zendesk.com/api/v2/help_center/en-us/articles/19893982562203.json",
+    "html_url": "https://klaviyo.zendesk.com/hc/en-us/articles/19893982562203-How-to-create-Google-service-account-to-enable-push-notifications",
+    "author_id": 388325929192,
+    "comments_disabled": true,
+    "draft": false,
+    "promoted": false,
+    "position": 5,
+    "vote_sum": 0,
+    "vote_count": 0,
+    "section_id": 49375884050075,
+    "created_at": "2023-10-26T18:54:51Z",
+    "updated_at": "2026-04-20T16:49:18Z",
+    "name": "How to create Google service account to enable push notifications",
+    "title": "How to create Google service account to enable push notifications",
+    "source_locale": "en-us",
+    "locale": "en-us",
+    "outdated": false,
+    "outdated_locales": [],
+    "edited_at": "2026-04-20T16:49:18Z",
+    "user_segment_id": null,
+    "permission_group_id": 146372,
+    "content_tag_ids": [],
+    "label_names": [],
+    "body": "<h2 id=\"h_01HDPM1N08PKXYHQ2JW53ST31V\">You will learn</h2>\n<p>Learn how to set up your Google service account and enable Firebase Cloud Messaging so you can send Klaviyo push notifications to Android devices. </p>\n<h2 id=\"h_01HDPM1N08R9PCW19AY8XFVYT0\">Before you begin</h2>\n<p>Before following the steps below, you must have an existing Firebase project.</p>\n<h2 id=\"h_01HDPM1N08WYX807F09HW40SM1\">Enable Cloud messaging API</h2>\n<ol>\n<li>Navigate to the <a href=\"https://console.cloud.google.com/welcome\">Google Cloud console</a>. </li>\n<li>Select your Firebase project from the dropdown in the top left corner.</li>\n<li>Search for “Firebase Cloud Messaging API.”</li>\n<li>Select <strong>Firebase Cloud Messaging API </strong>from the marketplace list.<br>\n\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28720761878939\" alt=\"Searching for the Firebase Cloud Messaging API\" width=\"564\" height=\"622\">\n</li>\n<li>In the modal that appears, click <strong>Enable</strong>.<br>\n</li>\n</ol>\n<p><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28720790367387\" alt=\"Page to enable Firebase Cloud Messaging API\"></p>\n<h2 id=\"h_01HDPM1N090P47HT4HAV42C3E4\">Create a custom role that supports message creation</h2>\n<ol>\n<li>From the <a href=\"https://console.cloud.google.com/welcome\">Google Cloud console dashboard</a>, select <strong>IAM &amp; Admin</strong> under the<em> Quick Access</em> section.<br>\n\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28720790364315\" alt=\"All Quick Access links, with only the IAM &amp; Admin option highlighted\" width=\"560\" height=\"311\">\n</li>\n<li>In the left menu, navigate to the <strong>Roles</strong> section. <br>\n\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28720790354971\" alt=\"Roles highlighted in the left sidebar\" width=\"231\" height=\"592\">\n</li>\n<li>Click <strong>+Create Role</strong>.<br>\n\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28720761885595\" alt=\"Roles page, where Create role is shown in the upper left\" width=\"532\" height=\"323\">\n</li>\n<li>Fill out details about the role (name, description, etc.).<br>\n\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28720761875611\" alt=\"Create Role window\" width=\"538\" height=\"787\">\n</li>\n<li>Click <strong>+Add Permissions</strong>. </li>\n<li>Add only the<em> cloudmessaging.messages.create</em> permission. (For more details, see Google’s instructions for <a href=\"https://cloud.google.com/iam/docs/creating-custom-roles#creating\">creating a custom role</a>.).<br>\n\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28720790351643\" alt=\"Searching for the correct role permission\" width=\"534\" height=\"607\">\n</li>\n<li>Click <strong>Add</strong>. </li>\n<li>When ready, create the role by selecting <strong>Create</strong>. </li>\n</ol>\n<h2 id=\"h_01HE5GH4CN8W5KBE2E7BSJRZPT\">Create a Google service account</h2>\n<ol>\n<li>In the left side menu of the <a href=\"https://console.cloud.google.com/iam-admin/iam\">IAM &amp; Admin section</a>, navigate to the <em>Service Accounts</em> tab.</li>\n<li>Click <strong>+Create Service Account</strong>.<br>\n\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28720790390043\" alt=\"Button to create a Google service account\">\n</li>\n<li>Fill out the <em>Service account name</em> and <em>Service account description </em>(optional) fields.<br>\n\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28720761897883\" alt=\"First step of the wizard to create a new service account\" width=\"591\" height=\"434\">\n</li>\n<li>Click <strong>Create And Continue</strong>.</li>\n<li>Click into the <em>Select a role</em> field.<br>\n\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28720790375579\" alt=\"Adding a role to a new service account\" width=\"542\" height=\"532\">\n</li>\n<li>Select the custom role that you just created. Here, we choose “Test Role,” but select the role you created in the previous section.</li>\n<li>Click <strong>Done </strong>to finish creating the service account.</li>\n</ol>\n<h2 id=\"h_01HE5GH4CNKP0Z25MFHBW8RNCX\">Generate a service account key</h2>\n<ol>\n<li>In the <a href=\"https://console.cloud.google.com/iam-admin/serviceaccounts\">Service Accounts</a> page, click on the email address for the service account that you created in the previous section.<br>\n\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28720790388635\" alt=\"Service accounts page, where the accounts are blurred for security purposes\" width=\"620\" height=\"287\">\n</li>\n<li>Navigate to the <strong>Keys</strong> tab.</li>\n<li>Click <strong>Add Key</strong>.</li>\n<li>Click <strong>Create new key</strong>.<br>\n\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28720790379163\" alt=\"Add key dropdown, when the Create new key option is highlighted\">\n</li>\n<li>Under <em>Key type</em>, select <strong>JSON</strong>.<br>\n\n<img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28720790372379\" alt=\"Modal to select the key type when JSON is selected\">\n</li>\n<li>Click <strong>Create </strong>to download the service account key file.<br>\nNote: you cannot download the file again, so ensure that you can locate the file on your computer. The downloaded JSON file should have the following format:<br>\n<code>{ \"type\": \"service_account\", <br>\n\"project_id\": \"PROJECT_ID\", <br>\n\"private_key_id\": \"KEY_ID\", <br>\n\"private_key\": \"-----BEGIN PRIVATE KEY-----\\nPRIVATE_KEY\\n-----END PRIVATE KEY-----\\n\", <br>\n\"client_email\": \"SERVICE_ACCOUNT_EMAIL\", <br>\n\"client_id\": \"CLIENT_ID\", <br>\n\"auth_uri\": \"https://accounts.google.com/o/oauth2/auth\", <br>\n\"token_uri\": \"https://accounts.google.com/o/oauth2/token\", <br>\n\"auth_provider_x509_cert_url\": \"https://www.googleapis.com/oauth2/v1/certs\", <br>\n\"client_x509_cert_url\": \"https://www.googleapis.com/robot/v1/metadata/x509/SERVICE_ACCOUNT_EMAIL\" }</code>\n</li>\n</ol>\n<h2 id=\"h_01HDPM1N099TT0Q9H1WME91S23\">Outcome</h2>\n<p>Now that you created and assigned the role to your Google service account, you can begin setting up Klaviyo Android push notifications.</p>",
+    "user_segment_ids": []
+  },
+  "normalized": {
+    "id": "19893982562203",
+    "title": "How to create Google service account to enable push notifications",
+    "source_url": "https://help.klaviyo.com/hc/en-us/articles/19893982562203-How-to-create-Google-service-account-to-enable-push-notifications",
+    "section_id": 49375884050075,
+    "section": "Push notification campaigns",
+    "category_id": 49375106949275,
+    "category": "Campaigns",
+    "category_slug": "campaigns",
+    "klaviyo_updated": "2026-04-20T16:49:18Z",
+    "created_at": "2023-10-26T18:54:51Z",
+    "draft": false,
+    "promoted": false,
+    "position": 5,
+    "label_names": []
+  },
+  "files": {
+    "body_html": "_source/articles/19893982562203.body.html",
+    "rendered_html": "_source/rendered/19893982562203.html"
+  },
+  "assets": {
+    "api_body": {
+      "images": [
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28720761878939",
+          "alt": "Searching for the Firebase Cloud Messaging API",
+          "width": "564",
+          "height": "622"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28720790367387",
+          "alt": "Page to enable Firebase Cloud Messaging API",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28720790364315",
+          "alt": "All Quick Access links, with only the IAM & Admin option highlighted",
+          "width": "560",
+          "height": "311"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28720790354971",
+          "alt": "Roles highlighted in the left sidebar",
+          "width": "231",
+          "height": "592"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28720761885595",
+          "alt": "Roles page, where Create role is shown in the upper left",
+          "width": "532",
+          "height": "323"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28720761875611",
+          "alt": "Create Role window",
+          "width": "538",
+          "height": "787"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28720790351643",
+          "alt": "Searching for the correct role permission",
+          "width": "534",
+          "height": "607"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28720790390043",
+          "alt": "Button to create a Google service account",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28720761897883",
+          "alt": "First step of the wizard to create a new service account",
+          "width": "591",
+          "height": "434"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28720790375579",
+          "alt": "Adding a role to a new service account",
+          "width": "542",
+          "height": "532"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28720790388635",
+          "alt": "Service accounts page, where the accounts are blurred for security purposes",
+          "width": "620",
+          "height": "287"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28720790379163",
+          "alt": "Add key dropdown, when the Create new key option is highlighted",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28720790372379",
+          "alt": "Modal to select the key type when JSON is selected",
+          "width": "",
+          "height": ""
+        }
+      ],
+      "links": [
+        {
+          "href": "https://console.cloud.google.com/welcome",
+          "text": "Google Cloud console"
+        },
+        {
+          "href": "https://console.cloud.google.com/welcome",
+          "text": "Google Cloud console dashboard"
+        },
+        {
+          "href": "https://cloud.google.com/iam/docs/creating-custom-roles#creating",
+          "text": "creating a custom role"
+        },
+        {
+          "href": "https://console.cloud.google.com/iam-admin/iam",
+          "text": "IAM & Admin section"
+        },
+        {
+          "href": "https://console.cloud.google.com/iam-admin/serviceaccounts",
+          "text": "Service Accounts"
+        }
+      ],
+      "headings": [
+        {
+          "level": 2,
+          "id": "h_01HDPM1N08PKXYHQ2JW53ST31V",
+          "text": "You will learn"
+        },
+        {
+          "level": 2,
+          "id": "h_01HDPM1N08R9PCW19AY8XFVYT0",
+          "text": "Before you begin"
+        },
+        {
+          "level": 2,
+          "id": "h_01HDPM1N08WYX807F09HW40SM1",
+          "text": "Enable Cloud messaging API"
+        },
+        {
+          "level": 2,
+          "id": "h_01HDPM1N090P47HT4HAV42C3E4",
+          "text": "Create a custom role that supports message creation"
+        },
+        {
+          "level": 2,
+          "id": "h_01HE5GH4CN8W5KBE2E7BSJRZPT",
+          "text": "Create a Google service account"
+        },
+        {
+          "level": 2,
+          "id": "h_01HE5GH4CNKP0Z25MFHBW8RNCX",
+          "text": "Generate a service account key"
+        },
+        {
+          "level": 2,
+          "id": "h_01HDPM1N099TT0Q9H1WME91S23",
+          "text": "Outcome"
+        }
+      ]
+    },
+    "rendered_page": {
+      "images": [
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/7ff492c2b417b7ecfe572f839a8a81398693c1f7-1920x1080.webp",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/28ec1a17730181ec4fff288b3a05a9c8e7fe3301-1522x1678.jpg?w=564",
+          "alt": "Searching for the Firebase Cloud Messaging API",
+          "width": "564",
+          "height": "622"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/f3e543ca4e645fdfb06393a718a3d08223a19c71-547x248.png",
+          "alt": "Page to enable Firebase Cloud Messaging API",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/e4ea1744bb95a4ede63a5869f125cd0463e29b00-2222x1234.jpg?w=560",
+          "alt": "All Quick Access links, with only the IAM & Admin option highlighted",
+          "width": "560",
+          "height": "311"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/c04aa2f7f9a65b0327ebc62f5b1d97f38eb80dcb-254x651.png?w=231",
+          "alt": "Roles highlighted in the left sidebar",
+          "width": "231",
+          "height": "592"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/0cc58b2e58211c9817d05abfdf15435efe8f9a4d-1999x1213.jpg?w=532",
+          "alt": "Roles page, where Create role is shown in the upper left",
+          "width": "532",
+          "height": "323"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/a4a739baa91ad23230adf582d94b31801c2bb625-1092x1596.jpg?w=538",
+          "alt": "Create Role window",
+          "width": "538",
+          "height": "787"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/7f858108f5716b104cd8e6ed34626cc46c1d0150-1106x1258.jpg?w=534",
+          "alt": "Searching for the correct role permission",
+          "width": "534",
+          "height": "607"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/a31301eab67af1a58a5908fb91c4e0960d3be1f5-1316x258.png",
+          "alt": "Button to create a Google service account",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/010e82716997660bf45c722c557980eaaab4fcef-1668x1224.png?w=591",
+          "alt": "First step of the wizard to create a new service account",
+          "width": "591",
+          "height": "434"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/a448e510151c009c4d54a7de041189bdfac62ba5-1151x1130.png?w=542",
+          "alt": "Adding a role to a new service account",
+          "width": "542",
+          "height": "532"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/1133fdfc1e8fc1eabff35981fbd55add0e989b6a-1490x689.png?w=620",
+          "alt": "Service accounts page, where the accounts are blurred for security purposes",
+          "width": "620",
+          "height": "287"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/50d97a3691c25e1f010d596b988c37887046dd2a-1999x842.jpg",
+          "alt": "Add key dropdown, when the Create new key option is highlighted",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/b1d62869b325d3e9640511d4e87306f394b2ed5e-1116x714.jpg",
+          "alt": "Modal to select the key type when JSON is selected",
+          "width": "",
+          "height": ""
+        }
+      ],
+      "links": [
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/19893982562203-How-to-create-Google-service-account-to-enable-push-notifications#site-content",
+          "text": "Skip to main content"
+        },
+        {
+          "href": "https://www.klaviyo.com",
+          "text": "Home"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center"
+        },
+        {
+          "href": "https://www.klaviyo.com/enterprise",
+          "text": "Enterprise"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Partners"
+        },
+        {
+          "href": "https://www.klaviyo.com/careers",
+          "text": "Careers"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": "Log in"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": ""
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center Find step-by-step instructions and troubleshooting solutions in our knowledge base."
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000032731",
+          "text": "Integrations"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000312411",
+          "text": "Flows"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867867",
+          "text": "Audience"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867667",
+          "text": "Campaigns"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/360000190711",
+          "text": "Sign-up forms"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000873988",
+          "text": "Deliverability & compliance"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/29173800271259",
+          "text": "SMS"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/16638219724187",
+          "text": "Reviews"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/18073014919195",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/34141283979931",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/37659126754075",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/33948021740315",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/39746685522331",
+          "text": "WhatsApp"
+        },
+        {
+          "href": "https://academy.klaviyo.com",
+          "text": "Klaviyo Academy Expert training and education to help you succeed with Klaviyo, and beyond."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Quick+guide&resource=academy_courses",
+          "text": "Quick guides Learn marketing strategies and concepts in 15 minutes or less."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Course&resource=academy_courses",
+          "text": "Courses Master key marketing topics through structured lessons and exams."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/best-practices",
+          "text": "Best practices Discover top product and marketing strategies for your business."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/learning-paths",
+          "text": "Learning paths Complete curated learning journeys tailored to your marketing goals."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses",
+          "text": "Explore all resources"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Live+training&resource=academy_courses",
+          "text": "Live trainings Build confidence through hands-on interactive workshops and thought-provoking strategy sessions."
+        },
+        {
+          "href": "https://www.bigmarker.com/klaviyo-customer-education/Office-hours-Getting-started-with-Klaviyo",
+          "text": "Live office hours Join a strategic discussion where you can ask questions and get answers in real-time."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/private-live-training",
+          "text": "1:1 Live training Book a private training session with an expert to jumpstart your platform knowledge and confidence."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/credentials",
+          "text": "Klaviyo credentials Dig deeper into select topics and showcase your expertise with a final exam to earn a certificate and digital badge."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/certificates/klaviyo-practitioner-certificate",
+          "text": "Klaviyo practitioner certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/deliverability-certificate",
+          "text": "Deliverability certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/developer-certificate",
+          "text": "Klaviyo developer certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses&select=Certificate",
+          "text": "See all certificates"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Klaviyo Community Join our thriving community network to connect with brands like yours—online and in person."
+        },
+        {
+          "href": "https://community.klaviyo.com/topic/new",
+          "text": "Ask a question Post a question and get thoughtful answers from Klaviyo powerusers."
+        },
+        {
+          "href": "https://community.klaviyo.com/p/roadmap",
+          "text": "Product roadmap"
+        },
+        {
+          "href": "https://community.klaviyo.com/search/activity/recent",
+          "text": "Recent threads"
+        },
+        {
+          "href": "https://community.klaviyo.com/p/champions",
+          "text": "Meet the Champions"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups",
+          "text": "Browse all groups Your people are waiting. New ideas and connections are a click away."
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/developer-group-64",
+          "text": "Developer group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/entrepreneur-user-group-118",
+          "text": "Entrepreneur group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/woo-user-group-87",
+          "text": "WooCommerce group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/new-york-meetup-chapter-82",
+          "text": "New York City"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/los-angeles-meetup-chapter-83",
+          "text": "Los Angeles"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/austin-meetup-chapter-85",
+          "text": "Austin"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/san-diego-meetup-chapter-86",
+          "text": "San Diego"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/amsterdam-meetup-chapter-84",
+          "text": "Amsterdam"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Klaviyo Developers Access API documentation and developer guides to help you build with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/get_started",
+          "text": "Get started Access key resources and a step-by-step checklist for how to start developing with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/build_your_integration",
+          "text": "Grow your app's reach Learn how to join our ecosystem and get your app listed on our marketplace."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/developer-tools",
+          "text": "Developer tools Generate sample data, monitor your API usage, and access our Postman collections."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/reference/api_overview",
+          "text": "API reference Browse our full catalog of API docs."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/changelog_",
+          "text": "Changelog"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/api_versioning_and_deprecation_policy",
+          "text": "Versioning & deprecation policy"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/rate_limits_and_error_handling",
+          "text": "Rate limits & error handling"
+        },
+        {
+          "href": "https://youtube.com/playlist?list=PLHkNfHgtxcUanrkMnKPdkRzuWU7MGv_xM&si=pkG-KH7IT_TUHOGC",
+          "text": "API tutorials on YouTube Subscribe to our Klaviyo API Tutorials playlist for easy access to step-by-step developer walkthroughs."
+        },
+        {
+          "href": "https://www.klaviyo.com/contact-us",
+          "text": "Contact us"
+        },
+        {
+          "href": "https://www.klaviyo.com/sign-up",
+          "text": "Sign up"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": "Search"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/19893982562203",
+          "text": "United States - EN"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/de-de/articles/19893982562203",
+          "text": "Deutschland - DE"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-es/articles/19893982562203",
+          "text": "España - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-mx/articles/19893982562203",
+          "text": "México - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/fr-fr/articles/19893982562203",
+          "text": "France - FR"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/it-it/articles/19893982562203",
+          "text": "Italia - IT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/ko-kr/articles/19893982562203",
+          "text": "한국 - KO"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/nl-nl/articles/19893982562203",
+          "text": "Nederland - NL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pl-pl/articles/19893982562203",
+          "text": "Polska - PL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pt-br/articles/19893982562203",
+          "text": "Brasil - PT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/sv-se/articles/19893982562203",
+          "text": "Sverige - SV"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/50026805374363",
+          "text": "Push Notifications"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/50026808518555",
+          "text": "Getting started with push notifications"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/19893982562203-How-to-create-Google-service-account-to-enable-push-notifications#h_01HDPM1N08PKXYHQ2JW53ST31V",
+          "text": "You will learn"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/19893982562203-How-to-create-Google-service-account-to-enable-push-notifications#h_01HDPM1N08R9PCW19AY8XFVYT0",
+          "text": "Before you begin"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/19893982562203-How-to-create-Google-service-account-to-enable-push-notifications#h_01HDPM1N08WYX807F09HW40SM1",
+          "text": "Enable Cloud messaging API"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/19893982562203-How-to-create-Google-service-account-to-enable-push-notifications#h_01HDPM1N090P47HT4HAV42C3E4",
+          "text": "Create a custom role that supports message creation"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/19893982562203-How-to-create-Google-service-account-to-enable-push-notifications#h_01HE5GH4CN8W5KBE2E7BSJRZPT",
+          "text": "Create a Google service account"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/19893982562203-How-to-create-Google-service-account-to-enable-push-notifications#h_01HE5GH4CNKP0Z25MFHBW8RNCX",
+          "text": "Generate a service account key"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/19893982562203-How-to-create-Google-service-account-to-enable-push-notifications#h_01HDPM1N099TT0Q9H1WME91S23",
+          "text": "Outcome"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/19893982562203-How-to-create-Google-service-account-to-enable-push-notifications#additional-resources",
+          "text": "Additional resources"
+        },
+        {
+          "href": "https://console.cloud.google.com/welcome",
+          "text": "Google Cloud console"
+        },
+        {
+          "href": "https://console.cloud.google.com/welcome",
+          "text": "Google Cloud console dashboard"
+        },
+        {
+          "href": "https://cloud.google.com/iam/docs/creating-custom-roles#creating",
+          "text": "creating a custom role"
+        },
+        {
+          "href": "https://console.cloud.google.com/iam-admin/iam",
+          "text": "IAM & Admin section"
+        },
+        {
+          "href": "https://console.cloud.google.com/iam-admin/serviceaccounts",
+          "text": "Service Accounts"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/14750928993307",
+          "text": "How to set up Android push notifications"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360023213971",
+          "text": "How to set up iOS push notifications"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115001002272",
+          "text": "Learn how to contact support"
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": ""
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": "Visit Community"
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": ""
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": "Hire a partner"
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/about",
+          "text": "About Klaviyo"
+        },
+        {
+          "href": "https://www.klaviyo.com/newsroom",
+          "text": "Newsroom"
+        },
+        {
+          "href": "https://investors.klaviyo.com/overview/default.aspx",
+          "text": "Investor relations"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Agency and tech partners"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Developers"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/retail",
+          "text": "Retail and ecommerce"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/restaurants",
+          "text": "Restaurant marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/wellness",
+          "text": "Wellness"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform",
+          "text": "B2C CRM overview"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai",
+          "text": "Klaviyo AI (K:AI)"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/marketing-automation",
+          "text": "Klaviyo Marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-service",
+          "text": "Klaviyo Service"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/analytics",
+          "text": "Klaviyo Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-data-platform",
+          "text": "Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare",
+          "text": "Klaviyo vs. Klaviyo alternatives"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-mailchimp",
+          "text": "Klaviyo vs. Mailchimp"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-postscript",
+          "text": "Klaviyo vs. Postscript"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-attentive",
+          "text": "Klaviyo vs. Attentive"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-salesforce-marketing-cloud",
+          "text": "Klaviyo vs. Salesforce"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-listrak",
+          "text": "Klaviyo vs. Listrak"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/omnichannel",
+          "text": "Omnichannel marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/email-marketing",
+          "text": "Email marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing",
+          "text": "SMS marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing/rcs",
+          "text": "RCS for Business"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/mobile-app-marketing",
+          "text": "Mobile app marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/whatsapp",
+          "text": "WhatsApp marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/social",
+          "text": "Social marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources",
+          "text": "Marketing resources"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources/marketing-campaign-calendar",
+          "text": "Marketing campaign calendar"
+        },
+        {
+          "href": "https://www.klaviyo.com/glossary",
+          "text": "Marketing glossary"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/email-subject-line-generator",
+          "text": "Subject line generator"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/roi-calculator",
+          "text": "ROI calculator"
+        },
+        {
+          "href": "https://www.klaviyo.com/customers",
+          "text": "Case studies"
+        },
+        {
+          "href": "https://www.klaviyo.com/composer",
+          "text": "Composer Beta"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/marketing-agent",
+          "text": "Marketing Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/customer-agent",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/customer-experience-hub",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/helpdesk",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/marketing-analytics",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/advanced-cdp",
+          "text": "Advanced Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/web-forms",
+          "text": "Web forms"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/email-templates",
+          "text": "Email templates"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/portfolio",
+          "text": "Portfolio"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform-integrations",
+          "text": "Apps and Integrations"
+        },
+        {
+          "href": "https://www.klaviyo.com/features",
+          "text": "Features"
+        },
+        {
+          "href": "https://www.klaviyo.com/whats-new",
+          "text": "What's new"
+        },
+        {
+          "href": "https://www.klaviyo.com/events",
+          "text": "Events"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help Center"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us",
+          "text": "Academy"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Community"
+        },
+        {
+          "href": "https://www.facebook.com/Klaviyo/",
+          "text": "Facebook"
+        },
+        {
+          "href": "https://twitter.com/klaviyo/",
+          "text": "Twitter"
+        },
+        {
+          "href": "https://www.linkedin.com/company/klaviyo/",
+          "text": "LinkedIn"
+        },
+        {
+          "href": "https://www.instagram.com/klaviyo/",
+          "text": "Instagram"
+        },
+        {
+          "href": "https://www.klaviyo.com/sitemap",
+          "text": "Site Map"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal",
+          "text": "Terms and Privacy"
+        },
+        {
+          "href": "https://www.klaviyo.com/security",
+          "text": "Security"
+        },
+        {
+          "href": "https://www.klaviyo.com/trust",
+          "text": "Trust"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal/intellectual-property-notices",
+          "text": "Intellectual Property Notices"
+        }
+      ],
+      "headings": [
+        {
+          "level": 1,
+          "id": "",
+          "text": "How to create Google service account to enable push notifications"
+        },
+        {
+          "level": 2,
+          "id": "h_01HDPM1N08PKXYHQ2JW53ST31V",
+          "text": "You will learn"
+        },
+        {
+          "level": 2,
+          "id": "h_01HDPM1N08R9PCW19AY8XFVYT0",
+          "text": "Before you begin"
+        },
+        {
+          "level": 2,
+          "id": "h_01HDPM1N08WYX807F09HW40SM1",
+          "text": "Enable Cloud messaging API"
+        },
+        {
+          "level": 2,
+          "id": "h_01HDPM1N090P47HT4HAV42C3E4",
+          "text": "Create a custom role that supports message creation"
+        },
+        {
+          "level": 2,
+          "id": "h_01HE5GH4CN8W5KBE2E7BSJRZPT",
+          "text": "Create a Google service account"
+        },
+        {
+          "level": 2,
+          "id": "h_01HE5GH4CNKP0Z25MFHBW8RNCX",
+          "text": "Generate a service account key"
+        },
+        {
+          "level": 2,
+          "id": "h_01HDPM1N099TT0Q9H1WME91S23",
+          "text": "Outcome"
+        },
+        {
+          "level": 2,
+          "id": "additional-resources",
+          "text": "Additional resources"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "Explore more from Klaviyo"
+        }
+      ]
+    }
+  },
+  "rendered_page": {
+    "status": "fetched",
+    "error": ""
+  }
+}

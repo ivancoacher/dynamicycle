@@ -1,0 +1,93 @@
+<h2 id="01H7ZRCXYWEFA0HFNATYX5HRDE">You will learn</h2>
+<p>Learn how to use the <em>klaviyo</em> JavaScript object’s getGroupMembership method, which can be used to implement onsite personalization on your website. This requires loading the <em>klaviyo</em> object and passing an array of lists or segments to check, which will return an output that you can leverage for onsite personalization.</p>
+<div class="bs-callout bs-callout-default">
+<p><a href="https://help.klaviyo.com/hc/en-us/articles/17655007276059">Advanced KDP</a> is not included in Klaviyo’s standard marketing application, and a subscription is required to access the associated functionality. Head to our <a href="https://help.klaviyo.com/hc/en-us/articles/115000976672">billing guide</a> to learn how to purchase this plan.</p>
+</div>
+<h2 id="01H7ZRCXYWF237X7BVWECQ16Z3">Before you begin</h2>
+<div class="bs-callout bs-callout-default">
+<p>This feature is only available for Advanced KDP customers, and is only available through the <em>klaviyo</em> object. To learn more about the <em>klaviyo</em> JavaScript object and what it can do, read the <a href="https://developers.klaviyo.com/en/docs/introduction_to_the_klaviyo_object">introduction to the Klaviyo object.</a></p>
+</div>
+<p>When you add Klaviyo's onsite tracking to your site, only the browsing activity of "known browsers" is tracked (i.e. browsers that have visited, engaged, and been identified or "cookied"). Klaviyo’s onsite tracking does not track anonymous browsers. There are 3 key ways Klaviyo will identify a site visitor for onsite tracking:</p>
+<ul>
+<li>If someone has clicked through a Klaviyo email to your website</li>
+<li>If someone has subscribed through a Klaviyo form</li>
+<li>If someone has logged into your site and you have tracking installed</li>
+</ul>
+<p>See our Klaviyo's <a href="https://www.youtube.com/watch?v=0MYFjCsm9nw">video</a> on using the group membership API.</p>
+<h2 id="01H7ZRCXYWSJDJBENZFRYF0CXK">Install Klaviyo.js and load the Klaviyo object</h2>
+<p>You’ll first need to install Klaviyo.js, if you have not done so already. Klaviyo.js, also known as<a href="https://developers.klaviyo.com/en/docs/guide_to_integrating_a_platform_without_a_pre_built_klaviyo_integration#active-on-site-tracking-snippet"> Klaviyo’s Active on Site JavaScript</a>, automatically supports the <em>klaviyo</em> object. If you have enabled an integration with your Klaviyo account or installed Klaviyo.js manually, you will be able to initiate the <em>klaviyo</em> object to listen for relevant calls.</p>
+<p>To use the <em>klaviyo</em> object immediately on page load, we recommend manually installing the snippet below on your site (in addition to installing Klaviyo.js as mentioned above). The <em>klaviyo</em> object only needs to be loaded once per page.</p>
+<p>To load the <em>klaviyo</em> object:</p>
+<pre><code class="language-text">
+ 
+!(function () {
+  if (!window.klaviyo) {
+    window._klOnsite = window._klOnsite || [];
+    try {
+      window.klaviyo = new Proxy(
+        {},
+        {
+          get: function (n, i) {
+            return "push" === i
+              ? function () {
+                  var n;
+                  (n = window._klOnsite).push.apply(n, arguments);
+                }
+              : function () {
+                  for (
+                    var n = arguments.length, o = new Array(n), w = 0;
+                    w &lt; n;
+                    w++
+                  )
+                    o[w] = arguments[w];
+                  var t =
+                      "function" == typeof o[o.length - 1] ? o.pop() : void 0,
+                    e = new Promise(function (n) {
+                      window._klOnsite.push(
+                        [i].concat(o, [
+                          function (i) {
+                            t &amp;&amp; t(i), n(i);
+                          },
+                        ]),
+                      );
+                    });
+                  return e;
+                };
+          },
+        },
+      );
+    } catch (n) {
+      (window.klaviyo = window.klaviyo || []),
+        (window.klaviyo.push = function () {
+          var n;
+          (n = window._klOnsite).push.apply(n, arguments);
+        });
+    }
+  }
+})();
+
+</code></pre>
+<p>To use the <em>klaviyo</em> JavaScript object’s getGroupMembership method for onsite personalization:</p>
+<ol>
+<li>Within your code, select the list or segment IDs you want to check membership for. The limit is 50 lists or segments.</li>
+<li>Identify users on your site via a Klaviyo form or other means.</li>
+<li>Make a call in the following format, with an array of the list or segment IDs you want to check membership for:</li>
+</ol>
+<pre><code class="language-text">
+klaviyo.getGroupMembership(['listID1', 'listID2', 'listID3'])
+</code></pre>
+<p>The output provided will be an array of the list/segment IDs that the identified user belongs to, given that those IDs were in the input array. If an empty array is returned, it means that you passed in too many IDs, or that the user does not belong to any of the lists or segments you provided.</p>
+<p>You can use the returned segment and list membership data to customize your site with relevant products, content, and more based on customer segments from Klaviyo.</p>
+<h3 id="01H7ZRCXYXQEE6WW8C6V2EBJA6">Code example</h3>
+<p>Here is an example showing how to call the getGroupMembership API with multiple segment IDs.</p>
+<pre><code class="language-text">
+const customerSegments = await klaviyo.getGroupMembership([
+  VIPSegmentID,
+  UnEngagedSegmentID,
+  DogLoversSegmentID
+]);</code></pre>
+<h2 id="h_01HAQKDAXSXM6CH4XD3RCAW13N">Impact on site performance</h2>
+<p>The group membership API has minimal impact on your site's performance. The Javascript file (i.e., web_personalization.js) Klaviyo loads on your site is only about 1.2KB and the bundle request for this file is not main thread blocking, so it does not impact the usability of any pages.</p>
+<p>The data that is loaded to customize a site based on the customer profile is cached in the browser after it is first requested, so additional requests do not require backend API calls.</p>
+<h2 id="01H7ZRCXYX84RHRWS02VD5T5KZ">Outcome</h2>
+<p>You can now use the <em>klaviyo</em> JavaScript object with web personalization tools and to personalize onsite content based on segment or list membership.</p>

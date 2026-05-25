@@ -1,0 +1,36 @@
+<h2 id="h_01HSXXZR43XMM8Q3WRWJJPMYJ9">You will learn</h2>
+<p>Learn how to identify Apple’s Mail Privacy Protection (MPP) opens in your Klaviyo segments, including how to build segments that aren’t inflated by these automatic opens. Head to Klaviyo’s blog to <a href="https://www.klaviyo.com/blog/apple-ios15-klaviyo">learn more about iOS15 and MPP</a>. </p>
+<p>By using the Apple Privacy Open flag (which is set to either True or False for every open event), you can differentiate MPP opens from true recipient engagement. </p>
+<div class="bs-callout bs-callout-default">
+<p>The Apple Privacy Open flag is available for Opened Email events occurring on or after November 20, 2021. Opens before this release may not include this information in their metadata. </p>
+</div>
+<h2 id="h_01HSXXZR431V08CNZMXBR0YFGM">Identify MPP opens </h2>
+<p>Open events contain a property called Apple Privacy Open, which is either <em>True</em> or <em>False</em> for all open events. If Apple Privacy Open is <em>True</em>, it means the message was opened on a device with MPP turned on. Therefore, the open event may be attributable to Apple’s MPP, and doesn’t necessarily reflect a true email open. In these cases, the message could have been opened by the inbox or by a recipient, and there’s no way to differentiate between the two. </p>
+<p>If Apple Privacy Open is <em>False</em>, then the open event can be attributed to a recipient opening and viewing your message on a device without Apple’s MPP feature enabled. </p>
+<p>To add an Apple Privacy Open condition to a segment, use this condition: </p>
+<ul>
+<li>
+<strong>What someone has done &gt; Opened Email</strong>
+<ul>
+<li>Click <strong>Add Filter</strong> and add the rule <strong>where Apple Privacy Open equals True/False</strong> (depending on your use case) </li>
+</ul>
+</li>
+</ul>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/28716354559003" alt="Opened APO is false.jpg"></p>
+<p>The sample segments below offer examples of how you can use this property in your own account.</p>
+<h3 id="h_01HSXXZR43QKTM6D3TH60AJ698">Remove MPP openers from your engaged segment</h3>
+<p>If your engaged segment follows the recommendation in our article <a href="https://help.klaviyo.com/hc/en-us/articles/115000200072-How-to-Create-an-Engaged-Segment">How to Create an Engaged Segment</a>, you can exclude MPP opens by adding the filter <strong>where Apple Privacy Open equals False</strong> to the Opened Email criteria. The segment below includes all subscribers who have opened or clicked an email in the last 30 days (excluding MPP opens) or subscribed in the last 15 days. </p>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/28716354562459" alt="Engaged not APO.jpg"></p>
+<h3 id="h_01HSXXZR430YK98EFRPA0678T0">Find all MPP openers </h3>
+<p>If you’d like to see the total number of profiles that are impacted by MPP, use the segment below. This segment will include anyone who has had the MPP feature enabled in their Apple Mail account since Klaviyo began tracking Apple Privacy opens. </p>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/28716354559003" alt="Opened APO is false.jpg"></p>
+<h3 id="h_01HSXXZR43W717K7KGS51PKDBN">Identify unengaged MPP openers </h3>
+<p>Use the segment below to identify profiles with Apple Privacy opens who have not directly engaged with your messages recently (either by opening an email on device without MPP, or by clicking an email on any device). Consider excluding this segment from your campaign sends. </p>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/28716331545499" alt="Unengaged APO openers.jpg"></p>
+<h2 id="h_01HSXXZR43X6RVYX9A3BBK4YDT">About MPP opens</h2>
+<p>With the release of iOS15, Monterey, WatchOS8, and iPadOS8, Apple Mail users have the option to turn on MPP. When one of your recipients has this feature turned on, all images in the messages they receive will be preemptively loaded, whether the recipient opens the email or not. </p>
+<p>Because opens are tracked when a tracking pixel (a small, nearly-invisible image) is loaded, this causes a false open event to be tracked in Klaviyo. This, in turn, artificially inflates your open rates and makes it harder to identify subscribers who are truly engaged. </p>
+<p>Klaviyo identifies these Apple Privacy opens so you can exclude them from engagement criteria in your segments and see which recipients are truly engaging with your messages. </p>
+<div class="bs-callout bs-callout-default">
+<p>If a subscriber has set up multiple inboxes (e.g., a Gmail inbox and an Apple Mail inbox) for the same email address, you may see both Apple Privacy opens and true open events (i.e., Opened Email events with Apple Privacy Open set to <em>False</em>) for the same message.</p>
+</div>

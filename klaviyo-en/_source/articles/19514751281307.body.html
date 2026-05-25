@@ -1,0 +1,99 @@
+<h2 id="h_01HCJ4YER7DQNZJES6MP126Z97">You will learn</h2>
+<p>Learn how to build segments based on whether someone is subscribed to or able to receive marketing via a particular channel (i.e., email, SMS, or push notifications). </p>
+<h2 id="h_01HCJ4YER7Y6Y25C4927NDXBEP">About marketing channel consent in Klaviyo </h2>
+<p>Consent for each marketing channel in Klaviyo is stored separately. This means someone can be subscribed to one channel, like SMS, while being unsubscribed from another channel, like email.<br><br>Additionally, consent works slightly differently for each Klaviyo channel. </p>
+<ul>
+<li>
+<strong>Email </strong>offers 3 consent statuses (i.e., subscribed, unsubscribed, and never subscribed).
+<ul>
+<li>
+<strong>Subscribed</strong><br>Someone who is actively opted in to receive emails. </li>
+<li>
+<strong>Unsubscribed</strong><br>Someone who indicated that they do not want to receive emails. (Includes both <a href="https://klaviyo.zendesk.com/hc/en-us/articles/115005246108" target="_blank" rel="noopener noreferrer">global and list-specific suppressions</a>.)</li>
+<li>
+<strong>Never subscribed</strong><br>Someone that can still technically receive emails, but never provided explicit consent. <em>Never subscribed</em> contacts are often added through general engagement with your site, like abandoning their cart. </li>
+</ul>
+</li>
+<li>
+<strong>SMS</strong> offers 3 consent statuses (i.e., subscribed, unsubscribed, and never subscribed). 
+<ul>
+<li>
+<strong>Subscribed</strong><br>Someone who actively opted in to receive SMS. </li>
+<li>
+<strong>Unsubscribed</strong><br>Someone who indicated that they do not want to receive SMS. </li>
+<li>
+<strong>Never subscribed</strong><br>Someone that cannot receive SMS, but has neither subscribed nor unsubscribed. These profiles were added through <a href="https://help.klaviyo.com/hc/en-us/articles/115005246968">general engagement</a> or when they consented to another marketing channel, which does not indicate consent for SMS marketing. </li>
+</ul>
+</li>
+<li>
+<strong>Push notifications</strong> 
+<ul>
+<li>
+<strong>Subscribed</strong><br>Someone who has enabled push notifications on at least one device (i.e., the profile has at least one push token that is authorized to receive push notifications).</li>
+<li>
+<strong>Unsubscribed</strong><br>Someone who has not enabled push notifications on at least one device (i.e., the profile has at least one push token that is not authorized to receive push notifications).</li>
+</ul>
+</li>
+</ul>
+<h2 id="h_01HCJ4YER7J2448SXHH59HH0RG">Segment on channel consent </h2>
+<p>To create a segment referencing channel consent:</p>
+<ol>
+<li>Navigate to the <strong>Lists &amp; segments</strong> tab in Klaviyo.</li>
+<li>Click the <em>Create New</em> dropdown.</li>
+<li>Click <strong>Create segment</strong>. </li>
+<li>Add the condition <strong>If someone can or cannot receive marketing</strong> </li>
+<li>Choose <strong>can receive</strong> or <strong>cannot receive</strong> and select a channel.<br><img src="https://klaviyo.zendesk.com/hc/article_attachments/28716118449819" alt="Can receive marketing segment" width="602" height="132">
+</li>
+<li>Add additional filters as desired. </li>
+<li>Save the segment.  </li>
+</ol>
+<p>In most cases, it is best to add your consent condition using an AND connector, rather than OR. </p>
+<h3 id="h_01JVQ1GYX3QS53HVE23JRPRV7Q">Email marketing consent </h3>
+<p>When <strong>can receive &gt; email marketing</strong> is selected as a condition, all profiles without an associated email address are excluded and list-only suppressions are included as active profiles. When <strong>cannot receive &gt; email marketing</strong> is selected, all profiles without an email address are included and list-only suppressions are excluded. </p>
+<h3 id="h_01HCJ4YER7F8CPZHNJYC6694CR">Additional filters for email consent status</h3>
+<p>To narrow a segment down to only email subscribers, follow the steps above. Then, click <strong>Add filter</strong> and select <strong>Because person subscribed</strong>.</p>
+<p class="wysiwyg-text-align-center"><img src="https://klaviyo.zendesk.com/hc/article_attachments/28716118456475" alt="Subscribed to email segment"></p>
+<p>From here, you can click <strong>Add filter</strong> again to add additional criteria, like subscription method, subscription date, double opt-in status, and more. </p>
+<p class="wysiwyg-text-align-center"><img src="https://klaviyo.zendesk.com/hc/article_attachments/28716057653275" alt="Double opt in to email"></p>
+<p>Because <em>Never subscribed</em> contacts don’t have an active subscription reason or other details, you cannot add additional filters to a condition on contacts who can receive email because of general engagement. </p>
+<p>Alternatively, choose <strong>cannot receive &gt; email</strong>, then click <strong>Add filter</strong> to add a suppression reason (e.g., unsubscribed, manually suppressed, marked as spam) and an unsubscribe method or date, if relevant. </p>
+<h3 id="h_01HCJ4YER795RRZKR5XF2FJT3J">Additional filters for SMS consent</h3>
+<p>Click <strong>Add filter</strong> after adding an SMS consent condition to narrow your segment down based on subscribe/unsubscribe method and subscribe/unsubscribe date.</p>
+<p class="wysiwyg-text-align-center"><img src="https://klaviyo.zendesk.com/hc/article_attachments/28716057636635" alt="Subscribed to SMS in the last month"></p>
+<h3 id="h_01HCJ4YER7HVF71ATH4CJYNWAF">Additional filters for push consent</h3>
+<p>Click <strong>Add filter</strong> after adding a push consent condition to identify push subscribers who opted in during a certain date range. This filter is only available when you select <strong>can receive &gt; mobile push marketing</strong>. </p>
+<p class="wysiwyg-text-align-center"><img src="https://klaviyo.zendesk.com/hc/article_attachments/28716118447259" alt="Subscribed to push in the last 30 days"></p>
+<h2 id="h_01HCJ4YER70QMMANMTQH5PK21Y">Sample segments with consent</h2>
+<p>Use these sample segments as guides and inspiration for your own. </p>
+<h3 id="h_01HCJ4YER7R2P6F23414WSEEHG">Engaged segment of email subscribers</h3>
+<p><strong>If someone can or cannot receive marketing &gt; can receive &gt; email marketing &gt; Because person &gt; subscribed </strong></p>
+<p><strong>AND</strong></p>
+<p><strong>What someone has done (or not done) &gt; Opened email &gt; at least once &gt; in the last 30 days</strong></p>
+<p><strong>OR</strong></p>
+<p><strong>What someone has done (or not done) &gt; Clicked email &gt; at least once &gt; in the last 30 days</strong></p>
+<p class="wysiwyg-text-align-center"><strong><img src="https://klaviyo.zendesk.com/hc/article_attachments/28716118454427" alt="engaged email subscribers"></strong></p>
+<h3 id="h_01HCJ4YER89TEFNJTVM4GSJ9G4">Engaged segment of everyone who can receive emails </h3>
+<p><strong>If someone can or cannot receive marketing &gt; can receive &gt; email marketing</strong></p>
+<p><strong>AND</strong></p>
+<p><strong>What someone has done (or not done) &gt; Opened email &gt; at least once &gt; in the last 30 days</strong></p>
+<p><strong>OR</strong></p>
+<p><strong>What someone has done (or not done) &gt; Clicked email &gt; at least once &gt; in the last 30 days</strong></p>
+<p class="wysiwyg-text-align-center"><strong><img src="https://klaviyo.zendesk.com/hc/article_attachments/28716057642011" alt="engaged and can receive email"></strong></p>
+<h3 id="h_01HCJ4YER86XD1Q8DZHSX7FV0Z">Subscribed to both email and SMS</h3>
+<p><strong>If someone can or cannot receive marketing &gt; can receive &gt; email marketing &gt; Because person &gt; subscribed</strong></p>
+<p><strong>AND</strong></p>
+<p><strong>If someone can or cannot receive marketing &gt; can receive &gt; SMS marketing</strong></p>
+<p class="wysiwyg-text-align-center"><strong><img src="https://klaviyo.zendesk.com/hc/article_attachments/28716057675547" alt="email plus sms subscriber"></strong></p>
+<h3 id="h_01HCJ4YER8A7JYCQ56P86V4P3S">Subscribed to email but not SMS</h3>
+<p><strong>If someone can or cannot receive marketing &gt; can receive &gt; email marketing &gt; Because person &gt; subscribed</strong></p>
+<p><strong>AND</strong></p>
+<p><strong>If someone can or cannot receive marketing &gt; cannot receive &gt; SMS marketing</strong></p>
+<p class="wysiwyg-text-align-center"><strong><img src="https://klaviyo.zendesk.com/hc/article_attachments/28716118444315" alt="subscribed to email not sms"></strong></p>
+<h3 id="h_01HCJ4YER8KGSGC42CTQ64XEYP">Recent SMS unsubscribers</h3>
+<p><strong>If someone can or cannot receive marketing &gt; cannot receive &gt; SMS marketing &gt; because person &gt; unsubscribed</strong></p>
+<p class="wysiwyg-text-align-center"><img src="https://klaviyo.zendesk.com/hc/article_attachments/28716057646491" alt="Unsubscribed from SMS"></p>
+<h2 id="h_01HCJ4YER8TYK76REX46XPV7K2">Additional resources</h2>
+<ul>
+<li><a href="https://klaviyo.zendesk.com/hc/en-us/articles/115005062847" target="_blank" rel="noopener noreferrer">Segment conditions reference</a></li>
+<li><a href="https://help.klaviyo.com/hc/en-us/articles/4403222359451">Segmenting with dates reference</a></li>
+</ul>

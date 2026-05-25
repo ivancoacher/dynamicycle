@@ -1,0 +1,66 @@
+<h2 id="h_01HGTYXCHN2N9X0B5YGYVR3MP1">You will learn</h2>
+<p>Learn how to integrate Segment with Klaviyo to be able to trigger and filter flows, and define segments using events synced to Klaviyo from your Segment project. Klaviyo is able to sync any <code>track</code> and <code>identify</code> calls you make from Segment to Klaviyo.</p>
+<p>This integration takes two steps: enabling the integration on the Segment side, and enabling the integration on the Klaviyo side. Make sure to also explore Segment's<a href="https://segment.com/docs/connections/destinations/catalog/actions-klaviyo/" target="_blank" rel="noopener noreferrer"> comprehensive guide to integrating with Klaviyo</a>. </p>
+<h2 id="h_01HGTYXCHN2K2H720DXTEKVG0R">Before you begin</h2>
+<div class="bs-callout bs-callout-default">
+<p>This integration now supports the two-way flow of information between Segment and Klaviyo, but you will need to select either Klaviyo or Segment as your primary source of truth for profile creation.</p>
+<p>If you select Klaviyo as your primary source, note the following: profiles generated in Segment contain a unique ID which Klaviyo keeps track of to record where these profiles came from. Klaviyo cannot easily reconcile duplicate profiles from different sources, so there is a chance of pushing duplicated profiles to Segment. See the <em>Enable Integration in Klaviyo</em> section below for more information.</p>
+</div>
+<h2 id="h_01HGTYXCHND11N2AWCCM18HNW2">Connect Segment and Klaviyo</h2>
+<h3 id="h_01HGTYXCHN3Q64B6RC8B62VA0D">Add Klaviyo destination to Segment</h3>
+<ol>
+<li>From your Segment project page, click <strong>Connections </strong>in the left hand navigation bar, then click <strong>Add Destination</strong> on the right side of the page.<br><img src="https://klaviyo.zendesk.com/hc/article_attachments/28723518315803" alt="Connections tab in Segment with Add Destination button with blue background" width="617" height="237">
+</li>
+<li>Search for <em>Klaviyo</em> in the Segment catalog. Once it appears, click on the Klaviyo tile, and then click <strong>Configure Klaviyo</strong> on the next page.<br><img src="https://klaviyo.zendesk.com/hc/article_attachments/28723518312987" alt="Segment catalog with Klaviyo in search bar and Klaviyo card in results" width="585" height="283">
+</li>
+<li>Select and confirm a source from your Segment project. On the next page, enter all of the following:
+<ul>
+<li>Your public Klaviyo API key. Learn <a href="https://help.klaviyo.com/hc/en-us/articles/115005062267" target="_blank" rel="noopener">how to find your public and private API keys in Klaviyo</a>.</li>
+<li>The list ID of the default Klaviyo list you want to sync with. Learn <a href="https://help.klaviyo.com/hc/en-us/articles/115005078647" target="_blank" rel="noopener">how to find your List ID in Klaviyo</a>.</li>
+<li>A private Klaviyo API key. Treat private API keys like passwords kept in a safe place and never exposed to the public.<br><img src="https://klaviyo.zendesk.com/hc/article_attachments/28723506665883" alt="Klaviyo setup page in Segment with fields for API key, List ID, and Enter your private API Key" width="549" height="285">
+</li>
+</ul>
+</li>
+<li>Finally, scroll down to <em>Other Settings</em> to verify that <em>Enforce Email as Primary Identifier</em> is set to <strong>On</strong>. It should be toggled on by default. If not, click into the setting and set it to <strong>On</strong>.<br><img src="https://klaviyo.zendesk.com/hc/article_attachments/28723506671643" alt="Klaviyo setup page in Segment Other Settings section with Confirm Optin set to On and Enforce Email as Primary Identifier set to On" width="571" height="120">
+</li>
+<li>To enable the integration on Klaviyo’s side, you’ll first need to get your write key from Segment. In Segment, navigate to <strong>Connections &gt; Sources</strong>, and click on the site you’d like to connect with Klaviyo.<br><img src="https://klaviyo.zendesk.com/hc/article_attachments/28723518319771" alt="List of sources in Connections tab in Segment showing test website in list" width="574" height="152">
+</li>
+<li>Click on the <strong>Settings</strong> tab at the top and then select <strong>API Keys</strong>.<br><img src="https://klaviyo.zendesk.com/hc/article_attachments/28723506684059" alt="Test website source page in Segment with Settings tab selected, with Source ID and Write Key blurred out" width="574" height="337">
+</li>
+<li>Copy your <em>Write Key</em>. Your write key is another private API key. Treat it like a password; keep it in a safe place and never expose it to the public.</li>
+</ol>
+<h3 id="h_01HGTYXCHNDH764DVR3P7NP2Y9">Enable the integration in Klaviyo</h3>
+<ol>
+<li>In Klaviyo, select the <strong>Integrations</strong> tab.</li>
+<li>Select <strong>Explore apps</strong>, search for <em>Segment</em>, and then click the card. Then, click <strong>Install</strong>.</li>
+<li>Paste the write key you copied earlier into the box, then click <strong>Connect to Segment</strong>.<br><img src="https://klaviyo.zendesk.com/hc/article_attachments/28723506700315" width="539" height="387">
+</li>
+<li>On the next page, you'll have the ability to limit the data you pass back to Segment, by checking the box next to <em>Do not sync profiles that are not updated by the Klaviyo Destination</em>.<br><img src="https://klaviyo.zendesk.com/hc/article_attachments/28723518331035"><br>
+<ul>
+<li>As noted in the Overview, this integration now supports the ability to pass information back and forth between Segment and Klaviyo, using a unique ID to keep track of which profiles are originally from Segment. If you have multiple integrations enabled in Klaviyo, there is a possibility that the same customer will interact with you from two separate sources, and as a result, this customer will end up with duplicated profiles in Klaviyo.</li>
+<li>To help avoid this duplication of profiles across multiple services, you can check the box above, which will limit the profiles Klaviyo syncs with Segment to only the profiles originally created in Segment.</li>
+</ul>
+</li>
+<li>Once finished, click <strong>Complete setup</strong>.</li>
+</ol>
+<h2 id="h_01HGTYXCHNKD3FEVRPKGWSJZC1">Segment metrics</h2>
+<p>We recommend syncing the most important events to Klaviyo, such as:</p>
+<ul>
+<li>When a customer signs up</li>
+<li>When a customer starts to checkout or expresses interest in paying</li>
+<li>What a customer buys (including pictures of items and descriptions of items)</li>
+</ul>
+<p>For each event you send through Segment, a customer is identified by their email address. For detailed information on how to format these events, see the <a href="https://segment.com/docs/connections/destinations/catalog/actions-klaviyo/" target="_blank" rel="noopener noreferrer">Segment's Klaviyo Integration</a> guide.</p>
+<p>For transactional web businesses and ecommerce platforms, we recommend following our <a href="https://developers.klaviyo.com/en/v1-2/docs/guide-to-integrating-a-platform-without-a-pre-built-klaviyo-integration" target="_blank" rel="noopener">guide to integrating a custom ecommerce cart or platform</a> guide for detailed information on the events that should be sent to Klaviyo through Segment.</p>
+<h2 id="h_01HGTYXCHNGJJ63JYECJHG1SGS">Monitoring the Klaviyo sync</h2>
+<p>Once you activate the Klaviyo integration inside of Segment, your <code>identify</code> and <code>track</code> calls will begin sending data to Klaviyo within 5-10 minutes. To verify Segment is sending data to Klaviyo, click the <strong>Analytics</strong> dropdown in Klaviyo and select the <strong>Metrics</strong> tab. </p>
+<p>As events are triggered in Segment, they will send data to Klaviyo, where the event name from the Segment <code>track</code> call is used to create the metric name. Klaviyo treats Segment metrics as third-party API metrics, so each metric will have a gear icon next to its name in Klaviyo. To view the data as it flows into Klaviyo, navigate to the <em>Activity Feed</em> for each metric.</p>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/28723506691995" alt="segment9.jpg"></p>
+<h2 id="h_01HGTYXCHNMDWM2Z2SED3EM1SW">Outcome</h2>
+<p>You've now integrated Segment with Klaviyo and can start using Segment data to trigger and filter flows, and define segments using events synced to Klaviyo from your Segment project. </p>
+<h2 id="h_01HGTYXCHNJ7787GX36MM4WVAK">Additional resources</h2>
+<ul>
+<li><a href="https://help.klaviyo.com/hc/en-us/articles/115002774932" target="_blank" rel="noopener">Getting started with flows</a></li>
+<li><a href="https://help.klaviyo.com/hc/en-us/articles/115005237908" target="_blank" rel="noopener">Getting started with segments</a></li>
+<li><a href="https://help.klaviyo.com/hc/en-us/articles/115003872171" target="_blank" rel="noopener">How to add a conditional split to a flow</a></li>
+</ul>

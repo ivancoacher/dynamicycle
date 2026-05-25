@@ -1,0 +1,92 @@
+<h2 id="01FK124H736A7QX0206YX2HCG8">You will learn</h2>
+<p>Learn how to use the block repeat feature for a section or a block in a Klaviyo email template. This feature allows you to repeat the content of a block or section for each entry in an array (i.e., list) of data from a recipient’s event or profile data, or from a data feed.</p>
+<h2 id="01FK124H73GGQ963D0W157RCFN">Before you begin</h2>
+<p>If you are unfamiliar with using event, profile, or catalog data in emails, check out our <a href="https://help.klaviyo.com/hc/en-us/articles/4408802648731">message personalization reference</a> as a first step. </p>
+<p>It will also be helpful to understand <a href="https://help.klaviyo.com/hc/en-us/articles/115005237648-About-Data-Types">data types in Klaviyo</a>, particularly lists (i.e., arrays). An array stores multiple pieces of data that are structured the same way. For example, a customer’s purchased items are stored as an array within a Placed Order event. The items array contains 1 entry per item ordered, and each entry contains the details for 1 item (e.g., item name, image URL, quantity, size, color, etc.). </p>
+<h2 id="01FK124H73AAHZW0TZ0550D9HT">Content repeat feature use cases</h2>
+<p>To use the content repeat feature, you’ll need an array or list of data. The table below lists some examples of arrays of data that may exist in your Klaviyo account, along with sample use cases. </p>
+<table>
+<tbody>
+<tr>
+<td style="text-align: center; background-color: #eee"><strong>Data source</strong></td>
+<td style="text-align: center; background-color: #eee"><strong>Sample use case</strong></td>
+</tr>
+<tr>
+<td>The array of ordered items in a Placed Order event</td>
+<td>Display a customer’s purchased items (including a product image, price, title, and variant information) in their order confirmation email. </td>
+</tr>
+<tr>
+<td>A list of existing subscriptions for someone subscribed to recurring orders </td>
+<td>Show a customer a list of their active subscriptions in a campaign.</td>
+</tr>
+<tr>
+<td>A list of recent blog entries from a custom web feed</td>
+<td>Provide an up-to-date list of your most recent blog posts in your welcome flow, including a link to the blog post and a preview of its content.</td>
+</tr>
+</tbody>
+</table>
+<p>You can use the content repeat feature with any array, whether it’s stored in a subscriber’s profile or event data, or in one of your <a href="https://klaviyo.zendesk.com/hc/en-us/articles/115005258768">web feeds</a>. The examples above are just a small sample of how this feature can be used.</p>
+<h2 id="01FK124H73S5R4ES1X5Z6N3K4Z">How to use the content repeat feature</h2>
+<p>To enable the content repeat feature, navigate to the section or block you’d like to repeat, then click <strong>Display Options</strong>. In the <em>Content Repeat</em> section, click <strong>Create Content Repeat</strong>. </p>
+<p>You’ll see two fields appear: <em>Repeat for</em> and <em>Item alias</em>. To fill out these fields and set up your repeating content, follow the steps below: </p>
+<ol>
+<li><a href="#01FK124H745446BNHM34CE4J1Q">Identify your “repeat for”</a></li>
+<li><a href="#01FK124H74R7GZSHJPWCR0QHQX">Choose your “item alias” </a></li>
+<li><a href="#01FK124H748C3S30TTNGD7EMWY">Build your repeating content</a></li>
+<li><a href="#01FK124H749B4585QNE6R6AP9T">Preview your email</a></li>
+</ol>
+<h3 id="01FK124H745446BNHM34CE4J1Q">Identify your “repeat for” </h3>
+<p>Add the name of the array you plan to iterate over to the <em>Repeat for</em> field.</p>
+<p>To find the name of your array, view the data from your data source (i.e., profile data, event data, or a data feed). In this example, we’ll walk through finding the array from event data: </p>
+<ol>
+<li>In your email template, click <strong>Preview and test</strong>.</li>
+<li>Click <strong>Event</strong>.</li>
+<li>Select the event that will trigger this flow email (e.g., Started Checkout).</li>
+<li>Scroll through the preview data for your event until you find an array that contains the information you need. You can use the arrow icons on the left of the data to collapse sections you don’t need and make it easier to navigate.<br>
+In this example, there are two arrays that store item information: In this case, you’d want to use the more detailed array, <em>line_items</em>, since it contains the detailed information needed to display in the repeating block. To find the appropriate variable to set in the <em>Repeat for</em> field, find two variables within the first section of the array and copy them. In this example, we’ll copy the variables for <em>variant_price</em> and <em>title</em>. Here are the two tags we copied: <code>{{ event.extra.line_items.0.variant_price }}{{ event.extra.line_items.0.title }}</code><br>
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28717812130459" alt="navigate event data" width="329" height="473">
+<ul>
+<ul>
+<li>
+<em>Items</em><br>
+A top-level array and contains a simple list of each item’s name, but no other information</li>
+<li>
+<em>Line_items</em><br>
+Nested within the <em>extra</em> array, and contains more detail including each item’s title, price, SKU, and image URL <br>
+</li>
+</ul>
+</ul>
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28717851792667" alt="Two items subsections in event data" width="391" height="623">
+</li>
+<li>Ignore the curly brackets and look at the variables within them. Note that the beginning of both variables are the same: <code>event.extra.line_items.0</code>. Use everything up to (but excluding) the dot and the number at the end of this portion of the variable as your <em>Repeat for</em>. In this example, the appropriate setting for the <em>Repeat for</em> field is <code>event.extra.line_items</code>.</li>
+</ol>
+<p class="wysiwyg-text-align-center"><img src="https://klaviyo.zendesk.com/hc/article_attachments/28717851791131" alt="repeat for options" width="415" height="358"></p>
+<h3 id="01FK124H74R7GZSHJPWCR0QHQX">Choose your item alias</h3>
+<p>Your item alias can be any text you’d like to use (with no special characters or spaces). You’ll use this alias within your repeating block to identify variables that should be pulled from the array you selected above. Choose a simple but descriptive alias, so it’s easy to remember. </p>
+<p>For example, if your block is repeating over a list of items in an abandoned cart, <em>item</em> is a good alias to use. If your block is repeating over a list of blog posts, then you could use <em>post</em> as your alias.</p>
+<p>You can use any alias you’d like; just make sure to consistently use that alias in variables from your array (as outlined in the following steps). </p>
+<p class="wysiwyg-text-align-center"><img src="https://klaviyo.zendesk.com/hc/article_attachments/28717851789595" alt="item alias" width="394" height="341"></p>
+<p>Once you’ve filled out the <em>Repeat for</em> and <em>Item alias</em> fields, click <strong>Save Changes</strong> and start building your content. </p>
+<h3 id="01FK124H748C3S30TTNGD7EMWY">Build your repeating block/section</h3>
+<p>Once you’ve set your <em>Repeat for</em> and <em>Item alias</em> settings, add in personalization tags to the content block to iterate over. You can add any type of variable to this block, including profile and event data, but any tags that are pulled from your array (e.g., the list of items someone ordered) must be adjusted slightly. </p>
+<p>The full title and variant price variables used in the example above were: </p>
+<p><code>{{ event.extra.line_items.0.variant_price }}</code></p>
+<p><code>{{ event.extra.line_items.0.title }}</code></p>
+<p>If you add the variables above to the block, it will repeat the block once per item in your array, but every repetition will show the title and price of the <strong>first</strong> item in the array. </p>
+<p>To show the title and price for each item, replace the text from the <em>Repeat for</em> setting (<code>event.extra.line_items</code>), plus the subsequent dot and number (<code>.0</code>) with your <em>Item alias</em> (<code>item</code>). The resulting variables for this example are: </p>
+<p><code>{{ item.variant_price }}</code></p>
+<p><code>{{ item.title }}</code></p>
+<p>Repeat the process with any other variables you’d like to include from the array. </p>
+<div class="bs-callout bs-callout-default">
+<p>Everything in the block or section with the block repeat feature enabled will be repeated once per item in the array. If you have any content you’d like to appear just once, add it in a different block or section. </p>
+<p>Additionally, the custom variables created through this process (e.g., <code>{{ item.title  }}</code>) only work inside the block or section where the block repeat section is enabled. If you add these custom variables elsewhere, they will not render. </p>
+</div>
+<h3 id="01FK124H749B4585QNE6R6AP9T">Preview your email and troubleshoot</h3>
+<p>Once you’ve built your repeating block, preview your email. If the email references event data, select the same event you used to build the block (i.e., the event that will trigger this flow). If your block references profile data, select a profile that has the correct variables. </p>
+<p>If the repeating block in your preview email appears blank or doesn’t contain all the content you expected, return to the steps above. Make sure your <em>Repeat for</em>, <em>Item alias</em>, and all custom variables are correctly configured following the steps above. Then, review the preview data you’re using: ensure that you’ve selected the correct event, and that the sample event you’ve chosen contains the data you need. </p>
+<h2 id="01FK124H74PRT8SBJMWVTQJ38T">Additional resources</h2>
+<ul>
+<li><a href="https://klaviyo.zendesk.com/hc/en-us/articles/4408802648731">Message personalization reference</a></li>
+<li><a href="https://klaviyo.zendesk.com/hc/en-us/articles/4407911841435">Guide to the email template editor</a></li>
+</ul>
+<p></p>

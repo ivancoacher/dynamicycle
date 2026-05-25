@@ -1,0 +1,865 @@
+{
+  "captured_at": "2026-05-23T16:16:58Z",
+  "article": {
+    "id": 115005082587,
+    "url": "https://klaviyo.zendesk.com/api/v2/help_center/en-us/articles/115005082587.json",
+    "html_url": "https://klaviyo.zendesk.com/hc/en-us/articles/115005082587-BigCommerce-data-reference",
+    "author_id": 20345311467,
+    "comments_disabled": true,
+    "draft": false,
+    "promoted": false,
+    "position": 1,
+    "vote_sum": 9,
+    "vote_count": 67,
+    "section_id": 49375348896539,
+    "created_at": "2017-03-30T18:31:55Z",
+    "updated_at": "2026-04-21T13:56:38Z",
+    "name": "BigCommerce data reference",
+    "title": "BigCommerce data reference",
+    "source_locale": "en-us",
+    "locale": "en-us",
+    "outdated": false,
+    "outdated_locales": [],
+    "edited_at": "2024-11-12T21:25:27Z",
+    "user_segment_id": null,
+    "permission_group_id": 146372,
+    "content_tag_ids": [],
+    "label_names": [],
+    "body": "<h2 id=\"h_01HHFMD1C5NK4BR0W1HF2A5NZA\">You will learn</h2>\n<p>Learn what data is synced to Klaviyo when you integrate with your BigCommerce store, such as order and customer data, and how to access it in Klaviyo.</p>\n<h2 id=\"h_01HHFMD1C549CJ0C4RZHGM0TF0\">Metrics synced from BigCommerce</h2>\n<p>After you've <a href=\"https://klaviyo.zendesk.com/hc/en-us/articles/115005082547\" target=\"_blank\" rel=\"noopener\">integrated with BigCommerce</a>, click the <strong>Analytics</strong> dropdown in Klaviyo and select <strong>Metrics</strong> to see all of the metrics in your account. Here, you can filter by BigCommerce to see which metrics are synced from the integration. <br><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28704476453275\" alt=\"Metrics tab in Klaviyo filtered by BigCommerce showing metrics list including Cancelled Order and Fulfilled Order\" width=\"596\" height=\"471\"></p>\n<div class=\"bs-callout bs-callout-default\">\n<p>Note that the top-level true/false property Discounted, which is included in many of these metrics, is determined by the discount amount from a coupon. If, for instance, you offer free shipping, but it is not reflected in the discount amount, it will not be reflected in the Discounted property, which will show as False.</p>\n</div>\n<h3 id=\"h_01HHFMD1C504V6T21RXJVRAC9S\">Started Checkout</h3>\n<div class=\"bs-callout bs-callout-default\">\n<p>BigCommerce <em>Started Checkout</em> events are tracked when a cart is created. If you have customer accounts on your site, there are some cases in which this cart will be created when the first item is added to the cart, rather than when the customer enters their contact and shipping information and clicks continue. </p>\n</div>\n<p>The event Klaviyo tracks includes all of the product information about the items in someone's cart including product names, images and category information so you can use that information in your Abandoned Cart emails.</p>\n<ul>\n<li>\n<strong>$value<br></strong>The total value of the cart at time of checkout</li>\n<li>\n<strong>Discounted</strong><br>Whether or not a discount code was used (true/false)</li>\n<li>\n<strong>Item Categories<br></strong>The complete set of the categories of the products in someone's cart, e.g., <em>t-shirts, mens, pants</em> and<em> sale</em>\n</li>\n<li>\n<strong>Item Count<br></strong>The number of items in the order, e.g., <em>2</em>\n</li>\n<li>\n<strong>Items<br></strong>The names of the products in someone's order, e.g., <em>t-shirt </em>or <em>pants</em>\n</li>\n<li>\n<strong>Coupons <br></strong>(optional array)</li>\n<li>\n<strong>ChannelID</strong><br>The ID of the channel for the checkout</li>\n</ul>\n<h3 id=\"h_01HHFMD1C5GBPBD0249JHA5C58\">Placed Order</h3>\n<p>This event is tracked when a customer completes the checkout process and creates an order in your BigCommerce store.</p>\n<div class=\"bs-callout bs-callout-default\">\n<p>By default, when Klaviyo polls for new orders, any order with any of the following statuses will not sync as a Placed Order: <code class=\"language-html\">Incomplete</code>, <code class=\"language-html\">Pending</code>, <code class=\"language-html\">Awaiting Payment</code>.</p>\n</div>\n<p>The <em>Placed Order</em> event Klaviyo tracks includes all of the product information about the items someone purchased including product names, images, and category information so you can use this information in purchase follow up emails. You can filter and target <em>Placed Order</em> events based on the following criteria:</p>\n<ul>\n<li>\n<strong>$value<br></strong>The total value of the cart at time of checkout</li>\n<li>\n<strong>Discounted<br></strong>Whether or not a discount code was used (true/false)</li>\n<li>\n<strong>Item Categories<br></strong>The complete set of the categories of the products in someone's cart, e.g., <em>t-shirts, mens, pants</em> and<em> sale</em>\n</li>\n<li>\n<strong>Item Count<br></strong>The number of items in the order, e.g., <em>2</em>\n</li>\n<li>\n<strong>Items<br></strong>The names of the products in someone's order, e.g., <em>t-shirt </em>or <em>pants</em>\n</li>\n<li>\n<strong>Coupons<br></strong>(optional array)</li>\n<li>\n<strong>ChannelID</strong><br>The ID of the channel for the order</li>\n</ul>\n<p>Revenue, or <em>Placed Order</em><span> </span>value, is calculated as follows: (sub-total + shipping) - any discounts.</p>\n<p>You may see that the <em>Revenue </em>value on your Klaviyo dashboard does not always match up with the revenue value you see in BigCommerce; this is because BigCommerce subtracts refunded orders from their revenue calculation, while Klaviyo does not.</p>\n<h3 id=\"h_01HHFMD1C6GA2C8BHW9YDVYQ45\">Ordered Product</h3>\n<p>This event is tracked when a customer places an order, but one event is tracked for each item someone purchases. For example, if someone buys a t-shirt and a pair of pants, one <em>Placed Order</em> event is tracked and two <em>Ordered Product</em> events - one event for the t-shirt and one event for the pants.</p>\n<p>The event Klaviyo tracks include detailed information about each product someone purchases. This is useful when creating behavioral segments based on product variation options and other detailed information that's not available in the <em>Placed Order</em> event. You can filter and target <em>Ordered Product</em> events based on the following criteria:</p>\n<ul>\n<li>\n<strong>Name<br></strong>The name or title of the product in BigCommerce, e.g., <em>t-shirt</em>\n</li>\n<li>\n<strong>$value<br></strong>The value of the item (product price minus any discounts)</li>\n<li><strong>SKU</strong></li>\n<li>The SKU of the product variation e.g., <em>REDMEDIUMTSHIRT</em>\n</li>\n<li>\n<strong>Categories<br></strong>The complete set of the categories of the product, e.g., <em>t-shirts, mens</em> and<em> sale</em>\n</li>\n<li>\n<strong>Product Price<br></strong>The price of the product</li>\n<li>\n<strong>Product Cost<br></strong>The cost of the product </li>\n<li>\n<strong>Price<br></strong>The price of the entire order for that product</li>\n<li>\n<strong>Discounted<br></strong>Whether or not a discount code was used (true/false)</li>\n<li>\n<strong>ProductID<br></strong>The ID of the ordered product </li>\n<li>\n<strong>Quantity<br></strong>The quantity of the ordered product</li>\n<li>\n<strong>Option (Optional)<br></strong>Custom product attributes</li>\n<li>\n<strong>ChannelID</strong><br>The ID of the channel for the order</li>\n</ul>\n<h3 id=\"h_01HHFMD1C6YZNJPXK9MM70GE19\">Fulfilled Order</h3>\n<p>This event is tracked when an order's status updates to either <code class=\"language-html\">Shipped</code> or <code class=\"language-html\">Completed</code>.</p>\n<p>The <em>Fulfilled Order</em> event Klaviyo tracks includes all of the product information about the items someone purchased including product names, images and variation information so you can use that information in purchase follow up emails. You can filter and target <em>Fulfilled Order</em> events based on the following criteria:</p>\n<ul>\n<li>\n<strong>$value<br></strong>The total value of the cart at time of checkout</li>\n<li>\n<strong>Discounted<br></strong>Whether or not a discount code was used (true/false)</li>\n<li>\n<strong>Item Categories<br></strong>The complete set of the categories of the products in someone's cart, e.g., <em>t-shirts, mens, pants</em> and<em> sale</em>\n</li>\n<li>\n<strong>Item Count<br></strong>The number of items in the order, e.g., <em>2</em>\n</li>\n<li>\n<strong>Items<br></strong>The names of the products in someone's order, e.g., <em>t-shirt </em>or <em>pants</em>\n</li>\n<li>\n<strong>Coupons<br></strong>(optional array)</li>\n<li>\n<strong>ChannelID</strong><br>The ID of the channel for the order</li>\n</ul>\n<h3 id=\"h_01HHFMD1C6W3465FGQR2JRRVNA\">Cancelled Order</h3>\n<p>This event is tracked when a customer creates an order in your BigCommerce store but then cancels the order before fulfillment (when the order status is equal to <code class=\"language-html\">Cancelled</code>). The event Klaviyo tracks include all of the product information about the items someone purchased including product names, images and variation information so you can use that information in purchase follow up emails. You can filter and target<em> Cancelled Order</em> events based on the following criteria:</p>\n<ul>\n<li>\n<strong>$value<br></strong>The total value of the cart at time of checkout</li>\n<li>\n<strong>Discounted<br></strong>Whether or not a discount code was used (true/false)</li>\n<li>\n<strong>Item Categories<br></strong>The complete set of the categories of the products in someone's cart, e.g., <em>t-shirts, mens, pants</em> and<em> sale</em>\n</li>\n<li>\n<strong>Item Count<br></strong>The number of items in the order, e.g., <em>2</em>\n</li>\n<li>\n<strong>Items<br></strong>The names of the products in someone's order, e.g., <em>t-shirt </em>or <em>pants</em>\n</li>\n<li>\n<strong>Coupons<br></strong>(optional array)</li>\n<li>\n<strong>ChannelID</strong><br>The ID of the channel for the order</li>\n</ul>\n<h3 id=\"h_01HHFMD1C6B9TNBYW6AHNRPNZX\">Refunded Order</h3>\n<p>This event is tracked when a customer refunds their order. You can filter and target<span> </span><em>Refunded Order</em><span> </span>events based on the following criteria:</p>\n<ul>\n<li>\n<strong>$value<br></strong>The total value of the refunded order</li>\n<li>\n<strong>Items<br></strong>The names of the products in someone's order, e.g., <em>t-shirt </em>or <em>pants</em>\n</li>\n<li>\n<strong>Item Categories<br></strong>The complete set of categories of the products in the order</li>\n<li>\n<strong>Item Count<br></strong>The number of items in the order, e.g., <em>2</em>\n</li>\n<li>\n<strong>Item Brands<br></strong>The brands of the products in the order</li>\n<li>\n<strong>Discounted<br></strong>Whether or not a discount code was used (true/false)</li>\n<li>\n<strong>Status<br></strong>The status of the order, e.g., <em>Refunded</em>\n</li>\n<li>\n<strong>ChannelID</strong><br>The ID of the channel for the order</li>\n</ul>\n<h2 id=\"h_01HHFMD1C6W55YDBNHA0VW8M4J\">Customer data synced from BigCommerce</h2>\n<p>In addition to the metrics Klaviyo syncs from BigCommerce, there are also custom properties that are added to each Klaviyo profile. You can use these properties in segments and in flows. Here are the properties that are automatically synced from BigCommerce:</p>\n<ul>\n<li>\n<strong>Email, First Name, Last Name, City, Phone Number<br></strong>These built-in Klaviyo fields are automatically synced with the integration.\n<div class=\"bs-callout bs-callout-default\">\n<p>Location information (City, State/Region, Zip Code, Country) is only synced to Klaviyo if the customer has placed an order.</p>\n</div>\n</li>\n<li>\n<strong>External ID<br></strong>Klaviyo also syncs customers' external IDs. This means that if a customer creates an account with your BigCommerce store, we will sync this ID along with their email address. If the same customer then goes on to change the email address associated with the account, we will map the new address to their external ID and update the email address associated with their profile.</li>\n<li>\n<strong>BigCommerce Original Channel ID</strong><strong><br></strong>This property lists the ID of the first storefront visited by the profile, if tracked. Storefront is tracked if you are using BigCommerce Multi-Storefront (MSF) and the customer has started a checkout or placed an order. </li>\n<li>\n<strong>BigCommerce Channel IDs</strong><strong><br></strong>An array of IDs that includes the ID of each storefront visited by the profile, if tracked. Storefront is tracked if you are using BigCommerce Multi-Storefront (MSF) and the customer has started a checkout or placed an order. </li>\n</ul>\n<p>If a customer does not create an account, no external ID will be created, and we will use their email address to map all data. If a customer does not create an account at first, but later creates one with the same email address, an external ID will be added to their profile.</p>\n<p>You may have additional custom properties associated with your BigCommerce profiles. These two custom properties can also be synced to Klaviyo:</p>\n<ul>\n<li>\n<strong>Customer Group</strong><br><a href=\"https://support.bigcommerce.com/s/article/Customer-Groups\" target=\"_self\">Customer Groups</a> allow you to organize your customers, give them discounts, and restrict access to specific products or categories.</li>\n<li><strong>Store Credit</strong></li>\n</ul>\n<p>Custom properties are found in the <em>Information - Custom Properties</em> section of a Klaviyo profile:<br><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28704476452251\" alt=\"Information section of customer profile in Klaviyo showing custom properties synced from BigCommerce including Store Credit and Customer Group\" width=\"514\" height=\"306\"></p>\n<h2 id=\"h_01HHFMD1C603395R9FJ42JXRZF\">Frequency of the BigCommerce sync</h2>\n<p>Metrics and profile properties from BigCommerce are synced in real-time. This means you should see all events appear in Klaviyo almost immediately when the event is tracked in BigCommerce.</p>\n<h2 id=\"h_01HHFMD1C6170CREXY89XBFFTP\">How to verify your synced order data</h2>\n<p>Klaviyo imports all of your BigCommerce data. When you first integrate, we will run a full historic sync. After the initial sync, Klaviyo runs hourly syncs to poll for new data. To verify this, you can compare the number of daily orders tracked within Klaviyo with the number of daily orders in BigCommerce. </p>\n<ol>\n<li>In Klaviyo, navigate to <strong>Analytics &gt; Metrics</strong>. </li>\n<li>Find the <em>Placed Order</em> metric, and click on it. This will take you to the metric chart page and show the last 30 days of data by default.</li>\n<li>Mouse over yesterday's data point or look in the table of data below the chart to see how many orders you had yesterday. Compare that number to what's stored in BigCommerce and you should see they match exactly.</li>\n<li>If they don't, the most likely issue is your Klaviyo account's timezone doesn't match BigCommerce's timezone. To check your timezone setting, click your account name in the lower left corner, then navigate to <strong>Settings &gt; Organization.<br></strong><img src=\"https://klaviyo.zendesk.com/hc/article_attachments/28704476454427\" alt=\"Graph of BigCommerce Placed Orders over time in Klaviyo metrics tab\" width=\"637\" height=\"344\">\n</li>\n</ol>\n<h2 id=\"h_01HHFMD1C640305G737MSS8TTG\" class=\"wysiwyg-text-align-left\">Additional resources</h2>\n<ul>\n<li><a href=\"https://klaviyo.zendesk.com/hc/en-us/articles/115005082547\" target=\"_blank\" rel=\"noopener\">Getting started with BigCommerce</a></li>\n<li><a href=\"https://klaviyo.zendesk.com/hc/en-us/articles/360024310292\" target=\"_blank\" rel=\"noopener\">How to create an Added to Cart event for BigCommerce</a></li>\n</ul>",
+    "user_segment_ids": []
+  },
+  "normalized": {
+    "id": "115005082587",
+    "title": "BigCommerce data reference",
+    "source_url": "https://help.klaviyo.com/hc/en-us/articles/115005082587-BigCommerce-data-reference",
+    "section_id": 49375348896539,
+    "section": "Getting started with BigCommerce",
+    "category_id": 115000032731,
+    "category": "Integrations",
+    "category_slug": "integrations",
+    "klaviyo_updated": "2026-04-21T13:56:38Z",
+    "created_at": "2017-03-30T18:31:55Z",
+    "draft": false,
+    "promoted": false,
+    "position": 1,
+    "label_names": []
+  },
+  "files": {
+    "body_html": "_source/articles/115005082587.body.html",
+    "rendered_html": "_source/rendered/115005082587.html"
+  },
+  "assets": {
+    "api_body": {
+      "images": [
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28704476453275",
+          "alt": "Metrics tab in Klaviyo filtered by BigCommerce showing metrics list including Cancelled Order and Fulfilled Order",
+          "width": "596",
+          "height": "471"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28704476452251",
+          "alt": "Information section of customer profile in Klaviyo showing custom properties synced from BigCommerce including Store Credit and Customer Group",
+          "width": "514",
+          "height": "306"
+        },
+        {
+          "src": "https://klaviyo.zendesk.com/hc/article_attachments/28704476454427",
+          "alt": "Graph of BigCommerce Placed Orders over time in Klaviyo metrics tab",
+          "width": "637",
+          "height": "344"
+        }
+      ],
+      "links": [
+        {
+          "href": "https://klaviyo.zendesk.com/hc/en-us/articles/115005082547",
+          "text": "integrated with BigCommerce"
+        },
+        {
+          "href": "https://support.bigcommerce.com/s/article/Customer-Groups",
+          "text": "Customer Groups"
+        },
+        {
+          "href": "https://klaviyo.zendesk.com/hc/en-us/articles/115005082547",
+          "text": "Getting started with BigCommerce"
+        },
+        {
+          "href": "https://klaviyo.zendesk.com/hc/en-us/articles/360024310292",
+          "text": "How to create an Added to Cart event for BigCommerce"
+        }
+      ],
+      "headings": [
+        {
+          "level": 2,
+          "id": "h_01HHFMD1C5NK4BR0W1HF2A5NZA",
+          "text": "You will learn"
+        },
+        {
+          "level": 2,
+          "id": "h_01HHFMD1C549CJ0C4RZHGM0TF0",
+          "text": "Metrics synced from BigCommerce"
+        },
+        {
+          "level": 3,
+          "id": "h_01HHFMD1C504V6T21RXJVRAC9S",
+          "text": "Started Checkout"
+        },
+        {
+          "level": 3,
+          "id": "h_01HHFMD1C5GBPBD0249JHA5C58",
+          "text": "Placed Order"
+        },
+        {
+          "level": 3,
+          "id": "h_01HHFMD1C6GA2C8BHW9YDVYQ45",
+          "text": "Ordered Product"
+        },
+        {
+          "level": 3,
+          "id": "h_01HHFMD1C6YZNJPXK9MM70GE19",
+          "text": "Fulfilled Order"
+        },
+        {
+          "level": 3,
+          "id": "h_01HHFMD1C6W3465FGQR2JRRVNA",
+          "text": "Cancelled Order"
+        },
+        {
+          "level": 3,
+          "id": "h_01HHFMD1C6B9TNBYW6AHNRPNZX",
+          "text": "Refunded Order"
+        },
+        {
+          "level": 2,
+          "id": "h_01HHFMD1C6W55YDBNHA0VW8M4J",
+          "text": "Customer data synced from BigCommerce"
+        },
+        {
+          "level": 2,
+          "id": "h_01HHFMD1C603395R9FJ42JXRZF",
+          "text": "Frequency of the BigCommerce sync"
+        },
+        {
+          "level": 2,
+          "id": "h_01HHFMD1C6170CREXY89XBFFTP",
+          "text": "How to verify your synced order data"
+        },
+        {
+          "level": 2,
+          "id": "h_01HHFMD1C640305G737MSS8TTG",
+          "text": "Additional resources"
+        }
+      ]
+    },
+    "rendered_page": {
+      "images": [
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/7ff492c2b417b7ecfe572f839a8a81398693c1f7-1920x1080.webp",
+          "alt": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/5923ae0ba31da8a5a14b8eeb9e50ee28c18fdb9f-1476x1166.jpg?w=596",
+          "alt": "Metrics tab in Klaviyo filtered by BigCommerce showing metrics list including Cancelled Order and Fulfilled Order",
+          "width": "596",
+          "height": "471"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/2b7d516ac5e2cb76120c3b29cb74cef17aafe2a5-538x320.jpg?w=514",
+          "alt": "Information section of customer profile in Klaviyo showing custom properties synced from BigCommerce including Store Credit and Customer Group",
+          "width": "514",
+          "height": "306"
+        },
+        {
+          "src": "https://cdn.sanity.io/images/6ct6b26e/help-center-prod/cfbc1705d0531888c1c8063c8df13825751a42fa-1367x739.jpg?w=637",
+          "alt": "Graph of BigCommerce Placed Orders over time in Klaviyo metrics tab",
+          "width": "637",
+          "height": "344"
+        }
+      ],
+      "links": [
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005082587-BigCommerce-data-reference#site-content",
+          "text": "Skip to main content"
+        },
+        {
+          "href": "https://www.klaviyo.com",
+          "text": "Home"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center"
+        },
+        {
+          "href": "https://www.klaviyo.com/enterprise",
+          "text": "Enterprise"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Partners"
+        },
+        {
+          "href": "https://www.klaviyo.com/careers",
+          "text": "Careers"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": "Log in"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": ""
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help center Find step-by-step instructions and troubleshooting solutions in our knowledge base."
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000032731",
+          "text": "Integrations"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000312411",
+          "text": "Flows"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867867",
+          "text": "Audience"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000867667",
+          "text": "Campaigns"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/360000190711",
+          "text": "Sign-up forms"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/115000873988",
+          "text": "Deliverability & compliance"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/29173800271259",
+          "text": "SMS"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/16638219724187",
+          "text": "Reviews"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/18073014919195",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/34141283979931",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/37659126754075",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/33948021740315",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/categories/39746685522331",
+          "text": "WhatsApp"
+        },
+        {
+          "href": "https://academy.klaviyo.com",
+          "text": "Klaviyo Academy Expert training and education to help you succeed with Klaviyo, and beyond."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Quick+guide&resource=academy_courses",
+          "text": "Quick guides Learn marketing strategies and concepts in 15 minutes or less."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Course&resource=academy_courses",
+          "text": "Courses Master key marketing topics through structured lessons and exams."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/best-practices",
+          "text": "Best practices Discover top product and marketing strategies for your business."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/learning-paths",
+          "text": "Learning paths Complete curated learning journeys tailored to your marketing goals."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses",
+          "text": "Explore all resources"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?select=Live+training&resource=academy_courses",
+          "text": "Live trainings Build confidence through hands-on interactive workshops and thought-provoking strategy sessions."
+        },
+        {
+          "href": "https://www.bigmarker.com/klaviyo-customer-education/Office-hours-Getting-started-with-Klaviyo",
+          "text": "Live office hours Join a strategic discussion where you can ask questions and get answers in real-time."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/private-live-training",
+          "text": "1:1 Live training Book a private training session with an expert to jumpstart your platform knowledge and confidence."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/credentials",
+          "text": "Klaviyo credentials Dig deeper into select topics and showcase your expertise with a final exam to earn a certificate and digital badge."
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/certificates/klaviyo-practitioner-certificate",
+          "text": "Klaviyo practitioner certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/deliverability-certificate",
+          "text": "Deliverability certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/collections/developer-certificate",
+          "text": "Klaviyo developer certificate"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us/search?resource=academy_courses&select=Certificate",
+          "text": "See all certificates"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Klaviyo Community Join our thriving community network to connect with brands like yours—online and in person."
+        },
+        {
+          "href": "https://community.klaviyo.com/topic/new",
+          "text": "Ask a question Post a question and get thoughtful answers from Klaviyo powerusers."
+        },
+        {
+          "href": "https://community.klaviyo.com/p/roadmap",
+          "text": "Product roadmap"
+        },
+        {
+          "href": "https://community.klaviyo.com/search/activity/recent",
+          "text": "Recent threads"
+        },
+        {
+          "href": "https://community.klaviyo.com/p/champions",
+          "text": "Meet the Champions"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups",
+          "text": "Browse all groups Your people are waiting. New ideas and connections are a click away."
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/developer-group-64",
+          "text": "Developer group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/entrepreneur-user-group-118",
+          "text": "Entrepreneur group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/woo-user-group-87",
+          "text": "WooCommerce group"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/new-york-meetup-chapter-82",
+          "text": "New York City"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/los-angeles-meetup-chapter-83",
+          "text": "Los Angeles"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/austin-meetup-chapter-85",
+          "text": "Austin"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/san-diego-meetup-chapter-86",
+          "text": "San Diego"
+        },
+        {
+          "href": "https://community.klaviyo.com/groups/amsterdam-meetup-chapter-84",
+          "text": "Amsterdam"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Klaviyo Developers Access API documentation and developer guides to help you build with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/get_started",
+          "text": "Get started Access key resources and a step-by-step checklist for how to start developing with Klaviyo."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/build_your_integration",
+          "text": "Grow your app's reach Learn how to join our ecosystem and get your app listed on our marketplace."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/developer-tools",
+          "text": "Developer tools Generate sample data, monitor your API usage, and access our Postman collections."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/reference/api_overview",
+          "text": "API reference Browse our full catalog of API docs."
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/changelog_",
+          "text": "Changelog"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/api_versioning_and_deprecation_policy",
+          "text": "Versioning & deprecation policy"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en/docs/rate_limits_and_error_handling",
+          "text": "Rate limits & error handling"
+        },
+        {
+          "href": "https://youtube.com/playlist?list=PLHkNfHgtxcUanrkMnKPdkRzuWU7MGv_xM&si=pkG-KH7IT_TUHOGC",
+          "text": "API tutorials on YouTube Subscribe to our Klaviyo API Tutorials playlist for easy access to step-by-step developer walkthroughs."
+        },
+        {
+          "href": "https://www.klaviyo.com/contact-us",
+          "text": "Contact us"
+        },
+        {
+          "href": "https://www.klaviyo.com/sign-up",
+          "text": "Sign up"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/search",
+          "text": "Search"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005082587",
+          "text": "United States - EN"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/de-de/articles/115005082587",
+          "text": "Deutschland - DE"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-es/articles/115005082587",
+          "text": "España - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/es-mx/articles/115005082587",
+          "text": "México - ES"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/fr-fr/articles/115005082587",
+          "text": "France - FR"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/it-it/articles/115005082587",
+          "text": "Italia - IT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/ko-kr/articles/115005082587",
+          "text": "한국 - KO"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/nl-nl/articles/115005082587",
+          "text": "Nederland - NL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pl-pl/articles/115005082587",
+          "text": "Polska - PL"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/pt-br/articles/115005082587",
+          "text": "Brasil - PT"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/sv-se/articles/115005082587",
+          "text": "Sverige - SV"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/115001509808",
+          "text": "BigCommerce"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/sections/49375348896539",
+          "text": "Getting started with BigCommerce"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005082587-BigCommerce-data-reference#h_01HHFMD1C5NK4BR0W1HF2A5NZA",
+          "text": "You will learn"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005082587-BigCommerce-data-reference#h_01HHFMD1C549CJ0C4RZHGM0TF0",
+          "text": "Metrics synced from BigCommerce"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005082587-BigCommerce-data-reference#h_01HHFMD1C6W55YDBNHA0VW8M4J",
+          "text": "Customer data synced from BigCommerce"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005082587-BigCommerce-data-reference#h_01HHFMD1C603395R9FJ42JXRZF",
+          "text": "Frequency of the BigCommerce sync"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005082587-BigCommerce-data-reference#h_01HHFMD1C6170CREXY89XBFFTP",
+          "text": "How to verify your synced order data"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005082587-BigCommerce-data-reference#additional-resources",
+          "text": "Additional resources"
+        },
+        {
+          "href": "https://klaviyo.zendesk.com/hc/en-us/articles/115005082547",
+          "text": "integrated with BigCommerce"
+        },
+        {
+          "href": "https://support.bigcommerce.com/s/article/Customer-Groups",
+          "text": "Customer Groups"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115005082547",
+          "text": "Getting started with BigCommerce"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/360024310292",
+          "text": "How to create an \"Added to Cart\" event for BigCommerce"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us/articles/115001002272",
+          "text": "Learn how to contact support"
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": ""
+        },
+        {
+          "href": "https://community.klaviyo.com",
+          "text": "Visit Community"
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": ""
+        },
+        {
+          "href": "https://connect.klaviyo.com/matchmaking",
+          "text": "Hire a partner"
+        },
+        {
+          "href": "https://www.klaviyo.com/login",
+          "text": ""
+        },
+        {
+          "href": "https://www.klaviyo.com/about",
+          "text": "About Klaviyo"
+        },
+        {
+          "href": "https://www.klaviyo.com/newsroom",
+          "text": "Newsroom"
+        },
+        {
+          "href": "https://investors.klaviyo.com/overview/default.aspx",
+          "text": "Investor relations"
+        },
+        {
+          "href": "https://www.klaviyo.com/partners",
+          "text": "Agency and tech partners"
+        },
+        {
+          "href": "https://developers.klaviyo.com/en",
+          "text": "Developers"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/retail",
+          "text": "Retail and ecommerce"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/restaurants",
+          "text": "Restaurant marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/industry/wellness",
+          "text": "Wellness"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform",
+          "text": "B2C CRM overview"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai",
+          "text": "Klaviyo AI (K:AI)"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/marketing-automation",
+          "text": "Klaviyo Marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-service",
+          "text": "Klaviyo Service"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/analytics",
+          "text": "Klaviyo Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/customer-data-platform",
+          "text": "Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare",
+          "text": "Klaviyo vs. Klaviyo alternatives"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-mailchimp",
+          "text": "Klaviyo vs. Mailchimp"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-postscript",
+          "text": "Klaviyo vs. Postscript"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-attentive",
+          "text": "Klaviyo vs. Attentive"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-salesforce-marketing-cloud",
+          "text": "Klaviyo vs. Salesforce"
+        },
+        {
+          "href": "https://www.klaviyo.com/compare/klaviyo-vs-listrak",
+          "text": "Klaviyo vs. Listrak"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/omnichannel",
+          "text": "Omnichannel marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/email-marketing",
+          "text": "Email marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing",
+          "text": "SMS marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/sms-marketing/rcs",
+          "text": "RCS for Business"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/mobile-app-marketing",
+          "text": "Mobile app marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/whatsapp",
+          "text": "WhatsApp marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/social",
+          "text": "Social marketing"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources",
+          "text": "Marketing resources"
+        },
+        {
+          "href": "https://www.klaviyo.com/marketing-resources/marketing-campaign-calendar",
+          "text": "Marketing campaign calendar"
+        },
+        {
+          "href": "https://www.klaviyo.com/glossary",
+          "text": "Marketing glossary"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/email-subject-line-generator",
+          "text": "Subject line generator"
+        },
+        {
+          "href": "https://www.klaviyo.com/tools/roi-calculator",
+          "text": "ROI calculator"
+        },
+        {
+          "href": "https://www.klaviyo.com/customers",
+          "text": "Case studies"
+        },
+        {
+          "href": "https://www.klaviyo.com/composer",
+          "text": "Composer Beta"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/marketing-agent",
+          "text": "Marketing Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/solutions/ai/customer-agent",
+          "text": "Customer Agent"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/customer-experience-hub",
+          "text": "Customer Hub"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/helpdesk",
+          "text": "Helpdesk"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/marketing-analytics",
+          "text": "Marketing Analytics"
+        },
+        {
+          "href": "https://www.klaviyo.com/products/advanced-cdp",
+          "text": "Advanced Klaviyo Data Platform"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/web-forms",
+          "text": "Web forms"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/email-templates",
+          "text": "Email templates"
+        },
+        {
+          "href": "https://www.klaviyo.com/features/portfolio",
+          "text": "Portfolio"
+        },
+        {
+          "href": "https://www.klaviyo.com/platform-integrations",
+          "text": "Apps and Integrations"
+        },
+        {
+          "href": "https://www.klaviyo.com/features",
+          "text": "Features"
+        },
+        {
+          "href": "https://www.klaviyo.com/whats-new",
+          "text": "What's new"
+        },
+        {
+          "href": "https://www.klaviyo.com/events",
+          "text": "Events"
+        },
+        {
+          "href": "https://help.klaviyo.com/hc/en-us",
+          "text": "Help Center"
+        },
+        {
+          "href": "https://academy.klaviyo.com/en-us",
+          "text": "Academy"
+        },
+        {
+          "href": "https://community.klaviyo.com/",
+          "text": "Community"
+        },
+        {
+          "href": "https://www.facebook.com/Klaviyo/",
+          "text": "Facebook"
+        },
+        {
+          "href": "https://twitter.com/klaviyo/",
+          "text": "Twitter"
+        },
+        {
+          "href": "https://www.linkedin.com/company/klaviyo/",
+          "text": "LinkedIn"
+        },
+        {
+          "href": "https://www.instagram.com/klaviyo/",
+          "text": "Instagram"
+        },
+        {
+          "href": "https://www.klaviyo.com/sitemap",
+          "text": "Site Map"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal",
+          "text": "Terms and Privacy"
+        },
+        {
+          "href": "https://www.klaviyo.com/security",
+          "text": "Security"
+        },
+        {
+          "href": "https://www.klaviyo.com/trust",
+          "text": "Trust"
+        },
+        {
+          "href": "https://www.klaviyo.com/legal/intellectual-property-notices",
+          "text": "Intellectual Property Notices"
+        }
+      ],
+      "headings": [
+        {
+          "level": 1,
+          "id": "",
+          "text": "BigCommerce data reference"
+        },
+        {
+          "level": 2,
+          "id": "h_01HHFMD1C5NK4BR0W1HF2A5NZA",
+          "text": "You will learn"
+        },
+        {
+          "level": 2,
+          "id": "h_01HHFMD1C549CJ0C4RZHGM0TF0",
+          "text": "Metrics synced from BigCommerce"
+        },
+        {
+          "level": 3,
+          "id": "h_01HHFMD1C504V6T21RXJVRAC9S",
+          "text": "Started Checkout"
+        },
+        {
+          "level": 3,
+          "id": "h_01HHFMD1C5GBPBD0249JHA5C58",
+          "text": "Placed Order"
+        },
+        {
+          "level": 3,
+          "id": "h_01HHFMD1C6GA2C8BHW9YDVYQ45",
+          "text": "Ordered Product"
+        },
+        {
+          "level": 3,
+          "id": "h_01HHFMD1C6YZNJPXK9MM70GE19",
+          "text": "Fulfilled Order"
+        },
+        {
+          "level": 3,
+          "id": "h_01HHFMD1C6W3465FGQR2JRRVNA",
+          "text": "Cancelled Order"
+        },
+        {
+          "level": 3,
+          "id": "h_01HHFMD1C6B9TNBYW6AHNRPNZX",
+          "text": "Refunded Order"
+        },
+        {
+          "level": 2,
+          "id": "h_01HHFMD1C6W55YDBNHA0VW8M4J",
+          "text": "Customer data synced from BigCommerce"
+        },
+        {
+          "level": 2,
+          "id": "h_01HHFMD1C603395R9FJ42JXRZF",
+          "text": "Frequency of the BigCommerce sync"
+        },
+        {
+          "level": 2,
+          "id": "h_01HHFMD1C6170CREXY89XBFFTP",
+          "text": "How to verify your synced order data"
+        },
+        {
+          "level": 2,
+          "id": "additional-resources",
+          "text": "Additional resources"
+        },
+        {
+          "level": 2,
+          "id": "",
+          "text": "Explore more from Klaviyo"
+        }
+      ]
+    }
+  },
+  "rendered_page": {
+    "status": "fetched",
+    "error": ""
+  }
+}

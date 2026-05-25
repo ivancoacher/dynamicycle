@@ -1,0 +1,131 @@
+<h2 id="h_01HCZMQ81SXCR21XC94154DVFK">You will learn</h2>
+<p>Learn how to use pre-built templates or configure a custom template for a back in stock flow email. When creating a back in stock flow email, it's important to set up the message so that it shows the right product data. Klaviyo supports back in stock flows for accounts with Shopify, BigCommerce, Magento 2, PrestaShop, Shopware, and SFCC integrations, as <span>well as accounts with inventory-aware catalogs sync via custom catalog feed or API. The instructions below </span>cover Shopify, BigCommerce, and Magento 2 integrations. </p>
+<p>If you are using a custom integration, learn <a href="https://developers.klaviyo.com/en/docs/how_to_set_up_custom_back_in_stock">how to set up back in stock via API</a>.</p>
+<h2 id="h_01HGGHQG2GF0HC05HVDZPH1KXM">Before you begin</h2>
+<p>Before you configure back in stock emails for your back in stock flows, you must have set up back in stock for your ecommerce store:</p>
+<ul>
+<li><a style="background-color: #ffffff; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;" href="https://help.klaviyo.com/hc/en-us/articles/38767539287323" target="_blank" rel="noopener noreferrer">Shopify back in stock instructions</a></li>
+<li><a href="https://help.klaviyo.com/hc/en-us/articles/38767539287323" target="_blank" rel="noopener noreferrer">BigCommerce back in stock instructions</a></li>
+<li><a href="https://help.klaviyo.com/hc/en-us/articles/33059375555099" target="_blank" rel="noopener noreferrer">PrestaShop back in stock instructions</a></li>
+<li><a href="https://developers.klaviyo.com/en/docs/set-up-back-in-stock-for-magento-2" target="_blank" rel="noopener">Magento 2 back in stock</a></li>
+<li><a href="https://developers.klaviyo.com/en/docs/how-to-enable-back-in-stock-for-custom-catalog-feeds" target="_blank" rel="noopener">Custom catalog feeds back in stock</a></li>
+<li><a href="https://developers.klaviyo.com/en/docs/how_to_set_up_custom_back_in_stock" target="_blank" rel="noopener noreferrer">API back in stock</a></li>
+</ul>
+<h2 id="h_01HCZMQ81T1ZVCKJ70Z23WECY3">Use pre-built templates</h2>
+<p>The pre-built back in stock flows you'll find in the Flow Library come configured with default email content. If you've built your own flow, to help get you started, you will find a pre-built back in stock email template in the <em>Email templates</em> tab. Simply search "back in stock" when configuring your stock alert email.</p>
+<h2 id="h_01HCZMQ81T2RB177PZY3B3EC75">Create your own back in stock email</h2>
+<p>To configure your email content, you will need to use a specific set of dynamic event variables. Given it may be days, weeks, or even months before an item is restocked, we realize that details about the item (for example, images or price) may change. For this reason, Klaviyo uses a special set of dynamic event variables for this email that will look up the restocked product in your catalog at send time and populate the most up-to-date details available.</p>
+<p>Note that the table block within the email template must be set to static, not dynamic, in order to function.</p>
+<h3 id="h_01HCZMQ81TCR34NH5SEJ5JCFA1">Shopify stores</h3>
+<table class=" wysiwyg-text-align-center" style="width: 567.5px; margin-left: auto; margin-right: auto;">
+<tbody>
+<tr>
+<td style="width: 357px;"><strong>Product Detail</strong></td>
+<td style="width: 10px;"><strong>Dynamic Event Variable (Shopify Stores)</strong></td>
+</tr>
+<tr>
+<td style="width: 357px;"><em>Product Title</em></td>
+<td style="width: 10px;">{% catalog event.VariantId integration='shopify' %} {{ catalog_item.title }} {% endcatalog %}</td>
+</tr>
+<tr>
+<td class="wysiwyg-text-align-center" style="width: 357px;"><em>Product URL</em></td>
+<td class="wysiwyg-text-align-center" style="width: 10px;">{% catalog event.VariantId integration='shopify' %}{{ catalog_item.url }}{% endcatalog %}</td>
+</tr>
+<tr>
+<td class="wysiwyg-text-align-center" style="width: 357px;"><em>Product Price</em></td>
+<td class="wysiwyg-text-align-center" style="width: 10px;">{% catalog event.VariantId integration='shopify' %}{% currency_format catalog_item.variant.price|floatformat:2 %}{% endcatalog %}</td>
+</tr>
+<tr>
+<td class="wysiwyg-text-align-center" style="width: 357px;"><em>Variant Image</em></td>
+<td class="wysiwyg-text-align-center" style="width: 10px;">{% catalog event.VariantId integration='shopify' %} {{ catalog_item.variant.featured_image.full.src|default:catalog_item.featured_image.full.src }} {% endcatalog %}</td>
+</tr>
+<tr>
+<td class="wysiwyg-text-align-center" style="width: 357px;"><em>Variant Title</em></td>
+<td class="wysiwyg-text-align-center" style="width: 10px;">{% catalog event.VariantId integration="shopify" %} {{ catalog_item.variant.title }} {% endcatalog %}</td>
+</tr>
+<tr>
+<td class="wysiwyg-text-align-center" style="width: 357px;"><em>Variant URL</em></td>
+<td class="wysiwyg-text-align-center" style="width: 10px;">{% catalog event.VariantId integration='shopify' %}{{ catalog_item.url }}?variant={{ catalog_item.variant.id }}{% endcatalog %}</td>
+</tr>
+</tbody>
+</table>
+<h3 id="h_01HCZMQ81T7T0BSKPAK7JGV14R">BigCommerce stores</h3>
+<div class="bs-callout bs-callout-default">
+<p>If you are having an issue with incorrect items appearing in your BigCommerce back in stock emails, it could be caused by some of your products having a VariantID that matches another item's ProductID in BigCommerce. To solve this, replace VariantID with ProductID when using the dynamic event variables below in your emails. Making this replacement should solve the incorrect item issue, though variant-specific information will no longer be shown.</p>
+</div>
+<table class=" wysiwyg-text-align-center" style="width: 567.5px; margin-left: auto; margin-right: auto;">
+<tbody>
+<tr>
+<td style="width: 357px;"><strong>Product Detail</strong></td>
+<td style="width: 10px;"><strong>Dynamic Event Variable (BigCommerce Stores)</strong></td>
+</tr>
+<tr>
+<td style="width: 357px;"><em>Product Title</em></td>
+<td style="width: 10px;">{% catalog event.VariantId integration='bigcommerce' %} {{ catalog_item.title }} {% endcatalog %}</td>
+</tr>
+<tr>
+<td class="wysiwyg-text-align-center" style="width: 357px;"><em>Product URL</em></td>
+<td class="wysiwyg-text-align-center" style="width: 10px;">{% catalog event.VariantId integration='bigcommerce' %}{{ catalog_item.url }}{% endcatalog %}</td>
+</tr>
+<tr>
+<td class="wysiwyg-text-align-center" style="width: 357px;"><em>Product Price</em></td>
+<td class="wysiwyg-text-align-center" style="width: 10px;">{% catalog event.VariantId integration='bigcommerce' %}{% currency_format catalog_item.metadata.price|floatformat:2 %}{% endcatalog %}</td>
+</tr>
+<tr>
+<td class="wysiwyg-text-align-center" style="width: 357px;"><em>Variant Image</em></td>
+<td class="wysiwyg-text-align-center" style="width: 10px;">{% catalog event.VariantId integration='bigcommerce' %} {{ catalog_item.variant.featured_image.full.src|default:catalog_item.featured_image.full.src }} {% endcatalog %}</td>
+</tr>
+<tr>
+<td class="wysiwyg-text-align-center" style="width: 357px;"><em>Variant Title</em></td>
+<td class="wysiwyg-text-align-center" style="width: 10px;">{% catalog event.VariantId integration="bigcommerce" %} {{ catalog_item.variant.title }} {% endcatalog %}</td>
+</tr>
+<tr>
+<td class="wysiwyg-text-align-center" style="width: 357px;"><em>Variant URL</em></td>
+<td class="wysiwyg-text-align-center" style="width: 10px;">{% catalog event.VariantId integration='bigcommerce' %}{{ catalog_item.url }}?variant={{ catalog_item.variant.id }}{% endcatalog %}</td>
+</tr>
+</tbody>
+</table>
+<h3 id="h_01HCZMQ81TEQX2JXXEB7DKR7FF">Magento 2 stores</h3>
+<table class=" wysiwyg-text-align-center" style="width: 567.5px; margin-left: auto; margin-right: auto;">
+<tbody>
+<tr>
+<td style="width: 357px;"><strong>Product Detail</strong></td>
+<td style="width: 10px;"><strong>Dynamic Event Variable (Magento 2 Stores)</strong></td>
+</tr>
+<tr>
+<td style="width: 357px;"><em>Product Title</em></td>
+<td style="width: 10px;">{% catalog event.VariantId integration='<span>magento_two</span>' %} {{ catalog_item.title }} {% endcatalog %}</td>
+</tr>
+<tr>
+<td class="wysiwyg-text-align-center" style="width: 357px;"><em>Product URL</em></td>
+<td class="wysiwyg-text-align-center" style="width: 10px;">{% catalog event.VariantId integration='<span>magento_two</span>' %}{{ catalog_item.url }}{% endcatalog %}</td>
+</tr>
+<tr>
+<td class="wysiwyg-text-align-center" style="width: 357px;"><em>Product Price</em></td>
+<td class="wysiwyg-text-align-center" style="width: 10px;">{% catalog event.VariantId integration='<span>magento_two</span>' %}{% currency_format catalog_item.variant.price|floatformat:2 %}{% endcatalog %}</td>
+</tr>
+<tr>
+<td class="wysiwyg-text-align-center" style="width: 357px;"><em>Variant Image</em></td>
+<td class="wysiwyg-text-align-center" style="width: 10px;">{% catalog event.VariantId integration='<span>magento_two</span>' %} {{ catalog_item.variant.featured_image.full.src|default:catalog_item.featured_image.full.src }} {% endcatalog %}</td>
+</tr>
+<tr>
+<td class="wysiwyg-text-align-center" style="width: 357px;"><em>Variant Title</em></td>
+<td class="wysiwyg-text-align-center" style="width: 10px;">{% catalog event.VariantId integration="<span>magento_two</span>" %} {{ catalog_item.variant.title }} {% endcatalog %}</td>
+</tr>
+<tr>
+<td class="wysiwyg-text-align-center" style="width: 357px;"><em>Variant URL</em></td>
+<td class="wysiwyg-text-align-center" style="width: 10px;">{% catalog event.VariantId integration='<span>magento_two</span>' %}{{ catalog_item.url }}?variant={{ catalog_item.variant.id }}{% endcatalog %}</td>
+</tr>
+</tbody>
+</table>
+<h3 id="h_01HCZMQ81TZ6K80HY41TE6DEM2" class="wysiwyg-text-align-left">Example</h3>
+<p class="wysiwyg-text-align-left">Here's what a template will look like inside the Template Builder with dynamic event variables, with a comparison of what this same template will look like when previewed with real event data:</p>
+<p class="wysiwyg-text-align-center"><img src="https://klaviyo.zendesk.com/hc/article_attachments/28717811792795" alt="An example of a content block with the image and text using dynamic event variables next to the same block populated with content in a preview"></p>
+<h2 id="h_01HCZMQ81TEZKZXZBFB5WBFTE7" class="wysiwyg-text-align-left">Additional resources</h2>
+<p>Check out other articles on back in stock flows</p>
+<ul>
+<li><a href="https://help.klaviyo.com/hc/en-us/articles/115003872251" target="_self" rel="undefined">How to create a back in stock flow</a></li>
+<li><a href="https://help.klaviyo.com/hc/en-us/articles/360051612551" target="_self" rel="undefined">Understanding how back in stock flows work</a></li>
+<li><a href="https://help.klaviyo.com/hc/en-us/articles/7954040204827" target="_self">How to use SMS in a back in stock flow</a></li>
+</ul>
+<p>Learn more about dynamic variables in <a href="https://help.klaviyo.com/hc/en-us/articles/115002779071" target="_self" rel="undefined">Personalize flow emails with dynamic event data</a></p>

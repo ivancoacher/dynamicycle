@@ -1,0 +1,279 @@
+<h2 id="h_01H9TNCZS9E7HM4J6GPTJDV2HW">You will learn</h2>
+<p>Learn about Code, and how to create custom functions that are executed directly by Klaviyo.</p>
+<p>Code requires custom development and Klaviyo’s support team is unable to offer hands-on assistance. If you don't have a developer on your team and are not comfortable writing code yourself, consider reaching out to a Klaviyo Partner for assistance.</p>
+<h2 id="h_01H9TNCZSAGVH3HPSFMTZYK1R6">Before you begin</h2>
+<div class="bs-callout bs-callout-default">
+<p><a href="https://help.klaviyo.com/hc/en-us/articles/17655007276059">Advanced KDP</a> is not included in Klaviyo’s standard marketing application, and a subscription is required to access the associated functionality. Head to our <a href="https://help.klaviyo.com/hc/en-us/articles/115000976672">billing guide</a> to learn how to purchase this plan.</p>
+</div>
+<h2 id="h_01H9TNCZSA6YZV3DT271CY61YF">What is Code?</h2>
+<p>Code enables you to execute custom functions in response to events captured in Klaviyo. You can write your own Javascript or Python functions in the Code editor, and they are then executed directly in the platform.</p>
+<p>With Code, you can send data to your external systems without having to set up a public HTTP endpoint to receive webhooks, and build custom functionality that is triggered in response to an event’s occurrence. You can also access many popular prebuilt modules to facilitate creating custom solutions.</p>
+<div class="bs-callout bs-callout-default">
+<p>Learn <a href="https://academy.klaviyo.com/build-custom-functions-with-code">how to build custom functions using Code</a>. </p>
+</div>
+<h2 id="h_01H9TX7DDT2ZBPFY3GZ4VYVRDZ">Topics</h2>
+<p>Code allows you to execute custom functions in response to any event that can be queried for via the <a href="https://developers.klaviyo.com/en/reference/get_events">Get Events API</a>.</p>
+<p>These include:</p>
+<ul>
+<li>Email events (e.g., <em>Clicked email</em>, <em>Marked email as spam</em> )</li>
+<li>SMS events (e.g., <em>Sent SMS</em>, <em>Received SMS</em>)</li>
+<li>Push notification events (e.g., <em>Received push</em>, <em>Bounced push</em>)</li>
+<li>Events from integrations ( i.e., events from first-party integrations created by Klaviyo)</li>
+<li>API events (i.e., events synced through Klaviyo’s APIs)</li>
+</ul>
+<div class="bs-callout bs-callout-default">
+<p>Klaviyo Code does not support the following events as topics:</p>
+<ol>
+<li>Email opened</li>
+<li>Email received</li>
+</ol>
+</div>
+<h2 id="h_01H9TNCZSATC9HPAADNX74JE5X">Code interface</h2>
+<p>To access Code, navigate to the <em>Code</em> tab under <strong>Advanced KDP</strong><strong>&gt; Data Management &gt; Code</strong><em>. </em></p>
+<p>To create a custom function, select the <em>Create a function </em>button:</p>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/28722598719003" alt="Create a function button"></p>
+<p>You will be brought to the <em>Recipes </em>page, where you can either select a prebuilt solution to execute, or a blank Python or Node.js function.</p>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/28722610653467" alt="image (9).jpg" width="675" height="375"></p>
+<p>If you select an existing recipe, you'll see the code editor with the code for the solution, along with a description of the functionality. </p>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/28722598744219" alt="image (10).jpg"></p>
+<p>If you select a blank function so you can create your own custom solutions, the <em>Details</em> modal will appear where you can:</p>
+<ul>
+<li>
+<strong>Name your function</strong><br>
+A name to identify your function.</li>
+<li>
+<strong>Select a topic for your function</strong><br>
+The event that will trigger your code’s execution .</li>
+<li>
+<strong>Select a runtime</strong><br>
+The runtime environment in which the code is executed (i.e., Python or Node.js).<br>
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28722610665883" alt="3.11.jpg">
+<p>After making the required selections and selecting the <em>Create function </em>button, you will be brought to an interface with the following tabs: </p>
+</li>
+<li>Editor </li>
+<li>Test output </li>
+<li>Logs</li>
+</ul>
+<h2 id="h_01JE40E7MAS736ZRPH3Q9V9NN5">Granting permissions</h2>
+<p>The first time you create a function through Code, you will be prompted to authenticate the Code OAuth application. This is required so that your Code functions are able to access data in your Klaviyo account.</p>
+<p>Once you’ve granted access, you will be brought to the Code editor.</p>
+<h2 id="h_01H9TNCZSAAEAQ6CWTPC47VZ2H">Editor</h2>
+<p>On the <em>Editor </em>page in Code, you’ll the page split into 3 tabs:</p>
+<ul>
+<li>
+<strong>Code</strong><br>
+The code tab has an editor where you can write Python or Javascript functions.</li>
+<li>
+<strong>Modules</strong><br>
+Modules are 3rd party packages that add functionality to your functions.</li>
+<li>
+<strong>Environment Variables</strong><br>
+Environment variables are the key-value pairs that your function accesses when it runs. </li>
+</ul>
+<h3 id="h_01H9TNCZSAQAZ876FPFR3MS2WZ">Code</h3>
+<p>On the <em>Code </em>tab, you’ll see an editor you can use to write Python or Javascript functions that are executed in response to the selected topic.</p>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/28722610658843" alt="3.11(2).jpg"></p>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/28722598751003" alt="js.jpg"></p>
+<h3 id="h_01H9TNCZSAR47C55CDVEPKQWXM">Handler function parameters</h3>
+<p>In order for Klaviyo to execute the code you write, it must be wrapped in a function named “handler” that accepts 2 parameters:</p>
+<ul>
+<li>
+<strong>Event</strong><br>
+Consists of the event data associated with the triggering event in JSON:API format. If the trigger is non-event based (e.g., <em>Added to List</em>), then the value of this parameter will be <em>None</em> or <em>Null</em> depending on the language.</li>
+<li>
+<strong>Context</strong><br>
+Contains additional metadata about the function execution, including the profile associated with the function invocation. You can access the profile object via <em>context.profile</em> in Javascript or <em>context["profile"]</em> in Python.</li>
+</ul>
+<p>Below are examples of the event and context parameters that are passed to the handler function.</p>
+<p><strong>Example event format</strong><br>
+</p>
+<pre><code class="language-text">{
+    {
+  "data": {
+    "type": "event",
+    "id": "7S2q9haejYG",
+    "attributes": {
+      "timestamp": 1694435729,
+      "event_properties": {
+        "MfaEnabled": false,
+        "IpAddress": "000.00.0.0",
+        "UserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36",
+        "UserRole": "Owner",
+        "SessionId": "34sh0a9nh8ngnk2nfacjxmt592yx40ib",
+        "LoginType": "Username_password",
+        "current_company_id": "XXXXX",
+        "$event_id": "1694435729"
+      },
+      "datetime": "2023-09-11 12:35:29+00:00",
+      "uuid": "b0b8fe80-509f-11ee-8001-278cc529fcd3"
+    },
+    "relationships": {
+      "profile": {
+        "data": {
+          "type": "profile",
+          "id": "123456"
+        },
+        "links": {
+          "self": "https://a.klaviyo.com/api/events/7S2q9haejYG/relationships/profile/",
+          "related": "https://a.klaviyo.com/api/events/7S2q9haejYG/profile/"
+        }
+      },
+      "metric": {
+        "data": {
+          "type": "metric",
+          "id": "4Tdup6"
+        },
+        "links": {
+          "self": "https://a.klaviyo.com/api/events/7S2q9haejYG/relationships/metric/",
+          "related": "https://a.klaviyo.com/api/events/7S2q9haejYG/metric/"
+        }
+      }
+    },
+    "links": {
+      "self": "https://a.klaviyo.com/api/events/7S2q9haejYG/"
+    }
+  }
+}
+</code></pre>
+<p><strong>Example context format </strong></p>
+<pre><code class="language-text">{
+    "company_id": "XXXXX",
+    "trigger": {"type": "event", "uid": "123456"},
+    "function_id": "123456",
+}
+</code></pre>
+<h3 id="h_01H9TP329V2B5R6M3R22H4V04Z">Modules</h3>
+<p>On the <em>Modules</em> tab, you can select from the most popular prebuilt modules (i.e., 3rd-party packages that add capabilities to your functions). </p>
+<p>To add an external module to use in your code, select the <strong>Add module</strong> button:</p>
+<p class="wysiwyg-text-align-center"><img src="https://klaviyo.zendesk.com/hc/article_attachments/28722610608411" alt="Add module button"></p>
+<p>On the modal that appears, you can search and select the module you’d like to add: </p>
+<p class="wysiwyg-text-align-center"><img src="https://klaviyo.zendesk.com/hc/article_attachments/28722598684571" alt="Add module modal" width="305" height="310"></p>
+<p>Once added, you can use the module with the code you write in Klaviyo.</p>
+<div class="bs-callout bs-callout-default">
+<p>You should refer to the external module’s native documentation for information regarding how to use it.</p>
+</div>
+<p class="wysiwyg-text-align-center"><img src="https://klaviyo.zendesk.com/hc/article_attachments/28722598687771" alt="Added modules"></p>
+<div class="accordion accordion--default">
+<div class="accordion__item">
+<div class="accordion__item-title"><strong>The klaviyo module</strong></div>
+<div class="accordion__item-content">
+<p>All Code functions come with a custom <em>klaviyo</em> package that is pre-installed into your Code environment. This module allows your functions to access the data in your Klaviyo account without needing to supply any credentials, such as an API key.</p>
+<p>The API of the <em>klaviyo</em> module depends on whether your code is written in Python or Javascript.</p>
+<h3 id="h_01JE43KJDNS6A3BXZ4SPHQ83KX">Python <em>klaviyo</em> module</h3>
+<p>The API of the pre-installed <em>klaviyo</em> module is the same as the <a href="https://github.com/klaviyo/klaviyo-api-python">Klaviyo SDK</a> object you would normally instantiate with the <em>klaviyo-api</em> Python module. You can think of the <em>klaviyo</em> module as a pre-instantiated <em>klaviyo</em> SDK client.</p>
+<p>For example, in a traditional workflow you would first instantiate a new Klaviyo SDK client by passing an API key to the constructor, and then use the resulting SDK object.</p>
+<pre><code class="language-text">from klaviyo_api import KlaviyoAPIimport osdef handler(event, context):  klaviyo = KlaviyoAPI(api_key=os.getenv("KLAVIYO_API_KEY"))  print(klaviyo.Metrics.get_metrics())</code></pre>
+<p>With Code, you just need to import the klaviyo object and authentication is handled for you.</p>
+<pre><code class="language-text">import klaviyodef handler(event, context):  print(klaviyo.Metrics.get_metrics())</code></pre>
+<p>View the <a href="https://pypi.org/project/klaviyo-api">available Klaviyo objects and their methods</a>.</p>
+<h3 id="h_01JE43KJDN312R5T5FG1PP6J1Q">Javascript <em>klaviyo</em> module</h3>
+<p>When using the pre-installed <em>klaviyo</em> module in your Javascript functions, import the specific Klaviyo features you want to access using curly brace syntax from the <em>klaviyo</em> module. Then use them as you normally would an API object using the <a href="https://www.npmjs.com/package/klaviyo-api"><em>klaviyo-api</em></a><a href="https://www.npmjs.com/package/klaviyo-api"> Javascript module</a>.</p>
+<pre><code class="language-text">import { Metrics } from 'klaviyo';export default async (event, context) =&gt; {  console.log(await Metrics.getMetrics())}</code></pre>
+<p>View the <a href="https://www.npmjs.com/package/klaviyo-api">available Klaviyo objects and their methods</a>. </p>
+<p></p>
+</div>
+</div>
+</div>
+<h3 id="h_01H9TNCZSA6HZS7SZRBZ6T93TQ">Environment variables </h3>
+<p>The <em>Environment variables</em> tab allows you to set key-value pairs that your code in Klaviyo can reference when it runs. These can be used to store information like credentials and secret keys so your functions can access them as they run. </p>
+<p>To add an environment variable, select the <strong>Add a variable</strong> button: </p>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/28722610624539" alt="Add environment variables button"></p>
+<p>On the modal that appears, you can set a key-value pair for your environment variable. </p>
+<p class="wysiwyg-text-align-center"><img src="https://klaviyo.zendesk.com/hc/article_attachments/28722610627099" alt="Key-value pairs set for environment variable " width="354" height="288"></p>
+<p>Once created, the environment variables will be listed on the page and can be used in your code. </p>
+<div class="bs-callout bs-callout-default">
+<p>To access your environment variables in your code, use os.getenv("Key") for Python, or process.env.KEY for Node.js.</p>
+</div>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/28722598707611" alt="Created environment variables"></p>
+<div class="bs-callout bs-callout-default">
+<p>To update the value for an existing environment variable, you must create a new variable with the same key you would like to update the value for.</p>
+</div>
+<h2 id="h_01H9TNCZSA7DPV4BRR3ARG3N8V">Test output</h2>
+<p>The <em>Test output</em> tab in Code allows you to test your code with recent events to confirm that the output is behaving as expected. </p>
+<p>To test your function:</p>
+<ol>
+<li>Select the <strong>Run test</strong> button:<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28722598714907" alt="Run test button">
+</li>
+<li>On the modal that appears, select an event to test with. You can select from the 10 most recent events captured in Klaviyo.<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28722610636315" alt="Recent events to test with" width="373" height="580">
+</li>
+<li>After selecting an event to test with, the test output will be shown:</li>
+</ol>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/28722610618651" alt="Test output" width="526" height="354"></p>
+<h2 id="h_01H9TNCZSA37TF7CJR5AVWNA1A">Logs</h2>
+<p>The <em>Logs </em>tab shows the health of your ongoing Code functions. You’ll see:</p>
+<ul>
+<li>
+<strong>Status </strong><br>
+The progress of a function’s execution. </li>
+<li>
+<strong>Response time</strong><br>
+The amount of time it takes for your code to execute in response to an event.</li>
+<li>
+<strong>Date </strong><br>
+A timestamp for when the function was executed. </li>
+</ul>
+<h2 id="h_01JE40Q8MC7QSXBWJG70T72FSY">Rate limits</h2>
+<p>Klaviyo code has the following rate limits:</p>
+<ul>
+<li>
+<strong>Function timeout</strong><br>
+Functions in Code can execute for up to 15 seconds before they timeout.</li>
+<li>
+<strong>Function rate limit</strong><br>
+Functions in Code allow for up to 25 concurrent executions per function.</li>
+</ul>
+<h2 id="h_01H9TNCZSAX3PFH87NRBT7RDCR">Deploying code </h2>
+<p>To deploy the code that you write in the editor, toggle the status dropdown to <em>Live</em>. </p>
+<p class="wysiwyg-text-align-center"><img src="https://klaviyo.zendesk.com/hc/article_attachments/28722610634139" alt="Toggle to deploy code"></p>
+<p>Once set to live, the code you write will execute each time the topic event is captured in Klaviyo.</p>
+<div class="bs-callout bs-callout-default">
+<p>When a function is set live, there may be up to a 15 minute delay before events begin to trigger the function.</p>
+</div>
+<h2 id="h_01HA9ZWYAYTKHB6V7269WYS8S8">Example solution</h2>
+<p>Below is an example of a custom solution being implemented with Code.</p>
+<p>In the example, event data is set as a profile property so it can be used in targeted emails and in segmentation. The <em>Booked shoot</em> custom event is captured in Klaviyo when customers book a shoot with the brand, and data about the booking city and associated URL is set as a profile property on the respective profile.</p>
+<p>A property called <em>Recent bookings </em>is also created, which stores data from the 5 most recent <em>Booked shoot</em> events so it can be looped through and accessed in an email templates.</p>
+<h3 id="h_01HA9ZWYAYP738KEQ2F3BC1RDC">Code</h3>
+<p>The Python code for this solution is written in the Code editor and is executed directly by Klaviyo.</p>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/32517910641819" alt="Code_updates.jpg"></p>
+<h3 id="h_01HGJXZ7QB498TETQYWJBMHZCY">Example code</h3>
+<iframe src="https://www.napkin.io/api/embed/236e23398bf14a27" height="600" title="“Booked" frameborder="0" style="width:100%;"></iframe>
+<h3 id="h_01HA9ZWYAYFG660J6EX4ZKGZQ3">Modules</h3>
+<p>In this example, the built-in <em>klaviyo</em> module is used. The <em>klaviyo</em> module relies on the <em>klaviyo-api</em> module being added to the function. Once added, the <em>klaviyo</em> module will handle authentication for you, so no API key is needed.</p>
+<h3 id="h_01HA9ZWYAYZ8C9VR9Q5J50HDJQ">Environment variables</h3>
+<p>Environment variables can be used to store information like credentials and secret keys so your functions can access them as they run. For this example, the following key-value pair is set:</p>
+<ul>
+<li>
+<strong>MAX_PROPERTIES_TO_STORE</strong><br>
+An environment variable used to define the maximum number of properties to store for the example function.</li>
+</ul>
+<h3 id="h_01HA9ZWYAZAVV3QJ2KFR931HHZ">Testing</h3>
+<p>While creating the function to set event data as profile properties, the <em>Test output </em>tab is used to verify the expected output.</p>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/28722610647323" alt="test_output.jpg"></p>
+<h3 id="h_01HA9ZWYAZCWZBV7E56Q3BPP69">Logs</h3>
+<p>Once the function has been created and tested, the <em>Logs </em>tab shows the health status of the function as it is executed in response to <em>Booked shoot </em>events. </p>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/28722598726043" alt="Logs.jpg"></p>
+<h3 id="h_01HA9ZWYAZKHDT13BHWDBATNA4">Outcome</h3>
+<p>With this Code function in place, as customers sign up for shoots and trigger the custom <em>Booked shoot</em> event, the event data will be stored on the customer profile for use in segmentation and targeted campaigns. </p>
+<h2 id="01HE8E917DM8MN13YFF68DWSPM">Implementing Recipes  </h2>
+<p>Recipes in Code allow you to implement prebuilt solutions without the need for custom development.</p>
+<p>To implement a Recipe in your Klaviyo account:</p>
+<ol>
+<li>Select the <em>Create function</em> button on the Code page.</li>
+<li>Choose the Recipe you’d like to implement in your account. You’ll be brought to the editor where you can see the code for the selected Recipe, along with a description of what the function does.</li>
+<li>Click the <em>Select</em> button to continue.<br>
+
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28722598756891" alt="Currency converter recipe in Klaviyo">
+</li>
+<li>Choose a name for the function and the trigger that will cause it to execute. The runtime is automatically set based on the code for the Recipe.</li>
+<li>Select the <em>Create function</em> button.</li>
+<li>Once the function has been created, set the relevant environment variables so the function has the data it needs to run.</li>
+<li>The Recipe can now be tested and set to <em>Live</em>.</li>
+</ol>
+<div class="bs-callout bs-callout-default">
+<p>Recipes may require you to update certain fields to match your desired naming preferences and the data in your events. See the instructions for the Recipe to view which fields can be renamed and edited.</p>
+</div>

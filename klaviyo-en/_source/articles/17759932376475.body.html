@@ -1,0 +1,419 @@
+<h2 id="01H826355V28CWDJABSZ13H409">You will learn</h2>
+<p>Learn how to sync data from Klaviyo to your data warehouse, and import warehouse data to Klaviyo via SFTP. You can sync your customer profile and event data, allowing you to store and analyze key information about your customers outside of Klaviyo. </p>
+<div class="bs-callout bs-callout-default">
+<p><a href="https://help.klaviyo.com/hc/en-us/articles/17655007276059">Advanced KDP</a> is not included in Klaviyo’s standard marketing application, and a subscription is required to access the associated functionality. Head to our <a href="https://help.klaviyo.com/hc/en-us/articles/115000976672">billing guide</a> to learn about how to purchase this plan.</p>
+</div>
+<p></p>
+<p>
+<script src="https://fast.wistia.com/embed/medias/1luu8fozn2.jsonp" async="async"></script>
+<script src="https://fast.wistia.com/assets/external/E-v1.js" async="async"></script>
+</p>
+<div class="wistia_responsive_padding" style="padding: 56.25% 0 0 0; position: relative;">
+<div class="wistia_responsive_wrapper" style="height: 100%; left: 0; position: absolute; top: 0; width: 100%;">
+<div class="wistia_embed wistia_async_1luu8fozn2 qualityMin=720 seo=false videoFoam=true" style="height: 100%; position: relative; width: 100%;">
+<div class="wistia_swatch" style="height: 100%; left: 0; opacity: 0; overflow: hidden; position: absolute; top: 0; transition: opacity 200ms; width: 100%;"><img style="filter: blur(5px); height: 100%; object-fit: contain; width: 100%;" src="https://fast.wistia.com/embed/medias/1luu8fozn2/swatch" alt="" aria-hidden="true"></div>
+</div>
+</div>
+</div>
+<h2 id="01H826355VCVZ1BZ3M6JV679SA">Before you begin</h2>
+<p>You will need to ensure that the data warehouse you are connecting with is configured as a destination. To make sure you have set this up correctly:</p>
+<ul>
+<li>Make sure the user that is provided to Klaviyo has the right permissions.</li>
+<li>Make sure to set tables with the appropriate names, shown below, based on your warehouse.<br>
+<p>Additionally, make sure to allowlist Klaviyo's outbound data warehouse traffic IP addresses. This will ensure that Klaviyo's requests are not blocked by your security layer. These addresses are represented by the following CIDR ranges:</p>
+</li>
+<li><code>184.72.183.187/32</code></li>
+<li><code>52.206.71.52/32</code></li>
+<li><code>3.227.146.32/32</code></li>
+<li><code>44.198.39.11/32</code></li>
+<li><code>35.172.58.121/32</code></li>
+<li><code>3.228.37.244/32</code></li>
+<li><code>54.88.219.8/32</code></li>
+<li><code>3.214.211.176/32</code></li>
+</ul>
+<h2 id="01H826355WMNAPHTASY78SSYEG">Connect to a data warehouse </h2>
+<p>To add a data warehouse connection to Klaviyo, navigate to <strong>Advanced KDP &gt;</strong><strong>Data management &gt; Syncing</strong>.</p>
+<p>To add a data warehouse, select a supported data warehouse on the <em>Select a connector modal</em>.</p>
+<div class="bs-callout bs-callout-default">
+<p>You can only have 1 data warehouse destination per account.</p>
+</div>
+<p>Alternatively, you can select your data warehouse from Klaviyo’s app marketplace by going to <strong>Integrations &gt; Explore apps </strong>and searching for your platform.</p>
+<p>When connecting a warehouse, you can either import data from your data warehouse to Klaviyo, or set a warehouse as an outbound sync destination.</p>
+<p class="wysiwyg-text-align-center"><img src="https://klaviyo.zendesk.com/hc/article_attachments/29207563157019" alt="import_export.jpg" width="430" height="274"></p>
+<h2 id="h_01J6J4RJ84SGTRC5K4ME999ZWE">Import data via SFTP</h2>
+<p>If you’d like to import data from your data warehouse into Klaviyo, you can do this via <a href="https://developers.klaviyo.com/en/docs/use_klaviyos_sftp_import_tool">SFTP</a>.</p>
+<p>To import your data into Klaviyo, select <strong>Import data</strong> when first connecting a warehouse destination, or click the <strong>Import</strong> button on the <em>Data syncing</em> page if you already have a connection established.</p>
+<p>The process to import warehouse data into Klaviyo is as follows:</p>
+<ol>
+<li>Export your desired data from your data warehouse.</li>
+<li>Generate SSH keys on your local machine.</li>
+<li>Configure SFTP client and import.</li>
+</ol>
+<div class="bs-callout bs-callout-default">
+<p>This is demonstrated with Snowflake, but the import process is similar regardless of your warehouse integration.</p>
+</div>
+<h3 id="h_01J6J4X40QYNV4FC2NQ0J65ASC">Export your database</h3>
+<p>First, you’ll need to export your data from your warehouse. Log into your warehouse and export the data you’d like to import to Klaviyo into a CSV file.</p>
+<div class="bs-callout bs-callout-default">
+<p>Format your exported data based on the <a href="https://developers.klaviyo.com/en/docs/use_klaviyos_sftp_import_tool#general-csv-formatting-and-size-limitations">CSV format and size limitations</a>.</p>
+</div>
+<h3 id="h_01J6J4ZBR096HSA9TPFY6SY0RF">Generate SSH keys on your local machine</h3>
+<p>Once you have your desired data exported from your warehouse, generate a new SSH key on your local machine and add it to Klaviyo by selecting the <strong>Add SSH key</strong> button.</p>
+<div class="bs-callout bs-callout-default">
+<p>When adding your key, make sure it starts with 1 of the following:</p>
+<ul>
+<li>Ssh-ras</li>
+<li>Ecdsa-sha2</li>
+<li>Ssh-ed</li>
+<li>Sk-ecdsa</li>
+<li>sk-ssh</li>
+</ul>
+</div>
+<h3 id="h_01J6J51E5JHY9566KXDJ7XNHJR">Configure SFTP client and import</h3>
+<p>Once your SSH key has been successfully added to Klaviyo, you’ll need to configure your SFTP client and import the data.</p>
+<ol>
+<li>Open your SFTP client and configure a new connection with the credentials presented in Klaviyo You’ll see the credentials presented after successfully adding your SSH key</li>
+<li>Once authenticated, make sure your database follows the recommended guidelines before importing</li>
+<li>Upload your database file via your SFTP client and review</li>
+</ol>
+<p class="wysiwyg-text-align-center"><img src="https://klaviyo.zendesk.com/hc/article_attachments/29207563159451" alt="configure.jpg" width="579" height="452"></p>
+<p>You’ll also see a list view of your recent imports with the following information:</p>
+<ul>
+<li>
+<strong>Status</strong><br>
+Completed or incomplete.</li>
+<li>
+<strong>Rows processed</strong><br>
+Percentage of total rows processed so far.</li>
+<li>
+<strong>Import date</strong><br>
+Date of import.</li>
+<li>
+<strong>Imported by </strong><br>
+User that imported data.</li>
+</ul>
+<p class="wysiwyg-text-align-center"><img src="https://klaviyo.zendesk.com/hc/article_attachments/29207608998811" alt="Panel.jpg" width="502" height="513"></p>
+<h2 id="h_01J6J5F6T27QB64PK5YR884KEC">Export data to your warehouse  </h2>
+<p>To configure your data warehouse as destination, you’ll need the following set of information and credentials for each data warehouse.</p>
+<div class="accordion accordion--default">
+<div class="accordion__item">
+<div class="accordion__item-title"><strong>Amazon Redshift</strong></div>
+<div class="accordion__item-content">
+<div class="bs-callout bs-callout-requirements">
+<p>To configure Amazon Redshift as a destination, run the following script to create the <em>klaviyo_event</em> and <em>klaviyo_profile</em> tables. <br>
+<br>
+</p>
+<iframe src="https://www.napkin.io/api/embed/2907a5ae195545d4" height="600" title="“Example" frameborder="0" style="width:100%;"></iframe>
+</div>
+<p>Once configured as a destination, connect your warehouse with Klaviyo using the following set of credentials:</p>
+<ul>
+<li>
+<strong>Name: </strong>The name of your database in Redshift (it’s recommend to use the same same name as your database in Redshift)</li>
+<li>
+<strong>Host URL: </strong>The endpoint of the Amazon Redshift server (called the connection URL in Redshift)</li>
+<li>
+<strong>Database: </strong> The name to identify your data source</li>
+<li>
+<strong>Port: </strong>The port number used by Redshift</li>
+<li>
+<strong>Schema: </strong>Your database schema </li>
+<li>
+<strong>Username: </strong>The username used for logging into Redshift </li>
+<li>
+<strong>Database password: </strong>The password used for logging into Redshift<br>
+</li>
+</ul>
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28705665436571" alt="Redshift credentials to connect" width="500" height="632">
+</div>
+</div>
+<div class="accordion__item">
+<div class="accordion__item-title"><strong>Amazon S3</strong></div>
+<div class="accordion__item-content">
+<div class="bs-callout bs-callout-requirements">
+<p>To configure Amazon S3 as a destination, set the table names to <em>klaviyo_profile</em> and <em>klaviyo_event</em>.</p>
+</div>
+<p>Once configured as a destination, connect your warehouse with Klaviyo using the following set of credentials:</p>
+<ul>
+<li>
+<strong>Name</strong>: The machine readable name for Amazon S3 database.</li>
+<li>
+<strong>Bucket</strong>: Your bucket name.</li>
+<li>
+<strong>Bucket location</strong>: The region name that was chosen when the storage bucket was created.</li>
+<li>
+<strong>Access key ID: </strong>Your AWS access key ID.</li>
+<li>
+<strong>Secret access key</strong>: Your AWS secret access key.<br>
+</li>
+</ul>
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28705665430939" alt="Amazon S3 credentials to connect" width="500" height="473">
+</div>
+</div>
+<div class="accordion__item">
+<div class="accordion__item-title"><strong>Google BigQuery</strong></div>
+<div class="accordion__item-content">
+<div class="bs-callout bs-callout-requirements">
+<p>To configure Google BigQuery as a destination, run the following script to set the <em>klaviyo_profile</em> and <em>klaviyo_event </em>tables. Your Google BigQuery account must have a payment profile for the connection process to be successful.</p>
+<p>Note that in this script you must replace the placeholder "SERVICE ACCOUNT EMAIL" with your BigQuery service account email.<br>
+<br>
+</p>
+<iframe src="https://www.napkin.io/api/embed/5a9fffbe699c45b6" height="600" title="“Example" frameborder="0" style="width:100%;"></iframe>
+</div>
+<p>Once configured as a destination, connect your warehouse with Klaviyo using the following set of credentials:</p>
+<ul>
+<li>
+<strong>Name: </strong>A name to help your identify this destination </li>
+<li>
+<strong>Project ID:</strong> This is known as the Project ID and can be found in your API console.</li>
+<li>
+<strong>Dataset: </strong>Also known as schema. This is the same name you used in the script you should have run for setup.</li>
+<li>
+<strong>Service account key: </strong>Paste the entire contents of the JSON file you downloaded when creating your service account in BigQuery. <br>
+</li>
+</ul>
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28705638604827" alt="BigQuery credentials to connect" width="500" height="476">
+</div>
+</div>
+<div class="accordion__item">
+<div class="accordion__item-title"><strong>Microsoft Azure Synapse Analytics</strong></div>
+<div class="accordion__item-content">
+<div class="bs-callout bs-callout-requirements">
+<p>To configure Microsoft Azure as a destination, run the following script to create the <em>klaviyo_profile</em> and <em>klaviyo_event </em>tables.<br>
+<br>
+</p>
+<iframe src="https://www.napkin.io/api/embed/9814f97b94764202" height="600" title="“Example" frameborder="0" style="width:100%;"></iframe>
+<p></p>
+</div>
+<ul>
+<li>
+<strong>Name: </strong>It is recommended to use the same name as your database in Azure. </li>
+<li>
+<strong>Workspace: </strong>The Azure Synapse workspace name.</li>
+<li>
+<strong>Database name: </strong>This identifies your Dedicated SQL Pool database.</li>
+<li>
+<strong>Username: </strong>Your login username for your Dedicated SQL Pool database.</li>
+<li>
+<strong>Database password:</strong>Your login password for your Dedicated SQL Pool database.</li>
+<li>
+<strong>Account name: </strong>Your Windows Azure storage account, or DNS prefix you created.</li>
+<li>
+<strong>Access signature: </strong>Your shared access signature (SAS) string that proves access to the Blob Storage container.</li>
+<li>
+<strong>Container name: </strong>The Azure Blob container name for temporary staging area for data transfer.<br>
+</li>
+</ul>
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28705665467547" alt="Azure credentials" width="500" height="712">
+</div>
+</div>
+<div class="accordion__item">
+<div class="accordion__item-title"><strong>Snowflake</strong></div>
+<div class="accordion__item-content">
+<p>To configure Snowflake as a destination, take the following steps: </p>
+<p>1. Generate a private key by running the following command in your terminal:</p>
+<pre><code class="language-text">openssl genrsa 2048 | openssl pkcs8 -topk8 -inform PEM -out rsa_key.p8 -nocrypt</code></pre>
+<p>2. Generate a public key that references the private key by running the following command in your terminal:</p>
+<pre><code class="language-text">openssl rsa -in rsa_key.p8 -pubout -out rsa_key.pub</code></pre>
+<p>3. Run the following script to set the <em>KLAVIYO_PROFILE</em>, <em>KLAVIYO_EVENT</em>, and <em>KLAVIYO_METRIC</em> tables. You must have securityadmin and sysadminprivileges in order to complete the setup below. To review what role(s) you have, run SHOW GRANTS TO USER &lt;your_username&gt; and ensure that you have both roles listed. Reach out to a system administrator if you need to have your role adjusted.</p>
+<iframe src="https://www.napkin.io/api/embed/06339b3a07a5475f" height="600" title="“Example" frameborder="0" style="width:100%;"></iframe>
+<p>Once configured as a destination, connect your warehouse with Klaviyo using the following set of credentials:</p>
+<ul>
+<li>
+<strong>Name:</strong> It’s recommended to use the same name as your database in Snowflake.</li>
+<li>
+<strong>Username: </strong>Username to connect to your database. This should be the same as <em>user_name</em> in the setup script.<br>
+</li>
+<li>
+<strong>Private key:</strong> The Snowflake private key generated.<br>
+</li>
+<li>
+<strong>Warehouse:  </strong>Your warehouse in Snowflake.</li>
+<li>
+<strong>Account: </strong>Your account in Snowflake.</li>
+<li>
+<strong>Database: </strong>Your database name. This should be the same as <em>database_name</em> in the setup script.</li>
+<li>
+<strong>Schema: </strong>Your database schema. This should be the same as <em>schema_name</em> in the setup script.<br>
+</li>
+</ul>
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/36251501527707" alt="" width="433" height="565">
+</div>
+</div>
+</div>
+<p>After entering your credentials for the data warehouse you are syncing with, choose the data you want to sync from Klaviyo. </p>
+<h3 id="h_01HTFYVX5D1TQS183VPS2F9E1W">Data objects </h3>
+<p>In the <em>Data objects </em>section you can choose to sync all profile data, just specific event data, or both types of data by checking the applicable box(es) next to each option.</p>
+<div class="bs-callout bs-callout-default">
+<p>Klaviyo uses a nested JSON structure when sending data to your data warehouse. Profiles and events are each sent as a single table, allowing you to query against 1 table instead of a large number of potential table names in your data warehouse.</p>
+</div>
+<p class="wysiwyg-text-align-center"><img src="https://klaviyo.zendesk.com/hc/article_attachments/28705638636059" alt="Profile and events data objects" width="552" height="238"></p>
+<div class="bs-callout bs-callout-warning">
+<p class="wysiwyg-text-align-left">Syncing all data from Klaviyo may cause you to incur additional charges from your data warehouse. </p>
+</div>
+<h3 id="h_01HTFYW8GWJ7AWSRCH2R1W0QBH">Integrations to exclude</h3>
+<p>In the <em>Integrations to exclude</em> field, you can select the specific integration(s) that you want to exclude in the data warehouse sync. This is helpful if you want to remove a specific integration’s data that you may have already connected to Klaviyo from syncing as well.</p>
+<div class="bs-callout bs-callout-default">
+<p>Excluding specific integration data is only for events data, and does not exclude profile data.</p>
+</div>
+<p class="wysiwyg-text-align-center"><img src="https://klaviyo.zendesk.com/hc/article_attachments/28705665480347" alt="Integrations to exclude field" width="550" height="125"></p>
+<h3 id="h_01HTFYXVZHMZH7P9M6M583C5AD">Selective sync</h3>
+<p>In the <em>Selective sync </em>field, you select the specific events that you want to sync to your data warehouse from Klaviyo. By default, all events are included. When you set specific events to sync with this field, only the selected events will sync. </p>
+<div class="bs-callout bs-callout-default">
+<p>This field will only appear if you select the <em>Events </em>data object. </p>
+</div>
+<p class="wysiwyg-text-align-center"><img src="https://klaviyo.zendesk.com/hc/article_attachments/28705665484699" alt="Selective sync field" width="551" height="107"></p>
+<h3 id="h_01HTFZ0Y1YD0YDEWTKSV3ZF505">Select how often your data will sync</h3>
+<p>The value set for the <em>Periodic sync cadence</em> field in the section called <em>Select how often your data will sync</em> defines how frequently a sync will occur from Klaviyo to your data warehouse. </p>
+<div class="bs-callout bs-callout-default">
+<p>Periodic sync cadence is set to be hourly by default and cannot be changed.</p>
+</div>
+<p class="wysiwyg-text-align-center"><img src="https://klaviyo.zendesk.com/hc/article_attachments/28705665488283" alt="Periodic sync cadence field" width="550" height="161"></p>
+<h3 id="h_01HTFZ0001Z4YKP3YQKV8QYE1H">Select how much historical data you want to sync </h3>
+<p>In the <em>Select how much historical data you want to sync </em>section, you can define how much historical data you'd like to sync from Klaviyo to your data warehouse during the initial connection. You can pick: </p>
+<ul>
+<li>30 days </li>
+<li>90 days</li>
+<li>1 year</li>
+<li>All time </li>
+</ul>
+<p class="wysiwyg-text-align-center"><img src="https://klaviyo.zendesk.com/hc/article_attachments/28705665476763" alt="Select how much data to sync to your data warehouse" width="551" height="221"></p>
+<div class="bs-callout bs-callout-warning">
+<p>You may incur additional costs from your data warehouse if syncing a large amount of data at once. </p>
+</div>
+<h3 id="h_01HTFZBKWRG3NDRT2FY3HTBDRM">Sync review</h3>
+<p>Once you have connected your integration, if the setup was successful, you will see a final screen noting that the connection is <em>Enabled</em>, along with: </p>
+<ul>
+<li>Details of the sync you setup</li>
+<li>What data is being shared (profiles, events, or both)</li>
+<li>Any excluded integrations<br>
+<img src="https://klaviyo.zendesk.com/hc/article_attachments/28705665449115" alt="Connection successful modal" width="502" height="373">
+<p>If your sync was not successfully connected, you will instead see an<em> Unable to connect</em> status, along with options to either retry your connection or to edit the information in your credentials.</p>
+<p>Once you have successfully connected your data warehouse, you will be brought back to the main <em>Data syncing</em> list page. Here you will see your:</p>
+</li>
+<li>Warehouse <em>Destination</em>
+</li>
+<li>The <em>Enabled</em> status</li>
+<li>Any potential errors that may have occurred with your sync in the past 24 hours</li>
+<li>The last sync that occurred along with a timestamp of this event</li>
+</ul>
+<p class="wysiwyg-text-align-center"><img src="https://klaviyo.zendesk.com/hc/article_attachments/29207563162267" alt="Card.jpg"></p>
+<p>Since you will only ever be able to connect 1 destination, you will only see 1 destination reflected in this list view.</p>
+<h2 id="01H82C0AP6068EXYVB12BZBDTW">Data syncing dashboard</h2>
+<p>Once you have a successful connection, click on your integration from the <em>Data syncing</em> list page. From here you will be brought to the data syncing dashboard providing historic and current information on the data syncs that have run.</p>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/28705638606491" alt="Sync interface after connecting warehouse"></p>
+<p>Here you’ll see the syncing information split into 2 tabs:</p>
+<ul>
+<li>Historical</li>
+<li>Periodic</li>
+</ul>
+<h3 id="01H826DXTCM7D7YHZR16G1S4HE">Historical </h3>
+<p>The <em>Historical</em> tab has logs that show the status of your historical data syncs. Historical syncs refer to the syncing of your existing data from Klaviyo to your data warehouse when you establish a connection. </p>
+<p>You’ll see the following information for each sync: </p>
+<ul>
+<li>
+<strong>Name</strong><br>
+The data is being included in the sync.</li>
+<li>
+<strong>Status</strong><br>
+Status and potential progress of the sync with an estimated percentage or potential errors noted. These statuses could include:<br>
+<br>
+
+<ul>
+<li>
+<strong>Completed</strong><br>
+Your data finished syncing for this one-off sync. It will not resync again automatically.</li>
+<li>
+<strong>Scheduled</strong><br>
+When the next sync is scheduled to automatically run.</li>
+<li>
+<strong>In progress</strong><br>
+Data is actively syncing to your data warehouse with an estimated percentage of completion.</li>
+<li>
+<strong>Errored</strong><br>
+An error occurred but Klaviyo will keep trying to re-establish a connection. Depending on the integration, this timing may slightly differ.</li>
+<li>
+<strong>Failed</strong><br>
+The sync completely failed even after trying to re-establish a connection. This means that you will need to review your configuration settings or even data warehouse setup.</li>
+<li>
+<strong>Paused</strong><br>
+You have paused the sync manually.</li>
+<li>
+<strong>Disabled</strong><br>
+The sync was disabled because the integration itself was disabled or removed.</li>
+</ul>
+</li>
+<li>
+<strong>Started on</strong><br>
+Start time of the sync.</li>
+<li>
+<strong>Ended on</strong><br>
+End time of the sync.</li>
+</ul>
+<h3 id="01H826YHT3S3A804T5Z59NNSDS">Periodic</h3>
+<p>The <em>Periodic</em> tab has logs that show the status of your periodic syncs. As customers continue to interact with your brand and new data is created, it will be routinely sent to your data warehouse. When setting up a data warehouse connection, periodic syncs will occur every hour. </p>
+<p>You’ll see the following information for each sync: </p>
+<ul>
+<li>
+<strong>Name</strong><br>
+The data is being included in the sync.</li>
+<li>
+<strong>Status</strong><br>
+Status and potential progress of the sync with an estimated percentage or potential errors noted. These statuses could include:<br>
+<br>
+
+<ul>
+<li>
+<strong>Completed</strong><br>
+Your data finished syncing for this one-off sync. It will not resync again automatically.</li>
+<li>
+<strong>Scheduled</strong><br>
+When the next sync is scheduled to automatically run.</li>
+<li>
+<strong>In progress</strong><br>
+Data is actively syncing to your data warehouse with an estimated percentage of completion.</li>
+<li>
+<strong>Errored</strong><br>
+An error occurred but Klaviyo will keep trying to re-establish a connection. Depending on the integration, this timing may slightly differ.</li>
+<li>
+<strong>Failed</strong><br>
+The sync completely failed even after trying to re-establish a connection. This means that you will need to review your configuration settings or even data warehouse setup.</li>
+<li>
+<strong>Paused</strong><br>
+You have paused the sync manually.</li>
+<li>
+<strong>Disabled</strong><br>
+The sync was disabled because the integration itself was disabled or removed.</li>
+</ul>
+</li>
+<li>
+<strong>Data freshness</strong><br>
+Data freshness refers to how up-to-date your data is. For example, if a sync has a freshness of 2 minutes, this means that any new data created in Klaviyo in the past 2 minutes is not yet in your data warehouse. </li>
+<li>Buttons to <em>Pause</em>, <em>Resume</em>, and re-enable individual syncs.</li>
+</ul>
+<h2 id="01H828QD9TR3P4JX6B4KGZH9MN">Removing data warehouse connections </h2>
+<p>To delete a data warehouse connection from your Klaviyo account, select the <strong>Integrations</strong> tab.</p>
+<p class="wysiwyg-text-align-left">Open the menu next to your data warehouse integration and select <strong>Remove integration</strong> to remove the connection.</p>
+<p class="wysiwyg-text-align-center"><img src="https://klaviyo.zendesk.com/hc/article_attachments/28705638617627" alt="integrations_page.jpg" width="641" height="174"></p>
+<h2 id="h_01J30ZH4E77SWQ61QKBCAJJEDE">View error logs </h2>
+<p>If you are experiencing issues with data syncing between Klaviyo and your data warehouse, viewing the associated error logs can provide additional information around the cause of the issue. </p>
+<p>To view errors, click into your warehouse destination on the <em>Syncing</em> page. On both the <em>Historical</em> and <em>Periodic </em>sync tabs you’ll see a list of the exports and their status, along with an indicator showing whether there are any active errors.</p>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/28705638663707" alt="List of exports to warehouse with information about health and count of errors" width="624" height="261"></p>
+<p>To view more details about a particular error, click into the export experiencing the failure. </p>
+<p>Here, you’ll see a timeline of the outbound syncs, along with an error or success message based on the status of the sync. </p>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/28705638666395" alt="Timeline of outbound syncs with health status" width="624" height="265"></p>
+<p>Clicking into a specific error will open a drawer with the following information:</p>
+<ul>
+<li>
+<strong>Summary</strong><br>
+A brief description of the error returned by the data warehouse </li>
+<li>
+<strong>Code</strong><br>
+The error code for the error</li>
+<li>
+<strong>External message</strong><br>
+The actual error message returned by the data warehouse</li>
+<li>
+<strong>Date</strong><br>
+The date and time of the error</li>
+</ul>
+<p><img src="https://klaviyo.zendesk.com/hc/article_attachments/28705638658459" alt="Drawer with information about syncing error" width="345" height="559"></p>
