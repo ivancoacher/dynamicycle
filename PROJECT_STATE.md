@@ -1,23 +1,22 @@
 # Project State
 
-Last updated: 2026-06-14T16:39:54+08:00
+Last updated: 2026-06-14T16:40:06+08:00
 
 ## Current Execution
 
 - Status: `completed`
 - Task: Provide a current category-type demo page
 - Branch: `codex/klaviyo-docs-sync-state`
-- Commit: `ac60639`
+- Commit: `b018aed`
 
 ## Latest Result
 
-Selected and opened the current Customer Agent category preview. It displays the category description, five section links, and a popular-articles list.
+Customer Agent category demo was verified and presented in the in-app browser. Delivery checkpoint b018aed was pushed to origin/codex/klaviyo-docs-sync-state.
 
 ## Verification
 
-- Browser loaded http://127.0.0.1:8765/category-customer-agent.html
-- Visible title: 客户 Agent
-- Visible sections: Guidance, Launch, Skills, Tools, Training
+- Local demo rendered successfully
+- Git commit b018aed created and pushed
 
 ## Changed Files
 
@@ -26,11 +25,11 @@ Selected and opened the current Customer Agent category preview. It displays the
 
 ## Next Action
 
-Use the Customer Agent preview as the current category-page demo for review; record any requested design changes in the next task.
+Await category demo review and apply the next requested page changes.
 
 ## Notes
 
-- Demo source file: build/deploy-previews/category-customer-agent.html
+- Demo file remains build/deploy-previews/category-customer-agent.html
 
 ## Resume
 

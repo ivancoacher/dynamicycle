@@ -62,3 +62,15 @@ entries.
 - Changed: `PROJECT_STATE.md`, `PROJECT_HISTORY.md`
 - Next: Use the Customer Agent preview as the current category-page demo for review; record any requested design changes in the next task.
 - Notes: Demo source file: build/deploy-previews/category-customer-agent.html
+
+
+## 2026-06-14T16:40:06+08:00 | completed
+
+- Task: Provide a current category-type demo page
+- Result: Customer Agent category demo was verified and presented in the in-app browser. Delivery checkpoint b018aed was pushed to origin/codex/klaviyo-docs-sync-state.
+- Branch: `codex/klaviyo-docs-sync-state`
+- Commit at record time: `b018aed`
+- Verification: Local demo rendered successfully; Git commit b018aed created and pushed
+- Changed: `PROJECT_STATE.md`, `PROJECT_HISTORY.md`
+- Next: Await category demo review and apply the next requested page changes.
+- Notes: Demo file remains build/deploy-previews/category-customer-agent.html
