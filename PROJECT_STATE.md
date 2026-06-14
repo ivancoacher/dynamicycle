@@ -1,36 +1,34 @@
 # Project State
 
-Last updated: 2026-06-14T20:42:28+08:00
+Last updated: 2026-06-14T20:43:47+08:00
 
 ## Current Execution
 
-- Status: `completed`
+- Status: `blocked`
 - Task: Deploy docs v2 pages to WordPress separately from BetterDocs
 - Branch: `codex/klaviyo-docs-sync-state`
-- Commit: `a4d32691`
+- Commit: `8779b037`
 
 ## Latest Result
 
-Paused full deployment as requested after fixing the WordPress Pages deployment path and template. The docs homepage now renders at https://dynamicycle.com/klaviyo-cn-docs-v2/ using a dedicated blank post-content template; existing progress is preserved in sync/.deploy_meta.json with 18 categories, 87 sections, and 0 articles deployed.
+Local checkpoint commit 8779b037 was created for the corrected WordPress docs v2 deployment script and sync/.deploy_meta.json, but pushing the branch failed because GitHub SSH reset the connection.
 
 ## Verification
 
-- .venv/bin/python -m py_compile sync/deploy.py passed; git diff --check passed; curl/html check found DC 中文知识库 and dc-search-input at https://dynamicycle.com/klaviyo-cn-docs-v2/; pgrep confirmed no sync/deploy.py all process is running.
+- git commit -m 'deploy: persist wordpress docs v2 checkpoint' succeeded as 8779b037; git push origin codex/klaviyo-docs-sync-state failed with kex_exchange_identification: read: Connection reset by peer; pgrep confirmed no full deploy process is running.
 
 ## Changed Files
 
-- `sync/deploy.py`
-- `sync/.deploy_meta.json`
 - `PROJECT_STATE.md`
 - `PROJECT_HISTORY.md`
 
 ## Next Action
 
-On another device, fetch this branch, install the documented Python dependencies if needed, then continue with: .venv/bin/python sync/deploy.py all
+Recover remote continuity by running: git push origin codex/klaviyo-docs-sync-state
 
 ## Notes
 
-- None.
+- Local resume command after fetching the pushed branch is: .venv/bin/python sync/deploy.py all
 
 ## Resume
 

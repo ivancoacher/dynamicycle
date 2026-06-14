@@ -518,3 +518,15 @@ entries.
 - Changed: `sync/deploy.py`, `sync/.deploy_meta.json`, `PROJECT_STATE.md`, `PROJECT_HISTORY.md`
 - Next: On another device, fetch this branch, install the documented Python dependencies if needed, then continue with: .venv/bin/python sync/deploy.py all
 - Notes: None.
+
+
+## 2026-06-14T20:43:47+08:00 | blocked
+
+- Task: Deploy docs v2 pages to WordPress separately from BetterDocs
+- Result: Local checkpoint commit 8779b037 was created for the corrected WordPress docs v2 deployment script and sync/.deploy_meta.json, but pushing the branch failed because GitHub SSH reset the connection.
+- Branch: `codex/klaviyo-docs-sync-state`
+- Commit at record time: `8779b037`
+- Verification: git commit -m 'deploy: persist wordpress docs v2 checkpoint' succeeded as 8779b037; git push origin codex/klaviyo-docs-sync-state failed with kex_exchange_identification: read: Connection reset by peer; pgrep confirmed no full deploy process is running.
+- Changed: `PROJECT_STATE.md`, `PROJECT_HISTORY.md`
+- Next: Recover remote continuity by running: git push origin codex/klaviyo-docs-sync-state
+- Notes: Local resume command after fetching the pushed branch is: .venv/bin/python sync/deploy.py all
