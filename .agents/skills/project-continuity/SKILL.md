@@ -51,5 +51,12 @@ Treat `落库` as a persistence command:
 2. Put repository-wide rules in `AGENTS.md`.
 3. Update this or another project skill when the workflow is reusable.
 4. Put detailed facts and current results in tracked state/reference documents.
-5. Validate changed skills.
-6. Record, commit, and push the checkpoint.
+5. Record required tools and versions in `TOOLCHAIN.md`.
+6. Validate changed skills.
+7. Record, commit, and push the checkpoint.
+
+## Handle Tool Upgrades
+
+Before replacing or upgrading system-level software, tell the user the current
+version, target version, reason, and verification command. Wait for the user to
+perform the upgrade. Use `TOOLCHAIN.md` as the durable project record.

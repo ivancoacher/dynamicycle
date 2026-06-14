@@ -70,6 +70,25 @@ When the user says `落库`:
 5. Validate any changed skill with `quick_validate.py`.
 6. Update state/history, commit the scoped changes, and push the branch.
 
+## Toolchain And System Upgrades
+
+1. Read `TOOLCHAIN.md` before running project scripts.
+2. Use the documented project version instead of whichever `python3`, Node, or
+   other executable happens to appear first on `PATH`.
+3. Do not upgrade or replace system-level software without telling the user.
+4. When an upgrade is required, report:
+   - Tool name
+   - Current version
+   - Required or recommended version
+   - Why the upgrade is needed
+   - How the user can verify the upgrade
+5. Wait for the user to perform the system upgrade, then verify it before
+   continuing.
+6. When a required tool or version changes, update `TOOLCHAIN.md` and any
+   relevant version file as part of the same checkpoint.
+7. Temporary project-local virtual environments and dependency installs are
+   allowed when they do not replace system software or expose credentials.
+
 ## Documentation Pipeline Rules
 
 - `klaviyo-en/_source/` is authoritative for source IDs, hierarchy, URLs,
@@ -89,6 +108,7 @@ When the user says `落库`:
 
 - `PROJECT_STATE.md`: latest resumable execution state
 - `PROJECT_HISTORY.md`: append-only task history
+- `TOOLCHAIN.md`: required tools, versions, and upgrade policy
 - `.agents/skills/project-continuity/`: continuity workflow and recorder
 - `batterDocs/`: existing BetterDocs-managed content
 - `klaviyo-en/`: English source and relationship data

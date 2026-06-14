@@ -74,3 +74,27 @@ entries.
 - Changed: `PROJECT_STATE.md`, `PROJECT_HISTORY.md`
 - Next: Await category demo review and apply the next requested page changes.
 - Notes: Demo file remains build/deploy-previews/category-customer-agent.html
+
+
+## 2026-06-14T16:42:09+08:00 | in_progress
+
+- Task: Normalize left category-menu icon sizing
+- Result: The category page reuses topic_sidebar_html, but its page-specific CSS does not define .hc-topic-icon dimensions; SVGs therefore expand to their intrinsic container width. The section page already contains the intended 28px/26px sizing.
+- Branch: `codex/klaviyo-docs-sync-state`
+- Commit at record time: `6c61d6f`
+- Verification: Screenshot shows oversized account and campaign icons; sync/deploy.py category CSS lacks .hc-topic-icon rules while section CSS defines them
+- Changed: `PROJECT_STATE.md`, `PROJECT_HISTORY.md`
+- Next: Add shared fixed icon sizing to the category-page generator, regenerate previews, and verify in the in-app browser.
+- Notes: None.
+
+
+## 2026-06-14T16:50:24+08:00 | completed
+
+- Task: Normalize left category-menu icon sizing and persist toolchain versions
+- Result: Moved topic-sidebar styling into shared layout CSS, constrained icon containers to 28x28px and SVGs to 26x26px, regenerated all 314 previews, fixed a Python 3.10-compatible homepage f-string, and persisted the system-upgrade protocol plus reproducible tool versions.
+- Branch: `codex/klaviyo-docs-sync-state`
+- Commit at record time: `6c61d6f`
+- Verification: Browser measured first three icon boxes at 28x28px and SVGs at 26x26px; Python 3.13.11 generated 314/314 previews with 0 failures; sync/deploy.py compiled successfully with Python 3.13.11; Project continuity skill validation passed; git diff --check passed
+- Changed: `sync/deploy.py`, `build/deploy-previews/`, `AGENTS.md`, `.agents/skills/project-continuity/SKILL.md`, `TOOLCHAIN.md`, `.python-version`, `README.md`, `PROJECT_STATE.md`, `PROJECT_HISTORY.md`
+- Next: Commit and push the icon/toolchain checkpoint, then await visual review of the refreshed category demo.
+- Notes: Default macOS python3 is 3.9.6 and incompatible; project standard is /opt/homebrew/bin/python3.13 version 3.13.11. No system upgrade was performed.

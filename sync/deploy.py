@@ -542,6 +542,17 @@ a{{color:inherit;text-decoration:none}}
 .hc-sb-item:hover{{background:#f4f4f5;color:#18181b}}
 .hc-sb-item--active{{background:#eef2ff;color:#4f46e5;font-weight:600}}
 
+/* --- Topic/category sidebar --- */
+.hc-topic-sidebar{{position:sticky;top:104px;align-self:start;max-height:calc(100vh - 128px);overflow-y:auto;padding-right:24px}}
+.hc-topic-heading{{font-family:'Instrument Sans',-apple-system,BlinkMacSystemFont,"Noto Sans SC",sans-serif;font-size:28px;font-weight:500;line-height:1.2;color:rgb(29,30,32);margin:0 0 24px}}
+.hc-topic-item{{display:flex;align-items:center;gap:14px;padding:17px 20px 17px 24px;border-radius:8px;color:rgb(29,30,32);text-decoration:none;transition:background .15s ease,color .15s ease}}
+.hc-topic-item:hover{{background:#f4f4f5;color:rgb(29,30,32)}}
+.hc-topic-item--active{{background:rgb(29,30,32);color:#fff}}
+.hc-topic-item--active:hover{{background:rgb(29,30,32);color:#fff}}
+.hc-topic-icon{{width:28px;height:28px;min-width:28px;max-width:28px;display:flex;align-items:center;justify-content:center;flex:0 0 28px;overflow:hidden}}
+.hc-topic-icon svg{{display:block;width:26px!important;height:26px!important;min-width:26px;max-width:26px!important;max-height:26px!important;flex:0 0 26px}}
+.hc-topic-label{{font-family:'Instrument Sans',-apple-system,BlinkMacSystemFont,"Noto Sans SC",sans-serif;font-size:20px;font-weight:400;line-height:1.25}}
+
 /* --- TOC sidebar (article pages) --- */
 .hc-toc{{padding:24px 20px 24px 24px;position:sticky;top:24px;align-self:start;max-height:calc(100vh - 48px);overflow-y:auto}}
 .hc-toc-title{{font-size:20px;font-weight:600;color:#1a1a2e;margin:36px 0 28px;padding:0 12px;letter-spacing:0}}
@@ -695,10 +706,12 @@ def homepage_html(menu_items, relation_data, docs_page_id=None, preview=False, m
 
     cards_html = []
     for cat in categories:
-        color = CATEGORY_COLORS.get(cat["slug"], "#6366f1")
-        icon = CATEGORY_ICONS.get(cat["slug"], """<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>""")
+        cat_slug = cat["slug"]
+        color = CATEGORY_COLORS.get(cat_slug, "#6366f1")
+        icon = CATEGORY_ICONS.get(cat_slug, """<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>""")
+        href = local_preview_href(f"category-{cat_slug}.html") if preview else meta_page_url(meta or {}, "categories", cat_slug, cat_slug)
         cards_html.append(
-            f'<a class="hc-card" href="{escape_attr(local_preview_href(f"category-{cat["slug"]}.html") if preview else meta_page_url(meta or {}, "categories", cat["slug"], cat["slug"]))}">'
+            f'<a class="hc-card" href="{escape_attr(href)}">'
             f'<div class="hc-card-icon" style="background:{color}0f;color:{color}">{icon}</div>'
             f'<div class="hc-card-body">'
             f'<span class="hc-card-title">{html.escape(cat["name"])}</span>'
@@ -965,15 +978,6 @@ def section_page_html(section_name, section_id, category_name, category_slug, ar
     page_css = """
 .hc-section-page{{background:#fafafa}}
 .hc-section-layout{{display:grid;grid-template-columns:360px 1fr;max-width:1200px;margin:0 auto;padding:46px 24px 90px;align-items:start}}
-.hc-topic-sidebar{{position:sticky;top:104px;align-self:start;max-height:calc(100vh - 128px);overflow-y:auto;padding-right:24px}}
-.hc-topic-heading{{font-family:'Instrument Sans',-apple-system,BlinkMacSystemFont,"Noto Sans SC",sans-serif;font-size:28px;font-weight:500;line-height:1.2;color:rgb(29,30,32);margin:0 0 24px}}
-.hc-topic-item{{display:flex;align-items:center;gap:14px;padding:17px 20px 17px 24px;border-radius:8px;color:rgb(29,30,32);text-decoration:none;transition:background .15s ease,color .15s ease}}
-.hc-topic-item:hover{{background:#f4f4f5;color:rgb(29,30,32)}}
-.hc-topic-item--active{{background:rgb(29,30,32);color:#fff}}
-.hc-topic-item--active:hover{{background:rgb(29,30,32);color:#fff}}
-.hc-topic-icon{{width:28px;height:28px;display:flex;align-items:center;justify-content:center;flex:0 0 auto}}
-.hc-topic-icon svg{{width:26px;height:26px}}
-.hc-topic-label{{font-family:'Instrument Sans',-apple-system,BlinkMacSystemFont,"Noto Sans SC",sans-serif;font-size:20px;font-weight:400;line-height:1.25}}
 .hc-section-main{{position:relative;min-width:0;padding-left:44px;font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans SC",'Instrument Sans',-apple-system,BlinkMacSystemFont,sans-serif}}
 .hc-section-main::before{{content:"";position:absolute;left:0;top:0;bottom:0;width:1px;background:#e4e4e7}}
 .hc-section-path{{display:flex;align-items:center;gap:10px;margin:0 0 36px;font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans SC",'Instrument Sans',-apple-system,BlinkMacSystemFont,sans-serif;font-size:24px;font-weight:500;line-height:31px;color:rgb(29,30,32);letter-spacing:.01em}}
