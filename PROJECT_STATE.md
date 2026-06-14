@@ -1,34 +1,36 @@
 # Project State
 
-Last updated: 2026-06-14T19:41:27+08:00
+Last updated: 2026-06-14T19:45:29+08:00
 
 ## Current Execution
 
-- Status: `blocked`
-- Task: Push deploy demo preview files checkpoint
+- Status: `completed`
+- Task: Clarify local history recording should create local git commit without push
 - Branch: `codex/klaviyo-docs-sync-state`
-- Commit: `86edaf12`
+- Commit: `0466e7dc`
 
 ## Latest Result
 
-Committed the four demo preview files as 86edaf12, but pushing codex/klaviyo-docs-sync-state failed because GitHub SSH reset the connection during key exchange.
+Updated AGENTS.md and project-continuity skill so recorded user-entered modification operations write local operation history and then create a scoped local Git commit; routine recording must not push unless the user explicitly requests remote synchronization.
 
 ## Verification
 
-- git commit -m 'docs: add deploy demo preview files' succeeded; git push origin codex/klaviyo-docs-sync-state failed with: kex_exchange_identification: read: Connection reset by peer; fatal: Could not read from remote repository.
+- find . -name quick_validate.py found no validator; git diff confirmed AGENTS.md and .agents/skills/project-continuity/SKILL.md contain the new add-and-commit-without-push rule.
 
 ## Changed Files
 
+- `AGENTS.md`
+- `.agents/skills/project-continuity/SKILL.md`
 - `PROJECT_STATE.md`
 - `PROJECT_HISTORY.md`
 
 ## Next Action
 
-Retry from /Users/user/Documents/Project/Dynamicycle/docs with: git push origin codex/klaviyo-docs-sync-state
+For future recorded modification operations, update local operation history, stage scoped files, create a local Git commit, and do not push unless explicitly requested.
 
 ## Notes
 
-- Local branch contains the demo files and remains ahead of origin until SSH push succeeds.
+- This completion record will be included in a local Git commit without push.
 
 ## Resume
 

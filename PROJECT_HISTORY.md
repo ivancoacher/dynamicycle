@@ -386,3 +386,39 @@ entries.
 - Changed: `PROJECT_STATE.md`, `PROJECT_HISTORY.md`
 - Next: Retry from /Users/user/Documents/Project/Dynamicycle/docs with: git push origin codex/klaviyo-docs-sync-state
 - Notes: Local branch contains the demo files and remains ahead of origin until SSH push succeeds.
+
+
+## 2026-06-14T19:43:37+08:00 | completed
+
+- Task: Clarify local operation history versus Git commit
+- Result: Updated AGENTS.md and project-continuity skill to record only user-entered modification requests and explicit local operation-history submissions; preview retrieval and demo file output no longer require PROJECT_HISTORY.md entries; Chinese 提交 now means local operation history by default, not git commit or push.
+- Branch: `codex/klaviyo-docs-sync-state`
+- Commit at record time: `0466e7dc`
+- Verification: Read AGENTS.md, PROJECT_STATE.md, PROJECT_HISTORY.md tail, git status, and latest commits; find . -name quick_validate.py returned no validator; git diff confirmed only AGENTS.md and .agents/skills/project-continuity/SKILL.md rule changes before recording.
+- Changed: `AGENTS.md`, `.agents/skills/project-continuity/SKILL.md`, `PROJECT_STATE.md`, `PROJECT_HISTORY.md`
+- Next: Follow the updated recording policy: do not record pure preview retrieval/output; record user-requested modifications and explicit local operation-history submissions only; do not Git commit/push unless explicitly requested.
+- Notes: No Git commit or push was performed for this rule clarification.
+
+
+## 2026-06-14T19:44:34+08:00 | in_progress
+
+- Task: Clarify local history recording should create local git commit without push
+- Result: User clarified that when a modification operation is written to local operation history, Codex should also run git add and git commit, but should not git push.
+- Branch: `codex/klaviyo-docs-sync-state`
+- Commit at record time: `0466e7dc`
+- Verification: Read project-continuity skill, AGENTS.md, PROJECT_STATE.md, recent PROJECT_HISTORY.md, git status, and latest commits.
+- Changed: `PROJECT_STATE.md`, `PROJECT_HISTORY.md`
+- Next: Update AGENTS.md and project-continuity skill with the add-and-commit-without-push rule.
+- Notes: None.
+
+
+## 2026-06-14T19:45:29+08:00 | completed
+
+- Task: Clarify local history recording should create local git commit without push
+- Result: Updated AGENTS.md and project-continuity skill so recorded user-entered modification operations write local operation history and then create a scoped local Git commit; routine recording must not push unless the user explicitly requests remote synchronization.
+- Branch: `codex/klaviyo-docs-sync-state`
+- Commit at record time: `0466e7dc`
+- Verification: find . -name quick_validate.py found no validator; git diff confirmed AGENTS.md and .agents/skills/project-continuity/SKILL.md contain the new add-and-commit-without-push rule.
+- Changed: `AGENTS.md`, `.agents/skills/project-continuity/SKILL.md`, `PROJECT_STATE.md`, `PROJECT_HISTORY.md`
+- Next: For future recorded modification operations, update local operation history, stage scoped files, create a local Git commit, and do not push unless explicitly requested.
+- Notes: This completion record will be included in a local Git commit without push.

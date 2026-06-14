@@ -1,11 +1,28 @@
 ---
 name: project-continuity
-description: Maintain a durable, resumable execution record for the Dynamicycle documentation repository. Use for every user-directed task in this project, especially when starting or finishing work, recording milestones or failures, responding to the trigger "落库", creating Git checkpoints, or preparing work to continue under another account or computer.
+description: Maintain a durable, resumable execution record for the Dynamicycle documentation repository. Use for user-entered modification requests, explicit local operation-history submissions, the trigger "落库", explicit Git checkpoints, or preparing work to continue under another account or computer. Do not use for read-only inspection, preview retrieval, or demo file output unless the user explicitly asks to record them.
 ---
 
 # Project Continuity
 
-## Start A Task
+## Recording Scope
+
+Record only user-entered modification requests and explicit local operation
+history submissions. Read-only inspection, preview retrieval, demo file output,
+and other non-mutating review tasks do not need a `PROJECT_HISTORY.md` entry
+unless the user explicitly asks to record them.
+
+The user's Chinese word `提交` means submit to the local operation history
+(`PROJECT_STATE.md` / `PROJECT_HISTORY.md`) by default. It does not mean
+`git commit`, `git push`, or remote synchronization unless the user explicitly
+says Git, commit, push, branch, PR, or remote.
+
+When a user-entered modification operation is written to local operation
+history, stage the scoped changed files and create a local Git commit for that
+record. Do not run `git push` unless the user explicitly requests a push or
+remote synchronization.
+
+## Start A Recorded Task
 
 1. Read `AGENTS.md`.
 2. Read `PROJECT_STATE.md`.
@@ -29,19 +46,18 @@ python3 .agents/skills/project-continuity/scripts/record_step.py \
   --next "Next executable action"
 ```
 
-## Finish A Task
+## Finish A Recorded Task
 
 1. Verify the task result.
 2. Record `completed` or `blocked`.
-3. Stage only task-owned files and the two continuity documents.
-4. Commit with a descriptive message.
-5. Push the current branch to its upstream.
-6. Record a final checkpoint containing the commit and push result. Amend the
-   checkpoint commit when practical so the remote state document names the
-   commit that contains it.
+3. For recorded modification operations, stage only task-owned files plus
+   `PROJECT_STATE.md` and `PROJECT_HISTORY.md`, then create a descriptive local
+   Git commit.
+4. Do not push unless the user explicitly asks for remote synchronization or
+   the `落库` trigger applies.
 
-Do not stage unrelated worktree changes. If push fails, leave the local commit
-intact and record the exact recovery command.
+Do not stage unrelated worktree changes. If an explicitly requested push fails,
+leave the local commit intact and record the exact recovery command.
 
 ## Handle "落库"
 

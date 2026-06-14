@@ -19,8 +19,22 @@ historical snapshot and must not override newer state.
 
 ## Mandatory Operation Recording
 
-Every user-directed task must be recorded, including analysis-only tasks and
-tasks that fail or are interrupted.
+Record only user-entered modification requests and explicit local operation
+history submissions. Read-only inspection, preview retrieval, demo file output,
+and other non-mutating review tasks do not need a `PROJECT_HISTORY.md` entry
+unless the user explicitly asks to record them.
+
+In this repository, the user's Chinese word `提交` means submit to the local
+operation history (`PROJECT_STATE.md` / `PROJECT_HISTORY.md`) by default. It
+does not mean `git commit`, `git push`, or any remote synchronization unless the
+user explicitly says Git, commit, push, branch, PR, or remote.
+
+When a user-entered modification operation is written to local operation
+history, stage the scoped changed files and create a local Git commit for that
+record. Do not run `git push` unless the user explicitly requests a push or
+remote synchronization.
+
+When a task should be recorded:
 
 1. At task start, update the state to `in_progress`.
 2. After each material milestone, keep the result and next action current.
@@ -43,19 +57,21 @@ python3 .agents/skills/project-continuity/scripts/record_step.py \
 
 ## Checkpoint And Device Continuity
 
-After a completed task or meaningful long-running milestone:
+For recorded user-entered modification operations, create a local Git checkpoint
+after updating `PROJECT_STATE.md` and `PROJECT_HISTORY.md`. Only stage files
+belonging to the task plus the continuity documents. Do not push to a remote as
+part of routine operation recording.
+
+When creating a local checkpoint:
 
 1. Stage only files belonging to the task plus `PROJECT_STATE.md` and
    `PROJECT_HISTORY.md`.
 2. Do not include unrelated user changes.
 3. Create a descriptive Git commit.
-4. Push the current branch to its upstream remote.
-5. Record commit and push results in the state/history documents.
-6. If commit or push cannot complete, record the exact blocker and leave a
+4. Do not push the current branch unless the user explicitly asks.
+5. Record commit results in the state/history documents.
+6. If commit or explicitly requested push cannot complete, record the exact blocker and leave a
    precise recovery command.
-
-This checkpoint is required so a different account or computer can resume by
-fetching the repository and reading `PROJECT_STATE.md`.
 
 ## "落库" Trigger
 
