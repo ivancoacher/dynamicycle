@@ -3,10 +3,10 @@
 
 Reads translated content from klaviyo-cn/ and relationship data from
 klaviyo-en/_source/ to generate professional HTML pages, then deploys
-them as native WordPress Pages under /docs/v2/.
+them as native WordPress Pages under /klaviyo-cn-docs-v2/.
 
 Usage:
-    python3 sync/deploy.py init          # Create /docs/v2/ parent page
+    python3 sync/deploy.py init          # Create /klaviyo-cn-docs-v2/ parent page
     python3 sync/deploy.py categories    # Deploy category pages
     python3 sync/deploy.py sections      # Deploy section pages
     python3 sync/deploy.py articles      # Deploy article pages
@@ -272,7 +272,13 @@ class PagesClient:
         return f"{self.base}{endpoint}"
 
     def create_page(self, title, content, slug=None, parent=0, status="publish"):
-        payload = {"title": title, "content": content, "status": status, "parent": parent}
+        payload = {
+            "title": title,
+            "content": content,
+            "status": status,
+            "parent": parent,
+            "template": DOCS_PAGE_TEMPLATE_SLUG,
+        }
         if slug:
             payload["slug"] = slug
 
@@ -283,7 +289,7 @@ class PagesClient:
         return with_retry(_do, description=f"CREATE page: {title[:40]}")
 
     def update_page(self, page_id, title=None, content=None, slug=None, parent=None):
-        payload = {"status": "publish"}
+        payload = {"status": "publish", "template": DOCS_PAGE_TEMPLATE_SLUG}
         if title is not None:
             payload["title"] = title
         if content is not None:
@@ -335,6 +341,72 @@ class PagesClient:
             resp.raise_for_status()
             return resp.json()
         return with_retry(_do, description=f"GET child pages of #{parent_id}")
+
+    def active_theme_slug(self):
+        def _do():
+            resp = requests.get(
+                self._url("/themes"),
+                params={"status": "active", "_fields": "stylesheet"},
+                auth=self.auth,
+                timeout=30,
+            )
+            resp.raise_for_status()
+            themes = resp.json()
+            if not themes:
+                raise RuntimeError("No active WordPress theme returned")
+            return themes[0].get("stylesheet")
+        return with_retry(_do, description="GET active theme")
+
+    def ensure_blank_content_template(self):
+        theme = self.active_theme_slug()
+        template_id = f"{theme}//{DOCS_PAGE_TEMPLATE_SLUG}"
+
+        def _get():
+            return requests.get(
+                self._url(f"/templates/{template_id}"),
+                params={"context": "edit"},
+                auth=self.auth,
+                timeout=30,
+            )
+
+        existing = with_retry(_get, description=f"GET template: {DOCS_PAGE_TEMPLATE_SLUG}")
+        payload = {
+            "title": DOCS_PAGE_TEMPLATE_TITLE,
+            "content": DOCS_PAGE_TEMPLATE_CONTENT,
+        }
+
+        if existing.status_code == 200:
+            def _update():
+                resp = requests.post(
+                    self._url(f"/templates/{template_id}"),
+                    json=payload,
+                    auth=self.auth,
+                    timeout=30,
+                )
+                resp.raise_for_status()
+                return resp.json()
+            return with_retry(_update, description=f"UPDATE template: {DOCS_PAGE_TEMPLATE_SLUG}")
+
+        if existing.status_code != 404:
+            existing.raise_for_status()
+
+        payload.update({
+            "slug": DOCS_PAGE_TEMPLATE_SLUG,
+            "theme": theme,
+            "type": "wp_template",
+            "status": "publish",
+        })
+
+        def _create():
+            resp = requests.post(
+                self._url("/templates"),
+                json=payload,
+                auth=self.auth,
+                timeout=30,
+            )
+            resp.raise_for_status()
+            return resp.json()
+        return with_retry(_create, description=f"CREATE template: {DOCS_PAGE_TEMPLATE_SLUG}")
 
 
 # ============================================================
@@ -430,7 +502,11 @@ def format_updated_at(value: str) -> str:
 # ============================================================
 
 SITE_BASE = (WP_SITE_URL or "https://dynamicycle.com").rstrip("/")
-DOCS_BASE_PATH = "/docs/v2"
+DOCS_PAGE_SLUG = "klaviyo-cn-docs-v2"
+DOCS_BASE_PATH = f"/{DOCS_PAGE_SLUG}"
+DOCS_PAGE_TEMPLATE_SLUG = "dc-docs-v2-blank"
+DOCS_PAGE_TEMPLATE_TITLE = "DC Docs v2 Blank"
+DOCS_PAGE_TEMPLATE_CONTENT = '<!-- wp:post-content {"layout":{"type":"default"}} /-->'
 BRAND_LOGO_URL = "https://i0.wp.com/dynamicycle.com/wp-content/uploads/2025/02/logo02.png?fit=600%2C126&ssl=1"
 BRAND_MARK_URL = "https://dynamicycle.com/wp-content/uploads/2025/03/e59bbee78987-1.png?w=125"
 
@@ -1439,12 +1515,13 @@ def prepare_article_body_html(markdown_body: str, lookup: dict | None = None) ->
 # ============================================================
 
 def cmd_init(args):
-    """Create the /docs/v2/ parent page."""
-    logger = SyncLogger("Init docs/v2")
+    """Create the docs v2 parent page."""
+    logger = SyncLogger(f"Init {DOCS_BASE_PATH}")
     wp = PagesClient()
+    wp.ensure_blank_content_template()
     meta = load_deploy_meta()
 
-    slug = "v2"
+    slug = DOCS_PAGE_SLUG
     docs_parent = wp.find_page_by_slug("docs", parent=0)
     parent_id = docs_parent["id"] if docs_parent else 0
     existing = None

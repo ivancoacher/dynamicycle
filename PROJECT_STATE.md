@@ -1,32 +1,32 @@
 # Project State
 
-Last updated: 2026-06-14T20:15:07+08:00
+Last updated: 2026-06-14T20:42:28+08:00
 
 ## Current Execution
 
 - Status: `completed`
-- Task: Use localhost URLs for preview page links
+- Task: Deploy docs v2 pages to WordPress separately from BetterDocs
 - Branch: `codex/klaviyo-docs-sync-state`
-- Commit: `f5e244be`
+- Commit: `a4d32691`
 
 ## Latest Result
 
-Updated AGENTS.md and project-continuity skill so future local preview links are given as http://127.0.0.1:8765/<filename>.html rather than file:// paths.
+Paused full deployment as requested after fixing the WordPress Pages deployment path and template. The docs homepage now renders at https://dynamicycle.com/klaviyo-cn-docs-v2/ using a dedicated blank post-content template; existing progress is preserved in sync/.deploy_meta.json with 18 categories, 87 sections, and 0 articles deployed.
 
 ## Verification
 
-- git diff -- AGENTS.md .agents/skills/project-continuity/SKILL.md confirmed the preview-link rule; git diff --check passed.
+- .venv/bin/python -m py_compile sync/deploy.py passed; git diff --check passed; curl/html check found DC 中文知识库 and dc-search-input at https://dynamicycle.com/klaviyo-cn-docs-v2/; pgrep confirmed no sync/deploy.py all process is running.
 
 ## Changed Files
 
-- `AGENTS.md`
-- `.agents/skills/project-continuity/SKILL.md`
+- `sync/deploy.py`
+- `sync/.deploy_meta.json`
 - `PROJECT_STATE.md`
 - `PROJECT_HISTORY.md`
 
 ## Next Action
 
-Provide future preview page links with http://127.0.0.1:8765/<filename>.html and avoid file:// preview links.
+On another device, fetch this branch, install the documented Python dependencies if needed, then continue with: .venv/bin/python sync/deploy.py all
 
 ## Notes
 

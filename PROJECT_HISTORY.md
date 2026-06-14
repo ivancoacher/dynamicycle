@@ -470,3 +470,51 @@ entries.
 - Changed: `AGENTS.md`, `.agents/skills/project-continuity/SKILL.md`, `PROJECT_STATE.md`, `PROJECT_HISTORY.md`
 - Next: Provide future preview page links with http://127.0.0.1:8765/<filename>.html and avoid file:// preview links.
 - Notes: None.
+
+
+## 2026-06-14T20:23:35+08:00 | in_progress
+
+- Task: Deploy docs v2 pages to WordPress separately from BetterDocs
+- Result: User requested publishing the generated docs files to the WordPress site while keeping them distinct from existing BetterDocs content and not affecting the original content.
+- Branch: `codex/klaviyo-docs-sync-state`
+- Commit at record time: `a4d32691`
+- Verification: Read project-continuity skill, AGENTS.md, PROJECT_STATE.md, TOOLCHAIN.md, recent PROJECT_HISTORY.md, git status, and deploy.py command list.
+- Changed: `PROJECT_STATE.md`, `PROJECT_HISTORY.md`
+- Next: Verify deploy.py uses the /docs/v2/ WordPress Pages path, regenerate previews, then run the scoped WordPress deploy commands without touching BetterDocs.
+- Notes: None.
+
+
+## 2026-06-14T20:33:17+08:00 | in_progress
+
+- Task: Deploy docs v2 pages to WordPress separately from BetterDocs
+- Result: Initial deploy created WordPress Page #13163 at https://dynamicycle.com/v2/ and 18 category pages plus 87 section pages before being stopped; user verified /v2/ shows the website homepage rather than the docs homepage, so the /v2/ entry is not a valid preview URL.
+- Branch: `codex/klaviyo-docs-sync-state`
+- Commit at record time: `a4d32691`
+- Verification: curl -I https://dynamicycle.com/v2/ returned page #13163, but user screenshot showed the site homepage; REST content for page #13163 contains the generated docs HTML; pgrep confirmed deploy process was stopped.
+- Changed: `sync/.deploy_meta.json`, `PROJECT_STATE.md`, `PROJECT_HISTORY.md`
+- Next: Change the WordPress Pages entry slug/base path to a unique non-BetterDocs URL, update the existing parent page, verify the homepage renders, then resume deployment under the corrected entry.
+- Notes: None.
+
+
+## 2026-06-14T20:40:21+08:00 | in_progress
+
+- Task: Deploy docs v2 pages to WordPress separately from BetterDocs
+- Result: Corrected the WordPress Pages entry from /v2/ to /klaviyo-cn-docs-v2/ and created a dedicated blank post-content template so the generated docs homepage renders instead of the site's homepage template.
+- Branch: `codex/klaviyo-docs-sync-state`
+- Commit at record time: `a4d32691`
+- Verification: curl/html checks found DC 中文知识库 and dc-search-input on https://dynamicycle.com/klaviyo-cn-docs-v2/ and did not find the previous homepage hero text; deploy.py init succeeded for page #13163.
+- Changed: `sync/deploy.py`, `sync/.deploy_meta.json`, `PROJECT_STATE.md`, `PROJECT_HISTORY.md`
+- Next: Run the full deploy again so category, section, and article pages are updated under /klaviyo-cn-docs-v2/ with the dedicated content template.
+- Notes: None.
+
+
+## 2026-06-14T20:42:28+08:00 | completed
+
+- Task: Deploy docs v2 pages to WordPress separately from BetterDocs
+- Result: Paused full deployment as requested after fixing the WordPress Pages deployment path and template. The docs homepage now renders at https://dynamicycle.com/klaviyo-cn-docs-v2/ using a dedicated blank post-content template; existing progress is preserved in sync/.deploy_meta.json with 18 categories, 87 sections, and 0 articles deployed.
+- Branch: `codex/klaviyo-docs-sync-state`
+- Commit at record time: `a4d32691`
+- Verification: .venv/bin/python -m py_compile sync/deploy.py passed; git diff --check passed; curl/html check found DC 中文知识库 and dc-search-input at https://dynamicycle.com/klaviyo-cn-docs-v2/; pgrep confirmed no sync/deploy.py all process is running.
+- Changed: `sync/deploy.py`, `sync/.deploy_meta.json`, `PROJECT_STATE.md`, `PROJECT_HISTORY.md`
+- Next: On another device, fetch this branch, install the documented Python dependencies if needed, then continue with: .venv/bin/python sync/deploy.py all
+- Notes: None.
