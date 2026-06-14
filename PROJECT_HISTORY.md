@@ -110,3 +110,27 @@ entries.
 - Changed: `PROJECT_STATE.md`, `PROJECT_HISTORY.md`
 - Next: Review the refreshed Customer Agent category page and provide the next layout adjustment.
 - Notes: Future system software upgrades require prior user notification and user-performed installation.
+
+
+## 2026-06-14T16:52:57+08:00 | in_progress
+
+- Task: Restore the local preview page service
+- Result: The preview HTML exists, but port 8765 has no listening process because the temporary verification server was stopped after the previous task.
+- Branch: `codex/klaviyo-docs-sync-state`
+- Commit at record time: `98c26b6`
+- Verification: category-campaigns.html exists; curl to 127.0.0.1:8765 failed with connection refused
+- Changed: `PROJECT_STATE.md`, `PROJECT_HISTORY.md`
+- Next: Start a persistent preview server, verify HTTP 200 and browser rendering, then document the service command.
+- Notes: None.
+
+
+## 2026-06-14T16:56:22+08:00 | completed
+
+- Task: Restore the local preview page service
+- Result: Restored the category preview at 127.0.0.1:8765 using a macOS launchctl-managed Python 3.13.11 HTTP server, so it remains available after the Codex command session ends.
+- Branch: `codex/klaviyo-docs-sync-state`
+- Commit at record time: `98c26b6`
+- Verification: HTTP 200 for category-campaigns.html; launchctl job com.dynamicycle.preview is running with Python PID 87806; In-app browser opened the page with title 活动与营销 and rendered category navigation and article content
+- Changed: `TOOLCHAIN.md`, `PROJECT_STATE.md`, `PROJECT_HISTORY.md`
+- Next: Continue reviewing category preview pages while the launchctl preview service remains running.
+- Notes: No system software upgrade was required.

@@ -1,35 +1,37 @@
 # Project State
 
-Last updated: 2026-06-14T16:50:38+08:00
+Last updated: 2026-06-14T16:56:22+08:00
 
 ## Current Execution
 
 - Status: `completed`
-- Task: Normalize left category-menu icon sizing and persist toolchain versions
+- Task: Restore the local preview page service
 - Branch: `codex/klaviyo-docs-sync-state`
-- Commit: `1563f6f`
+- Commit: `98c26b6`
 
 ## Latest Result
 
-The refreshed category and section previews now use 28x28px icon containers with 26x26px SVGs. Commit 1563f6f, including TOOLCHAIN.md and the system-upgrade rules, was pushed to origin/codex/klaviyo-docs-sync-state.
+Restored the category preview at 127.0.0.1:8765 using a macOS launchctl-managed Python 3.13.11 HTTP server, so it remains available after the Codex command session ends.
 
 ## Verification
 
-- Browser computed sizes: container 28x28px, SVG 26x26px
-- Commit 1563f6f pushed successfully
+- HTTP 200 for category-campaigns.html
+- launchctl job com.dynamicycle.preview is running with Python PID 87806
+- In-app browser opened the page with title 活动与营销 and rendered category navigation and article content
 
 ## Changed Files
 
+- `TOOLCHAIN.md`
 - `PROJECT_STATE.md`
 - `PROJECT_HISTORY.md`
 
 ## Next Action
 
-Review the refreshed Customer Agent category page and provide the next layout adjustment.
+Continue reviewing category preview pages while the launchctl preview service remains running.
 
 ## Notes
 
-- Future system software upgrades require prior user notification and user-performed installation.
+- No system software upgrade was required.
 
 ## Resume
 

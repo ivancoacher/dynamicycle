@@ -46,6 +46,34 @@ Recommended setup:
 
 `.venv/` is ignored by Git.
 
+## Local Preview Server
+
+Serve generated previews on `http://127.0.0.1:8765/`:
+
+```bash
+launchctl remove com.dynamicycle.preview >/dev/null 2>&1 || true
+launchctl submit -l com.dynamicycle.preview -- \
+  /opt/homebrew/bin/python3.13 -m http.server 8765 \
+  --bind 127.0.0.1 \
+  --directory /Users/lqhy/Documents/Projects/Dynamicycle/build/deploy-previews
+```
+
+Check the server:
+
+```bash
+curl -I http://127.0.0.1:8765/category-campaigns.html
+launchctl print gui/$(id -u)/com.dynamicycle.preview
+```
+
+Stop the server:
+
+```bash
+launchctl remove com.dynamicycle.preview
+```
+
+Do not stop the preview server after browser verification when the user is
+actively reviewing pages.
+
 ## Optional
 
 | Tool | Current version | Use |
