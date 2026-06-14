@@ -602,3 +602,27 @@ entries.
 - Changed: `sync/.deploy_meta.json`
 - Next: Optional: run 'deploy.py sections' and 'deploy.py articles' (or 'deploy.py all') to apply the same wp:html wrap to section and article pages.
 - Notes: None.
+
+
+## 2026-06-14T21:31:59+08:00 | in_progress
+
+- Task: Fix /v2/ stale links and push-notifications 404 in docs v2 sidebar
+- Result: Root cause: (1) meta_page_url returns stale /v2/ URLs from .deploy_meta.json sections; (2) topic_sidebar_html emits push-notifications link with no page. Patching both in deploy.py.
+- Branch: `codex/klaviyo-docs-sync-state`
+- Commit at record time: `cd4e4deb`
+- Verification: Not recorded.
+- Changed: None.
+- Next: Patch meta_page_url + topic_sidebar_html, redeploy categories/sections/articles, verify no /v2/ and no push-notifications 404.
+- Notes: None.
+
+
+## 2026-06-14T21:58:53+08:00 | completed
+
+- Task: Fix /v2/ stale links and push-notifications 404 in docs v2; redeploy categories + sections
+- Result: Patched sync/deploy.py: (1) meta_page_url ignores stale URLs not under current DOCS_BASE_PATH and falls back to deterministic URL; (2) topic_sidebar_html filters to active_category_slugs() so categories with no crawled content (push-notifications) are hidden. Redeployed categories (18/18) and sections (204/204). Articles (1205) intentionally NOT deployed per user.
+- Branch: `codex/klaviyo-docs-sync-state`
+- Commit at record time: `cd4e4deb`
+- Verification: All 18 category pages: http=200, }</p>=0, <p>/*=0, push-notifications=0, stale /v2/ (excl REST)=0. Sampled 3 section pages: http=200, wpautop-clean.
+- Changed: `sync/deploy.py, sync/.deploy_meta.json`
+- Next: When ready, deploy 1205 article pages: .venv/bin/python sync/deploy.py articles
+- Notes: None.

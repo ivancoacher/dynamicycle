@@ -126,6 +126,24 @@ When the user says `落库`:
   requests it.
 - Never commit `.env` or credentials.
 
+## WordPress Pages v2 Deploy Rules (`sync/deploy.py`)
+
+- Page content uploaded through `PagesClient` is wrapped in a Custom HTML block
+  (`<!-- wp:html --> ... <!-- /wp:html -->`) by `_wrap_block_html`. Never upload
+  raw full-HTML as plain `content` — WordPress `wpautop` injects `<p>`/`<br>`
+  into `<style>`, `<svg>`, and `<input>` and breaks the page layout.
+- `.deploy_meta.json` may hold URLs from a previous docs base path (legacy
+  `/v2/`). `meta_page_url` ignores any stored URL that does not contain the
+  current `DOCS_BASE_PATH` and falls back to the deterministic
+  `DOCS_BASE_PATH/<slug>/` URL. If cross-links still look stale after one pass,
+  run the deploy again — each page's content is generated before that page's
+  own meta entry is updated.
+- `topic_sidebar_html` only lists categories present in the relations data
+  (`active_category_slugs`), so categories with no crawled content (e.g.
+  `push-notifications`) are hidden instead of linking to a 404.
+- Deploy order for the v2 path: `init` → `categories` → `sections` → `articles`.
+  Each subcommand is idempotent and resume-safe.
+
 ## Important Paths
 
 - `PROJECT_STATE.md`: latest resumable execution state

@@ -460,7 +460,12 @@ def clean_section_name(section_name: str) -> str:
 
 def meta_page_url(meta: dict, kind: str, key: str, fallback_slug: str) -> str:
     info = meta.get(kind, {}).get(key, {})
-    return info.get("url") or docs_url(fallback_slug)
+    url = info.get("url")
+    # Ignore stale URLs left over from a previous docs base path (e.g. legacy
+    # /v2/) and fall back to the deterministic current-path URL instead.
+    if url and DOCS_BASE_PATH in url:
+        return url
+    return docs_url(fallback_slug)
 
 
 def reading_minutes_from_html(body_html: str) -> int:
@@ -659,14 +664,37 @@ def sidebar_html(active_slug="", meta=None, preview=False):
     return f'<nav class="hc-sidebar">{"".join(items)}</nav>'
 
 
+_ACTIVE_CATEGORY_SLUGS = None
+
+
+def active_category_slugs():
+    """Return the set of category slugs that actually have crawled content.
+
+    Used to hide sidebar entries (e.g. push-notifications) that have no category
+    page and would otherwise link to a 404. Lazily computed and cached.
+    """
+    global _ACTIVE_CATEGORY_SLUGS
+    if _ACTIVE_CATEGORY_SLUGS is None:
+        try:
+            _ACTIVE_CATEGORY_SLUGS = {
+                r.get("category_slug") for r in load_relation_data() if r.get("category_slug")
+            }
+        except Exception:
+            _ACTIVE_CATEGORY_SLUGS = set()
+    return _ACTIVE_CATEGORY_SLUGS
+
+
 def topic_sidebar_html(active_slug="", meta=None, preview=False):
     """Generate Klaviyo-style topic/category navigation for section pages."""
+    active = active_category_slugs()
     items = []
     for slug in CATEGORY_ORDER:
         if slug == "featured-resources":
             continue
         name = ZH_CATEGORY_NAMES.get(slug)
         if not name:
+            continue
+        if active and slug not in active:
             continue
         icon = CATEGORY_ICONS.get(slug, """<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/></svg>""")
         active_cls = " hc-topic-item--active" if slug == active_slug else ""
