@@ -261,6 +261,20 @@ CATEGORY_ORDER = [
 # WordPress Pages API Client
 # ============================================================
 
+def _wrap_block_html(content):
+    """Wrap full-HTML page content in a Custom HTML block so WordPress renders it
+    verbatim instead of running wpautop, which would otherwise inject <p>/<br>
+    into our <style>, <svg>, and <input> markup and break the page layout.
+
+    Idempotent: an empty value or content already wrapped is returned unchanged.
+    """
+    if not content:
+        return content
+    if content.lstrip().startswith("<!-- wp:html"):
+        return content
+    return f"<!-- wp:html -->\n{content}\n<!-- /wp:html -->"
+
+
 class PagesClient:
     """WordPress REST API client for Pages (not BetterDocs docs)."""
 
@@ -274,7 +288,7 @@ class PagesClient:
     def create_page(self, title, content, slug=None, parent=0, status="publish"):
         payload = {
             "title": title,
-            "content": content,
+            "content": _wrap_block_html(content),
             "status": status,
             "parent": parent,
             "template": DOCS_PAGE_TEMPLATE_SLUG,
@@ -293,7 +307,7 @@ class PagesClient:
         if title is not None:
             payload["title"] = title
         if content is not None:
-            payload["content"] = content
+            payload["content"] = _wrap_block_html(content)
         if slug is not None:
             payload["slug"] = slug
         if parent is not None:

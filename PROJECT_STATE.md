@@ -1,34 +1,33 @@
 # Project State
 
-Last updated: 2026-06-14T20:43:47+08:00
+Last updated: 2026-06-14T21:07:10+08:00
 
 ## Current Execution
 
-- Status: `blocked`
-- Task: Deploy docs v2 pages to WordPress separately from BetterDocs
+- Status: `completed`
+- Task: Fix docs v2 homepage styling broken by WordPress wpautop
 - Branch: `codex/klaviyo-docs-sync-state`
-- Commit: `8779b037`
+- Commit: `ff25476e`
 
 ## Latest Result
 
-Local checkpoint commit 8779b037 was created for the corrected WordPress docs v2 deployment script and sync/.deploy_meta.json, but pushing the branch failed because GitHub SSH reset the connection.
+Added idempotent _wrap_block_html() helper in sync/deploy.py; PagesClient.create_page and update_page now wrap content in <!-- wp:html -->...<!-- /wp:html --> Custom HTML block so WordPress renders it verbatim instead of injecting <p>/<br> into <style>/<svg>/<input>. Redeployed homepage via 'deploy.py init' (page #13163).
 
 ## Verification
 
-- git commit -m 'deploy: persist wordpress docs v2 checkpoint' succeeded as 8779b037; git push origin codex/klaviyo-docs-sync-state failed with kex_exchange_identification: read: Connection reset by peer; pgrep confirmed no full deploy process is running.
+- curl https://dynamicycle.com/klaviyo-cn-docs-v2/ -> wpautop mangle signatures all 0 (}</p>=0, <p>/*=0, <svg><br=0, <input><br=0), </style> intact=14, hc-hero=10 hc-card=118 layout rendered.
 
 ## Changed Files
 
-- `PROJECT_STATE.md`
-- `PROJECT_HISTORY.md`
+- `sync/deploy.py`
 
 ## Next Action
 
-Recover remote continuity by running: git push origin codex/klaviyo-docs-sync-state
+Optional follow-up: run 'deploy.py categories' (or 'all') to apply same wp:html wrap to category/section/article pages and refresh stale /v2 category-card links on the homepage.
 
 ## Notes
 
-- Local resume command after fetching the pushed branch is: .venv/bin/python sync/deploy.py all
+- None.
 
 ## Resume
 

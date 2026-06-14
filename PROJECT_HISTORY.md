@@ -530,3 +530,27 @@ entries.
 - Changed: `PROJECT_STATE.md`, `PROJECT_HISTORY.md`
 - Next: Recover remote continuity by running: git push origin codex/klaviyo-docs-sync-state
 - Notes: Local resume command after fetching the pushed branch is: .venv/bin/python sync/deploy.py all
+
+
+## 2026-06-14T21:03:06+08:00 | in_progress
+
+- Task: Fix docs v2 homepage styling: wrap uploaded HTML in Custom HTML block to stop WordPress wpautop mangling <style>/<svg>/<input>
+- Result: Starting: add _wrap_block_html to PagesClient upload layer (create_page/update_page) and redeploy homepage
+- Branch: `codex/klaviyo-docs-sync-state`
+- Commit at record time: `ff25476e`
+- Verification: Not recorded.
+- Changed: None.
+- Next: Apply wrap helper, run deploy.py init, verify live https://dynamicycle.com/klaviyo-cn-docs-v2/
+- Notes: None.
+
+
+## 2026-06-14T21:07:10+08:00 | completed
+
+- Task: Fix docs v2 homepage styling broken by WordPress wpautop
+- Result: Added idempotent _wrap_block_html() helper in sync/deploy.py; PagesClient.create_page and update_page now wrap content in <!-- wp:html -->...<!-- /wp:html --> Custom HTML block so WordPress renders it verbatim instead of injecting <p>/<br> into <style>/<svg>/<input>. Redeployed homepage via 'deploy.py init' (page #13163).
+- Branch: `codex/klaviyo-docs-sync-state`
+- Commit at record time: `ff25476e`
+- Verification: curl https://dynamicycle.com/klaviyo-cn-docs-v2/ -> wpautop mangle signatures all 0 (}</p>=0, <p>/*=0, <svg><br=0, <input><br=0), </style> intact=14, hc-hero=10 hc-card=118 layout rendered.
+- Changed: `sync/deploy.py`
+- Next: Optional follow-up: run 'deploy.py categories' (or 'all') to apply same wp:html wrap to category/section/article pages and refresh stale /v2 category-card links on the homepage.
+- Notes: None.
