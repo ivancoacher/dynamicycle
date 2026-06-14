@@ -1,37 +1,36 @@
 # Project State
 
-Last updated: 2026-06-14T16:56:22+08:00
+Last updated: 2026-06-14T16:56:53+08:00
 
 ## Current Execution
 
 - Status: `completed`
-- Task: Restore the local preview page service
+- Task: Checkpoint the restored local preview service
 - Branch: `codex/klaviyo-docs-sync-state`
-- Commit: `98c26b6`
+- Commit: `4e46154`
 
 ## Latest Result
 
-Restored the category preview at 127.0.0.1:8765 using a macOS launchctl-managed Python 3.13.11 HTTP server, so it remains available after the Codex command session ends.
+Committed the launchctl preview-server instructions and recovery record as 4e46154, then pushed the checkpoint to origin/codex/klaviyo-docs-sync-state.
 
 ## Verification
 
-- HTTP 200 for category-campaigns.html
-- launchctl job com.dynamicycle.preview is running with Python PID 87806
-- In-app browser opened the page with title 活动与营销 and rendered category navigation and article content
+- Commit 4e46154 created successfully
+- Commit 4e46154 pushed to origin/codex/klaviyo-docs-sync-state
+- Preview URL still returns HTTP 200 after push
 
 ## Changed Files
 
-- `TOOLCHAIN.md`
 - `PROJECT_STATE.md`
 - `PROJECT_HISTORY.md`
 
 ## Next Action
 
-Continue reviewing category preview pages while the launchctl preview service remains running.
+Use http://127.0.0.1:8765/category-campaigns.html for continued category-page review.
 
 ## Notes
 
-- No system software upgrade was required.
+- The launchctl job remains running; no system software upgrade was required.
 
 ## Resume
 

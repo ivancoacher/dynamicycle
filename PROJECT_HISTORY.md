@@ -134,3 +134,15 @@ entries.
 - Changed: `TOOLCHAIN.md`, `PROJECT_STATE.md`, `PROJECT_HISTORY.md`
 - Next: Continue reviewing category preview pages while the launchctl preview service remains running.
 - Notes: No system software upgrade was required.
+
+
+## 2026-06-14T16:56:53+08:00 | completed
+
+- Task: Checkpoint the restored local preview service
+- Result: Committed the launchctl preview-server instructions and recovery record as 4e46154, then pushed the checkpoint to origin/codex/klaviyo-docs-sync-state.
+- Branch: `codex/klaviyo-docs-sync-state`
+- Commit at record time: `4e46154`
+- Verification: Commit 4e46154 created successfully; Commit 4e46154 pushed to origin/codex/klaviyo-docs-sync-state; Preview URL still returns HTTP 200 after push
+- Changed: `PROJECT_STATE.md`, `PROJECT_HISTORY.md`
+- Next: Use http://127.0.0.1:8765/category-campaigns.html for continued category-page review.
+- Notes: The launchctl job remains running; no system software upgrade was required.
