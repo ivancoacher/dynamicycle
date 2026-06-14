@@ -2,6 +2,17 @@
 
 BetterDocs 文档同步仓库，管理与 dynamicycle.com/docs/ 的文档内容。
 
+## Codex 连续执行
+
+任何 Codex 或自动化代理开始工作前，应先读取：
+
+1. `AGENTS.md`：项目强制规则
+2. `PROJECT_STATE.md`：最近一次执行结果与下一步
+3. `PROJECT_HISTORY.md`：追加式执行历史
+
+每次完成任务后，更新状态和历史并推送当前工作分支，以便切换账号或
+设备后继续执行。
+
 ## 目录结构
 
 ```

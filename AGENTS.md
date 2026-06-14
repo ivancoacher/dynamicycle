@@ -1,39 +1,97 @@
-# Dynamicycle Docs
+# Dynamicycle Docs Agent Rules
 
-BetterDocs 文档同步仓库。
+This repository synchronizes Klaviyo documentation, Chinese translations, and
+WordPress/BetterDocs output.
 
-## 关键路径
+## Mandatory Startup
 
-- `batterDocs/` — 按分类组织的 markdown 文档（17 个分类，82+ 篇文章）
-- `sync/sync.py` — Python 同步工具（pull/push/status）
-- `.env` — WP 认证信息（已 gitignore）
+Before acting on any user request in this repository:
 
-## 常用命令
+1. Read this file.
+2. Read `PROJECT_STATE.md` for the latest execution result and next action.
+3. Read the latest entries in `PROJECT_HISTORY.md` when more context is needed.
+4. Check `git status --short --branch` and the latest commit.
+5. Continue from the recorded state instead of reconstructing project history
+   from chat memory.
+
+`PROJECT_STATE.md` is the canonical current-state document. `HANDOFF.md` is a
+historical snapshot and must not override newer state.
+
+## Mandatory Operation Recording
+
+Every user-directed task must be recorded, including analysis-only tasks and
+tasks that fail or are interrupted.
+
+1. At task start, update the state to `in_progress`.
+2. After each material milestone, keep the result and next action current.
+3. Before the final response, set the task to `completed` or `blocked`.
+4. Append the outcome to `PROJECT_HISTORY.md`; never rewrite old history.
+5. Record commands or checks that materially prove the result.
+6. Never record passwords, API keys, tokens, cookies, or `.env` contents.
+
+Use:
 
 ```bash
-python3 sync/sync.py pull    # 从 BetterDocs 拉取文档
-python3 sync/sync.py status  # 对比本地与远程差异
-python3 sync/sync.py push    # 推送本地修改到 BetterDocs
+python3 .agents/skills/project-continuity/scripts/record_step.py \
+  --status completed \
+  --task "Short task description" \
+  --result "What changed or what was learned" \
+  --verification "Verification command or result" \
+  --changed "path/to/file" \
+  --next "Exact next action"
 ```
 
-## 文档格式
+## Checkpoint And Device Continuity
 
-每篇文章包含 YAML frontmatter：
+After a completed task or meaningful long-running milestone:
 
-```yaml
----
-id: 1234
-title: "文章标题"
-slug: "article-slug"
-category: "分类名称"
-category_slug: "category-slug"
-wp_url: "https://dynamicycle.com/docs/article-slug/"
-wp_modified: "2025-01-01T00:00:00"
----
-```
+1. Stage only files belonging to the task plus `PROJECT_STATE.md` and
+   `PROJECT_HISTORY.md`.
+2. Do not include unrelated user changes.
+3. Create a descriptive Git commit.
+4. Push the current branch to its upstream remote.
+5. Record commit and push results in the state/history documents.
+6. If commit or push cannot complete, record the exact blocker and leave a
+   precise recovery command.
 
-## 数据流
+This checkpoint is required so a different account or computer can resume by
+fetching the repository and reading `PROJECT_STATE.md`.
 
-1. `pull`: BetterDocs API → HTML → Markdown → git
-2. `push`: git → Markdown → BetterDocs API
-3. （待开发）Klaviyo help docs → 翻译/转换 → batterDocs → push
+## "落库" Trigger
+
+When the user says `落库`:
+
+1. Treat the latest instructions as durable project rules.
+2. Update `AGENTS.md` for repository-wide mandatory behavior.
+3. Update an existing project skill or create a concise skill under
+   `.agents/skills/` when the workflow is reusable.
+4. Put detailed project facts in an appropriate tracked document instead of
+   bloating the skill.
+5. Validate any changed skill with `quick_validate.py`.
+6. Update state/history, commit the scoped changes, and push the branch.
+
+## Documentation Pipeline Rules
+
+- `klaviyo-en/_source/` is authoritative for source IDs, hierarchy, URLs,
+  original HTML, and media.
+- Translation changes user-visible text only. Preserve IDs, slugs, URLs,
+  anchors, links, media references, and HTML attributes.
+- Use stable slugs and update existing remote documents instead of creating
+  duplicates.
+- Resolve internal Klaviyo links to local documentation links before final
+  upload.
+- Generate and inspect local previews or dry-run output before batch writes.
+- Do not delete remote documents or force-push unless the user explicitly
+  requests it.
+- Never commit `.env` or credentials.
+
+## Important Paths
+
+- `PROJECT_STATE.md`: latest resumable execution state
+- `PROJECT_HISTORY.md`: append-only task history
+- `.agents/skills/project-continuity/`: continuity workflow and recorder
+- `batterDocs/`: existing BetterDocs-managed content
+- `klaviyo-en/`: English source and relationship data
+- `klaviyo-cn/`: translated Chinese content
+- `sync/pipeline.py`: BetterDocs synchronization pipeline
+- `sync/deploy.py`: WordPress Pages `/docs/v2/` deployment path

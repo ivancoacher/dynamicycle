@@ -1,5 +1,8 @@
 # Dynamicycle Docs Handoff
 
+> Historical snapshot from 2026-05-25. Read `PROJECT_STATE.md` for the current
+> execution result and resume instructions.
+
 Last updated: 2026-05-25 09:10 Asia/Shanghai
 
 ## Current Git State
