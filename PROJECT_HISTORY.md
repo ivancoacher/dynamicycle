@@ -338,3 +338,15 @@ entries.
 - Changed: `PROJECT_STATE.md`, `PROJECT_HISTORY.md`
 - Next: Continue applying this recording workflow on every future request; retry git push origin codex/klaviyo-docs-sync-state when network/SSH permits.
 - Notes: None.
+
+
+## 2026-06-14T19:37:09+08:00 | blocked
+
+- Task: Push operation logging confirmation checkpoint
+- Result: Committed the operation logging confirmation as 85accf37, but pushing codex/klaviyo-docs-sync-state failed again because GitHub SSH reset the connection during key exchange.
+- Branch: `codex/klaviyo-docs-sync-state`
+- Commit at record time: `85accf37`
+- Verification: git commit -m 'docs: record operation logging confirmation' succeeded; git push origin codex/klaviyo-docs-sync-state failed with: kex_exchange_identification: read: Connection reset by peer; fatal: Could not read from remote repository.
+- Changed: `PROJECT_STATE.md`, `PROJECT_HISTORY.md`
+- Next: Retry from /Users/user/Documents/Project/Dynamicycle/docs with: git push origin codex/klaviyo-docs-sync-state
+- Notes: Local branch now contains unpushed continuity commits 17933c9e, 1aa2ef0b, and 85accf37, plus this blocker record once committed.
