@@ -266,3 +266,15 @@ entries.
 - Changed: `AGENTS.md`, `sync/deploy-shared.css`, `sync/DEPLOY_STYLES.md`, `sync/deploy.py`, `build/deploy-previews/`, `PROJECT_STATE.md`, `PROJECT_HISTORY.md`
 - Next: Make future cross-page visual changes only in sync/deploy-shared.css, then regenerate previews.
 - Notes: Page-specific CSS remains only for category cards/header, section path/groups, and article header/body; no system software upgrade was required.
+
+
+## 2026-06-14T17:21:33+08:00 | completed
+
+- Task: Checkpoint shared deploy page styles
+- Result: Committed the shared article, section, and category style refactor as 7e4b398 and synchronized it to origin/codex/klaviyo-docs-sync-state.
+- Branch: `codex/klaviyo-docs-sync-state`
+- Commit at record time: `7e4b398`
+- Verification: Commit 7e4b398 contains the canonical sync/deploy-shared.css source, generator integration, documentation, and 314 regenerated previews.; Desktop and mobile browser checks passed for representative category, section, and article pages.; Representative category, section, and article preview URLs return HTTP 200.
+- Changed: `PROJECT_STATE.md`, `PROJECT_HISTORY.md`
+- Next: Use sync/deploy-shared.css for future cross-page visual changes, then regenerate previews with .venv/bin/python sync/deploy.py preview.
+- Notes: No system software or tool upgrade is required for this change.
