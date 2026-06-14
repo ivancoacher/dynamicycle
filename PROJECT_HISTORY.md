@@ -146,3 +146,27 @@ entries.
 - Changed: `PROJECT_STATE.md`, `PROJECT_HISTORY.md`
 - Next: Use http://127.0.0.1:8765/category-campaigns.html for continued category-page review.
 - Notes: The launchctl job remains running; no system software upgrade was required.
+
+
+## 2026-06-14T16:57:51+08:00 | in_progress
+
+- Task: Align category sidebar menu with its heading
+- Result: The topic heading starts at the sidebar edge, while every menu item adds 24px left padding, shifting icons and labels to the right.
+- Branch: `codex/klaviyo-docs-sync-state`
+- Commit at record time: `22b4a23`
+- Verification: Generated CSS uses .hc-topic-item padding: 17px 20px 17px 24px
+- Changed: `sync/deploy.py`, `PROJECT_STATE.md`, `PROJECT_HISTORY.md`
+- Next: Remove the menu item's left inset, regenerate previews, and compare browser element positions.
+- Notes: None.
+
+
+## 2026-06-14T17:00:53+08:00 | completed
+
+- Task: Align category sidebar menu with its heading
+- Result: Removed the 24px left inset from shared topic-menu items, regenerated all 314 previews, and aligned every menu icon with the 按主题浏览 heading.
+- Branch: `codex/klaviyo-docs-sync-state`
+- Commit at record time: `22b4a23`
+- Verification: Browser measured heading, menu item, and first five icon left edges at 20px; Computed menu-item padding-left is 0px; Preview generation completed: 314 OK, 0 failed; category-campaigns.html returns HTTP 200
+- Changed: `sync/deploy.py`, `build/deploy-previews/`, `PROJECT_STATE.md`, `PROJECT_HISTORY.md`
+- Next: Continue visual review of the refreshed category-campaigns preview.
+- Notes: Recreated the ignored project-local .venv with the already documented Python 3.13.11 dependency set; no system software upgrade was performed.
