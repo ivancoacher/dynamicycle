@@ -1,38 +1,34 @@
 # Project State
 
-Last updated: 2026-06-14T19:40:35+08:00
+Last updated: 2026-06-14T19:41:27+08:00
 
 ## Current Execution
 
-- Status: `completed`
-- Task: Output homepage category section article demo files
+- Status: `blocked`
+- Task: Push deploy demo preview files checkpoint
 - Branch: `codex/klaviyo-docs-sync-state`
-- Commit: `631ac9d4`
+- Commit: `86edaf12`
 
 ## Latest Result
 
-Regenerated deploy previews successfully, recreated a project-local .venv for documented dependencies, and produced four stable demo HTML files: demo-homepage.html, demo-category.html, demo-section.html, and demo-article.html under build/deploy-previews/.
+Committed the four demo preview files as 86edaf12, but pushing codex/klaviyo-docs-sync-state failed because GitHub SSH reset the connection during key exchange.
 
 ## Verification
 
-- .venv/bin/python sync/deploy.py preview completed: Total 314, OK 314, Fail 0; wc -c confirmed all four demo files; rg confirmed titles and shared hc-content-page/hc-brand-shell markers in demo files.
+- git commit -m 'docs: add deploy demo preview files' succeeded; git push origin codex/klaviyo-docs-sync-state failed with: kex_exchange_identification: read: Connection reset by peer; fatal: Could not read from remote repository.
 
 ## Changed Files
 
-- `build/deploy-previews/demo-homepage.html`
-- `build/deploy-previews/demo-category.html`
-- `build/deploy-previews/demo-section.html`
-- `build/deploy-previews/demo-article.html`
 - `PROJECT_STATE.md`
 - `PROJECT_HISTORY.md`
 
 ## Next Action
 
-User reviews the four demo files and requests visual/content adjustments if needed.
+Retry from /Users/user/Documents/Project/Dynamicycle/docs with: git push origin codex/klaviyo-docs-sync-state
 
 ## Notes
 
-- A project-local .venv was recreated with documented dependencies and remains ignored by Git.
+- Local branch contains the demo files and remains ahead of origin until SSH push succeeds.
 
 ## Resume
 

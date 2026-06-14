@@ -374,3 +374,15 @@ entries.
 - Changed: `build/deploy-previews/demo-homepage.html`, `build/deploy-previews/demo-category.html`, `build/deploy-previews/demo-section.html`, `build/deploy-previews/demo-article.html`, `PROJECT_STATE.md`, `PROJECT_HISTORY.md`
 - Next: User reviews the four demo files and requests visual/content adjustments if needed.
 - Notes: A project-local .venv was recreated with documented dependencies and remains ignored by Git.
+
+
+## 2026-06-14T19:41:27+08:00 | blocked
+
+- Task: Push deploy demo preview files checkpoint
+- Result: Committed the four demo preview files as 86edaf12, but pushing codex/klaviyo-docs-sync-state failed because GitHub SSH reset the connection during key exchange.
+- Branch: `codex/klaviyo-docs-sync-state`
+- Commit at record time: `86edaf12`
+- Verification: git commit -m 'docs: add deploy demo preview files' succeeded; git push origin codex/klaviyo-docs-sync-state failed with: kex_exchange_identification: read: Connection reset by peer; fatal: Could not read from remote repository.
+- Changed: `PROJECT_STATE.md`, `PROJECT_HISTORY.md`
+- Next: Retry from /Users/user/Documents/Project/Dynamicycle/docs with: git push origin codex/klaviyo-docs-sync-state
+- Notes: Local branch contains the demo files and remains ahead of origin until SSH push succeeds.
