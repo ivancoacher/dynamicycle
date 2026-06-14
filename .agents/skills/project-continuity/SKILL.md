@@ -46,6 +46,12 @@ python3 .agents/skills/project-continuity/scripts/record_step.py \
   --next "Next executable action"
 ```
 
+## Preview Links
+
+When giving local preview links to the user, use the local preview server URL
+format `http://127.0.0.1:8765/<filename>.html`. Do not provide `file://`
+preview links.
+
 ## Finish A Recorded Task
 
 1. Verify the task result.

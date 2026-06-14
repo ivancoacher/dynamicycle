@@ -446,3 +446,27 @@ entries.
 - Changed: `sync/deploy.py`, `build/deploy-previews/`, `PROJECT_STATE.md`, `PROJECT_HISTORY.md`
 - Next: Review http://127.0.0.1:8765/demo-category.html or build/deploy-previews/demo-category.html and report any remaining titles that should be localized.
 - Notes: Remaining English in category card labels is mainly product, platform, or acronym text such as Shopify, POS, RCS, WhatsApp, Advanced KDP, and Marketing Analytics.
+
+
+## 2026-06-14T20:13:17+08:00 | in_progress
+
+- Task: Use localhost URLs for preview page links
+- Result: User instructed that future preview page links should use the 127.0.0.1 local preview service URL instead of file:// paths.
+- Branch: `codex/klaviyo-docs-sync-state`
+- Commit at record time: `f5e244be`
+- Verification: Read project-continuity skill, AGENTS.md, PROJECT_STATE.md, recent PROJECT_HISTORY.md, git status, and latest commits.
+- Changed: `PROJECT_STATE.md`, `PROJECT_HISTORY.md`
+- Next: Update AGENTS.md and project-continuity skill with the preview-link URL rule.
+- Notes: None.
+
+
+## 2026-06-14T20:15:07+08:00 | completed
+
+- Task: Use localhost URLs for preview page links
+- Result: Updated AGENTS.md and project-continuity skill so future local preview links are given as http://127.0.0.1:8765/<filename>.html rather than file:// paths.
+- Branch: `codex/klaviyo-docs-sync-state`
+- Commit at record time: `f5e244be`
+- Verification: git diff -- AGENTS.md .agents/skills/project-continuity/SKILL.md confirmed the preview-link rule; git diff --check passed.
+- Changed: `AGENTS.md`, `.agents/skills/project-continuity/SKILL.md`, `PROJECT_STATE.md`, `PROJECT_HISTORY.md`
+- Next: Provide future preview page links with http://127.0.0.1:8765/<filename>.html and avoid file:// preview links.
+- Notes: None.

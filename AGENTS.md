@@ -119,6 +119,9 @@ When the user says `落库`:
 - Keep shared category, section, and article presentation in
   `sync/deploy-shared.css`; do not duplicate shared layout, sidebar, typography,
   list, or responsive rules inside individual page generators.
+- When giving local preview links to the user, use the local preview server URL
+  format `http://127.0.0.1:8765/<filename>.html`; do not provide `file://`
+  preview links.
 - Do not delete remote documents or force-push unless the user explicitly
   requests it.
 - Never commit `.env` or credentials.
