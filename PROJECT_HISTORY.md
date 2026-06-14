@@ -554,3 +554,27 @@ entries.
 - Changed: `sync/deploy.py`
 - Next: Optional follow-up: run 'deploy.py categories' (or 'all') to apply same wp:html wrap to category/section/article pages and refresh stale /v2 category-card links on the homepage.
 - Notes: None.
+
+
+## 2026-06-14T21:10:39+08:00 | in_progress
+
+- Task: Fix docs v2 category page styling (same wpautop issue as homepage)
+- Result: Confirmed account-billing category page is mangled by wpautop (}</p>=4, <p>/*=1, dc-category-page/dc-section-grid=0). Fix already in deploy.py; redeploy category with --only account-billing.
+- Branch: `codex/klaviyo-docs-sync-state`
+- Commit at record time: `9fd030a7`
+- Verification: Not recorded.
+- Changed: None.
+- Next: Run deploy.py categories --only account-billing, verify live, then offer bulk categories run.
+- Notes: None.
+
+
+## 2026-06-14T21:12:57+08:00 | completed
+
+- Task: Fix docs v2 account-billing category page styling
+- Result: Redeployed account-billing category page (#13172) using the already-committed wp:html wrap fix. Same root cause as homepage: category pages were deployed before the deploy.py fix, so their content was mangled by wpautop (}</p>=4, <p>/*=1).
+- Branch: `codex/klaviyo-docs-sync-state`
+- Commit at record time: `9fd030a7`
+- Verification: curl https://dynamicycle.com/klaviyo-cn-docs-v2/account-billing/ -> wpautop signatures 0 (}</p>=0, <p>/*=0, <br />=0); structure intact (hc-category-page=1, hc-cat-section-grid=4, hc-cat-section-card=22, hc-cat-article=17).
+- Changed: None.
+- Next: Remaining ~15 category pages still carry pre-fix mangled content. Run 'deploy.py categories' (no --only) to fix all category pages AND refresh homepage card links from /v2/ to /klaviyo-cn-docs-v2/.
+- Notes: None.
