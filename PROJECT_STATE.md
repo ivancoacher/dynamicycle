@@ -1,36 +1,44 @@
 # Project State
 
-Last updated: 2026-06-14T17:07:14+08:00
+Last updated: 2026-06-14T17:19:33+08:00
 
 ## Current Execution
 
 - Status: `completed`
-- Task: Checkpoint category sidebar inset
+- Task: Extract shared styles for article, section, and category pages
 - Branch: `codex/klaviyo-docs-sync-state`
-- Commit: `1fcaadb`
+- Commit: `e30a4c9`
 
 ## Latest Result
 
-Committed the 8px category-menu inset and regenerated previews as 1fcaadb, then pushed the checkpoint to origin/codex/klaviyo-docs-sync-state.
+Created sync/deploy-shared.css as the canonical shared style source, migrated category and section to shared layout/main/list primitives, made article inherit the same visual tokens and foundation, documented style ownership, and regenerated all 314 previews.
 
 ## Verification
 
-- Commit 1fcaadb created and pushed successfully
-- Browser computed padding-left remains 8px
-- Preview URL returns HTTP 200
+- Python compilation passed
+- Preview generation completed: 314 OK, 0 failed
+- Generated category, section, and article pages all contain the shared CSS and required shared classes
+- Desktop browser checks confirmed shared 1200px layout, 44px content inset, 28px icon box, 8px menu inset, 19px shared entry titles, and shared Chinese font tokens
+- Mobile checks confirmed category and section collapse identically and article TOC hides below 768px
+- All three representative preview URLs return HTTP 200
 
 ## Changed Files
 
+- `AGENTS.md`
+- `sync/deploy-shared.css`
+- `sync/DEPLOY_STYLES.md`
+- `sync/deploy.py`
+- `build/deploy-previews/`
 - `PROJECT_STATE.md`
 - `PROJECT_HISTORY.md`
 
 ## Next Action
 
-Review the updated category sidebar spacing in the current preview.
+Make future cross-page visual changes only in sync/deploy-shared.css, then regenerate previews.
 
 ## Notes
 
-- No system software upgrade was required.
+- Page-specific CSS remains only for category cards/header, section path/groups, and article header/body; no system software upgrade was required.
 
 ## Resume
 

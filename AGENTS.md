@@ -100,6 +100,9 @@ When the user says `落库`:
 - Resolve internal Klaviyo links to local documentation links before final
   upload.
 - Generate and inspect local previews or dry-run output before batch writes.
+- Keep shared category, section, and article presentation in
+  `sync/deploy-shared.css`; do not duplicate shared layout, sidebar, typography,
+  list, or responsive rules inside individual page generators.
 - Do not delete remote documents or force-push unless the user explicitly
   requests it.
 - Never commit `.env` or credentials.
@@ -115,3 +118,5 @@ When the user says `落库`:
 - `klaviyo-cn/`: translated Chinese content
 - `sync/pipeline.py`: BetterDocs synchronization pipeline
 - `sync/deploy.py`: WordPress Pages `/docs/v2/` deployment path
+- `sync/deploy-shared.css`: shared category/section/article visual rules
+- `sync/DEPLOY_STYLES.md`: style ownership and regeneration guide

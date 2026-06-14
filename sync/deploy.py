@@ -57,6 +57,7 @@ HOMEPAGE_CATEGORY_MENU = HOMEPAGE_MENU_DIR / "category-menu.json"
 SECTIONS_ARTICLES_JSON = RELATIONS_DIR / "sections-articles.json"
 PREVIEW_DIR = PROJECT_ROOT / "build" / "deploy-previews"
 DEPLOY_META = Path(__file__).resolve().parent / ".deploy_meta.json"
+DEPLOY_SHARED_CSS = Path(__file__).resolve().parent / "deploy-shared.css"
 
 # --- Category names (ZH) ---
 
@@ -524,62 +525,22 @@ def toc_sidebar_html(toc_items):
 
 
 def layout_css(extra=""):
-    """Shared CSS for 2-column layout pages."""
+    """Return shared CSS plus the page type's component-specific rules."""
     extra = (extra or "").replace("{{", "{").replace("}}", "}")
+    common = DEPLOY_SHARED_CSS.read_text("utf-8")
+    common = re.sub(r"/\*.*?\*/", "", common, flags=re.S)
+    common = re.sub(r"\s+", " ", common)
+    common = re.sub(r"\s*([{}:;,])\s*", r"\1", common)
+    common = common.replace("}", "}\n").strip()
     return f"""
 @import url('https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap');
 *,*::before,*::after{{box-sizing:border-box;margin:0;padding:0}}
 body{{font-family:'Inter',-apple-system,BlinkMacSystemFont,"Noto Sans SC",sans-serif;color:#18181b;background:#fafafa;line-height:1.6;-webkit-font-smoothing:antialiased}}
 a{{color:inherit;text-decoration:none}}
 {brand_css()}
-
-/* --- Layout --- */
-.hc-layout{{display:grid;grid-template-columns:260px 1fr;max-width:1200px;margin:0 auto;min-height:80vh}}
-
-/* --- Left sidebar --- */
-.hc-sidebar{{position:sticky;top:24px;padding:24px 20px 24px 24px;align-self:start;max-height:calc(100vh - 48px);overflow-y:auto}}
-.hc-sb-item{{display:block;font-size:14px;font-weight:500;color:#71717a;padding:8px 12px;border-radius:8px;margin-bottom:2px;transition:all .15s ease;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}}
-.hc-sb-item:hover{{background:#f4f4f5;color:#18181b}}
-.hc-sb-item--active{{background:#eef2ff;color:#4f46e5;font-weight:600}}
-
-/* --- Topic/category sidebar --- */
-.hc-topic-sidebar{{position:sticky;top:104px;align-self:start;max-height:calc(100vh - 128px);overflow-y:auto;padding-right:24px}}
-.hc-topic-heading{{font-family:'Instrument Sans',-apple-system,BlinkMacSystemFont,"Noto Sans SC",sans-serif;font-size:28px;font-weight:500;line-height:1.2;color:rgb(29,30,32);margin:0 0 24px}}
-.hc-topic-item{{display:flex;align-items:center;gap:14px;padding:17px 20px 17px 8px;border-radius:8px;color:rgb(29,30,32);text-decoration:none;transition:background .15s ease,color .15s ease}}
-.hc-topic-item:hover{{background:#f4f4f5;color:rgb(29,30,32)}}
-.hc-topic-item--active{{background:rgb(29,30,32);color:#fff}}
-.hc-topic-item--active:hover{{background:rgb(29,30,32);color:#fff}}
-.hc-topic-icon{{width:28px;height:28px;min-width:28px;max-width:28px;display:flex;align-items:center;justify-content:center;flex:0 0 28px;overflow:hidden}}
-.hc-topic-icon svg{{display:block;width:26px!important;height:26px!important;min-width:26px;max-width:26px!important;max-height:26px!important;flex:0 0 26px}}
-.hc-topic-label{{font-family:'Instrument Sans',-apple-system,BlinkMacSystemFont,"Noto Sans SC",sans-serif;font-size:20px;font-weight:400;line-height:1.25}}
-
-/* --- TOC sidebar (article pages) --- */
-.hc-toc{{padding:24px 20px 24px 24px;position:sticky;top:24px;align-self:start;max-height:calc(100vh - 48px);overflow-y:auto}}
-.hc-toc-title{{font-size:20px;font-weight:600;color:#1a1a2e;margin:36px 0 28px;padding:0 12px;letter-spacing:0}}
-.hc-toc-item{{display:block;font-size:16px;font-weight:400;color:#1a1a2e;padding:10px 12px;border-radius:6px;margin-bottom:24px;transition:all .15s ease;line-height:1.45}}
-.hc-toc-item:hover{{color:#18181b;background:#f4f4f5}}
-.hc-toc-h3{{padding-left:24px}}
-
-/* --- Main content area --- */
-.hc-main{{padding:24px 32px 80px 24px;border-left:1px solid #e4e4e7;min-width:0}}
-
-/* --- Breadcrumb --- */
-.hc-crumb{{font-size:14px;color:#71717a;margin-bottom:24px}}
-.hc-crumb a{{color:#71717a;transition:color .15s ease}}
-.hc-crumb a:hover{{color:#18181b}}
-.hc-crumb-sep{{margin:0 8px;color:#d4d4d8}}
+{common}
 
 {extra}
-
-/* --- Responsive --- */
-@media(max-width:1024px){{
-.hc-layout{{grid-template-columns:220px 1fr}}
-}}
-@media(max-width:768px){{
-.hc-layout{{grid-template-columns:1fr}}
-.hc-sidebar,.hc-toc{{display:none}}
-.hc-main{{padding:16px 20px 60px;border-left:none}}
-}}
 """
 
 
@@ -868,41 +829,34 @@ def category_page_html(category_name, category_slug, sections_data, articles_dat
         art_slug = article_slug(title, aid)
         href = local_preview_href("article-sample.html") if preview else meta_page_url(meta or {}, "articles", aid, art_slug)
         top_articles_html.append(
-            f'<article class="hc-cat-article">'
-            f'<a class="hc-cat-article-title" href="{escape_attr(href)}">{html.escape(title)}</a>'
-            f'{f"<p>{html.escape(excerpt)}</p>" if excerpt else ""}'
-            f'</article>'
+            f'<article class="hc-cat-article hc-content-entry">'
+            f'<a class="hc-cat-article-title hc-content-entry-title" href="{escape_attr(href)}">{html.escape(title)}</a>'
+            + (f'<p class="hc-content-entry-excerpt">{html.escape(excerpt)}</p>' if excerpt else "")
+            + f'</article>'
         )
 
     sidebar = topic_sidebar_html(category_slug, meta=meta, preview=preview)
     description = CATEGORY_DESCRIPTIONS.get(category_slug, f"浏览 {category_name} 相关的指南、设置说明和最佳实践。")
 
     page_css = """
-.hc-category-page{{background:#fafafa}}
-.hc-category-layout{{display:grid;grid-template-columns:360px 1fr;max-width:1200px;margin:0 auto;padding:46px 24px 90px;align-items:start}}
-.hc-category-main{{position:relative;min-width:0;padding-left:44px;font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans SC",'Instrument Sans',-apple-system,BlinkMacSystemFont,sans-serif}}
-.hc-category-main::before{{content:"";position:absolute;left:0;top:0;bottom:0;width:1px;background:#e4e4e7}}
 .hc-category-header{{max-width:820px;margin:0 0 34px}}
-.hc-category-title{{font-size:28px;font-weight:600;line-height:36px;color:rgb(29,30,32);letter-spacing:.01em;margin:0 0 12px}}
-.hc-category-desc{{font-size:18px;font-weight:400;line-height:30px;color:#52525b;letter-spacing:.012em;margin:0}}
+.hc-category-title{{font-size:28px;font-weight:600;line-height:36px;color:var(--hc-heading);letter-spacing:.01em;margin:0 0 12px}}
+.hc-category-desc{{font-size:18px;font-weight:400;line-height:30px;color:var(--hc-text);letter-spacing:.012em;margin:0}}
 .hc-cat-section-grid{{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;max-width:820px;margin:0 0 62px}}
-.hc-cat-section-card{{min-height:128px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:22px 18px;background:#fff;border:1px solid #f0efec;border-radius:8px;box-shadow:0 8px 18px rgba(29,30,32,.05);transition:transform .16s ease,box-shadow .16s ease,border-color .16s ease}}
+.hc-cat-section-card{{min-height:128px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:22px 18px;background:var(--hc-panel-bg);border:1px solid #f0efec;border-radius:8px;box-shadow:0 8px 18px rgba(29,30,32,.05);transition:transform .16s ease,box-shadow .16s ease,border-color .16s ease}}
 .hc-cat-section-card:hover{{transform:translateY(-2px);border-color:#e4e4e7;box-shadow:0 12px 24px rgba(29,30,32,.08)}}
-.hc-cat-section-card-name{{font-size:20px;font-weight:500;line-height:28px;color:rgb(29,30,32);letter-spacing:.01em;margin:0 0 12px}}
-.hc-cat-section-card-count{{font-size:16px;font-weight:400;line-height:24px;color:#52525b;letter-spacing:.012em}}
-.hc-cat-top-title{{font-size:21px;font-weight:600;line-height:28px;color:rgb(29,30,32);letter-spacing:.01em;margin:0 0 24px}}
-.hc-cat-articles{{display:flex;flex-direction:column;gap:34px;max-width:780px}}
-.hc-cat-article-title{{display:inline;color:rgb(29,30,32);font-size:19px;font-weight:500;line-height:30px;letter-spacing:.01em;text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:1px}}
-.hc-cat-article p{{font-size:16px;font-weight:400;line-height:27px;color:#52525b;letter-spacing:.012em;margin:7px 0 0;max-width:760px}}
-@media(max-width:1024px){{.hc-category-layout{{grid-template-columns:300px 1fr}}.hc-cat-section-grid{{grid-template-columns:repeat(2,minmax(0,1fr))}}}}
-@media(max-width:768px){{.hc-category-layout{{grid-template-columns:1fr;padding:28px 20px 70px}}.hc-category-main{{padding-left:0}}.hc-category-main::before{{display:none}}.hc-topic-sidebar{{position:static;max-height:none;padding:0 0 28px}}.hc-cat-section-grid{{grid-template-columns:1fr}}.hc-category-title{{font-size:24px;line-height:32px}}}}
+.hc-cat-section-card-name{{font-size:20px;font-weight:500;line-height:28px;color:var(--hc-heading);letter-spacing:.01em;margin:0 0 12px}}
+.hc-cat-section-card-count{{font-size:16px;font-weight:400;line-height:24px;color:var(--hc-text);letter-spacing:.012em}}
+.hc-cat-top-title{{font-size:21px;font-weight:600;line-height:28px;color:var(--hc-heading);letter-spacing:.01em;margin:0 0 24px}}
+@media(max-width:1024px){{.hc-cat-section-grid{{grid-template-columns:repeat(2,minmax(0,1fr))}}}}
+@media(max-width:768px){{.hc-cat-section-grid{{grid-template-columns:1fr}}.hc-category-title{{font-size:24px;line-height:32px}}}}
 """
 
     page = f"""<style>{layout_css(page_css)}</style>
-<div class="hc-category-page">
-  <div class="hc-category-layout">
+<div class="hc-category-page hc-content-page">
+  <div class="hc-category-layout hc-content-layout">
     {sidebar}
-    <main class="hc-category-main">
+    <main class="hc-category-main hc-content-main">
       <header class="hc-category-header">
         <h1 class="hc-category-title">{html.escape(category_name)}</h1>
         <p class="hc-category-desc">{html.escape(description)}</p>
@@ -910,7 +864,7 @@ def category_page_html(category_name, category_slug, sections_data, articles_dat
       <div class="hc-cat-section-grid">{"".join(cards_html)}</div>
       <section class="hc-cat-top">
         <h2 class="hc-cat-top-title">热门文章</h2>
-        <div class="hc-cat-articles">{"".join(top_articles_html)}</div>
+        <div class="hc-cat-articles hc-content-list">{"".join(top_articles_html)}</div>
       </section>
     </main>
   </div>
@@ -960,15 +914,15 @@ def section_page_html(section_name, section_id, category_name, category_slug, ar
             href = local_preview_href("article-sample.html") if preview else meta_page_url(meta or {}, "articles", aid, art_slug)
             excerpt = art.get("excerpt", "")
             article_items.append(
-                f'<article class="hc-sec-article">'
-                f'<a class="hc-sec-article-title" href="{escape_attr(href)}">{html.escape(title)}</a>'
-                f'{f"<p>{html.escape(excerpt)}</p>" if excerpt else ""}'
-                f'</article>'
+                f'<article class="hc-sec-article hc-content-entry">'
+                f'<a class="hc-sec-article-title hc-content-entry-title" href="{escape_attr(href)}">{html.escape(title)}</a>'
+                + (f'<p class="hc-content-entry-excerpt">{html.escape(excerpt)}</p>' if excerpt else "")
+                + f'</article>'
             )
         group_blocks.append(
             f'<section class="hc-sec-group">'
             f'<h2>{html.escape(clean_section_name(group.get("section_name", "")))}</h2>'
-            f'<div class="hc-sec-list">{"".join(article_items)}</div>'
+            f'<div class="hc-sec-list hc-content-list">{"".join(article_items)}</div>'
             f'</section>'
         )
 
@@ -976,31 +930,21 @@ def section_page_html(section_name, section_id, category_name, category_slug, ar
     category_href = local_preview_href(f"category-{category_slug}.html") if preview else meta_page_url(meta or {}, "categories", category_slug, category_slug)
 
     page_css = """
-.hc-section-page{{background:#fafafa}}
-.hc-section-layout{{display:grid;grid-template-columns:360px 1fr;max-width:1200px;margin:0 auto;padding:46px 24px 90px;align-items:start}}
-.hc-section-main{{position:relative;min-width:0;padding-left:44px;font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans SC",'Instrument Sans',-apple-system,BlinkMacSystemFont,sans-serif}}
-.hc-section-main::before{{content:"";position:absolute;left:0;top:0;bottom:0;width:1px;background:#e4e4e7}}
-.hc-section-path{{display:flex;align-items:center;gap:10px;margin:0 0 36px;font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans SC",'Instrument Sans',-apple-system,BlinkMacSystemFont,sans-serif;font-size:24px;font-weight:500;line-height:31px;color:rgb(29,30,32);letter-spacing:.01em}}
-.hc-section-path a{{color:rgb(29,30,32);text-decoration:underline;text-underline-offset:3px}}
+.hc-section-path{{display:flex;align-items:center;gap:10px;margin:0 0 36px;font-size:24px;font-weight:500;line-height:31px;color:var(--hc-heading);letter-spacing:.01em}}
+.hc-section-path a{{color:var(--hc-heading);text-decoration:underline;text-underline-offset:3px}}
 .hc-section-path .hc-back{{font-size:26px;font-weight:400;line-height:31px;text-decoration:none;letter-spacing:0}}
 .hc-section-count{{display:none}}
 .hc-sec-group{{margin:0 0 70px;max-width:780px}}
-.hc-sec-group h2{{font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans SC",'Instrument Sans',-apple-system,BlinkMacSystemFont,sans-serif;font-size:21px;font-weight:600;line-height:28px;color:rgb(29,30,32);letter-spacing:.01em;margin:0 0 22px;scroll-margin-top:120px}}
-.hc-sec-list{{display:flex;flex-direction:column;gap:34px}}
-.hc-sec-article{{font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans SC",'Instrument Sans',-apple-system,BlinkMacSystemFont,sans-serif;color:rgb(29,30,32);font-size:16px;line-height:27px;letter-spacing:.012em}}
-.hc-sec-article-title{{display:inline;color:rgb(29,30,32);font-size:19px;font-weight:500;line-height:30px;letter-spacing:.01em;text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:1px}}
-.hc-sec-article-title:hover{{color:rgb(29,30,32)}}
-.hc-sec-article p{{font-size:16px;font-weight:400;line-height:27px;color:#52525b;letter-spacing:.012em;margin:7px 0 0;max-width:760px}}
+.hc-sec-group h2{{font-size:21px;font-weight:600;line-height:28px;color:var(--hc-heading);letter-spacing:.01em;margin:0 0 22px;scroll-margin-top:120px}}
 .hc-sec-article p:last-child{{margin-bottom:0}}
-@media(max-width:1024px){{.hc-section-layout{{grid-template-columns:300px 1fr}}.hc-topic-label{{font-size:18px}}}}
-@media(max-width:768px){{.hc-section-layout{{grid-template-columns:1fr;padding:28px 20px 70px}}.hc-topic-sidebar{{position:static;max-height:none;padding:0 0 28px}}.hc-section-main{{padding-left:0}}.hc-section-main::before{{display:none}}.hc-section-path{{font-size:20px}}}}
+@media(max-width:768px){{.hc-section-path{{font-size:20px}}}}
 """
 
     page = f"""<style>{layout_css(page_css)}</style>
-<div class="hc-section-page">
-  <div class="hc-section-layout">
+<div class="hc-section-page hc-content-page">
+  <div class="hc-section-layout hc-content-layout">
     {sidebar}
-    <main class="hc-section-main">
+    <main class="hc-section-main hc-content-main">
       <div class="hc-section-path">
         <a class="hc-back" href="{escape_attr(category_href)}">←</a>
         <span><a href="{escape_attr(category_href)}">{html.escape(category_name)}</a> / {html.escape(root_section_label)}</span>
@@ -1056,32 +1000,31 @@ def article_page_html(title, category_name, category_slug, body_html, section_na
 
     page_css = """
 /* --- Article header --- */
-.hc-article-page{{background:#fafafa}}
 .hc-art-context{{width:100%;background:#fffcf9;border-bottom:none}}
 .hc-art-context-inner{{width:min(1200px,calc(100% - 48px));margin:0 auto;padding:42px 0 40px}}
-.hc-art-context .hc-crumb{{font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans SC",'Instrument Sans',-apple-system,BlinkMacSystemFont,sans-serif;font-size:14px;line-height:22px;letter-spacing:.01em;color:#1a1a2e;margin:0 0 28px}}
+.hc-art-context .hc-crumb{{font-size:14px;line-height:22px;letter-spacing:.01em;color:#1a1a2e;margin:0 0 28px}}
 .hc-art-context .hc-crumb a{{color:#1a1a2e;text-decoration:underline;text-underline-offset:3px}}
 .hc-art-context .hc-crumb a:hover{{color:#4a4a6a}}
 .hc-art-context .hc-crumb-sep{{color:#1a1a2e;margin:0 10px}}
 .hc-art-header{{display:flex;align-items:center;gap:14px;margin-bottom:22px}}
 .hc-art-title-icon{{width:32px;height:32px;display:flex;align-items:center;justify-content:center;color:#1a1a2e;flex:0 0 auto}}
 .hc-art-title-icon svg{{width:30px;height:30px}}
-.hc-art-title{{font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans SC",'Instrument Sans',-apple-system,BlinkMacSystemFont,sans-serif;font-size:30px;font-weight:600;color:#1a1a2e;letter-spacing:.01em;line-height:40px;margin:0}}
-.hc-art-meta{{font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans SC",'Instrument Sans',-apple-system,BlinkMacSystemFont,sans-serif;font-size:16px;line-height:27px;letter-spacing:.012em;color:#1a1a2e}}
+.hc-art-title{{font-size:30px;font-weight:600;color:#1a1a2e;letter-spacing:.01em;line-height:40px;margin:0}}
+.hc-art-meta{{font-size:16px;line-height:27px;letter-spacing:.012em;color:#1a1a2e}}
 .hc-art-meta em{{font-style:italic}}
-.hc-art-meta-sep{{color:#71717a}}
-.hc-article-layout{{align-items:start;background:#fafafa;position:relative}}
-.hc-article-layout::before{{content:"";position:absolute;left:260px;top:28px;bottom:0;width:1px;background:#e4e4e7}}
+.hc-art-meta-sep{{color:var(--hc-muted)}}
+.hc-article-layout{{align-items:start;background:var(--hc-page-bg);position:relative}}
+.hc-article-layout::before{{content:"";position:absolute;left:260px;top:28px;bottom:0;width:1px;background:var(--hc-divider)}}
 .hc-article-layout .hc-toc{{top:104px;max-height:calc(100vh - 128px);padding-top:36px}}
-.hc-article-layout .hc-toc-title{{font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans SC",'Instrument Sans',-apple-system,BlinkMacSystemFont,sans-serif;margin:0 0 28px;letter-spacing:.01em}}
-.hc-article-layout .hc-toc-item{{font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans SC",'Instrument Sans',-apple-system,BlinkMacSystemFont,sans-serif;line-height:1.6;letter-spacing:.012em}}
-.hc-article-main{{padding-top:36px;background:#fafafa;border-left:none}}
+.hc-article-layout .hc-toc-title{{margin:0 0 28px;letter-spacing:.01em}}
+.hc-article-layout .hc-toc-item{{line-height:1.6;letter-spacing:.012em}}
+.hc-article-main{{padding-top:36px;background:var(--hc-page-bg);border-left:none}}
 
 /* --- Article body — Chinese reading optimized, based on Klaviyo structure --- */
-.hc-art-body{{max-width:780px;font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans SC",'Instrument Sans',-apple-system,BlinkMacSystemFont,sans-serif;font-size:16px;line-height:27px;color:#52525b;letter-spacing:.012em}}
+.hc-art-body{{max-width:780px;font-size:16px;line-height:27px;color:var(--hc-text);letter-spacing:.012em}}
 .hc-art-body p,.hc-art-body ul,.hc-art-body ol,.hc-art-body li{{font-size:16px;line-height:27px;letter-spacing:.012em}}
 .hc-art-body p,.hc-art-body h2,.hc-art-body h3,.hc-art-body h4,.hc-art-body h5,.hc-art-body h6,.hc-art-body ul,.hc-art-body ol,.hc-art-body blockquote,.hc-art-body pre,.hc-art-body table{{margin-top:0;margin-bottom:18px}}
-.hc-art-body h1,.hc-art-body h2,.hc-art-body h3,.hc-art-body h4,.hc-art-body h5,.hc-art-body h6{{font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans SC",'Instrument Sans',-apple-system,BlinkMacSystemFont,sans-serif;font-weight:500;color:rgb(29,30,32);letter-spacing:.01em;scroll-margin-top:120px}}
+.hc-art-body h1,.hc-art-body h2,.hc-art-body h3,.hc-art-body h4,.hc-art-body h5,.hc-art-body h6{{font-weight:500;color:var(--hc-heading);letter-spacing:.01em;scroll-margin-top:120px}}
 .hc-art-body h2{{font-size:21px;font-weight:600;line-height:28px;padding:0;margin-top:34px;margin-bottom:22px}}
 .hc-art-body h3{{font-size:19px;font-weight:500;line-height:30px;margin-top:28px;margin-bottom:18px}}
 .hc-art-body h4,.hc-art-body h5,.hc-art-body h6{{font-size:16px;line-height:27px;margin-top:20px}}
@@ -1092,18 +1035,18 @@ def article_page_html(title, category_name, category_slug, body_html, section_na
 .hc-art-body li:empty{{display:none;margin:0}}
 .hc-art-body li>ul{{list-style-type:circle;margin-bottom:0}}
 .hc-art-body li>ol{{margin-bottom:0}}
-.hc-art-body a{{font-size:16px;line-height:27px;color:rgb(29,30,32);text-decoration:underline;text-underline-offset:3px;transition:color .15s ease}}
-.hc-art-body a:hover{{color:rgb(29,30,32)}}
-.hc-art-body strong,.hc-art-body b{{font-weight:500;color:rgb(29,30,32)}}
+.hc-art-body a{{font-size:16px;line-height:27px;color:var(--hc-heading);text-decoration:underline;text-underline-offset:3px;transition:color .15s ease}}
+.hc-art-body a:hover{{color:var(--hc-heading)}}
+.hc-art-body strong,.hc-art-body b{{font-weight:500;color:var(--hc-heading)}}
 .hc-art-body img{{display:block;height:auto;margin:0 auto 16px;max-width:100%}}
 .hc-art-body figure{{margin:40px auto 16px;max-width:100%}}
 .hc-art-body table{{width:100%;margin-top:16px;border-collapse:separate;border-spacing:2px}}
 .hc-art-body td,.hc-art-body th{{padding:8px;border:1px solid rgb(233,220,198);vertical-align:middle}}
 .hc-art-body th{{font-weight:500;background:#f8f8f8}}
-.hc-art-body code{{background:#f4f4f5;padding:2px 6px;border-radius:4px;font-size:14px;color:rgb(29,30,32);font-family:'SF Mono',SFMono-Regular,Menlo,monospace}}
+.hc-art-body code{{background:#f4f4f5;padding:2px 6px;border-radius:4px;font-size:14px;color:var(--hc-heading);font-family:'SF Mono',SFMono-Regular,Menlo,monospace}}
 .hc-art-body pre{{background:#1a1a2e;color:#e5e7eb;padding:20px;border-radius:8px;overflow-x:auto;font-size:14px;line-height:1.6}}
 .hc-art-body pre code{{background:none;padding:0;color:inherit;font-size:inherit}}
-.hc-art-body blockquote{{border-left:4px solid #d0d0d0;background:#f8f8f8;padding:14px 18px;color:rgb(29,30,32)}}
+.hc-art-body blockquote{{border-left:4px solid #d0d0d0;background:#f8f8f8;padding:14px 18px;color:var(--hc-heading)}}
 .hc-art-body hr{{border:none;border-top:1px solid #e0e0e0;margin:32px 0}}
 .hc-art-body > *:last-child{{margin-bottom:0}}
 .hc-art-body h2:last-of-type~ul,.hc-art-body h2:last-of-type~div>ul{{list-style-type:none;padding:0}}
@@ -1117,11 +1060,11 @@ def article_page_html(title, category_name, category_slug, body_html, section_na
 .dc-table-wrap{{overflow-x:auto;margin:16px 0}}
 
 @media(max-width:1024px){{.hc-article-layout::before{{left:220px}}}}
-@media(max-width:768px){{.hc-article-layout::before{{display:none}}.hc-art-context-inner{{width:auto;padding:28px 20px 30px}}.hc-article-main{{padding-top:28px;background:#fafafa}}.hc-art-title{{font-size:22px}}.hc-art-meta{{font-size:14px}}.hc-art-body{{max-width:none}}}}
+@media(max-width:768px){{.hc-article-layout::before{{display:none}}.hc-art-context-inner{{width:auto;padding:28px 20px 30px}}.hc-article-main{{padding-top:28px;background:var(--hc-page-bg)}}.hc-art-title{{font-size:22px}}.hc-art-meta{{font-size:14px}}.hc-art-body{{max-width:none}}}}
 """
 
     page = f"""<style>{layout_css(page_css)}</style>
-<div class="hc-article-page">
+<div class="hc-article-page hc-content-page">
   <section class="hc-art-context">
     <div class="hc-art-context-inner">
       <nav class="hc-crumb">{crumb_html}</nav>

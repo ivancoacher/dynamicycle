@@ -57,84 +57,73 @@ a{color:inherit;text-decoration:none}
 .hc-brand-footer-bottom{padding-left:20px;padding-right:20px}
 }
 
+:root{--hc-page-bg:#fafafa;--hc-panel-bg:#fff;--hc-heading:rgb(29,30,32);--hc-text:#52525b;--hc-muted:#71717a;--hc-divider:#e4e4e7;--hc-content-font:"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans SC","Instrument Sans",-apple-system,BlinkMacSystemFont,sans-serif;--hc-page-width:1200px;--hc-topic-column:360px;--hc-content-inset:44px;}
+.hc-content-page{background:var(--hc-page-bg);font-family:var(--hc-content-font);}
+.hc-content-layout{display:grid;grid-template-columns:var(--hc-topic-column) 1fr;max-width:var(--hc-page-width);margin:0 auto;padding:46px 24px 90px;align-items:start;}
+.hc-content-main{position:relative;min-width:0;padding-left:var(--hc-content-inset);}
+.hc-content-main::before{content:"";position:absolute;left:0;top:0;bottom:0;width:1px;background:var(--hc-divider);}
+.hc-layout{display:grid;grid-template-columns:260px 1fr;max-width:var(--hc-page-width);margin:0 auto;min-height:80vh;}
+.hc-main{padding:24px 32px 80px 24px;border-left:1px solid var(--hc-divider);min-width:0;}
+.hc-topic-sidebar{position:sticky;top:104px;align-self:start;max-height:calc(100vh - 128px);overflow-y:auto;padding-right:24px;}
+.hc-topic-heading{font-family:"Instrument Sans",-apple-system,BlinkMacSystemFont,"Noto Sans SC",sans-serif;font-size:28px;font-weight:500;line-height:1.2;color:var(--hc-heading);margin:0 0 24px;}
+.hc-topic-item{display:flex;align-items:center;gap:14px;padding:17px 20px 17px 8px;border-radius:8px;color:var(--hc-heading);text-decoration:none;transition:background .15s ease,color .15s ease;}
+.hc-topic-item:hover{background:#f4f4f5;color:var(--hc-heading);}
+.hc-topic-item--active,.hc-topic-item--active:hover{background:var(--hc-heading);color:#fff;}
+.hc-topic-icon{width:28px;height:28px;min-width:28px;max-width:28px;display:flex;align-items:center;justify-content:center;flex:0 0 28px;overflow:hidden;}
+.hc-topic-icon svg{display:block;width:26px !important;height:26px !important;min-width:26px;max-width:26px !important;max-height:26px !important;flex:0 0 26px;}
+.hc-topic-label{font-family:"Instrument Sans",-apple-system,BlinkMacSystemFont,"Noto Sans SC",sans-serif;font-size:20px;font-weight:400;line-height:1.25;}
+.hc-sidebar{position:sticky;top:24px;padding:24px 20px 24px 24px;align-self:start;max-height:calc(100vh - 48px);overflow-y:auto;}
+.hc-sb-item{display:block;font-size:14px;font-weight:500;color:var(--hc-muted);padding:8px 12px;border-radius:8px;margin-bottom:2px;transition:all .15s ease;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.hc-sb-item:hover{background:#f4f4f5;color:#18181b;}
+.hc-sb-item--active{background:#eef2ff;color:#4f46e5;font-weight:600;}
+.hc-toc{padding:24px 20px 24px 24px;position:sticky;top:24px;align-self:start;max-height:calc(100vh - 48px);overflow-y:auto;}
+.hc-toc-title{font-size:20px;font-weight:600;color:#1a1a2e;margin:36px 0 28px;padding:0 12px;letter-spacing:0;}
+.hc-toc-item{display:block;font-size:16px;font-weight:400;color:#1a1a2e;padding:10px 12px;border-radius:6px;margin-bottom:24px;transition:all .15s ease;line-height:1.45;}
+.hc-toc-item:hover{color:#18181b;background:#f4f4f5;}
+.hc-toc-h3{padding-left:24px;}
+.hc-content-list{display:flex;flex-direction:column;gap:34px;max-width:780px;}
+.hc-content-entry{color:var(--hc-heading);font-size:16px;line-height:27px;letter-spacing:.012em;}
+.hc-content-entry-title{display:inline;color:var(--hc-heading);font-size:19px;font-weight:500;line-height:30px;letter-spacing:.01em;text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:1px;}
+.hc-content-entry-title:hover{color:var(--hc-heading);}
+.hc-content-entry-excerpt{font-size:16px;font-weight:400;line-height:27px;color:var(--hc-text);letter-spacing:.012em;margin:7px 0 0;max-width:760px;}
+.hc-crumb{font-size:14px;color:var(--hc-muted);margin-bottom:24px;}
+.hc-crumb a{color:var(--hc-muted);transition:color .15s ease;}
+.hc-crumb a:hover{color:#18181b;}
+.hc-crumb-sep{margin:0 8px;color:#d4d4d8;}
+@media (max-width:1024px){.hc-layout{grid-template-columns:220px 1fr;}
+.hc-content-layout{grid-template-columns:300px 1fr;}
+.hc-topic-label{font-size:18px;}
+}
+@media (max-width:768px){.hc-layout,.hc-content-layout{grid-template-columns:1fr;}
+.hc-content-layout{padding:28px 20px 70px;}
+.hc-content-main{padding-left:0;}
+.hc-content-main::before{display:none;}
+.hc-topic-sidebar{position:static;max-height:none;padding:0 0 28px;}
+.hc-sidebar,.hc-toc{display:none;}
+.hc-main{padding:16px 20px 60px;border-left:none;}
+}
 
-/* --- Layout --- */
-.hc-layout{display:grid;grid-template-columns:260px 1fr;max-width:1200px;margin:0 auto;min-height:80vh}
 
-/* --- Left sidebar --- */
-.hc-sidebar{position:sticky;top:24px;padding:24px 20px 24px 24px;align-self:start;max-height:calc(100vh - 48px);overflow-y:auto}
-.hc-sb-item{display:block;font-size:14px;font-weight:500;color:#71717a;padding:8px 12px;border-radius:8px;margin-bottom:2px;transition:all .15s ease;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.hc-sb-item:hover{background:#f4f4f5;color:#18181b}
-.hc-sb-item--active{background:#eef2ff;color:#4f46e5;font-weight:600}
-
-/* --- Topic/category sidebar --- */
-.hc-topic-sidebar{position:sticky;top:104px;align-self:start;max-height:calc(100vh - 128px);overflow-y:auto;padding-right:24px}
-.hc-topic-heading{font-family:'Instrument Sans',-apple-system,BlinkMacSystemFont,"Noto Sans SC",sans-serif;font-size:28px;font-weight:500;line-height:1.2;color:rgb(29,30,32);margin:0 0 24px}
-.hc-topic-item{display:flex;align-items:center;gap:14px;padding:17px 20px 17px 8px;border-radius:8px;color:rgb(29,30,32);text-decoration:none;transition:background .15s ease,color .15s ease}
-.hc-topic-item:hover{background:#f4f4f5;color:rgb(29,30,32)}
-.hc-topic-item--active{background:rgb(29,30,32);color:#fff}
-.hc-topic-item--active:hover{background:rgb(29,30,32);color:#fff}
-.hc-topic-icon{width:28px;height:28px;min-width:28px;max-width:28px;display:flex;align-items:center;justify-content:center;flex:0 0 28px;overflow:hidden}
-.hc-topic-icon svg{display:block;width:26px!important;height:26px!important;min-width:26px;max-width:26px!important;max-height:26px!important;flex:0 0 26px}
-.hc-topic-label{font-family:'Instrument Sans',-apple-system,BlinkMacSystemFont,"Noto Sans SC",sans-serif;font-size:20px;font-weight:400;line-height:1.25}
-
-/* --- TOC sidebar (article pages) --- */
-.hc-toc{padding:24px 20px 24px 24px;position:sticky;top:24px;align-self:start;max-height:calc(100vh - 48px);overflow-y:auto}
-.hc-toc-title{font-size:20px;font-weight:600;color:#1a1a2e;margin:36px 0 28px;padding:0 12px;letter-spacing:0}
-.hc-toc-item{display:block;font-size:16px;font-weight:400;color:#1a1a2e;padding:10px 12px;border-radius:6px;margin-bottom:24px;transition:all .15s ease;line-height:1.45}
-.hc-toc-item:hover{color:#18181b;background:#f4f4f5}
-.hc-toc-h3{padding-left:24px}
-
-/* --- Main content area --- */
-.hc-main{padding:24px 32px 80px 24px;border-left:1px solid #e4e4e7;min-width:0}
-
-/* --- Breadcrumb --- */
-.hc-crumb{font-size:14px;color:#71717a;margin-bottom:24px}
-.hc-crumb a{color:#71717a;transition:color .15s ease}
-.hc-crumb a:hover{color:#18181b}
-.hc-crumb-sep{margin:0 8px;color:#d4d4d8}
-
-
-.hc-section-page{background:#fafafa}
-.hc-section-layout{display:grid;grid-template-columns:360px 1fr;max-width:1200px;margin:0 auto;padding:46px 24px 90px;align-items:start}
-.hc-section-main{position:relative;min-width:0;padding-left:44px;font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans SC",'Instrument Sans',-apple-system,BlinkMacSystemFont,sans-serif}
-.hc-section-main::before{content:"";position:absolute;left:0;top:0;bottom:0;width:1px;background:#e4e4e7}
-.hc-section-path{display:flex;align-items:center;gap:10px;margin:0 0 36px;font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans SC",'Instrument Sans',-apple-system,BlinkMacSystemFont,sans-serif;font-size:24px;font-weight:500;line-height:31px;color:rgb(29,30,32);letter-spacing:.01em}
-.hc-section-path a{color:rgb(29,30,32);text-decoration:underline;text-underline-offset:3px}
+.hc-section-path{display:flex;align-items:center;gap:10px;margin:0 0 36px;font-size:24px;font-weight:500;line-height:31px;color:var(--hc-heading);letter-spacing:.01em}
+.hc-section-path a{color:var(--hc-heading);text-decoration:underline;text-underline-offset:3px}
 .hc-section-path .hc-back{font-size:26px;font-weight:400;line-height:31px;text-decoration:none;letter-spacing:0}
 .hc-section-count{display:none}
 .hc-sec-group{margin:0 0 70px;max-width:780px}
-.hc-sec-group h2{font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans SC",'Instrument Sans',-apple-system,BlinkMacSystemFont,sans-serif;font-size:21px;font-weight:600;line-height:28px;color:rgb(29,30,32);letter-spacing:.01em;margin:0 0 22px;scroll-margin-top:120px}
-.hc-sec-list{display:flex;flex-direction:column;gap:34px}
-.hc-sec-article{font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans SC",'Instrument Sans',-apple-system,BlinkMacSystemFont,sans-serif;color:rgb(29,30,32);font-size:16px;line-height:27px;letter-spacing:.012em}
-.hc-sec-article-title{display:inline;color:rgb(29,30,32);font-size:19px;font-weight:500;line-height:30px;letter-spacing:.01em;text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:1px}
-.hc-sec-article-title:hover{color:rgb(29,30,32)}
-.hc-sec-article p{font-size:16px;font-weight:400;line-height:27px;color:#52525b;letter-spacing:.012em;margin:7px 0 0;max-width:760px}
+.hc-sec-group h2{font-size:21px;font-weight:600;line-height:28px;color:var(--hc-heading);letter-spacing:.01em;margin:0 0 22px;scroll-margin-top:120px}
 .hc-sec-article p:last-child{margin-bottom:0}
-@media(max-width:1024px){.hc-section-layout{grid-template-columns:300px 1fr}.hc-topic-label{font-size:18px}}
-@media(max-width:768px){.hc-section-layout{grid-template-columns:1fr;padding:28px 20px 70px}.hc-topic-sidebar{position:static;max-height:none;padding:0 0 28px}.hc-section-main{padding-left:0}.hc-section-main::before{display:none}.hc-section-path{font-size:20px}}
+@media(max-width:768px){.hc-section-path{font-size:20px}}
 
-
-/* --- Responsive --- */
-@media(max-width:1024px){
-.hc-layout{grid-template-columns:220px 1fr}
-}
-@media(max-width:768px){
-.hc-layout{grid-template-columns:1fr}
-.hc-sidebar,.hc-toc{display:none}
-.hc-main{padding:16px 20px 60px;border-left:none}
-}
 </style>
-<div class="hc-section-page">
-  <div class="hc-section-layout">
+<div class="hc-section-page hc-content-page">
+  <div class="hc-section-layout hc-content-layout">
     <aside class="hc-topic-sidebar"><h1 class="hc-topic-heading">按主题浏览</h1><a class="hc-topic-item hc-topic-item--active" href="category-account-billing.html"><span class="hc-topic-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M20 21a8 8 0 10-16 0"/></svg></span><span class="hc-topic-label">账户与计费</span></a><a class="hc-topic-item" href="category-campaigns.html"><span class="hc-topic-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg></span><span class="hc-topic-label">活动与营销</span></a><a class="hc-topic-item" href="category-flows.html"><span class="hc-topic-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg></span><span class="hc-topic-label">自动化与生命周期</span></a><a class="hc-topic-item" href="category-integrations.html"><span class="hc-topic-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></span><span class="hc-topic-label">集成</span></a><a class="hc-topic-item" href="category-content.html"><span class="hc-topic-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16a1 1 0 011 1v14a1 1 0 01-1 1H4a1 1 0 01-1-1V5a1 1 0 011-1z"/><path d="M8 8h8M8 12h5"/></svg></span><span class="hc-topic-label">内容与创意</span></a><a class="hc-topic-item" href="category-sign-up-forms.html"><span class="hc-topic-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18"/></svg></span><span class="hc-topic-label">注册表单与渠道</span></a><a class="hc-topic-item" href="category-sms.html"><span class="hc-topic-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></span><span class="hc-topic-label">短信</span></a><a class="hc-topic-item" href="category-deliverability-compliance.html"><span class="hc-topic-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span><span class="hc-topic-label">投递与合规</span></a><a class="hc-topic-item" href="category-analytics.html"><span class="hc-topic-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 20V10M12 20V4M6 20v-6"/></svg></span><span class="hc-topic-label">数据与受众</span></a><a class="hc-topic-item" href="category-audience.html"><span class="hc-topic-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="4" width="6" height="6" rx="1"/><rect x="14" y="4" width="6" height="6" rx="1"/><rect x="4" y="14" width="6" height="6" rx="1"/><rect x="14" y="14" width="6" height="6" rx="1"/></svg></span><span class="hc-topic-label">受众</span></a><a class="hc-topic-item" href="category-conversations.html"><span class="hc-topic-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg></span><span class="hc-topic-label">会话与沟通</span></a><a class="hc-topic-item" href="category-customer-agent.html"><span class="hc-topic-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2a5 5 0 015 5v3a5 5 0 01-10 0V7a5 5 0 015-5z"/><path d="M2 12h2m16 0h2M12 2v2m0 16v2"/><circle cx="12" cy="12" r="3"/></svg></span><span class="hc-topic-label">客户 Agent</span></a><a class="hc-topic-item" href="category-customer-hub.html"><span class="hc-topic-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></span><span class="hc-topic-label">自助客户中心</span></a><a class="hc-topic-item" href="category-helpdesk.html"><span class="hc-topic-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/><path d="M8 10h.01M12 10h.01M16 10h.01"/></svg></span><span class="hc-topic-label">帮助台</span></a><a class="hc-topic-item" href="category-reviews.html"><span class="hc-topic-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></span><span class="hc-topic-label">评论与评价</span></a><a class="hc-topic-item" href="category-advanced-kdp-marketing-analytics.html"><span class="hc-topic-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/><polyline points="7.5 4.21 12 6.81 16.5 4.21"/><polyline points="7.5 19.79 7.5 14.6 3 12"/><polyline points="21 12 16.5 14.6 16.5 19.79"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg></span><span class="hc-topic-label">核心数据与分析</span></a><a class="hc-topic-item" href="category-whatsapp.html"><span class="hc-topic-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/><path d="M8 10l2 2 4-4"/></svg></span><span class="hc-topic-label">WhatsApp</span></a><a class="hc-topic-item" href="category-push-notifications.html"><span class="hc-topic-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg></span><span class="hc-topic-label">推送通知</span></a><a class="hc-topic-item" href="category-social-marketing.html"><span class="hc-topic-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></span><span class="hc-topic-label">社交营销</span></a></aside>
-    <main class="hc-section-main">
+    <main class="hc-section-main hc-content-main">
       <div class="hc-section-path">
         <a class="hc-back" href="category-account-billing.html">←</a>
         <span><a href="category-account-billing.html">账户与计费</a> / Other</span>
       </div>
       <div class="hc-section-count">共 15 篇文章</div>
-      <section class="hc-sec-group"><h2>Preference and hosted pages</h2><div class="hc-sec-list"><article class="hc-sec-article"><a class="hc-sec-article-title" href="article-sample.html">如何启用和禁用托管页面</a><p>了解如何在您的 Klaviyo 帐户中打开托管页面。您可以使用托管页面向订阅者显示自定义编码的同意页面，而不是使用 Klaviyo 的默认同意页面。 本文介绍如何在您的帐户中启用托管页面设置。 如果您想了解有关托管页面功能的更多信息，请...</p></article><article class="hc-sec-article"><a class="hc-sec-article-title" href="article-sample.html">了解 Klaviyo 中的自定义托管页面</a><p>了解 Klaviyo 中的自定义托管页面，包括它们是什么以及它们可以做什么。 本文提供有关托管页面的信息。如果您需要有关如何启用或设置它们的指导，请参阅以下资源： 如何在 Klaviyo 中启用托管页面 如何自定义代码同意页面 只有通过...</p></article></div></section><section class="hc-sec-group"><h2>UTM tracking</h2><div class="hc-sec-list"><article class="hc-sec-article"><a class="hc-sec-article-title" href="article-sample.html">如何将 UTM 跟踪添加到活动和流程中</a><p>了解如何在 Klaviyo 电子邮件、文本、 WhatsApp 和移动推送消息中使用 UTM 跟踪来获取见解并改进 Google Analytics 转化跟踪。 UTM 跟踪将有关访问者来源的数据发送到 Google Analytics...</p></article><article class="hc-sec-article"><a class="hc-sec-article-title" href="article-sample.html">了解 Klaviyo 中的 UTM 跟踪</a><p>了解 UTM 跟踪是什么、它的工作原理以及如何在 Klaviyo 消息中使用它，以更深入地了解您的营销绩效。想要将 UTM 参数添加到 Klaviyo 消息中？请参阅我们关于[如何将 UTM 跟踪添加到营销活动和流程]的文章(https...</p></article></div></section><section class="hc-sec-group"><h2>Downloaded and scheduled reports</h2><div class="hc-sec-list"><article class="hc-sec-article"><a class="hc-sec-article-title" href="article-sample.html">如何访问最近的导出和下载</a><p>了解如何通过访问“下载”选项卡查找最近导出的内容。 在这里，您将看到过去 30 天内所有下载的列表，并可以检查任何待下载的进度。 只有具有所有者或管理员角色的 Klaviyo 用户可以访问“下载”选项卡并导出列表或片段。 单击左下角您的...</p></article></div></section><section class="hc-sec-group"><h2>Account troubleshooting</h2><div class="hc-sec-list"><article class="hc-sec-article"><a class="hc-sec-article-title" href="article-sample.html">如何添加可信设备</a><p>了解如何将受信任的设备添加到您的 Klaviyo 帐户。 添加受信任设备的功能为您的 Klaviyo 帐户增加了额外的安全层。不过，我们建议您启用多重身份验证作为确保您的 Klaviyo 帐户受到保护的最佳做法。 当您通过不受信任的设备...</p></article><article class="hc-sec-article"><a class="hc-sec-article-title" href="article-sample.html">如何联系支持人员</a><p>如果您使用的是免费或付费计划，请登录您的 Klaviyo 帐户并使用我们的支持页面：klaviyo.com/support。 如果您的帐户被锁定或有发票查询，请通过我们的请求表提交票证。 我们为所有付费计划的客户提供电子邮件和实时聊天支...</p></article><article class="hc-sec-article"><a class="hc-sec-article-title" href="article-sample.html">如何降级为免费、取消计划或关闭您的 Klaviyo 帐户</a><p>了解如何将您的计划降级为免费、取消单个计划（例如电子邮件和个人资料、短信或评论）或您的帐户，以及如何关闭您的 Klaviyo 帐户。 降级为免费后，您可以继续使用 Klaviyo 中的所有功能。 - 取消计划会停止对该计划的付款以及任何...</p></article><article class="hc-sec-article"><a class="hc-sec-article-title" href="article-sample.html">如何迁移出 Klaviyo</a><p>了解从 Klaviyo 迁移时应采取哪些步骤，无论您是否要更换为其他短信、电子邮件或两者提供商。如果您取消 SMS 计划但继续使用 Klaviyo 发送电子邮件，则只需按照下面 SMS 部分中概述的步骤操作即可。如果您要完全从 Klav...</p></article><article class="hc-sec-article"><a class="hc-sec-article-title" href="article-sample.html">如何重置您的 Klaviyo 密码</a><p>了解当您无法登录时如何重置忘记的 Klaviyo 密码。 本指南对于那些因忘记密码而无法访问 Klaviyo 帐户的人来说非常有用。查看以下场景以确定替代解决方案是否适用于您的情况： 仍然可以访问但想要更改密码 如果您能够登录帐户，但想...</p></article><article class="hc-sec-article"><a class="hc-sec-article-title" href="article-sample.html">如何重试失败的信用卡付款</a><p>了解如果定期付款失败如何在 Klaviyo 中重试信用卡付款。 您只能在以下情况下重试信用卡付款： 付款是定期的。 定期付款未完成，您想重试。 该帐户不在印度（由于必须在印度处理付款方式）。 Klaviyo 在 15 分钟内没有安排重试...</p></article><article class="hc-sec-article"><a class="hc-sec-article-title" href="article-sample.html">如何使用 Klaviyo 设置向导</a><p>了解如何使用 Klaviyo 设置向导配置您的帐户。本指南总结了每个步骤并帮助您完成快速设置过程。您需要完成设置向导中的所有基本步骤来配置您的帐户。如果您无法在一次会话中完成这些步骤，您输入的所有信息都将被保存。再次登录后，您将进入下一...</p></article><article class="hc-sec-article"><a class="hc-sec-article-title" href="article-sample.html">Klaviyo 支持的互联网浏览器</a><p>了解访问 Klaviyo 时支持哪些互联网浏览器和版本。 如果您在访问 Klaviyo 时遇到问题，您可能需要将互联网浏览器更新到较新版本。 Klaviyo 支持过去 2 年中以下互联网浏览器的版本： 镀铬 边缘 火狐浏览器 歌剧 野生...</p></article><article class="hc-sec-article"><a class="hc-sec-article-title" href="article-sample.html">为什么我的帐户被暂停或禁用？</a><p>了解您的 Klaviyo 帐户可能被禁用或暂时暂停的原因。 当帐户被禁用或暂停时，流会自动设置为手动模式，并且段不会更新。 在我们的验证和合规团队标记后，您的帐户可能会暂时被禁用。当新帐户第一次尝试发送到上传的联系人列表时，通常会发生这...</p></article></div></section><section class="hc-sec-group"><h2>Other</h2><div class="hc-sec-list"><article class="hc-sec-article"><a class="hc-sec-article-title" href="article-sample.html">如何使用营销代理</a><p>营销代理是 Klaviyo 的人工智能工具，用于生成品牌营销计划。营销代理仅使用您的网站来收集您的品牌资产，分析您的品牌声音，并制定启动计划。 要访问营销代理，您的用户角色必须是所有者、管理员或经理。 - 用于设置的网站必须是可公开访问...</p></article></div></section>
+      <section class="hc-sec-group"><h2>Preference and hosted pages</h2><div class="hc-sec-list hc-content-list"><article class="hc-sec-article hc-content-entry"><a class="hc-sec-article-title hc-content-entry-title" href="article-sample.html">如何启用和禁用托管页面</a><p class="hc-content-entry-excerpt">了解如何在您的 Klaviyo 帐户中打开托管页面。您可以使用托管页面向订阅者显示自定义编码的同意页面，而不是使用 Klaviyo 的默认同意页面。 本文介绍如何在您的帐户中启用托管页面设置。 如果您想了解有关托管页面功能的更多信息，请...</p></article><article class="hc-sec-article hc-content-entry"><a class="hc-sec-article-title hc-content-entry-title" href="article-sample.html">了解 Klaviyo 中的自定义托管页面</a><p class="hc-content-entry-excerpt">了解 Klaviyo 中的自定义托管页面，包括它们是什么以及它们可以做什么。 本文提供有关托管页面的信息。如果您需要有关如何启用或设置它们的指导，请参阅以下资源： 如何在 Klaviyo 中启用托管页面 如何自定义代码同意页面 只有通过...</p></article></div></section><section class="hc-sec-group"><h2>UTM tracking</h2><div class="hc-sec-list hc-content-list"><article class="hc-sec-article hc-content-entry"><a class="hc-sec-article-title hc-content-entry-title" href="article-sample.html">如何将 UTM 跟踪添加到活动和流程中</a><p class="hc-content-entry-excerpt">了解如何在 Klaviyo 电子邮件、文本、 WhatsApp 和移动推送消息中使用 UTM 跟踪来获取见解并改进 Google Analytics 转化跟踪。 UTM 跟踪将有关访问者来源的数据发送到 Google Analytics...</p></article><article class="hc-sec-article hc-content-entry"><a class="hc-sec-article-title hc-content-entry-title" href="article-sample.html">了解 Klaviyo 中的 UTM 跟踪</a><p class="hc-content-entry-excerpt">了解 UTM 跟踪是什么、它的工作原理以及如何在 Klaviyo 消息中使用它，以更深入地了解您的营销绩效。想要将 UTM 参数添加到 Klaviyo 消息中？请参阅我们关于[如何将 UTM 跟踪添加到营销活动和流程]的文章(https...</p></article></div></section><section class="hc-sec-group"><h2>Downloaded and scheduled reports</h2><div class="hc-sec-list hc-content-list"><article class="hc-sec-article hc-content-entry"><a class="hc-sec-article-title hc-content-entry-title" href="article-sample.html">如何访问最近的导出和下载</a><p class="hc-content-entry-excerpt">了解如何通过访问“下载”选项卡查找最近导出的内容。 在这里，您将看到过去 30 天内所有下载的列表，并可以检查任何待下载的进度。 只有具有所有者或管理员角色的 Klaviyo 用户可以访问“下载”选项卡并导出列表或片段。 单击左下角您的...</p></article></div></section><section class="hc-sec-group"><h2>Account troubleshooting</h2><div class="hc-sec-list hc-content-list"><article class="hc-sec-article hc-content-entry"><a class="hc-sec-article-title hc-content-entry-title" href="article-sample.html">如何添加可信设备</a><p class="hc-content-entry-excerpt">了解如何将受信任的设备添加到您的 Klaviyo 帐户。 添加受信任设备的功能为您的 Klaviyo 帐户增加了额外的安全层。不过，我们建议您启用多重身份验证作为确保您的 Klaviyo 帐户受到保护的最佳做法。 当您通过不受信任的设备...</p></article><article class="hc-sec-article hc-content-entry"><a class="hc-sec-article-title hc-content-entry-title" href="article-sample.html">如何联系支持人员</a><p class="hc-content-entry-excerpt">如果您使用的是免费或付费计划，请登录您的 Klaviyo 帐户并使用我们的支持页面：klaviyo.com/support。 如果您的帐户被锁定或有发票查询，请通过我们的请求表提交票证。 我们为所有付费计划的客户提供电子邮件和实时聊天支...</p></article><article class="hc-sec-article hc-content-entry"><a class="hc-sec-article-title hc-content-entry-title" href="article-sample.html">如何降级为免费、取消计划或关闭您的 Klaviyo 帐户</a><p class="hc-content-entry-excerpt">了解如何将您的计划降级为免费、取消单个计划（例如电子邮件和个人资料、短信或评论）或您的帐户，以及如何关闭您的 Klaviyo 帐户。 降级为免费后，您可以继续使用 Klaviyo 中的所有功能。 - 取消计划会停止对该计划的付款以及任何...</p></article><article class="hc-sec-article hc-content-entry"><a class="hc-sec-article-title hc-content-entry-title" href="article-sample.html">如何迁移出 Klaviyo</a><p class="hc-content-entry-excerpt">了解从 Klaviyo 迁移时应采取哪些步骤，无论您是否要更换为其他短信、电子邮件或两者提供商。如果您取消 SMS 计划但继续使用 Klaviyo 发送电子邮件，则只需按照下面 SMS 部分中概述的步骤操作即可。如果您要完全从 Klav...</p></article><article class="hc-sec-article hc-content-entry"><a class="hc-sec-article-title hc-content-entry-title" href="article-sample.html">如何重置您的 Klaviyo 密码</a><p class="hc-content-entry-excerpt">了解当您无法登录时如何重置忘记的 Klaviyo 密码。 本指南对于那些因忘记密码而无法访问 Klaviyo 帐户的人来说非常有用。查看以下场景以确定替代解决方案是否适用于您的情况： 仍然可以访问但想要更改密码 如果您能够登录帐户，但想...</p></article><article class="hc-sec-article hc-content-entry"><a class="hc-sec-article-title hc-content-entry-title" href="article-sample.html">如何重试失败的信用卡付款</a><p class="hc-content-entry-excerpt">了解如果定期付款失败如何在 Klaviyo 中重试信用卡付款。 您只能在以下情况下重试信用卡付款： 付款是定期的。 定期付款未完成，您想重试。 该帐户不在印度（由于必须在印度处理付款方式）。 Klaviyo 在 15 分钟内没有安排重试...</p></article><article class="hc-sec-article hc-content-entry"><a class="hc-sec-article-title hc-content-entry-title" href="article-sample.html">如何使用 Klaviyo 设置向导</a><p class="hc-content-entry-excerpt">了解如何使用 Klaviyo 设置向导配置您的帐户。本指南总结了每个步骤并帮助您完成快速设置过程。您需要完成设置向导中的所有基本步骤来配置您的帐户。如果您无法在一次会话中完成这些步骤，您输入的所有信息都将被保存。再次登录后，您将进入下一...</p></article><article class="hc-sec-article hc-content-entry"><a class="hc-sec-article-title hc-content-entry-title" href="article-sample.html">Klaviyo 支持的互联网浏览器</a><p class="hc-content-entry-excerpt">了解访问 Klaviyo 时支持哪些互联网浏览器和版本。 如果您在访问 Klaviyo 时遇到问题，您可能需要将互联网浏览器更新到较新版本。 Klaviyo 支持过去 2 年中以下互联网浏览器的版本： 镀铬 边缘 火狐浏览器 歌剧 野生...</p></article><article class="hc-sec-article hc-content-entry"><a class="hc-sec-article-title hc-content-entry-title" href="article-sample.html">为什么我的帐户被暂停或禁用？</a><p class="hc-content-entry-excerpt">了解您的 Klaviyo 帐户可能被禁用或暂时暂停的原因。 当帐户被禁用或暂停时，流会自动设置为手动模式，并且段不会更新。 在我们的验证和合规团队标记后，您的帐户可能会暂时被禁用。当新帐户第一次尝试发送到上传的联系人列表时，通常会发生这...</p></article></div></section><section class="hc-sec-group"><h2>Other</h2><div class="hc-sec-list hc-content-list"><article class="hc-sec-article hc-content-entry"><a class="hc-sec-article-title hc-content-entry-title" href="article-sample.html">如何使用营销代理</a><p class="hc-content-entry-excerpt">营销代理是 Klaviyo 的人工智能工具，用于生成品牌营销计划。营销代理仅使用您的网站来收集您的品牌资产，分析您的品牌声音，并制定启动计划。 要访问营销代理，您的用户角色必须是所有者、管理员或经理。 - 用于设置的网站必须是可公开访问...</p></article></div></section>
     </main>
   </div>
 </div>

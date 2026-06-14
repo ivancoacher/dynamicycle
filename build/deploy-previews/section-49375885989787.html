@@ -57,84 +57,73 @@ a{color:inherit;text-decoration:none}
 .hc-brand-footer-bottom{padding-left:20px;padding-right:20px}
 }
 
+:root{--hc-page-bg:#fafafa;--hc-panel-bg:#fff;--hc-heading:rgb(29,30,32);--hc-text:#52525b;--hc-muted:#71717a;--hc-divider:#e4e4e7;--hc-content-font:"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans SC","Instrument Sans",-apple-system,BlinkMacSystemFont,sans-serif;--hc-page-width:1200px;--hc-topic-column:360px;--hc-content-inset:44px;}
+.hc-content-page{background:var(--hc-page-bg);font-family:var(--hc-content-font);}
+.hc-content-layout{display:grid;grid-template-columns:var(--hc-topic-column) 1fr;max-width:var(--hc-page-width);margin:0 auto;padding:46px 24px 90px;align-items:start;}
+.hc-content-main{position:relative;min-width:0;padding-left:var(--hc-content-inset);}
+.hc-content-main::before{content:"";position:absolute;left:0;top:0;bottom:0;width:1px;background:var(--hc-divider);}
+.hc-layout{display:grid;grid-template-columns:260px 1fr;max-width:var(--hc-page-width);margin:0 auto;min-height:80vh;}
+.hc-main{padding:24px 32px 80px 24px;border-left:1px solid var(--hc-divider);min-width:0;}
+.hc-topic-sidebar{position:sticky;top:104px;align-self:start;max-height:calc(100vh - 128px);overflow-y:auto;padding-right:24px;}
+.hc-topic-heading{font-family:"Instrument Sans",-apple-system,BlinkMacSystemFont,"Noto Sans SC",sans-serif;font-size:28px;font-weight:500;line-height:1.2;color:var(--hc-heading);margin:0 0 24px;}
+.hc-topic-item{display:flex;align-items:center;gap:14px;padding:17px 20px 17px 8px;border-radius:8px;color:var(--hc-heading);text-decoration:none;transition:background .15s ease,color .15s ease;}
+.hc-topic-item:hover{background:#f4f4f5;color:var(--hc-heading);}
+.hc-topic-item--active,.hc-topic-item--active:hover{background:var(--hc-heading);color:#fff;}
+.hc-topic-icon{width:28px;height:28px;min-width:28px;max-width:28px;display:flex;align-items:center;justify-content:center;flex:0 0 28px;overflow:hidden;}
+.hc-topic-icon svg{display:block;width:26px !important;height:26px !important;min-width:26px;max-width:26px !important;max-height:26px !important;flex:0 0 26px;}
+.hc-topic-label{font-family:"Instrument Sans",-apple-system,BlinkMacSystemFont,"Noto Sans SC",sans-serif;font-size:20px;font-weight:400;line-height:1.25;}
+.hc-sidebar{position:sticky;top:24px;padding:24px 20px 24px 24px;align-self:start;max-height:calc(100vh - 48px);overflow-y:auto;}
+.hc-sb-item{display:block;font-size:14px;font-weight:500;color:var(--hc-muted);padding:8px 12px;border-radius:8px;margin-bottom:2px;transition:all .15s ease;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.hc-sb-item:hover{background:#f4f4f5;color:#18181b;}
+.hc-sb-item--active{background:#eef2ff;color:#4f46e5;font-weight:600;}
+.hc-toc{padding:24px 20px 24px 24px;position:sticky;top:24px;align-self:start;max-height:calc(100vh - 48px);overflow-y:auto;}
+.hc-toc-title{font-size:20px;font-weight:600;color:#1a1a2e;margin:36px 0 28px;padding:0 12px;letter-spacing:0;}
+.hc-toc-item{display:block;font-size:16px;font-weight:400;color:#1a1a2e;padding:10px 12px;border-radius:6px;margin-bottom:24px;transition:all .15s ease;line-height:1.45;}
+.hc-toc-item:hover{color:#18181b;background:#f4f4f5;}
+.hc-toc-h3{padding-left:24px;}
+.hc-content-list{display:flex;flex-direction:column;gap:34px;max-width:780px;}
+.hc-content-entry{color:var(--hc-heading);font-size:16px;line-height:27px;letter-spacing:.012em;}
+.hc-content-entry-title{display:inline;color:var(--hc-heading);font-size:19px;font-weight:500;line-height:30px;letter-spacing:.01em;text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:1px;}
+.hc-content-entry-title:hover{color:var(--hc-heading);}
+.hc-content-entry-excerpt{font-size:16px;font-weight:400;line-height:27px;color:var(--hc-text);letter-spacing:.012em;margin:7px 0 0;max-width:760px;}
+.hc-crumb{font-size:14px;color:var(--hc-muted);margin-bottom:24px;}
+.hc-crumb a{color:var(--hc-muted);transition:color .15s ease;}
+.hc-crumb a:hover{color:#18181b;}
+.hc-crumb-sep{margin:0 8px;color:#d4d4d8;}
+@media (max-width:1024px){.hc-layout{grid-template-columns:220px 1fr;}
+.hc-content-layout{grid-template-columns:300px 1fr;}
+.hc-topic-label{font-size:18px;}
+}
+@media (max-width:768px){.hc-layout,.hc-content-layout{grid-template-columns:1fr;}
+.hc-content-layout{padding:28px 20px 70px;}
+.hc-content-main{padding-left:0;}
+.hc-content-main::before{display:none;}
+.hc-topic-sidebar{position:static;max-height:none;padding:0 0 28px;}
+.hc-sidebar,.hc-toc{display:none;}
+.hc-main{padding:16px 20px 60px;border-left:none;}
+}
 
-/* --- Layout --- */
-.hc-layout{display:grid;grid-template-columns:260px 1fr;max-width:1200px;margin:0 auto;min-height:80vh}
 
-/* --- Left sidebar --- */
-.hc-sidebar{position:sticky;top:24px;padding:24px 20px 24px 24px;align-self:start;max-height:calc(100vh - 48px);overflow-y:auto}
-.hc-sb-item{display:block;font-size:14px;font-weight:500;color:#71717a;padding:8px 12px;border-radius:8px;margin-bottom:2px;transition:all .15s ease;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.hc-sb-item:hover{background:#f4f4f5;color:#18181b}
-.hc-sb-item--active{background:#eef2ff;color:#4f46e5;font-weight:600}
-
-/* --- Topic/category sidebar --- */
-.hc-topic-sidebar{position:sticky;top:104px;align-self:start;max-height:calc(100vh - 128px);overflow-y:auto;padding-right:24px}
-.hc-topic-heading{font-family:'Instrument Sans',-apple-system,BlinkMacSystemFont,"Noto Sans SC",sans-serif;font-size:28px;font-weight:500;line-height:1.2;color:rgb(29,30,32);margin:0 0 24px}
-.hc-topic-item{display:flex;align-items:center;gap:14px;padding:17px 20px 17px 8px;border-radius:8px;color:rgb(29,30,32);text-decoration:none;transition:background .15s ease,color .15s ease}
-.hc-topic-item:hover{background:#f4f4f5;color:rgb(29,30,32)}
-.hc-topic-item--active{background:rgb(29,30,32);color:#fff}
-.hc-topic-item--active:hover{background:rgb(29,30,32);color:#fff}
-.hc-topic-icon{width:28px;height:28px;min-width:28px;max-width:28px;display:flex;align-items:center;justify-content:center;flex:0 0 28px;overflow:hidden}
-.hc-topic-icon svg{display:block;width:26px!important;height:26px!important;min-width:26px;max-width:26px!important;max-height:26px!important;flex:0 0 26px}
-.hc-topic-label{font-family:'Instrument Sans',-apple-system,BlinkMacSystemFont,"Noto Sans SC",sans-serif;font-size:20px;font-weight:400;line-height:1.25}
-
-/* --- TOC sidebar (article pages) --- */
-.hc-toc{padding:24px 20px 24px 24px;position:sticky;top:24px;align-self:start;max-height:calc(100vh - 48px);overflow-y:auto}
-.hc-toc-title{font-size:20px;font-weight:600;color:#1a1a2e;margin:36px 0 28px;padding:0 12px;letter-spacing:0}
-.hc-toc-item{display:block;font-size:16px;font-weight:400;color:#1a1a2e;padding:10px 12px;border-radius:6px;margin-bottom:24px;transition:all .15s ease;line-height:1.45}
-.hc-toc-item:hover{color:#18181b;background:#f4f4f5}
-.hc-toc-h3{padding-left:24px}
-
-/* --- Main content area --- */
-.hc-main{padding:24px 32px 80px 24px;border-left:1px solid #e4e4e7;min-width:0}
-
-/* --- Breadcrumb --- */
-.hc-crumb{font-size:14px;color:#71717a;margin-bottom:24px}
-.hc-crumb a{color:#71717a;transition:color .15s ease}
-.hc-crumb a:hover{color:#18181b}
-.hc-crumb-sep{margin:0 8px;color:#d4d4d8}
-
-
-.hc-section-page{background:#fafafa}
-.hc-section-layout{display:grid;grid-template-columns:360px 1fr;max-width:1200px;margin:0 auto;padding:46px 24px 90px;align-items:start}
-.hc-section-main{position:relative;min-width:0;padding-left:44px;font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans SC",'Instrument Sans',-apple-system,BlinkMacSystemFont,sans-serif}
-.hc-section-main::before{content:"";position:absolute;left:0;top:0;bottom:0;width:1px;background:#e4e4e7}
-.hc-section-path{display:flex;align-items:center;gap:10px;margin:0 0 36px;font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans SC",'Instrument Sans',-apple-system,BlinkMacSystemFont,sans-serif;font-size:24px;font-weight:500;line-height:31px;color:rgb(29,30,32);letter-spacing:.01em}
-.hc-section-path a{color:rgb(29,30,32);text-decoration:underline;text-underline-offset:3px}
+.hc-section-path{display:flex;align-items:center;gap:10px;margin:0 0 36px;font-size:24px;font-weight:500;line-height:31px;color:var(--hc-heading);letter-spacing:.01em}
+.hc-section-path a{color:var(--hc-heading);text-decoration:underline;text-underline-offset:3px}
 .hc-section-path .hc-back{font-size:26px;font-weight:400;line-height:31px;text-decoration:none;letter-spacing:0}
 .hc-section-count{display:none}
 .hc-sec-group{margin:0 0 70px;max-width:780px}
-.hc-sec-group h2{font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans SC",'Instrument Sans',-apple-system,BlinkMacSystemFont,sans-serif;font-size:21px;font-weight:600;line-height:28px;color:rgb(29,30,32);letter-spacing:.01em;margin:0 0 22px;scroll-margin-top:120px}
-.hc-sec-list{display:flex;flex-direction:column;gap:34px}
-.hc-sec-article{font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans SC",'Instrument Sans',-apple-system,BlinkMacSystemFont,sans-serif;color:rgb(29,30,32);font-size:16px;line-height:27px;letter-spacing:.012em}
-.hc-sec-article-title{display:inline;color:rgb(29,30,32);font-size:19px;font-weight:500;line-height:30px;letter-spacing:.01em;text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:1px}
-.hc-sec-article-title:hover{color:rgb(29,30,32)}
-.hc-sec-article p{font-size:16px;font-weight:400;line-height:27px;color:#52525b;letter-spacing:.012em;margin:7px 0 0;max-width:760px}
+.hc-sec-group h2{font-size:21px;font-weight:600;line-height:28px;color:var(--hc-heading);letter-spacing:.01em;margin:0 0 22px;scroll-margin-top:120px}
 .hc-sec-article p:last-child{margin-bottom:0}
-@media(max-width:1024px){.hc-section-layout{grid-template-columns:300px 1fr}.hc-topic-label{font-size:18px}}
-@media(max-width:768px){.hc-section-layout{grid-template-columns:1fr;padding:28px 20px 70px}.hc-topic-sidebar{position:static;max-height:none;padding:0 0 28px}.hc-section-main{padding-left:0}.hc-section-main::before{display:none}.hc-section-path{font-size:20px}}
+@media(max-width:768px){.hc-section-path{font-size:20px}}
 
-
-/* --- Responsive --- */
-@media(max-width:1024px){
-.hc-layout{grid-template-columns:220px 1fr}
-}
-@media(max-width:768px){
-.hc-layout{grid-template-columns:1fr}
-.hc-sidebar,.hc-toc{display:none}
-.hc-main{padding:16px 20px 60px;border-left:none}
-}
 </style>
-<div class="hc-section-page">
-  <div class="hc-section-layout">
+<div class="hc-section-page hc-content-page">
+  <div class="hc-section-layout hc-content-layout">
     <aside class="hc-topic-sidebar"><h1 class="hc-topic-heading">按主题浏览</h1><a class="hc-topic-item" href="category-account-billing.html"><span class="hc-topic-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M20 21a8 8 0 10-16 0"/></svg></span><span class="hc-topic-label">账户与计费</span></a><a class="hc-topic-item" href="category-campaigns.html"><span class="hc-topic-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg></span><span class="hc-topic-label">活动与营销</span></a><a class="hc-topic-item" href="category-flows.html"><span class="hc-topic-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg></span><span class="hc-topic-label">自动化与生命周期</span></a><a class="hc-topic-item hc-topic-item--active" href="category-integrations.html"><span class="hc-topic-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></span><span class="hc-topic-label">集成</span></a><a class="hc-topic-item" href="category-content.html"><span class="hc-topic-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16a1 1 0 011 1v14a1 1 0 01-1 1H4a1 1 0 01-1-1V5a1 1 0 011-1z"/><path d="M8 8h8M8 12h5"/></svg></span><span class="hc-topic-label">内容与创意</span></a><a class="hc-topic-item" href="category-sign-up-forms.html"><span class="hc-topic-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18"/></svg></span><span class="hc-topic-label">注册表单与渠道</span></a><a class="hc-topic-item" href="category-sms.html"><span class="hc-topic-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></span><span class="hc-topic-label">短信</span></a><a class="hc-topic-item" href="category-deliverability-compliance.html"><span class="hc-topic-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span><span class="hc-topic-label">投递与合规</span></a><a class="hc-topic-item" href="category-analytics.html"><span class="hc-topic-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 20V10M12 20V4M6 20v-6"/></svg></span><span class="hc-topic-label">数据与受众</span></a><a class="hc-topic-item" href="category-audience.html"><span class="hc-topic-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="4" width="6" height="6" rx="1"/><rect x="14" y="4" width="6" height="6" rx="1"/><rect x="4" y="14" width="6" height="6" rx="1"/><rect x="14" y="14" width="6" height="6" rx="1"/></svg></span><span class="hc-topic-label">受众</span></a><a class="hc-topic-item" href="category-conversations.html"><span class="hc-topic-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg></span><span class="hc-topic-label">会话与沟通</span></a><a class="hc-topic-item" href="category-customer-agent.html"><span class="hc-topic-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2a5 5 0 015 5v3a5 5 0 01-10 0V7a5 5 0 015-5z"/><path d="M2 12h2m16 0h2M12 2v2m0 16v2"/><circle cx="12" cy="12" r="3"/></svg></span><span class="hc-topic-label">客户 Agent</span></a><a class="hc-topic-item" href="category-customer-hub.html"><span class="hc-topic-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></span><span class="hc-topic-label">自助客户中心</span></a><a class="hc-topic-item" href="category-helpdesk.html"><span class="hc-topic-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/><path d="M8 10h.01M12 10h.01M16 10h.01"/></svg></span><span class="hc-topic-label">帮助台</span></a><a class="hc-topic-item" href="category-reviews.html"><span class="hc-topic-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></span><span class="hc-topic-label">评论与评价</span></a><a class="hc-topic-item" href="category-advanced-kdp-marketing-analytics.html"><span class="hc-topic-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/><polyline points="7.5 4.21 12 6.81 16.5 4.21"/><polyline points="7.5 19.79 7.5 14.6 3 12"/><polyline points="21 12 16.5 14.6 16.5 19.79"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg></span><span class="hc-topic-label">核心数据与分析</span></a><a class="hc-topic-item" href="category-whatsapp.html"><span class="hc-topic-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/><path d="M8 10l2 2 4-4"/></svg></span><span class="hc-topic-label">WhatsApp</span></a><a class="hc-topic-item" href="category-push-notifications.html"><span class="hc-topic-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg></span><span class="hc-topic-label">推送通知</span></a><a class="hc-topic-item" href="category-social-marketing.html"><span class="hc-topic-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></span><span class="hc-topic-label">社交营销</span></a></aside>
-    <main class="hc-section-main">
+    <main class="hc-section-main hc-content-main">
       <div class="hc-section-path">
         <a class="hc-back" href="category-integrations.html">←</a>
         <span><a href="category-integrations.html">集成</a> / How integrations work</span>
       </div>
       <div class="hc-section-count">共 12 篇文章</div>
-      <section class="hc-sec-group"><h2>All integrations</h2><div class="hc-sec-list"><article class="hc-sec-article"><a class="hc-sec-article-title" href="article-sample.html">有关集成的常见问题</a><p>了解有关集成的一些常见问题的答案。如果此处未解答您的问题，请访问我们的社区 论坛。 我可以将多个商店与一个 Klaviyo 帐户集成吗？ 我可以将两个或多个 \_\_\_\_\_\_ 集成与一个 Klaviyo 帐户集成吗？ 在哪里可以...</p></article><article class="hc-sec-article"><a class="hc-sec-article-title" href="article-sample.html">Klaviyo 中的数据捕获入门</a><p>了解 Klaviyo 中可用于收集数据的各种数据捕获方法。 Klaviyo 允许您统一从营销堆栈中的多个来源捕获的数据，并从数百万个数据点创建单一客户视图，以个性化您的营销。 Klaviyo 中的数据主要分为三种类型： 1.事件数据 每...</p></article><article class="hc-sec-article"><a class="hc-sec-article-title" href="article-sample.html">集成同步参考的频率</a><p>&lt;h2 id=&quot;h_01HDEXVKF82RPSFD4XK66TFS74&quot;&gt;你会学到&lt;/h2&gt;&lt;p&gt;了解特定 Klaviyo 集成同步哪些数据以及同步运行的频率。我们通过电子商务平台、电子邮件服务提供商和其他数据集成来组织这些集成。 &lt;...</p></article><article class="hc-sec-article"><a class="hc-sec-article-title" href="article-sample.html">如何将 Klaviyo 集成流量 IP 地址列入白名单</a><p>了解如何将出站 Klaviyo 集成流量的 IP 地址列入白名单，以确保您的防火墙不会阻止 Klaviyo 的请求。所有出站 Klaviyo 集成流量都位于一组可预测的静态 IP 地址后面，因此您可以高度确信该流量来自 Klaviyo...</p></article><article class="hc-sec-article"><a class="hc-sec-article-title" href="article-sample.html">如何编辑、禁用或删除 Klaviyo 构建的集成</a><p>了解如何在帐户的“集成”选项卡中编辑、禁用或删除 Klaviyo 构建的集成。 第三方应用程序和集成需要从供应商方面删除，除非它们是 Klaviyo 应用程序市场上提供的精选第三方集成。要删除市场上未找到的第三方应用程序，请参阅供应商的...</p></article><article class="hc-sec-article"><a class="hc-sec-article-title" href="article-sample.html">了解 Klaviyo 构建的集成</a><p>了解 Klaviyo 提供的内置集成，它允许您与新的 Klaviyo 帐户同步数据，并使用此信息进行精准的定向营销。 您应该与电子商务平台集成，以从商店中提取数据，例如下订单、结帐开始和其他事件。您能够与 Klaviyo 同步的事件取决...</p></article><article class="hc-sec-article"><a class="hc-sec-article-title" href="article-sample.html">了解 Klaviyo 和应用程序之间如何交换信息</a><p>了解如何通过应用程序编程接口 (API) 在 Klaviyo 和第三方应用程序之间同步信息。通过 Klaviyo 集成交换的大多数数据都是单向的：数据被拉入您的 Klaviyo 帐户，以便您可以利用广泛的客户数据。 Klaviyo 的...</p></article><article class="hc-sec-article"><a class="hc-sec-article-title" href="article-sample.html">了解集成选项卡</a><p>了解如何访问已安装的集成并探索 Klaviyo 的应用程序市场，您可以在其中浏览、安装和配置 Klaviyo 与其他平台之间的不同集成。该市场包括电子商务、登陆页面、支付系统等的集成。 要导航到 Klaviyo 中的“集成”选项卡，请单...</p></article><article class="hc-sec-article"><a class="hc-sec-article-title" href="article-sample.html">了解 Klaviyo 和应用程序之间交换的信息类型</a><p>了解 Klaviyo 和外部应用程序之间交换哪些类型的数据，以及在您的 Klaviyo 帐户中的何处可以找到这些数据。当您将第三方应用程序与 Klaviyo 集成时，两个平台会交换信息。与 Klaviyo 的大多数数据交换都是单向的；数...</p></article><article class="hc-sec-article"><a class="hc-sec-article-title" href="article-sample.html">了解第三方应用程序</a><p>了解如何查找第三方应用程序，这些应用程序是由第三方（而不是 Klaviyo）使用 Klaviyo 的 API 构建的应用程序。 Klaviyo 的 API 使各种第三方能够构建应用程序并与我们的平台集成。您可以在我们的应用程序市场中搜索...</p></article></div></section><section class="hc-sec-group"><h2>Ecommerce integrations</h2><div class="hc-sec-list"><article class="hc-sec-article"><a class="hc-sec-article-title" href="article-sample.html">如何使用电子商务入门清单</a><p>了解如何设置定制的电子商务入门清单并开始使用 Klaviyo。 当您尝试访问其中一个电子商务清单时，它将首先在 Google 云端硬盘中打开并处于仅供查看模式。 从下面的列表中选择适用的电子商务集成或 SMS 清单。 BigCommer...</p></article><article class="hc-sec-article"><a class="hc-sec-article-title" href="article-sample.html">电子商务企业参考集成</a><p>了解对您的电子商务业务有用的 Klaviyo 集成和应用程序。 Klaviyo 是一个功能强大的平台，您可以在其中与客户沟通并为您的公司做出数据驱动的营销选择。了解 Klaviyo 的所有功能是重要的第一步。您与 Klaviyo 集成的...</p></article></div></section>
+      <section class="hc-sec-group"><h2>All integrations</h2><div class="hc-sec-list hc-content-list"><article class="hc-sec-article hc-content-entry"><a class="hc-sec-article-title hc-content-entry-title" href="article-sample.html">有关集成的常见问题</a><p class="hc-content-entry-excerpt">了解有关集成的一些常见问题的答案。如果此处未解答您的问题，请访问我们的社区 论坛。 我可以将多个商店与一个 Klaviyo 帐户集成吗？ 我可以将两个或多个 \_\_\_\_\_\_ 集成与一个 Klaviyo 帐户集成吗？ 在哪里可以...</p></article><article class="hc-sec-article hc-content-entry"><a class="hc-sec-article-title hc-content-entry-title" href="article-sample.html">Klaviyo 中的数据捕获入门</a><p class="hc-content-entry-excerpt">了解 Klaviyo 中可用于收集数据的各种数据捕获方法。 Klaviyo 允许您统一从营销堆栈中的多个来源捕获的数据，并从数百万个数据点创建单一客户视图，以个性化您的营销。 Klaviyo 中的数据主要分为三种类型： 1.事件数据 每...</p></article><article class="hc-sec-article hc-content-entry"><a class="hc-sec-article-title hc-content-entry-title" href="article-sample.html">集成同步参考的频率</a><p class="hc-content-entry-excerpt">&lt;h2 id=&quot;h_01HDEXVKF82RPSFD4XK66TFS74&quot;&gt;你会学到&lt;/h2&gt;&lt;p&gt;了解特定 Klaviyo 集成同步哪些数据以及同步运行的频率。我们通过电子商务平台、电子邮件服务提供商和其他数据集成来组织这些集成。 &lt;...</p></article><article class="hc-sec-article hc-content-entry"><a class="hc-sec-article-title hc-content-entry-title" href="article-sample.html">如何将 Klaviyo 集成流量 IP 地址列入白名单</a><p class="hc-content-entry-excerpt">了解如何将出站 Klaviyo 集成流量的 IP 地址列入白名单，以确保您的防火墙不会阻止 Klaviyo 的请求。所有出站 Klaviyo 集成流量都位于一组可预测的静态 IP 地址后面，因此您可以高度确信该流量来自 Klaviyo...</p></article><article class="hc-sec-article hc-content-entry"><a class="hc-sec-article-title hc-content-entry-title" href="article-sample.html">如何编辑、禁用或删除 Klaviyo 构建的集成</a><p class="hc-content-entry-excerpt">了解如何在帐户的“集成”选项卡中编辑、禁用或删除 Klaviyo 构建的集成。 第三方应用程序和集成需要从供应商方面删除，除非它们是 Klaviyo 应用程序市场上提供的精选第三方集成。要删除市场上未找到的第三方应用程序，请参阅供应商的...</p></article><article class="hc-sec-article hc-content-entry"><a class="hc-sec-article-title hc-content-entry-title" href="article-sample.html">了解 Klaviyo 构建的集成</a><p class="hc-content-entry-excerpt">了解 Klaviyo 提供的内置集成，它允许您与新的 Klaviyo 帐户同步数据，并使用此信息进行精准的定向营销。 您应该与电子商务平台集成，以从商店中提取数据，例如下订单、结帐开始和其他事件。您能够与 Klaviyo 同步的事件取决...</p></article><article class="hc-sec-article hc-content-entry"><a class="hc-sec-article-title hc-content-entry-title" href="article-sample.html">了解 Klaviyo 和应用程序之间如何交换信息</a><p class="hc-content-entry-excerpt">了解如何通过应用程序编程接口 (API) 在 Klaviyo 和第三方应用程序之间同步信息。通过 Klaviyo 集成交换的大多数数据都是单向的：数据被拉入您的 Klaviyo 帐户，以便您可以利用广泛的客户数据。 Klaviyo 的...</p></article><article class="hc-sec-article hc-content-entry"><a class="hc-sec-article-title hc-content-entry-title" href="article-sample.html">了解集成选项卡</a><p class="hc-content-entry-excerpt">了解如何访问已安装的集成并探索 Klaviyo 的应用程序市场，您可以在其中浏览、安装和配置 Klaviyo 与其他平台之间的不同集成。该市场包括电子商务、登陆页面、支付系统等的集成。 要导航到 Klaviyo 中的“集成”选项卡，请单...</p></article><article class="hc-sec-article hc-content-entry"><a class="hc-sec-article-title hc-content-entry-title" href="article-sample.html">了解 Klaviyo 和应用程序之间交换的信息类型</a><p class="hc-content-entry-excerpt">了解 Klaviyo 和外部应用程序之间交换哪些类型的数据，以及在您的 Klaviyo 帐户中的何处可以找到这些数据。当您将第三方应用程序与 Klaviyo 集成时，两个平台会交换信息。与 Klaviyo 的大多数数据交换都是单向的；数...</p></article><article class="hc-sec-article hc-content-entry"><a class="hc-sec-article-title hc-content-entry-title" href="article-sample.html">了解第三方应用程序</a><p class="hc-content-entry-excerpt">了解如何查找第三方应用程序，这些应用程序是由第三方（而不是 Klaviyo）使用 Klaviyo 的 API 构建的应用程序。 Klaviyo 的 API 使各种第三方能够构建应用程序并与我们的平台集成。您可以在我们的应用程序市场中搜索...</p></article></div></section><section class="hc-sec-group"><h2>Ecommerce integrations</h2><div class="hc-sec-list hc-content-list"><article class="hc-sec-article hc-content-entry"><a class="hc-sec-article-title hc-content-entry-title" href="article-sample.html">如何使用电子商务入门清单</a><p class="hc-content-entry-excerpt">了解如何设置定制的电子商务入门清单并开始使用 Klaviyo。 当您尝试访问其中一个电子商务清单时，它将首先在 Google 云端硬盘中打开并处于仅供查看模式。 从下面的列表中选择适用的电子商务集成或 SMS 清单。 BigCommer...</p></article><article class="hc-sec-article hc-content-entry"><a class="hc-sec-article-title hc-content-entry-title" href="article-sample.html">电子商务企业参考集成</a><p class="hc-content-entry-excerpt">了解对您的电子商务业务有用的 Klaviyo 集成和应用程序。 Klaviyo 是一个功能强大的平台，您可以在其中与客户沟通并为您的公司做出数据驱动的营销选择。了解 Klaviyo 的所有功能是重要的第一步。您与 Klaviyo 集成的...</p></article></div></section>
     </main>
   </div>
 </div>

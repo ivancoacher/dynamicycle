@@ -242,3 +242,27 @@ entries.
 - Changed: `PROJECT_STATE.md`, `PROJECT_HISTORY.md`
 - Next: Review the updated category sidebar spacing in the current preview.
 - Notes: No system software upgrade was required.
+
+
+## 2026-06-14T17:10:20+08:00 | in_progress
+
+- Task: Extract shared styles for article, section, and category pages
+- Result: The existing layout_css function shares global and sidebar CSS, but category and section duplicate their 360px layout, 44px content inset, divider, font stack, background, and mobile rules; article repeats the same visual tokens and divider behavior separately.
+- Branch: `codex/klaviyo-docs-sync-state`
+- Commit at record time: `e30a4c9`
+- Verification: Reviewed category_page_html, section_page_html, article_page_html, and recent sidebar CSS commits; Confirmed prior shared requirements: 28px icon box, 26px SVG, and 8px menu-item left inset
+- Changed: `sync/deploy.py`, `sync/deploy-shared.css`, `PROJECT_STATE.md`, `PROJECT_HISTORY.md`
+- Next: Create the shared CSS source and migrate all three page generators to shared layout and content primitives.
+- Notes: No system software upgrade is required.
+
+
+## 2026-06-14T17:19:33+08:00 | completed
+
+- Task: Extract shared styles for article, section, and category pages
+- Result: Created sync/deploy-shared.css as the canonical shared style source, migrated category and section to shared layout/main/list primitives, made article inherit the same visual tokens and foundation, documented style ownership, and regenerated all 314 previews.
+- Branch: `codex/klaviyo-docs-sync-state`
+- Commit at record time: `e30a4c9`
+- Verification: Python compilation passed; Preview generation completed: 314 OK, 0 failed; Generated category, section, and article pages all contain the shared CSS and required shared classes; Desktop browser checks confirmed shared 1200px layout, 44px content inset, 28px icon box, 8px menu inset, 19px shared entry titles, and shared Chinese font tokens; Mobile checks confirmed category and section collapse identically and article TOC hides below 768px; All three representative preview URLs return HTTP 200
+- Changed: `AGENTS.md`, `sync/deploy-shared.css`, `sync/DEPLOY_STYLES.md`, `sync/deploy.py`, `build/deploy-previews/`, `PROJECT_STATE.md`, `PROJECT_HISTORY.md`
+- Next: Make future cross-page visual changes only in sync/deploy-shared.css, then regenerate previews.
+- Notes: Page-specific CSS remains only for category cards/header, section path/groups, and article header/body; no system software upgrade was required.
