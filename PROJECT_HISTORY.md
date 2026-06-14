@@ -578,3 +578,27 @@ entries.
 - Changed: None.
 - Next: Remaining ~15 category pages still carry pre-fix mangled content. Run 'deploy.py categories' (no --only) to fix all category pages AND refresh homepage card links from /v2/ to /klaviyo-cn-docs-v2/.
 - Notes: None.
+
+
+## 2026-06-14T21:15:15+08:00 | in_progress
+
+- Task: Deploy all docs v2 category pages with wp:html fix
+- Result: Running deploy.py categories (all 16) to apply wp:html wrap and refresh homepage card links.
+- Branch: `codex/klaviyo-docs-sync-state`
+- Commit at record time: `52017546`
+- Verification: Not recorded.
+- Changed: None.
+- Next: Verify sample category pages + homepage links, then record completed.
+- Notes: None.
+
+
+## 2026-06-14T21:20:21+08:00 | completed
+
+- Task: Deploy all docs v2 category pages with wp:html fix
+- Result: Ran 'deploy.py categories': all 19 entries OK (18 category pages updated #13165-#13182, plus homepage links refreshed). Every category page now carries the wp:html wrap.
+- Branch: `codex/klaviyo-docs-sync-state`
+- Commit at record time: `52017546`
+- Verification: Sampled 5 category pages (account-billing, integrations, flows, campaigns, customer-agent): }</p>=0 and <p>/*=0, hc-cat-section-grid=4 each. Homepage: 22 links to /klaviyo-cn-docs-v2/, 0 stale category links (the 5 /v2/ matches are the WP REST endpoint /wp-json/wp/v2/pages in the search JS, not category links).
+- Changed: `sync/.deploy_meta.json`
+- Next: Optional: run 'deploy.py sections' and 'deploy.py articles' (or 'deploy.py all') to apply the same wp:html wrap to section and article pages.
+- Notes: None.
