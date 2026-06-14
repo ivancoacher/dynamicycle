@@ -422,3 +422,27 @@ entries.
 - Changed: `AGENTS.md`, `.agents/skills/project-continuity/SKILL.md`, `PROJECT_STATE.md`, `PROJECT_HISTORY.md`
 - Next: For future recorded modification operations, update local operation history, stage scoped files, create a local Git commit, and do not push unless explicitly requested.
 - Notes: This completion record will be included in a local Git commit without push.
+
+
+## 2026-06-14T20:04:58+08:00 | in_progress
+
+- Task: Translate remaining English section titles on category pages
+- Result: User reported several section titles on category pages remain untranslated, including titles visible in the attached screenshot such as Attribution, Dashboards, Metrics, Benchmarks, Deliverability, Custom reports, Experiments, Campaign/flow/audience analytics, and Analytics calculations and strategies.
+- Branch: `codex/klaviyo-docs-sync-state`
+- Commit at record time: `fae2b13b`
+- Verification: Read project-continuity skill, AGENTS.md, PROJECT_STATE.md, recent PROJECT_HISTORY.md, git status, and latest commits.
+- Changed: `PROJECT_STATE.md`, `PROJECT_HISTORY.md`
+- Next: Locate section title source data, add Chinese translations, regenerate previews, and verify affected category/demo pages.
+- Notes: None.
+
+
+## 2026-06-14T20:12:12+08:00 | completed
+
+- Task: Translate remaining English section titles on category pages
+- Result: Added Chinese mappings for untranslated section titles, including the Analytics category titles shown in the screenshot and broader generic section labels across category pages; regenerated deploy previews and refreshed demo-category.html from category-analytics.html.
+- Branch: `codex/klaviyo-docs-sync-state`
+- Commit at record time: `fae2b13b`
+- Verification: .venv/bin/python sync/deploy.py preview completed: Total 314, OK 314, Fail 0; rg found no screenshot-target English titles in category-analytics.html, demo-category.html, and representative section pages; curl http://127.0.0.1:8765/demo-category.html confirmed the Chinese card labels; git diff --check passed. Browser file:// verification was blocked by Browser Use URL policy, so verification used generated HTML and localhost curl.
+- Changed: `sync/deploy.py`, `build/deploy-previews/`, `PROJECT_STATE.md`, `PROJECT_HISTORY.md`
+- Next: Review http://127.0.0.1:8765/demo-category.html or build/deploy-previews/demo-category.html and report any remaining titles that should be localized.
+- Notes: Remaining English in category card labels is mainly product, platform, or acronym text such as Shopify, POS, RCS, WhatsApp, Advanced KDP, and Marketing Analytics.

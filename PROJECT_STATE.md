@@ -1,36 +1,36 @@
 # Project State
 
-Last updated: 2026-06-14T19:45:29+08:00
+Last updated: 2026-06-14T20:12:12+08:00
 
 ## Current Execution
 
 - Status: `completed`
-- Task: Clarify local history recording should create local git commit without push
+- Task: Translate remaining English section titles on category pages
 - Branch: `codex/klaviyo-docs-sync-state`
-- Commit: `0466e7dc`
+- Commit: `fae2b13b`
 
 ## Latest Result
 
-Updated AGENTS.md and project-continuity skill so recorded user-entered modification operations write local operation history and then create a scoped local Git commit; routine recording must not push unless the user explicitly requests remote synchronization.
+Added Chinese mappings for untranslated section titles, including the Analytics category titles shown in the screenshot and broader generic section labels across category pages; regenerated deploy previews and refreshed demo-category.html from category-analytics.html.
 
 ## Verification
 
-- find . -name quick_validate.py found no validator; git diff confirmed AGENTS.md and .agents/skills/project-continuity/SKILL.md contain the new add-and-commit-without-push rule.
+- .venv/bin/python sync/deploy.py preview completed: Total 314, OK 314, Fail 0; rg found no screenshot-target English titles in category-analytics.html, demo-category.html, and representative section pages; curl http://127.0.0.1:8765/demo-category.html confirmed the Chinese card labels; git diff --check passed. Browser file:// verification was blocked by Browser Use URL policy, so verification used generated HTML and localhost curl.
 
 ## Changed Files
 
-- `AGENTS.md`
-- `.agents/skills/project-continuity/SKILL.md`
+- `sync/deploy.py`
+- `build/deploy-previews/`
 - `PROJECT_STATE.md`
 - `PROJECT_HISTORY.md`
 
 ## Next Action
 
-For future recorded modification operations, update local operation history, stage scoped files, create a local Git commit, and do not push unless explicitly requested.
+Review http://127.0.0.1:8765/demo-category.html or build/deploy-previews/demo-category.html and report any remaining titles that should be localized.
 
 ## Notes
 
-- This completion record will be included in a local Git commit without push.
+- Remaining English in category card labels is mainly product, platform, or acronym text such as Shopify, POS, RCS, WhatsApp, Advanced KDP, and Marketing Analytics.
 
 ## Resume
 

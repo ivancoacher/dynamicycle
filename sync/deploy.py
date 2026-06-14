@@ -87,13 +87,91 @@ ZH_SECTION_NAMES = {
     "Security": "安全",
     "Account": "账户",
     "API keys": "API 密钥",
+    "Advertising": "广告",
     "Billing": "账单",
+    "Channel & Integration Management": "渠道与集成管理",
+    "Channel &amp; Integration Management": "渠道与集成管理",
+    "Compliance, consent, and data privacy": "合规、同意与数据隐私",
+    "Consent pages": "同意页面",
+    "Custom integrations": "自定义集成",
+    "Customer Agent": "客户 Agent",
+    "Data management (Advanced KDP)": "数据管理（Advanced KDP）",
+    "Email, SMS, and push notifications": "邮件、短信与推送通知",
+    "Foundation & Setup": "基础设置",
+    "Foundation &amp; Setup": "基础设置",
+    "Fundraising": "筹款",
+    "GDPR and CCPA": "GDPR 与 CCPA",
+    "Geofences": "地理围栏",
+    "Getting started with Advanced KDP": "Advanced KDP 入门",
+    "Getting started with Marketing Analytics": "Marketing Analytics 入门",
+    "Group membership API (Advanced KDP)": "群组成员 API（Advanced KDP）",
+    "Guidance": "引导",
+    "Health and wellness": "健康与保健",
+    "Helpdesk": "帮助台",
+    "Hotels and travel": "酒店与旅行",
+    "How integrations work": "集成的工作方式",
+    "Intelligence (Advanced KDP & Marketing Analytics)": "智能能力（Advanced KDP 与 Marketing Analytics）",
+    "Intelligence (Advanced KDP &amp; Marketing Analytics)": "智能能力（Advanced KDP 与 Marketing Analytics）",
+    "Klaviyo app for ChatGPT": "Klaviyo ChatGPT 应用",
+    "Landing pages and forms": "落地页与表单",
+    "Launch": "发布",
+    "Migrate to Klaviyo": "迁移到 Klaviyo",
+    "More integrations": "更多集成",
+    "Optimization & Analytics": "优化与分析",
+    "Optimization &amp; Analytics": "优化与分析",
+    "Other": "其他",
+    "Payments": "支付",
+    "Portfolio": "组合账户",
+    "Profiles": "客户资料",
+    "Restaurants": "餐饮",
+    "Routing & Automation": "路由与自动化",
+    "Routing &amp; Automation": "路由与自动化",
+    "Shipping": "物流配送",
+    "Skills": "技能",
+    "Support and help desk": "支持与帮助台",
+    "Team Workflow & Productivity": "团队工作流与效率",
+    "Team Workflow &amp; Productivity": "团队工作流与效率",
+    "Tools": "工具",
+    "Training": "训练",
+    "Understand Klaviyo": "了解 Klaviyo",
     "Users": "用户",
     "Getting started": "入门指南",
     "Getting started with analytics": "数据分析入门",
     "Getting started with Klaviyo reporting": "Klaviyo 报告入门",
+    "About cookies in Klaviyo": "Klaviyo 中的 Cookie",
+    "Analytics calculations and strategies": "数据分析计算与策略",
+    "Analyze email results": "分析邮件结果",
+    "Analyze lists and segments results": "分析列表与细分结果",
+    "Attribution": "归因",
+    "Attribution (Advanced KDP and Marketing Analytics)": "归因（Advanced KDP 与 Marketing Analytics）",
+    "Benchmarks": "基准",
+    "Benchmarks best practices": "基准最佳实践",
+    "Build and use benchmarks": "构建和使用基准",
+    "Build and use custom reports": "构建和使用自定义报告",
+    "Build and use dashboards": "构建和使用仪表盘",
+    "Build and use metrics": "构建和使用指标",
+    "Campaign, flow, and audience analytics": "营销活动、自动化流程与受众分析",
+    "Custom reports": "自定义报告",
+    "Custom reports best practices": "自定义报告最佳实践",
+    "Dashboard reports troubleshooting": "仪表盘报告故障排查",
+    "Dashboards": "仪表盘",
+    "Data explanations and attribution": "数据说明与归因",
+    "Deliverability": "投递表现",
+    "Experiments": "实验",
+    "Getting started with benchmarks": "基准入门",
+    "Getting started with custom reports": "自定义报告入门",
+    "Getting started with dashboards": "仪表盘入门",
+    "Getting started with metrics": "指标入门",
+    "Global experiments": "全局实验",
+    "Metrics": "指标",
+    "Metrics best practices": "指标最佳实践",
+    "Metrics troubleshooting": "指标故障排查",
     "Getting started with flows": "自动化流程入门",
     "Getting started with campaigns": "营销活动入门",
+    "Automations": "自动化",
+    "Build and use flows": "构建和使用自动化流程",
+    "Flow best practices and examples": "自动化流程最佳实践与示例",
+    "Test and optimize flows": "测试和优化自动化流程",
     "Templates": "模板",
     "Build and use templates": "构建和使用模板",
     "Getting started with templates": "模板入门",
@@ -104,8 +182,32 @@ ZH_SECTION_NAMES = {
     "Coupons": "优惠券",
     "Objects": "对象",
     "Products": "产品",
+    "Forms": "表单",
+    "Growth tools": "增长工具",
+    "Lists and segments": "列表与细分",
     "Troubleshooting": "故障排查",
     "Troubleshooting flows": "自动化流程故障排查",
+    "Analyze SMS performance": "分析短信表现",
+    "Email campaigns": "邮件营销活动",
+    "Email deliverability": "邮件投递",
+    "Getting started with SMS": "短信入门",
+    "Getting started with Social Marketing": "社交营销入门",
+    "Getting started with WhatsApp": "WhatsApp 入门",
+    "Grow your SMS list": "增长短信列表",
+    "Push notification campaigns": "推送通知活动",
+    "Send SMS campaigns": "发送短信活动",
+    "Send SMS from flows": "通过自动化流程发送短信",
+    "Send and use WhatsApp with Klaviyo": "通过 Klaviyo 发送和使用 WhatsApp",
+    "Set up Customer Hub": "设置 Customer Hub",
+    "SMS compliance and deliverability": "短信合规与投递",
+    "SMS segments and profiles": "短信细分与客户资料",
+    "Social Auto-replies": "社交自动回复",
+    "Social Events & Content": "社交活动与内容",
+    "Understand WhatsApp with Klaviyo": "了解 Klaviyo 中的 WhatsApp",
+    "Use web chat": "使用网页聊天",
+    "Build and use reviews": "构建和使用评价",
+    "Getting started with reviews": "评价入门",
+    "Reviews best practices": "评价最佳实践",
 }
 
 CATEGORY_DESCRIPTIONS = {
@@ -1496,6 +1598,7 @@ def cmd_sections(args):
             sec["section_name"], sid, cat_name, cat_slug, sec["articles"], meta=meta, all_sections=section_map
         )
         slug = f"section-{sid}"
+        section_title = clean_section_name(sec["section_name"])
 
         try:
             existing = None
@@ -1507,24 +1610,24 @@ def cmd_sections(args):
             if not existing:
                 existing = wp.find_page_by_slug(slug, parent=parent_id)
             if existing:
-                result = wp.update_page(existing["id"], title=sec["section_name"], content=content, slug=slug, parent=parent_id)
+                result = wp.update_page(existing["id"], title=section_title, content=content, slug=slug, parent=parent_id)
                 action = "updated"
             else:
-                result = wp.create_page(title=sec["section_name"], content=content, slug=slug, parent=parent_id)
+                result = wp.create_page(title=section_title, content=content, slug=slug, parent=parent_id)
                 action = "created"
 
             meta["sections"][sid] = {
                 "page_id": result["id"],
                 "slug": slug,
-                "name": sec["section_name"],
+                "name": section_title,
                 "category_slug": cat_slug,
                 "url": result.get("link", ""),
                 "action": action,
             }
             save_deploy_meta(meta)
-            logger.ok(f"[{sid}] {sec['section_name']} -> {action} #{result['id']}")
+            logger.ok(f"[{sid}] {section_title} -> {action} #{result['id']}")
         except Exception as exc:
-            logger.fail(f"[{sid}] {sec['section_name']}: {exc}")
+            logger.fail(f"[{sid}] {section_title}: {exc}")
 
         time.sleep(0.2)
 
@@ -1733,7 +1836,7 @@ def cmd_preview(args):
             cat_name, cat_slug, sec_sample["articles"], meta=meta, preview=True, all_sections=section_map
         )
         (PREVIEW_DIR / f"section-{sec_sample['section_id']}.html").write_text(
-            wrap(sec_sample["section_name"], sp_html), "utf-8"
+            wrap(clean_section_name(sec_sample["section_name"]), sp_html), "utf-8"
         )
         logger.ok(f"Section: section-{sec_sample['section_id']}.html")
 
