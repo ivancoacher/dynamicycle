@@ -1,0 +1,292 @@
+<!doctype html><html><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>如何根据活动创建客户角色细分</title></head><body><div class="hc-brand-shell">
+<header class="hc-brand-header">
+  <div class="hc-brand-header-inner">
+    <a class="hc-brand-logo" href="https://dynamicycle.com/" aria-label="Dynamicycle home">
+      <img src="https://i0.wp.com/dynamicycle.com/wp-content/uploads/2025/02/logo02.png?fit=600%2C126&ssl=1" alt="DYNAMIC CYCLE" loading="eager">
+      <span class="hc-brand-doc-badge">Docs v2</span>
+    </a>
+    <nav class="hc-brand-nav" aria-label="Dynamicycle">
+      <a href="https://dynamicycle.com/">Home</a>
+      <a href="https://dynamicycle.com/optimization-engine/">Optimization Engine</a>
+      <a href="https://connect.klaviyo.com/dynamic-cycle">Klaviyo Agency</a>
+      <a href="https://dynamicycle.com/partner/">Partners</a>
+      <a href="https://dynamicycle.com/blog/">Blog</a>
+      <a href="https://dynamicycle.com/contact/">Contact</a>
+      <a class="hc-brand-cta" href="https://connect.klaviyo.com/dynamic-cycle">GET START</a>
+    </nav>
+  </div>
+</header><style>
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap');
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',-apple-system,BlinkMacSystemFont,"Noto Sans SC",sans-serif;color:#18181b;background:#fafafa;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+
+/* --- Dynamicycle brand shell --- */
+.hc-brand-shell{min-height:100vh;background:#fafafa;color:#18181b}
+.hc-brand-header{position:sticky;top:0;z-index:80;background:rgba(255,255,255,.92);backdrop-filter:saturate(180%) blur(18px);border-bottom:1px solid #ececf0}
+.hc-brand-header-inner{max-width:1200px;margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+.hc-brand-logo{display:flex;align-items:center;gap:12px;min-width:0}
+.hc-brand-logo img{display:block;width:169px;height:auto}
+.hc-brand-doc-badge{font-size:12px;font-weight:600;color:#4f46e5;background:#eef2ff;border:1px solid #e0e7ff;border-radius:999px;padding:4px 9px;white-space:nowrap}
+.hc-brand-nav{display:flex;align-items:center;gap:22px;font-size:14px;font-weight:500;color:#3f3f46}
+.hc-brand-nav a{color:#3f3f46;text-decoration:none;white-space:nowrap}
+.hc-brand-nav a:hover{color:#111827;text-decoration:none}
+.hc-brand-cta{display:inline-flex;align-items:center;justify-content:center;border-radius:999px;background:#111827;color:#fff!important;padding:9px 16px;font-size:13px;font-weight:700;box-shadow:0 8px 20px rgba(17,24,39,.14)}
+.hc-brand-cta:hover{background:#312e81;color:#fff!important}
+.hc-brand-footer{background:#0f172a;color:#e5e7eb;margin-top:0}
+.hc-brand-footer-inner{max-width:1200px;margin:0 auto;padding:48px 24px;display:grid;grid-template-columns:minmax(220px,1.2fr) repeat(3,minmax(140px,.7fr));gap:36px}
+.hc-brand-footer-logo{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.hc-brand-footer-logo img{width:48px;height:auto;border-radius:10px}
+.hc-brand-footer-title{font-size:18px;font-weight:700;color:#fff;line-height:1.35}
+.hc-brand-footer-copy{font-size:14px;color:#a1a1aa;max-width:330px;line-height:1.7}
+.hc-brand-footer h3{font-size:12px;font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:.08em;margin:0 0 14px}
+.hc-brand-footer a{display:block;color:#cbd5e1;text-decoration:none;font-size:14px;margin:9px 0}
+.hc-brand-footer a:hover{color:#fff;text-decoration:none}
+.hc-brand-footer-bottom{max-width:1200px;margin:0 auto;padding:18px 24px 28px;border-top:1px solid rgba(148,163,184,.18);font-size:12px;color:#94a3b8;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+@media(max-width:980px){
+.hc-brand-nav{gap:14px}
+.hc-brand-nav a:nth-child(n+4){display:none}
+.hc-brand-footer-inner{grid-template-columns:1fr 1fr}
+}
+@media(max-width:768px){
+.hc-brand-header-inner{padding:12px 20px}
+.hc-brand-logo img{width:142px}
+.hc-brand-doc-badge{display:none}
+.hc-brand-nav a:not(.hc-brand-cta){display:none}
+.hc-brand-footer-inner{grid-template-columns:1fr;padding:38px 20px}
+.hc-brand-footer-bottom{padding-left:20px;padding-right:20px}
+}
+
+
+/* --- Layout --- */
+.hc-layout{display:grid;grid-template-columns:260px 1fr;max-width:1200px;margin:0 auto;min-height:80vh}
+
+/* --- Left sidebar --- */
+.hc-sidebar{position:sticky;top:24px;padding:24px 20px 24px 24px;align-self:start;max-height:calc(100vh - 48px);overflow-y:auto}
+.hc-sb-item{display:block;font-size:14px;font-weight:500;color:#71717a;padding:8px 12px;border-radius:8px;margin-bottom:2px;transition:all .15s ease;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hc-sb-item:hover{background:#f4f4f5;color:#18181b}
+.hc-sb-item--active{background:#eef2ff;color:#4f46e5;font-weight:600}
+
+/* --- TOC sidebar (article pages) --- */
+.hc-toc{padding:24px 20px 24px 24px;position:sticky;top:24px;align-self:start;max-height:calc(100vh - 48px);overflow-y:auto}
+.hc-toc-title{font-size:20px;font-weight:600;color:#1a1a2e;margin:36px 0 28px;padding:0 12px;letter-spacing:0}
+.hc-toc-item{display:block;font-size:16px;font-weight:400;color:#1a1a2e;padding:10px 12px;border-radius:6px;margin-bottom:24px;transition:all .15s ease;line-height:1.45}
+.hc-toc-item:hover{color:#18181b;background:#f4f4f5}
+.hc-toc-h3{padding-left:24px}
+
+/* --- Main content area --- */
+.hc-main{padding:24px 32px 80px 24px;border-left:1px solid #e4e4e7;min-width:0}
+
+/* --- Breadcrumb --- */
+.hc-crumb{font-size:14px;color:#71717a;margin-bottom:24px}
+.hc-crumb a{color:#71717a;transition:color .15s ease}
+.hc-crumb a:hover{color:#18181b}
+.hc-crumb-sep{margin:0 8px;color:#d4d4d8}
+
+
+/* --- Article header --- */
+.hc-article-page{background:#fafafa}
+.hc-art-context{width:100%;background:#fffcf9;border-bottom:none}
+.hc-art-context-inner{width:min(1200px,calc(100% - 48px));margin:0 auto;padding:42px 0 40px}
+.hc-art-context .hc-crumb{font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans SC",'Instrument Sans',-apple-system,BlinkMacSystemFont,sans-serif;font-size:14px;line-height:22px;letter-spacing:.01em;color:#1a1a2e;margin:0 0 28px}
+.hc-art-context .hc-crumb a{color:#1a1a2e;text-decoration:underline;text-underline-offset:3px}
+.hc-art-context .hc-crumb a:hover{color:#4a4a6a}
+.hc-art-context .hc-crumb-sep{color:#1a1a2e;margin:0 10px}
+.hc-art-header{display:flex;align-items:center;gap:14px;margin-bottom:22px}
+.hc-art-title-icon{width:32px;height:32px;display:flex;align-items:center;justify-content:center;color:#1a1a2e;flex:0 0 auto}
+.hc-art-title-icon svg{width:30px;height:30px}
+.hc-art-title{font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans SC",'Instrument Sans',-apple-system,BlinkMacSystemFont,sans-serif;font-size:30px;font-weight:600;color:#1a1a2e;letter-spacing:.01em;line-height:40px;margin:0}
+.hc-art-meta{font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans SC",'Instrument Sans',-apple-system,BlinkMacSystemFont,sans-serif;font-size:16px;line-height:27px;letter-spacing:.012em;color:#1a1a2e}
+.hc-art-meta em{font-style:italic}
+.hc-art-meta-sep{color:#71717a}
+.hc-article-layout{align-items:start;background:#fafafa;position:relative}
+.hc-article-layout::before{content:"";position:absolute;left:260px;top:28px;bottom:0;width:1px;background:#e4e4e7}
+.hc-article-layout .hc-toc{top:104px;max-height:calc(100vh - 128px);padding-top:36px}
+.hc-article-layout .hc-toc-title{font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans SC",'Instrument Sans',-apple-system,BlinkMacSystemFont,sans-serif;margin:0 0 28px;letter-spacing:.01em}
+.hc-article-layout .hc-toc-item{font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans SC",'Instrument Sans',-apple-system,BlinkMacSystemFont,sans-serif;line-height:1.6;letter-spacing:.012em}
+.hc-article-main{padding-top:36px;background:#fafafa;border-left:none}
+
+/* --- Article body — Chinese reading optimized, based on Klaviyo structure --- */
+.hc-art-body{max-width:780px;font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans SC",'Instrument Sans',-apple-system,BlinkMacSystemFont,sans-serif;font-size:16px;line-height:27px;color:#52525b;letter-spacing:.012em}
+.hc-art-body p,.hc-art-body ul,.hc-art-body ol,.hc-art-body li{font-size:16px;line-height:27px;letter-spacing:.012em}
+.hc-art-body p,.hc-art-body h2,.hc-art-body h3,.hc-art-body h4,.hc-art-body h5,.hc-art-body h6,.hc-art-body ul,.hc-art-body ol,.hc-art-body blockquote,.hc-art-body pre,.hc-art-body table{margin-top:0;margin-bottom:18px}
+.hc-art-body h1,.hc-art-body h2,.hc-art-body h3,.hc-art-body h4,.hc-art-body h5,.hc-art-body h6{font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans SC",'Instrument Sans',-apple-system,BlinkMacSystemFont,sans-serif;font-weight:500;color:rgb(29,30,32);letter-spacing:.01em;scroll-margin-top:120px}
+.hc-art-body h2{font-size:21px;font-weight:600;line-height:28px;padding:0;margin-top:34px;margin-bottom:22px}
+.hc-art-body h3{font-size:19px;font-weight:500;line-height:30px;margin-top:28px;margin-bottom:18px}
+.hc-art-body h4,.hc-art-body h5,.hc-art-body h6{font-size:16px;line-height:27px;margin-top:20px}
+.hc-art-body > h2:first-child,.hc-art-body > h3:first-child,.hc-art-body > h4:first-child{margin-top:0}
+.hc-art-body ul{padding-left:40px;list-style-type:disc}
+.hc-art-body ol{padding-left:40px;list-style-type:decimal}
+.hc-art-body li{margin:18px 0;display:list-item}
+.hc-art-body li:empty{display:none;margin:0}
+.hc-art-body li>ul{list-style-type:circle;margin-bottom:0}
+.hc-art-body li>ol{margin-bottom:0}
+.hc-art-body a{font-size:16px;line-height:27px;color:rgb(29,30,32);text-decoration:underline;text-underline-offset:3px;transition:color .15s ease}
+.hc-art-body a:hover{color:rgb(29,30,32)}
+.hc-art-body strong,.hc-art-body b{font-weight:500;color:rgb(29,30,32)}
+.hc-art-body img{display:block;height:auto;margin:0 auto 16px;max-width:100%}
+.hc-art-body figure{margin:40px auto 16px;max-width:100%}
+.hc-art-body table{width:100%;margin-top:16px;border-collapse:separate;border-spacing:2px}
+.hc-art-body td,.hc-art-body th{padding:8px;border:1px solid rgb(233,220,198);vertical-align:middle}
+.hc-art-body th{font-weight:500;background:#f8f8f8}
+.hc-art-body code{background:#f4f4f5;padding:2px 6px;border-radius:4px;font-size:14px;color:rgb(29,30,32);font-family:'SF Mono',SFMono-Regular,Menlo,monospace}
+.hc-art-body pre{background:#1a1a2e;color:#e5e7eb;padding:20px;border-radius:8px;overflow-x:auto;font-size:14px;line-height:1.6}
+.hc-art-body pre code{background:none;padding:0;color:inherit;font-size:inherit}
+.hc-art-body blockquote{border-left:4px solid #d0d0d0;background:#f8f8f8;padding:14px 18px;color:rgb(29,30,32)}
+.hc-art-body hr{border:none;border-top:1px solid #e0e0e0;margin:32px 0}
+.hc-art-body > *:last-child{margin-bottom:0}
+.hc-art-body h2:last-of-type~ul,.hc-art-body h2:last-of-type~div>ul{list-style-type:none;padding:0}
+.hc-art-body h2:last-of-type~ul>li,.hc-art-body h2:last-of-type~div>ul>li{margin:4px 0}
+
+/* --- Legacy classes from structure.py --- */
+.dc-note{border-left:4px solid #d0d0d0;background:#f8f8f8;padding:14px 18px;margin:16px 0;color:#1a1a2e}
+.dc-doc-figure{margin:40px 0 16px;max-width:100%}
+.dc-doc-figure img{display:block;width:100%;height:auto;margin:0}
+.dc-doc-figure figcaption{font-size:14px;color:#6b7280;margin-top:8px}
+.dc-table-wrap{overflow-x:auto;margin:16px 0}
+
+@media(max-width:1024px){.hc-article-layout::before{left:220px}}
+@media(max-width:768px){.hc-article-layout::before{display:none}.hc-art-context-inner{width:auto;padding:28px 20px 30px}.hc-article-main{padding-top:28px;background:#fafafa}.hc-art-title{font-size:22px}.hc-art-meta{font-size:14px}.hc-art-body{max-width:none}}
+
+
+/* --- Responsive --- */
+@media(max-width:1024px){
+.hc-layout{grid-template-columns:220px 1fr}
+}
+@media(max-width:768px){
+.hc-layout{grid-template-columns:1fr}
+.hc-sidebar,.hc-toc{display:none}
+.hc-main{padding:16px 20px 60px;border-left:none}
+}
+</style>
+<div class="hc-article-page">
+  <section class="hc-art-context">
+    <div class="hc-art-context-inner">
+      <nav class="hc-crumb"><a href="homepage.html">帮助中心</a><span class="hc-crumb-sep">/</span><a href="category-audience.html">受众</a><span class="hc-crumb-sep">/</span><a href="section-49375404972699.html">List and segments best practices</a></nav>
+      <div class="hc-art-header">
+        <div class="hc-art-title-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="4" width="6" height="6" rx="1"/><rect x="14" y="4" width="6" height="6" rx="1"/><rect x="4" y="14" width="6" height="6" rx="1"/><rect x="14" y="14" width="6" height="6" rx="1"/></svg></div>
+        <h1 class="hc-art-title">如何根据活动创建客户角色细分</h1>
+      </div>
+      <div class="hc-art-meta">预计阅读 5 分钟 <span class="hc-art-meta-sep">|</span> <em>更新于 2026年4月21日 9:54 AM EST</em></div>
+    </div>
+  </section>
+  <div class="hc-layout hc-article-layout">
+    <nav class="hc-toc"><div class="hc-toc-title">目录</div><a class="hc-toc-item" href="#品牌爱好者">品牌爱好者</a><a class="hc-toc-item" href="#潜在的豪赌客">潜在的豪赌客</a><a class="hc-toc-item" href="#潜在的品牌爱好者">潜在的品牌爱好者</a><a class="hc-toc-item" href="#差不多了">差不多了</a><a class="hc-toc-item" href="#等待哇">等待哇</a><a class="hc-toc-item" href="#浓缩咖啡">浓缩咖啡</a><a class="hc-toc-item" href="#橱窗购物者">橱窗购物者</a><a class="hc-toc-item" href="#逝去的爱好者">逝去的爱好者</a><a class="hc-toc-item" href="#一击奇迹">一击奇迹</a><a class="hc-toc-item" href="#只是路过">只是路过</a><a class="hc-toc-item" href="#错误的开始">错误的开始</a><a class="hc-toc-item" href="#其他资源">其他资源</a></nav>
+    <div class="hc-main hc-article-main">
+      <div class="hc-art-body">
+        <p>了解如何使用细分根据客户采取的操作创建客户角色细分。这使您可以发送更多相关的营销信息，从而从受众那里获得最大的价值。 ## 开始之前</p>
+<p>在接下来的几节中，您将学习如何根据客户采取的不同操作集来构建细分。虽然您不必向所有这些层发送电子邮件，但查看每个层中的联系人数量可以让您深入了解受众如何与您的电子邮件互动。此外，如果您还想<a href="https://help.klaviyo.com/hc/en-us/articles/115005082127-Integrate-Facebook-Advertising-with-Klaviyo">在 Facebook 上向这些细分受众群投放广告</a>，则可以删除“在或不在列表中”条件。您需要查看两种类型的行为：</p>
+<ol>
+<li><strong>参与：</strong> 包括浏览您的网站或打开/单击您的电子邮件等内容</li>
+<li><strong>购买：</strong> 有人向您购买商品的频率、花费的金额以及平均订单价值</li>
+</ol>
+<p>随着 iOS15、macOS Monterey、iPadOS 15 和 WatchOS 8 的发布，Apple Mail 隐私保护 (MPP) 通过预取跟踪像素改变了我们接收电子邮件打开率数据的方式。随着这一变化，重要的是要了解开放率将会上涨。如果您的营销活动分析显示大量 iOS 开场白，我们建议在您的个人<a href="https://help.klaviyo.com/hc/en-us/articles/4416791883163">订阅者细分</a> 中识别这些受影响的开场白。对于这两种类型的操作，您应该考虑两个维度：新近度和频率<strong>。</strong> 新近度比频率更强大。应根据您的业务定制近期价值、频繁价值和货币价值的定义。例如，如果您在线销售钢琴，那么您的客户一年内购买次数不太可能超过 3 次。也就是说，这里有一些开始指南：</p>
+<p>参与度：</p>
+<ul>
+<li>最近：3 个月内。 - 频繁：3次或以上</li>
+</ul>
+<p>采购：</p>
+<ul>
+<li>最近：4 个月内。 - 不是最近的：4 - 13 个月前</li>
+<li>频繁：3次或以上</li>
+<li>高货币价值：超过您的客户群的平均订单价值。我们在本页的所有示例中都使用 100 美元的 AOV。将此值替换为<a href="https://help.klaviyo.com/hc/en-us/articles/360000676712">您自己的 AOV</a>。 ##豪客赛</li>
+</ul>
+<p>这些是您最好的客户。他们最近经常以较高的货币价值进行购买。您的目标是通过像 VIP 一样对待他们来留住他们。您不一定需要大幅折扣，但其他福利和排他性大有帮助。 !<a href="https://klaviyo.zendesk.com/hc/article_attachments/28723519228699">多次大额购买的客户群</a></p>
+<h2 id="品牌爱好者">品牌爱好者</h2>
+<p>这些都是忠实的客户。他们最近经常购买，但花费不如您的 VIP 那么多，因此您的目标是提高他们的平均订单价值。为此，请给他们一个花更多钱的理由。尝试展示相关或互补的产品和/或提供基于数量的折扣。 !<a href="https://klaviyo.zendesk.com/hc/article_attachments/28723507575835">进行大量小额购买的客户群</a></p>
+<h2 id="潜在的豪赌客">潜在的豪赌客</h2>
+<p>这些客户有潜力成为您的最佳客户；他们最近以较高的货币价值购买，但购买频率不高。为了增加他们的购买频率，给他们一个回来的理由。尝试嘲笑成为 VIP 的福利，推销相关或互补的产品，或者向他们发送补货流程。 !<a href="https://klaviyo.zendesk.com/hc/article_attachments/28723507588507">可以转变为大手笔消费者的客户群</a></p>
+<h2 id="潜在的品牌爱好者">潜在的品牌爱好者</h2>
+<p>这些客户最近购买过商品，但购买频率不高，且金额不高。趁热打铁，集中精力提高购买频率或平均订单价值。推广畅销产品和流行或相关产品。 !<a href="https://klaviyo.zendesk.com/hc/article_attachments/28723519248923">进行小额购买的新客户</a></p>
+<h2 id="差不多了">差不多了</h2>
+<p>这些订阅者经常打开并点击您的电子邮件。他们最近还通过电子邮件进行了联系，但从未购买过。您的目标是通过给他们一个充分的购买理由来推动他们进行第一次购买。提醒他们缺少什么，推销价值，并尝试将激励作为最后的手段。 !<a href="https://klaviyo.zendesk.com/hc/article_attachments/28723519253531">定期打开或点击您的电子邮件但尚未购买的订阅者群体</a></p>
+<h2 id="等待哇">等待哇</h2>
+<p>这些订阅者从未购买过但最近至少使用过您的一封电子邮件。通过尝试“好得不容错过”的优惠和限时优惠来利用他们最近的兴趣。 !<a href="https://klaviyo.zendesk.com/hc/article_attachments/28723507609755">有时会打开或点击您的电子邮件但尚未购买的客户群</a></p>
+<h2 id="浓缩咖啡">浓缩咖啡</h2>
+<p>这些客户最近接触过您的电子邮件，但尚未进行购买。您可以在产品发布或销售公告后几天向该群组发送提醒电子邮件，以快速增加收入。 !<a href="https://klaviyo.zendesk.com/hc/article_attachments/28723507635483">近期购买可能性很高的一段资料</a></p>
+<h2 id="橱窗购物者">橱窗购物者</h2>
+<p>这些客户已参与您的营销活动并表现出一定的购买欲望或意图，但尚未实现这一飞跃。考虑向他们发送带有社会证明的活动（例如来自客户的正面评价或社交媒体帖子），以帮助他们将其转化为首次购买者。 !<a href="https://klaviyo.zendesk.com/hc/article_attachments/28723507612059">对您的产品感兴趣但尚未购买的部分个人资料</a></p>
+<p>对于 Shopify 商店：根据您在 Shopify 中的客户隐私设置，Klaviyo 可能不会跟踪您位于欧盟、欧洲经济区、英国和瑞士的 Shopify 商店的访客的现场活动，除非他们已表示同意。因此，您的橱窗购物者群体将不包括未经同意的个人。 ## 失败的豪赌客</p>
+<p>这些客户过去曾多次购买过商品，并在您那里花费过很多钱，但最近没有进行过购买。通过告诉他们您的业务的最新动态来赢回他们。这包括与他们过去购买的产品相关的新版本，以及激励他们购买的特别优惠。 !<a href="https://klaviyo.zendesk.com/hc/article_attachments/28723507616155">进行了几次较大购买，但有一段时间没有购买任何东西的一部分客户</a></p>
+<h2 id="逝去的爱好者">逝去的爱好者</h2>
+<p>这些客户过去经常购买，但最近没有购买。尝试发送赢回营销活动，但要警惕低打开率。 !<a href="https://klaviyo.zendesk.com/hc/article_attachments/28723507620251">过去进行过几次小额购买但最近没有购买过任何东西的一部分客户</a></p>
+<h2 id="一击奇迹">一击奇迹</h2>
+<p>这些客户最近没有购买过商品，且购买次数少于 3 次，但金额较高。针对 50% 的细分受众群或 1,000 个联系人（以较大者为准）测试赢回营销活动。您可以使用采样工具来执行此操作，通过单击<strong>管理细分</strong>下拉列表并选择<strong>样本细分成员即可找到该工具。</strong></p>
+<p>首先，构建段：</p>
+<figure class="dc-doc-figure"><img alt="一段高价购买过，但最近没有购买的资料" decoding="async" loading="lazy" src="https://klaviyo.zendesk.com/hc/article_attachments/28723507623067"/><figcaption>一段高价购买过，但最近没有购买的资料</figcaption></figure>
+<figure class="dc-doc-figure"><img alt="示例片段按钮" decoding="async" loading="lazy" src="https://klaviyo.zendesk.com/hc/article_attachments/28723507563291"/><figcaption>示例片段按钮</figcaption></figure>
+<p>然后对分段成员进行抽样。通过电子邮件发送此部分时，请密切关注您的打开率](https://klaviyo.zendesk.com/hc/en-us/articles/115000201131)。可接受的最低性能是：</p>
+<ul>
+<li>10% 或更高的打开率</li>
+<li>退订率低于3%</li>
+<li>垃圾邮件投诉率低于0.08%</li>
+</ul>
+<h2 id="只是路过">只是路过</h2>
+<p>这些客户在 6-13 个月前以较低的货币价值购买过一次或两次。针对 25% 的细分受众群或 1,000 个联系人（以较大者为准）测试赢回营销活动。首先，构建段：</p>
+<figure class="dc-doc-figure"><img alt="一次性购买了一些小额商品，但最近没有购买过的一部分客户" decoding="async" loading="lazy" src="https://klaviyo.zendesk.com/hc/article_attachments/28723519273499"/><figcaption>一次性购买了一些小额商品，但最近没有购买过的一部分客户</figcaption></figure>
+<figure class="dc-doc-figure"><img alt="在管理细分菜单中，光标悬停在示例细分成员上" decoding="async" loading="lazy" src="https://klaviyo.zendesk.com/hc/article_attachments/28723507565723"/><figcaption>在管理细分菜单中，光标悬停在示例细分成员上</figcaption></figure>
+<p>然后对分段成员进行抽样。通过电子邮件发送此细分受众群时，请密切监控您的打开率。可接受的最低性能是：</p>
+<ul>
+<li>10% 或更高的打开率</li>
+<li>退订率低于3%</li>
+<li>垃圾邮件投诉率低于0.08%</li>
+</ul>
+<h2 id="错误的开始">错误的开始</h2>
+<p>这些客户最近没有打开或点击您发送的电子邮件，但过去经常这样做。针对 10% 的细分受众群或 1,000 个联系人（以较大者为准）测试赢回营销活动。 首先，构建段：</p>
+<figure class="dc-doc-figure"><img alt="过去经常与您的电子邮件互动但最近没有打开或点击的订阅者群体" decoding="async" loading="lazy" src="https://klaviyo.zendesk.com/hc/article_attachments/28723519278747"/><figcaption>过去经常与您的电子邮件互动但最近没有打开或点击的订阅者群体</figcaption></figure>
+<figure class="dc-doc-figure"><img alt="在“管理细分”菜单中，光标悬停在示例细分成员上" decoding="async" loading="lazy" src="https://klaviyo.zendesk.com/hc/article_attachments/28723507568027"/><figcaption>在“管理细分”菜单中，光标悬停在示例细分成员上</figcaption></figure>
+<p>然后对分段成员进行抽样。通过电子邮件发送此细分受众群时，请密切监控您的打开率。可接受的最低性能是：</p>
+<ul>
+<li>10% 或更高的打开率</li>
+<li>退订率低于3%</li>
+<li>垃圾邮件投诉率低于0.08%</li>
+</ul>
+<p>##自重</p>
+<p>这些是最近未购买或参与的订阅者，应从您的帐户中清除。 <a href="https://help.klaviyo.com/hc/en-us/articles/115005078347-List-Cleaning">了解有关列表清理的更多信息</a>。 !<a href="https://klaviyo.zendesk.com/hc/article_attachments/28723507632667">属于订阅者但长时间未购买或参与的一段资料</a></p>
+<h2 id="其他资源">其他资源</h2>
+<ul>
+<li><a href="https://klaviyo.zendesk.com/hc/en-us/articles/115005062847">了解段条件</a></li>
+<li><a href="https://klaviyo.zendesk.com/hc/en-us/articles/360039769672">Facebook 和 Instagram 高级定位指南</a></li>
+<li><a href="https://help.klaviyo.com/hc/en-us/articles/360035312491">高级分割指南</a></li>
+<li><a href="https://help.klaviyo.com/hc/en-us/articles/360037527052">根据电子邮件参与度创建发送计划</a></li>
+</ul>
+      </div>
+    </div>
+  </div>
+</div>
+<footer class="hc-brand-footer">
+  <div class="hc-brand-footer-inner">
+    <div>
+      <div class="hc-brand-footer-logo">
+        <img src="https://dynamicycle.com/wp-content/uploads/2025/03/e59bbee78987-1.png?w=125" alt="" loading="lazy">
+        <div class="hc-brand-footer-title">AI-Powered<br>Customer Journey Agency</div>
+      </div>
+      <p class="hc-brand-footer-copy">Dynamic Cycle helps global ecommerce brands design governed AI decision systems on top of Klaviyo.</p>
+    </div>
+    <div>
+      <h3>Solutions</h3>
+      <a href="https://mp.weixin.qq.com/s/pYUMbwNYtKkRqKEC5FvtNA?version=4.1.31.70466&platform=mac&from=industrynews">Grow</a>
+      <a href="https://mp.weixin.qq.com/s/FBsBl04PMsdfuIC6lMpdlA">Retain</a>
+      <a href="https://mp.weixin.qq.com/s/i2W1IbL7BifSc6QZMzPXmg">Discover</a>
+      <a href="https://mp.weixin.qq.com/s/kRyW95A9L0JVTQ5Eunv81A">Site Search</a>
+    </div>
+    <div>
+      <h3>Services</h3>
+      <a href="https://connect.klaviyo.com/dynamic-cycle">Klaviyo Agency</a>
+      <a href="https://mp.weixin.qq.com/s/M-JDhtS4C1S-u2rXTZ-xxw">Email Marketing</a>
+      <a href="https://mp.weixin.qq.com/s/jBZ9BpD95O6Cb2k38kyC9g">SMS Marketing</a>
+      <a href="https://dynamicycle.com/optimization-engine/">Optimization Engine</a>
+    </div>
+    <div>
+      <h3>Contact</h3>
+      <a href="mailto:dc@dynamicycle.com">dc@dynamicycle.com</a>
+      <a href="https://dynamicycle.com/contact/">Contact US</a>
+      <a href="https://dynamicycle.com/docs/">Docs</a>
+      <a href="https://dynamicycle.com/docs/v2/">Docs v2</a>
+    </div>
+  </div>
+  <div class="hc-brand-footer-bottom">
+    <span>© Dynamic Cycle</span>
+    <span>China's Leading Professional Klaviyo Agency</span>
+  </div>
+</footer></div></body></html>
