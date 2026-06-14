@@ -206,3 +206,27 @@ entries.
 - Changed: `PROJECT_STATE.md`, `PROJECT_HISTORY.md`
 - Next: Await a decision on refreshing Customer Agent source relationships and removing stale 404 Procedure records from previews.
 - Notes: Analysis only; no source or preview code was changed and no system software upgrade was required.
+
+
+## 2026-06-14T17:05:27+08:00 | in_progress
+
+- Task: Add a small inset to the category sidebar menu
+- Result: The previous zero-left-padding alignment makes category icons and the active menu background feel too close to the sidebar edge; the requested direction is a small retained inset.
+- Branch: `codex/klaviyo-docs-sync-state`
+- Commit at record time: `fb67d4d`
+- Verification: Current shared .hc-topic-item left padding is 0px
+- Changed: `sync/deploy.py`, `PROJECT_STATE.md`, `PROJECT_HISTORY.md`
+- Next: Set an 8px left inset, regenerate previews, and verify the active item and icon positions in the browser.
+- Notes: None.
+
+
+## 2026-06-14T17:06:50+08:00 | completed
+
+- Task: Add a small inset to the category sidebar menu
+- Result: Set the shared category menu item left padding to 8px, regenerated all 314 previews, and retained a modest inset for icons inside normal and active menu items.
+- Branch: `codex/klaviyo-docs-sync-state`
+- Commit at record time: `fb67d4d`
+- Verification: Browser measured heading and item left edges at 20px, active icon left edge at 28px, and computed padding-left at 8px; Preview generation completed: 314 OK, 0 failed; category-campaigns.html remains available over the local preview server
+- Changed: `sync/deploy.py`, `build/deploy-previews/`, `PROJECT_STATE.md`, `PROJECT_HISTORY.md`
+- Next: Review the 8px category-menu inset and provide the next visual adjustment.
+- Notes: No system software upgrade was required.
