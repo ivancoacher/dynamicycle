@@ -1,29 +1,29 @@
 # Project State
 
-Last updated: 2026-06-14T21:58:53+08:00
+Last updated: 2026-06-14T22:01:12+08:00
 
 ## Current Execution
 
 - Status: `completed`
-- Task: Fix /v2/ stale links and push-notifications 404 in docs v2; redeploy categories + sections
+- Task: 落库 docs v2 deploy rules + push branch
 - Branch: `codex/klaviyo-docs-sync-state`
-- Commit: `cd4e4deb`
+- Commit: `509bf70b`
 
 ## Latest Result
 
-Patched sync/deploy.py: (1) meta_page_url ignores stale URLs not under current DOCS_BASE_PATH and falls back to deterministic URL; (2) topic_sidebar_html filters to active_category_slugs() so categories with no crawled content (push-notifications) are hidden. Redeployed categories (18/18) and sections (204/204). Articles (1205) intentionally NOT deployed per user.
+Persisted docs-v2 deploy rules (wp:html wrap, stale-/v2/ meta fallback, sidebar filtering, deploy order) in AGENTS.md and CLAUDE.md. Committed 509bf70b and pushed to origin/codex/klaviyo-docs-sync-state (ff25476e..509bf70b). First push attempt hit the known GitHub SSH reset; retry succeeded.
 
 ## Verification
 
-- All 18 category pages: http=200, }</p>=0, <p>/*=0, push-notifications=0, stale /v2/ (excl REST)=0. Sampled 3 section pages: http=200, wpautop-clean.
+- git push origin codex/klaviyo-docs-sync-state -> ff25476e..509bf70b (success)
 
 ## Changed Files
 
-- `sync/deploy.py, sync/.deploy_meta.json`
+- `AGENTS.md, CLAUDE.md`
 
 ## Next Action
 
-When ready, deploy 1205 article pages: .venv/bin/python sync/deploy.py articles
+When ready: .venv/bin/python sync/deploy.py articles  (1205 article pages; large run, background it)
 
 ## Notes
 
