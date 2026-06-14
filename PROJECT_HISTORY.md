@@ -278,3 +278,27 @@ entries.
 - Changed: `PROJECT_STATE.md`, `PROJECT_HISTORY.md`
 - Next: Use sync/deploy-shared.css for future cross-page visual changes, then regenerate previews with .venv/bin/python sync/deploy.py preview.
 - Notes: No system software or tool upgrade is required for this change.
+
+
+## 2026-06-14T19:32:53+08:00 | in_progress
+
+- Task: Review project agent instructions and retrieve last changelog
+- Result: Re-read AGENTS.md, PROJECT_STATE.md, TOOLCHAIN.md, recent PROJECT_HISTORY.md entries, git status, and latest commit; latest recorded completed work is the shared deploy page style checkpoint.
+- Branch: `codex/klaviyo-docs-sync-state`
+- Commit at record time: `3bd2a937`
+- Verification: sed AGENTS.md PROJECT_STATE.md TOOLCHAIN.md; tail PROJECT_HISTORY.md; git status --short --branch; git log -1 --stat --decorate --oneline
+- Changed: `PROJECT_STATE.md`, `PROJECT_HISTORY.md`
+- Next: Inspect recent commits and summarize the last changelog for the user.
+- Notes: None.
+
+
+## 2026-06-14T19:33:51+08:00 | completed
+
+- Task: Review project agent instructions and retrieve last changelog
+- Result: Confirmed the last substantive changelog is commit 7e4b398: shared category, section, and article deploy styles were extracted to sync/deploy-shared.css; sync/deploy.py was migrated to shared primitives; sync/DEPLOY_STYLES.md was added; AGENTS.md now requires shared presentation changes to live in sync/deploy-shared.css. The latest commit 3bd2a937 is a continuity-record-only checkpoint for that work.
+- Branch: `codex/klaviyo-docs-sync-state`
+- Commit at record time: `3bd2a937`
+- Verification: git log --oneline --decorate -8; git show --stat --patch 7e4b398 -- AGENTS.md; git show --stat --summary 7e4b398; git show --stat --name-status 3bd2a937
+- Changed: `PROJECT_STATE.md`, `PROJECT_HISTORY.md`
+- Next: Use sync/deploy-shared.css for future cross-page visual changes and regenerate previews with .venv/bin/python sync/deploy.py preview.
+- Notes: None.

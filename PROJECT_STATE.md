@@ -1,23 +1,21 @@
 # Project State
 
-Last updated: 2026-06-14T17:21:33+08:00
+Last updated: 2026-06-14T19:33:51+08:00
 
 ## Current Execution
 
 - Status: `completed`
-- Task: Checkpoint shared deploy page styles
+- Task: Review project agent instructions and retrieve last changelog
 - Branch: `codex/klaviyo-docs-sync-state`
-- Commit: `7e4b398`
+- Commit: `3bd2a937`
 
 ## Latest Result
 
-Committed the shared article, section, and category style refactor as 7e4b398 and synchronized it to origin/codex/klaviyo-docs-sync-state.
+Confirmed the last substantive changelog is commit 7e4b398: shared category, section, and article deploy styles were extracted to sync/deploy-shared.css; sync/deploy.py was migrated to shared primitives; sync/DEPLOY_STYLES.md was added; AGENTS.md now requires shared presentation changes to live in sync/deploy-shared.css. The latest commit 3bd2a937 is a continuity-record-only checkpoint for that work.
 
 ## Verification
 
-- Commit 7e4b398 contains the canonical sync/deploy-shared.css source, generator integration, documentation, and 314 regenerated previews.
-- Desktop and mobile browser checks passed for representative category, section, and article pages.
-- Representative category, section, and article preview URLs return HTTP 200.
+- git log --oneline --decorate -8; git show --stat --patch 7e4b398 -- AGENTS.md; git show --stat --summary 7e4b398; git show --stat --name-status 3bd2a937
 
 ## Changed Files
 
@@ -26,11 +24,11 @@ Committed the shared article, section, and category style refactor as 7e4b398 an
 
 ## Next Action
 
-Use sync/deploy-shared.css for future cross-page visual changes, then regenerate previews with .venv/bin/python sync/deploy.py preview.
+Use sync/deploy-shared.css for future cross-page visual changes and regenerate previews with .venv/bin/python sync/deploy.py preview.
 
 ## Notes
 
-- No system software or tool upgrade is required for this change.
+- None.
 
 ## Resume
 
