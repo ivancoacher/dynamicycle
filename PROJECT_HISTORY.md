@@ -314,3 +314,27 @@ entries.
 - Changed: `PROJECT_STATE.md`, `PROJECT_HISTORY.md`
 - Next: Retry from /Users/user/Documents/Project/Dynamicycle/docs with: git push origin codex/klaviyo-docs-sync-state
 - Notes: Local commit 17933c9e contains the completed changelog review record; remote origin/codex/klaviyo-docs-sync-state is still at 3bd2a937 until push succeeds.
+
+
+## 2026-06-14T19:36:39+08:00 | in_progress
+
+- Task: Confirm mandatory operation recording workflow
+- Result: User explicitly asked Codex to follow the project rule and record every operation; AGENTS.md already contains mandatory operation recording for every user-directed task.
+- Branch: `codex/klaviyo-docs-sync-state`
+- Commit at record time: `1aa2ef0b`
+- Verification: Read project-continuity skill, AGENTS.md, PROJECT_STATE.md, recent PROJECT_HISTORY.md, git status, and latest commits.
+- Changed: `PROJECT_STATE.md`, `PROJECT_HISTORY.md`
+- Next: Record completion, commit the continuity update, and retry pushing the queued local commits.
+- Notes: None.
+
+
+## 2026-06-14T19:36:47+08:00 | completed
+
+- Task: Confirm mandatory operation recording workflow
+- Result: Confirmed that future user-directed work in this repository will follow AGENTS.md and project-continuity: read startup state, record in_progress, update material milestones, record completed or blocked before final response, append PROJECT_HISTORY.md, and checkpoint scoped changes when appropriate. No AGENTS.md change was needed because the rule already exists.
+- Branch: `codex/klaviyo-docs-sync-state`
+- Commit at record time: `1aa2ef0b`
+- Verification: AGENTS.md Mandatory Operation Recording section already requires every user-directed task, including analysis-only, failed, or interrupted work, to be recorded.
+- Changed: `PROJECT_STATE.md`, `PROJECT_HISTORY.md`
+- Next: Continue applying this recording workflow on every future request; retry git push origin codex/klaviyo-docs-sync-state when network/SSH permits.
+- Notes: None.
