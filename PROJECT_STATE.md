@@ -1,39 +1,36 @@
 # Project State
 
-Last updated: 2026-06-14T17:00:53+08:00
+Last updated: 2026-06-14T17:01:42+08:00
 
 ## Current Execution
 
 - Status: `completed`
-- Task: Align category sidebar menu with its heading
+- Task: Checkpoint category sidebar left alignment
 - Branch: `codex/klaviyo-docs-sync-state`
-- Commit: `22b4a23`
+- Commit: `26efa6f`
 
 ## Latest Result
 
-Removed the 24px left inset from shared topic-menu items, regenerated all 314 previews, and aligned every menu icon with the 按主题浏览 heading.
+Committed the shared left-alignment fix and all regenerated previews as 26efa6f, then pushed it to origin/codex/klaviyo-docs-sync-state.
 
 ## Verification
 
-- Browser measured heading, menu item, and first five icon left edges at 20px
-- Computed menu-item padding-left is 0px
-- Preview generation completed: 314 OK, 0 failed
-- category-campaigns.html returns HTTP 200
+- Commit 26efa6f created and pushed successfully
+- Browser left-edge measurement remains 20px for heading, items, and icons
+- Preview service remains HTTP 200
 
 ## Changed Files
 
-- `sync/deploy.py`
-- `build/deploy-previews/`
 - `PROJECT_STATE.md`
 - `PROJECT_HISTORY.md`
 
 ## Next Action
 
-Continue visual review of the refreshed category-campaigns preview.
+Review the aligned category-campaigns page and provide the next visual adjustment.
 
 ## Notes
 
-- Recreated the ignored project-local .venv with the already documented Python 3.13.11 dependency set; no system software upgrade was performed.
+- No system software upgrade was required.
 
 ## Resume
 

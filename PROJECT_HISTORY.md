@@ -170,3 +170,15 @@ entries.
 - Changed: `sync/deploy.py`, `build/deploy-previews/`, `PROJECT_STATE.md`, `PROJECT_HISTORY.md`
 - Next: Continue visual review of the refreshed category-campaigns preview.
 - Notes: Recreated the ignored project-local .venv with the already documented Python 3.13.11 dependency set; no system software upgrade was performed.
+
+
+## 2026-06-14T17:01:42+08:00 | completed
+
+- Task: Checkpoint category sidebar left alignment
+- Result: Committed the shared left-alignment fix and all regenerated previews as 26efa6f, then pushed it to origin/codex/klaviyo-docs-sync-state.
+- Branch: `codex/klaviyo-docs-sync-state`
+- Commit at record time: `26efa6f`
+- Verification: Commit 26efa6f created and pushed successfully; Browser left-edge measurement remains 20px for heading, items, and icons; Preview service remains HTTP 200
+- Changed: `PROJECT_STATE.md`, `PROJECT_HISTORY.md`
+- Next: Review the aligned category-campaigns page and provide the next visual adjustment.
+- Notes: No system software upgrade was required.
