@@ -302,3 +302,15 @@ entries.
 - Changed: `PROJECT_STATE.md`, `PROJECT_HISTORY.md`
 - Next: Use sync/deploy-shared.css for future cross-page visual changes and regenerate previews with .venv/bin/python sync/deploy.py preview.
 - Notes: None.
+
+
+## 2026-06-14T19:34:51+08:00 | blocked
+
+- Task: Checkpoint changelog review
+- Result: Local continuity checkpoint commit 17933c9e was created, but pushing codex/klaviyo-docs-sync-state failed twice because GitHub SSH reset the connection during key exchange.
+- Branch: `codex/klaviyo-docs-sync-state`
+- Commit at record time: `17933c9e`
+- Verification: git commit -m 'docs: record changelog review' succeeded; git push failed twice with: kex_exchange_identification: read: Connection reset by peer; fatal: Could not read from remote repository.
+- Changed: `PROJECT_STATE.md`, `PROJECT_HISTORY.md`
+- Next: Retry from /Users/user/Documents/Project/Dynamicycle/docs with: git push origin codex/klaviyo-docs-sync-state
+- Notes: Local commit 17933c9e contains the completed changelog review record; remote origin/codex/klaviyo-docs-sync-state is still at 3bd2a937 until push succeeds.
