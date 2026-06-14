@@ -350,3 +350,27 @@ entries.
 - Changed: `PROJECT_STATE.md`, `PROJECT_HISTORY.md`
 - Next: Retry from /Users/user/Documents/Project/Dynamicycle/docs with: git push origin codex/klaviyo-docs-sync-state
 - Notes: Local branch now contains unpushed continuity commits 17933c9e, 1aa2ef0b, and 85accf37, plus this blocker record once committed.
+
+
+## 2026-06-14T19:38:00+08:00 | in_progress
+
+- Task: Output homepage category section article demo files
+- Result: User requested four demo files for homepage, category, section, and article review; startup rules, project state, recent history, toolchain, git status, and latest commits were read. Local branch is ahead of origin by 4 continuity commits because prior SSH pushes failed.
+- Branch: `codex/klaviyo-docs-sync-state`
+- Commit at record time: `631ac9d4`
+- Verification: Read AGENTS.md, PROJECT_STATE.md, PROJECT_HISTORY.md tail, TOOLCHAIN.md; git status --short --branch; git log -6 --oneline --decorate
+- Changed: `PROJECT_STATE.md`, `PROJECT_HISTORY.md`
+- Next: Inspect existing preview generator/output and create or refresh four demo HTML files.
+- Notes: None.
+
+
+## 2026-06-14T19:40:35+08:00 | completed
+
+- Task: Output homepage category section article demo files
+- Result: Regenerated deploy previews successfully, recreated a project-local .venv for documented dependencies, and produced four stable demo HTML files: demo-homepage.html, demo-category.html, demo-section.html, and demo-article.html under build/deploy-previews/.
+- Branch: `codex/klaviyo-docs-sync-state`
+- Commit at record time: `631ac9d4`
+- Verification: .venv/bin/python sync/deploy.py preview completed: Total 314, OK 314, Fail 0; wc -c confirmed all four demo files; rg confirmed titles and shared hc-content-page/hc-brand-shell markers in demo files.
+- Changed: `build/deploy-previews/demo-homepage.html`, `build/deploy-previews/demo-category.html`, `build/deploy-previews/demo-section.html`, `build/deploy-previews/demo-article.html`, `PROJECT_STATE.md`, `PROJECT_HISTORY.md`
+- Next: User reviews the four demo files and requests visual/content adjustments if needed.
+- Notes: A project-local .venv was recreated with documented dependencies and remains ignored by Git.

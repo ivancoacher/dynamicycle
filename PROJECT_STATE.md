@@ -1,34 +1,38 @@
 # Project State
 
-Last updated: 2026-06-14T19:37:09+08:00
+Last updated: 2026-06-14T19:40:35+08:00
 
 ## Current Execution
 
-- Status: `blocked`
-- Task: Push operation logging confirmation checkpoint
+- Status: `completed`
+- Task: Output homepage category section article demo files
 - Branch: `codex/klaviyo-docs-sync-state`
-- Commit: `85accf37`
+- Commit: `631ac9d4`
 
 ## Latest Result
 
-Committed the operation logging confirmation as 85accf37, but pushing codex/klaviyo-docs-sync-state failed again because GitHub SSH reset the connection during key exchange.
+Regenerated deploy previews successfully, recreated a project-local .venv for documented dependencies, and produced four stable demo HTML files: demo-homepage.html, demo-category.html, demo-section.html, and demo-article.html under build/deploy-previews/.
 
 ## Verification
 
-- git commit -m 'docs: record operation logging confirmation' succeeded; git push origin codex/klaviyo-docs-sync-state failed with: kex_exchange_identification: read: Connection reset by peer; fatal: Could not read from remote repository.
+- .venv/bin/python sync/deploy.py preview completed: Total 314, OK 314, Fail 0; wc -c confirmed all four demo files; rg confirmed titles and shared hc-content-page/hc-brand-shell markers in demo files.
 
 ## Changed Files
 
+- `build/deploy-previews/demo-homepage.html`
+- `build/deploy-previews/demo-category.html`
+- `build/deploy-previews/demo-section.html`
+- `build/deploy-previews/demo-article.html`
 - `PROJECT_STATE.md`
 - `PROJECT_HISTORY.md`
 
 ## Next Action
 
-Retry from /Users/user/Documents/Project/Dynamicycle/docs with: git push origin codex/klaviyo-docs-sync-state
+User reviews the four demo files and requests visual/content adjustments if needed.
 
 ## Notes
 
-- Local branch now contains unpushed continuity commits 17933c9e, 1aa2ef0b, and 85accf37, plus this blocker record once committed.
+- A project-local .venv was recreated with documented dependencies and remains ignored by Git.
 
 ## Resume
 
