@@ -1,42 +1,37 @@
 # Project State
 
-Last updated: 2026-06-14T16:37:28+08:00
+Last updated: 2026-06-14T16:37:56+08:00
 
 ## Current Execution
 
 - Status: `completed`
 - Task: Persist Codex operation-recording and cross-device continuity rules
 - Branch: `codex/klaviyo-docs-sync-state`
-- Commit: `e93c1cc`
+- Commit: `c2064cf`
 
 ## Latest Result
 
-Installed mandatory startup and operation-recording rules, a canonical latest-state document, an append-only history ledger, and the repository-local project-continuity skill with a tested recorder.
+Continuity rules and skill are active. Task checkpoint c2064cf was pushed to origin/codex/klaviyo-docs-sync-state, so another account or device can fetch the branch and resume from PROJECT_STATE.md.
 
 ## Verification
 
-- Official quick_validate.py: Skill is valid
-- python3 -m py_compile record_step.py passed
-- record_step.py updated PROJECT_STATE.md and appended PROJECT_HISTORY.md
-- git diff --check passed
+- Skill validation passed
+- Recorder compile and execution passed
+- Git commit c2064cf created
+- git push origin codex/klaviyo-docs-sync-state succeeded
 
 ## Changed Files
 
-- `AGENTS.md`
-- `CLAUDE.md`
 - `PROJECT_STATE.md`
 - `PROJECT_HISTORY.md`
-- `.agents/skills/project-continuity/`
-- `HANDOFF.md`
-- `README.md`
 
 ## Next Action
 
-Create and push the Git checkpoint, then record the resulting commit and remote status.
+For the next user request, read PROJECT_STATE.md, record the task as in_progress, execute it, then checkpoint and push the result.
 
 ## Notes
 
-- Every future task must update state/history; the explicit trigger 落库 persists rules and validates the relevant project skill.
+- Use the exact trigger 落库 to persist new durable rules into AGENTS.md and the appropriate project skill.
 
 ## Resume
 
