@@ -98,3 +98,15 @@ entries.
 - Changed: `sync/deploy.py`, `build/deploy-previews/`, `AGENTS.md`, `.agents/skills/project-continuity/SKILL.md`, `TOOLCHAIN.md`, `.python-version`, `README.md`, `PROJECT_STATE.md`, `PROJECT_HISTORY.md`
 - Next: Commit and push the icon/toolchain checkpoint, then await visual review of the refreshed category demo.
 - Notes: Default macOS python3 is 3.9.6 and incompatible; project standard is /opt/homebrew/bin/python3.13 version 3.13.11. No system upgrade was performed.
+
+
+## 2026-06-14T16:50:38+08:00 | completed
+
+- Task: Normalize left category-menu icon sizing and persist toolchain versions
+- Result: The refreshed category and section previews now use 28x28px icon containers with 26x26px SVGs. Commit 1563f6f, including TOOLCHAIN.md and the system-upgrade rules, was pushed to origin/codex/klaviyo-docs-sync-state.
+- Branch: `codex/klaviyo-docs-sync-state`
+- Commit at record time: `1563f6f`
+- Verification: Browser computed sizes: container 28x28px, SVG 26x26px; Commit 1563f6f pushed successfully
+- Changed: `PROJECT_STATE.md`, `PROJECT_HISTORY.md`
+- Next: Review the refreshed Customer Agent category page and provide the next layout adjustment.
+- Notes: Future system software upgrades require prior user notification and user-performed installation.
