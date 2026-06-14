@@ -1,24 +1,23 @@
 # Project State
 
-Last updated: 2026-06-14T16:37:56+08:00
+Last updated: 2026-06-14T16:39:54+08:00
 
 ## Current Execution
 
 - Status: `completed`
-- Task: Persist Codex operation-recording and cross-device continuity rules
+- Task: Provide a current category-type demo page
 - Branch: `codex/klaviyo-docs-sync-state`
-- Commit: `c2064cf`
+- Commit: `ac60639`
 
 ## Latest Result
 
-Continuity rules and skill are active. Task checkpoint c2064cf was pushed to origin/codex/klaviyo-docs-sync-state, so another account or device can fetch the branch and resume from PROJECT_STATE.md.
+Selected and opened the current Customer Agent category preview. It displays the category description, five section links, and a popular-articles list.
 
 ## Verification
 
-- Skill validation passed
-- Recorder compile and execution passed
-- Git commit c2064cf created
-- git push origin codex/klaviyo-docs-sync-state succeeded
+- Browser loaded http://127.0.0.1:8765/category-customer-agent.html
+- Visible title: 客户 Agent
+- Visible sections: Guidance, Launch, Skills, Tools, Training
 
 ## Changed Files
 
@@ -27,11 +26,11 @@ Continuity rules and skill are active. Task checkpoint c2064cf was pushed to ori
 
 ## Next Action
 
-For the next user request, read PROJECT_STATE.md, record the task as in_progress, execute it, then checkpoint and push the result.
+Use the Customer Agent preview as the current category-page demo for review; record any requested design changes in the next task.
 
 ## Notes
 
-- Use the exact trigger 落库 to persist new durable rules into AGENTS.md and the appropriate project skill.
+- Demo source file: build/deploy-previews/category-customer-agent.html
 
 ## Resume
 

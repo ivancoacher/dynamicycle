@@ -38,3 +38,27 @@ entries.
 - Changed: `PROJECT_STATE.md`, `PROJECT_HISTORY.md`
 - Next: For the next user request, read PROJECT_STATE.md, record the task as in_progress, execute it, then checkpoint and push the result.
 - Notes: Use the exact trigger 落库 to persist new durable rules into AGENTS.md and the appropriate project skill.
+
+
+## 2026-06-14T16:38:58+08:00 | in_progress
+
+- Task: Provide a current category-type demo page
+- Result: Located the generated category preview set; customer-agent is selected as the representative category demo.
+- Branch: `codex/klaviyo-docs-sync-state`
+- Commit at record time: `ac60639`
+- Verification: build/deploy-previews/category-customer-agent.html exists (about 21 KB)
+- Changed: `PROJECT_STATE.md`, `PROJECT_HISTORY.md`
+- Next: Open and visually verify the local customer-agent category demo, then return its link.
+- Notes: None.
+
+
+## 2026-06-14T16:39:54+08:00 | completed
+
+- Task: Provide a current category-type demo page
+- Result: Selected and opened the current Customer Agent category preview. It displays the category description, five section links, and a popular-articles list.
+- Branch: `codex/klaviyo-docs-sync-state`
+- Commit at record time: `ac60639`
+- Verification: Browser loaded http://127.0.0.1:8765/category-customer-agent.html; Visible title: 客户 Agent; Visible sections: Guidance, Launch, Skills, Tools, Training
+- Changed: `PROJECT_STATE.md`, `PROJECT_HISTORY.md`
+- Next: Use the Customer Agent preview as the current category-page demo for review; record any requested design changes in the next task.
+- Notes: Demo source file: build/deploy-previews/category-customer-agent.html
