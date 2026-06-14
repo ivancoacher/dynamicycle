@@ -230,3 +230,15 @@ entries.
 - Changed: `sync/deploy.py`, `build/deploy-previews/`, `PROJECT_STATE.md`, `PROJECT_HISTORY.md`
 - Next: Review the 8px category-menu inset and provide the next visual adjustment.
 - Notes: No system software upgrade was required.
+
+
+## 2026-06-14T17:07:14+08:00 | completed
+
+- Task: Checkpoint category sidebar inset
+- Result: Committed the 8px category-menu inset and regenerated previews as 1fcaadb, then pushed the checkpoint to origin/codex/klaviyo-docs-sync-state.
+- Branch: `codex/klaviyo-docs-sync-state`
+- Commit at record time: `1fcaadb`
+- Verification: Commit 1fcaadb created and pushed successfully; Browser computed padding-left remains 8px; Preview URL returns HTTP 200
+- Changed: `PROJECT_STATE.md`, `PROJECT_HISTORY.md`
+- Next: Review the updated category sidebar spacing in the current preview.
+- Notes: No system software upgrade was required.

@@ -1,34 +1,32 @@
 # Project State
 
-Last updated: 2026-06-14T17:06:50+08:00
+Last updated: 2026-06-14T17:07:14+08:00
 
 ## Current Execution
 
 - Status: `completed`
-- Task: Add a small inset to the category sidebar menu
+- Task: Checkpoint category sidebar inset
 - Branch: `codex/klaviyo-docs-sync-state`
-- Commit: `fb67d4d`
+- Commit: `1fcaadb`
 
 ## Latest Result
 
-Set the shared category menu item left padding to 8px, regenerated all 314 previews, and retained a modest inset for icons inside normal and active menu items.
+Committed the 8px category-menu inset and regenerated previews as 1fcaadb, then pushed the checkpoint to origin/codex/klaviyo-docs-sync-state.
 
 ## Verification
 
-- Browser measured heading and item left edges at 20px, active icon left edge at 28px, and computed padding-left at 8px
-- Preview generation completed: 314 OK, 0 failed
-- category-campaigns.html remains available over the local preview server
+- Commit 1fcaadb created and pushed successfully
+- Browser computed padding-left remains 8px
+- Preview URL returns HTTP 200
 
 ## Changed Files
 
-- `sync/deploy.py`
-- `build/deploy-previews/`
 - `PROJECT_STATE.md`
 - `PROJECT_HISTORY.md`
 
 ## Next Action
 
-Review the 8px category-menu inset and provide the next visual adjustment.
+Review the updated category sidebar spacing in the current preview.
 
 ## Notes
 
